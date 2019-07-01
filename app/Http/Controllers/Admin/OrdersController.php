@@ -142,8 +142,8 @@ class OrdersController extends Controller
         if (!$vape) abort(404);
 
         $variations = $vape->variations()->with('options')->get();
-
-        $html = $this->view('_partials.product', compact(['vape', 'variations']))->render();
+        $currency = get_currency();
+        $html = $this->view('_partials.product', compact(['vape', 'variations','currency']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

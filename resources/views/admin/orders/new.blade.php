@@ -78,24 +78,12 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Select user</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-6">
-                                <div class="row">
-                                    <label class="col-md-4 col-form-label">Select channel</label>
-                                    <div class="col-md-8">
-                                        <select name="" id="" class="form-control">
-                                            <option value="">All</option>
-                                            <option value="">1</option>
-                                            <option value="">2</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
                             <div class="col-md-6">
                                 <div class="row">
                                     <label class="col-md-4 col-form-label">Find User</label>
@@ -104,7 +92,6 @@
                                     </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                     <div class="details user-details">
@@ -128,30 +115,33 @@
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
-                    <div class="col-md-3">
-                        <div class="basic-left basic-wall h-100">
-                            <div class="all-list-extra">
-                                <div class="col-md-12" style="margin-bottom: 15px;">
-                                    {!! Form::select('product',$products,null,['class' => 'form-control tag-input-v select-product','placeholder' => 'Select product']) !!}
-                                </div>
-                                <div class="col-md-12">
-                                    <ul class="get-all-extra-tab">
-                                        {{--@foreach($products as $product)--}}
-                                        {{--<li style="display: flex" data-id="{{ $product->id }}"--}}
-                                        {{--class="promotion-elm {{ ($loop->first)?'active':'' }}"><a--}}
-                                        {{--href="#">{{ $product->name }}</a>--}}
-                                        {{--<div class="buttons">--}}
-                                        {{--</div>--}}
-                                        {{--</li>--}}
-                                        {{--@endforeach--}}
-                                    </ul>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="basic-left basic-wall h-100">
+                                <div class="all-list-extra">
+                                    <div class="col-md-12" style="margin-bottom: 15px;">
+                                        {!! Form::select('product',$products,null,['class' => 'form-control tag-input-v select-product','placeholder' => 'Select product']) !!}
+                                    </div>
+                                    <div class="col-md-12">
+                                        <ul class="get-all-extra-tab">
+                                            {{--@foreach($products as $product)--}}
+                                            {{--<li style="display: flex" data-id="{{ $product->id }}"--}}
+                                            {{--class="promotion-elm {{ ($loop->first)?'active':'' }}"><a--}}
+                                            {{--href="#">{{ $product->name }}</a>--}}
+                                            {{--<div class="buttons">--}}
+                                            {{--</div>--}}
+                                            {{--</li>--}}
+                                            {{--@endforeach--}}
+                                        </ul>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-9 extra-variations">
+                        <div class="col-md-9 extra-variations">
 
+                        </div>
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -568,6 +558,9 @@
 
     </style>
     <style>
+        .font-35 {
+            font-size: 35px;
+        }
         .StripeElement {
             width: 389px;
             background-color: white;
@@ -743,7 +736,7 @@
 
             $("body").on('change', '.select-product', function () {
                 let id = $(this).val();
-                AjaxCall("/admin/inventory/stock/get-by-id", {id: id}, function (res) {
+                AjaxCall("/admin/stock/get-by-id", {id: id}, function (res) {
                     if (!res.error) {
                         var isExists = $(".promotion-elm[data-id='" + res.data.id + "']");
                         if (isExists.length == 0) {

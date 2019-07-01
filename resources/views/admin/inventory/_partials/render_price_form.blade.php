@@ -16,7 +16,7 @@ $variations = collect($model->variations()->required()->get())->groupBy('variati
                 </div>
             </div>
         @else
-            @if(\view::exists("frontend.products._partials.variation_types.$vSettings->display_as"))
+            @if(\View::exists("frontend.products._partials.variation_types.$vSettings->display_as"))
                 <div class="product-single-info_row options-group">
                     <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
                         @include("frontend.products._partials.variation_types.$vSettings->display_as")
