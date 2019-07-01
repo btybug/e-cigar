@@ -14,6 +14,7 @@
                 <tr>
                     <th>#</th>
                     <th>Name</th>
+                    <th>Category</th>
                     <th>Image</th>
                     <th>Icon</th>
                     <th>Is Filter</th>
@@ -41,6 +42,7 @@
                 columns: [
                     {data: 'id',name: 'id'},
                     {data: 'name', name: 'name'},
+                    {data: 'category', name: 'category'},
                     {data: 'image', name: 'image'},
                     {data: 'icon', name: 'icon'},
                     {data: 'filter', name: 'filter'},
