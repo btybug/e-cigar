@@ -50,7 +50,7 @@
                                 <a class="nav-link" href="{!! url('/') !!}">Home</a>
                             </li>
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link" href="javascript:void(0)">Products
+                                <a class="nav-link" href="{!! route('categories_front') !!}">Products
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -74,8 +74,25 @@
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('blog') !!}">News</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('brands') !!}">Brands</a>
+
+                            <li class="nav-item align-items-center nav-item--has-dropdown">
+                                <a class="nav-link" href="{!! route('brands') !!}">Brands
+                                    <span class="ml-2 d-inline-block arrow main-transition pointer">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="9px" height="6px">
+<path fill-rule="evenodd" fill="rgb(121, 121, 121)"
+      d="M0.003,0.001 L8.998,0.001 L4.501,5.999 L0.003,0.001 Z"/>
+</svg>
+                        </span>
+                                </a>
+
+                                <div class="nav-item--has-dropdown_dropdown main-scrollbar">
+                                    <div class="products-menu-item row">
+                                        @include("frontend._partials.header_menu_brands")
+                                    </div>
+                                </div>
                             </li>
                             {{--<li class="nav-item nav-item--has-dropdown position-relative">--}}
                                 {{--<a class="nav-link" href="{!! route('blog') !!}">--}}
