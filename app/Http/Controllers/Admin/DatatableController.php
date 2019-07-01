@@ -119,7 +119,14 @@ class DatatableController extends Controller
 
     public function getAllAttributes()
     {
-        return Datatables::of(Attributes::whereNull('parent_id'))
+        return Datatables::of(
+            Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
+                ->leftJoin("attribute_categories", 'attributes.id', '=', 'attribute_categories.attribute_id')
+                ->leftJoin("categories", 'attribute_categories.categories_id', '=', 'categories.id')
+                ->select('attributes.*', 'attributes_translations.name')
+                ->where('attributes_translations.locale', \Lang::getLocale())
+                    ->whereNull('attributes.parent_id')
+        )
             ->editColumn('name', function ($attr) {
                 return $attr->name;
             })
