@@ -1198,6 +1198,23 @@
                $("#discountModal").modal();
             });
 
+            $("body").on("change", ".price-type-change", function (e) {
+                let value = $(this).val();
+                let parent = $(this).closest('.package_price');
+                if(value == 'static'){
+                    parent.find('.price-discount').removeClass('show').addClass('hide');
+                    parent.find('.price-static').removeClass('hide').addClass('show');
+                }else if(value == 'discount'){
+                    parent.find('.price-static').removeClass('show').addClass('hide');
+                    parent.find('.price-discount').removeClass('hide').addClass('show');
+                }else{
+                    parent.find('.price-static').removeClass('show').addClass('hide');
+                    parent.find('.price-discount').removeClass('show').addClass('hide');
+
+                }
+
+            });
+
             $('body').on('change', '.variation-product-select', function () {
                 let value = $(this).val();
                 let parent = $(this).closest('.stock-page');
