@@ -4,9 +4,9 @@
     font-family: 'Montserrat Medium', sans-serif;
 }
 
-.font-main-light {
-    font-family: 'Montserrat Light', sans-serif;
-}
+/*.font-main-light {*/
+/*    font-family: 'Montserrat Light', sans-serif;*/
+/*}*/
 
 .fnz-18 {
     font-size: 18px
@@ -58,7 +58,7 @@ html {
 }
 
 body {
-    color: #222423;
+    /*color: #222423;*/
     height: 100%;
     overflow-x: hidden;
 }
