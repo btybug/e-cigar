@@ -1,6 +1,286 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content">
+        <div class="home__page-wrapper">
+            <section class="home_slider-wrapper">
+                <div class="home__main-slider">
+                    <div>
+                        <div class="main-slider-wall position-relative">
+                            <img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">
+                            <div class="main-slider-wall-inner position-absolute">
+                                <div class="text-big font-sec-reg">HOW</div>
+                                <div class="text-second font-sec-bold">TO SEE THE SMOKE?</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="main-slider-wall">
+                            <img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">
+                        </div>
+                    </div>
+                    <div>
+                        <div class="main-slider-wall">
+                            <img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">
+                    <div class="thumb-wall">
+                        <img src="/public/img/slider/home-slider-thumb-1.jpg" alt="slider-thumb">
+                    </div>
+                    <div class="thumb-wall">
+                        <img src="/public/img/slider/home-slider-thumb-2.jpg" alt="slider-thumb">
+                    </div>
+                    <div class="thumb-wall">
+                        <img src="/public/img/slider/home-slider-thumb-3.jpg" alt="slider-thumb">
+                    </div>
+                </div>
+            </section>
+            <div class="container home_width">
+                <section class="home_categories">
+                    <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">OUR</span> <span>CATEGORIES</span>
+                    </h2>
+                    <p class="font-main-light font-15 text-center home_title-desc">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
+                        <br/> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
+                        orci.</p>
+                    <ul class="row home_categories_list">
+                        <li class="col-md-6">
+                            <div class="position-relative home_categories-item">
+                                <img src="/public/img/temp/product_1.jpg" alt="photo">
+                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                    <h4 class="font-sec-bold font-35 ">VAPE KIT</h4>
+                                    <p>Suspendisse at ante ac arcu elementum <br/>
+                                        interdum. Nullam lorem elit.</p>
+                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
+                                        products</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-md-6">
+                            <div class="position-relative home_categories-item">
+                                <img src="/public/img/temp/product_2.jpg" alt="photo">
+                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                    <h4 class="font-sec-bold font-35 ">Cbd</h4>
+                                    <p>Suspendisse at ante ac arcu elementum <br/>
+                                        interdum. Nullam lorem elit.</p>
+                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
+                                        products</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-md-6">
+                            <div class="position-relative home_categories-item mb-0">
+                                <img src="/public/img/temp/product_3.jpg" alt="photo">
+                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                    <h4 class="font-sec-bold font-35 ">E-liquid</h4>
+                                    <p>Suspendisse at ante ac arcu elementum <br/>
+                                        interdum. Nullam lorem elit.</p>
+                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
+                                        products</a>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="col-md-6">
+                            <div class="position-relative home_categories-item mb-0">
+                                <img src="/public/img/temp/product_4.jpg" alt="photo">
+                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                    <h4 class="font-sec-bold font-35 ">Parts</h4>
+                                    <p>Suspendisse at ante ac arcu elementum <br/>
+                                        interdum. Nullam lorem elit.</p>
+                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
+                                        products</a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <section class="home_brands-wrapper">
+                <h2 class="font-sec-reg home_main-title text-center text-white"><span class="font-sec-bold">OUR</span>
+                    <span>BRANDS</span>
+                </h2>
+                <p class="font-main-light font-15 text-center home_title-desc text-sec-clr">Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
+                    <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
+                    orci.
+                </p>
+                <div class="home_brands-slider">
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/1.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/2.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/3.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/4.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/5.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/1.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/2.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/3.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/1.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/2.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="brand-wall">
+                        <div class="brand-item">
+                            <a href="#" class="brand-link">
+                                <img src="/public/img/brands/3.png" alt="brand-logo">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div class="container home_width">
+                <section class="home_products-wrapper">
+                    <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">TOP</span>
+                        <span>PRODUCTS</span>
+                    </h2>
+                    <p class="font-main-light font-15 text-center home_title-desc mb-0">Lorem ipsum dolor sit amet,
+                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
+                        <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
+                        orci.
+                    </p>
+                    <ul class="d-flex home_products-version">
+                        <li class="col active">
+                            <a href="#" class="products-version-link">
+                                Best Offers
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="#" class="products-version-link">
+                                Top Pruducts
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="#" class="products-version-link">
+                                Most Sales
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="#" class="products-version-link">
+                                News
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="#" class="products-version-link">
+                                Category 5
+                            </a>
+                        </li>
+                        <li class="col">
+                            <a href="#" class="products-version-link">
+                                Category 6
+                            </a>
+                        </li>
+
+                    </ul>
+                    <ul class="row products__list-wrapper">
+                        <li class="col-md-3">
+                            <div class="products__item-wrapper">
+                                <a href="#" class="products__item-top">
+                                    <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name">BRAND NAME</span>
+                                    <span class="products__item-photo">
+                                        <img src="/public/img/temp/product_1.jpg" alt="product">
+<span class="products__item-new">new</span>
+                                    </span>
+                                    <span class="products__item-photo-thumb">
+<span>
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                    </span>
+                                    <span class="products__item-title text-truncate">
+Click-N-Vape Smoke V8 Starter
+                                    </span>
+                                    <span class="products__item-desc">
+Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                    <span class="products__item-price-discount">
+<span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+                                        <span class="products__item-price">
+<span>$50</span>
+                                        </span>
+                                    </span>
+                                </a>
+                                <div class="products__item-bottom">
+                                    <a href="#" class="products__item-view-more">
+                                        view more
+                                    </a>
+                                    <div class="products__item-favourite">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd"  opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
         <div class="d-flex h-100">
             <div class="main-left-tabs d-flex flex-column kaliony-menu">
                 <div class="nav flex-column justify-content-center nav-pills" id="v-pills-tab" role="tablist"
@@ -124,12 +404,39 @@
 
 @section('css')
     <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
     <link href="/public/css/carousel.css" rel="stylesheet">
+    <link href="/public/css/home-slider.css" rel="stylesheet">
 
 @stop
 
 @section('js')
 
     <script src={{asset("public/js/bundle/carousel.js")}}></script>
+    <script src={{asset("public/plugins/formstone/core.js")}}></script>
+    <script src={{asset("public/plugins/formstone/mediaquery.js")}}></script>
+    <script src={{asset("public/plugins/formstone/touch.js")}}></script>
+    <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
+    <script>
+        $(".home__main-slider").carousel({
+            pagination: false,
+            controls: false
+        });
 
+        $(".home__main-slider-thumb").carousel({
+            controls: false,
+            pagination: false,
+            matchWidth: false
+        });
+        $(".home_brands-slider").carousel({
+            theme: "fs-light",
+            pagination: false,
+            infinite: true,
+            show: {
+                "740px": 2,
+                "980px": 3,
+                "1220px": 5
+            }
+        });
+    </script>
 @stop
