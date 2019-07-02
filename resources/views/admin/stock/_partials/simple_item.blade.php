@@ -13,7 +13,7 @@
                     {{--</div>--}}
                     <div class="col-md-2">
                         Display as: {!! Form::select("variations[$main_unique][display_as]",
-                        ['menu' => 'Select','list' => 'Radio'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
+                        ['menu' => 'Select Box','list' => 'Radio'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
                     <div class="col-md-2">
                         <div class="section_price">
