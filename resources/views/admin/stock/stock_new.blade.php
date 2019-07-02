@@ -926,7 +926,7 @@
         </div>
 
         <div class="col-md-q">
-            <label>Price/Item</label>
+            <label>Total price</label>
             {!! Form::number('price',null,['class' => 'form-control']) !!}
         </div>
         <div class="col-md-4">
@@ -973,7 +973,7 @@
             </div>
 
             <div class="col-md-q">
-                <label>Price/Item</label>
+                <label>Total price</label>
                 {!! Form::number('price',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-4">
