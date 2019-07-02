@@ -435,9 +435,9 @@ class StockController extends Controller
         $main_unique = $request->get('uniqueId');
         $main = null;
         $html = '';
-        if ($request->type == 'simple_product') {
+        if ($request->type == 'single') {
             $html = \view("admin.stock._partials.simple_item", compact(['stockItems', 'main_unique', 'main']))->render();
-        } elseif ($request->type == 'package_product' || $request->type == 'single') {
+        } elseif ($request->type == 'package_product') {
             $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main']))->render();
         } elseif ($request->type == 'filter') {
             $html = \view("admin.stock._partials.filter_item", compact(['stockItems', 'main_unique', 'main']))->render();
