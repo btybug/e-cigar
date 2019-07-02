@@ -9,7 +9,7 @@
                @ok('admin_blog_create') <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_blog_create') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
-            <select name="table_head" id="table_head_id" multiple>
+            <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                 <option value="ID" data-column="0" data-name="id">ID</option>
                 <option value="Title" data-column="1" data-name="title">Title</option>
                 <option value="Author" data-column="2" data-name="user_id">Author</option>
@@ -65,6 +65,7 @@
 
                 tableArray = tableHeadArray.map((head) => {
                     const id = head.data;
+
                     var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
                         return el.name === id;
                     });
