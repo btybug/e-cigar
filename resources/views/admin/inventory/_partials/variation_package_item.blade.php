@@ -26,7 +26,10 @@
                 {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,['class' => 'form-control v-price']) !!}
             </div>
             <div class="price-discount @if($package_variation && $package_variation->price_type =='discount') show @else hide @endif">
-                <a href="javascript:void(0)" class="btn btn-info add-discount">Discount price</a>
+                <a data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}" href="javascript:void(0)" class="btn btn-info add-discount">Discount price</a>
+                <div class="discount-data-v" data-d-v="{{ $uniqueID }}">
+
+                </div>
             </div>
         </div>
     </td>

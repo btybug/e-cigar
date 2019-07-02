@@ -489,4 +489,16 @@ class StockController extends Controller
 
         return $data;
     }
+
+    public function applyDiscount(Request $request)
+    {
+        $type = $request->discount_type;
+        $main_unique = $request->main;
+        $uniqueID = $request->group;
+        $data = $request->get('discount');
+
+        $html = view("admin.stock._partials.discount_data",compact(['data','type','main_unique','uniqueID']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
+    }
 }
