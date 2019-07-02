@@ -251,6 +251,12 @@
                                 aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="search-attr" placeholder="Search">
+                        </div>
+                    </div>
                     <ul class="all-list modal-stickers--list">
 
                     </ul>
