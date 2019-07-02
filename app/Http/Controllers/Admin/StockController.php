@@ -47,7 +47,6 @@ class StockController extends Controller
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         $data = Category::recursiveItems($categories);
-        $brandsData = Category::recursiveItems($brands);
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
@@ -58,7 +57,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'brandsData', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
+        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
     }
 
     public function getStockEdit($id)
