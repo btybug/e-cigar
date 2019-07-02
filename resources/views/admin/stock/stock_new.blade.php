@@ -1183,10 +1183,15 @@
                     function (res) {
                         if (!res.error) {
                             if (value == 'filter') {
+                                parent.find('.multi-option').removeClass('show').addClass('hide');
                                 parent.find('.filter-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-variation-box').empty();
-                            } else {
+                            } else if(value == 'package_product')  {
                                 parent.find('.filter-option').removeClass('show').addClass('hide');
+                                parent.find('.multi-option').removeClass('hide').addClass('show');
+                            }else{
+                                parent.find('.filter-option').removeClass('show').addClass('hide');
+                                parent.find('.multi-option').removeClass('show').addClass('hide');
                             }
 
                             parent.find('.type-place').html(res.html)
