@@ -233,7 +233,7 @@
                         <li class="col-md-3">
                             <div class="products__item-wrapper">
                                 <a href="#" class="products__item-top">
-                                    <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name">BRAND NAME</span>
+                                    <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
                                     <span class="products__item-photo">
                                         <img src="/public/img/temp/product_1.jpg" alt="product">
 <span class="products__item-new">new</span>

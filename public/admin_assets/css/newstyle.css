@@ -618,12 +618,37 @@ header.main-header .logo .logo-img{
 .search-attributes-scrolled>.row {
     margin: 0;
 }
-.modal-stickers--list {
+.form-group.row + .modal-stickers--list {
     flex-direction: column;
     height: 400px;
     overflow: auto;
     flex-wrap: nowrap !important;
 }
-.modal-stickers--list > li a:first-of-type{
+.form-group.row + .modal-stickers--list > li a:first-of-type{
     flex: 1;
+}
+.releted-products-add-modal .all-list{
+    flex-direction: column;
+    height: 400px;
+    overflow: auto;
+    flex-wrap: nowrap !important;
+}
+.releted-products-add-modal .option-elm-modal a:first-of-type {
+    flex: 1;
+    background: #3c8dbc;
+    color: #fff!important;
+    padding: 5px 10px !important;
+}
+.releted-products-add-modal .option-elm-modal{
+    flex: 0 !important;
+    max-width: 100% !important;
+    padding: 0 !important;
+    min-height: auto !important;
+}
+.releted-products-add-modal .option-elm-modal > div{
+    align-items: normal !important;
+}
+.faq-select-modal-list .list-group-item{
+    border: none;
+    padding: 0;
 }
