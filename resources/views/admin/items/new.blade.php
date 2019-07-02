@@ -1,6 +1,5 @@
 @extends('layouts.admin')
 @section('content')
-
     <div class="card panel panel-default">
         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
         <div class="card-header panel-heading d-flex">

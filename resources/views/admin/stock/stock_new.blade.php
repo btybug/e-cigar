@@ -3,7 +3,8 @@
 
 @stop
 @section('content')
-    {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
+
+{!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
     <div class="card">
         <div class="card-header clearfix">
             <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>

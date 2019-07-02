@@ -141,6 +141,36 @@ const App = function() {
     },
     //********App -> htmlMaker -> makeImage********end
 
+      makeHtmlItem: (data) => {
+          return (`<div draggable="true" data-id="${data.id}" class="file" >
+        <a  bb-media-click="select_item" bb-media-type="image">
+            <span class="corner"></span>
+
+            <div class="icon">
+                <img width="180px" data-lightbox="image" src="/public/images/html.jpg">
+                <i class="fa fa-file"></i>
+            </div>
+            <div class="file-name">
+            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
+            </div>
+            <!--<small>Added: ${data.updated_at}</small>-->
+            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+              </button>
+              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
+                  <i class="fa fa-trash" style="color:#ffffff"></i>
+                </button>
+                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+              </span>
+            </span>
+        </a>
+    </div>`);
+      },
+
     makeTreeLeaf: (id, name) => {
       return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
@@ -1020,10 +1050,18 @@ var count = 0;
             )}</div>`;
             mainContainer.innerHTML += html;
           });
-          res.data.items.forEach((image, index) => {
-            let html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
-                image
-            )}</div>`;
+          res.data.items.forEach((file, index) => {
+              console.log(file)
+              let html;
+              if(file.extension === "html") {
+                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeHtmlItem(
+                      file
+                  )}</div>`;
+              } else {
+                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
+                      file
+                  )}</div>`;
+              }
             mainContainer.innerHTML += html;
           });
           if (tree) {
@@ -1156,10 +1194,10 @@ var count = 0;
     $("#uploader").fileinput({
       uploadAsync: false,
       maxFileCount: 10,
-      showUpload: false,
+      showUpload: true,
       showUploadedThumbs: false,
       initialPreviewAsData: true,
-      // browseOnZoneClick: true,
+      browseOnZoneClick: true,
       uploadExtraData: () => {
         return {
           _token: $("meta[name='csrf-token']").attr("content"),
@@ -1171,6 +1209,7 @@ var count = 0;
       $("#uploader").fileinput("upload");
     })
     .on("filebatchuploadsuccess", (event, files) => {
+        document.querySelector('.navbar').innerHTML = files.files[0]
       this.requests.drawingItems();
       this.helpers.showUploaderContainer();
       $("#uploader").fileinput("clear");

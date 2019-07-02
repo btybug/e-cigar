@@ -9,7 +9,7 @@
             @ok('admin_stock_new')<div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
-            <select name="table_head" id="table_head_id" multiple>
+            <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                 <option value="#" data-column="0" data-name="id">#</option>
                 <option value="Name" data-column="1" data-name="name">Name</option>
                 <option value="Image" data-column="2" data-name="image">Image</option>
@@ -38,18 +38,22 @@
                 if(!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
                 }
-                JSON.parse(localStorage.getItem(storageName)).map((el) => {
-                    $(selectId).find(`[data-name="${el.name}"]`).attr('selected', 'selected')
-                });
-                $(selectId).select2({
-                    multiple: true,
-                    initSelection: function (element, callback) {
-                        var selected_items = JSON.parse(localStorage.getItem(storageName));
 
-                        callback(selected_items);
-                    }
+                let selId = JSON.parse(localStorage.getItem(storageName)).map((el) => {
+                    return el.id;
                 });
 
+                $(selectId).selectpicker({
+                    // actionsBox: true,
+                    dropupAuto: true,
+                    // header: 'Select',
+                    liveSearch: true,
+                    liveSearchPlaceholder: 'Search',
+                    multipleSeparator: ' | ',
+                    style: 'btn-default',
+                    // width: 'auto'
+                });
+                $(selectId).selectpicker('val', selId);
                 var tableHeadArray = tableData;
 
                 tableArray = tableHeadArray.map((head) => {
@@ -93,12 +97,13 @@
                             column.visible(false);
                         }
                     });
+                    console.log(selected_items, 'selected_items')
                     localStorage.setItem(storageName, JSON.stringify(selected_items))
                 }
 
                 init();
 
-                $(selectId).on('change.select2', function (e) {
+                $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
             }
@@ -106,11 +111,11 @@
             tableInit(
                 "stock_table",
                 [
-                    {id: '#', text: '#', name: 'id'},
-                    {id: 'Name', text: 'Name', name: 'name'},
-                    {id: 'Image', text: 'Image', name: 'image'},
-                    {id: 'Added/Last Modified Date', text: 'Added/Last Modified Date', name: 'created_at'},
-                    {id: 'Actions', text: 'Actions', name: 'actions'}
+                    {id: '#', name: 'id'},
+                    {id: 'Name', name: 'name'},
+                    {id: 'Image', name: 'image'},
+                    {id: 'Added/Last Modified Date', name: 'created_at'},
+                    {id: 'Actions', name: 'actions'}
                 ],
                 '#table_head_id',
                 [

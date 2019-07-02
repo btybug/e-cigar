@@ -869,8 +869,18 @@ function App() {
                 let urlValue = document.querySelector(".file-realtive-url")
                     .value;
                 console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
-                document.querySelector(`.${inputId}`).value = urlValue;
-                document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                const exArray = urlValue.match(/[^\.]+/g);
+                const ex = exArray[exArray.length - 1];
+
+                if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
+                    document.querySelector(`.${inputId}`).value = urlValue;
+                    document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
+                    document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
+                    });
+                } else {
+                    document.querySelector(`.${inputId}`).value = urlValue;
+                    document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                }
                 // document.querySelector(`.${inputId}`).value = urlValue;
             }
             document.querySelector(".file-realtive-url").value = "";
