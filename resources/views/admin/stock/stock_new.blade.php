@@ -855,6 +855,26 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+
+    <div class="modal fade" id="discountModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Discount price</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-warning apply-discount">Apply</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -1172,6 +1192,10 @@
 
             $("body").on("change", ".tag-input-v", function (e) {
                 changeVariationOptions()
+            });
+
+            $("body").on("click", ".add-discount", function (e) {
+               $("#discountModal").modal();
             });
 
             $('body').on('change', '.variation-product-select', function () {
