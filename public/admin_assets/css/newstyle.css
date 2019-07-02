@@ -618,3 +618,12 @@ header.main-header .logo .logo-img{
 .search-attributes-scrolled>.row {
     margin: 0;
 }
+.modal-stickers--list {
+    flex-direction: column;
+    height: 400px;
+    overflow: auto;
+    flex-wrap: nowrap !important;
+}
+.modal-stickers--list > li a:first-of-type{
+    flex: 1;
+}
