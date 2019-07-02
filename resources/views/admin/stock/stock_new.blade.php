@@ -878,7 +878,15 @@
                             aria-hidden="true">&times;</span></button>
                 </div>
                 <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="col-md-12">
+                            {!! Form::select('discount_type',[''=>'Select type','range' => 'Range','fixed' => 'Fixed'],null,
+                            ['class' => 'form-control select-discount-type']) !!}
+                        </div>
+                        <div class="discount-type-box">
 
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -887,6 +895,98 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+<script type="template" id="range-discount">
+    <div class="d-flex flex-wrap discount-item">
+        <div class="col-md-3">
+            <label>From</label>
+            {!! Form::number('from',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-3">
+            <label>To</label>
+            {!! Form::number('to',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-3">
+            <label>Price/Item</label>
+            {!! Form::number('price',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-danger remove-discount-item">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="template" id="fixed-discount">
+    <div class="d-flex flex-wrap discount-item">
+        <div class="col-md-4">
+            <label>Qty</label>
+            {!! Form::number('qty',null,['class' => 'form-control']) !!}
+        </div>
+
+        <div class="col-md-q">
+            <label>Price/Item</label>
+            {!! Form::number('price',null,['class' => 'form-control']) !!}
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-danger remove-discount-item">
+                <i class="fa fa-minus"></i>
+            </button>
+        </div>
+    </div>
+</script>
+
+<script type="template" id="range-discount-temp">
+    <div class="col-md-12 range-box">
+        <div class="d-flex flex-wrap discount-item">
+            <div class="col-md-3">
+                <label>From</label>
+                {!! Form::number('from',null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-3">
+                <label>To</label>
+                {!! Form::number('to',null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-3">
+                <label>Price/Item</label>
+                {!! Form::number('price',null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-3">
+                <button class="btn btn-danger remove-discount-item">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 justify-content-center">
+        <a class="btn btn-primary add-range-discount" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+    </div>
+</script>
+
+<script type="template" id="fixed-discount-temp">
+    <div class="col-md-12 fixed-box">
+        <div class="d-flex flex-wrap discount-item">
+            <div class="col-md-4">
+                <label>Qty</label>
+                {!! Form::number('qty',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="col-md-q">
+                <label>Price/Item</label>
+                {!! Form::number('price',null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-danger remove-discount-item">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 justify-content-center">
+        <a class="btn btn-primary add-fixed-discount" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+    </div>
+</script>
 
 @stop
 @section('css')
@@ -955,6 +1055,37 @@
     <script>
 
         $(document).ready(function () {
+            $('body').on('click','.add-range-discount',function () {
+                let html = $('#range-discount').html();
+                // let data_p=$(this).attr('data-p');
+                // let lang=$('.languages-'+data_p).length+1;
+                // html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
+                $(this).closest('.discount-type-box').find('.range-box').append(html) ;
+            });
+
+            $('body').on('click','.add-fixed-discount',function () {
+                let html = $('#fixed-discount').html();
+                // let data_p=$(this).attr('data-p');
+                // let lang=$('.languages-'+data_p).length+1;
+                // html= html.replace(/{p}/g,data_p).replace(/{l}/g,lang);
+                $(this).closest('.discount-type-box').find('.fixed-box').append(html) ;
+            });
+
+            $('body').on('click','.remove-discount-item',function () {
+                $(this).closest('.discount-item').remove();
+            });
+
+            $('body').on('change','.select-discount-type',function () {
+                var value = $(this).val();
+                if(value == 'range'){
+                    $(".discount-type-box").html($('#range-discount-temp').html());
+                }else if(value =='fixed'){
+                    $(".discount-type-box").html($('#fixed-discount-temp').html());
+                }else{
+                    $(".discount-type-box").html();
+                }
+            });
+
             var value = $("#changeProductType").val();
             var sections = $("body").find('.stock-page');
             sections.each(function (k, v) {
