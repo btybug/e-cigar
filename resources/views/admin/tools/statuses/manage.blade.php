@@ -27,10 +27,10 @@
                     <div class="col-md-3 attributes-container">
                         <div class="mb-20 list-group">
                             @foreach($statuses as $status)
-                                <div class="form-group row list-group-item bg-light  pointer" data-item-id="{!! $status->id !!}"
+                                <div class="d-flex flex-wrap form-group row list-group-item bg-light  pointer" data-item-id="{!! $status->id !!}"
                                      data-parent-id="1">
                                     <div class="col-md-6 attr-option" data-item-id="{!! $status->id !!}">
-                                        {!! $status->name !!}
+                                        {!! ($status->name)??"Empty" !!}
                                     </div>
                                     <div class="col-md-4 text-right">
                                         <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
@@ -39,7 +39,7 @@
                                         @if(!$status->is_default)
                                             {!! Form::model($status,['url' => route('post_admin_stock_statuses_delete')]) !!}
                                             {!! Form::hidden('id',null) !!}
-                                            <button class="btn btn-sm btn-danger" type="submit"><i class='fa fa-trash'></i></button>
+                                                <button class="btn btn-sm btn-danger" type="submit"><i class='fa fa-trash'></i></button>
                                             {!! Form::close() !!}
                                         @endif
                                     </div>

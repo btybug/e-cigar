@@ -2,6 +2,8 @@
 
         {!! Form::model($model,['url'=>route('post_admin_stock_statuses_manage',($model?$model->id:null))]) !!}
         {!! Form::hidden('id',null) !!}
+        {!! Form::hidden('type',$type) !!}
+
         @if(count(get_languages()))
             <div class="head-space-between">
                 <ul class="nav nav-tabs">
