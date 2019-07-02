@@ -11,7 +11,7 @@
             </div>
             <div class="col-md-9">
                 <div class="col-md-6">
-                    {!! Form::select("variations[$main_unique][type]",['' => 'Select','package_product' => 'Multiple items','filter' => 'Filters'
+                    {!! Form::select("variations[$main_unique][type]",['' => 'Select','package_product' => 'Multiple items','filter' => 'Filters','single' => 'Single item'
            ],($main) ? $main->type : null,
            ['class' => 'form-control variation-product-select']) !!}
                 </div>
