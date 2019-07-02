@@ -45,18 +45,22 @@
                 if(!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
                 }
-                JSON.parse(localStorage.getItem(storageName)).map((el) => {
-                    $(selectId).find(`[data-name="${el.name}"]`).attr('selected', 'selected')
-                });
-                $(selectId).select2({
-                    multiple: true,
-                    initSelection: function (element, callback) {
-                        var selected_items = JSON.parse(localStorage.getItem(storageName));
 
-                        callback(selected_items);
-                    }
+                let selId = JSON.parse(localStorage.getItem(storageName)).map((el) => {
+                    return el.id;
                 });
 
+                $(selectId).selectpicker({
+                    // actionsBox: true,
+                    dropupAuto: true,
+                    // header: 'Select',
+                    liveSearch: true,
+                    liveSearchPlaceholder: 'Search',
+                    multipleSeparator: ' | ',
+                    style: 'btn-default',
+                    // width: 'auto'
+                });
+                $(selectId).selectpicker('val', selId);
                 var tableHeadArray = tableData;
 
                 tableArray = tableHeadArray.map((head) => {
@@ -73,7 +77,6 @@
                         };
                     }
                 });
-
                 var table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
@@ -101,26 +104,28 @@
                             column.visible(false);
                         }
                     });
+                    console.log(selected_items, 'selected_items')
                     localStorage.setItem(storageName, JSON.stringify(selected_items))
                 }
 
                 init();
 
-                $(selectId).on('change.select2', function (e) {
+                $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
             }
+
             tableInit(
                 "blog_table",
                 [
-                    {id: 'ID', text: 'ID', name: 'id'},
-                    {id: 'Title', text: 'Title', name: 'title'},
-                    {id: 'Author', text: 'Author', name: 'user_id'},
-                    {id: 'URL', text: 'URL', name: 'url'},
-                    {id: 'Short Description', text: 'Short Description', name: 'short_description'},
-                    {id: 'Status', text: 'Status', name: 'status'},
-                    {id: 'Added/Last Modified Date', text: 'Added/Last Modified Date', name: 'created_at'},
-                    {id: 'Action', text: 'Action', name: 'actions'}
+                    {id: 'ID', name: 'id'},
+                    {id: 'Title', name: 'title'},
+                    {id: 'Author', name: 'user_id'},
+                    {id: 'URL', name: 'url'},
+                    {id: 'Short Description', name: 'short_description'},
+                    {id: 'Status', name: 'status'},
+                    {id: 'Added/Last Modified Date', name: 'created_at'},
+                    {id: 'Action', name: 'actions'}
                 ],
                 '#table_head_id',
                 [
