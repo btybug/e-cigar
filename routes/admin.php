@@ -402,6 +402,8 @@ Route::group(['prefix' => 'stock'], function () {
     Route::post('/add-extra-option', 'Admin\StockController@addExtraOption')->name('admin_stock_extra_option');
     Route::post('/get-extra-option-variations', 'Admin\StockController@getPromotionVariations')->name('admin_stock_extra_option_variations');
     Route::post('/save-extra-option', 'Admin\StockController@saveExtraOptions')->name('admin_stock_extra_option_save');
+
+    Route::post('/apply-discount', 'Admin\StockController@applyDiscount')->name('admin_stock_apply_discount');
 });
 
 Route::get('/forum', 'Admin\ForumController@index')->name('admin_forum');
