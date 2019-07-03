@@ -24,9 +24,9 @@ class DriveFoldersTableSeeder extends Seeder
             $trash_folder = \DB::table('drive_folders')->where('name', 'trash')->where('parent_id',0)->first();
             DB::table('drive_settings')->insert(['slug'=>'trash','folder_id'=>$trash_folder->id]);
 
-            DB::table('drive_folders')->insert(['name' => 'banners', 'parent_id' => 0,'id'=>3]);
-            $drive_folder = \DB::table('drive_folders')->where('name', 'banners')->where('parent_id',0)->first();
-            DB::table('drive_settings')->insert(['slug'=>'banners','folder_id'=>$drive_folder->id]);
+            DB::table('drive_folders')->insert(['name' => 'banners', 'parent_id' => $drive_folder->id,'id'=>3]);
+            $banner_folder = \DB::table('drive_folders')->where('name', 'banners')->first();
+            DB::table('drive_settings')->insert(['slug'=>'banners','folder_id'=>$banner_folder->id]);
 
             DB::commit();
             // all good
