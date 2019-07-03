@@ -2993,12 +2993,12 @@ $(document).ready(function () {
             }
         };
 
-        var discountInputChange = function discountInputChange($ev, element, discount_type) {
+        var discountInputChange = function discountInputChange($ev, $element, discount_type) {
             console.log('99999999999999999999999999999999999999', discount_type);
-            var variation_id = element.attr('data-id');
+            var variation_id = $element.attr('data-id');
             console.log(variation_id);
             if (discount_type === 'range') {
-                var qty = element.val();
+                var qty = $element.val();
                 fetch("/thisissparta", {
                     method: "post",
                     headers: {
@@ -3012,9 +3012,14 @@ $(document).ready(function () {
                         variation_id: variation_id,
                         qty: qty
                     })
+                }).then(function (res) {
+                    console.log(res);
+                    $element.closest('.menu-item-selected').find('.price-placee').html("" + getCurrencySymbol() + '1' * qty);
+                }).catch(function (error) {
+                    return console.error(error);
                 });
             } else if (discount_type === 'fixed') {
-                var discount_id = element.val();
+                var discount_id = $element.val();
                 fetch("/thisissparta", {
                     method: "post",
                     headers: {
@@ -3028,7 +3033,12 @@ $(document).ready(function () {
                         variation_id: variation_id,
                         discount_id: discount_id
                     })
-                });
+                }).then(function (res) {
+                    console.log(res);
+                    $element.closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + '0');
+                }).catch(function (error) {
+                    return console.error(error);
+                });;
             }
         };
 
