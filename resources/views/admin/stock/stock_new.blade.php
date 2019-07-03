@@ -1055,9 +1055,16 @@
     <script>
 
         $(document).ready(function () {
+
             $("body").on("click", ".add-discount", function (e) {
                 var main = $(this).data('main');
                 var group = $(this).data('group');
+                var hiddenInputs = $(this).next();
+                var inputsArray = hiddenInputs.find('input').toArray();
+                // inputsArray.filter(() => {
+                //
+                // });
+                // $("#discountModal").attr('data-main',main).attr('data-group',group);
                 $("#discountModal").find('.apply-discount').attr('data-main',main).attr('data-group',group);
                 $("#discountModal").modal();
             });
@@ -1072,6 +1079,10 @@
                         $("#discountModal").modal('hide');
                     }
                 });
+            });
+
+            $('#discountModal').on('show.bs.modal', function (ev) {
+                // console.log($(ev.target));
             });
 
             $('body').on('click','.add-range-discount',function () {
