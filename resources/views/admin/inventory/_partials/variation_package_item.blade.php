@@ -28,7 +28,9 @@
             <div class="price-discount @if($package_variation && $package_variation->price_type =='discount') show @else hide @endif">
                 <a data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}" href="javascript:void(0)" class="btn btn-info add-discount">Discount price</a>
                 <div class="discount-data-v" data-d-v="{{ $uniqueID }}">
-
+                    @if($package_variation && count($package_variation->discounts))
+                        @include("admin.stock._partials.discount_data",['ajax' => false])
+                    @endif
                 </div>
             </div>
         </div>
