@@ -120,7 +120,7 @@
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'name', name: 'stock_translations.name'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
