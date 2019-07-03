@@ -174,7 +174,10 @@
                                                                         <div id="brands_treeview_json">
                                                                             <div class="filter-wall cat-name row">
                                                                                 <div class="col-12 p-sm-0">
-                                                                                    @foreach($brands as $brand)
+                                                                                    @foreach($brands as $parent)
+                                                                                        <p class="pl-sm-0 bold">{{ $parent->name }}</p>
+                                                                                        @if(count($parent->children))
+                                                                                            @foreach($parent->children as $brand)
                                                                                         <div class="single-wrap">
                                                                                             <div class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
                                                                                                 {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
@@ -184,6 +187,8 @@
                                                                                                 </label>
                                                                                             </div>
                                                                                         </div>
+                                                                                            @endforeach
+                                                                                        @endif
                                                                                     @endforeach
                                                                                 </div>
                                                                             </div>
