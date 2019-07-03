@@ -35,10 +35,12 @@
                                                     </div>
                                                     <div class="col-sm-3">
                                                         @if(!$key)
-                                                            <button type="button" class="btn btn-primary add-new-social-input">
+                                                            <button type="button"
+                                                                    class="btn btn-primary add-new-social-input">
                                                                 <i class="fa fa-plus"></i></button>
                                                         @else
-                                                            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                                            <button
+                                                                class="plus-icon remove-new-banner-input btn btn-danger">
                                                                 <i class="fa fa-minus"></i></button>
                                                         @endif
                                                     </div>
@@ -54,7 +56,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3">
-                                                    <button type="button" class="btn btn-primary add-new-social-input"><i
+                                                    <button type="button" class="btn btn-primary add-new-social-input">
+                                                        <i
                                                             class="fa fa-plus"></i></button>
                                                 </div>
                                             </div>
@@ -85,11 +88,13 @@
                                                 </div>
                                                 <div class="col-sm-3">
                                                     @if(!$key)
-                                                        <button type="button" class="btn btn-primary add-new-social-input">
+                                                        <button type="button"
+                                                                class="btn btn-primary add-new-social-input">
                                                             <i
                                                                 class="fa fa-plus"></i></button>
                                                     @else
-                                                        <button class="plus-icon remove-new-social-input btn btn-danger">
+                                                        <button
+                                                            class="plus-icon remove-new-social-input btn btn-danger">
                                                             <i class="fa fa-minus"></i></button>
                                                     @endif
                                                 </div>
@@ -159,7 +164,7 @@
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners").html();
-                html= html.replace(/{count}/g,uid);
+                html = html.replace(/{count}/g, uid);
                 $(".social-media-group").append(html);
             });
 

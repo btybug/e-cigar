@@ -28,12 +28,9 @@ class HomeController extends Controller
     public function index()
     {
         $banners = $this->settings->getEditableData('banners');
-        $banners = ($banners->data) ? json_decode($banners->data,true) : [];
-
-//        public/media/drive/Banners/6770493469a66ce503996020c26c2933.html
-//        $html = \File::get('public/media/drive/Banners/6770493469a66ce503996020c26c2933.html');
-//        dd($html);
-        return view('welcome',compact(['banners']));
+        $banners = ($banners->data) ? json_decode($banners->data, true) : [];
+        
+        return view('welcome', compact(['banners']));
     }
 
     public function getFaq()
