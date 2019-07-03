@@ -592,6 +592,10 @@
         .video--carousel-thumb .fs-carousel-item {
             border: 2px solid transparent;
         }
+
+        .product-single-info_radio-label:before{
+            border-radius: 50%;
+        }
     </style>
 @stop
 
