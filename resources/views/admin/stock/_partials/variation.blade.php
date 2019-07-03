@@ -47,6 +47,8 @@
     <div class="product-wall">
         @if($main && $main->type =='package_product')
             @include('admin.stock._partials.package_item')
+        @elseif($main && $main->type =='single')
+            @include('admin.stock._partials.package_item')
         @elseif($main && $main->type =='filter')
             @include('admin.stock._partials.filter_item')
         @endif
