@@ -1059,8 +1059,35 @@
             $("body").on("click", ".add-discount", function (e) {
                 var main = $(this).data('main');
                 var group = $(this).data('group');
-                var hiddenInputs = $(this).next();
-                var inputsArray = hiddenInputs.find('input').toArray();
+                var hiddenInputs = $(this).next()
+
+                var discount_type = hiddenInputs.find('[data-type-discount="discount_type"]').val();
+                var discount = hiddenInputs.find('[data-type-discount="discount"]');
+                var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val());
+                var discount_length;
+                console.log(discounts_value);
+                $("#discountModal").find(`.select-discount-type`).val(discount_type).trigger('change');
+                $("#discountModal").find(`.remove-discount-item`).trigger('click');
+                if(discount_type === 'range') {
+                    discount_length = discount.length / 3;
+                    for(let i = 1; i<=discount_length; i++) {
+                        $("#discountModal").find(`.add-range-discount`).trigger('click');
+                    }
+                } else if(discount_type === 'fixed') {
+                    discount_length = discount.length / 2;
+                    for(let i = 1; i<=discount_length; i++) {
+                        $("#discountModal").find(`.add-fixed-discount`).trigger('click');
+                    }
+                }
+                $("#discountModal").find(`.discount-item input`).toArray().map((discount_gr, index) => {
+                    $(discount_gr).val(discounts_value[index])
+                });
+
+                // .attr('selected', 'selected');
+                hiddenInputs.find('[data-type-discount="discount"]').length
+                // console.log('discount', hiddenInputs.find('[data-type-discount="discount_type"]').val());
+
+
                 // inputsArray.filter(() => {
                 //
                 // });
