@@ -301,7 +301,9 @@ class DatatableController extends Controller
 
     public function getAllStocks()
     {
-        return Datatables::of(Stock::query())
+        return Datatables::of(Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->select('stocks.*','stock_translations.name')
+            ->where('stock_translations.locale', \Lang::getLocale()))
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
             })
