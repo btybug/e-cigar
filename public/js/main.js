@@ -265,12 +265,12 @@ $(document).ready(function () {
             const counter = $(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]);
 
             new_qty(section);
-            Number(counter.val()) < Number(limit) - Number(new_qty(section)) +
+            // Number(counter.val()) < Number(limit) - Number(new_qty(section)) +
             Number($(plus_button.closest('.continue-shp-wrapp_qty').find('.field-input')[0]).val()) && counter.val(Number(counter.val()) + 1);
             new_qty(section);
-            if (type === 'select') {
-                select2MaxLimit(section, limit);
-            }
+            // if (type === 'select') {
+            //     select2MaxLimit(section, limit);
+            // }
 
             const price = plus_button.closest('[data-price]').attr('data-price');
             plus_button.closest('[data-price]').find('.price-placee').html(`${getCurrencySymbol()}${price * Number(counter.val())}`);
@@ -402,6 +402,51 @@ $(document).ready(function () {
                 select.find('[data-out="1"]').addClass('none-touchable-op');
             }
         };
+
+        const discountInputChange = ($ev, element, discount_type) => {
+            console.log('99999999999999999999999999999999999999', discount_type);
+            const variation_id = element.attr('data-id');
+            console.log(variation_id);
+            if(discount_type === 'range') {
+                const qty = element.val();
+                fetch("/thisissparta", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        variation_id,
+                        qty
+                    })
+                });
+            } else if(discount_type === 'fixed') {
+                const discount_id = element.val();
+                fetch("/thisissparta", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        variation_id,
+                        discount_id
+                    })
+                });
+            }
+
+        };
+
+        $('body').on('change', '[data-discount-type] input, [data-discount-type] select', function(ev) {
+            const discount_type = $(ev.target).closest('[data-discount-type]').attr('data-discount-type');
+            discountInputChange($(ev), $(ev.target), discount_type);
+        });
 
         setTotalPrice();
 
