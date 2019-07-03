@@ -20,43 +20,43 @@
                                 <div class="card-header panel-heading">Main slider</div>
                                 <div class="card-body panel-body">
                                     <div class="form-group d-flex flex-wrap align-items-center social-media-group">
-                                        @if($model && isset($model->social_media) && @json_decode($model->social_media,true))
+                                        @if($model && isset($model->data) && @json_decode($model->data,true))
                                             @php
-                                                $social_medias=json_decode($model->social_media,true);
+                                                $data = json_decode($model->data,true);
                                             @endphp
-                                            @foreach($social_medias as $key=>$social_media)
-                                                <div class="clearfix"></div>
-                                                <div class="col-sm-6 p-0">
-                                                    <div class="input-group">
-                                                        <div class="input-group-prepend">
-                                                            {!! Form::file('home_page['.$key.'][slider]') !!}
-                                                            {{--{!! Form::hidden('social_media['.$key.'][social]',$social_media['social'],['class'=>'social_type']) !!}--}}
+                                            @foreach($data as $key => $banner)
+                                                <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                    <div class="col-sm-6 p-0">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                {!! media_button('banners[]',$banner) !!}
+                                                            </div>
                                                         </div>
-                                                        {{--{!! Form::text('social_media['.$key.'][url]', $social_media['url'], ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}--}}
                                                     </div>
-                                                </div>
-                                                <div class="col-sm-3">
-                                                    @if(!$key)
-                                                        <button type="button" class="btn btn-primary add-new-social-input">
-                                                            <i
-                                                                class="fa fa-plus"></i></button>
-                                                    @else
-                                                        <button class="plus-icon remove-new-social-input btn btn-danger">
-                                                            <i class="fa fa-minus"></i></button>
-                                                    @endif
+                                                    <div class="col-sm-3">
+                                                        @if(!$key)
+                                                            <button type="button" class="btn btn-primary add-new-social-input">
+                                                                <i class="fa fa-plus"></i></button>
+                                                        @else
+                                                            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                                                <i class="fa fa-minus"></i></button>
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             @endforeach
                                         @else
-                                            <div class="col-sm-6 p-0">
-                                                <div class="input-group">
-                                                    <div class="input-group-prepend">
-                                                        {!! Form::file('home_page[0][slider]') !!}
+                                            <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                <div class="col-sm-6 p-0">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            {!! media_button('banners[]',$model) !!}
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-sm-3">
-                                                <button type="button" class="btn btn-primary add-new-social-input"><i
-                                                        class="fa fa-plus"></i></button>
+                                                <div class="col-sm-3">
+                                                    <button type="button" class="btn btn-primary add-new-social-input"><i
+                                                            class="fa fa-plus"></i></button>
+                                                </div>
                                             </div>
                                         @endif
                                     </div>
@@ -120,6 +120,22 @@
 
 
     </div>
+
+    <script type="template" id="add-more-banners">
+        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+            <div class="col-sm-6 p-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        {!! media_button('banners[]',$model) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </script>
 @stop
 
 @section('css')
@@ -142,27 +158,13 @@
             $('#first_line_country').select2();
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
-                var html = `<div class="clearfix">
-                    </div><div class="d-flex align-items-center w-100 social-container mt-3">
-                    <div class="col-sm-6 p-0">
-                    <div class="input-group">
-                    <div class="input-group-prepend">
-                    <button class="btn btn-outline-secondary dark_blue_gradient-cl dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-facebook-f icon-blue"></i>
-                    </button><div class="dropdown-menu">
-                    <a class="dropdown-item active"  href="javascript:void(0);"> <i class="fa fa-facebook icon-green"></i>  <span class="name">Facebook</span> </a> <a class="dropdown-item" href="javascript:void(0);"> <i class="fa fa-twitter icon-green"></i> <span class="name">Twitter</span></a>
-                    <a class="dropdown-item" href="javascript:void(0);"><i class="fa fa-yahoo icon-purple"></i>
-                    <span class="name">Yahoo</span></a><a class="dropdown-item" href="javascript:void(0);">
-                    <i class="fa fa-google icon-red"></i><span class="name">Google</span> </a> </div>
-                    <input name="social_media[${uid}][social]" value="fab fa-facebook icon-green" type="hidden" class="social_type">
-                    </div>
-                    <input name="social_media[${uid}][url]" type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="Profile URL">
-                    </div></div><div class="col-sm-3"><button class="plus-icon remove-new-social-input btn btn-danger">
-                    <i class="fa fa-minus"></i></button></div></div>`;
+                var html = $("#add-more-banners").html();
+                html= html.replace(/{count}/g,uid);
                 $(".social-media-group").append(html);
             });
 
-            $("body").on("click", ".remove-new-social-input", function () {
-                $(this).closest(".social-container").remove();
+            $("body").on("click", ".remove-new-banner-input", function () {
+                $(this).closest(".banner-item").remove();
             });
 
             $("body").on("click", "#add-more-hours", function () {

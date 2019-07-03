@@ -9,27 +9,30 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    // Get all tickets
-//
-//// Create a new ticket
-//    \Zendesk::tickets()->create([
-//        'subject' => 'Subject',
-//        'comment' => [
-//            'body' => 'Ticket content.'
-//        ],
-//        'priority' => 'normal'
-//    ]);
-//
-//// Update multiple tickets
-//    \Zendesk::ticket([123, 456])->update([
-//        'status' => 'urgent'
-//    ]);
-//
-//// Delete a ticket
-//    \Zendesk::ticket(123)->delete();
-    return view('welcome');
-})->name('home');
+
+Route::get('/', 'HomeController@index')->name('home');
+
+//Route::get('/', function () {
+//    // Get all tickets
+////
+////// Create a new ticket
+////    \Zendesk::tickets()->create([
+////        'subject' => 'Subject',
+////        'comment' => [
+////            'body' => 'Ticket content.'
+////        ],
+////        'priority' => 'normal'
+////    ]);
+////
+////// Update multiple tickets
+////    \Zendesk::ticket([123, 456])->update([
+////        'status' => 'urgent'
+////    ]);
+////
+////// Delete a ticket
+////    \Zendesk::ticket(123)->delete();
+//    return view('welcome');
+//})->name('home');
 
 Route::post('/stripe-charge', 'Frontend\StripePaymentController@stripeCharge');
 Route::post('/get-comments', function (\Illuminate\Http\Request $request) {

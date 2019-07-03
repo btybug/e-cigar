@@ -560,16 +560,19 @@ class SettingsController extends Controller
             ->with(['alert' => ['message' => 'New SMTP service connection made successfully!!!', 'class' => 'success']]);
     }
 
-    public function getHomePage()
+    public function getHomePage(Settings $settings)
     {
-        $model = Common::where('type','home_page')->first();
+        $model = $settings->getEditableData('banners');
 
         return $this->view('home_page',compact(['model']));
     }
 
-    public function postHomePage(Request $request)
+    public function postHomePage(Request $request,Settings $settings)
     {
+        $banners = array_filter($request->get('banners',[]));
+        $settings->updateOrCreateSettings('banners', ['data' =>$banners]);
 
+        return redirect()->back();
     }
 
 }
