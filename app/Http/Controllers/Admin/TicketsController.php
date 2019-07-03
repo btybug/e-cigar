@@ -58,9 +58,14 @@ class TicketsController extends Controller
         $statuses = $this->statuses->where('type', 'tickets')->get()->pluck('name', 'id')->all();
         $priorities = $this->statuses->where('type', 'ticket_priority')->get()->pluck('name', 'id')->all();
         $categories = $this->category->where('type', 'tickets')->get()->pluck('name', 'id')->all();
-        $staff = $this->user->pluck('name', 'id')->all();
+        $staff = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNotNull('role_id')
+            ->orWhere('roles.type', 'backend')->select('users.*')->get()->pluck('name','id')->all();
+        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNull('role_id')
+            ->orWhere('roles.type', 'frontend')->select('users.*')->get()->pluck('name','id')->all();
 
-        return $this->view('new', compact(['model', 'statuses', 'priorities', 'categories', 'staff']));
+        return $this->view('new', compact(['model', 'statuses', 'priorities', 'categories', 'staff','users']));
     }
 
     public function postNew(Request $request)
@@ -78,7 +83,7 @@ class TicketsController extends Controller
 
         if ($validate) return redirect()->back()->withErrors($validate);
 
-        $data['user_id'] = \Auth::id();
+        $data['author_id'] = \Auth::id();
         $ticket = Ticket::create($data);
 
         if ($ticket) {
@@ -98,10 +103,15 @@ class TicketsController extends Controller
         $statuses = $this->statuses->where('type', 'tickets')->get()->pluck('name', 'id')->all();
         $priorities = $this->statuses->where('type', 'ticket_priority')->get()->pluck('name', 'id')->all();
         $categories = $this->category->where('type', 'tickets')->get()->pluck('name', 'id')->all();
-        $staff = $this->user->pluck('name', 'id')->all();
+        $staff = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNotNull('role_id')
+            ->orWhere('roles.type', 'backend')->select('users.*')->get()->pluck('name','id')->all();
+        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+            ->whereNull('role_id')
+            ->orWhere('roles.type', 'frontend')->select('users.*')->get()->pluck('name','id')->all();
         $replies = $model->replies()->main()->get();
         $data = mergeCollections($replies, $model->history);
-        return $this->view('edit', compact(['model', 'statuses', 'priorities', 'categories', 'staff', 'data']));
+        return $this->view('edit', compact(['model', 'statuses', 'priorities', 'categories', 'staff', 'data','users']));
 
     }
 

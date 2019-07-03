@@ -18,7 +18,7 @@
             <td>
                 {!! media_button("variations[$main_unique][variations][$uniqueID][image]",$item->image ) !!}
             </td>
-           
+
             <td class="package_price @if(! $main || ($main && $main->price_per == 'product')) hide @endif d-flex">
                 <div class="col-md-6">
                     {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['' => 'Choose','static' => 'Static','discount' => 'Discount'],

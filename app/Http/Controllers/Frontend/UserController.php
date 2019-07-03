@@ -233,6 +233,7 @@ class UserController extends Controller
 
         $status = $setting = $this->settings->getData('tickets', 'open');
         $data['user_id'] = \Auth::id();
+        $data['author_id'] = \Auth::id();
         $data['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'tickets')->first()->id;
 
         $ticket = Ticket::create($data);
