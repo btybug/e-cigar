@@ -403,12 +403,12 @@ $(document).ready(function () {
             }
         };
 
-        const discountInputChange = ($ev, element, discount_type) => {
+        const discountInputChange = ($ev, $element, discount_type) => {
             console.log('99999999999999999999999999999999999999', discount_type);
-            const variation_id = element.attr('data-id');
+            const variation_id = $element.attr('data-id');
             console.log(variation_id);
             if(discount_type === 'range') {
-                const qty = element.val();
+                const qty = $element.val();
                 fetch("/thisissparta", {
                     method: "post",
                     headers: {
@@ -422,9 +422,14 @@ $(document).ready(function () {
                         variation_id,
                         qty
                     })
-                });
+                })
+                    .then((res) => {
+                        console.log(res);
+                        $element.closest('.menu-item-selected').find('.price-placee').html(`${getCurrencySymbol()}${'1'*qty}`);
+                    })
+                    .catch(error => console.error(error));
             } else if(discount_type === 'fixed') {
-                const discount_id = element.val();
+                const discount_id = $element.val();
                 fetch("/thisissparta", {
                     method: "post",
                     headers: {
@@ -438,7 +443,12 @@ $(document).ready(function () {
                         variation_id,
                         discount_id
                     })
-                });
+                })
+                    .then((res) => {
+                        console.log(res);
+                        $element.closest('.menu-item-selected').find('.price-placee').html(`${getCurrencySymbol()}${'0'}`);
+                    })
+                    .catch(error => console.error(error));;
             }
 
         };
