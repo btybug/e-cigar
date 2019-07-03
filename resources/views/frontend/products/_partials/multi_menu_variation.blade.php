@@ -1,6 +1,6 @@
 @if($variation->count_limit ==1 && $variation->min_count_limit)
     @if($variation->display_as == "popup" || $variation->display_as == "filter_popup")
-        <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}"
+        <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-discount-type="{{ $variation->discount_type }}" data-id="{{ $variation->id }}"
              data-price="{{ convert_price($variation->price,$currency,false,true) }}">
             <div class="d-flex flex-wrap align-items-center ">
                 <div class="col-sm-7">
@@ -60,7 +60,7 @@
         </div>
     @endif
 @else
-    <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-id="{{ $variation->id }}"
+    <div class="col-sm-12 pl-0 m-l-5 menu-item-selected mb-2" data-discount-type="{{ $variation->discount_type }}" data-id="{{ $variation->id }}"
          data-price="{{ convert_price($variation->price,$currency,false,true) }}">
         <div class="d-flex flex-wrap align-items-center ">
             <div class="col-sm-7">
