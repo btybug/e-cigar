@@ -52,7 +52,16 @@
                                <div class="row">
                                    {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
                                    <div class="col-sm-9">
-                                       Username
+                                       {{ Auth::user()->name }}
+                                   </div>
+                               </div>
+                           </div>
+                           <div class="status-wall wall list-group-item">
+                               <div class="row">
+                                   {{Form::label('user', 'User',['class' => 'col-sm-3'])}}
+                                   <div class="col-sm-9">
+                                       {!! Form::select('user_id',$users,null,
+                                                   ['class' => 'form-control','id'=> 'user']) !!}
                                    </div>
                                </div>
                            </div>
