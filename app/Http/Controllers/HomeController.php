@@ -16,7 +16,6 @@ class HomeController extends Controller
 
     public function __construct(Settings $settings)
     {
-        $this->middleware(['auth', 'verified']);
         $this->settings = $settings;
     }
 
@@ -28,6 +27,7 @@ class HomeController extends Controller
     public function index()
     {
         $banners = $this->settings->getEditableData('banners');
+//     dd($banners);
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
         
         return view('welcome', compact(['banners']));
