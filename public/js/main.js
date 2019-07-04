@@ -3,19 +3,19 @@ $(function () {
     $(window).resize(function () {
         heightBlock('.main-left-tabs .nav', '.main-left-tabs .nav a');
     });
-    $('body').on('click', '.filter-sidebar-wrapper .head.filter-main__head', function () {
-        let blockId = $(this).parent().find('.all-filters');
-        if ($(blockId).css('display') == 'none')
-        {
-            $(blockId).animate({height: 'show'}, 400);
-            $(this).find('i').toggleClass('fa-plus fa-minus');
-        }
-        else
-        {
-            $(blockId).animate({height: 'hide'}, 400);
-            $(this).find('i').toggleClass('fa-minus fa-plus');
-        }
-    });
+    // $('body').on('click', '.filter-sidebar-wrapper .head.filter-main__head', function () {
+    //     let blockId = $(this).parent().find('.all-filters');
+    //     if ($(blockId).css('display') == 'none')
+    //     {
+    //         $(blockId).animate({height: 'show'}, 400);
+    //         $(this).find('i').toggleClass('fa-plus fa-minus');
+    //     }
+    //     else
+    //     {
+    //         $(blockId).animate({height: 'hide'}, 400);
+    //         $(this).find('i').toggleClass('fa-minus fa-plus');
+    //     }
+    // });
 
     // // remove cart-info from cart sidbar
     // $('.cart-item-close').on('click', function (e) {
