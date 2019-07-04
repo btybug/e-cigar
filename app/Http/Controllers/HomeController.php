@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 
@@ -27,10 +28,10 @@ class HomeController extends Controller
     public function index()
     {
         $banners = $this->settings->getEditableData('banners');
-//     dd($banners);
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
-        
-        return view('welcome', compact(['banners']));
+        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
+
+        return view('welcome', compact(['banners','categories']));
     }
 
     public function getFaq()

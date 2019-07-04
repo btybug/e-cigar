@@ -69,54 +69,58 @@
                         <br/> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
                         orci.</p>
                     <ul class="row home_categories_list">
-                        <li class="col-md-6">
-                            <div class="position-relative home_categories-item">
-                                <img src="/public/img/temp/product_1.jpg" alt="photo">
-                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
-                                    <h4 class="font-sec-bold font-35 ">VAPE KIT</h4>
-                                    <p>Suspendisse at ante ac arcu elementum <br/>
-                                        interdum. Nullam lorem elit.</p>
-                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                        products</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="position-relative home_categories-item">
-                                <img src="/public/img/temp/product_2.jpg" alt="photo">
-                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
-                                    <h4 class="font-sec-bold font-35 ">Cbd</h4>
-                                    <p>Suspendisse at ante ac arcu elementum <br/>
-                                        interdum. Nullam lorem elit.</p>
-                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                        products</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="position-relative home_categories-item mb-0">
-                                <img src="/public/img/temp/product_3.jpg" alt="photo">
-                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
-                                    <h4 class="font-sec-bold font-35 ">E-liquid</h4>
-                                    <p>Suspendisse at ante ac arcu elementum <br/>
-                                        interdum. Nullam lorem elit.</p>
-                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                        products</a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-md-6">
-                            <div class="position-relative home_categories-item mb-0">
-                                <img src="/public/img/temp/product_4.jpg" alt="photo">
-                                <div class="d-flex flex-column position-absolute home_categories-item-inner">
-                                    <h4 class="font-sec-bold font-35 ">Parts</h4>
-                                    <p>Suspendisse at ante ac arcu elementum <br/>
-                                        interdum. Nullam lorem elit.</p>
-                                    <a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                        products</a>
-                                </div>
-                            </div>
-                        </li>
+                        @if(count($categories))
+                            @foreach($categories as $category)
+                                <li class="col-md-6">
+                                    <div class="position-relative home_categories-item">
+                                        <img src="{{ $category->image }}" alt="photo">
+                                        <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                            <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
+                                            <p>{{ $category->description }}</p>
+                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
+                                                products</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endforeach
+                        @endif
+
+                        {{--<li class="col-md-6">--}}
+                            {{--<div class="position-relative home_categories-item">--}}
+                                {{--<img src="/public/img/temp/product_2.jpg" alt="photo">--}}
+                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
+                                    {{--<h4 class="font-sec-bold font-35 ">Cbd</h4>--}}
+                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
+                                        {{--interdum. Nullam lorem elit.</p>--}}
+                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
+                                        {{--products</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-md-6">--}}
+                            {{--<div class="position-relative home_categories-item mb-0">--}}
+                                {{--<img src="/public/img/temp/product_3.jpg" alt="photo">--}}
+                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
+                                    {{--<h4 class="font-sec-bold font-35 ">E-liquid</h4>--}}
+                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
+                                        {{--interdum. Nullam lorem elit.</p>--}}
+                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
+                                        {{--products</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--<li class="col-md-6">--}}
+                            {{--<div class="position-relative home_categories-item mb-0">--}}
+                                {{--<img src="/public/img/temp/product_4.jpg" alt="photo">--}}
+                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
+                                    {{--<h4 class="font-sec-bold font-35 ">Parts</h4>--}}
+                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
+                                        {{--interdum. Nullam lorem elit.</p>--}}
+                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
+                                        {{--products</a>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
                     </ul>
                 </section>
             </div>
