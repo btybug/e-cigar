@@ -252,4 +252,9 @@ class ProductsController extends Controller
 
         return response()->json(['error' => false, 'html' => $html, 'type' => $vSettings->display_as]);
     }
+
+    public function getDiscountPrice(Request $request)
+    {
+        dd($request->all());
+    }
 }

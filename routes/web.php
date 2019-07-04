@@ -76,6 +76,7 @@ Route::group(['prefix' => 'products'], function () {
     Route::post('/search-items', 'Frontend\ProductsController@postSearchItems')->name('product_search_items');
     Route::post('/get-extra-content', 'Frontend\ProductsController@postExtraContent')->name('product_extra_content');
     Route::post('/get-extra-item', 'Frontend\ProductsController@postExtraItem')->name('product_extra_item');
+    Route::post('/get-discount-price', 'Frontend\ProductsController@getDiscountPrice')->name('product_discount_price');
     Route::get('/{type?}', 'Frontend\ProductsController@index')->name('categories_front');
     Route::post('/{type?}', 'Frontend\ProductsController@index')->name('categories_front_post');
     Route::group(['prefix' => '{type}'], function () {
