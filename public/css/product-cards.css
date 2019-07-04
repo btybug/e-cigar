@@ -1496,20 +1496,27 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 /*filter sidebar start*/
 .filter-sidebar-wrapper .head h5{
     margin: 0;
+    line-height: 1;
+    color: #7c7c7c;
 }
 .filter-sidebar-wrapper .head{
-    padding-bottom: 5px;
-    border-bottom: 1px solid #ccc;
+    /*padding-bottom: 5px;*/
+    /*border-bottom: 1px solid #ccc;*/
     cursor: pointer;
 }
-.filter-sidebar-wrapper .filter-single-wall:not(:first-of-type){
-    padding-top: 5px;
+.filter-sidebar-wrapper .filter-single-wall{
+    border: 1px solid #d7d7d7;
+    margin-top: 15px;
 }
+
 .filter-sidebar-wrapper .filter-single-wall .list-filter{
-    padding: 20px 10px;
-    background-color: #e3e6ed6b;
-    border: 1px solid #ccc;
+    padding: 15px 14px;
+    /*background-color: #e3e6ed6b;*/
+    /*border: 1px solid #ccc;*/
     border-top: none;
+}
+.filter-sidebar-wrapper .filters-title{
+    margin-bottom: 25px;
 }
 .top-filters .all-filters .filter-wall.cat-name .single-wrap .custom-control-inline {
     margin-right: 0;
@@ -1652,9 +1659,21 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     padding-left: 10px;
 }
 .products__page-main .filter-main__head{
-    margin-bottom: 20px;
-    background: #e3e6ed;
-    padding: 10px;
+    /*margin-bottom: 15px;*/
+    padding: 15px 12px;
+}
+.filter-sidebar-wrapper .filter-single-wall.opened .filter-main__head{
+    background: #edf0f5;
+}
+.products__page-main .filter-main__head .icon-head{
+    font-size: 16px;
+    line-height: 1;
+}
+.products__page-main .filter-main__head .icon-head .fa-minus{
+color: #cbdaf7;
+}
+.products__page-main .filter-main__head .icon-head .fa-plus{
+    color: #5184e5;
 }
 .products__page-main .filter-sidebar-wrapper .slider-range input{
     background-color: transparent;
@@ -2267,6 +2286,7 @@ max-width: 160px;
     -ms-flex: 0 0 876px;
     flex: 0 0 876px;
     max-width: 876px;
+    height: 426px;
     border-right: 1px solid #d7d7d7;
 }
 
@@ -2463,6 +2483,11 @@ color: #4b4b4b;
 
 /*brands main content end*/
 /*------------brands page END-------------*/
+/*------------product page START------------*/
+.filter-sidebar-wrapper{
+
+}
+/*------------product page END-------------*/
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head{
         border-bottom: 1px solid #d7d7d7;

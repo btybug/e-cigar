@@ -169,7 +169,12 @@
                                 @endif
                             </div>
                             <div class="filter-sidebar-wrapper">
-                                <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">Filters</h2>
+                                <div class="d-flex justify-content-between align-items-center head filter-main__head">
+                                    <h5 class="font-main-bold">Filters</h5>
+                                    <span>
+                                                <i class="fas fa-minus"></i>
+                                            </span>
+                                </div>
                                 <div class="all-filters">
                                     <div class="search-filters position-relative">
                                         <input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="Serach for anything">
@@ -210,11 +215,8 @@
                                     </div>
                                     @foreach($filters as $filter)
                                         <div class="filter-single-wall">
-                                            <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                                <h5 class="font-sec-reg text-uppercase font-17">{{ $filter->name }}</h5>
-                                                <span class="icon-head">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
+                                            <div class="d-flex justify-content-between head">
+                                                <h5 class="font-main-bold">{{ $filter->name }}</h5>
                                             </div>
                                             <ul class="list-filter">
                                                 @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
@@ -224,6 +226,7 @@
                                         </div>
                                     @endforeach
                                 </div>
+
                             </div>
 
                             {!! Form::close() !!}
@@ -293,19 +296,6 @@
 @section("js")
     <script>
         $(document).ready(function () {
-            $('body').on('click', '.filter-sidebar-wrapper .head.filter-main__head', function () {
-                let blockId = $(this).parent().find('.list-filter');
-                if ($(blockId).css('display') == 'none')
-                {
-                    $(blockId).animate({height: 'show'}, 100);
-                    $(this).find('i').toggleClass('fa-plus fa-minus');
-                }
-                else
-                {
-                    $(blockId).animate({height: 'hide'}, 100);
-                    $(this).find('i').toggleClass('fa-minus fa-plus');
-                }
-            });
 
             $(document).click(function (e) {
                 const containerBlock = $(".top-filters .arrow-wrap .nav-item--has-dropdown_dropdown");
