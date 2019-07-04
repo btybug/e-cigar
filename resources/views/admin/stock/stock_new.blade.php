@@ -965,7 +965,7 @@
         </div>
     </div>
     <div class="col-md-12 justify-content-center">
-        <a class="btn btn-primary add-range-discount" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
     </div>
 </script>
 
@@ -989,7 +989,7 @@
         </div>
     </div>
     <div class="col-md-12 justify-content-center">
-        <a class="btn btn-primary add-fixed-discount" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+        <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
     </div>
 </script>
 
@@ -1064,7 +1064,7 @@
             var mainS;
             var groupS;
 
-            $("body").on("click", ".add-discount", function (e) {
+            $("body").on("click", '.add-discount', function (e) {
                 var main = $(this).data('main');
                 var group = $(this).data('group');
                 var hiddenInputs = $(this).next()
@@ -1073,18 +1073,19 @@
                 var discount = hiddenInputs.find('[data-type-discount="discount"]');
                 var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val());
                 var discount_length;
-                console.log(discounts_value);
+                console.log('discount_type', discount_type);
                 $("#discountModal").find(`.select-discount-type`).val(discount_type).trigger('change');
+                console.log(hiddenInputs.find('[data-type-discount="discount_type"]'));
                 $("#discountModal").find(`.remove-discount-item`).trigger('click');
                 if(discount_type === 'range') {
                     discount_length = discount.length / 3;
                     for(let i = 1; i<=discount_length; i++) {
-                        $("#discountModal").find(`.add-range-discount`).trigger('click');
+                        $("#discountModal").find(`.add-discount-field`).trigger('click');
                     }
                 } else if(discount_type === 'fixed') {
                     discount_length = discount.length / 2;
                     for(let i = 1; i<=discount_length; i++) {
-                        $("#discountModal").find(`.add-fixed-discount`).trigger('click');
+                        $("#discountModal").find(`.add-discount-field`).trigger('click');
                     }
                 }
                 $("#discountModal").find(`.discount-item input`).toArray().map((discount_gr, index) => {
@@ -1104,7 +1105,12 @@
                 $("#discountModal").find('.apply-discount').attr('data-main',main).attr('data-group',group);
                 mainS = main;
                 groupS = group;
+                if($("#discountModal").find(`.select-discount-type`).val() === '') {
+                    $("#discountModal").find(`.add-discount-field`).addClass('d-none');
+                };
                 $("#discountModal").modal();
+
+                console.log('aaaaaaaaaaaaaaaaaaaaaaa');
             });
 
             $('body').on('click','.apply-discount',function () {
@@ -1155,7 +1161,7 @@
                     html= html.replace(/{count}/g,id);
                     $(".discount-type-box").html(html);
                 }else{
-                    $(".discount-type-box").html();
+                    $(".discount-type-box").html('');
                 }
             });
 
