@@ -787,6 +787,7 @@ adipiscing elit. Morbi sodales ...
         });
         $('body').on('click', '.brands_aside-item-link', function () {
             let value = $(this).data('id');
+            let slug = $(this).data('slug');
             $.ajax({
                 type: "post",
                 url: "/get-brand",
@@ -801,7 +802,8 @@ adipiscing elit. Morbi sodales ...
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='"+value+"']").addClass('active');
                         $("body").find('.brands_main-content-top').html(data.html);
-
+                        history.pushState(null, null, '/brands/'+slug);
+                        // document.location.hash = slug
                     }
                 }
             });
