@@ -102,259 +102,18 @@
                     <div class="d-flex flex-wrap">
                         <div class="brands_aside">
                             <div class="select-wall">
-                                <select
-                                    class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark"
-                                    style="width: 100%">
-                                    <option value="">All Brands</option>
-                                    <option value="">item2</option>
-                                    <option value="">item3</option>
-                                </select>
+                                {!! Form::select('brand_filter',['' => 'All Brands'] + $parentBrands,null,
+                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
+
                             </div>
                             <ul class="brands_aside-list">
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Black Note</span>
-                                            <span class="brands_aside-amount">(21)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link active">
-                                        <div>
-                                            <span class="brands_aside-name">Jam Monster</span>
-                                            <span class="brands_aside-amount">(22)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Emist</span>
-                                            <span class="brands_aside-amount">(15)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Black Note</span>
-                                            <span class="brands_aside-amount">(21)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Jam Monster</span>
-                                            <span class="brands_aside-amount">(22)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Emist</span>
-                                            <span class="brands_aside-amount">(15)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Black Note</span>
-                                            <span class="brands_aside-amount">(21)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Jam Monster</span>
-                                            <span class="brands_aside-amount">(22)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Emist</span>
-                                            <span class="brands_aside-amount">(15)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Black Note</span>
-                                            <span class="brands_aside-amount">(21)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Jam Monster</span>
-                                            <span class="brands_aside-amount">(22)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Emist</span>
-                                            <span class="brands_aside-amount">(15)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Black Note</span>
-                                            <span class="brands_aside-amount">(21)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Jam Monster</span>
-                                            <span class="brands_aside-amount">(22)</span>
-                                        </div>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#" class="brands_aside-item-link">
-                                        <div>
-                                            <span class="brands_aside-name">Emist</span>
-                                            <span class="brands_aside-amount">(15)</span>
-                                        </div>
-                                    </a>
-                                </li>
+                                @include("frontend.brands._partials.list")
                             </ul>
                         </div>
                         <div class="brands_main-content">
+
                             <div class="d-flex flex-wrap brands_main-content-top margin-b-brands-top">
-                                <div class="brands_main-content-top-photo">
-                                    <img src="/public/img/brands/brands-big.jpg" alt="big-brands">
-                                </div>
-                                <div class="brands_main-content-top-right">
-                                    <div class="text-center right-main-img">
-                                        <img src="/public/img/brands/brands-monster.png" alt="brand">
-                                    </div>
-                                    <h2 class="text-center font-sec-reg font-26 mb-0 lh-1">Jam Monster</h2>
-                                    <ul class="d-flex flex-wrap brands_right-list">
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brands-premium.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name green-brand-clr">
-                                                premium
-                                            </div>
-                                        </li>
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brand-uk.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name red-brand-clr">
-                                                uk brand
-                                            </div>
-                                        </li>
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brand-flavors.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name blue-brand-clr">
-                                                New Flavors
-                                            </div>
-                                        </li>
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brands-premium.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name green-brand-clr">
-                                                premium
-                                            </div>
-                                        </li>
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brand-uk.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name red-brand-clr">
-                                                uk brand
-                                            </div>
-                                        </li>
-                                        <li class="col brands_right-list-item">
-                                            <div class="brands_right-list-item-photo">
-                                                <img src="/public/img/brands/brand-flavors.png" alt="brand">
-                                            </div>
-                                            <div
-                                                class="font-15 text-uppercase brands_right-list-item-name blue-brand-clr">
-                                                New Flavors
-                                            </div>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex brands_main-content-top-more more-info-btn">
-                                        <span class="name">Read more</span>
-                                        <span class="icon">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                width="13px" height="10px"
-                                                viewBox="0 0 13 10"
-                                            >
-<path fill-rule="evenodd" fill="rgb(81, 132, 229)"
-      d="M7.000,10.000 L13.000,-0.000 C13.000,-0.000 11.738,-0.000 10.000,-0.000 C9.578,0.969 7.000,6.000 7.000,6.000 C7.000,6.000 3.553,0.844 3.000,-0.000 C1.262,-0.000 -0.000,-0.000 -0.000,-0.000 L7.000,10.000 Z"/>
-</svg>
-                                        </span>
-
-
-                                    </div>
-                                </div>
-                                <div class="d-none brands_main-content-top-info">
-                                    <p class="brand-info-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                        Suspendisse lorem risus, molestie tincidunt lacus nec sagittis tincidunt neque,
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse lorem
-                                        risus, molestie tincidunt lacus nec sagittis tincidunt neque. Lorem ipsum dolor
-                                        sit amet, consectetur adipiscing elit. Suspendisse lorem risus, molestie
-                                        tincidunt lacus nec sagittis tincidunt neque. Lorem ipsum dolor sit amet,
-                                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus
-                                        nec sagittis tincidunt neque. Lorem ipsum dolor sit amet, consectetur adipiscing
-                                        elit. Suspendisse lacus nec sagittis tincidunt neque. Lorem ipsum dolor sit
-                                        amet, consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt
-                                        lacus nec sagittis tincidu.
-                                    </p>
-                                    <ul class="d-flex flex-wrap brands_main-content-top-tags">
-                                        <li>
-                                            <a href="#" class="tag-link blue-bg-tag">E- Juice</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="tag-link red-bg-tag">Uk Brand</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="tag-link green-bg-tag">Premium</a>
-                                        </li>
-                                    </ul>
-                                    <div class="d-flex brands_main-content-top-more less-info-btn">
-                                        <span class="name">VIEW LESS</span>
-                                        <span class="icon">
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                width="13px" height="10px"
-                                                viewBox="0 0 13 10"
-                                            >
-<path fill-rule="evenodd" fill="rgb(81, 132, 229)"
-      d="M7.000,10.000 L13.000,-0.000 C13.000,-0.000 11.738,-0.000 10.000,-0.000 C9.578,0.969 7.000,6.000 7.000,6.000 C7.000,6.000 3.553,0.844 3.000,-0.000 C1.262,-0.000 -0.000,-0.000 -0.000,-0.000 L7.000,10.000 Z"/>
-</svg>
-                                        </span>
-                                    </div>
-                                </div>
+                                @include("frontend.brands._partials.current")
                             </div>
 
                             <div class="brands_main-content-products-wrapper">
@@ -1026,6 +785,28 @@ adipiscing elit. Morbi sodales ...
                 "1220px": 9
             }
         });
+        $('body').on('click', '.brands_aside-item-link', function () {
+            let value = $(this).data('id');
+            $.ajax({
+                type: "post",
+                url: "/get-brand",
+                cache: false,
+                datatype: "json",
+                data: {id: value},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("body").find(".brands_aside-item-link").removeClass('active');
+                        $("body").find(".brands_aside-item-link[data-id='"+value+"']").addClass('active');
+                        $("body").find('.brands_main-content-top').html(data.html);
+
+                    }
+                }
+            });
+        });
+
         $('body').on('click', '.brands_main-content-top-more', function () {
             let topBlock = $(this).closest('.brands_main-content-top');
             if ($(this).hasClass('more-info-btn')) {
