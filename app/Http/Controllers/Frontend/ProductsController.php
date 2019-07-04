@@ -192,7 +192,7 @@ class ProductsController extends Controller
 
     public function getVariationMenuRaw(Request $request)
     {
-        $variation = StockVariation::findOrFail($request->id);
+        $variation = StockVariation::findOrFail($request->selectElementId);
         $selectElementId = $request->get('selectElementId');
         $html = \view("frontend.products._partials.multi_menu_variation", compact(['variation', 'selectElementId']))->render();
 
