@@ -409,7 +409,7 @@ $(document).ready(function () {
             console.log(variation_id);
             if(discount_type === 'range') {
                 const qty = $element.val();
-                fetch("/thisissparta", {
+                fetch("/products/get-discount-price", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -430,7 +430,7 @@ $(document).ready(function () {
                     .catch(error => console.error(error));
             } else if(discount_type === 'fixed') {
                 const discount_id = $element.val();
-                fetch("/thisissparta", {
+                fetch("/products/get-discount-price", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -445,7 +445,10 @@ $(document).ready(function () {
                     })
                 })
                     .then((res) => {
-                        console.log(res);
+                        return res.json();
+                    })
+                    .then((data) => {
+                        console.log(data);
                         $element.closest('.menu-item-selected').find('.price-placee').html(`${getCurrencySymbol()}${'0'}`);
                     })
                     .catch(error => console.error(error));;

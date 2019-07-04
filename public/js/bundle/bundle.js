@@ -2999,7 +2999,7 @@ $(document).ready(function () {
             console.log(variation_id);
             if (discount_type === 'range') {
                 var qty = $element.val();
-                fetch("/thisissparta", {
+                fetch("/products/get-discount-price", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -3020,7 +3020,7 @@ $(document).ready(function () {
                 });
             } else if (discount_type === 'fixed') {
                 var discount_id = $element.val();
-                fetch("/thisissparta", {
+                fetch("/products/get-discount-price", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
@@ -3034,7 +3034,9 @@ $(document).ready(function () {
                         discount_id: discount_id
                     })
                 }).then(function (res) {
-                    console.log(res);
+                    return res.json();
+                }).then(function (data) {
+                    console.log(data);
                     $element.closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + '0');
                 }).catch(function (error) {
                     return console.error(error);
