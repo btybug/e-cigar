@@ -3013,8 +3013,9 @@ $(document).ready(function () {
                         qty: qty
                     })
                 }).then(function (res) {
-                    console.log(res);
-                    $element.closest('.menu-item-selected').find('.price-placee').html("" + getCurrencySymbol() + '1' * qty);
+                    return res.json();
+                }).then(function (data) {
+                    $element.closest('.menu-item-selected').find('.price-placee').html("" + getCurrencySymbol() + data.price);
                 }).catch(function (error) {
                     return console.error(error);
                 });
@@ -3036,11 +3037,10 @@ $(document).ready(function () {
                 }).then(function (res) {
                     return res.json();
                 }).then(function (data) {
-                    console.log(data);
-                    $element.closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + '0');
+                    $element.closest('.menu-item-selected').find('.price-placee').html("" + getCurrencySymbol() + data.price);
                 }).catch(function (error) {
                     return console.error(error);
-                });;
+                });
             }
         };
 
@@ -3216,12 +3216,31 @@ $(document).ready(function () {
                             var id = $(checkbox).val();
                             var counter_wrap = $($(event.target).closest('.product-list-item').find('.list-qty')[0]);
                             var price = $(counter_wrap[0]).closest('[data-price]').attr('data-price');
+                            var block_id = $(this).closest('.products-list-wrap').attr('data-id');
 
                             if (new_qty(counter_wrap) === limit && !isChecked($(checkbox))) {
                                 return false;
                             }
                             if (!hasQtyCounter(counter_wrap)) {
-                                $(counter_wrap[0]).append(counterHtml(id));
+                                // products-list-wrap
+                                fetch("/products/get-variation-menu-raw", {
+                                    method: "post",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Accept: "application/json",
+                                        "X-Requested-With": "XMLHttpRequest",
+                                        "X-CSRF-Token": $('input[name="_token"]').val()
+                                    },
+                                    credentials: "same-origin",
+                                    body: JSON.stringify({ id: block_id, selectElementId: id })
+                                }).then(function (response) {
+                                    return response.json();
+                                }).then(function (json) {
+                                    $(counter_wrap[0]).append(json.html);
+                                }).catch(function (error) {
+                                    console.log(error);
+                                });
+                                // $(counter_wrap[0]).append(counterHtml(id));
                                 setTotalPrice(modal);
                             } else {
                                 $(counter_wrap[0]).closest('[data-price]').find('.price-placee').html("" + getCurrencySymbol() + price);
