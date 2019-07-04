@@ -62,6 +62,11 @@ Route::group(['prefix' => 'brands'], function () {
 });
 Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
 
+Route::group(['prefix' => 'stickers'], function () {
+    Route::get('/{type?}', 'Frontend\StickersController@index')->name('stickers');
+});
+Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('post_sticker');
+
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
 
