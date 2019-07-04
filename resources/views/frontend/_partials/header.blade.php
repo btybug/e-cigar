@@ -69,7 +69,7 @@
                                 </div>
                             </li>
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link" href="{!! route('product_sales') !!}">Sales
+                                <a class="nav-link" href="{!! route('product_sales') !!}">Offers
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
