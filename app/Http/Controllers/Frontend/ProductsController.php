@@ -11,6 +11,7 @@ use App\Models\Products;
 use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockVariation;
+use App\Models\StockVariationDiscount;
 use App\Models\StockVariationOption;
 use App\ProductSearch\ProductSearch;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
@@ -255,6 +256,22 @@ class ProductsController extends Controller
 
     public function getDiscountPrice(Request $request)
     {
-        dd($request->all());
+        $qty = $request->get('qty');
+        $discount_id = $request->get('discount_id');
+        if($qty != null){
+            $variation = StockVariation::findOrFail($request->variation_id);
+            $discount = $variation->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
+            if($discount){
+                $price = $discount->price * $qty;
+                return response()->json(['error' => false,'price' => $price]);
+            }
+        }elseif($discount_id != null){
+            $discount = StockVariationDiscount::findOrFail($discount_id);
+            if($discount){
+                return response()->json(['error' => false,'price' => $discount->price]);
+            }
+        }
+
+        return response()->json(['error' => true]);
     }
 }
