@@ -515,9 +515,12 @@ $(document).ready(function () {
 
                                 select.on('select2:select', function (e) {
                                     const $this = $(this);
-                                    const current_item_id = $(e.params.data.element).attr('data-select2-id');
+                                    const current_item_id = $(e.params.data.element).val();
                                     new_qty(select);
-
+                                    console.log({
+                                        id: e.params.data.id,
+                                            selectElementId: current_item_id
+                                    })
                                     fetch("/products/get-variation-menu-raw", {
                                         method: "post",
                                         headers: {
@@ -897,7 +900,8 @@ $(document).ready(function () {
                             const id = $(this).attr('data-id');
                             const title = $(this).find('.name').text().trim();
                             filter_limit = $(`.filters-modal-wizard[data-group="${$(this).closest('[data-group]').attr('data-group')}"]`).closest('.limit').attr('data-limit');
-                            if (filter_limit > new_qty(null, 'filter') && !$(this).hasClass('active')) {
+                            // filter_limit > new_qty(null, 'filter') &&
+                            if (!$(this).hasClass('active')) {
                                 $(this).addClass('active');
                                 $('.selected-items_filter').append(makeSelectedItemModal(id, title, true));
                             } else if ($(this).hasClass('active')) {
@@ -1189,7 +1193,7 @@ $(document).ready(function () {
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({id: id, selectElementId: selectElementId})
+                            body: JSON.stringify({id: id, selectElementId: id})
                         })
                             .then(function (response) {
                                 return response.json();
@@ -1256,7 +1260,7 @@ $(document).ready(function () {
                                                     select2MaxLimit(parentRow.find('.product--select-items'), limit);
                                                 } else {
                                                     setTimeout(function () {
-                                                        const selectElementId = $(parentRow.find(".product--select-items").children()[0]).attr('data-select2-id');
+                                                        const selectElementId = $(parentRow.find(".product--select-items").children()[0]).val();
                                                         const id = parentRow.find(".product--select-items").val();
                                                         selectHandle(self, id, selectElementId, limit, parentRow.find(".product--select-items"));
                                                     }, 0);
