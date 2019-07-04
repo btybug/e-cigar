@@ -1068,14 +1068,13 @@
                 var main = $(this).data('main');
                 var group = $(this).data('group');
                 var hiddenInputs = $(this).next()
-
+                mainS = main;
+                groupS = group;
                 var discount_type = hiddenInputs.find('[data-type-discount="discount_type"]').val();
                 var discount = hiddenInputs.find('[data-type-discount="discount"]');
                 var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val());
                 var discount_length;
-                console.log('discount_type', discount_type);
                 $("#discountModal").find(`.select-discount-type`).val(discount_type).trigger('change');
-                console.log(hiddenInputs.find('[data-type-discount="discount_type"]'));
                 $("#discountModal").find(`.remove-discount-item`).trigger('click');
                 if(discount_type === 'range') {
                     discount_length = discount.length / 3;
@@ -1092,43 +1091,25 @@
                     $(discount_gr).val(discounts_value[index])
                 });
 
-                // .attr('selected', 'selected');
-                // hiddenInputs.find('[data-type-discount="discount"]').length
-                // console.log('discount', hiddenInputs.find('[data-type-discount="discount_type"]').val());
-
-
-                // inputsArray.filter(() => {
-                //
-                // });
-                // $("#discountModal").attr('data-main',main).attr('data-group',group);
-                // alert(`${main}, ${group}`)
                 $("#discountModal").find('.apply-discount').attr('data-main',main).attr('data-group',group);
-                mainS = main;
-                groupS = group;
+
                 if($("#discountModal").find(`.select-discount-type`).val() === '') {
                     $("#discountModal").find(`.add-discount-field`).addClass('d-none');
                 };
                 $("#discountModal").modal();
 
-                console.log('aaaaaaaaaaaaaaaaaaaaaaa');
             });
 
             $('body').on('click','.apply-discount',function () {
                 var data = $("#discount-form").serialize();
                 // var main = $(this).data('main');
                 // var group = $(this).data('group');
-                // console.log($(this));
-                // alert(`${mainS}, ${group}`)
                 AjaxCall("{{ route('admin_stock_apply_discount') }}", data+"&main="+mainS+"&group="+groupS, function (res) {
                     if (!res.error) {
                         $("body").find(`[data-d-v="${groupS}"]`).html(res.html);
                         $("#discountModal").modal('hide');
                     }
                 });
-            });
-
-            $('#discountModal').on('show.bs.modal', function (ev) {
-                // console.log($(ev.target));
             });
 
             $('body').on('click','.add-range-discount',function () {
