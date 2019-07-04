@@ -73,7 +73,7 @@
                             @foreach($categories as $category)
                                 <li class="col-md-6">
                                     <div class="position-relative home_categories-item">
-                                        <img src="{{ $category->image }}" alt="photo">
+                                        <img src="{!! media_image_tmb($category->image) !!}" alt="photo">
                                         <div class="d-flex flex-column position-absolute home_categories-item-inner">
                                             <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
                                             <p>{{ $category->description }}</p>
