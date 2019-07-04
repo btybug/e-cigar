@@ -18643,6 +18643,7 @@ max-width: 160px;
     position: absolute;
     box-shadow: 4px 7px 12px 0 rgba(16, 16, 20, 0.3);
     z-index: 1;
+    width: 100%;
 }
 
 /*home products end*/
@@ -18776,7 +18777,7 @@ max-width: 160px;
     justify-content: center;
 }
 .brands_page-wrapper .brands_page-top-title{
-    width: 292px;
+    width: 288px;
     border-right: 1px solid #d7d7d7;
     display: flex;
     align-items: center;
@@ -18796,9 +18797,9 @@ max-width: 160px;
 }
 @media (min-width: 576px){
     .brands_page-wrapper .brands_aside{
-        -ms-flex: 0 0 292px;
-        flex: 0 0 292px;
-        max-width: 292px;
+        -ms-flex: 0 0 288px;
+        flex: 0 0 288px;
+        max-width: 288px;
     }
     .brands_page-wrapper .brands_main-content{
         flex: 1;
@@ -18868,8 +18869,203 @@ max-width: 160px;
     border: 1px solid #d7d7d7;
 }
 .brands_main-content-top-photo{
+    -ms-flex: 0 0 876px;
+    flex: 0 0 876px;
+    max-width: 876px;
+    border-right: 1px solid #d7d7d7;
+}
+
+.brands_main-content-top-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-family: "object-fit: cover;";
+}
+.brands_main-content-top-right{
+    flex:1;
+    position: relative;
+}
+.brands_main-content-top-right .right-main-img img{
+    max-width: 134px;
+}
+.brands_main-content-top-right .right-main-img{
+    margin: 20px 0 2px;
+}
+
+.brands_main-content-top-right .brands_right-list .brands_right-list-item-name{
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 6px;
+    white-space: nowrap;
+}
+.brands_main-content-top-right .brands_right-list-item-name.green-brand-clr{
+    color: #7f7d33;
+}
+.brands_main-content-top-right .brands_right-list-item-name.red-brand-clr{
+color: #e83840;
+}
+.brands_main-content-top-right .brands_right-list-item-name.blue-brand-clr{
+    color: #68c1fe;
+}
+.brands_main-content-top-right .brands_right-list .brands_right-list-item-name{
+    font-size: 15px;
+}
+.brands_main-content-top-right .brands_right-list .brands_right-list-item{
+    text-align: center;
+    margin-top: 30px;
+}
+
+.brands_main-content-top-right .brands_right-list .brands_right-list-item-photo img{
+    width: 100%;
+    max-width: 62px;
+}
+.brands_main-content-top-more{
+    max-width: 150px;
+    width: 100%;
+    height: 38px;
+    border: 1px solid #d7d7d7;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    position: absolute;
+    background-color: #fff;
+    cursor: pointer;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.brands_main-content-top-more .name{
+    font-size: 15px;
+    color: #5184e5;
+    font-weight: bold;
+    text-transform: uppercase;
 
 }
+.brands_main-content-top-more .icon{
+    margin-left: 10px;
+    line-height: 1;
+}
+.brands_main-content-top-info{
+    padding: 30px 45px 15px;
+    position: relative;
+}
+.brands_main-content-top-info .brand-info-desc{
+color: #4b4b4b;
+    line-height: 32px;
+    font-size: 15px;
+    text-align: justify;
+    margin-bottom: 18px;
+}
+.brands_main-content-top.margin-b-brands-top{
+    margin-bottom: 46px;
+}
+.brands_main-content-top-tags{
+    position: relative;
+}
+
+.brands_main-content-top-right.bottom-border{
+    border-bottom: 1px solid #d7d7d7;
+}
+.brands_main-content-top-tags >li:not(:last-of-type){
+    margin-right: 17px;
+}
+.brands_main-content-top-tags .tag-link{
+    color: #FFFFFF;
+    font-size: 15px;
+    width: 150px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 30px;
+    text-transform: uppercase;
+}
+.brands_main-content-top-tags .tag-link.blue-bg-tag{
+    background-color: #5184e5;
+}
+.brands_main-content-top-tags .tag-link.red-bg-tag{
+    background-color: #cb4c4c;
+}
+.brands_main-content-top-tags .tag-link.green-bg-tag{
+    background-color: #beb359;
+}
+.brands_main-content-top-info .less-info-btn{
+    right: 104px;
+    left: auto;
+    transform: translateX(0);
+}
+.brands_main-content-top-info .less-info-btn .icon{
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.brands_main-content-products-wrapper .list-tabs .prod-link{
+    color: #7c7c7c;
+    opacity: .8;
+    font-size: 24px;
+    padding: 0 12px;
+    line-height: 1;
+    -webkit-transition: 0.5s ease;
+    -moz-transition: 0.5s ease;
+    -ms-transition: 0.5s ease;
+    -o-transition: 0.5s ease;
+    transition: 0.5s ease;
+}
+.brands_main-content-products-wrapper .list-tabs >li{
+    position: relative;
+}
+.brands_main-content-products-wrapper .list-tabs >li:not(:last-of-type){
+    margin-right: 40px;
+}
+.brands_main-content-products-wrapper .list-tabs .prod-link:after{
+    content: '';
+    height: 2px;
+    width: 100%;
+    background-color: transparent;
+    position: absolute;
+    margin-top: 6px;
+}
+.brands_main-content-products-wrapper .list-tabs .prod-link.active,.list-tabs .prod-link:hover{
+    color: #5184e5;
+    opacity: 1;
+}
+.brands_main-content-products-wrapper .list-tabs .prod-link.active:after,.list-tabs .prod-link:hover:after{
+    background-color: #5184e5;
+}
+.brands_main-content-products-wrapper .brands_main-content-products-top{
+    margin-top: 30px;
+}
+.brands_main-content-products-wrapper .brands_main-content-products-top .sort-by_select{
+    width: 100%;
+    max-width: 290px
+}
+
+.brands_main-content-products-wrapper .right-wrapper .right-head .sort-by_select .select-wall {
+    width: 100%;
+}
+.brands_main-content-products-wrapper .right-wrapper{
+    flex: 1;
+}
+.brands_main-content-products-wrapper .right-wrapper .select2-container--default{
+    width: 100% !important;
+}
+.brands_main-content-products-wrapper .brands_main-content-products-top .product-grid-list{
+    margin-right: 30px;
+}
+.brands_main-content-products-wrapper .brands_main-content-products .products__item-wrapper{
+    margin-top: 30px;
+}
+.brands_products__list-wrapper>li.list-product{
+    flex: none;
+    max-width: 100%;
+    width: 930px;
+    margin: 0 auto;
+}
+
+
 /*brands main content end*/
 /*------------brands page END-------------*/
 @media (max-width: 991px) {
