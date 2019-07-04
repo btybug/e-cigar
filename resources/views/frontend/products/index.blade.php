@@ -1,12 +1,10 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content products-page position-relative">
-        <div class="top-filters main-content-wrapper">
+        <div class="top-filters products__page-top-filters main-content-wrapper">
             <div class="container main-max-width">
                 <div class="content-head d-flex flex-wrap justify-content-between align-items-center position-relative">
-                    <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
-                        {{ Breadcrumbs::render('categories_front',$type) }}
-                    </div>
+
                     <div class="category-select">
                         {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
                         [
@@ -16,7 +14,15 @@
                         ]) !!}
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
-
+                        <div class="sale-only d-flex align-items-center">
+                    <span class="text-gray-clr">
+                        On Sale Only:
+                    </span>
+                            <label class="switch-custom">
+                                <input type="checkbox">
+                                <span class="slider round"></span>
+                            </label>
+                        </div>
                         <div class="product-grid-list align-self-center">
                     <span class="d-inline-block products-filter-wrap_display-icons">
             <span id="dispGrid" class="d-inline-block pointer display-icon active">
@@ -124,11 +130,13 @@
 
         </div>
         <div class="main-content-wrapper">
-
             <div class="products-wrap change-display-wrap display-grid products__page-main">
                 <div class="container main-max-width">
                     <div class="row">
-                        <div class="col-md-3">
+                        <div class="products__page-main_left-wrapper">
+                            <div class="left-head d-flex align-items-center ">
+                                {{ Breadcrumbs::render('categories_front',$type) }}
+                            </div>
                             {!! Form::model($filterModel,['url' => route('categories_front'),'method' => 'GET','id' => 'filter-form']) !!}
                             <div class="selected_filter-sidebar-wrapper">
                                 @if(count($selecteds))
@@ -228,8 +236,686 @@
 
                             {!! Form::close() !!}
                         </div>
-                        <div class="col-md-9 products-box">
-                            @include("frontend.products._partials.products_render")
+                        <div class="products__page-main_right-wrapper products-box">
+                            <div class="selected__filters">
+                                <ul class="d-inline-block">
+                                    <li class="single-item position-relative">
+                                        <span class="remove-icon">×</span>
+                                        DaVinci
+                                    </li>
+                                    <li class="single-item position-relative">
+                                        <span class="remove-icon">×</span>
+                                        Eleaf
+                                    </li>
+                                </ul>
+                            </div>
+                            <ul class="row products__page-list-product">
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+60W SMOK² PRIV V8 Starter1
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+                                                 <span class="products__item-discount">
+                                                      <img src="/public/img/discount-50.png" alt="discount">
+                                                  </span>
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+Click-N-Vape Smoke V8 Starter
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+{{--                                                 <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
+                                                  {{--</span>--}}
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+Click-N-Vape Smoke V8 Starter
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+{{--                                                 <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
+                                                  {{--</span>--}}
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+60W SMOK² PRIV V8 Starter1
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+{{--                                                                               <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-70.png" alt="discount">--}}
+                                                  {{--</span>--}}
+                                                 <span class="products__item-discount">
+                                                      <img src="/public/img/discount-50.png" alt="discount">
+                                                  </span>
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$100</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+60W SMOK² PRIV V8 Starter1
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+                                                 <span class="products__item-discount">
+                                                      <img src="/public/img/discount-50.png" alt="discount">
+                                                  </span>
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+Click-N-Vape Smoke V8 Starter
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+{{--                                                 <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
+                                                  {{--</span>--}}
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+Click-N-Vape Smoke V8 Starter
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+                                                                               <span class="products__item-discount">
+    <img src="/public/img/discount-70.png" alt="discount">
+</span>
+{{--                                                 <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
+                                                  {{--</span>--}}
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="col-md-3">
+                                    <div class="products__item-wrapper main-transition">
+                                        <div class="products__item-wrapper-inner">
+                                            <a href="#" class="products__item-top">
+                                    <span
+                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
+                                                <span class="position-relative products__item-photo d-block">
+                                        <img src="/public/img/temp/product-2-1.png" alt="product">
+{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
+<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>
+                                    </span>
+                                                <span class="products__item-main-content">
+                                         <span class="products__item-photo-thumb">
+
+<span class="products__item-photo-thumb-item active-slider">
+    <img src="/public/img/temp/product-2-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                             <span class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-3-1.png" alt="thumb">
+</span>
+                                                                                          <span
+                                                                                              class="products__item-photo-thumb-item">
+    <img src="/public/img/temp/product-4-1.png" alt="thumb">
+</span>
+
+                                        </span>
+                                        <span class="products__item-content-inner">
+                                            <span
+                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+60W SMOK² PRIV V8 Starter1
+                                    </span>
+                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
+adipiscing elit. Morbi sodales ...
+                                    </span>
+                                             <span
+                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
+
+                                              <span
+                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
+{{--                                                                               <span class="products__item-discount">--}}
+                                                  {{--    <img src="/public/img/discount-70.png" alt="discount">--}}
+                                                  {{--</span>--}}
+                                                 <span class="products__item-discount">
+                                                      <img src="/public/img/discount-50.png" alt="discount">
+                                                  </span>
+
+                                              </span>
+
+
+                                        <span class="d-flex flex-wrap products__item-prices">
+<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>
+<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$100</span>
+                                        </span>
+                                    </span>
+                                        </span>
+
+                                    </span>
+
+                                            </a>
+                                            <div
+                                                class="flex-wrap justify-content-between align-items-center products__item-bottom">
+                                                <a href="#"
+                                                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                                                    view more
+                                                </a>
+                                                <span class="products__item-favourite active">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="18px"
+                                            viewBox="0 0 20 18"
+                                        >
+                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
+                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
+                                        </svg>
+                                    </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+{{--                            @include("frontend.products._partials.products_render")--}}
                         </div>
                     </div>
                 </div>
@@ -305,6 +991,7 @@
                     $(blockId).animate({height: 'hide'}, 100);
                     $(this).find('i').toggleClass('fa-minus fa-plus');
                 }
+                $(this).toggleClass('closed')
             });
 
             $(document).click(function (e) {
