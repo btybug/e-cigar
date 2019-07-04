@@ -60,6 +60,8 @@ Route::group(['prefix' => 'news'], function () {
 Route::group(['prefix' => 'brands'], function () {
     Route::get('/{type?}', 'Frontend\BrandsController@index')->name('brands');
 });
+Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
+
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
 
