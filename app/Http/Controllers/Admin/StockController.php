@@ -18,6 +18,7 @@ use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
+use App\Models\StockSales;
 use App\Models\StockSeo;
 use App\Services\StockService;
 use Illuminate\Http\Request;
@@ -186,7 +187,10 @@ class StockController extends Controller
     {
         $model = Stock::findOrFail($request->stock_id);
         $promotion = ($request->get('slug')) ? StockSales::where('slug', $request->get('slug'))->first() : null;
-        $html = \View("admin.inventory._partials.promotion_item", compact(['model', 'promotion']))->render();
+        $variations = collect($model->variations()->where('is_required', true)->get())->groupBy('variation_id');
+        $stockItems = Items::active()->get()->pluck('name', 'id')->all();
+
+        $html = \View("admin.inventory._partials.promotion_item", compact(['model', 'promotion','variations','stockItems']))->render();
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
