@@ -40,13 +40,20 @@ class StockController extends Controller
         return $this->view('stock');
     }
 
+    public function stockOffers()
+    {
+        return $this->view('offers');
+    }
+
     public function stockNew()
     {
         $model = null;
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
 
         $data = Category::recursiveItems($categories);
+        $dataOffers = Category::recursiveItems($offers);
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
@@ -57,7 +64,8 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
+        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs','offers','dataOffers',
+            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
     }
 
     public function getStockEdit($id)
@@ -68,8 +76,11 @@ class StockController extends Controller
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
-        $checkedCategories = $model->categories()->where('type', 'stocks')->pluck('id')->all();
+        $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+        $checkedCategories = $model->categories()->pluck('id')->all();
+        $checkedOffers = $model->offers()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+        $dataOffers = Category::recursiveItems($offers, 0, [], $checkedOffers);
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
@@ -80,7 +91,7 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands',
+        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands','offers','dataOffers',
             'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
     }
 
@@ -88,7 +99,7 @@ class StockController extends Controller
     {
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation', 'extra_product', 'promotion_prices', 'promotion_type',
-            'categories', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
+            'categories', 'offers', 'general', 'related_products', 'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
         $data['user_id'] = \Auth::id();
         $data['price'] = ($data['price']) ?? 0;
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -101,10 +112,17 @@ class StockController extends Controller
         $stock->specifications()->syncWithoutDetaching($options);
 
         //-------------------//
-        $categories = json_decode($request->get('categories', []), true);
-        $stock->categories()->sync($categories);
-        $stock->related_products()->sync($request->get('related_products'));
+        if($stock->is_offer){
+            $categories = json_decode($request->get('offers', []), true);
+            $stock->categories()->detach();
+            $stock->offers()->sync($categories);
+        }else{
+            $categories = json_decode($request->get('categories', []), true);
+            $stock->offers()->detach();
+            $stock->categories()->sync($categories);
+        }
 
+        $stock->related_products()->sync($request->get('related_products'));
         $stock->promotions()->detach();
 
         if ($request->promotions && count($request->promotions)) {

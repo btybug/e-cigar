@@ -100,7 +100,11 @@ Route::group(['prefix' => 'products'], function () {
 //    });
 //});
 
-Route::get('/sales', 'Frontend\CommonController@getSales')->name('product_sales');
+Route::group(['prefix' => 'offers'], function () {
+    Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
+    Route::post('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers_post');
+});
+
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
 Route::post('/change-currency', 'Frontend\CommonController@changeCurrency')->name('change_currency');
 Route::group(['prefix' => '/support'], function () {

@@ -157,15 +157,46 @@
                                                             </div>
 
                                                         </div>
+                                                        @if(! $model)
+                                                        <div class="row">
+                                                            <div class="col-md-5">
+                                                            </div>
+                                                            <div class="col-md-7">
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 control-label">Is Offer</label>
+                                                                    <div class="col-sm-10">
+                                                                        {!! Form::select('is_offer',[
+                                                                            '0' => 'No',
+                                                                            '1' => 'Yes',
+                                                                        ],null,['class' => 'form-control is_offer']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        @else
+                                                            {!! Form::hidden('is_offer',null) !!}
+                                                        @endif
+
+
                                                         <div class="row">
                                                             <div class="col-md-5"></div>
                                                             <div class="col-md-7">
-                                                                <div class="col-md-7">
+                                                                <div class="col-md-7 main-cat
+                                                                    @if(! $model || $model->is_offer == 0) show @else hide @endif">
                                                                     <div class="form-group">
                                                                         <label class="col-sm-12 control-label pl-sm-0">Categories</label>
                                                                         {!! Form::hidden('categories',(isset($checkedCategories))
                                                                         ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
                                                                         <div id="treeview_json"></div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-7 offer-cat
+                                                                    @if($model && $model->is_offer == 1) show @else hide @endif">
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-12 control-label pl-sm-0">Offer</label>
+                                                                        {!! Form::hidden('offers',(isset($checkedCategories))
+                                                                        ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
+                                                                        <div id="treeview_json_offer"></div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-7">
@@ -1179,6 +1210,17 @@
                 });
             });
 
+            $("body").on("change", ".is_offer", function () {
+                let value = $(this).val();
+               if(value == 1){
+                  $(".main-cat").removeClass('show').addClass('hide');
+                  $(".offer-cat").removeClass('hide').addClass('show');
+               }else{
+                   $(".offer-cat").removeClass('show').addClass('hide');
+                   $(".main-cat").removeClass('hide').addClass('show');
+               }
+            });
+
             $("body").on("change", "#changeProductType", function () {
                 let value = $(this).val();
                 let sections = $("#variations").find('.stock-page');
@@ -1845,6 +1887,90 @@
         });
 
         render_categories_tree();
+
+
+        function render_offer_tree() {
+            $("#treeview_json_offer").jstree({
+                "checkbox": {
+                    "three_state": false,
+                    "cascade": 'undetermined',
+                    "keep_selected_style": false
+                },
+                plugins: ["wholerow", "checkbox", "types"],
+                core: {
+                    themes: {
+                        responsive: !1
+                    },
+                    data: {!! json_encode($dataOffers) !!}
+                },
+                types: {
+                    "default": {
+                        icon: "fa fa-folder text-primary fa-lg"
+                    },
+                    file: {
+                        icon: "fa fa-file text-success fa-lg"
+                    }
+                }
+            })
+        }
+
+        $('#treeview_json_offer').on('changed.jstree', function (e, data) {
+            let attributes = $("body").find(".select-specification");
+            let attrData = [];
+
+            attributes.map(function (i,e) {
+                var value = $(e).val();
+                if(value != 'Select' && value != null){
+                    attrData.push($(e).val());
+                }
+            });
+
+            var categories = $("#offer_tree").val();
+            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {id: data.node.id,
+                selected: data.node.state.selected,attrs:attrData,categories:categories}, function (res) {
+                if (!res.error) {
+                    if(data.node.state.selected == true){
+                        $("#mediaspecifications").find("table").find(".v-options-list").append(res.html);
+                        $(".tag-input-v").select2({width: '100%'});
+                    }else{
+                        for(let i of Object.keys(res.data)){
+                            if(Object.keys(res.existingAttributes).indexOf(i) === -1){
+                                $(`.select-specification option[value="${i}"]:selected`).closest('.v-options-list-item').remove();
+                            }
+
+                        }
+                    }
+                }
+            });
+        });
+
+        $('#treeview_json_offer').on("changed.jstree", function (e, data) {
+            if (data.node) {
+                let selectedNode = $('#treeview_json_offer').jstree(true).get_selected(true)
+                let dataArr = [];
+                for (let i = 0, j = selectedNode.length; i < j; i++) {
+                    dataArr.push(selectedNode[i].id);
+                    dataArr.push(selectedNode[i].parent);
+                }
+
+                let uniqueNames = [];
+
+                if (dataArr.length > 0) {
+                    $.each(dataArr, function (i, el) {
+                        if ($.inArray(el, uniqueNames) === -1) uniqueNames.push(el);
+                    });
+                }
+
+                let index = uniqueNames.indexOf("#");
+                if (index > -1) {
+                    uniqueNames.splice(index, 1);
+                }
+
+                $("#offer_tree").val(JSON.stringify(uniqueNames));
+            }
+        });
+
+        render_offer_tree();
 
         function removeA(arr) {
             var what, a = arguments, L = a.length, ax;
