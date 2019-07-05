@@ -25,39 +25,24 @@ class OffersController extends Controller
 {
     protected $view='frontend.offers';
 
-    public function getIndex(Request $request, $type = null)
+    public function getIndex($slug = null)
     {
-        $category = Category::where('type', 'offers')->whereNull('parent_id')->where('slug', $type)->first();
-        if (!$category && $type != null) abort(404);
+        $brands = Category::where('type', 'offers')->whereNull('parent_id')->get();
 
-        $categories = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get()->pluck('name', 'slug');
-        $products = ProductSearch::apply($request, $category);
-//        $products = ProductSearch::apply($request,$category,true);
-//        dd($products);
-        $filters = (new Attributes())->getFiltersByOffer($type);
-//        dd($filters);
-        $data = $request->except('_token');
-        $selecteds = [];
-        if (isset($data['select_filter']) && count($data['select_filter'])) {
-            foreach ($data['select_filter'] as $k => $v) {
-                if ($v && is_array($v)) {
-                    foreach ($v as $key => $value) {
-                        $attr = Attributes::getById($key);
-                        $sticker = Stickers::getById($value);
-                        $selecteds[$k . "," . $value] = $sticker;
-                    }
-                } elseif ($v) {
-                    $sticker = Stickers::getById($v);
-                    $attr = Attributes::getById($k);
-                    $selecteds[$k] = $sticker;
-                }
-            }
+        $slug = ($slug || !$brands->count()) ? $slug : $brands->first()->slug;
+        $current = ($slug) ? Category::where('slug', $slug)->first() : null;
+
+        return $this->view('index', compact('brands', 'slug', 'current','parentBrands'));
+    }
+
+    public function postOffer(Request $request)
+    {
+        $current = Category::where('type', 'offers')->where('id',$request->id)->first();
+        if($current){
+            $html = view("frontend.offers._partials.current",compact('current'))->render();
+            return response()->json(['error' => false,'html' => $html]);
         }
 
-        if($request->ajax()){
-            $html = View('frontend.products._partials.products_render',compact(['products']))->render();
-            return response()->json(['error' => false, 'html' => $html]);
-        }
-        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type'))->with('filterModel', $request->all());
+        return response()->json(['error' => true]);
     }
 }
