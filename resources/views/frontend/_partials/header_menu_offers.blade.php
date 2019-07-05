@@ -8,7 +8,7 @@ $categories = Category::where('type', 'offers')->whereNull('parent_id')->get();
 @foreach($categories as $category)
     <div class="col-lg-3 col-sm-6">
         <div class="single-product">
-            <a href="{!! route('product_offers',$category->slug) !!}" class="d-block">
+            <a href="{!! route('product_offers') !!}" class="d-block">
             <div class="product-photo">
                 <img src="{!! media_image_tmb($category['image']) !!}" alt="{!! $category['name'] !!}">
             </div>

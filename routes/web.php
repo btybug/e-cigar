@@ -62,6 +62,11 @@ Route::group(['prefix' => 'brands'], function () {
 });
 Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
 
+Route::group(['prefix' => 'offers'], function () {
+    Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
+});
+Route::post('/get-offer', 'Frontend\OffersController@postOffer')->name('post_offers');
+
 Route::group(['prefix' => 'stickers'], function () {
     Route::get('/{type?}', 'Frontend\StickersController@index')->name('stickers');
 });
@@ -100,10 +105,7 @@ Route::group(['prefix' => 'products'], function () {
 //    });
 //});
 
-Route::group(['prefix' => 'offers'], function () {
-    Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
-    Route::post('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers_post');
-});
+
 
 Route::get('/forum', 'Frontend\CommonController@getForum')->name('forum');
 Route::post('/change-currency', 'Frontend\CommonController@changeCurrency')->name('change_currency');
