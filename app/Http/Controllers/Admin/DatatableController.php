@@ -303,6 +303,26 @@ class DatatableController extends Controller
     {
         return Datatables::of(Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
             ->select('stocks.*','stock_translations.name')
+            ->where('stocks.is_offer', false)
+            ->where('stock_translations.locale', \Lang::getLocale()))
+            ->editColumn('image', function ($stock) {
+                return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
+            })
+            ->editColumn('created_at', function ($stock) {
+                return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
+            })
+            ->addColumn('actions', function ($stock) {
+                return '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'" 
+                class="delete-button badge btn-danger" data-key="' . $stock->id . '"><i class="fa fa-trash"></i></a>' . ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '') . ((userCan('admin_stock_promotion_edit')) ? "<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>" : '');
+            })->rawColumns(['actions', 'name', 'image'])
+            ->make(true);
+    }
+
+    public function getAllStockOffers()
+    {
+        return Datatables::of(Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->select('stocks.*','stock_translations.name')
+            ->where('stocks.is_offer', true)
             ->where('stock_translations.locale', \Lang::getLocale()))
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";

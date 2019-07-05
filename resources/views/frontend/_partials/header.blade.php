@@ -69,7 +69,7 @@
                                 </div>
                             </li>
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link" href="{!! route('product_sales') !!}">Offers
+                                <a class="nav-link" href="{!! route('product_offers') !!}">Offers
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -80,14 +80,12 @@
 </svg>
                         </span>
                                 </a>
-
                                 <div class="nav-item--has-dropdown_dropdown main-scrollbar">
                                     <div class="products-menu-item row">
-
+                                        @include("frontend._partials.header_menu_offers")
                                     </div>
                                 </div>
                             </li>
-
 
                             <li class="nav-item">
                                 <a class="nav-link" href="{!! route('blog') !!}">News</a>

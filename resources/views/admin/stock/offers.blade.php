@@ -7,11 +7,11 @@
         <div class="row">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
+                    <a class="nav-link " id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Stocks</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
+                    <a class="nav-link active" id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
                 </li>
             </ul>
@@ -19,7 +19,7 @@
                 <div class="card panel panel-default">
                     <div class="card-header panel-heading clearfix">
                         <div class="pull-left">
-                            <h2 class="m-0">Stock</h2>
+                            <h2 class="m-0">Offers</h2>
                         </div>
                         <div class="pull-right">
                             @ok('admin_stock_new')<div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
@@ -148,7 +148,7 @@
                     {data: 'actions', name: 'actions'}
                 ],
                 '#stocks-table',
-                "{!! route('datatable_all_stocks') !!}"
+                "{!! route('datatable_all_stocks_offers') !!}"
             )
         });
 

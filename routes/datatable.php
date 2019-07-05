@@ -23,6 +23,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/coupons/get-all/{is_archive}','Admin\DatatableController@getAllCoupons')->name('datatable_all_coupons');
     Route::get('/blog/comments/get-all','Admin\DatatableController@getAllPostComments')->name('datatable_all_post_comments');
     Route::get('/stock/get-all','Admin\DatatableController@getAllStocks')->name('datatable_all_stocks');
+    Route::get('/stock/get-all-offer','Admin\DatatableController@getAllStockOffers')->name('datatable_all_stocks_offers');
     Route::get('/settings/get-all-geo-zones','Admin\DatatableController@getAllGeoZones')->name('datatable_all_geo_zones');
     Route::get('/settings/get-user-activity/{id}','Admin\DatatableController@getUserActivity')->name('datatable_user_activity');
     Route::get('/settings/get-post-user-activity/{id}','Admin\DatatableController@getUserPostActivity')->name('datatable_user_post_activity');

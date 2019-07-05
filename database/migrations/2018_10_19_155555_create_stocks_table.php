@@ -28,6 +28,7 @@ class CreateStocksTable extends Migration
             $table->text('videos')->nullable();
             $table->tinyInteger('faq_tab')->default(0);
             $table->tinyInteger('reviews_tab')->default(0);
+            $table->tinyInteger('is_offer')->default(0);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')
