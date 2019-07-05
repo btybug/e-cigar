@@ -87,6 +87,9 @@
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
+        .form-control{
+            height: auto;
+        }
         .btn-coming {
             background-color: #0f4de0;
             border-color: #0f4de0;
