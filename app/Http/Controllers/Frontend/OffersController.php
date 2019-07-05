@@ -32,7 +32,7 @@ class OffersController extends Controller
         $slug = ($slug || !$brands->count()) ? $slug : $brands->first()->slug;
         $current = ($slug) ? Category::where('slug', $slug)->first() : null;
 
-        return $this->view('index', compact('brands', 'slug', 'current','parentBrands'));
+        return $this->view('index', compact('brands', 'slug', 'current'));
     }
 
     public function postOffer(Request $request)
