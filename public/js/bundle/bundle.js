@@ -2753,7 +2753,16 @@ $(document).ready(function () {
             pagination: false,
             controls: false
         });
-
+        $(".product__single-top .brands-top-slider").carousel({
+            pagination: false,
+            controls: false,
+            infinite: true,
+            show: {
+                "740px": 2,
+                "980px": 3,
+                "1220px": 9
+            }
+        });
         $(".video--carousel-thumb").carousel({
             controls: false,
             pagination: false,
