@@ -13,7 +13,6 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/store/categories/get-all','Admin\DatatableController@getAllCategories')->name('datatable_all_categories');
     Route::get('/store/products/get-all','Admin\DatatableController@getAllProducts')->name('datatable_all_products');
     Route::get('/store/attributes/get-all','Admin\DatatableController@getAllAttributes')->name('datatable_all_attributes');
-    Route::get('/store/promotions/get-all','Admin\DatatableController@getAllPromotions')->name('datatable_all_promotions');
     Route::get('/roles/get-all','Admin\DatatableController@getAllRoles')->name('datatable_all_roles');
     Route::get('/mail-templates/get-all','Admin\DatatableController@getAllMailTemplates')->name('datatable_all_mail_templates');
     Route::get('/email/get-all','Admin\DatatableController@getAllEmails')->name('datatable_all_emails');
