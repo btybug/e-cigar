@@ -17,12 +17,12 @@
                 <div class="card-body panel-body">
 
                     <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                        <option value="id" data-column="0" data-name="id">#</option>
-                        <option value="name" data-column="1" data-name="name">Name</option>
-                        <option value="stock_id" data-column="2" data-name="stock_id">Product</option>
-                        <option value="start_date" data-column="3" data-name="start_date">Start Date</option>
-                        <option value="end_date" data-column="4" data-name="end_date">End Date</option>
-                        <option value="canceled" data-column="5" data-name="canceled">Canceled</option>
+                        <option value="#" data-column="0" data-name="id">#</option>
+                        <option value="Name" data-column="1" data-name="name">Name</option>
+                        <option value="Product" data-column="2" data-name="stock_id">Product</option>
+                        <option value="Start Date" data-column="3" data-name="start_date">Start Date</option>
+                        <option value="End Date" data-column="4" data-name="end_date">End Date</option>
+                        <option value="Canceled" data-column="5" data-name="canceled">Canceled</option>
                         <option value="Actions" data-column="6" data-name="actions">Actions</option>
                     </select>
                     <table id="promotion-table" class="table table-style table-bordered" cellspacing="0" width="100%">
