@@ -4,7 +4,7 @@
 @stop
 @section('content')
 
-{!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
+    {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
     <div class="card">
         <div class="card-header clearfix">
             <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>
@@ -25,7 +25,9 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Extra</a></li>
+                            @if(! isset($offer))
+                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Special Offers</a></li>
+                            @endif
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
                     </div>
@@ -157,48 +159,26 @@
                                                             </div>
 
                                                         </div>
-                                                        @if(! $model)
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-                                                            </div>
-                                                            <div class="col-md-7">
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 control-label">Is Offer</label>
-                                                                    <div class="col-sm-10">
-                                                                        {!! Form::select('is_offer',[
-                                                                            '0' => 'No',
-                                                                            '1' => 'Yes',
-                                                                        ],null,['class' => 'form-control is_offer']) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        @if(isset($offer))
+                                                            {!! Form::hidden('is_offer',true) !!}
                                                         @else
-                                                            {!! Form::hidden('is_offer',null) !!}
+                                                            {!! Form::hidden('is_offer',false) !!}
                                                         @endif
-
 
                                                         <div class="row">
                                                             <div class="col-md-5"></div>
                                                             <div class="col-md-7">
-                                                                <div class="col-md-7 main-cat
-                                                                    @if(! $model || $model->is_offer == 0) show @else hide @endif">
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-12 control-label pl-sm-0">Categories</label>
-                                                                        {!! Form::hidden('categories',(isset($checkedCategories))
-                                                                        ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                                        <div id="treeview_json"></div>
+                                                                @if(! isset($offer))
+                                                                    <div class="col-md-7">
+                                                                        <div class="form-group">
+                                                                            <label
+                                                                                class="col-sm-12 control-label pl-sm-0">Categories</label>
+                                                                            {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                            ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                            <div id="treeview_json"></div>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="col-md-7 offer-cat
-                                                                    @if($model && $model->is_offer == 1) show @else hide @endif">
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-12 control-label pl-sm-0">Offer</label>
-                                                                        {!! Form::hidden('offers',(isset($checkedCategories))
-                                                                        ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
-                                                                        <div id="treeview_json_offer"></div>
-                                                                    </div>
-                                                                </div>
+                                                                @endif
                                                                 <div class="col-md-7">
                                                                     <div class="form-group">
                                                                         <label class="col-sm-12 control-label pl-sm-0">Brands</label>
@@ -209,15 +189,18 @@
                                                                                         <p class="pl-sm-0 bold">{{ $parent->name }}</p>
                                                                                         @if(count($parent->children))
                                                                                             @foreach($parent->children as $brand)
-                                                                                        <div class="single-wrap">
-                                                                                            <div class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                                {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                                <label class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                       for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                                    {{--<span class="amount">(189)</span>--}}
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
+                                                                                                <div
+                                                                                                    class="single-wrap">
+                                                                                                    <div
+                                                                                                        class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                                        {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                                        <label
+                                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                            for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                                            {{--<span class="amount">(189)</span>--}}
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </div>
                                                                                             @endforeach
                                                                                         @endif
                                                                                     @endforeach
@@ -237,6 +220,63 @@
 
                                             </div>
                                         </div>
+                                        @if(isset($offer))
+                                        <div class="col-md-12">
+                                            <div class="basic-center basic-wall d-flex flex-wrap">
+                                                <div class="col-md-5">
+                                                    <div class="form-group">
+                                                        <label class="col-sm-12 control-label pl-sm-0">Offer Type</label>
+                                                        {!! Form::select('offer_type',["0"=>"General","1"=>"Special"],null,['id' => 'offer_type',
+                                                        'class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-7">
+                                                    <div class="col-md-12 offer-cat @if(! $model || ! $model->offer_type) show @else hide @endif">
+                                                        <div class="form-group">
+                                                            <label class="col-sm-12 control-label pl-sm-0">Offers</label>
+                                                            {!! Form::hidden('offers',(isset($checkedCategories))
+                                                            ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
+                                                            <div id="treeview_json_offer"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 offer-special @if($model && $model->offer_type) show @else hide @endif">
+                                                        <div
+                                                            class="panel-heading d-flex justify-content-between align-items-center">
+                                                            <h4>
+                                                                Products
+                                                            </h4>
+                                                            <button type="button" class="btn btn-info select-offer-products">
+                                                                Select
+                                                            </button>
+                                                        </div>
+                                                        <div class="panel-body product-body">
+                                                            <ul class="get-all-offer-products-tab stickers--all--lists">
+                                                                @if(isset($model) && count($model->offer_products))
+                                                                    @foreach($model->offer_products as $special_offer)
+                                                                        <li style="display: flex"
+                                                                            data-id="{{ $special_offer->id }}"
+                                                                            class="option-elm-attributes">
+                                                                            <a href="#"
+                                                                               class="stick--link">{!! $special_offer->name !!}</a>
+                                                                            <div class="buttons">
+                                                                                <a href="javascript:void(0)"
+                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                    <i class="fa fa-trash"></i></a>
+                                                                            </div>
+                                                                            <input type="hidden"
+                                                                                   name="offer_products[]"
+                                                                                   value="{{ $special_offer->id }}">
+                                                                        </li>
+                                                                    @endforeach
+                                                                @endif
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -387,11 +427,11 @@
                                                                 </thead>
 
                                                                 <tbody class="v-options-list">
-                                                                    @if($model && $model->stockAttrs)
-                                                                        @foreach($model->stockAttrs as $selected)
-                                                                            @include('admin.inventory._partials.specifications')
-                                                                        @endforeach
-                                                                    @endif
+                                                                @if($model && $model->stockAttrs)
+                                                                    @foreach($model->stockAttrs as $selected)
+                                                                        @include('admin.inventory._partials.specifications')
+                                                                    @endforeach
+                                                                @endif
                                                                 </tbody>
 
                                                                 <tfoot>
@@ -542,22 +582,23 @@
                                     </div>
                                 </div>
                             </div>
+                            @if(! isset($offer))
                             <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
                                 <div class="container-fluid p-25">
-                                    <div class="col-md-12 v-box">
-                                        @if($model && isset($extraVariations))
-                                            @foreach($extraVariations as $v)
-                                                @include("admin.stock._partials.variation",['required' => 0])
+                                    <div class="text-right m-4">
+                                        <a class="btn btn-info text-white select-special-offers" data-required="0"><i
+                                                class="fa fa-plus"></i> Add Special Offers</a>
+                                    </div>
+                                    <div class="col-md-12 d-flex flex-wrap get-special-offers-tab">
+                                        @if($model && count($model->special_offers))
+                                            @foreach($model->special_offers as $offer)
+                                                @include("admin.stock._partials.special_offer_item")
                                             @endforeach
                                         @endif
                                     </div>
-                                    <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options" data-required="0"><i
-                                                class="fa fa-plus"></i> Add
-                                            new option</a>
-                                    </div>
                                 </div>
                             </div>
+                            @endif
                             <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
                                 <div class="container-fluid p-25">
                                     <div class="row">
@@ -806,6 +847,7 @@
 
         </div>
     </div>
+
     <div class="modal fade" id="attributesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -904,7 +946,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-
     <div class="modal fade" id="discountModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -932,49 +973,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-<script type="template" id="range-discount">
-    <div class="d-flex flex-wrap discount-item">
-        <div class="col-md-3">
-            <label>From</label>
-            {!! Form::number('discount[{count}][from]',null,['class' => 'form-control']) !!}
-        </div>
-        <div class="col-md-3">
-            <label>To</label>
-            {!! Form::number('discount[{count}][to]',null,['class' => 'form-control']) !!}
-        </div>
-        <div class="col-md-3">
-            <label>Price/Item</label>
-            {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
-        </div>
-        <div class="col-md-3">
-            <button class="btn btn-danger remove-discount-item">
-                <i class="fa fa-minus"></i>
-            </button>
-        </div>
-    </div>
-</script>
-
-<script type="template" id="fixed-discount">
-    <div class="d-flex flex-wrap discount-item">
-        <div class="col-md-4">
-            <label>Qty</label>
-            {!! Form::number('discount[{count}][qty]',null,['class' => 'form-control']) !!}
-        </div>
-
-        <div class="col-md-q">
-            <label>Total price</label>
-            {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
-        </div>
-        <div class="col-md-4">
-            <button class="btn btn-danger remove-discount-item">
-                <i class="fa fa-minus"></i>
-            </button>
-        </div>
-    </div>
-</script>
-
-<script type="template" id="range-discount-temp">
-    <div class="col-md-12 range-box">
+    <script type="template" id="range-discount">
         <div class="d-flex flex-wrap discount-item">
             <div class="col-md-3">
                 <label>From</label>
@@ -994,14 +993,9 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div class="col-md-12 justify-content-center">
-        <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-    </div>
-</script>
+    </script>
 
-<script type="template" id="fixed-discount-temp">
-    <div class="col-md-12 fixed-box">
+    <script type="template" id="fixed-discount">
         <div class="d-flex flex-wrap discount-item">
             <div class="col-md-4">
                 <label>Qty</label>
@@ -1018,11 +1012,60 @@
                 </button>
             </div>
         </div>
-    </div>
-    <div class="col-md-12 justify-content-center">
-        <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-    </div>
-</script>
+    </script>
+
+    <script type="template" id="range-discount-temp">
+        <div class="col-md-12 range-box">
+            <div class="d-flex flex-wrap discount-item">
+                <div class="col-md-3">
+                    <label>From</label>
+                    {!! Form::number('discount[{count}][from]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <label>To</label>
+                    {!! Form::number('discount[{count}][to]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <label>Price/Item</label>
+                    {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-danger remove-discount-item">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 justify-content-center">
+            <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
+                    class="fa fa-plus"></i></a>
+        </div>
+    </script>
+
+    <script type="template" id="fixed-discount-temp">
+        <div class="col-md-12 fixed-box">
+            <div class="d-flex flex-wrap discount-item">
+                <div class="col-md-4">
+                    <label>Qty</label>
+                    {!! Form::number('discount[{count}][qty]',null,['class' => 'form-control']) !!}
+                </div>
+
+                <div class="col-md-q">
+                    <label>Total price</label>
+                    {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-danger remove-discount-item">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 justify-content-center">
+            <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
+                    class="fa fa-plus"></i></a>
+        </div>
+    </script>
 
 @stop
 @section('css')
@@ -1103,39 +1146,44 @@
                 groupS = group;
                 var discount_type = hiddenInputs.find('[data-type-discount="discount_type"]').val();
                 var discount = hiddenInputs.find('[data-type-discount="discount"]');
-                var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val());
+                var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val()
+            )
+                ;
                 var discount_length;
                 $("#discountModal").find(`.select-discount-type`).val(discount_type).trigger('change');
                 $("#discountModal").find(`.remove-discount-item`).trigger('click');
-                if(discount_type === 'range') {
+                if (discount_type === 'range') {
                     discount_length = discount.length / 3;
-                    for(let i = 1; i<=discount_length; i++) {
+                    for (let i = 1; i <= discount_length; i++) {
                         $("#discountModal").find(`.add-discount-field`).trigger('click');
                     }
-                } else if(discount_type === 'fixed') {
+                } else if (discount_type === 'fixed') {
                     discount_length = discount.length / 2;
-                    for(let i = 1; i<=discount_length; i++) {
+                    for (let i = 1; i <= discount_length; i++) {
                         $("#discountModal").find(`.add-discount-field`).trigger('click');
                     }
                 }
                 $("#discountModal").find(`.discount-item input`).toArray().map((discount_gr, index) => {
                     $(discount_gr).val(discounts_value[index])
-                });
+                }
+            )
+                ;
 
-                $("#discountModal").find('.apply-discount').attr('data-main',main).attr('data-group',group);
+                $("#discountModal").find('.apply-discount').attr('data-main', main).attr('data-group', group);
 
-                if($("#discountModal").find(`.select-discount-type`).val() === '') {
+                if ($("#discountModal").find(`.select-discount-type`).val() === '') {
                     $("#discountModal").find(`.add-discount-field`).addClass('d-none');
-                };
+                }
+                ;
                 $("#discountModal").modal();
 
             });
 
-            $('body').on('click','.apply-discount',function () {
+            $('body').on('click', '.apply-discount', function () {
                 var data = $("#discount-form").serialize();
                 // var main = $(this).data('main');
                 // var group = $(this).data('group');
-                AjaxCall("{{ route('admin_stock_apply_discount') }}", data+"&main="+mainS+"&group="+groupS, function (res) {
+                AjaxCall("{{ route('admin_stock_apply_discount') }}", data + "&main=" + mainS + "&group=" + groupS, function (res) {
                     if (!res.error) {
                         $("body").find(`[data-d-v="${groupS}"]`).html(res.html);
                         $("#discountModal").modal('hide');
@@ -1143,36 +1191,36 @@
                 });
             });
 
-            $('body').on('click','.add-range-discount',function () {
+            $('body').on('click', '.add-range-discount', function () {
                 let html = $('#range-discount').html();
                 var id = guid();
-                html= html.replace(/{count}/g,id);
-                $(this).closest('.discount-type-box').find('.range-box').append(html) ;
+                html = html.replace(/{count}/g, id);
+                $(this).closest('.discount-type-box').find('.range-box').append(html);
             });
 
-            $('body').on('click','.add-fixed-discount',function () {
+            $('body').on('click', '.add-fixed-discount', function () {
                 let html = $('#fixed-discount').html();
                 var id = guid();
-                html= html.replace(/{count}/g,id);
-                $(this).closest('.discount-type-box').find('.fixed-box').append(html) ;
+                html = html.replace(/{count}/g, id);
+                $(this).closest('.discount-type-box').find('.fixed-box').append(html);
             });
 
-            $('body').on('click','.remove-discount-item',function () {
+            $('body').on('click', '.remove-discount-item', function () {
                 $(this).closest('.discount-item').remove();
             });
 
-            $('body').on('change','.select-discount-type',function () {
+            $('body').on('change', '.select-discount-type', function () {
                 var value = $(this).val();
                 var id = guid();
-                if(value == 'range'){
+                if (value == 'range') {
                     var html = $('#range-discount-temp').html();
-                    html= html.replace(/{count}/g,id);
+                    html = html.replace(/{count}/g, id);
                     $(".discount-type-box").html(html);
-                }else if(value =='fixed'){
+                } else if (value == 'fixed') {
                     var html = $('#fixed-discount-temp').html();
-                    html= html.replace(/{count}/g,id);
+                    html = html.replace(/{count}/g, id);
                     $(".discount-type-box").html(html);
-                }else{
+                } else {
                     $(".discount-type-box").html('');
                 }
             });
@@ -1210,16 +1258,93 @@
                 });
             });
 
-            $("body").on("change", ".is_offer", function () {
+            $("body").on("change", "#offer_type", function () {
                 let value = $(this).val();
-               if(value == 1){
-                  $(".main-cat").removeClass('show').addClass('hide');
-                  $(".offer-cat").removeClass('hide').addClass('show');
-               }else{
-                   $(".offer-cat").removeClass('show').addClass('hide');
-                   $(".main-cat").removeClass('hide').addClass('show');
-               }
+                if (value == 1) {
+                    $(".offer-cat").removeClass('show').addClass('hide');
+                    $(".offer-special").removeClass('hide').addClass('show');
+                } else {
+                    $(".offer-cat").removeClass('hide').addClass('show');
+                    $(".offer-special").removeClass('show').addClass('hide');
+                }
             });
+
+            $("body").on('click', '.select-offer-products', function () {
+                let arr = [];
+                $(".get-all-offer-products-tab")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/get-stocks", {arr: arr, promotion: 0}, function (res) {
+                    if (!res.error) {
+                        $("#productsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-related-offer-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                        $("#productsModal .modal-body .all-list").append(html);
+                    })
+                        ;
+                        $("#productsModal").modal();
+                    }
+                });
+            });
+
+            $("body").on("click", ".add-related-offer-event", function () {
+                let id = $(this).data("id");
+                let name = $(this).data("name");
+                $(".get-all-offer-products-tab")
+                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                                href="#">${name}</a>
+                                <div class="buttons">
+                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                </div>
+                                <input type="hidden" name="offer_products[]" value="${id}" />
+                                </li>`);
+                $(this)
+                    .parent()
+                    .remove();
+            });
+
+            $("body").on('click', '.select-special-offers', function () {
+                let arr = [];
+                $(".get-special-offers-tab")
+                    .children()
+                    .each(function () {
+                        arr.push($(this).attr("data-id"));
+                    });
+                AjaxCall("/admin/get-special-offers", {arr: arr, promotion: 0}, function (res) {
+                    if (!res.error) {
+                        $("#productsModal .modal-body .all-list").empty();
+                        res.data.forEach(item => {
+                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+                                                href="#">${item.name}
+                                                </a> <a class="btn btn-primary add-special-offer-event" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</a></li>`;
+                        $("#productsModal .modal-body .all-list").append(html);
+                    })
+                        ;
+                        $("#productsModal").modal();
+                    }
+                });
+            });
+
+            $("body").on("click", ".add-special-offer-event", function () {
+                let $_this = $(this);
+                let id = $_this.data("id");
+                AjaxCall("/admin/add-special-offers", {id: id}, function (res) {
+                    $(".get-special-offers-tab")
+                        .append(res.html);
+                    $_this.parent().remove();
+                });
+            });
+
+            $("body").on('click', '.delete-offer', function () {
+                $(this).closest('.special-offer-item').remove();
+            });
+
 
             $("body").on("change", "#changeProductType", function () {
                 let value = $(this).val();
@@ -1441,17 +1566,16 @@
             });
 
 
-
             $("body").on("change", ".price-type-change", function (e) {
                 let value = $(this).val();
                 let parent = $(this).closest('.package_price');
-                if(value == 'static'){
+                if (value == 'static') {
                     parent.find('.price-discount').removeClass('show').addClass('hide');
                     parent.find('.price-static').removeClass('hide').addClass('show');
-                }else if(value == 'discount'){
+                } else if (value == 'discount') {
                     parent.find('.price-static').removeClass('show').addClass('hide');
                     parent.find('.price-discount').removeClass('hide').addClass('show');
-                }else{
+                } else {
                     parent.find('.price-static').removeClass('show').addClass('hide');
                     parent.find('.price-discount').removeClass('show').addClass('hide');
 
@@ -1471,10 +1595,10 @@
                                 parent.find('.multi-option').removeClass('show').addClass('hide');
                                 parent.find('.filter-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-variation-box').empty();
-                            } else if(value == 'package_product')  {
+                            } else if (value == 'package_product') {
                                 parent.find('.filter-option').removeClass('show').addClass('hide');
                                 parent.find('.multi-option').removeClass('hide').addClass('show');
-                            }else{
+                            } else {
                                 parent.find('.filter-option').removeClass('show').addClass('hide');
                                 parent.find('.multi-option').removeClass('show').addClass('hide');
                             }
@@ -1696,8 +1820,9 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-related-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                            $("#productsModal .modal-body .all-list").append(html);
-                        });
+                        $("#productsModal .modal-body .all-list").append(html);
+                    })
+                        ;
                         $("#productsModal").modal();
                     }
                 });
@@ -1718,8 +1843,9 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-promotion" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                            $("#productsModal .modal-body .all-list").append(html);
-                        });
+                        $("#productsModal .modal-body .all-list").append(html);
+                    })
+                        ;
                         $("#productsModal").modal();
                     }
                 });
@@ -1781,8 +1907,9 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                            $("#stickerModal .modal-body .all-list").append(html);
-                        });
+                        $("#stickerModal .modal-body .all-list").append(html);
+                    })
+                        ;
                         $("#stickerModal").modal();
                     }
                 });
@@ -1817,7 +1944,7 @@
                     themes: {
                         responsive: !1
                     },
-                    data: {!! json_encode($data) !!}
+                    data: {!! json_encode((isset($data)?$data:[])) !!}
                 },
                 types: {
                     "default": {
@@ -1834,23 +1961,25 @@
             let attributes = $("body").find(".select-specification");
             let attrData = [];
 
-            attributes.map(function (i,e) {
+            attributes.map(function (i, e) {
                 var value = $(e).val();
-                if(value != 'Select' && value != null){
+                if (value != 'Select' && value != null) {
                     attrData.push($(e).val());
                 }
             });
 
             var categories = $("#categories_tree").val();
-            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {id: data.node.id,
-                selected: data.node.state.selected,attrs:attrData,categories:categories}, function (res) {
+            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {
+                id: data.node.id,
+                selected: data.node.state.selected, attrs: attrData, categories: categories
+            }, function (res) {
                 if (!res.error) {
-                    if(data.node.state.selected == true){
+                    if (data.node.state.selected == true) {
                         $("#mediaspecifications").find("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({width: '100%'});
-                    }else{
-                        for(let i of Object.keys(res.data)){
-                            if(Object.keys(res.existingAttributes).indexOf(i) === -1){
+                    } else {
+                        for (let i of Object.keys(res.data)) {
+                            if (Object.keys(res.existingAttributes).indexOf(i) === -1) {
                                 $(`.select-specification option[value="${i}"]:selected`).closest('.v-options-list-item').remove();
                             }
 
@@ -1918,23 +2047,25 @@
             let attributes = $("body").find(".select-specification");
             let attrData = [];
 
-            attributes.map(function (i,e) {
+            attributes.map(function (i, e) {
                 var value = $(e).val();
-                if(value != 'Select' && value != null){
+                if (value != 'Select' && value != null) {
                     attrData.push($(e).val());
                 }
             });
 
             var categories = $("#offer_tree").val();
-            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {id: data.node.id,
-                selected: data.node.state.selected,attrs:attrData,categories:categories}, function (res) {
+            AjaxCall("{{ route('admin_stock_specif_by_category') }}", {
+                id: data.node.id,
+                selected: data.node.state.selected, attrs: attrData, categories: categories
+            }, function (res) {
                 if (!res.error) {
-                    if(data.node.state.selected == true){
+                    if (data.node.state.selected == true) {
                         $("#mediaspecifications").find("table").find(".v-options-list").append(res.html);
                         $(".tag-input-v").select2({width: '100%'});
-                    }else{
-                        for(let i of Object.keys(res.data)){
-                            if(Object.keys(res.existingAttributes).indexOf(i) === -1){
+                    } else {
+                        for (let i of Object.keys(res.data)) {
+                            if (Object.keys(res.existingAttributes).indexOf(i) === -1) {
                                 $(`.select-specification option[value="${i}"]:selected`).closest('.v-options-list-item').remove();
                             }
 

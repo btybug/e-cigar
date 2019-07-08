@@ -374,10 +374,14 @@ Route::group(['prefix' => 'inventory'], function () {
 
 Route::group(['prefix' => 'stock'], function () {
     Route::get('/', 'Admin\StockController@stock')->name('admin_stock');
-    Route::get('/offers', 'Admin\StockController@stockOffers')->name('admin_stock_offers');
     Route::get('/new', 'Admin\StockController@stockNew')->name('admin_stock_new');
     Route::get('/edit/{id}', 'Admin\StockController@getStockEdit')->name('admin_stock_edit');
     Route::post('/delete', 'Admin\StockController@delete')->name('admin_stock_delete');
+    Route::group(['prefix' => 'offers'], function () {
+        Route::get('/', 'Admin\StockController@stockOffers')->name('admin_stock_offers');
+        Route::get('/new', 'Admin\StockController@offerNew')->name('admin_stock_new_offer');
+        Route::get('/edit/{id}', 'Admin\StockController@getOfferEdit')->name('admin_stock_edit_offer');
+    });
 
 
     Route::post('/save-stock', 'Admin\StockController@postStock')->name('admin_stock_save');
@@ -540,6 +544,8 @@ Route::group(['prefix' => 'seo'], function () {
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
 Route::post('/get-products', 'Admin\StoreController@getProducts')->name('admin_store_coupons_get_products');
 Route::post('/get-stocks', 'Admin\StockController@getStocks')->name('admin_inventary_get_stocks');
+Route::post('/get-special-offers', 'Admin\StockController@getSpecialOffers')->name('admin_inventary_get_special_offers');
+Route::post('/add-special-offers', 'Admin\StockController@addSpecialOffers')->name('admin_inventary_add_special_offers');
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 
