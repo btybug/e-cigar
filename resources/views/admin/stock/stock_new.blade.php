@@ -162,7 +162,7 @@
                                                         @if(isset($offer))
                                                             {!! Form::hidden('is_offer',true) !!}
                                                         @else
-                                                            {!! Form::hidden('is_offer',false) !!}
+                                                            {!! Form::hidden('is_offer',0) !!}
                                                         @endif
 
                                                         <div class="row">
