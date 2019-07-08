@@ -181,7 +181,7 @@
                                     </div>
                                 </div>
                                 <div class="brands_main-content-products">
-                                    <ul class="row brands_products__list-wrapper">
+                                    <ul class="row brands_products__list-wrapper products__all-list-product">
                                         <li class="col-md-3">
                                             <div class="products__item-wrapper main-transition">
                                                 <div class="products__item-wrapper-inner">
@@ -822,12 +822,12 @@ adipiscing elit. Morbi sodales ...
 
         })
         // grid brands products
-        $('body').on('click', '.brands_main-content-products-top .product-grid-list .display-icon', function () {
-            if ($(this).hasClass('list')) {
-$(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').addClass('list-product')
-            }else {
-                $(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').removeClass('list-product')
-            }
-        })
+//         $('body').on('click', '.brands_main-content-products-top .product-grid-list .display-icon', function () {
+//             if ($(this).hasClass('list')) {
+// $(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').addClass('list-product')
+//             }else {
+//                 $(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').removeClass('list-product')
+//             }
+//         })
     </script>
 @stop
