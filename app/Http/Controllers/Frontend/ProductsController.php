@@ -32,7 +32,6 @@ class ProductsController extends Controller
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
         $filters = (new Attributes)->getFiltersByCategory($type);
-//        dd($filters);
         $data = $request->except('_token');
         $selecteds = [];
         if (isset($data['select_filter']) && count($data['select_filter'])) {

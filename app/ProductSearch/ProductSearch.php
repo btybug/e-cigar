@@ -130,7 +130,8 @@ class ProductSearch
             ->leftJoin('stock_attributes', 'stocks.id', '=', 'stock_attributes.stock_id')
             ->leftJoin('favorites', 'stock_variations.id', '=', 'favorites.variation_id')
             ->where('stock_translations.locale', app()->getLocale())
-            ->where('stocks.status', true);
+            ->where('stocks.status', true)
+            ->where('stocks.is_offer', false);
 
         return $query->select('stocks.*', 'stock_translations.name',
             'stock_translations.short_description', 'stock_variations.price', 'stock_variations.id as variation_id',
