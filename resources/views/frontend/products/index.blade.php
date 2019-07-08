@@ -1402,12 +1402,12 @@ adipiscing elit. Morbi sodales ...
                     })
                 }
             });
-            $("form").keypress(function(e) {
-                //Enter key
-                if (e.which == 13) {
-                    return false;
-                }
-            });
+            // $("form").keypress(function(e) {
+            //     //Enter key
+            //     if (e.which == 13) {
+            //         return false;
+            //     }
+            // });
         });
     </script>
 
