@@ -8,32 +8,13 @@
                         @foreach($banners as $banner)
                             @php
                                 $banner = ltrim($banner, '/');
-                                $html = File::get($banner)
+                                $html = (File::exists($banner)) ? File::get($banner) : "";
                             @endphp
                             <div>
                                 {!! $html !!}
                             </div>
                         @endforeach
                     @endif
-                    {{--<div>--}}
-                        {{--<div class="main-slider-wall position-relative">--}}
-                            {{--<img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">--}}
-                            {{--<div class="main-slider-wall-inner position-absolute">--}}
-                                {{--<div class="text-big font-sec-reg">HOW</div>--}}
-                                {{--<div class="text-second font-sec-bold">TO SEE THE SMOKE?</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div>--}}
-                        {{--<div class="main-slider-wall">--}}
-                            {{--<img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                    {{--<div>--}}
-                        {{--<div class="main-slider-wall">--}}
-                            {{--<img src="/public/img/slider/home-slider-big-1.jpg" alt="slider-thumb">--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
                 </div>
 
                 <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">
@@ -41,23 +22,13 @@
                         @foreach($banners as $banner)
                             @php
                                 $banner = ltrim($banner, '/');
-                                $html = File::get($banner)
+                                $html = (File::exists($banner)) ? File::get($banner) : "";
                             @endphp
                             <div class="thumb-wall">
                                 {!! $html !!}
                             </div>
                         @endforeach
                     @endif
-
-                    {{--<div class="thumb-wall">--}}
-                        {{--<img src="/public/img/slider/home-slider-thumb-1.jpg" alt="slider-thumb">--}}
-                    {{--</div>--}}
-                    {{--<div class="thumb-wall">--}}
-                        {{--<img src="/public/img/slider/home-slider-thumb-2.jpg" alt="slider-thumb">--}}
-                    {{--</div>--}}
-                    {{--<div class="thumb-wall">--}}
-                        {{--<img src="/public/img/slider/home-slider-thumb-3.jpg" alt="slider-thumb">--}}
-                    {{--</div>--}}
                 </div>
             </section>
             <div class="container home_width">
