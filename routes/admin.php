@@ -200,6 +200,15 @@ Route::group(['prefix' => 'store'], function () {
         Route::get('/view/{id}', 'Admin\TransactionsController@getView')->name('admin_store_transactions_view');
     });
 
+    Route::group(['prefix' => 'promotions'], function () {
+        Route::get('/', 'Admin\PromotionController@getIndex')->name('admin_stock_promotions');
+        Route::get('/new', 'Admin\PromotionController@getNew')->name('admin_stock_promotions_new');
+
+        Route::post('/get-promotion', 'Admin\PromotionController@getPromotion')->name('admin_stock_get_promotion');
+        Route::post('/promotion-save', 'Admin\PromotionController@savePromotion')->name('admin_stock_sales_save');
+        Route::post('/cancel-promotion', 'Admin\PromotionController@cancelSale')->name('admin_stock_cancel_delete');
+    });
+
     Route::group(['prefix' => 'coupons'], function () {
         Route::get('/', 'Admin\StoreController@getCoupons')->name('admin_store_coupons');
         Route::get('/new', 'Admin\StoreController@getCouponsNew')->name('admin_store_coupons_new');
@@ -370,11 +379,6 @@ Route::group(['prefix' => 'stock'], function () {
     Route::get('/edit/{id}', 'Admin\StockController@getStockEdit')->name('admin_stock_edit');
     Route::post('/delete', 'Admin\StockController@delete')->name('admin_stock_delete');
 
-
-    Route::get('/promotions/{id}', 'Admin\StockController@getPromotionEdit')->name('admin_stock_promotion_edit');
-    Route::post('/get-promotion', 'Admin\StockController@getPromotion')->name('admin_stock_get_promotion');
-    Route::post('/promotion-save', 'Admin\StockController@savePromotion')->name('admin_stock_sales_save');
-    Route::post('/cancel-promotion', 'Admin\StockController@cancelSale')->name('admin_stock_cancel_delete');
 
     Route::post('/save-stock', 'Admin\StockController@postStock')->name('admin_stock_save');
     Route::post('/link-all', 'Admin\StockController@linkAll')->name('admin_stock_link_all');
