@@ -55,6 +55,11 @@ class Stock extends Translatable
             ->whereIn('categories.type', ['stocks','brands']);
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Category::class, 'brand_id', 'id');
+    }
+
     public function offers()
     {
         return $this->belongsToMany(Category::class, 'stock_categories', 'stock_id', 'categories_id')
