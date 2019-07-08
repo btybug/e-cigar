@@ -190,13 +190,16 @@
                                     <div class="filter-single-wall top-filters border-0">
                                         <div class="main-filters border-0 p-0">
                                             <div class="filter-single-wall">
-                                                <div class="d-flex justify-content-between head">
-                                                    <h5 class="font-main-bold">Price</h5>
+                                                <div class="d-flex justify-content-between align-items-center head filter-main__head">
+                                                    <h5 class="font-sec-reg text-uppercase font-17">Price</h5>
+                                                    <span class="icon-head">
+                                                <i class="fas fa-minus"></i>
+                                            </span>
                                                 </div>
-                                                <div class="list-filter d-block">
-                                                    <div class="slider-range d-flex flex-wrap align-items-center mr-4">
-                                                        <div id="slider-range" class="col-lg-7 col-6"></div>
-                                                        <div class="amount col-lg-5 col-6">
+                                                <div class="list-filter ">
+                                                    <div class="slider-range d-flex flex-wrap align-items-center">
+                                                        <div id="slider-range" class="w-100"></div>
+                                                        <div class="amount w-100">
 
                                                             <input type="hidden" id="amount_range" name="amount"
                                                                    value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
@@ -209,12 +212,15 @@
                                         </div>
                                     </div>
                                     <div class="filter-single-wall">
-                                        <div class="d-flex justify-content-between head">
-                                            <h5 class="font-main-bold">Brands</h5>
+                                        <div class="d-flex justify-content-between align-items-center head filter-main__head">
+                                            <h5 class="font-sec-reg text-uppercase font-17">Brands</h5>
+                                            <span class="icon-head">
+                                                <i class="fas fa-minus"></i>
+                                            </span>
                                         </div>
-                                        <ul class="list-filter">
+                                        <div class="list-filter">
                                             @include('frontend.products._partials.filters.checkbox_brand')
-                                        </ul>
+                                        </div>
                                     </div>
                                     @foreach($filters as $filter)
                                         <div class="filter-single-wall">
@@ -224,11 +230,11 @@
                                                 <i class="fas fa-minus"></i>
                                             </span>
                                             </div>
-                                            <ul class="list-filter">
+                                            <div class="list-filter">
                                                 @if(\View::exists('frontend.products._partials.filters.'.$filter->display_as))
                                                     @include('frontend.products._partials.filters.'.$filter->display_as)
                                                 @endif
-                                            </ul>
+                                            </div>
                                         </div>
                                     @endforeach
                                 </div>

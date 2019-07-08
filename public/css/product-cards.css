@@ -1515,6 +1515,15 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     /*border: 1px solid #ccc;*/
     border-top: none;
 }
+.filter-sidebar-wrapper .filter-single-wall .slider-range{
+    margin-left: 0;
+}
+.filter-sidebar-wrapper .filter-single-wall #slider-range{
+    margin-bottom: 20px;
+}
+.filter-sidebar-wrapper .filter-single-wall .slider-range .ui-state-default, .top-filters .main-filters .slider-range .ui-widget-content .ui-state-default{
+    margin-left: 0;
+}
 .filter-sidebar-wrapper .filters-title{
     margin-bottom: 25px;
 }
@@ -1698,7 +1707,7 @@ color: #cbdaf7;
 .products__page-main .filter-sidebar-wrapper .filter-wall.colors .custom-control {
     width: 100%;
     margin: 0;
-    padding-left: 10px;
+    padding-left: 0;
 }
 .products__page-main .filter-sidebar-wrapper .filter-wall.colors .color-label-custom {
     width: 20px;

@@ -1,4 +1,4 @@
-<div class="form-group row select_with-tag-wrapper position-relative">
+<div class="form-group select_with-tag-wrapper position-relative">
 
     {{--<label for="deliverySelect{{ $filter->id }}"--}}
            {{--class="text-main-clr mb-0 col-4 col-form-label text-right text-uppercase">{{ $filter->name }}</label>--}}
