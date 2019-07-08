@@ -33,6 +33,7 @@ use App\Models\Settings;
 use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
+use App\Models\StockSales;
 use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
@@ -313,7 +314,8 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($stock) {
                 return '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'" 
-                class="delete-button badge btn-danger" data-key="' . $stock->id . '"><i class="fa fa-trash"></i></a>' . ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '') . ((userCan('admin_stock_promotion_edit')) ? "<a class='badge btn-info' href='" . route("admin_stock_promotion_edit", $stock->id) . "'>Promotion</a>" : '');
+                class="delete-button badge btn-danger" data-key="' . $stock->id . '"><i class="fa fa-trash"></i></a>' .
+                    ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '');
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }
@@ -877,5 +879,32 @@ class DatatableController extends Controller
                 class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
             return $html .= "<a class='badge btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
         })->rawColumns(['actions','image'])->make(true);
+    }
+
+    public function getAllPromotions()
+    {
+        return Datatables::of(
+            StockSales::query()
+            )->editColumn('id', function ($item) {
+                return "id";
+            })->editColumn('start_date', function ($item) {
+                return BBgetDateFormat($item->start_date);
+            })->editColumn('end_date', function ($item) {
+                return BBgetDateFormat($item->end_date);
+            })
+            ->editColumn('stock_id', function ($item) {
+                return $item->stock->name;
+            })
+            ->editColumn('canceled', function ($attr) {
+                return ($attr->canceled) ? "YES" : "No";
+            })
+            ->addColumn('actions', function ($attr) {
+                return '';
+//                $html = '<a href="'.route("admin_warehouses_manage",$attr->id).'"
+//                class="badge btn-info" ><i class="fa fa-eye"></i></a>';
+//                $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'"
+//                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
+//                return $html .= "<a class='badge btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','canceled'])->make(true);
     }
 }
