@@ -725,21 +725,5 @@ adipiscing elit. Morbi sodales ...
             show: 1
         });
 
-        // product slider
-        function Product_slider() {
-            var _this = this;
-            this.products = function () {
-                $("body").on('mouseover', ".products__item-wrapper .products__item-photo-thumb-item", function () {
-                    $(this).closest('.products__item-wrapper').find('.products__item-photo-thumb-item').removeClass("active-slider")
-                    let img_path = $(this).find("img").attr("src")
-                    $(this).closest('.products__item-wrapper').find(".products__item-photo img").addClass("active-slider").attr("src", img_path)
-                    $(this).addClass("active-slider")
-                })
-            }
-
-        }
-
-        var productSlider = new Product_slider();
-        productSlider.products()
     </script>
 @stop

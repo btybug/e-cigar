@@ -29,6 +29,32 @@ $(function () {
     //     }
     // });
 
+    // grid brands products
+    $('body').on('click', '.product-grid-list .display-icon', function () {
+        if ($(this).hasClass('list')) {
+            $(this).closest('body').find('.products__all-list-product >li').addClass('products_col-list')
+            $(this).closest('body').find('.products__item-wrapper').addClass('product_list')
+        }else {
+            $(this).closest('body').find('.products__all-list-product >li').removeClass('products_col-list')
+            $(this).closest('body').find('.products__item-wrapper').removeClass('product_list')
+        }
+    })
+    // product slider
+    function Product_slider() {
+        var _this = this;
+        this.products = function () {
+            $("body").on('mouseover', ".products__item-wrapper .products__item-photo-thumb-item", function () {
+                $(this).closest('.products__item-wrapper').find('.products__item-photo-thumb-item').removeClass("active-slider")
+                let img_path = $(this).find("img").attr("src")
+                $(this).closest('.products__item-wrapper').find(".products__item-photo img").addClass("active-slider").attr("src", img_path)
+                $(this).addClass("active-slider")
+            })
+        }
+
+    }
+
+    var productSlider = new Product_slider();
+    productSlider.products()
     // product-slider
     $(".carousel_1").carousel({
         pagination: false,
