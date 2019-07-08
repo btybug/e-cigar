@@ -263,23 +263,156 @@
                                         <div class="product-single-info-outer">
                                             <div class="product-single-info">
                                                 <div class="product__single-item">
-                                                    <div class="d-flex flex-wrap product__single-item-top">
-                                                        <div>
-                                                            QTY Discount
+                                                    <div
+                                                        class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">
+                                                        <div
+                                                            class="d-flex align-items-center justify-content-center product_btn-discount">
+                                                            <span
+                                                                class="font-sec-reg font-26 text-sec-clr">QTY Discount</span>
                                                         </div>
-                                                        <div>
+                                                        <div class="font-main-light font-20">
                                                             The more you order the more you get
                                                         </div>
-                                                        <a href="#"> Offer Details</a>
+                                                        <a href="#" class="font-20 text-tert-clr top_details">Offer
+                                                            Details</a>
                                                     </div>
                                                     <div class="product__single-item-info">
-                                                        <div class="product__single-item-info-title">
+                                                        <div
+                                                            class="font-sec-light font-26 lh-1 product__single-item-info-top">
                                                             Choose Nicotine Strenght
                                                         </div>
-                                                    <div class="product__single-item-info">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center justify-content-between product__single-item-info-bottom">
+                                                            <div class="d-flex product__single-item-info-size">
+                                                                <div class="product_radio-single">
+                                                                    <div
+                                                                        class="custom-radio custom-control-inline">
+                                                                        <input type="radio" class="custom-control-input"
+                                                                               id="customRadio1" name="example"
+                                                                               value="">
+                                                                        <label class="custom-label"
+                                                                               for="customRadio1">
+                                                                            <span
+                                                                                class="font-sec-ex-light font-26 count">10</span>
+                                                                            <span
+                                                                                class="font-main-light font-18 mg">mg</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product_radio-single">
+                                                                    <div
+                                                                        class="custom-radio custom-control-inline">
+                                                                        <input type="radio" class="custom-control-input"
+                                                                               id="customRadio2" name="example"
+                                                                               value="">
+                                                                        <label class="custom-label"
+                                                                               for="customRadio2">
+                                                                            <span
+                                                                                class="font-sec-ex-light font-26 count">15</span>
+                                                                            <span
+                                                                                class="font-main-light font-18 mg">mg</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product_radio-single">
+                                                                    <div
+                                                                        class="custom-radio custom-control-inline">
+                                                                        <input type="radio" class="custom-control-input"
+                                                                               id="customRadio3" name="example"
+                                                                               value="">
+                                                                        <label class="custom-label"
+                                                                               for="customRadio3">
+                                                                            <span
+                                                                                class="font-sec-ex-light font-26 count">20</span>
+                                                                            <span
+                                                                                class="font-main-light font-18 mg">mg</span>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div
+                                                                class="d-flex align-items-center justify-content-between product__single-item-info-bottom-right product__single-price-count">
+                                                                <div class="product__single-item-info-amount">
+                                                                    <div class="select-wall">
+                                                                        <select name="" id=""
+                                                                                class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark select2-hidden-accessible"
+                                                                                style="width: 75px">
+                                                                            <option value="">1</option>
+                                                                            <option value="">2</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="product__single-item-info-price lh-1">
+                                                                    <span class="font-40">£10,00</span>
+                                                                </div>
+                                                            </div>
 
+                                                        </div>
                                                     </div>
+
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-wrap align-items-center justify-content-between product__single-add-cart-price">
+                                                    <a class="d-flex align-items-center justify-content-center bg-blue-clr product__single-add-cart-btn">
+                                                        <span
+                                                            class="cart-btn font-sec-light font-26 text-sec-clr text-uppercase">Add To Cart</span>
+                                                        <span>
+                                                            <svg
+                                                                xmlns="http://www.w3.org/2000/svg"
+                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                width="25px" height="32px" viewBox="0 0 25 32">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M19.867,5.698 L19.867,0.618 L5.131,0.618 L5.131,5.698 L-0.005,5.698 L-0.005,31.432 L25.003,31.432 L25.003,5.698 L19.867,5.698 ZM6.854,2.294 L18.143,2.294 L18.143,5.698 L6.854,5.698 L6.854,2.294 ZM23.279,29.756 L1.719,29.756 L1.719,7.375 L5.131,7.375 L5.131,10.744 L6.854,10.744 L6.854,7.375 L18.143,7.375 L18.143,10.744 L19.867,10.744 L19.867,7.375 L23.279,7.375 L23.279,29.756 Z"/>
+</svg>
+                                                        </span>
+                                                    </a>
+                                                    <div
+                                                        class="d-flex align-items-center justify-content-between product__single-add-cart-right product__single-price-count">
+                                                        <div class="product__single-add-cart-amount">
+                                                            <div class="select-wall">
+                                                                <select name="" id=""
+                                                                        class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark select2-hidden-accessible"
+                                                                        style="width: 75px">
+                                                                    <option value="">1</option>
+                                                                    <option value="">2</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="d-flex product__single-cart-price text-tert-clr lh-1">
+                                                            <span class="first-price">£10,</span><span
+                                                                class="sec-price">95</span>
+                                                        </div>
                                                     </div>
+
+                                                </div>
+                                                <div
+                                                    class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">
+                                                    <div class="d-flex align-items-center product__single-delivery-left">
+                                                        <div
+                                                            class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">
+                                                            Delivery
+                                                        </div>
+                                                        <div class="product__single-delivery-select">
+                                                            <div class="select-wall">
+                                                                <select name="" id=""
+                                                                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                        style="width: 250px">
+                                                                    <option value="">United Kingdom</option>
+                                                                    <option value="">Armenia</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex align-items-center product__single-delivery-right">
+                                                        <div class="product__single-delivery-free font-20 lh-1">
+                                                            Free on orders over £10
+                                                        </div>
+                                                        <a href="#"
+                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">More
+                                                            Details</a>
+                                                    </div>
+
                                                 </div>
                                                 {{--                                                <div class="d-flex align-items-center single-product-main-title">--}}
                                                 {{--                                                    <!--like icon-->--}}
