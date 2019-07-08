@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('meta')
     {!! stockSeo($vape) !!}
-    @stop
+@stop
 @section('content')
     <div class="main-content">
         <!--shopping dtls fixed at the bottom-->
@@ -41,7 +41,8 @@
                             </svg>
                         </span>
                         </a>
-                        <span class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
+                        <span
+                            class="product-card_price d-inline-block font-sec-bold font-41 text-tert-clr lh-1 position-relative">
                         <span class="price-place-summary">
                             @if($vape->type)
                                 {{ convert_price($vape->price,$currency, false)}}
@@ -62,24 +63,134 @@
         <div id="singleProductPageCnt" class="single-product-page-cnt d-none flex-column ">
             <main class="position-relative">
                 <!--breadcrump-->
-                <div class="main-content container main-max-width main-content-wrapper">
-                    <div class="content-head d-flex flex-wrap justify-content-between">
-                        <div class="left-head d-flex align-items-center mb-lg-0 mb-2">
-                            {{ Breadcrumbs::render('single_product',$type,$vape->name) }}
+                {{--                <div class="main-content container main-max-width main-content-wrapper">--}}
+                {{--                    <div class="content-head d-flex flex-wrap justify-content-between">--}}
+                {{--                        <div class="left-head d-flex align-items-center mb-lg-0 mb-2">--}}
+                {{--                            {{ Breadcrumbs::render('single_product',$type,$vape->name) }}--}}
+                {{--                        </div>--}}
+                {{--                    </div>--}}
+                {{--                </div>--}}
+                <div class="products-wrap product__single-wrapper">
+                    <div class="product__single-top">
+                        <div class="container main-max-width h-100">
+                            <div class="d-flex align-items-center product__single-top-inner h-100">
+                                <div class="product__single-top-inner-left">
+                                    <h1 class="font-sec-reg text-tert-clr font-28 text-uppercase product__single-top-title text-truncate">
+                                        dINNER LADY Cubano 32 pRO e-jUICE </h1>
+                                    <div class="d-flex align-items-center">
+                                        <span class="font-sec-reg font-26 text-main-clr lh-1">Cola Shades E-Juice</span>
+                                        <span class="icon">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="32px" height="31px" viewBox="0 0 31 32">
+<path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)" opacity="0.702" fill="rgb(255, 255, 255)"
+      d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.002,6.258 3.002,10.466 C3.002,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
+</svg>
+                                    </span>
+                                    </div>
+                                </div>
+                                <div class="brands-top-slider">
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="brand-wall">
+                                        <div class="brand-item">
+                                            <a href="#" class="brand-link">
+                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="products-wrap">
                     <div class="container main-max-width single-product-dtls-wrap-outer pr-lg-0">
                         <div class="row">
-                            <div class="col-md-10 col-12">
+                            <div class="col-12">
                                 <div class="single-product-dtls-wrap" id="requiredProducts">
                                     <div class="d-flex flex-xl-nowrap flex-wrap">
                                         <div class="product-single-view-outer">
-                                            <div class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
+                                            <div
+                                                class="align-items-center single-product-main-title mb-3 d-none visible-on-small">
                                                 <!--like icon-->
                                                 @if(Auth::check())
-                                                    <span data-id="{{ $vape->id }}" class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
+                                                    <span data-id="{{ $vape->id }}"
+                                                          class="like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
                                                     <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                         <path fill-rule="evenodd" opacity="0.949"
                                                               fill="rgb(255, 255, 255)"
@@ -99,9 +210,11 @@
                                                     </div>
                                             @endif
                                             <!--new label-->
-                                                <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
+                                                <span
+                                                    class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
                                                 <!--sale label-->
-                                                <span class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>
+                                                <span
+                                                    class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>
                                             </div>
 
                                             <div class="d-flex product-card-thumbs product-card-thumbs--single">
@@ -149,22 +262,42 @@
                                         </div>
                                         <div class="product-single-info-outer">
                                             <div class="product-single-info">
-                                                <div class="d-flex align-items-center single-product-main-title">
-                                                    <!--like icon-->
-                                                    @if(Auth::check())
-                                                        <span data-id="{{ $vape->id }}"
-                                                              class="add-fav-variation product-card_like-icon like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer d-none @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->
-                                                        <svg viewBox="0 0 20 18" width="20px" height="18px">
-                                                    <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"
-                                                          d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>
-                                                    </svg>
-                                                    </span>
-                                                    @endif
-                                                    <h2 class="font-36 mb-0">{!! $vape->name !!}</h2>
+                                                <div class="product__single-item">
+                                                    <div class="d-flex flex-wrap product__single-item-top">
+                                                        <div>
+                                                            QTY Discount
+                                                        </div>
+                                                        <div>
+                                                            The more you order the more you get
+                                                        </div>
+                                                        <a href="#"> Offer Details</a>
+                                                    </div>
+                                                    <div class="product__single-item-info">
+                                                        <div class="product__single-item-info-title">
+                                                            Choose Nicotine Strenght
+                                                        </div>
+                                                    <div class="product__single-item-info">
+
+                                                    </div>
+                                                    </div>
                                                 </div>
-                                                <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
-                                                       id="vpid">
-                                                @include("admin.inventory._partials.render_price_form",['model' => $vape])
+                                                {{--                                                <div class="d-flex align-items-center single-product-main-title">--}}
+                                                {{--                                                    <!--like icon-->--}}
+                                                {{--                                                    @if(Auth::check())--}}
+                                                {{--                                                        <span data-id="{{ $vape->id }}"--}}
+                                                {{--                                                              class="add-fav-variation product-card_like-icon like-icon d-inline-flex align-items-center justify-content-center rounded-circle pointer d-none @if(Auth::user()->favorites()->exists($vape->id)) active @endif"> <!--gets class active-->--}}
+                                                {{--                                                        <svg viewBox="0 0 20 18" width="20px" height="18px">--}}
+                                                {{--                                                    <path fill-rule="evenodd" opacity="0.949" fill="rgb(255, 255, 255)"--}}
+                                                {{--                                                          d="M14.698,-0.003 C13.055,-0.003 11.417,0.767 10.358,2.015 C9.299,0.767 7.661,-0.003 6.017,-0.003 C3.034,-0.003 0.718,2.306 0.718,5.280 C0.718,8.935 3.994,11.915 9.007,16.336 L10.358,17.677 L11.709,16.336 C16.722,11.915 19.998,8.935 19.998,5.280 C19.998,2.306 17.682,-0.003 14.698,-0.003 L14.698,-0.003 Z"/>--}}
+                                                {{--                                                    </svg>--}}
+                                                {{--                                                    </span>--}}
+                                                {{--                                                    @endif--}}
+                                                {{--                                                    <h2 class="font-36 mb-0">{!! $vape->name !!}</h2>--}}
+                                                {{--                                                </div>--}}
+                                                {{--                                                <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"--}}
+                                                {{--                                                       id="vpid">--}}
+                                                {{--                                                @include("admin.inventory._partials.render_price_form",['model' => $vape])--}}
+
                                             </div>
                                         </div>
                                     </div>
@@ -218,7 +351,8 @@
                                                         <li class="tecnical-labels_item d-flex align-items-center">
                                                             <img src="{{ $sticker->image }}" alt=""
                                                                  class="tecnical-labels_item-img rounded-circle">
-                                                            <span class="tecnical-labels_item-text d-inline-block font-main-bold font-15">
+                                                            <span
+                                                                class="tecnical-labels_item-text d-inline-block font-main-bold font-15">
                                                         {{ $sticker->name }}
                                                     </span>
                                                         </li>
@@ -276,8 +410,8 @@
                                                                 @if($vape->videos && count($vape->videos))
                                                                     @foreach($vape->videos as $video)
                                                                         <div class="video-item-thumb"><img
-                                                                                    src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
-                                                                                    alt="{{ $video }}"></div>
+                                                                                src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
+                                                                                alt="{{ $video }}"></div>
                                                                     @endforeach
                                                                 @endif
                                                             </div>
@@ -332,7 +466,8 @@
                                                                              alt="">
                                                                     </div>
                                                                     <!--like icon-->
-                                                                    <span class="like-icon product-card_like-icon d-inline-block pointer position-absolute active"> <!--gets class active-->
+                                                                    <span
+                                                                        class="like-icon product-card_like-icon d-inline-block pointer position-absolute active"> <!--gets class active-->
                                                                 <svg viewBox="0 0 20 18" width="20px" height="18px">
                                                                     <path fill-rule="evenodd" opacity="0.949"
                                                                           fill="rgb(255, 255, 255)"
@@ -340,12 +475,14 @@
                                                                 </svg>
                                                             </span>
                                                                     <!--new label-->
-                                                                    <span class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
+                                                                    <span
+                                                                        class="new-label product-card_new-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">new</span>
                                                                 </div>
                                                                 <div class="product-card_body">
                                                                     <!--product image thumbs-->
                                                                     <div class="d-flex product-card-thumbs">
-                                                                        <div class="product-card_thumb-img-holder pointer active_slider">
+                                                                        <div
+                                                                            class="product-card_thumb-img-holder pointer active_slider">
                                                                             <img class=""
                                                                                  src="{{checkImage($related_product->image)}}"
                                                                                  alt=""
@@ -357,7 +494,8 @@
                                                                             @foreach($related_product->variations()->take(3)->get() as $related_product_v)
                                                                                 @if($related_product_v->image)
                                                                                     @php $count++; @endphp
-                                                                                    <div class="product-card_thumb-img-holder pointer">
+                                                                                    <div
+                                                                                        class="product-card_thumb-img-holder pointer">
                                                                                         <img class=""
                                                                                              src="{{ (media_image_tmb($related_product_v->image)) }}"
                                                                                              alt="{{ $related_product_v->name }}">
@@ -365,7 +503,8 @@
                                                                                 @endif
                                                                             @endforeach
                                                                             @if($count == 3)
-                                                                                <div class="product-card_thumb-img-holder_more pointer">
+                                                                                <div
+                                                                                    class="product-card_thumb-img-holder_more pointer">
                                                                                     See More <i class="fa fa-plus"></i>
                                                                                 </div>
                                                                             @endif
@@ -378,7 +517,8 @@
                                                                         <p class="card-text font-main-light font-15 text-light-clr">
                                                                             {{ str_limit($related_product->short_description,30) }}
                                                                         </p>
-                                                                        <div class="product-card_icons-outer d-flex justify-content-between align-items-center">
+                                                                        <div
+                                                                            class="product-card_icons-outer d-flex justify-content-between align-items-center">
                                                                             <!--icons-->
                                                                             <div class="product-card_icons">
                                                                         <span class="product-card_icon d-inline-block">
@@ -389,7 +529,8 @@
                                                                                       d="M17.791,6.835 C17.566,6.980 17.251,6.934 17.091,6.732 C16.191,5.598 15.052,4.707 13.702,4.086 C10.833,2.759 7.169,2.763 4.305,4.095 C2.950,4.725 1.805,5.620 0.911,6.763 C0.811,6.885 0.656,6.948 0.501,6.948 C0.401,6.948 0.301,6.921 0.211,6.867 C-0.014,6.723 -0.069,6.444 0.091,6.241 C1.081,4.981 2.345,3.991 3.845,3.294 C6.989,1.832 11.008,1.827 14.157,3.285 C15.652,3.978 16.911,4.959 17.906,6.210 C18.066,6.412 18.016,6.691 17.791,6.835 ZM14.807,2.223 C14.727,2.223 14.652,2.205 14.577,2.173 C12.662,1.282 10.998,0.900 9.009,0.900 C7.024,0.900 5.155,1.327 3.440,2.169 C3.195,2.286 2.895,2.209 2.761,1.989 C2.631,1.768 2.715,1.499 2.960,1.377 C4.825,0.463 6.859,-0.000 9.009,-0.000 C11.138,-0.000 12.997,0.423 15.037,1.372 C15.282,1.485 15.377,1.759 15.252,1.980 C15.162,2.133 14.987,2.223 14.807,2.223 ZM8.964,4.347 C13.507,4.347 17.206,7.510 17.206,11.398 C17.206,12.861 15.822,14.049 14.127,14.049 C12.432,14.049 11.048,12.861 11.048,11.398 C11.048,10.435 10.113,9.648 8.968,9.648 C7.824,9.648 6.889,10.431 6.889,11.398 C6.889,12.933 7.554,14.377 8.758,15.457 C9.704,16.303 10.623,16.771 12.032,17.118 C12.297,17.185 12.458,17.433 12.382,17.671 C12.323,17.869 12.122,18.000 11.902,18.000 C11.857,18.000 11.813,17.995 11.773,17.982 C10.178,17.590 9.138,17.059 8.059,16.092 C6.664,14.841 5.894,13.171 5.894,11.394 C5.894,9.931 7.274,8.743 8.973,8.743 C10.673,8.743 12.053,9.931 12.053,11.394 C12.053,12.357 12.988,13.144 14.132,13.144 C15.277,13.144 16.211,12.361 16.211,11.394 C16.211,8.001 12.962,5.242 8.968,5.242 C6.125,5.242 3.530,6.664 2.361,8.869 C1.971,9.598 1.776,10.449 1.776,11.394 C1.776,12.096 1.845,13.203 2.440,14.638 C2.536,14.872 2.406,15.129 2.146,15.219 C1.886,15.304 1.601,15.187 1.500,14.953 C1.011,13.770 0.771,12.609 0.771,11.394 C0.771,10.314 1.001,9.333 1.456,8.483 C2.790,5.971 5.740,4.347 8.964,4.347 ZM8.999,6.538 C12.123,6.538 14.662,8.712 14.662,11.389 C14.662,11.637 14.437,11.839 14.162,11.839 C13.887,11.839 13.662,11.637 13.662,11.389 C13.662,9.211 11.573,7.438 8.999,7.438 C6.429,7.438 4.335,9.211 4.335,11.389 C4.335,12.685 4.655,13.882 5.259,14.859 C5.904,15.894 6.334,16.339 7.104,17.037 C7.299,17.212 7.299,17.500 7.099,17.671 C7.009,17.766 6.879,17.806 6.754,17.806 C6.624,17.806 6.499,17.761 6.400,17.671 C5.534,16.884 5.065,16.384 4.390,15.300 C3.700,14.193 3.335,12.838 3.335,11.389 C3.335,8.716 5.875,6.538 8.999,6.538 ZM8.443,11.394 C8.443,11.146 8.668,10.944 8.944,10.944 C9.219,10.944 9.443,11.146 9.443,11.394 C9.443,12.658 10.168,13.855 11.383,14.598 C12.087,15.030 12.917,15.241 13.917,15.241 C14.157,15.241 14.562,15.219 14.962,15.156 C15.232,15.111 15.491,15.277 15.542,15.520 C15.592,15.763 15.407,15.997 15.137,16.042 C14.552,16.137 14.057,16.141 13.917,16.141 C12.727,16.141 11.683,15.871 10.818,15.345 C9.333,14.436 8.443,12.960 8.443,11.394 Z"/>
                                                                             </svg>
                                                                         </span>
-                                                                                <span class="product-card_icon d-inline-block">
+                                                                                <span
+                                                                                    class="product-card_icon d-inline-block">
                                                                             <svg viewBox="0 0 16 17" width="16px"
                                                                                  height="17px">
                                                                                 <path fill-rule="evenodd"
@@ -397,7 +538,8 @@
                                                                                       d="M16.000,4.548 C16.000,4.315 15.877,4.111 15.686,4.009 L8.258,0.062 C8.081,-0.025 7.875,-0.025 7.711,0.092 C7.547,0.194 7.452,0.397 7.452,0.601 L7.452,7.534 L0.845,4.009 C0.571,3.863 0.229,3.980 0.093,4.271 C-0.044,4.563 0.065,4.927 0.339,5.072 L6.753,8.480 L0.339,11.917 C0.065,12.063 -0.058,12.427 0.093,12.718 C0.188,12.922 0.393,13.053 0.599,13.053 C0.681,13.053 0.763,13.039 0.845,12.995 L7.452,9.471 L7.452,16.403 C7.452,16.607 7.547,16.796 7.711,16.912 C7.807,16.971 7.903,17.000 8.012,17.000 C8.094,17.000 8.190,16.985 8.258,16.942 L15.686,12.995 C15.877,12.893 16.000,12.689 16.000,12.456 C16.000,12.223 15.877,12.019 15.686,11.917 L9.270,8.495 L15.686,5.087 C15.877,4.985 16.000,4.781 16.000,4.548 ZM8.573,15.427 L8.573,9.471 L14.181,12.456 L8.573,15.427 ZM8.573,7.534 L8.573,1.562 L14.181,4.548 L8.573,7.534 Z"/>
                                                                             </svg>
                                                                         </span>
-                                                                                <span class="product-card_icon d-inline-block">
+                                                                                <span
+                                                                                    class="product-card_icon d-inline-block">
                                                                             <svg viewBox="0 0 20 15" width="20px"
                                                                                  height="15px">
                                                                                 <path fill-rule="evenodd"
@@ -407,7 +549,8 @@
                                                                         </span>
                                                                             </div>
                                                                             <!--Price-->
-                                                                            <span class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
+                                                                            <span
+                                                                                class="product-card_price d-inline-block font-sec-bold font-24 text-tert-clr lh-1 ml-auto">
                                                                            {{ convert_price($related_product->variations->first()->price,$currency, false)}}
                                                                        </span>
                                                                         </div>
@@ -416,7 +559,8 @@
                                                                     <a href="javascript:void(0)"
                                                                        data-id="{{ $related_product->variations->first()->id }}"
                                                                        class="product-card_btn d-inline-flex align-items-center text-center font-15 text-white text-sec-clr text-uppercase __add_to_card">
-                                                                        <span class="product-card_btn-text">add to cart</span>
+                                                                        <span
+                                                                            class="product-card_btn-text">add to cart</span>
                                                                         <span class="d-inline-block ml-auto">
                                                                     <svg viewBox="0 0 18 22" width="18px" height="22px">
                                                                         <path fill-rule="evenodd" opacity="0.8"
@@ -449,12 +593,12 @@
                                                         <div class="accordion offset-top-0" role="tablist"
                                                              aria-multiselectable="true" id="accordion-3">
                                                             <div class="card card-accordion"><a
-                                                                        class="card-header collapsed" href="#"
-                                                                        data-toggle="collapse"
-                                                                        data-target="#accordion-3--card-0-content"
-                                                                        id="accordion-3--card-0-header"
-                                                                        aria-expanded="false"
-                                                                        aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
+                                                                    class="card-header collapsed" href="#"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#accordion-3--card-0-content"
+                                                                    id="accordion-3--card-0-header"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
                                                                 <div class="collapse" id="accordion-3--card-0-content"
                                                                      aria-labelledby="accordion-3--card-0-header"
                                                                      data-parent="#accordion-3" style="">
@@ -473,47 +617,47 @@
 
                             </div>
                             <div class="sharethis-inline-share-buttons"></div>
-{{--                            <div class="col-lg-1 col-2 ml-auto d-flex flex-column pr-0 product-single-share-col">--}}
-{{--                                <div class="ml-auto">--}}
-{{--                                    <div class="product-single-share-outer d-flex flex-column align-items-center justify-content-center">--}}
-{{--                                        <span class="d-inline-block font-main-bold font-22">87</span>--}}
-{{--                                        <span class="d-inline-block text-uppercase font-main-light fot-13">shares</span>--}}
-{{--                                    </div>--}}
-{{--                                    <div class="d-flex flex-column align-items-center">--}}
-{{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
-{{--                                            <svg viewBox="0 0 20 20" width="20px" height="20px">--}}
-{{--                                                <path fill-rule="evenodd" fill="rgb(189, 193, 201)"--}}
-{{--                                                      d="M18.891,0.005 L1.105,0.005 C0.498,0.005 0.002,0.497 0.002,1.108 L0.002,18.894 C0.002,19.503 0.498,19.999 1.105,19.999 L10.680,19.999 L10.680,12.256 L8.074,12.256 L8.074,9.237 L10.680,9.237 L10.680,7.011 C10.680,4.431 12.257,3.024 14.562,3.024 C15.667,3.024 16.612,3.106 16.890,3.144 L16.890,5.839 L15.290,5.843 C14.037,5.843 13.797,6.436 13.797,7.312 L13.797,9.237 L16.785,9.237 L16.395,12.252 L13.797,12.252 L13.797,19.999 L18.891,19.999 C19.500,19.999 19.996,19.503 19.996,18.894 L19.996,1.108 C19.996,0.497 19.500,0.005 18.891,0.005 L18.891,0.005 Z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
-{{--                                            <svg viewBox="0 0 20 16" width="20px" height="16px">--}}
-{{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
-{{--                                                      d="M19.998,1.890 C19.262,2.211 18.472,2.429 17.642,2.526 C18.489,2.026 19.139,1.235 19.445,0.291 C18.652,0.754 17.775,1.090 16.840,1.272 C16.092,0.486 15.026,-0.004 13.846,-0.004 C11.581,-0.004 9.744,1.805 9.744,4.036 C9.744,4.352 9.781,4.661 9.850,4.956 C6.441,4.788 3.419,3.179 1.395,0.735 C1.042,1.332 0.840,2.026 0.840,2.766 C0.840,4.168 1.564,5.404 2.665,6.129 C1.992,6.108 1.360,5.926 0.807,5.624 C0.807,5.641 0.807,5.657 0.807,5.675 C0.807,7.632 2.220,9.265 4.097,9.636 C3.753,9.728 3.390,9.778 3.016,9.778 C2.752,9.778 2.495,9.752 2.245,9.705 C2.766,11.310 4.282,12.478 6.076,12.511 C4.673,13.595 2.904,14.240 0.982,14.240 C0.651,14.240 0.324,14.221 0.003,14.184 C1.818,15.330 3.975,15.999 6.292,15.999 C13.837,15.999 17.962,9.843 17.962,4.504 C17.962,4.329 17.959,4.155 17.951,3.981 C18.752,3.412 19.448,2.700 19.998,1.890 L19.998,1.890 Z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
-{{--                                            <svg viewBox="0 0 19 18" width="19px" height="18px">--}}
-{{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
-{{--                                                      d="M19.002,11.037 L19.002,18.005 L14.930,18.005 L14.930,11.504 C14.930,9.872 14.342,8.757 12.868,8.757 C11.742,8.757 11.073,9.508 10.779,10.235 C10.671,10.494 10.644,10.855 10.644,11.219 L10.644,18.005 L6.571,18.005 C6.571,18.005 6.625,6.995 6.571,5.855 L10.644,5.855 L10.644,7.576 C10.635,7.590 10.624,7.603 10.617,7.616 L10.644,7.616 L10.644,7.576 C11.185,6.750 12.150,5.569 14.314,5.569 C16.994,5.569 19.002,7.305 19.002,11.037 L19.002,11.037 ZM2.309,-0.003 C0.916,-0.003 0.005,0.904 0.005,2.096 C0.005,3.263 0.890,4.196 2.256,4.196 L2.283,4.196 C3.703,4.196 4.586,3.263 4.586,2.096 C4.560,0.904 3.703,-0.003 2.309,-0.003 L2.309,-0.003 ZM0.247,18.005 L4.318,18.005 L4.318,5.855 L0.247,5.855 L0.247,18.005 Z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
-{{--                                            <svg viewBox="0 0 24 15" width="24px" height="15px">--}}
-{{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
-{{--                                                      d="M21.508,7.917 L21.508,10.421 L19.441,10.421 L19.441,7.917 L16.961,7.917 L16.961,5.830 L19.441,5.830 L19.441,3.325 L21.508,3.325 L21.508,5.830 L23.988,5.830 L23.988,7.917 L21.508,7.917 ZM7.537,15.013 C3.362,15.013 0.015,11.715 0.015,7.500 C0.015,3.284 3.362,-0.013 7.537,-0.013 C9.562,-0.013 11.339,0.571 12.621,1.823 L10.430,4.036 C9.728,3.284 8.694,2.909 7.537,2.909 C5.057,2.909 2.908,4.995 2.908,7.500 C2.908,10.004 5.057,12.091 7.537,12.091 C9.604,12.091 11.175,10.755 11.629,8.752 L7.455,8.752 L7.455,5.830 L14.729,5.830 C14.812,6.331 14.853,6.958 14.853,7.500 C14.853,8.043 14.812,8.544 14.729,9.045 C14.150,12.926 11.257,15.013 7.537,15.013 Z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                        </a>--}}
-{{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
-{{--                                            <svg viewBox="0 0 19 15" width="19px" height="15px">--}}
-{{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
-{{--                                                      d="M17.729,14.995 L1.266,14.995 C0.571,14.995 0.001,14.384 0.001,13.642 L0.001,3.899 C0.001,3.158 0.454,2.916 1.010,3.364 L8.487,9.414 C8.767,9.638 9.133,9.748 9.500,9.744 C9.862,9.748 10.228,9.638 10.508,9.414 L17.985,3.364 C18.541,2.916 18.994,3.158 18.994,3.899 L18.994,13.642 C18.994,14.384 18.424,14.995 17.729,14.995 ZM10.651,6.618 C10.338,6.881 9.912,6.995 9.496,6.974 C9.083,6.995 8.653,6.877 8.344,6.618 L1.503,0.841 C0.957,0.380 1.080,0.004 1.776,0.004 L17.219,0.004 C17.916,0.004 18.038,0.380 17.492,0.841 L10.651,6.618 Z"></path>--}}
-{{--                                            </svg>--}}
-{{--                                        </a>--}}
-{{--                                    </div>--}}
-{{--                                </div>--}}
+                            {{--                            <div class="col-lg-1 col-2 ml-auto d-flex flex-column pr-0 product-single-share-col">--}}
+                            {{--                                <div class="ml-auto">--}}
+                            {{--                                    <div class="product-single-share-outer d-flex flex-column align-items-center justify-content-center">--}}
+                            {{--                                        <span class="d-inline-block font-main-bold font-22">87</span>--}}
+                            {{--                                        <span class="d-inline-block text-uppercase font-main-light fot-13">shares</span>--}}
+                            {{--                                    </div>--}}
+                            {{--                                    <div class="d-flex flex-column align-items-center">--}}
+                            {{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
+                            {{--                                            <svg viewBox="0 0 20 20" width="20px" height="20px">--}}
+                            {{--                                                <path fill-rule="evenodd" fill="rgb(189, 193, 201)"--}}
+                            {{--                                                      d="M18.891,0.005 L1.105,0.005 C0.498,0.005 0.002,0.497 0.002,1.108 L0.002,18.894 C0.002,19.503 0.498,19.999 1.105,19.999 L10.680,19.999 L10.680,12.256 L8.074,12.256 L8.074,9.237 L10.680,9.237 L10.680,7.011 C10.680,4.431 12.257,3.024 14.562,3.024 C15.667,3.024 16.612,3.106 16.890,3.144 L16.890,5.839 L15.290,5.843 C14.037,5.843 13.797,6.436 13.797,7.312 L13.797,9.237 L16.785,9.237 L16.395,12.252 L13.797,12.252 L13.797,19.999 L18.891,19.999 C19.500,19.999 19.996,19.503 19.996,18.894 L19.996,1.108 C19.996,0.497 19.500,0.005 18.891,0.005 L18.891,0.005 Z"></path>--}}
+                            {{--                                            </svg>--}}
+                            {{--                                        </a>--}}
+                            {{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
+                            {{--                                            <svg viewBox="0 0 20 16" width="20px" height="16px">--}}
+                            {{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
+                            {{--                                                      d="M19.998,1.890 C19.262,2.211 18.472,2.429 17.642,2.526 C18.489,2.026 19.139,1.235 19.445,0.291 C18.652,0.754 17.775,1.090 16.840,1.272 C16.092,0.486 15.026,-0.004 13.846,-0.004 C11.581,-0.004 9.744,1.805 9.744,4.036 C9.744,4.352 9.781,4.661 9.850,4.956 C6.441,4.788 3.419,3.179 1.395,0.735 C1.042,1.332 0.840,2.026 0.840,2.766 C0.840,4.168 1.564,5.404 2.665,6.129 C1.992,6.108 1.360,5.926 0.807,5.624 C0.807,5.641 0.807,5.657 0.807,5.675 C0.807,7.632 2.220,9.265 4.097,9.636 C3.753,9.728 3.390,9.778 3.016,9.778 C2.752,9.778 2.495,9.752 2.245,9.705 C2.766,11.310 4.282,12.478 6.076,12.511 C4.673,13.595 2.904,14.240 0.982,14.240 C0.651,14.240 0.324,14.221 0.003,14.184 C1.818,15.330 3.975,15.999 6.292,15.999 C13.837,15.999 17.962,9.843 17.962,4.504 C17.962,4.329 17.959,4.155 17.951,3.981 C18.752,3.412 19.448,2.700 19.998,1.890 L19.998,1.890 Z"></path>--}}
+                            {{--                                            </svg>--}}
+                            {{--                                        </a>--}}
+                            {{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
+                            {{--                                            <svg viewBox="0 0 19 18" width="19px" height="18px">--}}
+                            {{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
+                            {{--                                                      d="M19.002,11.037 L19.002,18.005 L14.930,18.005 L14.930,11.504 C14.930,9.872 14.342,8.757 12.868,8.757 C11.742,8.757 11.073,9.508 10.779,10.235 C10.671,10.494 10.644,10.855 10.644,11.219 L10.644,18.005 L6.571,18.005 C6.571,18.005 6.625,6.995 6.571,5.855 L10.644,5.855 L10.644,7.576 C10.635,7.590 10.624,7.603 10.617,7.616 L10.644,7.616 L10.644,7.576 C11.185,6.750 12.150,5.569 14.314,5.569 C16.994,5.569 19.002,7.305 19.002,11.037 L19.002,11.037 ZM2.309,-0.003 C0.916,-0.003 0.005,0.904 0.005,2.096 C0.005,3.263 0.890,4.196 2.256,4.196 L2.283,4.196 C3.703,4.196 4.586,3.263 4.586,2.096 C4.560,0.904 3.703,-0.003 2.309,-0.003 L2.309,-0.003 ZM0.247,18.005 L4.318,18.005 L4.318,5.855 L0.247,5.855 L0.247,18.005 Z"></path>--}}
+                            {{--                                            </svg>--}}
+                            {{--                                        </a>--}}
+                            {{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
+                            {{--                                            <svg viewBox="0 0 24 15" width="24px" height="15px">--}}
+                            {{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
+                            {{--                                                      d="M21.508,7.917 L21.508,10.421 L19.441,10.421 L19.441,7.917 L16.961,7.917 L16.961,5.830 L19.441,5.830 L19.441,3.325 L21.508,3.325 L21.508,5.830 L23.988,5.830 L23.988,7.917 L21.508,7.917 ZM7.537,15.013 C3.362,15.013 0.015,11.715 0.015,7.500 C0.015,3.284 3.362,-0.013 7.537,-0.013 C9.562,-0.013 11.339,0.571 12.621,1.823 L10.430,4.036 C9.728,3.284 8.694,2.909 7.537,2.909 C5.057,2.909 2.908,4.995 2.908,7.500 C2.908,10.004 5.057,12.091 7.537,12.091 C9.604,12.091 11.175,10.755 11.629,8.752 L7.455,8.752 L7.455,5.830 L14.729,5.830 C14.812,6.331 14.853,6.958 14.853,7.500 C14.853,8.043 14.812,8.544 14.729,9.045 C14.150,12.926 11.257,15.013 7.537,15.013 Z"></path>--}}
+                            {{--                                            </svg>--}}
+                            {{--                                        </a>--}}
+                            {{--                                        <a href="#" class="product-single_share-icon d-inline-block">--}}
+                            {{--                                            <svg viewBox="0 0 19 15" width="19px" height="15px">--}}
+                            {{--                                                <path fill-rule="evenodd" fill="rgb(211, 214, 223)"--}}
+                            {{--                                                      d="M17.729,14.995 L1.266,14.995 C0.571,14.995 0.001,14.384 0.001,13.642 L0.001,3.899 C0.001,3.158 0.454,2.916 1.010,3.364 L8.487,9.414 C8.767,9.638 9.133,9.748 9.500,9.744 C9.862,9.748 10.228,9.638 10.508,9.414 L17.985,3.364 C18.541,2.916 18.994,3.158 18.994,3.899 L18.994,13.642 C18.994,14.384 18.424,14.995 17.729,14.995 ZM10.651,6.618 C10.338,6.881 9.912,6.995 9.496,6.974 C9.083,6.995 8.653,6.877 8.344,6.618 L1.503,0.841 C0.957,0.380 1.080,0.004 1.776,0.004 L17.219,0.004 C17.916,0.004 18.038,0.380 17.492,0.841 L10.651,6.618 Z"></path>--}}
+                            {{--                                            </svg>--}}
+                            {{--                                        </a>--}}
+                            {{--                                    </div>--}}
+                            {{--                                </div>--}}
 
-{{--                            </div>--}}
+                            {{--                            </div>--}}
                         </div>
                     </div>
                 </div>
@@ -593,7 +737,7 @@
             border: 2px solid transparent;
         }
 
-        .product-single-info_radio-label:before{
+        .product-single-info_radio-label:before {
             border-radius: 50%;
         }
     </style>
@@ -609,7 +753,7 @@
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
-  //esia 
+        //esia
         // var variations = {
         //     "group_id" : "5ca48c5f4401f",
         //     "products" : [
@@ -618,6 +762,7 @@
         // };
 
         $(document).ready(function () {
+
             // $.ajax({
             //     type: "post",
             //     url: "/add-extra-to-cart",
