@@ -17,25 +17,20 @@ $variations = collect($model->variations()->required()->get())->groupBy('variati
             </div>
         @elseif($vSettings->type == 'single')
             @if(\View::exists("frontend.products._partials.single.$vSettings->display_as"))
-                <div class="product-single-info_row options-group">
-                    <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
-                        @include("frontend.products._partials.single.$vSettings->display_as")
-                    </div>
-                    <div class="product-single-info_row-items">
+                @include("frontend.products._partials.single.$vSettings->display_as")
+                {{----}}
+                {{--<div class="product-single-info_row options-group">--}}
+                    {{--<div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">--}}
+                        {{----}}
+                    {{--</div>--}}
+                    {{--<div class="product-single-info_row-items">--}}
 
-                    </div>
-                </div>
+                    {{--</div>--}}
+                {{--</div>--}}
             @endif
         @else
             @if(\View::exists("frontend.products._partials.variation_types.$vSettings->display_as"))
-                <div class="product-single-info_row options-group">
-                    <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
-                        @include("frontend.products._partials.variation_types.$vSettings->display_as")
-                    </div>
-                    <div class="product-single-info_row-items">
-
-                    </div>
-                </div>
+                @include("frontend.products._partials.variation_types.$vSettings->display_as")
             @endif
         @endif
     @endforeach

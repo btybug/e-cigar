@@ -230,8 +230,9 @@
                                             <div class="product-single-info">
                                                 <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
                                                        id="vpid">
-                                                @include("admin.inventory._partials.render_price_form",['model' => $vape])
+
                                                 <div class="product__single-item">
+                                                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                                     <div
                                                         class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">
                                                         <div
