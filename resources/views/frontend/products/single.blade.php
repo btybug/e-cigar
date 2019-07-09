@@ -245,72 +245,313 @@
                                                         <a href="#" class="font-20 text-tert-clr top_details">Offer
                                                             Details</a>
                                                     </div>
-                                                    <div class="product__single-item-info">
+                                                    <div class="product__single-item-info mb-3">
                                                         <div
-                                                            class="font-sec-light font-26 lh-1 product__single-item-info-top">
-                                                            Choose Nicotine Strenght
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <span class="font-sec-light font-26">Choose Nicotine Strenght</span>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+                                                                <span
+                                                                    class="font-40 product__single-item_price">£100,00</span>
+                                                            </div>
                                                         </div>
+
                                                         <div
-                                                            class="d-flex flex-wrap align-items-center justify-content-between product__single-item-info-bottom">
-                                                            <div class="d-flex product__single-item-info-size">
-                                                                <div class="product_radio-single">
-                                                                    <div
-                                                                        class="custom-radio custom-control-inline">
-                                                                        <input type="radio" class="custom-control-input"
-                                                                               id="customRadio1" name="example"
-                                                                               value="">
-                                                                        <label class="custom-label"
-                                                                               for="customRadio1">
+                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-md-6 pl-0">
+                                                                <div
+                                                                    class="d-flex flex-wrap product__single-item-info-size">
+                                                                    <div class="product_radio-single">
+                                                                        <div
+                                                                            class="custom-radio custom-control-inline">
+                                                                            <input type="radio"
+                                                                                   class="custom-control-input"
+                                                                                   id="customRadio1" name="example"
+                                                                                   value="">
+                                                                            <label class="custom-label"
+                                                                                   for="customRadio1">
                                                                             <span
                                                                                 class="font-sec-ex-light font-26 count">10</span>
-                                                                            <span
-                                                                                class="font-main-light font-18 mg">mg</span>
-                                                                        </label>
+                                                                                <span
+                                                                                    class="font-main-light font-18 mg">mg</span>
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="product_radio-single">
-                                                                    <div
-                                                                        class="custom-radio custom-control-inline">
-                                                                        <input type="radio" class="custom-control-input"
-                                                                               id="customRadio2" name="example"
-                                                                               value="">
-                                                                        <label class="custom-label"
-                                                                               for="customRadio2">
+                                                                    <div class="product_radio-single">
+                                                                        <div
+                                                                            class="custom-radio custom-control-inline">
+                                                                            <input type="radio"
+                                                                                   class="custom-control-input"
+                                                                                   id="customRadio2" name="example"
+                                                                                   value="">
+                                                                            <label class="custom-label"
+                                                                                   for="customRadio2">
                                                                             <span
                                                                                 class="font-sec-ex-light font-26 count">15</span>
-                                                                            <span
-                                                                                class="font-main-light font-18 mg">mg</span>
-                                                                        </label>
+                                                                                <span
+                                                                                    class="font-main-light font-18 mg">mg</span>
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                                <div class="product_radio-single">
-                                                                    <div
-                                                                        class="custom-radio custom-control-inline">
-                                                                        <input type="radio" class="custom-control-input"
-                                                                               id="customRadio3" name="example"
-                                                                               value="">
-                                                                        <label class="custom-label"
-                                                                               for="customRadio3">
+                                                                    <div class="product_radio-single">
+                                                                        <div
+                                                                            class="custom-radio custom-control-inline">
+                                                                            <input type="radio"
+                                                                                   class="custom-control-input"
+                                                                                   id="customRadio3" name="example"
+                                                                                   value="">
+                                                                            <label class="custom-label"
+                                                                                   for="customRadio3">
                                                                             <span
                                                                                 class="font-sec-ex-light font-26 count">20</span>
-                                                                            <span
-                                                                                class="font-main-light font-18 mg">mg</span>
-                                                                        </label>
+                                                                                <span
+                                                                                    class="font-main-light font-18 mg">mg</span>
+                                                                            </label>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div
-                                                                class="d-flex align-items-center justify-content-between product__single-item-info-bottom-right product__single-price-count">
-                                                                <div class="product__single-item-info-amount">
-                                                                    <div class="select-wall">
+                                                            <div class="col-md-3 d-flex justify-content-center">
+                                                                <div
+                                                                    class="d-flex flex-column w-100 align-items-center">
+                                                                    <span class="text-tert-clr">*Quality Discount</span>
+                                                                    <div class="product__single-item-inp-num">
+                                                                        <div class="quantity">
+                                                                            <input type="number" min="1" max="9"
+                                                                                   step="1"
+                                                                                   value="1">
+                                                                            <div class="inp-icons">
+                                                                                <span class="inp-up"></span>
+                                                                                <span class="inp-down"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
+                                                                <div class="product__single-item-info-price lh-1">
+                                                                    <span class="font-40">£10,00</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="product__single-item-info mb-3">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <span class="font-sec-light font-26">Choose Nicotine Strenght</span>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-md-6 pl-0">
+                                                                <div class="select-wall product__select-wall">
+                                                                    <select name="" id=""
+                                                                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                            style="width: 100%">
+                                                                        <option value="">12 mg Nicotine</option>
+                                                                        <option value="">1 mg Nicotine</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-center">
+                                                                <div
+                                                                    class="d-flex flex-column w-100 align-items-center">
+                                                                    <span class="text-tert-clr">*Quality Discount</span>
+                                                                    <div class="select-wall product__select-wall w-100">
                                                                         <select name="" id=""
-                                                                                class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark select2-hidden-accessible"
-                                                                                style="width: 75px">
-                                                                            <option value="">1</option>
-                                                                            <option value="">2</option>
+                                                                                class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                                style="width: 100%">
+                                                                            <option value="">Pack of 2</option>
+                                                                            <option value="">Pack of 1</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
+                                                                <div class="product__single-item-info-price lh-1">
+                                                                    <span class="font-40">£10,00</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                    <div class="product__single-item-info mb-3">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <span class="font-sec-light font-26">Choose Nicotine Strenght</span>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+                                                                <span
+                                                                    class="font-40 product__single-item_price">£10,00</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-md-6 pl-0">
+                                                                <div class="select-wall product__select-wall">
+<span
+    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+<i class="fas fa-times"></i>
+</span>
+                                                                    <select name="" id=""
+                                                                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                            style="width: 100%">
+                                                                        <option value="">12 mg Nicotine</option>
+                                                                        <option value="">1 mg Nicotine</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-center">
+                                                                <div
+                                                                    class="d-flex flex-column w-100 align-items-center">
+                                                                    {{--                                                                    <span class="text-tert-clr">*Quality Discount</span>--}}
+                                                                    {{--                                                                    <div class="select-wall product__select-wall w-100">--}}
+                                                                    {{--                                                                        <select name="" id=""--}}
+                                                                    {{--                                                                                class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"--}}
+                                                                    {{--                                                                                style="width: 100%">--}}
+                                                                    {{--                                                                            <option value="">Pack of 2</option>--}}
+                                                                    {{--                                                                            <option value="">Pack of 1</option>--}}
+                                                                    {{--                                                                        </select>--}}
+                                                                    {{--                                                                    </div>--}}
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
+                                                                <div class="product__single-item-info-price lh-1">
+                                                                    {{--                                                                    <span class="font-40">£10,00</span>--}}
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="product__single-item-add-new">
+                                                            <a href="#"
+                                                               class="d-flex justify-content-center align-self-center text-tert-clr font-18 product__single-item-add-new-btn">
+                                                                <span class="icon-plus"><i
+                                                                        class="fas fa-plus"></i></span>
+                                                                <span>Add New</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product__single-item-info mb-3">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <span class="font-sec-light font-26">Choose Nicotine Strenght</span>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+                                                                {{--                                                                <span--}}
+                                                                {{--                                                                    class="font-40 product__single-item_price">£10,00</span>--}}
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-md-6 pl-0">
+                                                                <div class="select-wall product__select-wall">
+<span
+    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+<i class="fas fa-times"></i>
+</span>
+                                                                    <select name="" id=""
+                                                                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                            style="width: 100%">
+                                                                        <option value="">12 mg Nicotine</option>
+                                                                        <option value="">1 mg Nicotine</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-center">
+                                                                <div
+                                                                    class="d-flex flex-column w-100 align-items-center">
+                                                                    <span class="text-tert-clr">*Quality Discount</span>
+                                                                    <div class="select-wall product__select-wall w-100">
+                                                                        <select name="" id=""
+                                                                                class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
+                                                                                style="width: 100%">
+                                                                            <option value="">Pack of 2</option>
+                                                                            <option value="">Pack of 1</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
+                                                                <div class="product__single-item-info-price lh-1">
+                                                                    <span class="font-40">£10,00</span>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="product__single-item-add-new">
+                                                            <a href="#"
+                                                               class="d-flex justify-content-center align-self-center text-tert-clr font-18 product__single-item-add-new-btn">
+                                                                <span class="icon-plus"><i
+                                                                        class="fas fa-plus"></i></span>
+                                                                <span>Add New</span>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="product__single-item-info mb-3">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <a href="#" class="font-sec-light font-22 text-uppercase  product_select-link-btn">
+                                                                    Select Products
+                                                                </a>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+                                                                    <span class="font-40 product__single-item_price">
+                                                                        £10,00
+                                                                    </span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-md-6 pl-0">
+                                                                <div class="select-wall product__select-wall">
+<span
+    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+<i class="fas fa-times"></i>
+</span>
+                                                                    <span class="font-sec-light font-26">Diner Lady Cubano 32 pro Juice</span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-center">
+                                                                <div
+                                                                    class="d-flex flex-column w-100 align-items-center">
+                                                                    {{--                                                                    <span class="text-tert-clr">*Quality Discount</span>--}}
+                                                                    <div class="product__single-item-inp-num">
+                                                                        <div class="quantity">
+                                                                            <input type="number" min="1" max="9"
+                                                                                   step="1"
+                                                                                   value="1">
+                                                                            <div class="inp-icons">
+                                                                                <span class="inp-up"></span>
+                                                                                <span class="inp-down"></span>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
                                                                 <div class="product__single-item-info-price lh-1">
                                                                     <span class="font-40">£10,00</span>
                                                                 </div>
@@ -329,7 +570,7 @@
                                                             Delivery
                                                         </div>
                                                         <div class="product__single-delivery-select">
-                                                            <div class="select-wall">
+                                                            <div class="select-wall product__select-wall">
                                                                 <select name="" id=""
                                                                         class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
                                                                         style="width: 250px">
