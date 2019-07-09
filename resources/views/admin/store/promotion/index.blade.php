@@ -131,17 +131,17 @@
                      {id: 'Start Date', name: 'start_date'},
                      {id: 'End Date', name: 'end_date'},
                      {id: 'Canceled', name: 'canceled'},
-                     {id: 'Actions', name: 'actions'},
+                     {id: 'Actions', name: 'actions'}
                  ],
                 '#table_head_id',
                 [
-                    {id: 'id', name: 'id'},
-                    {id: 'name', name: 'name'},
-                    {id: 'stock_id', name: 'stock_id'},
-                    {id: 'start_date', name: 'start_date'},
-                    {id: 'end_date', name: 'end_date'},
-                    {id: 'canceled', name: 'canceled'},
-                    {id: 'Actions', name: 'actions'}
+                    {data: 'id', name: 'variation_id'},
+                    {data: 'name', name: 'name'},
+                    {data: 'stock_id', name: 'stock_id'},
+                    {data: 'start_date', name: 'start_date'},
+                    {data: 'end_date', name: 'end_date'},
+                    {data: 'canceled', name: 'canceled'},
+                    {data: 'actions', name: 'actions'}
                 ],
                 '#promotion-table',
                 "{!! route('datatable_all_promotions') !!}"
