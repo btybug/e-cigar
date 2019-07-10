@@ -16,7 +16,7 @@ class Attributes extends Translatable
 
     public $translationModel = AttributeTranslation::class;
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name','description'];
     /**
      * @var array
      */

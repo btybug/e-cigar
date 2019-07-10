@@ -52,6 +52,14 @@
                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                        </div>
                                                    </div>
+                                                   <div class="form-group row">
+                                                       <label class="col-md-2 control-label"><span data-toggle="tooltip"
+                                                                                                   title=""
+                                                                                                   data-original-title="Attribute description">Attribute Description</span></label>
+                                                       <div class="col-md-10">
+                                                           {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
+                                                       </div>
+                                                   </div>
                                                </div>
                                            @endforeach
                                        @endif
