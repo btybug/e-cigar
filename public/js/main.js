@@ -266,9 +266,9 @@ $(document).ready(function () {
         //add new single item
         $('body').on('click', '.product__single-item-add-new a.product__single-item-add-new-btn', function(ev) {
             ev.preventDefault();
-            const row = $(this).closest('.product__single-item-info-bottom');
+            const id = $(this).closest('.product__single-item-info').data('id');
 
-            fetch("/products/add-new-row", {
+            fetch("/products/get-variation-menu-raw", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -278,7 +278,7 @@ $(document).ready(function () {
                 },
                 credentials: "same-origin",
                 body: JSON.stringify({
-                    a:15
+                    id
                 })
             })
                 .then(function (response) {
