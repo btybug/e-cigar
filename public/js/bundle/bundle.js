@@ -2831,22 +2831,24 @@ $(document).ready(function () {
             var select_element_id = $(this).val();
             var vpid = $('#vpid').val();
 
-            $.ajax({
-                type: "post",
-                url: "/products/get-variation-menu-raw",
-                cache: false,
-                datatype: "json",
-                data: {
-                    group_id: group_id,
-                    vpid: vpid,
-                    select_element_id: select_element_id
-                },
+            fetch("/products/get-variation-menu-raw", {
+                method: "post",
                 headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
                 },
-                success: function success(data) {
-                    console.log(11111111111);
-                }
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    group_id: group_id,
+                    select_element_id: select_element_id,
+                    vpid: vpid
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (json) {}).catch(function (error) {
+                console.log(error);
             });
         });
         //data object for add-to-cart and extra
