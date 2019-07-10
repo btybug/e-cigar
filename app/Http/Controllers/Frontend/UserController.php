@@ -232,9 +232,11 @@ class UserController extends Controller
         if ($validate) return redirect()->back()->withErrors($validate);
 
         $status = $setting = $this->settings->getData('tickets', 'open');
+        $statusPriotity = $setting = $this->settings->getData('ticket_priority', 'open');
         $data['user_id'] = \Auth::id();
         $data['author_id'] = \Auth::id();
         $data['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'tickets')->first()->id;
+        $data['priority_id'] = ($statusPriotity) ? $statusPriotity->val : $this->statuses->where('type', 'ticket_priority')->first()->id;
 
         $ticket = Ticket::create($data);
 
