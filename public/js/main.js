@@ -192,6 +192,7 @@ $(document).ready(function () {
     });
 
     $("#singleProductPageCnt").fadeIn(function () {
+        //qty up and down,  and input-qty
         $('body').on('click', '.inp-up, .inp-down',function(ev) {
             const input_qty = $(this).closest('.quantity').find('.input-qty');
             const qty = input_qty.val();
@@ -201,7 +202,7 @@ $(document).ready(function () {
                 qty>1 && input_qty.val(qty*1 - 1);
             }
 
-            const variation_id = $(this).closest('.product__single-item-info').data('id');
+            const variation_id = $(this).closest('.product__single-item-info-bottom').find('.select-variation-option').val();
             const price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
             fetch("/products/get-discount-price", {
                 method: "post",
@@ -226,7 +227,103 @@ $(document).ready(function () {
                 .catch(error => console.error(error));
         });
 
+        //select variation
         $('body').on('change', 'select.select-variation-option.single-product-select', function(ev) {
+            ev.preventDefault();
+            const row = $(this).closest('.product__single-item-info-bottom');
+            const group_id = row.data('id');
+            const select_element_id = $(this).val();
+            const vpid = $('#vpid').val();
+
+            fetch("/products/get-variation-menu-raw", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    group_id: group_id,
+                    select_element_id: select_element_id,
+                    vpid:vpid
+                })
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    row.html(data.html);
+                    row.find('.select-2').select2({minimumResultsForSearch: -1});
+                    // row.find('.product-qty').select2();
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        //add new single item
+        $('body').on('click', '.product__single-item-add-new a.product__single-item-add-new-btn', function(ev) {
+            ev.preventDefault();
+            const row = $(this).closest('.product__single-item-info-bottom');
+
+            fetch("/products/add-new-row", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    a:15
+                })
+            })
+                .then(function (response) {
+                    return response.json();
+                })
+                .then(function (data) {
+                    // row.html(data.html);
+
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+        });
+
+        //select-qty
+        $('body').on('change', 'select.select-qty', function(ev) {
+            const price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
+            const variation_id = $(this).closest('.product__single-item-info-bottom').find('.select-variation-option').val();
+            const discount_id = $(this).val();
+
+            fetch("/products/get-discount-price", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    variation_id,
+                    discount_id
+                })
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    price_place.html(`${getCurrencySymbol()}${data.price}`);
+                })
+                .catch(error => console.error(error));
+        });
+
+
+        $('body').on('change', '.product_radio-single .custom-radio .custom-control-input', function(ev) {
             ev.preventDefault();
             const row = $(this).closest('.product__single-item-info-bottom');
             const group_id = $(this).data('id');
@@ -259,67 +356,6 @@ $(document).ready(function () {
                 .catch(function (error) {
                     console.log(error);
                 });
-        });
-
-        $('body').on('click', '.product__single-item-add-new a.product__single-item-add-new-btn', function(ev) {
-            ev.preventDefault();
-            const row = $(this).closest('.product__single-item-info-bottom');
-
-            fetch("/products/add-new-row", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": $('input[name="_token"]').val()
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    a:15
-                })
-            })
-                .then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    // row.html(data.html);
-
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
-        });
-
-
-        $('body').on('change', 'select.select-qty', function(ev) {
-            const price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
-            const variation_id = $(this).closest('.product__single-item-info').data('id');
-            const discount_id = $(this).val();
-
-            fetch("/products/get-discount-price", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": $('input[name="_token"]').val()
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    variation_id,
-                    discount_id
-                })
-            })
-                .then((res) => {
-                    return res.json();
-                })
-                .then((data) => {
-                    price_place.html(`${getCurrencySymbol()}${data.price}`);
-                })
-                .catch(error => console.error(error));
-        });
-        $('body').on('change', 'select.input-qty', function(ev) {
-
         });
 //data object for add-to-cart and extra
         const addDataKey = {};
