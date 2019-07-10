@@ -1,17 +1,63 @@
 <div class="col-md-6 pl-0">
-    <div class="select-wall product__select-wall">
-        <select name="variations[]" id="single_v_select_{{ $vSettings->id }}"
-                data-count="{{ $vSettings->count_limit }}"  data-id="{{ $vSettings->id }}"
-                style="width: 100%"
-                class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
-            @foreach($variation as $item)
-                <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected @endif data-out="{{ out_of_stock($item) }}">
-                    {{ $item->name }}
-                    <b>{{ out_of_stock_msg($item) }}</b>
-                </option>
-            @endforeach
-        </select>
-    </div>
+    @if($vSettings->display_as == 'menu')
+        <div class="select-wall product__select-wall">
+            @if($vSettings->type == 'package_product')
+            <span class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+                <i class="fas fa-times"></i>
+            </span>
+            @endif
+            <select name="variations[]" id="single_v_select_{{ $vSettings->id }}"
+                    data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                    style="width: 100%"
+                    class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
+                @foreach($variation as $item)
+                    <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
+                            @endif data-out="{{ out_of_stock($item) }}">
+                        {{ $item->name }}
+                        <b>{{ out_of_stock_msg($item) }}</b>
+                    </option>
+                @endforeach
+            </select>
+        </div>
+    @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
+        <div class="d-flex flex-wrap product__single-item-info-size">
+            <div class="product_radio-single">
+                @foreach($variation as $item)
+                    <div
+                        class="custom-radio custom-control-inline">
+                        <input type="radio"
+                               @if(isset($selected) && $selected->id == $item->id) checked
+                               @endif data-out="{{ out_of_stock($item) }}"
+                               class="custom-control-input"
+                               id="single_v_select_{{ $item->id }}" name="variations[]"
+                               value="{{ $item->id }}">
+                        <label class="custom-label"
+                               for="single_v_select_{{ $item->id }}">
+                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
+                        </label>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
+        <div class="d-flex flex-wrap product__single-item-info-size">
+            <div class="product_radio-single">
+                    <div
+                        class="custom-radio custom-control-inline">
+                        <input type="checkbox"
+                               data-out="{{ out_of_stock($selected) }}"
+                               class="custom-control-input"
+                               id="single_v_select_{{ $selected->id }}" name="variations[]"
+                               value="{{ $selected->id }}">
+                        <label class="custom-label checkbox-select"
+                               for="single_v_select_{{ $selected->id }}">
+                            <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
+                        </label>
+                    </div>
+            </div>
+        </div>
+    @endif
+
 </div>
 <div class="col-md-3 d-flex justify-content-center">
     @if($selected->discount_type == 'range')
