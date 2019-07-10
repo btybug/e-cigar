@@ -2895,7 +2895,7 @@ $(document).ready(function () {
         //add new single item
         $('body').on('click', '.product__single-item-add-new a.product__single-item-add-new-btn', function (ev) {
             ev.preventDefault();
-            var id = $(this).closest('.product__single-item-info').data('id');
+            var id = $(this).closest('.product__single-item-info').data('group-id');
 
             fetch("/products/get-variation-menu-raw", {
                 method: "post",
