@@ -75,7 +75,6 @@ class UserController extends Controller
     {
         $user = \Auth::user();
 
-//        dd($user->favorites->toArray());
         return $this->view('favourites', compact('user'));
     }
 
