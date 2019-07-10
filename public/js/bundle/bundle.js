@@ -2895,7 +2895,8 @@ $(document).ready(function () {
         //add new single item
         $('body').on('click', '.product__single-item-add-new a.product__single-item-add-new-btn', function (ev) {
             ev.preventDefault();
-            var id = $(this).closest('.product__single-item-info').data('group-id');
+            var row = $(this).closest('.product__single-item-info');
+            var id = row.data('group-id');
 
             fetch("/products/get-variation-menu-raw", {
                 method: "post",
@@ -2913,10 +2914,25 @@ $(document).ready(function () {
                 return response.json();
             }).then(function (data) {
                 // row.html(data.html);
+                row.find('.product__single-item-info-bottom').last().after(data.html);
 
+                console.log(row.find('.select-2'));
+                setTimeout(function () {
+                    row.find('.select-2').each(function () {
+                        $(this).select2({ minimumResultsForSearch: -1 });
+                    });
+                }, 2000);
+
+                // const new_rows_list = row.find('.product__single-item-info-bottom');
+                // console.log($(new_rows_list[new_rows_list.length - 1]).find('select'));
+                // $(new_rows_list[new_rows_list.length-1]).find('select').select2()
             }).catch(function (error) {
                 console.log(error);
             });
+        });
+
+        $('body').on('click', '.remove-single_product-item', function () {
+            $(this).closest('.product__single-item-info-bottom').remove();
         });
 
         //select-qty
