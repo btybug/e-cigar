@@ -23,16 +23,19 @@
         <div class="d-flex flex-wrap product__single-item-info-size">
             <div class="product_radio-single">
                 @foreach($variation as $item)
+                    @php
+                        $x = uniqid();
+                    @endphp
                     <div
                         class="custom-radio custom-control-inline">
                         <input type="radio"
                                @if(isset($selected) && $selected->id == $item->id) checked
                                @endif data-out="{{ out_of_stock($item) }}"
                                class="custom-control-input"
-                               id="single_v_select_{{ $item->id }}" name="variations[]"
+                               id="single_v_select_{{ $item->id.$x }}" name="variations[]"
                                value="{{ $item->id }}">
                         <label class="custom-label"
-                               for="single_v_select_{{ $item->id }}">
+                               for="single_v_select_{{ $item->id.$x }}">
                             <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
                         </label>
                     </div>
@@ -42,15 +45,18 @@
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
         <div class="d-flex flex-wrap product__single-item-info-size">
             <div class="product_radio-single">
+                @php
+                $x = uniqid();
+                @endphp
                     <div
                         class="custom-radio custom-control-inline">
                         <input type="checkbox"
                                data-out="{{ out_of_stock($selected) }}"
                                class="custom-control-input"
-                               id="single_v_select_{{ $selected->id.uniqid() }}" name="variations[]"
+                               id="single_v_select_{{ $selected->id.$x}}" name="variations[]"
                                value="{{ $selected->id }}">
                         <label class="custom-label checkbox-select"
-                               for="single_v_select_{{ $selected->id }}">
+                               for="single_v_select_{{ $selected->id.$x }}">
                             <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
                         </label>
                     </div>
