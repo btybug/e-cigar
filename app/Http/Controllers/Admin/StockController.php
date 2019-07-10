@@ -18,6 +18,7 @@ use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
+use App\Models\StockAttribute;
 use App\Models\StockOfferProducts;
 use App\Models\StockSales;
 use App\Models\StockSeo;
@@ -112,7 +113,18 @@ class StockController extends Controller
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->specifications()->sync($request->get('specifications'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-        $stock->specifications()->syncWithoutDetaching($options);
+//        dd($options);
+        if($options && count($options)){
+            foreach ($options as $option){
+                StockAttribute::create([
+                    'attributes_id' => $option['attributes_id'],
+                    'sticker_id' => $option['sticker_id'],
+                    'parent_id' => $option['parent_id'],
+                    'stock_id' => $stock->id,
+                ]);
+            }
+        }
+
         $offer_products = $request->get('offer_products',[]);
 
         if($stock->is_offer){
