@@ -6,7 +6,7 @@
                 <i class="fas fa-times"></i>
             </span>
             @endif
-            <select name="variations[]" id="single_v_select_{{ $vSettings->id }}"
+            <select name="variations[]" id="single_v_select_{{ $vSettings->id.uniqid() }}"
                     data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                     style="width: 100%"
                     class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
@@ -47,7 +47,7 @@
                         <input type="checkbox"
                                data-out="{{ out_of_stock($selected) }}"
                                class="custom-control-input"
-                               id="single_v_select_{{ $selected->id }}" name="variations[]"
+                               id="single_v_select_{{ $selected->id.uniqid() }}" name="variations[]"
                                value="{{ $selected->id }}">
                         <label class="custom-label checkbox-select"
                                for="single_v_select_{{ $selected->id }}">
