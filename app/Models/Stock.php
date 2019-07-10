@@ -10,6 +10,7 @@ namespace App\Models;
 
 use App\Models\Common\Translatable;
 use App\Models\Translations\StockTranslation;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class Stock extends Translatable
@@ -167,5 +168,10 @@ class Stock extends Translatable
     public function faqs()
     {
         return $this->belongsToMany(Faq::class, 'faq_stocks', 'stock_id', 'faq_id');
+    }
+
+    public function in_favorites()
+    {
+        return $this->belongsToMany(User::class, 'favorites', 'stock_id', 'user_id');
     }
 }

@@ -679,15 +679,16 @@
 
             })
 
-            $(".product-card_like-icon").click(function () {
+            $("body").on('click', '.product-card_like-icon', function () {
+
                 let url;
                 let is_active = $(this).hasClass("active");
 
                 url = (is_active) ? "/my-account/delete_favourites" : "/my-account/add_favourites";
 
-                let variation_id = $(this).data("id");
+                let variation_id = $(this).attr("data-id");
                 let _this = $(this);
-
+                console.log(`${variation_id}  ---->  `, _this);
                 if (variation_id) {
                     $.ajax({
                         type: "post",

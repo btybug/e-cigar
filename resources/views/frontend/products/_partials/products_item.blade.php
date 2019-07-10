@@ -73,7 +73,8 @@
                    class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
                     view more
                 </a>
-                <span class="products__item-favourite {{ ( $product->is_favorite)?'active':null}}" data-id="{{ $product->variation_id }}">
+                @if(Auth::check())
+                <span class="products__item-favourite product-card_like-icon {{ ($product->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}">
                     <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -84,6 +85,7 @@
                                                   d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
                                         </svg>
                 </span>
+                @endif
             </div>
         </div>
     </div>

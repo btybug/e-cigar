@@ -82,15 +82,19 @@
                                         <span class="font-sec-reg font-26 text-main-clr lh-1">
                                             {!! $vape->short_description !!}
                                         </span>
-                                        <span class="icon">
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    width="32px" height="31px" viewBox="0 0 31 32">
-<path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)" opacity="0.702" fill="rgb(255, 255, 255)"
-      d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.002,6.258 3.002,10.466 C3.002,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
-</svg>
-                                    </span>
+                                        @if(Auth::check())
+                                        <span class="icon products__item-favourite product-card_like-icon
+                                            {{ ($vape->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}"
+                                              data-id="{{ $vape->id }}">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                width="32px" height="31px" viewBox="0 0 31 32">
+                                            <path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)" opacity="0.702" fill="rgb(255, 255, 255)"
+                                                  d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.002,6.258 3.002,10.466 C3.002,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
+                                            </svg>
+                                        </span>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="brands-top-slider">
@@ -653,7 +657,12 @@
           href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css"/>
 
     <style>
-
+        .products__item-favourite.active svg path {
+            fill: #ee3a50;
+        }
+        .products__item-favourite{
+            cursor: pointer;
+        }
         .share-social-btn {
             position: relative;
         }
