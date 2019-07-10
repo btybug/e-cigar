@@ -21,11 +21,11 @@
     @if(! isset($selected))
         @php $selected = $variation->first(); @endphp
     @endif
-    <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
         @if(count($variation))
             @foreach($variation as $selected)
-                @include("frontend.products._partials.stock_variation_option")
-            @endforeach
+                <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"  data-single-price="{{ $selected->price }}">
+                    @include("frontend.products._partials.stock_variation_option")
+                </div>
+        @endforeach
         @endif
-    </div>
 </div>
