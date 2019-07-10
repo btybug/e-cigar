@@ -19,7 +19,7 @@
             <span class="text-tert-clr">*Quality Discount</span>
             <div class="product__single-item-inp-num">
                 <div class="quantity">
-                    {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price ',
+                    {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
                         'data-id' => $selected->id,'min' => 1,'step' => 1]) !!}
                     <div class="inp-icons">
                         <span class="inp-up"></span>
@@ -34,7 +34,7 @@
             <span class="text-tert-clr">*Quality Discount</span>
             <div class="select-wall product__select-wall w-100">
                 <select name="qty" id="" data-id="{{ $selected->id }}"
-                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price"
+                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
                         style="width: 100%">
                     @if(count($selected->discounts))
                         @foreach($selected->discounts as $d)
