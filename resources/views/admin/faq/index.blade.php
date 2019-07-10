@@ -42,35 +42,39 @@
                 if(!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
                 }
-                JSON.parse(localStorage.getItem(storageName)).map((el) => {
-                    $(selectId).find(`[data-name="${el.name}"]`).attr('selected', 'selected')
-                });
-                $(selectId).select2({
-                    multiple: true,
-                    initSelection: function (element, callback) {
-                        var selected_items = JSON.parse(localStorage.getItem(storageName));
 
-                        callback(selected_items);
-                    }
-                });
+                let selId = JSON.parse(localStorage.getItem(storageName)).map((el) => {
+                    return el.id;
+            });
 
+                $(selectId).selectpicker({
+                    // actionsBox: true,
+                    dropupAuto: true,
+                    // header: 'Select',
+                    liveSearch: true,
+                    liveSearchPlaceholder: 'Search',
+                    multipleSeparator: ' | ',
+                    style: 'btn-default',
+                    // width: 'auto'
+                });
+                $(selectId).selectpicker('val', selId);
                 var tableHeadArray = tableData;
 
                 tableArray = tableHeadArray.map((head) => {
                     const id = head.data;
-                    var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
-                        return el.name === id;
-                    });
-                    if(visible) {
-                        return head;
-                    } else {
-                        return {
-                            ...head,
-                            visible: false
-                        };
-                    }
-                });
 
+                var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
+                    return el.name === id;
+            });
+                if(visible) {
+                    return head;
+                } else {
+                    return {
+                        ...head,
+                        visible: false
+                    };
+                }
+            });
                 var table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
@@ -98,12 +102,13 @@
                             column.visible(false);
                         }
                     });
+                    console.log(selected_items, 'selected_items')
                     localStorage.setItem(storageName, JSON.stringify(selected_items))
                 }
 
                 init();
 
-                $(selectId).on('change.select2', function (e) {
+                $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
             }
