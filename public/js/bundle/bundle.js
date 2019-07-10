@@ -2833,7 +2833,7 @@ $(document).ready(function () {
 
             $.ajax({
                 type: "post",
-                url: "/get-variation-menu-raw",
+                url: "/products/get-variation-menu-raw",
                 cache: false,
                 datatype: "json",
                 data: {
