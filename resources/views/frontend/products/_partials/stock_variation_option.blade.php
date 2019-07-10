@@ -94,33 +94,41 @@
 </div>
 <div class="col-md-3 pr-0 d-flex justify-content-end">
     @if($selected->price_per =='item' && ! $selected->stock->type)
-        <div class="product__single-item-info-price lh-1">
-                    <span class="font-40">
-                        @if($selected->price_type == 'static')
-                            {{ convert_price($selected->price,$currency, false) }}
-                        @else
-                            @if($selected->discount_type == 'range')
-                                @php
-                                    $qty = (isset($qty))?:1;
-                                    $discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
-                                @endphp
-                                @if($discount)
-                                    {{ convert_price($discount->price*$qty,$currency, false) }}
-                                @else
-                                    not found
-                                @endif
-                            @elseif($selected->discount_type == 'fixed')
-                                @php
-                                    $discount = $selected->discounts()->first();
-                                @endphp
-                                @if($discount)
-                                    {{ convert_price($discount->price,$currency, false) }}
-                                @else
-                                    not found
-                                @endif
-                            @endif
-                        @endif
-                    </span>
-        </div>
+        @if($selected->price_type == 'static')
+            <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">
+                <span class="font-40">
+                        {{ convert_price($selected->price,$currency, false) }}
+                </span>
+            </div>
+        @else
+            @if($selected->discount_type == 'range')
+                @php
+                    $qty = (isset($qty))?:1;
+                    $discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
+                @endphp
+                @if($discount)
+                    <div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price*$qty }}">
+                        <span class="font-40">
+                            {{ convert_price($discount->price*$qty,$currency, false) }}
+                        </span>
+                    </div>
+                @else
+                    not found
+                @endif
+            @elseif($selected->discount_type == 'fixed')
+                @php
+                    $discount = $selected->discounts()->first();
+                @endphp
+                @if($discount)
+                    <div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price }}">
+                        <span class="font-40">
+                           {{ convert_price($discount->price,$currency, false) }}
+                        </span>
+                    </div>
+                @else
+                    not found
+                @endif
+            @endif
+        @endif
     @endif
 </div>
