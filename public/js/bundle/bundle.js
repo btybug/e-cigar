@@ -2884,9 +2884,10 @@ $(document).ready(function () {
         });
 
         $('body').on('change', 'select.product-qty_per_price', function (ev) {
-            var row = $(this).closest('.product__single-item-info-bottom');
+            var variation_id = $(this).closest('.product__single-item-info').data('id');
+            var qty = $(this).val();
 
-            fetch("/products/add-new-row", {
+            fetch("/products/get-discount-price", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -2896,15 +2897,15 @@ $(document).ready(function () {
                 },
                 credentials: "same-origin",
                 body: JSON.stringify({
-                    a: 15
+                    variation_id: variation_id,
+                    qty: qty
                 })
-            }).then(function (response) {
-                return response.json();
+            }).then(function (res) {
+                return res.json();
             }).then(function (data) {
-                // row.html(data.html);
-
+                $element.closest('.menu-item-selected').find('.price-placee').html("" + getCurrencySymbol() + data.price);
             }).catch(function (error) {
-                console.log(error);
+                return console.error(error);
             });
         });
         //data object for add-to-cart and extra
