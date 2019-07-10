@@ -195,7 +195,7 @@ $(document).ready(function () {
         $('body').on('change', 'select.select-variation-option.single-product-select', function(ev) {
             ev.preventDefault();
             const group_id = $(this).data('id');
-            const id = $(this).val();
+            const select_element_id = $(this).val();
             const vpid = $('#vpid').val();
 
             $.ajax({
@@ -206,7 +206,7 @@ $(document).ready(function () {
                 data: {
                     group_id:group_id,
                     vpid:vpid,
-                    id:id
+                    select_element_id:select_element_id
                 },
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
