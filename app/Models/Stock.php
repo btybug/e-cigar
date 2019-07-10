@@ -22,7 +22,7 @@ class Stock extends Translatable
     public $translationModel = StockTranslation::class;
 
     public $translatedAttributes = ['name', 'short_description', 'long_description', 'what_is_content'];
-    /**
+    /**specifications
      * @var array
      */
     protected $guarded = ['id'];
