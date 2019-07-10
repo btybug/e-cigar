@@ -2835,7 +2835,12 @@ $(document).ready(function () {
                 qty > 1 && input_qty.val(qty * 1 - 1);
             }
 
-            var variation_id = $(this).closest('.product__single-item-info-bottom').find('.select-variation-option').val();
+            var variation_id = 0;
+            if ($(this).closest('.product__single-item-info-bottom').find('.select-variation-option').length > 0) {
+                variation_id = $(this).closest('.product__single-item-info-bottom').find('.select-variation-option').val();
+            } else if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input').length > 0) {
+                variation_id = $(this).closest('.product__single-item-info-bottom').find('.custom-control-input:checked').val();
+            }
             var price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
             fetch("/products/get-discount-price", {
                 method: "post",
@@ -2914,14 +2919,11 @@ $(document).ready(function () {
                 return response.json();
             }).then(function (data) {
                 // row.html(data.html);
-                row.find('.product__single-item-info-bottom').last().after(data.html);
+                var single_item_info_bottom = row.find('.product__single-item-info-bottom');
+                row.find('.product__single-item-add-new').before(data.html);
 
                 console.log(row.find('.select-2'));
-                setTimeout(function () {
-                    row.find('.select-2').each(function () {
-                        $(this).select2({ minimumResultsForSearch: -1 });
-                    });
-                }, 2000);
+                row.find('.product__single-item-info-bottom').last().find('.select-2').select2({ minimumResultsForSearch: -1 });
 
                 // const new_rows_list = row.find('.product__single-item-info-bottom');
                 // console.log($(new_rows_list[new_rows_list.length - 1]).find('select'));
