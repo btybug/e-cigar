@@ -192,6 +192,40 @@ $(document).ready(function () {
     });
 
     $("#singleProductPageCnt").fadeIn(function () {
+        $('body').on('click', '.inp-up, .inp-down',function(ev) {
+            const input_qty = $(this).closest('.quantity').find('.input-qty');
+            const qty = input_qty.val();
+            if($(this).hasClass('inp-up')) {
+                input_qty.val(qty*1 + 1);
+            } else if($(this).hasClass('inp-down')) {
+                qty>1 && input_qty.val(qty*1 - 1);
+            }
+
+            const variation_id = $(this).closest('.product__single-item-info').data('id');
+            const price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
+            fetch("/products/get-discount-price", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json",
+                    Accept: "application/json",
+                    "X-Requested-With": "XMLHttpRequest",
+                    "X-CSRF-Token": $('input[name="_token"]').val()
+                },
+                credentials: "same-origin",
+                body: JSON.stringify({
+                    variation_id,
+                    qty: input_qty.val()*1
+                })
+            })
+                .then((res) => {
+                    return res.json();
+                })
+                .then((data) => {
+                    price_place.html(`${getCurrencySymbol()}${data.price}`);
+                })
+                .catch(error => console.error(error));
+        });
+
         $('body').on('change', 'select.select-variation-option.single-product-select', function(ev) {
             ev.preventDefault();
             const row = $(this).closest('.product__single-item-info-bottom');
@@ -257,9 +291,10 @@ $(document).ready(function () {
         });
 
 
-        $('body').on('change', 'select.product-qty_per_price', function(ev) {
+        $('body').on('change', 'select.select-qty', function(ev) {
+            const price_place = $(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price span');
             const variation_id = $(this).closest('.product__single-item-info').data('id');
-            const qty = $(this).val();
+            const discount_id = $(this).val();
 
             fetch("/products/get-discount-price", {
                 method: "post",
@@ -272,16 +307,19 @@ $(document).ready(function () {
                 credentials: "same-origin",
                 body: JSON.stringify({
                     variation_id,
-                    qty
+                    discount_id
                 })
             })
                 .then((res) => {
                     return res.json();
                 })
                 .then((data) => {
-                    $element.closest('.menu-item-selected').find('.price-placee').html(`${getCurrencySymbol()}${data.price}`);
+                    price_place.html(`${getCurrencySymbol()}${data.price}`);
                 })
                 .catch(error => console.error(error));
+        });
+        $('body').on('change', 'select.input-qty', function(ev) {
+
         });
 //data object for add-to-cart and extra
         const addDataKey = {};
