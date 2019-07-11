@@ -74,12 +74,13 @@ class GoogleController extends Controller
             $ga->auth->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
             $auth = $ga->auth->getAccessToken($request->get('code'));
             if ($auth['http_code'] == 200) {
-                dd($ga);
 
                 $ga->accessToken=$accessToken = $auth['access_token'];
                 $refreshToken = $auth['refresh_token'];
                 $tokenExpires = $auth['expires_in'];
                 $tokenCreated = time();
+                dd($ga->getProfiles());
+
                 $data=[
                     'access_token'=>$accessToken,
                     'refresh_token'=>$refreshToken,
