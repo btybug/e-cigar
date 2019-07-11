@@ -73,8 +73,9 @@ class GoogleController extends Controller
             $ga->auth->setClientSecret(env('GOOGLE_CLIENT_SECRET','client_secret'));
             $ga->auth->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
             $auth = $ga->auth->getAccessToken($request->get('code'));
-
             if ($auth['http_code'] == 200) {
+                dd($ga);
+
                 $ga->accessToken=$accessToken = $auth['access_token'];
                 $refreshToken = $auth['refresh_token'];
                 $tokenExpires = $auth['expires_in'];
