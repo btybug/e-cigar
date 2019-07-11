@@ -75,8 +75,6 @@
                                     <input type="text" name="single_product[tags][]" class="form-control" id="staticEmail">
                                 </div>
                             </div>
-
-
                         </div>
 
                     </div>
