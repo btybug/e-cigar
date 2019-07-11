@@ -37,6 +37,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/accounts', 'Admin\SettingsController@getAccounts')->name('admin_settings_accounts');
         Route::post('/accounts', 'Admin\SettingsController@postAccounts')->name('post_admin_settings_accounts');
 
+        Route::get('/main-pages', 'Admin\SettingsController@getMainPages')->name('admin_settings_main_pages');
+
         Route::get('/home-page', 'Admin\SettingsController@getHomePage')->name('admin_settings_home_page');
         Route::post('/home-page', 'Admin\SettingsController@postHomePage')->name('post_admin_settings_home_page');
 
