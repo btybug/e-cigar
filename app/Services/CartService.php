@@ -3,6 +3,7 @@
 use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\StockVariation;
+use App\Models\StockVariationDiscount;
 use App\Models\ZoneCountries;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 
@@ -255,7 +256,7 @@ class CartService
     {
         $error = false;
         $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->get();
-
+//        dd($vdata);
         if ($vdata && count($vdata) == count($extraVariations)) {
             foreach ($vdata as $k => $item) {
                 $data = [];
@@ -286,9 +287,31 @@ class CartService
                             foreach ($item['products'] as $p) {
                                 $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                 if ($option) {
+                                    $p['qty'] = ($p['qty'])??1;
+                                    if($option->price_type == 'discount'){
+                                        if($p['discount_id'] == null){
+                                            $discount = $option->discounts()->where('from','<=',$p['qty'])->where('to','>=',$p['qty'])->first();
+                                            if($discount) {
+                                                $this->price += $p['qty'] * $discount->price;
+                                                $itemPrice += $p['qty'] * $discount->price;
+                                            }else{
+                                                $error = "Option not found";
+                                            }
+                                        }else{
+                                            $discount = StockVariationDiscount::findOrFail($p['discount_id']);
+                                            if($discount) {
+                                                $this->price += $discount->price;
+                                                $itemPrice += $discount->price;
+                                            }else{
+                                                $error = "Option not found";
+                                            }
+                                        }
+                                    }else{
+                                        $this->price += $p['qty'] * $option->price;
+                                        $itemPrice += $p['qty'] * $option->price;
+                                    }
                                     $product_limit += $p['qty'];
-                                    $this->price += $p['qty'] * $option->price;
-                                    $itemPrice += $p['qty'] * $option->price;
+
                                     $data['options'][] = [
                                         'option' => $option,
                                         'qty' => $p['qty'],
@@ -317,7 +340,7 @@ class CartService
         } else {
             $error = 'Select available options';
         }
-
+        $error = false;
         return $error;
     }
 

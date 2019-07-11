@@ -103,7 +103,7 @@ class StockController extends Controller
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications','offer_products',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation',
             'extra_product', 'promotion_prices', 'promotion_type','categories', 'offers', 'general', 'related_products',
-            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options');
+            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads');
         $data['user_id'] = \Auth::id();
         $data['price'] = ($data['price']) ?? 0;
         $stock = Stock::updateOrCreate($request->id, $data);
