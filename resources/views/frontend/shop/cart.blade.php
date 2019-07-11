@@ -113,10 +113,10 @@
     </span>
                                                     </div>
                                                     <div class="row cart-details-address">
-                                                        <div class="col-md-3">
+                                                        <div class="col-md-4">
                                                             <h3 class="title">Shipping Address</h3>
                                                         </div>
-                                                        <div class="col-md-7">
+                                                        <div class="col-md-6">
                                                             <div class="address-info">
                                                                 <div class="select-wall product__select-wall">
                                                                     <select name="" id=""
