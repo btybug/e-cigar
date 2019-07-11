@@ -3,26 +3,26 @@
     <main class="main-content">
         <div class="shopping-cart_wrapper shopping__cart-wrapper">
             <div class="container main-max-width shopping__cart-mw shopping__cart-with-back">
-                    <div class="d-flex shopping-cart-head">
-                        <div class="shopping-cart-head-back-btn">
-                            <a href="#" >
+                <div class="d-flex shopping-cart-head">
+                    <div class="shopping-cart-head-back-btn">
+                        <a href="#">
                             <span class="icon">
                                 <svg width="10px" height="13px" viewBox="0 0 10 13">
-<path fill-rule="evenodd"  opacity="0.8" fill="rgb(53, 53, 53)"
+<path fill-rule="evenodd" opacity="0.8" fill="rgb(53, 53, 53)"
       d="M-0.000,7.000 L10.000,13.000 C10.000,13.000 10.000,11.738 10.000,10.000 C9.031,9.578 4.000,7.000 4.000,7.000 C4.000,7.000 9.156,3.553 10.000,3.000 C10.000,1.262 10.000,-0.000 10.000,-0.000 L-0.000,7.000 Z"/>
 </svg>
                             </span>
-                                <span class="text-main-clr font-22 name">Back</span>
-                            </a>
-                        </div>
-                        <ul class="nav nav-pills">
-                            <li class="nav-item col-md-3">
-                                <a class="item active d-flex align-items-center justify-content-between"
-                                   ref="javascript:void(0);">
-                                    <span class="font-sec-reg text-main-clr num">1</span>
-                                    <span
-                                        class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
-                                    <span class="icon">
+                            <span class="text-main-clr font-22 name">Back</span>
+                        </a>
+                    </div>
+                    <ul class="nav nav-pills">
+                        <li class="nav-item col-md-3">
+                            <a class="item active d-flex align-items-center justify-content-between"
+                               ref="javascript:void(0);">
+                                <span class="font-sec-reg text-main-clr num">1</span>
+                                <span
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
+                                <span class="icon">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -31,14 +31,14 @@
       d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
 </svg>
                                 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-md-3">
-                                <a class="item d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0);">
-                                    <span class="font-sec-reg text-main-clr num">2</span>
-                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">CHECKOUT</span>
-                                    <span class="icon">
+                            </a>
+                        </li>
+                        <li class="nav-item col-md-3">
+                            <a class="item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0);">
+                                <span class="font-sec-reg text-main-clr num">2</span>
+                                <span class="name text-uppercase font-main-bold font-16 text-truncate">CHECKOUT</span>
+                                <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -47,14 +47,14 @@
       d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
 </svg>
                                 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-md-3">
-                                <a class="item d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0);">
-                                    <span class="font-sec-reg text-main-clr num">3</span>
-                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
-                                    <span class="icon">
+                            </a>
+                        </li>
+                        <li class="nav-item col-md-3">
+                            <a class="item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0);">
+                                <span class="font-sec-reg text-main-clr num">3</span>
+                                <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
+                                <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -63,15 +63,15 @@
       d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
 </svg>
                                 </span>
-                                </a>
-                            </li>
-                            <li class="nav-item col-md-3">
-                                <a class="item d-flex align-items-center justify-content-between"
-                                   href="javascript:void(0);">
-                                    <span class="font-sec-reg text-main-clr num">4</span>
-                                    <span
-                                        class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
-                                    <span class="icon">
+                            </a>
+                        </li>
+                        <li class="nav-item col-md-3">
+                            <a class="item d-flex align-items-center justify-content-between"
+                               href="javascript:void(0);">
+                                <span class="font-sec-reg text-main-clr num">4</span>
+                                <span
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
+                                <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -80,14 +80,50 @@
       d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
 </svg>
                                 </span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div class="container main-max-width shopping__cart-mw">
                 <div class="cart-area">
-                    {{--                    shoping details tab--}}
+                    {{--                    --------------------- shopping cart no registr start------------------}}
+                    <div class="shopping__cart-no-reg">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="left-content">
+                                    <form action="">
+                                        <div class="main-wrap">
+                                            <h2 class="font-40 text-tert-clr title">SIGHN IN</h2>
+                                            <p class="font-26 text-main-clr sec-title">Already a customer</p>
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" placeholder="E-mail">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="password" class="form-control" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="d-flex bottom-wrap">
+                                            <a href="#" class="btn-log-reg">log in</a>
+                                            <a href="#" class="forgot-password">forget your password?</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="right-content">
+                                    <h2>REGISTER</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottom-logo">
+                            <div class="logo">
+                                <img src="/public/img/vapors-logo.png" alt="logo">
+                            </div>
+                        </div>
+                    </div>
+                    {{--                    --------------------- shopping cart no registr end------------------}}
+                    {{--            ------------------        shoping details tab start   ----------------   --}}
                     <div id="singleProductPageCnt" class="shopping-cart-content">
                         <div class="shopping-cart-inner">
                             <div class="d-flex flex-wrap">
@@ -174,7 +210,8 @@
                                                                     </span>
                                                                      <span class="method-right">
                                                                          <span class="method-item-title">Standrd Delivery</span>
-                                                                         <span class="font-main-light method-item-info">Shipping: <span class="text-red-clr">Free</span></span>
+                                                                         <span class="font-main-light method-item-info">Shipping: <span
+                                                                                 class="text-red-clr">Free</span></span>
                                                                          <span class="font-main-light method-item-info">Delivery Time: 2 days</span>
 
                                                                     </span>
@@ -195,8 +232,10 @@
                                                                 </span>
                                                                     </span>
                                                                      <span class="method-right">
-                                                                         <span class="method-item-title">DHL Delivery</span>
-                                                                         <span class="font-main-light method-item-info">Shipping: <span class="font-weight-bold">$5</span></span>
+                                                                         <span
+                                                                             class="method-item-title">DHL Delivery</span>
+                                                                         <span class="font-main-light method-item-info">Shipping: <span
+                                                                                 class="font-weight-bold">$5</span></span>
                                                                          <span class="font-main-light method-item-info">Delivery Time: 3 days</span>
 
                                                                     </span>
@@ -214,13 +253,15 @@
 
                                                                     <span class="method-left">
                                                                          <span class="photo">
-                                                                <img src="/public/img/temp/fedex-method-icon.jpg" alt="brand">
+                                                                <img src="/public/img/temp/fedex-method-icon.jpg"
+                                                                     alt="brand">
                                                                 </span>
                                                                     </span>
                                                                      <span class="method-right">
                                                                          <span class="method-item-title">Priority Delivery</span>
                                                                          <span class="font-main-light method-item-info">Shipping: $10</span>
-                                                                         <span class="font-main-light method-item-info">Delivery Time: <span class="text-tert-clr">1 day</span></span>
+                                                                         <span class="font-main-light method-item-info">Delivery Time: <span
+                                                                                 class="text-tert-clr">1 day</span></span>
 
                                                                     </span>
                                                                 </span>
@@ -352,9 +393,9 @@
                             </div>
                         </div>
                     </div>
+                    {{--            ------------------        shoping details tab end   ----------------   --}}
 
-
-                    {{--                    shoping cart tab--}}
+                    {{--             --------------       shoping cart tab start  -------------------- --}}
                     <div id="singleProductPageCnt" class="shopping-cart-content">
                         <div class="shopping-cart-inner">
                             <div class="d-flex flex-wrap">
@@ -668,7 +709,7 @@
                             </div>
                         </div>
                     </div>
-
+                    {{--             --------------       shoping cart tab end  -------------------- --}}
 
                     {{--                @include('frontend.shop._partials.cart_table')--}}
                 </div>
