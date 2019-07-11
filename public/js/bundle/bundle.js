@@ -2840,7 +2840,7 @@ $(document).ready(function () {
                     total_price += $(this).data('single-price') * 1;
                 }
             });
-            return total_price;
+            return total_price * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val() * 1;
         };
 
         var setTotalPrice = function setTotalPrice(totalPrice) {
@@ -2849,6 +2849,17 @@ $(document).ready(function () {
         };
 
         setTotalPrice(countTotalPrice());
+
+        $('body').on('click', ".continue-shp-wrapp_qty-minus.qty-count, .continue-shp-wrapp_qty-plus.qty-count", function () {
+            var totalQtyInput = $(this).closest('.continue-shp-wrapp_qty').find('input.product-qty-select');
+
+            if ($(this).hasClass('continue-shp-wrapp_qty-plus')) {
+                totalQtyInput.val(totalQtyInput.val() * 1 + 1);
+            } else if ($(this).hasClass('continue-shp-wrapp_qty-minus') && totalQtyInput.val() * 1 > 1) {
+                totalQtyInput.val(totalQtyInput.val() * 1 - 1);
+            }
+            setTotalPrice(countTotalPrice());
+        });
 
         //qty up and down,  and input-qty
         $('body').on('click', '.inp-up, .inp-down', function (ev) {
