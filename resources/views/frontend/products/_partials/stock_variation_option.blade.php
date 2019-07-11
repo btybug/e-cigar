@@ -2,11 +2,13 @@
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
-            <span class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+                <span
+                    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
                 <i class="fas fa-times"></i>
             </span>
             @endif
-            <select name="variations[{{ $vSettings->variation_id }}][]" id="single_v_select_{{ $vSettings->id.uniqid() }}"
+            <select name="variations[{{ $vSettings->variation_id }}][]"
+                    id="single_v_select_{{ $vSettings->id.uniqid() }}"
                     data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                     style="width: 100%"
                     class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
@@ -46,22 +48,50 @@
         <div class="d-flex flex-wrap product__single-item-info-size">
             <div class="product_radio-single">
                 @php
-                $x = uniqid();
+                    $x = uniqid();
                 @endphp
-                    <div
-                        class="custom-radio custom-control-inline">
-                        <input type="checkbox"
-                               data-out="{{ out_of_stock($selected) }}"
-                               class="custom-control-input"
-                               id="single_v_select_{{ $selected->id.$x}}" name="variations[{{ $vSettings->variation_id }}][]"
-                               value="{{ $selected->id }}">
-                        <label class="custom-label checkbox-select"
-                               for="single_v_select_{{ $selected->id.$x }}">
-                            <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
-                        </label>
-                    </div>
+                <div
+                    class="custom-radio custom-control-inline">
+                    <input type="checkbox"
+                           data-out="{{ out_of_stock($selected) }}"
+                           class="custom-control-input"
+                           id="single_v_select_{{ $selected->id.$x}}"
+                           name="variations[{{ $vSettings->variation_id }}][]"
+                           value="{{ $selected->id }}">
+                    <label class="custom-label checkbox-select"
+                           for="single_v_select_{{ $selected->id.$x }}">
+                        <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
+                    </label>
+                </div>
             </div>
         </div>
+    @elseif($vSettings->display_as == 'popup' && $vSettings->type == 'package_product')
+        <div class="select-wall product__select-wall">
+            <span
+                class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+            <i class="fas fa-times"></i>
+            </span>
+            <span class="font-sec-light font-26">{{ $selected->name }}</span>
+        </div>
+        {{--<div class="d-flex flex-wrap product__single-item-info-size">--}}
+        {{--<div class="product_radio-single">--}}
+        {{--@php--}}
+        {{--$x = uniqid();--}}
+        {{--@endphp--}}
+        {{--<div--}}
+        {{--class="custom-radio custom-control-inline">--}}
+        {{--<input type="checkbox"--}}
+        {{--data-out="{{ out_of_stock($selected) }}"--}}
+        {{--class="custom-control-input"--}}
+        {{--id="single_v_select_{{ $selected->id.$x}}" name="variations[{{ $vSettings->variation_id }}][]"--}}
+        {{--value="{{ $selected->id }}">--}}
+        {{--<label class="custom-label checkbox-select"--}}
+        {{--for="single_v_select_{{ $selected->id.$x }}">--}}
+        {{--<span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>--}}
+        {{--</label>--}}
+        {{--</div>--}}
+        {{--</div>--}}
+        {{--</div>--}}
     @endif
 
 </div>
