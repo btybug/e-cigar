@@ -250,7 +250,7 @@ $(document).ready(function () {
                 variation_id = $(this).closest('.product__single-item-info-bottom').find('.select-variation-option').val();
             } else if($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="radio"]').length > 0) {
                 variation_id = $(this).closest('.product__single-item-info-bottom').find('.custom-control-input:checked').val();
-            } else if($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="checkbox"]').length > 0) {
+            } else if($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="checkbox"]').length > 0 || $(this).closest('.product__single-item-info').find('.popup-select').length > 0) {
 
                 // console.log($(this).closest('.product__single-item-info-bottom').find('.product__single-item-info-price').data('single-price')*1, ($(this).closest('.quantity').find('input.product-qty').val()*1-1), $(this).closest('.quantity').find('input.product-qty').val()*1);
                 // console.log('val',$(this).closest('.product__single-item-info-bottom').find('.input.product-qty').val()*1);
@@ -1016,16 +1016,22 @@ $(document).ready(function () {
 
                         let dg_popup;
 
-                        $("body").on('click', `.popup-select`, function () {
+                        $("body").on('click', `.popup-select`, function() {
                             const $this = $(this);
+                            const selected_ids = [];
                             console.log($this, '$this');
                             dg_popup = $this.data('group');
+                            $this.closest('.product__single-item-info').find('.product__single-item-info-bottom').length > 0 && $this.closest('.product__single-item-info').find('.product__single-item-info-bottom').each(function() {
+                                selected_ids.push($(this).data('id'));
+                            });
+                            console.log('selected_ids', selected_ids)
                             $.ajax({
                                 type: "post",
                                 url: "/products/select-items",
                                 cache: false,
                                 data: {
-                                    group: dg_popup
+                                    group: dg_popup,
+                                    ids: selected_ids
                                 },
                                 headers: {
                                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
@@ -1113,6 +1119,9 @@ $(document).ready(function () {
                                     const selected_product_wrapper = $(`[data-group="${dg_popup}"]`).closest('.product-single-info_row').find('.product-single-info_row-items');
 
                                     $(`.product__single-item-info[data-group-id="${dg_popup}"]`).append(json.html);
+                                    $(`.product__single-item-info[data-group-id="${dg_popup}"]`).find('.select-2').each(function() {
+                                        $(this).select2();
+                                    });
                                     selected_product_wrapper.empty();
                                     selected_product_wrapper.append(json.html);
 
@@ -1123,7 +1132,7 @@ $(document).ready(function () {
                                     });
 
                                     // setTotalPrice(modal);
-
+                                    setTotalPrice(countTotalPrice());
                                     $('#popUpModal').modal('hide');
 
                                     $(`[data-group="${dg_popup}"]`).closest('.product-single-info_row').on('click', '.delete-menu-item', function () {
