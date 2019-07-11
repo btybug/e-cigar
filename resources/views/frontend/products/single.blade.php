@@ -251,58 +251,6 @@
                                                     </div>
 
                                                     @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                                                    <div class="product__single-item-info mb-3">
-                                                        <div
-                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
-                                                            <div class="col-md-9 pl-0">
-                                                                <a href="#" class="font-sec-light font-22 text-uppercase  product_select-link-btn">
-                                                                    Select Products
-                                                                </a>
-                                                            </div>
-                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
-                                                                    <span class="font-40 product__single-item_price">
-                                                                        £10,00
-                                                                    </span>
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
-                                                            <div class="col-md-6 pl-0">
-                                                                <div class="select-wall product__select-wall">
-<span
-    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
-<i class="fas fa-times"></i>
-</span>
-                                                                    <span class="font-sec-light font-26">Diner Lady Cubano 32 pro Juice</span>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-md-3 d-flex justify-content-center">
-                                                                <div
-                                                                    class="d-flex flex-column w-100 align-items-center">
-                                                                    {{--                                                                    <span class="text-tert-clr">*Quality Discount</span>--}}
-                                                                    <div class="product__single-item-inp-num">
-                                                                        <div class="quantity">
-                                                                            <input type="number" min="1" max="9"
-                                                                                   step="1"
-                                                                                   value="1">
-                                                                            <div class="inp-icons">
-                                                                                <span class="inp-up"></span>
-                                                                                <span class="inp-down"></span>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-
-                                                            </div>
-                                                            <div class="col-md-3 pr-0 d-flex justify-content-end">
-                                                                <div class="product__single-item-info-price lh-1">
-                                                                    <span class="font-40">£10,00</span>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
                                                 </div>
                                                 <div
                                                     class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">
