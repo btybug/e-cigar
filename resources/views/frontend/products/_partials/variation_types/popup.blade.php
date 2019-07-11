@@ -22,10 +22,5 @@
             @endif
         </div>
     </div>
-
-    <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
-        @if(isset($selected) && $selected)
-            @include("frontend.products._partials.stock_variation_option")
-        @endif
-    </div>
+    
 </div>
