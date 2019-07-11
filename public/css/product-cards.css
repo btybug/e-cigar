@@ -4318,6 +4318,31 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     flex: 1;
     padding-right: 117px
 }
+
+
+.shopping__cart-no-reg{
+
+}
+
+.shopping__cart-no-reg .title{
+    margin-bottom: 62px;
+    line-height: 1;
+    letter-spacing: -2px;
+}
+.shopping__cart-no-reg .sec-title{
+    margin-bottom: 20px;
+}
+.shopping__cart-no-reg .form-control{
+    padding: 25px 24px;
+    font-size: 24px;
+    font-family: 'Oswald-light', sans-serif;
+    color: #353535;
+}
+
+
+
+
+
 /*------------ Shopping cart pag new END-------------*/
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head {
