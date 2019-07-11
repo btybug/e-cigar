@@ -125,7 +125,7 @@
                                             <label class="col-md-4 control-label col-form-label text-right"
                                                    for="textinput">GOOGLE REDIRECT URI</label>
                                             <div class="col-md-4">
-                                                {!! Form::text('GOOGLE_REDIRECT_URI',env('GOOGLE_REDIRECT_URI'),['class'=>'form-control input-md']) !!}
+                                                {!! Form::text('GOOGLE_REDIRECT_URI','/admin/gmail/oauth/callback',['class'=>'form-control input-md']) !!}
                                             </div>
                                         </div>
                                         <!-- Button -->

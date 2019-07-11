@@ -25,7 +25,7 @@ Route::post('/dashboard-delete', 'Admin\AdminController@deleteDashboardWidget')-
 Route::get('/menu-manager', function () {
     return view('admin.menu_manager');
 });
-Route::get('/gmail-call-back', 'GmailController@callBack');
+Route::get('/gmail-call-back', 'GmailController@callBack')->name('gmail_call_back');
 
 Route::post('/search', 'Admin\SearchController@filter')->name('admin_search');
 
