@@ -47,7 +47,10 @@
 
 
                 </div>
-
+                <div class="col-sm-3">
+                    <button class="plus-icon remove-new-banner-input btn btn-danger">
+                        <i class="fa fa-minus"></i></button>
+                </div>
             </div>
                     @endforeach
                     @else
