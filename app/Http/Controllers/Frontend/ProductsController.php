@@ -218,7 +218,7 @@ class ProductsController extends Controller
 
     public function postSelectItems(Request $request)
     {
-        $items = StockVariation::where('variation_id', $request->group)->get();
+        $items = StockVariation::where('variation_id', $request->group)->whereNotIn('id',$request->get('ids',[]))->get();
         if (count($items)) {
             $stickers = [];
             $vSettings = $items->first();
