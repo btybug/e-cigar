@@ -44,10 +44,11 @@
                                         <input type="text" name="my_account[tags][]" class="form-control" id="staticEmail" value="{!! $data['tags'][$key] !!}">
                                     </div>
                                 </div>
-
-
                             </div>
-
+                            <div class="col-sm-3">
+                                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
                         </div>
                     @endforeach
                 @else
