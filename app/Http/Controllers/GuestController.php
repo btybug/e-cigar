@@ -151,7 +151,7 @@ class GuestController extends Controller
         \Config::set('mail.from.address','bil.gates@microsoft.com');
         \Config::set('mail.from.name','Bil Gates');
 //        \Mail::to(Gmail::user())->send($email);
-        \Mail::to('dr_abokamal@hotmail.com')->send($email);
+        \Mail::to('hakobyan.sahak88@gmail.com')->send($email);
         $result['message']=Gmail::getEncodedBody($result['message']);
         $contact_us=\App\Models\ContactUs::create($result);
         $contact_us->recipients()->create(['name'=>env('APP_NAME'),'email'=>Gmail::user()]);
