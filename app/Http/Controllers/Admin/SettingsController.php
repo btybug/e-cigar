@@ -563,8 +563,13 @@ class SettingsController extends Controller
     public function getHomePage(Settings $settings)
     {
         $model = $settings->getEditableData('banners');
-
         return $this->view('home_page',compact(['model']));
+    }
+
+    public function getMainPages(Settings $settings)
+    {
+        $model = $settings->getEditableData('main_pages');
+        return $this->view('main_pages',compact(['model']));
     }
 
     public function postHomePage(Request $request,Settings $settings)
