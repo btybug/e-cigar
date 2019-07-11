@@ -566,10 +566,11 @@ class SettingsController extends Controller
         return $this->view('home_page',compact(['model']));
     }
 
-    public function getMainPages(Settings $settings)
+    public function getMainPages(Settings $settings,Request $request)
     {
-        $model = $settings->getEditableData('main_pages');
-        return $this->view('main_pages',compact(['model']));
+        $p=$request->get('p','hom_page');
+        $model = $settings->getEditableData($p);
+        return $this->view('main_pages',compact(['model','p']));
     }
 
     public function postHomePage(Request $request,Settings $settings)
@@ -577,6 +578,13 @@ class SettingsController extends Controller
         $banners = array_filter($request->get('banners',[]));
         $settings->updateOrCreateSettings('banners', ['data' =>$banners]);
 
+        return redirect()->back();
+    }
+    public function postMainPages(Request $request,Settings $settings)
+    {
+        $p=$request->get('p','hom_page');
+        $banners = array_filter($request->get($p,[]));
+        $settings->updateOrCreateSettings($p, ['data' =>$banners]);
         return redirect()->back();
     }
 
