@@ -1,6 +1,7 @@
 <div class="tab-content">
     {!! Form::model($model,['class'=>'form-horizontal']) !!}
-    {!! Form::hidden('type','tc') !!}
+    {!! Form::hidden('type',$p) !!}
+    {!! Form::hidden('p',$p) !!}
     {!! Form::hidden('id',null) !!}
     <div class="text-right mb-20 mt20">
         <button class="btn btn-info">Save</button>

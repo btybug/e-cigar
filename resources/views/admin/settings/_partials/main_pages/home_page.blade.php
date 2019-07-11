@@ -1,5 +1,6 @@
 <div class="tab-content">
     {!! Form::model($model) !!}
+    {!! Form::hidden('p',$p) !!}
     <div class="tab-pane fade active in show" id="admin_settings_general">
         <div class="row">
             <div class="col-md-12">

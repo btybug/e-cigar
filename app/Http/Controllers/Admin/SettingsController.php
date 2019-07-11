@@ -569,13 +569,11 @@ class SettingsController extends Controller
     public function getMainPages(Settings $settings,Request $request)
     {
         $p=$request->get('p','home_page');
-        if($p=='home_page'){
+        if($p=='home_page' || $p=="single_product"){
             $model = $settings->getEditableData($p);
-
         }else{
-            $model = Common::where('type','about_us')->first();
+            $model = Common::where('type',$p)->first();
         }
-
         return $this->view('main_pages',compact(['model','p']));
     }
 
@@ -589,8 +587,13 @@ class SettingsController extends Controller
     public function postMainPages(Request $request,Settings $settings)
     {
         $p=$request->get('p','hom_page');
-        $banners = array_filter($request->get($p,[]));
-        $settings->updateOrCreateSettings($p, ['data' =>$banners]);
+        if($p=="home_page" || $p=="single_product"){
+            $banners = array_filter($request->get($p,[]));
+            $settings->updateOrCreateSettings($p, ['data' =>$banners]);
+        }else{
+            $data = $request->except('_token','translatable');
+            Common::updateOrCreate($request->id, $data);
+        }
         return redirect()->back();
     }
 
