@@ -26,7 +26,8 @@
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a>
                             </li>
                             @if(! isset($offer))
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Special Offers</a></li>
+                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Special
+                                        Offers</a></li>
                             @endif
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
@@ -221,61 +222,66 @@
                                             </div>
                                         </div>
                                         @if(isset($offer))
-                                        <div class="col-md-12">
-                                            <div class="basic-center basic-wall d-flex flex-wrap">
-                                                <div class="col-md-5">
-                                                    <div class="form-group">
-                                                        <label class="col-sm-12 control-label pl-sm-0">Offer Type</label>
-                                                        {!! Form::select('offer_type',["0"=>"General","1"=>"Special"],null,['id' => 'offer_type',
-                                                        'class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-7">
-                                                    <div class="col-md-12 offer-cat @if(! $model || ! $model->offer_type) show @else hide @endif">
+                                            <div class="col-md-12">
+                                                <div class="basic-center basic-wall d-flex flex-wrap">
+                                                    <div class="col-md-5">
                                                         <div class="form-group">
-                                                            <label class="col-sm-12 control-label pl-sm-0">Offers</label>
-                                                            {!! Form::hidden('offers',(isset($checkedCategories))
-                                                            ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
-                                                            <div id="treeview_json_offer"></div>
+                                                            <label class="col-sm-12 control-label pl-sm-0">Offer
+                                                                Type</label>
+                                                            {!! Form::select('offer_type',["0"=>"General","1"=>"Special"],null,['id' => 'offer_type',
+                                                            'class' => 'form-control']) !!}
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-12 offer-special @if($model && $model->offer_type) show @else hide @endif">
+                                                    <div class="col-md-7">
                                                         <div
-                                                            class="panel-heading d-flex justify-content-between align-items-center">
-                                                            <h4>
-                                                                Products
-                                                            </h4>
-                                                            <button type="button" class="btn btn-info select-offer-products">
-                                                                Select
-                                                            </button>
+                                                            class="col-md-12 offer-cat @if(! $model || ! $model->offer_type) show @else hide @endif">
+                                                            <div class="form-group">
+                                                                <label
+                                                                    class="col-sm-12 control-label pl-sm-0">Offers</label>
+                                                                {!! Form::hidden('offers',(isset($checkedCategories))
+                                                                ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
+                                                                <div id="treeview_json_offer"></div>
+                                                            </div>
                                                         </div>
-                                                        <div class="panel-body product-body">
-                                                            <ul class="get-all-offer-products-tab stickers--all--lists">
-                                                                @if(isset($model) && count($model->offer_products))
-                                                                    @foreach($model->offer_products as $special_offer)
-                                                                        <li style="display: flex"
-                                                                            data-id="{{ $special_offer->id }}"
-                                                                            class="option-elm-attributes">
-                                                                            <a href="#"
-                                                                               class="stick--link">{!! $special_offer->name !!}</a>
-                                                                            <div class="buttons">
-                                                                                <a href="javascript:void(0)"
-                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
-                                                                                    <i class="fa fa-trash"></i></a>
-                                                                            </div>
-                                                                            <input type="hidden"
-                                                                                   name="offer_products[]"
-                                                                                   value="{{ $special_offer->id }}">
-                                                                        </li>
-                                                                    @endforeach
-                                                                @endif
-                                                            </ul>
+                                                        <div
+                                                            class="col-md-12 offer-special @if($model && $model->offer_type) show @else hide @endif">
+                                                            <div
+                                                                class="panel-heading d-flex justify-content-between align-items-center">
+                                                                <h4>
+                                                                    Products
+                                                                </h4>
+                                                                <button type="button"
+                                                                        class="btn btn-info select-offer-products">
+                                                                    Select
+                                                                </button>
+                                                            </div>
+                                                            <div class="panel-body product-body">
+                                                                <ul class="get-all-offer-products-tab stickers--all--lists">
+                                                                    @if(isset($model) && count($model->offer_products))
+                                                                        @foreach($model->offer_products as $special_offer)
+                                                                            <li style="display: flex"
+                                                                                data-id="{{ $special_offer->id }}"
+                                                                                class="option-elm-attributes">
+                                                                                <a href="#"
+                                                                                   class="stick--link">{!! $special_offer->name !!}</a>
+                                                                                <div class="buttons">
+                                                                                    <a href="javascript:void(0)"
+                                                                                       class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                        <i class="fa fa-trash"></i></a>
+                                                                                </div>
+                                                                                <input type="hidden"
+                                                                                       name="offer_products[]"
+                                                                                       value="{{ $special_offer->id }}">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </ul>
+                                                            </div>
                                                         </div>
-                                                    </div>
 
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
                                         @endif
                                     </div>
                                 </div>
@@ -305,6 +311,8 @@
                                                                 Products</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#wiitb">What's in the box</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#ads">Ads</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -499,6 +507,62 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                    <div id="ads" class="tab-pane fade ">
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading clearfix">
+                                                                <p class="d-inline-block">Right column Ads</p>
+                                                                <div class="col-sm-2 pull-right">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary add-new-social-input">
+                                                                        <i
+                                                                            class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="form-group d-flex flex-wrap align-items-center social-media-group">
+                                                                    <div
+                                                                        class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                                        <div class="col-sm-7 p-0">
+                                                                            <div class="input-group">
+                                                                                <div class="input-group-prepend">
+                                                                                    {!! media_button('ads[images][]') !!}
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="form-group row mt-3">
+                                                                                <label for="staticEmail"
+                                                                                       class="col-sm-2 col-form-label">Url</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text"
+                                                                                           name="ads[urls][]"
+                                                                                           class="form-control"
+                                                                                           id="staticEmail">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label for="staticEmail"
+                                                                                       class="col-sm-2 col-form-label">Tag</label>
+                                                                                <div class="col-sm-10">
+                                                                                    <input type="text"
+                                                                                           name="ads[tags][]"
+                                                                                           class="form-control"
+                                                                                           id="staticEmail">
+                                                                                </div>
+                                                                            </div>
+
+
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                                                                <i class="fa fa-minus"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                                     <div id="long_desc" class="tab-pane fade in active show">
                                                         <div class="basic-center basic-wall">
                                                             <div class="row">
@@ -583,21 +647,22 @@
                                 </div>
                             </div>
                             @if(! isset($offer))
-                            <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
-                                <div class="container-fluid p-25">
-                                    <div class="text-right m-4">
-                                        <a class="btn btn-info text-white select-special-offers" data-required="0"><i
-                                                class="fa fa-plus"></i> Add Special Offers</a>
-                                    </div>
-                                    <div class="col-md-12 d-flex flex-wrap get-special-offers-tab">
-                                        @if($model && count($model->special_offers))
-                                            @foreach($model->special_offers as $offer)
-                                                @include("admin.stock._partials.special_offer_item")
-                                            @endforeach
-                                        @endif
+                                <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
+                                    <div class="container-fluid p-25">
+                                        <div class="text-right m-4">
+                                            <a class="btn btn-info text-white select-special-offers"
+                                               data-required="0"><i
+                                                    class="fa fa-plus"></i> Add Special Offers</a>
+                                        </div>
+                                        <div class="col-md-12 d-flex flex-wrap get-special-offers-tab">
+                                            @if($model && count($model->special_offers))
+                                                @foreach($model->special_offers as $offer)
+                                                    @include("admin.stock._partials.special_offer_item")
+                                                @endforeach
+                                            @endif
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
                             @endif
                             <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
                                 <div class="container-fluid p-25">
@@ -1060,13 +1125,43 @@
                     </button>
                 </div>
             </div>
-        </div>
-        <div class="col-md-12 justify-content-center">
-            <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
-                    class="fa fa-plus"></i></a>
+            <div class="col-md-12 justify-content-center">
+                <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
+                        class="fa fa-plus"></i></a>
+            </div></div>
+
+    </script>
+    <script type="template" id="add-more-banners">
+        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+            <div class="col-sm-7 p-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        {!! media_button('ads[images][]',$model) !!}
+
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="ads[urls][]" class="form-control" id="staticEmail" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="ads[tags][]" class="form-control" id="staticEmail" value="">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-sm-3">
+                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button>
+            </div>
         </div>
     </script>
-
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -1137,7 +1232,15 @@
 
             var mainS;
             var groupS;
-
+            $("body").on("click", ".add-new-social-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-banners").html();
+                html = html.replace(/{count}/g, uid);
+                $(".social-media-group").append(html);
+            });
+            $("body").on("click", ".remove-new-banner-input", function () {
+                $(this).closest(".banner-item").remove();
+            });
             $("body").on("click", '.add-discount', function (e) {
                 var main = $(this).data('main');
                 var group = $(this).data('group');
@@ -1147,7 +1250,7 @@
                 var discount_type = hiddenInputs.find('[data-type-discount="discount_type"]').val();
                 var discount = hiddenInputs.find('[data-type-discount="discount"]');
                 var discounts_value = discount.toArray().map(discount_gr => $(discount_gr).val()
-            )
+                    )
                 ;
                 var discount_length;
                 $("#discountModal").find(`.select-discount-type`).val(discount_type).trigger('change');
@@ -1164,9 +1267,9 @@
                     }
                 }
                 $("#discountModal").find(`.discount-item input`).toArray().map((discount_gr, index) => {
-                    $(discount_gr).val(discounts_value[index])
-                }
-            )
+                        $(discount_gr).val(discounts_value[index])
+                    }
+                )
                 ;
 
                 $("#discountModal").find('.apply-discount').attr('data-main', main).attr('data-group', group);
@@ -1284,8 +1387,8 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-related-offer-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    })
+                            $("#productsModal .modal-body .all-list").append(html);
+                        })
                         ;
                         $("#productsModal").modal();
                     }
@@ -1323,8 +1426,8 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-special-offer-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    })
+                            $("#productsModal .modal-body .all-list").append(html);
+                        })
                         ;
                         $("#productsModal").modal();
                     }
@@ -1820,8 +1923,8 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-related-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    })
+                            $("#productsModal .modal-body .all-list").append(html);
+                        })
                         ;
                         $("#productsModal").modal();
                     }
@@ -1843,8 +1946,8 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-promotion" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    })
+                            $("#productsModal .modal-body .all-list").append(html);
+                        })
                         ;
                         $("#productsModal").modal();
                     }
@@ -1907,8 +2010,8 @@
                                                 href="#">${item.name}
                                                 </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
-                        $("#stickerModal .modal-body .all-list").append(html);
-                    })
+                            $("#stickerModal .modal-body .all-list").append(html);
+                        })
                         ;
                         $("#stickerModal").modal();
                     }
