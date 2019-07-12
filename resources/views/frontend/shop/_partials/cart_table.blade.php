@@ -310,7 +310,7 @@
                             {{--                            </div>--}}
                             <div class="order-summary-btn-wall text-center mb-2">
                                 <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
-                                   href="#">
+                                   href="{!! route('shop_check_out') !!}">
                                     SHOPPING DETAILS
                                 </a>
                             </div>
