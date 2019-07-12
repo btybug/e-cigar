@@ -315,6 +315,7 @@ class CartService
                                     $data['options'][] = [
                                         'option' => $option,
                                         'qty' => $p['qty'],
+                                        'discount_id' => $p['discount_id'],
                                     ];
                                 } else {
                                     $error = "Option not found";
