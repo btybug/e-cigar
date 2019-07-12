@@ -61,7 +61,7 @@ class ProductsController extends Controller
     {
 //        Cart::clear();
 //        $x = Cart::getContent();
-//        dd($x);
+
         enableFilter();
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         if (!$vape) abort(404);
