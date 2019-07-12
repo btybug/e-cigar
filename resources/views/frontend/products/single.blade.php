@@ -888,7 +888,7 @@
                             <div class="mt-auto special__popup-content-left-bottom">
                                 <div class="d-flex inner">
                                     <a href="#" class="font-sec-light font-26 text-uppercase bottom-btn-cart no-btn">
-                                        nO THANK YOU
+                                        NO THANK YOU
                                     </a>
                                     <a href="#"
                                        class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
