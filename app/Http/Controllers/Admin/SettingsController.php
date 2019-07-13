@@ -148,7 +148,7 @@ class SettingsController extends Controller
 
     public function getAccounts()
     {
-        include __DIR__.'/../../../../test.php';die;
+//        include __DIR__.'/../../../../test.php';die;
         $froms = Emails::where('type', 'from')->get();
         $tos = Emails::where('type', 'to')->get();
         return $this->view('accounts', compact('froms', 'tos'));
