@@ -621,266 +621,155 @@
                         <div class="d-flex flex-column special__popup-content-left">
                             <div class="special__popup-content-scroll">
                                 <ul class="row special__popup-main-products-list">
-                                    {{--<li class="col-md-3">--}}
-                                        {{--<div class="special__popup-main-product-item active">--}}
-                                            {{--<div class="special__popup-main-product-item-photo">--}}
-                                                {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                            {{--</div>--}}
-                                            {{--<h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">--}}
-                                                {{--Teslagics Topo Pod System Vape Star ...--}}
-                                            {{--</h3>--}}
-                                            {{--<div--}}
-                                                {{--class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">--}}
-                                                {{--Choose Color--}}
-                                            {{--</div>--}}
-                                            {{--<div class="d-flex flex-wrap special__popup-main-product-item-radio">--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline color-radio">--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio1"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio1" style="background: #ee3a50">--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline color-radio">--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio2"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio2" style="background: #63b567">--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline color-radio" >--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio3"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio3" style="background: #5184e5">--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div--}}
-                                                {{--class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">--}}
-                                                {{--<span class="font-sec-light font-24 qty">QTY</span>--}}
-                                                {{--<div class="product__single-item-inp-num">--}}
-                                                    {{--<div class="quantity">--}}
-                                                        {{--<input type="number" min="1" max="9" step="1" value="1">--}}
-                                                        {{--<div class="inp-icons">--}}
-                                                            {{--<span class="inp-up"></span>--}}
-                                                            {{--<span class="inp-down"></span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="special__popup-main-product-item-price">--}}
-                                    {{--<span class="font-40 product__single-item_price">--}}
-                                                                        {{--£25,78--}}
-                                                                    {{--</span>--}}
-                                            {{--</div>--}}
-                                            {{--<a href="#"--}}
-                                               {{--class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn remove-btn">--}}
-                                                {{--Remove--}}
-                                            {{--</a>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3">--}}
-                                        {{--<div class="special__popup-main-product-item">--}}
-                                            {{--<div class="special__popup-main-product-item-photo">--}}
-                                                {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                            {{--</div>--}}
-                                            {{--<h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">--}}
-                                                {{--Teslagics Topo Pod System Vape Star ...--}}
-                                            {{--</h3>--}}
-                                            {{--<div--}}
-                                                {{--class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">--}}
-                                                {{--Choose Nicotine Strenght--}}
-                                            {{--</div>--}}
-                                            {{--<div class="d-flex flex-wrap special__popup-main-product-item-radio">--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline">--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio1"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio1">--}}
-                                                            {{--<span class="font-sec-ex-light font-26 count">10</span>--}}
-                                                            {{--<span class="font-main-light font-18 mg">mg</span>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline">--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio2"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio2">--}}
-                                                            {{--<span class="font-sec-ex-light font-26 count">15</span>--}}
-                                                            {{--<span class="font-main-light font-18 mg">mg</span>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                                {{--<div class="product_radio-single">--}}
-                                                    {{--<div class="custom-radio custom-control-inline">--}}
-                                                        {{--<input type="radio" class="custom-control-input"--}}
-                                                               {{--id="customRadio3"--}}
-                                                               {{--name="example" value="">--}}
-                                                        {{--<label class="custom-label" for="customRadio3">--}}
-                                                            {{--<span class="font-sec-ex-light font-26 count">20</span>--}}
-                                                            {{--<span class="font-main-light font-18 mg">mg</span>--}}
-                                                        {{--</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div--}}
-                                                {{--class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">--}}
-                                                {{--<span class="font-sec-light font-24 qty">QTY</span>--}}
-                                                {{--<div class="product__single-item-inp-num">--}}
-                                                    {{--<div class="quantity">--}}
-                                                        {{--<input type="number" min="1" max="9" step="1" value="1">--}}
-                                                        {{--<div class="inp-icons">--}}
-                                                            {{--<span class="inp-up"></span>--}}
-                                                            {{--<span class="inp-down"></span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="special__popup-main-product-item-price">--}}
-                                    {{--<span class="font-40 product__single-item_price">--}}
-                                                                        {{--£25,78--}}
-                                                                    {{--</span>--}}
-                                            {{--</div>--}}
-                                            {{--<a href="#"--}}
-                                               {{--class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">--}}
-                                                {{--Add--}}
-                                            {{--</a>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-3">--}}
-                                        {{--<div class="special__popup-main-product-item">--}}
-                                            {{--<div class="special__popup-main-product-item-photo">--}}
-                                                {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                            {{--</div>--}}
-                                            {{--<h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">--}}
-                                                {{--Teslagics Topo Pod System Vape Star ...--}}
-                                            {{--</h3>--}}
-                                            {{--<div--}}
-                                                {{--class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">--}}
-                                                {{--<span class="font-sec-light font-24 qty">QTY</span>--}}
-                                                {{--<div class="product__single-item-inp-num">--}}
-                                                    {{--<div class="quantity">--}}
-                                                        {{--<input type="number" min="1" max="9" step="1" value="1">--}}
-                                                        {{--<div class="inp-icons">--}}
-                                                            {{--<span class="inp-up"></span>--}}
-                                                            {{--<span class="inp-down"></span>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                            {{--<div class="special__popup-main-product-item-price">--}}
-                                    {{--<span class="font-40 product__single-item_price">--}}
-                                                                        {{--£25,78--}}
-                                                                    {{--</span>--}}
-                                            {{--</div>--}}
-                                            {{--<a href="#"--}}
-                                               {{--class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">--}}
-                                                {{--Add--}}
-                                            {{--</a>--}}
-                                        {{--</div>--}}
-                                    {{--</li>--}}
+                                    <li class="col-md-3">
+                                        <div class="special__popup-main-product-item active">
+                                            <div class="special__popup-main-product-item-photo">
+                                                <img src="/public/img/product-vape.png" alt="product">
+                                            </div>
+                                            <h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">
+                                                Teslagics Topo Pod System Vape Star ...
+                                            </h3>
+                                            <div
+                                                class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">
+                                                Choose Color
+                                            </div>
+                                            <div class="d-flex flex-wrap special__popup-main-product-item-radio">
+                                                <div class="product_radio-single">
+                                                    <div class="custom-radio custom-control-inline color-radio">
+                                                        <input type="radio" class="custom-control-input"
+                                                               id="customRadio1"
+                                                               name="example" value="">
+                                                        <label class="custom-label" for="customRadio1" style="background: #ee3a50">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="product_radio-single">
+                                                    <div class="custom-radio custom-control-inline color-radio">
+                                                        <input type="radio" class="custom-control-input"
+                                                               id="customRadio2"
+                                                               name="example" value="">
+                                                        <label class="custom-label" for="customRadio2" style="background: #63b567">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="product_radio-single">
+                                                    <div class="custom-radio custom-control-inline color-radio" >
+                                                        <input type="radio" class="custom-control-input"
+                                                               id="customRadio3"
+                                                               name="example" value="">
+                                                        <label class="custom-label" for="customRadio3" style="background: #5184e5">
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">
+                                                <span class="font-sec-light font-24 qty">QTY</span>
+                                                <div class="product__single-item-inp-num">
+                                                    <div class="quantity">
+                                                        <input type="number" min="1" max="9" step="1" value="1">
+                                                        <div class="inp-icons">
+                                                            <span class="inp-up"></span>
+                                                            <span class="inp-down"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="special__popup-main-product-item-price">
+                                    <span class="font-40 product__single-item_price">
+                                                                        £25,78
+                                                                    </span>
+                                            </div>
+                                            <a href="#"
+                                               class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn remove-btn">
+                                                Remove
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-3">
+                                        <div class="special__popup-main-product-item">
+                                            <div class="special__popup-main-product-item-photo">
+                                                <img src="/public/img/product-vape.png" alt="product">
+                                            </div>
+                                            <h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">
+                                                Teslagics Topo Pod System Vape Star ...
+                                            </h3>
+                                            <div
+                                                class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">
+                                                Choose Nicotine Strenght
+                                            </div>
+                                            <div class="d-flex flex-wrap special__popup-main-product-item-radio">
+                                                <select class="form-control">
+                                                    <option>
+                                                        xxxx
+                                                    </option> <option>
+                                                        ddc
+                                                    </option> <option>
+                                                        xxcecdecxx
+                                                    </option> <option>
+                                                        edcedcedcedc
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div
+                                                class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">
+                                                <span class="font-sec-light font-24 qty">QTY</span>
+                                                <div class="product__single-item-inp-num">
+                                                    <div class="quantity">
+                                                        <input type="number" min="1" max="9" step="1" value="1">
+                                                        <div class="inp-icons">
+                                                            <span class="inp-up"></span>
+                                                            <span class="inp-down"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="special__popup-main-product-item-price">
+                                    <span class="font-40 product__single-item_price">
+                                                                        £25,78
+                                                                    </span>
+                                            </div>
+                                            <a href="#"
+                                               class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">
+                                                Add
+                                            </a>
+                                        </div>
+                                    </li>
+                                    <li class="col-md-3">
+                                        <div class="special__popup-main-product-item">
+                                            <div class="special__popup-main-product-item-photo">
+                                                <img src="/public/img/product-vape.png" alt="product">
+                                            </div>
+                                            <h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">
+                                                Teslagics Topo Pod System Vape Star ...
+                                            </h3>
+                                            <div
+                                                class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">
+                                                <span class="font-sec-light font-24 qty">QTY</span>
+                                                <div class="product__single-item-inp-num">
+                                                    <div class="quantity">
+                                                        <input type="number" min="1" max="9" step="1" value="1">
+                                                        <div class="inp-icons">
+                                                            <span class="inp-up"></span>
+                                                            <span class="inp-down"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="special__popup-main-product-item-price">
+                                    <span class="font-40 product__single-item_price">
+                                                                        £25,78
+                                                                    </span>
+                                            </div>
+                                            <a href="#"
+                                               class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">
+                                                Add
+                                            </a>
+                                        </div>
+                                    </li>
                                     @if($vape->special_offers && count($vape->special_offers))
                                         @foreach($vape->special_offers as $offer)
-                                            <li class="col-md-3">
-                                                <div class="special__popup-main-product-item">
-                                                    <div class="special__popup-main-product-item-photo">
-                                                        <img src="{!! checkImage($offer->image) !!}" alt="product">
-                                                    </div>
-                                                    <h3 class="lh-1 text-tert-clr font-26 special__popup-main-product-item-title">
-                                                       {{ $offer->name }}
-                                                    </h3>
-
-                                                    <div
-                                                        class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">
-                                                        Choose Nicotine Strenght
-                                                    </div>
-                                                    <div class="d-flex flex-wrap special__popup-main-product-item-radio mb-3">
-                                                        <div class="product_radio-single">
-                                                            <div class="custom-radio custom-control-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                       id="customRadio1"
-                                                                       name="example" value="">
-                                                                <label class="custom-label" for="customRadio1">
-                                                                    <span class="font-sec-ex-light font-26 count">10</span>
-                                                                    <span class="font-main-light font-18 mg">mg</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product_radio-single">
-                                                            <div class="custom-radio custom-control-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                       id="customRadio2"
-                                                                       name="example" value="">
-                                                                <label class="custom-label" for="customRadio2">
-                                                                    <span class="font-sec-ex-light font-26 count">15</span>
-                                                                    <span class="font-main-light font-18 mg">mg</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="product_radio-single">
-                                                            <div class="custom-radio custom-control-inline">
-                                                                <input type="radio" class="custom-control-input"
-                                                                       id="customRadio3"
-                                                                       name="example" value="">
-                                                                <label class="custom-label" for="customRadio3">
-                                                                    <span class="font-sec-ex-light font-26 count">20</span>
-                                                                    <span class="font-main-light font-18 mg">mg</span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div
-                                                        class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title">
-                                                        Choose Option
-                                                    </div>
-                                                    <div class="select-wall product__select-wall">
-                                                        <select name="" id=""
-                                                                class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
-                                                                style="width: 100%">
-                                                            <option value="">12 mg Nicotine</option>
-                                                            <option value="">1 mg Nicotine</option>
-                                                        </select>
-                                                    </div>
-
-                                                    <div
-                                                        class="d-flex align-items-center flex-wrap special__popup-main-product-item-qty">
-                                                        <span class="font-sec-light font-24 qty">QTY</span>
-                                                        <div class="product__single-item-inp-num">
-                                                            <div class="quantity">
-                                                                <input type="number" min="1" max="9" step="1" value="1">
-                                                                <div class="inp-icons">
-                                                                    <span class="inp-up"></span>
-                                                                    <span class="inp-down"></span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="special__popup-main-product-item-price">
-                                            <span class="font-40 product__single-item_price">
-                                                                                £25,78
-                                                                            </span>
-                                                    </div>
-                                                    {{--<a href="#"--}}
-                                                       {{--class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn remove-btn">--}}
-                                                        {{--Remove--}}
-                                                    {{--</a>--}}
-                                                    <a href="#"
-                                                       class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">
-                                                        Add
-                                                    </a>
-                                                </div>
-                                            </li>
+                                            @include("frontend.products._partials.render_offer_price_form",['model' => $offer])
                                         @endforeach
                                     @endif
                                 </ul>
@@ -1052,7 +941,7 @@
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
-        // $("#specialPopUpModal").modal();
+        $("#specialPopUpModal").modal();
         //esia
         // var variations = {
         //     "group_id" : "5ca48c5f4401f",
