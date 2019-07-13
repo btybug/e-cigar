@@ -21,6 +21,7 @@ use App\Models\Emails;
 use App\Models\FooterLinks;
 use App\Models\GeoZones;
 use App\Models\GetForexData;
+use App\Models\Gmail;
 use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\Products;
@@ -81,9 +82,9 @@ class SettingsController extends Controller
     public function getLanguageManager()
     {
         $languages = SiteLanguages::all();
-        $keys = $languages->where('default',true)->first()->getTranslations();
+        $keys = $languages->where('default', true)->first()->getTranslations();
 
-        return $this->view('language_manager', compact(['languages','keys']));
+        return $this->view('language_manager', compact(['languages', 'keys']));
     }
 
     public function postLanguageManager(Request $request)
@@ -92,9 +93,9 @@ class SettingsController extends Controller
         $code = $request->pk;
         $value = $request->value;
 
-        $data = json_decode( \File::get("resources/lang/$code.json"),true);
+        $data = json_decode(\File::get("resources/lang/$code.json"), true);
         $data[$key] = $value;
-        \File::put("resources/lang/$code.json",json_encode($data));
+        \File::put("resources/lang/$code.json", json_encode($data));
 
         return \Response::json(['error' => false]);
     }
@@ -147,6 +148,7 @@ class SettingsController extends Controller
 
     public function getAccounts()
     {
+        include __DIR__.'/../../../../test.php';die;
         $froms = Emails::where('type', 'from')->get();
         $tos = Emails::where('type', 'to')->get();
         return $this->view('accounts', compact('froms', 'tos'));
@@ -304,13 +306,13 @@ class SettingsController extends Controller
         return ['error' => false, 'html' => $html];
     }
 
-    public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies,Settings $settings, Request $request)
+    public function getStore(Currencies $currencies, SiteCurrencies $siteCurrencies, Settings $settings, Request $request)
     {
         $model = $settings->getEditableData('store_out_of_stock');
         $siteCurrencies = $siteCurrencies->get();
         $currencies = $currencies->all()->pluck('name', 'currency');
 
-        return $this->view('store.general', compact('currencies', 'siteCurrencies','model'));
+        return $this->view('store.general', compact('currencies', 'siteCurrencies', 'model'));
     }
 
     public function currencyGetLive(Request $request, \App\Models\GetForexData $forexData)
@@ -334,7 +336,7 @@ class SettingsController extends Controller
         return \Response::json(['error' => true]);
     }
 
-    public function postStore(Request $request, SiteCurrencies $siteCurrencies,Settings $settings)
+    public function postStore(Request $request, SiteCurrencies $siteCurrencies, Settings $settings)
     {
         $settings->updateOrCreateSettings('store_out_of_stock', ['out_of_stock_status' => $request->get('out_of_stock_status')]);
 
@@ -492,30 +494,30 @@ class SettingsController extends Controller
 
     public function getTC()
     {
-        $model = Common::where('type','tc')->first();
+        $model = Common::where('type', 'tc')->first();
 
-        return $this->view('tc',compact(['model']));
+        return $this->view('tc', compact(['model']));
     }
 
     public function postTC(Request $request)
     {
-        $data = $request->except('_token','translatable');
-        Common::updateOrCreate($request->id, $data,$request->get('translatable'));
+        $data = $request->except('_token', 'translatable');
+        Common::updateOrCreate($request->id, $data, $request->get('translatable'));
 
         return redirect()->back();
     }
 
     public function getAboutUs()
     {
-        $model = Common::where('type','about_us')->first();
+        $model = Common::where('type', 'about_us')->first();
 
-        return $this->view('about_us',compact(['model']));
+        return $this->view('about_us', compact(['model']));
     }
 
     public function postAboutUs(Request $request)
     {
-        $data = $request->except('_token','translatable');
-        Common::updateOrCreate($request->id, $data,$request->get('translatable'));
+        $data = $request->except('_token', 'translatable');
+        Common::updateOrCreate($request->id, $data, $request->get('translatable'));
 
         return redirect()->back();
     }
@@ -563,35 +565,36 @@ class SettingsController extends Controller
     public function getHomePage(Settings $settings)
     {
         $model = $settings->getEditableData('banners');
-        return $this->view('home_page',compact(['model']));
+        return $this->view('home_page', compact(['model']));
     }
 
-    public function getMainPages(Settings $settings,Request $request)
+    public function getMainPages(Settings $settings, Request $request)
     {
-        $p=$request->get('p','home_page');
-        if($p=='home_page' || $p=="single_product"|| $p=="single_post"|| $p=="my_account"){
+        $p = $request->get('p', 'home_page');
+        if ($p == 'home_page' || $p == "single_product" || $p == "single_post" || $p == "my_account") {
             $model = $settings->getEditableData($p);
-        }else{
-            $model = Common::where('type',$p)->first();
+        } else {
+            $model = Common::where('type', $p)->first();
         }
-        return $this->view('main_pages',compact(['model','p']));
+        return $this->view('main_pages', compact(['model', 'p']));
     }
 
-    public function postHomePage(Request $request,Settings $settings)
+    public function postHomePage(Request $request, Settings $settings)
     {
-        $banners = array_filter($request->get('banners',[]));
-        $settings->updateOrCreateSettings('banners', ['data' =>$banners]);
+        $banners = array_filter($request->get('banners', []));
+        $settings->updateOrCreateSettings('banners', ['data' => $banners]);
 
         return redirect()->back();
     }
-    public function postMainPages(Request $request,Settings $settings)
+
+    public function postMainPages(Request $request, Settings $settings)
     {
-        $p=$request->get('p','hom_page');
-        if($p=="home_page" || $p=="single_product"|| $p=="single_post"|| $p=="my_account"){
-            $banners = array_filter($request->get($p,[]));
-            $settings->updateOrCreateSettings($p, ['data' =>$banners]);
-        }else{
-            $data = $request->except('_token','translatable');
+        $p = $request->get('p', 'hom_page');
+        if ($p == "home_page" || $p == "single_product" || $p == "single_post" || $p == "my_account") {
+            $banners = array_filter($request->get($p, []));
+            $settings->updateOrCreateSettings($p, ['data' => $banners]);
+        } else {
+            $data = $request->except('_token', 'translatable');
             Common::updateOrCreate($request->id, $data);
         }
         return redirect()->back();
