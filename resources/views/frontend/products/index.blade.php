@@ -488,6 +488,16 @@
                 $(location).attr("href", "/products/" + $("#choose_product").val())
             });
 
+            $("body").on('change', "#choose_product", function() {
+                let form = $("#filter-form");
+                let serializeValue = form.serialize();
+                let category = $('.all_categories').val();
+                let search_text = $("#search-for-filter").val();
+                let sort_by = $("#sortBy").val();
+
+                $(location).attr("href", "/products/" + $(this).val() + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text || ''}`)
+            });
+
             $("body").on('click', '.add-to-card-modal', function () {
                 var id = $(this).data("id");
 
