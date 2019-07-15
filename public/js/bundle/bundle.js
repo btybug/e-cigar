@@ -4962,7 +4962,7 @@ $(document).ready(function () {
 
         source: function source(d, e) {
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '/search',
                 dataType: "jsonp",
                 data: {
