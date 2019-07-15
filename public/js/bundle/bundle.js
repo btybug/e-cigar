@@ -4965,6 +4965,9 @@ $(document).ready(function () {
                 type: 'POST',
                 url: '/search',
                 dataType: "jsonp",
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
                 data: {
                     value: $("#search-product").val()
                 },
