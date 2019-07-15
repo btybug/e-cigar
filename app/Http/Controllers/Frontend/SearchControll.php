@@ -18,21 +18,23 @@ class SearchControll extends Controller
         $name = $request->get('name');
 
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
+            $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
+                ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
         if ($category) {
-            $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
             $query->where('stock_categories.slug', $category);
         }
         $result = $query->select(
             'stocks.image',
             'stocks.slug',
-            'stock_translations.*'
+            'stock_translations.*',
+            'categories.slug as category'
         )
             ->where('stock_translations.locale', app()->getLocale())
             ->where('stocks.status', true)
             ->where('stocks.is_offer', false)
             ->where('stock_translations.name', 'LIKE', '%' . $name . '%')
             ->get();
-        return response()->json(['data' => $result->toArray(), 'code' => 200]);
+        return response()->json(['data' => $result->toArray(), 'code' => 200,'category'=>$category]);
     }
 
 }
