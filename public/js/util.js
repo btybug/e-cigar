@@ -148,12 +148,7 @@ $(document).ready(function () {
                 }
             });
     // }
-    var countries = [
-        { value: 'Andorra', data: 'AD' },
-        { value: 'Anlolla', data: 'AK' },
-        // ...
-        { value: 'Zimbabwe', data: 'ZZ' }
-    ];
+
     $("#search-product").autocomplete({
         // serviceUrl: '/search',
         // onSelect: function (suggestion) {
