@@ -207,6 +207,24 @@ class ProductsController extends Controller
         return \Response::json(['error' => false, 'html' => $html]);
     }
 
+    public function getOfferMenuRaw(Request $request)
+    {
+        $id = $request->get("id",null);
+        if($id){
+            $variation = StockVariation::where('variation_id',$id)->get();
+            $selected = $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.offer_option_box", compact(['variation', 'selected','vSettings']))->render();
+        }else{
+            $selected = StockVariation::findOrFail($request->select_element_id);
+            $variation = $selected->stock->variations()->where('variation_id',$selected->variation_id)->get();
+            $vSettings = $variation->first();
+            $html = \view("frontend.products._partials.offer_option", compact(['variation', 'selected','vSettings']))->render();
+        }
+
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
     public function getVariationMenuRaws(Request $request)
     {
         $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
