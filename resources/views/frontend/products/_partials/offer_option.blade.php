@@ -1,4 +1,4 @@
-<div class="col-md-6 pl-0">
+<div>
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
@@ -22,48 +22,44 @@
             </select>
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
-        <div class="d-flex flex-wrap product__single-item-info-size">
-            <div class="product_radio-single">
-                @foreach($variation as $item)
-                    @php
-                        $x = uniqid();
-                    @endphp
-                    <div
-                        class="custom-radio custom-control-inline">
-                        <input type="radio"
-                               @if(isset($selected) && $selected->id == $item->id) checked
-                               @endif data-out="{{ out_of_stock($item) }}"
-                               class="custom-control-input"
-                               id="single_v_select_{{ $item->id.$x }}" name="variations[{{ $item->variation_id }}][]"
-                               value="{{ $item->id }}">
-                        <label class="custom-label"
-                               for="single_v_select_{{ $item->id.$x }}">
-                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
-                        </label>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
-        <div class="d-flex flex-wrap product__single-item-info-size">
-            <div class="product_radio-single">
+        <div class="d-flex flex-wrap special__popup-main-product-item-radio mb-3">
+            @foreach($variation as $item)
                 @php
                     $x = uniqid();
                 @endphp
-                <div
-                    class="custom-radio custom-control-inline">
-                    <input type="checkbox"
-                           data-out="{{ out_of_stock($selected) }}"
-                           class="custom-control-input"
-                           id="single_v_select_{{ $selected->id.$x}}"
-                           name="variations[{{ $vSettings->variation_id }}][]"
-                           value="{{ $selected->id }}">
-                    <label class="custom-label checkbox-select"
-                           for="single_v_select_{{ $selected->id.$x }}">
-                        <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
-                    </label>
+                <div class="product_radio-single">
+                    <div class="custom-radio custom-control-inline">
+                        <input type="radio" class="custom-control-input"
+                               @if(isset($selected) && $selected->id == $item->id) checked
+                               @endif data-out="{{ out_of_stock($item) }}"
+                               id="single_v_select_{{ $item->id.$x }}"
+                               name="special_offers[{{ $item->variation_id }}][]" value="{{ $item->id }}">
+                        <label class="custom-label"  for="single_v_select_{{ $item->id.$x }}">
+                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
+                        </label>
+                    </div>
                 </div>
-            </div>
+            @endforeach
+        </div>
+    @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
+        <div class="d-flex flex-wrap special__popup-main-product-item-radio mb-3">
+            @foreach($variation as $item)
+                @php
+                    $x = uniqid();
+                @endphp
+                <div class="product_radio-single">
+                    <div class="custom-radio custom-control-inline">
+                        <input type="checkbox" class="custom-control-input"
+                               @if(isset($selected) && $selected->id == $item->id) checked
+                               @endif data-out="{{ out_of_stock($item) }}"
+                               id="single_v_select_{{ $item->id.$x }}"
+                               name="special_offers[{{ $item->variation_id }}][]" value="{{ $item->id }}">
+                        <label class="custom-label checkbox-select"  for="single_v_select_{{ $item->id.$x }}">
+                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
+                        </label>
+                    </div>
+                </div>
+            @endforeach
         </div>
     @elseif($vSettings->display_as == 'popup' && $vSettings->type == 'package_product')
         <div class="select-wall product__select-wall">
@@ -95,7 +91,7 @@
     @endif
 
 </div>
-<div class="col-md-3 d-flex justify-content-center">
+<div class="d-flex justify-content-center">
     @if($selected->discount_type == 'range')
         <div class="d-flex flex-column w-100 align-items-center">
             <span class="text-tert-clr">*Quality Discount</span>
@@ -128,43 +124,43 @@
         </div>
     @endif
 </div>
-<div class="col-md-3 pr-0 d-flex justify-content-end">
-    @if($selected->price_per =='item' && ! $selected->stock->type)
-        @if($selected->price_type == 'static')
-            <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">
-                <span class="font-40">
-                        {{ convert_price($selected->price,$currency, false) }}
-                </span>
-            </div>
-        @else
-            @if($selected->discount_type == 'range')
-                @php
-                    $qty = (isset($qty))?:1;
-                    $discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
-                @endphp
-                @if($discount)
-                    <div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price*$qty }}">
-                        <span class="font-40">
-                            {{ convert_price($discount->price*$qty,$currency, false) }}
-                        </span>
-                    </div>
-                @else
-                    not found
-                @endif
-            @elseif($selected->discount_type == 'fixed')
-                @php
-                    $discount = $selected->discounts()->first();
-                @endphp
-                @if($discount)
-                    <div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price }}">
-                        <span class="font-40">
-                           {{ convert_price($discount->price,$currency, false) }}
-                        </span>
-                    </div>
-                @else
-                    not found
-                @endif
-            @endif
-        @endif
-    @endif
-</div>
+{{--<div class="col-md-3 pr-0 d-flex justify-content-end">--}}
+{{--@if($selected->price_per =='item' && ! $selected->stock->type)--}}
+{{--@if($selected->price_type == 'static')--}}
+{{--<div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">--}}
+{{--<span class="font-40">--}}
+{{--{{ convert_price($selected->price,$currency, false) }}--}}
+{{--</span>--}}
+{{--</div>--}}
+{{--@else--}}
+{{--@if($selected->discount_type == 'range')--}}
+{{--@php--}}
+{{--$qty = (isset($qty))?:1;--}}
+{{--$discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();--}}
+{{--@endphp--}}
+{{--@if($discount)--}}
+{{--<div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price*$qty }}">--}}
+{{--<span class="font-40">--}}
+{{--{{ convert_price($discount->price*$qty,$currency, false) }}--}}
+{{--</span>--}}
+{{--</div>--}}
+{{--@else--}}
+{{--not found--}}
+{{--@endif--}}
+{{--@elseif($selected->discount_type == 'fixed')--}}
+{{--@php--}}
+{{--$discount = $selected->discounts()->first();--}}
+{{--@endphp--}}
+{{--@if($discount)--}}
+{{--<div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price }}">--}}
+{{--<span class="font-40">--}}
+{{--{{ convert_price($discount->price,$currency, false) }}--}}
+{{--</span>--}}
+{{--</div>--}}
+{{--@else--}}
+{{--not found--}}
+{{--@endif--}}
+{{--@endif--}}
+{{--@endif--}}
+{{--@endif--}}
+{{--</div>--}}

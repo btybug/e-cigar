@@ -1,4 +1,4 @@
-<div class="product__single-item-info mb-3 limit {{$vSettings->type}}"
+<div class="mb-3 limit {{$vSettings->type}}"
      data-group-id="{{ $vSettings->variation_id }}"
      data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
      data-per-price="{{ $vSettings->price_per }}"
@@ -25,7 +25,7 @@
     @endif
     <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"
          data-single-price="{{ $selected->price }}">
-        @include("frontend.products._partials.stock_variation_option")
+        @include("frontend.products._partials.offer_option")
     </div>
 
     <div class="product__single-item-add-new">

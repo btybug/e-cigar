@@ -1,4 +1,4 @@
-<div class="product__single-item-info mb-3 limit {{$vSettings->type}}"
+<div class="mb-3 limit {{$vSettings->type}}"
      data-group-id="{{ $vSettings->variation_id }}"
      data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
      data-per-price="{{ $vSettings->price_per }}"
