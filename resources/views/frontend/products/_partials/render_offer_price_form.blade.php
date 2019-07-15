@@ -53,10 +53,10 @@
                 £25,78
             </span>
         </div>
-        <a href="#"
-           class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn remove-btn">
-            Remove
-        </a>
+        {{--<a href="#"--}}
+           {{--class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn remove-btn">--}}
+            {{--Remove--}}
+        {{--</a>--}}
         <a href="#"
            class="font-sec-light font-26 text-sec-clr text-uppercase special__popup-main-product-item-btn add-btn">
             Add
