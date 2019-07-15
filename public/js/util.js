@@ -171,7 +171,8 @@ $(document).ready(function () {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
                 data: {
-                    value: $("#search-product").val()
+                    name: $("#search-product").val(),
+                    category: $(".all_categories").val()
                 },
                 success: function (b) {
                     var c = [];
@@ -193,7 +194,7 @@ $(document).ready(function () {
             .data( "item.autocomplete", item )
             .append(inner_html)
             .appendTo( ul );
-    };;
+    };
 
     $("body").on('click','.qtycount',function () {
         var uid = $(this).data('uid');
