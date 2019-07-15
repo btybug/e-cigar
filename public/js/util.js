@@ -160,18 +160,19 @@ $(document).ready(function () {
         source: function (d, e) {
 
             var category = $(".all_categories").val();
+            category= category.length === 0 ? null : $(".all_categories").val();
             var data = {
                 name: $("#search-product").val(),
-                category: category.length === 0 ? null : $(".all_categories").val()
+                category: category
             };
             $.ajax({
                 type: 'POST',
                 url: '/search',
-                dataType: "json",
+                dataType: "JSON",
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
-                data: JSON.stringify(data),
+                data: data,
                 success: function (b) {
                     console.log(b, d, e);
                     var c = [];
