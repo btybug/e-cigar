@@ -345,14 +345,12 @@ $(document).ready(function () {
         $('body').on('change', '#specialPopUpModal select.select-variation-option.single-product-select', function(ev) {
             ev.preventDefault();
 
-            alert(5555555555)
-
             const row = $(this).closest('.product__single-item-info-bottom');
-            const group_id = row.data('id');
+            const group_id = $(this).closest('.package_product').data('id');
             const select_element_id = $(this).val();
             const vpid = $('#vpid').val();
 
-            fetch("/products/get-variation-menu-raw", {
+            fetch("/products/get-offer-menu-raw", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
