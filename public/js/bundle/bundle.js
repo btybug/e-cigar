@@ -4959,26 +4959,27 @@ $(document).ready(function () {
         // },
         // source:countries,
         // lookup: countries,
-
+        width: '100%',
         source: function source(d, e) {
 
             var category = $(".all_categories").val();
-
+            var data = {
+                name: $("#search-product").val(),
+                category: category.length === 0 ? null : $(".all_categories").val()
+            };
             $.ajax({
                 type: 'POST',
                 url: '/search',
-                dataType: "jsonp",
+                dataType: "json",
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
-                data: {
-                    name: $("#search-product").val(),
-                    category: category.length === 0 ? null : $(".all_categories").val()
-                },
+                data: JSON.stringify(data),
                 success: function success(b) {
+                    console.log(b, d, e);
                     var c = [];
-                    $.each(b.results, function (i, a) {
-                        a.label = a.title + " " + a.date;
+                    $.each(b.data, function (i, a) {
+                        console.log(a);
                         c.push(a);
                     });
                     e(c);
@@ -4989,7 +4990,9 @@ $(document).ready(function () {
             alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
-        var inner_html = '<a href="' + item.url + '" ><div class="list_item_container"><div class="image"><img src="' + item.image + '" ></div><div class="label"><h4><b>' + item.title + '</b></h4></div></div></a>';
+        console.log(location, 55555555555, item);
+        encodeURI(item.slug);
+        var inner_html = "  <a class=\"autocomplete_link_custom\" style=\"all: unset;\" href=\"" + location.origin + "/products/" + encodeURI(item.category) + "/" + encodeURI(item.slug) + "\"> \n                                <div class=\"autocomplete_content_custom\">\n                                    <div class=\"autocomplete_image_container_custom\">\n                                        <img class=\"autocomplete_image_custom\" style=\"width: 100px;\" src=\"" + item.image + "\">\n                                    </div>\n                                    <div class=\"autocomplete_title_container_custom\">\n                                        <h4 class=\"autocomplete_title_custom\">" + item.name + "</h4>\n                                    </div>\n                                    <p class=\"autocomplete_description_custom\">" + item.short_description + "...</p>\n                                </div>\n                            </a>\n                            <hr>";
         console.log(item);
         return $("<li></li>").data("item.autocomplete", item).append(inner_html).appendTo(ul);
     };
