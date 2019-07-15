@@ -43,23 +43,20 @@
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
         <div class="d-flex flex-wrap special__popup-main-product-item-radio mb-3">
-            @foreach($variation as $item)
-                @php
-                    $x = uniqid();
-                @endphp
-                <div class="product_radio-single">
-                    <div class="custom-radio custom-control-inline">
-                        <input type="checkbox" class="custom-control-input"
-                               @if(isset($selected) && $selected->id == $item->id) checked
-                               @endif data-out="{{ out_of_stock($item) }}"
-                               id="single_v_select_{{ $item->id.$x }}"
-                               name="special_offers[{{ $item->variation_id }}][]" value="{{ $item->id }}">
-                        <label class="custom-label checkbox-select"  for="single_v_select_{{ $item->id.$x }}">
-                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
-                        </label>
-                    </div>
+            @php
+                $x = uniqid();
+            @endphp
+            <div class="product_radio-single">
+                <div class="custom-radio custom-control-inline">
+                    <input type="checkbox" class="custom-control-input"
+                           data-out="{{ out_of_stock($selected) }}"
+                           id="single_v_select_{{ $selected->id.$x }}"
+                           name="special_offers[{{ $selected->variation_id }}][]" value="{{ $selected->id }}">
+                    <label class="custom-label checkbox-select"  for="single_v_select_{{ $selected->id.$x }}">
+                        <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
+                    </label>
                 </div>
-            @endforeach
+            </div>
         </div>
     @elseif($vSettings->display_as == 'popup' && $vSettings->type == 'package_product')
         <div class="select-wall product__select-wall">

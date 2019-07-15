@@ -10,7 +10,7 @@
             <span class="font-sec-light font-26">{{ $vSettings->title }}</span>
         </div>
         <div class="col-md-3 d-flex justify-content-end pr-0">
-            
+
         </div>
     </div>
     @if(! isset($selected))
