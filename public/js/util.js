@@ -164,7 +164,7 @@ $(document).ready(function () {
 
         source: function (d, e) {
             $.ajax({
-                type: 'GET',
+                type: 'POST',
                 url: '/search',
                 dataType: "jsonp",
                 data: {
