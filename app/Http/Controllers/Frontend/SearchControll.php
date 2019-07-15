@@ -14,22 +14,23 @@ class SearchControll extends Controller
 {
     public function postSearch(Request $request)
     {
-        $category = $request->get('category', false);
+        $category = $request->get('category');
         $name = $request->get('name');
 
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
             $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
                 ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
-        if ($category) {
-            $query->where('stock_categories.slug', $category);
-        }
-        $result = $query->select(
+
+       $query->select(
             'stocks.image',
             'stocks.slug',
             'stock_translations.*',
             'categories.slug as category'
-        )
-            ->where('stock_translations.locale', app()->getLocale())
+        );
+        if ($category) {
+            $query->where('categories.slug', $category);
+        }
+        $result=$query->where('stock_translations.locale', app()->getLocale())
             ->where('stocks.status', true)
             ->where('stocks.is_offer', false)
             ->where('stock_translations.name', 'LIKE', '%' . $name . '%')
