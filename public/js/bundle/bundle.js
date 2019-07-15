@@ -4961,6 +4961,9 @@ $(document).ready(function () {
         // lookup: countries,
 
         source: function source(d, e) {
+
+            var category = $(".all_categories").val();
+
             $.ajax({
                 type: 'POST',
                 url: '/search',
@@ -4970,7 +4973,7 @@ $(document).ready(function () {
                 },
                 data: {
                     name: $("#search-product").val(),
-                    category: $(".all_categories").val()
+                    category: category.length === 0 ? null : $(".all_categories").val()
                 },
                 success: function success(b) {
                     var c = [];
