@@ -10,14 +10,7 @@
             <span class="font-sec-light font-26">{{ $vSettings->title }}</span>
         </div>
         <div class="col-md-3 d-flex justify-content-end pr-0">
-            @if($vSettings->price_per == 'product')
-                <div class="product__single-item-info-price" data-single-price="{{ $vSettings->price }}">
-                     <span class="font-40 product__single-item_price " >
-                        {{ convert_price($vSettings->price,$currency, false) }}
-                </span>
-                </div>
-
-            @endif
+            
         </div>
     </div>
     @if(! isset($selected))
