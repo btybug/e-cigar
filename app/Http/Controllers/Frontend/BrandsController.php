@@ -29,7 +29,7 @@ class BrandsController extends Controller
             ->where('categories_translations.locale', app()->getLocale())
             ->whereIn('stock_categories.stock_id', $products->pluck('id'))
             ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
-        $f = (array_keys($stockCategories->toArray())[0]);
+        $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
             ->where('categories.slug', $f)->get();
