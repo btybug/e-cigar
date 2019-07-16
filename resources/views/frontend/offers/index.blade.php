@@ -2,7 +2,7 @@
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
-            
+
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap mt-5">
