@@ -650,12 +650,12 @@
                                     <div class="d-flex flex-wrap special__popup-content-right-product">
                                         <div class="special__popup-content-right-product-photo">
                                             <div class="inner-photo">
-                                                <img src="/public/img/product-juice.png" alt="product">
+                                                <img src="{!! $vape->image !!}" alt="product">
                                             </div>
                                         </div>
                                         <div class="special__popup-content-right-product-content">
                                             <div class="font-21 special__popup-content-right-product-title">
-                                                Kangertech Vola 23 100W Premium Vape
+                                               {{ $vape->name }}
                                             </div>
                                             <div class="d-flex flex-wrap special__popup-content-right-product-bottom">
                                                 <span class="text-main-clr special__popup-content-right-product-price">
@@ -669,27 +669,7 @@
                                     <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
                                         Added Offers
                                     </div>
-                                    <div class="d-flex flex-wrap special__popup-content-right-product">
-                                        <div class="special__popup-content-right-product-photo">
-                                            <div class="inner-photo">
-                                                <img src="/public/img/product-juice.png" alt="product">
-                                            </div>
-                                        </div>
-                                        <div class="special__popup-content-right-product-content">
-                                            <div class="font-21 special__popup-content-right-product-title">
-                                                Kangertech Vola 23 100W Premium Vape
-                                            </div>
-                                            <div class="d-flex flex-wrap special__popup-content-right-product-bottom">
-<span class="text-main-clr special__popup-content-right-product-price">
-    £25,78
-</span>
-                                                <a href="#"
-                                                   class="text-sec-clr special__popup-content-right-product-remove">
-                                                    Remove
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <a href="#" class="text-main-clr special__popup-content-right-item-more">
                                     <div class="d-flex flex-column align-items-center item-more-inner">
