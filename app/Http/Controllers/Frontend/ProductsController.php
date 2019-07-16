@@ -300,4 +300,13 @@ class ProductsController extends Controller
 
         return response()->json(['error' => true]);
     }
+
+    public function addOffer(Request $request)
+    {
+        $offer = Stock::findOrFail($request->id);
+        $price = $request->price;
+        $html = view("frontend.products._partials.add_offer",compact(['offer','price']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
+    }
 }
