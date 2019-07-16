@@ -152,6 +152,7 @@
                                             </td>
                                         </tr>
                                         </tbody>
+                                        @if(! $stock->is_offer)
                                         <tfoot>
                                         <tr>
                                             <td colspan="5">
@@ -211,6 +212,7 @@
                                             </td>
                                         </tr>
                                         </tfoot>
+                                        @endif
                                     </table>
                                 </div>
 

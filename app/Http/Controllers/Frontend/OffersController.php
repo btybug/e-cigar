@@ -17,6 +17,7 @@ use App\Models\Common;
 use App\Models\Newsletter;
 use App\Models\SiteCurrencies;
 use App\Models\Stickers;
+use App\Models\Stock;
 use App\ProductSearch\ProductSearch;
 use App\User;
 use Illuminate\Http\Request;
@@ -27,12 +28,9 @@ class OffersController extends Controller
 
     public function getIndex($slug = null)
     {
-        $brands = Category::where('type', 'offers')->whereNull('parent_id')->get();
+        $offers = Stock::where('is_offer',true)->where('offer_type',false)->get();
 
-        $slug = ($slug || !$brands->count()) ? $slug : $brands->first()->slug;
-        $current = ($slug) ? Category::where('slug', $slug)->first() : null;
-
-        return $this->view('index', compact('brands', 'slug', 'current'));
+        return $this->view('index', compact('offers'));
     }
 
     public function postOffer(Request $request)

@@ -593,7 +593,7 @@
         </div>
     </div>
 
-
+    @if(! $vape->is_offer)
     <div class="modal fade p-0" id="specialPopUpModal" tabindex="-1" role="dialog"
          aria-labelledby="specialPopUpModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
@@ -710,6 +710,7 @@
             </div>
         </div>
     </div>
+    @endif
 @stop
 
 @section('css')

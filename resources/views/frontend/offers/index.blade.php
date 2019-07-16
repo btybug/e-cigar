@@ -5,13 +5,17 @@
 
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
-                    <div class="d-flex flex-wrap mt-5">
-                        <div class="brands_main-content">
-                            <div class="d-flex flex-wrap brands_main-content-top margin-b-brands-top">
-                                @include("frontend.offers._partials.current")
+                    @if(count($offers))
+                        @foreach($offers as $offer)
+                            <div class="d-flex flex-wrap mt-5">
+                                <div class="brands_main-content">
+                                    <div class="d-flex flex-wrap brands_main-content-top margin-b-brands-top">
+                                        @include("frontend.offers._partials.current")
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        @endforeach
+                    @endif
                 </div>
             </div>
         </div>
