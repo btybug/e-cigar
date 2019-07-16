@@ -61,6 +61,7 @@ Route::group(['prefix' => 'brands'], function () {
     Route::get('/{type?}', 'Frontend\BrandsController@index')->name('brands');
 });
 Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
+Route::post('/get-category-products', 'Frontend\BrandsController@postCategoryProducts')->name('post_category_products');
 
 Route::group(['prefix' => 'offers'], function () {
     Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
