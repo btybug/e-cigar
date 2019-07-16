@@ -7,7 +7,10 @@ data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
 data-min-limit="{{ $vSettings->min_count_limit }}">
     {{ $vSettings->title }}
 </div>
-<div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom" data-single-price="{{ $selected->price }}">
+@if(! isset($selected))
+    @php $selected = $variation->first(); @endphp
+@endif
+<div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
 @include("frontend.products._partials.offer_option")
 </div>
 
@@ -43,9 +46,7 @@ data-min-limit="{{ $vSettings->min_count_limit }}">
             {{--@endif--}}
         {{--</div>--}}
     {{--</div>--}}
-    {{--@if(! isset($selected))--}}
-        {{--@php $selected = $variation->first(); @endphp--}}
-    {{--@endif--}}
+
     {{--<div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"--}}
          {{--data-single-price="{{ $selected->price }}">--}}
         {{--@include("frontend.products._partials.stock_variation_option")--}}
