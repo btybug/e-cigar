@@ -120,7 +120,7 @@
     @endif
 @endif
 
-<div class="d-flex justify-content-center" data-single-price="{{ $price }}">
+<div class="d-flex justify-content-center get-single-price" data-single-price="{{ $price }}">
     @if($selected->discount_type == 'range')
         <div class="d-flex flex-column w-100 align-items-center">
             <span class="text-tert-clr">*Quality Discount</span>
