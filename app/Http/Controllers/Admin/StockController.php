@@ -149,6 +149,7 @@ class StockController extends Controller
             }else{
                 $categories = json_decode($request->get('offers', []), true);
                 $stock->offers()->sync($categories);
+
                 StockOfferProducts::where('offer_id',$stock->id)->delete();
             }
 
@@ -211,7 +212,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 //dd($model->offer_products);
 
-        return $this->view('stock_new', compact(['model', 'variations','brands','offers','dataOffers','offer',
+        return $this->view('stock_new', compact(['model', 'variations','brands','offers','dataOffers','offer','checkedOffers',
             'filters','stockItems',
             'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
     }

@@ -238,8 +238,8 @@
                                                             <div class="form-group">
                                                                 <label
                                                                     class="col-sm-12 control-label pl-sm-0">Offers</label>
-                                                                {!! Form::hidden('offers',(isset($checkedCategories))
-                                                                ? json_encode($checkedCategories) : null,['id' => 'offer_tree']) !!}
+                                                                {!! Form::hidden('offers',(isset($checkedOffers))
+                                                                ? json_encode($checkedOffers) : null,['id' => 'offer_tree']) !!}
                                                                 <div id="treeview_json_offer"></div>
                                                             </div>
                                                         </div>
