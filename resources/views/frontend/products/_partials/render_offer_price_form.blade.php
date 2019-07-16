@@ -2,7 +2,7 @@
     $variations = collect($model->variations()->required()->get())->groupBy('variation_id');
 @endphp
 <li class="col-md-3">
-    <div class="special__popup-main-product-item">
+    <div class="special__popup-main-product-item" data-id="{{ $model->id }}">
         <div class="special__popup-main-product-item-photo">
             <img src="{!! checkImage($model->image) !!}" alt="product">
         </div>
@@ -50,7 +50,7 @@
         {{--</div>--}}
         <div class="special__popup-main-product-item-price">
             <span class="font-40 product__single-item_price">
-                £25,78
+                
             </span>
         </div>
         {{--<a href="#"--}}
