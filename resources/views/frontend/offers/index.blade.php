@@ -2,116 +2,11 @@
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
-            <div class="brands_page-top">
-                <div class="container main-max-width h-100">
-                    <div class="d-flex brands_page-top-inner h-100">
-                        <div class="brands_page-top-title">
-                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">Popular Offers</h1>
-                        </div>
-                        <div class="brands_page-top-slider">
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
-                    <div class="d-flex flex-wrap">
-                        <div class="brands_aside">
-                            <div class="select-wall">
-                                {!! Form::select('brand_filter',['' => 'All Offers'],null,
-                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
-
-                            </div>
-                            <ul class="brands_aside-list">
-                                @include("frontend.offers._partials.list")
-                            </ul>
-                        </div>
+                    <div class="d-flex flex-wrap mt-5">
                         <div class="brands_main-content">
-
                             <div class="d-flex flex-wrap brands_main-content-top margin-b-brands-top">
                                 @include("frontend.offers._partials.current")
                             </div>
