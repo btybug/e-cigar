@@ -32,7 +32,7 @@ class BrandsController extends Controller
         $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->where('categories.slug', $f)->get();
+            ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
         return $this->view('index', compact('brands', 'slug', 'current', 'parentBrands', 'products', 'categories', 'stockCategories','f'));
     }
 
@@ -50,7 +50,7 @@ class BrandsController extends Controller
             $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
             $products = ($f)?$products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
                 ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-                ->where('categories.slug', $f)->get():$products->get();
+                ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get():$products->get();
             $html = view("frontend.brands._partials.current", compact('current', 'products', 'stockCategories','f'))->render();
             return response()->json(['error' => false, 'html' => $html]);
         }
@@ -69,9 +69,11 @@ class BrandsController extends Controller
                 ->whereIn('stock_categories.stock_id', $products->pluck('id'))
                 ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
             $f = isset($stockCategories[$request->slug])?$request->slug:false;
-            $products = ($f)?$products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
+            $products = ($f)?$products
+                ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
                 ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-                ->where('categories.slug', $f)->get():$products->get();
+                ->where('categories.slug', $f)->select('stocks.*')
+                ->groupBy('stocks.id')->get():$products->get();
             $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->render();
             return response()->json(['error' => false, 'html' => $html]);
         }
