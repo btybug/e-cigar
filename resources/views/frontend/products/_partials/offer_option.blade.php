@@ -88,7 +88,39 @@
     @endif
 
 </div>
-<div class="d-flex justify-content-center">
+@php
+    $price = 0;
+@endphp
+@if($selected->price_per =='item' && ! $selected->stock->type)
+    @if($selected->price_type == 'static')
+        @php
+            $price = $selected->price;
+        @endphp
+    @else
+        @if($selected->discount_type == 'range')
+            @php
+                $qty = (isset($qty))?:1;
+                $discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
+            @endphp
+            @if($discount)
+                @php
+                    $price = $discount->price*$qty;
+                @endphp
+            @endif
+        @elseif($selected->discount_type == 'fixed')
+            @php
+                $discount = $selected->discounts()->first();
+            @endphp
+            @if($discount)
+                @php
+                    $price = $discount->price;
+                @endphp
+            @endif
+        @endif
+    @endif
+@endif
+
+<div class="d-flex justify-content-center" data-single-price="{{ $price }}">
     @if($selected->discount_type == 'range')
         <div class="d-flex flex-column w-100 align-items-center">
             <span class="text-tert-clr">*Quality Discount</span>
