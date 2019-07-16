@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\DeliveryCosts;
 use App\Models\GeoZones;
 use App\Models\Posts;
 use App\Models\Settings;
@@ -321,7 +322,7 @@ class ShoppingCartController extends Controller
 
         if (\Auth::check()) {
             $user = \Auth::user();
-            $address = $user->addresses()->where('type', 'address_book')->pluck('company', 'id');
+            $address = $user->addresses()->whereIn('type', ['address_book', 'default_shipping'])->pluck('first_line_address', 'id');
 //            $billing_address = $user->addresses()->where('type','billing_address')->first();
 
             if ($request->addressId) {
@@ -329,6 +330,7 @@ class ShoppingCartController extends Controller
             } else {
                 $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
             }
+
             $subtotal = Cart::getSubTotal();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
@@ -350,7 +352,8 @@ class ShoppingCartController extends Controller
                         Cart::condition($condition2);
                     }
                 } else {
-                    $delivery = $geoZone->deliveries()->where('id', $request->deliveryId)->first();
+//                    $delivery = $geoZone->deliveries()->where('id', $request->deliveryId)->first();
+                    $delivery = DeliveryCosts::find($request->deliveryId);
                     if ($delivery) {
                         $shippingDefaultOption = $delivery->options()->where('id', $request->optionId)->first();
                         if ($shippingDefaultOption) {
@@ -373,6 +376,7 @@ class ShoppingCartController extends Controller
                 $shipping = Cart::getCondition($geoZone->name);
             }
         }
+
 
         $html = $this->view('_partials.checkout_render',
             compact(['billing_address', 'default_shipping', 'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address']))->with('address_id', $request->addressId)->render();
