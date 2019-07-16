@@ -10,11 +10,11 @@
             @foreach($delivery->options as $option)
                 <div class="method">
                     <div class="custom-control custom-radio">
-                        <input type="radio" checked class="custom-control-input"
+                        <input type="radio" class="custom-control-input select-shipping-method"
                                data-delivery="{{ $delivery->id }}"
                                {!! ($shipping && $shipping->getAttributes()->id == $option->id) ? 'checked="checked"' : "" !!}
                                id="deliveryRadios{{ $option->id }}" name="courier_change" value="{!! $option->id !!}">
-                        <label class="custom-control-label select-shipping-method" for="deliveryRadios{{ $option->id }}">
+                        <label class="custom-control-label" for="deliveryRadios{{ $option->id }}">
                                                                 <span class="d-flex method-wrap pointer">
                                                                     <span class="method-left">
                                                                          <span class="photo">

@@ -669,7 +669,7 @@
                                     <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
                                         Added Offers
                                     </div>
-                                    
+
                                 </div>
                                 <a href="#" class="text-main-clr special__popup-content-right-item-more">
                                     <div class="d-flex flex-column align-items-center item-more-inner">

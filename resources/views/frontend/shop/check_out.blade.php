@@ -453,6 +453,7 @@
                             $(".container").css('opacity', '1');
                             $(".loader-img").toggleClass('d-none');
                             $(".checkout-data").html(res.html);
+                            $(".select-address").select2()
                         }
                     },
                     error => {
