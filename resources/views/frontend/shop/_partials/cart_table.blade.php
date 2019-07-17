@@ -2,6 +2,106 @@
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-10 pl-0">
+                <div class="shopping-cart-payment shopping__cart-payment-wrapper">
+                    <div class="head-wrap">
+                        <h1 class="font-sec-reg font-24 lh-1 title">Payment Methode</h1>
+                        <p class="font-18 desc lh-1 m-0">Select a payment methode</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="left-wrapper">
+                                <div class="method-lists">
+                                    <div class="method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input select-shipping-method" checked id="deliveryRadios1" name="method" value="">
+                                            <label class="custom-control-label" for="deliveryRadios1">
+                                                                <span class="d-flex method-wrap pointer">
+                                                                         <span class="method-payment-photo">
+                                                                             <img src="/public/img/temp/method-cart-logos.png" alt="brand" />
+                                                                        </span>
+                                                                </span>
+                                                <span class="check-line"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input select-shipping-method" id="deliveryRadios2" name="method" value="">
+                                            <label class="custom-control-label" for="deliveryRadios2">
+                                                                <span class="d-flex method-wrap pointer">
+                                                                         <span class="method-payment-photo">
+                                                                             <img src="/public/img/temp/method-cart-paypal-logo.png" alt="brand" />
+                                                                        </span>
+                                                                </span>
+                                                <span class="check-line"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="method">
+                                        <div class="custom-control custom-radio">
+                                            <input type="radio" class="custom-control-input select-shipping-method" id="deliveryRadios3" name="method" value="">
+                                            <label class="custom-control-label" for="deliveryRadios3">
+                                                                <span class="d-flex method-wrap pointer">
+                                                                         <span class="method-payment-photo">
+                                                                             <img src="/public/img/temp/method-cart-maestro-logo.png" alt="brand" />
+                                                                        </span>
+                                                                </span>
+                                                <span class="check-line"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-8">
+                            <div class="payment-method">
+                                <div class="pay-credit-card mt-0">
+                                    <form>
+                                        <div class="form-group row item-wrap card-number">
+                                            <label for="cardNumber" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Card Number <span class="sup">*</span></label>
+                                            <div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">
+                                                <input type="text" class="form-control place-light" id="cardNumber" placeholder="1234 1234 1234 1234">
+                                                <span class="cards-icon d-inline-flex align-items-center"><img src="/public/img/visa-logo.png" alt="visa"></span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row item-wrap">
+                                            <label for="cardName" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Name on Card <span class="sup">*</span></label>
+                                            <div class="col-xl-6 col-sm-8 p-xl-0 center-col">
+                                                <input type="text" class="form-control" id="cardName" placeholder="Connor Silva">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row item-wrap expiry-date">
+                                            <label class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Expiry Date <span class="sup">*</span></label>
+                                            <div class="col-xl-10 col-sm-8 p-xl-0 center-col">
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="col-sm-2 p-0 d-flex">
+                                                        <input type="text" class="form-control place-light" placeholder="MM/YY">
+                                                    </div>
+                                                    <div class="col-sm-8 p-0 d-flex flex-wrap secure-code">
+                                                        <label for="secureCode" class="col-sm-3 pr-0 col-form-label text-tert-clr text-sm-right d-flex flex-nowrap">Security Code <span class="sup">*</span></label>
+                                                        <div class="col-sm-8 pr-0 ">
+                                                            <input type="text" class="form-control place-light" id="secureCode" placeholder="CVC">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row item-wrap checked-payment">
+                                            <div class="col-sm-8 pr-0">
+                                                <div class="d-flex flex-wrap justify-content-between align-self-center">
+                                                    <div class="custom-control custom-checkbox custom-control-inline align-items-center">
+                                                        <input type="checkbox" class="custom-control-input" id="customCheck1" name="example1">
+                                                        <label class="custom-control-label font-18 text-main-clr" for="customCheck1">Accept terms and condition</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 @if(! \Cart::isEmpty())
                     @foreach(\Cart::getContent() as $key => $item)
                         @php
@@ -33,7 +133,9 @@
                                                             xmlns="http://www.w3.org/2000/svg"
                                                             xmlns:xlink="http://www.w3.org/1999/xlink"
                                                             width="32px" height="31px" viewBox="0 0 31 32">
-                                                    <path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)" opacity="0.702" fill="rgb(255, 255, 255)"
+                                                    <path fill-rule="evenodd" stroke-width="2px"
+                                                          stroke="rgb(53, 53, 53)" opacity="0.702"
+                                                          fill="rgb(255, 255, 255)"
                                                           d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.001,6.258 3.001,10.466 C3.001,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
                                                     </svg>
                                                     </span>
@@ -77,7 +179,8 @@
                                                                 @if(count($option['options']))
                                                                     @foreach($option['options'] as $voption)
                                                                         <li class="single-row-product">
-                                                                            <div class="d-flex flex-column w-100 col-9 p-0">
+                                                                            <div
+                                                                                class="d-flex flex-column w-100 col-9 p-0">
                                                                                 <div class="w-100">
                                                                                     <div class="row">
                                                                                         <div
@@ -153,65 +256,65 @@
                                         </tr>
                                         </tbody>
                                         @if(! $stock->is_offer)
-                                        <tfoot>
-                                        <tr>
-                                            <td colspan="5">
-                                                <div class=" d-flex footer">
-                                                    <div class="add-offers font-26 font-sec-reg">Added <br/>Offers
-                                                    </div>
-                                                    <ul class="d-flex flex-wrap list-product">
-                                                        <li class="single-wall no-product">
-                                                            <span class="font-26">No offer is added</span>
-                                                        </li>
-                                                        <li class="single-wall">
-                                                            <div class="photo-item">
-                                                                <img src="/public/img/product-juice.png"
-                                                                     alt="product">
-                                                            </div>
-                                                            <div class="info-product">
-                                                                <h6 class="font-21 text-tert-clr title">
-                                                                    Kangertech Vola 23 100W
-                                                                    Premium Vape copy 2</h6>
-                                                                <div
-                                                                    class="d-flex align-items-center price-wall">
-                                                                    <span class="price">£25,78 </span>
-                                                                    <a href="#" class="remove-btn">
-                                                                        Remove
-                                                                    </a>
+                                            <tfoot>
+                                            <tr>
+                                                <td colspan="5">
+                                                    <div class=" d-flex footer">
+                                                        <div class="add-offers font-26 font-sec-reg">Added <br/>Offers
+                                                        </div>
+                                                        <ul class="d-flex flex-wrap list-product">
+                                                            <li class="single-wall no-product">
+                                                                <span class="font-26">No offer is added</span>
+                                                            </li>
+                                                            <li class="single-wall">
+                                                                <div class="photo-item">
+                                                                    <img src="/public/img/product-juice.png"
+                                                                         alt="product">
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li class="single-wall">
-                                                            <div class="photo-item">
-                                                                <img src="/public/img/product-juice.png"
-                                                                     alt="product">
-                                                            </div>
-                                                            <div class="info-product">
-                                                                <h6 class="font-21 text-tert-clr title">
-                                                                    Kangertech Vola 23 100W
-                                                                    Premium Vape copy 2</h6>
-                                                                <div
-                                                                    class="d-flex align-items-center price-wall">
-                                                                    <span class="price">£25,78 </span>
-                                                                    <a href="#" class="remove-btn">
-                                                                        Remove
-                                                                    </a>
+                                                                <div class="info-product">
+                                                                    <h6 class="font-21 text-tert-clr title">
+                                                                        Kangertech Vola 23 100W
+                                                                        Premium Vape copy 2</h6>
+                                                                    <div
+                                                                        class="d-flex align-items-center price-wall">
+                                                                        <span class="price">£25,78 </span>
+                                                                        <a href="#" class="remove-btn">
+                                                                            Remove
+                                                                        </a>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                    <a href="#"
-                                                       class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">
+                                                            </li>
+                                                            <li class="single-wall">
+                                                                <div class="photo-item">
+                                                                    <img src="/public/img/product-juice.png"
+                                                                         alt="product">
+                                                                </div>
+                                                                <div class="info-product">
+                                                                    <h6 class="font-21 text-tert-clr title">
+                                                                        Kangertech Vola 23 100W
+                                                                        Premium Vape copy 2</h6>
+                                                                    <div
+                                                                        class="d-flex align-items-center price-wall">
+                                                                        <span class="price">£25,78 </span>
+                                                                        <a href="#" class="remove-btn">
+                                                                            Remove
+                                                                        </a>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                        <a href="#"
+                                                           class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">
                                                                             <span class="icon"><i
                                                                                     class="fas fa-plus"></i></span>
-                                                        <div class="text">
-                                                            Added <br/>Offers
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        </tfoot>
+                                                            <div class="text">
+                                                                Added <br/>Offers
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            </tfoot>
                                         @endif
                                     </table>
                                 </div>
