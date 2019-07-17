@@ -9,7 +9,7 @@
             {!! $offer->name !!}
         </div>
         <div class="d-flex flex-wrap special__popup-content-right-product-bottom">
-            <span class="text-main-clr special__popup-content-right-product-price">
+            <span class="text-main-clr special__popup-content-right-product-price" data-price="{{ $price }}">
                 {{ convert_price($price,get_currency(), false) }}
             </span>
             <a href="#"
