@@ -6,13 +6,14 @@ data-per-price="{{ $vSettings->price_per }}"
 data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
 data-min-limit="{{ $vSettings->min_count_limit }}">
     {{ $vSettings->title }}
+    @if(! isset($selected))
+        @php $selected = $variation->first(); @endphp
+    @endif
+    <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+        @include("frontend.products._partials.offer_option")
+    </div>
 </div>
-@if(! isset($selected))
-    @php $selected = $variation->first(); @endphp
-@endif
-<div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
-@include("frontend.products._partials.offer_option")
-</div>
+
 
 {{--<div class="select-wall product__select-wall">--}}
     {{--<select name="" id=""--}}
