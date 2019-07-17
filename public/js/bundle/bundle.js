@@ -2875,6 +2875,15 @@ $(document).ready(function () {
             // console.log(totalPrice, 222222222222222222);
             totalPrice !== undefined && $('.continue-shp-wrapp .price-place-summary').html("" + getCurrencySymbol() + totalPrice);
         };
+
+        var countOfferTotalPrice = function countOfferTotalPrice() {
+            var offer_total_price = 0;
+            $('.added-offers').find('.special__popup-content-right-product-price').each(function () {
+                offer_total_price += $(this).data('price');
+            });
+            $('.offer-total-price').html("" + getCurrencySymbol() + offer_total_price);
+        };
+
         countOfferPrice();
 
         setTotalPrice(countTotalPrice());
@@ -3294,6 +3303,7 @@ $(document).ready(function () {
                 if ($("#specialPopUpModal .added-offers .special__popup-content-right-product[data-id=\"" + id + "\"]").length === 0) {
                     $('.special__popup-content-right-item.added-offers').append(data.html);
                 }
+                countOfferTotalPrice();
             }).catch(function (error) {
                 console.log(error);
             });
@@ -3304,6 +3314,7 @@ $(document).ready(function () {
             $(this).closest('.special__popup-main-product-item').removeClass('active');
             var id = $(this).closest('.special__popup-main-product-item').data('id');
             $('.special__popup-content-right-item.added-offers').find(".special__popup-content-right-product[data-id=\"" + id + "\"]").remove();
+            countOfferTotalPrice();
         });
 
         $('body').on('click', '.special__popup-content-right-product-remove', function () {
@@ -3313,6 +3324,7 @@ $(document).ready(function () {
             var buttonCart = product.find('.special__popup-main-product-item-btn');
             product.removeClass('active');
             buttonCart.removeClass('remove-btn').addClass('add-btn').html('add');
+            countOfferTotalPrice();
         });
 
         $('body').on('click', '#specialPopUpModal .bottom-btn-cart', function () {
