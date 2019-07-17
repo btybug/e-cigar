@@ -145,9 +145,10 @@ class ShoppingCartController extends Controller
                 }
 
                 $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
+                $popuphtml = \View('frontend.products._partials.offer_popup',['vape' => $product])->render();
 
                 return \Response::json(['error' => false, 'message' => 'added', 'key' => $cart_id,'product_id' => $product->id,
-                    'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml]);
+                    'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml,'specialHtml' => $popuphtml]);
             }
 
             return \Response::json(['error' => true, 'message' => $error]);
