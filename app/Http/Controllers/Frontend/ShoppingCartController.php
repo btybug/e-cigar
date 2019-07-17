@@ -427,17 +427,29 @@ class ShoppingCartController extends Controller
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if ($geoZone) {
+                Cart::removeConditionsByType('shipping');
                 if (count($geoZone->deliveries)) {
                     $subtotal = Cart::getSubTotal();
                     $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
                     if ($delivery && count($delivery->options)) {
                         $shippingDefaultOption = $delivery->options->first();
+                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $geoZone->name,
+                            'type' => 'shipping',
+                            'target' => 'total',
+                            'value' => $shippingDefaultOption->cost,
+                            'order' => 1,
+                            'attributes' => $shippingDefaultOption
+                        ));
+                        Cart::condition($condition2);
                         $shipping = Cart::getCondition($geoZone->name);
                     }
                 }
             }
         }
 
-        return $this->view('payment', compact(['cash', 'stripe', 'active_payments_gateways', 'billing_address', 'default_shipping', 'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address', 'address_id']));
+
+        return $this->view('payment', compact(['cash', 'stripe', 'active_payments_gateways', 'billing_address', 'default_shipping',
+            'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address', 'address_id']));
     }
 }

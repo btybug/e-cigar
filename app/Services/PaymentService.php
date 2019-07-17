@@ -23,6 +23,7 @@ use PragmaRX\Countries\Package\Countries;
 class PaymentService
 {
     private $amount = 0;
+    public $method = 'cash';
 
     public function __construct(
         Statuses $statuses,
@@ -39,15 +40,33 @@ class PaymentService
         $billingId = session()->get('billing_address');
         $this->amount = CartService::getTotalPriceSum() + Cart::getTotal();
         $geoZone = null;
-
+        $items = Cart::getContent();
         if (\Auth::check()) {
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
             $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
-            $shipping = Cart::getCondition($geoZone->name);
         }
         return \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
+            Cart::removeConditionsByType('shipping');
+            if (count($geoZone->deliveries)) {
+                $subtotal = Cart::getSubTotal();
+                $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+                if ($delivery && count($delivery->options)) {
+                    $shippingDefaultOption = $delivery->options->first();
+                    $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                        'name' => $geoZone->name,
+                        'type' => 'shipping',
+                        'target' => 'total',
+                        'value' => $shippingDefaultOption->cost,
+                        'order' => 1,
+                        'attributes' => $shippingDefaultOption
+                    ));
+
+                    Cart::condition($condition2);
+                }
+            }
+
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
             $order_number = get_order_number();
@@ -58,9 +77,9 @@ class PaymentService
                 'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
-                'payment_method' => 'cash',
+                'payment_method' => $this->method,
                 'shipping_price' => $shipping->getValue(),
-                'currency' => 'usd',
+                'currency' => get_currency(),
                 'order_number' => $order_number
             ]);
 

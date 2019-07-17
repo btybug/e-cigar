@@ -53,6 +53,7 @@ class CashPaymentController extends Controller
     public function order(Request $request)
     {
         $order = $this->paymentService->call();
+
         return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
     }
 
