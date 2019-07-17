@@ -241,6 +241,15 @@ $(document).ready(function () {
             // console.log(totalPrice, 222222222222222222);
             totalPrice !== undefined && $('.continue-shp-wrapp .price-place-summary').html(`${getCurrencySymbol()}${totalPrice}`);
         };
+
+        const countOfferTotalPrice = () => {
+            let offer_total_price = 0;
+            $('.added-offers').find('.special__popup-content-right-product-price').each(function() {
+                offer_total_price += $(this).data('price');
+            });
+            $('.offer-total-price').html(`${getCurrencySymbol()}${offer_total_price}`);
+        };
+
         countOfferPrice();
 
 
@@ -698,6 +707,8 @@ $(document).ready(function () {
             btn.html('add');
         };
 
+
+
         $('body').on('click', '.special__popup-main-product-item-btn.add-btn', function() {
             const id = $(this).closest('.special__popup-main-product-item').data('id');
             const price = $(this).closest('.special__popup-main-product-item').find('.product__single-item_price').data('price-for-add');
@@ -725,7 +736,7 @@ $(document).ready(function () {
                     if($(`#specialPopUpModal .added-offers .special__popup-content-right-product[data-id="${id}"]`).length === 0) {
                         $('.special__popup-content-right-item.added-offers').append(data.html);
                     }
-
+                    countOfferTotalPrice();
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -737,6 +748,7 @@ $(document).ready(function () {
             $(this).closest('.special__popup-main-product-item').removeClass('active');
             const id = $(this).closest('.special__popup-main-product-item').data('id');
             $('.special__popup-content-right-item.added-offers').find(`.special__popup-content-right-product[data-id="${id}"]`).remove();
+            countOfferTotalPrice();
         });
 
         $('body').on('click', '.special__popup-content-right-product-remove', function() {
@@ -746,6 +758,7 @@ $(document).ready(function () {
             const buttonCart = product.find('.special__popup-main-product-item-btn');
             product.removeClass('active');
             buttonCart.removeClass('remove-btn').addClass('add-btn').html('add');
+            countOfferTotalPrice();
         });
 
         $('body').on('click', '#specialPopUpModal .bottom-btn-cart', function() {
