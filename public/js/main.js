@@ -676,6 +676,7 @@ $(document).ready(function () {
         $('body').on('click', '.special__popup-main-product-item-btn.add-btn', function() {
             const id = $(this).closest('.special__popup-main-product-item').data('id');
             const price = $(this).closest('.special__popup-main-product-item').find('.product__single-item_price').data('price-for-add');
+            const $self = $(this);
             fetch("/products/add-offer", {
                 method: "post",
                 headers: {
@@ -689,13 +690,13 @@ $(document).ready(function () {
                     id,
                     price
                 })
-            })
-                .then(function (response) {
+            }).then(function (response) {
                     return response.json();
                 })
                 .then(function (data) {
-                    $(this).closest('.special__popup-main-product-item').addClass('active');
-                    btnAddToRemove($(this));
+                    $self.closest('.special__popup-main-product-item').addClass('active');
+                    console.log($self.closest('.special__popup-main-product-item'));
+                    btnAddToRemove($self);
                     $('.special__popup-content-right-item.added-offers').append(data.html);
                 })
                 .catch(function (error) {
@@ -708,6 +709,15 @@ $(document).ready(function () {
             $(this).closest('.special__popup-main-product-item').removeClass('active');
             const id = $(this).closest('.special__popup-main-product-item').data('id');
             $('.special__popup-content-right-item.added-offers').find(`.special__popup-content-right-product[data-id="${id}"]`).remove();
+        });
+
+        $('body').on('click', '.special__popup-content-right-product-remove', function() {
+            const id = $(this).closest('.special__popup-content-right-product').data('id');
+            $(this).closest('.special__popup-content-right-product').remove();
+            const product = $(`#specialPopUpModal .special__popup-main-product-item[data-id="${id}"]`);
+            const buttonCart = product.find('.special__popup-main-product-item-btn');
+            product.removeClass('active');
+            buttonCart.removeClass('remove-btn').addClass('add-btn').html('add');
         });
 
 
