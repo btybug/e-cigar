@@ -3261,6 +3261,7 @@ $(document).ready(function () {
         $('body').on('click', '.special__popup-main-product-item-btn.add-btn', function () {
             var id = $(this).closest('.special__popup-main-product-item').data('id');
             var price = $(this).closest('.special__popup-main-product-item').find('.product__single-item_price').data('price-for-add');
+            var $self = $(this);
             fetch("/products/add-offer", {
                 method: "post",
                 headers: {
@@ -3277,8 +3278,9 @@ $(document).ready(function () {
             }).then(function (response) {
                 return response.json();
             }).then(function (data) {
-                $(this).closest('.special__popup-main-product-item').addClass('active');
-                btnAddToRemove($(this));
+                $self.closest('.special__popup-main-product-item').addClass('active');
+                console.log($self.closest('.special__popup-main-product-item'));
+                btnAddToRemove($self);
                 $('.special__popup-content-right-item.added-offers').append(data.html);
             }).catch(function (error) {
                 console.log(error);
@@ -3290,6 +3292,15 @@ $(document).ready(function () {
             $(this).closest('.special__popup-main-product-item').removeClass('active');
             var id = $(this).closest('.special__popup-main-product-item').data('id');
             $('.special__popup-content-right-item.added-offers').find(".special__popup-content-right-product[data-id=\"" + id + "\"]").remove();
+        });
+
+        $('body').on('click', '.special__popup-content-right-product-remove', function () {
+            var id = $(this).closest('.special__popup-content-right-product').data('id');
+            $(this).closest('.special__popup-content-right-product').remove();
+            var product = $("#specialPopUpModal .special__popup-main-product-item[data-id=\"" + id + "\"]");
+            var buttonCart = product.find('.special__popup-main-product-item-btn');
+            product.removeClass('active');
+            buttonCart.removeClass('remove-btn').addClass('add-btn').html('add');
         });
 
         //data object for add-to-cart and extra
