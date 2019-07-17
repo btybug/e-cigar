@@ -406,6 +406,7 @@ class CartService
             $this->extras = $data;
         }
 
+        $error = false;
         return $error;
     }
 
