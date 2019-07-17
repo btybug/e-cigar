@@ -1,4 +1,4 @@
-<div class="mb-3 limit {{$vSettings->type}}"
+<div class="mb-3 limit pr-wrap {{$vSettings->type}}"
      data-group-id="{{ $vSettings->variation_id }}"
      data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
      data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
