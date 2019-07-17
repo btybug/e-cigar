@@ -109,6 +109,7 @@ class StripePaymentController extends Controller
 
     private function order($transaction)
     {
+        $this->paymentService->method = 'stripe';
         $order = $this->paymentService->call();
         $this->makeTransaction($transaction, $order);
 
