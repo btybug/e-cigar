@@ -61,7 +61,7 @@
         </div>
         <div class="mt-auto special__popup-content-right-bottom">
             <div class="d-flex text-tert-clr lh-1">
-                <span class="font-48 offer-total-price">£36</span>
+                <span class="font-48 offer-total-price">{!! get_symbol() !!}0</span>
             </div>
         </div>
     </div>
