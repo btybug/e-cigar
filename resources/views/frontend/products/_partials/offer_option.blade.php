@@ -156,7 +156,7 @@
 
 @if($vSettings->display_as == 'popup' && $vSettings->type == 'package_product')
 <div>
-    <div class="product__single-item-info-price lh-1" data-single-price="{{ $price->price }}">
+    <div class="product__single-item-info-price lh-1" data-single-price="{{ $price }}">
         <span class="font-40">
 
         </span>
