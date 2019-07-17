@@ -481,7 +481,7 @@ $(document).ready(function () {
 
         $('body').on('click', '#specialPopUpModal .product__single-item-add-new a.product__single-item-add-new-btn', function(ev) {
             ev.preventDefault();
-            const row = $(this).closest('.package_product');
+            const row = $(this).closest('.pr-wrap');
             const id = row.data('group-id');
 
             fetch("/products/get-offer-menu-raw", {
@@ -697,7 +697,10 @@ $(document).ready(function () {
                     $self.closest('.special__popup-main-product-item').addClass('active');
                     console.log($self.closest('.special__popup-main-product-item'));
                     btnAddToRemove($self);
-                    $('.special__popup-content-right-item.added-offers').append(data.html);
+                    if($(`#specialPopUpModal .added-offers .special__popup-content-right-product[data-id="${id}"]`).length === 0) {
+                        $('.special__popup-content-right-item.added-offers').append(data.html);
+                    }
+
                 })
                 .catch(function (error) {
                     console.log(error);
@@ -719,6 +722,118 @@ $(document).ready(function () {
             product.removeClass('active');
             buttonCart.removeClass('remove-btn').addClass('add-btn').html('add');
         });
+
+        $('body').on('click', '#specialPopUpModal .bottom-btn-cart', function() {
+
+            const activeProducts = $('.special__popup-main-product-item.active');
+            const products = [];
+            if(activeProducts.length > 0) {
+                activeProducts.each(function() {
+                    const product_id = $(this).data('id');
+                    const product_qty = 1;
+                    const variations = [];
+
+                    const pr_items = $(this).find('.pr-wrap');
+
+                    pr_items.each(function() {
+                        const group_id = $(this).data('group-id');
+                        const products = [];
+                        $(this).find('.product__single-item-info-bottom').each(function() {
+                            console.log('.product__single-item-info-bottom', this)
+                            let id;
+                            let qty;
+                            let discount_id;
+                            if($(this).find('.single-product-select').length > 0) {
+                                id = $(this).find('.single-product-select').val();
+                                if($(this).find('.input-qty').length>0) {
+                                    qty = $(this).find('.input-qty').val();
+                                    discount_id = null;
+                                } else if($(this).find('.select-qty').length>0) {
+                                    qty = null;
+                                    discount_id = $(this).find('.select-qty').val();
+                                } else {
+                                    qty = '1';
+                                    discount_id = null;
+                                }
+                            } else if($(this).find('.custom-control-input').length > 0) {
+
+                                id = $(this).find('.custom-control-input:checked').val();
+                                console.log('id', id, $(this), $(this).find('.custom-control-input:checked'),  555555555);
+                                if($(this).find('.input-qty').length>0) {
+                                    qty = $(this).find('.input-qty').val();
+                                    discount_id = null;
+                                } else if($(this).find('.select-qty').length>0) {
+                                    qty = null;
+                                    discount_id = $(this).find('.select-qty').val();
+                                } else {
+                                    qty = '1';
+                                    discount_id = null;
+                                }
+                            } else if($(this).closest('.product__single-item-info').find('.popup-select').length > 0) {
+                                id = $(this).data('id');
+
+                                if($(this).find('.input-qty').length>0) {
+                                    qty = $(this).find('.input-qty').val();
+                                    discount_id = null;
+                                } else if($(this).find('.select-qty').length>0) {
+                                    qty = null;
+                                    discount_id = $(this).find('.select-qty').val();
+                                } else {
+                                    qty = '1';
+                                    discount_id = null;
+                                }
+                            }
+                            products.push({
+                                id,
+                                qty,
+                                discount_id
+                            });
+                        });
+
+
+
+                        variations.push({
+                            group_id,
+                            products: products.filter(function(el) {
+                                return el.id !== undefined;
+                            })
+                        });
+
+
+                    });
+                    products.push({product_id,product_qty, variations});
+                    console.log(products);
+                });
+
+
+                fetch("/products/add-offer-to-cart", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(products)
+                }).then(function (response) {
+                    return response.json();
+                })
+                    .then(function (data) {
+                        // $self.closest('.special__popup-main-product-item').addClass('active');
+                        // console.log($self.closest('.special__popup-main-product-item'));
+                        // btnAddToRemove($self);
+                        // $('.special__popup-content-right-item.added-offers').append(data.html);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+
+            }
+
+
+        })
 
 
 //data object for add-to-cart and extra
