@@ -1,5 +1,5 @@
 <div
-    class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title {{$vSettings->type}}"
+    class="font-sec-light text-main-clr font-24 lh-1 special__popup-main-product-item-sec-title pr-wrap {{$vSettings->type}}"
 data-group-id="{{ $vSettings->variation_id }}"
 data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
 data-per-price="{{ $vSettings->price_per }}"
