@@ -234,6 +234,15 @@ class ProductsController extends Controller
         return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
     }
 
+    public function getOfferMenuRaws(Request $request)
+    {
+        $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
+        $vSettings = $variations->first();
+        $html = \view("frontend.products._partials.render_offers", compact(['variations', 'vSettings']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
+    }
+
     public function postSelectItems(Request $request)
     {
         $items = StockVariation::where('variation_id', $request->group)->whereNotIn('id',$request->get('ids',[]))->get();
