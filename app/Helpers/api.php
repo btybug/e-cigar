@@ -1323,6 +1323,7 @@ function getClient()
 
 function getGoogleAlians($value,$key){
     // Get the API client and construct the service object.
+    if (!\App\Models\Gmail::check())  return collect([]);
     $client = getClient();
     $service = new Google_Service_Directory($client);
 
