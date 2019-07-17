@@ -36,13 +36,14 @@ return [
 	'scopes' => [
 	    'https://www.googleapis.com/auth/spreadsheets',
         'https://www.googleapis.com/auth/admin.directory.user',
-		'all',
+//		'all',
 	],
     'additional_scopes' => [
         'https://www.googleapis.com/auth/drive',
         'https://www.googleapis.com/auth/documents',
         'https://www.googleapis.com/auth/admin.directory.group.member',
-        'https://www.googleapis.com/auth/admin.directory.user'
+        'https://www.googleapis.com/auth/admin.directory.user',
+//        'all'
     ],
 	'access_type' => 'offline',
 

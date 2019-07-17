@@ -28,8 +28,8 @@
                                         </td>
                                         <td>
                                             {!! Form::hidden('old['.$from->id.'][type]','from') !!}
-                                            <input  type="text" name="old[{!!$from->id!!}][email]" class="form-control" value="{!! $from->email !!}"
-                                                    aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                            {!! Form::select("old[".$from->id."][email]",$alians,$from->email,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
+
                                         </td>
                                         <td>
                                             <label for="sendingEmailDesc">Description</label>
@@ -96,8 +96,8 @@
                                         </td>
                                         <td>
                                             {!! Form::hidden('old['.$to->id.'][type]','to') !!}
-                                            <input type="text" name="old[{!!$to->id!!}][email]" class="form-control" value="{!! $to->email !!}"
-                                                   aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                                            {!! Form::select("old[".$to->id."][email]",$alians,$to->email,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
+
                                         </td>
                                         <td>
                                             <label for="sendingEmailDesc">Description</label>
@@ -164,7 +164,7 @@
                 $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
                 let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
                     </td><td><input type="hidden" name="new[${fcount}][type]" value="from">
-                    <input name="new[${fcount}][email]" type="text" class="form-control" id="sendingEmail" aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                   {!! Form::select('new[${fcount}][email]',$alians,null,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
                     </td><td><label for="sendingEmailDesc">Description</label></td> <td>
                     <textarea rows="5" class="form-control" name="new[${fcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
                     </td><td><button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button> </td></tr>`;
@@ -177,7 +177,7 @@
                 $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
                 let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
                     </td><td><input type="hidden" name="new_to[${tcount}][type]" value="to">
-                    <input name="new_to[${tcount}][email]" type="text" class="form-control"  aria-describedby="sendingEmail" placeholder="Enter E-Mail Address">
+                     {!! Form::select('new_to[${tcount}][email]',$alians,null,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
                     </td><td><label for="sendingEmailDesc">Description</label></td> <td>
                     <textarea rows="5" class="form-control" name="new_to[${tcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
                     </td><td><button type="button" class="btn btn-primary pull-right  add-more-too"><i class="fa fa-plus"></i></button> </td></tr>`;

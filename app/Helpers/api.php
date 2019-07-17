@@ -1294,3 +1294,54 @@ function get_breadcrumb_previous_url($breadcrumbs)
     $length = count($breadcrumbs);
     return $breadcrumbs[$length - 2]->url;
 }
+
+function getClient()
+{
+    $client = new Google_Client();
+    $client->setClientId(env('GOOGLE_CLIENT_ID','client_id'));
+    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET','client_secret'));
+    $client->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
+    $client->setApplicationName('Google Classroom API PHP Quickstart');
+    $client->setScopes(Google_Service_Classroom::CLASSROOM_COURSES_READONLY);
+
+    $client->setAccessType('offline');
+    $client->setPrompt('select_account consent');
+    foreach (config('gmail.scopes') as $scopes) {
+        $client->addScope($scopes);
+    }
+    foreach (config('gmail.additional_scopes') as $scopes) {
+        $client->addScope($scopes);
+    }
+    $client->addScope(Google_Service_Oauth2::USERINFO_EMAIL);
+    $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_GROUP);
+    $accessToken = Gmail::refreshToken();
+    if (is_array($accessToken)) {
+        $client->setAccessToken($accessToken);
+    }
+    return $client;
+}
+
+function getGoogleAlians($value,$key){
+    // Get the API client and construct the service object.
+    $client = getClient();
+    $service = new Google_Service_Directory($client);
+
+// Print the first 10 users in the domain.
+    $optParams = array(
+        'customer' => 'my_customer',
+        'maxResults' => 10,
+        'orderBy' => 'email',
+    );
+    $results = $service->users->listUsers($optParams);
+    $users = [];
+    if (count($results->getUsers()) == 0) {
+        return [];
+    } else {
+        foreach ($results->getUsers() as $user) {
+            $users[] = ['email'=>$user->getPrimaryEmail(),'name'=>$user->getName()->getFullName()];
+        }
+        return collect($users)->pluck($value,$key);
+    }
+    return [];
+}
+
