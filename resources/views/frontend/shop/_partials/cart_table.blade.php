@@ -167,6 +167,7 @@
                                                         <ul class="d-flex flex-wrap list-product">
                                                             @if($item->attributes->has('extra') && isset($item->attributes->extra['data']))
                                                             @foreach($item->attributes->extra['data'] as $extra)
+                                                                {!! dd($extra) !!}
                                                                     <li class="single-wall">
                                                                         <div class="photo-item">
                                                                             <img src="{{ checkImage($extra['offer']->image) }}"

@@ -68,7 +68,7 @@ class CashPaymentController extends Controller
             Cart::clear();
             Cart::removeConditionsByType('shipping');
 
-            return $this->view('_partials.cash_success');
+            return $this->view('_partials.cash_success',compact('order'));
         }
 
         abort(404);

@@ -48,7 +48,10 @@ Route::get('error', function () {
     file_put_contents(storage_path('logs'.DS.date('Y_m_d_H_i_s').'.log'));
 });
 
-
+//Route::get('order-success', function () {
+//    $order = \App\Models\Orders::find(25);
+//    return view("frontend.shop._partials.cash_success",compact(['order']));
+//});
 
 Auth::routes();
 Auth::routes(['verify' => true]);
