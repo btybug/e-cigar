@@ -570,8 +570,8 @@ class SettingsController extends Controller
 
     public function getMainPages(Settings $settings, Request $request)
     {
-        $p = $request->get('p', 'home_page');
-        if ($p == 'home_page' || $p == "single_product" || $p == "single_post" || $p == "my_account") {
+        $p = $request->get('p', 'banners');
+        if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account") {
             $model = $settings->getEditableData($p);
         } else {
             $model = Common::where('type', $p)->first();
@@ -589,8 +589,8 @@ class SettingsController extends Controller
 
     public function postMainPages(Request $request, Settings $settings)
     {
-        $p = $request->get('p', 'hom_page');
-        if ($p == "home_page" || $p == "single_product" || $p == "single_post" || $p == "my_account") {
+        $p = $request->get('p', 'banners');
+        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account") {
             $banners = array_filter($request->get($p, []));
             $settings->updateOrCreateSettings($p, ['data' => $banners]);
         } else {
