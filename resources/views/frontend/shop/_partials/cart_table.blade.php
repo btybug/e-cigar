@@ -2,68 +2,7 @@
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-10 pl-0">
-                {{--                confirm tab start--}}
-                {{--<div class="shopping__cart-confirm">--}}
-                {{--<h1 class="font-40 title">Thank you for your order!</h1>--}}
-                {{--<p class="font-20 sec-title">We have already started preparing your order</p>--}}
-                {{--<ul class="row list-shipping">--}}
-                {{--<li class="col-md-3 col-sm-6">--}}
-                {{--<div class="sipping-item-wrap">--}}
-                {{--<div class="item-photo">--}}
-                {{--<img src="/public/img/confirm-box.png" class="box-img" alt="item"/>--}}
-                {{--</div>--}}
-                {{--<h3 class="font-sec-reg font-24 item-title">Order Number</h3>--}}
-                {{--<p class="font-sec-reg font-24 text-red-clr lh-1 item-info">123NFH255664</p>--}}
-                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">Track your order</a>--}}
-                {{--</div>--}}
-                {{--</li>--}}
-                {{--<li class="col-md-3 col-sm-6">--}}
-                {{--<div class="sipping-item-wrap address-item">--}}
-                {{--<div class="item-photo">--}}
-                {{--<img src="/public/img/confirm-home.png" class="home-img" alt="item"/>--}}
-                {{--</div>--}}
-                {{--<h3 class="font-sec-reg font-24 item-title">Shipping Address</h3>--}}
-                {{--<div class="d-inline-block text-left">--}}
-                {{--<p class="font-main-light font-17 text-wrap">Prime Minister</p>--}}
-                {{--<p class="font-main-light font-17 text-wrap">178 Grand Street</p>--}}
-                {{--<p class="font-main-light font-17 text-wrap">London</p>--}}
-                {{--<p class="font-main-light font-17 text-wrap">SW1A 2AA</p>--}}
-                {{--<p class="font-main-light font-17 text-wrap mb-0">United Kingdom</p>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</li>--}}
-                {{--<li class="col-md-3 col-sm-6">--}}
-                {{--<div class="sipping-item-wrap delivery-item">--}}
-                {{--<div class="item-photo">--}}
-                {{--<img src="/public/img/confirm-calendar.png" class="calendar-img" alt="item"/>--}}
-                {{--</div>--}}
-                {{--<h3 class="font-sec-reg font-24 item-title">--}}
-                {{--Expected <br>--}}
-                {{--Date of delivery--}}
-                {{--</h3>--}}
-                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info">Friday</p>--}}
-                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info mb-0">10/08/2019</p>--}}
-                {{--</div>--}}
-                {{--</li>--}}
-                {{--<li class="col-md-3 col-sm-6">--}}
-                {{--<div class="sipping-item-wrap-both">--}}
-                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
-                {{--<div class="item-photo">--}}
-                {{--<img src="/public/img/confirm-user.png" class="user-img" alt="item"/>--}}
-                {{--</div>--}}
-                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">View My Profile</a>--}}
-                {{--</div>--}}
-                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
-                {{--<div class="item-photo">--}}
-                {{--<img src="/public/img/confirm-gift.png" class="gift-img" alt="item"/>--}}
-                {{--</div>--}}
-                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-red item-order-btn">Continue Shopping</a>--}}
-                {{--</div>--}}
-                {{--</div>--}}
-                {{--</li>--}}
-                {{--</ul>--}}
-                {{--</div>--}}
-                {{--                confirm tab end--}}
+
 
                 {{--                payment tab start--}}
                 {{--<div class="shopping-cart-payment shopping__cart-payment-wrapper">--}}
