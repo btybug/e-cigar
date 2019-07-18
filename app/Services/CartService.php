@@ -327,8 +327,6 @@ class CartService
                         if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
                             $error = "Please select options according to limit";
                         }
-                    } else {
-                        $this->price += $group->price;
                     }
                 } else {
                     $error = "Section not found";
