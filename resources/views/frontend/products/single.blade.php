@@ -617,7 +617,6 @@
                     </button>
                 </div>
                 <div class="modal-body p-0">
-                    @include("frontend.products._partials.offer_popup")
                 </div>
             </div>
         </div>
@@ -708,7 +707,6 @@
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
-        $("#specialPopUpModal").modal();
         //esia
         // var variations = {
         //     "group_id" : "5ca48c5f4401f",
