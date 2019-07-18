@@ -181,7 +181,7 @@
                                                                                 <span class="price">
                                                                                     {!! convert_price($extra['price'],$currency) !!}
                                                                                 </span>
-                                                                                <a href="#" class="remove-btn">
+                                                                                <a  href="javascript:void(0)" data-uid="{{ $extra['key'] }}" class="remove-btn remove-from-cart">
                                                                                     Remove
                                                                                 </a>
                                                                             </div>
