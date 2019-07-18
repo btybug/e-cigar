@@ -126,16 +126,16 @@ class PaymentService
                 }
 
                 $extras = [];
-                if($item->attributes->extra && isset($item->attributes->extra)){
-                    foreach ($item->attributes->extra as $extra) {
+                if($item->attributes->has('extra') && isset($item->attributes->extra['data'])){
+                    foreach ($item->attributes->extra['data'] as $extra) {
                         $dataV = [];
                         $dataV['price'] = $extra['price'];
                         $dataV['options'] = [];
-                        foreach ($extra['options'] as $option) {
+                        foreach ($extra['variations']['options'] as $option) {
                             if (isset($sales[$option['option']->item_id])) {
-                                $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
+                                $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + 1;
                             } else {
-                                $sales[$option['option']->item_id] = $option['qty'];
+                                $sales[$option['option']->item_id] = 1;
                             }
 
                             $dataV['options'][] = [
@@ -146,7 +146,7 @@ class PaymentService
                                 'image' => $option['option']->image,
                             ];
                         }
-                        $extras[$extra['group']->variation_id] = $dataV;
+                        $extras[$extra['variations']['group']->variation_id] = $dataV;
                     }
                 }
 
