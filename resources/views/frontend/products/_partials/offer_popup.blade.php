@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap special__popup-content">
+<div class="d-flex flex-wrap special__popup-content" data-key="{{ @$key }}">
     <div class="d-flex flex-column special__popup-content-left">
         <div class="special__popup-content-scroll">
             <ul class="row special__popup-main-products-list">
