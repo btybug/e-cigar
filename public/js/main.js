@@ -832,7 +832,7 @@ $(document).ready(function () {
                 });
 
 
-                fetch("/products/add-offer-to-cart", {
+                fetch("/add-extra-to-cart", {
                     method: "post",
                     headers: {
                         "Content-Type": "application/json",
