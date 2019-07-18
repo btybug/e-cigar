@@ -1907,15 +1907,17 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     object-fit: cover;
     font-family: 'object-fit: cover;';
 }
-
-.home__main-slider-thumb .fs-carousel-canister.fs-touch-element {
-    display: flex;
-    flex-direction: column;
-    width: 100% !important;
-    transform: none !important;
+@media (min-width: 992px) {
+    .home__main-slider-thumb .fs-carousel-canister.fs-touch-element {
+        display: flex;
+        flex-direction: column;
+        width: 100% !important;
+        transform: none !important;
+    }
 }
 
-.home__main-slider {
+
+.home__main-slider .main-slider-wall{
     height: 700px;
 }
 
@@ -4801,6 +4803,12 @@ position: absolute;
         max-width: 33.33%;
         flex: 0 0 33.33%;
     }
+    .home_brands-slider .fs-carousel-viewport{
+        padding: 0 90px;
+    }
+    .home_brands-slider {
+        padding: 0 100px;
+    }
 }
 
 
@@ -4874,6 +4882,20 @@ position: absolute;
     .product-card_old-price {
         font-size: 22px;
     }
+    .home__main-slider .main-slider-wall{
+        height: 500px;
+    }
+    .home__main-slider-thumb{
+        position: static !important;
+        width: initial !important;
+    }
+    .home__main-slider-thumb .thumb-wall{
+        margin-bottom: 0;
+        margin-right: 15px;
+    }
+    .home__main-slider-thumb .fs-carousel-canister{
+        margin: 0 auto !important;
+    }
 }
 
 @media (max-width: 768px) {
@@ -4903,6 +4925,9 @@ position: absolute;
 
     .single-product-main-title .like-icon {
         margin-right: 10px;
+    }
+    .home_brands-slider {
+        padding: 0 10px;
     }
 }
 
@@ -4954,6 +4979,9 @@ position: absolute;
     .news_sort_by_select .sort-by_select:not(:last-of-type) {
         margin: 0;
     }
+    .home_brands-wrapper{
+        padding: 0 15px;
+    }
 
 }
 
@@ -4978,6 +5006,9 @@ position: absolute;
         width: 45px;
         bottom: 0;
         right: 0;
+    }
+    .home__main-slider .main-slider-wall{
+        height: 400px;
     }
 }
 
@@ -5062,6 +5093,12 @@ position: absolute;
 
     header .header-bottom .cat-search .select2.select2-container.select2-container--default {
         width: 90px !important;
+    }
+    .home_brands-slider .fs-carousel-controls{
+        display: none !important;
+    }
+    .home_brands-slider .fs-carousel-viewport {
+        padding: 0 10px;
     }
 }
 
