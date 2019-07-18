@@ -2,6 +2,7 @@
 
 use App\Models\OrderItem;
 use App\Models\Orders;
+use App\Models\Stock;
 use App\Models\StockVariation;
 use App\Models\StockVariationDiscount;
 use App\Models\ZoneCountries;
@@ -51,20 +52,9 @@ class CartService
     public static function getPriceSum($id)
     {
         $cart = Cart::get($id);
-        $price = 0;
+        $price = $cart->price;
         if ($cart && $cart->attributes->has('extra')) {
-            foreach ($cart->attributes['extra'] as $datum) {
-                if ($datum['group']->price_per == 'product') {
-                    $price += $datum['group']->price;
-                } else {
-                    if (count($datum['options'])) {
-                        foreach ($datum['options'] as $option) {
-                            //add qty
-                            $price += $option['option']->price * $option['qty'];
-                        }
-                    }
-                }
-            }
+            $price += $cart->attributes['extra']['price'];
         }
         return ($cart) ? $price * $cart->quantity : $price;
     }
@@ -76,19 +66,9 @@ class CartService
         foreach ($data as $cart) {
             $itemPrice = 0;
             if ($cart->attributes->has('extra')) {
-                foreach ($cart->attributes['extra'] as $datum) {
-                    if ($datum['group']->price_per == 'product') {
-                        $itemPrice += $datum['group']->price;
-                    } else {
-                        if (count($datum['options'])) {
-                            foreach ($datum['options'] as $option) {
-                                //add qty
-                                $itemPrice += $option['option']->price * $option['qty'];
-                            }
-                        }
-                    }
-                }
+                $itemPrice = $cart->attributes['extra']['price'];
             }
+
             $price += $itemPrice * $cart->quantity;
         }
         return $price;
@@ -343,65 +323,112 @@ class CartService
         return $error;
     }
 
-    public function validateExtra($product, $vdata)
+    public function validateExtra($product, $offers)
     {
         $error = false;
-        $data = [];
-        $group = $product->variations()->where('variation_id', $vdata['group_id'])->first();
-        if ($group) {
-            $data['group'] = $group;
-            $data['key'] = uniqid();
-            $data['options'] = [];
-            $product_limit = 0;
+        $offerData = [];
+        if(count($offers)){
+            foreach ($offers as $vdata){
+                $data = [];
+                $offer = Stock::find($vdata['product_id']);
+                if($offer){
+                    $data['offer'] = $offer;
+                    $data['key'] = uniqid();
+                    $data['variations'] = [];
+                    $data['price'] = 0;
 
-            if (isset($vdata['products']) && count($vdata['products'])) {
-                foreach ($vdata['products'] as $p) {
-                    if ($group->price_per == 'product') {
-                        $data['price'] = $group->price;
-                        $this->price += $group->price;
+                    $variations = [];
+                    if(isset($vdata['variations']) && count($vdata['variations'])){
+                        foreach ($vdata['variations'] as $variation){
+                            $group = $offer->variations()->where('variation_id', $variation['group_id'])->first();
+                            if ($group) {
+                                $variations['group'] = $group;
+                                $variations['key'] = uniqid();
+                                $variations['options'] = [];
 
-                        $option = $product->variations()->where('variation_id', $vdata['group_id'])->where('id', $p['id'])->first();
-                        if ($option) {
-                            $product_limit += $p['qty'];
-                            $data['options'][] = [
-                                'option' => $option,
-                                'qty' => $p['qty'],
-                            ];
-                        } else {
-                            $error = "Option invalid";
+                                $product_limit = 0;
+                                if (isset($variation['products']) && count($variation['products'])) {
+                                    if ($group->price_per == 'product') {
+                                        $data['price'] += $group->price;
+                                        $this->price += $group->price;
+                                        foreach ($variation['products'] as $p) {
+                                            $option = $offer->variations()->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
+                                            if ($option) {
+                                                $product_limit += $p['qty'];
+                                                $variations['options'][] = [
+                                                    'option' => $option,
+                                                    'qty' => $p['qty'],
+                                                ];
+                                            } else {
+                                                $error = "Option not found";
+                                            }
+                                        }
+                                    } else {
+                                        $itemPrice = 0;
+                                        foreach ($variation['products'] as $p) {
+                                            $option = $offer->variations()->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
+                                            if ($option) {
+                                                $p['qty'] = ($p['qty'])??1;
+                                                if($option->price_type == 'discount'){
+                                                    if($p['discount_id'] == null){
+                                                        $discount = $option->discounts()->where('from','<=',$p['qty'])->where('to','>=',$p['qty'])->first();
+                                                        if($discount) {
+                                                            $this->price += $p['qty'] * $discount->price;
+                                                            $itemPrice += $p['qty'] * $discount->price;
+                                                        }else{
+                                                            $error = "Option not found";
+                                                        }
+                                                    }else{
+                                                        $discount = StockVariationDiscount::findOrFail($p['discount_id']);
+                                                        if($discount) {
+                                                            $this->price += $discount->price;
+                                                            $itemPrice += $discount->price;
+                                                        }else{
+                                                            $error = "Option not found";
+                                                        }
+                                                    }
+                                                }else{
+                                                    $this->price += $p['qty'] * $option->price;
+                                                    $itemPrice += $p['qty'] * $option->price;
+                                                }
+                                                $product_limit += $p['qty'];
+
+                                                $variations['options'][] = [
+                                                    'option' => $option,
+                                                    'qty' => $p['qty'],
+                                                    'discount_id' => $p['discount_id'],
+                                                ];
+                                            } else {
+                                                $error = "Option not found";
+                                            }
+                                        }
+                                        $data['price'] += $itemPrice;
+
+                                    }
+
+                                    if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
+                                        $error = "Please select options according to limit";
+                                    }
+                                }else{
+                                    $error = "Empty variation";
+                                }
+                            }
                         }
-                    } else {
-                        $itemPrice = 0;
-                        $option = $product->variations()->where('variation_id', $vdata['group_id'])->where('id', $p['id'])->first();
-                        if ($option) {
-                            $product_limit += $p['qty'];
-                            $this->price += $p['qty'] * $option->price;
-                            $itemPrice += $p['qty'] * $option->price;
-                            $data['options'][] = [
-                                'option' => $option,
-                                'qty' => $p['qty'],
-                            ];
-                        } else {
-                            $error = "Option invalid";
-
-                        }
-                        $data['price'] = $itemPrice;
                     }
 
+                    $data['variations'] = $variations;
+                }else{
+                    $error = "Offer not found";
                 }
-
-                if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
-                    $error = "Please select options according to limit";
-                }
-            } else {
-                $this->price += $group->price;
+                $offerData['data'][] = $data;
             }
-        } else {
-            $error = "section not found";
+        }else {
+            $error = "No offers";
         }
 
-        if (count($data)) {
-            $this->extras = $data;
+        if (count($offerData)) {
+            $offerData['price'] = $this->price;
+            $this->extras = $offerData;
         }
 
         $error = false;
