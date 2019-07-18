@@ -39,9 +39,9 @@
                             {{ $vape->name }}
                         </div>
                         <div class="d-flex flex-wrap special__popup-content-right-product-bottom">
-                                                <span class="text-main-clr special__popup-content-right-product-price">
-                                                    £25,78
-                                                </span>
+                            <span class="text-main-clr special__popup-content-right-product-price">
+                               {{ convert_price($price,get_currency())  }}
+                            </span>
                         </div>
                     </div>
                 </div>
