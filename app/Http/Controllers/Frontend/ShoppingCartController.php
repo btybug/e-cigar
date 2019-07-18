@@ -199,8 +199,7 @@ class ShoppingCartController extends Controller
 
     public function postUpdateQty(Request $request)
     {
-
-        $qty = ($request->condition) ? 1 : -1;
+        $qty = ($request->condition == "true") ? 1 : -1;
         $default_shipping = null;
         $shipping = null;
         $geoZone = null;
