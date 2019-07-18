@@ -2837,19 +2837,26 @@ $(document).ready(function () {
             $('#specialPopUpModal .special__popup-main-product-item').each(function () {
                 var value = 0;
                 var id = $(this).data('id');
-                $(this).find('.product__single-item-info-bottom').each(function () {
-                    if ($(this).closest('.product__single-item-info-bottom').find('.select-variation-option').length > 0) {
-                        value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
-                    } else if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="radio"]').length > 0) {
-                        value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
-                    } else if ($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
-                        value += $(this).find('.get-single-price').data('single-price');
-                    } else if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="checkbox"]').length > 0) {
-                        if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input').prop('checked')) {
-                            value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
-                        }
+                $(this).find('.pr-wrap').each(function () {
+                    if ($(this).data('per-price') === 'product') {
+                        value += $(this).data('price');
+                    } else if ($(this).data('per-price') === 'item') {
+                        $(this).find('.product__single-item-info-bottom').each(function () {
+                            if ($(this).closest('.product__single-item-info-bottom').find('.select-variation-option').length > 0) {
+                                value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
+                            } else if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="radio"]').length > 0) {
+                                value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
+                            } else if ($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
+                                value += $(this).find('.get-single-price').data('single-price');
+                            } else if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input[type="checkbox"]').length > 0) {
+                                if ($(this).closest('.product__single-item-info-bottom').find('.custom-control-input').prop('checked')) {
+                                    value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
+                                }
+                            }
+                        });
                     }
                 });
+
                 $(this).find('.product__single-item_price').data('price-for-add', value);
                 setOfferPrice($(this).find('.product__single-item_price'), value);
                 var addedPricePlace = $("#specialPopUpModal .added-offers .special__popup-content-right-product[data-id=\"" + id + "\"] .special__popup-content-right-product-price");
@@ -3352,7 +3359,7 @@ $(document).ready(function () {
                                     qty = '1';
                                     discount_id = null;
                                 }
-                            } else if ($(this).closest('.product__single-item-info').find('.popup-select').length > 0) {
+                            } else if ($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
                                 id = $(this).data('id');
 
                                 if ($(this).find('.input-qty').length > 0) {
