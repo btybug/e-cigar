@@ -716,7 +716,8 @@ adipiscing elit. Morbi sodales ...
             show: {
                 "740px": 2,
                 "980px": 3,
-                "1220px": 5
+                "1220px": 4,
+                "1630px": 5,
             }
         });
         // home reviews slider
