@@ -947,7 +947,7 @@
                             <input type="text" class="form-control" id="search-attr" placeholder="Search">
                         </div>
                     </div>
-                    <ul class="all-list modal-stickers--list">
+                    <ul class="all-list modal-stickers--list" id="stickers-modal-list">
 
                     </ul>
                 </div>
@@ -1240,6 +1240,15 @@
             });
             $("body").on("click", ".remove-new-banner-input", function () {
                 $(this).closest(".banner-item").remove();
+            });
+
+            $(document).ready(function(){
+                $("#search-attr").on("keyup", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("#stickers-modal-list .option-elm-modal").filter(function() {
+                        $(this).toggle($(this).find('a.add-related-event').data('name').toLowerCase().indexOf(value) > -1)
+                    });
+                });
             });
             $("body").on("click", '.add-discount', function (e) {
                 var main = $(this).data('main');
