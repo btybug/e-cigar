@@ -13,7 +13,7 @@
                 <div class="col-3">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link @if($p=='home_page') active @endif" href="?p=home_page">Home page</a>
+                            <a class="nav-link @if($p=='main_pages') active @endif" href="?p=main_pages">Home page</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link @if($p=='tc') active @endif" href="?p=tc">T&C</a>
