@@ -255,7 +255,7 @@ $(document).ready(function () {
         });
 
         //qty up and down,  and input-qty
-        $('body').on('click', '.inp-up, .inp-down',function(ev) {
+        $('body').on('click', '.product__single-item-info-bottom .inp-up, .product__single-item-info-bottom .inp-down',function(ev) {
             let flag;
             const input_qty = $(this).closest('.quantity').find('.input-qty');
             const qty = input_qty.val();
