@@ -4,201 +4,201 @@
             <div class="col-lg-10 pl-0">
                 {{--                confirm tab start--}}
                 {{--<div class="shopping__cart-confirm">--}}
-                    {{--<h1 class="font-40 title">Thank you for your order!</h1>--}}
-                    {{--<p class="font-20 sec-title">We have already started preparing your order</p>--}}
-                    {{--<ul class="row list-shipping">--}}
-                        {{--<li class="col-md-3 col-sm-6">--}}
-                            {{--<div class="sipping-item-wrap">--}}
-                                {{--<div class="item-photo">--}}
-                                    {{--<img src="/public/img/confirm-box.png" class="box-img" alt="item"/>--}}
-                                {{--</div>--}}
-                                {{--<h3 class="font-sec-reg font-24 item-title">Order Number</h3>--}}
-                                {{--<p class="font-sec-reg font-24 text-red-clr lh-1 item-info">123NFH255664</p>--}}
-                                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">Track your order</a>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li class="col-md-3 col-sm-6">--}}
-                            {{--<div class="sipping-item-wrap address-item">--}}
-                                {{--<div class="item-photo">--}}
-                                    {{--<img src="/public/img/confirm-home.png" class="home-img" alt="item"/>--}}
-                                {{--</div>--}}
-                                {{--<h3 class="font-sec-reg font-24 item-title">Shipping Address</h3>--}}
-                                {{--<div class="d-inline-block text-left">--}}
-                                    {{--<p class="font-main-light font-17 text-wrap">Prime Minister</p>--}}
-                                    {{--<p class="font-main-light font-17 text-wrap">178 Grand Street</p>--}}
-                                    {{--<p class="font-main-light font-17 text-wrap">London</p>--}}
-                                    {{--<p class="font-main-light font-17 text-wrap">SW1A 2AA</p>--}}
-                                    {{--<p class="font-main-light font-17 text-wrap mb-0">United Kingdom</p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li class="col-md-3 col-sm-6">--}}
-                            {{--<div class="sipping-item-wrap delivery-item">--}}
-                                {{--<div class="item-photo">--}}
-                                    {{--<img src="/public/img/confirm-calendar.png" class="calendar-img" alt="item"/>--}}
-                                {{--</div>--}}
-                                {{--<h3 class="font-sec-reg font-24 item-title">--}}
-                                    {{--Expected <br>--}}
-                                    {{--Date of delivery--}}
-                                {{--</h3>--}}
-                                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info">Friday</p>--}}
-                                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info mb-0">10/08/2019</p>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li class="col-md-3 col-sm-6">--}}
-                            {{--<div class="sipping-item-wrap-both">--}}
-                                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
-                                    {{--<div class="item-photo">--}}
-                                        {{--<img src="/public/img/confirm-user.png" class="user-img" alt="item"/>--}}
-                                    {{--</div>--}}
-                                    {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">View My Profile</a>--}}
-                                {{--</div>--}}
-                                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
-                                    {{--<div class="item-photo">--}}
-                                        {{--<img src="/public/img/confirm-gift.png" class="gift-img" alt="item"/>--}}
-                                    {{--</div>--}}
-                                    {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-red item-order-btn">Continue Shopping</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                    {{--</ul>--}}
+                {{--<h1 class="font-40 title">Thank you for your order!</h1>--}}
+                {{--<p class="font-20 sec-title">We have already started preparing your order</p>--}}
+                {{--<ul class="row list-shipping">--}}
+                {{--<li class="col-md-3 col-sm-6">--}}
+                {{--<div class="sipping-item-wrap">--}}
+                {{--<div class="item-photo">--}}
+                {{--<img src="/public/img/confirm-box.png" class="box-img" alt="item"/>--}}
+                {{--</div>--}}
+                {{--<h3 class="font-sec-reg font-24 item-title">Order Number</h3>--}}
+                {{--<p class="font-sec-reg font-24 text-red-clr lh-1 item-info">123NFH255664</p>--}}
+                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">Track your order</a>--}}
+                {{--</div>--}}
+                {{--</li>--}}
+                {{--<li class="col-md-3 col-sm-6">--}}
+                {{--<div class="sipping-item-wrap address-item">--}}
+                {{--<div class="item-photo">--}}
+                {{--<img src="/public/img/confirm-home.png" class="home-img" alt="item"/>--}}
+                {{--</div>--}}
+                {{--<h3 class="font-sec-reg font-24 item-title">Shipping Address</h3>--}}
+                {{--<div class="d-inline-block text-left">--}}
+                {{--<p class="font-main-light font-17 text-wrap">Prime Minister</p>--}}
+                {{--<p class="font-main-light font-17 text-wrap">178 Grand Street</p>--}}
+                {{--<p class="font-main-light font-17 text-wrap">London</p>--}}
+                {{--<p class="font-main-light font-17 text-wrap">SW1A 2AA</p>--}}
+                {{--<p class="font-main-light font-17 text-wrap mb-0">United Kingdom</p>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</li>--}}
+                {{--<li class="col-md-3 col-sm-6">--}}
+                {{--<div class="sipping-item-wrap delivery-item">--}}
+                {{--<div class="item-photo">--}}
+                {{--<img src="/public/img/confirm-calendar.png" class="calendar-img" alt="item"/>--}}
+                {{--</div>--}}
+                {{--<h3 class="font-sec-reg font-24 item-title">--}}
+                {{--Expected <br>--}}
+                {{--Date of delivery--}}
+                {{--</h3>--}}
+                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info">Friday</p>--}}
+                {{--<p class="font-sec-reg font-24 text-tert-clr lh-1 date-info mb-0">10/08/2019</p>--}}
+                {{--</div>--}}
+                {{--</li>--}}
+                {{--<li class="col-md-3 col-sm-6">--}}
+                {{--<div class="sipping-item-wrap-both">--}}
+                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
+                {{--<div class="item-photo">--}}
+                {{--<img src="/public/img/confirm-user.png" class="user-img" alt="item"/>--}}
+                {{--</div>--}}
+                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-blue-clr item-order-btn">View My Profile</a>--}}
+                {{--</div>--}}
+                {{--<div class="d-flex flex-wrap align-items-center sipping-item-wrap ">--}}
+                {{--<div class="item-photo">--}}
+                {{--<img src="/public/img/confirm-gift.png" class="gift-img" alt="item"/>--}}
+                {{--</div>--}}
+                {{--<a href="#" class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-red item-order-btn">Continue Shopping</a>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</li>--}}
+                {{--</ul>--}}
                 {{--</div>--}}
                 {{--                confirm tab end--}}
 
                 {{--                payment tab start--}}
                 {{--<div class="shopping-cart-payment shopping__cart-payment-wrapper">--}}
-                    {{--<div class="head-wrap">--}}
-                        {{--<h1 class="font-sec-reg font-24 lh-1 title">Payment Methode</h1>--}}
-                        {{--<p class="font-18 desc lh-1 m-0">Select a payment methode</p>--}}
-                    {{--</div>--}}
-                    {{--<div class="row">--}}
-                        {{--<div class="col-md-4">--}}
-                            {{--<div class="left-wrapper">--}}
-                                {{--<div class="method-lists">--}}
-                                    {{--<div class="method">--}}
-                                        {{--<div class="custom-control custom-radio">--}}
-                                            {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
-                                                   {{--checked id="deliveryRadios1" name="method" value="">--}}
-                                            {{--<label class="custom-control-label" for="deliveryRadios1">--}}
-                                                                {{--<span class="d-flex method-wrap pointer">--}}
-                                                                         {{--<span class="method-payment-photo">--}}
-                                                                             {{--<img--}}
-                                                                                 {{--src="/public/img/temp/method-cart-logos.png"--}}
-                                                                                 {{--alt="brand"/>--}}
-                                                                        {{--</span>--}}
-                                                                {{--</span>--}}
-                                                {{--<span class="check-line"></span>--}}
-                                            {{--</label>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="method">--}}
-                                        {{--<div class="custom-control custom-radio">--}}
-                                            {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
-                                                   {{--id="deliveryRadios2" name="method" value="">--}}
-                                            {{--<label class="custom-control-label" for="deliveryRadios2">--}}
-                                                                {{--<span class="d-flex method-wrap pointer">--}}
-                                                                         {{--<span class="method-payment-photo">--}}
-                                                                             {{--<img--}}
-                                                                                 {{--src="/public/img/temp/method-cart-paypal-logo.png"--}}
-                                                                                 {{--alt="brand"/>--}}
-                                                                        {{--</span>--}}
-                                                                {{--</span>--}}
-                                                {{--<span class="check-line"></span>--}}
-                                            {{--</label>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="method">--}}
-                                        {{--<div class="custom-control custom-radio">--}}
-                                            {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
-                                                   {{--id="deliveryRadios3" name="method" value="">--}}
-                                            {{--<label class="custom-control-label" for="deliveryRadios3">--}}
-                                                                {{--<span class="d-flex method-wrap pointer">--}}
-                                                                         {{--<span class="method-payment-photo">--}}
-                                                                             {{--<img--}}
-                                                                                 {{--src="/public/img/temp/method-cart-maestro-logo.png"--}}
-                                                                                 {{--alt="brand"/>--}}
-                                                                        {{--</span>--}}
-                                                                {{--</span>--}}
-                                                {{--<span class="check-line"></span>--}}
-                                            {{--</label>--}}
-                                        {{--</div>--}}
-                                    {{--</div>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                        {{--<div class="col-md-8">--}}
-                            {{--<div class="payment-method">--}}
-                                {{--<div class="pay-credit-card mt-0">--}}
-                                    {{--<form>--}}
-                                        {{--<div class="form-group row item-wrap card-number">--}}
-                                            {{--<label for="cardNumber"--}}
-                                                   {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Card--}}
-                                                {{--Number <span class="sup">*</span></label>--}}
-                                            {{--<div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">--}}
-                                                {{--<input type="text" class="form-control place-light" id="cardNumber"--}}
-                                                       {{--placeholder="1234 1234 1234 1234">--}}
-                                                {{--<span class="cards-icon d-inline-flex align-items-center"><img--}}
-                                                        {{--src="/public/img/visa-logo.png" alt="visa"></span>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="form-group row item-wrap">--}}
-                                            {{--<label for="cardName"--}}
-                                                   {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Name--}}
-                                                {{--on Card <span class="sup">*</span></label>--}}
-                                            {{--<div class="col-xl-6 col-sm-8 p-xl-0 center-col">--}}
-                                                {{--<input type="text" class="form-control" id="cardName"--}}
-                                                       {{--placeholder="Connor Silva">--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="form-group row item-wrap expiry-date">--}}
-                                            {{--<label--}}
-                                                {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Expiry--}}
-                                                {{--Date <span class="sup">*</span></label>--}}
-                                            {{--<div class="col-xl-10 col-sm-8 p-xl-0 center-col">--}}
-                                                {{--<div class="d-flex flex-wrap">--}}
-                                                    {{--<div class="col-sm-2 p-0 d-flex">--}}
-                                                        {{--<input type="text" class="form-control place-light"--}}
-                                                               {{--placeholder="MM/YY">--}}
-                                                    {{--</div>--}}
-                                                    {{--<div class="col-sm-8 p-0 d-flex flex-wrap secure-code">--}}
-                                                        {{--<label for="secureCode"--}}
-                                                               {{--class="col-sm-3 pr-0 col-form-label text-tert-clr text-sm-right d-flex flex-nowrap">Security--}}
-                                                            {{--Code <span class="sup">*</span></label>--}}
-                                                        {{--<div class="col-sm-8 pr-0 ">--}}
-                                                            {{--<input type="text" class="form-control place-light"--}}
-                                                                   {{--id="secureCode" placeholder="CVC">--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                        {{--<div class="form-group row item-wrap checked-payment">--}}
-                                            {{--<div class="col-sm-8 pr-0">--}}
-                                                {{--<div class="d-flex flex-wrap justify-content-between align-self-center">--}}
-                                                    {{--<div--}}
-                                                        {{--class="custom-control custom-checkbox custom-control-inline align-items-center">--}}
-                                                        {{--<input type="checkbox" class="custom-control-input"--}}
-                                                               {{--id="customCheck1" name="example1">--}}
-                                                        {{--<label class="custom-control-label font-18 text-main-clr"--}}
-                                                               {{--for="customCheck1">Accept terms and condition</label>--}}
-                                                    {{--</div>--}}
-                                                {{--</div>--}}
-                                            {{--</div>--}}
-                                        {{--</div>--}}
-                                    {{--</form>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                {{--<div class="head-wrap">--}}
+                {{--<h1 class="font-sec-reg font-24 lh-1 title">Payment Methode</h1>--}}
+                {{--<p class="font-18 desc lh-1 m-0">Select a payment methode</p>--}}
+                {{--</div>--}}
+                {{--<div class="row">--}}
+                {{--<div class="col-md-4">--}}
+                {{--<div class="left-wrapper">--}}
+                {{--<div class="method-lists">--}}
+                {{--<div class="method">--}}
+                {{--<div class="custom-control custom-radio">--}}
+                {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
+                {{--checked id="deliveryRadios1" name="method" value="">--}}
+                {{--<label class="custom-control-label" for="deliveryRadios1">--}}
+                {{--<span class="d-flex method-wrap pointer">--}}
+                {{--<span class="method-payment-photo">--}}
+                {{--<img--}}
+                {{--src="/public/img/temp/method-cart-logos.png"--}}
+                {{--alt="brand"/>--}}
+                {{--</span>--}}
+                {{--</span>--}}
+                {{--<span class="check-line"></span>--}}
+                {{--</label>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="method">--}}
+                {{--<div class="custom-control custom-radio">--}}
+                {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
+                {{--id="deliveryRadios2" name="method" value="">--}}
+                {{--<label class="custom-control-label" for="deliveryRadios2">--}}
+                {{--<span class="d-flex method-wrap pointer">--}}
+                {{--<span class="method-payment-photo">--}}
+                {{--<img--}}
+                {{--src="/public/img/temp/method-cart-paypal-logo.png"--}}
+                {{--alt="brand"/>--}}
+                {{--</span>--}}
+                {{--</span>--}}
+                {{--<span class="check-line"></span>--}}
+                {{--</label>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="method">--}}
+                {{--<div class="custom-control custom-radio">--}}
+                {{--<input type="radio" class="custom-control-input select-shipping-method"--}}
+                {{--id="deliveryRadios3" name="method" value="">--}}
+                {{--<label class="custom-control-label" for="deliveryRadios3">--}}
+                {{--<span class="d-flex method-wrap pointer">--}}
+                {{--<span class="method-payment-photo">--}}
+                {{--<img--}}
+                {{--src="/public/img/temp/method-cart-maestro-logo.png"--}}
+                {{--alt="brand"/>--}}
+                {{--</span>--}}
+                {{--</span>--}}
+                {{--<span class="check-line"></span>--}}
+                {{--</label>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="col-md-8">--}}
+                {{--<div class="payment-method">--}}
+                {{--<div class="pay-credit-card mt-0">--}}
+                {{--<form>--}}
+                {{--<div class="form-group row item-wrap card-number">--}}
+                {{--<label for="cardNumber"--}}
+                {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Card--}}
+                {{--Number <span class="sup">*</span></label>--}}
+                {{--<div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">--}}
+                {{--<input type="text" class="form-control place-light" id="cardNumber"--}}
+                {{--placeholder="1234 1234 1234 1234">--}}
+                {{--<span class="cards-icon d-inline-flex align-items-center"><img--}}
+                {{--src="/public/img/visa-logo.png" alt="visa"></span>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="form-group row item-wrap">--}}
+                {{--<label for="cardName"--}}
+                {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Name--}}
+                {{--on Card <span class="sup">*</span></label>--}}
+                {{--<div class="col-xl-6 col-sm-8 p-xl-0 center-col">--}}
+                {{--<input type="text" class="form-control" id="cardName"--}}
+                {{--placeholder="Connor Silva">--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="form-group row item-wrap expiry-date">--}}
+                {{--<label--}}
+                {{--class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-tert-clr d-flex flex-nowrap">Expiry--}}
+                {{--Date <span class="sup">*</span></label>--}}
+                {{--<div class="col-xl-10 col-sm-8 p-xl-0 center-col">--}}
+                {{--<div class="d-flex flex-wrap">--}}
+                {{--<div class="col-sm-2 p-0 d-flex">--}}
+                {{--<input type="text" class="form-control place-light"--}}
+                {{--placeholder="MM/YY">--}}
+                {{--</div>--}}
+                {{--<div class="col-sm-8 p-0 d-flex flex-wrap secure-code">--}}
+                {{--<label for="secureCode"--}}
+                {{--class="col-sm-3 pr-0 col-form-label text-tert-clr text-sm-right d-flex flex-nowrap">Security--}}
+                {{--Code <span class="sup">*</span></label>--}}
+                {{--<div class="col-sm-8 pr-0 ">--}}
+                {{--<input type="text" class="form-control place-light"--}}
+                {{--id="secureCode" placeholder="CVC">--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--<div class="form-group row item-wrap checked-payment">--}}
+                {{--<div class="col-sm-8 pr-0">--}}
+                {{--<div class="d-flex flex-wrap justify-content-between align-self-center">--}}
+                {{--<div--}}
+                {{--class="custom-control custom-checkbox custom-control-inline align-items-center">--}}
+                {{--<input type="checkbox" class="custom-control-input"--}}
+                {{--id="customCheck1" name="example1">--}}
+                {{--<label class="custom-control-label font-18 text-main-clr"--}}
+                {{--for="customCheck1">Accept terms and condition</label>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</form>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
+                {{--</div>--}}
                 {{--</div>--}}
                 {{--                payment tab end--}}
 
                 @if(! \Cart::isEmpty())
-                    @foreach(\Cart::getContent() as $key => $item)
-                        @php
-                            $stock = $item->attributes->product;
-                        @endphp
-                        <div class="shopping__cart-tab-main new__scroll h-100">
+                    <div class="shopping__cart-tab-main new__scroll h-100">
+                        @foreach(\Cart::getContent() as $key => $item)
+                            @php
+                                $stock = $item->attributes->product;
+                            @endphp
                             <div class="shopping__cart-tab-table-wall position-relative">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
@@ -414,8 +414,8 @@
                                     Remove
                                 </a>
                             </div>
-                        </div>
-                    @endforeach
+                        @endforeach
+                    </div>
                 @endif
             </div>
 
