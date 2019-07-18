@@ -942,9 +942,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <label for="search-product" class="col-sm-2 col-form-label">Search</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="search-attr" placeholder="Search">
+                            <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
                         </div>
                     </div>
                     <ul class="all-list modal-stickers--list" id="stickers-modal-list">
@@ -968,9 +968,9 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <label for="search-sticker" class="col-sm-2 col-form-label">Search</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" id="search-attr" placeholder="Search">
+                            <input type="text" class="form-control search-attr" id="search-sticker" placeholder="Search">
                         </div>
                     </div>
                     <ul class="all-list modal-stickers--list">
@@ -1243,10 +1243,10 @@
             });
 
             $(document).ready(function(){
-                $("#search-attr").on("keyup", function() {
+                $(".search-attr").on("keyup", function() {
                     var value = $(this).val().toLowerCase();
-                    $("#stickers-modal-list .option-elm-modal").filter(function() {
-                        $(this).toggle($(this).find('a.add-related-event').data('name').toLowerCase().indexOf(value) > -1)
+                    $("ul.all-list .option-elm-modal").filter(function() {
+                        $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
                     });
                 });
             });
@@ -1930,7 +1930,7 @@
                         res.data.forEach(item => {
                             let html = `<li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-related-event" data-name="${item.name}"
+                                                </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
                             $("#productsModal .modal-body .all-list").append(html);
                         })
@@ -2017,7 +2017,7 @@
                         res.data.forEach(item => {
                             let html = `<li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
+                                                </a> <a class="btn btn-primary add-sticker-event searchable" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
                             $("#stickerModal .modal-body .all-list").append(html);
                         })
