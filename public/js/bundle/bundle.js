@@ -3413,6 +3413,7 @@ $(document).ready(function () {
                     // btnAddToRemove($self);
                     // $('.special__popup-content-right-item.added-offers').append(data.html);
                     $("#specialPopUpModal").modal('hide');
+                    $("#headerShopCartBtn").click();
                 }).catch(function (error) {
                     console.log(error);
                 });
@@ -3833,6 +3834,13 @@ $(document).ready(function () {
             selectedGroupId.length = 0;
         });
         // productsInit();
+
+        $("body").on('click', '.bottom-btn-cart.no-btn', function () {
+            $("#specialPopUpModal").modal('hide');
+            setTimeout(function () {
+                $("#headerShopCartBtn").click();
+            }, 0);
+        });
 
         $("body").on('click', '.btn-add-to-cart', function () {
             var product_id = $('#singleProductPageCnt #vpid').val();
