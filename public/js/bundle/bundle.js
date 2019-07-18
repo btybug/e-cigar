@@ -2848,12 +2848,21 @@ $(document).ready(function () {
             offer.html("" + getCurrencySymbol() + offerPrice);
         };
 
+        var countOfferTotalPrice = function countOfferTotalPrice() {
+            var offer_total_price = 0;
+            $('.added-offers').find('.special__popup-content-right-product-price').each(function () {
+                offer_total_price += $(this).data('price');
+            });
+            $('.offer-total-price').html("" + getCurrencySymbol() + offer_total_price);
+        };
+
         var countOfferPrice = function countOfferPrice() {
             var gget = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
 
             $('#specialPopUpModal .special__popup-main-product-item').each(function () {
                 var value = 0;
+                var id = $(this).data('id');
                 $(this).find('.product__single-item-info-bottom').each(function () {
                     if ($(this).closest('.product__single-item-info-bottom').find('.select-variation-option').length > 0) {
                         value += $(this).closest('.product__single-item-info-bottom').find('.get-single-price').data('single-price');
@@ -2869,19 +2878,15 @@ $(document).ready(function () {
                 });
                 $(this).find('.product__single-item_price').data('price-for-add', value);
                 setOfferPrice($(this).find('.product__single-item_price'), value);
+                var addedPricePlace = $("#specialPopUpModal .added-offers .special__popup-content-right-product[data-id=\"" + id + "\"] .special__popup-content-right-product-price");
+                addedPricePlace.data('price', value);
+                addedPricePlace.html("" + getCurrencySymbol() + value);
+                countOfferTotalPrice();
             });
         };
         var setTotalPrice = function setTotalPrice(totalPrice) {
             // console.log(totalPrice, 222222222222222222);
             totalPrice !== undefined && $('.continue-shp-wrapp .price-place-summary').html("" + getCurrencySymbol() + totalPrice);
-        };
-
-        var countOfferTotalPrice = function countOfferTotalPrice() {
-            var offer_total_price = 0;
-            $('.added-offers').find('.special__popup-content-right-product-price').each(function () {
-                offer_total_price += $(this).data('price');
-            });
-            $('.offer-total-price').html("" + getCurrencySymbol() + offer_total_price);
         };
 
         countOfferPrice();
