@@ -72,6 +72,8 @@ Route::group(['prefix' => 'stickers'], function () {
     Route::get('/{type?}', 'Frontend\StickersController@index')->name('stickers');
 });
 Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('post_sticker');
+Route::post('/get-category-products-stickers', 'Frontend\StickersController@postCategoryProducts')->name('post_category_products_stickers');
+
 
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
 
