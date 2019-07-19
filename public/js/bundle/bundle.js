@@ -3472,7 +3472,7 @@ $(document).ready(function () {
 
                     $("[data-group=\"" + group_id + "\"]").on('change', function () {
                         var self = $(this);
-                        var parentRow = $(this).closest('.product-single-info_row');
+                        var parentRow = $(this).closest('.product__single-item-info-bottom');
                         var data = parentRow.find('form#filter-form').serialize();
                         var limit = $(this).closest('[data-limit]').attr('data-limit');
 

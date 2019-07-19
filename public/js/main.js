@@ -924,7 +924,7 @@ $(document).ready(function () {
 
                         $(`[data-group="${group_id}"]`).on('change', function () {
                             let self = $(this);
-                            let parentRow = $(this).closest('.product-single-info_row');
+                            let parentRow = $(this).closest('.product__single-item-info-bottom');
                             let data = parentRow.find('form#filter-form').serialize();
                             const limit = $(this).closest('[data-limit]').attr('data-limit');
 
