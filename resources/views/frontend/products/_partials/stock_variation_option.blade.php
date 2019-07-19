@@ -21,6 +21,14 @@
                 @endforeach
             </select>
         </div>
+    @elseif($vSettings->type == 'filter')
+        <div class="select-wall product__select-wall">
+            <span
+                class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+            <i class="fas fa-times"></i>
+            </span>
+            <span class="font-sec-light font-26">{{ $selected->name }}</span>
+        </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
             <div class="product_radio-single">
