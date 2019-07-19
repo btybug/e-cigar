@@ -1185,7 +1185,7 @@ var count = 0;
 
   //********App -> getInitailData********start
   this.getInitailData = () => {
-    this.requests.drawingItems(undefined);
+    this.requests.drawingItems(undefined, true);
   };
   //********App -> getInitailData********end
 
@@ -1305,6 +1305,7 @@ var count = 0;
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
+      console.log('self', e.target)
       !$(e.target).hasClass('closer') && (function(){
         const id = elm.closest("[data-id]").getAttribute("data-id");
         globalFolderId = id;
@@ -1315,7 +1316,7 @@ var count = 0;
                 files: true,
                 access_token: "string"
               },
-              true,
+              $(e.target).data('core') === true,
               () => self.htmlMaker.currentId = id
           );
         }
