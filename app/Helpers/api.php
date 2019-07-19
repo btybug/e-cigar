@@ -5,7 +5,10 @@
  * Date: 08.02.2018
  * Time: 10:39
  */
+
+
 $_MEDIA_BUTTON = false;
+$_MEDIA_FOLDER = null;
 $_FILTER_BUTTON = false;
 $_FILTER_HTML = '';
 global $_MODEL_BOOTED;
@@ -66,11 +69,18 @@ function enableFilter()
 
 function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
 {
-    enableMedia();
-    $uniqId = uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html']));
-}
+    $folder=App\Models\Media\Folders::where('name',$slug)->where('parent_id',0)->first(['id','name']);
 
+    enableMedia();
+    $id=$folder->id;
+    global $_MEDIA_FOLDER;$_MEDIA_FOLDER=$folder;
+    $uniqId = uniqid('media_');
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html','id']));
+}
+function get_media_folder(){
+    global $_MEDIA_FOLDER;
+    return   $_MEDIA_FOLDER;
+}
 function filter_button($category, $group = null, $text = 'Filter', $name = null, $is_multiple = true, $type = 'filter_popup')
 {
     global $_FILTER_HTML;
