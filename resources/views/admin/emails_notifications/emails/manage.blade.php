@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 <div class="text-right btn-save">
-                    <button type="submit" class="btn btn-success btn-view">View Template</button>
+                    {!! media_button('template',null,false,'html') !!}
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>

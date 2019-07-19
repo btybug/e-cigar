@@ -35,7 +35,7 @@ shortAjax = function(url, data, success, error) {
 function App() {
     var self = this;
     var prevFolder = [];
-    var globalFolderId = 1;
+    var globalFolderId = document.getElementById('core-folder').value;
     this.multipleImages = [];
     this.htmlMaker = {
         makeFolder: function(data) {
@@ -996,7 +996,7 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 
 $("body").on("click", ".bestbetter-modal-open button", function() {
     app.requests.drawingItems({
-        folder_id: 1,
+        folder_id: document.getElementById('core_folder').value,
         files: true,
         access_token: "string"
     });
