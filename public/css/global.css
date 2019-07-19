@@ -164,8 +164,14 @@
 .text-red-clr{
     color: #ee3a50;
 }
+.text-green-clr{
+    color:#41cf5c
+}
 .bg-blue-clr {
     background-color: #5184e5;
+}
+.bg-red-clr {
+    background-color: #ee3a50;
 }
 
 
