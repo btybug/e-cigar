@@ -21332,9 +21332,79 @@ position: absolute;
     padding-right: 5px;
 }
 
-
-
 /*------------ Shopping cart pag new END-------------*/
+/*-------------------- stickers page START------------------*/
+
+.stickers__page-wrapper{
+
+}
+
+
+
+.stickers__page-wrapper .stickers-ads-wrapper{
+    width: 100%;
+    height: 297px;
+    border: 1px solid #d7d7d7;
+    margin: 18px 0 30px;
+}
+.stickers__page-wrapper .stickers-ads-wrapper img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.stickers__page-wrapper .brands_aside .search-inp-wrap{
+    border-bottom: 1px solid #d7d7d7;
+}
+.stickers__page-wrapper .brands_aside .search-inp-wrap input{
+    font-size: 24px;
+    color: #353535;
+    width: 100%;
+    border: none;
+    padding: 11px 19px;
+    outline: none;
+}
+.stickers__page-wrapper .brands_aside .search-inp-wrap input::placeholder{
+    /*font-size: 24px;*/
+    color: #353535;
+    opacity: .84;
+}
+.stickers__page-wrapper .brands_main-content-top{
+    border: none;
+}
+.stickers__page-wrapper .stickers__right-top{
+    margin-top: 8px;
+}
+
+.stickers__page-wrapper .stickers__right-top .left img{
+    margin-right: 24px;
+    width: 62px;
+}
+.stickers__page-wrapper .stickers__right-top .right{
+    opacity: .6;
+}
+
+.stickers__page-wrapper .brands_aside-list{
+    margin-right: 10px;
+    margin-top: 18px;
+    max-height: 731px;
+    padding-top: 15px;
+}
+
+.stickers__page-wrapper .brands_aside-list::-webkit-scrollbar {
+    width: 7px;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------- stickers page END------------------*/
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head {
         border-bottom: 1px solid #d7d7d7;
