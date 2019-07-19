@@ -873,8 +873,154 @@ $(document).ready(function () {
         });
 
 
+                    const filterSelectInit = () => {
+                (function () {
+
+        const selectHandle = (el, id, selectElementId, limit, select) => {
+                        fetch("/products/get-variation-menu-raw", {
+                            method: "post",
+                            headers: {
+                                "Content-Type": "application/json",
+                                Accept: "application/json",
+                                "X-Requested-With": "XMLHttpRequest",
+                                "X-CSRF-Token": $('input[name="_token"]').val()
+                            },
+                            credentials: "same-origin",
+                            body: JSON.stringify({id: id, selectElementId: id})
+                        })
+                            .then(function (response) {
+                                return response.json();
+                            })
+                            .then(function (json) {
+                                const isMultiple = select.closest('[data-limit]').attr('data-limit') === '1' ? false : true;
+                                if (isMultiple) {
+                                    el.closest('.product-single-info_row').find('.filter-children-items').append(json.html);
+                                    select2MaxLimit(select, limit);
+                                } else {
+                                    el.closest('.product-single-info_row').find('.menu-item-selected').remove();
+                                    el.closest('.product-single-info_row').find('.filter-children-items').append(json.html);
+                                    // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
+                                    $(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]).remove();
+                                }
+                                setTotalPrice(modal);
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    };
+
+// //unselect handle function
+                    const unselectHandle = (select, id, limit) => {
+                        select.closest('.filters-select-wizard').find(`.menu-item-selected[data-id="${id}"]`).remove();
+                        setTimeout(function () {
+                            select2MaxLimit(select, limit);
+                            setTotalPrice(modal);
+                        }, 0);
+                    };
 
 
+                    $(`.filters-select-wizard`).each(function () {
+                        const group_id = $(this).attr('data-group');
+
+                        $(`[data-group="${group_id}"]`).on('change', function () {
+                            let self = $(this);
+                            let parentRow = $(this).closest('.product-single-info_row');
+                            let data = parentRow.find('form#filter-form').serialize();
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+
+                            AjaxCall("/filters",
+                                data,
+                                function (res) {
+                                    if (!res.error) {
+                                        switch (res.type) {
+                                            case 'filter':
+                                                parentRow.find('.filter-children-items').empty();
+                                                parentRow.find('.filter-children-selects').html(res.filters);
+                                                Number(parentRow.find('.limit[data-limit]').attr('data-limit')) === 1
+                                                && parentRow.find('.limit[data-per-price]').attr('data-per-price') !== 'product'
+                                                && parentRow.find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').empty();
+                                                break;
+                                            case 'items':
+                                                const isMultiple = self.closest('[data-limit]').attr('data-limit') === '1' ? false : true;
+                                                parentRow.find('.filter-children-selects').html(res.filters);
+                                                parentRow.find('.filter-children-items').children().length === 0 && parentRow.find('.filter-children-items').html(res.items_html);
+                                                parentRow.find(".product--select-items").select2({
+                                                    multiple: isMultiple,
+                                                    placeholder: "Select Products",
+                                                });
+                                                makeOutOfStockSelectOption(parentRow.find(".product--select-items"), 'select');
+                                                if (isMultiple) {
+                                                    select2MaxLimit(parentRow.find('.product--select-items'), limit);
+                                                } else {
+                                                    setTimeout(function () {
+                                                        const selectElementId = $(parentRow.find(".product--select-items").children()[0]).val();
+                                                        const id = parentRow.find(".product--select-items").val();
+                                                        selectHandle(self, id, selectElementId, limit, parentRow.find(".product--select-items"));
+                                                    }, 0);
+
+                                                }
+                                                parentRow.find(".product--select-items").find('option[value=""]').remove();
+                                                break;
+                                        }
+                                    }
+                                });
+                        });
+
+                        $(`[data-group="${group_id}"]`).on('select2:select', '.product--select-items', function (e) {
+                            const id = e.params.data.id;
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+                            const selectElementId = $(e.params.data.element).attr('data-select2-id');
+                            selectHandle($(e.target), id, selectElementId, limit, $(this));
+                        });
+
+                        $(`[data-group="${group_id}"]`).on('select2:unselect', '.product--select-items', function (e) {
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+                            unselectHandle($(this), e.params.data.id, limit);
+                        });
+
+                        $(`[data-group="${group_id}"]`).on('click', '.product-count-minus', function (ev) {
+                            eventInitialDefault(ev);
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+                            const row = $(this).closest('.product-single-info_row');
+                            const select = row.find('.product--select-items');
+
+                            handleProductCountMinus($(this), select, 'select', limit);
+                            setTotalPrice(modal);
+                        });
+
+                        $(`[data-group="${group_id}"]`).on('click', '.product-count-plus', function (ev) {
+                            eventInitialDefault(ev);
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+                            const row = $(this).closest('.product-single-info_row');
+                            const select = row.find('.product--select-items');
+
+                            handleProductCountPlus($(this), select, 'select', limit);
+                            setTotalPrice(modal);
+                        });
+
+                        $(`[data-group="${group_id}"]`).on('click', '.delete-menu-item', function () {
+                            const limit = $(this).closest('[data-limit]').attr('data-limit');
+
+                            if ($(this).closest('.filters-select-wizard').length > 0) {
+                                const $this = $(this);
+                                const s_id = $this.attr('data-el-id');
+
+                                $(`.select2-selection__choice[data-select2-id="${s_id}"].select2-selection__choice__remove`).click();
+                                $(this).closest('.filters-select-wizard').find(`option[data-select2-id="${s_id}"]`);
+                                const deleted = $this.closest('.menu-item-selected').attr('data-id');
+                                const values = $(this).closest('.filters-select-wizard').find('.product--select-items').val().filter((value) => value !== deleted);
+                                $(this).closest('.filters-select-wizard').find('.product--select-items').val(values).trigger('change.select2');
+                                $this.closest('.menu-item-selected').remove();
+                                select2MaxLimit($(this).closest('.filters-select-wizard').find('.product--select-items'), limit);
+                                setTotalPrice(modal);
+                            }
+                        });
+                    });
+
+                })();
+            };
+
+        filterSelectInit()
 //data object for add-to-cart and extra
         const addDataKey = {};
 
