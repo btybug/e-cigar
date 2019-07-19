@@ -42,7 +42,6 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
-                <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -50px; cursor: pointer">DRIVE</div>
                 <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
                   <ol class="dd-list sortable" id="fff">
 
