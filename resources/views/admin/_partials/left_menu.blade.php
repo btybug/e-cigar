@@ -37,8 +37,8 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="{{route('admin_media')}}"><i class="fa fa-circle-o"></i>Drive</a></li>
-                    <li><a href="{{route('admin_media_html')}}"><i class="fa fa-circle-o"></i>Html</a></li>
-                    <li><a href="{{route('admin_media_trash')}}"><i class="fa fa-circle-o"></i>Trash</a>
+                    <li><a href="{{route('admin_media','html')}}"><i class="fa fa-circle-o"></i>Html</a></li>
+                    <li><a href="{{route('admin_media','trash')}}"><i class="fa fa-circle-o"></i>Trash</a>
                     </li>
                 </ul>
             </li>

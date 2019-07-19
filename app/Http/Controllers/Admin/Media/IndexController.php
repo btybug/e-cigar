@@ -22,10 +22,11 @@ class IndexController extends Controller
         $this->settings = $settings;
     }
 
-    public function index()
+    public function index($name='drive')
     {
+        $folder=Folders::where('name',$name)->where('parent_id',0)->first(['id','name']);
         $settings = [];
-        return view('media.index', compact('settings'));
+        return view('media.index', compact('settings','folder'));
     }
 
     public function html()
