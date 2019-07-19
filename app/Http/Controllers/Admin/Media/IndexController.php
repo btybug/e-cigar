@@ -6,6 +6,7 @@
  * Date: 12/19/2016
  * Time: 2:58 PM
  */
+
 use App\Http\Controllers\Controller;
 use App\Models\Media\Folders;
 use App\Models\Media\Settings;
@@ -25,6 +26,18 @@ class IndexController extends Controller
     {
         $settings = [];
         return view('media.index', compact('settings'));
+    }
+
+    public function html()
+    {
+        $settings = [];
+        return view('media.html', compact('settings'));
+    }
+
+    public function trash()
+    {
+        $settings = [];
+        return view('media.trash', compact('settings'));
     }
 
     public function getSettings()

@@ -61,7 +61,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //********App********start
 //App includes all methods for media page
 const App = function() {
-  let globalFolderId = 1;
+  let globalFolderId = document.getElementById('core_folder').value;
   this.selectedImage = [];
 
   //********App -> htmlMaker********start
@@ -1036,7 +1036,7 @@ var count = 0;
                      files: true,
                      access_token: "string"
                    },
-                   tree = false,
+                   tree = true,
                    cb) => {
       shortAjax("/api/api-media/get-folder-childs", obj, res => {
         if (!res.error) {

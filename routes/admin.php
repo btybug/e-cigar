@@ -522,6 +522,8 @@ Route::group(['prefix' => 'comments'], function () {
 //Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::group(['prefix' => 'media'], function () {
     Route::get('/', 'Admin\Media\IndexController@index')->name('admin_media');
+    Route::get('/html', 'Admin\Media\IndexController@html')->name('admin_media_html');
+    Route::get('/trash', 'Admin\Media\IndexController@trash')->name('admin_media_trash');
     Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
 });

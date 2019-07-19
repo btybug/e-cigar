@@ -30,15 +30,15 @@
 
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
             @hasAccess('media')
-            <li class="treeview"><a href="{{route('admin_media')}}"><i class="fa fa-picture-o"></i> <span>Media</span>
+            <li class="treeview"><a href="javascript:void(0)"><i class="fa fa-picture-o"></i> <span>Media</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Drive</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Html</a></li>
-                    <li><a href="#"><i class="fa fa-circle-o"></i>Trash</a>
+                    <li><a href="{{route('admin_media')}}"><i class="fa fa-circle-o"></i>Drive</a></li>
+                    <li><a href="{{route('admin_media_html')}}"><i class="fa fa-circle-o"></i>Html</a></li>
+                    <li><a href="{{route('admin_media_trash')}}"><i class="fa fa-circle-o"></i>Trash</a>
                     </li>
                 </ul>
             </li>

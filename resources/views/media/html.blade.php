@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <input type="hidden" id="core_folder" value="1">
+    <input type="hidden" id="core_folder" value="2">
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">
@@ -43,7 +43,7 @@
                   //     ev.keyCode === 13 && $('[bb-media-click="add_new_folder"]').click()
                   // })
                 </script>
-                <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="1" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -49px; cursor: pointer">DRIVE</div>
+                <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="2" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 51px; margin-bottom: -49px; cursor: pointer">HTML</div>
                 <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
                   <ol class="dd-list sortable" id="fff">
 
