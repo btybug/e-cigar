@@ -1,0 +1,75 @@
+@font-face {
+    font-family: 'Oswald-Regular';
+    src: url('../fonts/Oswald-Regular.eot');
+    src: url('../fonts/Oswald-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Oswald-Regular.woff2') format('woff2'),
+    url('../fonts/Oswald-Regular.woff') format('woff'),
+    url('../fonts/Oswald-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Regular';
+    src: url('../fonts/Roboto-Regular.eot');
+    src: url('../fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Regular.woff2') format('woff2'),
+    url('../fonts/Roboto-Regular.woff') format('woff'),
+    url('../fonts/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Roboto-Medium';
+    src: url('../fonts/Roboto-Medium.eot');
+    src: url('../fonts/Roboto-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Roboto-Medium.woff2') format('woff2'),
+    url('../fonts/Roboto-Medium.woff') format('woff'),
+    url('../fonts/Roboto-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+.invoice__wrapper{
+    width: 100%;
+    font-family: 'Roboto-Regular', sans-serif;
+}
+.invoice__wrapper-header{
+    height: 72px;
+    background-color: #f0f0f0;
+    border-bottom: 20px solid #383838;
+}
+.invoice__wrapper-main-content{
+    background-color: #fff;
+    padding-left: 172px;
+    padding-right: 188px;
+}
+.invoice__content-logo{
+    margin-top: 35px;
+    margin-bottom: 135px;
+}
+.invoice__content-info{
+    color: #383838;
+    font-size: 41px;
+}
+.invoice__content-info p{
+    line-height: 1;
+    margin-bottom: 20px;
+}
+.invoice__content-info .title{
+    margin-bottom: 80px;
+}
+.bold-title{
+    font-family: 'Roboto-Medium', sans-serif;
+}
+.main-title{
+    margin-top: 40px;
+    margin-bottom: 80px;
+    font-family: 'Oswald-Regular', sans-serif;
+    line-height: 1;
+    color: #6383e1;
+    font-size: 147px;
+}
+.invoice__table-wrap{
+
+}
