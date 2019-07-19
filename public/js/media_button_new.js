@@ -61,7 +61,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //********App********start
 //App includes all methods for media page
 const App = function() {
-  let globalFolderId = null;
+  let globalFolderId = 1;
   this.selectedImage = [];
 
   //********App -> htmlMaker********start
@@ -1044,18 +1044,13 @@ var count = 0;
               `[data-type="main-container"]`
           );
           mainContainer.innerHTML = "";
-          if(res.start==true){
-              var result=res.data[0];
-          }else {
-              var result=res.data;
-          }
-            result.children.forEach((folder, index) => {
+            res.data.children.forEach((folder, index) => {
             var html = `<div class="file-box folder-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
                 folder
             )}</div>`;
             mainContainer.innerHTML += html;
           });
-            result.items.forEach((file, index) => {
+            res.data.items.forEach((file, index) => {
               let html;
               if(file.extension === "html") {
                   html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeHtmlItem(
@@ -1070,7 +1065,7 @@ var count = 0;
           });
           if (tree) {
               console.log(res)
-            this.htmlMaker.makeTreeFolder(res.data, '#folder-list2');
+            this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
           globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
