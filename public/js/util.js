@@ -210,7 +210,7 @@ $(document).ready(function () {
     };
 
     $("body").on('click','.shopping-cart-content .inp-up, .shopping-cart-content .inp-down',function () {
-        var uid = $(this).closest('.shopping__cart-tab-table-wall').find('.remove-from-cart').data('uid');
+        var uid = $(this).closest('.shopping__cart-tab-table-wall').data('uid');
         var condition = $(this).hasClass('inp-up');
         if(uid && uid != ''){
             $.ajax({
