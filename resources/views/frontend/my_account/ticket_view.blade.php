@@ -21,8 +21,8 @@
             </div>
             <div class="profile-inner-pg-right-cnt ticket__tab-wrapper">
                 <div class="profile-inner-pg-right-cnt_inner h-100">
-                    <div class="row">
-                        <div class="col-lg-9">
+                    <div class="d-flex flex-wrap">
+                        <div class="ticket__tab-wrapper-left-col">
                             <div class="ticket__tab-wrapper-left">
                                 <div class="d-flex flex-wrap ticket__tab-top-wrap">
                                     <div class="ticket__tab-top-left">
@@ -322,7 +322,7 @@
                             {{--                                </div>--}}
                             {{--                            </div>--}}
                         </div>
-                        <div class="col-lg-3">
+                        <div class="ticket__tab-wrapper-right-col">
                             <div class="ticket__tab-wrapper-right">
                                 <a href="#" class="d-block">
                                     <img src="/public/img/temp/ads-product-2.jpg" alt="ads" class="ads-img">

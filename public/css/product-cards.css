@@ -4730,12 +4730,12 @@ position: absolute;
 .stickers__page-wrapper .brands_aside-list::-webkit-scrollbar {
     width: 7px;
 }
-
 /*-------------------- stickers page END------------------*/
 /*-------------------- ticket tab START------------------*/
 
 .ticket__tab-wrapper .profile-inner-pg-right-cnt_inner{
     background-color: transparent;
+    padding: 20px 0;
 }
 .ticket__tab-wrapper .ticket__tab-top-left{
     border: 1px solid #d7d7d7;
@@ -4854,13 +4854,13 @@ position: absolute;
     font-size: 16px;
 }
 .ticket__tab-wrapper .ticket__tab-top-right .card-body .form-group{
-    margin-bottom: 28px;
+    margin-bottom: 24px;
 }
 
 .comments__wrapper .comment-block{
     border: 1px solid #d7d7d7;
     background-color: #f0f0f0;
-    padding-top: 140px;
+    padding-top: 95px;
 }
 .comments__wrapper .comment-block-inner{
     padding: 0 20px;
@@ -4963,7 +4963,7 @@ position: absolute;
 }
 
 .ticket__tab-wrapper-left{
-    margin-left: 68px;
+    margin-left: 164px;
 }
 .ticket__tab-wrapper-right{
     border: 1px solid #d7d7d7;
@@ -4971,8 +4971,27 @@ position: absolute;
 .ticket__tab-wrapper-right .ads-img{
     width: 100%;
 }
-
-
+.ticket__tab-wrapper{
+    padding: 0 84px 0 0;
+}
+@media (min-width: 992px){
+    .ticket__tab-wrapper-right-col{
+        -ms-flex: 0 0 345px;
+        flex: 0 0 345px;
+        max-width: 345px;
+    }
+    .ticket__tab-wrapper-left-col{
+        -ms-flex: 0 0 calc(100% - 345px);
+        flex: 0 0 calc(100% - 345px);
+        max-width: calc(100% - 345px);
+    }
+}
+.ticket__tab-wrapper-right-col,.ticket__tab-wrapper-left-col{
+    width: 100%;
+}
+.ticket__tab-wrapper-left-col{
+    padding-right: 30px;
+}
 /*-------------------- ticket tab END------------------*/
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head {
