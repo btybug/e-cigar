@@ -393,7 +393,15 @@
                                                                                     <span>$55</span>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>@mdo</td>
+                                                                            <td>
+                                                                                <span>x 1</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <span>£18 (21%)</span>
+                                                                            </td>
+                                                                            <td>
+                                                                                <span class="price">£83,00</span>
+                                                                            </td>
                                                                         </tr>
 
                                                                         </tbody>
