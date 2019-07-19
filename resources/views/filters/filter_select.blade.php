@@ -11,7 +11,8 @@
             <div class="form-group row">
                 <label class="col-md-4 col-xs-12">{!! $category->name !!}</label>
                 <div class="col-md-8">
-                    {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,['class'=>'form-control filter-select','required'=>true]) !!}
+                    {!! Form::select('filters[]',[null=>'Select Parent']+$category->filters()->get()->pluck('name','id')->toArray(),null,
+                    ['class'=>'form-control filter-select','required'=>true]) !!}
                 </div>
 
             </div>
