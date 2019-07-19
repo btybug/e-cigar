@@ -1,112 +1,23 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content">
-        <div class="brands_page-wrapper">
-            <div class="brands_page-top">
-                <div class="container main-max-width h-100">
-                    <div class="d-flex brands_page-top-inner h-100">
-                        <div class="brands_page-top-title">
-                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">Popular Stickers</h1>
-                        </div>
-                        <div class="brands_page-top-slider">
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+        <div class="brands_page-wrapper stickers__page-wrapper">
+            <div class="container main-max-width">
+                <div class="stickers-ads-wrapper">
+                    <a href="#" class="d-block h-100">
+                        <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                    </a>
                 </div>
             </div>
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap">
                         <div class="brands_aside">
-                            <div class="select-wall">
-                                {!! Form::select('sticker_filter',['' => 'All Stickers'],null,
-                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
-
+                            <div class="search-inp-wrap">
+                                <input type="search" placeholder="Search">
                             </div>
-                            <ul class="brands_aside-list">
+
+                            <ul class="brands_aside-list new__scroll">
                                 @include("frontend.stickers._partials.list")
                             </ul>
                         </div>
