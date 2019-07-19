@@ -48,10 +48,10 @@ Route::get('error', function () {
     file_put_contents(storage_path('logs'.DS.date('Y_m_d_H_i_s').'.log'));
 });
 
-//Route::get('order-success', function () {
-//    $order = \App\Models\Orders::find(25);
-//    return view("frontend.shop._partials.cash_success",compact(['order']));
-//});
+Route::get('order-success/{id}', function ($id) {
+    $order = \App\Models\Orders::find($id);
+    return view("frontend.shop._partials.cash_success",compact(['order']));
+});
 
 Auth::routes();
 Auth::routes(['verify' => true]);
@@ -156,6 +156,8 @@ Route::post('/change-shipping-method', 'Frontend\ShoppingCartController@postChan
 Route::post('/get-payment-options', 'Frontend\ShoppingCartController@postPaymentOptions')->name('get_payment_options');
 Route::post('/cash-order', 'Frontend\CashPaymentController@order')->name('cash_order');
 Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@success')->name('cash_order_success');
+Route::post('/apply-coupon', 'Frontend\ShoppingCartController@postApplyCoupon')->name('apply_coupon');
+
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');

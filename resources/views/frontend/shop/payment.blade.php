@@ -6,7 +6,7 @@
             <div class="container main-max-width shopping__cart-mw shopping__cart-with-back">
                 <div class="d-flex shopping-cart-head">
                     <div class="shopping-cart-head-back-btn">
-                        <a href="#">
+                        <a href="{{ route("shop_check_out") }}">
                             <span class="icon">
                                 <svg width="10px" height="13px" viewBox="0 0 10 13">
 <path fill-rule="evenodd" opacity="0.8" fill="rgb(53, 53, 53)"
@@ -18,7 +18,7 @@
                     </div>
                     <ul class="nav nav-pills">
                         <li class="nav-item col-md-3">
-                            <a class="item  d-flex align-items-center justify-content-between"
+                            <a class="item visited d-flex align-items-center justify-content-between"
                                ref="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">1</span>
                                 <span
@@ -35,7 +35,7 @@
                             </a>
                         </li>
                         <li class="nav-item col-md-3">
-                            <a class="item d-flex align-items-center justify-content-between"
+                            <a class="item visited d-flex align-items-center justify-content-between"
                                href="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">2</span>
                                 <span class="name text-uppercase font-main-bold font-16 text-truncate">CHECKOUT</span>
@@ -159,6 +159,28 @@
     <script src="https://js.stripe.com/v3/"></script>
 
     <script>
+
+        $("body").on('keyup', '#coupon_code', function () {
+            let value = $(this).val();
+            $("body").find("#coupon_require_error").addClass('hide');
+            clearTimeout(timeout);
+            var timeout = setTimeout(function () {
+                console.log(value);
+                AjaxCall("/apply-coupon", {
+                    code: value,
+                    user_id: $("#order_user").val()
+                }, function (res) {
+                    if (res.error) {
+                        $("body").find("#coupon_require_error").text(res.message);
+                        $("body").find("#coupon_require_error").removeClass('hide');
+                    }else{
+                        $(".order-summary").html(res.summaryHtml);
+                    }
+
+                });
+            }, 500);
+        });
+        
         var stripe = Stripe("{!! stripe_key() !!}");
         var elements = stripe.elements();
         // Custom Styling
