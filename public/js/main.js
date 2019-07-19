@@ -907,12 +907,13 @@ $(document).ready(function () {
                                     el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
                                     // select2MaxLimit(select, limit);
                                     setTotalPrice(countTotalPrice());
-                                    // el.closest('.product__single-item-info-bottom').find('.menu-item-selected').remove();
-                                    // el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
-                                    // // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
-                                    // $(el.closest('.product__single-item-info-bottom').find('.filter-children-items').children()[1]).remove();
+                                    el.closest('.product__single-item-info-bottom').find('.menu-item-selected').remove();
+                                    el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
+                                    // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
+                                    $(el.closest('.product__single-item-info-bottom').find('.filter-children-items').children()[1]).remove();
+
                                     el.closest('.filters-select-wizard').on('click', '.remove-single_product-item', function(ev) {
-                                        ev.stopImmediatePropagation();
+                                        // ev.stopImmediatePropagation();
                                         unselectHandle($(this), $(this).closest('.product__single-item-info-bottom').data('id'));
                                     });
                                 // setTotalPrice(modal);
@@ -978,6 +979,7 @@ $(document).ready(function () {
                             const id = e.params.data.id;
                             const limit = $(this).closest('[data-limit]').attr('data-limit');
                             const selectElementId = $(e.params.data.element).attr('data-select2-id');
+                            console.log(1111111111111, e.params)
                             selectHandle($(e.target), id, selectElementId, limit, $(this));
                         });
 
