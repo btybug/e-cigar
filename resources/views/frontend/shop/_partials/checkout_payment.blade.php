@@ -124,7 +124,7 @@
             </div>
             <div class="col-lg-2 pr-md-right">
                 <div class="right-content">
-                    @include("frontend.shop._partials.order_summary")
+                    @include("frontend.shop._partials.order_summary",['pyp' =>true,'back_route' => route('shop_check_out')])
                 </div>
             </div>
         </div>

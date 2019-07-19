@@ -79,15 +79,35 @@
         {{--                                    CHECKOUT--}}
         {{--                                </a>--}}
         {{--                            </div>--}}
-        <div class="order-summary-btn-wall text-center mb-2">
-            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
-               href="{!! route('shop_check_out') !!}">
-                SHOPPING DETAILS
-            </a>
+        <div class="order-summary-btn-wall text-center mb-2 @if(isset($pyp)) checkout-btn @endif">
+            @if(! isset($pyp))
+                @if(isset($checkout) && $checkout)
+                    @if(Auth::check())
+                        @if($default_shipping)
+                            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn go-to-payment"
+                               href="javascript:void(0)">
+                                CHECKOUT
+                            </a>
+                        @else
+
+                            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn address-book-new"
+                               href="javascript:void(0)">
+                                CHECKOUT
+                            </a>
+                        @endif
+                    @endif
+                @else
+                    <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
+                       href="{{ @$submit_route }}">
+                        SHOPPING DETAILS
+                    </a>
+                @endif
+            @endif
+
         </div>
         <div class="order-summary-btn-wall text-center">
             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
-               href="#">
+               href="{{ @$back_route }}">
                 Back
             </a>
         </div>
