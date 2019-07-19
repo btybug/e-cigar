@@ -875,9 +875,19 @@ $(document).ready(function () {
 
                     const filterSelectInit = () => {
                 (function () {
+                    const unselectHandle = (select, id, limit) => {
+                        select.closest('.filters-select-wizard').find(`.menu-item-selected[data-id="${id}"]`).remove();
+
+                        setTimeout(function () {
+                            // select2MaxLimit(select, limit);
+                            setTotalPrice(modal);
+                        }, 0);
+                    };
 
         const selectHandle = (el, id, selectElementId, limit, select) => {
-                        fetch("/products/get-variation-menu-raw", {
+
+                        console.log('el', el, 'id', id, 'selectElementId', selectElementId, 'select',select)
+                        fetch("/products/get-variation-menu-raws", {
                             method: "post",
                             headers: {
                                 "Content-Type": "application/json",
@@ -886,7 +896,7 @@ $(document).ready(function () {
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({vpid: $('#vpid').val(), select_element_id: id})
+                            body: JSON.stringify({items: [{id: id, value: 1}], ids: [id]})
                         })
                             .then(function (response) {
                                 return response.json();
@@ -896,12 +906,15 @@ $(document).ready(function () {
 
                                     el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
                                     // select2MaxLimit(select, limit);
-
+                                    setTotalPrice(countTotalPrice());
                                     // el.closest('.product__single-item-info-bottom').find('.menu-item-selected').remove();
                                     // el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
                                     // // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
                                     // $(el.closest('.product__single-item-info-bottom').find('.filter-children-items').children()[1]).remove();
-
+                                    el.closest('.filters-select-wizard').on('click', '.remove-single_product-item', function(ev) {
+                                        ev.stopImmediatePropagation();
+                                        unselectHandle($(this), $(this).closest('.product__single-item-info-bottom').data('id'));
+                                    });
                                 // setTotalPrice(modal);
                             })
                             .catch(function (error) {
@@ -910,13 +923,7 @@ $(document).ready(function () {
                     };
 
 // //unselect handle function
-                    const unselectHandle = (select, id, limit) => {
-                        select.closest('.filters-select-wizard').find(`.menu-item-selected[data-id="${id}"]`).remove();
-                        setTimeout(function () {
-                            select2MaxLimit(select, limit);
-                            setTotalPrice(modal);
-                        }, 0);
-                    };
+
 
 
                     $(`.filters-select-wizard`).each(function () {
@@ -950,7 +957,7 @@ $(document).ready(function () {
                                                 });
                                                 makeOutOfStockSelectOption(parentRow.find(".product--select-items"), 'select');
                                                 if (isMultiple) {
-                                                    select2MaxLimit(parentRow.find('.product--select-items'), limit);
+                                                    // select2MaxLimit(parentRow.find('.product--select-items'), limit);
                                                 } else {
                                                     setTimeout(function () {
                                                         const selectElementId = $(parentRow.find(".product--select-items").children()[0]).val();
@@ -960,6 +967,7 @@ $(document).ready(function () {
 
                                                 }
                                                 parentRow.find(".product--select-items").find('option[value=""]').remove();
+
                                                 break;
                                         }
                                     }
