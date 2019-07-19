@@ -13,8 +13,8 @@ class MediaApiController extends Controller
     {
         $data = $request->all();
         $validator = \Validator::make($data, [
-            'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
-            'slug' => 'required_without_all:folder_id|alpha_dash'
+//            'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
+//            'slug' => 'required_without_all:folder_id|alpha_dash'
         ]);
         if ($validator->fails()) {
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
@@ -24,6 +24,9 @@ class MediaApiController extends Controller
             $folder = Folders::with('children', 'items')->find($data['folder_id']);
         } elseif (isset($data['slug'])) {
             $folder = Folders::where('name', $data['slug'])->with('children', 'items')->first();
+        }else{
+            $folder = Folders::where('parent_id', 0)->with('children', 'items')->get();
+            return \Response::json(['error' => false, 'data' => $folder->toArray(), 'settings' => [],'start'=>true]);
         }
 
         if (!$folder) {
