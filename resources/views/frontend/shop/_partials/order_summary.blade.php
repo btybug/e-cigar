@@ -46,13 +46,24 @@
                 <div class="name">
                     Coupon Discount
                 </div>
-                <div
-                    class="price font-main-bold">{{ convert_price(0,$currency, false) }}</div>
+                @php
+                    $coupons = \Cart::getConditionsByType('coupon');
+                @endphp
+                @if($coupons && count($coupons))
+                    @foreach($coupons as $c)
+                        <div class="price font-main-bold">
+                            {{ $c->getValue() }}
+                        </div>
+                    @endforeach
+                @else
+
+                @endif
             </div>
             <div class="w-100 row_with-select">
                 <div class="code">
                     <input type="text" class="form-control" name="coupon_code"
                            id="coupon_code">
+                    <div id="coupon_require_error"></div>
                 </div>
             </div>
 

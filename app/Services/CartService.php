@@ -74,6 +74,21 @@ class CartService
         return $price;
     }
 
+    public static function getTotalCouponSum()
+    {
+        $data = Cart::getConditionsByType('coupon');
+        $price = 0;
+        foreach ($data as $cart) {
+            dd($cart->getValue(),$cart);
+//            if ($cart->getTarget() == 'total') {
+//                $itemPrice = $cart->attributes['extra']['price'];
+//            }
+
+            $price += $cart->getPrice();
+        }
+        return $price;
+    }
+
     public function remove($id, $user_id = null)
     {
         $list = $this->getCartItems($user_id);

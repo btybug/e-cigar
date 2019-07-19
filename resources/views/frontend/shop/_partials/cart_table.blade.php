@@ -222,7 +222,7 @@
             </div>
 
             <div class="col-lg-2 pr-md-right">
-                <div class="right-content">
+                <div class="right-content order-summary">
                     {{--                        SUMMARY</h3>--}}
                     @include("frontend.shop._partials.order_summary",['submit_route' => route("shop_check_out"),"back_route" => route("home")])
                 </div>

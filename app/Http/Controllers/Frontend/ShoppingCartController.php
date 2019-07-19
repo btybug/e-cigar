@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\Coupons;
 use App\Models\DeliveryCosts;
 use App\Models\GeoZones;
+use App\Models\Orders;
 use App\Models\Posts;
 use App\Models\Settings;
 use App\Models\Stock;
@@ -14,6 +16,7 @@ use App\Models\StockVariationOption;
 use App\Models\ZoneCountries;
 use App\Services\CartService;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
+use http\Client\Curl\User;
 use Illuminate\Support\Facades\Auth;
 use PragmaRX\Countries\Package\Countries;
 use View;
@@ -437,5 +440,80 @@ class ShoppingCartController extends Controller
 
         return $this->view('payment', compact(['cash', 'stripe', 'active_payments_gateways', 'billing_address', 'default_shipping',
             'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address', 'address_id']));
+    }
+
+    public function postApplyCoupon(Request $request)
+    {
+        $now = strtotime(today()->toDateString());
+        $coupon = Coupons::where('code', $request->code)->where('status', true)
+            ->where('start_date', '<=', $now)->where('end_date', '>=', $now)->first();
+//        Cart::getConditions();
+//        dd(Cart::session(Orders::ORDER_NEW_SESSION_ID)->getConditions());
+        Cart::removeConditionsByType('coupon');
+        $cartItems = Cart::getContent();
+        foreach ($cartItems as $cartItem) {
+            Cart::clearItemConditions($cartItem->id);
+        }
+
+        $error = false;
+        $message = '';
+        if ($coupon) {
+            session()->put('order_new_coupon', $request->code);
+
+            //checking if user can apply this coupon
+            if ($coupon->target) {
+                if ($coupon->users && count($coupon->users) && !in_array(\Auth::id(), $coupon->users)) {
+                    $error = true;
+                    $message = 'Please enter a valid coupon code, ... you can not use this(testing)';
+                }
+            }
+
+            if ($error == false) {
+                $subtotal = Cart::getSubTotal();
+                if ($subtotal >= $coupon->total_amount) {
+                    if ($coupon->based == 'cart') {
+                        $cc = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $coupon->name,
+                            'type' => 'coupon',
+                            'target' => 'total',
+                            'value' => ($coupon->type == 'p') ? "-" . $coupon->discount . "%" : "-" . $coupon->discount
+                        ));
+
+                        Cart::condition($cc);
+                    } else {
+                        if ($coupon->variations && count($coupon->variations)) {
+                            $cc = new \Darryldecode\Cart\CartCondition(array(
+                                'name' => $coupon->name,
+                                'type' => 'coupon',
+                                'value' => ($coupon->type == 'p') ? "-" . $coupon->discount . "%" : "-" . $coupon->discount
+                            ));
+                            foreach ($cartItems as $item) {
+                                if (in_array($item->id, $coupon->variations)) {
+                                    \Cart::addItemCondition($item->id, $cc);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } else {
+            if ($request->code == '') {
+                $error = false;
+                $message = '';
+            } else {
+                $error = true;
+                $message = 'Please enter a valid coupon ';
+            }
+        }
+
+        $user = Auth::user();
+        $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+        $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+        $geoZone = ($zone) ? $zone->geoZone : null;
+        $shipping = Cart::getCondition($geoZone->name);
+
+        $orderSummary = $this->view("_partials.order_summary", compact('shipping'))->render();
+
+        return \Response::json(['error' => $error, 'message' => $message, 'summaryHtml' => $orderSummary]);
     }
 }

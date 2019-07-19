@@ -103,3 +103,27 @@
 @section('css')
     <link rel="stylesheet" href="{{asset('public/frontend/css/cart.css')}}">
 @stop
+@section("js")
+    <script>
+        $("body").on('keyup', '#coupon_code', function () {
+            let value = $(this).val();
+            $("body").find("#coupon_require_error").addClass('hide');
+            clearTimeout(timeout);
+            var timeout = setTimeout(function () {
+                console.log(value);
+                AjaxCall("/apply-coupon", {
+                    code: value,
+                    user_id: $("#order_user").val()
+                }, function (res) {
+                    if (res.error) {
+                        $("body").find("#coupon_require_error").text(res.message);
+                        $("body").find("#coupon_require_error").removeClass('hide');
+                    }else{
+                        $(".order-summary").html(res.summaryHtml);
+                    }
+
+                });
+            }, 500);
+        });
+    </script>
+@stop
