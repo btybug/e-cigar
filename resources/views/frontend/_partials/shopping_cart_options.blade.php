@@ -19,15 +19,6 @@
                     </div>
                     <div class="col-7">
                         <h3 class="font-20 font-sec-bold">{!! $stock->name !!}</h3>
-                        <div class="font-main-light text-sec-clr">
-                            @if($stock->type == 'variation_product')
-                                {{--@foreach($item->attributes->variation->options as $voption)--}}
-                                {{--@if($voption->attribute_sticker)--}}
-                                {{--<span class="d-block">{{ $voption->attribute_sticker->attr->name }} : {{ $voption->attribute_sticker->sticker->name }}</span>--}}
-                                {{--@endif--}}
-                                {{--@endforeach--}}
-                            @endif
-                        </div>
                     </div>
                 </div>
                 <div class="row align-items-center">
@@ -39,7 +30,7 @@
                     </div>
                     <div class="col-7">
                         <span class="d-block cart-product-price font-24 font-sec-bold cart-product-price">
-                            {{ convert_price(\App\Services\CartService::getPriceSum(@$item->id)+$item->price,@$currency, false) }}
+                            {{ convert_price(\App\Services\CartService::getPriceSum($item->id),@$currency, false) }}
                         </span>
                     </div>
                 </div>
