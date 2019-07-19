@@ -8,7 +8,7 @@
                             @php
                                 $stock = $item->attributes->product;
                             @endphp
-                            <div class="shopping__cart-tab-table-wall position-relative">
+                            <div class="shopping__cart-tab-table-wall position-relative" data-uid="{{$key}}">
                                 <div class="table-responsive">
                                     <table class="table table-bordered">
                                         <tbody>

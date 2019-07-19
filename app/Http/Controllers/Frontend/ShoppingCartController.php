@@ -48,6 +48,7 @@ class ShoppingCartController extends Controller
 
     public function getCart()
     {
+//        Cart::clear();
         enableFilter();
         $items = Cart::getContent();
         $data = $this->cartService->getShipping($items);
@@ -244,7 +245,7 @@ class ShoppingCartController extends Controller
 
         }
 
-        $items = $this->cartService->getCartItems();
+        $items = Cart::getContent();
 
         $html = $this->view('_partials.cart_table', compact(['items', 'default_shipping', 'shipping', 'geoZone']))->render();
         $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
