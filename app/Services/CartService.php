@@ -117,9 +117,9 @@ class CartService
         if ($section && $section->attributes->has('extra')) {
             $attrs = $section->attributes;
             $extras = $attrs['extra'];
-            foreach ($extras as $key => $datum) {
+            foreach ($extras['data'] as $key => $datum) {
                 if ($datum['key'] == $id) {
-                    unset($extras[$key]);
+                    unset($extras['data'][$key]);
                 }
             }
             $attrs['extra'] = $extras;
