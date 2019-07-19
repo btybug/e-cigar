@@ -1030,7 +1030,7 @@ $(document).ready(function () {
                 })();
             };
 
-        filterSelectInit()
+        filterSelectInit();
 //data object for add-to-cart and extra
         const addDataKey = {};
 

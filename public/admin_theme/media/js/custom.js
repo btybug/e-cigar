@@ -863,6 +863,7 @@ function App() {
             }
         },
         open_images(elm, e) {
+
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
@@ -874,17 +875,30 @@ function App() {
 
                 if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
                     document.querySelector(`.${inputId}`).value = urlValue;
-                    document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
-                    document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
-                    });
+                    console.log('files', document.getElementById('uploader').files);
+                    console.log(location)
+
+
+                    if(document.querySelector(`.${inputId}_media_single_img`)) {
+                        document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
+                        document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
+                        });
+                    }
+
                 } else {
                     document.querySelector(`.${inputId}`).value = urlValue;
+                    tinymce.activeEditor.uploadImages(function(success) {
+                        $.post(`${location.origin}${urlValue}`, tinymce.activeEditor.getContent()).done(function() {
+                            console.log("Uploaded images and posted content as an ajax request.");
+                        });
+                    });
                     document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
                 }
                 // document.querySelector(`.${inputId}`).value = urlValue;
             }
             document.querySelector(".file-realtive-url").value = "";
             self.helpers.hideAllActiveImages();
+
         },
         modal_load_image(elm, e) {
             if (!e.target.closest("button").disabled) {
