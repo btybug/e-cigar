@@ -67,9 +67,7 @@
 
 
 
-            <div class="trash-icon-btn">
-              <a href="#" class="btn btn-danger"><i class="fa fa-trash"></i></a>
-            </div>
+
           </div>
 
         </div>
