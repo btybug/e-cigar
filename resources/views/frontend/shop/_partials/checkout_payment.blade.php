@@ -16,9 +16,9 @@
                                             @if($cash)
                                                 <div class="method">
                                                     <div class="custom-control custom-radio">
-                                                        <input type="radio" class="custom-control-input select-shipping-method payment_methods"
+                                                        <input type="radio" class="custom-control-input payment_methods"
                                                                checked id="deliveryRadios1" name="payment_method" value="cash">
-                                                        <label class="custom-control-label" for="deliveryRadios1" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                        <label class="custom-control-label" for="deliveryRadios1">
                                                                 <span class="d-flex method-wrap pointer">
                                                                          <span class="method-payment-photo">
                                                                              <img
@@ -37,9 +37,9 @@
                                             @if($stripe)
                                                     <div class="method">
                                                         <div class="custom-control custom-radio">
-                                                            <input type="radio" class="custom-control-input select-shipping-method payment_methods"
+                                                            <input type="radio" class="custom-control-input payment_methods"
                                                                    {{ (!$cash && $stripe)?'checked':'' }} id="deliveryRadios2" name="payment_method" value="stripe">
-                                                            <label class="custom-control-label" for="deliveryRadios2" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                            <label class="custom-control-label" for="deliveryRadios2">
                                                                 <span class="d-flex method-wrap pointer">
                                                                          <span class="method-payment-photo">
                                                                              <img
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-8">
                             <div class="payment-method">
-                                <div id="collapseTwo">
+                                <div id="stripe-method" class="payment-method-data d-none">
                                     <div class="pay-credit-card mt-0">
                                         <script src="https://js.stripe.com/v3/"></script>
                                         <form action="/stripe-charge" method="post" id="payment-form">
