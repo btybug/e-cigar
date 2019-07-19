@@ -1036,7 +1036,7 @@ var count = 0;
                      files: true,
                      access_token: "string"
                    },
-                   tree = true,
+                   tree = false,
                    cb) => {
       shortAjax("/api/api-media/get-folder-childs", obj, res => {
         if (!res.error) {
@@ -1185,7 +1185,7 @@ var count = 0;
 
   //********App -> getInitailData********start
   this.getInitailData = () => {
-    this.requests.drawingItems(undefined, true);
+    this.requests.drawingItems(undefined);
   };
   //********App -> getInitailData********end
 
@@ -1315,7 +1315,7 @@ var count = 0;
                 files: true,
                 access_token: "string"
               },
-              false,
+              true,
               () => self.htmlMaker.currentId = id
           );
         }
