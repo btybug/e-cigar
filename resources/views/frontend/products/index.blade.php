@@ -142,35 +142,6 @@
                                         <a href="javascript:void(0)"
                                            class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
                                     </div>
-                                    <div class="selected_filter-sidebar-items">
-                                        {{--                                        <div class="select-wall">--}}
-                                        {{--                                            {!! Form::select('',$selecteds,array_keys($selecteds),--}}
-                                        {{--                                            ['class' => 'select_with-tag select-2 main-select main-select-2arrows products-filter-wrap_select not-selected',--}}
-                                        {{--                                            'multiple' =>true,'id' => 'brandSelect']) !!}--}}
-                                        {{--                                        </div>--}}
-                                        <ul class="d-inline-block">
-                                            <li class="selected_filter-sidebar-item position-relative">
-                                                <span class="selection_remove" role="presentation">×</span>
-                                                item 1
-                                            </li>
-                                            <li class="selected_filter-sidebar-item position-relative">
-                                                <span class="selection_remove" role="presentation">×</span>
-                                                item 2
-                                            </li>
-                                            <li class="selected_filter-sidebar-item position-relative">
-                                                <span class="selection_remove" role="presentation">×</span>
-                                                item 3
-                                            </li>
-                                            <li class="selected_filter-sidebar-item position-relative">
-                                                <span class="selection_remove" role="presentation">×</span>
-                                                item 4
-                                            </li>
-                                            <li class="selected_filter-sidebar-item position-relative">
-                                                <span class="selection_remove" role="presentation">×</span>
-                                                item 5
-                                            </li>
-                                        </ul>
-                                    </div>
                                 @endif
                             </div>
                             <div class="filter-sidebar-wrapper">
@@ -240,20 +211,7 @@
                             {!! Form::close() !!}
                         </div>
                         <div class="products__page-main_right-wrapper products-box">
-                            <div class="selected__filters">
-                                <ul class="d-inline-block">
-                                    <li class="single-item position-relative">
-                                        <span class="remove-icon">×</span>
-                                        DaVinci
-                                    </li>
-                                    <li class="single-item position-relative">
-                                        <span class="remove-icon">×</span>
-                                        Eleaf
-                                    </li>
-                                </ul>
-                            </div>
-
-                            @include("frontend.products._partials.products_render")
+                            @include("frontend.products._partials.products_render",['all_products' => true])
                         </div>
                     </div>
                 </div>
