@@ -34,6 +34,7 @@ class ProductsController extends Controller
         $filters = (new Attributes)->getFiltersByCategory($type);
         $data = $request->except('_token');
         $selecteds = [];
+        $selectedBrands = [];
         if (isset($data['select_filter']) && count($data['select_filter'])) {
             foreach ($data['select_filter'] as $k => $v) {
                 if ($v && is_array($v)) {
@@ -50,11 +51,20 @@ class ProductsController extends Controller
             }
         }
 
+        if(isset($data['brands']) && count($data['brands'])){
+            foreach ($data['brands'] as $k => $v) {
+                $cat = Category::find($v);
+                if($cat){
+                    $selectedBrands[$v] = $cat->name;
+                }
+            }
+        }
+
         if($request->ajax()){
-            $html = View('frontend.products._partials.products_render',compact(['products']))->render();
+            $html = View('frontend.products._partials.products_render',compact(['products','selectedBrands','selecteds']))->with('all_products',true)->render();
            return response()->json(['error' => false, 'html' => $html]);
         }
-        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type'))->with('filterModel', $request->all());
+        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type','selectedBrands'))->with('filterModel', $request->all());
     }
 
     public function getSingle($type, $slug)

@@ -1,3 +1,26 @@
+@if(isset($all_products))
+    <div class="selected__filters">
+        <ul class="d-inline-block">
+            @if(count($selecteds))
+                @foreach($selecteds as $key => $selected)
+                    <li data-key="{{ $key }}" class="single-item position-relative">
+                        <span class="remove-icon">×</span>
+                        {{ $selected }}
+                    </li>
+                @endforeach
+            @endif
+            @if(count($selectedBrands))
+                @foreach($selectedBrands as $key => $selected)
+                    <li data-key="{{ $key }}" class="single-item position-relative">
+                        <span class="remove-icon">×</span>
+                        {{ $selected }}
+                    </li>
+                @endforeach
+            @endif
+        </ul>
+    </div>
+@endif
+
 @if(count($products))
     <ul class="row products__page-list-product products__all-list-product">
         @foreach($products as $product)
