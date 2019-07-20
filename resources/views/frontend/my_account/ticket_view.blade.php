@@ -38,30 +38,30 @@
                                                 </svg>
                                             </a>
                                             <h1 class="font-sec-reg font-28 lh-1 text-tert-clr ticket__tab-top-head-title mb-0">
-                                                Order is not received </h1>
+                                                {!! $ticket->subject !!}
+                                            </h1>
                                             <span
-                                                class="font-main-bold font-16 lh-1 bg-red-clr text-sec-clr ticket__tab-top-head-status">Urgent</span>
+                                                class="font-main-bold font-16 lh-1 bg-red-clr text-sec-clr ticket__tab-top-head-status"
+                                                style="background-color: {{ $ticket->priority->color }}">
+                                                {{ $ticket->priority->name }}
+                                            </span>
                                         </div>
                                         <div class="d-flex flex-wrap ticket__tab-top-left-content-wrap">
                                             <div class="ticket__tab-top-left-user">
-                                                <img src="/public/img/user-girl.jpg" alt="user"
+                                                <img src="{{ user_avatar($ticket->user_id) }}" alt="user"
                                                      class="ticket__tab-top-left-user-photo">
                                                 <div class="text-center ticket__tab-top-left-user-info">
                                                     <p class="font-16 ticket__tab-top-left-user-by">Submitted by</p>
                                                     <h3 class="font-main-bold font-20 lh-1 ticket__tab-top-left-user-title">
-                                                        User Name</h3>
+                                                    {{ $ticket->author->name .' '.$ticket->author->last_name }}
+                                                    </h3>
                                                 </div>
 
                                             </div>
                                             <div class="d-flex flex-column ticket__tab-top-left-content">
-                                                <p class="font-main-light font-16 ticket__tab-top-left-content-txt">Best
-                                                    knowm as the Tesla TPOD, this vape pod system changes the pod kit
-                                                    game.
-                                                    This all-in-one vape is easy to use and features ceramic coil pod
-                                                    cartridges that work with oil concentrates and e-liquids.
-                                                    This premium pod kit makes a great oil vaporizer or salt nic vape.
-                                                    The
-                                                    T-POD battery mod.</p>
+                                                <p class="font-main-light font-16 ticket__tab-top-left-content-txt">
+                                                    {!! $ticket->summary !!}
+                                                </p>
                                                 <div class="mt-auto attachments">
                                                 <span class="title">
                                                     <svg
@@ -86,12 +86,6 @@
                                                                     </li>
                                                                 @endif
                                                             @endforeach
-
-                                                            {{--<li class="item-attach">--}}
-                                                            {{--<audio controls>--}}
-                                                            {{--<source src="https://www.computerhope.com/jargon/m/example.mp3" />--}}
-                                                            {{--</audio>--}}
-                                                            {{--</li>--}}
                                                         @else
                                                             <li>No Attachments</li>
                                                         @endif
@@ -185,75 +179,21 @@
                                                         class="font-main-bold">{!! time_ago($ticket->updated_at) !!}</span>
                                                     </div>
                                                 </div>
-                                                {{--                                            <p>--}}
-                                                {{--                                                <strong>Owner</strong>: {{ $ticket->author->name }}--}}
-                                                {{--                                            </p>--}}
-
-                                                {{--                                            @if($ticket->priority)--}}
-                                                {{--                                                <p>--}}
-                                                {{--                                                    <strong>Priority</strong>:--}}
-                                                {{--                                                    <span class="badge"--}}
-                                                {{--                                                          style="color: #069900">{{ $ticket->priority->name }}</span>--}}
-                                                {{--                                                </p>--}}
-                                                {{--                                            @endif--}}
-
-
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="comments__wrapper">
                                     <div class="comment-block">
-                                        <div class="comment-block-inner new__scroll">
-                                            <div class="d-flex comment-first">
-                                                <div class="user-photo">
-                                                    <svg width="39px" height="39px" viewBox="0 0 39 39">
-                                                        <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                                                              d="M33.289,25.211 C31.165,23.087 28.637,21.515 25.879,20.563 C28.833,18.529 30.773,15.124 30.773,11.273 C30.773,5.057 25.716,-0.000 19.500,-0.000 C13.284,-0.000 8.227,5.057 8.227,11.273 C8.227,15.124 10.167,18.529 13.121,20.563 C10.363,21.515 7.835,23.087 5.711,25.211 C2.028,28.895 -0.000,33.791 -0.000,39.000 L3.047,39.000 C3.047,29.928 10.428,22.547 19.500,22.547 C28.572,22.547 35.953,29.928 35.953,39.000 L39.000,39.000 C39.000,33.791 36.972,28.895 33.289,25.211 ZM19.500,19.500 C14.964,19.500 11.273,15.810 11.273,11.273 C11.273,6.737 14.964,3.047 19.500,3.047 C24.036,3.047 27.727,6.737 27.727,11.273 C27.727,15.810 24.036,19.500 19.500,19.500 Z"/>
-                                                    </svg>
-                                                </div>
-                                                <div class="comment-first-info">
-                                                    <div
-                                                        class="d-flex justify-content-between font-16 comment-info-head comment-first-info-head">
-                                                        <span>Admin, 15:36</span>
-                                                        <span class="comment-first-info-date">11/07/2019</span>
-                                                    </div>
-
-                                                    <div class="bg-blue-clr comment-info-text-wrap">
-                                                        <p class="mb-0 lh-1 font-16">Your ticket is already under
-                                                            process</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="comment-infos text-center">
-                                                <div class="d-inline-flex align-items-center comment-infos-inner">
-                                            <span class="icon">
-                                                <img src="/public/img/comment-repeat-icon.png" alt="icon">
-                                            </span>
-                                                    <p class="font-main-bold font-16 mb-0 lh-1">10/07/2019, Admin has
-                                                        Resigned responsibility to Vahag</p>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex justify-content-end comment-second">
-                                                <div class="comment-second-info">
-                                                    <div
-                                                        class="d-flex font-16 comment-info-head comment-first-info-head">
-                                                        <span>User Name, 12:15</span>
-                                                    </div>
-
-                                                    <div class="comment-info-text-wrap">
-                                                        <p class="mb-0 lh-1 font-16">My order number is AMO-C2A7046</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        <div class="comment-block-inner new__scroll comments-refresh">
+                                            @include("admin.ticket._partials.comments")
                                         </div>
                                     </div>
                                     <div class="comment-send-block">
                                         {!! Form::open(['url' => 'admin_tickets_reply']) !!}
                                         {!! Form::hidden('ticket_id',$ticket->id) !!}
                                         <div class="comment-send-block-user-img">
-                                            <img src="/public/images/male.png" alt="user">
+                                            <img src="{{ user_avatar(auth()->id()) }}" alt="user">
                                         </div>
                                         <div class="area-wrap">
                                         <textarea name="reply" id="" rows="0"
@@ -411,9 +351,9 @@
                         } else {
                             form[0].reset();
                             $(".user-add-comment-secondry").remove();
-
-                            $("#msgModal .message-place").text(data.message);
-                            $("#msgModal").modal();
+                            //
+                            // $("#msgModal .message-place").text(data.message);
+                            // $("#msgModal").modal();
 
                             $(".comments-refresh").html(data.html);
                         }

@@ -210,6 +210,7 @@ class UserController extends Controller
 
         if (!$ticket) abort(404);
         $replies = $ticket->replies()->main()->get();
+//        dd($ticket,$ticket->author);
         $data = mergeCollections($replies, $ticket->history);
 
         return $this->view('ticket_view', compact(['ticket', 'data']));
