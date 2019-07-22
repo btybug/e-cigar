@@ -172,21 +172,44 @@ class ShoppingCartController extends Controller
                     $parent = Cart::get($key);
                     if($parent){
                         $attrs = $parent->attributes;
-                        $attrs['extra'] = $this->cartService->extras;
+                        $newAttr = [];
+                        if( $parent->attributes->has('extra') && isset($parent->attributes->extra['data']))
+                        {
+                            $data = $parent->attributes->extra['data'];
+                            $price = $parent->attributes->extra['price'];
+                            $x = [];
+                            foreach ($data as $datum){
+                                $x[] = $datum;
+                            }
+
+                            $newData = $this->cartService->extras['data'];
+                            $price = $price + $this->cartService->extras['price'];
+
+                            foreach ($newData as $datum){
+                                $x[] = $datum;
+                            }
+
+
+                            $newAttr = ['data' => $x,'price' => $price];
+                            $attrs['extra'] = $newAttr;
+                        }
+                        else
+                        {
+                            $attrs['extra'] = $this->cartService->extras;
+                        }
 
                         Cart::update($key, array(
                             'attributes' => $attrs
                         ));
-                        if($request->cart){
-                            $data = $this->cartService->getShipping(Cart::getContent());
-                            $default_shipping = $data['default_shipping'];
-                            $shipping = $data['shipping'];
-                            $geoZone = $data['geoZone'];
-                            $html = \View("frontend.shop._partials.cart_table",compact(['default_shipping','shipping','geoZone']))->render();
-                        }
+
+                        $data = $this->cartService->getShipping(Cart::getContent());
+                        $default_shipping = $data['default_shipping'];
+                        $shipping = $data['shipping'];
+                        $geoZone = $data['geoZone'];
+                        $html = \View("frontend.shop._partials.cart_table",compact(['default_shipping','shipping','geoZone']))->render();
 
                         return \Response::json(['error' => false, 'message' => 'Extra Product added',
-                            'html' => isset($html)?$html:null]);
+                            'html' => $html]);
 
                     }
                 }
@@ -523,7 +546,7 @@ class ShoppingCartController extends Controller
         $cart_id = $request->item_id;
         $item = Cart::get($cart_id);
         if($item){
-            $product = $item->attributes->product;
+            $product = Stock::find($item->attributes->product->id);
             $price = $item->price;
             $qty = $item->quantity;
             $extras = ($item->attributes->has('extra')) ? $item->attributes->extra['data'] : [];

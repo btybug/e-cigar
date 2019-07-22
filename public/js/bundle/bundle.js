@@ -4467,7 +4467,7 @@ $(document).ready(function () {
 
         $('body').on('click', '#specialPopUpModal .bottom-btn-cart', function () {
 
-            var activeProducts = $('.special__popup-main-product-item.active');
+            var activeProducts = $('body').find(' .special__popup-main-product-item.active');
             var products = [];
             //Edo
             if (location.pathname === "/my-cart") {
@@ -4566,8 +4566,9 @@ $(document).ready(function () {
                         // console.log($self.closest('.special__popup-main-product-item'));
                         // btnAddToRemove($self);
                         // $('.special__popup-content-right-item.added-offers').append(data.html);
+                        $(".cart-area").html(data.html);
                         $("#specialPopUpModal").modal('hide');
-                        $("#headerShopCartBtn").click();
+                        // $('#headerShopCartBtn').click();
                     }).catch(function (error) {
                         console.log(error);
                     });
@@ -5103,7 +5104,7 @@ $(document).ready(function () {
         // });
 
 
-        $('.add-offers-btn').each(function () {
+        $("body").find('.add-offers-btn').each(function () {
             var item_id = $(this).data('uid');
             // const items = [];
             // $(this).closest('.footer').find('.remove-extra-from-cart').each(function() {

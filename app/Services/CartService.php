@@ -53,7 +53,7 @@ class CartService
     {
         $cart = Cart::get($id);
         $price = $cart->price;
-        if ($cart && $cart->attributes->has('extra')) {
+        if ($cart && $cart->attributes->has('extra') && isset($cart->attributes['extra']['price'])) {
             $price += $cart->attributes['extra']['price'];
         }
         return ($cart) ? $price * $cart->quantity : $price;
@@ -65,7 +65,7 @@ class CartService
         $price = 0;
         foreach ($data as $cart) {
             $itemPrice = 0;
-            if ($cart->attributes->has('extra')) {
+            if ($cart->attributes->has('extra') && isset($cart->attributes['extra']['price'])) {
                 $itemPrice = $cart->attributes['extra']['price'];
             }
 

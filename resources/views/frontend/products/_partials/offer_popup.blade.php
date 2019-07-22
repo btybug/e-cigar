@@ -11,10 +11,10 @@
         </div>
         <div class="mt-auto special__popup-content-left-bottom">
             <div class="d-flex inner">
-                <a href="#" class="font-sec-light font-26 text-uppercase bottom-btn-cart no-btn">
+                <a href="javascript:void(0)" class="font-sec-light font-26 text-uppercase bottom-btn-cart no-btn">
                     NO THANK YOU
                 </a>
-                <a href="#"
+                <a href="javascript:void(0)"
                    class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
                     Add To Cart
                 </a>
@@ -50,12 +50,13 @@
                 <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
                     Added Offers
                 </div>
+                @if(isset($extras) && count($extras))
+                    @foreach($extras as $extra)
+                        @include("frontend.products._partials.add_offer",['offer' => $extra['offer'],'price'  => $extra['price']])
+                    @endforeach
+                @endif
             </div>
-            @if(isset($extras) && count($extras))
-                @foreach($extras as $extra)
-                    @include("frontend.products._partials.add_offer",['offer' => $extra['offer'],'price'  => $extra['price']])
-                @endforeach
-            @endif
+
             <a href="#" class="text-main-clr special__popup-content-right-item-more">
                 <div class="d-flex flex-column align-items-center item-more-inner">
                     <span class="icon"><i class="fas fa-plus"></i></span>
