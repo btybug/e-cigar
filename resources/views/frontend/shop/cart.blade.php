@@ -99,6 +99,34 @@
             </svg>
         </button>
     </main>
+
+    <div class="modal fade p-0" id="specialPopUpModal" tabindex="-1" role="dialog"
+         aria-labelledby="specialPopUpModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
+            <div class="modal-content">
+                <div class="modal-header special__popup-head">
+                    <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
+                        Offer</h5>
+                    <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">You
+                        might be interested in the following offers
+                    </div>
+                    <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink"
+                                width="42px" height="42px" viewBox="0 0 42 42">
+<path fill-rule="evenodd" fill="rgb(53, 53, 53)"
+      d="M42.008,1.300 L40.701,-0.009 L21.000,19.690 L1.301,-0.009 L-0.008,1.300 L19.691,21.000 L-0.008,40.699 L1.301,42.009 L21.000,22.307 L40.701,42.009 L42.008,40.699 L22.309,21.000 L42.008,1.300 Z"/>
+</svg>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body p-0">
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/frontend/css/cart.css')}}">
