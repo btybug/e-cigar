@@ -21523,7 +21523,8 @@ position: absolute;
 .comments__wrapper .comment-block{
     border: 1px solid #d7d7d7;
     background-color: #f0f0f0;
-    padding-top: 95px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 .comments__wrapper .comment-block-inner{
     padding: 0 20px;
@@ -21621,6 +21622,20 @@ position: absolute;
     right: 12px;
     top: 9px;
 }
+
+.comments__wrapper .comment-send-block .inputfile {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+.comments__wrapper .comment-send-block .inputfile + label {
+    display: inline-block;
+    cursor: pointer;
+}
+
 .comments__wrapper .comment-infos-inner .icon{
     margin-right: 22px;
 }
