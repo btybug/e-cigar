@@ -38,17 +38,148 @@
         </div>
         <div class="col-md-6">
             <div class="right-content h-100">
-                <form action="" class="h-100 d-flex flex-column">
+                <form method="POST" action="{{ route('register') }}" class="h-100 d-flex flex-column" id="register-form-1">
+                    @csrf
                     <div class="main-wrap">
                         <h2 class="font-40 text-tert-clr title">REGISTER</h2>
                         <p class="font-26 text-main-clr sec-title">Don’t have an account yet?</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="firstName" type="text" class="form-control {{ $errors->has('name') ? ' is-invalid' : '' }}" placeholder="First name"
+                                           name="name" value="{{ old('name') }}">
+                                    @if ($errors->has('name'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="lastName" type="text" class="form-control {{ $errors->has('last_name') ? ' is-invalid' : '' }}" placeholder="Last name"
+                                           name="last_name" value="{{ old('last_name') }}">
+                                    @if ($errors->has('last_name'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('last_name') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                 <input type="email" class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="E-mail" name="email" value="{{ old('email') }}">
+                                    @if ($errors->has('email'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="phoneNumber" type="text"
+                                       class="form-control {{ $errors->has('phone') ? ' is-invalid' : '' }}" placeholder="Phone number"
+                                       name="phone" value="{{ old('phone') }}" autofocus>
+                                    @if ($errors->has('phone'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                @php
+                                    $countries = (new \PragmaRX\Countries\Package\Countries())->all()->pluck('name.common', 'name.common')->toArray();
+                                @endphp
+                                <div class="form-group">
+                                    {!! Form::select('country',$countries,null,['id'=>'country',"style" =>"width: 100%;padding: 0;height: 52px;padding-left: 24px;",
+                                    'class' => 'form-control']) !!}
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div>
+                                    <label class="text-gray-clr">Gender</label>
+                                </div>
+                                <div class="row no-gutters form-checkes-outer d-flex justify-content-between">
+                                    <div>
+                                        <input class="form-check-input register-form_input-radio" type="radio"
+                                               name="gender" id="genderRadios1" value="male" checked>
+                                        <label
+                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
+                                            for="genderRadios1">
+                                            Male
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input register-form_input-radio" type="radio"
+                                               name="gender" id="genderRadios2" value="female">
+                                        <label
+                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
+                                            for="genderRadios2">
+                                            Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="password" name="password" type="password" placeholder="Password" {{ $errors->has('password') ? ' is-invalid' : '' }}
+                                           class="form-control">
+                                    @if ($errors->has('password'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input id="confirmPassword" type="password"  placeholder="Confirm password"
+                                           class="form-control {{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}"
+                                           name="password_confirmation">
+                                    @if ($errors->has('password_confirmation'))
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password_confirmation') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
+                        </div>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="E-mail">
+                            <div class="col-md-7 d-flex align-items-center">
+                                <div class="position-relative">
+                                    <input class="form-check-input register-form_input-check"
+                                           name="terms_conditions" type="checkbox" value="1" id="defaultCheck1">
+                                    <label class="form-check-label text-gray-clr register-form_label pointer"
+                                           for="defaultCheck1">
+                                        I agree to&nbsp;&nbsp; <a href="#" class="text-uderlined text-gray-clr">Terms
+                                            and conditions</a>
+                                        <span
+                                            class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                            <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+  <path
+      d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"/>
+</svg>
+                                        </span>
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="d-flex mt-auto bottom-wrap">
-                        <a href="#" class="bg-blue-clr btn-log-reg text-uppercase">REGISTER</a>
+                        <button type="submit" class="bg-blue-clr btn-log-reg text-uppercase">REGISTER</button>
                     </div>
+                    {!! Form::hidden('g-recaptcha-response',null,['class'=>'g-recaptcha-response']) !!}
+
                 </form>
             </div>
         </div>
