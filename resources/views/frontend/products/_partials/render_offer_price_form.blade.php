@@ -16,13 +16,7 @@
                     $vSettings = $variation->first();
                 @endphp
                 @if($vSettings->type == 'filter')
-                    <div class="product-single-info_row options-group">
-                        <div class="d-flex flex-wrap align-items-center {{$vSettings->type}}" data-group-id="{{ $vSettings->variation_id }}">
-                            @include("frontend.products._partials.variation_types.filter_popup")
-                        </div>
-                        <div class="product-single-info_row-items">
-                        </div>
-                    </div>
+                    @include("frontend.products._partials.special_offer.filter_popup")
                 @elseif($vSettings->type == 'single')
                     @if(\View::exists("frontend.products._partials.special_offer.single.$vSettings->display_as"))
                         @include("frontend.products._partials.special_offer.single.$vSettings->display_as")
