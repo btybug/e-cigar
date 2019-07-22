@@ -1329,6 +1329,7 @@ function getClient()
     $client->addScope(Google_Service_Oauth2::USERINFO_EMAIL);
     $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_GROUP);
     $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_USER_ALIAS);
+    $client->addScope(Google_Service_Directory::ADMIN_DIRECTORY_CUSTOMER);
     $accessToken = Gmail::refreshToken();
     if (is_array($accessToken)) {
         $client->setAccessToken($accessToken);
