@@ -210,8 +210,8 @@
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
                 image_advtab: true,
                 templates: [
-                    {title: 'Test template 1', content: 'Test 1'},
-                    {title: 'Test template 2', content: 'Test 2'}
+                    {"title": "Some title 1", "description": "Some desc 1", "content": "My content"},
+                    {"title": "Some title 2", "description": "Some desc 2", "url": "http://e-cigar.com/"}
                 ],
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',

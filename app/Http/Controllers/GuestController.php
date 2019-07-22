@@ -3,14 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactUsRequest;
-use App\Mail\ContactUs;
 use App\Models\Category;
 use App\Models\Common;
-use App\Models\Faq;
+use App\Models\ContactUs;
 use App\Models\GeoZones;
-use App\Models\Gmail;
 use App\Models\ZoneCountries;
-use Dacastro4\LaravelGmail\Services\Message\Mail;
+use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
@@ -127,6 +125,7 @@ class GuestController extends Controller
 
     public function getContactUs()
     {
+
         return $this->view('contact_us');
     }
 
@@ -144,17 +143,16 @@ class GuestController extends Controller
             'message' => trim(htmlspecialchars($data['message'])),
         ];
 //            $mail=Gmail::message()->subject('about_team_5c4ef6c1e44b1')->preload()->all();
-//        dd($mail);
 
-        $email = new ContactUs($result);
+        $email =  $contact_us=\App\Models\ContactUs::create($result);
+        event(new \App\Events\ContactUs($email));
+        $email->save();
 //        \Config::set('mail.from.address',$data['email']);
-        \Config::set('mail.from.address','bil.gates@microsoft.com');
-        \Config::set('mail.from.name','Bil Gates');
 //        \Mail::to(Gmail::user())->send($email);
-        \Mail::to('hakobyan.sahak88@gmail.com')->send($email);
-        $result['message']=Gmail::getEncodedBody($result['message']);
-        $contact_us=\App\Models\ContactUs::create($result);
-        $contact_us->recipients()->create(['name'=>env('APP_NAME'),'email'=>Gmail::user()]);
+//        \Mail::to('hakobyan.sahak88@gmail.com')->send($email);
+//        $result['message']=Gmail::getEncodedBody($result['message']);
+//        $contact_us=\App\Models\ContactUs::create($result);
+//        $contact_us->recipients()->create(['name'=>env('APP_NAME'),'email'=>Gmail::user()]);
 //        }catch (\Exception $exception){
 //            \Log::emergency("message: " . $exception->getMessage(). "  --file-  line : " . $exception->getFile(). ' - ' .$exception->getLine());
 //        }
