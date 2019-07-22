@@ -146,6 +146,7 @@ Route::post('/subscribe-to-newsletter', 'Frontend\CommonController@postSubscribe
 Route::get('/forum', 'Frontend\ForumController@index')->name('forum');
 Route::get('/shop', 'Frontend\ShoppingCartController@index')->name('shop');
 Route::get('/my-cart', 'Frontend\ShoppingCartController@getCart')->name('shop_my_cart');
+Route::post('/my-cart-special-offer', 'Frontend\ShoppingCartController@postSpecialOfferModal')->name('shop_my_cart_special_offer_modal');
 Route::get('/check-out', 'Frontend\ShoppingCartController@getCheckOut')->name('shop_check_out');
 Route::get('/payment/{token}', 'Frontend\ShoppingCartController@getPayment')->name('shop_payment');
 Route::post('/add-to-cart', 'Frontend\ShoppingCartController@postAddToCart')->name('shop_add_to_cart');
