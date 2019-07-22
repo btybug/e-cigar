@@ -8,7 +8,7 @@
                     {!! Form::hidden('g-recaptcha-response',null,['class'=>'g-recaptcha-response']) !!}
 
                     <div class="main-wrap">
-                        <h2 class="font-40 text-tert-clr title">SIGHN IN</h2>
+                        <h2 class="font-40 text-tert-clr title">SIGN IN</h2>
                         <p class="font-26 text-main-clr sec-title">Already a customer</p>
                         <div class="form-group">
                             <input id="loginEmail" type="email" placeholder="E-mail"
