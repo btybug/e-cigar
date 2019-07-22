@@ -47,6 +47,7 @@
     {{--<link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />--}}
     {{--<link href="{{asset('public/css/custom.css')}}" rel="stylesheet" />--}}
     {{--*****packed in public/css/bundle.css***** --}}
+    <link href="{{asset('public/css/invoice.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('public/css/bundle.css?v='.rand(111,999))}}">
     {{-- ********************************************* --}}
     {{-- <script src={{asset("public/js/jQuery3.3.1.js")}}></script> --}}
