@@ -95,5 +95,11 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->subject = 'Bonus from your referral';
         $email->translateOrNew($locale)->content = '';
         $email->save();
+
+        $email = new \App\Models\MailTemplates(['slug' => 'new_contact_us','from'=>'hr@hook.am']);
+        $email->save();
+        $email->translateOrNew($locale)->subject = 'New contact us message';
+        $email->translateOrNew($locale)->content = '';
+        $email->save();
     }
 }
