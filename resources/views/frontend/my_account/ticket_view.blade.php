@@ -122,7 +122,7 @@
                                                         class="font-main-bold text-tert-clr">{{ $ticket->category->name }}</span>
                                                     </div>
                                                 </div>
-                                                @if($ticket->category && $ticket->category->slug == 'order')
+                                                @if($ticket->category && $ticket->category->slug == 'order' && $ticket->order)
                                                     <div class="form-group row">
                                                         <div class="col-sm-6 pr-0">
                                                             <span>Order Number:</span>
@@ -210,8 +210,7 @@
                                         </span>
                                         </div>
 
-                                        <span
-                                            class="error-box invalid-feedback comment"></span>
+                                        <span class="error-box invalid-feedback comment"></span>
 
                                         <button type="button"
                                                 class="btn font-18 text-uppercase ntfs-btn add-comment-btn rounded-0">
@@ -326,6 +325,8 @@
 @section('js')
     <script>
         $(document).ready(function () {
+            $('.comments-refresh').animate({scrollTop: document.querySelector(".comments-refresh").scrollHeight},"fast");
+
             $('body').on('click', '.cancel-comment', function (event) {
                 $(this).parents('form:first')[0].reset();
             });
@@ -356,6 +357,8 @@
                             // $("#msgModal").modal();
 
                             $(".comments-refresh").html(data.html);
+                            $('.comments-refresh').animate({scrollTop: document.querySelector(".comments-refresh").scrollHeight},"fast");
+
                         }
                     },
                     error: function (data) {

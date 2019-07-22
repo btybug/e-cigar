@@ -109,8 +109,9 @@ class TicketsController extends Controller
         $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->whereNull('role_id')
             ->orWhere('roles.type', 'frontend')->select('users.*')->get()->pluck('name','id')->all();
-        $replies = $model->replies()->main()->get();
-        $data = mergeCollections($replies, $model->history);
+        $replies = $model->replies()->main()->oldest()->get();
+
+        $data = mergeCollections($replies, $model->history()->oldest()->get());
         return $this->view('edit', compact(['model', 'statuses', 'priorities', 'categories', 'staff', 'data','users']));
 
     }

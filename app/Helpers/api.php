@@ -830,7 +830,7 @@ function mergeCollections($collection1, $collection2)
         $collection->push($col1);
     foreach ($collection2 as $col2)
         $collection->push($col2);
-    $data = $collection->sortByDesc('created_at');
+    $data = $collection->sortBy('created_at');
     return $data->merge([]);
 }
 
