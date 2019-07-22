@@ -2858,7 +2858,7 @@ $(document).ready(function () {
                 });
 
                 $(this).find('.product__single-item_price').data('price-for-add', value);
-                setOfferPrice($(this).find('.product__single-item_price'), value);
+                // setOfferPrice($(this).find('.product__single-item_price'), value);
                 var addedPricePlace = $("#specialPopUpModal .added-offers .special__popup-content-right-product[data-id=\"" + id + "\"] .special__popup-content-right-product-price");
                 addedPricePlace.data('price', value);
                 addedPricePlace.html("" + getCurrencySymbol() + value);
@@ -3566,10 +3566,12 @@ $(document).ready(function () {
             }).then(function (json) {
                 // const isMultiple = select.closest('[data-limit]').attr('data-limit') === '1' ? false : true;
 
-                el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
+                el.closest('.filter-children-items').append(json.html);
                 // select2MaxLimit(select, limit);
                 console.log();
-                setTotalPrice(countTotalPrice());
+                // setTotalPrice(countTotalPrice());
+                countOfferPrice();
+                countOfferTotalPrice();
                 // el.closest('.product__single-item-info-bottom').find('.filter-children-items').find('.product__single-item-info-bottom').remove();
                 // el.closest('.product__single-item-info-bottom').find('.filter-children-items').append(json.html);
                 // el.closest('.product-single-info_row').find('.filter .col-sm-2.pl-sm-3.p-0.text-sm-center').html($(el.closest('.product-single-info_row').find('.filter-children-items').children()[1]));
@@ -4406,7 +4408,7 @@ $(document).ready(function () {
                         var limit = $(this).closest('[data-limit]').attr('data-limit');
                         var selectElementId = $(e.params.data.element).attr('data-select2-id');
                         console.log(1111111111111, e.params);
-                        selectHandle($(e.target), id, selectElementId, limit, $(this));
+                        selectOfferHandle($(e.target), id, selectElementId, limit, $(this));
                     });
 
                     $("[data-group=\"" + group_id + "\"]").on('select2:unselect', '.product--select-items', function (e) {
