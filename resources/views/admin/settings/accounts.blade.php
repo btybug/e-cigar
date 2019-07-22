@@ -28,7 +28,7 @@
                                         </td>
                                         <td>
                                             {!! Form::hidden('old['.$from->id.'][type]','from') !!}
-                                            {!! Form::select("old[".$from->id."][email]",$alians,$from->email,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
+                                            {!! Form::text("old[".$from->id."][email]",$from->email,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
 
                                         </td>
                                         <td>
@@ -96,26 +96,13 @@
                 $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
                 let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
                     </td><td><input type="hidden" name="new[${fcount}][type]" value="from">
-                   {!! Form::select('new[${fcount}][email]',$alians,null,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
+                   {!! Form::text('new[${fcount}][email]',null,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
                     </td><td><label for="sendingEmailDesc">Description</label></td> <td>
                     <textarea rows="5" class="form-control" name="new[${fcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
                     </td><td><button type="button" class="btn btn-primary pull-right add-more-from"><i class="fa fa-plus"></i></button> </td></tr>`;
                 $('.froms-table').append(html);
                 fcount++;
-            })
-            $('body').on('click', '.add-more-too', function () {
-                $(this).removeClass('add-more-from').addClass('remove-line');
-                $(this).removeClass('btn-primary').addClass('btn-danger delete');
-                $(this).find('i').removeClass('fa-plus').addClass('fa-minus');
-                let html = `<tr><td><label for="sendingEmail">E-Mail Address</label>
-                    </td><td><input type="hidden" name="new_to[${tcount}][type]" value="to">
-                     {!! Form::select('new_to[${tcount}][email]',$alians,null,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
-                    </td><td><label for="sendingEmailDesc">Description</label></td> <td>
-                    <textarea rows="5" class="form-control" name="new_to[${tcount}][description]" aria-describedby="sendingEmailDesc" placeholder="Enter Description"></textarea>
-                    </td><td><button type="button" class="btn btn-primary pull-right  add-more-too"><i class="fa fa-plus"></i></button> </td></tr>`;
-                $('.table-to').append(html)
-                tcount++;
-            })
+            });
             $('body').on('click','.delete',function () {
                 $(this).closest('tr').remove();
             })
