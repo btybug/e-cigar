@@ -72,23 +72,8 @@
       d="M20.150,27.150 C19.681,27.150 19.300,26.768 19.300,26.296 L19.300,10.555 C19.300,5.677 15.353,1.708 10.500,1.708 C5.647,1.708 1.699,5.677 1.699,10.555 L1.699,17.203 C1.699,17.203 1.699,17.203 1.699,17.203 L1.699,33.434 C1.699,36.664 4.313,39.292 7.526,39.292 C10.739,39.292 13.353,36.664 13.353,33.434 L13.353,24.447 L13.353,17.203 L13.353,11.714 C13.353,10.167 12.100,8.908 10.561,8.908 C9.021,8.908 7.769,10.167 7.769,11.714 L7.769,24.447 C7.769,24.918 7.388,25.301 6.919,25.301 C6.450,25.301 6.069,24.918 6.069,24.447 L6.069,11.714 C6.069,9.225 8.084,7.199 10.561,7.199 C13.037,7.199 15.052,9.225 15.052,11.714 L15.052,17.202 C15.052,17.202 15.052,17.203 15.052,17.203 L15.052,33.434 C15.052,37.606 11.676,41.000 7.526,41.000 C3.376,41.000 0.000,37.606 0.000,33.434 L0.000,26.297 C0.000,26.296 -0.000,26.296 -0.000,26.296 L-0.000,10.555 C-0.000,4.735 4.710,-0.000 10.500,-0.000 C16.290,-0.000 21.000,4.735 21.000,10.555 L21.000,26.296 C21.000,26.768 20.619,27.150 20.150,27.150 Z"/>
 </svg>
                                                 </span>
-                                                    <ul>
-                                                        @if(count($ticket->attachments))
-                                                            @foreach($ticket->attachments as $attachment)
-                                                                @if($attachment->type == 'image')
-                                                                    <li class="item-attach">
-                                                                        <img src="{{ $attachment->file_path }}" alt="">
-                                                                    </li>
-                                                                @elseif($attachment->type == 'document')
-                                                                    <li class="item-attach">
-                                                                        <iframe src="{{ $attachment->file_path }}"
-                                                                                style="width: 100%;height: 100%;border: none;"></iframe>
-                                                                    </li>
-                                                                @endif
-                                                            @endforeach
-                                                        @else
-                                                            <li>No Attachments</li>
-                                                        @endif
+                                                    <ul class="attachments-box">
+                                                        @include("admin.ticket._partials.attachments")
                                                     </ul>
                                                 </div>
                                             </div>
@@ -190,7 +175,7 @@
                                         </div>
                                     </div>
                                     <div class="comment-send-block">
-                                        {!! Form::open(['url' => 'admin_tickets_reply']) !!}
+                                        {!! Form::open(['url' => route('admin_tickets_reply'),'id' => 'add-comment','files' =>true]) !!}
                                         {!! Form::hidden('ticket_id',$ticket->id) !!}
                                         <div class="comment-send-block-user-img">
                                             <img src="{{ user_avatar(auth()->id()) }}" alt="user">
@@ -200,7 +185,7 @@
                                                   placeholder="Your reply"
                                                   class="add-comment_field form-control w-100"></textarea>
                                             <span class="icon">
-                                                <input type="file" id="attach-file" class="inputfile">
+                                                <input type="file" name="attachments[]" id="attach-file" multiple="true" class="inputfile">
                                                 <label for="attach-file">
                                                     <svg
                                                         xmlns="http://www.w3.org/2000/svg"
@@ -216,7 +201,7 @@
 
                                         <span class="error-box invalid-feedback comment"></span>
 
-                                        <button type="button"
+                                        <button type="submit"
                                                 class="btn font-18 text-uppercase ntfs-btn add-comment-btn rounded-0">
                                             Send
                                         </button>
@@ -225,45 +210,6 @@
                                     </div>
                                 </div>
                             </div>
-
-                            {{--                            <div class="row">--}}
-                            {{--                                <div class="col-md-6">--}}
-
-                            {{--                                    <div class="col-md-12">--}}
-                            {{--                                        <div class="tickets-comments">--}}
-                            {{--                                            <div class="row user-comment-img user-commmet-add">--}}
-                            {{--                                                <div class="comments_wall">--}}
-                            {{--                                                    <h2 class="ticket-reply-title font-25 mb-4">Reply</h2>--}}
-                            {{--                                                    <div class="divider"></div>--}}
-                            {{--                                                    <div class="user-add-comment mb-4">--}}
-                            {{--                                                        <div class="row">--}}
-                            {{--                                                            <div class="col-sm-2">--}}
-
-                            {{--                                                            </div>--}}
-                            {{--                                                            <div class="col-sm-10">--}}
-                            {{--                                                                <div class="add-comment">--}}
-
-                            {{--                                                                </div>--}}
-                            {{--                                                            </div>--}}
-                            {{--                                                        </div>--}}
-                            {{--                                                    </div>--}}
-                            {{--                                                    <div class="comments-refresh">--}}
-                            {{--                                                        @include('admin.ticket._partials.comments')--}}
-                            {{--                                                    </div>--}}
-                            {{--                                                </div>--}}
-                            {{--                                            </div>--}}
-                            {{--                                        </div>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-
-                            {{--                                <div class="col-md-3">--}}
-                            {{--                                    <div class="col-md-12">--}}
-                            {{--                                        <p></p>--}}
-                            {{--                                        <p>{!! $ticket->summary !!}</p>--}}
-                            {{--                                        <p></p>--}}
-                            {{--                                    </div>--}}
-                            {{--                                </div>--}}
-                            {{--                            </div>--}}
                         </div>
                         <div class="ticket__tab-wrapper-right-col">
                             <div class="ticket__tab-wrapper-right">
@@ -339,28 +285,31 @@
                 $(this).parents('.user-add-comment').remove();
             });
 
-            $('body').on('click', '.add-comment-btn', function (event) {
-                event.preventDefault();
-                var form = $(this).parents('form:first');
-                var data = form.serialize();
+            $("body").on('submit',"#add-comment" ,function(e){
+                e.preventDefault();
+                form = this;
                 $.ajax({
                     url: "{!! route('admin_tickets_reply') !!}",
                     type: 'POST',
-                    data: data,
+                    data: new FormData(this),
+                    contentType: false,
+                    cache: false,
+                    processData:false,
                     success: function (data) {
                         $('.error-box').html('');
                         if (data.success == false) {
                             $.map(data.errors, function (k, v) {
-                                form.find('.' + v).text(k[0]);
+                                $('#add-comment').find('.' + v).text(k[0]);
                             });
                         } else {
-                            form[0].reset();
+                            $('#add-comment')[0].reset();
                             $(".user-add-comment-secondry").remove();
                             //
                             // $("#msgModal .message-place").text(data.message);
                             // $("#msgModal").modal();
 
                             $(".comments-refresh").html(data.html);
+                            $(".attachments-box").html(data.attachments);
                             $('.comments-refresh').animate({scrollTop: document.querySelector(".comments-refresh").scrollHeight},"fast");
 
                         }
@@ -370,6 +319,57 @@
                     }
                 });
             });
+
+            {{--$('body').on('click', '.add-comment-btn', function (event) {--}}
+                {{--event.preventDefault();--}}
+                {{--var form = $(this).parents('form:first');--}}
+                {{--var data = new FormData(form[0]);--}}
+                {{--jQuery.each($('#attach-file')[0].files, function(i, file) {--}}
+                    {{--data.append('attachments[]', file);--}}
+                {{--});--}}
+
+                {{--console.log(data.);--}}
+                {{--// var data = new FormData();--}}
+                {{--// var form_data = form.serializeArray();--}}
+                {{--// $.each(form_data, function (key, input) {--}}
+                {{--//     data.append(input.name, input.value);--}}
+                {{--// });--}}
+                {{--//--}}
+                {{--// $.each(form.find('input[type="file"]'), function(i, tag) {--}}
+                {{--//     $.each($(tag)[0].files, function(i, file) {--}}
+                {{--//         data.append(tag.name, file);--}}
+                {{--//     });--}}
+                {{--// });--}}
+
+
+                {{--$.ajax({--}}
+                    {{--url: "{!! route('admin_tickets_reply') !!}",--}}
+                    {{--type: 'POST',--}}
+                    {{--data: data,--}}
+                    {{--success: function (data) {--}}
+                        {{--$('.error-box').html('');--}}
+                        {{--if (data.success == false) {--}}
+                            {{--$.map(data.errors, function (k, v) {--}}
+                                {{--form.find('.' + v).text(k[0]);--}}
+                            {{--});--}}
+                        {{--} else {--}}
+                            {{--form[0].reset();--}}
+                            {{--$(".user-add-comment-secondry").remove();--}}
+                            {{--//--}}
+                            {{--// $("#msgModal .message-place").text(data.message);--}}
+                            {{--// $("#msgModal").modal();--}}
+
+                            {{--$(".comments-refresh").html(data.html);--}}
+                            {{--$(".attachments-box").html(data.attachments);--}}
+                            {{--$('.comments-refresh').animate({scrollTop: document.querySelector(".comments-refresh").scrollHeight},"fast");--}}
+
+                        {{--}--}}
+                    {{--},--}}
+                    {{--error: function (data) {--}}
+                        {{--// alert(data.err);--}}
+                    {{--}--}}
+                {{--});--}}
+            {{--});--}}
 
 
             $('body').on('click', '.reply', function (e) {

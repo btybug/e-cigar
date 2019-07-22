@@ -128,9 +128,13 @@ class TicketsController extends Controller
     public function reply(Request $request)
     {
         $data = $request->all();
+        $max_size = (int)ini_get('upload_max_filesize') * 1000;
+        $all_ext = implode(',', $this->fileService->allExtensions());
+
         $rules = [
             'ticket_id' => 'required|exists:tickets,id',
-            'reply' => 'required|min:2|max:1000'
+            'reply' => 'required|min:2|max:1000',
+            'attachments.*' => 'sometimes|file|mimes:' . $all_ext . '|max:' . $max_size
         ];
 
         $result = [
@@ -149,11 +153,18 @@ class TicketsController extends Controller
         $reply = new Reply();
         $reply->create($result);
         $ticket = Ticket::find($data['ticket_id']);
+        if ($request->hasfile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $this->fileService->saveFiles($ticket->attachments(), $file);
+            }
+        }
+
         $replies = $ticket->replies()->main()->get();
         $data = mergeCollections($replies, $ticket->history);
         $html = \View::make('admin.ticket._partials.comments', compact('data'))->render();
+        $attachments = \View::make("admin.ticket._partials.attachments", compact('ticket'))->render();
 
-        return \Response::json(['success' => true, 'message' => 'Success', 'html' => $html]);
+        return \Response::json(['success' => true, 'message' => 'Success', 'html' => $html,'attachments' =>$attachments]);
     }
 
     public function getSettings()
