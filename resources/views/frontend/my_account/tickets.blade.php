@@ -49,6 +49,7 @@
                        <thead>
                        <tr>
                            <th class="text-capitalize">ticket ID</th>
+                           <th class="text-capitalize">subject</th>
                            <th class="text-capitalize">submited</th>
                            <th class="text-capitalize">updated on</th>
                            <th class="text-capitalize">status</th>
@@ -60,6 +61,7 @@
                            @foreach($tickets as $ticket)
                                <tr>
                                    <td>#{{ $ticket->id }}</td>
+                                   <td>#{{ $ticket->subject }}</td>
                                    <td>{!! BBgetDateFormat($ticket->created_at) . ' ' . BBgetTimeFormat($ticket->created_at); !!}</td>
                                    <td>{!! BBgetDateFormat($ticket->updated_at) . ' ' . BBgetTimeFormat($ticket->updated_at); !!}</td>
                                    <td>
