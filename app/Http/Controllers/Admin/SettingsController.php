@@ -148,7 +148,7 @@ class SettingsController extends Controller
 
     public function getAccounts()
     {
-        $alians = getGoogleAlians('email','email');
+        $alians = getGoogleAlians();
         $froms = Emails::where('type', 'from')->get();
         $tos = Emails::where('type', 'to')->get();
         return $this->view('accounts', compact('froms', 'tos', 'alians'));
