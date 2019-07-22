@@ -368,20 +368,19 @@
                                                             <h1 class="main-title">INVOICE</h1>
                                                             <div class="invoice__table-wrap">
                                                                 <div class="table-responsive">
-                                                                    <table class="table">
+                                                                    <table class="table table-bordered">
                                                                         <thead>
                                                                         <tr>
                                                                             <th scope="col">Product</th>
                                                                             <th scope="col">Description</th>
-                                                                            <th scope="col">Quantity</th>
-                                                                            <th scope="col">VAT</th>
-                                                                            <th scope="col">Total</th>
+                                                                            <th scope="col" class="text-center">Quantity</th>
+                                                                            <th scope="col" class="text-center">VAT</th>
+                                                                            <th scope="col" class="text-center">Total</th>
                                                                         </tr>
                                                                         </thead>
                                                                         <tbody>
                                                                         <tr>
-
-                                                                            <td>Kangertech Vola 23 100W Premium Vape
+                                                                            <td class="product-td">Kangertech Vola 23 100W Premium Vape
                                                                             </td>
                                                                             <td>
                                                                                 <div class="single-item">
@@ -393,23 +392,84 @@
                                                                                     <span>$55</span>
                                                                                 </div>
                                                                             </td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 <span>x 1</span>
                                                                             </td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 <span>£18 (21%)</span>
                                                                             </td>
-                                                                            <td>
+                                                                            <td class="text-center">
                                                                                 <span class="price">£83,00</span>
                                                                             </td>
                                                                         </tr>
-
+                                                                        <tr>
+                                                                            <td class="product-td">Kangertech Vola 23 100W Premium Vape
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="single-item">
+                                                                                    <span>Pods Gold Edition</span>
+                                                                                    <span>$28</span>
+                                                                                </div>
+                                                                                <div class="single-item">
+                                                                                    <span>Gold Tobacco Nic.Salts 18mg</span>
+                                                                                    <span>$55</span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                <span>x 1</span>
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                <span>£18 (21%)</span>
+                                                                            </td>
+                                                                            <td class="text-center">
+                                                                                <span class="price">£83,00</span>
+                                                                            </td>
+                                                                        </tr>
                                                                         </tbody>
                                                                     </table>
                                                                 </div>
                                                             </div>
+                                                            <div class="d-flex invoice__content-paid-price">
+                                                                <div class="invoice__content-paid">
+                                                                    <img src="/public/img/temp/paid-invoice.png"
+                                                                         alt="paid">
+                                                                </div>
+                                                                <div class="invoice__content-price">
+                                                                    <div class="invoice__content-price-item">
+                                                                        <span class="name">Sub Total</span>
+                                                                        <span class="price">£18,00</span>
+                                                                    </div>
+                                                                    <div class="invoice__content-price-item">
+                                                                        <span class="name">Total VAT</span>
+                                                                        <span class="price">£08,00</span>
+                                                                    </div>
+                                                                    <div class="invoice__content-price-item">
+                                                                        <span class="name">Shipping</span>
+                                                                        <span class="price">£10,00</span>
+                                                                    </div>
+                                                                    <div class="invoice__content-price-item">
+                                                                        <span
+                                                                            class="name total-name">Total Amount</span>
+                                                                        <span
+                                                                            class="price total-price"><span>£86,</span><span
+                                                                                class="sec-price">95</span></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                        <div class="invoice__wrapper-footer"></div>
+                                                        <div class="d-flex flex-wrap justify-content-between invoice__wrapper-footer">
+                                                            <ul class="left-list">
+                                                                <li>The Vapors Hub Ltd, GM</li>
+                                                                <li>Wilkinson Way, Blackburn</li>
+                                                                <li>Lancashire, BB1 2EH</li>
+                                                                <li>London, UK</li>
+                                                            </ul>
+                                                            <ul class="right-list">
+                                                                <li>TheVaporsHub.com</li>
+                                                                <li>Info@TheVaporsHub.com</li>
+                                                                <li>Tel: +32 456 586 56</li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane active show" id="shipping-doc">
