@@ -4993,6 +4993,63 @@ $(document).ready(function () {
         //     }
         // });
 
+
+        $('.add-offers-btn').each(function () {
+            var item_id = $(this).data('uid');
+            var items = [];
+            $(this).closest('.footer').find('.remove-extra-from-cart').each(function () {
+                items.push($(this).data('uid'));
+            });
+            console.log(item_id, JSON.stringify(items));
+            $(this).on('click', function (ev) {
+                eventInitialDefault(ev);
+
+                $.ajax({
+                    type: "post",
+                    url: "/my-cart-special-offer",
+                    cache: false,
+                    datatype: "json",
+                    data: { item_id: item_id, items: items },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function success(data) {
+                        if (!data.error) {
+                            console.log(data.html);
+                            // if(data.message === 'added') {
+                            //     $('#cartSidebar').html(data.headerHtml);
+                            //     $('.add-cart-number.cart-count').html(data.count);
+                            //     $('#specialPopUpModal .modal-body').html(data.specialHtml);
+                            //     $('.special__popup-main-product-item .select-2').each(function() {
+                            //         $(this).select2();
+                            //     });
+                            //     filterModalOfferInit();
+                            //     filterSelectOfferInit();
+                            //     countOfferPrice();
+                            //     $("#specialPopUpModal").modal();
+                            // }
+
+                            // $(".cart-count").html(data.count);
+                            // $('#cartSidebar').html(data.headerHtml);
+                            // addDataKey.key = data.key;
+                            // addDataKey.product_id = data.product_id;
+                            // AjaxCall("/products/get-extra-content", {id: $("#vpid").val()}, function (res) {
+                            //     if (!res.error) {
+                            //         $("#extraModal .modal-body").html(res.html);
+                            //         productsInit();
+                            //         $("#extraModal").modal();
+                            //     }
+                            // });
+                            //
+                            // $('#extraModal .extra-content-left .select-extra.item.active').click();
+                        } else {
+                                //test
+                                // alert(data.message);
+                            }
+                    }
+                });
+            });
+        });
         //------------------------------------------------------------------------------------------------------------------------
     });
 });
