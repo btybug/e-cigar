@@ -1472,3 +1472,9 @@ a:hover {
 #search-for-filter + span {
     cursor: pointer;
 }
+
+.user-non-select {
+    pointer-events: none;
+    /*touch-action: none;*/
+    opacity: 0.3;
+}
