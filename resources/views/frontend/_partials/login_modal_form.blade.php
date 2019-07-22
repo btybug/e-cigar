@@ -2,20 +2,36 @@
     <div class="row log-reg-wrapper">
         <div class="col-md-6">
             <div class="left-content">
-                <form action="">
+                <form method="POST" action="{{ route('login') }}" class="register-form" id="login-form-checkout">
+                    @csrf
+                    <input type="hidden" name="redirectPath" value="/{!! Route::getFacadeRoot()->current()->uri() !!}">
+                    {!! Form::hidden('g-recaptcha-response',null,['class'=>'g-recaptcha-response']) !!}
+
                     <div class="main-wrap">
                         <h2 class="font-40 text-tert-clr title">SIGHN IN</h2>
                         <p class="font-26 text-main-clr sec-title">Already a customer</p>
                         <div class="form-group">
-                            <input type="email" class="form-control" placeholder="E-mail">
+                            <input id="loginEmail" type="email" placeholder="E-mail"
+                                   class="form-control {{ $errors->has('email') ? ' is-invalid' : '' }}"
+                                   name="email" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $errors->first('email') }}</strong>
+                                </span>
+                            @endif
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-control" placeholder="Password">
+                            <input type="password" name="password" class="form-control" placeholder="Password">
+                            @if ($errors->has('password'))
+                                <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
                     <div class="d-flex bottom-wrap">
-                        <a href="#" class="bg-blue-clr btn-log-reg text-uppercase">log in</a>
-                        <a href="#" class="font-26 font-sec-bold text-tert-clr forgot-password">forget your password?</a>
+                        <button type="submit" class="bg-blue-clr btn-log-reg text-uppercase">log in</button>
+                        <a href="{{ route('password.request') }}"  class="font-26 font-sec-bold text-tert-clr forgot-password">forget your password?</a>
                     </div>
                 </form>
             </div>
