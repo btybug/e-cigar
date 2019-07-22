@@ -517,4 +517,12 @@ class ShoppingCartController extends Controller
 
         return \Response::json(['error' => $error, 'message' => $message, 'summaryHtml' => $orderSummary]);
     }
+
+    public function postSpecialOfferModal(Request $request)
+    {
+        $item = Cart::get($request->item_id);
+        if($item){
+
+        }
+    }
 }
