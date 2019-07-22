@@ -69,18 +69,22 @@ function enableFilter()
 
 function media_button(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
 {
-    $folder=App\Models\Media\Folders::where('name',$slug)->where('parent_id',0)->first(['id','name']);
+    $folder = App\Models\Media\Folders::where('name', $slug)->where('parent_id', 0)->first(['id', 'name']);
 
     enableMedia();
-    $id=$folder->id;
-    global $_MEDIA_FOLDER;$_MEDIA_FOLDER=$folder;
-    $uniqId = uniqid('media_');
-    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html','id']));
-}
-function get_media_folder(){
+    $id = $folder->id;
     global $_MEDIA_FOLDER;
-    return   $_MEDIA_FOLDER;
+    $_MEDIA_FOLDER = $folder;
+    $uniqId = uniqid('media_');
+    return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
 }
+
+function get_media_folder()
+{
+    global $_MEDIA_FOLDER;
+    return $_MEDIA_FOLDER;
+}
+
 function filter_button($category, $group = null, $text = 'Filter', $name = null, $is_multiple = true, $type = 'filter_popup')
 {
     global $_FILTER_HTML;
@@ -1308,8 +1312,8 @@ function get_breadcrumb_previous_url($breadcrumbs)
 function getClient()
 {
     $client = new Google_Client();
-    $client->setClientId(env('GOOGLE_CLIENT_ID','client_id'));
-    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET','client_secret'));
+    $client->setClientId(env('GOOGLE_CLIENT_ID', 'client_id'));
+    $client->setClientSecret(env('GOOGLE_CLIENT_SECRET', 'client_secret'));
     $client->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
     $client->setApplicationName('Google Classroom API PHP Quickstart');
     $client->setScopes(Google_Service_Classroom::CLASSROOM_COURSES_READONLY);
@@ -1332,9 +1336,10 @@ function getClient()
     return $client;
 }
 
-function getGoogleAlians(){
+function getGoogleAlians()
+{
     // Get the API client and construct the service object.
-    if (!\App\Models\Gmail::check())  return collect([]);
+    if (!\App\Models\Gmail::check()) return collect([]);
     $client = getClient();
     $service = new Google_Service_Directory($client);
 
@@ -1346,15 +1351,18 @@ function getGoogleAlians(){
     );
     $results = $service->users->listUsers($optParams);
     $users = [];
-    $emails=[];
+    $emails = [];
     if (count($results->getUsers()) == 0) {
         return [];
     } else {
         foreach ($results->getUsers() as $user) {
             $users[$user->getPrimaryEmail()] = $user->aliases;
         }
-        foreach ($users[Gmail::user()] as $email) {
-            $emails[$email] = $email;
+        if (is_array($users[Gmail::user()])) {
+
+            foreach ($users[Gmail::user()] as $email) {
+                $emails[$email] = $email;
+            }
         }
         return collect($emails);
     }
