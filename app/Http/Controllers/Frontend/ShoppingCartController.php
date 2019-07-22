@@ -520,9 +520,18 @@ class ShoppingCartController extends Controller
 
     public function postSpecialOfferModal(Request $request)
     {
-        $item = Cart::get($request->item_id);
+        $cart_id = $request->item_id;
+        $item = Cart::get($cart_id);
         if($item){
+            $product = $item->attributes->product;
+            $price = $item->price;
+            $qty = $item->quantity;
+            $extras = ($item->attributes->has('extra')) ? $item->attributes->extra['data'] : [];
 
+            $popuphtml = \View('frontend.products._partials.offer_popup',['vape' => $product,'key' => $cart_id,'price' => $price,'qty' => $qty,'extras' => $extras])->render();
+            return response()->json(['error' => false,'html' => $popuphtml]);
         }
+
+        return response()->json(['error' => true]);
     }
 }

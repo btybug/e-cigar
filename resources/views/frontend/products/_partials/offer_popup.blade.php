@@ -50,8 +50,12 @@
                 <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
                     Added Offers
                 </div>
-
             </div>
+            @if(isset($extras) && count($extras))
+                @foreach($extras as $extra)
+                    @include("frontend.products._partials.add_offer",['offer' => $extra['offer'],'price'  => $extra['price']])
+                @endforeach
+            @endif
             <a href="#" class="text-main-clr special__popup-content-right-item-more">
                 <div class="d-flex flex-column align-items-center item-more-inner">
                     <span class="icon"><i class="fas fa-plus"></i></span>
