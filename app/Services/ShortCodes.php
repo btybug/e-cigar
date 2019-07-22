@@ -18,6 +18,13 @@ class ShortCodes
         'ticket' => [
 
         ],
+        'new_contact_us'=>[
+            ['code' => 'guest_name', 'description' => 'guest name'],
+            ['code' => 'guest_phone', 'description' => 'guest phone number '],
+            ['code' => 'guest_email', 'description' => 'guest email address '],
+            ['code' => 'guest_category', 'description' => 'message category selected'],
+            ['code' => 'guest_message', 'description' => 'message'],
+        ],
         'order_is_Canceled' => [
             ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
