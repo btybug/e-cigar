@@ -1332,7 +1332,7 @@ function getClient()
     return $client;
 }
 
-function getGoogleAlians($value,$key){
+function getGoogleAlians(){
     // Get the API client and construct the service object.
     if (!\App\Models\Gmail::check())  return collect([]);
     $client = getClient();
@@ -1346,13 +1346,17 @@ function getGoogleAlians($value,$key){
     );
     $results = $service->users->listUsers($optParams);
     $users = [];
+    $emails=[];
     if (count($results->getUsers()) == 0) {
         return [];
     } else {
         foreach ($results->getUsers() as $user) {
-            $users[] = ['email'=>$user->getPrimaryEmail(),'name'=>$user->getName()->getFullName()];
+            $users[$user->getPrimaryEmail()] = $user->aliases;
         }
-        return collect($users)->pluck($value,$key);
+        foreach ($users[Gmail::user()] as $email) {
+            $emails[$email] = $email;
+        }
+        return collect($emails);
     }
 }
 
