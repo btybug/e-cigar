@@ -195,7 +195,7 @@
                                                             @endif
 
                                                         </ul>
-                                                        <a href="#" data-uid="{{ $key }}"
+                                                        <a href="javascript:void(0)" data-uid="{{ $key }}"
                                                            class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">
                                                                             <span class="icon"><i
                                                                                     class="fas fa-plus"></i></span>
