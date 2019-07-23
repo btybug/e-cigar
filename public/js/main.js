@@ -2035,7 +2035,6 @@ $(document).ready(function () {
                                         discount_id = null;
                                     }
                                 } else if($(this).find('.custom-control-input').length > 0) {
-                                    alert(2)
                                     id = $(this).find('.custom-control-input:checked').val();
                                     console.log('id', id, $(this), $(this).find('.custom-control-input:checked'),  555555555);
                                     if($(this).find('.input-qty').length>0) {
