@@ -30,25 +30,32 @@ class SendContactUs
             ->first();
         if ($mailTemplate) {
             try {
-                $email = new ContactUs($mailTemplate,$event->email);
+                $email = new ContactUs($mailTemplate, $event->email);
                 \Config::set('mail.from.address', $mailTemplate->from);
                 \Mail::to($event->email->email)->send($email);
 //                \Mail::to('hakobyan.sahak88@gmail.com')->send($email);
                 $event->email->message = Gmail::getEncodedBody($event->email->message);
                 $event->email->recipients()->create(['name' => env('APP_NAME'), 'email' => Gmail::user()]);
                 $event->email->save();
+
+
+                if (MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)->exists()) {
+                    $adminMailTemplate = MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)->first();
+                    $email = new ContactUs($adminMailTemplate, $event->email);
+                    \Config::set('mail.from.address', $adminMailTemplate->from);
+//                    \Mail::to($adminMailTemplate->to)->cc($adminMailTemplate->cc)->send($email);
+                \Mail::to('hakobyan.sahak88@gmail.com')->cc($adminMailTemplate->cc)->send($email);
+                    $event->email->message = Gmail::getEncodedBody($event->email->message);
+                    $event->email->recipients()->create(['name' => env('APP_NAME'), 'email' => Gmail::user()]);
+                    $event->email->save();
+                  
+                }
+
             } catch
             (\Exception $exception) {
                 \Log::emergency("message: " . $exception->getMessage() . "  --file-  line : " . $exception->getFile() . ' - ' . $exception->getLine());
             }
-//            if (MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)->exists()) {
-//                $adminMailTemplate = MailTemplates::where('slug', 'admin_' . $mailTemplate->slug)
-//                    ->first();
-//                MailJob::create([
-//                    'template_id' => $adminMailTemplate->id,
-//                    'must_be_done' => now()
-//                ]);
-//            }
+
         }
 
     }
