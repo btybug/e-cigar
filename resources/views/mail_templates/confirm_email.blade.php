@@ -274,17 +274,21 @@
                 max-width: 100% !important;
                 direction: ltr !important;
             }
-            .mobile-img{
+
+            .mobile-img {
                 padding: 20px 0 !important;
                 text-align: center;
             }
-            .mobile-account{
+
+            .mobile-account {
                 padding-bottom: 20px;
             }
-            .mobile-account table td{
+
+            .mobile-account table td {
                 padding: 0 10px;
             }
-            .account-link{
+
+            .account-link {
                 padding: 12px !important;
                 display: block !important;
                 text-align: center;
@@ -341,7 +345,8 @@
                                                 style="font-family:Oswald, sans-serif; font-size: 11px; mso-line-height-rule:exactly;font-weight: bold; line-height: 12px; color: #353535; text-transform: uppercase;padding-left: 35px;">
                                                 <a href="#" target="_blank"
                                                    style="font-family: Roboto, sans-serif; color: #353535; text-decoration: none;display: inline-block">
-                                                    <img src="/public/mail-templates/confirm-email/images/logo.png" alt="Vapors Hub" width="201" height="64"
+                                                    <img src="/public/mail-templates/confirm-email/images/logo.png"
+                                                         alt="Vapors Hub" width="201" height="64"
                                                          border="0" style="display: block; outline: none;"/>
                                                 </a>
                                             </td>
@@ -360,7 +365,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="/public/mail-templates/confirm-email/images/product-discount.jpg" alt="discount" style="width: 100%">
+                                    <img src="/public/mail-templates/confirm-email/images/product-discount.jpg"
+                                         alt="discount" style="width: 100%">
                                 </td>
                             </tr>
                             <tr>
@@ -372,7 +378,8 @@
                                            style="border-collapse: collapse;border: 1px solid #d7d7d7;box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);">
                                         <tr>
                                             <td class="mobile-col mobile-img" style="padding: 25px 33px 25px 17px;">
-                                                <img src="/public/mail-templates/confirm-email/images/congr.png" alt="Congratulations">
+                                                <img src="/public/mail-templates/confirm-email/images/congr.png"
+                                                     alt="Congratulations">
                                             </td>
                                             <td class="mobile-col mobile-account">
                                                 <table width="100%" align="center" cellpadding="0" cellspacing="0"
@@ -460,7 +467,8 @@
                                             <td align="left" valign="top"
                                                 style="font-family:Roboto, sans-serif; font-size: 17px;font-weight:300;line-height: 17px;color: #6a6a6a;padding: 0 45px;">
                                                 Your login:
-                                                <span style="font-family:Roboto, sans-serif;font-weight: 500;text-decoration: underline">username@gmail.com</span>
+                                                <span
+                                                    style="font-family:Roboto, sans-serif;font-weight: 500;text-decoration: underline">username@gmail.com</span>
                                             </td>
                                         </tr>
                                         <tr>
@@ -472,14 +480,16 @@
                                                 <table width="100%" align="center" cellpadding="0" cellspacing="0"
                                                        border="0" bgcolor="#ffffff" style="border-collapse: collapse;">
                                                     <tr>
-                                                        <td class="mobile-col" align="center" valign="middle" bgcolor="#353535"
+                                                        <td class="mobile-col" align="center" valign="middle"
+                                                            bgcolor="#353535"
                                                             style="padding: 12px 5px;border: 1px solid #d7d7d7">
                                                             <a href="#" target="_blank"
                                                                style="display: inline-block;color: #ffffff;text-decoration: none">Review
                                                                 My Account</a>
                                                         </td>
                                                         <td class="mobile-col" width="25"></td>
-                                                        <td class="mobile-col" align="center" valign="middle" bgcolor="#5184e5"
+                                                        <td class="mobile-col" align="center" valign="middle"
+                                                            bgcolor="#5184e5"
                                                             style="padding: 12px 5px;border: 1px solid #d7d7d7">
                                                             <a href="#" target="_blank"
                                                                style="display: inline-block;color: #ffffff;text-decoration: none">Continue
@@ -536,7 +546,8 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="/public/mail-templates/confirm-email/images/line.jpg" alt="line" style="width: 100%">
+                                    <img src="/public/mail-templates/confirm-email/images/line.jpg" alt="line"
+                                         style="width: 100%">
                                 </td>
                             </tr>
                         </table>
@@ -572,21 +583,26 @@
                                         <tr>
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
-                                                    <img src="/public/mail-templates/confirm-email/images/social-fb.png" alt="fb" style="width: 100%">
+                                                    <img src="/public/mail-templates/confirm-email/images/social-fb.png"
+                                                         alt="fb" style="width: 100%">
                                                 </a>
                                             </td>
                                             <td width="30">&nbsp;</td>
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
-                                                    <img src="/public/mail-templates/confirm-email/images/social-instagram.png" alt="instagram"
-                                                         style="width: 100%">
+                                                    <img
+                                                        src="/public/mail-templates/confirm-email/images/social-instagram.png"
+                                                        alt="instagram"
+                                                        style="width: 100%">
                                                 </a>
                                             </td>
                                             <td width="30">&nbsp;</td>
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
-                                                    <img src="/public/mail-templates/confirm-email/images/social-youtube.png" alt="youtube"
-                                                         style="width: 100%">
+                                                    <img
+                                                        src="/public/mail-templates/confirm-email/images/social-youtube.png"
+                                                        alt="youtube"
+                                                        style="width: 100%">
                                                 </a>
                                             </td>
 
