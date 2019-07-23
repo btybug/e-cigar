@@ -1,4 +1,4 @@
-<input type="hidden" id="core-folder" value="{!! get_media_folder()->id !!}">
+<input type="hidden" id="core-folder" value="{!! @get_media_folder()->id !!}">
 <div class="bestbetter-modal">
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -13,7 +13,7 @@
         <div class="modal-body">
           <div class="content ">
             <div class="left">
-              <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="{!! get_media_folder()->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white;  margin-bottom: -50px; cursor: pointer">{!! strtoupper(get_media_folder()->name) !!}</div>
+              <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="{!! @get_media_folder()->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white;  margin-bottom: -50px; cursor: pointer">{!! strtoupper(@get_media_folder()->name) !!}</div>
               <div class="folder-list" id="jstree_html" class="demo" data-media="folder" data-menudata>
                 <ol class="dd-list sortable" id="fff">
 

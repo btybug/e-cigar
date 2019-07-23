@@ -62,6 +62,11 @@ class Items extends Translatable
         return $this->hasMany(ItemsPackages::class, 'item_id');
     }
 
+    public function locations()
+    {
+        return $this->hasMany(ItemsLocations::class, 'item_id');
+    }
+
     public function others()
     {
         return $this->hasMany(Others::class, 'item_id');
