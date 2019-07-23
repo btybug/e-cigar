@@ -42,7 +42,7 @@ class EmailsTableSeeder extends Seeder
         $email->translateOrNew($locale)->content = '';
         $email->save();
 
-        $email = new \App\Models\MailTemplates(['slug' => 'order_is_Canceled','from'=>'hr@hook.am','module'=>'orders']);
+        $email = new \App\Models\MailTemplates(['slug' => 'order_is_canceled','from'=>'hr@hook.am','module'=>'orders']);
         $email->save();
         $email->translateOrNew($locale)->subject = '';
         $email->translateOrNew($locale)->content = '';

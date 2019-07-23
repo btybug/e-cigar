@@ -14,8 +14,6 @@ use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\Coupons;
-use App\Models\OrderHistory;
-use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\OrdersJob;
 use App\Models\Statuses;
@@ -25,7 +23,7 @@ use App\Models\StockVariation;
 use App\Models\StripePayments;
 use App\Models\ZoneCountries;
 use App\Services\CartService;
-use App\Services\ManagerApiRequest;
+use App\Services\OrdersService;
 use App\User;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use PragmaRX\Countries\Package\Countries;
@@ -103,15 +101,15 @@ class OrdersController extends Controller
         return $this->view('new', compact('statuses', 'products', 'users', 'user', 'countries', 'countriesShipping'));
     }
 
-    public function addNote(OrderHistoryRequest $request)
+    public function addNote(OrderHistoryRequest $request, OrdersService $ordersService)
     {
         $order = Orders::findOrFail($request->id);
-
+        $status_id = $request->get('status_id', null);
         $order->history()->create([
             'status_id' => $request->get('status_id', null),
             'note' => $request->note,
         ]);
-
+        $ordersService->changeStatus($order, $status_id);
         $histories = $order->history()->orderBy('created_at', 'desc')->get();
         $html = \View('admin.orders._partials.timeline_item', compact(['histories']))->render();
 
@@ -143,7 +141,7 @@ class OrdersController extends Controller
 
         $variations = $vape->variations()->with('options')->get();
         $currency = get_currency();
-        $html = $this->view('_partials.product', compact(['vape', 'variations','currency']))->render();
+        $html = $this->view('_partials.product', compact(['vape', 'variations', 'currency']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

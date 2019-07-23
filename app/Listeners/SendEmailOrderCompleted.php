@@ -8,14 +8,13 @@
 
 namespace App\Listeners;
 
-use App\Events\OrderCanceled;
 use App\Events\OrderCompleted;
 use App\Models\MailJob;
 use App\Models\MailTemplates;
 
 class SendEmailOrderCompleted
 {
-    public function handle(OrderCompletedted $event)
+    public function handle(OrderCompleted $event)
     {
         $mailTemplate = MailTemplates::where('slug', 'order_is_completed')
             ->where('is_active', '1')

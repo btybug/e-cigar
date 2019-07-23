@@ -27,7 +27,7 @@ class ShortCodes
             ['code' => 'guest_category', 'description' => 'message category selected'],
             ['code' => 'guest_message', 'description' => 'message'],
         ],
-        'order_is_Canceled' => [
+        'order_is_canceled' => [
             ['code' => 'order_status', 'description' => 'order status'],
             ['code' => 'order_code', 'description' => 'order unique code'],
             ['code' => 'order_amount', 'description' => 'order total amount'],
@@ -142,7 +142,7 @@ class ShortCodes
 
         return $content;
     }
-
+//\r\n0.Trying to get property 'name' of non-object (View: C:\xampp\htdocs\e-cigar\resources\views\send_email.blade.php)
     public function contact_us(ContactUs $contactUs, $content)
     {
         $data = $contactUs->toArray();
