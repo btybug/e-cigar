@@ -170,12 +170,10 @@ class StoreController extends Controller
     public function getPurchaseNew()
     {
         $model = null;
-        $items = Items::where('type','simple')->get()->pluck('name', 'id');
-        $suppliers = Suppliers::all()->pluck('name', 'id');
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
-        $racks = [];
-        $shelves = [];
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses','racks','shelves'));
+        $items = Items::where('type','simple')->get()->pluck('name', 'id')->all();
+        $suppliers = Suppliers::all()->pluck('name', 'id')->all();
+
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
@@ -211,6 +209,16 @@ class StoreController extends Controller
         }
 
         return \Response::json(['error' => true]);
+    }
+
+    public function postItemLocations(Request $request)
+    {
+        $item_id = $request->get('item_id');
+        $model = Items::findOrFail($item_id);
+
+        $html = $this->view("purchase.locations", compact('model'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
     }
 
 }
