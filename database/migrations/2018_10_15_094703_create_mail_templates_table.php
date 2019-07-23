@@ -18,6 +18,7 @@ class CreateMailTemplatesTable extends Migration
             $table->string('slug')->unique();
             $table->string('from');
             $table->string('to')->nullable();
+            $table->string('cc')->nullable();
             $table->string('module')->nullable();
             $table->tinyInteger('is_active')->default(0);
             $table->unsignedInteger('category_id')->nullable();
