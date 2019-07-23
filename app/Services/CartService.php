@@ -119,9 +119,12 @@ class CartService
             $extras = $attrs['extra'];
             foreach ($extras['data'] as $key => $datum) {
                 if ($datum['key'] == $id) {
+                    $price = $datum['price'];
                     unset($extras['data'][$key]);
                 }
             }
+
+            $extras['price'] -= $price;
             $attrs['extra'] = $extras;
             if ($user_id) {
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->update($section_id, array(
