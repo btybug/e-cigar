@@ -338,6 +338,8 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchase')->name('admin_inventory_purchase_delete');
         Route::get('/edit/{id}', 'Admin\StoreController@EditPurchase')->name('admin_inventory_purchase_edit');
         Route::post('/get-stock-by-sku', 'Admin\StoreController@getStockBySku')->name('admin_inventory_purchase_get_stock_by_sku');
+        Route::post('/get-item-locations', 'Admin\StoreController@postItemLocations')->name('admin_item_locations');
+
     });
     Route::group(['prefix' => 'suppliers'], function () {
         Route::get('/', 'Admin\ItemsController@getSuppliers')->name('admin_suppliers');
