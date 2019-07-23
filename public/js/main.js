@@ -226,8 +226,10 @@ $(document).ready(function () {
                 $(this).find('.product__single-item_price').data('price-for-add', value);
                 setOfferPrice($(this).find('.product__single-item_price'), value);
                 var addedPricePlace = $(`#specialPopUpModal .added-offers .special__popup-content-right-product[data-id="${id}"] .special__popup-content-right-product-price`)
-                addedPricePlace.data('price', value);
-                addedPricePlace.html(`${getCurrencySymbol()}${value}`);
+                if(!$(this).hasClass('user-non-select')) {
+                    addedPricePlace.data('price', value);
+                    addedPricePlace.html(`${getCurrencySymbol()}${value}`);
+                }
                 countOfferTotalPrice();
             });
         };
@@ -1873,9 +1875,6 @@ $(document).ready(function () {
 
         const filterSelectOfferInit = () => {
             (function () {
-
-                alert('filterSelectOfferInit')
-
 
                 $(`#specialPopUpModal .filters-select-wizard`).each(function () {
                     const group_id = $(this).attr('data-group');
