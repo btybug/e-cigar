@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Frontend;
 
 
+use App\Events\OrderSubmitted;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\OrderItem;
@@ -68,6 +69,8 @@ class StripePaymentController extends Controller
         }
 
         $order = $this->order($charge);
+        event(new OrderSubmitted($order->user,$order));
+
         if (!Cart::isEmpty() && session()->has('shipping_address') && session()->has('billing_address') && $order) {
             session()->forget('shipping_address', 'billing_address');
             session()->forget('shipping_address_id', 'billing_address_id');
