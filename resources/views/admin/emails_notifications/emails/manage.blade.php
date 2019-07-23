@@ -89,7 +89,13 @@
                                         <div class="form-group row">
                                             {{Form::label('to_admin', 'To',['class' => 'col-sm-3'])}}
                                             <div class="col-sm-9">
-                                                {{Form::select('admin[to]',$tos,($admin_model)?$admin_model->to:null,['class' =>'form-control','id'=>'to_admin'])}}
+                                                {{Form::select('admin[to]',$froms,($admin_model)?$admin_model->to:null,['class' =>'form-control','id'=>'to_admin'])}}
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            {{Form::label('to_admin', 'CC',['class' => 'col-sm-3'])}}
+                                            <div class="col-sm-9">
+                                                {{Form::select('admin[cc][]',$froms,($admin_model)?explode(',',$admin_model->cc):null,['class' =>'form-control','id'=>'admin-cc','multiple'=>'multiple'])}}
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -196,11 +202,15 @@
         {!! Form::close() !!}
     </div>
 @stop
-
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+@stop
 
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
+        $("#admin-cc").select2({width: '100%', tags: true});
         function initTinyMce(e) {
             tinymce.init({
                 selector: e,
