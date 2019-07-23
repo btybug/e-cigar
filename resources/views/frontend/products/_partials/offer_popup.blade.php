@@ -51,8 +51,8 @@
                     Added Offers
                 </div>
                 @if(isset($extras) && count($extras))
-                    @foreach($extras as $extra)
-                        @include("frontend.products._partials.add_offer",['offer' => $extra['offer'],'price'  => $extra['price']])
+                    @foreach($extras as $item_key => $extra)
+                        @include("frontend.products._partials.add_offer",['offer' => $extra['offer'],'price'  => $extra['price'],'item_key' => $extra['key']])
                     @endforeach
                 @endif
             </div>
