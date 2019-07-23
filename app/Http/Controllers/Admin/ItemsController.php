@@ -18,6 +18,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\ItemsPackages;
 use App\Models\Suppliers;
+use App\Models\Warehouse;
 use App\Services\BarcodesService;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
@@ -48,9 +49,11 @@ class ItemsController extends Controller
         $bundle = false;
         $barcodes = $this->barcodeService->getUnsedCodes();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories','warehouses','racks','shelves'));
     }
 
     public function getNewBundle()
@@ -58,9 +61,12 @@ class ItemsController extends Controller
         $model = null;
         $bundle = true;
         $barcodes = $this->barcodeService->getUnsedCodes();
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','warehouses','racks','shelves'));
     }
 
     public function postNew(ItemsRequest $request)
@@ -71,11 +77,13 @@ class ItemsController extends Controller
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
         $this->savePackages($item, $request->get('packages', []));
+        $this->saveLocations($item, $request->get('locations', []));
 
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
+
 
         return redirect()->route('admin_items');
     }
@@ -90,8 +98,12 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle', 'categories', 'data', 'checkedCategories'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
+            'categories', 'data', 'checkedCategories','warehouses','racks','shelves'));
     }
 
     private function savePackages($item, array $data = [])
@@ -113,6 +125,27 @@ class ItemsController extends Controller
         }
 
         $item->packages()->whereNotIn('id', $deletableArray)->delete();
+    }
+
+    private function saveLocations($item, array $data = [])
+    {
+        $deletableArray = [];
+        if (count($data)) {
+            foreach ($data as $datum) {
+                $existing = $item->locations()->where('id', $datum['id'])->first();
+
+                if ($existing) {
+                    $location = ItemsPackages::find($datum['id']);
+                    $location->update($datum);
+                    $deletableArray[] = $location->id;
+                } else {
+                    $location = $item->locations()->create($datum);
+                    $deletableArray[] = $location->id;
+                }
+            }
+        }
+
+        $item->locations()->whereNotIn('id', $deletableArray)->delete();
     }
 
     private function saveImages(Request $request, $item)
@@ -227,6 +260,17 @@ class ItemsController extends Controller
         $items = Items::all()->pluck('name', 'id')->all();
         $package = null;
         $html = \View('admin.items._partials.package_item', compact(['package', 'items']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
+
+    public function addLocation(Request $request)
+    {
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
+
+        $html = \View('admin.items._partials.location', compact(['warehouses', 'racks','shelves']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

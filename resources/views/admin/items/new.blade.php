@@ -38,6 +38,7 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#locations">Locations</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -181,6 +182,46 @@
                                         </div>
                                         <div id="images" class="tab-pane fade">
                                             {!! media_button('other_images',$model,true) !!}
+                                        </div>
+                                        <div id="locations" class="tab-pane fade">
+                                            <div class="form-group row">
+                                                <div class="col-md-2">
+                                                    Locations
+                                                </div>
+                                                <div class="col-sm-10">
+                                                    <table class="table table--store-settings">
+                                                        <thead>
+                                                        <tr class="bg-my-light-pink">
+                                                            <th>Warehouse</th>
+                                                            <th>Rack</th>
+                                                            <th>Shelve</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                        </thead>
+
+                                                        <tbody class="v-options-list-locations">
+                                                        @if($model && $model->locations)
+                                                            @foreach($model->locations as $location)
+                                                                @include('admin.items._partials.location')
+                                                            @endforeach
+                                                        @else
+                                                            @include('admin.items._partials.location')
+                                                        @endif
+                                                        </tbody>
+
+                                                        <tfoot>
+                                                        <tr class="add-new-ship-filed-container">
+                                                            <td colspan="4" class="text-right">
+                                                                <button type="button" class="btn btn-primary add-location"><i
+                                                                        class="fa fa-plus-circle "></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                        </tfoot>
+                                                    </table>
+                                                </div>
+
+                                            </div>
                                         </div>
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                                             <div class="row">
@@ -411,6 +452,57 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("body").on('change','.warehouse',function () {
+                let w_id = $(this).val();
+                let parent = $(this).closest(".location-item");
+                render_racks(w_id,parent)
+            })
+
+            $("body").on('change','.rack',function () {
+                let r_id = $(this).val();
+                let parent = $(this).closest(".location-item");
+
+                render_shelves(r_id,parent)
+            })
+
+            function render_racks(w_id,parent){
+                parent.find(".rack").html('<option value="0">Select Rack</option>');
+                parent.find(".shelve").html('<option value="0">Select Shelve</option>');
+                if(w_id){
+                    AjaxCall("{{ route('admin_warehouses_rack_by_warehouse') }}", {w_id: w_id}, function (res) {
+                        if (!res.error) {
+                            parent.find(".rack").empty();
+                            var html = '<option value="0">Select Rack</option>';
+                            for (var prop in res.data) {
+                                html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                            }
+
+                            parent.find(".rack").append(html);
+                        }
+                    });
+                }
+
+            }
+
+            function render_shelves(r_id,parent){
+                parent.find(".shelve").html('<option value="0">Select Shelve</option>');
+                if(r_id){
+                    AjaxCall("{{ route('admin_warehouses_shelve_by_rack') }}", {r_id: r_id}, function (res) {
+                        if (!res.error) {
+                            parent.find(".shelve").empty();
+
+                            var html = '<option value="0">Select Shelve</option>';
+                            for (var prop in res.data) {
+                                html += '<option value="'+res.data[prop].id+'">'+res.data[prop].name+'</option>';
+                            }
+
+                            parent.find(".shelve").append(html);
+                        }
+                    });
+                }
+            }
+
+
             $("body").on('click', '.delete-v-option_button', function () {
                 $(this).closest('tr').remove();
             });
@@ -422,6 +514,18 @@
                     function (res) {
                         if (!res.error) {
                             $('.package-variation-box').append(res.html)
+                        }
+                    }
+                );
+            });
+
+            $("body").on('click', '.add-location', function () {
+                AjaxCall(
+                    "/admin/inventory/items/add-location",
+                    {},
+                    function (res) {
+                        if (!res.error) {
+                            $('.v-options-list-locations').append(res.html)
                         }
                     }
                 );
