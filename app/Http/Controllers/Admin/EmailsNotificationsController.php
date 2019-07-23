@@ -246,4 +246,9 @@ class EmailsNotificationsController extends Controller
 
         return response()->json(['error' => true]);
     }
+
+    public function templates($template)
+    {
+        return view("mail_templates.$template");
+    }
 }

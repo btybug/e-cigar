@@ -221,7 +221,7 @@
                 image_advtab: true,
                 templates: [
                     {"title": "Some title 1", "description": "Some desc 1", "content": "My content"},
-                    {"title": "Some title 2", "description": "Some desc 2", "url": "http://e-cigar.com/"}
+                    {"title": "Confirm email", "description": "Some desc 2", "url": "{!! url('admin/mail-templates/confirm_email') !!}"}
                 ],
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
