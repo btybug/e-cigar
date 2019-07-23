@@ -4159,7 +4159,8 @@ $(document).ready(function () {
                             //     $(this).val(value);
                             //     $(this).closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + $(this).closest('.menu-item-selected').attr('data-price') * Number($(this).val()));
                             // });
-                            setTotalPrice(countTotalPrice());
+                            countOfferPrice();
+                            countOfferTotalPrice();
 
                             $('#wizardViewModal').modal('hide');
 
@@ -4412,6 +4413,8 @@ $(document).ready(function () {
                         var selectElementId = $(e.params.data.element).attr('data-select2-id');
                         console.log(1111111111111, e.params);
                         selectOfferHandle($(e.target), id, selectElementId, limit, $(this));
+                        countOfferPrice();
+                        countOfferTotalPrice();
                     });
 
                     $("[data-group=\"" + group_id + "\"]").on('select2:unselect', '.product--select-items', function (e) {
@@ -4419,6 +4422,8 @@ $(document).ready(function () {
 
                         // const limit = $(this).closest('[data-limit]').attr('data-limit');
                         unselectHandle($(this), e.params.data.id);
+                        countOfferPrice();
+                        countOfferTotalPrice();
                     });
 
                     $("[data-group=\"" + group_id + "\"]").on('click', '.product-count-minus', function (ev) {
@@ -4428,7 +4433,8 @@ $(document).ready(function () {
                         var select = row.find('.product--select-items');
 
                         handleProductCountMinus($(this), select, 'select', limit);
-                        setTotalPrice(countTotalPrice());
+                        countOfferPrice();
+                        countOfferTotalPrice();
                     });
 
                     $("[data-group=\"" + group_id + "\"]").on('click', '.product-count-plus', function (ev) {
@@ -4438,7 +4444,8 @@ $(document).ready(function () {
                         var select = row.find('.product--select-items');
 
                         handleProductCountPlus($(this), select, 'select', limit);
-                        setTotalPrice(countTotalPrice());
+                        countOfferPrice();
+                        countOfferTotalPrice();
                     });
 
                     $("[data-group=\"" + group_id + "\"]").on('click', '.remove-single_product-item', function () {
@@ -4458,7 +4465,8 @@ $(document).ready(function () {
                             $(this).closest('.filters-select-wizard').find('.product--select-items').val(values).trigger('change.select2');
                             $this.closest('.menu-item-selected').remove();
                             // select2MaxLimit($(this).closest('.filters-select-wizard').find('.product--select-items'), limit);
-                            setTotalPrice(countTotalPrice());
+                            countOfferPrice();
+                            countOfferTotalPrice();
                         }
                     });
                 });
@@ -5137,6 +5145,8 @@ $(document).ready(function () {
                             }
                         });
                         $('.user-non-select').find('.special__popup-main-product-item-btn').removeClass('add-btn').addClass('remove-btn').html('remove');
+                        filterModalOfferInit();
+                        filterSelectOfferInit();
                         countOfferPrice();
                         countOfferTotalPrice();
                         $("#specialPopUpModal").modal();
