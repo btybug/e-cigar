@@ -382,7 +382,6 @@ function receiver_name($user)
 {
     return $user->name;
 }
-
 function receiver_last_name($user)
 {
     return $user->last_name;

@@ -33,11 +33,12 @@ class SendEmail extends Mailable
     public function build()
     {
         return $this->from($this->job->email->from)
+            ->cc(explode(',',$this->job->email->cc))
             ->subject($this->job->email->subject)
             ->view('send_email')
             ->with([
             'email'=>$this->job->email,
-            'user'=>User::where('email',$this->job->email->to)->first(),
+            'user'=>User::find($this->job->additional_data['user']['id']),
             'job'=>$this->job,
         ]);
     }

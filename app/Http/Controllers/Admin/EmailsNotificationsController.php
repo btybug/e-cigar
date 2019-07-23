@@ -174,7 +174,9 @@ class EmailsNotificationsController extends Controller
         $data = $request->except('admin', 'translatable', '_token');
         $translatable = $request->get('translatable');
         $admin_data = $request->get('admin');
+        if(isset($admin_data['cc'])){
         $admin_data['cc']=is_array($admin_data['cc'])?implode(',',$admin_data['cc']):null;
+        }
         MailTemplates::updateOrCreate($request->id, $data, $translatable);
         $translatable = $admin_data['translatable'];
         unset($admin_data['translatable']);
