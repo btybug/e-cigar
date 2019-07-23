@@ -7,7 +7,10 @@
  */
 
 
+use App\Models\Media\Folders;
+
 $_MEDIA_BUTTON = false;
+$_MEDIA_SLUG = null;
 $_MEDIA_FOLDER = null;
 $_FILTER_BUTTON = false;
 $_FILTER_HTML = '';
@@ -53,9 +56,13 @@ function is_enabled_filter_modal()
 
 }
 
-function enableMedia()
+function enableMedia($slug=null)
 {
     global $_MEDIA_BUTTON;
+    if($slug){
+        global $_MEDIA_SLUG;
+        $_MEDIA_SLUG=$slug;
+    }
     $_MEDIA_BUTTON = true;
 }
 
@@ -82,6 +89,10 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
 function get_media_folder()
 {
     global $_MEDIA_FOLDER;
+    global $_MEDIA_SLUG;
+    if(!$_MEDIA_FOLDER && $_MEDIA_SLUG){
+        $_MEDIA_FOLDER = App\Models\Media\Folders::where('name', $_MEDIA_SLUG)->where('parent_id', 0)->first(['id', 'name']);
+    }
     return $_MEDIA_FOLDER;
 }
 

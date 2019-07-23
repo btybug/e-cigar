@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <input type="hidden" id="core_folder" value="{!! $folder->id !!}">
+    <input type="hidden" id="core-folder" value="{!! $folder->id !!}">
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">

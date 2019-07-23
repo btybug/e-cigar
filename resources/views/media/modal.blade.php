@@ -1,4 +1,4 @@
-<input type="hidden" id="core_folder" value="{!! get_media_folder()->id !!}">
+<input type="hidden" id="core-folder" value="{!! get_media_folder()->id !!}">
 <div class="bestbetter-modal">
   <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
