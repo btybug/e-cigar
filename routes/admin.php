@@ -6,6 +6,7 @@
  * Time: 00:09
  */
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
 Route::group(['prefix' => 'find'], function () {
     Route::get('/', 'Admin\FindController@getIndex')->name('admin_find');
