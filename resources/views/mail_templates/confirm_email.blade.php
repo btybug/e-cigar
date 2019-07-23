@@ -365,7 +365,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="/public/mail-templates/confirm-email/images/product-discount.jpg"
+                                    <img src="{!! 'data:image/' . pathinfo(public_path('mail-templates/confirm-email/images/product-discount.jpg'), PATHINFO_EXTENSION) . ';base64,' . base64_encode(File::get(public_path('mail-templates/confirm-email/images/product-discount.jpg'))); !!}"
                                          alt="discount" style="width: 100%">
                                 </td>
                             </tr>
