@@ -1,3 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{!! env('SITE_NAME','ADMIN') !!}</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+{{--{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
+<!-- Bootstrap 4.3.1 -->
+{!! Html::style("public/admin_theme/bower_components/bootstrap-4/css/bootstrap.min.css") !!}
+<!-- Theme style -->
+{!! Html::style("public/admin_theme/dist/css/AdminLTE.min.css") !!}
+<!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+{!! Html::style("public/admin_theme/dist/css/skins/_all-skins.min.css") !!}
+<!-- Morris chart -->
+{!! Html::style("public/admin_theme/bower_components/morris.js/morris.css") !!}
+
+
+
+<!-- Date Picker -->
+<!-- Daterange picker -->
+<!-- bootstrap wysihtml5 - text editor -->
+    {!! Html::style("public/plugins/bootstrap-select/bootstrap-select.min.css") !!}
+
+
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('public/admin_assets/css/newstyle.css?v='.rand(111,999))}}">
+</head>
+<body>
 <div class="invoice__wrapper">
     <div class="invoice__wrapper-header"></div>
     <div class="invoice__wrapper-main-content">
@@ -133,3 +168,10 @@
         </ul>
     </div>
 </div>
+
+
+</body>
+</html>
+
+
+
