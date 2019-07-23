@@ -581,4 +581,6 @@ Route::group(['prefix' => 'gmail'], function () {
     })->name('google_log_out');
 });
 
+Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_download');
+
 

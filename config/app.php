@@ -174,6 +174,7 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Dacastro4\LaravelGmail\LaravelGmailServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
+        Barryvdh\DomPDF\ServiceProvider::class,
 //        Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
         /*
          * Application Service Providers...
@@ -184,8 +185,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ValidatorServiceProvider::class,
-
-
     ],
 
     /*
@@ -245,6 +244,7 @@ return [
         'DNS2D' => Milon\Barcode\Facades\DNS2DFacade::class,
         'Gmail' => \App\Models\Gmail::class,
         'Image' => Intervention\Image\Facades\Image::class,
+        'PDF' => Barryvdh\DomPDF\Facade::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
     ],
 
