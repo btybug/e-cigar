@@ -12,7 +12,7 @@
             <span class="text-main-clr special__popup-content-right-product-price" data-price="{{ $price }}">
                 {{ convert_price($price,get_currency(), false) }}
             </span>
-            <a href="javascript:void(0)" data-section-id="{{ $key }}" data-uid="{{ $item_key }}"
+            <a href="javascript:void(0)" data-section-id="{{ @$key }}" data-uid="{{ @$item_key }}"
                class="text-sec-clr special__popup-content-right-product-remove remove-extra-from-cart">
                 Remove
             </a>
