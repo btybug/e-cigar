@@ -2091,7 +2091,7 @@ $(document).ready(function () {
                             // btnAddToRemove($self);
                             // $('.special__popup-content-right-item.added-offers').append(data.html);
                             $(".cart-area").html(data.html);
-                            addOfferEvent();
+                            // addOfferEvent();
                             $("#specialPopUpModal").modal('hide');
                             // $('#headerShopCartBtn').click();
                         })
@@ -2666,14 +2666,15 @@ $(document).ready(function () {
         // });
 
 
-        function addOfferEvent() {
-            $("body").find('.add-offers-btn').each(function() {
-                const item_id = $(this).data('uid');
+        // function addOfferEvent() {
+        //     $("body").find().each(function() {
+
                 // const items = [];
                 // $(this).closest('.footer').find('.remove-extra-from-cart').each(function() {
                 //     items.push($(this).data('uid'));
                 // });
-                $(this).on('click', function(ev) {
+                $("body").on('click', '.add-offers-btn', function(ev) {
+                    const item_id = $(this).data('uid');
                     eventInitialDefault(ev);
 
                     $.ajax({
@@ -2733,8 +2734,8 @@ $(document).ready(function () {
                         }
                     });
                 });
-            });
-        };
+            // });
+        // };
 
         addOfferEvent();
         //------------------------------------------------------------------------------------------------------------------------
