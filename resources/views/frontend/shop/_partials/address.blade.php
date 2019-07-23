@@ -30,12 +30,13 @@
                                     <div class="col-md-6">
                                         <div class="address-info">
                                             <div class="select-wall product__select-wall">
-                                                {!! Form::select('address_book',$address->toArray(),$address_id,
+                                                {!! Form::select('address_book',[null => 'Select']+$address->toArray(),$address_id,
                                                 ['class' => 'select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible select-address',
                                                 "style" => 'width: 100%']) !!}
 
                                             </div>
                                             <div class="main-info">
+                                                @if($default_shipping)
                                                 <span>{!! $default_shipping->company !!}</span>
                                                 <span>{!! $default_shipping->first_line_address !!}</span>
                                                 <span>{!! $default_shipping->second_line_address !!}</span>
@@ -43,6 +44,7 @@
                                                 <span>{!! $countriesShipping[$default_shipping->country] !!}</span>
                                                 <span>{!! getRegionByZone(@$default_shipping->country)[$default_shipping->region] !!}</span>
                                                 <span>{!! $default_shipping->post_code !!}</span>
+                                                @endif
                                             </div>
                                             <a href="javascript:void(0)" data-toggle="modal" data-target="#addNewAddress"
                                                class="font-18 bg-blue-clr text-sec-clr add-address-btn address-book-new">Add

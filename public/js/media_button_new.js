@@ -61,7 +61,7 @@ const normAjax = function (URL, obj = {}, cb) {
 //********App********start
 //App includes all methods for media page
 const App = function() {
-  let globalFolderId = document.getElementById('core_folder').value;
+  let globalFolderId = document.getElementById('core-folder').value;
   this.selectedImage = [];
 
   //********App -> htmlMaker********start

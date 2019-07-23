@@ -39,7 +39,7 @@ class CategoriesController extends Controller
     {
         $categories = Category::whereNull('parent_id')->where('type', $type)->get();
         $allCategories = Category::where('type', $type)->get();
-        enableMedia();
+        enableMedia('drive');
         return $this->view('index', compact('categories', 'model', 'allCategories', 'type'));
     }
 

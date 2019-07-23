@@ -1010,7 +1010,7 @@ $("body").on("click", `[data-tabaction]`, function(e) {
 
 $("body").on("click", ".bestbetter-modal-open button", function() {
     app.requests.drawingItems({
-        folder_id: document.getElementById('core_folder').value,
+        folder_id: document.getElementById('core-folder').value,
         files: true,
         access_token: "string"
     });
