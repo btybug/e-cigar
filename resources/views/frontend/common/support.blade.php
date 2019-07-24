@@ -14,14 +14,16 @@
                 </div>
                 <div class="support-lists-wrap">
                     <ul class="support-lists row">
-                        <li class="col-md-4 col-sm-6">
-                            <a href="#" class="d-flex align-items-center item-link">
-                                <div class="item-photo">
-                                    <img src="/public/img/message-icon.png" alt="contact">
-                                </div>
-                                <div class="item-name font-20">Contact Us</div>
-                            </a>
-                        </li>
+                        @if(LaravelGmail::check())
+                            <li class="col-md-4 col-sm-6">
+                                <a href="{!! route('support_contact_us') !!}" class="d-flex align-items-center item-link">
+                                    <div class="item-photo">
+                                        <img src="/public/img/message-icon.png" alt="contact">
+                                    </div>
+                                    <div class="item-name font-20">Contact Us</div>
+                                </a>
+                            </li>
+                        @endif
                         <li class="col-md-4 col-sm-6">
                             <a href="{!! route('terms_conditions') !!}" class="d-flex align-items-center item-link">
                                 <div class="item-photo">
