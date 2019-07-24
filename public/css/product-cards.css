@@ -5008,6 +5008,49 @@ position: absolute;
     padding-right: 30px;
 }
 /*-------------------- ticket tab END------------------*/
+/*-------------------- support page START------------------*/
+.support__page-wrapper{
+    margin-bottom: 20px;
+}
+.support__page-wrapper .item-name{
+    color: #353535;
+    line-height: 32px;
+    font-weight: bold;
+}
+.support__page-wrapper .item-photo{
+    margin-right: 40px;
+}
+.support__page-wrapper .item-photo img{
+    width: 86px;
+}
+.support__page-wrapper .item-link{
+    padding: 22px;
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
+    border: 1px solid #d7d7d7;
+    min-height: 126px;
+    height: 100%;
+}
+.support__page-wrapper .support-lists>li{
+    margin-bottom: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.support__page-wrapper .support-lists-wrap{
+    max-width: 898px;
+    margin: 0 auto;
+}
+.support__page-wrapper .support-lists{
+    margin-right: -10px;
+    margin-left: -10px;
+}
+.support__page-wrapper .logo-wrap{
+    margin-top: 44px;
+    margin-bottom: 53px;
+    text-align: center;
+}
+
+
+/*-------------------- support page END------------------*/
 @media (max-width: 991px) {
     .top-filters.main-content-wrapper .left-head {
         border-bottom: 1px solid #d7d7d7;
