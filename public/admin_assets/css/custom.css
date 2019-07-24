@@ -1098,3 +1098,53 @@ div.remover-container .remover-container-zone .file {
     opacity: 0;
     display: none;
 }
+/*--------------------------- order admin page START  ----------------*/
+.order__admin-wrapper{
+    max-width: 1392px;
+    margin-bottom: 40px;
+}
+.head-order-wrap{
+    box-shadow: 0 3px 21px 0 rgba(0, 0, 0, 0.11);
+    height: 56px;
+    border-bottom: 1px solid #d7d7d7;
+    background-color: #fff;
+    padding-right: 68px;
+    padding-left: 18px;
+}
+.head-order-wrap .right-head .status{
+    margin-right: 38px;
+}
+.head-order-wrap .right-head .submit-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 170px;
+    height: 35px;
+    background-color: #c6edcd;
+    border:1px solid #d7d7d7;
+    color: #353535;
+    margin-right: 12px;
+}
+.head-order-wrap .right-head .change-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    width: 155px;
+    height: 35px;
+    border:1px solid #d7d7d7;
+    cursor: pointer;
+}
+.head-order-wrap .left-head .name{
+    width: 224px;
+    height: 35px;
+
+}
+.head-order-wrap .left-head .title-customer{
+    margin-right: 15px;
+    font-size: 16px;
+}
+.head-order-wrap .left-head .title{
+    margin-right: 217px;
+}
+/*--------------------------- order admin page END  ----------------*/
