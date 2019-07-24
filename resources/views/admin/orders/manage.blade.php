@@ -3,6 +3,37 @@
 
 @stop
 @section('content')
+    <div class="order__admin-wrapper">
+        <div class="d-flex align-items-center justify-content-between head-order-wrap">
+            <div class="d-flex align-items-center left-head">
+                <span class="font-sec-reg font-24 title">Order: MK-12355k4N </span>
+                <div class="d-flex align-items-center">
+                    <span class="title-customer">Customer</span>
+                    <span class="font-main-light border-main d-flex align-items-center justify-content-center name">Customer Name</span>
+                </div>
+            </div>
+            <div class="d-flex align-items-center right-head">
+<span class="font-16 status">Status</span>
+                <div class="font-main-bold font-16 submit-btn">Order Is submitted</div>
+                <div class="font-main-light font-18 bg-blue-clr change-btn">Change</div>
+            </div>
+        </div>
+        <nav class="nav-orders">
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-order-details-tab" data-toggle="tab" href="#nav-order-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
+                <a class="nav-item nav-link" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs" role="tab" aria-controls="nav-order-docs" aria-selected="false">Docs</a>
+                <a class="nav-item nav-link" id="nav-order-collecting-tab" data-toggle="tab" href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-order-details" role="tabpanel" aria-labelledby="nav-order-details-tab">1</div>
+            <div class="tab-pane fade" id="nav-order-docs" role="tabpanel" aria-labelledby="nav-order-docs-tab">2</div>
+            <div class="tab-pane fade" id="nav-order-collecting" role="tabpanel" aria-labelledby="nav-order-collecting-tab">3</div>
+        </div>
+    </div>
+
+
+
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix order-panel--header">
             <div class="row">
@@ -123,7 +154,8 @@
                                             </div>
                                             <div class="col-lg-4 mb-1">
                                                 <div
-                                                    manage  class="card panel panel-default panel--orders-addresses customer-notes">
+                                                    manage
+                                                    class="card panel panel-default panel--orders-addresses customer-notes">
                                                     <div class="card-header panel-heading clearfix">
                                                         <div class="row">
                                                             <div class="col-md-8">
@@ -606,6 +638,7 @@
 @stop
 
 @section('css')
+    <link href="/public/admin_assets/css/global-admin.css" rel="stylesheet">
     <link href="/public/css/invoice.css" rel="stylesheet">
     <style>
         .order-main-cnt_right-col {
