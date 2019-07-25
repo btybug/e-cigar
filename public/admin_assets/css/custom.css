@@ -1501,4 +1501,46 @@ div.remover-container .remover-container-zone .file {
 .order-details__tab .customers-notes .no-notes{
     opacity: .5;
 }
+/*order docs tab start*/
+.order-docs__tab{
+    padding: 30px 115px 30px 38px;
+}
+.order-docs__tab-left .list-nav .item-link{
+    padding: 10px 28px;
+    border: 1px solid #d7d7d7;
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
+    display: flex;
+    align-items: center;
+}
+.order-docs__tab-left .list-nav .item-link .icon{
+    margin-right: 42px;
+    width: 62px;
+}
+.order-docs__tab-left .list-nav .item-link .icon img{
+    width: 100%;
+}
+.order-docs__tab-left .item-wrap{
+    margin-bottom: 16px;
+}
+.order-docs__tab-right .print-btn {
+    width: 100%;
+    max-width: 153px;
+    min-height: 36px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #d7d7d7;
+}
+.order-docs__tab-right .invoice__wrapper{
+    margin-top: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
+}
+.order-docs__tab-left{
+    padding-right: 20px;
+}
+.order-docs__tab-right{
+    padding-left: 83px;
+}
+/*order docs tab end*/
 /*--------------------------- order admin page END  ----------------*/
