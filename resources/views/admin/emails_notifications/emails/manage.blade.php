@@ -255,12 +255,13 @@
 //                     input.click();
 //                     },
 
-                menubar: "insert",
-                visualblocks_default_state: true,
+                // menubar: "insert",
+                // visualblocks_default_state: true,
                 fullpage_default_doctype: "<!DOCTYPE html>",
                 theme: 'modern',
-                plugins: ['toc print preview code fullpage bbcode searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help','htmlloader'],
-                toolbar1: 'formatselect toc | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | htmlloader | template',
+                plugins: ['toc codesample print preview code fullpage bbcode searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help','htmlloader'],
+
+                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | htmlloader | template',
                 image_advtab: true,
                 templates: [
                     {"title": "Some title 1", "description": "Some desc 1", "content": "My content"},
