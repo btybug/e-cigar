@@ -1543,4 +1543,245 @@ div.remover-container .remover-container-zone .file {
     padding-left: 83px;
 }
 /*order docs tab end*/
+/*order collecting tab end*/
+.order-collecting__tab{
+    padding-left: 74px;
+    padding-right: 140px;
+    padding-bottom: 50px;
+}
+.order-collecting__tab .product-add-wrap {
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
+    width: 862px;
+    height: 82px;
+    border: 1px solid #d7d7d7;
+    padding: 0 25px;
+    margin: 40px auto 0;
+}
+.order-collecting__tab .product-add-wrap .left-wrap{
+    flex: none;
+}
+.order-collecting__tab .product-add-wrap .form-control{
+    height: 49px;
+    border: 1px solid #d7d7d7;
+    border-radius: 0;
+    background-color: #f0f0f0;
+    width: 428px;
+}
+.order-collecting__tab .product-add-wrap .scan-name{
+    margin-right: 35px;
+}
+.order-collecting__tab .product-add-wrap .qty{
+    opacity: .68;
+}
+.order-collecting__tab .product-add-wrap .quantity{
+    height: 49px !important;
+    font-size: 18px;
+    width: 56px !important;
+}
+.order-collecting__tab .product-add-wrap .quantity input{
+    background-color: #f0f0f0;
+    opacity: .68;
+    font-size: 18px;
+}
+.order-collecting__tab .product-add-wrap .product__single-item-inp-num{
+    padding-left: 20px;
+    padding-right: 30px;
+}
+.order-collecting__tab .product-add-wrap .add-btn{
+    background-color: #ee3a50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 80px;
+    height: 49px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid #d7d7d7;
+}
+
+
+.order-collecting__tab .product-table{
+    margin-top: 40px;
+}
+.order-collecting__tab .product-table .last-td{
+    width: 58px;
+    background-color: #f3f3f3;
+    vertical-align: middle !important;
+}
+.order-collecting__tab .product-table .last-td.active{
+    background-color: #6ab32f;
+}
+.order-collecting__tab .product-table .square-icon{
+    background-color: #cfcfcf;
+    width: 36px;
+    height: 36px;
+}
+
+.order-collecting__tab .product-table .check-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.order-collecting__tab .product-table .photo-td{
+    width: 112px;
+}
+.order-collecting__tab .product-table .photo{
+    width: 83px;
+    height: 104px;
+}
+.order-collecting__tab .product-table .photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.order-collecting__tab .product-table .title-td{
+    vertical-align: middle !important;
+}
+.order-collecting__tab .product-table .title-block p{
+    margin-bottom: 8px;
+}
+.order-collecting__tab .product-table .qty-block .quantity{
+    width: 40px;
+    height: 35px;
+}
+.order-collecting__tab .product-table .qty-block .quantity input{
+    padding: 0;
+    padding-left: 13px;
+    font-size: 18px;
+}
+.order-collecting__tab .product-table .qty-block .product__single-item-inp-num{
+    margin-top: 6px;
+}
+.order-collecting__tab .product-table .align_middle{
+    vertical-align: middle !important;
+}
+.order-collecting__tab .product-table .barcode-block{
+    min-width: 132px;
+    height: 32px;
+    background-color: #353535;
+    font-size: 16px;
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.order-collecting__tab .product-table .info-td{
+    width: 260px;
+}
+.order-collecting__tab .product-table .table-mt{
+    margin-top: 20px;
+}
+.order-collecting__tab .product-table .table-bordered>tbody>tr>td,.order-collecting__tab .product-table .table-bordered>thead>tr>th{
+    border: 1px solid #d7d7d7;
+}
+.order-collecting__tab .product-table .table-bordered>thead>tr>th{
+    border-left-color: transparent;
+    border-right-color: transparent;
+    border-top-color: transparent;
+}
+.order-collecting__tab .product-table .table-bordered>tbody>tr>td:not(:first-of-type){
+    border-left: 2px solid transparent;
+}
+.order-collecting__tab .check-item-btn{
+    max-width: 480px;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #d7d7d7;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.order-collecting__tab .total-items-block{
+    margin-top: 20px;
+}
+.order-collecting__tab .total-items-count{
+    margin-right: 202px;
+    font-weight: bold;
+    margin-left: 20px;
+}
+.order-collecting__tab .check-item-btn .no-item{
+    display: flex;
+    align-items: center;
+}
+.order-collecting__tab .check-item-btn .no-item .icon{
+    margin-right: 20px;
+    background-color: #cfcfcf;
+    width: 24px;
+    height: 24px;
+}
+.order-collecting__tab .check-item-btn.active .no-item{
+    display: none !important;
+}
+.order-collecting__tab .check-item-btn.active {
+    background-color: #bde4c4;
+}
+.order-collecting__tab .check-item-btn.active .item-checked{
+    display: flex;
+}
+.order-collecting__tab .check-item-btn .item-checked{
+    display: none;
+    align-items: center;
+}
+.order-collecting__tab .check-item-btn .item-checked .icon{
+    margin-right: 20px;
+    background-color: #6ab32f;
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+.order-collecting__tab .check-item-btn .item-checked .icon-svg{
+position: absolute;
+    left: 4px;
+}
+.order-collecting__tab .check-item-btn .item-checked .first-icon{
+    top: -2px;
+}
+.order-collecting__tab .check-item-btn .item-checked .second-icon{
+    top: 3px;
+}
+/*order collecting tab end*/
+/*order logs tab start*/
+.order-logs__tab{
+
+}
+.order-logs__tab .order-notes_timeline .timeline-item-left-col > div::after{
+    display: none;
+}
+.order-logs__tab .order-notes_timeline .timeline-item-left-col > div {
+    display: flex;
+    align-items: center;
+}
+.order-logs__tab .timeline-item-left-col .date-time-wrap .time{
+    color: #444444;
+    text-align: right;
+    margin-top: 4px;
+}
+.order-logs__tab .timeline-item-left-col .date-time-wrap{
+    margin-right: 15px;
+}
+.order-logs__tab .order-notes_timeline .timeline-item-left-col_dtls {
+    padding: 0;
+    margin: 0;
+    line-height: 1;
+}
+.order-logs__tab .order-notes_timeline .timeline-item-left-col img {
+    border-radius: 50%;
+    border: 3px solid #353535;
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+}
+.order-logs__tab .order-notes_timeline .timeline-item-left-col{
+    padding-right: 14px;
+}
+.order-logs__tab .order-notes_timeline .timeline-item-right-col::before{
+    border-left: 3px solid #222d32;
+    top: 92px;
+    left: -51px;
+}
+/*order logs tab end*/
 /*--------------------------- order admin page END  ----------------*/
