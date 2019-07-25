@@ -21257,6 +21257,12 @@ position: absolute;
 .shopping__cart-confirm h2.title{
     margin-bottom: 43px;
 }
+.shopping__cart-confirm .right-content .right-ads{
+border: 1px solid #d7d7d7;
+}
+.shopping__cart-confirm .right-content .right-ads img{
+    width: 100%;
+}
 .order__product-wall{
     border: 1px solid #d7d7d7;
     background-color: #fff;
