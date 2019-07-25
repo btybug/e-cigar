@@ -22,14 +22,14 @@
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link " id="nav-order-details-tab" data-toggle="tab"
                    href="#nav-order-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
-                <a class="nav-item nav-link active" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs"
+                <a class="nav-item nav-link" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs"
                    role="tab"
                    aria-controls="nav-order-docs" aria-selected="false">Docs</a>
                 <a class="nav-item nav-link" id="nav-order-collecting-tab" data-toggle="tab"
                    href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
                 <a class="nav-item nav-link" id="nav-order-shipping-tab" data-toggle="tab" href="#nav-order-shipping"
                    role="tab" aria-controls="nav-order-shipping" aria-selected="false">Shipping</a>
-                <a class="nav-item nav-link" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs" role="tab"
+                <a class="nav-item nav-link active" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs" role="tab"
                    aria-controls="nav-order-logs" aria-selected="false">Logs</a>
             </div>
         </nav>
@@ -612,7 +612,7 @@
                 </div>
 
             </div>
-            <div class="tab-pane fade  show active" id="nav-order-docs" role="tabpanel"
+            <div class="tab-pane fade" id="nav-order-docs" role="tabpanel"
                  aria-labelledby="nav-order-docs-tab">
                 <div class="order-docs__tab">
                     <div class="row">
@@ -782,12 +782,222 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="nav-order-collecting" role="tabpanel"
-                 aria-labelledby="nav-order-collecting-tab">3
+                 aria-labelledby="nav-order-collecting-tab">
+                <div class="font-main-reg order-collecting__tab">
+                    <div class="d-flex align-items-center justify-content-between product-add-wrap">
+                        <div class="d-flex align-items-center left-wrap">
+                            <span class="font-sec-reg font-20 text-tert-clr lh-1 scan-name">Scan Product</span>
+                            <input type="text" placeholder="Barcode" class="form-control">
+                        </div>
+                        <div class="d-flex align-items-center right-wrap">
+                            <span class="font-18 lh-1 qty">QTY</span>
+                            <div class="product__single-item-inp-num">
+                                <div class="quantity">
+                                    <input type="number" readonly min="1" max="9" step="1" value="1">
+                                </div>
+                            </div>
+                            <a href="#" class="add-btn">Add</a>
+                        </div>
+                    </div>
+                    <div class="product-table">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead>
+                                <tr>
+                                    <th scope="col">Item</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
+                                    <th scope="col">QTY</th>
+                                    <th scope="col">Warehouse</th>
+                                    <th scope="col">Shilf</th>
+                                    <th scope="col">Rak</th>
+                                    <th scope="col">Barcode</th>
+                                    <th scope="col"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="photo-td">
+                                        <div class="photo">
+                                            <img src="/public/img/product-juice.png" alt="product">
+                                        </div>
+                                    </td>
+                                    <td class="title-td">
+                                        <div class="font-16 lh-1 title-block">
+                                            <p class="text-tert-clr text-uppercase">dINNER LADY Cubano 32 pRO</p>
+                                            <p class="mb-0">Cola Shades E-Juice</p>
+                                        </div>
+                                    </td>
+                                    <td class="info-td align_middle">
+                                        <div class="info-product-block">
+
+                                        </div>
+                                    </td>
+                                    <td class="qty-td">
+                                        <div class="d-flex flex-column align-items-center qty-block">
+                                            <span class="font-sec-light font-16 lh-1">QTY</span>
+                                            <div class="product__single-item-inp-num">
+                                                <div class="quantity">
+                                                    <input type="number" readonly="" min="1" max="9" step="1" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="warehouse-td align_middle">
+                                        <span class="font-sec-reg font-20 text-tert-clr lh-1">London, MS</span>
+                                    </td>
+                                    <td class="shilf-td align_middle">
+                                        <span class="font-sec-reg font-20 text-main-clr lh-1">A17</span>
+                                    </td>
+                                    <td class="rak-td align_middle">
+                                        <span class="font-sec-reg font-20 text-red-clr lh-1">65</span>
+                                    </td>
+                                    <td class="barcode-td align_middle">
+                                        <span class="barcode-block">34232132445</span>
+                                    </td>
+                                    <td class="last-td">
+                                        <div class="check-block">
+                                            <span class="check-icon d-none">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg></span>
+                                            <span class="square-icon"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-responsive table-mt">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td class="photo-td">
+                                        <div class="photo">
+                                            <img src="/public/img/product-juice.png" alt="product">
+                                        </div>
+                                    </td>
+                                    <td class="title-td">
+                                        <div class="font-16 lh-1 title-block">
+                                            <p class="text-tert-clr text-uppercase">dINNER LADY Cubano 32 pRO</p>
+                                            <p class="mb-0">Cola Shades E-Juice</p>
+                                        </div>
+                                    </td>
+                                    <td class="info-td align_middle">
+                                        <div class="info-product-block">
+                                            <div class="row">
+                                                <div class="col-sm-9 font-15 font-main-bold">
+                                                    Mango Harmony Cloud 18mg/ Single Pack
+                                                </div>
+                                                <div class="col-sm-3 font-main-bold">
+                                                    <span>x 2</span>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-sm-9 font-15 font-main-bold">
+                                                    Mango Harmony Hit 12mg/ Single Pack
+                                                </div>
+                                                <div class="col-sm-3 font-main-bold">
+                                                    <span>x 1</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="qty-td">
+                                        <div class="d-flex flex-column align-items-center qty-block">
+                                            <span class="font-sec-light font-16 lh-1">QTY</span>
+                                            <div class="product__single-item-inp-num">
+                                                <div class="quantity">
+                                                    <input type="number" readonly="" min="1" max="9" step="1" value="1">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="warehouse-td align_middle">
+                                        <span class="font-sec-reg font-20 text-tert-clr lh-1">London, MS</span>
+                                    </td>
+                                    <td class="shilf-td align_middle">
+                                        <span class="font-sec-reg font-20 text-main-clr lh-1">A17</span>
+                                    </td>
+                                    <td class="rak-td align_middle">
+                                        <span class="font-sec-reg font-20 text-red-clr lh-1">65</span>
+                                    </td>
+                                    <td class="barcode-td align_middle">
+                                        <span class="barcode-block">34232132445</span>
+                                    </td>
+                                    <td class="last-td active">
+                                        <div class="check-block">
+                                            <span class="check-icon">
+                                                <svg
+                                                    xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+      d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg></span>
+                                            <span class="square-icon d-none"></span>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center total-items-block">
+                        <span class="font-16 total-items-count">Total Items: 10</span>
+                        <button class="check-item-btn active">
+<span class="no-item">
+    <span class="icon"></span>
+    <span class="font-16 title">Check All Items</span>
+</span>
+                            <span class="item-checked">
+                                <span class="icon">
+                                    <span class="first-icon icon-svg"><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="14px" height="11px">
+<path fill-rule="evenodd"  fill="rgb(255, 255, 255)"
+      d="M4.454,8.702 L1.114,5.254 L0.000,6.403 L4.454,11.000 L14.000,1.149 L12.886,0.000 L4.454,8.702 Z"/>
+</svg></span>
+                                    <span class="second-icon icon-svg"><svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="14px" height="11px">
+<path fill-rule="evenodd"  fill="rgb(255, 255, 255)"
+      d="M4.454,8.702 L1.114,5.254 L0.000,6.403 L4.454,11.000 L14.000,1.149 L12.886,0.000 L4.454,8.702 Z"/>
+</svg></span>
+                                </span>
+    <span class="font-16 font-weight-bold title">All Items are collected</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
             </div>
             <div class="tab-pane fade" id="nav-order-shipping" role="tabpanel" aria-labelledby="nav-order-shipping-tab">
                 4
             </div>
-            <div class="tab-pane fade" id="nav-order-logs" role="tabpanel" aria-labelledby="nav-order-shipping-tab">5
+            <div class="tab-pane fade show active" id="nav-order-logs" role="tabpanel" aria-labelledby="nav-order-logs-tab">
+                <div class="font-main-reg order-logs__tab">
+                    <div class="row">
+                        <div class="col-md-9 order-main-cnt_right-col">
+                            <div class="order-notes panel panel-default mb-0">
+                                <div class="order-notes_timeline">
+                                    <ul class="list-unstyled order-timeline">
+                                        @include('admin.orders._partials.timeline_item',['histories' => $order->history()->orderBy('created_at','desc')->get()])
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
