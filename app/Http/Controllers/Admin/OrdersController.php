@@ -73,10 +73,13 @@ class OrdersController extends Controller
         if (!$order) abort(404);
         $hidden = [];
         $model = $settings->getEditableData('orders_statuses');
+
         $hidden[] = $model->submitted;
         $hidden[] = $model->partially_collected;
         $hidden[] = $model->collected;
-        $statuses = $this->statuses->where('type', 'order')->whereNotIn('id', $hidden)->get()->pluck('name', 'id');
+
+        $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
+//        dd($statuses,$model,$hidden);
         return $this->view('manage', compact('order', 'statuses'));
     }
 
