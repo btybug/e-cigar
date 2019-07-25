@@ -164,9 +164,13 @@ function BBgetDateFormat($date, $format = null)
  * @param $time
  * @return bool|string
  */
-function BBgetTimeFormat($time)
+function BBgetTimeFormat($time,$format = null)
 {
     if (!$time) null;
+
+    if($format){
+        return date($format, strtotime($time));
+    }
 
     $model = new \App\Models\Settings();
     $settings = $model->getData('admin_general_settings', 'date_format');
