@@ -242,7 +242,7 @@
                                                         </div>
                                                         <div class="price-col">
                                                         <span class="lh-1 text-tert-clr ">
-                                                            {!! convert_price($item->price,$currency) !!}
+                                                            {!! convert_price($item->price,get_currency()) !!}
                                                         </span>
                                                         </div>
                                                     </div>
