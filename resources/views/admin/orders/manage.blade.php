@@ -13,22 +13,610 @@
                 </div>
             </div>
             <div class="d-flex align-items-center right-head">
-<span class="font-16 status">Status</span>
+                <span class="font-16 status">Status</span>
                 <div class="font-main-bold font-16 submit-btn">Order Is submitted</div>
                 <div class="font-main-light font-18 bg-blue-clr change-btn">Change</div>
             </div>
         </div>
         <nav class="nav-orders">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-order-details-tab" data-toggle="tab" href="#nav-order-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
-                <a class="nav-item nav-link" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs" role="tab" aria-controls="nav-order-docs" aria-selected="false">Docs</a>
-                <a class="nav-item nav-link" id="nav-order-collecting-tab" data-toggle="tab" href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
+                <a class="nav-item nav-link active" id="nav-order-details-tab" data-toggle="tab"
+                   href="#nav-order-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
+                <a class="nav-item nav-link" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs" role="tab"
+                   aria-controls="nav-order-docs" aria-selected="false">Docs</a>
+                <a class="nav-item nav-link" id="nav-order-collecting-tab" data-toggle="tab"
+                   href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
+                <a class="nav-item nav-link" id="nav-order-shipping-tab" data-toggle="tab" href="#nav-order-shipping"
+                   role="tab" aria-controls="nav-order-shipping" aria-selected="false">Shipping</a>
+                <a class="nav-item nav-link" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs" role="tab"
+                   aria-controls="nav-order-logs" aria-selected="false">Logs</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-order-details" role="tabpanel" aria-labelledby="nav-order-details-tab">1</div>
+            <div class="tab-pane fade show active" id="nav-order-details" role="tabpanel"
+                 aria-labelledby="nav-order-details-tab">
+                <div class="order-details__tab">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="order-details__tab-left">
+                                <div class="shopping__cart-confirm w-100">
+                                    <div class="row list-shipping">
+                                        <div class="left-col">
+                                            <ul class="row mb-0">
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="sipping-item-wrap">
+                                                        <div class="item-photo">
+                                                            <img src="/public/img/confirm-user.png" class="user-img"
+                                                                 alt="item"/>
+                                                        </div>
+                                                        <h3 class="font-sec-reg font-18 item-title">Customer Name</h3>
+                                                        <p class="font-sec-reg font-18 text-red-clr lh-1 item-info">
+                                                            {!! $order->order_number !!}
+                                                        </p>
+                                                        <a href="{{ route('my_account_order_invoice',$order->id) }}"
+                                                           class="d-flex align-items-center justify-content-center font-14 text-sec-clr bg-blue-clr item-order-btn">Verfied
+                                                            Customer</a>
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="sipping-item-wrap address-item">
+                                                        <div class="item-photo">
+                                                            <img src="/public/img/confirm-home.png" class="home-img"
+                                                                 alt="item"/>
+                                                        </div>
+                                                        <h3 class="font-sec-reg font-18 item-title">Shipping Address</h3>
+                                                        <div class="d-inline-block text-left">
+                                                            <p class="font-main-light font-13 text-wrap">{{ $order->shippingAddress->company }}</p>
+                                                            <p class="font-main-light font-13 text-wrap">
+                                                                {!! $order->shippingAddress->first_line_address ." ".$order->shippingAddress->second_line_address  !!}</p>
+                                                            <p class="font-main-light font-13 text-wrap">{!! $order->shippingAddress->city !!}</p>
+                                                            <p class="font-main-light font-13 text-wrap">{!! $order->shippingAddress->post_code !!}</p>
+                                                            <p class="font-main-light font-13 text-wrap mb-0">{!! $order->shippingAddress->country !!}</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li class="col-md-4 col-sm-6">
+                                                    <div class="sipping-item-wrap delivery-item">
+                                                        <div class="item-photo">
+                                                            <img src="/public/img/confirm-calendar.png" class="calendar-img"
+                                                                 alt="item"/>
+                                                        </div>
+                                                        <h3 class="font-sec-reg font-18 item-title">
+                                                            Date of Order
+                                                        </h3>
+                                                        <p class="font-sec-reg font-18 text-tert-clr lh-1 date-info">
+                                                            Friday</p>
+                                                        <p class="font-sec-reg font-18 text-tert-clr lh-1 date-info mb-0">
+                                                            13:45</p>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="right-col">
+                                            <div class="sipping-item-wrap method-wrap">
+                                                <div class="d-flex align-items-center single-wrap">
+                                                    <div class="font-sec-reg font-18 left-wrap">Delivery Method</div>
+                                                    <div class="font-16 text-tert-clr right-wrap">DHL UK</div>
+                                                </div>
+                                                <div class="d-flex align-items-center single-wrap">
+                                                    <div class="font-sec-reg font-18 left-wrap">Total items</div>
+                                                    <div class="font-16 text-tert-clr right-wrap">3 Items</div>
+                                                </div>
+                                                <div class="d-flex align-items-center single-wrap">
+                                                    <div class="font-sec-reg font-18 left-wrap">Total weight</div>
+                                                    <div class="font-16 text-tert-clr right-wrap">200 g</div>
+                                                </div>
+                                                <div class="d-flex align-items-center single-wrap">
+                                                    <div class="font-sec-reg font-18 left-wrap">Payment Method</div>
+                                                    <div class="font-16 text-tert-clr right-wrap">Master Card</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h2 class="font-sec-reg font-22 lh-1 title">Order Details</h2>
+                                    <ul class="row list-order">
+                                        @foreach($order->items as $item)
+                                            {{--{!! dd($item->options) !!}--}}
+
+                                            <li class="col-md-4">
+                                                <div class="order__product-wall">
+                                                    <div class="main-info">
+                                                        <div class="order__product-photo">
+                                                            <img src="{!! checkImage($item->image) !!}"
+                                                                 alt="{{ $item->name }}">
+                                                        </div>
+                                                        <h6 class="font-18 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
+                                                        <p class="font-18 lh-1 order__product-sec-title">Cola Shades
+                                                            E-Juice</p>
+                                                        <div class="order__product-info">
+                                                            @if(count($item->options['options']))
+                                                                <ul class="list-unstyled mb-0">
+                                                                    @foreach($item->options['options'] as $option)
+                                                                        <li class="single-row-product">
+                                                                            @foreach($option['options'] as $op)
+                                                                                <div class="row">
+                                                                                    <div
+                                                                                        class="col-sm-9 font-15 font-main-bold">
+                                                                                        {{ $op['title'] ." - ". $op['name'] }}
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
+                                                                                        <span>x {{ $op['qty'] }}</span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </li>
+                                                                    @endforeach
+                                                                </ul>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    @if(isset($item->options['extras']) && count($item->options['extras']))
+                                                        <div class="order__product-offers">
+                                                            <div class="font-16 text-sec-clr offers-tag">
+                                                                With offers:
+                                                            </div>
+                                                            @foreach($item->options['extras'] as $extra)
+                                                                @foreach($extra['options'] as $ext)
+                                                                    <div class="d-flex product-offers-inner">
+                                                                        <div class="photo">
+                                                                            <img src="{{ $ext['image'] }}" alt="product">
+                                                                        </div>
+                                                                        <div class="title-offers">
+                                                                            <p class="font-18 lh-1 mb-0">
+                                                                                {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+
+                                                    <div class="qty-price">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">
+                                                            <div class="d-flex align-items-center qty-col">
+                                                            <span
+                                                                class="font-sec-light font-22 lh-1 qty-text">QTY</span>
+                                                                <div class="product__single-item-inp-num">
+                                                                    <div class="quantity">
+                                                                        <input type="number" readonly min="1" max="9"
+                                                                               step="1"
+                                                                               value="{{ $item->qty }}">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="price-col">
+                                                        <span class="lh-1 text-tert-clr font-35">
+                                                            {!! convert_price($item->price,get_currency()) !!}
+                                                        </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                        {{--<li class="col-md-4">--}}
+                                        {{--<div class="order__product-wall">--}}
+                                        {{--<div class="main-info">--}}
+                                        {{--<div class="order__product-photo">--}}
+                                        {{--<img src="/public/img/product-vape.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
+                                        {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
+                                        {{--<div class="order__product-info">--}}
+                                        {{--<ul class="list-unstyled mb-0">--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Hit--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 1</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony 18--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+
+                                        {{--</ul>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="order__product-offers">--}}
+                                        {{--<div class="font-16 text-sec-clr offers-tag">--}}
+                                        {{--With offers:--}}
+                                        {{--</div>--}}
+                                        {{--<div class="d-flex product-offers-inner">--}}
+                                        {{--<div class="photo">--}}
+                                        {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<div class="title-offers">--}}
+                                        {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="qty-price">--}}
+                                        {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
+                                        {{--<div class="d-flex align-items-center qty-col">--}}
+                                        {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
+                                        {{--<div class="product__single-item-inp-num">--}}
+                                        {{--<div class="quantity">--}}
+                                        {{--<input type="number" min="1" max="9" step="1"--}}
+                                        {{--value="1">--}}
+
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="price-col">--}}
+                                        {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li class="col-md-4">--}}
+                                        {{--<div class="order__product-wall">--}}
+                                        {{--<div class="main-info">--}}
+                                        {{--<div class="order__product-photo">--}}
+                                        {{--<img src="/public/img/product-vape.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
+                                        {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
+                                        {{--<div class="order__product-info">--}}
+                                        {{--<ul class="list-unstyled mb-0">--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Hit--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 1</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony 18--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+
+                                        {{--</ul>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="order__product-offers">--}}
+                                        {{--<div class="font-16 text-sec-clr offers-tag">--}}
+                                        {{--With offers:--}}
+                                        {{--</div>--}}
+                                        {{--<div class="d-flex product-offers-inner">--}}
+                                        {{--<div class="photo">--}}
+                                        {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<div class="title-offers">--}}
+                                        {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="qty-price">--}}
+                                        {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
+                                        {{--<div class="d-flex align-items-center qty-col">--}}
+                                        {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
+                                        {{--<div class="product__single-item-inp-num">--}}
+                                        {{--<div class="quantity">--}}
+                                        {{--<input type="number" min="1" max="9" step="1"--}}
+                                        {{--value="1">--}}
+
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="price-col">--}}
+                                        {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li class="col-md-4">--}}
+                                        {{--<div class="order__product-wall">--}}
+                                        {{--<div class="main-info">--}}
+                                        {{--<div class="order__product-photo">--}}
+                                        {{--<img src="/public/img/product-vape.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
+                                        {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
+                                        {{--<div class="order__product-info">--}}
+                                        {{--<ul class="list-unstyled mb-0">--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Hit--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 1</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony Cloud--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                        {{--<li class="single-row-product">--}}
+                                        {{--<div class="row">--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-9 font-15 font-main-bold">--}}
+                                        {{--Mango Harmony 18--}}
+                                        {{--</div>--}}
+                                        {{--<div--}}
+                                        {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
+                                        {{--<span>x 2</span>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+
+                                        {{--</ul>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="order__product-offers">--}}
+                                        {{--<div class="font-16 text-sec-clr offers-tag">--}}
+                                        {{--With offers:--}}
+                                        {{--</div>--}}
+                                        {{--<div class="d-flex product-offers-inner">--}}
+                                        {{--<div class="photo">--}}
+                                        {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
+                                        {{--</div>--}}
+                                        {{--<div class="title-offers">--}}
+                                        {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--<div class="qty-price">--}}
+                                        {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
+                                        {{--<div class="d-flex align-items-center qty-col">--}}
+                                        {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
+                                        {{--<div class="product__single-item-inp-num">--}}
+                                        {{--<div class="quantity">--}}
+                                        {{--<input type="number" min="1" max="9" step="1"--}}
+                                        {{--value="1">--}}
+
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--<div class="price-col">--}}
+                                        {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+                                        {{--</div>--}}
+
+                                        {{--</div>--}}
+                                        {{--</li>--}}
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="order-details__tab-right">
+                                <div class="customers-notes">
+                                    <div class="font-sec-reg text-tert-clr font-23 notes-head">
+                                        Customer’s Notes
+                                    </div>
+                                    <div class="d-flex align-items-center justify-content-center notes-body">
+                                        <span class="font-sec-reg font-21 no-notes">No Notes Added</span>
+                                    </div>
+                                </div>
+                                <div class="card order-summary">
+                                    <div class="order-header text-tert-clr font-23">
+                                        ORDER SUMMARY
+                                    </div>
+                                    <div class="card-body border-top-0">
+                                        <div
+                                            class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center">
+                                            <div class="name">
+                                                Sub Total
+                                            </div>
+                                            <div
+                                                class="price font-main-bold">£25,78
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center">
+                                            <div class="name">
+                                                Tax
+                                            </div>
+                                            <div
+                                                class="price font-main-bold">£0
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center">
+                                            <div class="name">
+                                                Shipping
+                                            </div>
+                                            <div
+                                                class="w-100 font-16 d-flex flex-wrap justify-content-between align-items-center shipping-wall">
+                                                <div class="shipping-item">
+                                                    United Kingdom
+                                                </div>
+                                                <div class="price font-21 font-main-bold">£0</div>
+                                            </div>
+                                            <div
+                                                class="w-100 d-flex font-16 flex-wrap justify-content-between align-items-center shipping-wall">
+                                                <div class="shipping-item">
+                                                    Shipping Service
+                                                </div>
+                                                <div class="price font-21 font-main-bold">£0</div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center">
+                                            <div
+                                                class="w-100 d-flex flex-wrap justify-content-between align-items-center">
+                                                <div class="name">
+                                                    Coupon Discount
+                                                </div>
+                                                <div
+                                                    class="price font-main-bold">£0
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center border-bottom-0 mb-0 pb-0">
+                                            <div class="name">
+                                                Total
+                                            </div>
+                                            <div
+                                                class="price text-tert-clr font-main-bold">£25,78
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
             <div class="tab-pane fade" id="nav-order-docs" role="tabpanel" aria-labelledby="nav-order-docs-tab">2</div>
-            <div class="tab-pane fade" id="nav-order-collecting" role="tabpanel" aria-labelledby="nav-order-collecting-tab">3</div>
+            <div class="tab-pane fade" id="nav-order-collecting" role="tabpanel"
+                 aria-labelledby="nav-order-collecting-tab">3
+            </div>
+            <div class="tab-pane fade" id="nav-order-shipping" role="tabpanel" aria-labelledby="nav-order-shipping-tab">
+                4
+            </div>
+            <div class="tab-pane fade" id="nav-order-logs" role="tabpanel" aria-labelledby="nav-order-shipping-tab">5
+            </div>
         </div>
     </div>
 

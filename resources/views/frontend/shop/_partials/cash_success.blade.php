@@ -577,7 +577,75 @@
                             {{--                confirm tab end--}}
                             <div class="col-lg-2 pr-md-right">
                                 <div class="right-content">
-
+                                    <div class="right-ads">
+                                        <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
+                                    </div>
+                                    <div class="card order-summary">
+                                        <div class="card-header text-tert-clr font-26">
+                                            ORDER SUMMARY
+                                        </div>
+                                        <div class="card-body border-top-0">
+                                            <div
+                                                class="single-row font-24 d-flex flex-wrap justify-content-between align-items-center">
+                                                <div class="name">
+                                                    Sub Total
+                                                </div>
+                                                <div
+                                                    class="price font-main-bold">£25,78
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="single-row font-24 d-flex flex-wrap justify-content-between align-items-center">
+                                                <div class="name">
+                                                    Tax
+                                                </div>
+                                                <div
+                                                    class="price font-main-bold">£0
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="single-row font-24 d-flex flex-wrap justify-content-between align-items-center">
+                                                <div class="name">
+                                                    Shipping
+                                                </div>
+                                                <div
+                                                    class="w-100 font-18 d-flex flex-wrap justify-content-between align-items-center shipping-wall">
+                                                    <div class="shipping-item">
+                                                        United Kingdom
+                                                    </div>
+                                                    <div class="price font-24 font-main-bold">£0</div>
+                                                </div>
+                                                <div
+                                                    class="w-100 d-flex font-18 flex-wrap justify-content-between align-items-center shipping-wall">
+                                                    <div class="shipping-item">
+                                                        Shipping Service
+                                                    </div>
+                                                    <div class="price font-24 font-main-bold">£0</div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="single-row font-24 d-flex flex-wrap justify-content-between align-items-center">
+                                                <div
+                                                    class="w-100 d-flex flex-wrap justify-content-between align-items-center">
+                                                    <div class="name">
+                                                        Coupon Discount
+                                                    </div>
+                                                    <div
+                                                        class="price font-main-bold">£0
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div
+                                                class="single-row font-21 d-flex flex-wrap justify-content-between align-items-center border-bottom-0 mb-0 pb-0">
+                                                <div class="name">
+                                                    Total
+                                                </div>
+                                                <div
+                                                    class="price text-tert-clr font-main-bold">£25,78
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                     {{--@include("frontend.shop._partials.order_summary",['pyp' =>true,'back_route' => route('shop_check_out')])--}}
                                 </div>
                             </div>
