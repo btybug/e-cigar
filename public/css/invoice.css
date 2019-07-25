@@ -167,100 +167,100 @@ font-size: 26px;
 .invoice__wrapper .invoice__table-wrap .product-td{
     max-width: 400px;
 }
+/*@media (max-width:1920px) {*/
+/*    .invoice__wrapper .invoice__content-logo svg{*/
+/*        width: 540px;*/
+/*        height: 100%;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-logo .icon {*/
+/*        margin-right: 100px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__wrapper-main-content {*/
+/*        padding-left: 101px;*/
+/*        padding-right: 110px;*/
+/*        margin-bottom: 438px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-info .title {*/
+/*        margin-bottom: 47px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-info {*/
+/*        font-size: 24px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-logo {*/
+/*        margin-top: 20px;*/
+/*        margin-bottom: 79px;*/
+/*    }*/
+/*    .invoice__wrapper .main-title {*/
+/*        margin-top: 23px;*/
+/*        margin-bottom: 47px;*/
+/*        font-size: 86px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap table{*/
+/*        margin-bottom: 32px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap thead th {*/
+/*        font-size: 20px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap tbody td {*/
+/*        font-size: 18px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap .single-item {*/
+/*        margin-bottom: 20px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap .single-item span:first-of-type{*/
+/*        margin-right: 35px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-paid {*/
+/*        margin-right: 61px;*/
+/*        max-width: 210px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price {*/
+/*        max-width: 604px;*/
+/*        padding: 20px 76px 0 82px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price .invoice__content-price-item {*/
+/*        margin-bottom: 20px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price .name {*/
+/*        font-size: 15px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price .price {*/
+/*        font-size: 23px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price .price.total-price {*/
+/*        font-size: 35px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__content-price .price.total-price .sec-price {*/
+/*        font-size: 28px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__wrapper-footer {*/
+/*        font-size: 19px;*/
+/*        padding: 31px 128px 66px 115px;*/
+/*        border-top: 11px solid #383838;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__wrapper-footer ul li {*/
+/*        margin-bottom: 17px;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__wrapper-header {*/
+/*        height: 42px;*/
+/*        border-bottom: 11px solid #383838;*/
+/*    }*/
+/*    .invoice__wrapper .invoice__table-wrap .product-td{*/
+/*        max-width: 235px;*/
+/*    }*/
+/*}*/
+
 @media (max-width:1920px) {
     .invoice__wrapper .invoice__content-logo svg{
-        width: 540px;
+        width: 275px;
         height: 100%;
     }
     .invoice__wrapper .invoice__content-logo .icon {
-        margin-right: 100px;
+        margin-right: 58px;
     }
     .invoice__wrapper .invoice__wrapper-main-content {
-        padding-left: 101px;
-        padding-right: 110px;
-        margin-bottom: 438px;
-    }
-    .invoice__wrapper .invoice__content-info .title {
-        margin-bottom: 47px;
-    }
-    .invoice__wrapper .invoice__content-info {
-        font-size: 24px;
-    }
-    .invoice__wrapper .invoice__content-logo {
-        margin-top: 20px;
-        margin-bottom: 79px;
-    }
-    .invoice__wrapper .main-title {
-        margin-top: 23px;
-        margin-bottom: 47px;
-        font-size: 86px;
-    }
-    .invoice__wrapper .invoice__table-wrap table{
-        margin-bottom: 32px;
-    }
-    .invoice__wrapper .invoice__table-wrap thead th {
-        font-size: 20px;
-    }
-    .invoice__wrapper .invoice__table-wrap tbody td {
-        font-size: 18px;
-    }
-    .invoice__wrapper .invoice__table-wrap .single-item {
-        margin-bottom: 20px;
-    }
-    .invoice__wrapper .invoice__table-wrap .single-item span:first-of-type{
-        margin-right: 35px;
-    }
-    .invoice__wrapper .invoice__content-paid {
-        margin-right: 61px;
-        max-width: 210px;
-    }
-    .invoice__wrapper .invoice__content-price {
-        max-width: 604px;
-        padding: 20px 76px 0 82px;
-    }
-    .invoice__wrapper .invoice__content-price .invoice__content-price-item {
-        margin-bottom: 20px;
-    }
-    .invoice__wrapper .invoice__content-price .name {
-        font-size: 15px;
-    }
-    .invoice__wrapper .invoice__content-price .price {
-        font-size: 23px;
-    }
-    .invoice__wrapper .invoice__content-price .price.total-price {
-        font-size: 35px;
-    }
-    .invoice__wrapper .invoice__content-price .price.total-price .sec-price {
-        font-size: 28px;
-    }
-    .invoice__wrapper .invoice__wrapper-footer {
-        font-size: 19px;
-        padding: 31px 128px 66px 115px;
-        border-top: 11px solid #383838;
-    }
-    .invoice__wrapper .invoice__wrapper-footer ul li {
-        margin-bottom: 17px;
-    }
-    .invoice__wrapper .invoice__wrapper-header {
-        height: 42px;
-        border-bottom: 11px solid #383838;
-    }
-    .invoice__wrapper .invoice__table-wrap .product-td{
-        max-width: 235px;
-    }
-}
-
-@media (max-width:991px) {
-    .invoice__wrapper .invoice__content-logo svg{
-        width: 284px;
-        height: 100%;
-    }
-    .invoice__wrapper .invoice__content-logo .icon {
-        margin-right: 100px;
-    }
-    .invoice__wrapper .invoice__wrapper-main-content {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 60px;
+        padding-right: 60px;
         margin-bottom: 180px;
     }
     .invoice__wrapper .invoice__content-info .title {
@@ -271,7 +271,7 @@ font-size: 26px;
     }
     .invoice__wrapper .invoice__content-logo {
         margin-top: 15px;
-        margin-bottom: 30px;
+        margin-bottom: 42px;
     }
     .invoice__wrapper .main-title {
         margin-top: 23px;
@@ -295,30 +295,30 @@ font-size: 26px;
     }
     .invoice__wrapper .invoice__content-paid {
         margin-right: 32px;
-        max-width: 110px;
+        max-width: 161px;
     }
     .invoice__wrapper .invoice__content-price {
         max-width: 400px;
         padding: 20px 25px 0 25px;
     }
     .invoice__wrapper .invoice__content-price .invoice__content-price-item {
-        margin-bottom: 20px;
+        margin-bottom: 14px;
     }
     .invoice__wrapper .invoice__content-price .name {
         font-size: 14px;
     }
     .invoice__wrapper .invoice__content-price .price {
-        font-size: 20px;
+        font-size: 18px;
     }
     .invoice__wrapper .invoice__content-price .price.total-price {
-        font-size: 30px;
+        font-size: 28px;
     }
     .invoice__wrapper .invoice__content-price .price.total-price .sec-price {
-        font-size: 24px;
+        font-size: 22px;
     }
     .invoice__wrapper .invoice__wrapper-footer {
-        font-size: 19px;
-        padding: 20px 40px 50px 40px;
+        font-size: 16px;
+        padding: 20px 60px 50px 60px;
         border-top: 8px solid #383838;
     }
     .invoice__wrapper .invoice__wrapper-footer ul li {
@@ -330,5 +330,11 @@ font-size: 26px;
     }
     .invoice__wrapper .invoice__table-wrap .product-td{
         max-width: 150px;
+    }
+    .invoice__wrapper .invoice__content-info-right{
+        margin-right: 30px;
+    }
+    .invoice__wrapper .invoice__content-info p{
+        margin-bottom: 10px;
     }
 }
