@@ -215,9 +215,52 @@
             tinymce.init({
                 selector: e,
                 height: 500,
+                // file_picker_types: 'file image media',
+                // automatic_uploads: true,
+
+
+                // Example content CSS (should be your site CSS)
+
+//                 file_picker_callback: function(cb, value, meta) {
+//                     var input = document.createElement('input');
+//                     input.setAttribute('type', 'file');
+//                     input.setAttribute('accept', 'image/*');
+//                     input.onchange = function() {
+//                         var file = this.files[0];
+//                         var reader = new FileReader();
+//                         reader.readAsDataURL(file);
+//                         reader.onload = function () {
+//
+//                             var name = file.name.split('.')[0];
+//                             var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+//                             var blobInfo = blobCache.create(name, file, reader.result);
+//                             blobCache.add(blobInfo);
+//
+// // Provide file and text for the link dialog
+//                             if (meta.filetype == 'file') {
+//                                 cb(blobInfo.blobUri(), {text: name, target: '_blank'});
+//                             }
+//
+// // Provide image and alt text for the image dialog
+//                             if (meta.filetype == 'image') {
+//                                 cb(blobInfo.blobUri(), {alt: file.name, title: name});
+//                             }
+//
+// // Provide alternative source and posted for the media dialog
+//                             if (meta.filetype == 'media') {
+//                                 cb(blobInfo.blobUri(), {source: blobInfo.blobUri(), poster: 'image.jpg'});
+//                             }
+//                         };
+//                     };
+//                     input.click();
+//                     },
+
+                menubar: "insert",
+                visualblocks_default_state: true,
+                fullpage_default_doctype: "<!DOCTYPE html>",
                 theme: 'modern',
-                plugins: 'print preview fullpage  searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help',
-                toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+                plugins: ['toc print preview code fullpage bbcode searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help','htmlloader'],
+                toolbar1: 'formatselect toc | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | htmlloader | template',
                 image_advtab: true,
                 templates: [
                     {"title": "Some title 1", "description": "Some desc 1", "content": "My content"},
@@ -230,9 +273,9 @@
             });
         }
 
-        initTinyMce(".content_editor")
+        initTinyMce(".content_editor");
         $('#form').submit(function () {
-            tinyMCE.triggerSave()
+            tinyMCE.triggerSave();
             // DO STUFF...
             return true; // return false to cancel form action
         });
