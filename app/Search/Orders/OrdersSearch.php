@@ -29,7 +29,7 @@ class OrdersSearch
 
     public function currency($value)
     {
-        return $this->model->where('orders.currency', $value);
+        return $this->model->whereIn('orders.currency', $value);
     }
 
     public function shipping_method($value)
@@ -39,7 +39,7 @@ class OrdersSearch
 
     public function payment_method($value)
     {
-        return $this->model->where('orders.payment_method', $value);
+        return $this->model->whereIn('orders.payment_method', $value);
     }
 
     public function customer($value)
@@ -58,15 +58,22 @@ class OrdersSearch
         return $this->model;
     }
 
+    public function status($value)
+    {
+        return $this->model->leftJoin('order_history','order_history.order_id','=','orders.id')
+            ->whereIn('order_history.status_id',$value);
+
+    }
+
     public function date($value)
     {
         return $this->model->where(function ($query) use ($value) {
 
-            $value = explode(' - ',$value);
+            $value = explode(' - ', $value);
             $value[0] = Carbon::parse($value[0])->format('Y-m-d');
-            if(Carbon::parse($value[1])->format('d.m.Y') == Carbon::today()->format('d.m.Y') ){
+            if (Carbon::parse($value[1])->format('d.m.Y') == Carbon::today()->format('d.m.Y')) {
                 $value[1] = Carbon::parse($value[1])->addDay(1)->format('Y-m-d');
-            }else{
+            } else {
                 $value[1] = Carbon::parse($value[1])->format('Y-m-d');
             }
             $query->whereBetween('orders.created_at', $value);

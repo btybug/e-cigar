@@ -32,11 +32,16 @@
             AjaxCall("/admin/find/call-find", {key: option}, function (res) {
                 if (!res.error) {
                     $(".find-form").html(res.form);
-                    date_column();
-                    if(option == 'products'){
-                        call_products();
-                    }else if(option == 'orders'){
 
+                    if(option == 'products'){
+                        date_column();
+                        call_products();
+
+                    }else if(option == 'orders'){
+                        date_column();
+                        $("body").find("#customer").select2();
+                        $("body").find("#payment_method").select2();
+                        $("body").find("#status").select2();
                     }
                 }
             });

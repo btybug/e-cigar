@@ -20,9 +20,9 @@
     </div>
     <div class="col-sm-6">
         <div class="form-group row">
-            <label for="shipping_method" class="col-sm-2 col-form-label">Payment method</label>
+            <label for="payment_method" class="col-sm-2 col-form-label">Payment method</label>
             <div class="col-sm-10">
-                {!! Form::select('payment_method',[null=>'Select payment method']+$payments_gateways->toArray(),null,['class'=>'form-control','id'=>'payment_method']) !!}
+                {!! Form::select('payment_method[]',$payments_gateways->toArray(),null,['class'=>'form-control','id'=>'payment_method','multiple' => true]) !!}
             </div>
         </div>
     </div>
@@ -30,15 +30,15 @@
         <div class="form-group row">
             <label for="shipping_method" class="col-sm-2 col-form-label">Status</label>
             <div class="col-sm-10">
-                {!! Form::select('status',[],null,['class'=>'form-control','id'=>'status']) !!}
+                {!! Form::select('status[]',$statuses,null,['class'=>'form-control','id'=>'status','multiple' => true]) !!}
             </div>
         </div>
     </div>
     <div class="col-sm-6">
         <div class="form-group row">
-            <label for="shipping_method" class="col-sm-2 col-form-label">Customer</label>
+            <label for="customer" class="col-sm-2 col-form-label">Customer</label>
             <div class="col-sm-10">
-                {!! Form::select('customer',[null=>'Select Customer']+$users->toArray(),null,['class'=>'form-control','id'=>'status']) !!}
+                {!! Form::select('customer[]',$users,null,['class'=>'form-control','id'=>'customer','multiple' => true]) !!}
             </div>
         </div>
     </div>
