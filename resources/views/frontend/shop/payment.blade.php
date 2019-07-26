@@ -337,9 +337,12 @@
                 var button = '';
                 if(method == 'cash'){
                     $("#stripe-method").removeClass('show').addClass('d-none');
+                    $("#cash-method").removeClass('d-none').addClass('show');
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-cash">PAY CASH</button>';
                 }else if(method == 'stripe'){
                     $("#stripe-method").removeClass('d-none').addClass('show');
+                    $("#cash-method").removeClass('show').addClass('d-none');
+
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-stripe">PAY WITH CARD</button>';
                 }
 console.log(method)
