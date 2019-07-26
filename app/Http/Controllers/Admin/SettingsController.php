@@ -426,6 +426,11 @@ class SettingsController extends Controller
         $model = Couriers::find($id);
         return $this->view('store.couriers.edit', compact('model'));
     }
+    public function getCreateCouriers()
+    {
+        $model = null;
+        return $this->view('store.couriers.edit', compact('model'));
+    }
 
     public function getCouriersSave(Request $request)
     {
