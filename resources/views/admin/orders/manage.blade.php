@@ -9,7 +9,9 @@
                 <span class="font-sec-reg font-24 title">Order:  {!! $order->order_number !!} </span>
                 <div class="d-flex align-items-center">
                     <span class="title-customer">Customer</span>
-                    <span class="font-main-light border-main d-flex align-items-center justify-content-center name">Customer Name</span>
+                    <span class="font-main-light border-main d-flex align-items-center justify-content-center name">
+                        {!! $order->user->name ." " .$order->user->last_name !!}
+                    </span>
                 </div>
             </div>
             <div class="d-flex align-items-center right-head">
@@ -523,11 +525,13 @@
                                         <span class="font-sec-reg font-20 lh-1 text-tert-clr">Add Note</span>
                                     </div>
                                     <div class="border-main border-top-0 note-body">
-                                        <form action="">
-                                            <textarea name="" id="" cols="30" rows="10"
-                                                      placeholder="Your note"></textarea>
-                                            <button class="add-note-btn">Add</button>
-                                        </form>
+                                        {!! Form::open(['url' =>route('orders_add_note')]) !!}
+                                            <div class="errors"></div>
+                                            {!! Form::hidden('id',$order->id) !!}
+                                            <textarea name="note" id="" cols="30" rows="10"
+                                                  placeholder="Your note"></textarea>
+                                            {!! Form::submit('Add',['class' => 'add-note-btn change-status-btn']) !!}
+                                        {!! Form::close() !!}
                                     </div>
                                 </div>
                             </div>

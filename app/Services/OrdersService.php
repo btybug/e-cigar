@@ -16,7 +16,7 @@ class OrdersService
     public function changeStatus($order, $status_id)
     {
         $status = Statuses::find($status_id);
-        if($status->is_default){
+        if($status && $status->is_default){
             $settings=new Settings();
             $model = $settings->getEditableData('orders_statuses');
             switch (array_search($status_id,$model->toArray())){
