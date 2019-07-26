@@ -178,12 +178,25 @@ class StoreController extends Controller
 
     public function postSaveOrUpdate(PurchaseRequest $request)
     {
-        $data = $request->except('_token');
+        $data = $request->except('_token','qty');
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         Purchase::updateOrCreate($request->only('id'), $data);
+        $item = Items::find($request->get('item_id'));
+        if($item && $locations = $item->locations){
+            $qtys = $request->get('qty');
+            $locIDs = array_keys($qtys);
+            foreach ($locations as $location){
+                if(in_array($location->id,$locIDs)){
+                    $location->qty += $qtys[$location->id];
+                    $location->save();
+                }
+            }
+        }
+
         return redirect()->route('admin_inventory_purchase');
     }
+
 
     public function EditPurchase($id)
     {
