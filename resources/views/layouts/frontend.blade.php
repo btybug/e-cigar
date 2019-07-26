@@ -65,7 +65,7 @@
     <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
     <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
-    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>
+{{--    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>--}}
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=custom-share-buttons"></script>
     <script src={{asset("public/plugins/autocomplete/jquery.autocomplete.min.js")}}></script>
     @if(!Auth::check())
