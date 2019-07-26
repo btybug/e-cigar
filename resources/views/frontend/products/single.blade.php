@@ -4,6 +4,7 @@
 @stop
 @section('content')
     <div class="main-content">
+
         <!--shopping dtls fixed at the bottom-->
         <div class="continue-shp-wrapp">
             <div class="container main-max-width h-100 p-0">
@@ -568,6 +569,7 @@
 
                             </div>
                             <div class="sharethis-inline-share-buttons"></div>
+
                             {{--                            <div class="col-lg-1 col-2 ml-auto d-flex flex-column pr-0 product-single-share-col">--}}
                             {{--                                <div class="ml-auto">--}}
                             {{--                                    <div class="product-single-share-outer d-flex flex-column align-items-center justify-content-center">--}}
