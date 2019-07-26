@@ -22,7 +22,7 @@
                                                                 <span class="d-flex method-wrap pointer">
                                                                          <span class="method-payment-photo">
                                                                              <img
-                                                                                 src="/public/img/temp/paycash.png"
+                                                                                 src="{{ $cash->image }}"
                                                                                  alt="brand"/>
                                                                         </span>
                                                                 </span>
@@ -43,7 +43,7 @@
                                                                 <span class="d-flex method-wrap pointer">
                                                                          <span class="method-payment-photo">
                                                                              <img
-                                                                                 src="/public/img/temp/method-cart-logos.png"
+                                                                                 src="{{ $stripe->stripe_image }}"
                                                                                  alt="brand"/>
                                                                         </span>
                                                                 </span>
