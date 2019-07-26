@@ -61,8 +61,6 @@ class OrdersSearch
     public function status($value)
     {
         return $this->model->leftJoin('order_history','order_history.order_id','=','orders.id')
-            ->groupBy('order_history.status_id')
-//            ->select('order_history.status_id','orders.*')
             ->whereIn('order_history.status_id',$value);
 
     }
