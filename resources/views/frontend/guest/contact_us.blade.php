@@ -149,7 +149,7 @@
                                         allowfullscreen></iframe>
                                 </div>
                                 <div class="main-info">
-                                    @if($model)
+                                    @if($settings)
                                     <div class="item-wrap">
                                         <div class="left">
                                             <span class="icon">
@@ -163,9 +163,9 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light">{{ $model->first_address. ' '.$model->second_address }}</p>
-                                            <p class="font-main-light">{{ $model->city }}, {{ $model->post_code }}</p>
-                                            <p class="font-main-light">{{ $model->country }}</p>
+                                            <p class="font-main-light">{{ $settings->first_address. ' '.$settings->second_address }}</p>
+                                            <p class="font-main-light">{{ $settings->city }}, {{ $settings->post_code }}</p>
+                                            <p class="font-main-light">{{ $settings->country }}</p>
                                         </div>
                                     </div>
                                     <div class="item-wrap align-items-center tel">
@@ -181,7 +181,7 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light mb-0">{{ $model->phone }}</p>
+                                            <p class="font-main-light mb-0">{{ $settings->phone }}</p>
                                         </div>
                                     </div>
                                     <div class="item-wrap align-items-center">
@@ -197,7 +197,7 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light mb-0">{{ $model->email }}</p>
+                                            <p class="font-main-light mb-0">{{ $settings->email }}</p>
                                         </div>
                                     </div>
                                     @endif
