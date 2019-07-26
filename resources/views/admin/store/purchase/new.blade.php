@@ -19,12 +19,10 @@
                         {!! Form::select('item_id',[null => 'Select'] + $items,null,[ 'class'=> 'form-control select-item']) !!}
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label class="col-sm-2 control-label" for="input-discount">Quantity</label>
-                    <div class="col-sm-10">
-                        {!! Form::number('qty',null,['placeholder' => 'Purchase quantity','class'=> 'form-control']) !!}
-                    </div>
+                <div class="form-group locations">
+
                 </div>
+                
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" for="input-discount">Price</label>
                     <div class="col-sm-10">
@@ -57,10 +55,6 @@
                     <div class="col-sm-10">
                         {!! Form::number('invoice_number',null,['placeholder' => 'Purchase invoice number','class'=> 'form-control']) !!}
                     </div>
-                </div>
-
-                <div class="form-group row locations">
-
                 </div>
 
                 <div class="form-group row">
