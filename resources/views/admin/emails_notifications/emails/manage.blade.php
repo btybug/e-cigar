@@ -30,7 +30,7 @@
                                         <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2">To Admin</a>
                                     </li>
                                 </ul>
-                                <div class="tab-content tab-content-store-settings">
+                                <div class="tab-content tab-content-store-settings overflow-visible">
                                     <div class="tab-pane fade active in show" id="tab1"
                                          aria-labelledby="tab1-tab">
                                         <div class="form-group row">
@@ -68,8 +68,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
-                                                                <div class="col-sm-9">
+                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-12'])}}
+                                                                <div class="col-sm-12">
                                                                     {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                                 </div>
                                                             </div>
@@ -121,8 +121,8 @@
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-3'])}}
-                                                                <div class="col-sm-9">
+                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-12'])}}
+                                                                <div class="col-sm-12">
                                                                     {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',get_translated($admin_model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
                                                                 </div>
                                                             </div>

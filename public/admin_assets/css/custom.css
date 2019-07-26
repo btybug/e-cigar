@@ -1783,5 +1783,12 @@ position: absolute;
     top: 92px;
     left: -51px;
 }
+.order-logs__tab .order-notes_timeline .timeline-item-right-col > div {
+    padding: 0;
+    margin: 0;
+}
 /*order logs tab end*/
 /*--------------------------- order admin page END  ----------------*/
+.overflow-visible{
+    overflow: visible !important;
+}
