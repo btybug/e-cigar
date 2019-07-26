@@ -17,7 +17,7 @@
 
         <div class="card-body panel-body">
             <div class="row">
-                <div class="tab-content tabs_content col-md-8">
+                <div class="tab-content tabs_content col-md-9">
                     <div id="home" class="tab-pane tab_info fade in active show">
 
                         <div class="sortable-panels">
@@ -137,7 +137,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     @if(isset($shortcodes->relatedShortcoders[$model->slug]))
                         <table class="table table-striped table--email-temp mb-50">
                             <thead>
