@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\WarehouseRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRacksRequest;
+use App\Models\Items;
 use App\Models\Stickers;
 use App\Models\Warehouse;
 use App\Models\WarehouseRacks;
@@ -77,14 +78,29 @@ class WarehouseController extends Controller
     {
         $id = $request->get('id', 0);
         $warehouse = Warehouse::findOrFail($w_id);
-
+        $items = collect([]);
         $model = $warehouse->categories()->where('id', $id)->first();
+
+        if($model){
+            $items = Items::leftJoin('item_translations','items.id','=','item_translations.items_id')
+                ->leftJoin("item_locations","items.id","=","item_locations.item_id")
+                ->where("item_locations.warehouse_id","=",$w_id);
+            if($model->parent_id){
+                $items = $items->where("item_locations.shelve_id","=",$model->id);
+            }else{
+                $items = $items->where("item_locations.rack_id","=",$model->id);
+            }
+
+            $items = $items->select("items.*","item_translations.name")->get();
+        }
+
 
         $allCategories = $warehouse->categories()->whereNull('parent_id')->get();
         $stickers = Stickers::all()->pluck('name', 'id');
         $html = $this->view("create_or_update", compact(['allCategories', 'model','warehouse' ,'stickers']))->render();
+        $itemHtml = $this->view("items", compact(['items', 'model','warehouse']))->render();
 
-        return \Response::json(['error' => false, 'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html, 'itemHtml' => $itemHtml]);
     }
 
     public function postCategoryUpdateParent(Request $request, $w_id)
