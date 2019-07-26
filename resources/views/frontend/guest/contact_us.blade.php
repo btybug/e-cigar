@@ -144,7 +144,7 @@
                             <div class="info-wall">
                                 <div class="map-block">
                                     <iframe
-                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d158857.7281080726!2d-0.24168024584704462!3d51.528771840474214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47d8a00baf21de75%3A0x52963a5addd52a99!2z0JvQvtC90LTQvtC9LCDQktC10LvQuNC60L7QsdGA0LjRgtCw0L3QuNGP!5e0!3m2!1sru!2s!4v1563968499292!5m2!1sru!2s"
+                                        src="https://www.google.com/maps/embed?pb={{ $settings->first_address. '+'.$settings->second_address. '+'.$settings->city. '+'.$settings->post_code. '+'.$settings->country }}"
                                         width="100%" height="100%" frameborder="0" style="border:0"
                                         allowfullscreen></iframe>
                                 </div>
@@ -164,7 +164,7 @@
                                         </div>
                                         <div class="right">
                                             <p class="font-main-light">{{ $settings->first_address. ' '.$settings->second_address }}</p>
-                                            <p class="font-main-light">{{ $settings->city }}, {{ $settings->post_code }}</p>
+                                            <p class="font-main-light">{{ $settings->city .',' }} {{ $settings->post_code }}</p>
                                             <p class="font-main-light">{{ $settings->country }}</p>
                                         </div>
                                     </div>
