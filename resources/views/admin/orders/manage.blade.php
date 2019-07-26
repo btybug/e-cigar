@@ -366,31 +366,52 @@
                 <div class="order-docs__tab">
                     <div class="row">
                         <div class="col-md-3">
+
                             <div class="font-main-reg order-docs__tab-left">
-                                <ul class="list-nav">
-                                    <li class="item-wrap">
-                                        <a href="" class="item-link">
-                                            <span class="icon"><img src="/public/img/print-icon.png" alt="icon"></span>
-                                            <span class="font-20 text-main-clr name">Invoice</span>
-                                        </a>
-                                    </li>
-                                    <li class="item-wrap">
-                                        <a href="" class="item-link">
-                                            <span class="icon"><img src="/public/img/delivery-icon.png"
-                                                                    alt="icon"></span>
-                                            <span class="font-20 text-main-clr name">Shipping Label</span>
-                                        </a>
-                                    </li>
-                                </ul>
+                                <div class="nav flex-column list-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                    <a class="nav-link item-link active" id="v-pills-docs-invoice-tab" data-toggle="pill" href="#v-pills-docs-invoice" role="tab" aria-controls="v-pills-docs-invoice" aria-selected="true">
+                                        <span class="icon"><img src="/public/img/print-icon.png" alt="icon"></span>
+                                        <span class="font-20 text-main-clr name">Invoice</span>
+                                    </a>
+                                    <a class="nav-link item-link" id="v-pills-docs-shipping-tab" data-toggle="pill" href="#v-pills-docs-shipping" role="tab" aria-controls="v-pills-docs-shipping" aria-selected="false">
+                                        <span class="icon"><img src="/public/img/delivery-icon.png"
+                                                                alt="icon"></span>
+                                        <span class="font-20 text-main-clr name">Shipping Label</span>
+                                    </a>
+                                </div>
+{{--                                <ul class="list-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">--}}
+{{--                                    <li class="item-wrap">--}}
+{{--                                        <a class="item-link" id="v-pills-docs-invoice-tab" data-toggle="pill" href="#v-pills-docs-invoice" role="tab" aria-controls="v-pills-docs-invoice" aria-selected="true">--}}
+{{--                                            <span class="icon"><img src="/public/img/print-icon.png" alt="icon"></span>--}}
+{{--                                            <span class="font-20 text-main-clr name">Invoice</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                    <li class="item-wrap">--}}
+{{--                                        <a class="item-link"  id="v-pills-docs-shipping-tab" data-toggle="pill" href="#v-pills-docs-shipping" role="tab" aria-controls="v-pills-docs-shipping" aria-selected="false">--}}
+{{--                                            <span class="icon"><img src="/public/img/delivery-icon.png"--}}
+{{--                                                                    alt="icon"></span>--}}
+{{--                                            <span class="font-20 text-main-clr name">Shipping Label</span>--}}
+{{--                                        </a>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
                             </div>
                         </div>
                         <div class="col-md-9">
+
                             <div class="order-docs__tab-right">
-                                <div class="text-right">
-                                    <a href="{{ route("pdf_download",$order->id) }}"
-                                       class="bg-blue-clr text-sec-clr font-20 print-btn">Print</a>
+                                <div class="tab-content" id="v-pills-tabContent">
+                                    <div class="tab-pane fade show active" id="v-pills-docs-invoice" role="tabpanel" aria-labelledby="v-pills-docs-invoice-tab">
+                                        <div class="text-right">
+                                            <a href="{{ route("pdf_download",$order->id) }}"
+                                               class="bg-blue-clr text-sec-clr font-20 print-btn">Print</a>
+                                        </div>
+                                        @include('admin.pdf.invoice')
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-docs-shipping" role="tabpanel" aria-labelledby="v-pills-docs-shipping-tab">
+                                        Shipping
+                                    </div>
                                 </div>
-                                @include('admin.pdf.invoice')
+
                             </div>
                         </div>
                     </div>
