@@ -1100,7 +1100,7 @@ div.remover-container .remover-container-zone .file {
 }
 /*--------------------------- order admin page START  ----------------*/
 .order__admin-wrapper{
-    max-width: 1392px;
+    /*max-width: 1392px;*/
     margin-bottom: 40px;
     background-color: #fff;
 }
@@ -1511,6 +1511,16 @@ div.remover-container .remover-container-zone .file {
     box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
     display: flex;
     align-items: center;
+    margin-bottom: 16px;
+    position: relative;
+}
+.order-docs__tab-left .list-nav .item-link.active:before{
+    position: absolute;
+    content: '';
+    width: 6px;
+    height: 100%;
+    background-color: #5184e5;
+    left: 0;
 }
 .order-docs__tab-left .list-nav .item-link .icon{
     margin-right: 42px;
@@ -1520,7 +1530,7 @@ div.remover-container .remover-container-zone .file {
     width: 100%;
 }
 .order-docs__tab-left .item-wrap{
-    margin-bottom: 16px;
+    /*margin-bottom: 16px;*/
 }
 .order-docs__tab-right .print-btn {
     width: 100%;
