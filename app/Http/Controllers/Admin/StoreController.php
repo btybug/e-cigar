@@ -170,7 +170,7 @@ class StoreController extends Controller
     public function getPurchaseNew()
     {
         $model = null;
-        $items = Items::where('type','simple')->get()->pluck('name', 'id')->all();
+        $items = Items::get()->pluck('name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
 
         return $this->view('purchase.new', compact('model', 'items', 'suppliers'));

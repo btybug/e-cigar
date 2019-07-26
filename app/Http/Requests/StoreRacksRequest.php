@@ -26,7 +26,7 @@ class StoreRacksRequest extends FormRequest
         return [
             'slug' => 'required|string',
             "translatable"    => "required|array|min:1",
-            "translatable.gb.name"  => "required|string|min:3",
+            "translatable.gb.name"  => "required|string|min:1",
             "translatable.gb.description"  => "required|string|min:3"
         ];
     }
