@@ -16,6 +16,7 @@ use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\Items;
+use App\Models\ItemsLocations;
 use App\Models\ItemsPackages;
 use App\Models\Suppliers;
 use App\Models\Warehouse;
@@ -135,7 +136,7 @@ class ItemsController extends Controller
                 $existing = $item->locations()->where('id', $datum['id'])->first();
 
                 if ($existing) {
-                    $location = ItemsPackages::find($datum['id']);
+                    $location = ItemsLocations::find($datum['id']);
                     $location->update($datum);
                     $deletableArray[] = $location->id;
                 } else {
