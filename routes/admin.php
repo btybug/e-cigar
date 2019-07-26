@@ -12,6 +12,8 @@ Route::group(['prefix' => 'find'], function () {
     Route::get('/', 'Admin\FindController@getIndex')->name('admin_find');
     Route::post('/call-find', 'Admin\FindController@postCallFind')->name('admin_find_call');
     Route::post('/products-find', 'Admin\FindController@postProductResults')->name('find_product_results');
+    Route::post('/orders-find', 'Admin\FindController@postOrdersResults')->name('find_orders_results');
+    Route::post('/customers-find', 'Admin\FindController@postCustomersResults')->name('find_customers_results');
 });
 
 Route::get('/profile', 'Admin\AdminController@getProfile')->name('admin_dashboard_profile');

@@ -10,18 +10,12 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
-use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
-use App\Models\Dashboard;
-use App\Models\Roles;
 use App\ProductSearch\ProductSearch;
+use App\Search\Customer\CustomersSearch;
+use App\Search\Orders\OrdersSearch;
 use App\Services\FindService;
-use App\Services\ManagerApiRequest;
-use App\Services\UserService;
-use App\Services\Widgets;
-use App\User;
-use PragmaRX\Countries\Package\Countries;
 use App\Models\GeoZones;
 use Illuminate\Http\Request;
 
@@ -49,18 +43,18 @@ class FindController extends Controller
     public function postCallFind(Request $request)
     {
         $key = $request->get('key');
-        $fn = 'get'.strtoupper($key)."Data";
+        $fn = 'get' . strtoupper($key) . "Data";
         $data = $this->$fn();
 
-        $form = view("admin.find.$key.form",$data)->render();
+        $form = view("admin.find.$key.form", $data)->render();
 
         return response()->json(['form' => $form]);
     }
 
     public function getProductsData()
     {
-        $categories = Category::where('type','stocks')->whereNull('parent_id')->get()->pluck('name','id')->all();
-        $brands = Category::where('type','brands')->whereNull('parent_id')->get()->pluck('name','id')->all();
+        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         return ['categories' => $categories, 'brands' => $brands];
     }
@@ -68,9 +62,8 @@ class FindController extends Controller
     public function postProductResults(Request $request)
     {
         $products = ProductSearch::apply($request);
-
-        $html = view("admin.find.products.results",compact(['products']))->render();
-       return response()->json(['error' => false,'html' => $html]);
+        $html = view("admin.find.products.results", compact(['products']))->render();
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
     public function getCustomersData()
@@ -78,8 +71,22 @@ class FindController extends Controller
         return [];
     }
 
+    public function postCustomersResults(Request $request)
+    {
+        $customers = CustomersSearch::apply($request);
+        $html = view("admin.find.customers.results", compact(['customers']))->render();
+        return response()->json(['error' => false, 'html' => $html]);
+    }
+
     public function getOrdersData()
     {
         return [];
+    }
+
+    public function postOrdersResults(Request $request)
+    {
+        $orders = OrdersSearch::apply($request);
+        $html = view("admin.find.orders.results", compact(['orders']))->render();
+        return response()->json(['error' => false, 'html' => $html]);
     }
 }
