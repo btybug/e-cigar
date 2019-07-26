@@ -32,6 +32,7 @@
             AjaxCall("/admin/find/call-find", {key: option}, function (res) {
                 if (!res.error) {
                     $(".find-form").html(res.form);
+                    date_column();
                     if(option == 'products'){
                         call_products();
                     }else if(option == 'orders'){
@@ -80,24 +81,26 @@
                     g.load('analytics');
                 };
             }(window, document, 'script'));
-            $('.daterange').daterangepicker({
-                ranges: {
-                    'Today': [moment(), moment()],
-                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-                    'This Month': [moment().startOf('month'), moment().endOf('month')],
-                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
-                },
-                startDate: moment().subtract(29, 'days'),
-                endDate: moment()
-            }, function (start, end) {
-                $('#find-date__ranged').val(`${start.format('MMMM D, YYYY')} - ${end.format('MMMM D, YYYY')}`);
-                doSubmitForm();
-            });
+
 
         }
-
+function date_column() {
+    $('.daterange').daterangepicker({
+        ranges: {
+            'Today': [moment(), moment()],
+            'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+            'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+            'This Month': [moment().startOf('month'), moment().endOf('month')],
+            'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        },
+        startDate: moment().subtract(29, 'days'),
+        endDate: moment()
+    }, function (start, end) {
+        $('#find-date__ranged').val(`${start.format('MMMM D, YYYY')} - ${end.format('MMMM D, YYYY')}`);
+        doSubmitForm();
+    });
+}
         function doSubmitForm() {
             $('.find-wrapper-results-content').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
                 '            <div class="lds-dual-ring"></div>\n' +
