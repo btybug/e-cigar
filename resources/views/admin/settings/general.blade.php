@@ -163,6 +163,14 @@
                                                 <label for="postCode">Post Code</label>
                                                 {!! Form::text('post_code',null,['class'=>'form-control']) !!}
                                             </div>
+                                            <div class="form-group">
+                                                <label for="postCode">Phone</label>
+                                                {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="postCode">Email</label>
+                                                {!! Form::email('email',null,['class'=>'form-control']) !!}
+                                            </div>
 
                                         </div>
                                         <div class="offset-md-1 col-md-6">

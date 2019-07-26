@@ -149,9 +149,10 @@
                                         allowfullscreen></iframe>
                                 </div>
                                 <div class="main-info">
+                                    @if($model)
                                     <div class="item-wrap">
                                         <div class="left">
-<span class="icon">
+                                            <span class="icon">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -162,14 +163,14 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light">10 Downing Street</p>
-                                            <p class="font-main-light">LONDON SW1A 2AA</p>
-                                            <p class="font-main-light">United Kingdom</p>
+                                            <p class="font-main-light">{{ $model->first_address. ' '.$model->second_address }}</p>
+                                            <p class="font-main-light">{{ $model->city }}, {{ $model->post_code }}</p>
+                                            <p class="font-main-light">{{ $model->country }}</p>
                                         </div>
                                     </div>
                                     <div class="item-wrap align-items-center tel">
                                         <div class="left">
-<span class="icon">
+                                            <span class="icon">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -180,12 +181,12 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light mb-0">1-800-1234-567</p>
+                                            <p class="font-main-light mb-0">{{ $model->phone }}</p>
                                         </div>
                                     </div>
                                     <div class="item-wrap align-items-center">
                                         <div class="left">
-<span class="icon">
+                                            <span class="icon">
 <svg
     xmlns="http://www.w3.org/2000/svg"
     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -196,9 +197,10 @@
 </span>
                                         </div>
                                         <div class="right">
-                                            <p class="font-main-light mb-0">info@ourteam.org</p>
+                                            <p class="font-main-light mb-0">{{ $model->email }}</p>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="social-wall">
