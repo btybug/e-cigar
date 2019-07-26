@@ -1,6 +1,6 @@
 
 <footer class="main-footer font-main-light">
-    <div class="button share-button facebook-share-button">share</div> <div class="button share-button twitter-share-button">tweet</div>
+    <div class="button share-button facebook-share-button" data-network="twitter">share</div> <div data-network="facebook" class="button share-button twitter-share-button">tweet</div>
     <div class="footer-top">
         <div class="container main-max-width">
             <div class="d-flex flex-wrap">
