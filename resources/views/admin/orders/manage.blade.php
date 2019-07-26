@@ -436,156 +436,42 @@
                         </div>
                     </div>
                     <div class="product-table">
-                        <div class="table-responsive">
-                            <table class="table table-bordered">
-                                <thead>
-                                <tr>
-                                    <th scope="col">Item</th>
-                                    <th scope="col"></th>
-                                    <th scope="col"></th>
-                                    <th scope="col">QTY</th>
-                                    <th scope="col">Warehouse</th>
-                                    <th scope="col">Shilf</th>
-                                    <th scope="col">Rak</th>
-                                    <th scope="col">Barcode</th>
-                                    <th scope="col"></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td class="photo-td">
-                                        <div class="photo">
-                                            <img src="/public/img/product-juice.png" alt="product">
-                                        </div>
-                                    </td>
-                                    <td class="title-td">
-                                        <div class="font-16 lh-1 title-block">
-                                            <p class="text-tert-clr text-uppercase">dINNER LADY Cubano 32 pRO</p>
-                                            <p class="mb-0">Cola Shades E-Juice</p>
-                                        </div>
-                                    </td>
-                                    <td class="info-td align_middle">
-                                        <div class="info-product-block">
-
-                                        </div>
-                                    </td>
-                                    <td class="qty-td">
-                                        <div class="d-flex flex-column align-items-center qty-block">
-                                            <span class="font-sec-light font-16 lh-1">QTY</span>
-                                            <div class="product__single-item-inp-num">
-                                                <div class="quantity">
-                                                    <input type="number" readonly="" min="1" max="9" step="1" value="1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="warehouse-td align_middle">
-                                        <span class="font-sec-reg font-20 text-tert-clr lh-1">London, MS</span>
-                                    </td>
-                                    <td class="shilf-td align_middle">
-                                        <span class="font-sec-reg font-20 text-main-clr lh-1">A17</span>
-                                    </td>
-                                    <td class="rak-td align_middle">
-                                        <span class="font-sec-reg font-20 text-red-clr lh-1">65</span>
-                                    </td>
-                                    <td class="barcode-td align_middle">
-                                        <span class="barcode-block">34232132445</span>
-                                    </td>
-                                    <td class="last-td">
-                                        <div class="check-block">
-                                            <span class="check-icon d-none">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    width="24px" height="19px">
-<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-      d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
-</svg></span>
-                                            <span class="square-icon"></span>
-                                        </div>
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="table-responsive table-mt">
-                            <table class="table table-bordered">
-                                <tbody>
-                                <tr>
-                                    <td class="photo-td">
-                                        <div class="photo">
-                                            <img src="/public/img/product-juice.png" alt="product">
-                                        </div>
-                                    </td>
-                                    <td class="title-td">
-                                        <div class="font-16 lh-1 title-block">
-                                            <p class="text-tert-clr text-uppercase">dINNER LADY Cubano 32 pRO</p>
-                                            <p class="mb-0">Cola Shades E-Juice</p>
-                                        </div>
-                                    </td>
-                                    <td class="info-td align_middle">
-                                        <div class="info-product-block">
-                                            <div class="row">
-                                                <div class="col-sm-9 font-15 font-main-bold">
-                                                    Mango Harmony Cloud 18mg/ Single Pack
-                                                </div>
-                                                <div class="col-sm-3 font-main-bold">
-                                                    <span>x 2</span>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-sm-9 font-15 font-main-bold">
-                                                    Mango Harmony Hit 12mg/ Single Pack
-                                                </div>
-                                                <div class="col-sm-3 font-main-bold">
-                                                    <span>x 1</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="qty-td">
-                                        <div class="d-flex flex-column align-items-center qty-block">
-                                            <span class="font-sec-light font-16 lh-1">QTY</span>
-                                            <div class="product__single-item-inp-num">
-                                                <div class="quantity">
-                                                    <input type="number" readonly="" min="1" max="9" step="1" value="1">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td class="warehouse-td align_middle">
-                                        <span class="font-sec-reg font-20 text-tert-clr lh-1">London, MS</span>
-                                    </td>
-                                    <td class="shilf-td align_middle">
-                                        <span class="font-sec-reg font-20 text-main-clr lh-1">A17</span>
-                                    </td>
-                                    <td class="rak-td align_middle">
-                                        <span class="font-sec-reg font-20 text-red-clr lh-1">65</span>
-                                    </td>
-                                    <td class="barcode-td align_middle">
-                                        <span class="barcode-block">34232132445</span>
-                                    </td>
-                                    <td class="last-td active">
-                                        <div class="check-block">
-                                            <span class="check-icon">
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    width="24px" height="19px">
-<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-      d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
-</svg></span>
-                                            <span class="square-icon d-none"></span>
-                                        </div>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        @if(count($order->items))
+                            @php
+                                $count = 0;
+                            @endphp
+                            @foreach($order->items as $item)
+                                @if(count($item->options))
+                                    @if(isset($item->options['options']))
+                                        @foreach($item->options['options'] as $option)
+                                            @if(count($option['options']))
+                                                @foreach($option['options'] as $o)
+                                                    @include("admin.orders._partials.collect")
+                                                    @php
+                                                        $count++;
+                                                    @endphp
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                    @if(isset($item->options['extras']))
+                                        @foreach($item->options['extras'] as $option)
+                                            @if(count($option['options']))
+                                                @foreach($option['options'] as $o)
+                                                    @include("admin.orders._partials.collect")
+                                                    @php
+                                                        $count++;
+                                                    @endphp
+                                                @endforeach
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                @endif
+                            @endforeach
+                        @endif
                     </div>
                     <div class="d-flex align-items-center total-items-block">
-                        <span class="font-16 total-items-count">Total Items: 10</span>
+                        <span class="font-16 total-items-count">Total Items: {{ $count++ }}</span>
                         <button class="check-item-btn active">
 <span class="no-item">
     <span class="icon"></span>
