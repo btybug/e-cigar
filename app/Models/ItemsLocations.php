@@ -31,6 +31,11 @@ class ItemsLocations extends Model
         return $this->hasOne(WarehouseRacks::class,'id','rack_id');
     }
 
+    public function shelve()
+    {
+        return $this->hasOne(WarehouseRacks::class,'id','shelve_id');
+    }
+
 
 
 }

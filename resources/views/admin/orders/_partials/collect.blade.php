@@ -1,6 +1,10 @@
 @php
     $variation = \App\Models\StockVariation::find($o['id']);
+    $locations = $variation->item->locations;
 @endphp
+{{--if($count == 1){--}}
+{{--dd($variation->item);--}}
+{{--}--}}
 <div class="table-responsive @if($count > 0) table-mt @endif">
     <table class="table table-bordered">
         @if($count == 0)
@@ -43,14 +47,48 @@
                     </div>
                 </div>
             </td>
-            <td class="warehouse-td align_middle w-50">
-                <span class="font-sec-reg font-20 text-tert-clr lh-1">London, MS</span>
+            <td class="warehouse-td align_middle w-25">
+                @if(count($locations) > 1)
+                    <select class="form-control">
+                        @foreach($locations  as $location)
+                            <option value="{{ $location->warehouse_id }}">{{ $location->warehouse->name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    @php
+                    $location = (count($locations)) ? $locations->first() : null
+                    @endphp
+                    <span class="font-sec-reg font-20 text-tert-clr lh-1">{{ ($location) ? $location->warehouse->name : "No Warehouse" }}</span>
+                @endif
+
             </td>
             <td class="shilf-td align_middle w-20">
-                <span class="font-sec-reg font-20 text-main-clr lh-1">A17</span>
+                @if(count($locations) > 1)
+                    <select class="form-control">
+                        @foreach($locations  as $location)
+                            <option value="{{ $location->rack_id }}">{{ $location->rack->name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    @php
+                        $location = (count($locations)) ? $locations->first() : null
+                    @endphp
+                    <span class="font-sec-reg font-20 text-main-clr lh-1">{{ ($location) ? $location->rack->name : "No rack" }}</span>
+                @endif
             </td>
             <td class="rak-td align_middle w-20">
-                <span class="font-sec-reg font-20 text-red-clr lh-1">65</span>
+                @if(count($locations) > 1)
+                    <select class="form-control">
+                        @foreach($locations  as $location)
+                            <option value="{{ $location->shelve_id }}">{{ $location->shelve->name }}</option>
+                        @endforeach
+                    </select>
+                @else
+                    @php
+                        $location = (count($locations)) ? $locations->first() : null
+                    @endphp
+                    <span class="font-sec-reg font-20 text-red-clr lh-1">{{ ($location) ? $location->shelve->name : "No shelve" }}</span>
+                @endif
             </td>
             <td class="barcode-td align_middle w-25">
                 <span class="barcode-block">{{ $variation->item->barcode->code }}</span>
