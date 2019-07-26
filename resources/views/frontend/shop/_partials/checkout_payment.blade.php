@@ -98,8 +98,8 @@
                                             <div class="form-group row item-wrap checked-payment">
                                                 <div class="col-sm-8 pr-0">
                                                     <div class="d-flex flex-wrap justify-content-between align-self-center">
-                                                        <button type="submit" class="d-none btn btn-primary text-uppercase mt-1 font-15 btn-done submit-stripe-btn">
-                                                            Done
+                                                        <button type="submit" class=" btn btn-primary text-uppercase mt-1 font-15 btn-done submit-stripe-btn">
+                                                            Pay
                                                         </button>
                                                     </div>
 
@@ -117,6 +117,11 @@
                                         </form>
                                     </div>
                                 </div>
+                                @if(in_array('cash',$geoZone->payment_options) && $active_payments_gateways->cash)
+                                <div id="cash-method" class="payment-method-data d-none">
+                                    <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done submit-cash">PAY CASH</button>
+                                </div>
+                                @endif
                             </div>
                         </div>
                     </div>
