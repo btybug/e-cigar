@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Common;
 use App\Models\ContactUs;
 use App\Models\GeoZones;
+use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
@@ -22,10 +23,12 @@ class GuestController extends Controller
      * @return void
      */
     private $countries;
+    private $settings;
 
-    public function __construct(Countries $countries)
+    public function __construct(Countries $countries,Settings $settings)
     {
         $this->countries = $countries;
+        $this->settings = $settings;
     }
 
 
@@ -125,8 +128,9 @@ class GuestController extends Controller
 
     public function getContactUs()
     {
+        $settings = $this->settings->getEditableData('admin_general_settings');
 
-        return $this->view('contact_us');
+        return $this->view('contact_us',compact(['settings']));
     }
 
     public function postContactUs(ContactUsRequest $request)
