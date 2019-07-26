@@ -1,6 +1,7 @@
 <header class="main-header">
     <div class="header-top">
         <div class="container main-max-width h-100">
+
             <div class="d-flex flex-wrap justify-content-between h-100">
                 <nav class="navbar navbar-expand-md flex-md-row-reverse w-100 navbar-dark">
                     <div class="d-flex align-items-center">

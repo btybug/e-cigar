@@ -257,12 +257,17 @@
 
                 // menubar: "insert",
                 // visualblocks_default_state: true,
-                fullpage_default_doctype: "<!DOCTYPE html>",
+                // object_resizing : false,
+                // fullpage_default_doctype: "<!DOCTYPE html>",
                 theme: 'modern',
                 plugins: ['toc codesample print preview code fullpage bbcode searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help','htmlloader'],
-
+                convert_newlines_to_brs : false,
+                force_p_newlines : true,
+                force_br_newlines : false,
+                remove_linebreaks : true,
                 toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat | htmlloader | template',
                 image_advtab: true,
+
                 templates: {!! \App\Models\Media\Items::TinyMceTemplates() !!},
                 content_css: [
                     '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
