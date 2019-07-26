@@ -1,6 +1,6 @@
 <div class="d-flex flex-wrap">
-    @if(count($customers))
-        @foreach($customers as $customer)
+    @if(count($orders))
+        @foreach($orders as $order)
             <div class="col-md-6 mb-3">
                 <div class="card h-100">
                     <div class="row no-gutters h-100">
@@ -11,9 +11,9 @@
                         </div>
                         <div class="col-md-8">
                             <div class="card-body">
-{{--                                <h5 class="card-title">{{ $product->name }}</h5>--}}
+                                <h5 class="card-title">{{ $order->code }}</h5>
                                 <p class="card-text">
-                                    {!! $customer->name !!}
+{{--                                    {!! $product->short_description !!}--}}
                                 </p>
                             </div>
                         </div>
