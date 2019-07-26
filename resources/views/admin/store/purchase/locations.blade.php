@@ -31,7 +31,7 @@
                     @endif
                 </td>
                 <td colspan="2" class="text-right">
-                    0
+                    {!! Form::number("qty[$location->id]",null,['class' => 'form-control']) !!}
                 </td>
             </tr>
         @endforeach

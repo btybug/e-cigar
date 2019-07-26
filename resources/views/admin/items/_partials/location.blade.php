@@ -10,7 +10,7 @@
     <td>
         @if(isset($location) && $location->warehouse)
             @php
-            $racks = $location->warehouse->categories()->whereNull('parent_id')->get()->pluck('name','id')->all();
+                $racks = $location->warehouse->categories()->whereNull('parent_id')->get()->pluck('name','id')->all();
             @endphp
         @endif
         {!! Form::select("locations[$uniqueID][rack_id]",['' => 'Select Rack']+$racks,(isset($location))?$location->rack_id : null,['class'=> 'form-control rack']) !!}
@@ -24,7 +24,13 @@
         {!! Form::select("locations[$uniqueID][shelve_id]",['' => 'Select Shelve']+$shelves,(isset($location))?$location->shelve_id : null,['class'=> 'form-control shelve']) !!}
     </td>
     <td>
-        <div class="form-control">0</div>
+        <div class="form-control">
+            @if(isset($location))
+                {{ $location->qty }}
+            @else
+                0
+            @endif
+        </div>
     </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger delete-v-option_button"><i
