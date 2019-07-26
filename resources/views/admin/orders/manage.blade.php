@@ -36,7 +36,8 @@
                    href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
                 <a class="nav-item nav-link" id="nav-order-shipping-tab" data-toggle="tab" href="#nav-order-shipping"
                    role="tab" aria-controls="nav-order-shipping" aria-selected="false">Shipping</a>
-                <a class="nav-item nav-link active" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs" role="tab"
+                <a class="nav-item nav-link active" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs"
+                   role="tab"
                    aria-controls="nav-order-logs" aria-selected="false">Logs</a>
             </div>
         </nav>
@@ -54,7 +55,8 @@
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="sipping-item-wrap">
                                                         <div class="item-photo">
-                                                            <img src="{{ user_avatar($order->user_id) }}" class="user-img"
+                                                            <img src="{{ user_avatar($order->user_id) }}"
+                                                                 class="user-img"
                                                                  alt="item"/>
                                                         </div>
                                                         <h3 class="font-sec-reg font-18 item-title">{{ $order->user->name. " ".$order->user->last_name }}</h3>
@@ -115,11 +117,11 @@
                                                 <div class="d-flex align-items-center single-wrap">
                                                     <div class="font-sec-reg font-18 left-wrap">Total items</div>
                                                     <div class="font-16 text-tert-clr right-wrap">
-                                                       @if($order->items->count() > 1)
+                                                        @if($order->items->count() > 1)
                                                             {{ $order->items->count() }} Items
-                                                       @else
+                                                        @else
                                                             {{ $order->items->count() }} Item
-                                                       @endif
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="d-flex align-items-center single-wrap">
@@ -344,7 +346,8 @@
                         <div class="col-md-9">
                             <div class="order-docs__tab-right">
                                 <div class="text-right">
-                                    <a href="{{ route("pdf_download",$order->id) }}" class="bg-blue-clr text-sec-clr font-20 print-btn">Print</a>
+                                    <a href="{{ route("pdf_download",$order->id) }}"
+                                       class="bg-blue-clr text-sec-clr font-20 print-btn">Print</a>
                                 </div>
                                 @include('admin.pdf.invoice')
                             </div>
@@ -532,14 +535,14 @@
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink"
                                             width="14px" height="11px">
-<path fill-rule="evenodd"  fill="rgb(255, 255, 255)"
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
       d="M4.454,8.702 L1.114,5.254 L0.000,6.403 L4.454,11.000 L14.000,1.149 L12.886,0.000 L4.454,8.702 Z"/>
 </svg></span>
                                     <span class="second-icon icon-svg"><svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink"
                                             width="14px" height="11px">
-<path fill-rule="evenodd"  fill="rgb(255, 255, 255)"
+<path fill-rule="evenodd" fill="rgb(255, 255, 255)"
       d="M4.454,8.702 L1.114,5.254 L0.000,6.403 L4.454,11.000 L14.000,1.149 L12.886,0.000 L4.454,8.702 Z"/>
 </svg></span>
                                 </span>
@@ -552,7 +555,8 @@
             <div class="tab-pane fade" id="nav-order-shipping" role="tabpanel" aria-labelledby="nav-order-shipping-tab">
                 4
             </div>
-            <div class="tab-pane fade show active" id="nav-order-logs" role="tabpanel" aria-labelledby="nav-order-logs-tab">
+            <div class="tab-pane fade show active" id="nav-order-logs" role="tabpanel"
+                 aria-labelledby="nav-order-logs-tab">
                 <div class="font-main-reg order-logs__tab">
                     <div class="row">
                         <div class="col-md-9 order-main-cnt_right-col">
@@ -565,7 +569,19 @@
                             </div>
                         </div>
                         <div class="col-md-3">
-
+                            <div class="order-logs__tab-right">
+                                <div class="add-notes-block">
+                                    <div class="border-main note-head">
+                                        <span class="font-sec-reg font-20 lh-1 text-tert-clr">Add Note</span>
+                                    </div>
+                                    <div class="border-main border-top-0 note-body">
+                                        <form action="">
+                                            <textarea name="" id="" cols="30" rows="10" placeholder="Your note"></textarea>
+                                            <button class="add-note-btn">Add</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
