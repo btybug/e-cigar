@@ -10,43 +10,77 @@ use Illuminate\Http\Request;
 
 class OrdersSearch
 {
+    /**
+     * @var Orders
+     */
     protected $model;
 
+    /**
+     * OrdersSearch constructor.
+     */
     public function __construct()
     {
         $this->model = new Orders();
     }
 
+    /**
+     * @param Request $request
+     * @return mixed
+     */
     public static function apply(Request $request)
     {
         return (new self())->run($request)->get();
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function code($value)
     {
         return $this->model->where('orders.code', 'LIKE', "%" . $value . "%");
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function currency($value)
     {
         return $this->model->whereIn('orders.currency', $value);
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function shipping_method($value)
     {
         return $this->model->where('orders.shipping_method', $value);
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function payment_method($value)
     {
         return $this->model->whereIn('orders.payment_method', $value);
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function customer($value)
     {
         return $this->model->where('orders.user_id', $value);
     }
 
+    /**
+     * @param $value
+     * @return Orders
+     */
     public function amount($value)
     {
         if (isset($value[1]) && !is_null($value[1])) {
@@ -58,6 +92,10 @@ class OrdersSearch
         return $this->model;
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function status($value)
     {
         return $this->model->leftJoin('order_history','order_history.order_id','=','orders.id')
@@ -65,6 +103,10 @@ class OrdersSearch
 
     }
 
+    /**
+     * @param $value
+     * @return mixed
+     */
     public function date($value)
     {
         return $this->model->where(function ($query) use ($value) {
@@ -81,6 +123,10 @@ class OrdersSearch
     }
 
 
+    /**
+     * @param $request
+     * @return $this
+     */
     public function run($request)
     {
         $fields = $request->all();
@@ -92,6 +138,9 @@ class OrdersSearch
         return $this;
     }
 
+    /**
+     * @return mixed
+     */
     public function get()
     {
         return $this->model->get();
