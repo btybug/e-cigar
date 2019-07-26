@@ -32,7 +32,8 @@
                         </span>
                         </div>
                         <a href="#"
-                           class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase" data-toggle="modal" data-target="#specialPopUpModal">
+                           class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase"
+                           data-toggle="modal" data-target="#specialPopUpModal">
                             <span class="product-card_btn-text">add to cart</span>
                             <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
@@ -76,21 +77,22 @@
                             <div class="d-flex align-items-center product__single-top-inner h-100">
                                 <div class="product__single-top-inner-left">
                                     <h1 class="font-sec-reg text-tert-clr font-28 text-uppercase product__single-top-title text-truncate">
-                                     {!! $vape->name !!}
+                                        {!! $vape->name !!}
                                     </h1>
                                     <div class="d-flex align-items-center">
                                         <span class="font-sec-reg font-26 text-main-clr lh-1">
                                             {!! $vape->short_description !!}
                                         </span>
                                         @if(Auth::check())
-                                        <span class="icon products__item-favourite product-card_like-icon
+                                            <span class="icon products__item-favourite product-card_like-icon
                                             {{ ($vape->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}"
-                                              data-id="{{ $vape->id }}">
+                                                  data-id="{{ $vape->id }}">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
                                                 width="32px" height="31px" viewBox="0 0 31 32">
-                                            <path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)" opacity="0.702" fill="rgb(255, 255, 255)"
+                                            <path fill-rule="evenodd" stroke-width="2px" stroke="rgb(53, 53, 53)"
+                                                  opacity="0.702" fill="rgb(255, 255, 255)"
                                                   d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.002,6.258 3.002,10.466 C3.002,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
                                             </svg>
                                         </span>
@@ -317,15 +319,17 @@
                                             @endif
                                         </div>
                                     </div>
-                                    <div class="d-flex flex-wrap">
-                                        <div class="product_single-main-tab-content">
-                                            <div class="tab-content">
-                                                <div class="tab-pane fade show active" id="pills-tecnical"
-                                                     role="tabpanel"
-                                                     aria-labelledby="pills-tecnical-tab">
-                                                    {{--<p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">--}}
-                                                    {{--{!! $vape->long_description !!}--}}
-                                                    {{--</p>--}}
+
+
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade show active" id="pills-tecnical"
+                                             role="tabpanel"
+                                             aria-labelledby="pills-tecnical-tab">
+                                            {{--<p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">--}}
+                                            {{--{!! $vape->long_description !!}--}}
+                                            {{--</p>--}}
+                                            <div class="d-flex flex-wrap">
+                                                <div class="product_single-main-tab-content">
                                                     <div class="tecnical-desc">
                                                         <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
                                                             Description</h3>
@@ -361,32 +365,42 @@
                                                             @if($vape->stockAttrs && count($vape->stockAttrs))
                                                                 @foreach($vape->stockAttrs as $stockAttr)
                                                                     @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
-                                                                        <div class="d-flex technical-features-content-wall">
-                                                                            <div class="technical-features-content-left">
-                                                                                <div class="d-flex align-items-center h-100">
+                                                                        <div
+                                                                            class="d-flex technical-features-content-wall">
+                                                                            <div
+                                                                                class="technical-features-content-left">
+                                                                                <div
+                                                                                    class="d-flex align-items-center h-100">
                                                                             <span
                                                                                 class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
                                                                                     @if($stockAttr->attr->description)
-                                                                                        <span data-toggle="tooltip" data-placement="top"
+                                                                                        <span data-toggle="tooltip"
+                                                                                              data-placement="top"
                                                                                               title="{!! $stockAttr->attr->description !!}">
                                                                                             <svg
                                                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                                width="24px" height="24px" viewBox="0 0 24 24">
-                                                                                                <path fill-rule="evenodd"
-                                                                                                      fill="rgb(255, 255, 255)"
-                                                                                                      d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
+                                                                                                width="24px"
+                                                                                                height="24px"
+                                                                                                viewBox="0 0 24 24">
+                                                                                                <path
+                                                                                                    fill-rule="evenodd"
+                                                                                                    fill="rgb(255, 255, 255)"
+                                                                                                    d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
                                                                                             </svg>
                                                                                         </span>
                                                                                     @endif
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="technical-features-content-right">
-                                                                                <div class="d-flex align-items-center h-100">
+                                                                            <div
+                                                                                class="technical-features-content-right">
+                                                                                <div
+                                                                                    class="d-flex align-items-center h-100">
                                                                             <span
                                                                                 class="font-18 text-gray-clr font-main-light technical-features-content-desc">
                                                                                 @foreach($stockAttr->children as $child)
-                                                                                    {{ $child->sticker->name }} @if(! $loop->last) , @endif
+                                                                                    {{ $child->sticker->name }} @if(! $loop->last)
+                                                                                        , @endif
                                                                                 @endforeach
                                                                             </span>
                                                                                 </div>
@@ -407,9 +421,11 @@
                                                             <div class="technical-inside-box-right">
                                                                 <div class="technical-inside-box-photo">
                                                                     @if($vape->what_is_image)
-                                                                        <img src="{{ $vape->what_is_image }}" alt="what is in box">
+                                                                        <img src="{{ $vape->what_is_image }}"
+                                                                             alt="what is in box">
                                                                     @else
-                                                                        <img src="/public/img/temp/inside-box.jpg" alt="what is in box">
+                                                                        <img src="/public/img/temp/inside-box.jpg"
+                                                                             alt="what is in box">
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -434,100 +450,115 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="tab-pane related-tab-pane fade show" id="pills-related"
-                                                     role="tabpanel"
-                                                     aria-labelledby="pills-related-tab">
-                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products])
-
-                                                </div>
-                                                @if($vape->reviews_tab)
-                                                    <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
-                                                         aria-labelledby="pills-tecnical-tab">
-                                                        <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
-                                                            I bought one.
-                                                        </p>
+                                                <div class="product_single-right-ads">
+                                                    <div class="single-ads-wall">
+                                                        <a href="#" class="d-block">
+                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
+                                                        </a>
                                                     </div>
-                                                @endif
-                                                @if($vape->faq_tab)
-                                                    <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
-                                                         aria-labelledby="pills-faq-tab">
-                                                        <div class="faq-wrapper">
-                                                            @foreach($vape->faqs as $faq)
-                                                                <div class="accordion offset-top-0" role="tablist"
-                                                                     aria-multiselectable="true" id="accordion-3">
-                                                                    <div class="card card-accordion"><a
-                                                                            class="card-header collapsed" href="#"
-                                                                            data-toggle="collapse"
-                                                                            data-target="#accordion-3--card-0-content"
-                                                                            id="accordion-3--card-0-header"
-                                                                            aria-expanded="false"
-                                                                            aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
-                                                                        <div class="collapse"
-                                                                             id="accordion-3--card-0-content"
-                                                                             aria-labelledby="accordion-3--card-0-header"
-                                                                             data-parent="#accordion-3" style="">
-                                                                            <div
-                                                                                class="card-body">{!! $faq->answer !!}</div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        </div>
-
+                                                    <div class="single-ads-wall">
+                                                        <a href="#" class="d-block">
+                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
+                                                        </a>
                                                     </div>
-                                                @endif
-                                                <div class="tab-pane fade show" id="pills-videos" role="tabpanel"
-                                                     aria-labelledby="pills-videos-tab">
-                                                    <div class="row video-carousel-wrap">
-                                                        <div class="col-2">
-                                                            <div class="video--carousel-thumb d-flex flex-column"
-                                                                 data-carousel-controller-for=".video--carousel">
-                                                                @if($vape->videos && count($vape->videos))
-                                                                    @foreach($vape->videos as $video)
-                                                                        <div class="video-item-thumb"><img
-                                                                                src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
-                                                                                alt="{{ $video }}"></div>
-                                                                    @endforeach
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-10">
-                                                            <div class="video--carousel">
-                                                                @if($vape->videos && count($vape->videos))
-                                                                    @foreach($vape->videos as $video)
-                                                                        <div class="video-item">
-                                                                            <iframe width="100%" height="415"
-                                                                                    src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
-                                                                                    frameborder="0"
-                                                                                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                                                    allowfullscreen></iframe>
-                                                                        </div>
-                                                                    @endforeach
-                                                                @endif
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="tab-pane fade show" id="pills-offers" role="tabpanel"
-                                                     aria-labelledby="pills-offers-tab">
-                                                    <p class="product-single-offers-text font-15 font-main-light text-light-clr mb-0">
-                                                        offers
-                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="product_single-right-ads">
-                                            <div class="single-ads-wall">
-                                                <a href="#" class="d-block">
-                                                    <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                </a>
+                                        <div class="tab-pane related-tab-pane fade show" id="pills-related"
+                                             role="tabpanel"
+                                             aria-labelledby="pills-related-tab">
+                                            <div class="d-flex flex-wrap">
+                                                <div class="product_single-main-tab-content">
+                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products])
+                                                </div>
+                                                <div class="product_single-right-ads">
+                                                    <div class="single-ads-wall">
+                                                        <a href="#" class="d-block">
+                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
+                                                        </a>
+                                                    </div>
+                                                    <div class="single-ads-wall">
+                                                        <a href="#" class="d-block">
+                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
+                                                        </a>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="single-ads-wall">
-                                                <a href="#" class="d-block">
-                                                    <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                </a>
+                                        </div>
+                                        @if($vape->reviews_tab)
+                                            <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
+                                                 aria-labelledby="pills-tecnical-tab">
+                                                <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
+                                                    I bought one.
+                                                </p>
                                             </div>
+                                        @endif
+                                        @if($vape->faq_tab)
+                                            <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
+                                                 aria-labelledby="pills-faq-tab">
+                                                <div class="faq-wrapper">
+                                                    @foreach($vape->faqs as $faq)
+                                                        <div class="accordion offset-top-0" role="tablist"
+                                                             aria-multiselectable="true" id="accordion-3">
+                                                            <div class="card card-accordion"><a
+                                                                    class="card-header collapsed" href="#"
+                                                                    data-toggle="collapse"
+                                                                    data-target="#accordion-3--card-0-content"
+                                                                    id="accordion-3--card-0-header"
+                                                                    aria-expanded="false"
+                                                                    aria-controls="accordion-3--card-0-content"> {!! $faq->question !!}</a>
+                                                                <div class="collapse"
+                                                                     id="accordion-3--card-0-content"
+                                                                     aria-labelledby="accordion-3--card-0-header"
+                                                                     data-parent="#accordion-3" style="">
+                                                                    <div
+                                                                        class="card-body">{!! $faq->answer !!}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+
+                                            </div>
+                                        @endif
+                                        <div class="tab-pane fade show" id="pills-videos" role="tabpanel"
+                                             aria-labelledby="pills-videos-tab">
+                                            <div class="row video-carousel-wrap">
+                                                <div class="col-2">
+                                                    <div class="video--carousel-thumb d-flex flex-column"
+                                                         data-carousel-controller-for=".video--carousel">
+                                                        @if($vape->videos && count($vape->videos))
+                                                            @foreach($vape->videos as $video)
+                                                                <div class="video-item-thumb"><img
+                                                                        src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
+                                                                        alt="{{ $video }}"></div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="col-10">
+                                                    <div class="video--carousel">
+                                                        @if($vape->videos && count($vape->videos))
+                                                            @foreach($vape->videos as $video)
+                                                                <div class="video-item">
+                                                                    <iframe width="100%" height="415"
+                                                                            src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                                            frameborder="0"
+                                                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                            allowfullscreen></iframe>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane fade show" id="pills-offers" role="tabpanel"
+                                             aria-labelledby="pills-offers-tab">
+                                            <p class="product-single-offers-text font-15 font-main-light text-light-clr mb-0">
+                                                offers
+                                            </p>
                                         </div>
                                     </div>
 
@@ -594,17 +625,18 @@
     </div>
 
     @if(! $vape->is_offer)
-    <div class="modal fade p-0" id="specialPopUpModal" tabindex="-1" role="dialog"
-         aria-labelledby="specialPopUpModalTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
-            <div class="modal-content">
-                <div class="modal-header special__popup-head">
-                    <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
-                        Offer</h5>
-                    <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">You
-                        might be interested in the following offers
-                    </div>
-                    <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
+        <div class="modal fade p-0" id="specialPopUpModal" tabindex="-1" role="dialog"
+             aria-labelledby="specialPopUpModalTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
+                <div class="modal-content">
+                    <div class="modal-header special__popup-head">
+                        <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
+                            Offer</h5>
+                        <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">
+                            You
+                            might be interested in the following offers
+                        </div>
+                        <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -614,13 +646,13 @@
       d="M42.008,1.300 L40.701,-0.009 L21.000,19.690 L1.301,-0.009 L-0.008,1.300 L19.691,21.000 L-0.008,40.699 L1.301,42.009 L21.000,22.307 L40.701,42.009 L42.008,40.699 L22.309,21.000 L42.008,1.300 Z"/>
 </svg>
                         </span>
-                    </button>
-                </div>
-                <div class="modal-body p-0">
+                        </button>
+                    </div>
+                    <div class="modal-body p-0">
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     @endif
 @stop
 
@@ -637,9 +669,11 @@
         .products__item-favourite.active svg path {
             fill: #ee3a50;
         }
-        .products__item-favourite{
+
+        .products__item-favourite {
             cursor: pointer;
         }
+
         .share-social-btn {
             position: relative;
         }
