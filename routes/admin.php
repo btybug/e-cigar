@@ -97,6 +97,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'couriers'], function () {
             Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_couriers');
             Route::get('/edit/{id}', 'Admin\SettingsController@getCouriersEdit')->name('admin_settings_courier_edit');
+            Route::get('/create', 'Admin\SettingsController@getCreateCouriers')->name('admin_settings_courier_create');
             Route::post('/save/{id?}', 'Admin\SettingsController@getCouriersSave')->name('admin_settings_courier_save');
 
             Route::post('/enable', 'Admin\SettingsController@postCouriersEnable')->name('post_admin_couriers_enable');
