@@ -195,6 +195,7 @@
                                                             <th>Warehouse</th>
                                                             <th>Rack</th>
                                                             <th>Shelve</th>
+                                                            <th>QTY</th>
                                                             <th>Action</th>
                                                         </tr>
                                                         </thead>
@@ -211,7 +212,7 @@
 
                                                         <tfoot>
                                                         <tr class="add-new-ship-filed-container">
-                                                            <td colspan="4" class="text-right">
+                                                            <td colspan="5" class="text-right">
                                                                 <button type="button" class="btn btn-primary add-location"><i
                                                                         class="fa fa-plus-circle "></i>
                                                                 </button>
