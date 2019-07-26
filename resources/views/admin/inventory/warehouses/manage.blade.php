@@ -21,6 +21,9 @@
                             {{--@include('admin.store.categories.create_or_update')--}}
                             <h4 class="text-center">New Category</h4>
                         </div>
+                        <div class="content-area item-form-place">
+
+                        </div>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -32,6 +35,7 @@
                         @endif
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -130,6 +134,7 @@
             AjaxCall("/admin/inventory/warehouses/get-form/{{ $model->id }}", {id: e.node.id}, function (res) {
                 if (!res.error) {
                     $(".category-form-place").html(res.html);
+                    $(".item-form-place").html(res.itemHtml);
                     $('.icon-picker').iconpicker();
                     $("#select-stickers").select2();
 
