@@ -174,7 +174,13 @@
 
                                         </div>
                                         <div class="offset-md-1 col-md-6">
-                                            <div class="settings-map-outer"></div>
+                                            <div class="settings-map-outer">
+                                                <iframe
+                                                    src="https://www.google.com/maps/embed/v1/place?key=&q=Armenia"
+                                                    {{--{{ $settings->first_address. '+'.$settings->second_address. '+'.$settings->city. '+'.$settings->post_code. '+'.$settings->country }}"--}}
+                                                    width="100%" height="100%" frameborder="0" style="border:0"
+                                                    allowfullscreen></iframe>
+                                            </div>
                                         </div>
                                     </div>
 
