@@ -6,15 +6,7 @@
             <div class="container main-max-width shopping__cart-mw shopping__cart-with-back">
                 <div class="d-flex shopping-cart-head">
                     <div class="shopping-cart-head-back-btn">
-                        <a href="{{ route("shop_my_cart") }}">
-                            <span class="icon">
-                                <svg width="10px" height="13px" viewBox="0 0 10 13">
-<path fill-rule="evenodd" opacity="0.8" fill="rgb(53, 53, 53)"
-      d="M-0.000,7.000 L10.000,13.000 C10.000,13.000 10.000,11.738 10.000,10.000 C9.031,9.578 4.000,7.000 4.000,7.000 C4.000,7.000 9.156,3.553 10.000,3.000 C10.000,1.262 10.000,-0.000 10.000,-0.000 L-0.000,7.000 Z"/>
-</svg>
-                            </span>
-                            <span class="text-main-clr font-22 name">Back</span>
-                        </a>
+
                     </div>
                     <ul class="nav nav-pills">
                         <li class="nav-item col-md-3">
