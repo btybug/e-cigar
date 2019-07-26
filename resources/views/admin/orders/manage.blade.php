@@ -4,7 +4,7 @@
 @stop
 @section('content')
     <div class="order__admin-wrapper">
-        <div class="d-flex align-items-center justify-content-between head-order-wrap">
+        <div class="d-flex align-items-center justify-content-between position-relative head-order-wrap">
             <div class="d-flex align-items-center left-head">
                 <span class="font-sec-reg font-24 title">Order:  {!! $order->order_number !!} </span>
                 <div class="d-flex align-items-center">
@@ -22,12 +22,53 @@
                         {{ $status->status->name }}
                     @endif
                 </div>
+                <div class="font-main-light font-16 lh-1 d-none status-pending">Pending</div>
                 <div class="font-main-light font-18 bg-blue-clr change-btn">Change</div>
+            </div>
+            <div class="d-none order__change-status-wrapper">
+                <form action="" class="w-100">
+                    <div class="d-flex align-items-center justify-content-between font-main-reg order__change-status-wrapper-inner">
+
+                        <div class="d-flex align-items-center order__change-status-wrapper-left">
+                            <span class="font-sec-reg font-20 lh-1 text-tert-clr status-title">Change Status To</span>
+                            <div class="custom-status-select position-relative">
+                                <select name="" id="" class="form-control status-select">
+                                    <option value="">Pending</option>
+                                    <option value="">Pending</option>
+                                </select>
+                                <span class="position-absolute icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="10px" height="9px">
+<path fill-rule="evenodd"  fill="rgb(53, 53, 53)"
+      d="M5.544,8.368 L0.956,0.809 L9.955,0.704 L5.544,8.368 Z"/>
+</svg>
+                                </span>
+                            </div>
+
+                        </div>
+                        <div class="d-flex align-items-center order__change-status-wrapper-right">
+                            <textarea name="" id="" cols="30" rows="10" placeholder="Add Note" class="border-main add-note-area"></textarea>
+                            <button class="border-main font-18 text-sec-clr bg-blue-clr change-status-btn">Change</button>
+                            <div class="border-main close-status-icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="32px" height="32px">
+                                    <path fill-rule="evenodd"  fill="rgb(53, 53, 53)"
+                                          d="M32.000,0.997 L31.004,-0.000 L16.000,15.002 L0.997,-0.000 L-0.000,0.997 L15.003,16.000 L-0.000,31.002 L0.997,32.000 L16.000,16.995 L31.004,32.000 L32.000,31.002 L16.997,16.000 L32.000,0.997 Z"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
             </div>
         </div>
         <nav class="nav-orders">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link " id="nav-order-details-tab" data-toggle="tab"
+                <a class="nav-item nav-link active" id="nav-order-details-tab" data-toggle="tab"
                    href="#nav-order-details" role="tab" aria-controls="nav-details" aria-selected="true">Details</a>
                 <a class="nav-item nav-link" id="nav-order-docs-tab" data-toggle="tab" href="#nav-order-docs"
                    role="tab"
@@ -36,13 +77,13 @@
                    href="#nav-order-collecting" role="tab" aria-controls="nav-order-collecting" aria-selected="false">Collecting</a>
                 <a class="nav-item nav-link" id="nav-order-shipping-tab" data-toggle="tab" href="#nav-order-shipping"
                    role="tab" aria-controls="nav-order-shipping" aria-selected="false">Shipping</a>
-                <a class="nav-item nav-link active" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs"
+                <a class="nav-item nav-link" id="nav-order-logs-tab" data-toggle="tab" href="#nav-order-logs"
                    role="tab"
                    aria-controls="nav-order-logs" aria-selected="false">Logs</a>
             </div>
         </nav>
         <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade" id="nav-order-details" role="tabpanel"
+            <div class="tab-pane fade  show active" id="nav-order-details" role="tabpanel"
                  aria-labelledby="nav-order-details-tab">
                 <div class="order-details__tab">
                     <div class="row">
@@ -555,7 +596,7 @@
             <div class="tab-pane fade" id="nav-order-shipping" role="tabpanel" aria-labelledby="nav-order-shipping-tab">
                 4
             </div>
-            <div class="tab-pane fade show active" id="nav-order-logs" role="tabpanel"
+            <div class="tab-pane fade" id="nav-order-logs" role="tabpanel"
                  aria-labelledby="nav-order-logs-tab">
                 <div class="font-main-reg order-logs__tab">
                     <div class="row">
@@ -576,7 +617,8 @@
                                     </div>
                                     <div class="border-main border-top-0 note-body">
                                         <form action="">
-                                            <textarea name="" id="" cols="30" rows="10" placeholder="Your note"></textarea>
+                                            <textarea name="" id="" cols="30" rows="10"
+                                                      placeholder="Your note"></textarea>
                                             <button class="add-note-btn">Add</button>
                                         </form>
                                     </div>
@@ -1429,7 +1471,24 @@
 @section('js')
     <script>
         $(function () {
+            $('body').on('click','.order__admin-wrapper .head-order-wrap .right-head .change-btn',function () {
+                if($('.order__admin-wrapper .order__change-status-wrapper').hasClass('d-none')){
+                    $('.order__admin-wrapper .order__change-status-wrapper').removeClass('d-none')
+            $(this).addClass('d-none')
+                    let headWrap = $(this).closest('.right-head')
+                    $(headWrap).find('.submit-btn').addClass('d-none')
+                    $(headWrap).find('.status-pending').removeClass('d-none')
 
+                }else{
+                    $('.order__admin-wrapper .order__change-status-wrapper').addClass('d-none')
+                }
+            });
+            $('body').on('click','.order__change-status-wrapper-inner .close-status-icon',function () {
+                $('.order__admin-wrapper .head-order-wrap .right-head .change-btn').removeClass('d-none')
+                $('.order__admin-wrapper .head-order-wrap .right-head .status-pending').addClass('d-none')
+                $('.order__admin-wrapper .head-order-wrap .right-head .submit-btn').removeClass('d-none')
+                $(this).closest('.order__change-status-wrapper').addClass('d-none')
+            });
             $('body').on('click', '.check-collecting', function (event) {
                 let $_this = $(this);
                 let item_id = $_this.data('id')

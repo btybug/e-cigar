@@ -1865,6 +1865,90 @@ border: 1px solid #d7d7d7;
     padding-left: 130px;
 }
     /*order logs tab end*/
+.order__change-status-wrapper-inner{
+    border: 1px solid #d7d7d7;
+    box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
+    min-height: 81px;
+    padding: 1px 58px 1px 72px;
+}
+.order__change-status-wrapper-inner .change-status-btn{
+    width: 100%;
+    max-width: 105px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    margin: 0 10px;
+}
+.order__change-status-wrapper-inner .close-status-icon{
+    width: 50px;
+    height: 50px;
+    background-color: #f4f4f4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    cursor: pointer;
+}
+.order__change-status-wrapper-inner .add-note-area{
+    background-color: #f0f0f0;
+    height: 50px;
+    padding: 15px 22px;
+    font-size: 18px;
+    line-height: 1;
+    width: 100%;
+}
+.order__change-status-wrapper-inner .status-title{
+    margin-right: 24px;
+    white-space: nowrap;
+}
+.order__change-status-wrapper-inner .custom-status-select{
+    width: 287px;
+    margin-right: 20px;
+}
+
+.order__change-status-wrapper-inner .custom-status-select .icon{
+    right: 18px;
+    top: 19px;
+    line-height: 1;
+}
+
+.order__change-status-wrapper-inner .custom-status-select .status-select{
+    border: 1px solid #d7d7d7;
+    background-color: #f7f7f7;
+    height: 50px;
+    border-radius: 0;
+    width: 100%;
+    padding-right: 27px;
+    padding-left: 32px;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    text-indent: 1px;
+    text-overflow: '';
+}
+
+.order__change-status-wrapper-inner .order__change-status-wrapper-right{
+    flex: auto;
+}
+.order__change-status-wrapper{
+    position: absolute;
+    top: 100%;
+    left: -1px;
+    right: -1px;
+    background: #fff;
+    z-index: 1;
+}
+.head-order-wrap .right-head .status-pending{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 192px;
+    height: 35px;
+    background-color: #ffffff;
+    border: 1px solid #d7d7d7;
+    color: #353535;
+    margin-right: 140px;
+}
 /*--------------------------- order admin page END  ----------------*/
 .overflow-visible{
     overflow: visible !important;
