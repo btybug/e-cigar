@@ -23,6 +23,9 @@
         @endif
         {!! Form::select("locations[$uniqueID][shelve_id]",['' => 'Select Shelve']+$shelves,(isset($location))?$location->shelve_id : null,['class'=> 'form-control shelve']) !!}
     </td>
+    <td>
+        <div class="form-control">0</div>
+    </td>
     <td colspan="2" class="text-right">
         <button type="button" class="btn btn-danger delete-v-option_button"><i
                 class="fa fa-minus-circle delete-v-option"></i></button>
