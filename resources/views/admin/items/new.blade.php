@@ -269,7 +269,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <fieldset>
-                                                        <legend class="border-bottom">Item Weight</legend>
+                                                        <legend class="border-bottom">Item size</legend>
                                                         <div class="form-group row">
                                                             <label for="packaging_length"
                                                                    class=" col-sm-2">Length</label>
