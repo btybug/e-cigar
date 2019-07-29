@@ -45,7 +45,9 @@
 </head>
 <body>
 <div class="invoice__wrapper">
+
     <div class="invoice__wrapper-header"></div>
+
     <div class="invoice__wrapper-main-content clearfix">
         <div class="invoice__content-logo clearfix">
                                         <span class="icon">
@@ -76,7 +78,7 @@
                 <table class="table table-bordered">
                     <thead>
                     <tr>
-                        <th scope="col">Product</th>
+                        <th scope="col" class="product-th">Product</th>
                         <th scope="col">Description</th>
                         <th scope="col" class="text-center">Quantity</th>
                         <th scope="col" class="text-center">VAT</th>
@@ -89,44 +91,44 @@
                         </td>
                         <td class="desc-td">
                             <div class="single-item">
-                                <span>Pods Gold Edition</span>
-                                <span>$28</span>
+                                <span class="single-item-name">Pods Gold Edition</span>
+                                <span class="single-item-price">$28</span>
                             </div>
                             <div class="single-item">
-                                <span>Gold Tobacco Nic.Salts 18mg</span>
-                                <span>$55</span>
+                                <span class="single-item-name">Gold Tobacco Nic.Salts 18mg</span>
+                                <span class="single-item-price">$55</span>
                             </div>
                         </td>
-                        <td class="text-center">
+                        <td class="qty-td text-center">
                             <span>x 1</span>
                         </td>
-                        <td class="text-center">
+                        <td class="vat-td text-center">
                             <span>£18 (21%)</span>
                         </td>
-                        <td class="text-center">
+                        <td class="total-td text-center">
                             <span class="price">£83,00</span>
                         </td>
                     </tr>
                     <tr>
                         <td class="product-td">Kangertech Vola 23 100W Premium Vape
                         </td>
-                        <td>
+                        <td class="desc-td">
                             <div class="single-item">
-                                <span>Pods Gold Edition</span>
-                                <span>$28</span>
+                                <span class="single-item-name">Pods Gold Edition</span>
+                                <span class="single-item-price">$28</span>
                             </div>
                             <div class="single-item">
-                                <span>Gold Tobacco Nic.Salts 18mg</span>
-                                <span>$55</span>
+                                <span class="single-item-name">Gold Tobacco Nic.Salts 18mg</span>
+                                <span class="single-item-price">$55</span>
                             </div>
                         </td>
-                        <td class="text-center">
+                        <td class="qty-td text-center">
                             <span>x 1</span>
                         </td>
-                        <td class="text-center">
+                        <td class="vat-td text-center">
                             <span>£18 (21%)</span>
                         </td>
-                        <td class="text-center">
+                        <td class="total-td text-center">
                             <span class="price">£83,00</span>
                         </td>
                     </tr>
@@ -135,9 +137,6 @@
             </div>
         </div>
         <div class="invoice__content-paid-price">
-            <div class="invoice__content-paid-price-inner clearfix">
-
-            </div>
             <div class="invoice__content-paid">
                 <img src="{{ url('/public/img/temp/paid-invoice.png') }}" alt="paid">
             </div>
@@ -154,14 +153,15 @@
                     <span class="name">Shipping</span>
                     <span class="price">£10,00</span>
                 </div>
-                <div class="invoice__content-price-item clearfix">
-                                                                        <span
-                                                                            class="name total-name">Total Amount</span>
-                    <span
-                        class="price total-price"><span>£86,</span><span
-                            class="sec-price">95</span></span>
+                <div class="invoice__content-price-item total-amount-wall clearfix">
+                    <span class="name total-name">Total Amount</span>
+                    <span class="price total-price">
+                        <span>£86,</span>
+                        <span class="sec-price">95</span>
+                    </span>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
     <div class="invoice__wrapper-footer clearfix">
