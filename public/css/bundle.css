@@ -21721,11 +21721,11 @@ border: 1px solid #d7d7d7;
 
 /*-------------------- support page END------------------*/
 /*-------------------- contact us page START------------------*/
-.contact__page-wrapper{
+.support__pages-wrapper{
     margin: 38px 0 64px;
 }
 
-.contact__page-wrapper .left-wrapper .item-link{
+.support__pages-wrapper .left-wrapper .item-link{
     padding: 12px 15px;
     box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);
     border: 1px solid #d7d7d7;
@@ -21733,22 +21733,22 @@ border: 1px solid #d7d7d7;
     position: relative;
     max-width: 273px;
 }
-.contact__page-wrapper .left-wrapper .item-name{
+.support__pages-wrapper .left-wrapper .item-name{
     color: #353535;
     line-height: 32px;
     font-weight: bold;
 }
-.contact__page-wrapper .left-wrapper .item-photo{
+.support__pages-wrapper .left-wrapper .item-photo{
     margin-right: 25px;
 }
-.contact__page-wrapper .left-wrapper .item-photo img{
+.support__pages-wrapper .left-wrapper .item-photo img{
     width: 52px;
 }
-.contact__page-wrapper .left-wrapper .item-wrap{
+.support__pages-wrapper .left-wrapper .item-wrap{
     margin-bottom: 12px;
 
 }
-.contact__page-wrapper .left-wrapper .item-link.active:after{
+.support__pages-wrapper .left-wrapper .item-link.active:after{
     content: '';
     position: absolute;
     left: 0;
@@ -21757,11 +21757,11 @@ border: 1px solid #d7d7d7;
     height: 100%;
     background-color: #5184e5;
 }
-.contact__page-wrapper .left-wrapper .item-link.active .item-photo{
+.support__pages-wrapper .left-wrapper .item-link.active .item-photo{
     margin-left: 8px;
     margin-right: 17px;
 }
-.contact__page-wrapper .left-wrapper .item-link.active{
+.support__pages-wrapper .left-wrapper .item-link.active{
     max-width: 290px;
 }
 
