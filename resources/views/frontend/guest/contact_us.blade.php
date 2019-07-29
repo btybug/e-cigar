@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     <main class="main-content">
-        <section class="contact__page-wrapper">
+        <section class="support__pages-wrapper contact__page-wrapper">
             <div class="container main-max-width">
 
                 <div class="row">
