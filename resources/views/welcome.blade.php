@@ -194,41 +194,42 @@
                         <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
                         orci.
                     </p>
-                    <ul class="d-flex home_products-version">
-                        <li class="col active">
+
+                    <div class="d-flex home_products-version">
+                        <div class="col active">
                             <a href="#" class="products-version-link">
                                 Best Offers
                             </a>
-                        </li>
-                        <li class="col">
+                        </div>
+                        <div class="col">
                             <a href="#" class="products-version-link">
                                 Top Pruducts
                             </a>
-                        </li>
-                        <li class="col">
+                        </div>
+                        <div class="col">
                             <a href="#" class="products-version-link">
                                 Most Sales
                             </a>
-                        </li>
-                        <li class="col">
+                        </div>
+                        <div class="col">
                             <a href="#" class="products-version-link">
                                 News
                             </a>
-                        </li>
-                        <li class="col">
+                        </div>
+                        <div class="col">
                             <a href="#" class="products-version-link">
                                 Category 5
                             </a>
-                        </li>
-                        <li class="col">
+                        </div>
+                        <div class="col">
                             <a href="#" class="products-version-link">
                                 Category 6
                             </a>
-                        </li>
+                        </div>
 
-                    </ul>
+                    </div>
                     <ul class="row products__list-wrapper">
-                        <li class="col-md-3">
+                        <li class="col-lg-3 col-md-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -311,7 +312,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-md-3">
+                        <li class="col-lg-3 col-md-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -394,7 +395,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-md-3">
+                        <li class="col-lg-3 col-md-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -477,7 +478,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-md-3">
+                        <li class="col-lg-3 col-md-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -699,32 +700,47 @@ adipiscing elit. Morbi sodales ...
     <script src={{asset("public/plugins/formstone/touch.js")}}></script>
     <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
     <script>
-        $(".home__main-slider").carousel({
-            pagination: false,
-            controls: false
-        });
+        $(document).ready(function () {
+            $(".home__main-slider").carousel({
+                pagination: false,
+                controls: false
+            });
 
-        $(".home__main-slider-thumb").carousel({
-            controls: false,
-            pagination: false,
-            matchWidth: false
-        });
-        $(".home_brands-slider").carousel({
-            theme: "fs-light",
-            pagination: false,
-            infinite: true,
-            show: {
-                "740px": 2,
-                "980px": 3,
-                "1220px": 4,
-                "1630px": 5,
+            $(".home__main-slider-thumb").carousel({
+                controls: false,
+                pagination: false,
+                matchWidth: false
+            });
+            $(".home_brands-slider").carousel({
+                theme: "fs-light",
+                pagination: false,
+                infinite: true,
+                show: {
+                    "740px": 2,
+                    "980px": 3,
+                    "1220px": 4,
+                    "1630px": 5,
+                }
+            });
+            // home reviews slider
+            $(".home_reviews-slider").carousel({
+                controls: false,
+                show: 1
+            });
+//home products top list
+            let windowWidyh = $(window).width()
+
+            if(windowWidyh<=767){
+                $(".home_products-version").carousel({
+                    // controls: false,
+                    pagination: false,
+                    show: {
+                        "557px": 2
+                    }
+                });
             }
-        });
-        // home reviews slider
-        $(".home_reviews-slider").carousel({
-            controls: false,
-            show: 1
-        });
+
+        })
 
     </script>
 @stop
