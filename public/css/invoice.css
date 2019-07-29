@@ -1,5 +1,5 @@
 
-.clearfix:after {
+.invoice__wrapper .clearfix:after {
     content: "";
     display: table;
     clear: both;
@@ -7,15 +7,19 @@
 .invoice__wrapper .invoice__table-wrap .table-bordered td, .invoice__table-wrap .table-bordered th {
     border: 1px solid #d7d7d7;
 }
-.table thead th {
-    vertical-align: bottom;
-    border-bottom: 2px solid #dee2e6;
+.invoice__wrapper .text-center{
+    text-align: center;
 }
-.table td, .table th {
+.invoice__wrapper .table thead th {
+    vertical-align: bottom;
+    border-bottom: 1px solid #d7d7d7;
+}
+.invoice__wrapper .table td,.invoice__wrapper  .table th {
     padding: .75rem;
     vertical-align: top;
 }
-table{
+
+.invoice__wrapper table{
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
@@ -85,47 +89,64 @@ table{
 }
 .invoice__wrapper .invoice__table-wrap tbody td{
     font-size: 31px;
-    /*line-height: 1;*/
 }
 .invoice__wrapper .invoice__table-wrap .price{
     font-family: 'Roboto-Medium', sans-serif;
 }
+.invoice__wrapper .invoice__table-wrap .desc-td{
+    width: 200px;
+}
 .invoice__wrapper .invoice__table-wrap .single-item{
     margin-bottom: 35px;
+    display: table;
+    width: 100%;
 }
 .invoice__wrapper .invoice__table-wrap .single-item:after{
-    content: "";
-    display: table;
-    clear: both;
+    /*content: "";*/
+    /*display: table;*/
+    /*clear: both;*/
 }
-.invoice__wrapper .invoice__table-wrap .single-item span:first-of-type{
-    float: left;
-    margin-right: 60px;
+.invoice__wrapper .invoice__table-wrap .single-item .single-item-name{
+    display: table-cell;
+    width: 70%;
 }
-.invoice__wrapper .invoice__table-wrap .single-item span:last-of-type{
-    float: right;
+.invoice__wrapper .invoice__table-wrap .single-item .single-item-price{
+    display: table-cell;
+    text-align: right;
+    width: 35%;
 }
 
 .invoice__wrapper .invoice__table-wrap .table-bordered td,.invoice__table-wrap .table-bordered th{
     border:1px solid #d7d7d7;
 }
-.invoice__wrapper .invoice__table-wrap thead th:not(:first-of-type),.invoice__wrapper .invoice__table-wrap tbody td:not(:first-of-type){
-    border-left: 2px solid transparent;
+.invoice__wrapper .invoice__table-wrap tbody td.vat-td,.invoice__wrapper .invoice__table-wrap tbody td.total-td,
+.invoice__wrapper .invoice__table-wrap tbody td.qty-td,.invoice__wrapper .invoice__table-wrap tbody td.desc-td{
+    border-left: 2px solid transparent !important;;
+}
+.invoice__table-wrap .table-bordered th{
+    border-left: 2px solid transparent !important;
+}
+
+.invoice__table-wrap .table-bordered th.product-th{
+    border-left: 1px solid #d7d7d7!important;
 }
 .invoice__wrapper .invoice__content-price{
     width: 1027px;
     background-color: #f0f0f0;
     padding: 35px 130px 0 140px;
     float: right;
+    display: table-cell;
 }
 .invoice__wrapper .invoice__content-price .name{
 font-size: 26px;
-    float: left;
+    /*float: left;*/
+    display: inline-block;
 }
 .invoice__wrapper .invoice__content-price .price{
     font-size: 40px;
     font-weight: bold;
     float: right;
+    display: inline-block;
 }
 .invoice__wrapper .invoice__content-price .invoice__content-price-item{
     margin-bottom: 35px;
@@ -133,16 +154,29 @@ font-size: 26px;
 }
 .invoice__wrapper .invoice__content-price .name.total-name{
     font-weight: bold;
+    vertical-align: middle;
+    display: table-cell;
+    width: 50%;
+}
+.invoice__wrapper .total-amount-wall{
+    vertical-align: middle;
+    display: table;
+    width: 100%;
 }
 .invoice__wrapper .invoice__content-price .price.total-price{
     font-size: 61px;
     color: #5184e5;
     letter-spacing: -2px;
-    display: flex;
     line-height: 1;
+    vertical-align: middle;
+    display: table-cell;
+    width: 50%;
+    float: none;
+    text-align: right;
 }
 .invoice__wrapper .invoice__content-price .price.total-price .sec-price{
     font-size: 49px;
+    vertical-align: top;
 }
 .invoice__wrapper .invoice__content-paid{
     margin-right: 104px;
@@ -179,104 +213,19 @@ float: right;
     margin-bottom: 55px;
 }
 .invoice__wrapper .invoice__content-paid-price{
-    /*justify-content: flex-end;*/
     float: right;
     width: 510px;
-
-}
-.invoice__content-paid-price-inner{
-    /*display: inline-block;*/
+    display: table;
 
 }
 .invoice__wrapper .invoice__content-paid{
     float: left;
+    display: table-cell;
+    vertical-align: middle;
 }
 .invoice__wrapper .invoice__table-wrap .product-td{
     max-width: 400px;
 }
-
-/*@media (max-width:1920px) {*/
-/*    .invoice__wrapper .invoice__content-logo svg{*/
-/*        width: 540px;*/
-/*        height: 100%;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-logo .icon {*/
-/*        margin-right: 100px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__wrapper-main-content {*/
-/*        padding-left: 101px;*/
-/*        padding-right: 110px;*/
-/*        margin-bottom: 438px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-info .title {*/
-/*        margin-bottom: 47px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-info {*/
-/*        font-size: 24px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-logo {*/
-/*        margin-top: 20px;*/
-/*        margin-bottom: 79px;*/
-/*    }*/
-/*    .invoice__wrapper .main-title {*/
-/*        margin-top: 23px;*/
-/*        margin-bottom: 47px;*/
-/*        font-size: 86px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap table{*/
-/*        margin-bottom: 32px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap thead th {*/
-/*        font-size: 20px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap tbody td {*/
-/*        font-size: 18px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap .single-item {*/
-/*        margin-bottom: 20px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap .single-item span:first-of-type{*/
-/*        margin-right: 35px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-paid {*/
-/*        margin-right: 61px;*/
-/*        max-width: 210px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price {*/
-/*        max-width: 604px;*/
-/*        padding: 20px 76px 0 82px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price .invoice__content-price-item {*/
-/*        margin-bottom: 20px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price .name {*/
-/*        font-size: 15px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price .price {*/
-/*        font-size: 23px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price .price.total-price {*/
-/*        font-size: 35px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__content-price .price.total-price .sec-price {*/
-/*        font-size: 28px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__wrapper-footer {*/
-/*        font-size: 19px;*/
-/*        padding: 31px 128px 66px 115px;*/
-/*        border-top: 11px solid #383838;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__wrapper-footer ul li {*/
-/*        margin-bottom: 17px;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__wrapper-header {*/
-/*        height: 42px;*/
-/*        border-bottom: 11px solid #383838;*/
-/*    }*/
-/*    .invoice__wrapper .invoice__table-wrap .product-td{*/
-/*        max-width: 235px;*/
-/*    }*/
-/*}*/
 
 @media (max-width:1920px) {
     .invoice__wrapper .invoice__content-logo svg{
@@ -321,7 +270,7 @@ float: right;
     .invoice__wrapper .invoice__table-wrap .single-item {
         margin-bottom: 15px;
     }
-    .invoice__wrapper .invoice__table-wrap .single-item span:first-of-type{
+    .invoice__wrapper .invoice__table-wrap .single-item .single-item-name{
         margin-right: 15px;
     }
     .invoice__wrapper .invoice__content-paid {
@@ -367,11 +316,5 @@ float: right;
     }
     .invoice__wrapper .invoice__content-info p{
         margin-bottom: 10px;
-    }
-    .desc-td{
-        /*width: 300px*/
-    }
-    .product-td{
-        /*width: 180px;*/
     }
 }
