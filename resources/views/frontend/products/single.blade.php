@@ -194,7 +194,7 @@
                             <div class="col-12">
                                 <div class="single-product-dtls-wrap" id="requiredProducts">
                                     <div class="row">
-                                        <div class="col-md-6 product-single-view-outer mr-0 w-100">
+                                        <div class="col-lg-6 product-single-view-outer mr-0 w-100">
                                             <div class="product-card_view product-card_view--single position-relative">
                                                 <!--product main image-->
                                                 @if($vape->image)
@@ -233,7 +233,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="col-md-6 product-single-info-outer">
+                                        <div class="col-lg-6 product-single-info-outer">
                                             <div class="product-single-info">
                                                 <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
                                                        id="vpid">
@@ -453,12 +453,12 @@
                                                 </div>
                                                 <div class="product_single-right-ads">
                                                     <div class="single-ads-wall">
-                                                        <a href="#" class="d-block">
+                                                        <a href="#" class="d-block h-100">
                                                             <img src="/public/img/temp/ads-product.jpg" alt="ads">
                                                         </a>
                                                     </div>
                                                     <div class="single-ads-wall">
-                                                        <a href="#" class="d-block">
+                                                        <a href="#" class="d-block h-100">
                                                             <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
                                                         </a>
                                                     </div>
@@ -474,12 +474,12 @@
                                                 </div>
                                                 <div class="product_single-right-ads">
                                                     <div class="single-ads-wall">
-                                                        <a href="#" class="d-block">
+                                                        <a href="#" class="d-block h-100">
                                                             <img src="/public/img/temp/ads-product.jpg" alt="ads">
                                                         </a>
                                                     </div>
                                                     <div class="single-ads-wall">
-                                                        <a href="#" class="d-block">
+                                                        <a href="#" class="d-block h-100">
                                                             <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
                                                         </a>
                                                     </div>
