@@ -231,7 +231,7 @@
 </div>
 <div id="share_modal" class="hidden-sidebar cart-aside d-flex flex-column p-0">
     <button class="share_modal_close">X</button>
-    <div class="sharethis-inline-share-buttons"></div>
+    <div class="sharethis-inline-share-buttons main-scrollbar"></div>
 </div>
 @if(!Auth::check())
 
