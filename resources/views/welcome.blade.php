@@ -229,7 +229,7 @@
 
                     </div>
                     <ul class="row products__list-wrapper">
-                        <li class="col-lg-3 col-md-6">
+                        <li class="col-lg-3 col-sm-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -312,7 +312,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-lg-3 col-md-6">
+                        <li class="col-lg-3 col-sm-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -395,7 +395,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-lg-3 col-md-6">
+                        <li class="col-lg-3 col-sm-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">
@@ -478,7 +478,7 @@ adipiscing elit. Morbi sodales ...
                                 </div>
                             </div>
                         </li>
-                        <li class="col-lg-3 col-md-6">
+                        <li class="col-lg-3 col-sm-6">
                             <div class="products__item-wrapper main-transition">
                                 <div class="products__item-wrapper-inner">
                                     <a href="#" class="products__item-top">

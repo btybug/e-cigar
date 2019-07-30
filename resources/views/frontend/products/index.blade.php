@@ -275,6 +275,11 @@
 @section("js")
     <script>
         $(document).ready(function () {
+            if($(window).width()<=767){
+                $('body').on('click','.filter-sidebar-wrapper .filters-title',function () {
+                    $(this).parent().find('.all-filters').fadeToggle()
+                })
+            }
 
             $('body').on('click', '.filter-sidebar-wrapper .head.filter-main__head', function () {
                 let blockId = $(this).parent().find('.list-filter');
