@@ -9,7 +9,7 @@
                             @if(LaravelGmail::check())
                                 <li class="item-wrap">
                                     <a href="{!! route('support_contact_us') !!}"
-                                       class="d-flex align-items-center item-link active">
+                                       class="d-flex align-items-center item-link">
                                         <span class="line"></span>
                                         <div class="item-photo">
                                             <img src="/public/img/message-icon.png" alt="contact">
@@ -19,7 +19,7 @@
                                 </li>
                             @endif
                             <li class="item-wrap">
-                                <a href="{!! route('delivery') !!}" class="d-flex align-items-center item-link">
+                                <a href="{!! route('delivery') !!}" class="d-flex align-items-center item-link active">
                                     <div class="item-photo">
                                         <img src="/public/img/delivery-icon.png" alt="Delivery">
                                     </div>
