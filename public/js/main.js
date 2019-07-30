@@ -84,10 +84,34 @@ $(document).ready(function () {
     $("#loading").fadeOut("slow", function () {
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $("#singleProductPageCnt").removeClass('d-none').addClass('d-flex');
-        $(".video--carousel").carousel({
-            pagination: false,
-            controls: false,
+
+        $('body').on('click', '#carousel-tabs-wrap a[aria-controls="pills-videos"]', function() {
+            $(".video--carousel").carousel({
+                pagination: false,
+                controls: false,
+            });
+
+            $(".video--carousel-thumb").carousel({
+                controls: false,
+                pagination: false,
+//                show: 4,
+                matchWidth: false
+            });
+
+            $('.video-carousel-wrap iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
+
+            $('.video-carousel-wrap .video-item-thumb').on('itemClick.carousel', function () {
+                $('body .youtube-iframe').each(function (index) {
+                    $(".youtube-iframe")[index].contentWindow.postMessage(
+                        '{"event":"command","func":"' + "stopVideo" + '","args":""}',
+                        "*"
+                    );
+                    return true;
+                });
+
+            });
         });
+
         $(".product__single-top .brands-top-slider").carousel({
             pagination: false,
             controls: false,
@@ -98,30 +122,11 @@ $(document).ready(function () {
                 "1220px": 9
             }
         });
-        $(".video--carousel-thumb").carousel({
-            controls: false,
-            pagination: false,
-//                show: 4,
-            matchWidth: false
-        });
         $(".product-card-thumbs--single").carousel({
             controls: true,
             pagination: false,
             matchWidth: false
         });
-        $('.video-carousel-wrap iframe[src*="https://www.youtube.com/embed/"]').addClass("youtube-iframe");
-
-        $('.video-carousel-wrap .video-item-thumb').on('itemClick.carousel', function () {
-            $('body .youtube-iframe').each(function (index) {
-                $(".youtube-iframe")[index].contentWindow.postMessage(
-                    '{"event":"command","func":"' + "stopVideo" + '","args":""}',
-                    "*"
-                );
-                return true;
-            });
-
-        });
-
         // start carousel tabs
         let activeTab = $('#carousel-tabs-wrap a').filter('.active');
         $('#carousel-tabs-wrap a').on('click', function (e) {
