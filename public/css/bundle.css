@@ -22718,6 +22718,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .share-button.facebook-share-button{
     cursor: pointer;
 }
+#share_modal .st-remove-label{
+    display: inline-block !important;
+}
 /*share block end*/
 
 /*Globals*/
