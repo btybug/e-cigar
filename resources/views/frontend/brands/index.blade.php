@@ -110,9 +110,10 @@
                                 @include("frontend.brands._partials.list")
                             </ul>
                         </div>
-                        <div class="brands_main-content brands_main-content-top">
-                                @include("frontend.brands._partials.current")
+                        <div class="brands_main-content">
+                            @include("frontend.brands._partials.current")
                         </div>
+
                     </div>
                 </div>
             </div>

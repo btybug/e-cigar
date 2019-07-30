@@ -1,4 +1,4 @@
-<div class="d-flex flex-wrap  margin-b-brands-top">
+<div class="d-flex flex-wrap brands_main-content-top margin-b-brands-top">
     <div class="brands_main-content-top-photo">
         <img src="{!! $current->image !!}" alt="big-brands">
     </div>
@@ -70,6 +70,7 @@
         </div>
     </div>
 </div>
+
 
 <div class="brands_main-content-products-wrapper" id="brand_related_products_list">
     @include('frontend.brands._partials.products')
