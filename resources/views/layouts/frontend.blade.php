@@ -109,9 +109,6 @@
         </div>
     </div>
 </div>
-<div class="share_modal_right">
-
-</div>
 <img src="/public/images/loader.gif" class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 @include("frontend.products._partials.extra_modal")
 @if(is_enabled_filter_modal())

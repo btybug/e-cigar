@@ -170,6 +170,25 @@ $(document).ready(function () {
         const getCurrencySymbol = () => {
             return $('.header-bottom #symbol').val();
         };
+
+        $('.share-button').on('click', function(ev) {
+            ev.stopImmediatePropagation();
+            $('#share_modal').addClass('show');
+        });
+        $('.sharethis-inline-share-buttons').css({
+            'flex-direction': 'column'
+        });
+        $(document).click(function (e) {
+            console.log(e.target);
+            const containerBlock = $("#share_modal");
+            let arrowLink = $('.share-button.facebook-share-button');
+            console.log(arrowLink.has(e.target).length === 0,containerBlock.has(e.target).length === 0,containerBlock !== e.target);
+            if ($(e.target).closest('#share_modal').length === 0 || $(e.target).hasClass('share_modal_close')) {
+                if (containerBlock.hasClass('show')) {
+                    containerBlock.removeClass('show');
+                }
+            }
+        });
         //count total price function
         const countTotalPrice = () => {
             let total_price = 0;

@@ -197,7 +197,7 @@
       d="M19.867,4.943 L19.867,-0.003 L5.131,-0.003 L5.131,4.943 L-0.005,4.943 L-0.005,30.000 L25.003,30.000 L25.003,4.943 L19.867,4.943 ZM6.854,1.629 L18.143,1.629 L18.143,4.943 L6.854,4.943 L6.854,1.629 ZM23.279,28.368 L1.719,28.368 L1.719,6.575 L5.131,6.575 L5.131,9.857 L6.854,9.857 L6.854,6.575 L18.143,6.575 L18.143,9.857 L19.867,9.857 L19.867,6.575 L23.279,6.575 L23.279,28.368 Z"/>
 </svg>
                 </span>
-                <div class="button share-button facebook-share-button st-custom-button share-header-icon-container" data-network="sharethis" style="margin-left: 15px">
+                <div class="button share-button facebook-share-button st-custom-button share-header-icon-container" style="margin-left: 15px">
                     <svg fill="#528eff" preserveAspectRatio="xMidYMid meet" height="2em" width="2em" viewBox="0 0 40 40" class="hvr-pulse share-header-icon" style="vertical-align: middle;"><g><path d="m30 26.8c2.7 0 4.8 2.2 4.8 4.8s-2.1 5-4.8 5-4.8-2.3-4.8-5c0-0.3 0-0.7 0-1.1l-11.8-6.8c-0.9 0.8-2.1 1.3-3.4 1.3-2.7 0-5-2.3-5-5s2.3-5 5-5c1.3 0 2.5 0.5 3.4 1.3l11.8-6.8c-0.1-0.4-0.2-0.8-0.2-1.1 0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5c-1.3 0-2.5-0.6-3.4-1.4l-11.8 6.8c0.1 0.4 0.2 0.8 0.2 1.2s-0.1 0.8-0.2 1.2l11.9 6.8c0.9-0.7 2.1-1.2 3.3-1.2z"></path></g></svg>
                 </div>
                 </div>
@@ -230,7 +230,8 @@
     @include('frontend._partials.shopping_cart_options')
 </div>
 <div id="share_modal" class="hidden-sidebar cart-aside d-flex flex-column p-0">
-
+    <button class="share_modal_close">X</button>
+    <div class="sharethis-inline-share-buttons"></div>
 </div>
 @if(!Auth::check())
 
