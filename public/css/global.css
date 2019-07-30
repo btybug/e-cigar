@@ -369,3 +369,8 @@ body::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 .new__scroll::-webkit-scrollbar-thumb {
     background: #e7e7e7;
 }
+@media (max-width: 767px) {
+    .container{
+        max-width: 100%;
+    }
+}

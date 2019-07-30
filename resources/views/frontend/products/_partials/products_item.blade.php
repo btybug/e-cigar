@@ -1,4 +1,4 @@
-<li class="col-md-3">
+<li class="col-md-6 col-xl-3">
     <div class="products__item-wrapper main-transition">
         <div class="products__item-wrapper-inner">
             <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="products__item-top">
