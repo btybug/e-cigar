@@ -17,7 +17,7 @@
 
                     @if(Auth::check())
                         <div id="ptofileBtn"
-                             class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer">
+                             class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer sidebar_button_active_detector">
                             <div class="user-img">
                                 <img src="{!! user_avatar() !!}" alt="user">
                             </div>
@@ -189,7 +189,7 @@
                                   d="M23.901,2.043 C22.539,0.732 20.737,0.016 18.813,0.016 C16.890,0.016 15.081,0.738 13.720,2.048 L13.009,2.732 L12.287,2.037 C10.926,0.727 9.112,0.000 7.188,0.000 C5.270,0.000 3.462,0.722 2.106,2.027 C0.745,3.337 -0.005,5.077 0.001,6.928 C0.001,8.780 0.756,10.515 2.117,11.825 L12.469,21.788 C12.612,21.926 12.805,22.000 12.992,22.000 C13.180,22.000 13.373,21.931 13.516,21.793 L23.890,11.846 C25.251,10.536 26.001,8.796 26.001,6.944 C26.006,5.093 25.262,3.353 23.901,2.043 L23.901,2.043 Z"/>
                         </svg>
                     </a>
-                    <span id="headerShopCartBtn" class="d-inline-block position-relative pointer add-links-wrap_icon">
+                    <span id="headerShopCartBtn" class="d-inline-block position-relative pointer add-links-wrap_icon sidebar_button_active_detector">
                         <span class="d-inline-block position-absolute absolute-center add-cart-number cart-count">{{ cartCount() }}</span>
                     <svg
                             width="25px" height="30px" viewBox="0 0 25 30">
@@ -197,7 +197,7 @@
       d="M19.867,4.943 L19.867,-0.003 L5.131,-0.003 L5.131,4.943 L-0.005,4.943 L-0.005,30.000 L25.003,30.000 L25.003,4.943 L19.867,4.943 ZM6.854,1.629 L18.143,1.629 L18.143,4.943 L6.854,4.943 L6.854,1.629 ZM23.279,28.368 L1.719,28.368 L1.719,6.575 L5.131,6.575 L5.131,9.857 L6.854,9.857 L6.854,6.575 L18.143,6.575 L18.143,9.857 L19.867,9.857 L19.867,6.575 L23.279,6.575 L23.279,28.368 Z"/>
 </svg>
                 </span>
-                <div class="button share-button facebook-share-button st-custom-button share-header-icon-container" style="margin-left: 15px">
+                <div class="button share-button facebook-share-button st-custom-button share-header-icon-container sidebar_button_active_detector" style="margin-left: 15px">
                     <svg fill="#528eff" preserveAspectRatio="xMidYMid meet" height="2em" width="2em" viewBox="0 0 40 40" class="hvr-pulse share-header-icon" style="vertical-align: middle;"><g><path d="m30 26.8c2.7 0 4.8 2.2 4.8 4.8s-2.1 5-4.8 5-4.8-2.3-4.8-5c0-0.3 0-0.7 0-1.1l-11.8-6.8c-0.9 0.8-2.1 1.3-3.4 1.3-2.7 0-5-2.3-5-5s2.3-5 5-5c1.3 0 2.5 0.5 3.4 1.3l11.8-6.8c-0.1-0.4-0.2-0.8-0.2-1.1 0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5c-1.3 0-2.5-0.6-3.4-1.4l-11.8 6.8c0.1 0.4 0.2 0.8 0.2 1.2s-0.1 0.8-0.2 1.2l11.9 6.8c0.9-0.7 2.1-1.2 3.3-1.2z"></path></g></svg>
                 </div>
                 </div>
