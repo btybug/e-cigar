@@ -176,13 +176,10 @@ $(document).ready(function () {
             return $('.header-bottom #symbol').val();
         };
 
-        $('.share-button').on('click', function(ev) {
-            ev.stopImmediatePropagation();
-            $('#share_modal').addClass('show');
-        });
-        $('.sharethis-inline-share-buttons').css({
-            'flex-direction': 'column'
-        });
+        // $('.share-button').on('click', function(ev) {
+        //     ev.stopImmediatePropagation();
+        //     $('#share_modal').addClass('show');
+        // });
         // $(document).click(function (e) {
         //     console.log(e.target);
         //     const containerBlock = $("#share_modal");
