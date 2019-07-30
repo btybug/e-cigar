@@ -22692,6 +22692,27 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .single-product-row-repeatable:not(:last-of-type) {
     margin-bottom: 25px;
 }
+/*share block start*/
+#share_modal {
+    /*width: 203px;*/
+}
+#share_modal .sharethis-inline-share-buttons{
+    flex-direction: column;
+    align-items: center;
+}
+.sharethis-inline-share-buttons>div{
+    margin-right: 0!important;
+    margin-bottom: 8px;
+}
+.share_modal_close{
+    background-color: red;
+    border: 0;
+    color: #fff;
+    border-bottom: 1px solid #fff;
+    padding: 8px 3px;
+    cursor: pointer;
+}
+/*share block end*/
 
 /*Globals*/
 /*fonts*/
