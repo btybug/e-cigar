@@ -229,6 +229,9 @@
 <div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column p-0">
     @include('frontend._partials.shopping_cart_options')
 </div>
+<div id="share_modal" class="hidden-sidebar cart-aside d-flex flex-column p-0">
+
+</div>
 @if(!Auth::check())
 
     <!--modal Login-->
