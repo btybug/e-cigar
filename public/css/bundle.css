@@ -22694,22 +22694,28 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 /*share block start*/
 #share_modal {
-    /*width: 203px;*/
+    width: 180px;
 }
 #share_modal .sharethis-inline-share-buttons{
     flex-direction: column;
     align-items: center;
 }
-.sharethis-inline-share-buttons>div{
+#share_modal .sharethis-inline-share-buttons>div{
     margin-right: 0!important;
     margin-bottom: 8px;
 }
-.share_modal_close{
+#share_modal .share_modal_close{
     background-color: red;
     border: 0;
     color: #fff;
     border-bottom: 1px solid #fff;
     padding: 8px 3px;
+    cursor: pointer;
+}
+#share_modal .st-total{
+    color: #ffffff !important;
+}
+.share-button.facebook-share-button{
     cursor: pointer;
 }
 /*share block end*/
