@@ -142,7 +142,8 @@ const App = function() {
     //********App -> htmlMaker -> makeImage********end
 
       makeHtmlItem: (data) => {
-          return (`<div draggable="true" data-id="${data.id}" class="file" >
+        console.log(data, 'nhang')
+          return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" >
         <a  bb-media-click="select_item" bb-media-type="image">
             <span class="corner"></span>
 
@@ -150,7 +151,7 @@ const App = function() {
                 <img width="180px" data-lightbox="image" src="/public/images/html.jpg">
                 <i class="fa fa-file"></i>
             </div>
-            <div class="file-name">
+            <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
             <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
             <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
             </div>
@@ -1407,17 +1408,36 @@ var count = 0;
     select_item: (elm, e) => {
       const id = e.target.closest(".file").getAttribute("data-id");
       if (e.type === "dblclick") {
-        e.target.closest(".file-box").classList.remove("active");
-        const countId = e.target
-            .closest(".file-box")
-            .getAttribute("data-image");
-        this.requests.getImageDetails({item_id: id}, res => {
-          $('#modal_area').html(this.htmlMaker.fullInfoModal(
-              res,
-              Number(countId)
-          ));
-          return $('body').append(html);
-        });
+          if($(e.target).closest('.file').data('type') === 'html') {
+
+              $.ajax({
+                  type: "get",
+                  url: $(e.target).closest('.file').find('[data-url]').data('url'),
+                  cache: false,
+                  data: 1,
+                  headers: {
+                      "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                  },
+                  success: function (data) {
+                      // $('#modal-id .modal-body').append(data);
+                      // $('#modal-id').modal('show');
+                  }
+              });
+
+          } else {
+              e.target.closest(".file-box").classList.remove("active");
+              const countId = e.target
+                  .closest(".file-box")
+                  .getAttribute("data-image");
+              this.requests.getImageDetails({item_id: id}, res => {
+                  $('#modal_area').html(this.htmlMaker.fullInfoModal(
+                      res,
+                      Number(countId)
+                  ));
+                  return $('body').append(html);
+              });
+          };
+
       } else if (e.type === "click") {
         e.target.closest(".file-box").classList.toggle("active");
         if(this.selectedImage.includes(id)) {
