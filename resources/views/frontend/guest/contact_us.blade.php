@@ -5,7 +5,7 @@
             <div class="container main-max-width">
 
                 <div class="row">
-                    <div class="col-md-3">
+                    <div class="col-lg-3">
                         <ul class="left-wrapper">
                             @if(LaravelGmail::check())
                                 <li class="item-wrap">
@@ -47,26 +47,26 @@
                             </li>
                         </ul>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-lg-6 col-md-8">
                         {!! Form::open([]) !!}
                         <div class="contact-main-content">
                             <h1 class="font-sec-reg font-22 lh-1 text-tert-clr main-title">Send Us a Message</h1>
                             <div class="form-group row">
-                                <div class="col-md-6">
-                                    <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="row mb-3 mb-lg-0">
                                         <label for="contactname"
-                                               class="col-sm-2 col-form-label font-sec-light">Name</label>
-                                        <div class="col-sm-10">
+                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">Name</label>
+                                        <div class="col-xl-10 col-sm-9">
                                             <input type="text" class="form-control border-light" id="contactname"
                                                    value="">
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="row">
                                         <label for="contactphone"
-                                               class="col-sm-2 col-form-label font-sec-light">Phone</label>
-                                        <div class="col-sm-10">
+                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">Phone</label>
+                                        <div class="col-xl-10 col-sm-9">
                                             <input type="tel" class="form-control border-light" id="contactphone"
                                                    value="">
                                         </div>
@@ -74,11 +74,11 @@
                                 </div>
                             </div>
                             <div class="form-group row email-group">
-                                <div class="col-md-6">
+                                <div class="col-lg-6">
                                     <div class="row">
                                         <label for="contactemail"
-                                               class="col-sm-2 pr-sm-0 pr-3 col-form-label font-sec-light">E-mail</label>
-                                        <div class="col-sm-10">
+                                               class="col-xl-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">E-mail</label>
+                                        <div class="col-xl-10 col-sm-9">
                                             <input type="email" class="form-control border-light" id="contactemail"
                                                    value="">
                                         </div>
@@ -88,8 +88,8 @@
                             <div class="form-group row subject-group">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <label for="contactsubject" class="col-sm-1 pr-sm-0 pr-3 col-form-label font-sec-light">Subject</label>
-                                        <div class="col-sm-11">
+                                        <label for="contactsubject" class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">Subject</label>
+                                        <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
                                             <input type="text" class="form-control" id="contactsubject"
                                                    value="">
                                         </div>
@@ -100,8 +100,8 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <label for="contactarea"
-                                               class="col-sm-1 pr-sm-0 pr-3 col-form-label font-sec-light">Message</label>
-                                        <div class="col-sm-11">
+                                               class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">Message</label>
+                                        <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
                                             <textarea name="" id="contactarea" cols="30" rows="10"
                                                       class="form-control"></textarea>
                                         </div>
@@ -109,9 +109,9 @@
                                 </div>
                             </div>
                             <div class="form-group row mb-0">
-                                <div class="col-md-1">
+                                <div class="col-md-3">
                                 </div>
-                                <div class="col-md-11">
+                                <div class="col-md-9">
                                     <div class="d-flex align-items-center justify-content-between">
                                         <div class="attach">
 
@@ -139,7 +139,7 @@
                         </div>
                         {!! Form::close() !!}
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-lg-3 col-md-4">
                         <div class="right-wrapper">
                             <div class="info-wall">
                                 <div class="map-block">
