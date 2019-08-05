@@ -147,6 +147,15 @@
                             <div class="filter-sidebar-wrapper">
                                 <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">Filters</h2>
                                 <div class="all-filters">
+                                    <div class="mobile-back-reset">
+                                        <a href="#" class="back-link">
+                                            <span><i class="fa fa-arrow-left"></i></span>
+                                        </a>
+                                        <a href="javascript:void(0)"
+                                           class="text-tert-clr text-uderlined font-15 reset-form">
+                                            Reset
+                                        </a>
+                                    </div>
                                     <div class="search-filters position-relative">
                                         <input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="Serach for anything">
                                         <span class="position-absolute d-flex align-items-center search-icon">
@@ -205,6 +214,9 @@
                                             </div>
                                         </div>
                                     @endforeach
+                                    <div class="mobile-show-filters-wrap">
+                                        <a href="#" class="bg-blue-clr text-sec-clr show-filter-link">Show</a>
+                                    </div>
                                 </div>
                             </div>
 
@@ -277,7 +289,10 @@
         $(document).ready(function () {
             if($(window).width()<=767){
                 $('body').on('click','.filter-sidebar-wrapper .filters-title',function () {
-                    $(this).parent().find('.all-filters').fadeToggle()
+                    $(this).parent().find('.all-filters').fadeIn()
+                })
+                $('body').on('click','.filter-sidebar-wrapper .back-link',function () {
+                    $(this).parent().parent().fadeOut()
                 })
             }
 
