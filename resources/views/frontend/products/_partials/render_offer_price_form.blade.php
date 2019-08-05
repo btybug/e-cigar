@@ -1,7 +1,7 @@
 @php
     $variations = collect($model->variations()->required()->get())->groupBy('variation_id');
 @endphp
-<li class="col-md-3">
+<li class="col-xl-3 col-md-6">
     <div class="special__popup-main-product-item" data-id="{{ $model->id }}">
         <div class="special__popup-main-product-item-photo">
             <img src="{!! checkImage($model->image) !!}" alt="product">

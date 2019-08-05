@@ -634,9 +634,10 @@
                     <div class="modal-header special__popup-head">
                         <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
                             Offer</h5>
-                        <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">
-                            You
-                            might be interested in the following offers
+                        <div class="font-main-light font-20 text-main-clr align-self-stretch text-truncate special__popup-head-mid">
+                            <span class="w-100 text-truncate">You
+                            might be interested in the following offers</span>
+
                         </div>
                         <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">
