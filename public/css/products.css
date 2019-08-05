@@ -1742,12 +1742,12 @@ header .search-icon-mobile {
 
 .shopping-cart_wrapper .shopping-cart-head .item .icon {
     opacity: 0;
-    display: none;
+    /*display: none;*/
 }
 
 .shopping-cart_wrapper .shopping-cart-head .item.visited .icon {
     opacity: 1;
-    display: block;
+    /*display: block;*/
 }
 
 .shopping-cart_wrapper .shopping-cart-head .item.active {
