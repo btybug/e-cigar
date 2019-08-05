@@ -3782,7 +3782,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .special__popup-main-product-item {
-    padding: 20px 30px 32px;
+    /*padding: 20px 30px 32px;*/
+    padding: 20px 0;
 }
 
 .special__popup-main-product-item-price {
@@ -3807,8 +3808,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .special__popup-main-products-list > li {
-    padding-left: 40px;
-    padding-right: 40px;
+    /*padding-left: 40px;*/
+    /*padding-right: 40px;*/
 }
 
 .special__popup-content-left-bottom {
@@ -3842,7 +3843,50 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.45);
     border-width: 2px;
 }
-
+.special__popup-main-product-item .product__single-item-info-bottom>div:first-of-type{
+    width: 100%;
+}
+.special__popup-main-product-item .product__select-wall .remove-single_product-item{
+    margin-right: 10px;
+}
+.special__popup-main-product-item .product__single-item-info-bottom .remove-single_product-item ~ .select2-container.select2-container--default{
+    width: calc(100% - 35px)!important;
+}
+.special__popup-main-product-item .product__single-item-info-top{
+    margin-bottom: 10px;
+}
+.special__popup-main-product-item .package_product>div{
+    margin-bottom: 15px !important;
+}
+.special__popup-main-product-item .special__popup-main-product-item-radio .product_radio-single{
+    width: 100%;
+    margin-bottom: 5px;
+}
+.special__popup-main-product-item .special__popup-main-product-item-radio .custom-control-inline{
+    width: 100%;
+    margin-right: 0 !important;
+}
+.special__popup-main-product-item .special__popup-main-product-item-radio .custom-label{
+    width: 100%;
+    padding: 10px;
+}
+.special__popup-main-product-item .special__popup-main-product-item-radio{
+    margin-bottom: 0 !important;
+}
+.special__popup-main-product-item .product__single-item-add-new{
+    padding-left: 0;
+    margin-top: 10px;
+}
+.special__popup-main-product-item .product__single-item-info-bottom{
+    margin-top: 10px !important;
+}
+.special__popup-main-product-item .product__single-item-info{
+    border: none;
+    padding: 0;
+}
+.special__popup-main-product-item .filters-select-wizard >form>div>div{
+max-width: 100%;
+}
 /*------------Special offer pop up END-------------*/
 /*------------ Shopping cart pag new START-------------*/
 .shopping__cart-wrapper .shopping-cart-head .item.active:after {
