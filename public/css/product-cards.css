@@ -2463,14 +2463,22 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .brands_page-wrapper .brands_page-top-slider .brand-item {
     height: 100%;
 }
-
+.brands_page-wrapper .brands_page-top-slider .brand-wall{
+    margin-left: 35px;
+}
 .brands_page-wrapper .brands_page-top-slider .brand-link {
-    height: 100%;
+    /*height: 100%;*/
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 90px;
+    height: 85px;
 }
-
+.brands_page-wrapper .brands_page-top-slider .brand-link img{
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+}
 .brands_page-wrapper .brands_page-top-title {
     width: 288px;
     border-right: 1px solid #d7d7d7;

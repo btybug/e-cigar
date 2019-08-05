@@ -190,7 +190,11 @@ body {
         max-width: 1600px;
     }
 }
-
+@media (min-width: 1350px) and (max-width: 1629px){
+    .main-max-width  {
+        max-width: 1300px;
+    }
+}
 body {
     position: relative;
     color: #353535;
