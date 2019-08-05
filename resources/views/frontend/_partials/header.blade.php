@@ -50,7 +50,7 @@
                                 <a class="nav-link" href="{!! url('/') !!}">Home</a>
                             </li>
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link" href="{!! route('categories_front') !!}">Products
+                                <a class="nav-link pr-nav-l" href="{!! route('categories_front') !!}">Products
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@
                             </li>
 
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link" href="{!! route('brands') !!}">Brands
+                                <a class="nav-link br-nav-l" href="{!! route('brands') !!}">Brands
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -242,3 +242,25 @@
     @include("frontend._partials.register_modal")
 
 @endif
+
+<script>
+
+    $(document).ready(function() {
+        var x = window.matchMedia("(max-width: 768px)")
+        function resize_win(x) {
+            if(x.matches) {
+                $('body').on('click', '.pr-nav-l, .br-nav-l', function(ev) {
+                    ev.preventDefault();
+                });
+            } else {
+                $('body').on('click', '.pr-nav-l, .br-nav-l', function(ev) {
+                    return true;
+                });
+            }
+        }
+        resize_win(x);
+        $(window).on('resize', function() {
+            resize_win(x);
+        })
+    });
+</script>
