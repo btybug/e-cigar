@@ -1563,17 +1563,23 @@ header .search-icon-mobile {
     }
 
     .header-top .navbar-collapse {
-        background-color: rgba(0, 0, 0, 0.82);
+        /*background-color: rgba(0, 0, 0, 0.82);*/
         border-top: 1px solid white;
         position: absolute;
         top: 100%;
         width: 100%;
+        overflow: auto;
+        height: calc(100vh - 52px)
     }
 
     .header-top .navbar-collapse ul.navbar-nav {
         padding-left: 15px;
-    }
+        background-color: rgba(0, 0, 0, 0.82);
 
+    }
+    header .header-top .navbar{
+        height: 100%;
+    }
     .header-top .navbar-collapse ul.navbar-nav .nav-item {
         border-bottom: 1px solid #ffffff5e;
         margin-right: 15px;
@@ -1581,6 +1587,7 @@ header .search-icon-mobile {
 
     .header-top .navbar-collapse ul.navbar-nav .nav-item--has-dropdown_dropdown {
         position: static;
+        height: 237px;
     }
 
     .header-top .navbar-collapse ul.navbar-nav .nav-item--has-dropdown {

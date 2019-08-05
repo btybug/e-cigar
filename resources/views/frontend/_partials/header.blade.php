@@ -9,10 +9,10 @@
                                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="logo-small-screens d-md-none d-flex align-items-center ml-3">
+                        <a href="{!! url('/') !!}" class="logo-small-screens d-md-none d-flex align-items-center ml-3">
                             <img src="{!! url('/public/img/logo-icon.png') !!}"  alt="" class="logo-small-screens_logo">
                             <h1 class="font-14 font-sec-bold text-sec-clr text-uppercase ml-2 mb-0">The Vapors Hub</h1>
-                        </div>
+                        </a>
                     </div>
 
                     @if(Auth::check())
