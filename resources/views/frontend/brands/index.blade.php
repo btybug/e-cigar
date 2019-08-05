@@ -106,6 +106,7 @@
                                 ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
 
                             </div>
+                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">Categories</div>
                             <ul class="brands_aside-list">
                                 @include("frontend.brands._partials.list")
                             </ul>
@@ -143,6 +144,9 @@
     <script src={{asset("public/plugins/formstone/touch.js")}}></script>
     <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
     <script>
+        $('body').on('click','.mobile-brands_aside-title',function () {
+            $(this).parent().find('.brands_aside-list').slideToggle()
+        })
         $(".brands_page-top-slider").carousel({
             pagination: false,
             controls: false,

@@ -2526,7 +2526,12 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .brands_page-wrapper .brands_aside-list {
     padding: 32px 20px;
 }
-
+.mobile-brands_aside-title{
+    font-size: 24px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+}
 .brands_page-wrapper .brands_aside-item-link {
     display: flex;
     margin-bottom: 25px;
@@ -5974,6 +5979,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
     .brands_main-content-products-wrapper .right-wrapper .right-head{
         justify-content: flex-end !important;
+    }
+    .brands_page-wrapper .brands_aside-list{
+        display: none;
     }
 }
 
