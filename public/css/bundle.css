@@ -22726,8 +22726,10 @@ max-width: 100%;
         display: flex;
     }
     .products__item-wrapper .products__item-wrapper-inner{
-        position: static;
+        position: static !important;
+        box-shadow: 4px 7px 12px 0 rgba(16, 16, 20, 0.3);
     }
+
     .products__item-wrapper .products__item-photo-thumb{
         display: flex!important;
     }
@@ -22794,7 +22796,7 @@ max-width: 100%;
     }
 
     .home__main-slider .main-slider-wall {
-        height: 400px;
+        height: 280px;
     }
 }
 @media (max-width: 575px) {
