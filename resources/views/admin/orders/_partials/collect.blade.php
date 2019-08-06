@@ -1,6 +1,6 @@
 @php
     $variation = \App\Models\StockVariation::find($o['id']);
-    $locations = $variation->item->locations;
+    $locations = ($variation) ? $variation->item->locations : [];
 @endphp
 {{--if($count == 1){--}}
 {{--dd($variation->item);--}}
@@ -91,7 +91,7 @@
                 @endif
             </td>
             <td class="barcode-td align_middle w-25">
-                <span class="barcode-block">{{ $variation->item->barcode->code }}</span>
+                <span class="barcode-block">{{ @$variation->item->barcode->code }}</span>
             </td>
             <td class="last-td w-25">
                 <div class="check-block">
