@@ -2,7 +2,7 @@
 @section('content')
     <main class="main-content">
         <div class="shopping-cart_wrapper shopping__cart-wrapper">
-            <div class="container main-max-width shopping__cart-mw shopping__cart-with-back">
+            <div class="container main-max-width">
                 <div class="d-flex shopping-cart-head">
                     <ul class="nav nav-pills">
                         <li class="nav-item col-md-3">
