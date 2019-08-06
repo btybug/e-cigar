@@ -69,7 +69,7 @@ class StripePaymentController extends Controller
         }
 
         $order = $this->order($charge);
-        event(new OrderSubmitted($order->user,$order));
+//        event(new OrderSubmitted($order->user,$order));
 
         if (!Cart::isEmpty() && session()->has('shipping_address') && session()->has('billing_address') && $order) {
             session()->forget('shipping_address', 'billing_address');
