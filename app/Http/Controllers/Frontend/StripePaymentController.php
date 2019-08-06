@@ -69,6 +69,7 @@ class StripePaymentController extends Controller
         }
 
         $order = $this->order($charge);
+//        dd($order);
 //        event(new OrderSubmitted($order->user,$order));
 
         if (!Cart::isEmpty() && session()->has('shipping_address') && session()->has('billing_address') && $order) {
@@ -116,6 +117,6 @@ class StripePaymentController extends Controller
         $order = $this->paymentService->call();
         $this->makeTransaction($transaction, $order);
 
-        return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
+        return $order;
     }
 }
