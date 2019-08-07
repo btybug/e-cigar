@@ -116,6 +116,7 @@ $(document).ready(function () {
             pagination: false,
             controls: false,
             infinite: true,
+            matchWidth:false,
             show: {
                 "740px": 2,
                 "980px": 3,

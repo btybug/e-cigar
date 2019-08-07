@@ -2975,14 +2975,23 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .product__single-wrapper .product__single-top .brands-top-slider .brand-item {
     height: 100%;
 }
-
+.product__single-wrapper .product__single-top .brands-top-slider .brand-wall{
+    margin-left: 30px;
+}
 .product__single-wrapper .product__single-top .brands-top-slider .brand-link {
-    height: 100%;
+    /*height: 100%;*/
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 72px;
+    height: 68px;
 }
-
+.product__single-wrapper .product__single-top .brands-top-slider .brand-link img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    font-family: "object-fit: contain;";
+}
 .product__single-wrapper .product__single-top {
     border-bottom: 1px solid #d7d7d7;
 }
