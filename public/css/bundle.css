@@ -14712,7 +14712,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 
     .modal.modal-accounts {
-        top: 101px;
+        /*top: 101px;*/
     }
 }
 
@@ -22911,6 +22911,10 @@ max-width: 100%;
     }
     .shopping__cart-confirm .list-shipping .sipping-item-wrap-both .sipping-item-wrap:first-of-type{
         margin-right: 0;
+    }
+    .modal-accounts .modal-dialog .close{
+        opacity: 1;
+        visibility: visible;
     }
 }
 

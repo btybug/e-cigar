@@ -1318,7 +1318,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 
     .modal.modal-accounts {
-        top: 101px;
+        /*top: 101px;*/
     }
 }
 
