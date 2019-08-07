@@ -22462,6 +22462,12 @@ max-width: 100%;
         width: 100%;
         padding-right: 30px;
     }
+    .ticket__tab-wrapper-left{
+        margin-left: 40px;
+    }
+    .ticket__tab-wrapper {
+        padding: 0 40px 0 0;
+    }
 }
 
 @media (max-width: 1349px) {
@@ -22475,6 +22481,13 @@ max-width: 100%;
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
+    }
+    .ticket__tab-wrapper .ticket__tab-top-left, .ticket__tab-wrapper .ticket__tab-top-right{
+        max-width: 100%;
+        flex: none;
+    }
+    .ticket__tab-wrapper .ticket__tab-top-right .card-body{
+        border-left: 1px solid #d7d7d7;
     }
 }
 @media (max-width: 1199px) {
@@ -22705,6 +22718,19 @@ max-width: 100%;
     }
     .shopping__cart-wrapper .shopping-cart-inner .col-lg-10.pl-0{
         padding-right: 0;
+    }
+    .ticket__tab-wrapper-left-col{
+        padding-right: 0;
+        margin-bottom: 20px;
+    }
+    .ticket__tab-wrapper-left{
+        margin-left: 30px;
+    }
+    .ticket__tab-wrapper {
+        padding: 0 30px 0 0;
+    }
+    .ticket__tab-wrapper-right-col{
+        padding-left: 30px;
     }
 }
 
@@ -22966,6 +22992,15 @@ max-width: 100%;
     .special__popup-content-scroll{
         margin-bottom: 15px;
     }
+    .ticket__tab-wrapper{
+        padding: 0 15px 0 0;
+    }
+    .ticket__tab-wrapper-right-col{
+        padding-left: 15px;
+    }
+    .ticket__tab-wrapper-left{
+        margin-left: 15px;
+    }
 }
 @media (max-width: 455px) {
     .continue-shp-wrapp .product-card_price {
@@ -23088,6 +23123,12 @@ max-width: 100%;
     .shopping__cart-confirm .list-shipping .sipping-item-wrap-both .sipping-item-wrap .item-photo{
         width: 100px;
         height: 100px;
+    }
+    .comments__wrapper .comment-send-block .add-comment-btn{
+        padding: 0 25px;
+    }
+    .ticket__tab-wrapper {
+        padding: 0 15px 0 0 !important;
     }
 }
 
