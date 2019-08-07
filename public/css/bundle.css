@@ -17875,9 +17875,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 /*Account page*/
 .notif-modal .modal-content {
-    height: 250px;
+    /*height: 250px;*/
 }
-
+.notif-modal .table--email-temp{
+    width: 100% !important;
+}
 .profile-sidebar--inner-pages {
     width: 150px;
     padding-top: 38px;
@@ -17925,7 +17927,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #c8c8d2;
     border: 2px solid #c8c8d2;
     height: 130px;
-    width: 130px;
+    /*width: 130px;*/
+    width: 100%;
     overflow: hidden;
 }
 

@@ -6,7 +6,7 @@
     <li class="profile-sidebar-menu_item @if($active=='my_account') active @endif">
         <a href="{!! route('my_account') !!}"
            class="profile-sidebar-menu_link d-inline-flex align-items-center font-15 main-transition">
-                <span class="d-inline-block profile-sidebar-menu_icon mr-3">
+                <span class="d-inline-block profile-sidebar-menu_icon mr-2">
                     <svg
                         viewBox="0 0 22 24"
                         width="22px" height="24px">
