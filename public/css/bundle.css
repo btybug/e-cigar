@@ -18018,7 +18018,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background: #fff;
     padding: 2%;
     flex: auto;
-
+    max-width: calc(100% - 150px);
 }
 
 .profile-sidebar--inner-pages,
@@ -23000,6 +23000,9 @@ max-width: 100%;
     }
     .ticket__tab-wrapper-left{
         margin-left: 15px;
+    }
+    .profile-inner-pg-right-cnt {
+        max-width: 100%;
     }
 }
 @media (max-width: 455px) {
