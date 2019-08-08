@@ -161,20 +161,24 @@ class OrdersController extends Controller
     public function postCollecting($id, Request $request)
     {
         $order = Orders::findOrfail($id);
+//        dd($request->all());
         $error = true;
-        $item = $order->items()->where('order_items.id', $request->item_id)->first();
         $message = '';
-        if ($item) {
+        $success = false;
+        if($request->unique_id){
             $error = false;
-            $item->update(['collected' => $request->value]);
+
+            $collect = $order->collections()->create([
+                'unique_id' => $request->unique_id
+            ]);
+
             $settings = $this->settings->getEditableData('orders_statuses');
 
-            $count = $order->items()->count();
-            $collected = $order->items()->where('collected', true)->count();
+            $count = $request->count;
+            $collected = $order->collections->count();
             $itemsNeedCollect = $count - $collected;
             if ($count == $collected) {
-                $message = "All collected, Congratulations !!!";
-
+                $success = true;
                 if ($settings && isset($settings['collected'])) {
                     $historyData['user_id'] = \Auth::id();
                     $historyData['status_id'] = $settings['collected'];
@@ -191,7 +195,8 @@ class OrdersController extends Controller
             }
         }
 
-        return \Response::json(['error' => $error, 'message' => $message]);
+
+        return \Response::json(['error' => $error, 'message' => $message,'success' => $success]);
     }
 
     public function postAddUser(Request $request)

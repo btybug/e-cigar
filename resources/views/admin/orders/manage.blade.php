@@ -473,11 +473,13 @@
                         @endif
                     </div>
                     <div class="d-flex align-items-center total-items-block">
-                        <span class="font-16 total-items-count">Total Items: {{ $count++ }}</span>
-                        <button class="check-item-btn active">
+                        {!! Form::hidden('item_count',$count,['id' => 'item_count']) !!}
+
+                        <span class="font-16 total-items-count">Total Items: {{ $count }}</span>
+                        <button class="check-item-btn @if($order->collections()->count() == $count) active @endif">
                             <span class="no-item">
                                 <span class="icon"></span>
-                                <span class="font-16 title">Check All Items</span>
+                                <span class="font-16 title status-check">Check All Items</span>
                             </span>
                             <span class="item-checked">
                                 <span class="icon">
@@ -1402,21 +1404,37 @@
                 $('.order__admin-wrapper .head-order-wrap .right-head .submit-btn').removeClass('d-none')
                 $(this).closest('.order__change-status-wrapper').addClass('d-none')
             });
+
+            $("body").on('click','.check-item-btn',function () {
+                var data = $("body").find('.check-collecting');
+                data.each(function (e,i) {
+                    $(i).click();
+                    console.log(e,i)
+                })
+            })
+
             $('body').on('click', '.check-collecting', function (event) {
                 let $_this = $(this);
-                let item_id = $_this.data('id')
-                if ($_this.is(':checked')) {
+                if(! $_this.hasClass('d-none')){
+                    let unique_id = $_this.data("unique");
+
                     AjaxCall("{!! route('admin_orders_collecting',$order->id) !!}", {
-                        item_id: item_id,
-                        value: 1
+                        unique_id: unique_id,
+                        count: $("#item_count").val()
                     }, function (res) {
                         if (!res.error) {
-                            $_this.attr('disabled', true);
-                            $_this.removeClass('check-collecting');
-                            $(".status-box").html(res.message);
+                            $_this.addClass('d-none');
+                            $_this.closest('td').addClass('active');
+                            $_this.closest('td').find('.check-icon').removeClass('d-none');
+
+                            $(".status-check").html(res.message);
+                            if(res.success){
+                                $(".check-item-btn").addClass('active');
+                            }
                         }
                     });
                 }
+
             });
 
             $('#check1').click(function () {
