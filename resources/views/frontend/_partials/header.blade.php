@@ -246,7 +246,7 @@
 <script>
 
     $(document).ready(function() {
-        var x = window.matchMedia("(max-width: 768px)")
+        var x = window.matchMedia("(max-width: 768px)");
         function resize_win(x) {
             if(x.matches) {
                 $('body').on('click', '.pr-nav-l, .br-nav-l', function(ev) {
