@@ -3,10 +3,10 @@
     $variation = $o['variation'];
     $item = \App\Models\Items::find($variation['item_id']);
     $locations = ($item) ? $item->locations : [];
+    $collected = $order->collections()->where('unique_id',$o['unique_id'])->first();
+
 @endphp
-{{--if($count == 1){--}}
-{{--dd($variation->item);--}}
-{{--}--}}
+
 <div class="table-responsive @if($count > 0) table-mt @endif">
     <table class="table table-bordered">
         @if($count == 0)
@@ -51,7 +51,7 @@
             </td>
             <td class="warehouse-td align_middle w-25">
                 @if(count($locations) > 1)
-                    <select class="form-control">
+                    <select class="form-control location">
                         @foreach($locations  as $location)
                             <option value="{{ $location->warehouse_id }}">{{ $location->warehouse->name }}</option>
                         @endforeach
@@ -95,9 +95,9 @@
             <td class="barcode-td align_middle w-25">
                 <span class="barcode-block">{{ $item->barcode->code }}</span>
             </td>
-            <td class="last-td w-25">
+            <td class="last-td w-25 @if($collected) active @endif">
                 <div class="check-block">
-                    <span class="check-icon d-none">
+                    <span class="check-icon @if(! $collected) d-none @endif">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -105,7 +105,7 @@
                         <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                               d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
                         </svg></span>
-                    <span class="square-icon"></span>
+                    <span class="square-icon check-collecting @if($collected)  d-none @endif" data-unique="{{ $o['unique_id'] }}" ></span>
                 </div>
             </td>
         </tr>
