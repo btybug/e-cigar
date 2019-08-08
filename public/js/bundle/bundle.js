@@ -2809,7 +2809,6 @@ $(document).ready(function () {
         var getCurrencySymbol = function getCurrencySymbol() {
             return $('.header-bottom #symbol').val();
         };
-
         // $('.share-button').on('click', function(ev) {
         //     ev.stopImmediatePropagation();
         //     $('#share_modal').addClass('show');
@@ -5456,6 +5455,14 @@ function heightBlock(mainDiv, element) {
     }
 }
 
+console.log(1111111111111111111);
+$('body').on('click', function (ev) {
+    console.log(2, $(ev.target));
+    if ($('.navbar-collapse').hasClass('show') && !($(ev.target).hasClass('navbar-nav') || $(ev.target).closest('.navbar-nav').length > 0)) {
+        $('.navbar-collapse').removeClass('show');
+        console.log(1);
+    }
+});
 // $("body").on('click', `#popUpModal .modal-footer .b_save`, function () {
 //     const items_value_array = [];
 //     const items_array = [];
