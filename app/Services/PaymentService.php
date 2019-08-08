@@ -120,6 +120,8 @@ class PaymentService
                             'title' => $option['option']->title,
                             'id' => $option['option']->id,
                             'image' => $option['option']->image,
+                            'variation' => $option['option'],
+                            'unique_id' => uniqid()
                         ];
                     }
                     $options[$variation['group']->variation_id] = $dataV;
@@ -144,6 +146,8 @@ class PaymentService
                                 'title' => $option['option']->title,
                                 'id' => $option['option']->id,
                                 'image' => $option['option']->image,
+                                'variation' => $option['option'],
+                                'unique_id' => uniqid()
                             ];
                         }
                         $extras[$extra['variations']['group']->variation_id] = $dataV;

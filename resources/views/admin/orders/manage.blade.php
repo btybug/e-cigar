@@ -475,10 +475,10 @@
                     <div class="d-flex align-items-center total-items-block">
                         <span class="font-16 total-items-count">Total Items: {{ $count++ }}</span>
                         <button class="check-item-btn active">
-<span class="no-item">
-    <span class="icon"></span>
-    <span class="font-16 title">Check All Items</span>
-</span>
+                            <span class="no-item">
+                                <span class="icon"></span>
+                                <span class="font-16 title">Check All Items</span>
+                            </span>
                             <span class="item-checked">
                                 <span class="icon">
                                     <span class="first-icon icon-svg"><svg
@@ -1382,6 +1382,8 @@
 @section('js')
     <script>
         $(function () {
+
+
             $('body').on('click','.order__admin-wrapper .head-order-wrap .right-head .change-btn',function () {
                 if($('.order__admin-wrapper .order__change-status-wrapper').hasClass('d-none')){
                     $('.order__admin-wrapper .order__change-status-wrapper').removeClass('d-none')
