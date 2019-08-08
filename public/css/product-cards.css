@@ -6237,6 +6237,9 @@ max-width: 100%;
         opacity: 1;
         visibility: visible;
     }
+    header .header-bottom{
+        height: 72px;
+    }
 }
 
 @media (max-width: 640px) {
