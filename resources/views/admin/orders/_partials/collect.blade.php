@@ -1,6 +1,8 @@
 @php
-    $variation = \App\Models\StockVariation::find($o['id']);
-    $locations = ($variation) ? $variation->item->locations : [];
+
+    $variation = $o['variation'];
+    $item = \App\Models\Items::find($variation['item_id']);
+    $locations = ($item) ? $item->locations : [];
 @endphp
 {{--if($count == 1){--}}
 {{--dd($variation->item);--}}
@@ -91,18 +93,18 @@
                 @endif
             </td>
             <td class="barcode-td align_middle w-25">
-                <span class="barcode-block">{{ @$variation->item->barcode->code }}</span>
+                <span class="barcode-block">{{ $item->barcode->code }}</span>
             </td>
             <td class="last-td w-25">
                 <div class="check-block">
-                                                        <span class="check-icon d-none">
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                width="24px" height="19px">
-            <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
-                  d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
-            </svg></span>
+                    <span class="check-icon d-none">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                            width="24px" height="19px">
+                        <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
+                              d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+                        </svg></span>
                     <span class="square-icon"></span>
                 </div>
             </td>
