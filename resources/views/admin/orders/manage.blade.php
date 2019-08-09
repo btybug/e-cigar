@@ -204,6 +204,9 @@
                                                                                     <div
                                                                                         class="col-sm-9 font-15 font-main-bold">
                                                                                         {{ $op['title'] ." - ". $op['name'] }}
+                                                                                        @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
+                                                                                            ({{ "Pack of ".$op['discount']['qty'] }})
+                                                                                        @endif
                                                                                     </div>
                                                                                     <div
                                                                                         class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
@@ -233,6 +236,9 @@
                                                                         <div class="title-offers">
                                                                             <p class="font-18 lh-1 mb-0">
                                                                                 {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                                @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
+                                                                                    ({{ "Pack of ".$ext['discount']['qty'] }})
+                                                                                @endif
                                                                             </p>
                                                                         </div>
                                                                     </div>
