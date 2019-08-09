@@ -226,8 +226,25 @@
                                                             <div class="font-16 text-sec-clr offers-tag">
                                                                 With offers:
                                                             </div>
+                                                            @php
+                                                                $extraPrice = 0;
+                                                            @endphp
                                                             @foreach($item->options['extras'] as $extra)
                                                                 @foreach($extra['options'] as $ext)
+                                                                    @php
+                                                                        if($ext['discount']){
+                                                                            if($ext['variation']['discount_type'] =='fixed'){
+                                                                                $price = $ext['discount']['price'];
+                                                                            }else{
+                                                                                $price = $ext['discount']['price']* $ext['qty'];
+                                                                            }
+                                                                        }else{
+                                                                            $price = $ext['variation']['price'] * $ext['qty'];
+                                                                        }
+                                                                    @endphp
+                                                                    @php
+                                                                        $extraPrice +=$price;
+                                                                    @endphp
                                                                     <div class="d-flex product-offers-inner">
                                                                         <div class="photo">
                                                                             <img src="{{ $ext['image'] }}"
@@ -265,7 +282,7 @@
                                                             </div>
                                                             <div class="price-col">
                                                         <span class="lh-1 text-tert-clr font-35">
-                                                            {!! convert_price($item->price,get_currency()) !!}
+                                                            {!! convert_price($item->price+$extraPrice,get_currency()) !!}
                                                         </span>
                                                             </div>
                                                         </div>

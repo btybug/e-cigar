@@ -51,23 +51,24 @@
     <div class="invoice__wrapper-main-content clearfix">
         <div class="invoice__content-logo clearfix">
                                         <span class="icon">
-                   <img src="{{ url(get_site_logo()) }}" alt="logo">
+                   <img src="{{ url(get_site_logo()) }}" alt="{{ get_site_name() }}">
                 </span>
         </div>
         <div
             class="invoice__content-info">
             <div class="invoice__content-info-left">
                 <p class="title">To:</p>
-                <p class="bold-title">Customer Name</p>
-                <p>Wilkinson Way, Blackburn</p>
-                <p>BB1 2EH, London</p>
-                <p>United Kingdom</p>
+                <p class="bold-title">{{ $order->user->name. " ".$order->user->last_name }}</p>
+                <p>{{ $order->shippingAddress->company }}</p>
+                <p>{!! $order->shippingAddress->first_line_address ." ".$order->shippingAddress->second_line_address  !!}</p>
+                <p>{!! $order->shippingAddress->post_code !!}</p>
+                <p>{!! $order->shippingAddress->city !!}, {!! $order->shippingAddress->country !!}</p>
             </div>
             <div class="invoice__content-info-right">
-                <p>The Vapors Hub Ltd, GM</p>
-                <p>Wilkinson Way, Blackburn</p>
-                <p>Lancashire, BB1 2EH</p>
-                <p>London, UK</p>
+                <p>{{ $settings->first_address. ' '.$settings->second_address }}</p>
+                <p>{{ $settings->city .',' }} {{ $settings->post_code }}</p>
+                <p>{{ $settings->country }}</p>
+
                 <p>Company number: 47655666</p>
                 <p>VAT number: 978886765766</p>
             </div>
@@ -86,52 +87,82 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="product-td">Kangertech Vola 23 100W Premium Vape
-                        </td>
-                        <td class="desc-td">
-                            <div class="single-item">
-                                <span class="single-item-name">Pods Gold Edition</span>
-                                <span class="single-item-price">$28</span>
-                            </div>
-                            <div class="single-item">
-                                <span class="single-item-name">Gold Tobacco Nic.Salts 18mg</span>
-                                <span class="single-item-price">$55</span>
-                            </div>
-                        </td>
-                        <td class="qty-td text-center">
-                            <span>x 1</span>
-                        </td>
-                        <td class="vat-td text-center">
-                            <span>£18 (21%)</span>
-                        </td>
-                        <td class="total-td text-center">
-                            <span class="price">£83,00</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="product-td">Kangertech Vola 23 100W Premium Vape
-                        </td>
-                        <td class="desc-td">
-                            <div class="single-item">
-                                <span class="single-item-name">Pods Gold Edition</span>
-                                <span class="single-item-price">$28</span>
-                            </div>
-                            <div class="single-item">
-                                <span class="single-item-name">Gold Tobacco Nic.Salts 18mg</span>
-                                <span class="single-item-price">$55</span>
-                            </div>
-                        </td>
-                        <td class="qty-td text-center">
-                            <span>x 1</span>
-                        </td>
-                        <td class="vat-td text-center">
-                            <span>£18 (21%)</span>
-                        </td>
-                        <td class="total-td text-center">
-                            <span class="price">£83,00</span>
-                        </td>
-                    </tr>
+
+                    @foreach($order->items as $item)
+                        <tr>
+                            <td class="product-td">
+                                {{ $item->name }}
+                            </td>
+                            <td class="desc-td">
+                                @if(count($item->options['options']))
+                                    @foreach($item->options['options'] as $option)
+                                        @foreach($option['options'] as $op)
+                                            @php
+                                                if($op['discount']){
+                                                    if($op['variation']['discount_type'] =='fixed'){
+                                                        $price = $op['discount']['price'];
+                                                    }else{
+                                                        $price = $op['discount']['price']* $op['qty'];
+                                                    }
+                                                }else{
+                                                    $price = $op['variation']['price'] * $op['qty'];
+                                                }
+                                            @endphp
+                                            <div class="single-item">
+                                                <span class="single-item-name">
+                                                     {{ $op['title'] ." - ". $op['name'] }}
+                                                    @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
+                                                        ({{ "Pack of ".$op['discount']['qty'] }})
+                                                    @endif
+                                                </span>
+
+                                                <span class="single-item-price">{!! convert_price($price,$order->currency) !!}</span>
+                                            </div>
+                                        @endforeach
+                                    @endforeach
+                                    @php
+                                    $extraPrice = 0;
+                                    @endphp
+                                    @foreach($item->options['extras'] as $extra)
+                                        @foreach($extra['options'] as $ext)
+                                                @php
+                                                    if($ext['discount']){
+                                                        if($ext['variation']['discount_type'] =='fixed'){
+                                                            $price = $ext['discount']['price'];
+                                                        }else{
+                                                            $price = $ext['discount']['price']* $ext['qty'];
+                                                        }
+                                                    }else{
+                                                        $price = $ext['variation']['price'] * $ext['qty'];
+                                                    }
+                                                @endphp
+                                                <div class="single-item">
+                                                    <span class="single-item-name">
+                                                         {{ $ext['title'] ." - ". $ext['name'] }}
+                                                        @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
+                                                            ({{ "Pack of ".$ext['discount']['qty'] }})
+                                                        @endif
+                                                    </span>
+                                                    @php
+                                                        $extraPrice +=$price;
+                                                    @endphp
+                                                    <span class="single-item-price">{!! convert_price($price,$order->currency) !!}</span>
+                                                </div>
+                                        @endforeach
+                                    @endforeach
+                                @endif
+                            </td>
+                            <td class="qty-td text-center">
+                                <span>x {{ $item->qty }}</span>
+                            </td>
+                            <td class="vat-td text-center">
+                                <span> {{ convert_price(0,$order->currency) }}</span>
+                            </td>
+                            <td class="total-td text-center">
+                                <span class="price">  {!! convert_price($item->price+$extraPrice,$order->currency) !!}</span>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
@@ -143,21 +174,22 @@
             <div class="invoice__content-price">
                 <div class="invoice__content-price-item clearfix">
                     <span class="name">Sub Total</span>
-                    <span class="price">£18,00</span>
+                    <span class="price">{{ convert_price($order->items()->sum('amount'),$order->currency) }}</span>
                 </div>
                 <div class="invoice__content-price-item clearfix">
                     <span class="name">Total VAT</span>
-                    <span class="price">£08,00</span>
+                    <span class="price">  {{ convert_price(0,$order->currency) }}</span>
                 </div>
                 <div class="invoice__content-price-item clearfix">
                     <span class="name">Shipping</span>
-                    <span class="price">£10,00</span>
+                    <span class="price"> {{ convert_price($order->shipping_price,$order->currency) }}
+                    </span>
                 </div>
                 <div class="invoice__content-price-item total-amount-wall clearfix">
                     <span class="name total-name">Total Amount</span>
                     <span class="price total-price">
-                        <span>£86,</span>
-                        <span class="sec-price">95</span>
+                        <span>{{ convert_price($order->amount,$order->currency) }}
+                        </span>
                     </span>
                 </div>
             </div>
@@ -166,15 +198,20 @@
     </div>
     <div class="invoice__wrapper-footer clearfix">
         <ul class="left-list">
-            <li>The Vapors Hub Ltd, GM</li>
-            <li>Wilkinson Way, Blackburn</li>
-            <li>Lancashire, BB1 2EH</li>
-            <li>London, UK</li>
+            <li>{{ $settings->first_address }}</li>
+            <li>{{ $settings->second_address }}</li>
+            <li> {{ $settings->post_code }}</li>
+            <li>{{ $settings->city .', ' }}{{ $settings->country }}</li>
+
+            {{--<li>The Vapors Hub Ltd, GM</li>--}}
+            {{--<li>Wilkinson Way, Blackburn</li>--}}
+            {{--<li>Lancashire, BB1 2EH</li>--}}
+            {{--<li>London, UK</li>--}}
         </ul>
         <ul class="right-list">
             <li>TheVaporsHub.com</li>
-            <li>Info@TheVaporsHub.com</li>
-            <li>Tel: +32 456 586 56</li>
+            <li> {{ $settings->email }}</li>
+            <li>Tel: {{ $settings->phone }}</li>
         </ul>
     </div>
 </div>

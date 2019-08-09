@@ -73,6 +73,7 @@ class OrdersController extends Controller
         if (!$order) abort(404);
         $hidden = [];
         $model = $settings->getEditableData('orders_statuses');
+        $settings = $settings->getEditableData('admin_general_settings');
 
         $hidden[] = $model->submitted;
         $hidden[] = $model->partially_collected;
@@ -80,7 +81,7 @@ class OrdersController extends Controller
 
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
 //        dd($statuses,$model,$hidden);
-        return $this->view('manage', compact('order', 'statuses'));
+        return $this->view('manage', compact('order', 'statuses','settings'));
     }
 
     public function getNew()
@@ -641,10 +642,14 @@ class OrdersController extends Controller
 
     }
 
-    public function printPdf(Request $request,$id)
+    public function printPdf(Request $request,$id,Settings $settings)
     {
 // This  $data array will be passed to our PDF blade
+        $settings = $settings->getEditableData('admin_general_settings');
+        $order = Orders::findOrFail($id);
         $data = [
+            'order' => $order,
+            'settings' => $settings,
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
             'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
@@ -654,6 +659,6 @@ class OrdersController extends Controller
 
         $pdf = \PDF::loadView('admin.pdf.invoice', $data);
 
-        return $pdf->download('medium.pdf');
+        return $pdf->download('invoice.pdf');
     }
 }
