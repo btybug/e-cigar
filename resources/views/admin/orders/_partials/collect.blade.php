@@ -35,7 +35,12 @@
                     <p class="text-tert-clr text-uppercase">
                         {!! $o['title'] !!}
                     </p>
-                    <p class="mb-0">{{ $o['name'] }}</p>
+                    <p class="mb-0">
+                        {{ $o['name'] }}
+                        @if($o['discount'] && $variation['discount_type'] == 'fixed')
+                            ({{ "Pack of ".$o['discount']['qty'] }})
+                        @endif
+                    </p>
                 </div>
             </td>
 

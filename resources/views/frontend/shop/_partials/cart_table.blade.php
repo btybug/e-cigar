@@ -51,11 +51,13 @@
                                                 <div class="product-main-info">
                                                     <ul class="list-unstyled mb-0">
                                                         @foreach($item->attributes->variations as $option)
+
                                                             @if($option['group']->price_per =='product')
                                                                 <li class="single-row-product">
                                                                     <div class="d-flex flex-column w-100 col-9 p-0">
                                                                         @if(count($option['options']))
                                                                             @foreach($option['options'] as $voption)
+
                                                                                 <div class="w-100">
                                                                                     <div class="row">
                                                                                         <div
@@ -81,6 +83,25 @@
                                                             @else
                                                                 @if(count($option['options']))
                                                                     @foreach($option['options'] as $voption)
+                                                                        @php
+                                                                            if($voption['option']->price_type == 'discount'){
+                                                                                if($voption['option']->discount_type =='fixed'){
+                                                                                    $price = 0;
+                                                                                    $discount = \App\Models\StockVariationDiscount::find($voption['discount_id']);
+                                                                                    if($discount){
+                                                                                        $price = $discount->price;
+                                                                                    }
+                                                                                }else{
+                                                                                    $price = 0;
+                                                                                    $discount = $voption['option']->discounts()->where('from','<=',$voption['qty'])->where('to','>=',$voption['qty'])->first();
+                                                                                    if($discount){
+                                                                                        $price = $discount->price* $voption['qty'];
+                                                                                    }
+                                                                                }
+                                                                            }else{
+                                                                                $price = $voption['option']->price * $voption['qty'];
+                                                                            }
+                                                                        @endphp
                                                                         <li class="single-row-product">
                                                                             <div
                                                                                 class="d-flex flex-column w-100 col-9 p-0">
@@ -89,6 +110,9 @@
                                                                                         <div
                                                                                             class="col-sm-8 font-15 font-main-bold">
                                                                                             {{ $voption['option']->name }}
+                                                                                            @if(isset($discount) && $voption['option']->discount_type == 'fixed')
+                                                                                                ({{ "Pack of $discount->qty" }})
+                                                                                            @endif
                                                                                         </div>
                                                                                         <div
                                                                                             class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
@@ -99,26 +123,7 @@
                                                                                 </div>
                                                                             </div>
 
-                                                                            @php
 
-                                                                                if($voption['option']->price_type == 'discount'){
-                                                                                    if($voption['option']->discount_type =='fixed'){
-                                                                                        $price = 0;
-                                                                                        $discount = \App\Models\StockVariationDiscount::find($voption['discount_id']);
-                                                                                        if($discount){
-                                                                                            $price = $discount->price;
-                                                                                        }
-                                                                                    }else{
-                                                                                        $price = 0;
-                                                                                        $discount = $voption['option']->discounts()->where('from','<=',$voption['qty'])->where('to','>=',$voption['qty'])->first();
-                                                                                        if($discount){
-                                                                                            $price = $discount->price* $voption['qty'];
-                                                                                        }
-                                                                                    }
-                                                                                }else{
-                                                                                    $price = $voption['option']->price * $voption['qty'];
-                                                                                }
-                                                                            @endphp
                                                                             <div
                                                                                 class="font-15 font-main-bold align-self-center col-3 pr-0 text-right">
                                                                                 {!!  convert_price($price,$currency, false)  !!}

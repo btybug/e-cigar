@@ -113,7 +113,14 @@ class PaymentService
                         } else {
                             $sales[$option['option']->item_id] = $option['qty'];
                         }
-
+                        $discount = null;;
+                        if($option['option']->price_type == 'discount'){
+                            if($option['option']->discount_type =='fixed'){
+                                $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
+                            }else{
+                                $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
+                            }
+                        }
                         $dataV['options'][] = [
                             'qty' => $option['qty'],
                             'name' => $option['option']->name,
@@ -121,7 +128,8 @@ class PaymentService
                             'id' => $option['option']->id,
                             'image' => $option['option']->image,
                             'variation' => $option['option'],
-                            'unique_id' => uniqid()
+                            'unique_id' => uniqid(),
+                            'discount' => $discount
                         ];
                     }
                     $options[$variation['group']->variation_id] = $dataV;
@@ -140,6 +148,15 @@ class PaymentService
                                 $sales[$option['option']->item_id] = 1;
                             }
 
+                            $discount = null;;
+                            if($option['option']->price_type == 'discount'){
+                                if($option['option']->discount_type =='fixed'){
+                                    $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
+                                }else{
+                                    $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
+                                }
+                            }
+
                             $dataV['options'][] = [
                                 'qty' => $option['qty'],
                                 'name' => $option['option']->name,
@@ -147,7 +164,8 @@ class PaymentService
                                 'id' => $option['option']->id,
                                 'image' => $option['option']->image,
                                 'variation' => $option['option'],
-                                'unique_id' => uniqid()
+                                'unique_id' => uniqid(),
+                                'discount' => $discount
                             ];
                         }
                         $extras[$extra['variations']['group']->variation_id] = $dataV;
