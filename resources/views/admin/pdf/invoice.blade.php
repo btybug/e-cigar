@@ -51,7 +51,7 @@
     <div class="invoice__wrapper-main-content clearfix">
         <div class="invoice__content-logo clearfix">
                                         <span class="icon">
-                   <img src="{{ get_site_logo() }}" alt="{{ get_site_name() }}">
+                   <img src="{{ url(get_site_logo()) }}" alt="logo">
                 </span>
         </div>
         <div
