@@ -4,7 +4,7 @@
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>E-</b>CIGAR</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><img src="{!! url('/public/img/vapors-logo.png') !!}" alt="logo" class="logo-img"></span>
+        <span class="logo-lg"><img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" class="logo-img"></span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">
