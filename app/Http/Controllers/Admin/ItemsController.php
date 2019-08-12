@@ -48,7 +48,7 @@ class ItemsController extends Controller
     {
         $model = null;
         $bundle = false;
-        $barcodes = $this->barcodeService->getUnsedCodes();
+        $barcodes = $this->barcodeService->getPluck();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = [];
@@ -61,7 +61,7 @@ class ItemsController extends Controller
     {
         $model = null;
         $bundle = true;
-        $barcodes = $this->barcodeService->getUnsedCodes();
+        $barcodes = $this->barcodeService->getPluck();
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = [];
         $shelves = [];
@@ -72,7 +72,8 @@ class ItemsController extends Controller
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price');
+//        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
         $this->saveVideos($request, $item);
@@ -93,7 +94,7 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($id);
         $bundle = ($model->type != 'bundle') ? false : true;
-        $barcodes = $this->barcodeService->getUnsedCodes($model->barcode_id);
+        $barcodes = $this->barcodeService->getPluck();
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();

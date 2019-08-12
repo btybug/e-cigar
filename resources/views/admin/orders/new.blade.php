@@ -736,7 +736,7 @@
 
             $("body").on('change', '.select-product', function () {
                 let id = $(this).val();
-                AjaxCall("/admin/stock/get-by-id", {id: id}, function (res) {
+                AjaxCall("{{ route('admin_orders_items_by_id') }}", {id: id}, function (res) {
                     if (!res.error) {
                         var isExists = $(".promotion-elm[data-id='" + res.data.id + "']");
                         if (isExists.length == 0) {
@@ -826,7 +826,7 @@
                 var id = $(this).data('id');
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/orders/get-product", {id: id}, function (res) {
+                AjaxCall("/admin/orders/get-item", {id: id}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         get_price();

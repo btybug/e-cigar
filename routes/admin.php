@@ -297,9 +297,10 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/add-note', 'Admin\OrdersController@addNote')->name('orders_add_note');
     Route::get('/settings', 'Admin\OrdersController@getSettings')->name('admin_orders_settings');
     Route::post('/settings', 'Admin\OrdersController@postSettings')->name('admin_orders_settings_save');
-    Route::post('/get-product', 'Admin\OrdersController@getProduct')->name('orders_get_product');
+    Route::post('/get-item', 'Admin\OrdersController@getItem')->name('orders_get_product');
 
     Route::post('/collecting/{id}', 'Admin\OrdersController@postCollecting')->name('admin_orders_collecting');
+    Route::post('/get-item-by-id', 'Admin\OrdersController@ItemById')->name('admin_orders_items_by_id');
 
 
     Route::post('/get-user', 'Admin\OrdersController@postGetUser')->name('admin_orders_get_user');

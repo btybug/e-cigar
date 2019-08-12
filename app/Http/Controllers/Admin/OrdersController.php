@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\Coupons;
+use App\Models\Items;
 use App\Models\Orders;
 use App\Models\OrdersJob;
 use App\Models\Statuses;
@@ -87,7 +88,7 @@ class OrdersController extends Controller
     public function getNew()
     {
         $user = null;
-        $products = Stock::all()->pluck('name', 'id')->all();
+        $products = Items::all()->pluck('name', 'id')->all();
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
         $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->whereNull('role_id')
@@ -137,15 +138,11 @@ class OrdersController extends Controller
         return redirect()->back();
     }
 
-    public function getProduct(Request $request)
+    public function getItem(Request $request)
     {
-        $vape = Stock::with(['variations', 'stockAttrs'])->where('id', $request->id)->first();
-
-        if (!$vape) abort(404);
-
-        $variations = $vape->variations()->with('options')->get();
+        $item = Items::findOrFail($request->id);
         $currency = get_currency();
-        $html = $this->view('_partials.product', compact(['vape', 'variations', 'currency']))->render();
+        $html = $this->view('_partials.product', compact(['item']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -198,6 +195,13 @@ class OrdersController extends Controller
 
 
         return \Response::json(['error' => $error, 'message' => $message,'success' => $success]);
+    }
+
+    public function ItemById(Request $request)
+    {
+        $model = Items::findOrFail($request->id);
+
+        return \Response::json(['error' => false, 'data' => $model]);
     }
 
     public function postAddUser(Request $request)

@@ -21,4 +21,9 @@ class BarcodesService
         }
         return $query->get()->pluck('code','id');
     }
+
+    public function getPluck($id=null)
+    {
+        return Barcodes::get()->pluck('code','id');
+    }
 }
