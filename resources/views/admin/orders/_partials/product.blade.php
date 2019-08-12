@@ -1,16 +1,16 @@
-<div class="main-right-wrapp kaliony-page d-flex flex-wrap" data-id="{{ $vape->id }}">
-    <div class="col-xl-12 col-lg-12 p-0">
+<div class="main-right-wrapp kaliony-page d-flex flex-wrap" data-id="{{ $item->id }}">
+    <div class="col-xl-6 col-lg-6 p-0">
         <div class="main-content product-tab-main-content h-100">
             <div class="row no-gutters h-100">
-                @if($vape->image)
+                @if($item->image)
                     <div>
-                        <img src="{!! $vape->image !!}" alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                        <img src="{!! $item->image !!}" alt="{!! @getImage( $item->image)->seo_alt !!}" width="700px">
                     </div>
                 @endif
             </div>
         </div>
     </div>
-    <div class="col-xl-12 col-lg-12 p-0">
+    <div class="col-xl-6 col-lg-6 p-0">
         <div class="product-content-left-col-inner">
             <div class="d-flex w-100 product-tab-main-content-desc">
                 <div class="product-tab-main-content-title">
@@ -18,14 +18,14 @@
                          alt="kaliony">
 
                     <div class="product-tab-main-content-sub text-uppercase">
-                        <em class="txt-cl-red emph">{!! $vape->name !!}</em>
+                        <em class="txt-cl-red emph">{!! $item->name !!}</em>
                     </div>
                 </div>
                 <div class="share-btns d-inline-block ml-auto">
                     @if(Auth::check())
                         <a href="javascript:void(0)"
-                           class="d-block share-btns-item add-to-favorite add-to-favorite @if(Auth::user()->favorites()->exists($vape->id)) active @endif"
-                           data-id="{!! $vape->id !!}">
+                           class="d-block share-btns-item add-to-favorite add-to-favorite @if(Auth::user()->favorites()->exists($item->id)) active @endif"
+                           data-id="{!! $item->id !!}">
                             <svg width="30px" height="28px" viewBox="0 0 30 28">
                                 <path fill-rule="evenodd" stroke="rgb(34, 36, 35)"
                                       d="M29.355,11.060 C28.755,13.649 27.363,16.008 25.333,17.877 L14.912,27.331 L4.670,17.879 C2.637,16.007 1.246,13.648 0.645,11.060 C0.213,9.200 0.390,8.149 0.391,8.142 L0.400,8.080 C0.796,3.538 3.897,0.241 7.774,0.241 C10.634,0.241 13.152,2.028 14.347,4.904 L14.909,6.259 L15.471,4.904 C16.647,2.072 19.298,0.242 22.227,0.242 C26.102,0.242 29.204,3.539 29.609,8.139 C29.610,8.149 29.787,9.200 29.355,11.060 Z"></path>
@@ -43,12 +43,14 @@
             </div>
             <p class="product-tab-main-content-info">
                 <strong class="font-main-med fnz-18">
-                    {!! $vape->long_description !!}
+                    {!! $item->long_description !!}
                 </strong>
             </p>
             <div>
-                <input type="hidden" value="{{ $vape->id }}" id="vpid">
-                @include("admin.inventory._partials.render_price_form",['model' => $vape])
+                <input type="hidden" value="{{ $item->id }}" id="vpid">
+                <div>
+                    Price: {{ convert_price($item->default_price,get_currency()) }}
+                </div>
                 <div>
                     <div class="form-group d-md-flex align-items-center">
                         <label for="productQty"

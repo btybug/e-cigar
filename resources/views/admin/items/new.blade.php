@@ -144,7 +144,7 @@
                                                         <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Default price</label>
 
                                                         <div class="col-sm-8">
-                                                            {!! Form::number('default_price', 0,['class' => 'form-control','step'=>0.1,'min'=>0]) !!}
+                                                            {!! Form::number('default_price',null,['class' => 'form-control','min'=>0]) !!}
                                                         </div>
                                                     </div>
                                                 </div>
