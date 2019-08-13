@@ -877,37 +877,19 @@
             });
 
             $("body").on('click', '.add-to-cart', function () {
-                var variationId = $("#variation_uid").val();
-                var userID = $("#order_user").val();
+                var itemId = $(this).closest('.item-pr-bx').data('item-id');
+                var qty = $(this).closest('.item-pr-bx').find('.qty-item').val();
+                var userID = $("body").find("#order_user").val();
 
-                if (variationId && variationId != '') {
-                    var requiredItems = [];
-                    var optionalItems = [];
-
-                    var requiredItemsData = $(".required_item");
-                    var optionalItemsData = $(".optional_item");
-
-
-                    optionalItemsData.each(function (i, e) {
-                        if ($(e).parent().find('.optional_checkbox').is(':checked')) {
-                            optionalItems.push($(e).val());
-                        }
-                    });
-
-                    requiredItemsData.each(function (i, e) {
-                        requiredItems.push($(e).val());
-                    });
-//                    console.log(requiredItems)
-//                    return false;
+                if (itemId && itemId != '') {
                     $.ajax({
                         type: "post",
                         url: "/admin/orders/add-to-cart",
                         cache: false,
                         datatype: "json",
                         data: {
-                            uid: variationId,
-                            requiredItems: requiredItems,
-                            optionalItems: optionalItems,
+                            uid: itemId,
+                            qty: qty,
                             user_id: userID
                         },
                         headers: {
@@ -926,7 +908,7 @@
                         }
                     });
                 } else {
-                    alert('Select available variation');
+                    alert('Select available item');
                 }
             })
 
@@ -1021,103 +1003,6 @@
                     alert('Select available variation');
                 }
             })
-
-            function get_price() {
-                var items = $(".extra-variations").find('.select-variation-option');
-                console.log(items)
-
-                $("body .btn-add-to-cart").removeClass('add-to-cart');
-                let options = {};
-
-                for (var i = 0; i < items.length; i++) {
-                    options[$(items[i]).data('name')] = $(items[i]).val();
-                }
-
-                $.map($("body .options-group input:radio:checked"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-                console.log(items, options, $("body #vpid").val())
-                $.ajax({
-                    type: "post",
-                    url: "/products/get-price",
-                    cache: false,
-                    datatype: "json",
-                    data: {options: options, uid: $("body #vpid").val()},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            var price = "€" + data.price;
-                            if (data.message) {
-                                price = data.message + " €" + data.price;
-                            }
-                            $("body .price-place").html(price);
-                            $("body #variation_uid").val(data.variation_id);
-                            $("body .btn-add-to-cart").addClass('add-to-cart');
-                        } else {
-                            $("body .price-place").html(data.message);
-                            $("body #variation_uid").val('');
-                        }
-                    }
-                });
-            }
-
-            var plist = $(".poptions-group");
-            for (var i = 0; i < plist.length; i++) {
-                get_promotion_price($(plist[i]).data('promotion'))
-            }
-
-            $("body").on('change', '.select-variation-poption', function () {
-                var pid = $(this).closest('.poptions-group').data('promotion');
-                get_promotion_price(pid);
-            });
-
-            $("body").on('change', '.select-variation-radio-poption', function () {
-                var pid = $(this).closest('.poptions-group').data('promotion');
-                get_promotion_price(pid);
-            });
-
-            function get_promotion_price(pid) {
-                let options = {};
-
-                $.map($("[data-promotion='" + pid + "'] input:radio:checked"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-
-                $.map($("[data-promotion='" + pid + "'] .select-variation-poption"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-
-                console.log(options);
-//            price-place-promotion
-                $.ajax({
-                    type: "post",
-                    url: "/products/get-price",
-                    cache: false,
-                    datatype: "json",
-                    data: {options: options, uid: pid, promotion: true},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            var price = "€" + data.price;
-                            if (data.message) {
-                                price = data.message + " €" + data.price;
-                            }
-
-                            $("[data-promotion='" + pid + "'] .price-place-promotion").html(price);
-                            $("[data-promotion='" + pid + "'] .variation_items").val(data.variation_id);
-//                        $("#variation_uid").val(data.variation_id);
-//                        $(".btn-add-to-cart").addClass('add-to-cart');
-                        } else {
-                            $("[data-promotion='" + pid + "'] .price-place-promotion").html(data.message);
-//                        $("#variation_uid").val('');
-                        }
-                    }
-                });
-            }
 
 
             $('body').on('click', '.change-status-btn', function (event) {

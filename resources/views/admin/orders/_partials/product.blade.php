@@ -52,12 +52,12 @@
                     Price: {{ convert_price($item->default_price,get_currency()) }}
                 </div>
                 <div>
-                    <div class="form-group d-md-flex align-items-center">
+                    <div class="form-group d-md-flex align-items-center item-pr-bx" data-item-id="{{ $item->id }}">
                         <label for="productQty"
                                class="fnz-20 mb-md-0 mb-4 mr-3">Qty.</label>
-                        {!! Form::number('',1,['class' => 'product-qty-select mr-3','min' => '1','style'=> 'width: 85px;']) !!}
+                        {!! Form::number('',1,['class' => 'product-qty-select mr-3 qty-item','min' => '1','style'=> 'width: 85px;']) !!}
 
-                        <button class="btn btn-primary btn-add-to-cart rounded-0 fnz-20">
+                        <button class="btn btn-primary btn-add-to-cart add-to-cart rounded-0 fnz-20">
                                                     <span class="icon">
                                                         <svg width="24px" height="31px">
                                                     <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
