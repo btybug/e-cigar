@@ -2171,7 +2171,23 @@ $(document).ready(function () {
                                 let id;
                                 let qty;
                                 let discount_id;
-                                if($(this).find('.single-product-select').length > 0) {
+
+                                if($(this).closest('.filter').length > 0 && $(this).hasClass('get-single-price')) {
+                                    console.log(1111111111)
+                                    id = $(this).data('id');
+                                    if($(this).find('.input-qty').length>0) {
+                                        qty = $(this).find('.input-qty').val();
+                                        discount_id = null;
+                                    } else if($(this).find('.select-qty').length>0) {
+                                        qty = null;
+                                        discount_id = $(this).find('.select-qty').val();
+                                    } else {
+                                        qty = '1';
+                                        discount_id = null;
+                                    }
+                                } if($(this).find('.single-product-select').length > 0 && $(this).closest('.filter').length == 0) {
+                                    console.log(222222222)
+
                                     id = $(this).find('.single-product-select').val();
                                     if($(this).find('.input-qty').length>0) {
                                         qty = $(this).find('.input-qty').val();
@@ -2184,6 +2200,7 @@ $(document).ready(function () {
                                         discount_id = null;
                                     }
                                 } else if($(this).find('.custom-control-input').length > 0) {
+                                    console.log(333333333333)
 
                                     id = $(this).find('.custom-control-input:checked').val();
                                     console.log('id', id, $(this), $(this).find('.custom-control-input:checked'),  555555555);
@@ -2198,6 +2215,8 @@ $(document).ready(function () {
                                         discount_id = null;
                                     }
                                 } else if($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
+                                    console.log(4444444444444)
+
                                     id = $(this).data('id');
 
                                     if($(this).find('.input-qty').length>0) {
