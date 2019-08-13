@@ -699,9 +699,9 @@
 //            });
 
             $("body").on('click', '.pay-button', function () {
-                let user = $("#order_user").val();
-                let product = $("#order_product_subtotal").val();
-                let method = $("input[name='payment_method']:checked").val();
+                let user = $("body").find("#order_user").val();
+                let product = $("body").find("#order_product_subtotal").val();
+                let method = $("body").find("input[name='payment_method']:checked").val();
                 console.log(user, product)
 
                 if (user == '' || user == undefined) {
