@@ -20,7 +20,7 @@
                     </option>
                 @endforeach
             </select>
-
+        </div>
     @elseif($vSettings->type == 'filter')
         <div class="select-wall product__select-wall">
             <span
@@ -129,7 +129,7 @@
 @endif
 
 <div class="d-flex justify-content-center get-single-price" data-single-price="{{ $price }}">
-    @if($selected->discount_type == 'range')
+    @if($selected->price_type != 'static' && $selected->discount_type == 'range')
         <div class="d-flex flex-column w-100 align-items-center">
             <span class="text-tert-clr">*Quality Discount</span>
             <div class="product__single-item-inp-num">
@@ -143,7 +143,7 @@
                 </div>
             </div>
         </div>
-    @elseif($selected->discount_type == 'fixed')
+    @elseif($selected->price_type != 'static' && $selected->discount_type == 'fixed')
         <div
             class="d-flex flex-column w-100 align-items-center">
             <span class="text-tert-clr">*Quality Discount</span>
