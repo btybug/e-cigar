@@ -89,23 +89,26 @@ class ShoppingCartController extends Controller
             if ($geoZone) {
                 session()->put('billing_address_id', $default_shipping->id);
                 session()->put('shipping_address_id', $default_shipping->id);
+                $shipping = Cart::getCondition($geoZone->name);
 
-                Cart::removeConditionsByType('shipping');
                 if (count($geoZone->deliveries)) {
                     $subtotal = Cart::getSubTotal();
                     $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                    if ($delivery && count($delivery->options)) {
-                        $shippingDefaultOption = $delivery->options->first();
-                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                            'name' => $geoZone->name,
-                            'type' => 'shipping',
-                            'target' => 'total',
-                            'value' => $shippingDefaultOption->cost,
-                            'order' => 1,
-                            'attributes' => $shippingDefaultOption
-                        ));
-                        Cart::condition($condition2);
-                        $shipping = Cart::getCondition($geoZone->name);
+                    if(! $shipping) {
+                        Cart::removeConditionsByType('shipping');
+                        if ($delivery && count($delivery->options)) {
+                            $shippingDefaultOption = $delivery->options->first();
+                            $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                                'name' => $geoZone->name,
+                                'type' => 'shipping',
+                                'target' => 'total',
+                                'value' => $shippingDefaultOption->cost,
+                                'order' => 1,
+                                'attributes' => $shippingDefaultOption
+                            ));
+                            Cart::condition($condition2);
+                            $shipping = Cart::getCondition($geoZone->name);
+                        }
                     }
                 }
             }
@@ -124,29 +127,29 @@ class ShoppingCartController extends Controller
                 $cart_id = uniqid();
                 Cart::add($cart_id, $product->id, $this->cartService->price, $request->product_qty, ['variations' => $this->cartService->variations, 'product' => $product]);
 
-                if (Auth::check()) {
-                    $user = \Auth::user();
-                    $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
-                    $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
-                    $geoZone = ($zone) ? $zone->geoZone : null;
-                    if ($geoZone && count($geoZone->deliveries)) {
-                        $subtotal = Cart::getSubTotal();
-                        Cart::removeConditionsByType('shipping');
-                        $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                        if ($delivery && count($delivery->options)) {
-                            $shippingDefaultOption = $delivery->options->first();
-                            $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                                'name' => $geoZone->name,
-                                'type' => 'shipping',
-                                'target' => 'total',
-                                'value' => $shippingDefaultOption->cost,
-                                'order' => 1,
-                                'attributes' => $shippingDefaultOption
-                            ));
-                            Cart::condition($condition2);
-                        }
-                    }
-                }
+//                if (Auth::check()) {
+//                    $user = \Auth::user();
+//                    $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+//                    $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+//                    $geoZone = ($zone) ? $zone->geoZone : null;
+//                    if ($geoZone && count($geoZone->deliveries)) {
+//                        $subtotal = Cart::getSubTotal();
+//                        Cart::removeConditionsByType('shipping');
+//                        $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+//                        if ($delivery && count($delivery->options)) {
+//                            $shippingDefaultOption = $delivery->options->first();
+//                            $condition2 = new \Darryldecode\Cart\CartCondition(array(
+//                                'name' => $geoZone->name,
+//                                'type' => 'shipping',
+//                                'target' => 'total',
+//                                'value' => $shippingDefaultOption->cost,
+//                                'order' => 1,
+//                                'attributes' => $shippingDefaultOption
+//                            ));
+//                            Cart::condition($condition2);
+//                        }
+//                    }
+//                }
 
                 $headerhtml = \View('frontend._partials.shopping_cart_options')->render();
                 $popuphtml = \View('frontend.products._partials.offer_popup',['vape' => $product,'key' => $cart_id,'price' => $this->cartService->price,'qty' => $request->product_qty])->render();
@@ -249,23 +252,27 @@ class ShoppingCartController extends Controller
             $geoZone = ($zone) ? $zone->geoZone : null;
             if ($geoZone && count($geoZone->deliveries)) {
                 $subtotal = Cart::getSubTotal();
-                Cart::removeConditionsByType('shipping');
+                $shipping = Cart::getCondition($geoZone->name);
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                if ($delivery && count($delivery->options)) {
-                    $shippingDefaultOption = $delivery->options->first();
-                    $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                        'name' => $geoZone->name,
-                        'type' => 'shipping',
-                        'target' => 'total',
-                        'value' => $shippingDefaultOption->cost,
-                        'order' => 1,
-                        'attributes' => $shippingDefaultOption
-                    ));
-                    Cart::condition($condition2);
-                    $shipping = Cart::getCondition($geoZone->name);
+
+                if(! $shipping){
+                    Cart::removeConditionsByType('shipping');
+
+                    if ($delivery && count($delivery->options)) {
+                        $shippingDefaultOption = $delivery->options->first();
+                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $geoZone->name,
+                            'type' => 'shipping',
+                            'target' => 'total',
+                            'value' => $shippingDefaultOption->cost,
+                            'order' => 1,
+                            'attributes' => $shippingDefaultOption
+                        ));
+                        Cart::condition($condition2);
+                        $shipping = Cart::getCondition($geoZone->name);
+                    }
                 }
             }
-
         }
 
         $items = Cart::getContent();
@@ -294,20 +301,24 @@ class ShoppingCartController extends Controller
             $geoZone = ($zone) ? $zone->geoZone : null;
             if ($geoZone && count($geoZone->deliveries)) {
                 $subtotal = Cart::getSubTotal();
-                Cart::removeConditionsByType('shipping');
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                if ($delivery && count($delivery->options)) {
-                    $shippingDefaultOption = $delivery->options->first();
-                    $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                        'name' => $geoZone->name,
-                        'type' => 'shipping',
-                        'target' => 'total',
-                        'value' => $shippingDefaultOption->cost,
-                        'order' => 1,
-                        'attributes' => $shippingDefaultOption
-                    ));
-                    Cart::condition($condition2);
-                    $shipping = Cart::getCondition($geoZone->name);
+                $shipping = Cart::getCondition($geoZone->name);
+
+                if(!$shipping){
+                    Cart::removeConditionsByType('shipping');
+                    if ($delivery && count($delivery->options)) {
+                        $shippingDefaultOption = $delivery->options->first();
+                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                            'name' => $geoZone->name,
+                            'type' => 'shipping',
+                            'target' => 'total',
+                            'value' => $shippingDefaultOption->cost,
+                            'order' => 1,
+                            'attributes' => $shippingDefaultOption
+                        ));
+                        Cart::condition($condition2);
+                        $shipping = Cart::getCondition($geoZone->name);
+                    }
                 }
             }
         }
@@ -440,22 +451,26 @@ class ShoppingCartController extends Controller
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if ($geoZone) {
-                Cart::removeConditionsByType('shipping');
                 if (count($geoZone->deliveries)) {
                     $subtotal = Cart::getSubTotal();
                     $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                    if ($delivery && count($delivery->options)) {
-                        $shippingDefaultOption = $delivery->options->first();
-                        $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                            'name' => $geoZone->name,
-                            'type' => 'shipping',
-                            'target' => 'total',
-                            'value' => $shippingDefaultOption->cost,
-                            'order' => 1,
-                            'attributes' => $shippingDefaultOption
-                        ));
-                        Cart::condition($condition2);
-                        $shipping = Cart::getCondition($geoZone->name);
+                    $shipping = Cart::getCondition($geoZone->name);
+
+                    if(! $shipping){
+                        Cart::removeConditionsByType('shipping');
+                        if ($delivery && count($delivery->options)) {
+                            $shippingDefaultOption = $delivery->options->first();
+                            $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                                'name' => $geoZone->name,
+                                'type' => 'shipping',
+                                'target' => 'total',
+                                'value' => $shippingDefaultOption->cost,
+                                'order' => 1,
+                                'attributes' => $shippingDefaultOption
+                            ));
+                            Cart::condition($condition2);
+                            $shipping = Cart::getCondition($geoZone->name);
+                        }
                     }
                 }
             }
