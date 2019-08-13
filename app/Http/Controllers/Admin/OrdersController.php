@@ -235,23 +235,12 @@ class OrdersController extends Controller
 
     public function postAddToCart(Request $request)
     {
-        $variation = StockVariation::find($request->uid);
+        $item = Items::find($request->uid);
         $user = User::find($request->user_id);
-        if ($variation && $user) {
+        if ($item && $user) {
             $delivery = null;
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($variation->id, $variation->id, $variation->price, 1,
-                ['variation' => $variation, 'requiredItems' => $request->get('requiredItems')]);
-
-            $optionalItems = $request->get('optionalItems');
-            if ($optionalItems && count($optionalItems)) {
-                foreach ($optionalItems as $opv) {
-                    $optpVariation = StockVariation::find($opv);
-                    if ($optpVariation) {
-                        Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($optpVariation->id, $variation->id, $optpVariation->price, 1,
-                            ['variation' => $optpVariation]);
-                    }
-                }
-            }
+            Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($item->id, $item->id, $item->default_price, $request->qty,
+                ['item' => $item]);
 
             $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
