@@ -88,7 +88,7 @@ class OrdersController extends Controller
     public function getNew()
     {
         $user = null;
-        $products = Items::all()->pluck('name', 'id')->all();
+        $products = Stock::all()->pluck('name', 'id')->all();
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
         $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
             ->whereNull('role_id')
@@ -140,9 +140,9 @@ class OrdersController extends Controller
 
     public function getItem(Request $request)
     {
-        $item = Items::findOrFail($request->id);
+        $vape = Stock::findOrFail($request->id);
         $currency = get_currency();
-        $html = $this->view('_partials.product', compact(['item']))->render();
+        $html = $this->view('_partials.product', compact(['vape','currency']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -199,7 +199,7 @@ class OrdersController extends Controller
 
     public function ItemById(Request $request)
     {
-        $model = Items::findOrFail($request->id);
+        $model = Stock::findOrFail($request->id);
 
         return \Response::json(['error' => false, 'data' => $model]);
     }
