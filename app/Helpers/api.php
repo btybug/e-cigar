@@ -1214,13 +1214,13 @@ function user_avatar($id = null)
         $user = $userRepo->find($id);
         if ($user) {
             if ($user->avatar) {
-                return "/public/images/users/" . $user->avatar;
+                return "/storage/app/images/$user->email/" . $user->avatar;
             }
         }
     } else {
         if (Auth::check()) {
             if (Auth::user()->avatar) {
-                return "/public/images/users/" . Auth::user()->avatar;
+                return "/storage/app/images/".Auth::user()->email . "/" . Auth::user()->avatar;
             }
         }
     }
