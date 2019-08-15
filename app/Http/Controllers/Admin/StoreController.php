@@ -16,6 +16,7 @@ use App\Models\Category;
 use App\Models\Coupons;
 use App\Models\Emails;
 use App\Models\Items;
+use App\Models\ItemsLocations;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Products;
 use App\Models\Purchase;
@@ -172,31 +173,43 @@ class StoreController extends Controller
         $model = null;
         $items = Items::get()->pluck('name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
 
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers'));
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
     {
-        $data = $request->except('_token','qty');
+        $data = $request->except('_token','qty','locations');
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         Purchase::updateOrCreate($request->only('id'), $data);
         $item = Items::find($request->get('item_id'));
-        if($item && $locations = $item->locations){
-            $qtys = $request->get('qty');
-            $locIDs = array_keys($qtys);
-            foreach ($locations as $location){
-                if(in_array($location->id,$locIDs)){
-                    $location->qty += $qtys[$location->id];
-                    $location->save();
-                }
-            }
+
+        if($item){
+            $this->saveLocations($item, $request->get('locations', []));
         }
 
         return redirect()->route('admin_inventory_purchase');
     }
 
+    private function saveLocations($item, array $data = [])
+    {
+        $deletableArray = [];
+        if (count($data)) {
+            foreach ($data as $datum) {
+                $existing = $item->locations()->where('warehouse_id', $datum['warehouse_id'])
+                    ->where('rack_id', $datum['rack_id'])
+                    ->where('shelve_id', $datum['shelve_id'])->first();
+                if ($existing) {
+                    $datum['qty'] += $existing->qty;
+                    $existing->update($datum);
+                } else {
+                    $location = $item->locations()->create($datum);
+                }
+            }
+        }
+    }
 
     public function EditPurchase($id)
     {
@@ -226,10 +239,8 @@ class StoreController extends Controller
 
     public function postItemLocations(Request $request)
     {
-        $item_id = $request->get('item_id');
-        $model = Items::findOrFail($item_id);
-
-        $html = $this->view("purchase.locations", compact('model'))->render();
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $html = $this->view("purchase.locations", compact('warehouses'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

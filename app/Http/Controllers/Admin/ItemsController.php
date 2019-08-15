@@ -79,7 +79,7 @@ class ItemsController extends Controller
         $this->saveVideos($request, $item);
         $this->saveDownloads($request, $item);
         $this->savePackages($item, $request->get('packages', []));
-        $this->saveLocations($item, $request->get('locations', []));
+
 
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications', []));
