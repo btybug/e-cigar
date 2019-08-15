@@ -1,41 +1,26 @@
-<table class="table table--store-settings">
-    <thead>
-        <tr class="">
-            <th colspan="4" class="text-left pl-2">Locations</th>
+@php
+    $uniqueID = uniqid();
 
-        </tr>
-        <tr class="bg-my-light-pink">
-            <th>Warehouse</th>
-            <th>Rack</th>
-            <th>Shelve</th>
-            <th>Qty</th>
-        </tr>
-    </thead>
+@endphp
+<tr class="v-options-list-item location-item">
+    <td>
+        {!! Form::select("locations[$uniqueID][warehouse_id]",['' => 'Select Warehouse'] + $warehouses,null,['class'=> 'form-control warehouse']) !!}
+    </td>
+    <td>
+        {!! Form::select("locations[$uniqueID][rack_id]",['' => 'Select Rack'],null,['class'=> 'form-control rack']) !!}
+    </td>
+    <td>
+        {!! Form::select("locations[$uniqueID][shelve_id]",['' => 'Select Shelve'], null,['class'=> 'form-control shelve']) !!}
+    </td>
+    <td>
+        {!! Form::number("locations[$uniqueID][qty]",null,['class' => 'form-control']) !!}
+    </td>
+    <td colspan="2" class="text-right">
+        <button type="button" class="btn btn-danger delete-v-option_button"><i
+                class="fa fa-minus-circle delete-v-option"></i></button>
+    </td>
+</tr>
 
-    <tbody class="v-options-list-locations">
-    @if($model && $model->locations)
-        @foreach($model->locations as $location)
-            <tr class="v-options-list-item location-item">
-                <td>
-                    <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
-                </td>
-                <td>
-                    <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
-                </td>
-                <td>
-                    @if($location->rack)
-                        @php
-                            $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
-                        @endphp
-                        <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
-                    @endif
-                </td>
-                <td colspan="2" class="text-right">
-                    {!! Form::number("qty[$location->id]",null,['class' => 'form-control']) !!}
-                </td>
-            </tr>
-        @endforeach
-    @endif
-    </tbody>
-</table>
+
+
 

@@ -191,34 +191,43 @@
                                                 <div class="col-sm-10">
                                                     <table class="table table--store-settings">
                                                         <thead>
+                                                        <tr class="">
+                                                            <th colspan="4" class="text-left pl-2">Locations</th>
+
+                                                        </tr>
                                                         <tr class="bg-my-light-pink">
                                                             <th>Warehouse</th>
                                                             <th>Rack</th>
                                                             <th>Shelve</th>
-                                                            <th>QTY</th>
-                                                            <th>Action</th>
+                                                            <th>Qty</th>
                                                         </tr>
                                                         </thead>
 
                                                         <tbody class="v-options-list-locations">
                                                         @if($model && $model->locations)
                                                             @foreach($model->locations as $location)
-                                                                @include('admin.items._partials.location')
+                                                                <tr class="v-options-list-item location-item">
+                                                                    <td>
+                                                                        <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
+                                                                    </td>
+                                                                    <td>
+                                                                        @if($location->rack)
+                                                                            @php
+                                                                                $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
+                                                                            @endphp
+                                                                            <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
+                                                                        @endif
+                                                                    </td>
+                                                                    <td colspan="2" class="text-right">
+                                                                        <div class="form-control">{{ $location->qty }}</div>
+                                                                    </td>
+                                                                </tr>
                                                             @endforeach
-                                                        @else
-                                                            @include('admin.items._partials.location')
                                                         @endif
                                                         </tbody>
-
-                                                        <tfoot>
-                                                        <tr class="add-new-ship-filed-container">
-                                                            <td colspan="5" class="text-right">
-                                                                <button type="button" class="btn btn-primary add-location"><i
-                                                                        class="fa fa-plus-circle "></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        </tfoot>
                                                     </table>
                                                 </div>
 
