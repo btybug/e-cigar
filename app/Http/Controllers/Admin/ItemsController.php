@@ -303,4 +303,9 @@ class ItemsController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html, 'data' => $selecteds]);
     }
+
+    public function transfer()
+    {
+        return $this->view('transfer.index');
+    }
 }
