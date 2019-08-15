@@ -125,7 +125,7 @@ function get_site_logo()
 {
     $settings = new \App\Models\Settings();
     $logo = $settings->getData('admin_general_settings', 'siteLogo');
-    return ($logo) ? $logo->val : '';
+    return ($logo) ? $logo->val : '/no-logo';
 }
 
 function get_site_name()
