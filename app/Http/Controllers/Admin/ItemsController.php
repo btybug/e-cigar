@@ -307,7 +307,9 @@ class ItemsController extends Controller
     public function transfer()
     {
         $items = Items::all()->pluck('name', 'id')->all();
-
-        return $this->view('transfer.index',compact(['items']));
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $racks = [];
+        $shelves = [];
+        return $this->view('transfer.index',compact(['items','warehouses','racks','shelves']));
     }
 }
