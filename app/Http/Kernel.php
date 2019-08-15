@@ -51,7 +51,8 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\AdminMiddleware::class,
             UserCan::class,
-            ActivityMiddleware::class
+            ActivityMiddleware::class,
+            CurrencyMiddleware::class,
         ],
 
         'api' => [

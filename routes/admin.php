@@ -363,6 +363,10 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/new', 'Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
+    Route::group(['prefix' => 'transfer'], function () {
+        Route::get('/', 'Admin\ItemsController@transfer')->name('admin_items_transfer');
+    });
+
     Route::group(['prefix' => 'items'], function () {
         Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
