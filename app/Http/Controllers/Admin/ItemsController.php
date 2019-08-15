@@ -306,6 +306,8 @@ class ItemsController extends Controller
 
     public function transfer()
     {
-        return $this->view('transfer.index');
+        $items = Items::all()->pluck('name', 'id')->all();
+
+        return $this->view('transfer.index',compact(['items']));
     }
 }
