@@ -15,6 +15,24 @@ class ItemsLocations extends Model
 {
     protected $table = 'item_locations';
     protected $guarded=['id'];
+    protected $appends=['transfer_location'];
+
+    public function getTransferLocationAttribute() {
+        $str = 'Not Correct';
+        $warehouse = ($this->warehouse) ? $this->warehouse->name : null;
+        if($warehouse){
+            $str =  $warehouse;
+            $rack = ($this->rack) ? $this->rack->name : null;
+            if($rack){
+                $str .= " - ".$rack;
+                $shelve = ($this->shelve) ? $this->shelve->name : null;
+                if($shelve){
+                    $str .= " - ".$shelve;
+                }
+            }
+        }
+        return $str;
+    }
 
     public function item()
     {
