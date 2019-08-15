@@ -1,5 +1,5 @@
-<div class="main-right-wrapp kaliony-page d-flex flex-wrap" data-id="{{ $vape->id }}">
-    <div class="single-product-dtls-wrap" id="requiredProducts">
+<div class="product__single-wrapper" data-id="{{ $vape->id }}">
+    <div class="single-product-dtls-wrap w-100 " id="requiredProducts">
         <div class="row">
             <div class="col-lg-6 product-single-view-outer mr-0 w-100">
                 <div class="product-card_view product-card_view--single position-relative">
@@ -17,27 +17,6 @@
                 <!--sale label-->
                     {{--                                                <span--}}
                     {{--                                                    class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>--}}
-                </div>
-
-                <div class="d-flex product-card-thumbs product-card-thumbs--single">
-                    @if($vape->image)
-                        <div class="product-card_thumb-img-holder pointer active_slider">
-                            <img class="" src="{!! checkImage($vape->image) !!}"
-                                 alt="{!! @getImage( $vape->image)->seo_alt !!}">
-                        </div>
-                    @endif
-                    @if($vape->variations && count($vape->variations))
-                        @foreach($vape->variations()->required()->get() as $variation)
-                            @if(isset($variation['image']))
-                                <div class="product-card_thumb-img-holder pointer"
-                                     data-id="{{ $variation['id'] }}">
-                                    <img class=""
-                                         src="{{ checkImage($variation["image"]) }}"
-                                         alt="{!! @getImage($variation["image"])->seo_alt !!}">
-                                </div>
-                            @endif
-                        @endforeach
-                    @endif
                 </div>
             </div>
             <div class="col-lg-6 product-single-info-outer">

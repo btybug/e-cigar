@@ -242,6 +242,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
     <link href="/public/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
+
 
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
     <style>
