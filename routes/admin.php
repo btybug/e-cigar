@@ -365,6 +365,8 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'transfer'], function () {
         Route::get('/', 'Admin\ItemsController@transfer')->name('admin_items_transfer');
+        Route::post('/', 'Admin\ItemsController@PostTransfer')->name('admin_transfer_post');
+        Route::post('/get-item-locations', 'Admin\ItemsController@postItemLocations')->name('admin_items_transfer_locations');
     });
 
     Route::group(['prefix' => 'items'], function () {
@@ -378,6 +380,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/add-location', 'Admin\ItemsController@addLocation')->name('admin_items_location_add');
         Route::post('/get-specifications', 'Admin\ItemsController@getSpecification')->name('admin_items_get_specification');
         Route::post('/get-specifications-by-category', 'Admin\ItemsController@getSpecificationByCategory')->name('admin_items_get_specification_by_category');
+
     });
     Route::group(['prefix' => 'barcode'], function () {
         Route::get('/', 'Admin\BarcodesController@getIndex')->name('admin_inventory_barcodes');

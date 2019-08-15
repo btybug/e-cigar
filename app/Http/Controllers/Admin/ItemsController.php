@@ -312,4 +312,30 @@ class ItemsController extends Controller
         $shelves = [];
         return $this->view('transfer.index',compact(['items','warehouses','racks','shelves']));
     }
+
+    public function PostTransfer(Request $request)
+    {
+        $model = Items::findOrFail($request->item_id);
+        $from = ItemsLocations::findOrFail($request->from);
+        $to = ItemsLocations::findOrFail($request->to);
+        if($from->qty < $request->qty){
+            return redirect()->back()->with('error',"Max qty that you can transfer is $from->qty");
+        }
+
+        $from->update(['qty'=>($from->qty - $request->qty)]);
+        $to->update(['qty'=> ($to->qty + $request->qty)]);
+
+        return redirect()->back()->with('message',"Successfully transfered");
+
+    }
+
+    public function postItemLocations(Request $request)
+    {
+        $model = Items::findOrFail($request->item_id);
+        $data = $model->locations()->get()->pluck('transfer_location','id')->all();
+
+        $html = View("admin.items.transfer.locations", compact('model','data'))->render();
+
+        return \Response::json(['error' => false, 'html' => $html]);
+    }
 }
