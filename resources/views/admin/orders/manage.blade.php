@@ -220,15 +220,15 @@
                                                             @endif
                                                         </div>
                                                     </div>
-
+                                                    @php
+                                                        $extraPrice = 0;
+                                                    @endphp
                                                     @if(isset($item->options['extras']) && count($item->options['extras']))
                                                         <div class="order__product-offers">
                                                             <div class="font-16 text-sec-clr offers-tag">
                                                                 With offers:
                                                             </div>
-                                                            @php
-                                                                $extraPrice = 0;
-                                                            @endphp
+
                                                             @foreach($item->options['extras'] as $extra)
                                                                 @foreach($extra['options'] as $ext)
                                                                     @php
