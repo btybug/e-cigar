@@ -13666,7 +13666,16 @@ header .header-bottom {
     padding: 15px 0;
     height: 94px;
 }
-
+header .header-bottom .logo{
+    width: 198px;
+    height: 64px;
+}
+header .header-bottom .logo img{
+    width: 100%;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+    height: 100%;
+}
 @media screen and (max-width: 576px) {
     header .header-bottom .logo img {
         width: 100%;
