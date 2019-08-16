@@ -1198,6 +1198,55 @@ header.main-header .logo .logo-img{
 .product__single-wrapper .border-main{
     border: 1px solid #d7d7d7;
 }
+.product__single-wrapper .continue-shp-wrapp_right{
+    background: #fff;
+    position: fixed;
+    bottom: 67px;
+    right: 33px;
+    width: 50%;
+    box-shadow: 0 0 4px #ccc;
+    padding: 10px;
+}
+.product__single-wrapper .single-product-dtls-wrap{
+    margin-bottom: 90px;
+}
+.product__single-wrapper .continue-shp-wrapp_right .continue-shp-wrapp_qty {
+    border: 1px solid #d7d7d7;
+    padding: 5px 45px;
+    width: 170px;
+    height: 55px;
+    margin-right: 85px;
+}
+.product__single-wrapper .continue-shp-wrapp_right .continue-shp-wrapp_qty-plus,
+.product__single-wrapper .continue-shp-wrapp_right .continue-shp-wrapp_qty-minus {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.product__single-wrapper .continue-shp-wrapp_right .continue-shp-wrapp_qty-plus {
+    right: 10px;
+}
+.product__single-wrapper .continue-shp-wrapp_right .continue-shp-wrapp_qty-minus {
+    left: 10px;
+}
+.product__single-wrapper .continue-shp-wrapp_right input[type=number]::-webkit-inner-spin-button,
+.product__single-wrapper .continue-shp-wrapp_right input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.product__single-wrapper .continue-shp-wrapp_right .product-card_price {
+    width: 195px;
+}
+.product__single-wrapper .continue-shp-wrapp_right .product-card_btn {
+    padding: 14px 40px;
+    margin-right: 60px;
+    width: 290px;
+}
+.product__single-wrapper .continue-shp-wrapp_right .product-card_btn {
+    background: #5184e5;
+}
+.product__single-wrapper .product_radio-single .custom-label{
+    padding: 8px;
+}
 /*---------------------------------------------*/
 /*---------------- add product modal end -------------*/
 /*-------------------------------------------------*/
