@@ -906,38 +906,6 @@
                             $(this).select2({minimumResultsForSearch: -1})
                         });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                         const getCurrencySymbol = () => {
                             return $('#symbol').val();
                         };
