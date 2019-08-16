@@ -144,6 +144,7 @@
 
                 </div>
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -238,6 +239,8 @@
         </div>
     </div>
 </div>
+<input type="hidden" id="symbol" value="{{ get_symbol() }}">
+
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
@@ -898,10 +901,10 @@
                         //     get_promotion_price($(plist[i]).data('promotion'))
                         // }
 
-                        $('.select-2.single-product-select').each(function() {
+                        $('.select-2').each(function() {
                             console.log($(this));
                             $(this).select2({minimumResultsForSearch: -1})
-                        })
+                        });
 
 
 
@@ -936,7 +939,7 @@
 
 
                         const getCurrencySymbol = () => {
-                            return $('.header-bottom #symbol').val();
+                            return $('#symbol').val();
                         };
                         // $('.share-button').on('click', function(ev) {
                         //     ev.stopImmediatePropagation();
@@ -1640,7 +1643,7 @@
                                 <div class="d-flex align-items-center justify-content-end">
                                   <div class="mr-1">Qty</div>
                                   <div class="continue-shp-wrapp_qty position-relative mr-0">
-                                    <!--minus qty-->
+
                                 <span class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-minus qty-count">
                                 <svg viewBox="0 0 20 3" width="12px" height="3px">
                                 <path fill-rule="evenodd" fill="rgb(214, 217, 225)"
@@ -1649,7 +1652,7 @@
                                 </span>
                                 <input class="popup_field-input w-100 h-100 font-23 text-center border-0 selected-item-popup_qty-select none-touchable" min="number" name=""
                                 type="number" value="1">
-                                <!--plus qty-->
+
                                 <span class="d-flex align-items-center pointer position-absolute selected-item-popup_qty-plus qty-count">
                                 <svg viewBox="0 0 20 20" width="15px" height="15px">
                                 <path fill-rule="evenodd" fill="rgb(211, 214, 223)"
@@ -2209,10 +2212,8 @@
 
                         const filterSelectSingleInit = () => {
                             (function () {
-                                alert(111)
                                 $(`.add-product-modal .filters-select-wizard`).each(function () {
                                     const group_id = $(this).attr('data-group');
-                                    alert(group_id)
                                     $(`[data-group="${group_id}"]`).on('change', function () {
                                         let self = $(this);
                                         let parentRow = $(this).closest('.product__single-item-info-bottom');
@@ -2831,7 +2832,6 @@
                                                         discount_id = null;
                                                     }
                                                 } else if($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
-                                                    alert(3)
                                                     id = $(this).data('id');
 
                                                     if($(this).find('.input-qty').length>0) {
@@ -2845,7 +2845,6 @@
                                                         discount_id = null;
                                                     }
                                                 } else if($(this).closest('.filter').length > 0 && $(this).hasClass('.get-single-price')) {
-                                                    alert(4)
                                                     id = $(this).data('id');
 
                                                     if($(this).find('.input-qty').length>0) {
