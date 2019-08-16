@@ -3411,7 +3411,7 @@
                             } else {
                                 $.ajax({
                                     type: "post",
-                                    url: "/add-to-cart",
+                                    url: "/admin/orders/add-to-cart",
                                     cache: false,
                                     datatype: "json",
                                     data: {product_id,product_qty, variations},
