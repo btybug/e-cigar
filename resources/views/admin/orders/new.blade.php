@@ -3317,7 +3317,8 @@
                         });
 
                         $("body").on('click', '.btn-add-to-cart', function () {
-                            const product_id = $('#singleProductPageCnt #vpid').val();
+                            const product_id = $("body").find('#vpid').val();
+                            const user_id = $("body").find('#order_user').val();
                             const product_qty = $('.continue-shp-wrapp_qty .field-input.product-qty-select').val();
                             const variations = [];
                             const bad = [];
@@ -3399,7 +3400,7 @@
 
 
                             });
-                            console.log({product_id,product_qty, variations});
+                            console.log({product_id,product_qty,user_id, variations});
                             variations.map((gr) => {
                                 gr.products.length === 0 && bad.push(gr.group_id);
                             });
@@ -3414,7 +3415,7 @@
                                     url: "/admin/orders/add-to-cart",
                                     cache: false,
                                     datatype: "json",
-                                    data: {product_id,product_qty, variations},
+                                    data: {product_id,product_qty,user_id, variations},
                                     headers: {
                                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                                     },
@@ -3428,6 +3429,11 @@
                                                 $('.special__popup-main-product-item .select-2').each(function() {
                                                     $(this).select2({minimumResultsForSearch: -1});
                                                 });
+
+                                                $(".cart-table").html(data.html);
+                                                $(".shipping-payment").html(data.shippingHtml);
+                                                $(".order-summary").html(data.summaryHtml);
+
                                                 filterModalOfferInit();
                                                 filterSelectOfferInit();
                                                 countOfferPrice();

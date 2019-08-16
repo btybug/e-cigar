@@ -1,4 +1,5 @@
 <div class="product__single-wrapper" data-id="{{ $vape->id }}">
+    {!! Form::hidden('vape_id',$vape->id,['id' => 'vpid']) !!}
     <div class="single-product-dtls-wrap w-100 " id="requiredProducts">
         <div class="row">
             <div class="col-lg-6 product-single-view-outer mr-0 w-100">

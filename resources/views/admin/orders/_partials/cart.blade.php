@@ -13,7 +13,7 @@
                                 <tr>
                                     <td class="photo-td">
                                         <div class="product-photo-col">
-                                            <img src="{{ checkImage($stock->image) }}"
+                                            <img src="{{ checkImage($stock->image) }}" width="200"
                                                  alt=" {!! $stock->name !!}">
 
                                             {{--<img src="{{ checkImage(media_image_tmb($stock->image)) }}"--}}
@@ -160,57 +160,57 @@
                                     </td>
                                 </tr>
                                 </tbody>
-                                @if(! $stock->is_offer)
-                                    <tfoot>
-                                    <tr>
-                                        <td colspan="5">
-                                            <div class=" d-flex footer">
-                                                <div class="add-offers font-26 font-sec-reg">Added <br/>Offers
-                                                </div>
-                                                <ul class="d-flex flex-wrap list-product">
-                                                    @if($item->attributes->has('extra') && isset($item->attributes->extra['data']))
-                                                        @foreach($item->attributes->extra['data'] as $extra)
-                                                            <li class="single-wall">
-                                                                <div class="photo-item">
-                                                                    <img src="{{ checkImage($extra['offer']->image) }}"
-                                                                         alt="product">
-                                                                </div>
-                                                                <div class="info-product">
-                                                                    <h6 class="font-21 text-tert-clr title">
-                                                                        {{ $extra['offer']->name }}
-                                                                    </h6>
-                                                                    <div
-                                                                        class="d-flex align-items-center price-wall">
-                                                                                <span class="price">
-                                                                                    {!! convert_price($extra['price'],$currency) !!}
-                                                                                </span>
-                                                                        <a  href="javascript:void(0)" data-section-id="{{ $key }}" data-uid="{{ $extra['key'] }}" class="remove-btn remove-extra-from-cart">
-                                                                            Remove
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
-                                                            </li>
-                                                        @endforeach
-                                                    @else
-                                                        <li class="single-wall no-product">
-                                                            <span class="font-26">No offer is added</span>
-                                                        </li>
-                                                    @endif
+                                {{--@if(! $stock->is_offer)--}}
+                                    {{--<tfoot>--}}
+                                    {{--<tr>--}}
+                                        {{--<td colspan="5">--}}
+                                            {{--<div class=" d-flex footer">--}}
+                                                {{--<div class="add-offers font-26 font-sec-reg">Added <br/>Offers--}}
+                                                {{--</div>--}}
+                                                {{--<ul class="d-flex flex-wrap list-product">--}}
+                                                    {{--@if($item->attributes->has('extra') && isset($item->attributes->extra['data']))--}}
+                                                        {{--@foreach($item->attributes->extra['data'] as $extra)--}}
+                                                            {{--<li class="single-wall">--}}
+                                                                {{--<div class="photo-item">--}}
+                                                                    {{--<img src="{{ checkImage($extra['offer']->image) }}"--}}
+                                                                         {{--alt="product">--}}
+                                                                {{--</div>--}}
+                                                                {{--<div class="info-product">--}}
+                                                                    {{--<h6 class="font-21 text-tert-clr title">--}}
+                                                                        {{--{{ $extra['offer']->name }}--}}
+                                                                    {{--</h6>--}}
+                                                                    {{--<div--}}
+                                                                        {{--class="d-flex align-items-center price-wall">--}}
+                                                                                {{--<span class="price">--}}
+                                                                                    {{--{!! convert_price($extra['price'],$currency) !!}--}}
+                                                                                {{--</span>--}}
+                                                                        {{--<a  href="javascript:void(0)" data-section-id="{{ $key }}" data-uid="{{ $extra['key'] }}" class="remove-btn remove-extra-from-cart">--}}
+                                                                            {{--Remove--}}
+                                                                        {{--</a>--}}
+                                                                    {{--</div>--}}
+                                                                {{--</div>--}}
+                                                            {{--</li>--}}
+                                                        {{--@endforeach--}}
+                                                    {{--@else--}}
+                                                        {{--<li class="single-wall no-product">--}}
+                                                            {{--<span class="font-26">No offer is added</span>--}}
+                                                        {{--</li>--}}
+                                                    {{--@endif--}}
 
-                                                </ul>
-                                                <a href="javascript:void(0)" data-uid="{{ $key }}"
-                                                   class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">
-                                                                            <span class="icon"><i
-                                                                                    class="fas fa-plus"></i></span>
-                                                    <div class="text">
-                                                        Added <br/>Offers
-                                                    </div>
-                                                </a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tfoot>
-                                @endif
+                                                {{--</ul>--}}
+                                                {{--<a href="javascript:void(0)" data-uid="{{ $key }}"--}}
+                                                   {{--class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">--}}
+                                                                            {{--<span class="icon"><i--}}
+                                                                                    {{--class="fas fa-plus"></i></span>--}}
+                                                    {{--<div class="text">--}}
+                                                        {{--Added <br/>Offers--}}
+                                                    {{--</div>--}}
+                                                {{--</a>--}}
+                                            {{--</div>--}}
+                                        {{--</td>--}}
+                                    {{--</tr>--}}
+                                    {{--</tfoot>--}}
+                                {{--@endif--}}
                             </table>
                         </div>
 
