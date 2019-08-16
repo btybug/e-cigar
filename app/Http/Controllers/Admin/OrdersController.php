@@ -116,9 +116,12 @@ class OrdersController extends Controller
         ]);
         $ordersService->changeStatus($order, $status_id);
         $histories = $order->history()->orderBy('created_at', 'desc')->get();
-        $html = \View('admin.orders._partials.timeline_item', compact(['histories']))->render();
+        $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
 
-        return \Response::json(['error' => false, 'html' => $html]);
+        $html = \View('admin.orders._partials.timeline_item', compact(['histories']))->render();
+        $statusHtml = \View('admin.orders._partials.order_status', compact(['order','statuses']))->render();
+
+        return \Response::json(['error' => false, 'html' => $html,'statusHtml' => $statusHtml]);
     }
 
     public function getSettings()
