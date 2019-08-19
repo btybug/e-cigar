@@ -60,6 +60,9 @@
                     @ok('admin_customers')
                     <li><a href="{{route('admin_customers')}}"><i class="fa fa-circle-o"></i>Customers</a></li>
                     @endok
+                    @ok('admin_wholesalers')
+                    <li><a href="{{route('admin_wholesalers')}}"><i class="fa fa-circle-o"></i>Wholesalers</a></li>
+                    @endok
                     @ok('admin_role_membership')
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>

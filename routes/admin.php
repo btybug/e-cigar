@@ -157,6 +157,8 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/new', 'Admin\UserController@getNew')->name('admin_customers_new');
     Route::post('/new', 'Admin\UserController@postNew')->name('admin_customers_new_post');
 
+    Route::get('/wholesalers', 'Admin\UserController@showWholesallers')->name('admin_wholesalers');
+
     Route::get('/staff', 'Admin\UserController@showStaff')->name('admin_staff');
     Route::get('/staff/new', 'Admin\UserController@newStaff')->name('admin_staff_new');
     Route::post('/staff/new', 'Admin\UserController@postStaff')->name('admin_staff_new_post');
