@@ -283,6 +283,22 @@
             <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Import</span></a></li>
             @endok
+
+            @hasAccess('admin_wholesallers')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-handshake-o"></i>
+                    <span>Wholesallers</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                   <li><a href="{{route('admin_wholesallers')}}"><i class="fa fa-circle-o"></i>Requests</a></li>
+                </ul>
+
+            </li>
+            @endHasAccess
         </ul>
     </section>
     <!-- /.sidebar -->
