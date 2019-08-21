@@ -60,8 +60,8 @@
                                 {!! BBgetDateFormat($export->delivery_date) !!}
                             </td>
                             <td>
-{{--                                <a href="{!! route('customer_imports_view',$export->id) !!}" class="table-del-link">view</a>--}}
-{{--                                <a href="{!! route('customer_imports_accept',$export->id) !!}" class="table-del-link">Accept(for test)</a>--}}
+                                <a class='btn btn-info' href="{!! route('admin_wholesallers_view',$export->id) !!}" class="table-del-link">view</a>
+                                <a class='btn btn-success' href="{!! route('admin_wholesallers_manage',$export->id) !!}" class="table-del-link">Manage</a>
                             </td>
                         </tr>
                     @endforeach
