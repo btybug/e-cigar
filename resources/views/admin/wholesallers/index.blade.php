@@ -13,16 +13,48 @@
         <div class="card-body panel-body">
             <div class="table-responsive">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>User</th>
-                    <th>Order</th>
-                    <th>Qty</th>
+                <table class="table table-hover ">
+                    <thead>
+                    <th>
+                        Status
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Purchase date
+                    </th>
+                    <th>
+                        Delivery Date
+                    </th>
+                    <th>
+                        Actions
+                    </th>
+                    </thead>
+                    <tbody>
 
-                    <th>Actions</th>
-                </tr>
-                </thead>
+                    @foreach($exports as $export)
+                        <tr>
+                            <td>
+                                {!! \App\Models\Exports::$status[$export->status] !!}
+                            </td>
+                            <td>
+                                {!! $export->getPrice() !!}
+                            </td>
+                            <td>
+                                {!! BBgetDateFormat($export->created_at) !!}
+                            </td>
+                            <td>
+                                {!! BBgetDateFormat($export->delivery_date) !!}
+                            </td>
+                            <td>
+{{--                                <a href="{!! route('customer_imports_view',$export->id) !!}" class="table-del-link">view</a>--}}
+{{--                                <a href="{!! route('customer_imports_accept',$export->id) !!}" class="table-del-link">Accept(for test)</a>--}}
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
             </table>
             </div>
         </div>
