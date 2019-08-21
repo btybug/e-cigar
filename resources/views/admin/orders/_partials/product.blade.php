@@ -99,7 +99,7 @@
                         </span>
         </div>
         <a href="#"
-           class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase"
+           class="btn-add-to-cart-manual product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase"
            data-toggle="modal" data-target="#specialPopUpModal">
             <span class="product-card_btn-text">add to cart</span>
             <span class="d-inline-block ml-auto">

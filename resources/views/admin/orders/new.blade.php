@@ -3284,7 +3284,7 @@
 
                         });
 
-                        $("body").on('click', '.btn-add-to-cart', function () {
+                        $("body").on('click', '.btn-add-to-cart-manual', function () {
                             const product_id = $("body").find('#vpid').val();
                             const user_id = $("body").find('#order_user').val();
                             const product_qty = $('.continue-shp-wrapp_qty .field-input.product-qty-select').val();
