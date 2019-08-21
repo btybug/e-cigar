@@ -98,8 +98,11 @@ class OrdersSearch
      */
     public function status($value)
     {
-        return $this->model->leftJoin('order_history','order_history.order_id','=','orders.id')
-            ->whereIn('order_history.status_id',$value);
+       return $this->model->leftJoin('order_history','orders.id','=','order_history.order_id')
+            ->where('order_history.order_id', \DB::raw("(SELECT MAX(id) FROM order_history AS ss2 WHERE ss2.order_id = order_history.order_id )"));
+//           ->whereIn('order_history.status_id',$value);
+//        \DB::table('orders')->where('id', \DB::raw("(select max(`id`) from orders)"))->get();
+       // return $this->model->select('SELECT orders.*, order_history.* FROM orders LEFT JOIN order_history ON (orders.id = order_history.order_id) WHERE order_history.id = ( SELECT MAX(id) FROM order_history AS ss2 WHERE ss2.order_id = order_history.order_id )')->whereIn('order_history.status_id',$value);
 
     }
 

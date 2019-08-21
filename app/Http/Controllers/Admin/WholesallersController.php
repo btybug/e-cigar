@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Exports;
 use App\Models\Permissions;
 use App\Models\Roles;
 use Illuminate\Http\Request;
@@ -20,6 +21,7 @@ class WholesallersController extends Controller
 
     public function index()
     {
-        return $this->view('index');
+        $exports=Exports::orderBy('id','ASC')->get();
+        return $this->view('index',compact('exports'));
     }
 }

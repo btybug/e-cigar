@@ -71,7 +71,7 @@ class WarehouseController extends Controller
         $categories = $model->categories()->whereNull('parent_id')->get();
 //        dd($categories);
         enableMedia();
-        return $this->view('manage', compact('categories', 'model', 'type'));
+        return $this->view('manage', compact('categories', 'model'));
     }
 
     public function postCategoryForm(Request $request, $w_id)
