@@ -600,6 +600,8 @@ Route::group(['prefix' => 'gmail'], function () {
 
 Route::group(['prefix' => 'wholesellers'], function () {
     Route::get('/', 'Admin\WholesallersController@index')->name('admin_wholesallers');
+    Route::get('/view/{id}', 'Admin\WholesallersController@viewItems')->name('admin_wholesallers_view');
+    Route::get('/manage/{id}', 'Admin\WholesallersController@manage')->name('admin_wholesallers_manage');
 });
 
 Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_download');

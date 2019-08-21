@@ -24,4 +24,17 @@ class WholesallersController extends Controller
         $exports=Exports::orderBy('id','ASC')->get();
         return $this->view('index',compact('exports'));
     }
+
+    public function viewItems($id)
+    {
+        $exports=Exports::find($id);
+        $items=$exports->items;
+
+        return $this->view('view',compact('items'));
+    }
+    public function manage($id)
+    {
+        $exports=Exports::find($id);
+        return $this->view('manage',compact('exports'));
+    }
 }

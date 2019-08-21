@@ -15,6 +15,10 @@ class ExportsItems extends Model
     {
         return $this->belongsTo(Exports::class,'export_id');
     }
+    public function parent()
+    {
+        return $this->belongsTo(Items::class,'item_id');
+    }
 
 
 
