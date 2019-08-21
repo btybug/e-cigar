@@ -19,7 +19,13 @@
                         Status
                     </th>
                     <th>
+                        Site
+                    </th>
+                    <th>
                         Price
+                    </th>
+                    <th>
+                       Customer
                     </th>
                     <th>
                         Purchase date
@@ -39,7 +45,13 @@
                                 {!! \App\Models\Exports::$status[$export->status] !!}
                             </td>
                             <td>
+                                {!! $export->site_id !!}
+                            </td>
+                            <td>
                                 {!! $export->getPrice() !!}
+                            </td>
+                            <td>
+                                {!! $export->customer_id !!}
                             </td>
                             <td>
                                 {!! BBgetDateFormat($export->created_at) !!}

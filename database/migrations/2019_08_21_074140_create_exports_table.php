@@ -15,7 +15,7 @@ class CreateExportsTable extends Migration
     {
         Schema::create('exports', function (Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('shop_id');
+            $table->unsignedInteger('customer_id');
             $table->tinyInteger('status')->default(0);
             $table->string('site_id');
             $table->text('notes')->nullable();
