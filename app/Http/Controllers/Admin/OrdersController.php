@@ -239,6 +239,11 @@ class OrdersController extends Controller
     public function postAddToCart(Request $request)
     {
         $product = Stock::find($request->product_id);
+        $user = User::where('id',$request->user_id)->first();
+        $default_shipping = null;
+        $shipping = null;
+        $geoZone = null;
+
         if ($product) {
             $error = $this->cartService->validateProduct($product, $request->variations);
 
@@ -246,6 +251,35 @@ class OrdersController extends Controller
                 $cart_id = uniqid();
                 Cart::session(Orders::ORDER_NEW_SESSION_ID)->add($cart_id, $product->id, $this->cartService->price,
                     $request->product_qty, ['variations' => $this->cartService->variations, 'product' => $product]);
+
+                if ($user) {
+                    $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+                    $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+                    $geoZone = ($zone) ? $zone->geoZone : null;
+                    if ($geoZone && count($geoZone->deliveries)) {
+                        $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                        $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
+                        $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+
+                        if(! $shipping){
+                            Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
+
+                            if ($delivery && count($delivery->options)) {
+                                $shippingDefaultOption = $delivery->options->first();
+                                $condition2 = new \Darryldecode\Cart\CartCondition(array(
+                                    'name' => $geoZone->name,
+                                    'type' => 'shipping',
+                                    'target' => 'total',
+                                    'value' => $shippingDefaultOption->cost,
+                                    'order' => 1,
+                                    'attributes' => $shippingDefaultOption
+                                ));
+                                Cart::session(Orders::ORDER_NEW_SESSION_ID)->condition($condition2);
+                                $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
+                            }
+                        }
+                    }
+                }
 
                 $items = $this->cartService->getCartItems(true);
                 $html = $this->view('_partials.cart', compact(['items', 'default_shipping', 'shipping', 'geoZone']))->render();
