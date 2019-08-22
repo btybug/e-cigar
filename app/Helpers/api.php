@@ -472,6 +472,13 @@ function cartCount()
     return $cartService->getCount();
 }
 
+
+function cartCountItems()
+{
+    $cart = \Cart::session('wholesaler')->getContent();
+    return count($cart);
+}
+
 function getRegions($country, $all = false)
 {
     $countries = new \PragmaRX\Countries\Package\Countries();

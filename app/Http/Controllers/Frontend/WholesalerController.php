@@ -12,6 +12,7 @@ use App\Services\FileService;
 use App\User;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
+use Darryldecode\Cart\Facades\CartFacade as Cart;
 
 class WholesalerController extends Controller
 {
@@ -54,6 +55,19 @@ class WholesalerController extends Controller
             return response()->json(['error' => false, 'html' => $html]);
         }
         return $this->view('index', compact('items'));
+    }
+
+    public function addToCart(Request $request){
+        $item = Items::findOrFail($request->id);
+
+        Cart::session('wholesaler')->add($item->id, $item->name, $item->default_price, 1,
+            ['item' => $item]);
+        $headerhtml = \View('frontend.wholesaler._partials.shopping_cart_options')->render();
+
+        $cartData = Cart::session('wholesaler')->getContent();
+        return \Response::json(['error' => false, 'message' => 'added', 'item_id' => $item->id,
+            'count' => count($cartData), 'headerHtml' => $headerhtml]);
+
     }
 }
 

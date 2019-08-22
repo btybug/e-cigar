@@ -17,6 +17,7 @@ Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
 
 Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','wholesaler','verifyed_wholesaler']], function () {
     Route::get('/', 'Frontend\WholesalerController@index')->name('wholesaler');
+    Route::post('/add-to-cart', 'Frontend\WholesalerController@addToCart')->name('wholesaler_add_to_cart');
 
 });
 

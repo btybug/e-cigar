@@ -457,33 +457,14 @@
             });
 
             $("body").on('click', '.add-to-cart', function () {
-                var variationId = $("#variation_uid").val();
-
-                if (variationId && variationId != '') {
-                    var requiredItems = [];
-                    var optionalItems = [];
-
-                    var requiredItemsData = $(".required_item");
-                    var optionalItemsData = $(".optional_item");
-
-
-                    optionalItemsData.each(function (i, e) {
-                        if ($(e).parent().find('.optional_checkbox').is(':checked')) {
-                            optionalItems.push($(e).val());
-                        }
-                    });
-
-                    requiredItemsData.each(function (i, e) {
-                        requiredItems.push($(e).val());
-                    });
-//                    console.log(requiredItems)
-//                    return false;
+                let id = $(this).data('id');
+                if (id && id != '') {
                     $.ajax({
                         type: "post",
-                        url: "/add-to-cart",
+                        url: "/wholesaler/add-to-cart",
                         cache: false,
                         datatype: "json",
-                        data: {uid: variationId, requiredItems: requiredItems, optionalItems: optionalItems},
+                        data: {id: id},
                         headers: {
                             "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                         },
@@ -491,7 +472,6 @@
                             if (!data.error) {
                                 $(".cart-count").html(data.count)
                                 $('#cartSidebar').html(data.headerHtml)
-                                $("#addToCardModal").modal('hide');
                                 $("#headerShopCartBtn").trigger('click');
                             } else {
 
@@ -499,149 +479,9 @@
                         }
                     });
                 } else {
-                    alert('Select available variation');
+                    alert('Select available item');
                 }
             })
-
-            function get_price() {
-                var uid = $("#vpid").val();
-                var items = document.getElementsByClassName('select-variation-option');
-                $(".btn-add-to-cart").removeClass('add-to-cart');
-                let options = {};
-                for (var i = 0; i < items.length; i++) {
-                    options[$(items[i]).data('name')] = $(items[i]).val();
-                }
-
-                $.map($("[data-main-stock='" + uid + "'] input:radio:checked"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-
-                $.ajax({
-                    type: "post",
-                    url: "/products/get-price",
-                    cache: false,
-                    datatype: "json",
-                    data: {options: options, uid: uid},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            var price = data.price;
-                            if (data.message) {
-                                price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + data.price;
-                            }
-                            $(".price-place").html(price);
-                            $("#variation_uid").val(data.variation_id);
-                            $(".btn-add-to-cart").addClass('add-to-cart');
-
-                        } else {
-                            $(".price-place").html('<span class="d-inline-block font-16">' + data.message + '</span>');
-                            $("#variation_uid").val('');
-                            $(".add-fav-variation").addClass('d-none').data('id', '').removeClass('active');
-                        }
-                    }
-                });
-            }
-
-            $("body").on('change', '.select-variation-poption', function () {
-                var pid = $(this).closest('.poptions-group').data('promotion');
-                get_promotion_price(pid);
-            });
-
-            $("body").on('change', '.select-variation-radio-poption', function () {
-                var pid = $(this).closest('.poptions-group').data('promotion');
-                get_promotion_price(pid);
-            });
-
-            function get_promotion_price(pid) {
-                let options = {};
-
-                $.map($("[data-promotion='" + pid + "'] input:radio:checked"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-
-                $.map($("[data-promotion='" + pid + "'] .select-variation-poption"), function (elem, idx) {
-                    options[$(elem).data('name')] = $(elem).val();
-                });
-
-                console.log(options);
-//            price-place-promotion
-                $.ajax({
-                    type: "post",
-                    url: "/products/get-price",
-                    cache: false,
-                    datatype: "json",
-                    data: {options: options, uid: pid, promotion: true},
-                    headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                    },
-                    success: function (data) {
-                        if (!data.error) {
-                            var price = data.price;
-                            if (data.message) {
-                                price = "<span class='d-inline-block font-16'>" + data.message + "</span>" + data.price;
-                            }
-
-                            $("[data-promotion='" + pid + "'] .price-place-promotion").html(price);
-                            $("[data-promotion='" + pid + "'] .variation_items").val(data.variation_id);
-//                        $("#variation_uid").val(data.variation_id);
-//                        $(".btn-add-to-cart").addClass('add-to-cart');
-                        } else {
-                            $("[data-promotion='" + pid + "'] .price-place-promotion").html('<span class="d-inline-block font-16">' + data.message + '</span>');
-//                        $("#variation_uid").val('');
-                        }
-                    }
-                });
-            }
-
-            $('body').on('change', '.products_custom_check input', function () {
-                if ($(this).is(':checked')) {
-                    $(this).closest('.product-single-info_title').next().removeClass('products_closed')
-                } else {
-                    $(this).closest('.product-single-info_title').next().addClass('products_closed')
-                }
-
-            })
-
-            $("body").on('click', '.product-card_like-icon', function () {
-
-                let url;
-                let is_active = $(this).hasClass("active");
-
-                url = (is_active) ? "/my-account/delete_favourites" : "/my-account/add_favourites";
-
-                let variation_id = $(this).attr("data-id");
-                let _this = $(this);
-                console.log(`${variation_id}  ---->  `, _this);
-                if (variation_id) {
-                    $.ajax({
-                        type: "post",
-                        url: url,
-                        cache: false,
-                        data: {
-                            id: variation_id
-                        },
-                        headers: {
-                            "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                        },
-                        success: function (data) {
-                            console.log(data);
-                            if (!data.error) {
-                                _this.toggleClass("active")
-                            } else {
-                                alert("error");
-                            }
-                        }
-                    })
-                }
-            });
-            // $("form").keypress(function(e) {
-            //     //Enter key
-            //     if (e.which == 13) {
-            //         return false;
-            //     }
-            // });
         });
     </script>
 
