@@ -2,32 +2,14 @@
 
 namespace App\Http\Controllers\Frontend;
 
-use App\Events\Tickets;
-use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Frontend\Requests\ChangePasswordRequest;
-use App\Http\Controllers\Frontend\Requests\MyAccountContactRequest;
-use App\Http\Controllers\Frontend\Requests\MyAccountRequest;
-use App\Http\Controllers\Frontend\Requests\VerificationRequest;
-use App\Http\Requests\AddressesRequest;
-use App\Models\Addresses;
 use App\Models\Category;
 use App\Models\GeoZones;
-use App\Models\MailJob;
-use App\Models\Media\Folders;
-use App\Models\Media\Items;
-use App\Models\Newsletter;
-use App\Models\Notifications\CustomEmails;
-use App\Models\Notifications\CustomEmailUser;
-use App\Models\Orders;
+use App\Models\Items;
 use App\Models\Statuses;
-use App\Models\Ticket;
 use App\Models\Settings;
-use App\Models\ZoneCountries;
 use App\Services\FileService;
-use App\Services\UserService;
 use App\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
 
