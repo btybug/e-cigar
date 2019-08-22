@@ -8,6 +8,7 @@ use App\Models\GeoZones;
 use App\Models\Items;
 use App\Models\Statuses;
 use App\Models\Settings;
+use App\Services\CartService;
 use App\Services\FileService;
 use App\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,7 @@ class WholesalerController extends Controller
     private $user;
     private $fileService;
     private $settings;
+    private $cartService;
 
     protected $view = 'frontend.wholesaler';
 
@@ -33,7 +35,8 @@ class WholesalerController extends Controller
         Category $category,
         User $user,
         FileService $fileService,
-        Settings $settings
+        Settings $settings,
+        CartService $cartService
     )
     {
         $this->countries = $countries;
@@ -43,6 +46,7 @@ class WholesalerController extends Controller
         $this->user = $user;
         $this->fileService = $fileService;
         $this->settings = $settings;
+        $this->cartService = $cartService;
     }
 
     public function index(Request $request)
@@ -68,6 +72,20 @@ class WholesalerController extends Controller
         return \Response::json(['error' => false, 'message' => 'added', 'item_id' => $item->id,
             'count' => count($cartData), 'headerHtml' => $headerhtml]);
 
+    }
+
+    public function getCart()
+    {
+//        Cart::clear();
+        enableFilter();
+        $items = Cart::session('wholesaler')->getContent();
+        $data = $this->cartService->getShippingWholesaler($items);
+
+        $default_shipping = $data['default_shipping'];
+        $shipping = $data['shipping'];
+        $geoZone = $data['geoZone'];
+
+        return $this->view('cart', compact(['items', 'default_shipping', 'shipping', 'geoZone']));
     }
 }
 

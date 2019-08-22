@@ -54,9 +54,9 @@
     </div>
     <!--cart btn-s-->
     <div class="d-flex justify-content-between w-100">
-        <a href="{!! route('shop_my_cart') !!}" class="cart-sidebar_view-btn btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-sec-clr rounded-0 pointer">View Cart</a>
+        <a href="{!! route('wholesaler_my_cart') !!}" class="cart-sidebar_view-btn btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-sec-clr rounded-0 pointer">View Cart</a>
         @if(! \Cart::session('wholesaler')->isEmpty())
-            <a href="{!! route('shop_check_out') !!}" class="cart-sidebar_check-btn btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase rounded-0 text-tert-clr pointer">Checkout</a>
+            <a href="{!! route('wholesaler_check_out') !!}" class="cart-sidebar_check-btn btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase rounded-0 text-tert-clr pointer">Checkout</a>
         @endif
     </div>
 
