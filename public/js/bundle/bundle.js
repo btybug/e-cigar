@@ -6641,6 +6641,13 @@ function onRecaptchaLoadCallback() {
     });
 }
 (function () {
+    $('body').on('change', '.wholesaler_radio', function (ev) {
+        if ($(this).val() == 1) {
+            $("body").find(".wholesaler-box").addClass('show').removeClass('d-none');
+        } else {
+            $("body").find(".wholesaler-box").addClass('d-none').removeClass('show');
+        }
+    });
 
     $('#register-form-1').on('submit', function (ev) {
         var _this4 = this;
@@ -6659,6 +6666,9 @@ function onRecaptchaLoadCallback() {
                 var emailEl = $('#e-mail');
                 var phoneEl = $('#phoneNumber');
                 var passwordEl = $('#password');
+                var wholesaler_radio = $('.wholesaler_radio');
+                var companyName = $('#companyName');
+                var companyNumber = $('#companyNumber');
 
                 var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
                     var change = function change(fieldElementChange, fieldElementNameChange) {
@@ -6701,7 +6711,7 @@ function onRecaptchaLoadCallback() {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            console.log(data);
+                            window.location = data.redirectPath;
                         }
                     },
                     error: function error(_error8) {
@@ -6711,6 +6721,12 @@ function onRecaptchaLoadCallback() {
                         errorHandler(emailEl, _error8.responseJSON.errors, _error8.responseJSON.errors.email, '#e-mail');
                         errorHandler(phoneEl, _error8.responseJSON.errors, _error8.responseJSON.errors.phone, '#phoneNumber');
                         errorHandler(passwordEl, _error8.responseJSON.errors, _error8.responseJSON.errors.password, '#password');
+                        console.log(wholesaler_radio.val(), _typeof(wholesaler_radio.val()));
+                        if (wholesaler_radio.val()) {
+
+                            errorHandler(companyName, _error8.responseJSON.errors, _error8.responseJSON.errors.company_name, '#companyName');
+                            errorHandler(companyNumber, _error8.responseJSON.errors, _error8.responseJSON.errors.company_number, '#companyNumber');
+                        }
                     }
                 });
             });

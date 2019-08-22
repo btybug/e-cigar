@@ -12,6 +12,14 @@
 
 Route::get('/', 'HomeController@index')->name('home');
 
+Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
+    ->middleware(['auth','verified','wholesaler','is_not_verifyed_wholesaler'])->name('verification_wholesaler');
+
+Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','wholesaler','verifyed_wholesaler']], function () {
+    Route::get('/', 'Frontend\WholesalerController@index')->name('wholesaler');
+
+});
+
 //Route::get('/', function () {
 //    // Get all tickets
 ////
