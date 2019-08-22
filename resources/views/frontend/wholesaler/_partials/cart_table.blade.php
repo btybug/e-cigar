@@ -1,4 +1,4 @@
-<div id="singleProductPageCnt" class="shopping-cart-content">
+<div id="singleProductPageCnt" class="shopping-cart-content-wholesaler">
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-10 pl-0">
@@ -42,8 +42,7 @@
                                                           d="M21.852,2.990 C19.636,2.990 17.428,4.080 15.999,5.846 C14.571,4.080 12.363,2.990 10.147,2.990 C6.125,2.990 3.001,6.258 3.001,10.466 C3.001,15.639 7.419,19.857 14.178,26.113 L15.999,28.011 L17.821,26.113 C24.580,19.857 28.998,15.639 28.998,10.466 C28.998,6.258 25.875,2.990 21.852,2.990 L21.852,2.990 Z"/>
                                                     </svg>
                                                     </span>
-                                                        <a href="#"
-                                                           class="text-tert-clr font-18 lh-1 edit-link">Edit</a>
+
                                                     </div>
                                                 </div>
                                             </td>

@@ -25,9 +25,11 @@ Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','who
     Route::post('/remove-from-cart', 'Frontend\WholesalerController@postRemoveFromCart')->name('wholesaler_remove_from_cart');
     Route::post('/change-shipping-method', 'Frontend\WholesalerController@postChangeShippingMethod')->name('wholesaler_change_shipping_method');
     Route::post('/get-payment-options', 'Frontend\WholesalerController@postPaymentOptions')->name('wholesaler_get_payment_options');
-    Route::post('/cash-order', 'Frontend\WholesalerController@order')->name('wholesaler_cash_order');
-    Route::get('/cash-order-success/{id}', 'Frontend\WholesalerController@success')->name('wholesaler_cash_order_success');
+    Route::post('/cash-order', 'Frontend\CashPaymentController@wholesalerOrder')->name('wholesaler_cash_order');
+    Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@wholesalerSuccess')->name('wholesaler_cash_order_success');
     Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
+    Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
+
 });
 
 //Route::get('/', function () {
