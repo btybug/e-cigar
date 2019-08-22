@@ -48,8 +48,8 @@
                 </span>
             </a>
             <div  class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                <a href="javascript:void(0)"
-                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
+                <a href="javascript:void(0)" data-id="{{ $item->id }}"
+                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more add-to-cart">
                     Add to cart
                 </a>
             </div>

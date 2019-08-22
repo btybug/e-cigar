@@ -122,9 +122,9 @@
                                 <a class="nav-link " href="{!! route('product_support') !!}">Support</a>
                             </li>
                             @if(Auth::check() && Auth::user()->isWholeseler())
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('wholesaler') !!}">Wholesaler</a>
-                            </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{!! route('wholesaler') !!}">Wholesaler</a>
+                                </li>
                             @endif
                         </ul>
                     </div>
@@ -139,38 +139,43 @@
                 <a href="{!! url('/') !!}" class="d-md-block d-none logo">
                     <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}">
                 </a>
-                @if(Request::route()->getName() != 'wholesaler')
+
                     <div class="d-flex align-self-center cat-search">
-                        @if(\Request::route() && \Request::route()->getName() != 'categories_front')
-                            <div class="category-select">
-                                @php
-                                    $categories = \App\Models\Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
-                                @endphp
-                                {!! Form::select('category',['' => 'All Categories'] + $categories->toArray(),null,
-                                    [
-                                        'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected',
-                                        'style' =>'width: 190px',
-                                        'id' => 'filter_sort'
-                                    ]) !!}
+                        @if(Request::route()->getPrefix() != '/wholesaler')
+
+                            @if(\Request::route() && \Request::route()->getName() != 'categories_front')
+                                <div class="category-select">
+                                    @php
+                                        $categories = \App\Models\Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
+                                    @endphp
+                                    {!! Form::select('category',['' => 'All Categories'] + $categories->toArray(),null,
+                                        [
+                                            'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                            'style' =>'width: 190px',
+                                            'id' => 'filter_sort'
+                                        ]) !!}
+                                </div>
+                            @endif
+
+                            <div class="search position-relative">
+                                <input type="search" class="form-control" id="search-product"
+                                       value="{{ (\Request::has('q')) ? \Request::get('q') :null }}"
+                                       placeholder="Serach for anything">
+                                <span class="position-absolute d-flex align-items-center">
+                                    <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink"
+                                            width="20px" height="20px">
+        <path fill-rule="evenodd" fill="rgb(121, 121, 121)"
+              d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"/>
+        </svg>
+                                </span>
                             </div>
                         @endif
-                        <div class="search position-relative">
-                            <input type="search" class="form-control" id="search-product"
-                                   value="{{ (\Request::has('q')) ? \Request::get('q') :null }}"
-                                   placeholder="Serach for anything">
-                            <span class="position-absolute d-flex align-items-center">
-                                <svg
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                        width="20px" height="20px">
-    <path fill-rule="evenodd" fill="rgb(121, 121, 121)"
-          d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"/>
-    </svg>
-                            </span>
-                        </div>
                     </div>
                     <div class="favorite-add-cart d-flex align-items-center">
-                        <span class="position-relative pointer add-links-wrap_icon search-mobile-icon">
+                        @if(Request::route()->getPrefix() != '/wholesaler')
+                            <span class="position-relative pointer add-links-wrap_icon search-mobile-icon">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -179,6 +184,8 @@
           d="M19.996,18.987 L16.406,15.260 C19.498,11.613 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.724,2.715 C-0.909,6.339 -0.909,12.216 2.724,15.840 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.002 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.026 7.136,1.185 9.303,1.185 C11.469,1.185 13.506,2.026 15.038,3.555 C18.201,6.710 18.201,11.844 15.038,15.000 C13.506,16.528 11.469,17.370 9.303,17.370 Z"/>
     </svg>
                         </span>
+                        @endif
+
                         <div class="d-inline-block simple_select_wrapper currency--wrap">
                             {!! Form::select('currency',site_currencies(),@$currency,[
                                'class' =>'select-2 currency--select-2 main-select',
@@ -187,6 +194,7 @@
                             {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
                         </div>
 
+                        @if(Request::route()->getPrefix() != '/wholesaler')
 
                         <a href="{!! route('my_account_favourites') !!}"
                            class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">
@@ -197,17 +205,25 @@
                         </a>
                         <span id="headerShopCartBtn" class="d-inline-block position-relative pointer add-links-wrap_icon sidebar_button_active_detector">
                             <span class="d-inline-block position-absolute absolute-center add-cart-number cart-count">{{ cartCount() }}</span>
-                        <svg
-                                width="25px" height="30px" viewBox="0 0 25 30">
-    <path fill-rule="evenodd" fill="rgb(121, 121, 121)"
-          d="M19.867,4.943 L19.867,-0.003 L5.131,-0.003 L5.131,4.943 L-0.005,4.943 L-0.005,30.000 L25.003,30.000 L25.003,4.943 L19.867,4.943 ZM6.854,1.629 L18.143,1.629 L18.143,4.943 L6.854,4.943 L6.854,1.629 ZM23.279,28.368 L1.719,28.368 L1.719,6.575 L5.131,6.575 L5.131,9.857 L6.854,9.857 L6.854,6.575 L18.143,6.575 L18.143,9.857 L19.867,9.857 L19.867,6.575 L23.279,6.575 L23.279,28.368 Z"/>
-    </svg>
-                    </span>
+                                <svg
+                                        width="25px" height="30px" viewBox="0 0 25 30">
+            <path fill-rule="evenodd" fill="rgb(121, 121, 121)"
+                  d="M19.867,4.943 L19.867,-0.003 L5.131,-0.003 L5.131,4.943 L-0.005,4.943 L-0.005,30.000 L25.003,30.000 L25.003,4.943 L19.867,4.943 ZM6.854,1.629 L18.143,1.629 L18.143,4.943 L6.854,4.943 L6.854,1.629 ZM23.279,28.368 L1.719,28.368 L1.719,6.575 L5.131,6.575 L5.131,9.857 L6.854,9.857 L6.854,6.575 L18.143,6.575 L18.143,9.857 L19.867,9.857 L19.867,6.575 L23.279,6.575 L23.279,28.368 Z"/>
+            </svg>
+                            </span>
+                        @else
+                            <span id="headerShopCartBtn" class="ml-5 d-inline-block position-relative pointer add-links-wrap_icon sidebar_button_active_detector">
+                                <span class="d-inline-block position-absolute absolute-center add-cart-number cart-count">{{ cartCountItems() }}</span>
+                                    <svg width="25px" height="30px" viewBox="0 0 25 30">
+                                <path fill-rule="evenodd" fill="rgb(121, 121, 121)"
+                                      d="M19.867,4.943 L19.867,-0.003 L5.131,-0.003 L5.131,4.943 L-0.005,4.943 L-0.005,30.000 L25.003,30.000 L25.003,4.943 L19.867,4.943 ZM6.854,1.629 L18.143,1.629 L18.143,4.943 L6.854,4.943 L6.854,1.629 ZM23.279,28.368 L1.719,28.368 L1.719,6.575 L5.131,6.575 L5.131,9.857 L6.854,9.857 L6.854,6.575 L18.143,6.575 L18.143,9.857 L19.867,9.857 L19.867,6.575 L23.279,6.575 L23.279,28.368 Z"/>
+                                </svg>
+                            </span>
+                        @endif
                     <div class="button share-button facebook-share-button st-custom-button share-header-icon-container sidebar_button_active_detector" style="margin-left: 15px">
                         <svg fill="#528eff" preserveAspectRatio="xMidYMid meet" height="2em" width="2em" viewBox="0 0 40 40" class="hvr-pulse share-header-icon" style="vertical-align: middle;"><g><path d="m30 26.8c2.7 0 4.8 2.2 4.8 4.8s-2.1 5-4.8 5-4.8-2.3-4.8-5c0-0.3 0-0.7 0-1.1l-11.8-6.8c-0.9 0.8-2.1 1.3-3.4 1.3-2.7 0-5-2.3-5-5s2.3-5 5-5c1.3 0 2.5 0.5 3.4 1.3l11.8-6.8c-0.1-0.4-0.2-0.8-0.2-1.1 0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5c-1.3 0-2.5-0.6-3.4-1.4l-11.8 6.8c0.1 0.4 0.2 0.8 0.2 1.2s-0.1 0.8-0.2 1.2l11.9 6.8c0.9-0.7 2.1-1.2 3.3-1.2z"></path></g></svg>
                     </div>
                     </div>
-                @endif
             </div>
         </div>
     </div>
@@ -234,7 +250,11 @@
     </div>
 @endif
 <div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column p-0">
-    @include('frontend._partials.shopping_cart_options')
+    @if(Request::route()->getPrefix() != '/wholesaler')
+        @include('frontend._partials.shopping_cart_options')
+    @else
+        @include('frontend.wholesaler._partials.shopping_cart_options')
+    @endif
 </div>
 <div id="share_modal" class="hidden-sidebar cart-aside d-flex flex-column p-0">
     <button class="share_modal_close">X</button>
