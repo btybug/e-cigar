@@ -160,7 +160,7 @@
                             {!! Form::close() !!}
                         </div>
                         <div class="products__page-main_right-wrapper products-box">
-                            {{--@include("frontend.products._partials.products_render",['all_products' => true])--}}
+                            @include("frontend.wholesaler._partials.products_render",['all_products' => true])
                         </div>
                     </div>
                 </div>
