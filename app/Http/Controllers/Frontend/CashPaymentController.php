@@ -58,6 +58,13 @@ class CashPaymentController extends Controller
         return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
     }
 
+    public function wholesalerOrder(Request $request)
+    {
+        $order = $this->paymentService->callWholesaler();
+
+        return \Response::json(['error' => false, 'url' => route('wholesaler_cash_order_success', $order->id)]);
+    }
+
     public function success(Request $request, $id)
     {
         $order = Orders::findOrFail($id);
@@ -68,6 +75,24 @@ class CashPaymentController extends Controller
             session()->forget('payment_token');
             Cart::clear();
             Cart::removeConditionsByType('shipping');
+
+            return $this->view('_partials.cash_success',compact('order'));
+        }
+
+        abort(404);
+    }
+
+    public function wholesalerSuccess(Request $request, $id)
+    {
+        $order = Orders::findOrFail($id);
+
+        if (!Cart::session('wholesaler')->isEmpty() && session()->has('shipping_address_wholesale')
+            && session()->has('billing_address_wholesale') && $order) {
+            session()->forget('shipping_address_wholesale', 'billing_address_wholesale');
+            session()->forget('shipping_address_wholesaler_id', 'billing_address_wholesaler_id');
+            session()->forget('payment_token_wholesale');
+            Cart::session('wholesaler')->clear();
+            Cart::session('wholesaler')->removeConditionsByType('shipping');
 
             return $this->view('_partials.cash_success',compact('order'));
         }

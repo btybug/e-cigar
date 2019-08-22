@@ -535,7 +535,8 @@ class CartService
         return [
             'default_shipping' => (isset($default_shipping) ? $default_shipping : null),
             'shipping' => (isset($shipping) ? $shipping : null),
-            'geoZone' => (isset($geoZone) ? $geoZone : null)
+            'geoZone' => (isset($geoZone) ? $geoZone : null),
+            'delivery' => (isset($delivery) ? $delivery : null)
         ];
     }
 }

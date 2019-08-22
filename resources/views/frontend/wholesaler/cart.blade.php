@@ -116,6 +116,64 @@
 
                 });
             }, 500);
+
+
+        });
+
+        $("body").on('click','.shopping-cart-content-wholesaler .inp-up, .shopping-cart-content-wholesaler .inp-down',function () {
+            var uid = $(this).closest('.shopping__cart-tab-table-wall').data('uid');
+            var condition = $(this).hasClass('inp-up');
+            if(uid && uid != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/wholesaler/update-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: {  uid : uid, condition: condition },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $('.cart-area').html(data.html);
+                            $('#cartSidebar').html(data.headerHtml);
+                        }else{
+                            alert('error');
+                        }
+                    }
+                });
+            }else{
+                alert('Select available variation');
+            }
+        });
+
+        $("body").on('click','.remove-from-cart',function (e) {
+            e.stopPropagation();
+            var uid = $(this).data('uid');
+
+            if(uid && uid != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/wholesaler/remove-from-cart",
+                    cache: false,
+                    datatype: "json",
+                    data: {  uid : uid },
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if(! data.error){
+                            $('.cart-area').html(data.html)
+                            $('#cartSidebar').html(data.headerHtml)
+                            $(".cart-count").html(data.count);
+                        }else{
+                            alert('error');
+                        }
+                    }
+                });
+            }else{
+                alert('Select available variation');
+            }
         });
     </script>
 @stop
