@@ -30,7 +30,8 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status', 'referred_by', 'role_id', 'verification_type', 'verification_image', 'customer_number', 'dob'
+        'name', 'last_name', 'username', 'email', 'password', 'phone', 'country', 'gender', 'status', 'referred_by', 'role_id',
+        'verification_type', 'verification_image', 'customer_number', 'dob', 'company_name', 'company_number', 'wholesaler_status'
     ];
 
     protected $appends = [
@@ -105,6 +106,11 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isAdministrator()
     {
         return ($this->role->type == 'backend') ? true : false;
+    }
+
+    public function isWholeseler()
+    {
+        return ($this->role->slug == 'wholesaler') ? true : false;
     }
 
     public function customEmails()

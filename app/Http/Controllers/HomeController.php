@@ -38,4 +38,8 @@ class HomeController extends Controller
     {
         return view('faq');
     }
+
+    public function verifyWholesaler(){
+        return view('auth.verify_wholesaler');
+    }
 }
