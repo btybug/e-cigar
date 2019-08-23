@@ -40,7 +40,7 @@
                                                    href="">{!! $item->name !!}</a>
                                             </td>
                                             <td class="text-left">
-
+                                                @if(! $order->type)
                                                 @php
                                                     $options=$item->options;
                                                         $lastElement = end($options);
@@ -77,7 +77,8 @@
                                                     <p>
                                                         {{ $op['name'] }}
                                                     </p>
-                                @endforeach
+                                    @endforeach
+
                             </div>
                             <div class="col-md-4">
                                 {{ convert_price($option['price'],$currency) }}
@@ -87,6 +88,7 @@
                         @endforeach
                         </b>
                         </p>
+                        @endif
                         </td>
                         <td class="text-right">{!! $item->qty !!}</td>
                         <td class="text-right">{!! convert_price($item->amount/$item->qty,$currency) !!}</td>

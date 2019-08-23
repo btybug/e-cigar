@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Coupons;
 use App\Models\DeliveryCosts;
 use App\Models\GeoZones;
 use App\Models\Items;
@@ -364,7 +365,7 @@ class WholesalerController extends Controller
         $stripe = (new Settings())->getEditableData('payments_gateways');
         if (\Auth::check()) {
             $user = \Auth::user();
-            $default_shipping = $user->addresses()->where('id', session()->get('shipping_address_id'))->first();
+            $default_shipping = $user->addresses()->where('id', session()->get('shipping_address_wholesaler_id'))->first();
             $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
             $geoZone = ($zone) ? $zone->geoZone : null;
             if ($geoZone) {
@@ -392,7 +393,6 @@ class WholesalerController extends Controller
                 }
             }
         }
-
 
         return $this->view('payment', compact(['cash', 'stripe', 'active_payments_gateways', 'billing_address', 'default_shipping',
             'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address', 'address_id']));

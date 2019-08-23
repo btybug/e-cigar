@@ -175,8 +175,8 @@ class UserController extends Controller
 
     public function getOrders()
     {
-        $user = \Auth::user()->with('orders')->first();
-//        dd($user->toArray());
+        $user = \Auth::user();
+
         return $this->view('orders', compact('user'));
     }
 

@@ -445,6 +445,9 @@ class DatatableController extends Controller
             })->editColumn('user', function ($attr) {
                 return $attr->user->name . ' ' . $attr->user->last_name;
             })
+            ->editColumn('type', function ($attr) {
+                return ($attr->type) ? "Wholesaler" : "User";
+            })
             ->addColumn('actions', function ($post) {
                 return (userCan('admin_orders_manage')) ? "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>" : '';
             })->rawColumns(['actions', 'status'])

@@ -153,7 +153,7 @@
                                                     <img src="/public/img/confirm-gift.png" class="gift-img"
                                                          alt="item"/>
                                                 </div>
-                                                <a href="{{ route('home') }}"
+                                                <a href="{{ route('wholesaler') }}"
                                                    class="d-flex align-items-center justify-content-center font-18 text-sec-clr bg-red item-order-btn">Continue
                                                     Shopping</a>
                                             </div>
@@ -176,33 +176,11 @@
                                                              alt="{{ $item->name }}">
                                                     </div>
                                                     <h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
-                                                    <p class="font-20 lh-1 order__product-sec-title">Cola Shades
-                                                        E-Juice</p>
+                                                    <p class="font-20 lh-1 order__product-sec-title"> </p>
                                                     <div class="order__product-info">
-                                                        @if(count($item->options['options']))
-                                                            <ul class="list-unstyled mb-0">
-                                                                @foreach($item->options['options'] as $option)
-                                                                    <li class="single-row-product">
-                                                                        @foreach($option['options'] as $op)
-                                                                            <div class="row">
-                                                                                <div
-                                                                                    class="col-sm-9 font-15 font-main-bold">
-                                                                                    {{ $op['title'] ." - ". $op['name'] }}
-                                                                                </div>
-                                                                                <div
-                                                                                    class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
-                                                                                    <span>x {{ $op['qty'] }}</span>
-                                                                                </div>
-                                                                            </div>
-                                                                        @endforeach
-                                                                    </li>
-                                                                @endforeach
-                                                            </ul>
-                                                        @endif
+
                                                     </div>
                                                 </div>
-
-
 
                                                 <div class="qty-price">
                                                     <div
@@ -222,7 +200,7 @@
                                                         </div>
                                                         <div class="price-col">
                                                         <span class="lh-1 text-tert-clr ">
-                                                            {!! convert_price($item->price,get_currency()) !!}
+                                                            {!! convert_price($item->price,$order->currency) !!}
                                                         </span>
                                                         </div>
                                                     </div>
@@ -251,7 +229,8 @@
                                                     Sub Total
                                                 </div>
                                                 <div
-                                                    class="price font-main-bold">£25,78
+                                                    class="price font-main-bold">
+                                                    {!! convert_price($order->amount-$order->shipping_price,$order->currency) !!}
                                                 </div>
                                             </div>
                                             <div
@@ -260,7 +239,7 @@
                                                     Tax
                                                 </div>
                                                 <div
-                                                    class="price font-main-bold">£0
+                                                    class="price font-main-bold">{!! convert_price(0,$order->currency) !!}
                                                 </div>
                                             </div>
                                             <div
@@ -271,17 +250,19 @@
                                                 <div
                                                     class="w-100 font-18 d-flex flex-wrap justify-content-between align-items-center shipping-wall">
                                                     <div class="shipping-item">
-                                                        United Kingdom
+                                                        {!! $order->shipping_method !!}
                                                     </div>
-                                                    <div class="price font-24 font-main-bold">£0</div>
-                                                </div>
-                                                <div
-                                                    class="w-100 d-flex font-18 flex-wrap justify-content-between align-items-center shipping-wall">
-                                                    <div class="shipping-item">
-                                                        Shipping Service
+                                                    <div class="price font-24 font-main-bold">
+                                                        {!! convert_price($order->shipping_price,$order->currency) !!}
                                                     </div>
-                                                    <div class="price font-24 font-main-bold">£0</div>
                                                 </div>
+                                                {{--<div--}}
+                                                    {{--class="w-100 d-flex font-18 flex-wrap justify-content-between align-items-center shipping-wall">--}}
+                                                    {{--<div class="shipping-item">--}}
+                                                        {{--Shipping Service--}}
+                                                    {{--</div>--}}
+                                                    {{--<div class="price font-24 font-main-bold">£0</div>--}}
+                                                {{--</div>--}}
                                             </div>
                                             <div
                                                 class="single-row font-24 d-flex flex-wrap justify-content-between align-items-center">
@@ -291,7 +272,7 @@
                                                         Coupon Discount
                                                     </div>
                                                     <div
-                                                        class="price font-main-bold">£0
+                                                        class="price font-main-bold">{!! convert_price(0,$order->currency) !!}
                                                     </div>
                                                 </div>
                                             </div>
@@ -301,7 +282,9 @@
                                                     Total
                                                 </div>
                                                 <div
-                                                    class="price text-tert-clr font-main-bold">£25,78
+                                                    class="price text-tert-clr font-main-bold">
+                                                    {!! convert_price($order->amount,$order->currency) !!}
+
                                                 </div>
                                             </div>
                                         </div>
