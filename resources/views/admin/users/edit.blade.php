@@ -18,10 +18,44 @@
 
                 <div class="form-group pull-right">
                     {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                    {!! Form::hidden('email',$user->email) !!}
-                    <button type="submit" class="btn btn-warning">Send reset password email</button>
+                        {!! Form::hidden('email',$user->email) !!}
+                        <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
+
+                @if(! $user->email_verified_at)
+                    <div class="form-group ">
+                        {!! Form::open(['url'=>route('admin_users_approve')]) !!}
+                            {!! Form::hidden('id',$user->id) !!}
+                            <button type="submit" class="btn btn-success">Verify</button>
+                        {!! Form::close() !!}
+                    </div>
+                @else
+                    <div class="form-group ">
+                        {!! Form::open(['url'=>route('admin_users_reject')]) !!}
+                        {!! Form::hidden('id',$user->id) !!}
+                        <button type="submit" class="btn btn-danger">Block</button>
+                        {!! Form::close() !!}
+                    </div>
+                @endif
+
+                @if($user->isWholeseler())
+                    @if(! $user->wholesaler_status)
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_approve')]) !!}
+                                {!! Form::hidden('id',$user->id) !!}
+                                <button type="submit" class="btn btn-success">Approve Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @else
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_reject')]) !!}
+                            {!! Form::hidden('id',$user->id) !!}
+                            <button type="submit" class="btn btn-danger">Block Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @endif
+                @endif
 
                 <div class="pull-right mr-10">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#msgModal">Send
