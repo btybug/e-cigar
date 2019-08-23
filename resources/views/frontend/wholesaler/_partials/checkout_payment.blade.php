@@ -117,10 +117,10 @@
                                         </form>
                                     </div>
                                 </div>
-                                @if(in_array('cash',$geoZone->payment_options) && $active_payments_gateways->cash)
-                                <div id="cash-method" class="payment-method-data d-none">
-                                    <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done submit-cash">PAY CASH</button>
-                                </div>
+                                @if($geoZone && in_array('cash',$geoZone->payment_options) && $active_payments_gateways->cash)
+                                    <div id="cash-method" class="payment-method-data d-none">
+                                        <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done submit-cash">PAY CASH</button>
+                                    </div>
                                 @endif
                             </div>
                         </div>
@@ -129,7 +129,7 @@
             </div>
             <div class="col-lg-2 pr-md-right">
                 <div class="right-content">
-                    @include("frontend.wholesaler._partials.order_summary",['pyp' =>true,'back_route' => route('shop_check_out')])
+                    @include("frontend.wholesaler._partials.order_summary",['pyp' =>true,'back_route' => route('wholesaler_check_out')])
                 </div>
             </div>
         </div>

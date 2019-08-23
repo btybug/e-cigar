@@ -94,7 +94,7 @@ class CashPaymentController extends Controller
             Cart::session('wholesaler')->clear();
             Cart::session('wholesaler')->removeConditionsByType('shipping');
 
-            return $this->view('_partials.cash_success',compact('order'));
+            return View('frontend.wholesaler._partials.cash_success',compact('order'));
         }
 
         abort(404);

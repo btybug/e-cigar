@@ -145,28 +145,30 @@
                                                         <p class="font-18 lh-1 order__product-sec-title">Cola Shades
                                                             E-Juice</p>
                                                         <div class="order__product-info">
-                                                            @if(count($item->options['options']))
-                                                                <ul class="list-unstyled mb-0">
-                                                                    @foreach($item->options['options'] as $option)
-                                                                        <li class="single-row-product">
-                                                                            @foreach($option['options'] as $op)
-                                                                                <div class="row">
-                                                                                    <div
-                                                                                        class="col-sm-9 font-15 font-main-bold">
-                                                                                        {{ $op['title'] ." - ". $op['name'] }}
-                                                                                        @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
-                                                                                            ({{ "Pack of ".$op['discount']['qty'] }})
-                                                                                        @endif
+                                                            @if(! $order->type)
+                                                                @if(count($item->options['options']))
+                                                                    <ul class="list-unstyled mb-0">
+                                                                        @foreach($item->options['options'] as $option)
+                                                                            <li class="single-row-product">
+                                                                                @foreach($option['options'] as $op)
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-sm-9 font-15 font-main-bold">
+                                                                                            {{ $op['title'] ." - ". $op['name'] }}
+                                                                                            @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
+                                                                                                ({{ "Pack of ".$op['discount']['qty'] }})
+                                                                                            @endif
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
+                                                                                            <span>x {{ $op['qty'] }}</span>
+                                                                                        </div>
                                                                                     </div>
-                                                                                    <div
-                                                                                        class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
-                                                                                        <span>x {{ $op['qty'] }}</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </li>
-                                                                    @endforeach
-                                                                </ul>
+                                                                                @endforeach
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
                                                             @endif
                                                         </div>
                                                     </div>
@@ -416,32 +418,40 @@
                                 $count = 0;
                             @endphp
                             @foreach($order->items as $item)
-                                @if(count($item->options))
-                                    @if(isset($item->options['options']))
-                                        @foreach($item->options['options'] as $option)
-                                            @if(count($option['options']))
-                                                @foreach($option['options'] as $o)
-                                                    @include("admin.orders._partials.collect")
-                                                    @php
-                                                        $count++;
-                                                    @endphp
-                                                @endforeach
-                                            @endif
-                                        @endforeach
-                                    @endif
-                                    @if(isset($item->options['extras']))
-                                        @foreach($item->options['extras'] as $option)
-                                            @if(count($option['options']))
-                                                @foreach($option['options'] as $o)
-                                                    @include("admin.orders._partials.collect")
-                                                    @php
-                                                        $count++;
-                                                    @endphp
-                                                @endforeach
-                                            @endif
-                                        @endforeach
+                                @if($order->type)
+                                    @include("admin.orders._partials.collect_wholesaler")
+                                    @php
+                                        $count++;
+                                    @endphp
+                                @else
+                                    @if(count($item->options))
+                                        @if(isset($item->options['options']))
+                                            @foreach($item->options['options'] as $option)
+                                                @if(count($option['options']))
+                                                    @foreach($option['options'] as $o)
+                                                        @include("admin.orders._partials.collect")
+                                                        @php
+                                                            $count++;
+                                                        @endphp
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
+                                        @if(isset($item->options['extras']))
+                                            @foreach($item->options['extras'] as $option)
+                                                @if(count($option['options']))
+                                                    @foreach($option['options'] as $o)
+                                                        @include("admin.orders._partials.collect")
+                                                        @php
+                                                            $count++;
+                                                        @endphp
+                                                    @endforeach
+                                                @endif
+                                            @endforeach
+                                        @endif
                                     @endif
                                 @endif
+
                             @endforeach
                         @endif
                     </div>

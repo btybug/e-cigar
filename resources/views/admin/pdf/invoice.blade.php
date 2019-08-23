@@ -94,7 +94,15 @@
                                 {{ $item->name }}
                             </td>
                             <td class="desc-td">
-                                @if(count($item->options['options']))
+                                @if($order->type)
+                                <div class="single-item">
+                                    <span class="single-item-name">
+                                         {{ $item->name }}
+                                    </span>
+                                    <span class="single-item-price">{!! convert_price($item->price,$order->currency) !!}</span>
+                                </div>
+                                @else
+                                    @if(count($item->options['options']))
                                     @foreach($item->options['options'] as $option)
                                         @foreach($option['options'] as $op)
                                             @php
@@ -151,6 +159,7 @@
                                         @endforeach
                                     @endforeach
                                 @endif
+                                @endif
                             </td>
                             <td class="qty-td text-center">
                                 <span>x {{ $item->qty }}</span>
@@ -159,7 +168,11 @@
                                 <span> {{ convert_price(0,$order->currency) }}</span>
                             </td>
                             <td class="total-td text-center">
-                                <span class="price">  {!! convert_price($item->price+$extraPrice,$order->currency) !!}</span>
+                                @if($order->type)
+                                    <span class="price">  {!! convert_price($item->amount,$order->currency) !!}</span>
+                                @else
+                                     <span class="price">  {!! convert_price($item->price+$extraPrice,$order->currency) !!}</span>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

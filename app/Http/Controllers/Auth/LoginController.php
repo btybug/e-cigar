@@ -60,6 +60,10 @@ class LoginController extends Controller
             if ($user->isAdministrator()) {
                 $this->redirectTo = '/admin';
             }
+
+            if ($user->isWholeseler()) {
+                $this->redirectTo = '/wholesaler';
+            }
         }
 
         return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);

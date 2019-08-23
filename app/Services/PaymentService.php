@@ -209,9 +209,9 @@ class PaymentService
     {
         $shippingId = session()->get('shipping_address_wholesale');
         $billingId = session()->get('billing_address_wholesale');
-        $this->amount = Cart::getTotal();
+        $this->amount = Cart::session('wholesaler')->getTotal();
         $geoZone = null;
-        $items = Cart::getContent();
+        $items = Cart::session('wholesaler')->getContent();
         if (\Auth::check()) {
             $shippingAddress = Addresses::find($shippingId);
             $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
@@ -219,9 +219,9 @@ class PaymentService
             $geoZone = ($zone) ? $zone->geoZone : null;
         }
         return \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
-            Cart::removeConditionsByType('shipping');
+            Cart::session('wholesaler')->removeConditionsByType('shipping');
             if (count($geoZone->deliveries)) {
-                $subtotal = Cart::getSubTotal();
+                $subtotal = Cart::session('wholesaler')->getSubTotal();
                 $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
                 if ($delivery && count($delivery->options)) {
                     $shippingDefaultOption = $delivery->options->first();
@@ -234,12 +234,12 @@ class PaymentService
                         'attributes' => $shippingDefaultOption
                     ));
 
-                    Cart::condition($condition2);
+                    Cart::session('wholesaler')->condition($condition2);
                 }
             }
 
-            $shipping = Cart::getCondition($geoZone->name);
-            $items = Cart::getContent();
+            $shipping = Cart::session('wholesaler')->getCondition($geoZone->name);
+            $items = Cart::session('wholesaler')->getContent();
             $order_number = get_order_number();
 
             $order = Orders::create([
@@ -251,7 +251,8 @@ class PaymentService
                 'payment_method' => $this->method,
                 'shipping_price' => $shipping->getValue(),
                 'currency' => get_currency(),
-                'order_number' => $order_number
+                'order_number' => $order_number,
+                'type' => true
             ]);
 
             $status = $setting = $this->settings->getData('order', 'open');
@@ -272,100 +273,25 @@ class PaymentService
             $order->shippingAddress()->create($shippingAddress);
 
             $sales = [];
-            foreach ($items as $variation_id => $item) {
-                $options = [];
-                foreach ($item->attributes->variations as $variation) {
-                    $dataV = [];
-                    $dataV['price'] = $variation['price'];
-                    $dataV['options'] = [];
-                    foreach ($variation['options'] as $option) {
-                        if (isset($sales[$option['option']->item_id])) {
-                            $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
-                        } else {
-                            $sales[$option['option']->item_id] = $option['qty'];
-                        }
-                        $discount = null;;
-                        if($option['option']->price_type == 'discount'){
-                            if($option['option']->discount_type =='fixed'){
-                                $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
-                            }else{
-                                $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
-                            }
-                        }
-                        $dataV['options'][] = [
-                            'qty' => $option['qty'],
-                            'name' => $option['option']->name,
-                            'title' => $option['option']->title,
-                            'id' => $option['option']->id,
-                            'image' => $option['option']->image,
-                            'variation' => $option['option'],
-                            'unique_id' => uniqid(),
-                            'discount' => $discount
-                        ];
-                    }
-                    $options[$variation['group']->variation_id] = $dataV;
-                }
-
-                $extras = [];
-                if($item->attributes->has('extra') && isset($item->attributes->extra['data'])){
-                    foreach ($item->attributes->extra['data'] as $extra) {
-                        $dataV = [];
-                        $dataV['price'] = $extra['price'];
-                        $dataV['options'] = [];
-                        foreach ($extra['variations']['options'] as $option) {
-                            if (isset($sales[$option['option']->item_id])) {
-                                $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + 1;
-                            } else {
-                                $sales[$option['option']->item_id] = 1;
-                            }
-
-                            $discount = null;;
-                            if($option['option']->price_type == 'discount'){
-                                if($option['option']->discount_type =='fixed'){
-                                    $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
-                                }else{
-                                    $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
-                                }
-                            }
-
-                            $dataV['options'][] = [
-                                'qty' => $option['qty'],
-                                'name' => $option['option']->name,
-                                'title' => $option['option']->title,
-                                'id' => $option['option']->id,
-                                'image' => $option['option']->image,
-                                'variation' => $option['option'],
-                                'unique_id' => uniqid(),
-                                'discount' => $discount
-                            ];
-                        }
-                        $extras[$extra['variations']['group']->variation_id] = $dataV;
-                    }
-                }
-
-
-                if (count($sales)) {
-                    foreach ($sales as $item_id => $sale) {
-                        Others::create([
-                            'item_id' => $item_id,
-                            'user_id' => \Auth::id(),
-                            'qty' => (int)$sale,
-                            'reason' => 'sold',
-                            'grouped' => $order->id,
-                        ]);
-                    }
-                }
+            foreach ($items as $item_id => $item) {
+                Others::create([
+                    'item_id' => $item->id,
+                    'user_id' => \Auth::id(),
+                    'qty' => $item->quantity,
+                    'reason' => 'sold',
+                    'grouped' => $order->id,
+                ]);
 
                 OrderItem::create([
                     'order_id' => $order->id,
-                    'name' => $item->attributes->product->name,
+                    'name' => $item->attributes->item->name,
                     'sku' => '',
-                    'variation_id' => $variation_id,
+                    'variation_id' => $item->id,
                     'price' => $item->price,
                     'qty' => $item->quantity,
                     'amount' => $item->price * $item->quantity,
-                    'image' => $item->attributes->product->image,
-                    'options' => ['options' => $options, 'extras' => $extras]
+                    'image' => $item->attributes->item->image,
+                    'options' => []
                 ]);
             }
 
