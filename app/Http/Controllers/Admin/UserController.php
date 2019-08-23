@@ -189,33 +189,7 @@ class UserController extends Controller
             ->with('status', trans($response));
     }
 
-    public function postReject(Request $request)
-    {
-        $user = User::findOrFail($request->user_id);
-        if ($user->email_verified_at && !$user->status) {
-            $user->update([
-                'verification_type' => null,
-                'verification_image' => null
-            ]);
-            return \Response::json(['error' => false]);
-        }
 
-        abort(404);
-    }
-
-    public function postApprove(Request $request)
-    {
-        $user = User::findOrFail($request->user_id);
-        if ($user->email_verified_at && !$user->status) {
-            $user->update([
-                'status' => true
-            ]);
-
-            return \Response::json(['error' => false]);
-        }
-
-        abort(404);
-    }
 
     public function deleteStaff(Request $request)
     {
@@ -262,5 +236,62 @@ class UserController extends Controller
         $note->delete();
 
         return response()->json(['error' => false]);
+    }
+
+    public function postVerify(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        if (! $user->email_verified_at) {
+            $user->markEmailAsVerified();
+            $user->update([
+                'status' => true
+            ]);
+
+            return redirect()->back();
+        }
+
+        abort(404);
+    }
+
+    public function postRejectVerified(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        if ($user->email_verified_at) {
+            \DB::table("users")->update(['email_verified_at' => null]);
+            $user->update([
+                'status' => false
+            ]);
+            return redirect()->back();
+        }
+
+        abort(404);
+    }
+
+    public function postApprove(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        if (! $user->wholesaler_status) {
+            $user->update([
+                'wholesaler_status' => true
+            ]);
+
+            return redirect()->back();
+        }
+
+        abort(404);
+    }
+
+    public function postRejectApproved(Request $request)
+    {
+        $user = User::findOrFail($request->id);
+        if ($user->wholesaler_status) {
+            $user->update([
+                'wholesaler_status' => false
+
+            ]);
+            return redirect()->back();
+        }
+
+        abort(404);
     }
 }
