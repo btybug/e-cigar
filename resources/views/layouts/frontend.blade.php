@@ -127,7 +127,7 @@
 {{--<script src={{asset("public/js/login.js")}}></script>--}}
 {{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
-<script src={{asset("public/js/bundle/bundle.js?v".rand(111,999))}}></script>
+<script src={{asset("public/js/bundle/bundle.js?v=".rand(111,999))}}></script>
 
 @stack('style')
 
