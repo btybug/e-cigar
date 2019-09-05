@@ -278,6 +278,10 @@
 
             </li>
             @endHasAccess
+            @ok('admin_landings')
+            <li><a href="{{route('admin_landings')}}"><i class="fa fa-download" aria-hidden="true"></i>
+                    <span>Landings</span></a></li>
+            @endok
 
             @ok('import_index')
             <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
