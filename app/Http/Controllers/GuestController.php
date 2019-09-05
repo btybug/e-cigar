@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Common;
 use App\Models\ContactUs;
 use App\Models\GeoZones;
+use App\Models\Landing;
 use App\Models\Settings;
 use App\Models\ZoneCountries;
 use App\Services\ShortCodes;
@@ -162,5 +163,13 @@ class GuestController extends Controller
 //        }
 
         return redirect()->back();
+    }
+
+    public function landings($url)
+    {
+        $landing = Landing::where('url',$url)->first();
+        if(! $landing) abort(404);
+
+        return $this->view('landings',compact(['landing']));
     }
 }

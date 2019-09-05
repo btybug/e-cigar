@@ -284,6 +284,15 @@ Route::group(['prefix' => 'faq'], function () {
     Route::post('create-new', 'Admin\FaqController@newPost')->name('admin_faq_new');
 });
 
+Route::group(['prefix' => 'landings'], function () {
+    Route::get('/', 'Admin\LandingController@index')->name('admin_landings');
+    Route::get('create', 'Admin\LandingController@create')->name('admin_landings_create');
+    Route::post('delete', 'Admin\LandingController@getDelete')->name('admin_landings_delete');
+    Route::get('edit/{id}', 'Admin\LandingController@edit')->name('admin_landings_edit');
+    Route::post('edit/{id}', 'Admin\LandingController@postEdit')->name('admin_landings_edit_post');
+    Route::post('create', 'Admin\LandingController@postCreate')->name('admin_landings_new');
+});
+
 Route::group(['prefix' => 'manage-api'], function () {
     Route::get('/', 'Admin\ManageApiController@index')->name('admin_manage_api');
     Route::post('/', 'Admin\ManageApiController@postManage')->name('post_admin_manage_api');

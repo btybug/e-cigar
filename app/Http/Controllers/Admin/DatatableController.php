@@ -15,6 +15,7 @@ use App\Models\Faq;
 use App\Models\Filters;
 use App\Models\GeoZones;
 use App\Models\Items;
+use App\Models\Landing;
 use App\Models\LogActivities;
 use App\Models\MailTemplates;
 use App\Models\MarketType;
@@ -909,5 +910,21 @@ class DatatableController extends Controller
 //                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
 //                return $html .= "<a class='badge btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions','canceled'])->make(true);
+    }
+
+    public function getAllLandings()
+    {
+        return Datatables::of(
+            Landing::query()
+            )->editColumn('url', function ($item) {
+                return "<a href='/landings/$item->url' target='_blank'>/landings/".$item->url."</a>";
+            })->editColumn('created_at', function ($item) {
+                return BBgetDateFormat($item->created_at);
+            })
+            ->addColumn('actions', function ($attr) {
+                $html = '<a href="javascript:void(0)" data-href="'.route("admin_landings_delete").'"
+                class="delete-button badge btn-danger" data-key="' . $attr->id . '"><i class="fa fa-trash"></i></a>';
+                return $html .= "<a class='badge btn-warning' href='" . route('admin_landings_edit', $attr->id) . "'><i class='fa fa-edit'></i></a>";
+            })->rawColumns(['actions','url'])->make(true);
     }
 }

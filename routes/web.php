@@ -156,6 +156,9 @@ Route::group(['prefix' => '/support'], function () {
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');
     }
 });
+
+Route::get('/landings/{url}', 'GuestController@landings')->name('landings');
+
 Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 Route::get('/about-us', 'Frontend\CommonController@getAboutUs')->name('about_us');
 Route::post('/get-regions-by-country', 'GuestController@getRegionsByCountry')->name('get_regions_by_country');
