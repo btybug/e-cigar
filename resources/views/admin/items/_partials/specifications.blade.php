@@ -21,11 +21,11 @@
     <td class="w-50">
         @php
             if(isset($model)){
-                $type_options = (isset($selected) && $selected) ? $selected->children->pluck('sticker_id')->all() : [];
-                $type_optionArray = (isset($selected) && $selected) ? $selected->attr->stickers->pluck('name','id')->all() : [];
+                $type_options = (isset($selected) && $selected && count($selected->children)) ? $selected->children->pluck('sticker_id')->all() : [];
+                $type_optionArray = (isset($selected) && $selected && $selected->attr) ? $selected->attr->stickers->pluck('name','id')->all() : [];
             }else{
                 $type_options = [];
-                $type_optionArray = (isset($selected) && $selected) ? $selected->stickers->pluck('name','id')->all() : [];
+                $type_optionArray = (isset($selected) && $selected && count($selected->stickers)) ? $selected->stickers->pluck('name','id')->all() : [];
             }
         @endphp
 
