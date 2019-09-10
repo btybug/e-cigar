@@ -242,36 +242,29 @@
                                                             <label for="packaging_length"
                                                                    class=" col-sm-2">Length</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_length" type="text">
+                                                                {!! Form::text('length',null,['class' => 'form-control']) !!}
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_width"
                                                                    class="col-sm-2">Width</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_width" type="text">
+                                                                {!! Form::text('width',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_height"
                                                                    class="col-sm-2">Height</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_height" type="text">
+                                                                {!! Form::text('height',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_weight"
                                                                    class="col-sm-2">Weight</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_weight" type="text">
+                                                                {!! Form::text('weight',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                     </fieldset>
@@ -283,36 +276,29 @@
                                                             <label for="packaging_length"
                                                                    class=" col-sm-2">Length</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_length" type="text">
+                                                                {!! Form::text('item_length',null,['class' => 'form-control']) !!}
+
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_width"
                                                                    class="col-sm-2">Width</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_width" type="text">
+                                                                {!! Form::text('item_width',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_height"
                                                                    class="col-sm-2">Height</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_height" type="text">
+                                                                {!! Form::text('item_height',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_weight"
                                                                    class="col-sm-2">Weight</label>
                                                             <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name=""
-                                                                       id="packaging_weight" type="text">
+                                                                {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                     </fieldset>

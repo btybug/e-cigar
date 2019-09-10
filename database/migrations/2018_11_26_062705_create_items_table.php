@@ -28,6 +28,11 @@ class CreateItemsTable extends Migration
             $table->decimal('width')->nullable();
             $table->decimal('height')->nullable();
             $table->decimal('weight')->nullable();
+
+            $table->decimal('item_length')->nullable();
+            $table->decimal('item_width')->nullable();
+            $table->decimal('item_height')->nullable();
+            $table->decimal('item_weight')->nullable();
             $table->timestamps();
         });
 
