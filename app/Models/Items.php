@@ -49,7 +49,12 @@ class Items extends Translatable
 
     public function media()
     {
-        return $this->hasMany(ItemsMedia::class, 'item_id');
+        return $this->hasMany(ItemsMedia::class, 'item_id')->where('items_media.type','image');
+    }
+
+    public function videos()
+    {
+        return $this->hasMany(ItemsMedia::class, 'item_id')->where('items_media.type','video');
     }
 
     public function suppliers()

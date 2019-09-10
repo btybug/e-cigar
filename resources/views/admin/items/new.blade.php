@@ -166,14 +166,14 @@
                                                         @foreach($model->videos as $video)
                                                             <div class="video-single-item" style="display: flex">
                                                                 <iframe width="200" height="200"
-                                                                        src="https://www.youtube.com/embed/{{ $video }}">
+                                                                        src="https://www.youtube.com/embed/{{ $video->url }}">
                                                                 </iframe>
                                                                 <div>
                                                                     <button class="btn btn-danger remove-video-single-item">
                                                                         <i class="fa fa-trash"></i></button>
                                                                 </div>
-                                                                <input type="hidden" name="videos[]"
-                                                                       value="{{ $video }}"></div>
+                                                                <input type="hidden" name="video[]"
+                                                                       value="{{  $video->url }}"></div>
                                                         @endforeach
                                                     @endif
 
@@ -181,7 +181,7 @@
                                             </div>
                                         </div>
                                         <div id="images" class="tab-pane fade">
-                                            {!! media_button('other_images',$model,true) !!}
+                                            {!! media_button('media',$model,true) !!}
                                         </div>
                                         <div id="locations" class="tab-pane fade">
                                             <div class="form-group row">

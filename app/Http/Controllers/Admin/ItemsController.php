@@ -104,6 +104,8 @@ class ItemsController extends Controller
         $racks = [];
         $shelves = [];
 
+//        dd($model,$model->media);
+
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
             'categories', 'data', 'checkedCategories','warehouses','racks','shelves'));
     }
@@ -152,8 +154,10 @@ class ItemsController extends Controller
 
     private function saveImages(Request $request, $item)
     {
-        $images = $request->get('other_images');
+        $images = $request->get('media');
+//        dd($images,$request->all());
         if ($images) {
+            $item->media()->delete();
             $data = [];
             foreach ($images as $image) {
                 $data[] = ['url' => $image, 'type' => 'image', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
@@ -165,8 +169,9 @@ class ItemsController extends Controller
 
     private function saveVideos(Request $request, $item)
     {
-        $videos = $request->get('videos');
+        $videos = $request->get('video');
         if ($videos) {
+            $item->videos()->delete();
             $data = [];
             foreach ($videos as $video) {
                 $data[] = ['url' => $video, 'type' => 'video', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
