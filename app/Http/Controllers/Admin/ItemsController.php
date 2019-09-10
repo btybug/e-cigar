@@ -63,11 +63,13 @@ class ItemsController extends Controller
         $bundle = true;
         $barcodes = $this->barcodeService->getPluck();
         $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+
         $racks = [];
         $shelves = [];
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','warehouses','racks','shelves'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','warehouses','racks','shelves','categories'));
     }
 
     public function postNew(ItemsRequest $request)
@@ -85,8 +87,9 @@ class ItemsController extends Controller
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
-        $item->categories()->sync(json_decode($request->get('categories', [])));
-
+        $categories = json_decode($request->get('categories', []), true);
+//        dd($categories);
+        $item->categories()->sync($categories);
 
         return redirect()->route('admin_items');
     }
@@ -98,9 +101,11 @@ class ItemsController extends Controller
         $barcodes = $this->barcodeService->getPluck();
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
+
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
+//        dd($model->categories);
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = [];
         $shelves = [];

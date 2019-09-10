@@ -730,7 +730,7 @@
                         themes: {
                             responsive: !1
                         },
-                        data: {!! json_encode('{}') !!}
+                        data: {!! json_encode((isset($data)?$data:[])) !!}
                     },
                     types: {
                         "default": {
@@ -777,6 +777,9 @@
                     });
                 }
             });
+
+
+
             render_categories_tree()
         })
     </script>
