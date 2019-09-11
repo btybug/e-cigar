@@ -39,7 +39,6 @@ class WarehouseController extends Controller
 
     public function getNew ()
     {
-        dd(123);
         $model = null;
         return $this->view('new', compact('model'));
     }
