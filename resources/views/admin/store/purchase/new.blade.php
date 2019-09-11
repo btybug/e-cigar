@@ -50,7 +50,7 @@
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" for="input-discount">Price</label>
                     <div class="col-sm-10">
-                        {!! Form::number('price',null,['placeholder' => 'Purchase price','class'=> 'form-control']) !!}
+                        {!! Form::number('price',null,['placeholder' => 'Purchase price','class'=> 'form-control','step' => 'any']) !!}
                     </div>
                 </div>
 
