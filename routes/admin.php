@@ -386,11 +386,14 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'items'], function () {
         Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
+        Route::get('/archives', 'Admin\ItemsController@archives')->name('admin_items_archives');
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
         Route::get('/new-bundle', 'Admin\ItemsController@getNewBundle')->name('admin_items_new_bundle');
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
+        Route::get('/archive/{item_id}', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
+        Route::get('/activate/{item_id}', 'Admin\ItemsController@putActivate')->name('admin_items_activate');
         Route::post('/add-package', 'Admin\ItemsController@addPackage')->name('admin_items_package_add');
         Route::post('/add-location', 'Admin\ItemsController@addLocation')->name('admin_items_location_add');
         Route::post('/get-specifications', 'Admin\ItemsController@getSpecification')->name('admin_items_get_specification');

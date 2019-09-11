@@ -698,7 +698,7 @@ class DatatableController extends Controller
 
     public function getAllItems()
     {
-        return Datatables::of(Items::query())
+        return Datatables::of(Items::main())
             ->editColumn('name', function ($attr) {
                 return $attr->name;
             })->editColumn('short_description', function ($attr) {
@@ -711,7 +711,28 @@ class DatatableController extends Controller
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-warning' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
-            <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>";
+            <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>
+            <a class='badge btn-danger' href='" . route('admin_items_archive', $attr->id) . "'><i class='fa fa-archive'></i></a>";
+            })->rawColumns(['actions'])->make(true);
+    }
+
+    public function getAllItemsArchived()
+    {
+        return Datatables::of(Items::archive())
+            ->editColumn('name', function ($attr) {
+                return $attr->name;
+            })->editColumn('short_description', function ($attr) {
+                return $attr->short_description;
+            })->addColumn('quantity', function ($attr) {
+                return ($attr->type=='simple')?$attr->purchase()->sum('qty')-$attr->others()->sum('qty'):'N/A';
+            })->editColumn('barcode_id', function ($attr) {
+                return ($attr->barcode)?$attr->barcode->code:'no barcode';
+            })->editColumn('long_description', function ($attr) {
+                return $attr->long_description;
+            })->addColumn('actions', function ($attr) {
+                return "<a class='badge btn-warning' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
+            <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>
+            <a class='badge btn-success' href='" . route('admin_items_activate', $attr->id) . "'><i class='fa fa-arrow-circle-left'></i></a>";
             })->rawColumns(['actions'])->make(true);
     }
 

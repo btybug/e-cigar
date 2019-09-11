@@ -43,6 +43,10 @@ class ItemsController extends Controller
     {
         return $this->view('index');
     }
+    public function archives()
+    {
+        return $this->view('archive');
+    }
 
     public function getNew()
     {
@@ -91,8 +95,8 @@ class ItemsController extends Controller
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
 
-
-        return redirect()->route('admin_items');
+        $route = ($item->is_archive)?'admin_items_archives':'admin_items';
+        return redirect()->route($route);
     }
 
     public function getEdit($id)
@@ -198,6 +202,24 @@ class ItemsController extends Controller
     {
         $item = Items::FindOrFail($id);
         return $this->view('purchase', compact('item'));
+    }
+
+    public function putArchive($id)
+    {
+        $item = Items::FindOrFail($id);
+        $item->is_archive = true;
+        $item->save();
+
+        return redirect()->back();
+    }
+
+    public function putActivate($id)
+    {
+        $item = Items::FindOrFail($id);
+        $item->is_archive = false;
+        $item->save();
+
+        return redirect()->back();
     }
 
     public function getSuppliers()

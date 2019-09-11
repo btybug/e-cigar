@@ -34,7 +34,16 @@ class Items extends Translatable
 
     public function scopeActive($query)
     {
-        return $query->where('status', self::ACTIVE);
+        return $query->where('status', self::ACTIVE)->where('is_archive',false);
+    }
+
+    public function scopeMain($query)
+    {
+        return $query->where('is_archive', false);
+    }
+    public function scopeArchive($query)
+    {
+        return $query->where('is_archive', true);
     }
 
     public function purchase()
