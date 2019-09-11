@@ -50,11 +50,13 @@ class ItemsController extends Controller
         $bundle = false;
         $barcodes = $this->barcodeService->getPluck();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories, 0, [], []);
+
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = [];
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories','warehouses','racks','shelves'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories','warehouses','racks','shelves','data'));
     }
 
     public function getNewBundle()
@@ -63,19 +65,19 @@ class ItemsController extends Controller
         $bundle = true;
         $barcodes = $this->barcodeService->getPluck();
         $warehouses = Warehouse::all()->pluck('name','id')->all();
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-
         $racks = [];
         $shelves = [];
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','warehouses','racks','shelves','categories'));
+        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $data = Category::recursiveItems($categories, 0, [], []);
+
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','categories','warehouses','racks','shelves','data'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price',
-            'length','width','height','weight', 'item_length','item_width','item_height','item_weight');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
@@ -87,9 +89,8 @@ class ItemsController extends Controller
         $item->suppliers()->sync($request->get('suppliers'));
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
-        $categories = json_decode($request->get('categories', []), true);
-//        dd($categories);
-        $item->categories()->sync($categories);
+        $item->categories()->sync(json_decode($request->get('categories', [])));
+
 
         return redirect()->route('admin_items');
     }
@@ -101,16 +102,12 @@ class ItemsController extends Controller
         $barcodes = $this->barcodeService->getPluck();
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
-//        dd($model->categories);
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = [];
         $shelves = [];
-
-//        dd($model,$model->media);
 
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
             'categories', 'data', 'checkedCategories','warehouses','racks','shelves'));
@@ -160,10 +157,8 @@ class ItemsController extends Controller
 
     private function saveImages(Request $request, $item)
     {
-        $images = $request->get('media');
-//        dd($images,$request->all());
+        $images = $request->get('other_images');
         if ($images) {
-            $item->media()->delete();
             $data = [];
             foreach ($images as $image) {
                 $data[] = ['url' => $image, 'type' => 'image', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
@@ -175,9 +170,8 @@ class ItemsController extends Controller
 
     private function saveVideos(Request $request, $item)
     {
-        $videos = $request->get('video');
+        $videos = $request->get('videos');
         if ($videos) {
-            $item->videos()->delete();
             $data = [];
             foreach ($videos as $video) {
                 $data[] = ['url' => $video, 'type' => 'video', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
