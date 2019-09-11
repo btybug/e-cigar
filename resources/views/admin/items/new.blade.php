@@ -24,6 +24,7 @@
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
 
                         {!! Form::hidden('id',null) !!}
+                        {!! Form::hidden('type',($bundle)?"bundle":"simple") !!}
 
                         <div class="row">
                             <div class="col-md-3">
