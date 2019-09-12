@@ -21,7 +21,7 @@ class CreatePurchasesTable extends Migration
             $table->string('invoice_number')->nullable();
             $table->unsignedInteger('qty')->default(0);
             $table->timestamp('purchase_date');
-            $table->integer('price');
+            $table->double('price');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('restrict');

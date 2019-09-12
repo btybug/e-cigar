@@ -183,11 +183,12 @@ class StoreController extends Controller
         $data = $request->except('_token','qty','locations');
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
-        Purchase::updateOrCreate($request->only('id'), $data);
+        $purchase = Purchase::updateOrCreate($request->only('id'), $data);
         $item = Items::find($request->get('item_id'));
 
         if($item){
-            $this->saveLocations($item, $request->get('locations', []));
+            $purchase->qty = $this->saveLocations($item, $request->get('locations', []));
+            $purchase->save();
         }
 
         return redirect()->route('admin_inventory_purchase');
@@ -195,9 +196,11 @@ class StoreController extends Controller
 
     private function saveLocations($item, array $data = [])
     {
+        $qty = 0;
         $deletableArray = [];
         if (count($data)) {
             foreach ($data as $datum) {
+                $qty += $datum['qty'];
                 $existing = $item->locations()->where('warehouse_id', $datum['warehouse_id'])
                     ->where('rack_id', $datum['rack_id'])
                     ->where('shelve_id', $datum['shelve_id'])->first();
@@ -209,6 +212,8 @@ class StoreController extends Controller
                 }
             }
         }
+
+        return $qty;
     }
 
     public function EditPurchase($id)
