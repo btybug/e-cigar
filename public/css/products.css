@@ -236,8 +236,8 @@ header .header-top .products-menu-item .single-product:hover .product-more {
 header .header-top .products-menu-item .single-product .product-photo img {
     width: 100%;
     height: 220px;
-    object-fit: cover;
-    font-family: 'object-fit: cover;';
+    object-fit: contain;
+    font-family: 'object-fit: contain;';
 }
 
 @media screen and (max-width: 992px) {
@@ -278,8 +278,8 @@ header .header-bottom .logo{
 }
 header .header-bottom .logo img{
     width: 100%;
-    object-fit: cover;
-    font-family: 'object-fit: cover;';
+    object-fit: contain;
+    font-family: 'object-fit: contain;';
     height: 100%;
 }
 @media screen and (max-width: 576px) {
@@ -458,7 +458,10 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of
 footer .footer-top .footer-info .footer-logo {
     margin-bottom: 58px;
 }
-
+footer .footer-top .footer-info .footer-logo img{
+    width: 60%;
+    
+}
 footer .footer-top .footer-info .footer-desc {
     color: #7c7c7c;
 }

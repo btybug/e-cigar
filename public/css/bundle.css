@@ -13630,8 +13630,8 @@ header .header-top .products-menu-item .single-product:hover .product-more {
 header .header-top .products-menu-item .single-product .product-photo img {
     width: 100%;
     height: 220px;
-    object-fit: cover;
-    font-family: 'object-fit: cover;';
+    object-fit: contain;
+    font-family: 'object-fit: contain;';
 }
 
 @media screen and (max-width: 992px) {
@@ -13672,8 +13672,8 @@ header .header-bottom .logo{
 }
 header .header-bottom .logo img{
     width: 100%;
-    object-fit: cover;
-    font-family: 'object-fit: cover;';
+    object-fit: contain;
+    font-family: 'object-fit: contain;';
     height: 100%;
 }
 @media screen and (max-width: 576px) {
@@ -13852,7 +13852,10 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of
 footer .footer-top .footer-info .footer-logo {
     margin-bottom: 58px;
 }
-
+footer .footer-top .footer-info .footer-logo img{
+    width: 60%;
+    
+}
 footer .footer-top .footer-info .footer-desc {
     color: #7c7c7c;
 }
@@ -18211,6 +18214,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .filter-sidebar-wrapper .filter-single-wall {
     border: 1px solid #d7d7d7;
     margin-top: 15px;
+    overflow: hidden;
 }
 
 .filter-sidebar-wrapper .filter-single-wall .list-filter {
@@ -18306,7 +18310,15 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     line-height: 25px;
     margin-left: 40px;
 }
-
+.filter-sidebar-wrapper .filter-wall.colors .custom-control-label {
+    width: 100%;
+}
+.filter-sidebar-wrapper .filter-wall.colors .custom-control-label-txt{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+}
 .filter-sidebar-wrapper .custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
     background-color: #5184e5;
     left: -2.5rem;
@@ -18318,6 +18330,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .filter-sidebar-wrapper .custom-checkbox .custom-control-input:checked ~ .custom-control-label {
     color: #353535;
+
 }
 
 /*filter sidebar end*/
