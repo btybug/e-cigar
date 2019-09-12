@@ -20,7 +20,7 @@ class CreatePurchasesTable extends Migration
             $table->unsignedInteger('supplier_id');
             $table->string('invoice_number')->nullable();
             $table->unsignedInteger('qty')->default(0);
-            $table->timestamp('purchase_date');
+            $table->timestamp('purchase_date')->nullable();
             $table->double('price');
             $table->timestamps();
 

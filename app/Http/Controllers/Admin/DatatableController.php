@@ -633,7 +633,7 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->purchase_date);
             })
             ->addColumn('actions', function ($faq) {
-                return (userCan('admin_inventory_purchase_edit')) ? "<a class='badge btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>" : '';
+//                return "<a class='badge btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'><i class='fa fa-edit'></i></a>";
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
