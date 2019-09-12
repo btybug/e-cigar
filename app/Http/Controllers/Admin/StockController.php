@@ -419,7 +419,7 @@ class StockController extends Controller
 
     public function postSelectItems(Request $request)
     {
-        $items = Items::whereNotIn('id', $request->get('items', []))->where('status', Items::ACTIVE)->get();
+        $items = Items::whereNotIn('id', $request->get('items', []))->where('status', Items::ACTIVE)->where('is_archive',false)->get();
         $uniqueId = $request->get('uniqueId');
         $stickers = array_filter(Stickers::all()->pluck('name', 'id')->all());
 
