@@ -152,8 +152,9 @@ class StockService
 
     public function savePackageVariation($stock, array $data = [])
     {
+        $deletableArray = [];
         if (count($data)) {
-            $deletableArray = [];
+//            dd($data);
             foreach ($data as $variation_id => $datum) {
                 $newData = [];
                 $newData['count_limit'] = ($datum['count_limit']) ?? 0;
@@ -203,8 +204,8 @@ class StockService
                     }
                 }
             }
-            $stock->variations()->whereNotIn('id', $deletableArray)->delete();
         }
+        $stock->variations()->whereNotIn('id', $deletableArray)->delete();
     }
 
     public function savePromotionPrices($promotion, array $data = [])

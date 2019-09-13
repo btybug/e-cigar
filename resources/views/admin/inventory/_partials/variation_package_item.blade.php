@@ -5,7 +5,7 @@
     <td>
         <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]" class="form-control v-item-change">
             @if($package_variation->item->is_archive)
-                <option value="{{ $package_variation->item_id }}" disabled="disabled" selected>{{ $package_variation->name }}</option>
+                <option value="{{ $package_variation->item_id }}"  selected>{{ $package_variation->name }}</option>
             @endif
             @foreach ($stockItems as $key => $value)
                 <option value="{{ $key }}" {{ ($package_variation && $key == $package_variation->item_id) ? 'selected' : '' }}>
