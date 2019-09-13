@@ -1614,15 +1614,16 @@
                 var value = $(this).val();
                 var data_id = $(this).closest('.stock-page').data('unqiue');
                 package_product_price(parent, data_id, value);
-            })
+            });
+
 
             function package_product_price(parent, data_id, type) {
                 if (type == 'product') {
-                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('hide');
-                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('d-none');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('d-none').addClass('show');
                 } else {
-                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('hide');
-                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('hide').addClass('show');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('d-none');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('d-none').addClass('show');
                 }
             }
 
@@ -1683,14 +1684,14 @@
                 let value = $(this).val();
                 let parent = $(this).closest('.package_price');
                 if (value == 'static') {
-                    parent.find('.price-discount').removeClass('show').addClass('hide');
-                    parent.find('.price-static').removeClass('hide').addClass('show');
+                    parent.find('.price-discount').removeClass('show').addClass('d-none');
+                    parent.find('.price-static').removeClass('d-none').addClass('show');
                 } else if (value == 'discount') {
-                    parent.find('.price-static').removeClass('show').addClass('hide');
-                    parent.find('.price-discount').removeClass('hide').addClass('show');
+                    parent.find('.price-static').removeClass('show').addClass('d-none');
+                    parent.find('.price-discount').removeClass('d-none').addClass('show');
                 } else {
-                    parent.find('.price-static').removeClass('show').addClass('hide');
-                    parent.find('.price-discount').removeClass('show').addClass('hide');
+                    parent.find('.price-static').removeClass('show').addClass('d-none');
+                    parent.find('.price-discount').removeClass('show').addClass('d-none');
 
                 }
 
@@ -1705,15 +1706,15 @@
                     function (res) {
                         if (!res.error) {
                             if (value == 'filter') {
-                                parent.find('.multi-option').removeClass('show').addClass('hide');
-                                parent.find('.filter-option').removeClass('hide').addClass('show');
+                                parent.find('.multi-option').removeClass('show').addClass('d-none');
+                                parent.find('.filter-option').removeClass('d-none').addClass('show');
                                 parent.find('.filter-variation-box').empty();
                             } else if (value == 'package_product') {
-                                parent.find('.filter-option').removeClass('show').addClass('hide');
-                                parent.find('.multi-option').removeClass('hide').addClass('show');
+                                parent.find('.filter-option').removeClass('show').addClass('d-none');
+                                parent.find('.multi-option').removeClass('d-none').addClass('show');
                             } else {
-                                parent.find('.filter-option').removeClass('show').addClass('hide');
-                                parent.find('.multi-option').removeClass('show').addClass('hide');
+                                parent.find('.filter-option').removeClass('show').addClass('d-none');
+                                parent.find('.multi-option').removeClass('show').addClass('d-none');
                             }
 
                             parent.find('.type-place').html(res.html)

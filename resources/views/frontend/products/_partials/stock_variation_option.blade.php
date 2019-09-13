@@ -104,36 +104,38 @@
 
 </div>
 <div class="col-md-3 d-flex justify-content-center">
-    @if($selected->discount_type == 'range')
-        <div class="d-flex flex-column w-100 align-items-center">
-            <span class="text-tert-clr">*Quality Discount</span>
-            <div class="product__single-item-inp-num">
-                <div class="quantity">
-                    {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
-                        'data-id' => $selected->id,'min' => 1,'step' => 1]) !!}
-                    <div class="inp-icons">
-                        <span class="inp-up"></span>
-                        <span class="inp-down"></span>
+    @if($vSettings->price_per == 'item')
+        @if($selected->discount_type == 'range')
+            <div class="d-flex flex-column w-100 align-items-center">
+                <span class="text-tert-clr">*Quality Discount</span>
+                <div class="product__single-item-inp-num">
+                    <div class="quantity">
+                        {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
+                            'data-id' => $selected->id,'min' => 1,'step' => 1]) !!}
+                        <div class="inp-icons">
+                            <span class="inp-up"></span>
+                            <span class="inp-down"></span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    @elseif($selected->discount_type == 'fixed')
-        <div
-            class="d-flex flex-column w-100 align-items-center">
-            <span class="text-tert-clr">*Quality Discount</span>
-            <div class="select-wall product__select-wall w-100">
-                <select name="qty" id="" data-id="{{ $selected->id }}"
-                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
-                        style="width: 100%">
-                    @if(count($selected->discounts))
-                        @foreach($selected->discounts as $d)
-                            <option value="{{ $d->id }}">Pack of {{ $d->qty }}</option>
-                        @endforeach
-                    @endif
-                </select>
+        @elseif($selected->discount_type == 'fixed')
+            <div
+                class="d-flex flex-column w-100 align-items-center">
+                <span class="text-tert-clr">*Quality Discount</span>
+                <div class="select-wall product__select-wall w-100">
+                    <select name="qty" id="" data-id="{{ $selected->id }}"
+                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
+                            style="width: 100%">
+                        @if(count($selected->discounts))
+                            @foreach($selected->discounts as $d)
+                                <option value="{{ $d->id }}">Pack of {{ $d->qty }}</option>
+                            @endforeach
+                        @endif
+                    </select>
+                </div>
             </div>
-        </div>
+        @endif
     @endif
 </div>
 <div class="col-md-3 pr-0 d-flex justify-content-end">
