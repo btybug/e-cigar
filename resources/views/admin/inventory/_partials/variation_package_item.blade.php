@@ -21,7 +21,14 @@
         {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
     </td>
     <td>
-        <span class="v-qty">{!! ($package_variation && $package_variation->qty) ? $package_variation->qty : 0 !!}</span>
+        <span class="v-qty">
+            @if($package_variation && $package_variation->item)
+                {!! $package_variation->item->purchase->sum('qty')-$package_variation->item->others->sum('qty') !!}
+            @else
+                0
+            @endif
+            {{--{!! ($package_variation && $package_variation->qty) ? $package_variation->qty : 0 !!}--}}
+        </span>
         {!! Form::hidden("variations[$main_unique][variations][$uniqueID][qty]",($package_variation) ? $package_variation->qty : null) !!}
     </td>
     <td>
