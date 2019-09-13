@@ -49,5 +49,11 @@ class BarcodesController extends Controller
         return \Response::json(['error' => !Barcodes::findOrFail($request->get('slug'))->delete()]);
     }
 
+    public function prnpriview($id)
+    {
+        $barcode=Barcodes::findOrfail($id);
+        return $this->view('print',compact('barcode'));
+    }
+
 
 }

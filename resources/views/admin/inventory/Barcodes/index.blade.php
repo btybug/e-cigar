@@ -12,6 +12,7 @@
                     <th>#</th>
                     <th>Code</th>
                     <th>Related Item</th>
+                    <th>Barcode</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -20,6 +21,8 @@
     </div>
 @stop
 @section('js')
+    <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
+
     <script>
         $(function () {
             $('#stocks-table').DataTable({
@@ -35,11 +38,18 @@
                     {data: 'id', name: 'id'},
                     {data: 'code', name: 'code'},
                     {data: 'item', name: 'item'},
+                    {data: 'barcode', name: 'barcode'},
                     {data: 'actions', name: 'actions'}
                 ],
                 order: [ [0, 'desc'] ]
             });
         });
 
+        $(document).ready(function(){
+            $("body").on('click',".printB",function () {
+                var id = $(this).data('id');
+                $("#barcode"+id).printThis();
+            });
+        });
     </script>
     @stop

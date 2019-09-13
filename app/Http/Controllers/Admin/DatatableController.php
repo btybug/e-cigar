@@ -845,12 +845,17 @@ class DatatableController extends Controller
             ->addColumn('item', function ($barcode) {
                 return ($barcode->item) ? "<a href='".route("admin_items_edit",$barcode->item->id)."' >" .$barcode->item->name. "</a>" : "not connected";
             })
+            ->editColumn('barcode', function ($barcode) {
+                return ($barcode->code && is_numeric($barcode->code)) ? \DNS1D::getBarcodeHTML($barcode->code, "EAN13",3,30,"black", true)."<span class='d-none'><div  id='barcode$barcode->id'>" .\DNS1D::getBarcodeHTML($barcode->code, "EAN13",3,300,"black", true). "</div></span>" : "no barcode";
+            })
             ->addColumn('actions', function ($code) {
                 return "
 <a class='badge btn-danger delete-button' data-key='$code->id' data-href='" . route('admin_inventory_barcode_delete') . "'><i class='fa fa-trash-o'></i></a>
 <a class='badge btn-info' href='".route('admin_inventory_barcode_view',$code->id)."'><i class='fa fa-eye'></i></a>
+<a class='badge btn-primary printB' href='javascript:void(0)' data-id='".$code->id."' ><i class='fa fa-print'></i></a>
+
 ";
-            })->rawColumns(['actions','item'])
+            })->rawColumns(['actions','item','barcode'])
             ->make(true);
     }
 
