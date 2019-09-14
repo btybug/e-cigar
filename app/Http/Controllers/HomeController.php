@@ -30,8 +30,9 @@ class HomeController extends Controller
         $banners = $this->settings->getEditableData('banners');
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
         $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
+        $brands = Category::where('type','brands')->whereNotNull('parent_id')->get();
 
-        return view('welcome', compact(['banners','categories']));
+        return view('welcome', compact(['banners','categories','brands']));
     }
 
     public function getFaq()

@@ -105,83 +105,16 @@
                     orci.
                 </p>
                 <div class="home_brands-slider">
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
+                    @foreach($brands as $brand)
+                        <div class="brand-wall">
+                            <div class="brand-item">
+                                <a href="javascript:void(0)" class="brand-link">
+                                    <img src="{{ $brand->image }}" alt="brand-logo">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/4.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/5.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </section>
             <div class="container home_width">
