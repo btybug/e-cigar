@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Common;
 use App\Models\ContactUs;
 use App\Models\GeoZones;
+use App\Models\Items;
 use App\Models\Landing;
 use App\Models\Settings;
 use App\Models\ZoneCountries;
@@ -165,11 +166,17 @@ class GuestController extends Controller
         return redirect()->back();
     }
 
-    public function landings($url)
+    public function landings($barcode)
     {
-        $landing = Landing::where('url',$url)->first();
-        if(! $landing) abort(404);
 
-        return $this->view('landings',compact(['landing']));
+        $items = Items::leftJoin('barcodes','items.barcode_id','barcodes.id')
+            ->select('items.*')
+            ->where('barcodes.code',$barcode)
+            ->where('items.landing',true)
+            ->get();
+        if(! $items || count($items) == 0) abort(404);
+
+//        dd($items);
+        return $this->view('landings',compact(['items']));
     }
 }

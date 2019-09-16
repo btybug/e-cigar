@@ -1,12 +1,11 @@
 @extends('layouts.frontend')
 @section('content')
-    @php
-        $file = ltrim($landing->content, '/');
-        $html = (File::exists($file)) ? File::get($file) : "";
-    @endphp
-    <div>
-        {!! $html !!}
+   @foreach($items as $item)
+    <div class="col-md-12">
+        <img src="{{ $item->image }}" width="200px" />
+        {{ $item->name }}
     </div>
+    @endforeach
 @endsection
 @section('css')
 @stop

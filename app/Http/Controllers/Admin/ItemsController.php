@@ -81,7 +81,7 @@ class ItemsController extends Controller
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price','landing');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);

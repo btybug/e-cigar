@@ -40,6 +40,7 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#locations">Locations</a></li>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#landings">Landing</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -183,6 +184,25 @@
                                         </div>
                                         <div id="images" class="tab-pane fade">
                                             {!! media_button('media',$model,true) !!}
+                                        </div>
+                                        <div id="landings" class="tab-pane fade">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <fieldset>
+                                                        <div class="form-group row">
+                                                            <label for="landing"
+                                                                   class=" col-sm-2">Allow landing</label>
+                                                            <div class="col-sm-10">
+                                                                {!! Form::hidden('landing',0) !!}
+                                                                {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </fieldset>
+                                                </div>
+                                                <div class="col-md-6 qr-code d-none">
+                                                    DNS2D::getBarcodeHTML("4445645656", "QRCODE")
+                                                </div>
+                                            </div>
                                         </div>
                                         <div id="locations" class="tab-pane fade">
                                             <div class="form-group row">
