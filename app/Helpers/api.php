@@ -1198,7 +1198,7 @@ function user_can_claim($user)
 
 function checkImage($img)
 {
-    dd($img,File::exists("/app".$img));
+    dd($img,public_path(),File::exists("/app".$img));
     return (File::exists($img)) ? $img : no_image();
 }
 
