@@ -23,6 +23,7 @@ use App\Models\Warehouse;
 use App\Services\BarcodesService;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
+use Svg\Document;
 
 class ItemsController extends Controller
 {
@@ -373,5 +374,22 @@ class ItemsController extends Controller
 
         $html = $this->view('_partials.qr',['code' => $barcode->code])->render();
         return response()->json(['error' => false,'html' => $html]);
+    }
+
+    public function downloadCode($code,$type = 'qr')
+    {
+        $barcode = Barcodes::where('code',$code)->first();
+        if(! $barcode) return response()->json(['error' => true]);
+
+        if($type == 'qr'){
+            $name = $code.'QR.png';
+            $path = \DNS2D::getBarcodePNGPath(env('APP_URL').'/landings/'.$code, "QRCODE");
+        }else{
+            $name = $code."BARCODE.png";
+            $path = \DNS1D::getBarcodePNGPath($barcode->code, "EAN13",3,300,array(0,0,0), true);
+        }
+
+
+        return \Response::download($path,$name);
     }
 }
