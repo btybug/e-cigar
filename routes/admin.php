@@ -398,6 +398,8 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/add-location', 'Admin\ItemsController@addLocation')->name('admin_items_location_add');
         Route::post('/get-specifications', 'Admin\ItemsController@getSpecification')->name('admin_items_get_specification');
         Route::post('/get-specifications-by-category', 'Admin\ItemsController@getSpecificationByCategory')->name('admin_items_get_specification_by_category');
+        Route::post('/render-barcode', 'Admin\ItemsController@renderBarcode')->name('admin_items_render_barcode');
+
 
     });
     Route::group(['prefix' => 'barcode'], function () {

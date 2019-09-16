@@ -365,4 +365,13 @@ class ItemsController extends Controller
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
+
+    public function renderBarcode(Request $request)
+    {
+        $barcode = Barcodes::find($request->code);
+        if(! $barcode) return response()->json(['error' => true]);
+
+        $html = $this->view('_partials.qr',['code' => $barcode->code])->render();
+        return response()->json(['error' => false,'html' => $html]);
+    }
 }

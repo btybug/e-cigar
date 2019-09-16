@@ -199,8 +199,8 @@
                                                         </div>
                                                     </fieldset>
                                                 </div>
-                                                <div class="col-md-6 qr-code d-none">
-                                                    DNS2D::getBarcodeHTML("4445645656", "QRCODE")
+                                                <div class="col-md-6 qr-code @if($model && $model->landing)@else d-none @endif">
+                                                    @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                 </div>
                                             </div>
                                         </div>
@@ -510,6 +510,24 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $('#landing'). click(function() {
+                if ($(this).prop("checked") == true) {
+                    var code  = $("#barcode").val();
+                    AjaxCall("{{ route('admin_items_render_barcode') }}", {code: code}, function (res) {
+                        if (!res.error) {
+                            $(".qr-code").html(res.html);
+                        }else{
+                            $(".qr-code").html('Barcode is not selected');
+                        }
+
+                        $(".qr-code").removeClass('d-none');
+                    });
+                } else if ($(this).prop("checked") == false) {
+                    $(".qr-code").addClass('d-none');
+
+                }
+            });
+
             $("body").on('change','.warehouse',function () {
                 let w_id = $(this).val();
                 let parent = $(this).closest(".location-item");
