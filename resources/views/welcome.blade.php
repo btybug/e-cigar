@@ -105,15 +105,15 @@
                     orci.
                 </p>
                 <div class="home_brands-slider">
-                    {{--@foreach($brands as $brand)--}}
-                        {{--<div class="brand-wall">--}}
-                            {{--<div class="brand-item">--}}
-                                {{--<a href="javascript:void(0)" class="brand-link">--}}
-                                    {{--<img src="{{ $brand->image }}" alt="brand-logo">--}}
-                                {{--</a>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--@endforeach--}}
+                    @foreach($brands as $brand)
+                        <div class="brand-wall">
+                            <div class="brand-item">
+                                <a href="javascript:void(0)" class="brand-link">
+                                    <img src="{{ $brand->image }}" alt="brand-logo">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach
 
                 </div>
             </section>
