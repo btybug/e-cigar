@@ -44,6 +44,7 @@ class ItemsController extends Controller
     {
         return $this->view('index');
     }
+
     public function archives()
     {
         return $this->view('archive');
@@ -57,11 +58,11 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
 
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories','warehouses','racks','shelves','data'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data'));
     }
 
     public function getNewBundle()
@@ -69,7 +70,7 @@ class ItemsController extends Controller
         $model = null;
         $bundle = true;
         $barcodes = $this->barcodeService->getPluck();
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
 
@@ -77,12 +78,12 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle','categories','warehouses','racks','shelves','data'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status','default_price','landing');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status', 'default_price', 'landing');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
@@ -96,7 +97,7 @@ class ItemsController extends Controller
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
 
-        $route = ($item->is_archive)?'admin_items_archives':'admin_items';
+        $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
         return redirect()->route($route);
     }
 
@@ -110,12 +111,12 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
 
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
-            'categories', 'data', 'checkedCategories','warehouses','racks','shelves'));
+            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves'));
     }
 
     private function savePackages($item, array $data = [])
@@ -296,11 +297,11 @@ class ItemsController extends Controller
 
     public function addLocation(Request $request)
     {
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
 
-        $html = \View('admin.items._partials.location', compact(['warehouses', 'racks','shelves']))->render();
+        $html = \View('admin.items._partials.location', compact(['warehouses', 'racks', 'shelves']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -335,10 +336,10 @@ class ItemsController extends Controller
     public function transfer()
     {
         $items = Items::all()->pluck('name', 'id')->all();
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
-        return $this->view('transfer.index',compact(['items','warehouses','racks','shelves']));
+        return $this->view('transfer.index', compact(['items', 'warehouses', 'racks', 'shelves']));
     }
 
     public function PostTransfer(Request $request)
@@ -346,23 +347,23 @@ class ItemsController extends Controller
         $model = Items::findOrFail($request->item_id);
         $from = ItemsLocations::findOrFail($request->from);
         $to = ItemsLocations::findOrFail($request->to);
-        if($from->qty < $request->qty){
-            return redirect()->back()->with('error',"Max qty that you can transfer is $from->qty");
+        if ($from->qty < $request->qty) {
+            return redirect()->back()->with('error', "Max qty that you can transfer is $from->qty");
         }
 
-        $from->update(['qty'=>($from->qty - $request->qty)]);
-        $to->update(['qty'=> ($to->qty + $request->qty)]);
+        $from->update(['qty' => ($from->qty - $request->qty)]);
+        $to->update(['qty' => ($to->qty + $request->qty)]);
 
-        return redirect()->back()->with('message',"Successfully transfered");
+        return redirect()->back()->with('message', "Successfully transfered");
 
     }
 
     public function postItemLocations(Request $request)
     {
         $model = Items::findOrFail($request->item_id);
-        $data = $model->locations()->get()->pluck('transfer_location','id')->all();
+        $data = $model->locations()->get()->pluck('transfer_location', 'id')->all();
 
-        $html = View("admin.items.transfer.locations", compact('model','data'))->render();
+        $html = View("admin.items.transfer.locations", compact('model', 'data'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -370,26 +371,26 @@ class ItemsController extends Controller
     public function renderBarcode(Request $request)
     {
         $barcode = Barcodes::find($request->code);
-        if(! $barcode) return response()->json(['error' => true]);
+        if (!$barcode) return response()->json(['error' => true]);
 
-        $html = $this->view('_partials.qr',['code' => $barcode->code])->render();
-        return response()->json(['error' => false,'html' => $html]);
+        $html = $this->view('_partials.qr', ['code' => $barcode->code])->render();
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
-    public function downloadCode($code,$type = 'qr')
+    public function downloadCode($code, $type = 'qr')
     {
-        $barcode = Barcodes::where('code',$code)->first();
-        if(! $barcode) return response()->json(['error' => true]);
+        $barcode = Barcodes::where('code', $code)->first();
+        if (!$barcode) return response()->json(['error' => true]);
 
-        if($type == 'qr'){
-            $name = $code.'QR.png';
-            $path = \DNS2D::getBarcodePNGPath(env('APP_URL').'/landings/'.$code, "QRCODE");
-        }else{
-            $name = $code."BARCODE.png";
-            $path = \DNS1D::getBarcodePNGPath($barcode->code, "EAN13",3,300,array(0,0,0), true);
+        if ($type == 'qr') {
+            $name = $code . 'QR.png';
+            $path = \DNS2D::getBarcodePNGPath(env('APP_URL') . '/landings/' . $code, "QRCODE");
+        } else {
+            $name = $code . "BARCODE.png";
+            $path = \DNS1D::getBarcodePNGPath($barcode->code, "EAN13", 3, 300, array(0, 0, 0), true);
         }
 
 
-        return \Response::download($path,$name);
+        return \Response::download($path, $name);
     }
 }
