@@ -200,7 +200,9 @@
                                                     </fieldset>
                                                 </div>
                                                 <div class="col-md-6 qr-code @if($model && $model->landing)@else d-none @endif">
-                                                    @include("admin.items._partials.qr",['code' => $model->barcode->code])
+                                                    @if($model)
+                                                        @include("admin.items._partials.qr",['code' => $model->barcode->code])
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
