@@ -2006,14 +2006,20 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .home_brands-slider .brand-item {
     height: 100%;
 }
-
+.home_brands-slider .brand-wall{
+    margin-right: 7px;
+}
 .home_brands-slider .brand-link {
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 }
-
+.home_brands-slider .brand-link img{
+    height: 100px;
+    object-fit: contain;
+    width: 100%;
+}
 .home_brands-slider .fs-carousel-control {
     width: 60px !important;
     height: 60px !important;
