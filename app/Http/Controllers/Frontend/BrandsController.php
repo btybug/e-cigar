@@ -81,5 +81,24 @@ class BrandsController extends Controller
         return response()->json(['error' => true]);
     }
 
+    public function postBrandProducts(Request $request)
+    {
+        $parent = Category::where('type', 'brands')->whereNull('parent_id')->where('id', $request->id)->first();
+        if ($parent) {
+            $stockCategories = $parent->children;
+        }else{
+            $stockCategories = Category::where('type', 'brands')->whereNotNull('parent_id')->get();
+        }
+
+        $current = ($stockCategories && count($stockCategories)) ? $stockCategories->first() : null;
+        $products = ($current) ? $current->brandProducts() : collect([]);
+        $f = ($current) ? $current->id : null;
+        $html = view('frontend.brands._partials.current', compact('current', 'products','f'))
+            ->with('stockCategories',$stockCategories->pluck('name','slug'))->render();
+        $list = view("frontend.brands._partials.list",compact(['current']))->with('brands',$stockCategories)->render();
+
+        return response()->json(['error' => false, 'html' => $html,'list' => $list]);
+    }
+
 }
 

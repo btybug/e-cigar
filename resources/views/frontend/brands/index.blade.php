@@ -103,7 +103,7 @@
                         <div class="brands_aside">
                             <div class="select-wall">
                                 {!! Form::select('brand_filter',['' => 'All Brands'] + $parentBrands,null,
-                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
+                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}
 
                             </div>
                             <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">Categories</div>
@@ -196,6 +196,27 @@
                 success: function (data) {
                     if (!data.error) {
                         $("body").find('#brand_related_products_list').html(data.html);
+                    }
+                }
+            });
+        });
+
+        $('body').on('change', '.brand-list', function () {
+            let value = $(this).val();
+            console.log(value);
+            $.ajax({
+                type: "post",
+                url: "/get-brand-list",
+                cache: false,
+                datatype: "json",
+                data: {id: value},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("body").find('.brands_main-content').html(data.html);
+                        $("body").find('.brands_aside-list').html(data.list);
                     }
                 }
             });
