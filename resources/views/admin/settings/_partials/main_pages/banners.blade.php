@@ -118,7 +118,6 @@
                                     <div class="input-group-prepend">
                                         <input type="text" class="form-control"  name="top[name][]">
                                         {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
-
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -126,6 +125,7 @@
                                         <i class="fa fa-plus"></i></button>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
@@ -154,9 +154,8 @@
     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
         <div class="col-sm-8 p-0">
             <div class="input-group-prepend">
-                <input type="text" class="form-control" name="top[name][]">
+                <input type="text" class="form-control"  name="top[name][]">
                 {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
-                </select>
             </div>
         </div>
         <div class="col-sm-3">
@@ -194,6 +193,7 @@
             $("body").on("click", ".add-new-product", function () {
                 var html = $("#add-top-items").html();
                 $(".top-products-group").append(html);
+                $('.top-items-select').select2();
             });
 
             $("body").on("click", ".remove-new-banner-input", function () {
