@@ -109,6 +109,25 @@
 
                     </div>
                 </div>
+                <div class="card panel panel-default social-profile-page mb-3">
+                    <div class="card-header panel-heading">Top Products</div>
+                    <div class="card-body panel-body">
+                        <div class="form-group d-flex flex-wrap align-items-center social-media-group">
+                            <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                <div class="col-sm-8 p-0">
+                                    <div class="input-group-prepend">
+                                            <select class="form-control" name="top[]">
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <button type="button" class="btn btn-primary add-new-product">
+                                        <i class="fa fa-plus"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
