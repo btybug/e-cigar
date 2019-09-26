@@ -45,6 +45,10 @@
             @endif
         </div>
         <div class="form-group">
+            <label>Sticker Name</label>
+            {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+        </div>
+        <div class="form-group">
             <label>Image</label>
             {!! media_button('image',$model) !!}
         </div>
