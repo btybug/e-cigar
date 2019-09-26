@@ -22,7 +22,7 @@
                                         <div class="col-sm-6 p-0">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    {!! media_button('banners[]',$banner) !!}
+                                                    {!! media_button('stickers[]',$banner) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                     <div class="col-sm-6 p-0">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                {!! media_button('banners[]',$model) !!}
+                                                {!! media_button('stickers[]',$model) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
         <div class="col-sm-6 p-0">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    {!! media_button('banners[]',$model) !!}
+                    {!! media_button('stickers[]',$model) !!}
                 </div>
             </div>
         </div>
