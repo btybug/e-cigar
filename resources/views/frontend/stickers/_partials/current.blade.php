@@ -4,7 +4,7 @@
         <h2 class="font-sec-reg lh-1 font-28 mb-0">{!! $current->name !!}</h2>
     </div>
     <div class="right">
-        <span class="font-sec-reg lh-1 font-28">{{ $products->count() }} Products</span>
+        <span class="font-sec-reg lh-1 font-28">{{ $current->products->count() }} Products</span>
     </div>
 </div>
 <div class="brands_main-content-products-wrapper" id="sticker_related_products_list">
