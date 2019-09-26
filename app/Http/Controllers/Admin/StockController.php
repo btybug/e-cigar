@@ -40,13 +40,13 @@ class StockController extends Controller
 
     public function stock()
     {
-        $stckers = Stickers::all();
-        foreach ($stckers as $stcker){
-            $stcker->slug = strtolower(str_replace(' ','-',$stcker->name));
-            $stcker->save();
-        }
-
-        dd('done');
+//        $stckers = Stickers::all();
+//        foreach ($stckers as $stcker){
+//            $stcker->slug = strtolower(str_replace(' ','-',$stcker->name));
+//            $stcker->save();
+//        }
+//
+//        dd('done');
 
         return $this->view('stock');
     }
