@@ -22,6 +22,7 @@ use App\Models\FooterLinks;
 use App\Models\GeoZones;
 use App\Models\GetForexData;
 use App\Models\Gmail;
+use App\Models\Items;
 use App\Models\Languages;
 use App\Models\MailTemplates;
 use App\Models\Products;
@@ -30,6 +31,7 @@ use App\Models\ShippingZones;
 use App\Models\SiteCurrencies;
 use App\Models\SiteLanguages;
 use App\Models\Statuses;
+use App\Models\Stock;
 use App\Models\TaxRates;
 use App\Models\Translations\FooterLinkTranslation;
 use App\Services\ShortCodes;
@@ -581,7 +583,12 @@ class SettingsController extends Controller
         } else {
             $model = Common::where('type', $p)->first();
         }
-        return $this->view('main_pages', compact(['model', 'p']));
+        $items=[];
+        if ($p == 'banners'){
+            $items=Stock::all()->pluck('name','id');
+        }
+
+        return $this->view('main_pages', compact(['model', 'p','items']));
     }
 
     public function postHomePage(Request $request, Settings $settings)

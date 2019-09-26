@@ -112,13 +112,13 @@
                 <div class="card panel panel-default social-profile-page mb-3">
                     <div class="card-header panel-heading">Top Products</div>
                     <div class="card-body panel-body">
-                        <div class="form-group d-flex flex-wrap align-items-center social-media-group">
+                        <div class="form-group d-flex flex-wrap align-items-center top-products-group">
                             <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
                                 <div class="col-sm-8 p-0">
                                     <div class="input-group-prepend">
                                         <input type="text" class="form-control"  name="top[name][]">
-                                            <select class="form-control" name="top[products][]">
-                                            </select>
+                                        {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
+
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -150,6 +150,21 @@
             </div>
         </div>
     </script>
+<script type="template" id="add-top-items">
+    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+        <div class="col-sm-8 p-0">
+            <div class="input-group-prepend">
+                <input type="text" class="form-control" name="top[name][]">
+                {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <button type="button" class="btn btn-danger remove-product">
+                <i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</script>
 
 @section('css')
     <link rel="stylesheet" href="{{asset('public/admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}">
@@ -169,11 +184,16 @@
             $(".calendar").datepicker();
             $('.timepicker1').timepicker();
             $('#first_line_country').select2();
+            $('.top-items-select').select2();
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners").html();
                 html = html.replace(/{count}/g, uid);
                 $(".social-media-group").append(html);
+            });
+            $("body").on("click", ".add-new-product", function () {
+                var html = $("#add-top-items").html();
+                $(".top-products-group").append(html);
             });
 
             $("body").on("click", ".remove-new-banner-input", function () {

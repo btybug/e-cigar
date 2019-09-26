@@ -36,6 +36,9 @@
                         <li class="nav-item">
                             <a class="nav-link @if($p=='my_account')active @endif" href="?p=my_account">My Account</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="col-9">
