@@ -116,7 +116,8 @@
                             <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
                                 <div class="col-sm-8 p-0">
                                     <div class="input-group-prepend">
-                                            <select class="form-control" name="top[]">
+                                        <input type="text" class="form-control"  name="top[name][]">
+                                            <select class="form-control" name="top[products][]">
                                             </select>
                                     </div>
                                 </div>
