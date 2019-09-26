@@ -16,10 +16,10 @@ class StickersController extends Controller
 
     protected $view = 'frontend.stickers';
 
-    public function index($id = null)
+    public function index($slug = null)
     {
         $stickers = Stickers::get();
-        $current = ($id) ? Stickers::findOrFail($id) : $stickers->first();
+        $current = ($slug) ? Stickers::where('slug',$slug)->first() : $stickers->first();
         $products=($current)?$current->products():collect([]);
         $stockCategories = StockCategories::
         leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
