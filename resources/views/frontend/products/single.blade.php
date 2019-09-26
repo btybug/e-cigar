@@ -101,90 +101,15 @@
                                     </div>
                                 </div>
                                 <div class="brands-top-slider">
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
+                                    @foreach($vape->stickers as $sticker)
+                                        <div class="brand-wall">
+                                            <div class="brand-item">
+                                                <a href="javascript:void(0)" class="brand-link">
+                                                    <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}">
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -239,19 +164,19 @@
                                                        id="vpid">
 
                                                 <div class="product__single-item">
-                                                    <div
-                                                        class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-center product_btn-discount">
-                                                            <span
-                                                                class="font-sec-reg font-26 text-sec-clr">QTY Discount</span>
-                                                        </div>
-                                                        <div class="font-main-light font-20">
-                                                            The more you order the more you get
-                                                        </div>
-                                                        <a href="#" class="font-20 text-tert-clr top_details">Offer
-                                                            Details</a>
-                                                    </div>
+                                                    {{--<div--}}
+                                                        {{--class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">--}}
+                                                        {{--<div--}}
+                                                            {{--class="d-flex align-items-center justify-content-center product_btn-discount">--}}
+                                                            {{--<span--}}
+                                                                {{--class="font-sec-reg font-26 text-sec-clr">QTY Discount</span>--}}
+                                                        {{--</div>--}}
+                                                        {{--<div class="font-main-light font-20">--}}
+                                                            {{--The more you order the more you get--}}
+                                                        {{--</div>--}}
+                                                        {{--<a href="#" class="font-20 text-tert-clr top_details">Offer--}}
+                                                            {{--Details</a>--}}
+                                                    {{--</div>--}}
 
                                                     @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                                 </div>
@@ -400,8 +325,11 @@
                                                                             <span
                                                                                 class="font-18 text-gray-clr font-main-light technical-features-content-desc">
                                                                                 @foreach($stockAttr->children as $child)
-                                                                                    {{ $child->sticker->name }} @if(! $loop->last)
-                                                                                        , @endif
+                                                                                    {!! dd($child->sticker) !!}
+                                                                                    <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                    @if(! $loop->last)
+                                                                                        ,
+                                                                                    @endif
                                                                                 @endforeach
                                                                             </span>
                                                                                 </div>
