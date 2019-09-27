@@ -157,6 +157,7 @@ class StockService
 //            dd($data);
             foreach ($data as $variation_id => $datum) {
                 $newData = [];
+                $newData['ordering'] = ($datum['ordering']) ?? 0;
                 $newData['count_limit'] = ($datum['count_limit']) ?? 0;
                 $newData['min_count_limit'] = ($datum['min_count_limit']) ?? 0;
                 $newData['title'] = $datum['title'];

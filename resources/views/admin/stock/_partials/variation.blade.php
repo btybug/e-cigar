@@ -9,7 +9,7 @@
             <div class="col-md-3">
                 {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
             </div>
-            <div class="col-md-9">
+            <div class="col-md-6">
                 <div class="row">
                     <div class="col-md-6">
                         {!! Form::select("variations[$main_unique][type]",['' => 'Select','package_product' => 'Multiple items','filter' => 'Filters','single' => 'Single item'
@@ -21,6 +21,10 @@
                         ['class' => 'form-control filter-select']) !!}
                     </div>
                 </div>
+            </div>
+            <div class="col-md-3">
+                {!! Form::number("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
+                ['class' => 'form-control','placeholder' => 'Sort']) !!}
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end pr-0">
