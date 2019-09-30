@@ -62,6 +62,7 @@ class StockController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+        $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
 
         $data = Category::recursiveItems($categories);
         $dataOffers = Category::recursiveItems($offers);
@@ -76,7 +77,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
         return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs','offers','dataOffers',
-            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters']));
+            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters','special_filters']));
     }
 
     public function getStockEdit($id)
@@ -88,6 +89,8 @@ class StockController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
+        $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
+
         $checkedCategories = $model->categories()->pluck('id')->all();
         $checkedOffers = $model->offers()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
@@ -103,7 +106,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
         return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands','offers','dataOffers',
-            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters']));
+            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters','special_filters']));
     }
 
     public function postStock(ProductsRequest $request)

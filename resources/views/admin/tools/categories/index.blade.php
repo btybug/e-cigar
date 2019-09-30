@@ -75,8 +75,6 @@
         });
 
 
-
-        $('.icon-picker').iconpicker();
         $("body").on("click", ".iconpicker-item", function () {
             let value = $(".icon-picker").val()
             $("#font-show-area").attr("class", value)
@@ -110,10 +108,6 @@
 
         $("#tree1").tree({
             data: data,
-            //   dataUrl: {
-            //     url: '/example_data.json',
-            //     headers: {'abc': 'def'}
-            // },
             autoOpen: true,
             saveState: true,
             dragAndDrop: true,

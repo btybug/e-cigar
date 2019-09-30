@@ -194,7 +194,7 @@
                                                                                         @if(count($parent->children))
                                                                                             @foreach($parent->children as $brand)
                                                                                                 <div
-                                                                                                    class="single-wrap">
+                                                                                                    class="single-wrap ml-4">
                                                                                                     <div
                                                                                                         class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
                                                                                                         {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
@@ -207,6 +207,34 @@
                                                                                                 </div>
                                                                                             @endforeach
                                                                                         @endif
+                                                                                    @endforeach
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+
+                                                                    <div class="form-group">
+                                                                        <label class="col-sm-12 control-label pl-sm-0">
+                                                                            Special Filter <input type="checkbox" id="specialOffer" @if($model && $model->special_filter) checked="checked" @endif value="1">
+                                                                        </label>
+                                                                        <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
+                                                                            <div class="filter-wall cat-name row ml-4">
+                                                                                <div class="col-12 p-sm-0">
+                                                                                    @foreach($special_filters as $special_filter)
+                                                                                        <div
+                                                                                            class="single-wrap">
+                                                                                            <div
+                                                                                                class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                                {!! Form::radio("special_filter",$special_filter->id,null,
+                                                                                                ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
+                                                                                                <label
+                                                                                                    class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                    for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     @endforeach
                                                                                 </div>
                                                                             </div>
@@ -1233,6 +1261,13 @@
     <script>
 
         $(document).ready(function () {
+            $("#specialOffer").change(function() {
+                if(this.checked) {
+                    $("#special_offer_treeview_json").removeClass('hide')
+                }else{
+                    $("#special_offer_treeview_json").addClass('hide')
+                }
+            });
 
             var mainS;
             var groupS;
