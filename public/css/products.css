@@ -433,6 +433,7 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of
 
  .footer-subscribe {
     max-width: 611px;
+     width: 100%;
 }
 
  .footer-subscribe > div {
@@ -456,30 +457,28 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of
 }
 
 footer .footer-top .footer-info .footer-logo {
-    margin-bottom: 58px;
+    margin-bottom: 40px;
 }
 footer .footer-top .footer-info .footer-logo img{
-    width: 60%;
+    width: 100%;
+    max-width: 145px;
     
 }
 footer .footer-top .footer-info .footer-desc {
     color: #7c7c7c;
 }
 
-footer .footer-top .footer-info .footer-payment {
-    padding: 23px 0 45px 0;
-}
 
 footer .footer-top .footer-info .footer-payment img {
     margin-left: 20px;
 }
 
-footer .footer-top .footer-info .footer-social li {
+footer .footer-top .footer-social li {
     margin-left: 20px;
     margin-bottom: 4px;
 }
 
-footer .footer-top .footer-info .footer-social li a {
+footer .footer-top .footer-social li a {
     width: 30px;
     height: 30px;
     border: 1px solid #7c7c7c;
@@ -491,7 +490,7 @@ footer .footer-top .footer-info .footer-social li a {
     transition: .5s ease;
 }
 
-footer .footer-top .footer-info .footer-social li.active a, footer .footer-top .footer-info .footer-social li:hover a {
+footer .footer-top .footer-social li.active a, footer .footer-top .footer-social li:hover a {
     background-color: #7c7c7c;
     color: #ffffff;
 }
@@ -499,7 +498,12 @@ footer .footer-top .footer-info .footer-social li.active a, footer .footer-top .
 footer .footer-bottom {
     padding: 14px 0;
 }
-
+footer .footer-subscribe-social-wrap{
+    margin-top: 60px;
+}
+footer .footer-subscribe-social-wrap >form{
+    flex: 1;
+}
 @media screen and (max-width: 576px) {
     footer .footer-bottom {
         padding: 6px 0;
@@ -1320,8 +1324,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     padding: 0.42rem 3.1rem;
 }
 
-.copyright {
-    padding-top: 25px;
+footer .copyright {
+    /*padding-top: 25px;*/
+    color: #838383;
 }
 
 @media (max-width: 768px) {
