@@ -2,7 +2,7 @@
     <div class="header-top">
         <div class="container main-max-width h-100">
             <div class="d-flex flex-wrap justify-content-between h-100">
-                <nav class="navbar navbar-expand-md flex-md-row-reverse w-100 navbar-dark">
+                <nav class="navbar navbar-expand-md flex-md-row-reverse w-100 navbar-light">
                     <div class="d-flex align-items-center">
                         <button class="navbar-toggler" type="button" data-toggle="collapse"
                                 data-target="#navbarTogglerDemo01"
@@ -10,8 +10,8 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <a href="{!! url('/') !!}" class="logo-small-screens d-md-none d-flex align-items-center ml-3">
-                            <img src="{!! url('/public/img/logo-icon.png') !!}"  alt="" class="logo-small-screens_logo">
-                            <h1 class="font-14 font-sec-bold text-sec-clr text-uppercase ml-2 mb-0">The Vapors Hub</h1>
+                            <img src="{!! url('/public/img/kaliony-hub-logo.svg') !!}"  alt="" class="logo-small-screens_logo">
+{{--                            <h1 class="font-14 font-sec-bold text-sec-clr text-uppercase ml-2 mb-0">The Vapors Hub</h1>--}}
                         </a>
                     </div>
 
@@ -21,9 +21,9 @@
                             <div class="user-img">
                                 <img src="{!! user_avatar() !!}" alt="user">
                             </div>
-                            <span class="user-name font-15 text-sec-clr font-main-bold">
-                                Hi {{ Auth::user()->name }}
-                            </span>
+{{--                            <span class="user-name font-15 text-sec-clr font-main-bold">--}}
+{{--                                Hi {{ Auth::user()->name }}--}}
+{{--                            </span>--}}
                         </div>
                     @else
                         {{--<span class="d-inline-block">--}}
@@ -184,6 +184,15 @@
           d="M19.996,18.987 L16.406,15.260 C19.498,11.613 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.724,2.715 C-0.909,6.339 -0.909,12.216 2.724,15.840 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.002 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.026 7.136,1.185 9.303,1.185 C11.469,1.185 13.506,2.026 15.038,3.555 C18.201,6.710 18.201,11.844 15.038,15.000 C13.506,16.528 11.469,17.370 9.303,17.370 Z"/>
     </svg>
                         </span>
+                            <span class="header-mobile-search-close">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="19px" height="19px">
+<path fill-rule="evenodd"  fill="rgb(255, 255, 255)"
+      d="M17.441,18.555 L9.689,10.803 L1.493,18.999 L-0.002,17.504 L8.194,9.308 L0.434,1.548 L1.840,0.143 L9.600,7.903 L17.505,-0.003 L18.999,1.492 L11.094,9.397 L18.846,17.149 L17.441,18.555 Z"/>
+</svg>
+                                </span>
                         @endif
 
                         <div class="d-inline-block simple_select_wrapper currency--wrap">

@@ -57,6 +57,13 @@ $( document ).ready(function () {
     // search for mobile
     $('body').on('click', '.header-bottom .search-mobile-icon', function () {
         $(this).closest('.header-bottom').find('.cat-search').addClass('opened-full');
+        $(this).hide()
+        $(this).parent().find('.header-mobile-search-close').addClass('active')
+    });
+    $('body').on('click', '.header-bottom .header-mobile-search-close', function () {
+        $(this).closest('.header-bottom').find('.cat-search').removeClass('opened-full');
+        $(this).removeClass('active')
+        $(this).parent().find('.search-mobile-icon').show()
     });
 
 });

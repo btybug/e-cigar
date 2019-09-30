@@ -128,6 +128,19 @@
                             <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
                             orci.
                         </p>
+                        <div class="home_products-version-mobile d-sm-none d-block">
+                            <div class="home_products-version-mobile-select">
+                                <select class="select-2 select-2--no-search main-select main-select-2arrows not-selected" name="" id="" style="width: 100%">
+                                    <option value="">Best Offers</option>
+                                    <option value="">Top Pruducts</option>
+                                    <option value="">Most Sales</option>
+                                    <option value="">News</option>
+                                    <option value="">Category 5</option>
+                                    <option value="">Category 6</option>
+                                </select>
+
+                            </div>
+                        </div>
                     </div>
                     <div class="d-flex home_products-version">
                         <div class="col active">
@@ -162,6 +175,7 @@
                         </div>
 
                     </div>
+
                     <div class="products__list-wrapper home_products-carousel">
                         <div class="home_products-carousel-item">
                             <div class="products__item-wrapper main-transition">
@@ -814,10 +828,10 @@ adipiscing elit. Morbi sodales ...
             });
             $(".home_brands-slider").carousel({
                 theme: "fs-light",
-                pagination: false,
+                // pagination: false,
                 infinite: true,
                 show: {
-                    "740px": 2,
+                    "320px": 2,
                     "980px": 3,
                     "1220px": 4,
                     "1630px": 5,
@@ -842,17 +856,17 @@ adipiscing elit. Morbi sodales ...
                 show: 1
             });
 //home products top list
-            let windowWidyh = $(window).width()
-
-            if(windowWidyh<=767){
-                $(".home_products-version").carousel({
-                    // controls: false,
-                    pagination: false,
-                    show: {
-                        "557px": 2
-                    }
-                });
-            }
+//             let windowWidyh = $(window).width()
+//
+//             if(windowWidyh<=767){
+//                 $(".home_products-version").carousel({
+//                     // controls: false,
+//                     pagination: false,
+//                     show: {
+//                         "557px": 2
+//                     }
+//                 });
+//             }
 
         })
 

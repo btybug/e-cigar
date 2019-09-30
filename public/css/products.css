@@ -223,6 +223,7 @@ header .header-top .user-img img {
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
+    border: 1px solid #d7d7d7;
 }
 
 header .header-top .products-menu-item .single-product:hover h5 {
@@ -2753,6 +2754,10 @@ vertical-align: middle;
         margin: 0;
         z-index: 9;
         width: 100%;
+        top: 100%;
+        background-color: rgba(53, 53, 53, .9);
+        padding: 20px;
+        flex-direction: column;
     }
     header .header-bottom .cat-search .search > span{
         right: 12px;
