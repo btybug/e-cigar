@@ -192,6 +192,7 @@ class StockController extends Controller
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
         $dataOffers = Category::recursiveItems($offers);
+        $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
 
         $general = $this->settings->getEditableData('seo_stocks')->toArray();
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
@@ -199,7 +200,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
         return $this->view('stock_new', compact(['model','brands', 'general','offers','dataOffers',
-            'twitterSeo', 'fbSeo', 'robot','offer']));
+            'twitterSeo', 'fbSeo', 'robot','offer','special_filters']));
     }
 
     public function getOfferEdit($id)
@@ -212,6 +213,7 @@ class StockController extends Controller
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
         $checkedOffers = $model->offers()->pluck('id')->all();
         $dataOffers = Category::recursiveItems($offers, 0, [], $checkedOffers);
+        $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
 
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
@@ -224,7 +226,7 @@ class StockController extends Controller
 //dd($model->offer_products);
 
         return $this->view('stock_new', compact(['model', 'variations','brands','offers','dataOffers','offer','checkedOffers',
-            'filters','stockItems',
+            'filters','stockItems','special_filters',
             'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
     }
 
