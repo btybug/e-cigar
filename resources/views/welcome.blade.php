@@ -842,7 +842,7 @@ adipiscing elit. Morbi sodales ...
 
             $(".home_products-carousel").carousel({
                 theme: "fs-light",
-                pagination: false,
+                pagination: true,
                 infinite: true,
                 show: {
                     "740px": 2,
