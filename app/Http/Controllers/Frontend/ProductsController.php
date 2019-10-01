@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\AttributeStickers;
 use App\Models\Category;
+use App\Models\Items;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Stickers;
