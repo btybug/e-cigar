@@ -62,3 +62,15 @@
         transform: translateX(-50%);
     }
 }
+@media (max-width: 575px) {
+    .home__main-slider .main-slider-wall-inner .text-second{
+        font-size: 30px;
+        white-space: nowrap;
+    }
+    .home__main-slider .main-slider-wall-inner .text-big{
+        margin-bottom: 16px;
+    }
+    .home__main-slider .main-slider-wall-inner{
+        bottom: 90px;
+    }
+}

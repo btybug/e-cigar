@@ -444,7 +444,18 @@ footer .footer-top .footer-menu-subscribe .footer-menu .menus ul li:not(:last-of
 .footer-subscribe > div label {
     letter-spacing: 2px;
     margin-left: 15px;
-    margin-right: 5px;
+    padding-right: 8px;
+    position: relative;
+}
+.footer-subscribe > div label:after{
+    content: '';
+    background: #464646;
+    width: 2px;
+    display: block;
+    position: absolute;
+    right: 0;
+    height: 66%;
+    top: 17%;
 }
 
  .footer-subscribe > div .form-control {

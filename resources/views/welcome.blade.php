@@ -31,7 +31,7 @@
                     @endif
                 </div>
             </section>
-            <div class="container home_width">
+            <div class="container home_width p-home-mobile">
                 <section class="home_categories">
                     <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">OUR</span> <span>CATEGORIES</span>
                     </h2>
@@ -772,7 +772,7 @@ adipiscing elit. Morbi sodales ...
                     </div>
                 </div>
             </section>
-            <div class="container home_width">
+            <div class="container home_width p-home-mobile">
                 <section class="d-flex flex-wrap align-items-end justify-content-between home_delivery-wrapper">
                     <div class="home_delivery-left">
                         <div class="font-main-bold home_delivery-title">
@@ -817,7 +817,7 @@ adipiscing elit. Morbi sodales ...
     <script>
         $(document).ready(function () {
             $(".home__main-slider").carousel({
-                pagination: false,
+                pagination: true,
                 controls: false
             });
 

@@ -65,7 +65,7 @@
 
                     <div class="d-flex position-relative align-items-center">
                         <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">SUBSCRIBE
-                            |</label>
+                            </label>
                         {!! Form::email('subscribe_email',null,['class' => 'form-control','placeholder' => 'Your email','id' => 'footer-subscribe']) !!}
                         <span class="arrow position-absolute">
                                         <svg viewBox="0 0 24 8"
