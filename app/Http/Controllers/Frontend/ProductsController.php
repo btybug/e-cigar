@@ -25,6 +25,27 @@ class ProductsController extends Controller
 
     public function index(Request $request, $type = null)
     {
+//        $exportData = [];
+//        $data = Items::get();
+//        foreach ($data as $datum){
+//            $exportData[] = [
+//              'id' =>   $datum->id,
+//              'name' =>   $datum->name,
+//              'short_description' =>   $datum->short_description,
+//              'long_description' =>   $datum->long_description,
+//            ];
+//        }
+//
+//
+//        return \Excel::create('itsolutionstuff_example', function($excel) use ($data) {
+//            $excel->sheet('Items', function($sheet) use ($data)
+//            {
+//                $sheet->fromArray($data);
+//            });
+//        })->download("xls");
+//
+//        dd(33);
+
         $category = Category::where('type', 'stocks')->whereNull('parent_id')->where('slug', $type)->first();
         if (!$category && $type != null) abort(404);
 
