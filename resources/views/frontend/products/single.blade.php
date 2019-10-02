@@ -256,115 +256,106 @@
                                             {{--</p>--}}
                                             <div class="d-flex flex-wrap">
                                                 <div class="product_single-main-tab-content">
-                                                    <div class="tecnical-desc">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            Description</h3>
-                                                        <div class="tecnical-desc_heading">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 font-15 text-gray-clr">
-                                                                    <div
-                                                                        class="tecnical-desc_info-col font-15 text-gray-clr font-main-light">
-                                                                        {!! $vape->long_description !!}
-                                                                    </div>
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{--                                                <ul class="tecnical-labels list-unstyled d-flex">--}}
-                                                        {{--                                                    @foreach($vape->stickers as $sticker)--}}
-                                                        {{--                                                        <li class="tecnical-labels_item d-flex align-items-center">--}}
-                                                        {{--                                                            <img src="{{ $sticker->image }}" alt=""--}}
-                                                        {{--                                                                 class="tecnical-labels_item-img rounded-circle">--}}
-                                                        {{--                                                            <span--}}
-                                                        {{--                                                                class="tecnical-labels_item-text d-inline-block font-main-bold font-15">--}}
-                                                        {{--                                                        {{ $sticker->name }}--}}
-                                                        {{--                                                    </span>--}}
-                                                        {{--                                                        </li>--}}
-                                                        {{--                                                    @endforeach--}}
-
-                                                        {{--                                                </ul>--}}
-                                                    </div>
-                                                    <div class="technical-features">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            Features</h3>
-                                                        <div class="d-flex flex-wrap technical-features-content">
-                                                            @if($vape->stockAttrs && count($vape->stockAttrs))
-                                                                @foreach($vape->stockAttrs as $stockAttr)
-                                                                    @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
+                                                    @if(trim(strip_tags($vape->long_description)))
+                                                        <div class="tecnical-desc">
+                                                            <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                Description</h3>
+                                                            <div class="tecnical-desc_heading">
+                                                                <div class="row">
+                                                                    <div class="col-lg-12 font-15 text-gray-clr">
                                                                         <div
-                                                                            class="d-flex technical-features-content-wall">
-                                                                            <div
-                                                                                class="technical-features-content-left">
-                                                                                <div
-                                                                                    class="d-flex align-items-center h-100">
-                                                                            <span
-                                                                                class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
-                                                                                    @if($stockAttr->attr->description)
-                                                                                        <span data-toggle="tooltip"
-                                                                                              data-placement="top"
-                                                                                              title="{!! $stockAttr->attr->description !!}">
-                                                                                            <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                                width="24px"
-                                                                                                height="24px"
-                                                                                                viewBox="0 0 24 24">
-                                                                                                <path
-                                                                                                    fill-rule="evenodd"
-                                                                                                    fill="rgb(255, 255, 255)"
-                                                                                                    d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
-                                                                                            </svg>
-                                                                                        </span>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="technical-features-content-right">
-                                                                                <div
-                                                                                    class="d-flex align-items-center h-100">
-                                                                            <span
-                                                                                class="font-18 text-gray-clr font-main-light technical-features-content-desc">
-                                                                                @foreach($stockAttr->children as $child)
-                                                                                    <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
-                                                                                    @if(! $loop->last)
-                                                                                        ,
-                                                                                    @endif
-                                                                                @endforeach
-                                                                            </span>
-                                                                                </div>
-                                                                            </div>
+                                                                            class="tecnical-desc_info-col font-15 text-gray-clr font-main-light">
+                                                                            {!! $vape->long_description !!}
                                                                         </div>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="technical-inside-box">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            inside tHE BOX</h3>
-                                                        <div class="d-flex flex-wrap technical-inside-box-inner">
-                                                            <div class="technical-inside-box-left lh-1">
-                                                                {!! $vape->what_is_content !!}
-                                                            </div>
-                                                            <div class="technical-inside-box-right">
-                                                                <div class="technical-inside-box-photo">
-                                                                    @if($vape->what_is_image)
-                                                                        <img src="{{ $vape->what_is_image }}"
-                                                                             alt="what is in box">
-                                                                    @else
-                                                                        <img src="/public/img/temp/inside-box.jpg"
-                                                                             alt="what is in box">
-                                                                    @endif
+
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    @endif
 
-                                                    </div>
+                                                    @if($vape->stockAttrs && count($vape->stockAttrs))
+                                                        <div class="technical-features">
+                                                            <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                Features</h3>
+                                                            <div class="d-flex flex-wrap technical-features-content">
+                                                                    @foreach($vape->stockAttrs as $stockAttr)
+                                                                        @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
+                                                                            <div
+                                                                                class="d-flex technical-features-content-wall">
+                                                                                <div
+                                                                                    class="technical-features-content-left">
+                                                                                    <div
+                                                                                        class="d-flex align-items-center h-100">
+                                                                                <span
+                                                                                    class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
+                                                                                        @if($stockAttr->attr->description)
+                                                                                            <span data-toggle="tooltip"
+                                                                                                  data-placement="top"
+                                                                                                  title="{!! $stockAttr->attr->description !!}">
+                                                                                                <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                                    width="24px"
+                                                                                                    height="24px"
+                                                                                                    viewBox="0 0 24 24">
+                                                                                                    <path
+                                                                                                        fill-rule="evenodd"
+                                                                                                        fill="rgb(255, 255, 255)"
+                                                                                                        d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
+                                                                                                </svg>
+                                                                                            </span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="technical-features-content-right">
+                                                                                    <div
+                                                                                        class="d-flex align-items-center h-100">
+                                                                                <span
+                                                                                    class="font-18 text-gray-clr font-main-light technical-features-content-desc">
+                                                                                    @foreach($stockAttr->children as $child)
+                                                                                        <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                        @if(! $loop->last)
+                                                                                            ,
+                                                                                        @endif
+                                                                                    @endforeach
+                                                                                </span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endforeach
+                                                            </div>
+                                                        </div>
+                                                    @endif
 
-                                                    <div class="tecnical_gallery">
-                                                        <div class="tecnical_gallery-all">
+                                                    @if(trim(strip_tags($vape->long_description)))
+                                                        <div class="technical-inside-box">
+                                                            <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                inside tHE BOX</h3>
+                                                            <div class="d-flex flex-wrap technical-inside-box-inner">
+                                                                <div class="technical-inside-box-left lh-1">
+                                                                    {!! $vape->what_is_content !!}
+                                                                </div>
+                                                                <div class="technical-inside-box-right">
+                                                                    <div class="technical-inside-box-photo">
+                                                                        @if($vape->what_is_image)
+                                                                            <img src="{{ $vape->what_is_image }}"
+                                                                                 alt="what is in box">
+                                                                        @else
+                                                                            <img src="/public/img/temp/inside-box.jpg"
+                                                                                 alt="what is in box">
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
 
-                                                            @if($vape->other_images && count($vape->other_images))
+                                                    @if($vape->other_images && count($vape->other_images))
+                                                        <div class="tecnical_gallery">
+                                                            <div class="tecnical_gallery-all">
                                                                 @foreach($vape->other_images as $other_image)
                                                                     <a href="{{ $other_image }}"
                                                                        class="tecnical_gallery_obj-holder lightbox-item"
@@ -374,10 +365,11 @@
                                                                              alt="{!! @getImage($other_image)->seo_alt !!}">
                                                                     </a>
                                                                 @endforeach
-                                                            @endif
+                                                            </div>
                                                         </div>
-                                                    </div>
+                                                    @endif
                                                 </div>
+
                                                 <div class="product_single-right-ads">
                                                     <div class="single-ads-wall">
                                                         <a href="#" class="d-block h-100">
