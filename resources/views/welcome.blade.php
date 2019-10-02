@@ -845,9 +845,10 @@ adipiscing elit. Morbi sodales ...
                 pagination: true,
                 infinite: true,
                 show: {
-                    "740px": 2,
-                    "980px": 3,
-                    "1220px": 4,
+                    "768px": 1,
+                    "900px": 2,
+                    "1100px":3,
+                    "1300px": 4,
                 }
             });
             // home reviews slider
