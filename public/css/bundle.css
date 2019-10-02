@@ -19771,6 +19771,13 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 /*brands main content end*/
 /*------------brands page END-------------*/
 /*------------product page START------------*/
+.products__page-main .products__page-main_right-wrapper .product-no_result{
+    margin-top: 125px;
+}
+.products__page-main .products__page-main_right-wrapper .product-no_result span{
+    font-size: 26px;
+    color: #c9cdd8;
+}
 .products__page-main .products__page-main_left-wrapper, .products__page-main .products__page-main_right-wrapper {
     position: relative;
     width: 100%;
