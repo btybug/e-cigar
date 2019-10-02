@@ -128,6 +128,7 @@
                                                                        class="control-label col-sm-4 control-label text-right">Faq
                                                                     Tab</label>
                                                                 <div class="col-sm-8">
+                                                                    {!! Form::hidden('faq_tab',false) !!}
                                                                     {!! Form::checkbox('faq_tab', true,null,
                                                                      ['class' => '','id' => 'faq_tab']) !!}
                                                                 </div>
@@ -139,6 +140,8 @@
                                                                        class="control-label col-sm-4 control-label  text-right">Reviews
                                                                     Tab</label>
                                                                 <div class="col-sm-8">
+                                                                    {!! Form::hidden('reviews_tab',false) !!}
+
                                                                     {!! Form::checkbox('reviews_tab', true,null,
                                                                      ['class' => '','id' => 'reviews_tab']) !!}
                                                                 </div>
