@@ -361,7 +361,6 @@
                                                             <option class="selected">Armenia</option>
                                                             <option>UK</option>
                                                             <option>USA</option>
-
                                                         </select>
                                                     </div>
 
