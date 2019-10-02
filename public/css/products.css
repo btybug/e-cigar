@@ -211,6 +211,15 @@ header .header-top .navbar-nav .nav-link {
     display: flex;
 }
 
+header .header-top .navbar .sidebar_button_active_detector.active{
+    background: #222222;
+    position: fixed !important;
+    right: 0px !important;
+    width: 305px;
+    height: 50px;
+    padding-left: 10px;
+    margin: 0 !important;
+}
 header .header-top .user-name {
     margin-left: 25px;
 }
@@ -413,7 +422,12 @@ header .header-bottom .cat-search .select2.select2-container.select2-container--
         width: 120px !important;
     }
 }
-
+header .header-bottom .sort-by-currency-wrap{
+    margin-left: 0;
+}
+header .header-bottom .sort-by-currency-wrap .currency--wrap{
+    width: 74px;
+}
 footer .footer-top {
     background-color: #e3e6ed;
     padding: 41px 0;

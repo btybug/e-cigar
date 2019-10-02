@@ -21,9 +21,9 @@
                             <div class="user-img">
                                 <img src="{!! user_avatar() !!}" alt="user">
                             </div>
-{{--                            <span class="user-name font-15 text-sec-clr font-main-bold">--}}
-{{--                                Hi {{ Auth::user()->name }}--}}
-{{--                            </span>--}}
+                            <span class="user-name font-15 text-sec-clr font-main-bold">
+                                Hi {{ Auth::user()->name }}
+                            </span>
                         </div>
                     @else
                         {{--<span class="d-inline-block">--}}
@@ -194,14 +194,17 @@
 </svg>
                                 </span>
                         @endif
+<div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative">
+    <label for="sortBy" class="text-main-clr mb-0">CURRENCY: </label>
+    <div class="d-inline-block select-wall simple_select_wrapper currency--wrap">
+        {!! Form::select('currency',site_currencies(),@$currency,[
+           'class' =>'select-2 currency--select-2 main-select main-select-2arrows arrow-dark',
+           'id' => 'change-currency'
+       ]) !!}
+        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
+    </div>
+</div>
 
-                        <div class="d-inline-block simple_select_wrapper currency--wrap">
-                            {!! Form::select('currency',site_currencies(),@$currency,[
-                               'class' =>'select-2 currency--select-2 main-select',
-                               'id' => 'change-currency'
-                           ]) !!}
-                            {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
-                        </div>
 
                         @if(Request::route()->getPrefix() != '/wholesaler')
 
@@ -256,6 +259,15 @@
             Logout
         </button>
         {!! Form::close() !!}
+        <span class="profileSidebar-close">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="19px" height="19px">
+<path fill-rule="evenodd"  fill="rgb(53, 53, 53)"
+      d="M17.441,18.554 L9.689,10.803 L1.493,18.999 L-0.002,17.504 L8.194,9.308 L0.434,1.548 L1.840,0.143 L9.600,7.903 L17.505,-0.002 L18.999,1.492 L11.094,9.397 L18.846,17.149 L17.441,18.554 Z"/>
+</svg>
+        </span>
     </div>
 @endif
 <div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column p-0">
@@ -297,6 +309,11 @@
         resize_win(x);
         $(window).on('resize', function() {
             resize_win(x);
+        })
+        // profile sidbar close
+        $('body').on('click','.profileSidebar-close',function () {
+            $(this).closest('.profile-sidebar').removeClass('show')
+            $(this).closest('body').find('.sidebar_button_active_detector').removeClass('active')
         })
     });
 </script>

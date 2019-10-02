@@ -823,10 +823,16 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .profile-sidebar {
     width: 305px;
-    right: -305px;
+    right: -345px;
     padding-bottom: 38px;
 }
-
+.profile-sidebar .profileSidebar-close{
+    position: absolute;
+    left: -40px;
+    top: 20px;
+    z-index: 9;
+    cursor: pointer;
+}
 .profile-sidebar_avatar-holder {
     background: #e3e6ed;
     height: 280px;
@@ -5820,6 +5826,9 @@ max-width: 100%;
 .header-mobile-search-close{
     display: none;
 }
+header .header-bottom .share-button svg {
+    fill: #797979;
+}
 @media (max-width: 1854px) {
     .shopping__cart-payment-wrapper{
         padding-left: 0;
@@ -6076,6 +6085,9 @@ max-width: 100%;
     }
     .home_products-carousel .home_products-carousel-item{
         margin-right: 20px;
+    }
+    header .header-bottom .sort-by-currency-wrap .currency--wrap{
+        width: 48px;
     }
 }
 @media (max-width: 1199px) {
@@ -6546,7 +6558,16 @@ max-width: 100%;
     .home_products-version .products-version-link{
         font-size: 13px;
     }
+    .main-header .header-top .user-name{
+        display: none;
+    }
+    .profile-sidebar.hidden-sidebar, #cartSidebar{
+        top: 69px;
+    }
 
+    header .header-top .navbar .sidebar_button_active_detector.active{
+        height: 69px;
+    }
 }
 
 @media (max-width: 640px) {
@@ -6923,6 +6944,15 @@ max-width: 100%;
         padding-left: 10px;
         padding-right: 10px;
     }
+    header .header-bottom .sort-by-currency-wrap{
+        border: none;
+    }
+    header .header-bottom .sort-by-currency-wrap .currency--wrap{
+        width: auto;
+    }
+    header .header-bottom .sort-by-currency-wrap label{
+        display: none;
+    }
 
 }
 @media (max-width: 455px) {
@@ -7017,7 +7047,7 @@ max-width: 100%;
 
     .profile-sidebar {
         width: 255px;
-        right: -255px;
+        right: -295px;
     }
 
     .home_brands-slider .fs-carousel-controls {
@@ -7055,6 +7085,9 @@ max-width: 100%;
     }
     .ticket__tab-wrapper {
         padding: 0 15px 0 0 !important;
+    }
+    header .header-top .navbar .sidebar_button_active_detector.active{
+        width: 255px;
     }
 }
 
