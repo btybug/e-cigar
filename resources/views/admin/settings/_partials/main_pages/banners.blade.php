@@ -113,18 +113,44 @@
                     <div class="card-header panel-heading">Top Products</div>
                     <div class="card-body panel-body">
                         <div class="form-group d-flex flex-wrap align-items-center top-products-group">
+                            @if(isset($top->data))
+                                @php
+                                $data=@json_decode($top->data,true);
+                                @endphp
+                            @foreach($data['name'] as $key=>$title)
                             <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
                                 <div class="col-sm-8 p-0">
                                     <div class="input-group-prepend">
-                                        <input type="text" class="form-control"  name="top[name][]">
-                                        {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
+                                        <input type="text" class="form-control"  name="top[name][]" value="{!! $title !!}">
+                                        {!! Form::select('top[products]['.$key.'][]',$items,$data['products'][$key],['class'=>'top-items-select','multiple'=>true]) !!}
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
-                                    <button type="button" class="btn btn-primary add-new-product">
-                                        <i class="fa fa-plus"></i></button>
+                                    @if($key>0)
+                                        <button type="button" class="btn btn-danger remove-product">
+                                            <i class="fa fa-minus"></i></button>
+                                        @else
+                                        <button type="button" class="btn btn-primary add-new-product">
+                                            <i class="fa fa-plus"></i></button>
+                                        @endif
+
                                 </div>
                             </div>
+                                @endforeach
+                            @else
+                                <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                    <div class="col-sm-8 p-0">
+                                        <div class="input-group-prepend">
+                                            <input type="text" class="form-control" name="top[name][]">
+                                            {!! Form::select('top[products][0][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-primary add-new-product">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            @endif
 
                         </div>
                     </div>
@@ -154,8 +180,8 @@
     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
         <div class="col-sm-8 p-0">
             <div class="input-group-prepend">
-                <input type="text" class="form-control"  name="top[name][]">
-                {!! Form::select('top[products][]',$items,null,['class'=>'top-items-select']) !!}
+                <input type="text" class="form-control" name="top[name][]">
+                {!! Form::select('top[products][{index}][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
             </div>
         </div>
         <div class="col-sm-3">
@@ -192,11 +218,15 @@
             });
             $("body").on("click", ".add-new-product", function () {
                 var html = $("#add-top-items").html();
+                html = html.replace(/{index}/g, $('.top-items-select').length);
                 $(".top-products-group").append(html);
                 $('.top-items-select').select2();
             });
 
             $("body").on("click", ".remove-new-banner-input", function () {
+                $(this).closest(".banner-item").remove();
+            });
+            $("body").on("click", ".remove-product", function () {
                 $(this).closest(".banner-item").remove();
             });
 

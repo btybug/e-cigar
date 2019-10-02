@@ -578,8 +578,11 @@ class SettingsController extends Controller
     public function getMainPages(Settings $settings, Request $request)
     {
         $p = $request->get('p', 'banners');
+        $top=null;
         if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers") {
             $model = $settings->getEditableData($p);
+            $top = $settings->getEditableData('top');
+
         } else {
             $model = Common::where('type', $p)->first();
         }
@@ -587,8 +590,7 @@ class SettingsController extends Controller
         if ($p == 'banners'){
             $items=Stock::all()->pluck('name','id');
         }
-
-        return $this->view('main_pages', compact(['model', 'p','items']));
+        return $this->view('main_pages', compact(['model', 'p','items','top']));
     }
 
     public function postHomePage(Request $request, Settings $settings)
@@ -608,6 +610,9 @@ class SettingsController extends Controller
         } else {
             $data = $request->except('_token', 'translatable');
             Common::updateOrCreate($request->id, $data);
+        }
+        if ($request->exists('top')){
+            $settings->updateOrCreateSettings('top', ['data'=>$request->get('top')]);
         }
         return redirect()->back();
     }
