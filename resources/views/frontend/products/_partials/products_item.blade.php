@@ -59,9 +59,19 @@
                                         {{ convert_price($product->price,$currency, false) }}
                                     </span>
                                 @else
-                                    <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
-                                        {{ convert_price($product->price,$currency, false) }}
-                                    </span>
+                                    @if($product->price)
+                                        <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
+                                            {{ convert_price($product->price,$currency, false) }}
+                                        </span>
+                                    @else
+                                        @php
+                                        $firstVariation = ($product->variations && count($product->variations))?$product->variations()->first():null;
+                                        @endphp
+                                        <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
+                                            {{ convert_price(($firstVariation)?$firstVariation->common_price:0,$currency, false) }}
+                                        </span>
+                                    @endif
+
                                 @endif
                             </span>
                         </span>
