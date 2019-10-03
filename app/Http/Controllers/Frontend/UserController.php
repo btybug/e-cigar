@@ -74,7 +74,6 @@ class UserController extends Controller
     public function getFavourites()
     {
         $user = \Auth::user();
-
         return $this->view('favourites', compact('user'));
     }
 
