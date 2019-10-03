@@ -67,12 +67,12 @@
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'name', name: 'item_translations.name'},
                     {data: 'type', name: 'type'},
                     {data: 'sku', name: 'sku'},
                     {data: 'barcode_id', name: 'barcode_id'},
                     {data: 'quantity', name: 'quantity'},
-                    {data: 'short_description', name: 'short_description'},
+                    {data: 'short_description', name: 'item_translations.short_description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

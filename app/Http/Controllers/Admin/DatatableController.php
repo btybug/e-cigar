@@ -354,19 +354,6 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-//    public function getAllCompetitions($sport_id = null, $region_id = null)
-//    {
-//        $query = Competitions::query();
-//        if ($sport_id) {
-//            $query = $query->where('sport_id', $sport_id);
-//        }
-//        if ($region_id) {
-//            $query = $query->where('region_id', $region_id);
-//        }
-//        return Datatables::of($query)->addColumn('actions', function ($comp) {
-//            return '<a href="javascript:void(0)" class="btn btn-warning events-modal" data-object="competitions"  data-id="' . $comp->id . '">Edit</a>';
-//        })->rawColumns(['actions'])->make(true);
-//    }
     public function getUserActivity($id)
     {
         return Datatables::of(LogActivities::where('user_id', $id))
@@ -698,7 +685,10 @@ class DatatableController extends Controller
 
     public function getAllItems()
     {
-        return Datatables::of(Items::main())
+        return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->select('items.*','item_translations.name','item_translations.short_description')
+            ->where('items.is_archive', false)
+            ->where('item_translations.locale', \Lang::getLocale()))
             ->editColumn('name', function ($attr) {
                 return $attr->name;
             })->editColumn('short_description', function ($attr) {
