@@ -67,8 +67,12 @@ class UserController extends Controller
         $user = \Auth::user();
         $categories = Category::where('type', 'notifications')->get();
         $newsletters = Newsletter::where('user_id', \Auth::id())->pluck('category_id', 'category_id')->all();
+        $countriesShipping = [null => 'Select Country'] + $this->geoZones
+                ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
+                ->select('zone_countries.*', 'zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return $this->view('index', compact('user', 'categories', 'newsletters'));
+        return $this->view('index', compact('user', 'categories', 'newsletters','countriesShipping'));
     }
 
     public function getFavourites()

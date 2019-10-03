@@ -277,11 +277,11 @@
 
                                     </div>
 
-                                    <div class="card account-card rounded-0 mb-5">
-                                        <h2 class="card-title font-20 mb-0">Billing Address</h2>
+                                    {{--<div class="card account-card rounded-0 mb-5">--}}
+                                        {{--<h2 class="card-title font-20 mb-0">Billing Address</h2>--}}
 
-                                        <div class="card-body">
-                                            {!! Form::model(@$billing_address,['class'=>'form-horizontal']) !!}
+                                        {{--<div class="card-body">--}}
+                                            {{--{!! Form::model(@$billing_address,['class'=>'form-horizontal']) !!}--}}
                                             {{--<div class="form-group">--}}
                                             {{--<div class="row">--}}
                                             {{--<label for="text" class="control-label col-sm-4">Name</label>--}}
@@ -297,87 +297,88 @@
                                             {{--</div>--}}
                                             {{--</div>--}}
                                             {{--</div>--}}
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">Company
-                                                        name</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('company',null,['class'=>'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">1st Line
-                                                        address</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">2nd line
-                                                        address</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group hide">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">City</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('city',null,['class'=>'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group hide">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">Region</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">Post Code</label>
-                                                    <div class="col-sm-8">
-                                                        {!! Form::text('post_code',null,['class'=>'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="text" class="control-label col-sm-4">Country</label>
-                                                    <div class="col-sm-8">
-                                                        {{--{!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">Company--}}
+                                                        {{--name</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('company',null,['class'=>'form-control']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">1st Line--}}
+                                                        {{--address</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('first_line_address',null,['class'=>'form-control']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">2nd line--}}
+                                                        {{--address</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('second_line_address',null,['class'=>'form-control']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group hide">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">City</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('city',null,['class'=>'form-control']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group hide">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">Region</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('region',null,['class'=>'form-control','id' => 'regions']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">Post Code</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::text('post_code',null,['class'=>'form-control']) !!}--}}
+                                                    {{--</div>--}}
+                                                {{--</div>--}}
+                                            {{--</div>--}}
+                                            {{--<div class="form-group">--}}
+                                                {{--<div class="row">--}}
+                                                    {{--<label for="text" class="control-label col-sm-4">Country</label>--}}
+                                                    {{--<div class="col-sm-8">--}}
+                                                        {{--{!! Form::select('country',$countriesShipping,null,--}}
+                                                        {{--['class'=>'select-2 select-2--no-search main-select account-country-select','id' => 'country','style' => 'width: 100%']) !!}--}}
                                                         {{--{!! Form::select('country',['' => 'SELECT'],null,['class'=>'form-control']) !!}--}}
-                                                        <select id="country"
-                                                                class="select-2 select-2--no-search main-select account-country-select"
-                                                                style="width: 100%">
+                                                        {{--<select id="country"--}}
+                                                                {{--class="select-2 select-2--no-search main-select account-country-select"--}}
+                                                                {{--style="width: 100%">--}}
 
-                                                            <option class="selected">Armenia</option>
-                                                            <option>UK</option>
-                                                            <option>USA</option>
-                                                        </select>
-                                                    </div>
+                                                            {{--<option class="selected">Armenia</option>--}}
+                                                            {{--<option>UK</option>--}}
+                                                            {{--<option>USA</option>--}}
+                                                        {{--</select>--}}
+                                                    {{--</div>--}}
 
-                                                </div>
-                                            </div>
+                                                {{--</div>--}}
+                                            {{--</div>--}}
 
-                                            {!! Form::hidden('type','billing_address') !!}
-                                            {!! Form::hidden('id') !!}
+                                            {{--{!! Form::hidden('type','billing_address') !!}--}}
+                                            {{--{!! Form::hidden('id') !!}--}}
                                             {{--<div class="form-group row">--}}
                                             {{--<div class="col-sm-offset-4 col-sm-8">--}}
                                             {{--<button type="submit" class="btn btn-primary">Submit</button>--}}
                                             {{--</div>--}}
                                             {{--</div>--}}
-                                            {!! Form::close() !!}
-                                        </div>
+                                            {{--{!! Form::close() !!}--}}
+                                        {{--</div>--}}
 
-                                    </div>
+                                    {{--</div>--}}
 
                                     {{--<div class="form-group row">--}}
                                     {{--<label for="username" class="col-md-4">--}}

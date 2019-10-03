@@ -88,7 +88,9 @@
                 class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
     <div class="col-md-9">
         <div class="checkout-form_input-group">   <!--gets form-has-err class-->
-            {!! Form::select('region',getRegionByZone(@$address_book->country),null,['class'=>'form-control select-2 select-2--no-search main-select main-select-2arrows checkout-form_select','id' => 'geo_region_book','style' => 'width: 100%;']) !!}
+            {!! Form::select('region',getRegionByZone(@$address_book->country),null,
+            ['class'=>'form-control select-2 select-2--no-search main-select main-select-2arrows checkout-form_select geo_region_book',
+            'id' => 'geo_region_book','style' => 'width: 100%;']) !!}
 
             <p class="err-msg">region is not valid</p>
         </div>
@@ -114,7 +116,8 @@
                 class="form-required-icon text-quatr-clr font-main-bold">&nbsp;&#42;</span></label>
     <div class="col-md-9">
         <div class="checkout-form_input-group">   <!--gets form-has-err class-->
-            {!! Form::select('country',$countriesShipping,null,['class'=>'select-2 select-2--no-search main-select main-select-2arrows checkout-form_select','id' => 'geo_country_book','style' => 'width: 100%;']) !!}
+            {!! Form::select('country',$countriesShipping,null,['class'=>'select-2 select-2--no-search main-select main-select-2arrows checkout-form_select geo_country_book',
+            'id' => 'geo_country_book','style' => 'width: 100%;']) !!}
             <p class="err-msg">country is not valid</p>
         </div>
 

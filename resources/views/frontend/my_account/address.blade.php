@@ -285,7 +285,7 @@
                 )
                 {
                     $(".address-form").html(res.html);
-                    $("#geo_country_book").select2();
+                    $("body").find(".geo_region_book").select2();
                     $("#newAddressModal").modal();
                 }
             }
@@ -304,8 +304,9 @@
                         )
                         {
                             $(".selected-form").html(res.html);
-                            $("#geo_country_book").select2();
-        //                    $("#newAddressModal").modal();
+                            $("body").find(".address-book-form .geo_region_book").select2();
+
+                            // $("#newAddressModal").modal();
                         }
                     }
                 )
@@ -318,7 +319,7 @@
                     "/get-regions-by-geozone",
                     {country: value},
                     res => {
-                    let select = document.getElementById('geo_region');
+                    let select = $("body").find('#geo_region');
                 select.innerText = null;
                 if (!res.error) {
                     var opt = document.createElement('option');
