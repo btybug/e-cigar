@@ -6553,6 +6553,7 @@ $(document).ready(function () {
         // },
         // source:countries,
         // lookup: countries,
+        appendTo: "#autocomplite_content_search",
         width: '100%',
         source: function source(d, e) {
 
@@ -6587,7 +6588,7 @@ $(document).ready(function () {
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
         console.log(location, 55555555555, item);
         encodeURI(item.slug);
-        var inner_html = "  <a class=\"autocomplete_link_custom\" style=\"all: unset;\" href=\"" + location.origin + "/products/" + encodeURI(item.category) + "/" + encodeURI(item.slug) + "\"> \n                                <div class=\"autocomplete_content_custom\">\n                                    <div class=\"autocomplete_image_container_custom\">\n                                        <img class=\"autocomplete_image_custom\" style=\"width: 100px;\" src=\"" + item.image + "\">\n                                    </div>\n                                    <div class=\"autocomplete_title_container_custom\">\n                                        <h4 class=\"autocomplete_title_custom\">" + item.name + "</h4>\n                                    </div>\n                                    <p class=\"autocomplete_description_custom\">" + item.short_description + "...</p>\n                                </div>\n                            </a>\n                            <hr>";
+        var inner_html = "  <a class=\"autocomplete_link_custom\" style=\"all: unset;\" href=\"" + location.origin + "/products/" + encodeURI(item.category) + "/" + encodeURI(item.slug) + "\"> \n                                <div class=\"autocomplete_content_custom\">\n                                    <div class=\"autocomplete_image_container_custom\">\n                                        <img class=\"autocomplete_image_custom\" src=\"" + item.image + "\">\n                                    </div>\n                                    <div class=\"autocomplete-right-main-content\">\n                                         <div class=\"autocomplete_title_container_custom\">\n                                            <h4 class=\"font-sec-reg font-17 text-main-clr lh-1 autocomplete_title_custom\">" + item.name + "</h4>\n                                            <span class=\"font-main-bold font-14 lh-1 autocomplete-new-item\">NEW</span>\n                                        </div>\n                                        <p class=\"font-main-light text-light-clr font-14 autocomplete_description_custom\">" + item.short_description + "...</p>\n                                    </div>\n                               \n                                </div>\n                            </a>";
         console.log(item);
         return $("<li></li>").data("item.autocomplete", item).append(inner_html).appendTo(ul);
     };

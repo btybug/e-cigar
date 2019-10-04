@@ -381,6 +381,17 @@ header .header-bottom .cat-search .search .form-control {
     color: #7c7c7c;
 }
 
+header .header-bottom .cat-search .search .form-control::-webkit-input-placeholder {
+    opacity: .6;
+}
+
+header .header-bottom .cat-search .search .form-control:-ms-input-placeholder {
+    opacity: .6;
+}
+
+header .header-bottom .cat-search .search .form-control::placeholder {
+    opacity: .6;
+}
 header .header-bottom .cat-search .search > span {
     right: 15px;
     top: 0;
