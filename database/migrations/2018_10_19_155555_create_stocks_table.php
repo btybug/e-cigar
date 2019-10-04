@@ -26,8 +26,8 @@ class CreateStocksTable extends Migration
             $table->text('other_images')->nullable();
             $table->string('what_is_image')->nullable();
             $table->text('videos')->nullable();
-            $table->tinyInteger('faq_tab')->default(0);
-            $table->tinyInteger('reviews_tab')->default(0);
+            $table->tinyInteger('faq_tab')->nullable();
+            $table->tinyInteger('reviews_tab')->nullable();
             $table->tinyInteger('is_offer')->default(0);
             $table->tinyInteger('offer_type')->default(0);
             $table->timestamps();
