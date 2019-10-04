@@ -220,6 +220,7 @@
 
                                                                     <div class="form-group">
                                                                         <label class="col-sm-12 control-label pl-sm-0">
+                                                                            {!! Form::hidden('special_filter',0) !!}
                                                                             Special Filter <input type="checkbox" id="specialOffer" @if($model && $model->special_filter) checked="checked" @endif value="1">
                                                                         </label>
                                                                         <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
