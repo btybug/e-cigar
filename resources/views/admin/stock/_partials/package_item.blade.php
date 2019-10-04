@@ -15,8 +15,8 @@
                     </div>
                     <div class="col-md-2">
                         <div class="section_price product_price @if($main && $main->price_per == 'item') d-none @endif">
-                            Price : {!! Form::text("variations[$main_unique][common_price]",
-                                                                ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
+                            Price : {!! Form::number("variations[$main_unique][common_price]",
+                                                                ($main) ? $main->common_price : null,['class' => 'form-control','step'=>'any']) !!}
                         </div>
                     </div>
                     <div class="col-md-6">
