@@ -42,7 +42,8 @@
             </div>
             <div class="col-md-6">
                 <div class="price-static @if($package_variation && $package_variation->price_type =='static') show @else d-none @endif">
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,['class' => 'form-control v-price']) !!}
+                    {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,
+                    ['class' => 'form-control v-price','step' => 'any']) !!}
                 </div>
                 <div class="price-discount @if($package_variation && $package_variation->price_type =='discount') show @else d-none @endif">
                     <a data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}" href="javascript:void(0)" class="btn btn-info add-discount">Discount price</a>
