@@ -555,12 +555,12 @@ $(document).ready(function () {
 
         $('body').on('click', '#specialPopUpModal .product__single-item-add-new a.product__single-item-add-new-btn', function(ev) {
             ev.preventDefault();
-            console.log(777777, '--------')
-
-            const row = $(this).closest('.pr-wrap');
+            console.log(777777, '--------');
+            const $self = $(this);
+            const row = $self.closest('.pr-wrap');
             const id = row.data('group-id');
-
-            fetch("/products/get-offer-menu-raw", {
+            $self.closest('.limit.pr-wrap').css('border', 'none');
+            checkLimit($self.closest('.limit.pr-wrap').find('.product__single-item-info-bottom').length + 1,   $self.closest('.limit.pr-wrap').data('limit')) && fetch("/products/get-offer-menu-raw", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -667,15 +667,22 @@ $(document).ready(function () {
 
         $('body').on('change', '#specialPopUpModal .product_radio-single .custom-radio .custom-control-input[type="checkbox"]', function(ev) {
             ev.preventDefault();
-            console.log(131313, '--------')
-
+            console.log(131313, '--------');
+            $(this).closest('.limit.pr-wrap').css('border', 'none');
+            if($(this).is(':checked') && checkLimit($(this).closest('.limit.pr-wrap').find('.custom-control-input:checked').length, $(this).closest('.pr-wrap.limit').data('limit'))) {
+                if($(this).closest('#specialPopUpModal')) {
+                    countOfferPrice();
+                }
+            } else {
+                $(this).prop('checked', false);
+            }
             // const row = $(this).closest('.product__single-item-info-bottom');
             // const group_id = $(this).data('id');
             // const select_element_id = $(this).val();
             // const vpid = $('#vpid').val();
-            if($(this).closest('#specialPopUpModal')) {
-                countOfferPrice();
-            }
+            // if($(this).closest('#specialPopUpModal')) {
+            //     countOfferPrice();
+            // }
         });
 
         $('body').on('change', '#singleProductPageCnt .product_radio-single .custom-radio .custom-control-input[type="radio"]', function(ev) {
@@ -770,40 +777,70 @@ $(document).ready(function () {
             btn.html('add');
         };
 
+        minLimitCheck = ($self) => {
+            const wrapper = $self.closest('.special__popup-main-product-item');
+            const wrongLimit = [];
+            wrapper.find('.limit.pr-wrap').each(function() {
+                const minLimit = $(this).data('min-limit');
+                if($(this).find('.product__single-item-add-new').length > 0) {
+                    $(this).find('.single-product-select').length < minLimit && wrongLimit.push($(this).data('group-id'));
+                } else if ($(this).find('.custom-control-input[type="checkbox"]').length > 0) {
+                    let count = 0;
+                    $(this).find('.custom-control-input[type="checkbox"]').each(function() {
+                        $(this).is(':checked') && ++count;
+                    });
+                    count < minLimit && wrongLimit.push($(this).data('group-id'));
+                } else if($(this).find('.popup-select').length > 0) {
+                    $(this).find('.product__single-item-info-bottom').length < minLimit && wrongLimit.push($(this).data('group-id'));
+                }
+            });
 
+            return wrongLimit;
+        };
 
         $('body').on('click', '.special__popup-main-product-item-btn.add-btn', function() {
             const id = $(this).closest('.special__popup-main-product-item').data('id');
             const price = $(this).closest('.special__popup-main-product-item').find('.product__single-item_price').data('price-for-add');
             const $self = $(this);
-            fetch("/products/add-offer", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": $('input[name="_token"]').val()
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    id,
-                    price
+            const wrongMinLimit = minLimitCheck($self);
+            console.log(wrongMinLimit);
+            if(wrongMinLimit.length === 0) {
+                fetch("/products/add-offer", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        id,
+                        price
+                    })
                 })
-            }).then(function (response) {
-                    return response.json();
-                })
-                .then(function (data) {
-                    $self.closest('.special__popup-main-product-item').addClass('active');
-                    // console.log($self.closest('.special__popup-main-product-item'));
-                    btnAddToRemove($self);
-                    if($(`#specialPopUpModal .added-offers .special__popup-content-right-product[data-id="${id}"]`).length === 0) {
-                        $('.special__popup-content-right-item.added-offers').append(data.html);
-                    }
-                    countOfferTotalPrice();
-                })
-                .catch(function (error) {
-                    console.log(error);
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (data) {
+                        $self.closest('.special__popup-main-product-item').addClass('active');
+                        $self.closest('.special__popup-main-product-item').addClass('user-non-select');
+                        // console.log($self.closest('.special__popup-main-product-item'));
+                        btnAddToRemove($self);
+                        if($(`#specialPopUpModal .added-offers .special__popup-content-right-product[data-id="${id}"]`).length === 0) {
+                            $('.special__popup-content-right-item.added-offers').append(data.html);
+                        }
+                        countOfferTotalPrice();
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            } else {
+                wrongMinLimit.map((groupId) => {
+                    $self.closest('.special__popup-main-product-item').find(`.limit.pr-wrap[data-group-id="${groupId}"]`).css('border', '1px solid red');
                 });
+            }
+
         });
 
         $('body').on('click', '.special__popup-main-product-item-btn.remove-btn', function() {
@@ -2353,10 +2390,13 @@ $(document).ready(function () {
                         $("body").on('click', `.popup-select`, function() {
                             const $this = $(this);
                             const selected_ids = [];
+                            $this.closest('.limit.pr-wrap').length > 0 && setTimeout(function() {
+                                $this.closest('.limit.pr-wrap').css('border', 'none');
+                            }, 1000)
                             if($(this).closest('#singleProductPageCnt').length > 0) {
-                                $('#popUpModal').data('product-or-offer', 'product');
+                                $('#popUpModal').attr('product-or-offer', 'product');
                             } else if($(this).closest('#specialPopUpModal').length > 0) {
-                                $('#popUpModal').data('product-or-offer', 'offer');
+                                $('#popUpModal').attr('product-or-offer', 'offer');
                             }
 
                             dg_popup = $this.data('group');
@@ -2382,7 +2422,7 @@ $(document).ready(function () {
                                         // makeSelectedItem(data_group_id);
                                         $("#popUpModal").attr('data-group', dg_popup);
                                         makeOutOfStockSelectOption($("#popUpModal .modal-content"), 'popup');
-                                        $("#popUpModal").attr('limit', $this.closest('.product__single-item-info.limit').data('limit'));
+                                        $("#popUpModal").attr('limit', $this.closest('.product__single-item-info.limit').data('limit') || $this.closest('.pr-wrap.limit').data('limit'));
                                         $("#popUpModal").modal();
                                     } else {
                                         console.log(data.error);
@@ -2393,13 +2433,22 @@ $(document).ready(function () {
 //[data-group="${dg_popup}"]
                         $("body").on('click', `#popUpModal .single-item-wrapper .single-item`, function (ev) {
                             console.log(181818, '-------')
+                            const offer = $(this).closest('#popUpModal').attr('product-or-offer') === 'offer';
                             const id = $(this).closest(".single-item-wrapper").attr('data-id');
                             const title = $(this).find('.name-item').text().trim();
                             const selectedCount = $(this).closest('.modal-body').find('.single-item-wrapper.active').length;
                             const limit = $(this).closest('#popUpModal').attr('limit')*1;
                             const group = $(this).closest('#popUpModal').attr('data-group');
-                            const selectedItemsCountInPage = $('#singleProductPageCnt').find(`[data-group-id="${group}"]`).find('.product__single-item-info-bottom').length
-
+                            const selectedItemsCountInPage = $('#singleProductPageCnt').find(`[data-group-id="${group}"]`).find('.product__single-item-info-bottom').length || $('#specialPopUpModal').find(`[data-group-id="${group}"]`).find('.product__single-item-info-bottom').length;
+                            console.log({
+                                id,
+                                title,
+                                selectedCount,
+                                limit,
+                                group,
+                                offer,
+                                selectedItemsCountInPage
+                            });
                             if (!$(this).closest(".single-item-wrapper").hasClass('active') && selectedCount + 1 + selectedItemsCountInPage <= limit) {
                                 $(this).closest(".single-item-wrapper").addClass('active');
                                 // $(this).closest('.modal').find('.selected-items_popup')
@@ -2422,7 +2471,7 @@ $(document).ready(function () {
                                 items_array.push($(this).data('id'));
                             });
 
-                            if($(this).closest('#popUpModal').data('product-or-offer') === 'product') {
+                            if($(this).closest('#popUpModal').attr('product-or-offer') === 'product') {
                                 fetch("/products/get-variation-menu-raws", {
                                     method: "post",
                                     headers: {
@@ -2481,7 +2530,7 @@ $(document).ready(function () {
                                         //     // setTotalPrice(modal);
                                         // });
                                     });
-                            } else if($(this).closest('#popUpModal').data('product-or-offer') === 'offer') {
+                            } else if($(this).closest('#popUpModal').attr('product-or-offer') === 'offer') {
                                 fetch("/products/get-offer-menu-raws", {
                                     method: "post",
                                     headers: {
