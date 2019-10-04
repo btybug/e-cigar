@@ -86,7 +86,7 @@
                     <ul class="d-inline-flex flex-wrap">
                         <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
                                         class="fab fa-facebook-f"></i></span></a></li>
-                        <li class="active"><a href="#"
+                        <li><a href="#"
                                               class="d-flex align-items-center justify-content-center"><span><i
                                         class="fab fa-instagram"></i></span></a></li>
                         <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i

@@ -18,8 +18,8 @@
                             Lorem Ipsum has been the industry's standard dummy.</p>
                         <form method="POST" action="{{ route('register') }}" class="register-form" id="register-form-1">
                             @csrf
-                            <div class="row">
-                                <div>
+                            <div class="d-flex flex-wrap">
+                                <div class="mr-2">
                                     <label class="text-gray-clr register-form_label">Become a Wholesaler ?</label>
                                 </div>
                                 <div class="row no-gutters form-checkes-outer d-flex justify-content-between">

@@ -18,7 +18,7 @@
                     @if(Auth::check())
                         <div id="ptofileBtn"
                              class="form-inline my-2 my-lg-0 align-self-lg-auto align-self-baseline pointer sidebar_button_active_detector">
-                            <div class="user-img">
+                            <div class="user-img @if(user_avatar_class()) no-img @endif">
                                 <img src="{!! user_avatar() !!}" alt="user">
                             </div>
                             <span class="user-name font-15 text-sec-clr font-main-bold">
@@ -232,7 +232,7 @@
                                 </svg>
                             </span>
                         @endif
-                    <div class="button share-button facebook-share-button st-custom-button share-header-icon-container sidebar_button_active_detector" style="margin-left: 15px">
+                    <div class="button share-button facebook-share-button st-custom-button share-header-icon-container sidebar_button_active_detector">
                         <svg fill="#528eff" preserveAspectRatio="xMidYMid meet" height="2em" width="2em" viewBox="0 0 40 40" class="hvr-pulse share-header-icon" style="vertical-align: middle;"><g><path d="m30 26.8c2.7 0 4.8 2.2 4.8 4.8s-2.1 5-4.8 5-4.8-2.3-4.8-5c0-0.3 0-0.7 0-1.1l-11.8-6.8c-0.9 0.8-2.1 1.3-3.4 1.3-2.7 0-5-2.3-5-5s2.3-5 5-5c1.3 0 2.5 0.5 3.4 1.3l11.8-6.8c-0.1-0.4-0.2-0.8-0.2-1.1 0-2.8 2.3-5 5-5s5 2.2 5 5-2.3 5-5 5c-1.3 0-2.5-0.6-3.4-1.4l-11.8 6.8c0.1 0.4 0.2 0.8 0.2 1.2s-0.1 0.8-0.2 1.2l11.9 6.8c0.9-0.7 2.1-1.2 3.3-1.2z"></path></g></svg>
                     </div>
                     </div>
@@ -276,6 +276,15 @@
     @else
         @include('frontend.wholesaler._partials.shopping_cart_options')
     @endif
+        <span class="profileSidebar-close">
+<svg
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="19px" height="19px">
+<path fill-rule="evenodd"  fill="rgb(53, 53, 53)"
+      d="M17.441,18.554 L9.689,10.803 L1.493,18.999 L-0.002,17.504 L8.194,9.308 L0.434,1.548 L1.840,0.143 L9.600,7.903 L17.505,-0.002 L18.999,1.492 L11.094,9.397 L18.846,17.149 L17.441,18.554 Z"/>
+</svg>
+        </span>
 </div>
 <div id="share_modal" class="hidden-sidebar cart-aside d-flex flex-column p-0">
     <button class="share_modal_close">X</button>
@@ -312,7 +321,7 @@
         })
         // profile sidbar close
         $('body').on('click','.profileSidebar-close',function () {
-            $(this).closest('.profile-sidebar').removeClass('show')
+            $(this).closest('.hidden-sidebar').removeClass('show')
             $(this).closest('body').find('.sidebar_button_active_detector').removeClass('active')
         })
     });

@@ -1236,6 +1236,27 @@ function user_avatar($id = null)
     return '/public/img/user.svg';
 }
 
+function user_avatar_class($id = null)
+{
+    if ($id) {
+        $userRepo = new \App\User();
+        $user = $userRepo->find($id);
+        if ($user) {
+            if ($user->avatar) {
+                return false;
+            }
+        }
+    } else {
+        if (Auth::check()) {
+            if (Auth::user()->avatar) {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+
 
 function has_permission($role, $permission)
 {

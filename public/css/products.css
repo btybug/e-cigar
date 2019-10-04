@@ -223,16 +223,25 @@ header .header-top .navbar .sidebar_button_active_detector.active{
 header .header-top .user-name {
     margin-left: 25px;
 }
-
-header .header-top .user-img img {
+header .header-top .user-img {
     width: 36px;
     height: 36px;
-    object-fit: cover;
-    font-family: 'object-fit: cover;';
+    background-color: white;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
+    overflow: hidden;
     border: 1px solid #d7d7d7;
+}
+header .header-top .user-img.no-img{
+    padding: 6px;
+}
+header .header-top .user-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+
 }
 
 header .header-top .products-menu-item .single-product:hover h5 {
@@ -302,7 +311,9 @@ header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
     margin-right: 50px;
     margin-left: 50px;
 }
-
+header .header-bottom .favorite-add-cart .share-button {
+    margin-left: 15px;
+}
 @media screen and (max-width: 992px) {
     header .header-bottom .favorite-add-cart .add-links-wrap_favorite {
         margin-right: 25px;
@@ -371,7 +382,7 @@ header .header-bottom .cat-search .search .form-control {
 }
 
 header .header-bottom .cat-search .search > span {
-    right: 22px;
+    right: 15px;
     top: 0;
     height: 100%;
 }
