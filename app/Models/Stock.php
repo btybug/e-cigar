@@ -92,6 +92,12 @@ class Stock extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_offer_products', 'stock_id', 'offer_id');
     }
 
+    public function special_filters()
+    {
+        return $this->belongsToMany(Category::class, 'stock_filters', 'stock_id', 'categories_id')
+            ->where('categories.type','special_filter');
+    }
+
     public function offer_products()
     {
         return $this->belongsToMany(Stock::class, 'stock_offer_products', 'offer_id', 'stock_id');

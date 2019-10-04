@@ -14,10 +14,7 @@ class AddSpecialFilterColumn extends Migration
     public function up()
     {
         Schema::table('stocks', function (Blueprint $table) {
-            $table->integer('special_filter')->unsigned()->nullable();
-
-            $table->foreign('special_filter')->references('id')
-                ->on('categories')->onDelete('CASCADE');
+            $table->tinyInteger('special_filter')->nullable();
         });
     }
 

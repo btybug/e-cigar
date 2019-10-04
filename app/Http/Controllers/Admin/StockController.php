@@ -114,7 +114,7 @@ class StockController extends Controller
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications','offer_products',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation',
             'extra_product', 'promotion_prices', 'promotion_type','categories', 'offers', 'general', 'related_products',
-            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads');
+            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads','special_filters');
         $data['user_id'] = \Auth::id();
         $data['price'] = ($data['price']) ?? 0;
         $stock = Stock::updateOrCreate($request->id, $data);
@@ -169,6 +169,9 @@ class StockController extends Controller
             $stock->categories()->sync($categories);
             $stock->special_offers()->sync($offer_products);
         }
+
+        $special_filters = $request->get('special_filters',[]);
+        $stock->special_filters()->sync($special_filters);
 
         $stock->related_products()->sync($request->get('related_products'));
         $stock->stickers()->sync($request->get('stickers'));
