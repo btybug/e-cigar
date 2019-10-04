@@ -4633,7 +4633,6 @@ $(document).ready(function () {
                                         discount_id = null;
                                     }
                                 } else if ($(this).closest('.pr-wrap').find('.popup-select').length > 0) {
-                                    alert(3);
                                     id = $(this).data('id');
 
                                     if ($(this).find('.input-qty').length > 0) {
@@ -4647,7 +4646,6 @@ $(document).ready(function () {
                                         discount_id = null;
                                     }
                                 } else if ($(this).closest('.filter').length > 0 && $(this).hasClass('.get-single-price')) {
-                                    alert(4);
                                     id = $(this).data('id');
 
                                     if ($(this).find('.input-qty').length > 0) {
