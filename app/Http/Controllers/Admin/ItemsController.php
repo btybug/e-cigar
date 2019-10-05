@@ -385,7 +385,7 @@ class ItemsController extends Controller
 
         if ($type == 'qr') {
             $name = $code . 'QR.png';
-            $path = \DNS2D::getBarcodePNGPath('http://kaliony.co.uk/landings/' . $code, "QRCODE" ,200, 200);
+            $path = \DNS2D::getBarcodePNGPath('http://kaliony.com//landings/' . $code, "QRCODE" ,200, 200);
         } else {
             $name = $code . "BARCODE.png";
             $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
