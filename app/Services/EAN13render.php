@@ -43,7 +43,9 @@ class EAN13render
         for ($n = 0; $n < 13; ++$n) {
             $digit = (int)$barcode[$n];
             if ($n == 0) {
+                if($digit!=0){
                 ImageTTFtext($im, 8, 0, $xpos - 10, $h - 1, 0x000000, $font, $digit);
+                }
             } else {
                 ImageTTFtext($im, 8, 0, $xpos, $h - 1, 0x000000, $font, $digit);
                 $code = self::$Rcodes[$digit];
