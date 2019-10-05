@@ -21,6 +21,7 @@ use App\Models\ItemsPackages;
 use App\Models\Suppliers;
 use App\Models\Warehouse;
 use App\Services\BarcodesService;
+use App\Services\D1Barcode;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
 use Svg\Document;
@@ -387,10 +388,10 @@ class ItemsController extends Controller
             $path = \DNS2D::getBarcodePNGPath(env('APP_URL') . '/landings/' . $code, "QRCODE" ,200, 200);
         } else {
             $name = $code . "BARCODE.png";
-            $path = \DNS1D::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
+            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
         }
 
-
+//        dd($path);
         return \Response::download($path, $name);
     }
 }
