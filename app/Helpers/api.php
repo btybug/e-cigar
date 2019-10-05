@@ -16,7 +16,7 @@ $_FILTER_BUTTON = false;
 $_FILTER_HTML = '';
 global $_MODEL_BOOTED;
 
-include "App\Helpers\barcode.php";
+//include "App\Helpers\barcode.php";
 
 function render_bc($format,$symbology,$data,$options = []){
     $generator = new barcode_generator();
