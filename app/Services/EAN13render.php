@@ -46,10 +46,10 @@ class EAN13render
                 ImageTTFtext($im, 8, 0, $xpos - 10, $h - 1, 0x000000, $font, $digit);
             } else {
                 ImageTTFtext($im, 8, 0, $xpos, $h - 1, 0x000000, $font, $digit);
-                $code = \EAN13render::$Rcodes[$digit];
+                $code = self::$Rcodes[$digit];
                 $select = 'R';
                 if ($n <= 6) {
-                    $select = EAN13render::$groups[(int)$barcode[0]][$n - 1];
+                    $select = self::$groups[(int)$barcode[0]][$n - 1];
                 }
                 $synth($code, $select, $normal_height);
                 if ($n == 6) {
