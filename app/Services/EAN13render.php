@@ -66,7 +66,7 @@ class EAN13render
     public static function get($code,$path,$w=123,$h=78)
     {
         $barcode = sprintf('64%s', base_convert($code, 36, 10));
-        $image = self::Render($barcode);
+        $image = self::Render($barcode,$w=123,$h=78);
         imagePNG($image, $path);
         return $path;
     }
