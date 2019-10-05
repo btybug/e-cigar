@@ -201,6 +201,8 @@
                                                 </div>
                                                 <div class="col-md-6 qr-code @if($model && $model->landing)@else d-none @endif">
                                                     @if($model)
+                                                       {!! render_bc("png",'code-39', $model->barcode->code) !!}
+
                                                         @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                     @endif
                                                 </div>

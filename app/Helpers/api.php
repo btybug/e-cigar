@@ -15,6 +15,22 @@ $_MEDIA_FOLDER = null;
 $_FILTER_BUTTON = false;
 $_FILTER_HTML = '';
 global $_MODEL_BOOTED;
+
+include "App\Helpers\barcode.php";
+
+function render_bc($format,$symbology,$data,$options = []){
+    $generator = new barcode_generator();
+
+    /* Output directly to standard output. */
+    $generator->output_image($format, $symbology, $data, $options);
+//
+//    /* Create bitmap image. */
+//    $image = $generator->render_image($symbology, $data, $options);
+//    imagepng($image);
+//    imagedestroy($image);
+//    return $image;
+}
+
 function getAlertIconByClass($class = 'success')
 {
     $icon = '';
