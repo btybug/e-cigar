@@ -22,6 +22,7 @@ use App\Models\Suppliers;
 use App\Models\Warehouse;
 use App\Services\BarcodesService;
 use App\Services\D1Barcode;
+use App\Services\EAN13render;
 use App\Services\ItemService;
 use Illuminate\Http\Request;
 use Svg\Document;
@@ -388,7 +389,8 @@ class ItemsController extends Controller
             $path = \DNS2D::getBarcodePNGPath('https://kaliony.com//landings/' . $code, "QRCODE" ,200, 200);
         } else {
             $name = $code . "BARCODE.png";
-            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
+//            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
+            $path=EAN13render::get($code,public_path('BARCODE.png'),200,100);
         }
 
 //        dd($path);
