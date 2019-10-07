@@ -80,6 +80,11 @@ class Category extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_categories', 'categories_id', 'stock_id');
     }
 
+    public function filter_products()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_filters', 'categories_id', 'stock_id');
+    }
+
     public function faqs()
     {
         return $this->belongsToMany(Faq::class, 'faq_categories', 'categories_id', 'faq_id');
