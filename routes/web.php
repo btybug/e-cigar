@@ -11,6 +11,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/top-product', 'HomeController@topProduct')->name('topProduct');
 
 Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
     ->middleware(['auth','verified','wholesaler','is_not_verifyed_wholesaler'])->name('verification_wholesaler');
