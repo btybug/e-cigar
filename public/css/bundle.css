@@ -22920,6 +22920,10 @@ header .header-bottom .share-button svg {
     .ticket__tab-wrapper {
         padding: 0 40px 0 0;
     }
+    header .header-bottom .cat-search {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
 }
 
 @media (max-width: 1349px) {
@@ -22946,6 +22950,29 @@ header .header-bottom .share-button svg {
     }
     header .header-bottom .sort-by-currency-wrap .currency--wrap{
         width: 48px;
+    }
+    #autocomplite_content_search .autocomplete_content_custom{
+flex-direction: column;
+    }
+    #autocomplite_content_search .autocomplete_image_container_custom{
+        width: 100%;
+    }
+    #autocomplite_content_search .autocomplete-right-main-content{
+        width: 100%;
+        padding-left: 0;
+        margin-top: 7px;
+    }
+    #autocomplite_content_search .autocomplete_description_custom{
+        margin-bottom: 0;
+    }
+    #autocomplite_content_search .autocomplete_title_custom{
+        flex: 1;
+    }
+    #autocomplite_content_search .autocomplete-new-item{
+        margin-top: 5px;
+    }
+    #autocomplite_content_search .autocomplete_title_container_custom{
+        flex-wrap: wrap;
     }
 }
 @media (max-width: 1199px) {
@@ -23425,6 +23452,9 @@ header .header-bottom .share-button svg {
 
     header .header-top .navbar .sidebar_button_active_detector.active{
         height: 69px;
+    }
+    header .header-bottom .cat-search{
+        margin-left: 0;
     }
 }
 
