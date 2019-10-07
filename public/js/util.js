@@ -127,6 +127,15 @@ $(document).ready(function () {
             .addEventListener("keyup", function(event) {
                 event.preventDefault();
 
+                event.target.value.trim() === '' ? $('#autocomplite_content_search').css('display', 'none') : $('#autocomplite_content_search').css('display', 'block')
+                if(event.target.value.trim() !== '') {
+                    console.log('***********************')
+                    $('.search_icon_header').removeClass('d-flex').addClass('d-none');
+                    $('.close_icon_header').removeClass('d-none').addClass('d-flex');
+                } else {
+                    $('.search_icon_header').removeClass('d-none').addClass('d-flex');
+                    $('.close_icon_header').removeClass('d-flex').addClass('d-none');
+                }
                 if (event.keyCode === 13) {
                     var form = $("#filter-form");
                     var category = $('.all_categories').val();
@@ -148,6 +157,25 @@ $(document).ready(function () {
                 }
             });
     // }
+
+    $(document).on('click', function(ev) {
+        console.log($(ev.target).closest('#autocomplite_content_search'));
+        if($(ev.target).closest('#autocomplite_content_search').length > 0) {
+
+        } else {
+            $('#autocomplite_content_search').css('display', 'none');
+        };
+    });
+
+    $('body').on('click', '.close_icon_header', function() {
+        $('#search-product').val('');
+        $('.search_icon_header').removeClass('d-none').addClass('d-flex');
+        $('.close_icon_header').removeClass('d-flex').addClass('d-none');
+        $('#search-product').focus();
+        $('#autocomplite_content_search').css('display', 'none');
+    });
+
+    // $('#search-product').val().trim() === '' ? $('#autocomplite_content_search').css('display', 'none') : $('#autocomplite_content_search').css('display', 'block')
 
     $("#search-product").autocomplete({
         // serviceUrl: '/search',
@@ -175,13 +203,29 @@ $(document).ready(function () {
                 },
                 data: data,
                 success: function (b) {
-                    console.log(b, d, e);
+                    // console.log(b, d, e);
                     var c = [];
-                    $.each(b.data, function (i, a) {
-                        console.log(a)
-                        c.push(a);
-                    });
+                    console.log('------------------', b.data);
+
+
+                    if(b.data.length > 0) {
+                        $.each(b.data, function (i, a) {
+                            c.push(a);
+                        });
+                        $('#autocomplite_content_search .not_found').removeClass('d-flex').addClass('d-none');
+                    } else {
+
+                        if($('#search-product').val().trim() === '') {
+                            $('#autocomplite_content_search').css('display', 'none')
+                            $('#autocomplite_content_search .not_found').removeClass('d-flex').addClass('d-none');
+                        } else {
+                            $('#autocomplite_content_search').css('display', 'block');
+                            $('#autocomplite_content_search .not_found').removeClass('d-none').addClass('d-flex');
+                        }
+
+                    }
                     e(c);
+
                 }
             });
         },
@@ -189,7 +233,7 @@ $(document).ready(function () {
             alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
-        console.log(location, 55555555555, item);
+        // console.log(location, 55555555555, item);
         encodeURI(item.slug)
         var inner_html = `  <a class="autocomplete_link_custom" style="all: unset;" href="${location.origin}/products/${encodeURI(item.category)}/${encodeURI(item.slug)}"> 
                                 <div class="autocomplete_content_custom">
@@ -206,7 +250,7 @@ $(document).ready(function () {
                                
                                 </div>
                             </a>`;
-        console.log(item);
+        // console.log('--------------', item);
         return $( "<li></li>" )
             .data( "item.autocomplete", item )
             .append(inner_html)

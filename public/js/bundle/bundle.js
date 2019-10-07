@@ -6526,6 +6526,15 @@ $(document).ready(function () {
     document.getElementById("search-product").addEventListener("keyup", function (event) {
         event.preventDefault();
 
+        event.target.value.trim() === '' ? $('#autocomplite_content_search').css('display', 'none') : $('#autocomplite_content_search').css('display', 'block');
+        if (event.target.value.trim() !== '') {
+            console.log('***********************');
+            $('.search_icon_header').removeClass('d-flex').addClass('d-none');
+            $('.close_icon_header').removeClass('d-none').addClass('d-flex');
+        } else {
+            $('.search_icon_header').removeClass('d-none').addClass('d-flex');
+            $('.close_icon_header').removeClass('d-flex').addClass('d-none');
+        }
         if (event.keyCode === 13) {
             var form = $("#filter-form");
             var category = $('.all_categories').val();
@@ -6545,6 +6554,23 @@ $(document).ready(function () {
         }
     });
     // }
+
+    $(document).on('click', function (ev) {
+        console.log($(ev.target).closest('#autocomplite_content_search'));
+        if ($(ev.target).closest('#autocomplite_content_search').length > 0) {} else {
+            $('#autocomplite_content_search').css('display', 'none');
+        };
+    });
+
+    $('body').on('click', '.close_icon_header', function () {
+        $('#search-product').val('');
+        $('.search_icon_header').removeClass('d-none').addClass('d-flex');
+        $('.close_icon_header').removeClass('d-flex').addClass('d-none');
+        $('#search-product').focus();
+        $('#autocomplite_content_search').css('display', 'none');
+    });
+
+    // $('#search-product').val().trim() === '' ? $('#autocomplite_content_search').css('display', 'none') : $('#autocomplite_content_search').css('display', 'block')
 
     $("#search-product").autocomplete({
         // serviceUrl: '/search',
@@ -6572,12 +6598,25 @@ $(document).ready(function () {
                 },
                 data: data,
                 success: function success(b) {
-                    console.log(b, d, e);
+                    // console.log(b, d, e);
                     var c = [];
-                    $.each(b.data, function (i, a) {
-                        console.log(a);
-                        c.push(a);
-                    });
+                    console.log('------------------', b.data);
+
+                    if (b.data.length > 0) {
+                        $.each(b.data, function (i, a) {
+                            c.push(a);
+                        });
+                        $('#autocomplite_content_search .not_found').removeClass('d-flex').addClass('d-none');
+                    } else {
+
+                        if ($('#search-product').val().trim() === '') {
+                            $('#autocomplite_content_search').css('display', 'none');
+                            $('#autocomplite_content_search .not_found').removeClass('d-flex').addClass('d-none');
+                        } else {
+                            $('#autocomplite_content_search').css('display', 'block');
+                            $('#autocomplite_content_search .not_found').removeClass('d-none').addClass('d-flex');
+                        }
+                    }
                     e(c);
                 }
             });
@@ -6586,10 +6625,10 @@ $(document).ready(function () {
             alert('You selected: ' + suggestion.value + ', ' + suggestion.data);
         }
     }).data("ui-autocomplete")._renderItem = function (ul, item) {
-        console.log(location, 55555555555, item);
+        // console.log(location, 55555555555, item);
         encodeURI(item.slug);
         var inner_html = "  <a class=\"autocomplete_link_custom\" style=\"all: unset;\" href=\"" + location.origin + "/products/" + encodeURI(item.category) + "/" + encodeURI(item.slug) + "\"> \n                                <div class=\"autocomplete_content_custom\">\n                                    <div class=\"autocomplete_image_container_custom\">\n                                        <img class=\"autocomplete_image_custom\" src=\"" + item.image + "\">\n                                    </div>\n                                    <div class=\"autocomplete-right-main-content\">\n                                         <div class=\"autocomplete_title_container_custom\">\n                                            <h4 class=\"font-sec-reg font-17 text-main-clr lh-1 autocomplete_title_custom\">" + item.name + "</h4>\n                                            <span class=\"font-main-bold font-14 lh-1 autocomplete-new-item\">NEW</span>\n                                        </div>\n                                        <p class=\"font-main-light text-light-clr font-14 autocomplete_description_custom\">" + item.short_description + "...</p>\n                                    </div>\n                               \n                                </div>\n                            </a>";
-        console.log(item);
+        // console.log('--------------', item);
         return $("<li></li>").data("item.autocomplete", item).append(inner_html).appendTo(ul);
     };
 

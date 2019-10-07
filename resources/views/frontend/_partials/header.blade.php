@@ -157,11 +157,11 @@
                                 </div>
                             @endif
 
-                            <div class="search position-relative">
+                            <div class="search position-relative search_conteiner_1">
                                 <input type="search" class="form-control" id="search-product"
                                        value="{{ (\Request::has('q')) ? \Request::get('q') :null }}"
                                        placeholder="Serach for anything">
-                                <span class="position-absolute d-flex align-items-center">
+                                <span class="position-absolute d-flex align-items-center search_icon_header">
                                     <svg
                                             xmlns="http://www.w3.org/2000/svg"
                                             xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -170,8 +170,17 @@
               d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"/>
         </svg>
                                 </span>
+                                <span class="position-absolute d-none align-items-center close_icon_header">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="12px" height="12px">
+<path fill-rule="evenodd"  fill="rgb(124, 124, 124)"
+      d="M11.998,0.835 L11.164,0.001 L5.997,5.168 L0.830,0.001 L-0.003,0.835 L5.163,6.002 L-0.003,11.169 L0.830,12.002 L5.997,6.835 L11.164,12.002 L11.998,11.169 L6.831,6.002 L11.998,0.835 Z"/>
+</svg>
+                                </span>
                                 <div id="autocomplite_content_search">
-
+                                    <span class="not_found d-none" >Not Found</span>
                                 </div>
                             </div>
                         @endif

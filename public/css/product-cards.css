@@ -5847,17 +5847,25 @@ header .header-bottom .share-button svg {
     position: absolute;
     top: 100%;
     width: 100%;
-    max-height: 150px;
-    height: 600px;
+    /*max-height: 150px;*/
+    /*height: 600px;*/
     z-index: 9;
+    display: none;
     padding: 15px 15px 0;
     box-shadow: 4.5px 7.794px 12px 0px rgba(16, 16, 20, 0.3);
     background: #fff;
 }
-
+#autocomplite_content_search .not_found{
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 15px;
+    font-size: 18px;
+}
 #autocomplite_content_search .ui-autocomplete.ui-menu{
     position: static !important;
     height: 100%;
+    max-height: 435px;
     overflow-y: auto;
     border: none !important;
     width: 100% !important;
@@ -5902,7 +5910,7 @@ header .header-bottom .share-button svg {
     margin-bottom: 14px;
 }
 #autocomplite_content_search .autocomplete-right-main-content{
-    padding: 0 20px;
+    padding-left: 20px;
     align-self: center;
     flex: auto;
 }
@@ -5922,7 +5930,7 @@ header .header-bottom .share-button svg {
 }
 #autocomplite_content_search .ui-autocomplete.ui-menu .ui-menu-item:last-of-type .autocomplete_link_custom{
     border-bottom: none!important;
-    padding-bottom: 0!important;
+    /*padding-bottom: 0!important;*/
 }
 /*-------------------- autocomplete wall END------------------*/
 @media (max-width: 1854px) {
@@ -7244,3 +7252,11 @@ header .header-bottom .share-button svg {
     display: inline-block !important;
 }
 /*share block end*/
+
+/*.search_icon_header {*/
+/*    */
+/*}*/
+
+.close_icon_header {
+    cursor: pointer;
+}
