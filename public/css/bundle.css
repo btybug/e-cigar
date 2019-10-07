@@ -22604,7 +22604,6 @@ header .header-bottom .share-button svg {
     padding: 15px 15px 0;
     box-shadow: 4.5px 7.794px 12px 0px rgba(16, 16, 20, 0.3);
     background: #fff;
-    display: none;
 }
 
 #autocomplite_content_search .ui-autocomplete.ui-menu{
@@ -22612,15 +22611,16 @@ header .header-bottom .share-button svg {
     height: 100%;
     overflow-y: auto;
     border: none !important;
+    width: 100% !important;
 }
 #autocomplite_content_search .ui-autocomplete.ui-menu::-webkit-scrollbar {
     width: 3px;
 }
 #autocomplite_content_search .ui-autocomplete.ui-menu::-webkit-scrollbar-track {
-    background: red;
+    background: #e3e6ed;
 }
 #autocomplite_content_search .ui-autocomplete.ui-menu::-webkit-scrollbar-thumb {
-    background: blue;
+    background: #5184e5;
 }
 #autocomplite_content_search .autocomplete-new-item{
     width: 50px;
@@ -22630,7 +22630,8 @@ header .header-bottom .share-button svg {
     justify-content: center;
     color: #fff;
     background-color: #5184e5;
-    text-transform: uppercase
+    text-transform: uppercase;
+    flex: none;
 }
 #autocomplite_content_search .autocomplete_content_custom{
     display: flex;
@@ -22647,26 +22648,32 @@ header .header-bottom .share-button svg {
 }
 #autocomplite_content_search .autocomplete_title_container_custom{
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
 }
 #autocomplite_content_search .autocomplete-right-main-content{
     padding: 0 20px;
     align-self: center;
+    flex: auto;
 }
 #autocomplite_content_search .autocomplete_title_custom{
-    margin-bottom: 16px;
+    margin: 0 5px 0 0;
+}
+#autocomplite_content_search .ui-menu-item{
+    padding-right: 20px;
 }
 #autocomplite_content_search .autocomplete_link_custom{
-    display: block;
-    padding: 0 10px;
-    border-bottom: 1px solid #d7d7d7;
+    display: block !important;
+    padding: 10px 0 !important;
+    border-bottom: 1px solid #d7d7d7 !important;
 }
-#autocomplite_content_search .ui-autocomplete.ui-menu .ui-menu-item:first-of-type{
-    padding-top: 0;
+#autocomplite_content_search .ui-autocomplete.ui-menu .ui-menu-item:first-of-type .autocomplete_link_custom{
+    padding-top: 0 !important;
 }
-#autocomplite_content_search .ui-autocomplete.ui-menu .ui-menu-item:last-of-type{
-    border-bottom: none;
-    padding-bottom: 0;
+#autocomplite_content_search .ui-autocomplete.ui-menu .ui-menu-item:last-of-type .autocomplete_link_custom{
+    border-bottom: none!important;
+    padding-bottom: 0!important;
 }
 /*-------------------- autocomplete wall END------------------*/
 @media (max-width: 1854px) {
