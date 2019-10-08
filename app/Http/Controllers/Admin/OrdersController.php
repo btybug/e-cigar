@@ -85,6 +85,20 @@ class OrdersController extends Controller
         return $this->view('manage', compact('order', 'statuses','settings'));
     }
 
+    public function getEdit($id)
+    {
+        $order = Orders::findOrFail($id);
+
+        return $this->view('edit', compact('order'));
+    }
+
+    public function postEdit($id, Request $request)
+    {
+        $order = Orders::findOrFail($id);
+
+        dd($request->all());
+    }
+
     public function getNew()
     {
         $user = null;

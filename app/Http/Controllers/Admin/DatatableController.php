@@ -437,7 +437,9 @@ class DatatableController extends Controller
                 return ($attr->type) ? "Wholesaler" : "User";
             })
             ->addColumn('actions', function ($post) {
-                return (userCan('admin_orders_manage')) ? "<a class='badge btn-warning' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-edit'></i></a>" : '';
+                return (userCan('admin_orders_manage')) ?
+                    "<a class='badge btn-info' href='" . route('admin_orders_manage', $post->id) . "'><i class='fa fa-eye'></i></a>" .
+                    "<a class='badge btn-warning' href='" . route('admin_orders_edit', $post->id) . "'><i class='fa fa-edit'></i></a>"  : '' ;
             })->rawColumns(['actions', 'status'])
             ->make(true);
     }

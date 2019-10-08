@@ -308,6 +308,8 @@ Route::group(['prefix' => 'manage-api'], function () {
 Route::group(['prefix' => 'orders'], function () {
     Route::get('/', 'Admin\OrdersController@index')->name('admin_orders');
     Route::get('/manage/{id}', 'Admin\OrdersController@getManage')->name('admin_orders_manage');
+    Route::get('/edit/{id}', 'Admin\OrdersController@getEdit')->name('admin_orders_edit');
+    Route::post('/edit/{id}', 'Admin\OrdersController@postEdit')->name('admin_orders_edit_post');
     Route::get('/new', 'Admin\OrdersController@getNew')->name('admin_orders_new');
     Route::post('/add-note', 'Admin\OrdersController@addNote')->name('orders_add_note');
     Route::get('/settings', 'Admin\OrdersController@getSettings')->name('admin_orders_settings');
