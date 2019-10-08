@@ -220,7 +220,7 @@
 
                         @if(Request::route()->getPrefix() != '/wholesaler')
 
-                        <a href="{!! route('my_account_favourites') !!}"
+                        <a @if(\Auth::check()) href="{!! route('my_account_favourites') !!}" @else data-toggle="modal" data-target="#loginModal" href="javascript:void(0)" @endif
                            class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">
                             <svg viewBox="0 0 29 22" width="26px" height="22px">
                                 <path fill-rule="evenodd" fill="rgb(227, 40, 84)"
