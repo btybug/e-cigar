@@ -330,6 +330,44 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="refund_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="delete_item_label">Are you sure you want to refund this ?</h4>
+                </div>
+                <div class="modal-body">
+                    <a class="btn btn-default" data-dismiss="modal">NO</a>
+                    <a id="item_modal_refund_button" class="btn btn-danger" data-slug="empty" data-url="empty">YES</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirm_refund" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 class="modal-title" id="delete_item_label">Please choose option where to put Item ?</h4>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open() !!}
+                    <div class="form-group">
+                        <label>Choose option</label>
+                        {!! Form::select('type',[0=> "Put to Others",1=>"Return to Items"],null,['class' => 'form-control']) !!}
+                    </div>
+                        <a class="btn btn-default" data-dismiss="modal">Close</a>
+                        {!! Form::submit('Confirm',['class' => 'btn btn-primary']) !!}
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 
 @section('css')
@@ -567,7 +605,14 @@
 @section('js')
     <script>
         $(function () {
+            $("body").on("click",'.refund-item',function () {
+                $("#refund_modal").modal();
+            })
 
+            $("body").on("click",'#item_modal_refund_button',function () {
+                $("#refund_modal").modal("hide");
+                $("#confirm_refund").modal();
+            })
 
         });
     </script>
