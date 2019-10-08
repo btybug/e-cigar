@@ -153,9 +153,10 @@
                         @endif
                     </div>
 
-                    <div class="products__list-wrapper home_products-carousel">
+                    <div class="home-top-products">
+
                         @php
-                        $topProducts = (count($tops) && isset($tops['products'][0])) ? $tops['products'][0] : [];
+                            $topProducts = (count($tops) && isset($tops['products'][0])) ? $tops['products'][0] : [];
                         @endphp
                         @include("frontend._partials.top_products",['topProducts' => $topProducts])
                     </div>
@@ -353,7 +354,7 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            $(".home_products-carousel").html(data.html);
+                            $(".home-top-products").html(data.html);
                             $("body").find(".home_products-carousel").carousel({
                                 theme: "fs-light",
                                 pagination: true,
@@ -386,7 +387,7 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            $(".home_products-carousel").html(data.html);
+                            $(".home-top-products").html(data.html);
 
                             $("body").find(".home_products-carousel").carousel({
                                 theme: "fs-light",

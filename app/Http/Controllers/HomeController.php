@@ -42,7 +42,7 @@ class HomeController extends Controller
         $key = $request->key;
         $tops = $this->settings->getEditableData('top');
         $tops = ($tops->data) ? json_decode($tops->data, true) : [];
-        $topProducts = (count($tops) && isset($tops['products'][0])) ? $tops['products'][0] : [];
+        $topProducts = (count($tops) && isset($tops['products'][$key])) ? $tops['products'][$key] : [];
 
         $html = view('frontend._partials.top_products',compact(['topProducts']))->render();
 

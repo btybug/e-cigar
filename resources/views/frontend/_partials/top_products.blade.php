@@ -1,7 +1,7 @@
 @php
     $products = \App\Models\Stock::where('status',true)->whereIn('id',$topProducts)->get();
 @endphp
-
+<div class="products__list-wrapper home_products-carousel">
 @foreach($products as $product)
     <div class="home_products-carousel-item">
         <div class="products__item-wrapper main-transition">
@@ -106,3 +106,4 @@
         </div>
     </div>
 @endforeach
+</div>
