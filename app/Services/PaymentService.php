@@ -116,11 +116,12 @@ class PaymentService
                         $discount = null;;
                         if($option['option']->price_type == 'discount'){
                             if($option['option']->discount_type =='fixed'){
-                                $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
+                                $discount = \App\Models\StockVariationDiscount::where("variation_id",$option['option']->id)->first();
                             }else{
                                 $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
                             }
                         }
+
                         $dataV['options'][] = [
                             'qty' => $option['qty'],
                             'name' => $option['option']->name,
@@ -151,7 +152,7 @@ class PaymentService
                             $discount = null;;
                             if($option['option']->price_type == 'discount'){
                                 if($option['option']->discount_type =='fixed'){
-                                    $discount = \App\Models\StockVariationDiscount::find($option['discount_id']);
+                                    $discount = \App\Models\StockVariationDiscount::where("variation_id",$option['option']->id)->first();
                                 }else{
                                     $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
                                 }
