@@ -358,6 +358,7 @@
                 <div class="modal-body">
                     {!! Form::open() !!}
                     <div class="form-group">
+                        {!! Form::hidden('order_item_id',null,['id' => 'order_item_id']) !!}
                         <label>Choose option</label>
                         {!! Form::select('type',[0=> "Put to Others",1=>"Return to Items"],null,['class' => 'form-control']) !!}
                     </div>
@@ -606,11 +607,13 @@
     <script>
         $(function () {
             $("body").on("click",'.refund-item',function () {
+                $("#item_modal_refund_button").attr('data-slug',$(this).data('id'));
                 $("#refund_modal").modal();
             })
 
             $("body").on("click",'#item_modal_refund_button',function () {
                 $("#refund_modal").modal("hide");
+                $("#order_item_id").val($(this).data('slug'));
                 $("#confirm_refund").modal();
             })
 

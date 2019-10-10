@@ -17,6 +17,7 @@ use App\Models\Coupons;
 use App\Models\Items;
 use App\Models\Orders;
 use App\Models\OrdersJob;
+use App\Models\Others;
 use App\Models\Statuses;
 use App\Models\Settings;
 use App\Models\Stock;
@@ -96,6 +97,33 @@ class OrdersController extends Controller
     {
         $order = Orders::findOrFail($id);
 
+        $orderItem = $order->items()->where('id',$request->order_item_id)->first();
+        if(! $orderItem) abort(500);
+
+        if(count($orderItem->options)){
+            foreach ($orderItem->options as $options){
+                if(count($options)){
+                    foreach ($options as $items){
+                        if(isset($items['options'])){
+                            foreach ($items['options'] as $item){
+                                $sold = Others::where('grouped',$order->id)->where('item_id',$item['variation']['item_id'])->where('qty',$item['qty'])->get();
+                                dd($options,$item);
+                            }
+                        }
+
+                    }
+                }
+            }
+        }else{
+            if(! $orderItem) abort(500);
+        }
+        $sold = Others::where('grouped',$order->id)->get();
+        dd($orderItem->options,$sold);
+        if($request->type){
+            //
+        }else{
+
+        }
         dd($request->all());
     }
 
