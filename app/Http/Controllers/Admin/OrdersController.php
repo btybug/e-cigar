@@ -106,25 +106,29 @@ class OrdersController extends Controller
                     foreach ($options as $items){
                         if(isset($items['options'])){
                             foreach ($items['options'] as $item){
-                                $sold = Others::where('grouped',$order->id)->where('item_id',$item['variation']['item_id'])->where('qty',$item['qty'])->get();
-                                dd($options,$item);
+                                $sold = Others::where('grouped',$order->id)->where('item_id',$item['variation']['item_id'])->where('qty',$item['qty'])->first();
+                                if($request->type){
+                                    $sold->delete();
+                                }else{
+                                    $sold->reason = 'refunded';
+                                    $sold->save();
+                                }
                             }
                         }
-
                     }
                 }
             }
         }else{
             if(! $orderItem) abort(500);
         }
-        $sold = Others::where('grouped',$order->id)->get();
-        dd($orderItem->options,$sold);
-        if($request->type){
-            //
-        }else{
 
-        }
-        dd($request->all());
+        $orderItem->is_refunded = true;
+        $orderItem->save();
+
+        $order->amount -= $orderItem->amount;
+        $order->save();
+
+        return redirect()->back();
     }
 
     public function getNew()
