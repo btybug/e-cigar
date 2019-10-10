@@ -111,9 +111,9 @@
                                                     <div class="font-sec-reg font-18 left-wrap">Total items</div>
                                                     <div class="font-16 text-tert-clr right-wrap">
                                                         @if($order->items->count() > 1)
-                                                            {{ $order->items->count() }} Items
+                                                            {{ $order->items()->where('is_refunded',false)->count() }} Items
                                                         @else
-                                                            {{ $order->items->count() }} Item
+                                                            {{ $order->items()->where('is_refunded',false)->count() }} Item
                                                         @endif
                                                     </div>
                                                 </div>
@@ -133,7 +133,7 @@
 
                                     <h2 class="font-sec-reg font-22 lh-1 title">Order Details</h2>
                                     <ul class="row list-order">
-                                        @foreach($order->items as $item)
+                                        @foreach($order->items()->where('is_refunded',false)->get() as $item)
                                             <li class="col-md-4">
                                                 <div class="order__product-wall">
                                                     <div class="main-info">
@@ -268,7 +268,7 @@
                                             </div>
                                             <div
                                                 class="price font-main-bold">
-                                                {{ convert_price($order->items()->sum('amount'),$order->currency) }}
+                                                {{ convert_price($order->items()->where('is_refunded',false)->sum('amount'),$order->currency) }}
                                             </div>
                                         </div>
                                         <div
@@ -413,11 +413,11 @@
                         </div>
                     </div>
                     <div class="product-table">
-                        @if(count($order->items))
+                        @if(count($order->items()->where('is_refunded',false)->get()))
                             @php
                                 $count = 0;
                             @endphp
-                            @foreach($order->items as $item)
+                            @foreach($order->items()->where('is_refunded',false)->get() as $item)
                                 @if($order->type)
                                     @include("admin.orders._partials.collect_wholesaler")
                                     @php

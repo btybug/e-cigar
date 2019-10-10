@@ -98,9 +98,9 @@
                                                     <div class="font-sec-reg font-18 left-wrap">Total items</div>
                                                     <div class="font-16 text-tert-clr right-wrap">
                                                         @if($order->items->count() > 1)
-                                                            {{ $order->items->count() }} Items
+                                                            {{ $order->items()->where('is_refunded',false)->count() }} Items
                                                         @else
-                                                            {{ $order->items->count() }} Item
+                                                            {{ $order->items()->where('is_refunded',false)->count() }} Item
                                                         @endif
                                                     </div>
                                                 </div>

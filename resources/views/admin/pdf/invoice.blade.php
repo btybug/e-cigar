@@ -88,7 +88,7 @@
                     </thead>
                     <tbody>
 
-                    @foreach($order->items as $item)
+                    @foreach($order->items()->where('is_refunded',false)->get() as $item)
                         <tr>
                             <td class="product-td">
                                 {{ $item->name }}
@@ -187,7 +187,7 @@
             <div class="invoice__content-price">
                 <div class="invoice__content-price-item clearfix">
                     <span class="name">Sub Total</span>
-                    <span class="price">{{ convert_price($order->items()->sum('amount'),$order->currency) }}</span>
+                    <span class="price">{{ convert_price($order->items()->where('is_refunded',false)->sum('amount'),$order->currency) }}</span>
                 </div>
                 <div class="invoice__content-price-item clearfix">
                     <span class="name">Total VAT</span>
