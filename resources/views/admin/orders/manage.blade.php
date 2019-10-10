@@ -243,6 +243,119 @@
                                             </li>
                                         @endforeach
                                     </ul>
+
+                                    <h2 class="font-sec-reg font-22 lh-1 title">Refunded</h2>
+                                    <ul class="row list-order">
+                                        @foreach($order->items()->where('is_refunded',true)->get() as $item)
+                                            <li class="col-md-4">
+                                                <div class="order__product-wall">
+                                                    <div class="main-info">
+                                                        <div class="order__product-photo">
+                                                            <img src="{!! checkImage($item->image) !!}"
+                                                                 alt="{{ $item->name }}">
+                                                        </div>
+                                                        <h6 class="font-18 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
+                                                        <p class="font-18 lh-1 order__product-sec-title">Cola Shades
+                                                            E-Juice</p>
+                                                        <div class="order__product-info">
+                                                            @if(! $order->type)
+                                                                @if(count($item->options['options']))
+                                                                    <ul class="list-unstyled mb-0">
+                                                                        @foreach($item->options['options'] as $option)
+                                                                            <li class="single-row-product">
+                                                                                @foreach($option['options'] as $op)
+                                                                                    <div class="row">
+                                                                                        <div
+                                                                                            class="col-sm-9 font-15 font-main-bold">
+                                                                                            {{ $op['title'] ." - ". $op['name'] }}
+                                                                                            @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
+                                                                                                ({{ "Pack of ".$op['discount']['qty'] }})
+                                                                                            @endif
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
+                                                                                            <span>x {{ $op['qty'] }}</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    @php
+                                                        $extraPrice = 0;
+                                                    @endphp
+                                                    @if(isset($item->options['extras']) && count($item->options['extras']))
+                                                        <div class="order__product-offers">
+                                                            <div class="font-16 text-sec-clr offers-tag">
+                                                                With offers:
+                                                            </div>
+
+                                                            @foreach($item->options['extras'] as $extra)
+                                                                @foreach($extra['options'] as $ext)
+                                                                    @php
+                                                                        if($ext['discount']){
+                                                                            if($ext['variation']['discount_type'] =='fixed'){
+                                                                                $price = $ext['discount']['price'];
+                                                                            }else{
+                                                                                $price = $ext['discount']['price']* $ext['qty'];
+                                                                            }
+                                                                        }else{
+                                                                            $price = $ext['variation']['price'] * $ext['qty'];
+                                                                        }
+                                                                    @endphp
+                                                                    @php
+                                                                        $extraPrice +=$price;
+                                                                    @endphp
+                                                                    <div class="d-flex product-offers-inner">
+                                                                        <div class="photo">
+                                                                            <img src="{{ $ext['image'] }}"
+                                                                                 alt="product">
+                                                                        </div>
+                                                                        <div class="title-offers">
+                                                                            <p class="font-18 lh-1 mb-0">
+                                                                                {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                                @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
+                                                                                    ({{ "Pack of ".$ext['discount']['qty'] }})
+                                                                                @endif
+                                                                            </p>
+                                                                        </div>
+                                                                    </div>
+                                                                @endforeach
+                                                            @endforeach
+                                                        </div>
+                                                    @endif
+
+                                                    <div class="qty-price">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">
+                                                            <div class="d-flex align-items-center qty-col">
+                                                            <span
+                                                                class="font-sec-light font-22 lh-1 qty-text">QTY</span>
+                                                                <div class="product__single-item-inp-num">
+                                                                    <div class="quantity">
+                                                                        <input type="number" readonly min="1" max="9"
+                                                                               step="1"
+                                                                               value="{{ $item->qty }}">
+
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="price-col">
+                                                        <span class="lh-1 text-tert-clr font-35">
+                                                            {!! convert_price($item->price+$extraPrice,get_currency()) !!}
+                                                        </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        @endforeach
+                                    </ul>
                                 </div>
                             </div>
                         </div>
