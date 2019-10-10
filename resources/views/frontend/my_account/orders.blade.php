@@ -61,7 +61,7 @@
                                         <tr>
                                             <td>#{{ $order->order_number }}</td>
                                             <td>{!! BBgetDateFormat($order->created_at).' '.BBgetTimeFormat($order->created_at)  !!}</td>
-                                            <td>{!! $order->items->count() !!}</td>
+                                            <td>{!! $order->items()->where("is_refunded",false)->count() !!}</td>
                                             <td>{!! convert_price($order->amount,get_currency()) !!}</td>
                                             <td>{!! ($order->type) ? 'Wholesaler' : 'User' !!}</td>
                                             <td>

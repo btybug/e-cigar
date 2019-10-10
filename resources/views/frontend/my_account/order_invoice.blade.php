@@ -33,7 +33,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($order->items as $item)
+                                    @foreach($order->items()->where("is_refunded",false)->get() as $item)
                                         <tr>
                                             <td class="text-left">
                                                 <a class="font-20 text-tert-clr main-transition"
