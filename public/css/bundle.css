@@ -23847,6 +23847,9 @@ flex-direction: column;
         max-width: 45%;
         height: 38px;
     }
+    .adult-modal .modal-content{
+        height: auto;
+    }
 }
 @media (max-width: 455px) {
     .continue-shp-wrapp .product-card_price {
