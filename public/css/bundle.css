@@ -23845,6 +23845,7 @@ flex-direction: column;
         -ms-flex: 0 0 45%;
         flex: 0 0 45%;
         max-width: 45%;
+        height: 38px;
     }
 }
 @media (max-width: 455px) {
