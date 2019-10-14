@@ -371,16 +371,15 @@
                                                 </div>
 
                                                 <div class="product_single-right-ads">
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
+                                                    @if($ads && isset($ads['images']))
+                                                        @foreach($ads['images'] as $key => $ad)
+                                                            <div class="single-ads-wall">
+                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -392,16 +391,16 @@
                                                     @include("frontend.products._partials.products_render",['products' => $vape->related_products])
                                                 </div>
                                                 <div class="product_single-right-ads">
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
+                                                    @if($ads && isset($ads['images']))
+                                                        @foreach($ads['images'] as $key => $ad)
+                                                            <div class="single-ads-wall">
+                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -481,16 +480,16 @@
                                                     @include("frontend.products._partials.products_render",['products' => $vape->special_offers])
                                                 </div>
                                                 <div class="product_single-right-ads">
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
+                                                    @if($ads && isset($ads['images']))
+                                                        @foreach($ads['images'] as $key => $ad)
+                                                            <div class="single-ads-wall">
+                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>

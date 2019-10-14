@@ -9,6 +9,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\Posts;
 use App\Models\Products;
+use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockVariation;
@@ -23,29 +24,15 @@ class ProductsController extends Controller
 {
     protected $view = 'frontend.products';
 
+    public $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
+
     public function index(Request $request, $type = null)
     {
-//        $exportData = [];
-//        $data = Items::get();
-//        foreach ($data as $datum){
-//            $exportData[] = [
-//              'id' =>   $datum->id,
-//              'name' =>   $datum->name,
-//              'short_description' =>   $datum->short_description,
-//              'long_description' =>   $datum->long_description,
-//            ];
-//        }
-//
-//
-//        return \Excel::create('itsolutionstuff_example', function($excel) use ($data) {
-//            $excel->sheet('Items', function($sheet) use ($data)
-//            {
-//                $sheet->fromArray($data);
-//            });
-//        })->download("xls");
-//
-//        dd(33);
-
         $category = Category::where('type', 'stocks')->whereNull('parent_id')->where('slug', $type)->first();
         if (!$category && $type != null) abort(404);
 
@@ -99,8 +86,12 @@ class ProductsController extends Controller
         if (!$vape) abort(404);
 
         $variations = $vape->variations()->required()->with('options')->get();
+        $ads = $this->settings->getEditableData('single_product');
+        if($ads && isset($ads['data'])){
+            $ads = json_decode($ads['data'],true);
+        }
 
-        return $this->view('single', compact(['vape', 'variations', 'type']));
+        return $this->view('single', compact(['vape', 'variations', 'type','ads']));
     }
 
     public function getPrice(Request $request)
