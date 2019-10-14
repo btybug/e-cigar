@@ -125,6 +125,28 @@ class StockController extends Controller
         $stock->specifications()->sync($request->get('specifications'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
 //        dd($options);
+
+        $ads = $request->get('ads',[]);
+        $adNotDeletable = [];
+        if(count($ads)){
+            foreach ($ads as $ad){
+                if(isset($ad['id'])){
+                    $stock_ad = $stock->ads()->where('id',$ad['id'])->first();
+                    if($stock_ad){
+                        $stock_ad->fill($ad);
+                        $stock_ad->save();
+                        $adNotDeletable[] = $stock_ad->id;
+                    }
+                }else{
+                    $stock_ad = $stock->ads()->create($ad);
+                    $adNotDeletable[] = $stock_ad->id;
+                }
+
+            }
+        }
+
+        $stock->ads()->whereNotIn('id',$adNotDeletable)->delete();
+
         if($options && count($options)){
             foreach ($options as $option){
                 StockAttribute::create([

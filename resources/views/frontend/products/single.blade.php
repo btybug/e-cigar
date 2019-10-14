@@ -371,15 +371,26 @@
                                                 </div>
 
                                                 <div class="product_single-right-ads">
-                                                    @if($ads && isset($ads['images']))
-                                                        @foreach($ads['images'] as $key => $ad)
+                                                    @if($vape->ads && count($vape->ads))
+                                                        @foreach($vape->ads as $ad)
                                                             <div class="single-ads-wall">
-                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
-                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
                                                                 </a>
                                                             </div>
                                                         @endforeach
+                                                    @else
+                                                        @if($ads && isset($ads['images']))
+                                                            @foreach($ads['images'] as $key => $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
                                                     @endif
+
                                                 </div>
                                             </div>
                                         </div>
@@ -391,14 +402,24 @@
                                                     @include("frontend.products._partials.products_render",['products' => $vape->related_products])
                                                 </div>
                                                 <div class="product_single-right-ads">
-                                                    @if($ads && isset($ads['images']))
-                                                        @foreach($ads['images'] as $key => $ad)
+                                                    @if($vape->ads && count($vape->ads))
+                                                        @foreach($vape->ads as $ad)
                                                             <div class="single-ads-wall">
-                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
-                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
                                                                 </a>
                                                             </div>
                                                         @endforeach
+                                                    @else
+                                                        @if($ads && isset($ads['images']))
+                                                            @foreach($ads['images'] as $key => $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
                                                     @endif
 
                                                 </div>
@@ -480,14 +501,24 @@
                                                     @include("frontend.products._partials.products_render",['products' => $vape->special_offers])
                                                 </div>
                                                 <div class="product_single-right-ads">
-                                                    @if($ads && isset($ads['images']))
-                                                        @foreach($ads['images'] as $key => $ad)
+                                                    @if($vape->ads && count($vape->ads))
+                                                        @foreach($vape->ads as $ad)
                                                             <div class="single-ads-wall">
-                                                                <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
-                                                                    <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
                                                                 </a>
                                                             </div>
                                                         @endforeach
+                                                    @else
+                                                        @if($ads && isset($ads['images']))
+                                                            @foreach($ads['images'] as $key => $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
                                                     @endif
 
                                                 </div>

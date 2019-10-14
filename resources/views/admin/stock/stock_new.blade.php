@@ -559,34 +559,60 @@
                                                                     <div
                                                                         class="col-md-12 mb-2 d-flex flex-wrap banner-item">
                                                                         <div class="col-sm-7 p-0">
-                                                                            <div class="input-group">
-                                                                                <div class="input-group-prepend">
-                                                                                    {!! media_button('ads[images][]') !!}
+                                                                            @if($model && count($model->ads))
+                                                                                @foreach($model->ads as $key => $ad)
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            {!! media_button("ads[$key][image]",$ad->image) !!}
+                                                                                        </div>
+                                                                                    </div>
 
-                                                                                </div>
-                                                                            </div>
+                                                                                    <div class="form-group row mt-3">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Url</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="ads[{{ $key }}][url]" value="{{ $ad->url }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Tag</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="ads[{{ $key }}][tags]" value="{{ $ad->tags }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            @else
+                                                                                <div class="input-group">
+                                                                                    <div class="input-group-prepend">
+                                                                                        {!! media_button('ads[0][image]') !!}
 
-                                                                            <div class="form-group row mt-3">
-                                                                                <label for="staticEmail"
-                                                                                       class="col-sm-2 col-form-label">Url</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="text"
-                                                                                           name="ads[urls][]"
-                                                                                           class="form-control"
-                                                                                           id="staticEmail">
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <label for="staticEmail"
-                                                                                       class="col-sm-2 col-form-label">Tag</label>
-                                                                                <div class="col-sm-10">
-                                                                                    <input type="text"
-                                                                                           name="ads[tags][]"
-                                                                                           class="form-control"
-                                                                                           id="staticEmail">
-                                                                                </div>
-                                                                            </div>
 
+                                                                                <div class="form-group row mt-3">
+                                                                                    <label for="staticEmail"
+                                                                                           class="col-sm-2 col-form-label">Url</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="text"
+                                                                                               name="ads[0][url]"
+                                                                                               class="form-control">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label for="staticEmail"
+                                                                                           class="col-sm-2 col-form-label">Tag</label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input type="text"
+                                                                                               name="ads[0][tags]"
+                                                                                               class="form-control" >
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endif
 
                                                                         </div>
                                                                         <div class="col-sm-3">
@@ -1172,7 +1198,7 @@
             <div class="col-sm-7 p-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        {!! media_button('ads[images][]',$model) !!}
+                        {!! media_button('ads[{count}][image]',$model) !!}
 
                     </div>
                 </div>
@@ -1180,13 +1206,13 @@
                 <div class="form-group row mt-3">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
                     <div class="col-sm-10">
-                        <input type="text" name="ads[urls][]" class="form-control" id="staticEmail" value="">
+                        <input type="text" name="ads[{count}][url]" class="form-control"  value="">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
                     <div class="col-sm-10">
-                        <input type="text" name="ads[tags][]" class="form-control" id="staticEmail" value="">
+                        <input type="text" name="ads[{count}][tags]" class="form-control" value="">
                     </div>
                 </div>
 

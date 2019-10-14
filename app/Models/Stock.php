@@ -180,4 +180,9 @@ class Stock extends Translatable
     {
         return $this->belongsToMany(User::class, 'favorites', 'stock_id', 'user_id');
     }
+
+    public function ads()
+    {
+        return $this->hasMany(StockAds::class, 'stock_id');
+    }
 }
