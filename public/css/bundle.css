@@ -23841,7 +23841,11 @@ flex-direction: column;
     header .header-bottom .sort-by-currency-wrap label{
         display: none;
     }
-
+    .adult-modal .btn{
+        -ms-flex: 0 0 45%;
+        flex: 0 0 45%;
+        max-width: 45%;
+    }
 }
 @media (max-width: 455px) {
     .continue-shp-wrapp .product-card_price {
