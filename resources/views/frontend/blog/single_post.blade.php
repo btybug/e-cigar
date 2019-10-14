@@ -87,16 +87,15 @@
                     </div>
                     <div class="col-md-3">
                         <div class="right-content">
-                            <div class="advertisment">
-                                <a href="javascript:void(0);">
-                                    <img src="/public/img/temp/advertisement1.jpg" alt="advertisment">
-                                </a>
-                            </div>
-                            <div class="advertisment mt-20">
-                                <a href="javascript:void(0);">
-                                    <img src="/public/img/temp/advertisement2.jpg" alt="advertisment">
-                                </a>
-                            </div>
+                            @if($ads && isset($ads['images']))
+                                @foreach($ads['images'] as $key => $ad)
+                                    <div class="advertisment @if(!$loop->first) mt-20 @endif">
+                                        <a href="{!! $ads['urls'][$key] !!}">
+                                            <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>

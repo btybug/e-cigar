@@ -5,12 +5,20 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Comment;
 use App\Models\Posts;
+use App\Models\Settings;
 use View;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
     protected $view='frontend.blog';
+
+    public $settings;
+
+    public function __construct(Settings $settings)
+    {
+        $this->settings = $settings;
+    }
 
     public function index(Request $request)
     {
@@ -33,7 +41,12 @@ class BlogController extends Controller
             ->orderBy('posts.created_at',"asc")->take(6)->get();
 
         $comments = $post->comments()->main()->get();
-        return $this->view('single_post',compact('post','comments','relatedPosts'));
+        $ads = $this->settings->getEditableData('single_post');
+        if($ads && isset($ads['data'])){
+            $ads = json_decode($ads['data'],true);
+        }
+
+        return $this->view('single_post',compact('post','comments','relatedPosts','ads'));
     }
 
     public function addComment(Request $request)
