@@ -100,7 +100,6 @@ class OrdersController extends Controller
         $orderItem = $order->items()->where('id',$request->order_item_id)->first();
         if(! $orderItem) abort(500);
 
-        dd($request->all());
         if(count($orderItem->options)){
             foreach ($orderItem->options as $options){
                 if(count($options)){
