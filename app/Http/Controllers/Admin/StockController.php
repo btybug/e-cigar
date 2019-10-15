@@ -124,7 +124,6 @@ class StockController extends Controller
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
         $stock->specifications()->sync($request->get('specifications'));
         $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-//        dd($options);
 
         $ads = $request->get('ads',[]);
         $adNotDeletable = [];
@@ -133,15 +132,18 @@ class StockController extends Controller
                 if(isset($ad['id'])){
                     $stock_ad = $stock->ads()->where('id',$ad['id'])->first();
                     if($stock_ad){
-                        $stock_ad->fill($ad);
-                        $stock_ad->save();
-                        $adNotDeletable[] = $stock_ad->id;
+                        if($ad['image']){
+                            $stock_ad->fill($ad);
+                            $stock_ad->save();
+                            $adNotDeletable[] = $stock_ad->id;
+                        }
                     }
                 }else{
-                    $stock_ad = $stock->ads()->create($ad);
-                    $adNotDeletable[] = $stock_ad->id;
+                    if($ad['image']) {
+                        $stock_ad = $stock->ads()->create($ad);
+                        $adNotDeletable[] = $stock_ad->id;
+                    }
                 }
-
             }
         }
 
