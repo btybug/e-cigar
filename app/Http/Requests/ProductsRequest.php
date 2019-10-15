@@ -24,7 +24,7 @@ class ProductsRequest extends FormRequest
     public function rules()
     {
         return [
-            'slug' => 'required|unique:stocks,slug,'.$this->slug,
+            'slug' => 'required|unique:stocks,id,'.$this->id,
             "translatable"    => "required|array|min:1",
             "translatable.gb.name"  => "required|string|min:3",
             "translatable.gb.short_description"  => "required|string|min:3",

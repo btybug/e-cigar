@@ -586,32 +586,7 @@
                                                                                         </div>
                                                                                     </div>
                                                                                 @endforeach
-                                                                            @else
-                                                                                <div class="input-group">
-                                                                                    <div class="input-group-prepend">
-                                                                                        {!! media_button('ads[0][image]') !!}
-
-                                                                                    </div>
-                                                                                </div>
-
-                                                                                <div class="form-group row mt-3">
-                                                                                    <label for="staticEmail"
-                                                                                           class="col-sm-2 col-form-label">Url</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="text"
-                                                                                               name="ads[0][url]"
-                                                                                               class="form-control">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="form-group row">
-                                                                                    <label for="staticEmail"
-                                                                                           class="col-sm-2 col-form-label">Tag</label>
-                                                                                    <div class="col-sm-10">
-                                                                                        <input type="text"
-                                                                                               name="ads[0][tags]"
-                                                                                               class="form-control" >
-                                                                                    </div>
-                                                                                </div>
+                                                                            
                                                                             @endif
 
                                                                         </div>
