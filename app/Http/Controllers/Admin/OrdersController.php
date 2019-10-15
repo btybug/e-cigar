@@ -42,13 +42,15 @@ class OrdersController extends Controller
     private $cartService;
     private $countries;
     private $geoZones;
+    private $orderService;
 
     public function __construct(
         Statuses $statuses,
         Settings $settings,
         CartService $cartService,
         Countries $countries,
-        GeoZones $geoZones
+        GeoZones $geoZones,
+        OrdersService $orderService
     )
     {
         $this->statuses = $statuses;
@@ -56,6 +58,7 @@ class OrdersController extends Controller
         $this->cartService = $cartService;
         $this->countries = $countries;
         $this->geoZones = $geoZones;
+        $this->orderService = $orderService;
     }
 
     public function index()
@@ -96,40 +99,24 @@ class OrdersController extends Controller
     public function postEdit($id, Request $request)
     {
         $order = Orders::findOrFail($id);
-
-        $orderItem = $order->items()->where('id',$request->order_item_id)->first();
-        if(! $orderItem) abort(500);
-
-        if(count($orderItem->options)){
-            foreach ($orderItem->options as $options){
-                if(count($options)){
-                    foreach ($options as $items){
-                        if(isset($items['options'])){
-                            foreach ($items['options'] as $item){
-                                $sold = Others::where('grouped',$order->id)->where('item_id',$item['variation']['item_id'])->where('qty',$item['qty'])->first();
-                                if($sold){
-                                    if($request->type){
-                                        $sold->delete();
-                                    }else{
-                                        $sold->reason = $request->reason;
-                                        $sold->notes = $request->notes;
-                                        $sold->save();
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+        if($request->order_item_id == 'all'){
+            $items = $order->items;
+            foreach ($items as $item){
+                $orderItem = $this->orderService->refundItems($item,$order,$request);
+                $orderItem->is_refunded = true;
+                $orderItem->save();
             }
         }else{
+            $orderItem = $order->items()->where('id',$request->order_item_id)->first();
             if(! $orderItem) abort(500);
+
+            $orderItem = $this->orderService->refundItems($orderItem,$order,$request);
+            $orderItem->is_refunded = true;
+            $orderItem->save();
+
+            $order->amount -= $orderItem->amount;
+            $order->save();
         }
-
-        $orderItem->is_refunded = true;
-        $orderItem->save();
-
-        $order->amount -= $orderItem->amount;
-        $order->save();
 
         return redirect()->back();
     }

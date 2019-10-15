@@ -14,6 +14,9 @@
                     </span>
                 </div>
             </div>
+            <div class="d-flex align-items-center right-head">
+                <a href="javascript:void(0)" class="btn btn-default refund-all">Refund Order</a>
+            </div>
         </div>
         <nav class="nav-orders">
             <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -450,7 +453,7 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
                     </button>
-                    <h4 class="modal-title" id="delete_item_label">Are you sure you want to refund this ?</h4>
+                    <h4 class="modal-title" id="delete_item_label">Are you sure you want to refund ?</h4>
                 </div>
                 <div class="modal-body">
                     <a class="btn btn-default" data-dismiss="modal">NO</a>
@@ -752,6 +755,12 @@
                     $("body").find(".other-box").removeClass('d-none');
                 }
             })
+
+            $("body").on("click",'.refund-all',function () {
+                $("#item_modal_refund_button").attr('data-slug',"all");
+                $("#refund_modal").modal();
+            });
+
             $("body").on("click",'.refund-item',function () {
                 $("#item_modal_refund_button").attr('data-slug',$(this).data('id'));
                 $("#refund_modal").modal();
