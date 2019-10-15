@@ -43,10 +43,19 @@ class OrdersService
                                 if($sold){
                                     if($request->type){
                                         $sold->delete();
+                                        $order->history()->create([
+                                            'status_id' => null,
+                                            'note' => "Refunded " . $sold->name ." and returned to Items",
+                                        ]);
                                     }else{
                                         $sold->reason = $request->reason;
                                         $sold->notes = $request->notes;
                                         $sold->save();
+
+                                        $order->history()->create([
+                                            'status_id' => null,
+                                            'note' => "Refunded " . $sold->name ." item, reason - ".$request->reason,
+                                        ]);
                                     }
                                 }
                             }
