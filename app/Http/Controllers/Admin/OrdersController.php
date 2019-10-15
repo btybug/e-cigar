@@ -100,6 +100,7 @@ class OrdersController extends Controller
         $orderItem = $order->items()->where('id',$request->order_item_id)->first();
         if(! $orderItem) abort(500);
 
+        dd($request->all());
         if(count($orderItem->options)){
             foreach ($orderItem->options as $options){
                 if(count($options)){
@@ -107,11 +108,14 @@ class OrdersController extends Controller
                         if(isset($items['options'])){
                             foreach ($items['options'] as $item){
                                 $sold = Others::where('grouped',$order->id)->where('item_id',$item['variation']['item_id'])->where('qty',$item['qty'])->first();
-                                if($request->type){
-                                    $sold->delete();
-                                }else{
-                                    $sold->reason = 'refunded';
-                                    $sold->save();
+                                if($sold){
+                                    if($request->type){
+                                        $sold->delete();
+                                    }else{
+                                        $sold->reason = $request->reason;
+                                        $sold->notes = $request->notes;
+                                        $sold->save();
+                                    }
                                 }
                             }
                         }

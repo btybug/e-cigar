@@ -473,10 +473,35 @@
                     <div class="form-group">
                         {!! Form::hidden('order_item_id',null,['id' => 'order_item_id']) !!}
                         <label>Choose option</label>
-                        {!! Form::select('type',[0=> "Put to Others",1=>"Return to Items"],null,['class' => 'form-control']) !!}
+                        {!! Form::select('type',[0=> "Put to Others",1=>"Return to Items"],null,['class' => 'form-control choose-option']) !!}
                     </div>
-                        <a class="btn btn-default" data-dismiss="modal">Close</a>
-                        {!! Form::submit('Confirm',['class' => 'btn btn-primary']) !!}
+                    <div class="form-group row other-box">
+                        <label class="col-md-2 control-label" for="supplier">
+                            Reason</label>
+                        <div class="col-md-10">
+                            {!! Form::select('reason',[
+                            'Lost'=>'Lost',
+                            'Damaged'=>'Damaged',
+                            'Returned'=>'Returned',
+                            'Faulty'=>'Faulty',
+                            'Shelf life'=>'Shelf life',
+                            'Confiscated'=>'Confiscated',
+                            'Gift'=>'Gift',
+                            'Marketing or designer needs '=>'Marketing or designer needs',
+                            'Admin needs'=>'Admin needs',
+                            'Stolen'=>'Stolen',
+                            ],null,[ 'class'=> 'form-control']) !!}
+                        </div>
+                    </div>
+                    <div class="form-group row other-box">
+                        <label class="col-md-2 control-label" for="supplier">
+                            Notes</label>
+                        <div class="col-md-10">
+                            {!! Form::textarea('notes',null,[ 'class'=> 'form-control']) !!}
+                        </div>
+                    </div>
+                    <a class="btn btn-default" data-dismiss="modal">Close</a>
+                    {!! Form::submit('Confirm',['class' => 'btn btn-primary']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>
@@ -719,6 +744,14 @@
 @section('js')
     <script>
         $(function () {
+            $("body").on('change','.choose-option',function () {
+                let val = $(this).val();
+                if(val == 1){
+                    $("body").find(".other-box").addClass('d-none');
+                }else{
+                    $("body").find(".other-box").removeClass('d-none');
+                }
+            })
             $("body").on("click",'.refund-item',function () {
                 $("#item_modal_refund_button").attr('data-slug',$(this).data('id'));
                 $("#refund_modal").modal();
