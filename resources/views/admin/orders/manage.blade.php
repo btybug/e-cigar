@@ -524,10 +524,10 @@
                         </div>
                     </div>
                     <div class="product-table">
+                        @php
+                            $count = 0;
+                        @endphp
                         @if(count($order->items()->where('is_refunded',false)->get()))
-                            @php
-                                $count = 0;
-                            @endphp
                             @foreach($order->items()->where('is_refunded',false)->get() as $item)
                                 @if($order->type)
                                     @include("admin.orders._partials.collect_wholesaler")
