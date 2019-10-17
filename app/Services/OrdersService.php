@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Events\OrderCanceled;
 use App\Events\OrderCompleted;
 use App\Events\OrderCompletelyCollected;
+use App\Events\OrderPartiallyCollected;
 use App\Events\OrderSubmitted;
 use App\Models\Others;
 use App\Models\Settings;
