@@ -117,10 +117,12 @@
 
         </div>
         <div class="order-summary-btn-wall text-center">
+            @if($back_route)
             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
                href="{{ @$back_route }}">
                 Back
             </a>
+            @endif
         </div>
     </div>
 </div>

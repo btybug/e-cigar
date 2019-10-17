@@ -250,327 +250,7 @@
                                             </div>
                                         </li>
                                     @endforeach
-                                    {{--<li class="col-md-4">--}}
-                                    {{--<div class="order__product-wall">--}}
-                                    {{--<div class="main-info">--}}
-                                    {{--<div class="order__product-photo">--}}
-                                    {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
-                                    {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
-                                    {{--<div class="order__product-info">--}}
-                                    {{--<ul class="list-unstyled mb-0">--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Hit--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
 
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 1</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony 18--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-
-                                    {{--</ul>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="order__product-offers">--}}
-                                    {{--<div class="font-16 text-sec-clr offers-tag">--}}
-                                    {{--With offers:--}}
-                                    {{--</div>--}}
-                                    {{--<div class="d-flex product-offers-inner">--}}
-                                    {{--<div class="photo">--}}
-                                    {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="title-offers">--}}
-                                    {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="qty-price">--}}
-                                    {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
-                                    {{--<div class="d-flex align-items-center qty-col">--}}
-                                    {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
-                                    {{--<div class="product__single-item-inp-num">--}}
-                                    {{--<div class="quantity">--}}
-                                    {{--<input type="number" min="1" max="9" step="1"--}}
-                                    {{--value="1">--}}
-
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="price-col">--}}
-                                    {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-4">--}}
-                                    {{--<div class="order__product-wall">--}}
-                                    {{--<div class="main-info">--}}
-                                    {{--<div class="order__product-photo">--}}
-                                    {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
-                                    {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
-                                    {{--<div class="order__product-info">--}}
-                                    {{--<ul class="list-unstyled mb-0">--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Hit--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 1</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony 18--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-
-                                    {{--</ul>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="order__product-offers">--}}
-                                    {{--<div class="font-16 text-sec-clr offers-tag">--}}
-                                    {{--With offers:--}}
-                                    {{--</div>--}}
-                                    {{--<div class="d-flex product-offers-inner">--}}
-                                    {{--<div class="photo">--}}
-                                    {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="title-offers">--}}
-                                    {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="qty-price">--}}
-                                    {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
-                                    {{--<div class="d-flex align-items-center qty-col">--}}
-                                    {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
-                                    {{--<div class="product__single-item-inp-num">--}}
-                                    {{--<div class="quantity">--}}
-                                    {{--<input type="number" min="1" max="9" step="1"--}}
-                                    {{--value="1">--}}
-
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="price-col">--}}
-                                    {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="col-md-4">--}}
-                                    {{--<div class="order__product-wall">--}}
-                                    {{--<div class="main-info">--}}
-                                    {{--<div class="order__product-photo">--}}
-                                    {{--<img src="/public/img/product-vape.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">dINNER LADY Cubano pRO </h6>--}}
-                                    {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades E-Juice</p>--}}
-                                    {{--<div class="order__product-info">--}}
-                                    {{--<ul class="list-unstyled mb-0">--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Hit--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 1</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony Cloud--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="single-row-product">--}}
-                                    {{--<div class="row">--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-9 font-15 font-main-bold">--}}
-                                    {{--Mango Harmony 18--}}
-                                    {{--</div>--}}
-                                    {{--<div--}}
-                                    {{--class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">--}}
-                                    {{--<span>x 2</span>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
-
-                                    {{--</ul>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="order__product-offers">--}}
-                                    {{--<div class="font-16 text-sec-clr offers-tag">--}}
-                                    {{--With offers:--}}
-                                    {{--</div>--}}
-                                    {{--<div class="d-flex product-offers-inner">--}}
-                                    {{--<div class="photo">--}}
-                                    {{--<img src="/public/img/temp/product-1.png" alt="product">--}}
-                                    {{--</div>--}}
-                                    {{--<div class="title-offers">--}}
-                                    {{--<p class="font-18 lh-1 mb-0">Kangertech Vola 23 100W Premium Vape </p>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--<div class="qty-price">--}}
-                                    {{--<div class="d-flex flex-wrap align-items-center justify-content-between qty-price-inner">--}}
-                                    {{--<div class="d-flex align-items-center qty-col">--}}
-                                    {{--<span class="font-sec-light font-24 lh-1 qty-text">QTY</span>--}}
-                                    {{--<div class="product__single-item-inp-num">--}}
-                                    {{--<div class="quantity">--}}
-                                    {{--<input type="number" min="1" max="9" step="1"--}}
-                                    {{--value="1">--}}
-
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--<div class="price-col">--}}
-                                    {{--<span class="lh-1 text-tert-clr ">£25,78</span>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-                                    {{--</div>--}}
-
-                                    {{--</div>--}}
-                                    {{--</li>--}}
                                 </ul>
                             </div>
                             </div>
@@ -591,7 +271,8 @@
                                                     Sub Total
                                                 </div>
                                                 <div
-                                                    class="price font-main-bold">£25,78
+                                                    class="price font-main-bold">
+                                                    {!! convert_price($order->amount-$order->shipping_price,$currency, false) !!}
                                                 </div>
                                             </div>
                                             <div
@@ -600,7 +281,9 @@
                                                     Tax
                                                 </div>
                                                 <div
-                                                    class="price font-main-bold">£0
+                                                    class="price font-main-bold">
+                                                    {!! convert_price(0,$currency, false) !!}
+
                                                 </div>
                                             </div>
                                             <div
@@ -610,17 +293,11 @@
                                                 </div>
                                                 <div
                                                     class="w-100 font-18 d-flex flex-wrap justify-content-between align-items-center shipping-wall">
-                                                    <div class="shipping-item">
-                                                        United Kingdom
-                                                    </div>
-                                                    <div class="price font-24 font-main-bold">£0</div>
                                                 </div>
                                                 <div
                                                     class="w-100 d-flex font-18 flex-wrap justify-content-between align-items-center shipping-wall">
-                                                    <div class="shipping-item">
-                                                        Shipping Service
-                                                    </div>
-                                                    <div class="price font-24 font-main-bold">£0</div>
+
+                                                    <div class="price font-24 font-main-bold">{!! convert_price($order->shipping_price,$currency, false) !!}</div>
                                                 </div>
                                             </div>
                                             <div
@@ -631,7 +308,8 @@
                                                         Coupon Discount
                                                     </div>
                                                     <div
-                                                        class="price font-main-bold">£0
+                                                        class="price font-main-bold">{!! convert_price(0,$currency, false) !!}
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -641,12 +319,12 @@
                                                     Total
                                                 </div>
                                                 <div
-                                                    class="price text-tert-clr font-main-bold">£25,78
+                                                    class="price text-tert-clr font-main-bold">
+                                                    {!! convert_price($order->amount,$currency, false) !!}
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    {{--@include("frontend.shop._partials.order_summary",['pyp' =>true,'back_route' => route('shop_check_out')])--}}
                                 </div>
                             </div>
                         </div>

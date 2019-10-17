@@ -48,24 +48,25 @@ class PaymentService
             $geoZone = ($zone) ? $zone->geoZone : null;
         }
         return \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region) {
-            Cart::removeConditionsByType('shipping');
-            if (count($geoZone->deliveries)) {
-                $subtotal = Cart::getSubTotal();
-                $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
-                if ($delivery && count($delivery->options)) {
-                    $shippingDefaultOption = $delivery->options->first();
-                    $condition2 = new \Darryldecode\Cart\CartCondition(array(
-                        'name' => $geoZone->name,
-                        'type' => 'shipping',
-                        'target' => 'total',
-                        'value' => $shippingDefaultOption->cost,
-                        'order' => 1,
-                        'attributes' => $shippingDefaultOption
-                    ));
-
-                    Cart::condition($condition2);
-                }
-            }
+//            Cart::removeConditionsByType('shipping');
+//            if (count($geoZone->deliveries)) {
+//                $subtotal = Cart::getSubTotal();
+//                $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+//
+//                if ($delivery && count($delivery->options)) {
+//                    $shippingDefaultOption = $delivery->options->first();
+//                    $condition2 = new \Darryldecode\Cart\CartCondition(array(
+//                        'name' => $geoZone->name,
+//                        'type' => 'shipping',
+//                        'target' => 'total',
+//                        'value' => $shippingDefaultOption->cost,
+//                        'order' => 1,
+//                        'attributes' => $shippingDefaultOption
+//                    ));
+//
+//                    Cart::condition($condition2);
+//                }
+//            }
 
             $shipping = Cart::getCondition($geoZone->name);
             $items = Cart::getContent();
@@ -179,7 +180,7 @@ class PaymentService
                         Others::create([
                             'item_id' => $item_id,
                             'user_id' => \Auth::id(),
-                            'qty' => (int)$sale,
+                            'qty' => (int)$sale * $item->quantity,
                             'reason' => 'sold',
                             'grouped' => $order->id,
                         ]);
