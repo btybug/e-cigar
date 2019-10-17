@@ -106,6 +106,9 @@ class OrdersController extends Controller
                 $orderItem->is_refunded = true;
                 $orderItem->save();
             }
+
+//            $order->type = 2;
+
         }else{
             $orderItem = $order->items()->where('id',$request->order_item_id)->first();
             if(! $orderItem) abort(500);
@@ -115,8 +118,9 @@ class OrdersController extends Controller
             $orderItem->save();
 
             $order->amount -= $orderItem->amount;
-            $order->save();
+
         }
+        $order->save();
 
         return redirect()->back();
     }
