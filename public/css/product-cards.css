@@ -3015,7 +3015,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     width: 100%;
     background-color: transparent;
     position: absolute;
-    margin-top: 6px;
+    bottom: 0;
+    left: 0;
 }
 
 .brands_main-content-products-wrapper .list-tabs .prod-link.active, .list-tabs .prod-link:hover {

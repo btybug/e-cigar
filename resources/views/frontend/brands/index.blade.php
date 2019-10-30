@@ -158,6 +158,7 @@
                 "1220px": 9
             }
         });
+
         $('body').on('click', '.brands_aside-item-link', function () {
             let value = $(this).data('id');
             let slug = $(this).data('slug');
@@ -174,7 +175,8 @@
                     if (!data.error) {
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
-                        $("body").find('.brands_main-content-top').html(data.html);
+                        $("body").find('.brands_main-content').html(data.html);
+                        $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/brands/' + slug);
                         // document.location.hash = slug
                     }
