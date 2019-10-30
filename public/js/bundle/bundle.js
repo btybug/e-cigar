@@ -2726,8 +2726,28 @@ $('.select-2--no-search').select2({
     minimumResultsForSearch: Infinity
 });
 
+var afterHeight;
+var productsWallHeight = parseInt($('body').find('.products-box').height());
+$("body").find(".products__item-wrapper").hover(function () {
+    afterHeight = parseInt($('body').find('.products__item-wrapper-inner').height());
+    $(this).closest('.products-box').css('height', productsWallHeight);
+    // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
+}, function () {
+    $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height', 'auto');
+});
+
 $(document).ready(function () {
     $("#loading").fadeOut("slow", function () {
+        var afterHeight;
+        var productsWallHeight = parseInt($('body').find('.products-box').height());
+        $("body").find(".products__item-wrapper").hover(function () {
+            afterHeight = parseInt($('body').find('.products__item-wrapper-inner').height());
+            $(this).closest('.products-box').css('height', productsWallHeight);
+            // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
+        }, function () {
+            $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height', 'auto');
+        });
+
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $("#singleProductPageCnt").removeClass('d-none').addClass('d-flex');
 

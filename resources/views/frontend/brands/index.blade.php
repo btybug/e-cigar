@@ -111,7 +111,7 @@
                                 @include("frontend.brands._partials.list")
                             </ul>
                         </div>
-                        <div class="brands_main-content">
+                        <div class="brands_main-content products-box">
                             @include("frontend.brands._partials.current")
                         </div>
 
@@ -144,6 +144,9 @@
     <script src={{asset("public/plugins/formstone/touch.js")}}></script>
     <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
     <script>
+
+
+
         $('body').on('click','.mobile-brands_aside-title',function () {
             $(this).parent().find('.brands_aside-list').slideToggle()
         })
@@ -175,7 +178,12 @@
                     if (!data.error) {
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
+
+                        $("body").find('.products-box').css('height','auto');
                         $("body").find('.brands_main-content').html(data.html);
+                        let productsWallHeight = parseInt( $('body').find('.products-box').height())
+                        $("body").find('.products-box').css('height',productsWallHeight);
+
                         $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/brands/' + slug);
                         // document.location.hash = slug

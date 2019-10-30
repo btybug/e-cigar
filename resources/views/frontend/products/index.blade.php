@@ -399,7 +399,11 @@
                     },
                     success: function (data) {
                         if (!data.error) {
+                            $("body").find('.products-box').css('height','auto');
                             $(".products-box").html(data.html);
+                            let productsWallHeight = parseInt( $('body').find('.products-box').height())
+
+                            $("body").find('.products-box').css('height',productsWallHeight);
                             // var ht = (name, path) => {
                             //     return `<li class="selected_filter-sidebar-item position-relative">
                             //                     <span class="selection_remove" role="presentation">×</span>
