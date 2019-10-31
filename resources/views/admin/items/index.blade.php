@@ -188,7 +188,10 @@
                 ],
                 '#table_head_id',
                 [
-                    {data: 'id', name: 'id'},
+                    {  data: null,
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'brand_id', name: 'brand_id'},
                     {data: 'barcode_id', name: 'barcodes.code'},
