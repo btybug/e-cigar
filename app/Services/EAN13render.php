@@ -48,6 +48,7 @@ class EAN13render
                 }
             } else {
                 ImageTTFtext($im, 8, 0, $xpos, $h - 1, 0x000000, $font, $digit);
+
                 $code = self::$Rcodes[$digit];
                 $select = 'R';
                 if ($n <= 6) {
@@ -67,8 +68,8 @@ class EAN13render
 
     public static function get($code,$path,$w=123,$h=78)
     {
-        $barcode = sprintf('64%s', base_convert($code, 36, 10));
-        $image = self::Render($barcode,$w=123,$h=78);
+//        $barcode = sprintf('64%s', base_convert($code, 36, 10));
+        $image = self::Render($code,$w=123,$h=78);
         imagePNG($image, $path);
         return $path;
     }
