@@ -61,6 +61,8 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                // responsive: true,
+                "scrollX": true,
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'

@@ -65,7 +65,7 @@
                                                                 @foreach(get_languages() as $language)
                                                                     <div id="{{ strtolower($language->code) }}"
                                                                          class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                        <div class="form-group row">
+                                                                        <div class="form-group row mt-3">
                                                                             <label
                                                                                 class="col-sm-2 control-label col-form-label text-right"><span
                                                                                     data-toggle="tooltip"

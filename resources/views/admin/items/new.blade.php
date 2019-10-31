@@ -3,11 +3,11 @@
     <div class="card panel panel-default">
         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
         <div class="card-header panel-heading d-flex">
-                <div class="col-md-8">
+                <div class="col-9 pr-0 pl-sm-3 pl-0">
                     <h2 class="m-0">{{ ($model) ? $model->name : "Add new item" }}</h2>
                 </div>
 
-            <div class="col-md-4">
+            <div class="col-3 pr-sm-3 pr-0">
                 <button class="btn btn-info ml-4 float-right" type="submit">Save</button>
             </div>
         </div>
@@ -27,7 +27,7 @@
                         {!! Form::hidden('type',($bundle)?"bundle":"simple") !!}
 
                         <div class="row">
-                            <div class="col-md-3">
+                            <div class="col-xl-3 col-4 pr-sm-3 pr-0">
                                 <div class="basic-left basic-wall h-100">
                                     <div class="all-list">
                                         <ul class="nav nav-tabs media-list">
@@ -44,12 +44,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-9">
+                            <div class="col-xl-9 col-8">
                                 <div class="basic-center basic-wall">
                                     <div class="tab-content media-list-tab-content">
                                         <div id="basics" class="tab-pane fade in active show">
                                             @if(count(get_languages()))
-                                                <ul class="nav nav-tabs">
+                                                <ul class="nav nav-tabs mb-3">
                                                     @foreach(get_languages() as $language)
                                                         <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
                                                                     data-toggle="tab"
@@ -65,29 +65,29 @@
                                                         <div id="{{ strtolower($language->code) }}"
                                                              class="tab-pane fade  @if($loop->first) in active show @endif">
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-xl-10">
                                                                     {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Short Description">Short Description</span></label>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-xl-10">
                                                                     {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                 </div>
                                                             </div>
                                                             <div class="form-group row">
-                                                                <label class="col-sm-2 control-label col-form-label text-right"><span
+                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                             data-toggle="tooltip"
                                                                             title=""
                                                                             data-original-title="Short Description">Long Description</span></label>
-                                                                <div class="col-sm-10">
+                                                                <div class="col-xl-10">
                                                                     {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                 </div>
                                                             </div>
@@ -160,7 +160,7 @@
                                                 <div class="form-group">
                                                     <label class="col-sm-12 control-label pl-sm-0">Brands</label>
                                                     <div id="brands_treeview_json">
-                                                        <div class="filter-wall cat-name row">
+                                                        <div class="filter-wall cat-name d-flex flex-wrap">
                                                             <div class="col-7 p-sm-0">
                                                                 @foreach($brands as $parent)
                                                                     <p class="pl-sm-0 bold">{{ $parent->name }}</p>

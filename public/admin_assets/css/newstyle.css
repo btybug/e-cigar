@@ -1597,3 +1597,68 @@ color: #ffffff;
 /*----------------------------------------------------*/
 /*---------------- popUpModal end --------------------*/
 /*----------------------------------------------------*/
+/*---------------------Responsive-------------------*/
+@media (max-width: 1199px) {
+    
+}
+@media (max-width: 991px) {
+    .main-header_nav-middle .main-header_nav-middle-list .find-link{
+        padding-left: 0;
+        padding-right: 20px;
+    }
+    .card-header.panel-heading h2{
+    font-size: 26px;
+    }
+    .basic-details-tab .basic-wall{
+        padding-left: 10px !important;
+        padding-right: 10px !important;
+    }
+}
+@media (max-width: 767px) {
+    .basic-details-tab .basic-left .nav-item{
+        width: 100%;
+    }
+    .basic-details-tab .basic-left .nav-item .nav-link{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+@media (max-width: 575px) {
+    .main-header_nav-middle .main-header_nav-middle-list .find-link{
+        padding-right: 5px;
+    }
+    .main-header_nav-middle .main-header_nav-middle-list .btn {
+        padding: 0.55rem 0.7rem;
+    }
+    .main-header .user-menu .dropdown-toggle {
+        padding-left: 0;
+        padding-right: 10px;
+    }
+    .card.panel .card-body .content.main-content{
+        padding: 0;
+    }
+
+}
+@media (max-width: 500px) {
+    li.paginate_button.previous {
+        display: inline;
+    }
+
+    li.paginate_button.next {
+        display: inline;
+    }
+
+    li.paginate_button {
+        display: none;
+    }
+}
+
+@media (max-width: 400px) {
+    .profile-header +.mt-5{
+        margin-top: 88px !important;
+    }
+    .dataTables_wrapper .dt-buttons.btn-group .btn{
+        padding: 0.55rem 0.4rem;
+    }
+}
