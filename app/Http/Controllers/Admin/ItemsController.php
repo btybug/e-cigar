@@ -117,7 +117,9 @@ class ItemsController extends Controller
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-        $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->whereIn('id',$model->manual_codes)->get();
+        if($model->manual_codes){
+            $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->whereIn('id',$model->manual_codes)->get();
+        }
 
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
