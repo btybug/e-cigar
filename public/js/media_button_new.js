@@ -1459,7 +1459,7 @@ var count = 0;
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
             console.log('helloooooooooo', `${location.origin}${$(e.target).closest('.file').find('img').attr('src')}`);
               console.log(Math.random())
-            $(".folderitems").html(`<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
+            $(".folderitems").html(`<iframe src="https://docs.google.com/viewer?url=http://infolab.stanford.edu/pub/papers/google.pdf&embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
           }else {
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
