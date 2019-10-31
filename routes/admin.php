@@ -5,6 +5,9 @@
  * Date: 31.12.2017
  * Time: 00:09
  */
+
+use App\Services\EAN13render;
+
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
@@ -628,5 +631,17 @@ Route::group(['prefix' => 'wholesellers'], function () {
 });
 
 Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_download');
+Route::get('/fix-barcodes', function () {
+    $barcodes = \App\Models\Barcodes::all()->pluck('code');
+    foreach ($barcodes as $code) {
+        try {
+            $path = EAN13render::get($code, public_path('barcodes' . DS . $code . '.png'), 200, 100);
+        } catch (Exception $e) {
+            echo $code . '<br>';
+        }
+
+    }
+    dd('finish');
+});
 
 

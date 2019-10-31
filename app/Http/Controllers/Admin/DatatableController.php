@@ -846,7 +846,7 @@ class DatatableController extends Controller
                 return ($barcode->item) ? "<a href='".route("admin_items_edit",$barcode->item->id)."' >" .$barcode->item->name. "</a>" : "not connected";
             })
             ->editColumn('barcode', function ($barcode) {
-                return ($barcode->code && is_numeric($barcode->code)) ? \DNS1D::getBarcodeHTML($barcode->code, "EAN13",3,30,"black", true)."<span class='d-none'><div  id='barcode$barcode->id'>" .\DNS1D::getBarcodeHTML($barcode->code, "EAN13",3,300,"black", true). "</div></span>" : "no barcode";
+                return ($barcode->code && is_numeric($barcode->code)) ? "<img src='".url('public/barcodes/'.$barcode->code.'.png')."'>" : "no barcode";
             })
             ->addColumn('actions', function ($code) {
                 return "

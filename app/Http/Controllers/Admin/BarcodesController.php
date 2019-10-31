@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
 use App\Services\BarcodesService;
+use App\Services\EAN13render;
 use Illuminate\Http\Request;
 
 
@@ -40,7 +41,8 @@ class BarcodesController extends Controller
     {
         $v=\Validator::make($request->all(),['code'=>'required|unique:barcodes,code']);
         if($v->fails()) return redirect()->back()->withErrors($v);
-        Barcodes::create(['code'=>$request->get('code')]);
+        $barcode= Barcodes::create(['code'=>$request->get('code')]);
+        $path=EAN13render::get($request->get('code'),public_path('barcodes'.DS.$request->get('code').'.png'),200,100);
         return redirect()->route('admin_inventory_barcodes');
     }
 

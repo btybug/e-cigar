@@ -108,6 +108,7 @@ function date_column() {
     });
 }
         function doSubmitForm() {
+            
             $('.find-wrapper-results-content').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
                 '            <div class="lds-dual-ring"></div>\n' +
                 '        </div>');
