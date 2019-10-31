@@ -38,8 +38,8 @@
                     {data: 'id', name: 'id'},
                     {data: 'code', name: 'code'},
                     {data: 'item', name: 'item'},
-                    {data: 'barcode', name: 'barcode'},
-                    {data: 'actions', name: 'actions'}
+                    {data: 'barcode', name: 'barcode',orderable : false},
+                    {data: 'actions', name: 'actions',orderable : false}
                 ],
                 order: [ [0, 'desc'] ]
             });
