@@ -15,10 +15,7 @@
     </div>
     <div class="col-md-6">
         @if(strlen($code) == 13)
-            @php
-                \App\Services\EAN13render::get($code,public_path('BARCODE.png'),200,100);
-            @endphp
-            <img src="/public/BARCODE.png" />
+            <img src="{!! url('public/barcodes/'.$code.'.png') !!}" />
         @else
             Barcode is invalid, need to be 13 numbers
         @endif

@@ -351,9 +351,28 @@
                                                 </div>
 
                                                 <div class="col-md-12 manual-codes d-flex flex-wrap mb-5">
-                                                    @if($model && isset($manual_codes) && count($manual_codes))
-                                                        @foreach($manual_codes as $item)
-                                                            @include("admin.items._partials.manual_downloads")
+                                                    @if($model && $model->manual_codes)
+                                                        @foreach($model->manual_codes as $key => $item)
+                                                            @if(isset($item['id']))
+                                                                @php
+                                                                    $manual = \App\Models\Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$item['id'])->first();
+                                                                @endphp
+                                                                @if($manual)
+                                                                    <div class="col-md-12 d-flex flex-wrap manual-code mt-5" data-id="{!! $manual->id !!}">
+                                                                        {!! Form::hidden("manual_codes[$key][id]",$manual->id) !!}
+                                                                        <div class="col-md-3">
+                                                                            {!! $manual->name !!}
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            {!! media_button("manual_codes[$key][image]",$item['image']) !!}
+                                                                        </div>
+                                                                        <div class="col-md-3">
+                                                                            <a class="btn btn-success" href="{{ route("admin_items_download_code",[$key,'manual',$model->id]) }}">Download</a>
+                                                                            <a class="btn btn-danger delete-manual-code" href="javascript:void(0)">Delete</a>
+                                                                        </div>
+                                                                    </div>
+                                                                @endif
+                                                            @endif
                                                         @endforeach
                                                     @endif
                                                 </div>

@@ -117,9 +117,6 @@ class ItemsController extends Controller
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-        if($model->manual_codes){
-            $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->whereIn('id',$model->manual_codes)->get();
-        }
 
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
@@ -129,7 +126,7 @@ class ItemsController extends Controller
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
-            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads','manual_codes'));
+            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));
     }
 
     private function savePackages($item, array $data = [])
@@ -392,10 +389,15 @@ class ItemsController extends Controller
 
     public function downloadCode($code, $type = 'qr',$name = null)
     {
-        $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$code)->first();
-        if($manual_codes){
-            $path = base_path().$manual_codes->image;
-            $name = $name . $manual_codes->name .'.png';
+        if($type == 'manual'){
+            $item = Items::findOrFail($name);
+            $codes = $item->manual_codes;
+            if(isset($codes[$code])){
+
+                $path = base_path().$codes[$code]['image'];
+                $name = $item->name .'manual.png';
+            }
+
         }else{
             $barcode = Barcodes::where('code', $code)->first();
             if (!$barcode) return response()->json(['error' => true]);
@@ -403,11 +405,11 @@ class ItemsController extends Controller
             if ($type == 'qr') {
 
                 $name = $name . 'QR.png';
-                $path = \DNS2D::getBarcodePNGPath('https://kaliony.com//landings/' . $code, "QRCODE" ,200, 200);
+                $path = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $code, "QRCODE" ,200, 200);
             } else  {
                 $name = $name . "BARCODE.png";
 //            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
-                $path=EAN13render::get($code,public_path('BARCODE.png'),200,100);
+                $path= base_path('public/barcodes/'.$code.'.png');
             }
         }
 
