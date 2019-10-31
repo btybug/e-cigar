@@ -1427,8 +1427,8 @@ var count = 0;
               });
 
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
-            console.log('helloooooooooo');
-            $("body").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}/public/media/tmp/f8bebe8e469abe8f88763e7bb4e7de3b.pdf&amp;embedded=true" style="width:100%; height:100vh" frameborder="0"></iframe>`)
+            console.log('helloooooooooo', $(e.target).closest('.file').find('img').attr('src'));
+            $("body").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:100vh" frameborder="0"></iframe>`)
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
                   .closest(".file-box")
