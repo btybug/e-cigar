@@ -31,16 +31,16 @@
                     </div>
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="Brand" data-column="2" data-name="brand_id">Brand</option>
-                            <option value="Barcode" data-column="3" data-name="barcode_id">Barcode</option>
-                            <option value="Quantity" data-column="4" data-name="quantity">Quantity</option>
-                            <option value="Category" data-column="5" data-name="category">Category</option>
-                            <option value="Price" data-column="6" data-name="price">Price</option>
-                            <option value="Status" data-column="7" data-name="status">Status</option>
+                            <option value="#" data-column="0" data-name="id" selected>#</option>
+                            <option value="Name" data-column="1" data-name="name" selected>Name</option>
+                            <option value="Brand" data-column="2" data-name="brand_id" selected>Brand</option>
+                            <option value="Barcode" data-column="3" data-name="barcode_id" selected>Barcode</option>
+                            <option value="Quantity" data-column="4" data-name="quantity" selected>Quantity</option>
+                            <option value="Category" data-column="5" data-name="category" selected>Category</option>
+                            <option value="Price" data-column="6" data-name="price" selected>Price</option>
+                            <option value="Status" data-column="7" data-name="status" selected>Status</option>
                             <option value="Created At" data-column="8" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="9" data-name="actions">Actions</option>
+                            <option value="Actions" data-column="9" data-name="actions" selected>Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
