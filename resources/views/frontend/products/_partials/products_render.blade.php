@@ -1,6 +1,17 @@
+<ul class="d-flex products__page-head__list">
+    <li>
+        <a href="#" class="font-sec-reg item-link active">All</a>
+    </li>
+    <li>
+        <a href="#" class="font-sec-reg item-link">Child 1</a>
+    </li>
+    <li>
+        <a href="#" class="font-sec-reg item-link">Child 2</a>
+    </li>
+</ul>
 @if(isset($all_products))
     <div class="selected__filters">
-        <ul class="d-inline-block">
+        <ul class="d-inline-bloc">
             @if(count($selecteds))
                 @foreach($selecteds as $key => $selected)
                     <li data-key="{{ $key }}" class="single-item position-relative">
