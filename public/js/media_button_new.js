@@ -1427,7 +1427,7 @@ var count = 0;
               });
 
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
-            console.log('helloooooooooo', $(e.target).closest('.file').find('img').attr('src'));
+            console.log('helloooooooooo', `${location.origin}${$(e.target).closest('.file').find('img').attr('src')}`);
               console.log(Math.random())
             $(".folderitems").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
 
