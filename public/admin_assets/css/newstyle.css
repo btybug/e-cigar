@@ -1639,6 +1639,10 @@ color: #ffffff;
     .basic-center.basic-wall .media-videos-preview .video-single-item iframe{
         width: calc(100% - 47px);
     }
+    .basic-center.basic-wall .multiple-image-placeholder .img-thumb-container{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
 }
 @media (max-width: 767px) {
     .basic-details-tab .basic-left .nav-item{
@@ -1686,6 +1690,9 @@ color: #ffffff;
 
     li.paginate_button {
         display: none;
+    }
+    .basic-center.basic-wall .multiple-image-placeholder .img-thumb-container .inner{
+        height: 150px;
     }
 }
 
