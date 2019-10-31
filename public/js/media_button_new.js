@@ -111,6 +111,35 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
+        if(data.extension === "pdf") {
+            return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" data-url="${data.url}">
+                        <a  bb-media-click="select_item" bb-media-type="image">
+                            <span class="corner"></span>
+                
+                            <div class="icon">
+                                <img width="180px" data-lightbox="image" src="/public/media/tmp/${data.original_name}">
+                                <i class="fa fa-file"></i>
+                            </div>
+                            <div class="file-name">
+                            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
+                            </div>
+                            <!--<small>Added: ${data.updated_at}</small>-->
+                            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+                              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                              </button>
+                              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
+                                  <i class="fa fa-trash" style="color:#ffffff"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+                                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                              </span>
+                            </span>
+                        </a>
+                    </div>`);
+        }
       return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}">
         <a  bb-media-click="select_item" bb-media-type="image">
             <span class="corner"></span>
@@ -142,8 +171,9 @@ const App = function() {
     //********App -> htmlMaker -> makeImage********end
 
       makeHtmlItem: (data) => {
-        console.log(data, 'nhang')
-          return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" >
+          console.log(data);
+
+          return (`<div draggable="true" data-id="${data.id}" class="file" >
         <a  bb-media-click="select_item" bb-media-type="image">
             <span class="corner"></span>
 
@@ -1429,7 +1459,7 @@ var count = 0;
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
             console.log('helloooooooooo', `${location.origin}${$(e.target).closest('.file').find('img').attr('src')}`);
               console.log(Math.random())
-            // $(".folderitems").html(`<iframe src="https://docs.google.com/gview?url=http://kaliony.bootydev.co.uk${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
+            $(".folderitems").html(`<iframe src="https://docs.google.com/gview?url=http://kaliony.bootydev.co.uk${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
           }else {
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
