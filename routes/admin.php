@@ -635,7 +635,7 @@ Route::get('/fix-barcodes', function () {
     $barcodes = \App\Models\Barcodes::all()->pluck('code');
     foreach ($barcodes as $code) {
         try {
-            $path = EAN13render::get($code, public_path('barcodes' . DS . $code . '.png'), 246, 156);
+            $path = EAN13render::get($code, public_path('barcodes' . DS . $code . '.png'), 123, 78);
         } catch (Exception $e) {
             echo $code . '<br>';
         }
