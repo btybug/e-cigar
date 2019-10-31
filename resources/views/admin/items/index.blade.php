@@ -39,7 +39,7 @@
                                 <th>Sku</th>
                                 <th>Barcode</th>
                                 <th>Quantity</th>
-                                <th>Description</th>
+                                <th>Category</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
