@@ -37,8 +37,10 @@
                             <option value="Barcode" data-column="3" data-name="barcode_id">Barcode</option>
                             <option value="Quantity" data-column="4" data-name="quantity">Quantity</option>
                             <option value="Category" data-column="5" data-name="category">Category</option>
-                            <option value="Created At" data-column="6" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="7" data-name="actions">Actions</option>
+                            <option value="Price" data-column="6" data-name="price">Price</option>
+                            <option value="Status" data-column="7" data-name="status">Status</option>
+                            <option value="Created At" data-column="8" data-name="created_at">Created At</option>
+                            <option value="Actions" data-column="9" data-name="actions">Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -49,6 +51,8 @@
                                 <th>Barcode</th>
                                 <th>Quantity</th>
                                 <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -61,6 +65,8 @@
                                 <th>Barcode</th>
                                 <th>Quantity</th>
                                 <th>Category</th>
+                                <th>Price</th>
+                                <th>Status</th>
                                 <th>Created At</th>
                                 <th>Actions</th>
                             </tr>
@@ -175,6 +181,8 @@
                     {id: 'Barcode', name: 'barcode_id'},
                     {id: 'Quantity', name: 'quantity'},
                     {id: 'Category', name: 'category'},
+                    {id: 'Price', name: 'price'},
+                    {id: 'Status', name: 'status'},
                     {id: 'Created At', name: 'created_at'},
                     {id: 'Actions', name: 'actions'}
                 ],
@@ -186,6 +194,8 @@
                     {data: 'barcode_id', name: 'barcodes.code'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'category'},
+                    {data: 'default_price', name: 'default_price'},
+                    {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ],

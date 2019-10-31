@@ -711,6 +711,8 @@ class DatatableController extends Controller
             })
             ->editColumn('brand_id', function ($attr) {
                 return ($attr->brand)?$attr->brand->name:'no brand';
+            })->editColumn('status', function ($attr) {
+                return ($attr->status)?"Active":'Draft';
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
