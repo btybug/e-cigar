@@ -345,7 +345,18 @@
                                         </div>
                                         <div id="downloads" class="tab-pane fade">
                                             <div class="col-md-12">
-                                                {!! media_button('downloads',$model,true) !!}
+                                                <div class="col-md-12 d-flex flex-wrap mb-5">
+                                                    <label>Select Manual downloads</label>
+                                                    {!! Form::select('select_download',['' => 'Select']+$downloads,null,['class' =>'form-control select-download w-20']) !!}
+                                                </div>
+
+                                                <div class="col-md-12 manual-codes d-flex flex-wrap mb-5">
+                                                    @if($model && isset($manual_codes) && count($manual_codes))
+                                                        @foreach($manual_codes as $item)
+                                                            @include("admin.items._partials.manual_downloads")
+                                                        @endforeach
+                                                    @endif
+                                                </div>
                                             </div>
                                             <div class="col-md-12 qr-code d-flex flex-wrap @if($model && $model->landing)@else d-none @endif">
                                                 @if($model)
@@ -607,6 +618,7 @@
                 $(this).closest('tr').remove();
             });
 
+
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(
                     "/admin/inventory/items/add-package",
@@ -617,6 +629,27 @@
                         }
                     }
                 );
+            });
+
+            $("body").on('change', '.select-download', function () {
+                let id = $(this).val();
+                let exists = $("body").find('.manual-code[data-id="'+id+'"]');
+                if(! exists.length){
+                    AjaxCall(
+                        "/admin/inventory/items/get-download-html",
+                        {id:$(this).val()},
+                        function (res) {
+                            if (!res.error) {
+
+                                $('.manual-codes').append(res.html)
+                            }
+                        }
+                    );
+                }
+            });
+
+            $("body").on('click', '.delete-manual-code', function () {
+                $(this).closest('.manual-code').remove();
             });
 
             $("body").on('click', '.add-location', function () {

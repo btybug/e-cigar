@@ -6,7 +6,7 @@
         {!! \DNS2D::getBarcodeHTML('https://kaliony.com/landings/'.$code, "QRCODE") !!}
     </div>
     <div class="col-md-3">
-        <a class="btn btn-success" href="{{ route("admin_items_download_code",[$code]) }}">Download QR code</a>
+        <a class="btn btn-success" href="{{ route("admin_items_download_code",[$code,'qr',($model)?$model->name: null]) }}">Download QR code</a>
     </div>
 </div>
 <div class="col-md-12 d-flex flex-wrap mt-5">
@@ -26,7 +26,7 @@
 
     <div class="col-md-3">
         @if(strlen($code) == 13)
-            <a class="btn btn-success" href="{{ route("admin_items_download_code",[$code,'barcode']) }}">Download Barcode</a>
+            <a class="btn btn-success" href="{{ route("admin_items_download_code",[$code,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
         @endif
     </div>
 </div>

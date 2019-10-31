@@ -18,6 +18,10 @@ class Items extends Translatable
 
     protected $guarded = ['id'];
 
+    protected $casts = [
+        'manual_codes' => 'json',
+    ];
+
     public $translationModel = ItemTranslations::class;
 
     public $translatedAttributes = ['name', 'short_description', 'long_description'];

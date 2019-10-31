@@ -60,12 +60,14 @@ class ItemsController extends Controller
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses',
+            'racks', 'shelves', 'data','brands','downloads'));
     }
 
     public function getNewBundle()
@@ -81,13 +83,14 @@ class ItemsController extends Controller
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
+        $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands','downloads'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status', 'default_price', 'landing','brand_id');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status', 'default_price', 'landing','brand_id','manual_codes');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
@@ -113,6 +116,9 @@ class ItemsController extends Controller
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
+        $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->whereIn('id',$model->manual_codes)->get();
+
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
@@ -121,7 +127,7 @@ class ItemsController extends Controller
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
-            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands'));
+            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads','manual_codes'));
     }
 
     private function savePackages($item, array $data = [])
@@ -382,21 +388,37 @@ class ItemsController extends Controller
         return response()->json(['error' => false, 'html' => $html]);
     }
 
-    public function downloadCode($code, $type = 'qr')
+    public function downloadCode($code, $type = 'qr',$name = null)
     {
-        $barcode = Barcodes::where('code', $code)->first();
-        if (!$barcode) return response()->json(['error' => true]);
+        $manual_codes = Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$code)->first();
+        if($manual_codes){
+            $path = base_path().$manual_codes->image;
+            $name = $name . $manual_codes->name .'.png';
+        }else{
+            $barcode = Barcodes::where('code', $code)->first();
+            if (!$barcode) return response()->json(['error' => true]);
 
-        if ($type == 'qr') {
-            $name = $code . 'QR.png';
-            $path = \DNS2D::getBarcodePNGPath('https://kaliony.com//landings/' . $code, "QRCODE" ,200, 200);
-        } else {
-            $name = $code . "BARCODE.png";
+            if ($type == 'qr') {
+
+                $name = $name . 'QR.png';
+                $path = \DNS2D::getBarcodePNGPath('https://kaliony.com//landings/' . $code, "QRCODE" ,200, 200);
+            } else  {
+                $name = $name . "BARCODE.png";
 //            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
-            $path=EAN13render::get($code,public_path('BARCODE.png'),200,100);
+                $path=EAN13render::get($code,public_path('BARCODE.png'),200,100);
+            }
         }
 
-//        dd($path);
         return \Response::download($path, $name);
+    }
+
+    public function getDownloadHtml(Request $request)
+    {
+        $item = Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$request->id)->first();
+
+        if (!$item) return response()->json(['error' => true]);
+
+        $html = $this->view('_partials.manual_downloads', ['item' => $item,'model' => null])->render();
+        return response()->json(['error' => false, 'html' => $html]);
     }
 }

@@ -58,6 +58,13 @@
                     </div>
                     @ok('admin_store_categories')<a href="{!! route('admin_store_categories','special_filter') !!} " class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>@endok
                 </li>
+
+                <li class="item">
+                    <div class="chek-title">
+                        <label for="stripe_paymant"  class="title font-weight-bold">Product downloads</label>
+                    </div>
+                    @ok('admin_store_categories')<a href="{!! route('admin_store_categories','downloads') !!} " class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>@endok
+                </li>
             </ul>
         </div>
 
