@@ -40,7 +40,6 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#locations">Locations</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#landings">Landing</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,7 +130,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-
+                                                <div class="form-group row">
+                                                    <label for="landing"
+                                                           class=" col-sm-2">Allow landing</label>
+                                                    <div class="col-sm-10">
+                                                        {!! Form::hidden('landing',0) !!}
+                                                        {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
+                                                    </div>
+                                                </div>
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="feature_image"
@@ -185,29 +191,7 @@
                                         <div id="images" class="tab-pane fade">
                                             {!! media_button('media',$model,true) !!}
                                         </div>
-                                        <div id="landings" class="tab-pane fade">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <fieldset>
-                                                        <div class="form-group row">
-                                                            <label for="landing"
-                                                                   class=" col-sm-2">Allow landing</label>
-                                                            <div class="col-sm-10">
-                                                                {!! Form::hidden('landing',0) !!}
-                                                                {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
-                                                </div>
-                                                <div class="col-md-6 qr-code @if($model && $model->landing)@else d-none @endif">
-                                                    @if($model)
-                                                       {{--{!! render_bc("png",'code-39', $model->barcode->code) !!}--}}
 
-                                                        @include("admin.items._partials.qr",['code' => $model->barcode->code])
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div>
                                         <div id="locations" class="tab-pane fade">
                                             <div class="form-group row">
                                                 <div class="col-md-2">
@@ -331,7 +315,14 @@
                                             </div>
                                         </div>
                                         <div id="downloads" class="tab-pane fade">
-                                            {!! media_button('downloads',$model,true) !!}
+                                            <div class="col-md-12">
+                                                {!! media_button('downloads',$model,true) !!}
+                                            </div>
+                                            <div class="col-md-12 qr-code d-flex flex-wrap @if($model && $model->landing)@else d-none @endif">
+                                                @if($model)
+                                                    @include("admin.items._partials.qr",['code' => $model->barcode->code])
+                                                @endif
+                                            </div>
                                         </div>
                                         <div id="settings" class="tab-pane fade">
                                             @if($model == null || $model->type != 'bundle')
