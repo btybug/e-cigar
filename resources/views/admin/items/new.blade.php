@@ -198,7 +198,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                                <div class="media-videos-preview" style="display: flex">
+                                                <div class="media-videos-preview" style="display: flex;flex-wrap: wrap">
                                                     @if(isset($model->videos) && $model->videos && count($model->videos))
                                                         @foreach($model->videos as $video)
                                                             <div class="video-single-item" style="display: flex">
