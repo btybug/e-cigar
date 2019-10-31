@@ -122,8 +122,11 @@
                     buttons: [
                         'csv', 'excel', 'pdf', 'print'
                     ],
-                    "columnDefs": [
-                    ],
+                    columnDefs: [ {
+                        orderable: false,
+                        className: 'select-checkbox',
+                        targets:   0
+                    } ],
                     columns: tableHeadArray,
                     initComplete: function () {
                         this.api().columns().every(function () {
