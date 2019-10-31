@@ -180,8 +180,8 @@
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'brand_id', name: 'brand_id'},
-                    {data: 'barcode_id', name: 'barcode_id'},
-                    {data: 'quantity', name: 'quantity'},
+                    {data: 'barcode_id', name: 'barcodes.code'},
+                    {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'category'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}

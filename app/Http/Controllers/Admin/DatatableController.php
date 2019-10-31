@@ -688,7 +688,8 @@ class DatatableController extends Controller
     public function getAllItems()
     {
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->select('items.*','item_translations.name','item_translations.short_description')
+            ->leftJoin('barcodes','items.barcode_id','=','barcodes.id')
+            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
 //            ->editColumn('name', function ($attr) {
@@ -704,9 +705,11 @@ class DatatableController extends Controller
                 return $str;
             })->addColumn('quantity', function ($attr) {
                 return ($attr->type=='simple')?$attr->purchase()->sum('qty')-$attr->others()->sum('qty'):'N/A';
-            })->addColumn('barcode_id', function ($attr) {
+            })
+            ->addColumn('barcode_id', function ($attr) {
                 return ($attr->barcode)?$attr->barcode->code:'no barcode';
-            })->editColumn('brand_id', function ($attr) {
+            })
+            ->editColumn('brand_id', function ($attr) {
                 return ($attr->brand)?$attr->brand->name:'no brand';
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
