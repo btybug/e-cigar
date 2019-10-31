@@ -193,7 +193,7 @@
                         className: 'select-checkbox',
                         orderable: false},
                     {data: 'name', name: 'item_translations.name'},
-                    {data: 'brand_id', name: 'brand_id'},
+                    {data: 'brand_id', name: 'categories_translations.name'},
                     {data: 'barcode_id', name: 'barcodes.code'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'category'},

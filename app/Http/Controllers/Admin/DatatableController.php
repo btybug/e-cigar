@@ -689,12 +689,15 @@ class DatatableController extends Controller
     {
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('barcodes','items.barcode_id','=','barcodes.id')
-            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code')
+            ->leftJoin('categories','items.brand_id','=','categories.id')
+            ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
+            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code','categories_translations.name')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
 //            ->editColumn('name', function ($attr) {
 //                return $attr->name;
-//            })
+//            }),
+//                \DB::raw('SUM(purchases.qty) as pqty,SUM(others.qty) as oqty')
             ->addColumn('category', function ($attr) {
                 $str = '';
                 if($attr->categories && count($attr->categories)){
