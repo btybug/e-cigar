@@ -36,7 +36,7 @@
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Type</th>
-                                <th>Sku</th>
+                                <th>Brand</th>
                                 <th>Barcode</th>
                                 <th>Quantity</th>
                                 <th>Category</th>
@@ -69,10 +69,10 @@
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'type', name: 'type'},
-                    {data: 'sku', name: 'sku'},
+                    {data: 'brand_id', name: 'brand_id'},
                     {data: 'barcode_id', name: 'barcode_id'},
                     {data: 'quantity', name: 'quantity'},
-                    {data: 'short_description', name: 'item_translations.short_description'},
+                    {data: 'category', name: 'category'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]

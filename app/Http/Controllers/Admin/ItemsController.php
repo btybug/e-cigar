@@ -59,12 +59,13 @@ class ItemsController extends Controller
         $barcodes = $this->barcodeService->getPluck();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands'));
     }
 
     public function getNewBundle()
@@ -75,17 +76,18 @@ class ItemsController extends Controller
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data'));
+        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands'));
     }
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status', 'default_price', 'landing');
+        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status', 'default_price', 'landing','brand_id');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveImages($request, $item);
@@ -116,9 +118,10 @@ class ItemsController extends Controller
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
+        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
 
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
-            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves'));
+            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands'));
     }
 
     private function savePackages($item, array $data = [])

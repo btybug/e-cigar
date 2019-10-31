@@ -156,6 +156,35 @@
                                                         </div>
                                                     </div>
                                                 </div>
+
+                                                <div class="form-group">
+                                                    <label class="col-sm-12 control-label pl-sm-0">Brands</label>
+                                                    <div id="brands_treeview_json">
+                                                        <div class="filter-wall cat-name row">
+                                                            <div class="col-7 p-sm-0">
+                                                                @foreach($brands as $parent)
+                                                                    <p class="pl-sm-0 bold">{{ $parent->name }}</p>
+                                                                    @if(count($parent->children))
+                                                                        @foreach($parent->children as $brand)
+                                                                            <div
+                                                                                class="single-wrap ml-4">
+                                                                                <div
+                                                                                    class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                    {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                    <label
+                                                                                        class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                        for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                    </label>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endforeach
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
                                         </div>
                                         <div id="videos" class="tab-pane fade">
                                             <div class="media-videos">

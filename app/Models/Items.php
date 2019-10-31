@@ -56,6 +56,11 @@ class Items extends Translatable
         return $this->belongsTo(Barcodes::class, 'barcode_id');
     }
 
+    public function brand()
+    {
+        return $this->belongsTo(Category::class, 'brand_id');
+    }
+
     public function media()
     {
         return $this->hasMany(ItemsMedia::class, 'item_id')->where('items_media.type','image');

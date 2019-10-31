@@ -693,19 +693,27 @@ class DatatableController extends Controller
             ->where('item_translations.locale', \Lang::getLocale()))
             ->editColumn('name', function ($attr) {
                 return $attr->name;
-            })->editColumn('short_description', function ($attr) {
-                return $attr->short_description;
+            })->addColumn('category', function ($attr) {
+                $str = '';
+                if($attr->categories && count($attr->categories)){
+                    foreach ($attr->categories as $category){
+                        $str .= "<span class='badge badge-dark'>".$category->name."</span>";
+                    }
+                }
+                return $str;
             })->addColumn('quantity', function ($attr) {
                 return ($attr->type=='simple')?$attr->purchase()->sum('qty')-$attr->others()->sum('qty'):'N/A';
             })->editColumn('barcode_id', function ($attr) {
                 return ($attr->barcode)?$attr->barcode->code:'no barcode';
+            })->editColumn('brand_id', function ($attr) {
+                return ($attr->brand)?$attr->brand->name:'no brand';
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
                 return "<a class='badge btn-warning' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
             <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>
             <a class='badge btn-danger' href='" . route('admin_items_archive', $attr->id) . "'><i class='fa fa-archive'></i></a>";
-            })->rawColumns(['actions'])->make(true);
+            })->rawColumns(['actions','category'])->make(true);
     }
 
     public function getAllItemsArchived()
