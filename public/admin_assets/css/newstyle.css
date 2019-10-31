@@ -689,7 +689,23 @@ header.main-header .logo .logo-img{
     max-height: 420px;
     overflow: auto;
 }
-/*find page End*/
+.admin-find-wrapper .find-wrapper-results-head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #ffffff !important;
+    background: #24C6DC !important;
+    background: -webkit-linear-gradient(to right, #514A9D, #24C6DC) !important;
+    background: linear-gradient(to right, #514A9D, #24C6DC) !important;
+    padding: .75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0,0,0,.03);
+    border-bottom: 1px solid rgba(0,0,0,.125);
+}
+.admin-find-wrapper .find-wrapper-results-head-right{
+    display: flex;
+}
+    /*find page End*/
 
 #users_special-note .special-note-wall{
     min-height: 70px;

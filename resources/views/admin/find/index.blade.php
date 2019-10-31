@@ -13,7 +13,18 @@
 
         </div>
         <div class="find-wrapper-results mt-5">
-            <h3 class="border-bottom pb-2">Results</h3>
+            <div class="find-wrapper-results-head">
+                <h3>Results</h3>
+                <div class="find-wrapper-results-head-right">
+                    <button class="btn btn-warning btn-edit mr-3">Edit</button>
+                    <select class="form-control">
+                        <option value="">Action</option>
+                        <option value="">Print Barcode</option>
+                        <option value="">Print Qr Code</option>
+                    </select>
+                </div>
+            </div>
+
             <div class="find-wrapper-results-content row">
 
             </div>
