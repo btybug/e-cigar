@@ -39,10 +39,16 @@ class BarcodesController extends Controller
 
     public function postNew(Request $request)
     {
-        $v=\Validator::make($request->all(),['code'=>'required|unique:barcodes,code']);
+        $data=$request->all();
+        $data['code']=explode(',',$data['code']);
+        $v=\Validator::make($data,['code.*'=>'required|unique:barcodes,code']);
         if($v->fails()) return redirect()->back()->withErrors($v);
-        $barcode= Barcodes::create(['code'=>$request->get('code')]);
-        $path=EAN13render::get($request->get('code'),public_path('barcodes'.DS.$request->get('code').'.png'),200,100);
+        foreach ($data['code'] as $code){
+            $barcode= Barcodes::create(['code'=>$code]);
+            $path=EAN13render::get($code,public_path('barcodes'.DS.$code.'.png'),200,100);
+        }
+
+
         return redirect()->route('admin_inventory_barcodes');
     }
 
