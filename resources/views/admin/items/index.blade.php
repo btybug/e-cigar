@@ -44,6 +44,19 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Brand</th>
+                                <th>Barcode</th>
+                                <th>Quantity</th>
+                                <th>Category</th>
+                                <th>Created At</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -56,13 +69,23 @@
 @section('js')
     <script>
         $(function () {
-            $('#stocks-table').DataTable({
+
+            $('#stocks-table tfoot th').each( function () {
+                var title = $(this).text();
+                $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+            } );
+
+            // Apply the search
+
+
+            var table =  $('#stocks-table').DataTable({
                 ajax: "{!! route('datatable_all_items') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
                 // responsive: true,
                 "scrollX": true,
+                "pagingType": "full_numbers",
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
@@ -76,9 +99,21 @@
                     {data: 'quantity', name: 'quantity'},
                     {data: 'category', name: 'category'},
                     {data: 'created_at', name: 'created_at'},
-                    {data: 'actions', name: 'actions'}
+                    {data: 'actions', name: 'actions', orderable: false, searchable: false}
                 ]
             });
+
+            table.columns().every( function () {
+                var that = this;
+
+                $( 'input', this.footer() ).on( 'keyup change clear', function () {
+                    if ( that.search() !== this.value ) {
+                        that
+                            .search( this.value )
+                            .draw();
+                    }
+                } );
+            } );
         });
 
     </script>
