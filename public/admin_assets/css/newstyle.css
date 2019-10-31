@@ -1638,6 +1638,9 @@ color: #ffffff;
     .card.panel .card-body .content.main-content{
         padding: 0;
     }
+    .basic-center.basic-wall .tab-content textarea{
+        height: 150px;
+    }
 
 }
 @media (max-width: 500px) {

@@ -97,13 +97,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Barcode</label>
+                                                    <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Barcode</label>
                                                     @if(! count($barcodes))
-                                                        <div class="col-sm-8">
+                                                        <div class="col-lg-8">
                                                             <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
                                                         </div>
                                                     @else
-                                                        <div class="col-sm-8">
+                                                        <div class="col-lg-8">
                                                             {!! Form::select('barcode_id', $barcodes,null,
                                                             ['class' => 'form-control','id' => 'barcode']) !!}
                                                         </div>
@@ -112,9 +112,9 @@
                                             </div>
                                             <div class="form-group">
                                                 <div class="row">
-                                                    <label for="product_id" class="control-label col-sm-4 col-form-label text-right">Product
+                                                    <label for="product_id" class="control-label col-lg-4 col-form-label text-lg-right">Product
                                                         SKU</label>
-                                                    <div class="col-sm-8">
+                                                    <div class="col-lg-8">
                                                         {!! Form::text('sku', null,
                                                         ['class' => 'form-control']) !!}
                                                     </div>
@@ -122,9 +122,9 @@
                                             </div>
                                                 <div class="form-group">
                                                 <div class="row">
-                                                    <label for="status" class="control-label col-sm-4 col-form-label text-right">
+                                                    <label for="status" class="control-label col-lg-4 col-form-label text-lg-right">
                                                         Status</label>
-                                                    <div class="col-sm-8">
+                                                    <div class="col-lg-8">
                                                         {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
                                                         ['class' => 'form-control']) !!}
                                                     </div>
@@ -132,8 +132,8 @@
                                             </div>
                                                 <div class="form-group row">
                                                     <label for="landing"
-                                                           class=" col-sm-2">Allow landing</label>
-                                                    <div class="col-sm-10">
+                                                           class=" col-xl-2">Allow landing</label>
+                                                    <div class="col-xl-10">
                                                         {!! Form::hidden('landing',0) !!}
                                                         {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
                                                     </div>
@@ -141,27 +141,27 @@
                                             <div class="form-group">
                                                 <div class="row">
                                                     <label for="feature_image"
-                                                           class="control-label col-sm-4 col-form-label text-right">Feature image</label>
-                                                    <div class="col-sm-8">
+                                                           class="control-label col-lg-4 col-form-label text-lg-right">Feature image</label>
+                                                    <div class="col-lg-8">
                                                         {!! media_button('image',$model) !!}
                                                     </div>
                                                 </div>
                                             </div>
                                                 <div class="form-group">
                                                     <div class="row">
-                                                        <label for="barcode" class="control-label col-sm-4 col-form-label text-right">Default price</label>
+                                                        <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Default price</label>
 
-                                                        <div class="col-sm-8">
+                                                        <div class="col-lg-8">
                                                             {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label class="col-sm-12 control-label pl-sm-0">Brands</label>
+                                                    <label class="col-sm-12 control-label pl-0">Brands</label>
                                                     <div id="brands_treeview_json">
                                                         <div class="filter-wall cat-name d-flex flex-wrap">
-                                                            <div class="col-7 p-sm-0">
+                                                            <div class="col-md-7 p-0">
                                                                 @foreach($brands as $parent)
                                                                     <p class="pl-sm-0 bold">{{ $parent->name }}</p>
                                                                     @if(count($parent->children))
