@@ -38,6 +38,9 @@
                                 <p >
                                    <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="btn btn-primary"><i class="fa fa-eye"></i> View</a>
                                 </p>
+                                <p >
+                                   <a href="{{ route('admin_stock_edit',  $product->id) }}" target="_blank" class="btn btn-primary"><i class="fa fa-edit"></i> Edit</a>
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -11,8 +11,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Controller;
+use App\ItemsSearch\ItemsSearch;
+use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\Couriers;
+use App\Models\GeoZones;
 use App\Models\Orders;
 use App\Models\Settings;
 use App\Models\Statuses;
@@ -20,7 +23,6 @@ use App\ProductSearch\ProductSearch;
 use App\Search\Customer\CustomersSearch;
 use App\Search\Orders\OrdersSearch;
 use App\Services\FindService;
-use App\Models\GeoZones;
 use Illuminate\Http\Request;
 
 class FindController extends Controller
@@ -63,10 +65,25 @@ class FindController extends Controller
         return ['categories' => $categories, 'brands' => $brands];
     }
 
+    public function getItemsData()
+    {
+        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+        return compact('categories', 'brands', 'barcodes');
+    }
+
     public function postProductResults(Request $request)
     {
         $products = ProductSearch::apply($request);
         $html = view("admin.find.products.results", compact(['products']))->render();
+        return response()->json(['error' => false, 'html' => $html]);
+    }
+
+    public function postItemsResults(Request $request)
+    {
+        $products = ItemsSearch::apply($request);
+        $html = view("admin.find.items.results", compact(['products']))->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
 

@@ -33,7 +33,7 @@
                 if (!res.error) {
                     $(".find-form").html(res.form);
 
-                    if(option == 'products'){
+                    if(option == 'products' || option == 'items'  ){
                         date_column();
                         call_products();
 
@@ -69,6 +69,7 @@
         function call_products() {
             $("body").find(".categories").select2();
             $("body").find(".brands").select2();
+            $("body").find(".barcodes").select2();
 
             // for date rang
             (function (w, d, s, g, js, fs) {

@@ -7,6 +7,6 @@ return [
     ],
     'products' => [
     ],
-    'Items' => [
+    'items' => [
     ],
 ];
