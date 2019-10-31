@@ -25,14 +25,20 @@
 
     <script>
         $(function () {
-            $('#stocks-table').DataTable({
+            var table = $('#stocks-table').DataTable({
                 ajax: "{!! route('datatable_all_barcodes') !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
                 dom: 'Bfrtip',
                 buttons: [
-                    'csv', 'excel', 'pdf', 'print'
+                    'csv', 'excel', 'pdf',
+                    {
+                        extend: "print",
+                        exportOptions: {
+                            stripHtml: false
+                        }
+                    }
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
@@ -42,13 +48,6 @@
                     {data: 'actions', name: 'actions',orderable : false}
                 ],
                 order: [ [0, 'desc'] ]
-            });
-        });
-
-        $(document).ready(function(){
-            $("body").on('click',".printB",function () {
-                var id = $(this).data('id');
-                $("#barcode"+id).printThis();
             });
         });
     </script>
