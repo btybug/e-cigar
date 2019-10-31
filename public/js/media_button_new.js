@@ -111,7 +111,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
-      return (`<div draggable="true" data-id="${data.id}" class="file" >
+      return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}">
         <a  bb-media-click="select_item" bb-media-type="image">
             <span class="corner"></span>
 
@@ -1409,6 +1409,7 @@ var count = 0;
       const id = e.target.closest(".file").getAttribute("data-id");
       if (e.type === "dblclick") {
           if($(e.target).closest('.file').data('type') === 'html') {
+              console.log('---------------------5---------------------')
 
               $.ajax({
                   type: "get",
@@ -1419,12 +1420,27 @@ var count = 0;
                       "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                   },
                   success: function (data) {
+                      console.log('data',data)
                       // $('#modal-id .modal-body').append(data);
                       // $('#modal-id').modal('show');
                   }
               });
 
-          } else {
+          } else if($(e.target).closest('.file').data('type') === 'pdf') {
+            console.log('helloooooooooo');
+            $("body").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}/public/media/tmp/f8bebe8e469abe8f88763e7bb4e7de3b.pdf&amp;embedded=true" style="width:100%; height:100vh" frameborder="0"></iframe>`)
+              e.target.closest(".file-box").classList.remove("active");
+              const countId = e.target
+                  .closest(".file-box")
+                  .getAttribute("data-image");
+              this.requests.getImageDetails({item_id: id}, res => {
+                  $('#modal_area').html(this.htmlMaker.fullInfoModal(
+                      res,
+                      Number(countId)
+                  ));
+                  return $('body').append(html);
+              });
+          }else {
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
                   .closest(".file-box")
