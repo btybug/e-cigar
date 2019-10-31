@@ -36,7 +36,8 @@
                     {
                         extend: "print",
                         exportOptions: {
-                            stripHtml: false
+                            stripHtml: false,
+                            columns: [ 0, 1, 2,3 ]
                         }
                     }
                 ],
