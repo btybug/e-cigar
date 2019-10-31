@@ -691,9 +691,10 @@ class DatatableController extends Controller
             ->select('items.*','item_translations.name','item_translations.short_description')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
-            ->editColumn('name', function ($attr) {
-                return $attr->name;
-            })->addColumn('category', function ($attr) {
+//            ->editColumn('name', function ($attr) {
+//                return $attr->name;
+//            })
+            ->addColumn('category', function ($attr) {
                 $str = '';
                 if($attr->categories && count($attr->categories)){
                     foreach ($attr->categories as $category){
