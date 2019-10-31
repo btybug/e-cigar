@@ -1139,7 +1139,7 @@ function get_currency()
 {
     $default = site_default_currency();
 
-    return (\Cookie::get('currency')) ? \Cookie::get('currency')
+    return (\Cookie::get('currency') && \App\Models\SiteCurrencies::where('code',\Cookie::get('currency'))->exists()) ? \Cookie::get('currency')
         : (($default) ? $default->code : null);
 }
 
