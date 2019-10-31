@@ -1429,6 +1429,7 @@ var count = 0;
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
             console.log('helloooooooooo', $(e.target).closest('.file').find('img').attr('src'));
             $(".folderitems").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:100vh" frameborder="0"></iframe>`)
+              console.log(Math.random())
               // e.target.closest(".file-box").classList.remove("active");
               // const countId = e.target
               //     .closest(".file-box")
