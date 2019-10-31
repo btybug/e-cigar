@@ -122,6 +122,8 @@
                     buttons: [
                         'csv', 'excel', 'pdf', 'print'
                     ],
+                    "columnDefs": [
+                    ],
                     columns: tableHeadArray,
                     initComplete: function () {
                         this.api().columns().every(function () {
