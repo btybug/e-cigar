@@ -1428,7 +1428,7 @@ var count = 0;
 
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
             console.log('helloooooooooo', $(e.target).closest('.file').find('img').attr('src'));
-            $("body").append(`<iframe src="https://docs.google.com/gview?url=${location.origin}${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:100vh" frameborder="0"></iframe>`)
+            $("body").append(`<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=${location.origin}${$(e.target).closest('.file').find('img').attr('src')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
                   .closest(".file-box")
