@@ -73,9 +73,9 @@
                     onBlur: 'submit'
                 } );
             } );
-                $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
-                    editor.inline(this);
-                });
+                // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
+                //     editor.inline(this);
+                // });
 
                     {{$dataTable->generateScripts()}}
             @php
