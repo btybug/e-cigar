@@ -378,6 +378,26 @@
                                                             @endif
                                                         @endforeach
                                                     @endif
+                                                    @if($model && $model->barcode)
+                                                        <div class="row mt-5">
+                                                            <div class="col-xl-3">
+                                                                BARCODE
+                                                            </div>
+                                                            <div class="col-xl-6">
+                                                                @if(strlen($model->barcode->code) == 13)
+                                                                    <img src="{!! url('public/barcodes/'.$model->barcode->code.'.png') !!}" />
+                                                                @else
+                                                                    Barcode is invalid, need to be 13 numbers
+                                                                @endif
+                                                            </div>
+
+                                                            <div class="col-xl-3">
+                                                                @if(strlen($model->barcode->code) == 13)
+                                                                    <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode->code,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                             <div class="qr-code @if($model && $model->landing)@else d-none @endif">
