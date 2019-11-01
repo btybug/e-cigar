@@ -62,6 +62,7 @@ class ItemsDataTable extends DataTable
                 'dom' => 'Bfrtip',
                 'order' => [1, 'asc'],
                 'tfoot ',
+                'searching'=>false,
                 'select' => [
                     'style' => 'os',
                     'selector' => 'td:first-child',
