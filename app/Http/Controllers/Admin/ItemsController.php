@@ -435,16 +435,22 @@ class ItemsController extends Controller
         $items = Items::whereIn('id',$ids)->get();
         if($method == 'download'){
             if($type == 'qr_code'){
-                $fileArray = [];
-                foreach ($items as $item){
-                    $fileArray[] = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $item->barcode->code, "QRCODE" ,200, 200);
-                }
+                $this->x($items);
 
-                $zipper = new Zipper();
-                $zipper->make('public/codes.zip')->add($fileArray);
-                return response()->download(public_path('codes.zip'));
+                return \Response::download(public_path('codes.zip'), 'codes.zip', array('Content-Type: application/octet-stream','Content-Length: '. filesize(public_path('codes.zip'))))->deleteFileAfterSend(true);
             }
         }
         dd($request->all());
+    }
+
+    public function x($items)
+    {
+        $fileArray = [];
+        foreach ($items as $item){
+            $fileArray[] = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $item->barcode->code, "QRCODE" ,200, 200);
+        }
+
+        $zipper = new Zipper();
+        $zipper->make('public/codes.zip')->add($fileArray);
     }
 }

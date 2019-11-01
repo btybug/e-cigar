@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="col-md-6 d-flex justify-content-end pr-0">
-            <div class="col-md-10 multi-option {{ ($main && $main->type =='package_product') ? '' : 'hide' }}">
+            <div class="col-md-10 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
                 <div class="row h-100 align-items-center">
                     <div class="col-md-5">
                         <div class="row">

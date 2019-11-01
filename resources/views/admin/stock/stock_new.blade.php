@@ -1749,15 +1749,15 @@
                     function (res) {
                         if (!res.error) {
                             if (value == 'filter') {
-                                parent.find('.multi-option').removeClass('show').addClass('d-none');
+                                parent.find('.multi-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-variation-box').empty();
                             } else if (value == 'package_product') {
                                 parent.find('.filter-option').removeClass('show').addClass('hide');
-                                parent.find('.multi-option').removeClass('d-none').addClass('show');
+                                parent.find('.multi-option').removeClass('hide').addClass('show');
                             } else {
-                                parent.find('.filter-option').removeClass('show').addClass('d-none');
-                                parent.find('.multi-option').removeClass('show').addClass('d-none');
+                                parent.find('.filter-option').removeClass('show').addClass('hide');
+                                parent.find('.multi-option').removeClass('show').addClass('hide');
                             }
 
                             parent.find('.type-place').html(res.html)

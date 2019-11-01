@@ -89,7 +89,7 @@
 
             const shortAjax = function(url, data, success, error) {
                 $.ajax({
-                    type: "post",
+                    type: "get",
                     url: url,
                     cache: false,
                     datatype: "json",
