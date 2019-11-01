@@ -111,8 +111,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
-        if(data.extension === "pdf") {
-            return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" data-url="${data.url}">
+            return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" ${data.extension === "pdf" && ('data-url="' + data.url + '"')}>
                         <a  bb-media-click="select_item" bb-media-type="image">
                             <span class="corner"></span>
                 
@@ -139,34 +138,7 @@ const App = function() {
                             </span>
                         </a>
                     </div>`);
-        }
-      return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}">
-        <a  bb-media-click="select_item" bb-media-type="image">
-            <span class="corner"></span>
 
-            <div class="icon">
-                <img width="180px" data-lightbox="image" src="/public/media/tmp/${data.original_name}">
-                <i class="fa fa-file"></i>
-            </div>
-            <div class="file-name">
-            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
-            </div>
-            <!--<small>Added: ${data.updated_at}</small>-->
-            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-              </button>
-              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
-                  <i class="fa fa-trash" style="color:#ffffff"></i>
-                </button>
-                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-              </span>
-            </span>
-        </a>
-    </div>`);
     },
     //********App -> htmlMaker -> makeImage********end
 
@@ -174,32 +146,32 @@ const App = function() {
           console.log(data);
 
           return (`<div draggable="true" data-id="${data.id}" class="file" >
-        <a  bb-media-click="select_item" bb-media-type="image">
-            <span class="corner"></span>
-
-            <div class="icon">
-                <img width="180px" data-lightbox="image" src="/public/images/html.jpg">
-                <i class="fa fa-file"></i>
-            </div>
-            <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
-            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
-            </div>
-            <!--<small>Added: ${data.updated_at}</small>-->
-            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-              </button>
-              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
-                  <i class="fa fa-trash" style="color:#ffffff"></i>
-                </button>
-                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-              </span>
-            </span>
-        </a>
-    </div>`);
+                        <a  bb-media-click="select_item" bb-media-type="image">
+                            <span class="corner"></span>
+                
+                            <div class="icon">
+                                <img width="180px" data-lightbox="image" src="/public/images/html.jpg">
+                                <i class="fa fa-file"></i>
+                            </div>
+                            <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
+                            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
+                            </div>
+                            <!--<small>Added: ${data.updated_at}</small>-->
+                            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+                              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+                              </button>
+                              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
+                                  <i class="fa fa-trash" style="color:#ffffff"></i>
+                                </button>
+                                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+                                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                              </span>
+                            </span>
+                        </a>
+                    </div>`);
       },
 
     makeTreeLeaf: (id, name) => {
@@ -495,7 +467,7 @@ const App = function() {
     //********App -> htmlMaker -> editNameModal********end
 
     //********App -> htmlMaker -> fullInfoModal********start
-    fullInfoModal: (data, countId) => {
+    fullInfoModal: (data, countId, pdf) => {
       return `<div class="adminmodal modal fade show d-block in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-9 p-0">
@@ -508,7 +480,7 @@ const App = function() {
         +`</div>
                     <div class="modal-body text-center">
                     <div class="modal-title">
-                    <img src="${data.url}" data-slideshow="typeext" style="width:100%">
+                    ${pdf ? pdf : `<img src="${data.url}" data-slideshow="typeext" style="width:100%">`}
                     </div>
                     </div>
                        <div class="modal-footer col-md-9">
@@ -1450,7 +1422,7 @@ var count = 0;
                       "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                   },
                   success: function (data) {
-                      console.log('data',data)
+                      console.log('data',data);
                       // $('#modal-id .modal-body').append(data);
                       // $('#modal-id').modal('show');
                   }
@@ -1459,7 +1431,19 @@ var count = 0;
           } else if($(e.target).closest('.file').data('type') === 'pdf') {
             console.log('helloooooooooo', `${location.origin}${$(e.target).closest('.file').find('img').attr('src')}`);
               console.log(Math.random())
-            $(".folderitems").html(`<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`)
+              e.target.closest(".file-box").classList.remove("active");
+              const countId = e.target
+                  .closest(".file-box")
+                  .getAttribute("data-image");
+              this.requests.getImageDetails({item_id: id}, res => {
+                  $('#modal_area').html(this.htmlMaker.fullInfoModal(
+                      res,
+                      Number(countId),
+                      `<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`
+                  ));
+                  return $('body').append(html);
+              });
+            // $(".folderitems").html(`<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`);
           }else {
               e.target.closest(".file-box").classList.remove("active");
               const countId = e.target
