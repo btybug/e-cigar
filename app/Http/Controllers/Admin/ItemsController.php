@@ -383,7 +383,7 @@ class ItemsController extends Controller
         $barcode = Barcodes::find($request->code);
         if (!$barcode) return response()->json(['error' => true]);
 
-        $html = $this->view('_partials.qr', ['code' => $barcode->code])->render();
+        $html = $this->view('_partials.qr', ['code' => $barcode->code,'model' => null])->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
 
