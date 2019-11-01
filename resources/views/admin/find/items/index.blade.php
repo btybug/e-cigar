@@ -69,6 +69,7 @@
                     ]
                 });
             $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
+                $('body').find('#DTE_Field_barcodes_code').select2()
                 editor.inline( this, {
                     onBlur: 'submit'
                 } );

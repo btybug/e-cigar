@@ -68,7 +68,7 @@ class ItemsDataTable extends DataTable
                 ],
                 'buttons' => [
 //                    ['extend' => 'create', 'editor' => 'editor'],
-//                    ['extend' => 'edit', 'editor' => 'editor'],
+                    ['extend' => 'edit', 'editor' => 'editor'],
                     ['extend' => 'remove', 'editor' => 'editor'],
                 ]
             ]);
