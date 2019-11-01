@@ -56,6 +56,10 @@
         });
 
         {{$dataTable->generateScripts()}}
+        $("#items-table").append(
+            $('<tfoot/>').append( $("#items-table thead tr").clone() )
+        );
+
         $('#items-table thead th').each( function () {
             var title = $('#items-table tfoot th').eq($(this).index()).text();
             console.log(title)
