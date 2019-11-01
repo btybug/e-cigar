@@ -81,6 +81,7 @@
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_all_geo_zones') !!}",
                 dom: 'Bfrtip',
+                "scrollX": true,
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],

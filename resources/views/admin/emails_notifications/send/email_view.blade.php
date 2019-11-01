@@ -3,7 +3,7 @@
     <div class="card panel panel-default">
         {!! Form::model($model) !!}
         <div class="card-body panel-body">
-            <div class="tab-content tabs_content col-md-12">
+            <div class="tab-content tabs_content">
 
                 <div id="home" class="tab-pane tab_info fade in active show">
 

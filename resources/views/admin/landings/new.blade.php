@@ -10,15 +10,15 @@
             <div class="row">
                 <div class="col-md-8">
                     <div class="form-group">
-                        <label for="text" class="col-4 col-form-label">Name</label>
+                        <label for="text" class="col-form-label">Name</label>
                         {!! Form::text('name',null,['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        <label for="text" class="col-4 col-form-label">Url (starts with /landings)</label>
+                        <label for="text" class="col-form-label">Url (starts with /landings)</label>
                         {!! Form::text('url',null,['class' => 'form-control']) !!}
                     </div>
                     <div class="form-group">
-                        <label for="text" class="col-4 col-form-label">Upload content Html</label>
+                        <label for="text" class="col-form-label">Upload content Html</label>
                         {!! media_button('content',$model) !!}
                     </div>
                 </div>

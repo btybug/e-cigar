@@ -437,6 +437,7 @@
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
+                "scrollX": true,
                 columns: [
                     {data: 'id',name: 'id'},
                     {data: 'url',name: 'url'},
