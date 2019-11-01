@@ -68,12 +68,12 @@
                         {label: "Brand:", name: "brand"}
                     ]
                 });
-            $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
-                $('body').find('#DTE_Field_barcodes_code').select2()
-                editor.inline( this, {
-                    onBlur: 'submit'
-                } );
-            } );
+            // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
+            //     $('body').find('#DTE_Field_barcodes_code').select2()
+            //     editor.inline( this, {
+            //         onBlur: 'submit'
+            //     } );
+            // } );
                 // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
                 //     editor.inline(this);
                 // });
