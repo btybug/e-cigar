@@ -9,11 +9,11 @@
                 {!! Form::model($category,['url'=>route('post_admin_tools_filters_edit_category',$category->id),'class'=>'w-100']) !!}
                 <div class="d-flex flex-wrap justify-content-between">
                     <div class="row">
-                        <div class="col-md-6">
-                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][name]',$category->name,['class'=>'form-control mb-1','required'=>true,'placeholder'=>'Filter Name']) !!}
                         </div>
-                        <div class="col-md-6">
-                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][description]',$category->description,['class'=>'form-control','required'=>true,'placeholder'=>'Filter Name']) !!}
+                        <div class="col-sm-6">
+                            {!! Form::text('translatable['.strtolower(app()->getLocale()).'][description]',$category->description,['class'=>'form-control mb-1','required'=>true,'placeholder'=>'Filter Name']) !!}
 
                         </div>
 
