@@ -12,12 +12,13 @@ Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
 Route::group(['prefix' => 'find'], function () {
-    Route::get('/', 'Admin\FindController@getIndex')->name('admin_find');
+    Route::any('/', 'Admin\FindController@getIndex')->name('admin_find');
     Route::post('/call-find', 'Admin\FindController@postCallFind')->name('admin_find_call');
     Route::post('/products-find', 'Admin\FindController@postProductResults')->name('find_product_results');
     Route::post('/items-find', 'Admin\FindController@postItemsResults')->name('find_items_results');
     Route::post('/orders-find', 'Admin\FindController@postOrdersResults')->name('find_orders_results');
     Route::post('/customers-find', 'Admin\FindController@postCustomersResults')->name('find_customers_results');
+    Route::resource('items', 'ItemsController');
 });
 
 Route::get('/profile', 'Admin\AdminController@getProfile')->name('admin_dashboard_profile');
@@ -636,7 +637,7 @@ Route::get('/fix-barcodes', function () {
     $barcodes = \App\Models\Barcodes::all()->pluck('code');
     foreach ($barcodes as $code) {
         try {
-            $path = EAN13render::get($code, public_path('barcodes' . DS . $code . '.png'), 200, 100);
+            $path = EAN13render::get($code, public_path('barcodes' . DS . $code . '.png'));
         } catch (Exception $e) {
             echo $code . '<br>';
         }
@@ -648,4 +649,4 @@ Route::get('/datatable-test', function () {
   return view('admin.test');
 });
 
-Route::resource('items-editor', 'ItemsController');
+
