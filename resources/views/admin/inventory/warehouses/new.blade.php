@@ -30,7 +30,7 @@
                                      class="tab-pane fade  @if($loop->first) in active show @endif">
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">Warehouse name</span></label>
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">Manager name</span></label>
@@ -50,7 +50,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">City </span></label>
@@ -61,7 +61,7 @@
 
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">Telephone Number</span></label>
@@ -72,7 +72,7 @@
 
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Short Description">Description</span></label>
@@ -82,7 +82,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">First Line Address </span></label>
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="form-group row">
                                         <label
-                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                            class="col-sm-2 control-label col-form-label text-sm-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Attribute Name Title">Address</span></label>
@@ -106,7 +106,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <label for="feature_image"
-                                           class="control-label col-sm-4 control-label col-form-label text-right">Image</label>
+                                           class="control-label col-sm-4 control-label col-form-label text-sm-right">Image</label>
                                     <div class="col-sm-8">
                                         {!! media_button('image',$model) !!}
                                     </div>
