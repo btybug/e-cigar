@@ -178,13 +178,13 @@
                                 {
                                     text: 'Barcode',
                                     action: function(e, dt) {
-                                        action(dt, 'admin/inventory/items/datatable-selections', 'download', 'barcode')
+                                        action(dt, '/admin/inventory/items/datatable-selections', 'download', 'barcode')
                                     }
                                 },
                                 {
                                     text: 'QR Code',
                                     action: function (e, dt) {
-                                        action(dt, 'admin/inventory/items/datatable-selections', 'download', 'qr_code')
+                                        action(dt, '/admin/inventory/items/datatable-selections', 'download', 'qr_code')
                                     }
                                 }
                             ]
@@ -196,13 +196,13 @@
                                 {
                                     text: 'Barcode',
                                     action: function ( e, dt, node, config ) {
-                                        action(dt, 'admin/inventory/items/datatable-selections', 'print', 'barcode')
+                                        action(dt, '/admin/inventory/items/datatable-selections', 'print', 'barcode')
                                     }
                                 },
                                 {
                                     text: 'QR Code',
                                     action: function ( e, dt, node, config ) {
-                                        action(dt, 'admin/inventory/items/datatable-selections', 'print', 'qr_code')
+                                        action(dt, '/admin/inventory/items/datatable-selections', 'print', 'qr_code')
                                     }
                                 }
                             ]
