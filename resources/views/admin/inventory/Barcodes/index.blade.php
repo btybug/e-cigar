@@ -30,6 +30,7 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                "scrollX": true,
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf',

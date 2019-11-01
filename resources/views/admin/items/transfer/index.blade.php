@@ -9,7 +9,7 @@
         </div>
         <div class="card-body panel-body">
 
-            <div class="col-md-8">
+            <div class="col-xl-8">
                 <div class="form-group row required">
                     <label class="col-sm-2 control-label" for="input-code">
                         <span data-toggle="tooltip" title="" data-original-title="">Item</span></label>

@@ -5,7 +5,7 @@
             <h3 class="m-0">Others Form</h3>
         </div>
         <div class="card-body panel-body">
-            <div class="col-md-8">
+            <div class="col-xl-8">
                 {!! Form::model($model,['url' => route('post_admin_inventory_others_new'),'id' => 'form-coupon','class' => '']) !!}
                 {!! Form::hidden('id') !!}
                 <div class="form-group row required">
@@ -104,6 +104,7 @@
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
+                "scrollX": true,
                 dom: 'Bfrtip',
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'

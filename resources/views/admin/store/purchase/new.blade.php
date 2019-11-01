@@ -9,7 +9,7 @@
         </div>
         <div class="card-body panel-body">
 
-            <div class="col-md-8">
+            <div class="col-xl-8">
                 {!! Form::model($model,['url' => route('admin_inventory_purchase_save'),'id' => 'form-coupon','class' => '']) !!}
                 {!! Form::hidden('id') !!}
                 <div class="form-group row required">
@@ -20,31 +20,33 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <table class="table table--store-settings">
-                        <thead>
-                        <tr class="bg-my-light-pink">
-                            <th>Warehouse</th>
-                            <th>Rack</th>
-                            <th>Shelve</th>
-                            <th>QTY</th>
-                            <th>Action</th>
-                        </tr>
-                        </thead>
+                    <div class="table-responsive">
+                        <table class="table table--store-settings">
+                            <thead>
+                            <tr class="bg-my-light-pink">
+                                <th>Warehouse</th>
+                                <th>Rack</th>
+                                <th>Shelve</th>
+                                <th>QTY</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
 
-                        <tbody class="v-options-list-locations">
+                            <tbody class="v-options-list-locations">
                             @include('admin.store.purchase.locations')
-                        </tbody>
+                            </tbody>
 
-                        <tfoot>
-                        <tr class="add-new-ship-filed-container">
-                            <td colspan="5" class="text-right">
-                                <button type="button" class="btn btn-primary add-location"><i
-                                        class="fa fa-plus-circle "></i>
-                                </button>
-                            </td>
-                        </tr>
-                        </tfoot>
-                    </table>
+                            <tfoot>
+                            <tr class="add-new-ship-filed-container">
+                                <td colspan="5" class="text-right">
+                                    <button type="button" class="btn btn-primary add-location"><i
+                                            class="fa fa-plus-circle "></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
                 
                 <div class="form-group row">
@@ -89,7 +91,7 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-            <div class="col-md-4 product-box">
+            <div class="col-xl-4 product-box">
 
             </div>
         </div>
