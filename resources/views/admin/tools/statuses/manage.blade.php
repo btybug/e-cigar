@@ -24,24 +24,25 @@
             </div>
             <div class="card-body panel-body">
                 <div class="row">
-                    <div class="col-md-3 attributes-container">
+                    <div class="col-xl-3 col-lg-4  col-md-5 attributes-container">
                         <div class="mb-20 list-group">
                             @foreach($statuses as $status)
                                 <div class="d-flex flex-wrap form-group row list-group-item bg-light  pointer" data-item-id="{!! $status->id !!}"
                                      data-parent-id="1">
-                                    <div class="col-md-6 attr-option" data-item-id="{!! $status->id !!}">
+                                    <div class="col-6 attr-option" data-item-id="{!! $status->id !!}">
                                         {!! ($status->name)??"Empty" !!}
                                     </div>
-                                    <div class="col-md-4 text-right">
-                                        <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
-                                    </div>
-                                    <div class="col-md-2 text-right">
-                                        @if(!$status->is_default)
-                                            {!! Form::model($status,['url' => route('post_admin_stock_statuses_delete')]) !!}
-                                            {!! Form::hidden('id',null) !!}
+                                    <div class="col-6 text-right">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
+                                            @if(!$status->is_default)
+                                                {!! Form::model($status,['url' => route('post_admin_stock_statuses_delete')]) !!}
+                                                {!! Form::hidden('id',null) !!}
                                                 <button class="btn btn-sm btn-danger" type="submit"><i class='fa fa-trash'></i></button>
-                                            {!! Form::close() !!}
-                                        @endif
+                                                {!! Form::close() !!}
+                                            @endif
+                                        </div>
+
                                     </div>
                                 </div>
                             @endforeach
@@ -58,7 +59,7 @@
                         {{--</form>--}}
                         {{--</div>--}}
                     </div>
-                    <div class="col-md-8 col-md-offset-1">
+                    <div class="col-xl-9 col-lg-8  col-md-7">
                         @include('admin.tools.statuses._patrials.status_form')
                     </div>
                 </div>

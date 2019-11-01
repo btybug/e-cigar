@@ -1616,11 +1616,12 @@ color: #ffffff;
 .basic-center.basic-wall .suppliers-block .inventory-attr-item{
     margin-bottom: 10px;
 }
-div.dt-buttons {
-    float: right;
-}
+
 .main-header .logo-admin-mobile{
     display: none;
+}
+.inventory_attributes .attributes-container .btn-danger{
+    padding: 0.25rem .54rem;
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
