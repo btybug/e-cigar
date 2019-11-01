@@ -5,6 +5,7 @@ namespace App\DataTables;
 
 use App\ItemsSearch\ItemsSearch;
 use App\Models\Barcodes;
+use App\Models\Category;
 use App\Models\Items;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -28,9 +29,9 @@ class ItemsDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('barcode_id',function ($item){
              return $item->code;
-            })->editColumn('brand',function ($item){
-             $brand= $item->brand;
-             return   ($brand)?$brand->name:null;
+            })->editColumn('brand_id',function ($item){
+             $brand= Category::find($item->brand_id);
+             return  ($brand)?$brand->name:null;
             })
             ;
 
@@ -45,7 +46,7 @@ class ItemsDataTable extends DataTable
     public function query(Items $model,Request $request)
     {
         $products = ItemsSearch::apply($request);
-        return $products->select('items.id', 'item_translations.name', 'barcodes.code', 'items.default_price');
+        return $products->with('brand')->select('items.*', 'item_translations.name', 'barcodes.code');
     }
 
     /**
@@ -120,7 +121,9 @@ class ItemsDataTable extends DataTable
     public function getOptions()
     {
         return [
-            'barcodes_code'=>Barcodes::select('code as label','id as value')->get()
+            'barcodes_code'=>Barcodes::select('code as label','id as value')->get(),
+            'brands'=>Category::where('type','brands')->join('categories_translations','categories_translations.category_id','categories.id')->
+                where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
         ];
     }
     /**
@@ -143,7 +146,8 @@ class ItemsDataTable extends DataTable
             'name',
             'default_price',
             ['name' => 'barcodes', 'data' => 'barcode_id', 'title' => 'Barcode','editField'=> "barcodes_code"],
-            'brand',
+            'brand_id',
+//            ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
         ];
     }
 

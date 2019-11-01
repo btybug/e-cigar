@@ -68,6 +68,10 @@ class ItemsDataTableEditor extends DataTablesEditor
             $data['barcode_id']=$data['barcodes_code'];
             unset($data['barcodes_code']);
         };
+        if(isset($data['brands'])){
+            $data['brand_id']=$data['brands'];
+            unset($data['brands']);
+        };
 
         return $data;
     }

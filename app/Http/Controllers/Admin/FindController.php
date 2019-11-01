@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\DataTables\ItemsDataTable;
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Controller;
 use App\ItemsSearch\ItemsSearch;
@@ -39,14 +40,14 @@ class FindController extends Controller
         $this->findService = $findService;
     }
 
-    public function getIndex()
+    public function getIndex(Request $request, ItemsDataTable $dataTable)
     {
         $options = $this->findService->getOptions();
-
-        return view('admin.find.index', compact(['options']));
+        $data = $request->all();
+        return $dataTable->render('admin.find.index', compact(['options','data']));
     }
 
-    public function postCallFind(Request $request)
+    public function postCallFind(Request $request, ItemsDataTable $dataTable)
     {
         $key = $request->get('key');
         $fn = 'get' . strtoupper($key) . "Data";
@@ -80,10 +81,10 @@ class FindController extends Controller
         return response()->json(['error' => false, 'html' => $html]);
     }
 
-    public function postItemsResults(Request $request)
+    public function postItemsResults(Request $request, ItemsDataTable $dataTable)
     {
         $products = ItemsSearch::apply($request);
-        $html = view("admin.find.items.results", compact(['products']))->render();
+        $html = $dataTable->render("admin.find.items.results")->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
 

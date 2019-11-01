@@ -65,7 +65,7 @@
                         {label: "Name:", name: "name"},
                         {label: "Price:", name: "default_price"},
                         {label: "Barcode:", name: "barcodes_code",type: "select"},
-                        {label: "Brand:", name: "brand"}
+                        {label: "Brand:", name: "brands",type: "select"}
                     ]
                 });
             // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
