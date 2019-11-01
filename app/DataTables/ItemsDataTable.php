@@ -56,8 +56,8 @@ class ItemsDataTable extends DataTable
                     'selector' => 'td:first-child',
                 ],
                 'buttons' => [
-                    ['extend' => 'create', 'editor' => 'editor'],
-                    ['extend' => 'edit', 'editor' => 'editor'],
+//                    ['extend' => 'create', 'editor' => 'editor'],
+//                    ['extend' => 'edit', 'editor' => 'editor'],
                     ['extend' => 'remove', 'editor' => 'editor'],
                 ]
             ]);
@@ -81,7 +81,7 @@ class ItemsDataTable extends DataTable
             ],
             'id',
             'width',
-            'action'=>['readonly' => true]
+            'action'=>['type' => 'readonly']
         ];
     }
 
