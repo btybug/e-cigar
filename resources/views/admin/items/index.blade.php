@@ -127,13 +127,72 @@
                     "scrollX": true,
                     dom: 'Bfrtip',
                     buttons: [
-                        'csv', 'excel', 'pdf', 'print'
+                        // 'selectAll',
+                        // 'selectNone',
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
+                        },
+                        {
+                            extend: 'collection',
+                            text: 'Download',
+                            buttons: [
+                                {
+                                    text: 'Barcode',
+                                    action: function ( e, dt, node, config ) {
+                                        alert( 'Download -> Barcode' );
+                                    }
+                                },
+                                {
+                                    text: 'QR Code',
+                                    action: function ( e, dt, node, config ) {
+                                        alert( 'Download -> QR Code' );
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            extend: 'collection',
+                            text: 'Print',
+                            buttons: [
+                                {
+                                    text: 'Barcode',
+                                    action: function ( e, dt, node, config ) {
+                                        alert( 'Print -> Barcode' );
+                                    }
+                                },
+                                {
+                                    text: 'QR Code',
+                                    action: function ( e, dt, node, config ) {
+                                        alert( 'Print -> QR Code' );
+                                    }
+                                }
+                            ]
+                        }
                     ],
+                    // language: {
+                    //     buttons: {
+                    //         selectAll: "Select all items",
+                    //         selectNone: "Select none"
+                    //     }
+                    // },
                     columnDefs: [ {
                         orderable: false,
                         className: 'select-checkbox',
                         targets:   0
                     } ],
+                    select: {
+                        style:    'multi',
+                        selector: '.select-checkbox'
+                    },
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        },
+                        columns: ':visible:not(.not-exported)',
+                        rows: '.selected'
+                    },
                     columns: tableHeadArray,
                     initComplete: function () {
                         this.api().columns().every(function () {
