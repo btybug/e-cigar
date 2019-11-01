@@ -467,7 +467,7 @@ const App = function() {
     //********App -> htmlMaker -> editNameModal********end
 
     //********App -> htmlMaker -> fullInfoModal********start
-    fullInfoModal: (data, countId, pdf) => {
+    fullInfoModal: (data, countId) => {
       return `<div class="adminmodal modal fade show d-block in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-9 p-0">
@@ -479,7 +479,7 @@ const App = function() {
 
         +`</div>
                     <div class="modal-body text-center">
-                    ${pdf ? pdf + '<div class="modal-title"></div>' : `<div class="modal-title"><img src="${data.url}" data-slideshow="typeext" style="width:100%"></div>`}
+                    ${data.extension === 'pdf' ? `<iframe src="https://docs.google.com/gview?url=${data.url}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe><div class="modal-title"></div>` : `<div class="modal-title"><img src="${data.url}" data-slideshow="typeext" style="width:100%"></div>`}
 												
 												
 												
@@ -1439,8 +1439,7 @@ var count = 0;
               this.requests.getImageDetails({item_id: id}, res => {
                   $('#modal_area').html(this.htmlMaker.fullInfoModal(
                       res,
-                      Number(countId),
-                      `<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`
+                      Number(countId)
                   ));
                   return $('body').append(html);
               });
@@ -1482,7 +1481,8 @@ var count = 0;
           document.querySelectorAll(".adminmodal ").forEach(item => item.remove());
           $('#modal_area').html(this.htmlMaker.fullInfoModal(
               res,
-              Number(id)
+              Number(id),
+              // e.target.closest(".imageload").attr('type') === 'pdf' && `<iframe src="https://docs.google.com/gview?url=${$(e.target).closest('.file').data('url')}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe>`
           ));
         });
       }
