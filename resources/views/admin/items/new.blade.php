@@ -278,30 +278,30 @@
                                                         <legend class="border-bottom">Packaging Size</legend>
                                                         <div class="form-group row">
                                                             <label for="packaging_length"
-                                                                   class=" col-sm-2">Length</label>
-                                                            <div class="col-sm-10">
+                                                                   class=" col-xl-2">Length</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('length',null,['class' => 'form-control']) !!}
 
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_width"
-                                                                   class="col-sm-2">Width</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Width</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('width',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_height"
-                                                                   class="col-sm-2">Height</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Height</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('height',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_weight"
-                                                                   class="col-sm-2">Weight</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Weight</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('weight',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
@@ -312,30 +312,30 @@
                                                         <legend class="border-bottom">Item size</legend>
                                                         <div class="form-group row">
                                                             <label for="packaging_length"
-                                                                   class=" col-sm-2">Length</label>
-                                                            <div class="col-sm-10">
+                                                                   class=" col-xl-2">Length</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('item_length',null,['class' => 'form-control']) !!}
 
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_width"
-                                                                   class="col-sm-2">Width</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Width</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('item_width',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_height"
-                                                                   class="col-sm-2">Height</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Height</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('item_height',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
                                                         <div class="form-group row">
                                                             <label for="packaging_weight"
-                                                                   class="col-sm-2">Weight</label>
-                                                            <div class="col-sm-10">
+                                                                   class="col-xl-2">Weight</label>
+                                                            <div class="col-xl-10">
                                                                 {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
@@ -344,13 +344,13 @@
                                             </div>
                                         </div>
                                         <div id="downloads" class="tab-pane fade">
-                                            <div class="col-md-12">
-                                                <div class="col-md-12 d-flex flex-wrap mb-5">
-                                                    <label>Select Manual downloads</label>
+                                            <div class="">
+                                                <div class="d-flex flex-wrap mb-5">
+                                                    <label class="col-form-label mr-2">Select Manual downloads</label>
                                                     {!! Form::select('select_download',['' => 'Select']+$downloads,null,['class' =>'form-control select-download w-20']) !!}
                                                 </div>
 
-                                                <div class="col-md-12 manual-codes d-flex flex-wrap mb-5">
+                                                <div class="manual-codes mb-5">
                                                     @if($model && $model->manual_codes)
                                                         @foreach($model->manual_codes as $key => $item)
                                                             @if(isset($item['id']))
@@ -358,15 +358,15 @@
                                                                     $manual = \App\Models\Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$item['id'])->first();
                                                                 @endphp
                                                                 @if($manual)
-                                                                    <div class="col-md-12 d-flex flex-wrap manual-code mt-5" data-id="{!! $manual->id !!}">
+                                                                    <div class="row manual-code mt-5" data-id="{!! $manual->id !!}">
                                                                         {!! Form::hidden("manual_codes[$key][id]",$manual->id) !!}
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-xl-3">
                                                                             {!! $manual->name !!}
                                                                         </div>
-                                                                        <div class="col-md-6">
+                                                                        <div class="col-xl-6">
                                                                             {!! media_button("manual_codes[$key][image]",$item['image']) !!}
                                                                         </div>
-                                                                        <div class="col-md-3">
+                                                                        <div class="col-xl-3">
                                                                             <a class="btn btn-success" href="{{ route("admin_items_download_code",[$key,'manual',$model->id]) }}">Download</a>
                                                                             <a class="btn btn-danger delete-manual-code" href="javascript:void(0)">Delete</a>
                                                                         </div>
@@ -377,7 +377,7 @@
                                                     @endif
                                                 </div>
                                             </div>
-                                            <div class="col-md-12 qr-code d-flex flex-wrap @if($model && $model->landing)@else d-none @endif">
+                                            <div class="qr-code @if($model && $model->landing)@else d-none @endif">
                                                 @if($model)
                                                     @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                 @endif

@@ -1643,6 +1643,9 @@ color: #ffffff;
         flex: 0 0 100%;
         max-width: 100%;
     }
+    .basic-center.basic-wall .select-download.w-20{
+        width: 50%;
+    }
 }
 @media (max-width: 767px) {
     .basic-details-tab .basic-left .nav-item{
@@ -1702,5 +1705,8 @@ color: #ffffff;
     }
     .dataTables_wrapper .dt-buttons.btn-group .btn{
         padding: 0.55rem 0.4rem;
+    }
+    .basic-center.basic-wall .select-download.w-20{
+        width: 100%;
     }
 }
