@@ -479,10 +479,10 @@ const App = function() {
 
         +`</div>
                     <div class="modal-body text-center">
-                    ${pdf ? pdf : `<img src="${data.url}" data-slideshow="typeext" style="width:100%">`}
-												<div class="modal-title">
+                    ${pdf ? pdf + '<div class="modal-title"></div>' : `<div class="modal-title"><img src="${data.url}" data-slideshow="typeext" style="width:100%"></div>`}
 												
-												</div>
+												
+												
 												</div>
 													 <div class="modal-footer col-md-9">
 		<div style="display: flex; justify-content: space-between;width:100%">
