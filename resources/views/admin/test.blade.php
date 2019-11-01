@@ -56,6 +56,25 @@
         });
 
         {{$dataTable->generateScripts()}}
+        $('#items-table thead th').each( function () {
+            var title = $('#items-table tfoot th').eq($(this).index()).text();
+            console.log(title)
+            $(this).html( '<input placeholder="'+title+'">' );
+        } );
+
+        // DataTable
+        var table =  window.LaravelDataTables["items-table"];
+
+        // Apply the search
+        table.columns().eq( 0 ).each( function ( colIdx ) {
+            $( 'input', table.column( colIdx ).header() ).on( 'keyup change', function () {
+                table
+                    .column( colIdx )
+                    .search( this.value )
+                    .draw();
+            } );
+        } );
+
     })
 </script>
 </body>
