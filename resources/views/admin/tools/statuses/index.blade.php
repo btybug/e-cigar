@@ -3,12 +3,9 @@
 
 @stop
 @section('content')
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="col-md-6 pull-left"><h2>Statuses</h2></div>
-        </div>
 
-        <div class="payment_gateways_tab">
+        <div class="payment_gateways_tab w-100">
+            <h2>Statuses</h2>
             <ul class="list_paymant">
                 <li class="item">
                     <div class="chek-title">
@@ -69,7 +66,7 @@
                 {{--</thead>--}}
             {{--</table>--}}
         {{--</div>--}}
-    </div>
+
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">

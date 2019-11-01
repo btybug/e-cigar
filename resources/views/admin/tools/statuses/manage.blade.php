@@ -4,9 +4,9 @@
     @php
         $model=null
     @endphp
-    <div class="col-md-12 inventory_attributes">
-        <div class="panel panel-default">
-            <div class="panel-heading">
+    <div class="inventory_attributes">
+        <div class="card panel panel-default">
+            <div class="card-header panel-heading">
                     <div class="head-space-between">
                         <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Status</h2>
                         <div class="form-group row bord-top">
@@ -22,7 +22,7 @@
                         </div>
                     </div>
             </div>
-            <div class="panel-body">
+            <div class="card-body panel-body">
                 <div class="row">
                     <div class="col-md-3 attributes-container">
                         <div class="mb-20 list-group">

@@ -8,8 +8,8 @@
             <div class="head-space-between">
                 <ul class="nav nav-tabs">
                     @foreach(get_languages() as $language)
-                        <li class="@if($loop->first) active @endif"><a data-toggle="tab"
-                                                                       href="#{{ strtolower($language->code) }}">
+                        <li class="nav-item">
+                            <a data-toggle="tab" href="#{{ strtolower($language->code) }}" class="nav-link @if($loop->first) active @endif">
                                 <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
                             </a></li>
                     @endforeach
