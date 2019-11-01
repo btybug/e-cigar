@@ -479,13 +479,14 @@ const App = function() {
 
         +`</div>
                     <div class="modal-body text-center">
-                    <div class="modal-title">
                     ${pdf ? pdf : `<img src="${data.url}" data-slideshow="typeext" style="width:100%">`}
-                    </div>
-                    </div>
-                       <div class="modal-footer col-md-9">
-<div style="display: flex; justify-content: space-between;width:100%">
-                    <button href="#" type="button" role="button" ${
+												<div class="modal-title">
+												
+												</div>
+												</div>
+													 <div class="modal-footer col-md-9">
+		<div style="display: flex; justify-content: space-between;width:100%">
+												<button href="#" type="button" role="button" ${
               countId === 0 ? "disabled" : ""
               } data-id="${countId - 1}" class="btn btn-info popuparrow go-prev-image" bb-media-click="modal_load_image" ><i class="fa fa-arrow-left"></i></button>
 
