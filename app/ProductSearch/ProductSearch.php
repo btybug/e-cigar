@@ -113,9 +113,18 @@ class ProductSearch
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
         $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
 
-        if ($category) {
-            $query->where('stock_categories.categories_id', $category->id);
+        $subcategory = $request->get('subcategory',null);
+        if($subcategory && $subcategory != 'all'){
+            $subcategoryObject = Category::where('slug',$subcategory)->first();
+            if($subcategoryObject)
+                $query->where('stock_categories.categories_id', $subcategoryObject->id);
+
+        }else{
+            if ($category) {
+                $query->where('stock_categories.categories_id', $category->id);
+            }
         }
+
         $query->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
             ->leftJoin('stock_variation_options', 'stock_variations.id', '=', 'stock_variation_options.variation_id')
             ->leftJoin('stock_sales', function($join) {

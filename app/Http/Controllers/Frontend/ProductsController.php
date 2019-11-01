@@ -42,6 +42,7 @@ class ProductsController extends Controller
 //        dd($products);
         $filters = (new Attributes)->getFiltersByCategory($type);
         $data = $request->except('_token');
+        $sc = $request->get('subcategory','all');
         $selecteds = [];
         $selectedBrands = [];
         if (isset($data['select_filter']) && count($data['select_filter'])) {
@@ -70,10 +71,10 @@ class ProductsController extends Controller
         }
 
         if($request->ajax()){
-            $html = View('frontend.products._partials.products_render',compact(['products','selectedBrands','selecteds']))->with('all_products',true)->render();
+            $html = View('frontend.products._partials.products_render',compact(['products','selectedBrands','selecteds','category']))->with('all_products',true)->render();
            return response()->json(['error' => false, 'html' => $html]);
         }
-        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type','selectedBrands'))->with('filterModel', $request->all());
+        return $this->view('index', compact('categories', 'category', 'products', 'filters', 'selecteds', 'type','selectedBrands','sc'))->with('filterModel', $request->all());
     }
 
     public function getSingle($type, $slug)

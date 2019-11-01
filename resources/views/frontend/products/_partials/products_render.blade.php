@@ -1,5 +1,5 @@
 @if(isset($all_products))
-    <div class="selected__filters">
+    <div class="selected__filters overflow-auto clearfix">
         <ul class="d-inline-bloc">
             @if(count($selecteds))
                 @foreach($selecteds as $key => $selected)
@@ -20,6 +20,8 @@
         </ul>
     </div>
 @endif
+
+
 
 @if(count($products))
     <ul class="row products__page-list-product products__all-list-product">

@@ -222,20 +222,23 @@
 
                             {!! Form::close() !!}
                         </div>
-                        <div class="products__page-main_right-wrapper products-box">
+
+                        <div class="products__page-main_right-wrapper">
                             @if($category)
-                                <ul class="d-flex products__page-head__list">
+                                <ul class="d-flex products__page-head__list mb-2">
                                     <li>
-                                        <a href="javascript:void(0)" class="font-sec-reg item-link active">All</a>
+                                        <a href="javascript:void(0)" class="font-sec-reg item-link @if($sc == 'all')active @endif subcategory-select"  data-slug="all">All</a>
                                     </li>
                                     @foreach($category->children as $subcategory)
-                                    <li>
-                                        <a href="javascript:void(0)" class="font-sec-reg item-link">{!! $subcategory->name !!}</a>
-                                    </li>
+                                        <li>
+                                            <a href="javascript:void(0)" class="font-sec-reg item-link @if($sc == $subcategory->slug)active @endif subcategory-select" data-slug="{{ $subcategory->slug }}">{!! $subcategory->name !!}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             @endif
-                            @include("frontend.products._partials.products_render",['all_products' => true])
+                            <div class="products-box">
+                                @include("frontend.products._partials.products_render",['all_products' => true])
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -344,6 +347,13 @@
                 doSubmitForm()
             });
 
+
+            $("body").on("click",'.subcategory-select', function() {
+                $("body").find('.subcategory-select').removeClass('active');
+                $("body").find('.subcategory-select[data-slug="'+$(this).data('slug')+'"]').addClass('active');
+                doSubmitForm()
+            });
+
             // if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
                 $("#search-for-filter").on('keyup', function(e) {
                     e.preventDefault();
@@ -383,12 +393,13 @@
                     let category = $('.all_categories').val();
                     let search_text = $("#search-for-filter").val();
                     let sort_by = $("#sortBy").val();
+                    let subcategory = $("body").find('.subcategory-select.active').data('slug');
 
                     let url = category === '' ? "/products" : "/products/" + category;
                     // let url = "/products/" + category;
                 // console.log(typeof serializeValue)
                 // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
-                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text || ''}`);
+                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
                 var serArr = form.serializeArray();
 
@@ -405,7 +416,7 @@
                     url: url,
                     cache: false,
                     datatype: "json",
-                    data: `${serializeValue}&sort_by=${sort_by}&q=${search_text || ''}`,
+                    data: `${serializeValue}&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`,
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
