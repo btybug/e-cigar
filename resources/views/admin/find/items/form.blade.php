@@ -1,4 +1,4 @@
-{!! Form::open(['class' => 'form-horizontal','url' => route('find_items_results'),'id' => 'findForm']) !!}
+{!! Form::open(['class' => 'form-horizontal','url' =>url('admin/find/items'),'id' => 'findForm','method'=>'GET']) !!}
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group row">
@@ -12,7 +12,7 @@
             <div class="form-group row">
                 <label for="barcode" class="col-sm-2 col-form-label">Product slug</label>
                 <div class="col-sm-10">
-                    {!! Form::text('slug',null,['class' => 'form-control','placeholder' => 'product slug']) !!}
+                    {!! Form::text('slug',@$data['slug'],['class' => 'form-control','placeholder' => 'product slug']) !!}
                 </div>
             </div>
         </div>
@@ -20,7 +20,7 @@
             <div class="form-group row">
                 <label for="product-name" class="col-sm-2 col-form-label">Brands</label>
                 <div class="col-sm-10">
-                    {!! Form::select('brands[]',$brands,null,['class' => 'form-control brands','multiple' => true]) !!}
+                    {!! Form::select('brands[]',$brands,@implode(',',$data['brands']),['class' => 'form-control brands','multiple' => true]) !!}
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="form-group row">
                 <label for="product-id" class="col-sm-2 col-form-label">Categories</label>
                 <div class="col-sm-10">
-                    {!! Form::select('categories[]',$categories,null,['class' => 'form-control categories','multiple' => true]) !!}
+                    {!! Form::select('categories[]',$categories,@implode(',',$data['categories']),['class' => 'form-control categories','multiple' => true]) !!}
                 </div>
             </div>
         </div>
@@ -67,9 +67,18 @@
             <div class="form-group row">
                 <label for="barcodes" class="col-sm-2 col-form-label">Barcodes</label>
                 <div class="col-sm-10">
-                    {!! Form::select('barcodes[]',$barcodes,null,['class' => 'form-control barcodes','id'=>'barcodes','multiple' => true]) !!}
+                    {!! Form::select('barcodes[]',$barcodes,@implode(',',$data['barcodes']),['class' => 'form-control barcodes','id'=>'barcodes','multiple' => true]) !!}
                 </div>
             </div>
         </div>
     </div>
+<div class="col-sm-6">
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit">Find</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 {!! Form::close() !!}

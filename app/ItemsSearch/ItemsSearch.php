@@ -15,7 +15,7 @@ class ItemsSearch
             $filters, static::createObject($category, $filters)
         );
 
-        return static::getResults($query, $sql, $filters);
+        return $query;
     }
 
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
@@ -108,7 +108,9 @@ class ItemsSearch
     private static function createObject($category = null, $request)
     {
         $query = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id');
-        $query->leftJoin('item_categories', 'items.id', '=', 'item_categories.item_id');
+        $query
+            ->leftJoin('item_categories', 'items.id', '=', 'item_categories.item_id')
+            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id');
 
         if ($category) {
             $query->where('item_categories.categories_id', $category->id);

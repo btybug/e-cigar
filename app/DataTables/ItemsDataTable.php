@@ -3,12 +3,10 @@
 namespace App\DataTables;
 
 
+use App\ItemsSearch\ItemsSearch;
 use App\Models\Items;
-use Yajra\DataTables\Html\Button;
-use Yajra\DataTables\Html\Column;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Services\DataTable;
-use Yajra\DataTables\Html\Editor\Fields;
-use Yajra\DataTables\Html\Editor\Editor;
 
 class ItemsDataTable extends DataTable
 {
@@ -22,9 +20,14 @@ class ItemsDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', function(){
+            ->editColumn('barcode_id',function ($item){
+             return $item->code;
+            })->editColumn('brand',function ($item){
+             $brand= $item->brand;
+             return   ($brand)?$brand->name:null;
+            })
+            ;
 
-            });
     }
 
     /**
@@ -33,9 +36,10 @@ class ItemsDataTable extends DataTable
      * @param \App\Item $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Items $model)
+    public function query(Items $model,Request $request)
     {
-          return $model->newQuery()->select('id','width');
+        $products = ItemsSearch::apply($request);
+        return $products->select('items.id', 'item_translations.name','barcodes.code','items.default_price');
     }
 
     /**
@@ -51,6 +55,7 @@ class ItemsDataTable extends DataTable
             ->parameters([
                 'dom' => 'Bfrtip',
                 'order' => [1, 'asc'],
+                'tfoot ',
                 'select' => [
                     'style' => 'os',
                     'selector' => 'td:first-child',
@@ -80,8 +85,10 @@ class ItemsDataTable extends DataTable
                 'searchable' => false
             ],
             'id',
-            'width',
-            'action'=>['type' => 'readonly']
+            'name',
+            'default_price',
+            'barcode_id',
+            'brand',
         ];
     }
 
