@@ -591,6 +591,7 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            $("#barcode").select2();
             $('#landing'). click(function() {
                 if ($(this).prop("checked") == true) {
                     var code  = $("#barcode").val();
