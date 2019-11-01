@@ -223,50 +223,53 @@
 
                                         <div id="locations" class="tab-pane fade">
                                             <div class="form-group row">
-                                                <div class="col-md-2">
+                                                <div class="col-xl-2">
                                                     Locations
                                                 </div>
-                                                <div class="col-sm-10">
-                                                    <table class="table table--store-settings">
-                                                        <thead>
-                                                        <tr class="">
-                                                            <th colspan="4" class="text-left pl-2">Locations</th>
+                                                <div class="col-xl-10">
+                                                    <div class="table-responsive">
+                                                        <table class="table table--store-settings">
+                                                            <thead>
+                                                            <tr class="">
+                                                                <th colspan="4" class="text-left pl-2">Locations</th>
 
-                                                        </tr>
-                                                        <tr class="bg-my-light-pink">
-                                                            <th>Warehouse</th>
-                                                            <th>Rack</th>
-                                                            <th>Shelve</th>
-                                                            <th>Qty</th>
-                                                        </tr>
-                                                        </thead>
+                                                            </tr>
+                                                            <tr class="bg-my-light-pink">
+                                                                <th>Warehouse</th>
+                                                                <th>Rack</th>
+                                                                <th>Shelve</th>
+                                                                <th>Qty</th>
+                                                            </tr>
+                                                            </thead>
 
-                                                        <tbody class="v-options-list-locations">
-                                                        @if($model && $model->locations)
-                                                            @foreach($model->locations as $location)
-                                                                <tr class="v-options-list-item location-item">
-                                                                    <td>
-                                                                        <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
-                                                                    </td>
-                                                                    <td>
-                                                                        <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
-                                                                    </td>
-                                                                    <td>
-                                                                        @if($location->rack)
-                                                                            @php
-                                                                                $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
-                                                                            @endphp
-                                                                            <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
-                                                                        @endif
-                                                                    </td>
-                                                                    <td colspan="2" class="text-right">
-                                                                        <div class="form-control">{{ $location->qty }}</div>
-                                                                    </td>
-                                                                </tr>
-                                                            @endforeach
-                                                        @endif
-                                                        </tbody>
-                                                    </table>
+                                                            <tbody class="v-options-list-locations">
+                                                            @if($model && $model->locations)
+                                                                @foreach($model->locations as $location)
+                                                                    <tr class="v-options-list-item location-item">
+                                                                        <td>
+                                                                            <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
+                                                                        </td>
+                                                                        <td>
+                                                                            @if($location->rack)
+                                                                                @php
+                                                                                    $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
+                                                                                @endphp
+                                                                                <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
+                                                                            @endif
+                                                                        </td>
+                                                                        <td colspan="2" class="text-right">
+                                                                            <div class="form-control">{{ $location->qty }}</div>
+                                                                        </td>
+                                                                    </tr>
+                                                                @endforeach
+                                                            @endif
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
                                                 </div>
 
                                             </div>
@@ -407,7 +410,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="card-body panel-body">
-                                                    <div class="d-flex suppliers-block">
+                                                    <div class="d-flex flex-wrap suppliers-block">
                                                         @if($model)
                                                             @foreach($model->suppliers as $supplier)
                                                                 <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
@@ -440,34 +443,35 @@
 
                                                         </div>
                                                     </div>
-                                                    
-                                                    <table class="table table--store-settings">
-                                                        <thead>
-                                                        <tr class="bg-my-light-pink">
-                                                            <th>Attributes</th>
-                                                            <th></th>
-                                                            <th></th>
-                                                        </tr>
-                                                        </thead>
+                                                    <div class="table-responsive">
+                                                        <table class="table table--store-settings">
+                                                            <thead>
+                                                            <tr class="bg-my-light-pink">
+                                                                <th>Attributes</th>
+                                                                <th></th>
+                                                                <th></th>
+                                                            </tr>
+                                                            </thead>
 
-                                                        <tbody class="v-options-list">
-                                                        @if($model && $model->specifications)
-                                                            @foreach($model->specifications()->whereNull('parent_id')->get() as $selected)
-                                                                @include('admin.items._partials.specifications')
-                                                            @endforeach
-                                                        @endif
-                                                        </tbody>
+                                                            <tbody class="v-options-list">
+                                                            @if($model && $model->specifications)
+                                                                @foreach($model->specifications()->whereNull('parent_id')->get() as $selected)
+                                                                    @include('admin.items._partials.specifications')
+                                                                @endforeach
+                                                            @endif
+                                                            </tbody>
 
-                                                        <tfoot>
-                                                        <tr class="add-new-ship-filed-container">
-                                                            <td colspan="4" class="text-right">
-                                                                <button type="button" class="btn btn-primary add-specification_button"><i
-                                                                        class="fa fa-plus-circle add-specification"></i>
-                                                                </button>
-                                                            </td>
-                                                        </tr>
-                                                        </tfoot>
-                                                    </table>
+                                                            <tfoot>
+                                                            <tr class="add-new-ship-filed-container">
+                                                                <td colspan="4" class="text-right">
+                                                                    <button type="button" class="btn btn-primary add-specification_button"><i
+                                                                            class="fa fa-plus-circle add-specification"></i>
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
                                                 </div>
                                             </div>
 
@@ -481,30 +485,33 @@
                     </div>
                     <div id="package" data-tab="package" class="tab-pane fade media-new-tab package-details-tab
                     @if(!$bundle) hide @endif">
-                        <div class="col-md-12">
+                        <div class="my-2">
                                 <button class="btn btn-primary pull-right add-package-item"
                                         type="button">
                                     <i class="fa fa-plus"></i> Add new
                                 </button>
                         </div>
-                        <table class="table table-style table-bordered mt-2" cellspacing="0"
-                               width="100%">
-                            <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Items</th>
-                                <th>Qty</th>
-                                <th>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody class="package-variation-box">
+                        <div class="table-responsive">
+                            <table class="table table-style table-bordered mt-2" cellspacing="0"
+                                   width="100%">
+                                <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Items</th>
+                                    <th>Qty</th>
+                                    <th>Actions</th>
+                                </tr>
+                                </thead>
+                                <tbody class="package-variation-box">
                                 @if($model && count($model->packages))
                                     @foreach($model->packages as $package)
                                         @include('admin.items._partials.package_item')
                                     @endforeach
                                 @endif
-                            </tbody>
-                        </table>
+                                </tbody>
+                            </table>
+                        </div>
+
                     </div>
                 </div>
             </div>

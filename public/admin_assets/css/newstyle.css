@@ -1613,6 +1613,9 @@ color: #ffffff;
 /*----------------------------------------------------*/
 /*---------------- popUpModal end --------------------*/
 /*----------------------------------------------------*/
+.basic-center.basic-wall .suppliers-block .inventory-attr-item{
+    margin-bottom: 10px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{
@@ -1696,6 +1699,13 @@ color: #ffffff;
     }
     .basic-center.basic-wall .multiple-image-placeholder .img-thumb-container .inner{
         height: 150px;
+    }
+    .basic-center.basic-wall .suppliers-block .inventory-attr-item{
+        width: 100%;
+        margin-right: 0;
+    }
+    .basic-center.basic-wall .suppliers-block .inventory-attr-item .text{
+        width: 100%;
     }
 }
 
