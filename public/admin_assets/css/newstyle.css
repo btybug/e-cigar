@@ -1616,6 +1616,9 @@ color: #ffffff;
 .basic-center.basic-wall .suppliers-block .inventory-attr-item{
     margin-bottom: 10px;
 }
+div.dt-buttons {
+    float: right;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{
