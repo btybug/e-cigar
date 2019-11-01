@@ -1,6 +1,6 @@
 <header class="main-header">
     <!-- Logo -->
-    <a href="{{route('admin_dashboard')}}" class="logo">
+    <a href="{{route('admin_dashboard')}}" class="logo logo-admin-main">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"><b>E-</b>CIGAR</span>
         <!-- logo for regular state and mobile devices -->
@@ -12,14 +12,18 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
+        <a href="{{route('admin_dashboard')}}" class="logo-admin-mobile">
+            <!-- logo for regular state and mobile devices -->
+            <span class="d-block"><img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" class="logo-img"></span>
+        </a>
         <div class="main-header_nav-middle">
             <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
                 <li class="find-link"><a href="{{ route('admin_find') }}" class="btn btn-primary text-white">
-                        <span class="mr-1">Find</span>
+                        <span class="mr-1 mobile-none">Find</span>
                         <i class="fa fa-search"></i></a>
                 </li>
                 <li class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i>Create new</button>
+                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i><span class="mobile-none">Create new</span></button>
                     <div class="dropdown-menu dropdown-menu-right">
                         <a href="{!! route('admin_staff_new') !!}" class="dropdown-item">Staff</a>
                         <a href="#" class="dropdown-item">Customer</a>

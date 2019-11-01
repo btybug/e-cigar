@@ -1619,6 +1619,9 @@ color: #ffffff;
 div.dt-buttons {
     float: right;
 }
+.main-header .logo-admin-mobile{
+    display: none;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{
@@ -1685,6 +1688,28 @@ div.dt-buttons {
     }
     .basic-center.basic-wall .media-videos-preview .video-single-item iframe{
         height: 100px;
+    }
+    .main-header_nav-middle .main-header_nav-middle-list .mobile-none{
+        display: none;
+    }
+    .main-header_nav-middle .main-header_nav-middle-list .fa-plus{
+        margin-right: 0;
+    }
+    .main-header_nav-middle .main-header_nav-middle-list .dropdown-toggle:after{
+        display: none;
+    }
+    .main-header .logo-admin-main{
+        display: none;
+    }
+    .main-header .logo-admin-mobile{
+        display: block;
+        margin: 0 5px;
+    }
+    .main-header .logo-admin-mobile .logo-img{
+        width: 50px;
+        max-height: 45px;
+        object-fit: contain;
+
     }
 
 }
