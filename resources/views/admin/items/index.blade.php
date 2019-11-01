@@ -31,21 +31,23 @@
                     </div>
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <option value="#" data-column="0" data-name="id" selected>#</option>
-                            <option value="Name" data-column="1" data-name="name" selected>Name</option>
-                            <option value="Brand" data-column="2" data-name="brand_id" selected>Brand</option>
-                            <option value="Barcode" data-column="3" data-name="barcode_id" selected>Barcode</option>
-                            <option value="Quantity" data-column="4" data-name="quantity" selected>Quantity</option>
-                            <option value="Category" data-column="5" data-name="category" selected>Category</option>
-                            <option value="Price" data-column="6" data-name="price" selected>Price</option>
-                            <option value="Status" data-column="7" data-name="status" selected>Status</option>
-                            <option value="Created At" data-column="8" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="9" data-name="actions" selected>Actions</option>
+                            <option value="#" data-column="0" data-name="#" selected>#</option>
+                            <option value="#" data-column="1" data-name="id" selected>id</option>
+                            <option value="Name" data-column="2" data-name="name" selected>Name</option>
+                            <option value="Brand" data-column="3" data-name="brand_id" selected>Brand</option>
+                            <option value="Barcode" data-column="4" data-name="barcode_id" selected>Barcode</option>
+                            <option value="Quantity" data-column="5" data-name="quantity" selected>Quantity</option>
+                            <option value="Category" data-column="6" data-name="category" selected>Category</option>
+                            <option value="Price" data-column="7" data-name="price" selected>Price</option>
+                            <option value="Status" data-column="8" data-name="status" selected>Status</option>
+                            <option value="Created At" data-column="9" data-name="created_at">Created At</option>
+                            <option value="Actions" data-column="10" data-name="actions" selected>Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th></th>
+                                <th>id</th>
                                 <th>Name</th>
                                 <th>Brand</th>
                                 <th>Barcode</th>
@@ -59,7 +61,8 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th>#</th>
+                                <th></th>
+                                <th>id</th>
                                 <th>Name</th>
                                 <th>Brand</th>
                                 <th>Barcode</th>
@@ -83,6 +86,40 @@
 @section('js')
     <script>
         $(function () {
+
+            const shortAjax = function(url, data, success, error) {
+                $.ajax({
+                    type: "post",
+                    url: url,
+                    cache: false,
+                    datatype: "json",
+                    data: data,
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function(data) {
+                        if (success) {
+                            success(data);
+                        }
+                        return data;
+                    },
+                    error: function(errorThrown) {
+                        if (error) {
+                            error(errorThrown);
+                        }
+                        return errorThrown;
+                    }
+                });
+            };
+
+            const action = function ( dt, url, method, type ) {
+                const ids = [];
+                dt.rows( { selected: true } ).data().map((r) => ids.push(r.id));
+                console.log('data', ids);
+                shortAjax(url, {method, type, ids}, (res) => console.log('res', res), (err) => console.log('err', err));
+            };
+
+
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
@@ -140,14 +177,14 @@
                             buttons: [
                                 {
                                     text: 'Barcode',
-                                    action: function ( e, dt, node, config ) {
-                                        alert( 'Download -> Barcode' );
+                                    action: function(e, dt) {
+                                        action(dt, 'admin/inventory/items/datatable-selections', 'download', 'barcode')
                                     }
                                 },
                                 {
                                     text: 'QR Code',
-                                    action: function ( e, dt, node, config ) {
-                                        alert( 'Download -> QR Code' );
+                                    action: function (e, dt) {
+                                        action(dt, 'admin/inventory/items/datatable-selections', 'download', 'qr_code')
                                     }
                                 }
                             ]
@@ -159,13 +196,13 @@
                                 {
                                     text: 'Barcode',
                                     action: function ( e, dt, node, config ) {
-                                        alert( 'Print -> Barcode' );
+                                        action(dt, 'admin/inventory/items/datatable-selections', 'print', 'barcode')
                                     }
                                 },
                                 {
                                     text: 'QR Code',
                                     action: function ( e, dt, node, config ) {
-                                        alert( 'Print -> QR Code' );
+                                        action(dt, 'admin/inventory/items/datatable-selections', 'print', 'qr_code')
                                     }
                                 }
                             ]
@@ -236,6 +273,7 @@
                 "stock_table",
                 [
                     {id: '#', name: 'id'},
+                    {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
                     {id: 'Brand', name: 'brand_id'},
                     {id: 'Barcode', name: 'barcode_id'},
@@ -252,6 +290,7 @@
                         defaultContent: '',
                         className: 'select-checkbox',
                         orderable: false},
+                    {data: 'id', name: 'id'},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'brand_id', name: 'categories_translations.name'},
                     {data: 'barcode_id', name: 'barcodes.code'},
