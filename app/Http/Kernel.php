@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\ActivityMiddleware;
+use App\Http\Middleware\CorsMiddlewaer;
 use App\Http\Middleware\CurrencyMiddleware;
 use App\Http\Middleware\UserCan;
 use App\Http\Middleware\WholesalerIsVerifiedMiddleware;
@@ -56,6 +57,7 @@ class Kernel extends HttpKernel
             UserCan::class,
             ActivityMiddleware::class,
             CurrencyMiddleware::class,
+            CorsMiddlewaer::class
         ],
 
         'api' => [

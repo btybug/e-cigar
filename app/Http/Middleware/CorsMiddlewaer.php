@@ -14,6 +14,7 @@ class CorsMiddlewaer
 
     public function handle($request, Closure $next)
     {
+
         if ($request->getMethod() === "OPTIONS") {
             $response = \Response::make('');
             if (!empty($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], ['http://localhost:8090'])) {
@@ -32,6 +33,7 @@ class CorsMiddlewaer
             ->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization')
             ->header('Access-Control-Allow-Methods','POST, GET, OPTIONS, PUT, DELETE')
             ->header('Access-Control-Allow-Credentials', 'true')
-            ->header('X-Content-Type-Options', 'nosniff');
+            ->header('X-Content-Type-Options', 'nosniff')
+            ->header('SameSite', 'nosniff');
     }
 }

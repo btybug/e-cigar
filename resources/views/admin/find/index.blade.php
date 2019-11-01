@@ -43,8 +43,17 @@
             AjaxCall("/admin/find/call-find", {key: option}, function (res) {
                 if (!res.error) {
                     $(".find-form").html(res.form);
+switch (option) {
+    case 'products':
+        date_column();
+        call_products();
+        break;
+    case 'items':
 
-                    if(option == 'products' || option == 'items'  ){
+        break;
+    case 'orders':   break;
+}
+                    if(option == 'products'){
                         date_column();
                         call_products();
 
