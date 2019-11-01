@@ -6,6 +6,7 @@ namespace App\DataTables;
 use App\ItemsSearch\ItemsSearch;
 use App\Models\Barcodes;
 use App\Models\Category;
+use App\Models\ItemCategories;
 use App\Models\Items;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -29,9 +30,19 @@ class ItemsDataTable extends DataTable
             ->eloquent($query)
             ->editColumn('barcode_id',function ($item){
              return $item->code;
-            })->editColumn('brand_id',function ($item){
+            })
+            ->editColumn('brand_id',function ($item){
              $brand= Category::find($item->brand_id);
              return  ($brand)?$brand->name:null;
+            })
+            ->editColumn('categories',function ($item){
+             $ItemCategories= ItemCategories::where('item_id',$item->id)->get();
+             $text='';
+             foreach ($ItemCategories as $itemCategory){
+                $category= $itemCategory->category;
+                 $text.=$category->name.',';
+             }
+             return  $text;
             })
             ;
 
@@ -124,6 +135,8 @@ class ItemsDataTable extends DataTable
             'barcodes_code'=>Barcodes::select('code as label','id as value')->get(),
             'brands'=>Category::where('type','brands')->join('categories_translations','categories_translations.category_id','categories.id')->
                 where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
+            'categories_lists'=>Category::where('type','stocks')->join('categories_translations','categories_translations.category_id','categories.id')->
+                where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
         ];
     }
     /**
@@ -146,8 +159,8 @@ class ItemsDataTable extends DataTable
             'name',
             'default_price',
             ['name' => 'barcodes', 'data' => 'barcode_id', 'title' => 'Barcode','editField'=> "barcodes_code"],
-            'brand_id',
-//            ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
+            ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
+            ['name' => 'categories', 'data' => 'categories', 'title' => 'Categories','editField'=> "categories_lists"],
         ];
     }
 

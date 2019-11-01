@@ -72,6 +72,10 @@ class ItemsDataTableEditor extends DataTablesEditor
             $data['brand_id']=$data['brands'];
             unset($data['brands']);
         };
+        if(isset($data['categories_lists'])){
+            $model->categories()->sync($data['categories_lists']);
+            unset($data['categories_lists']);
+        };
 
         return $data;
     }
