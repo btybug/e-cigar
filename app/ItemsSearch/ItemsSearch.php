@@ -110,7 +110,7 @@ class ItemsSearch
         $query = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id');
         $query
             ->leftJoin('item_categories', 'items.id', '=', 'item_categories.item_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id');
+            ->rightJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id');
 
         if ($category) {
             $query->where('item_categories.categories_id', $category->id);
@@ -118,7 +118,7 @@ class ItemsSearch
 
 
         return $query->select('items.*', 'item_translations.name',
-            'item_translations.short_description');
+            'item_translations.short_description')->groupBy('items.id');
     }
 
 

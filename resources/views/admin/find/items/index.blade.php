@@ -1,3 +1,5 @@
+
+
 @extends('layouts.admin')
 @section('content-header')
 @stop
@@ -11,17 +13,7 @@
             @include('admin.find.items.form')
         </div>
         <div class="find-wrapper-results mt-5">
-            <div class="find-wrapper-results-head">
-                <h3>Results</h3>
-                <div class="find-wrapper-results-head-right">
-                    <button class="btn btn-warning btn-edit mr-3">Edit</button>
-                    <select class="form-control">
-                        <option value="">Action</option>
-                        <option value="">Print Barcode</option>
-                        <option value="">Print Qr Code</option>
-                    </select>
-                </div>
-            </div>
+
 
             <div class="find-wrapper-results-content row">
                 @include('admin.find.items.results')
@@ -55,11 +47,16 @@
     {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
     <script>
         $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            });
             $("body").find(".categories").select2();
             $("body").find(".brands").select2();
             $("body").find(".barcodes").select2();
                 var editor = new $.fn.dataTable.Editor({
-                    ajax: "/admin/items-editor",
+                    ajax: "/admin/find/items",
                     table: $('body').find("#items-table"),
                     display: "bootstrap",
                     idSrc: 'id',
@@ -67,16 +64,27 @@
                         {label: "ID:", name: "id", type: 'readonly'},
                         {label: "Name:", name: "name"},
                         {label: "Price:", name: "default_price"},
-                        {label: "Barcode:", name: "barcode_id"},
+                        {label: "Barcode:", name: "barcodes_code",type: "select"},
                         {label: "Brand:", name: "brand"}
                     ]
                 });
+            $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
+                editor.inline( this, {
+                    onBlur: 'submit'
+                } );
+            } );
                 $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
                     editor.inline(this);
                 });
 
                     {{$dataTable->generateScripts()}}
-
+            @php
+                use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
+                use Yajra\DataTables\Html\Editor\Fields\Select;
+                    Select::make('barcode_id')->modelOptions(\App\Models\Barcodes::class, 'code');
+                            Select::make('barcode_id')->tableOptions('items', 'barcode_id');
+                            BelongsTo::model(\App\Models\Barcodes::class, 'code');
+            @endphp
                 });
     </script>
 @stop

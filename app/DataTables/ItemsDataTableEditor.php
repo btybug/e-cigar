@@ -15,7 +15,7 @@ class ItemsDataTableEditor extends DataTablesEditor
     public function createRules()
     {
         return [
-            'width' => 'required',
+            'name' => 'required',
         ];
     }
 
@@ -28,8 +28,7 @@ class ItemsDataTableEditor extends DataTablesEditor
     public function editRules(Model $model)
     {
         return [
-            'width' => 'required',
-
+        //    'price' => 'required',
         ];
     }
 
@@ -65,7 +64,10 @@ class ItemsDataTableEditor extends DataTablesEditor
      */
     public function updating(Model $model, array $data)
     {
-
+        if(isset($data['barcodes_code'])){
+            $data['barcode_id']=$data['barcodes_code'];
+            unset($data['barcodes_code']);
+        };
 
         return $data;
     }

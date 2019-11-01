@@ -19,6 +19,7 @@ class ItemsController extends Controller
         return $dataTable->render('admin.find.items.index',compact(['categories','brands','barcodes','data']));
     }
 
+
     public function store(ItemsDataTableEditor $editor)
     {
         return $editor->process(request());
