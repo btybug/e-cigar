@@ -223,6 +223,18 @@
                             {!! Form::close() !!}
                         </div>
                         <div class="products__page-main_right-wrapper products-box">
+                            @if($category)
+                                <ul class="d-flex products__page-head__list">
+                                    <li>
+                                        <a href="javascript:void(0)" class="font-sec-reg item-link active">All</a>
+                                    </li>
+                                    @foreach($category->children as $subcategory)
+                                    <li>
+                                        <a href="javascript:void(0)" class="font-sec-reg item-link">{!! $subcategory->name !!}</a>
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            @endif
                             @include("frontend.products._partials.products_render",['all_products' => true])
                         </div>
                     </div>
