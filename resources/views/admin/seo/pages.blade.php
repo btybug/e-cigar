@@ -28,14 +28,14 @@
                 @endok
             </ul>
             <div class="seo-pages mt-20">
-                <div class="container-fluid">
+                <div class="">
                     <div class="row m-0 justify-content-end">
                         @ok('post_admin_seo_pages')
                         <button class="btn btn-info" id="form-submit">Save</button>
                         @endok
                     </div>
                     <div class="row mt-20">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-4 pr-md-3 pr-0">
                             <div class="seo-pages-left-list">
                                 <ul>
                                     @foreach($pages as $key=>$page)
@@ -79,39 +79,39 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-9">
+                        <div class="col-md-9 col-8">
                             <div class="card panel panel-default">
                                 <div class="card-header panel-heading">General</div>
                                 {!! Form::model($model) !!}
                                 <div class="card-body panel-body">
                                     <div class="form-group">
                                         <div class="row">
-                                            <label for="seo-title" class="col-md-2 col-xs-12">Title</label>
-                                            <div class="col-md-5 col-xs-12">
+                                            <label for="seo-title" class="col-xl-3 col-md-4 col-sm-3">Title</label>
+                                            <div class="col-xl-5 col-md-8 col-sm-9">
                                                 {!! Form::text('go:title',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label for="seo-desc" class="col-md-2 col-xs-12">Description</label>
-                                            <div class="col-md-5 col-xs-12">
+                                            <label for="seo-desc" class="col-xl-3 col-md-4 col-sm-3">Description</label>
+                                            <div class="col-xl-5 col-md-8 col-sm-9">
                                                 {!! Form::text('go:description',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label for="seo-keywords" class="col-md-2 col-xs-12">Focus keywords</label>
-                                            <div class="col-md-5 col-xs-12">
+                                            <label for="seo-keywords" class="col-xl-3 col-md-4 col-sm-3">Focus keywords</label>
+                                            <div class="col-xl-5 col-md-8 col-sm-9">
                                                 {!! Form::text('go:keywords',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="row">
-                                            <label for="seo-meta-robots" class="col-md-2 col-xs-12">Meta Robots</label>
-                                            <div class="col-md-5 col-xs-12">
+                                            <label for="seo-meta-robots" class="col-xl-3 col-md-4 col-sm-3">Meta Robots</label>
+                                            <div class="col-xl-5 col-md-8 col-sm-9">
                                                 {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
 
                                             </div>
