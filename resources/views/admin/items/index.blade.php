@@ -46,7 +46,7 @@
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th></th>
+                                <th><div class="text-center" style="margin-left: 17.282px"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Brand</th>
@@ -217,7 +217,10 @@
                     columnDefs: [ {
                         orderable: false,
                         className: 'select-checkbox',
-                        targets:   0
+                        targets:   0,
+                        'checkboxes': {
+                            'selectRow': true
+                        }
                     } ],
                     select: {
                         style:    'multi',
@@ -266,6 +269,15 @@
 
                 $(selectId).on('changed.bs.select', function (e) {
                     init();
+                });
+
+                $("body").on( "change", ".select_all_checkbox",function(e) {
+                    // console.log(table.rows({selected: true}).length);
+                    if ($(this).is( ":checked" )) {
+                        table.rows(  ).select();
+                    } else {
+                        table.rows(  ).deselect();
+                    }
                 });
             }
 
