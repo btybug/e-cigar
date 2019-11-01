@@ -24,6 +24,7 @@ use App\Services\BarcodesService;
 use App\Services\D1Barcode;
 use App\Services\EAN13render;
 use App\Services\ItemService;
+use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
 use Svg\Document;
 
@@ -428,6 +429,22 @@ class ItemsController extends Controller
 
     public function datatableSelections(Request $request)
     {
+        $method = $request->get('method');
+        $type = $request->get('type');
+        $ids = $request->get('ids');
+        $items = Items::whereIn('id',$ids)->get();
+        if($method == 'download'){
+            if($type == 'qr_code'){
+                $fileArray = [];
+                foreach ($items as $item){
+                    $fileArray[] = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $item->barcode->code, "QRCODE" ,200, 200);
+                }
+
+                $zipper = new Zipper();
+                $zipper->make('public/codes.zip')->add($fileArray);
+                return response()->download(public_path('codes.zip'));
+            }
+        }
         dd($request->all());
     }
 }

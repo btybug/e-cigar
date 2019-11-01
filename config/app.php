@@ -175,6 +175,7 @@ return [
         Dacastro4\LaravelGmail\LaravelGmailServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
 //        Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
         /*
          * Application Service Providers...
@@ -245,6 +246,7 @@ return [
         'Gmail' => \App\Models\Gmail::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Zipper' => Chumper\Zipper\Zipper::class
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
     ],
 
