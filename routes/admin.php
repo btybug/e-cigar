@@ -407,6 +407,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/render-barcode', 'Admin\ItemsController@renderBarcode')->name('admin_items_render_barcode');
         Route::post('/get-download-html', 'Admin\ItemsController@getDownloadHtml')->name('admin_items_download_html');
         Route::get('/download-code/{code}/{type?}/{item_id?}', 'Admin\ItemsController@downloadCode')->name('admin_items_download_code');
+        Route::post('/datatable-selections', 'Admin\ItemsController@datatableSelections')->name('admin_items_datatable_selections');
 
 
     });

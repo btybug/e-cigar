@@ -425,4 +425,9 @@ class ItemsController extends Controller
         $html = $this->view('_partials.manual_downloads', ['item' => $item,'model' => null])->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
+
+    public function datatableSelections(Request $request)
+    {
+        dd($request->all());
+    }
 }
