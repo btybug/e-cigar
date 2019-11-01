@@ -27,7 +27,7 @@
 
                 <div class="card-body panel-body basic-details-tab">
                        <div class="row">
-                           <div class="col-md-8">
+                           <div class="col-xl-8 col-lg-7 col-md-6">
                                <div class="basic-wall">
                                    @if(count(get_languages()))
                                        <ul class="nav nav-tabs">
@@ -45,18 +45,18 @@
                                                <div id="{{ strtolower($language->code) }}"
                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
                                                    <div class="form-group row">
-                                                       <label class="col-md-2 control-label"><span data-toggle="tooltip"
+                                                       <label class="col-xl-2 col-lg-4 control-label"><span data-toggle="tooltip"
                                                                                                    title=""
                                                                                                    data-original-title="Attribute Name Title">Attribute Name</span></label>
-                                                       <div class="col-md-10">
+                                                       <div class="col-xl-10 col-lg-8">
                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                        </div>
                                                    </div>
                                                    <div class="form-group row">
-                                                       <label class="col-md-2 control-label"><span data-toggle="tooltip"
+                                                       <label class="col-xl-2 col-lg-4 control-label"><span data-toggle="tooltip"
                                                                                                    title=""
                                                                                                    data-original-title="Attribute description">Attribute Description</span></label>
-                                                       <div class="col-md-10">
+                                                       <div class="col-xl-10 col-lg-8">
                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control']) !!}
                                                        </div>
                                                    </div>
@@ -65,10 +65,10 @@
                                        @endif
                                    </div>
                                    <div class="form-group row">
-                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                       <label class="col-xl-2 col-lg-4 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                                      title=""
                                                                                                      data-original-title="Icon Title">Icon</span></label>
-                                       <div class="col-md-10">
+                                       <div class="col-xl-10 col-lg-8">
                                            {!! Form::text('icon',null,['class'=>'form-control icon-picker']) !!}
                                        </div>
                                        <div class="col-md-1 text-center font-icon-added">
@@ -77,10 +77,10 @@
                                    </div>
 
                                    <div class="form-group row">
-                                       <label class="col-md-2 control-label" for="input-total"><span data-toggle="tooltip"
+                                       <label class="col-xl-2 col-lg-4 control-label" for="input-total"><span data-toggle="tooltip"
                                                                                                      title=""
                                                                                                      data-original-title="Image Title">Image</span></label>
-                                       <div class="col-md-10">
+                                       <div class="col-xl-10 col-lg-8">
                                            {!! media_button('image',$model) !!}
                                        </div>
                                    </div>
@@ -89,13 +89,13 @@
 
                            </div>
 
-                           <div class="col-md-4">
+                           <div class="col-xl-4 col-lg-5 col-md-6">
                                <div class="basic-wall mb-3">
                                    <div class="right_col">
                                        <div class="form-group row">
-                                           <label class="col-md-2 control-label" for="input-total">
+                                           <label class="col-xl-3 col-lg-4 col-md-5 col-3 control-label" for="input-total">
                                                <span data-toggle="tooltip" title="" data-original-title="Filter">Filter</span></label>
-                                           <div class="col-md-10 filter--display">
+                                           <div class="col-xl-9 col-lg-8 col-md-7 col-9 filter--display">
                                                YES {!! Form::radio('filter',1,null) !!}
                                                NO {!! Form::radio('filter',0,null) !!}
                                            </div>
@@ -103,10 +103,10 @@
                                        <div class="card panel panel-default panel-display-as">
                                            <div class="card-header panel-heading">
                                                <div class="row">
-                                                   <div class="col-sm-7 pl-0">
+                                                   <div class="col-sm-7 col-4 pl-0 align-self-center">
                                                        Display as
                                                    </div>
-                                                   <div class="col-sm-5 p-0">
+                                                   <div class="col-sm-5 col-8 p-0">
                                                        {!! Form::select('display_as',[
                                                            'radio' => 'Radio',
                                                            'select' => 'Select',
@@ -209,7 +209,7 @@
                                </div>
                                <div class="basic-wall">
                                    <div class="form-group">
-                                       <label class="col-sm-2 control-label pl-sm-0">Categories</label>
+                                       <label class="control-label pl-sm-0">Categories</label>
                                        {!! Form::hidden('categories',(isset($checkedCategories))
                                        ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
                                        <div id="treeview_json"></div>
@@ -231,7 +231,7 @@
                     </div>
                 </div>
                 <div class="card-body panel-body">
-                    <div class="d-flex get-all-stickers-tab">
+                    <div class="d-flex flex-wrap get-all-stickers-tab">
                         @if(isset($model) && count($model->stickers))
                             @foreach($model->stickers as $sticker)
                                 <div class="inventory-attr-item" data-id="{{ $sticker->id }}">
