@@ -43,9 +43,67 @@
     <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
 
     <script src="{{url('public/js/DataTables/js/editor.bootstrap.min.js')}}"></script>
+    <script src="{{url('public/js/DataTables/js/editor.select2.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
     <script>
+
+        (function ($, DataTable) {
+
+            if ( ! DataTable.ext.editorFields ) {
+                DataTable.ext.editorFields = {};
+            }
+
+            var Editor = DataTable.Editor;
+            var _fieldTypes = DataTable.ext.editorFields;
+
+            _fieldTypes.status = {
+                create: function ( conf ) {
+                    var that = this;
+
+                    conf._enabled = true;
+
+                    // Create the elements to use for the input
+                    conf._input = $(
+                        '<div id="'+Editor.safeId( conf.id )+'">'+
+                        '<button type="button" class="inputButton" value="Draft">Draft</button>'+
+                        '<button type="button" class="inputButton" value="Published">Published</button>'+
+                        '</div>');
+
+                    // Use the fact that we are called in the Editor instance's scope to call
+                    // the API method for setting the value when needed
+                    $('button.inputButton', conf._input).click( function () {
+                        if ( conf._enabled ) {
+                            that.set( conf.name, $(this).attr('value') );
+                        }
+
+                        return false;
+                    } );
+
+                    return conf._input;
+                },
+
+                get: function ( conf ) {
+                    return $('button.selected', conf._input).attr('value');
+                },
+
+                set: function ( conf, val ) {
+                    $('button.selected', conf._input).removeClass( 'selected' );
+                    $('button.inputButton[value='+val+']', conf._input).addClass('selected');
+                },
+
+                enable: function ( conf ) {
+                    conf._enabled = true;
+                    $(conf._input).removeClass( 'disabled' );
+                },
+
+                disable: function ( conf ) {
+                    conf._enabled = false;
+                    $(conf._input).addClass( 'disabled' );
+                }
+            };
+
+        })(jQuery, jQuery.fn.dataTable);
+
         $(function () {
             $.ajaxSetup({
                 headers: {
@@ -63,12 +121,21 @@
                     fields: [
                         {label: "ID:", name: "id", type: 'readonly'},
                         {label: "Name:", name: "name"},
+                        {label: "status:", name: "status",type:'status'},
                         {label: "Price:", name: "default_price"},
-                        {label: "Barcode:", name: "barcodes_code",type: "select"},
+                        {label: "Barcode:", name: "barcodes_code",type: "select2"},
                         {label: "Brand:", name: "brands",type: "select"},
-                        {label: "Categories:", name: "categories_lists",type: "checkbox"}
+                        {label: "Categories:", name: "categories_lists",type: "select2",
+                            "opts": {
+                                "placeholder": "Seleziona una nazione",
+                                'multiple':true,
+                                "allowClear": true,
+                            }}
                     ]
                 });
+
+
+
             // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
             //     $('body').find('#DTE_Field_barcodes_code').select2()
             //     editor.inline( this, {
@@ -80,13 +147,7 @@
                 // });
 
                     {{$dataTable->generateScripts()}}
-            @php
-                use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
-                use Yajra\DataTables\Html\Editor\Fields\Select;
-                    Select::make('barcode_id')->modelOptions(\App\Models\Barcodes::class, 'code');
-                            Select::make('barcode_id')->tableOptions('items', 'barcode_id');
-                            BelongsTo::model(\App\Models\Barcodes::class, 'code');
-            @endphp
+
                 });
     </script>
 @stop

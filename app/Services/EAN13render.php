@@ -17,9 +17,12 @@ class EAN13render
 
     public static function Render($barcode,$w,$h)
     {
+
         $im = ImageCreateTrueColor($w, $h);
         ImageFilledRectangle($im, 0, 0, $w, $h, 0xFFFFFF);
-        $xpos = 19;
+        $w=$w*2;
+        $h=$h*2;
+        $xpos = 38;
         $synth = function ($pattern, $transformation, $height) use (&$im, &$xpos) {
             $b = strlen($pattern);
             for ($a = 0; $a < $b; ++$a) {
@@ -35,8 +38,8 @@ class EAN13render
 
             }
         };
-        $normal_height = $h - 12;
-        $seperator_height = $h - 7;
+        $normal_height = $h - 24;
+        $seperator_height = $h-14 ;
         $font = public_path('fonts/arial.ttf');
         $synth('101', 'R', $seperator_height);
 
@@ -44,10 +47,10 @@ class EAN13render
             $digit = (int)$barcode[$n];
             if ($n == 0) {
                 if($digit!=0){
-                ImageTTFtext($im, 8, 0, $xpos - 10, $h - 1, 0x000000, $font, $digit);
+                ImageTTFtext($im, 16, 0, $xpos - 20, $h - 2, 0x000000, $font, $digit);
                 }
             } else {
-                ImageTTFtext($im, 8, 0, $xpos, $h - 1, 0x000000, $font, $digit);
+                ImageTTFtext($im, 16, 0, $xpos, $h - 2, 0x000000, $font, $digit);
 
                 $code = self::$Rcodes[$digit];
                 $select = 'R';
@@ -70,7 +73,7 @@ class EAN13render
     {
 //        $barcode = sprintf('64%s', base_convert($code, 36, 10));
         $image = self::Render($code,$w,$h);
-        imagePNG($image, $path, 9);
+        imagepng($image, $path,9);
         return $path;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\DataTables;
 
+use App\Models\Barcodes;
 use App\Models\Items;
 use App\User;
 use Illuminate\Validation\Rule;
@@ -65,7 +66,7 @@ class ItemsDataTableEditor extends DataTablesEditor
     public function updating(Model $model, array $data)
     {
         if(isset($data['barcodes_code'])){
-            $data['barcode_id']=$data['barcodes_code'];
+            $data['barcode_id']=Barcodes::where('code',$data['barcodes_code'])->first()->id;
             unset($data['barcodes_code']);
         };
         if(isset($data['brands'])){
@@ -75,6 +76,9 @@ class ItemsDataTableEditor extends DataTablesEditor
         if(isset($data['categories_lists'])){
             $model->categories()->sync($data['categories_lists']);
             unset($data['categories_lists']);
+        };
+        if(isset($data['status'])){
+            $data['status']=($data['status']=='Draft')?0:1;
         };
 
         return $data;
