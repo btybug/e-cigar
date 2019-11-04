@@ -1,7 +1,7 @@
 @php
     $uniqueID = uniqid();
 @endphp
-<tr>
+<tr class="shock__edit-tr">
     <td>
         <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]" class="form-control v-item-change">
             @if($package_variation->item->is_archive)
@@ -13,7 +13,12 @@
                 </option>
             @endforeach
         </select>
-        xxxxxxxxxx
+        <a href="javascript:void(0);" class="btn btn-primary btn-sm stock-toggle-tiny__btn mt-1"><i class="fa fa-plus"></i></a>
+        <div class="stock-toggle-tiny__wrapper">
+            <form action="">
+                <textarea name="content" class="stock-tiny-area"></textarea>
+            </form>
+        </div>
         {{--{!! Form::select("variations[$main_unique][variations][$uniqueID][item_id]",$stockItems,($package_variation) ? $package_variation->item_id : null,--}}
         {{--['class' => 'form-control v-item-change']) !!}--}}
     </td>

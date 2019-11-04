@@ -1623,6 +1623,20 @@ color: #ffffff;
 .inventory_attributes .attributes-container .btn-danger{
     padding: 0.25rem .54rem;
 }
+.shock__edit-tr{
+    position: relative;
+}
+.stock-toggle-tiny__wrapper{
+    display: none;
+    position: absolute;
+    left: 22px;
+    background: #28bdd800;
+    width: 50%;
+    margin-left: .75rem;
+    z-index: 9;
+    box-shadow: 0 0 5px #000;
+    margin-top: 5px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{

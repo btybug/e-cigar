@@ -1256,16 +1256,38 @@
     </style>
 @stop
 @section('js')
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="/public/js/tinymce/tinymce.min.js"></script>
-
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
 
         $(document).ready(function () {
+            tinymce.init({
+                selector: ".stock-tiny-area",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+            });
+            $(document).on('click',function (ev) {
+                // ev.stopImmediatePropagation();
+                console.log($(ev.target).closest('.stock-toggle-tiny__wrapper'));
+                if($(ev.target).closest('.stock-toggle-tiny__wrapper').length === 0
+                ){
+                    $('body').find('.stock-toggle-tiny__wrapper').fadeOut()
+                }
+            });
+            $('body').on('click','.stock-toggle-tiny__btn',function (ev) {
+                ev.stopImmediatePropagation();
+
+                $(this).closest('.shock__edit-tr').find('.stock-toggle-tiny__wrapper').fadeToggle()
+            })
             $("#specialOffer").change(function() {
                 if(this.checked) {
                     $("#special_offer_treeview_json").removeClass('hide')
