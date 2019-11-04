@@ -15,6 +15,11 @@
                     data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                     style="width: 100%"
                     class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
+                @if($vSettings->count_limit == 0)
+                    <option value="no" data-out="1">
+                        No, Thank you
+                    </option>
+                @endif
                 @foreach($variation as $item)
                     <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
                             @endif data-out="{{ out_of_stock($item) }}">
