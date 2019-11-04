@@ -176,6 +176,7 @@ class StockService
                         $newData['image'] = $item['image'];
                         $newData['name'] = $item['name'];
                         $newData['variation_id'] = $variation_id;
+                        $newData['description'] = ($item['description']) ?? null;
 
                         $newData['price_type'] = ($item['price_type']) ?? null;
                         $newData['discount_type'] = (isset($item['discount_type'])) ?$item['discount_type']: null;

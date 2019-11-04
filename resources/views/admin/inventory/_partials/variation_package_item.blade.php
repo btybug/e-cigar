@@ -15,9 +15,8 @@
         </select>
         <a href="javascript:void(0);" class="btn btn-primary btn-sm stock-toggle-tiny__btn mt-1"><i class="fa fa-plus"></i></a>
         <div class="stock-toggle-tiny__wrapper">
-            <form action="">
-                <textarea name="content" class="stock-tiny-area"></textarea>
-            </form>
+            {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,['class' => 'form-control stock-tiny-area']) !!}
+
         </div>
         {{--{!! Form::select("variations[$main_unique][variations][$uniqueID][item_id]",$stockItems,($package_variation) ? $package_variation->item_id : null,--}}
         {{--['class' => 'form-control v-item-change']) !!}--}}

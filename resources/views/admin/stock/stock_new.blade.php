@@ -1604,6 +1604,17 @@
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
+
+                            tinymce.init({
+                                selector: ".stock-tiny-area",
+                                plugins: [
+                                    "advlist autolink lists link image charmap print preview anchor",
+                                    "searchreplace visualblocks code fullscreen",
+                                    "insertdatetime media table paste"
+                                ],
+                                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+                            });
+
                             if ($('#changeProductType').val() == 0) {
                                 let parent = $_this.closest('.basic-details-tab');
 

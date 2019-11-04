@@ -3,9 +3,13 @@
         @php
             $uniqueID = uniqid();
         @endphp
-        <tr>
+        <tr class="shock__edit-tr">
             <td>
                 {!! Form::select("variations[$main_unique][variations][$uniqueID][item_id]",$stockItems,$item->id,['class' => 'form-control v-item-change']) !!}
+                <a href="javascript:void(0);" class="btn btn-primary btn-sm stock-toggle-tiny__btn mt-1"><i class="fa fa-plus"></i></a>
+                <div class="stock-toggle-tiny__wrapper">
+                    {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",$item->description,['class' => 'form-control stock-tiny-area']) !!}
+                </div>
             </td>
             <td>
                 {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",$item->name,['class' => 'form-control v-name']) !!}
