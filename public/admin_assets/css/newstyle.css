@@ -1640,6 +1640,12 @@ color: #ffffff;
 .fix-modal--required{
     height: calc(100% - 69px);
 }
+.stock_widget--block{
+    border: 1px solid #b9b9b9;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #e2e2e266;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{

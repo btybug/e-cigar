@@ -175,77 +175,80 @@
                                                         <div class="row">
                                                             <div class="col-md-5"></div>
                                                             <div class="col-md-7">
-                                                                @if(! isset($offer))
+                                                                <div class="stock_widget--block">
+                                                                    @if(! isset($offer))
+                                                                        <div class="col-md-7">
+                                                                            <div class="form-group">
+                                                                                <label
+                                                                                    class="col-sm-12 control-label pl-sm-0">Categories</label>
+                                                                                {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                                ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                                <div id="treeview_json"></div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endif
                                                                     <div class="col-md-7">
                                                                         <div class="form-group">
-                                                                            <label
-                                                                                class="col-sm-12 control-label pl-sm-0">Categories</label>
-                                                                            {!! Form::hidden('categories',(isset($checkedCategories))
-                                                                            ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                                            <div id="treeview_json"></div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
-                                                                <div class="col-md-7">
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-12 control-label pl-sm-0">Brands</label>
-                                                                        <div id="brands_treeview_json">
-                                                                            <div class="filter-wall cat-name row">
-                                                                                <div class="col-12 p-sm-0">
-                                                                                    @foreach($brands as $parent)
-                                                                                        <p class="pl-sm-0 bold">{{ $parent->name }}</p>
-                                                                                        @if(count($parent->children))
-                                                                                            @foreach($parent->children as $brand)
-                                                                                                <div
-                                                                                                    class="single-wrap ml-4">
+                                                                            <label class="col-sm-12 control-label pl-sm-0">Brands</label>
+                                                                            <div id="brands_treeview_json">
+                                                                                <div class="filter-wall cat-name row">
+                                                                                    <div class="col-12 p-sm-0">
+                                                                                        @foreach($brands as $parent)
+                                                                                            <p class="pl-sm-0 bold">{{ $parent->name }}</p>
+                                                                                            @if(count($parent->children))
+                                                                                                @foreach($parent->children as $brand)
                                                                                                     <div
-                                                                                                        class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                                        {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                                        <label
-                                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                            for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                                            {{--<span class="amount">(189)</span>--}}
-                                                                                                        </label>
+                                                                                                        class="single-wrap ml-4">
+                                                                                                        <div
+                                                                                                            class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                                            {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                                            <label
+                                                                                                                class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                                for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                                                {{--<span class="amount">(189)</span>--}}
+                                                                                                            </label>
+                                                                                                        </div>
                                                                                                     </div>
-                                                                                                </div>
-                                                                                            @endforeach
-                                                                                        @endif
-                                                                                    @endforeach
+                                                                                                @endforeach
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
 
+                                                                            </div>
                                                                         </div>
-                                                                    </div>
 
 
-                                                                    <div class="form-group">
-                                                                        <label class="col-sm-12 control-label pl-sm-0">
-                                                                            {!! Form::hidden('special_filter',0) !!}
-                                                                            Special Filter {!! Form::checkbox('special_filter',1,null,['id' => 'specialOffer']) !!}
-                                                                        </label>
-                                                                        <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
-                                                                            <div class="filter-wall cat-name row ml-4">
-                                                                                <div class="col-12 p-sm-0">
-                                                                                    @foreach($special_filters as $special_filter)
-                                                                                        <div
-                                                                                            class="single-wrap">
+                                                                        <div class="form-group">
+                                                                            <label class="col-sm-12 control-label pl-sm-0">
+                                                                                {!! Form::hidden('special_filter',0) !!}
+                                                                                Special Filter {!! Form::checkbox('special_filter',1,null,['id' => 'specialOffer']) !!}
+                                                                            </label>
+                                                                            <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
+                                                                                <div class="filter-wall cat-name row ml-4">
+                                                                                    <div class="col-12 p-sm-0">
+                                                                                        @foreach($special_filters as $special_filter)
                                                                                             <div
-                                                                                                class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                                                                {!! Form::checkbox("special_filters[]",$special_filter->id,null,
-                                                                                                ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
-                                                                                                <label
-                                                                                                    class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                    for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
-                                                                                                </label>
+                                                                                                class="single-wrap">
+                                                                                                <div
+                                                                                                    class="custom-control custom-checkbox custom-control-inline align-items-center">
+                                                                                                    {!! Form::checkbox("special_filters[]",$special_filter->id,null,
+                                                                                                    ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
+                                                                                                    <label
+                                                                                                        class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                        for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
+                                                                                                    </label>
+                                                                                                </div>
                                                                                             </div>
-                                                                                        </div>
-                                                                                    @endforeach
+                                                                                        @endforeach
+                                                                                    </div>
                                                                                 </div>
-                                                                            </div>
 
+                                                                            </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
 
                                                         </div>
