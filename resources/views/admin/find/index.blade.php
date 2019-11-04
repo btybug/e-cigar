@@ -1,6 +1,7 @@
 @extends('layouts.admin')
 @section('content-header')
 @stop
+
 @section('content')
     <div class="admin-find-wrapper">
         <div class="form-group row border-bottom pb-2">

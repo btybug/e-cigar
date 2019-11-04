@@ -18,7 +18,10 @@ Route::group(['prefix' => 'find'], function () {
     Route::post('/items-find', 'Admin\FindController@postItemsResults')->name('find_items_results');
     Route::post('/orders-find', 'Admin\FindController@postOrdersResults')->name('find_orders_results');
     Route::post('/customers-find', 'Admin\FindController@postCustomersResults')->name('find_customers_results');
-    Route::resource('items', 'ItemsController');
+    Route::resource('customer', 'Find\CustomerController');
+    Route::resource('order', 'Find\OrderController');
+    Route::resource('product', 'Find\ProductController');
+    Route::resource('items', 'Find\ItemsController');
 
 });
 

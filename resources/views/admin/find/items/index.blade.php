@@ -121,14 +121,15 @@
         })(jQuery, jQuery.fn.dataTable);
 
         $(function () {
+            $("body").find(".categories").select2();
+            $("body").find(".brands").select2();
+            $("body").find(".barcodes").select2();
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': '{{csrf_token()}}'
                 }
             });
-            $("body").find(".categories").select2();
-            $("body").find(".brands").select2();
-            $("body").find(".barcodes").select2();
+
                 var editor = new $.fn.dataTable.Editor({
                     ajax: "/admin/find/items",
                     table: $('body').find("#items-table"),

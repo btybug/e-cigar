@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Find;
 
 use App\DataTables\ItemsDataTable;
 use App\DataTables\ItemsDataTableEditor;
+use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
 use App\Models\Category;
-use Illuminate\Http\Request;
 
-class ItemsController extends Controller
+class CustomerController extends Controller
 {
     public function index(ItemsDataTable $dataTable)
     {
@@ -16,7 +16,7 @@ class ItemsController extends Controller
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
         $data=request()->all();
-        return $dataTable->render('admin.find.items.index',compact(['categories','brands','barcodes','data']));
+        return $dataTable->render('admin.find.customers.index',compact(['categories','brands','barcodes','data']));
     }
 
 

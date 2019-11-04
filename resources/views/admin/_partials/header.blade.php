@@ -17,8 +17,11 @@
             <span class="d-block"><img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" class="logo-img"></span>
         </a>
         <div class="main-header_nav-middle">
+            @inject('findService','App\Services\FindService')
+
             <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
-                <li class="find-link"><a href="{{ route('admin_find') }}" class="btn btn-primary text-white">
+                <li class="find-link">
+                    {!! Form::select('find',[null=>'Select Find Type']+$findService->getOptions(),'@yield("find")',['class' => 'form-control ','id' => 'admin_find']) !!}
                         <span class="mr-1 mobile-none">Find</span>
                         <i class="fa fa-search"></i></a>
                 </li>

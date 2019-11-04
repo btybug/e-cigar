@@ -48,9 +48,7 @@ class ItemsDataTable extends DataTable
                  $text.=$category->name.',';
              }
              return  trim($text,',');
-            })->with('options',$this->getOptions())
-            ;
-
+            })->with('options',$this->getOptions());
     }
 
     /**
