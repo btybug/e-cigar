@@ -46,7 +46,7 @@
                                         <div class="col-md-12">
                                             <div class="basic-center basic-wall">
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         @if(count(get_languages()))
                                                             <ul class="nav nav-tabs">
                                                                 @foreach(get_languages() as $language)
@@ -148,12 +148,8 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <div class="row">
-                                                            <div class="col-md-5">
-
-                                                            </div>
-                                                            <div class="col-md-7">
+                                                    <div class="col-md-4">
+                                                            <div class="stock-basic-tab-right-top stock_widget--block">
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-2 control-label">Status</label>
                                                                     <div class="col-sm-10">
@@ -164,20 +160,17 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
-                                                        </div>
                                                         @if(isset($offer))
                                                             {!! Form::hidden('is_offer',true) !!}
                                                         @else
                                                             {!! Form::hidden('is_offer',0) !!}
                                                         @endif
 
-                                                        <div class="row">
-                                                            <div class="col-md-5"></div>
-                                                            <div class="col-md-7">
-                                                                <div class="stock_widget--block">
+                                                            <div class="stock-basic-tab-right-main">
+
                                                                     @if(! isset($offer))
-                                                                        <div class="col-md-7">
+
+                                                                            <div class="stock_widget--block">
                                                                             <div class="form-group">
                                                                                 <label
                                                                                     class="col-sm-12 control-label pl-sm-0">Categories</label>
@@ -186,13 +179,14 @@
                                                                                 <div id="treeview_json"></div>
                                                                             </div>
                                                                         </div>
+
                                                                     @endif
-                                                                    <div class="col-md-7">
+                                                                    <div class="stock_widget--block">
                                                                         <div class="form-group">
                                                                             <label class="col-sm-12 control-label pl-sm-0">Brands</label>
                                                                             <div id="brands_treeview_json">
                                                                                 <div class="filter-wall cat-name row">
-                                                                                    <div class="col-12 p-sm-0">
+                                                                                    <div class="col-12">
                                                                                         @foreach($brands as $parent)
                                                                                             <p class="pl-sm-0 bold">{{ $parent->name }}</p>
                                                                                             @if(count($parent->children))
@@ -247,16 +241,12 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                </div>
+
 
                                                             </div>
 
-                                                        </div>
-
-
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                         @if(isset($offer))
