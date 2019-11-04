@@ -12,7 +12,7 @@ class ItemsController extends Controller
 {
     public function index(ItemsDataTable $dataTable)
     {
-        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
         $data=request()->all();
