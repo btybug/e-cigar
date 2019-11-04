@@ -112,51 +112,59 @@
                                                         {{--</div>--}}
                                                         {{--</div>--}}
                                                         {{--</div>--}}
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="feature_image"
-                                                                       class="control-label col-sm-4 control-label col-form-label text-right">Feature
-                                                                    image</label>
-                                                                <div class="col-sm-8">
+                                                        <div class="form-group w-75">
+                                                            <div class="card panel panel-default">
+                                                                <div class="card-header panel-heading">
+                                                                    <p class="pull-left mb-0">
+                                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Feature
+                                                                            image</b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="card-body stock-basic-future-photo-body-wrap">
                                                                     {!! media_button('image',$model) !!}
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="faq_tab"
-                                                                       class="control-label col-sm-4 control-label text-right">Faq
-                                                                    Tab</label>
-                                                                <div class="col-sm-8">
-                                                                    {!! Form::hidden('faq_tab',false) !!}
-                                                                    {!! Form::checkbox('faq_tab', true,null,
-                                                                     ['class' => '','id' => 'faq_tab']) !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="reviews_tab"
-                                                                       class="control-label col-sm-4 control-label  text-right">Reviews
-                                                                    Tab</label>
-                                                                <div class="col-sm-8">
-                                                                    {!! Form::hidden('reviews_tab',false) !!}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <div class="row">--}}
+{{--                                                                <label for="faq_tab"--}}
+{{--                                                                       class="control-label col-sm-4 control-label text-right">Faq--}}
+{{--                                                                    Tab</label>--}}
+{{--                                                                <div class="col-sm-8">--}}
+{{--                                                                    {!! Form::hidden('faq_tab',false) !!}--}}
+{{--                                                                    {!! Form::checkbox('faq_tab', true,null,--}}
+{{--                                                                     ['class' => '','id' => 'faq_tab']) !!}--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="form-group">--}}
+{{--                                                            <div class="row">--}}
+{{--                                                                <label for="reviews_tab"--}}
+{{--                                                                       class="control-label col-sm-4 control-label  text-right">Reviews--}}
+{{--                                                                    Tab</label>--}}
+{{--                                                                <div class="col-sm-8">--}}
+{{--                                                                    {!! Form::hidden('reviews_tab',false) !!}--}}
 
-                                                                    {!! Form::checkbox('reviews_tab', true,null,
-                                                                     ['class' => '','id' => 'reviews_tab']) !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
+{{--                                                                    {!! Form::checkbox('reviews_tab', true,null,--}}
+{{--                                                                     ['class' => '','id' => 'reviews_tab']) !!}--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
                                                     </div>
                                                     <div class="col-md-4">
-                                                            <div class="stock-basic-tab-right-top stock_widget--block">
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 control-label">Status</label>
-                                                                    <div class="col-sm-10">
-                                                                        {!! Form::select('status',[
-                                                                            '0' => 'Draft',
-                                                                            '1' => 'Published',
-                                                                        ],null,['class' => 'form-control']) !!}
+                                                            <div class="stock-basic-tab-right-top">
+                                                                <div class="stock_widget--block">
+                                                                    <div class="stock_widget--block-header">
+                                                                        <span class="">Status</span>
+
+                                                                    </div>
+                                                                    <div class="stock_widget--block-body">
+                                                                        <div class="">
+                                                                            {!! Form::select('status',[
+                                                                                '0' => 'Draft',
+                                                                                '1' => 'Published',
+                                                                            ],null,['class' => 'form-control']) !!}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -171,80 +179,118 @@
                                                                     @if(! isset($offer))
 
                                                                             <div class="stock_widget--block">
-                                                                            <div class="form-group">
-                                                                                <label
-                                                                                    class="col-sm-12 control-label pl-sm-0">Categories</label>
-                                                                                {!! Form::hidden('categories',(isset($checkedCategories))
-                                                                                ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                                                <div id="treeview_json"></div>
+                                                                                <div class="stock_widget--block-header">
+                                                                                    <span class="">Categories</span>
+
+                                                                                </div>
+                                                                                <div class="stock_widget--block-body">
+                                                                                    {!! Form::hidden('categories',(isset($checkedCategories))
+                                                                                   ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                                                                    <div id="treeview_json"></div>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
 
                                                                     @endif
                                                                     <div class="stock_widget--block">
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-12 control-label pl-sm-0">Brands</label>
-                                                                            <div id="brands_treeview_json">
-                                                                                <div class="filter-wall cat-name row">
-                                                                                    <div class="col-12">
-                                                                                        @foreach($brands as $parent)
-                                                                                            <p class="pl-sm-0 bold">{{ $parent->name }}</p>
-                                                                                            @if(count($parent->children))
-                                                                                                @foreach($parent->children as $brand)
-                                                                                                    <div
-                                                                                                        class="single-wrap ml-4">
-                                                                                                        <div
-                                                                                                            class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                                            {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                                            <label
-                                                                                                                class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                                for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                                                {{--<span class="amount">(189)</span>--}}
-                                                                                                            </label>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                @endforeach
-                                                                                            @endif
-                                                                                        @endforeach
-                                                                                    </div>
-                                                                                </div>
-
-                                                                            </div>
+                                                                        <div class="stock_widget--block-header">
+                                                                            <span class="">Brands</span>
                                                                         </div>
-
-
-                                                                        <div class="form-group">
-                                                                            <label class="col-sm-12 control-label pl-sm-0">
-                                                                                {!! Form::hidden('special_filter',0) !!}
-                                                                                Special Filter {!! Form::checkbox('special_filter',1,null,['id' => 'specialOffer']) !!}
-                                                                            </label>
-                                                                            <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
-                                                                                <div class="filter-wall cat-name row ml-4">
-                                                                                    <div class="col-12 p-sm-0">
-                                                                                        @foreach($special_filters as $special_filter)
-                                                                                            <div
-                                                                                                class="single-wrap">
-                                                                                                <div
-                                                                                                    class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                                                                    {!! Form::checkbox("special_filters[]",$special_filter->id,null,
-                                                                                                    ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
-                                                                                                    <label
-                                                                                                        class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                        for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
-                                                                                                    </label>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        @endforeach
+                                                                        <div class="stock_widget--block-body">
+                                                                            <div class="form-group">
+                                                                                <div id="brands_treeview_json">
+                                                                                    <div class="filter-wall cat-name row">
+                                                                                        <div class="col-12">
+                                                                                            @foreach($brands as $parent)
+                                                                                                <p class="pl-sm-0 bold">{{ $parent->name }}</p>
+                                                                                                @if(count($parent->children))
+                                                                                                    @foreach($parent->children as $brand)
+                                                                                                        <div
+                                                                                                            class="single-wrap ml-4">
+                                                                                                            <div
+                                                                                                                class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                                                {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                                                <label
+                                                                                                                    class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                                    for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                                                    {{--<span class="amount">(189)</span>--}}
+                                                                                                                </label>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    @endforeach
+                                                                                                @endif
+                                                                                            @endforeach
+                                                                                        </div>
                                                                                     </div>
-                                                                                </div>
 
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-12 control-label pl-sm-0">
+                                                                                    {!! Form::hidden('special_filter',0) !!}
+                                                                                    Special Filter {!! Form::checkbox('special_filter',1,null,['id' => 'specialOffer']) !!}
+                                                                                </label>
+                                                                                <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
+                                                                                    <div class="filter-wall cat-name row ml-4">
+                                                                                        <div class="col-12 p-sm-0">
+                                                                                            @foreach($special_filters as $special_filter)
+                                                                                                <div
+                                                                                                    class="single-wrap">
+                                                                                                    <div
+                                                                                                        class="custom-control custom-checkbox custom-control-inline align-items-center">
+                                                                                                        {!! Form::checkbox("special_filters[]",$special_filter->id,null,
+                                                                                                        ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
+                                                                                                        <label
+                                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                                            for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
+                                                                                                        </label>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            @endforeach
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
 
 
                                                             </div>
+                                                            <div class="stock-basic-tab-right-top">
+                                                                <div class="stock_widget--block">
+                                                                    <div class="stock_widget--block-header">
+                                                                        <span class="">Tabs</span>
 
+                                                                    </div>
+                                                                    <div class="stock_widget--block-body">
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                <label for="faq_tab"
+                                                                                       class="control-label col-sm-3 control-label">Faq
+                                                                                    Tab</label>
+                                                                                <div class="col-sm-9">
+                                                                                    {!! Form::hidden('faq_tab',false) !!}
+                                                                                    {!! Form::checkbox('faq_tab', true,null,
+                                                                                     ['class' => '','id' => 'faq_tab']) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group">
+                                                                            <div class="row">
+                                                                                <label for="reviews_tab"
+                                                                                       class="control-label col-sm-3 control-label">Reviews
+                                                                                    Tab</label>
+                                                                                <div class="col-sm-9">
+                                                                                    {!! Form::hidden('reviews_tab',false) !!}
+
+                                                                                    {!! Form::checkbox('reviews_tab', true,null,
+                                                                                     ['class' => '','id' => 'reviews_tab']) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                     </div>
                                                 </div>
                                             </div>
