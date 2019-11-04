@@ -13,7 +13,18 @@
                 </option>
             @endforeach
         </select>
-        <a href="javascript:void(0);" class="btn btn-primary btn-sm stock-toggle-tiny__btn mt-1"><i class="fa fa-plus"></i></a>
+        <a href="javascript:void(0);" class="btn btn-primary btn-sm stock-toggle-tiny__btn mt-1">
+            @if($package_variation && $package_variation->description)
+                Edit
+            @else
+                <i class="fa fa-plus"></i>
+            @endif
+        </a>
+        <div class="desc-box">
+            @if($package_variation && $package_variation->description)
+                {!! $package_variation->description !!}
+            @endif
+        </div>
         <div class="stock-toggle-tiny__wrapper">
             {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,['class' => 'form-control stock-tiny-area']) !!}
 
