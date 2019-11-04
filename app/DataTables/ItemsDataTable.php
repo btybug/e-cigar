@@ -100,7 +100,7 @@ class ItemsDataTable extends DataTable
             'brands'=>Category::where('type','brands')->join('categories_translations','categories_translations.category_id','categories.id')->
                 where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
             'categories_lists'=>Category::where('type','stocks')->join('categories_translations','categories_translations.category_id','categories.id')->
-                where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
+                where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value','categories.id as id')->get(),
         ];
     }
     /**
