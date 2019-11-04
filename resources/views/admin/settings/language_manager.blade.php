@@ -16,45 +16,47 @@
                 <div class="card-body panel-body">
                     <div class="row">
                         <div class="col-sm-12">
-                            <table id="example1" class="table table-bordered table-striped">
-                                <thead>
-                                <tr>
-                                    <th>KEY</th>
-                                    @foreach($languages as $language)
-                                        <th>{{ $language->name }}</th>
-                                    @endforeach
-                                    <th>Action</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($keys as $key => $text)
+                            <div class="table-responsive">
+                                <table id="example1" class="table table-bordered table-striped">
+                                    <thead>
                                     <tr>
-                                        <td>
-                                           {{ $key }}
-                                        </td>
+                                        <th>KEY</th>
                                         @foreach($languages as $language)
-                                            @php
-                                            $translationData = $language->getTranslations();
-                                            $translated = (isset($translationData[$key])) ? $translationData[$key] : '';
-                                            @endphp
-                                            <td>
-                                                <a href="#" class="x-editable" data-type="text" data-pk="{{ $language->code }}" data-name="{{ $key }}"
-                                                   data-url="/admin/settings/languages/manager" data-title="Enter Value">
-                                                    {{ $translated }}
-                                                </a>
-                                            </td>
+                                            <th>{{ $language->name }}</th>
                                         @endforeach
-                                        <td>
-                                            <div class="d-flex">
-                                                <a href="#" data-toggle="tooltip" data-placement="bottom"  title="{!! $language->name !!}"  class="btn btn-sm btn-warning mr-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                <a href="#" data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}" class="btn btn-sm bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                                            </div>
-
-                                        </td>
+                                        <th>Action</th>
                                     </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                    @foreach($keys as $key => $text)
+                                        <tr>
+                                            <td>
+                                                {{ $key }}
+                                            </td>
+                                            @foreach($languages as $language)
+                                                @php
+                                                    $translationData = $language->getTranslations();
+                                                    $translated = (isset($translationData[$key])) ? $translationData[$key] : '';
+                                                @endphp
+                                                <td>
+                                                    <a href="#" class="x-editable" data-type="text" data-pk="{{ $language->code }}" data-name="{{ $key }}"
+                                                       data-url="/admin/settings/languages/manager" data-title="Enter Value">
+                                                        {{ $translated }}
+                                                    </a>
+                                                </td>
+                                            @endforeach
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom"  title="{!! $language->name !!}"  class="btn btn-sm btn-warning mr-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}" class="btn btn-sm bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </div>
+
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="col-xs-12 text-right">
 
                             </div>

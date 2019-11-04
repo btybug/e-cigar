@@ -1765,4 +1765,8 @@ color: #ffffff;
     .basic-center.basic-wall .select-download.w-20{
         width: 100%;
     }
+    .setting_lang_panel_head .nav-tabs{
+        flex-direction: column;
+        width: 100%;
+    }
 }
