@@ -13,6 +13,7 @@
                 </option>
             @endforeach
         </select>
+        xxxxxxxxxx
         {{--{!! Form::select("variations[$main_unique][variations][$uniqueID][item_id]",$stockItems,($package_variation) ? $package_variation->item_id : null,--}}
         {{--['class' => 'form-control v-item-change']) !!}--}}
     </td>
