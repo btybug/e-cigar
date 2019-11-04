@@ -120,7 +120,7 @@ DataTable.Editor.display.bootstrap = $.extend( true, {}, DataTable.Editor.models
 	 * API methods
 	 */
 	"init": function ( dte ) {
-		var conf = {
+        var conf = {
 			// Note that `modal-dialog-scrollable` is BS4.3+ only. It has no effect on 4.0-4.2
 			content: $(
 				'<div class="modal fade DTED">'+
@@ -145,14 +145,14 @@ DataTable.Editor.display.bootstrap = $.extend( true, {}, DataTable.Editor.models
 		} );
 
 		$(document).on('click', 'div.modal', function (e) {
-			if ( $(e.target).hasClass('modal') && allowBackgroundClick ) {
+            if ( $(e.target).hasClass('modal') && allowBackgroundClick ) {
 				dte.background();
 			}
 		} );
 
 		// Add `form-control` to required elements
 		dte.on( 'displayOrder.dtebs', function ( e, display, action, form ) {
-			$.each( dte.s.fields, function ( key, field ) {
+            $.each( dte.s.fields, function ( key, field ) {
 				$('input:not([type=checkbox]):not([type=radio]), select, textarea', field.node() )
 					.addClass( 'form-control' );
 			} );
@@ -175,7 +175,7 @@ DataTable.Editor.display.bootstrap = $.extend( true, {}, DataTable.Editor.models
 			content.append( append );
 
 			if ( callback ) {
-				callback();
+                callback();
 			}
 			return;
 		}
@@ -191,7 +191,8 @@ DataTable.Editor.display.bootstrap = $.extend( true, {}, DataTable.Editor.models
 
 		$(conf.content)
 			.one('shown.bs.modal', function () {
-				// Can only give elements focus when shown
+
+                // Can only give elements focus when shown
 				if ( dte.s.setFocus ) {
 					dte.s.setFocus.focus();
 				}
@@ -203,7 +204,7 @@ DataTable.Editor.display.bootstrap = $.extend( true, {}, DataTable.Editor.models
 				}
 			})
 			.one('hidden', function () {
-				conf.shown = false;
+                conf.shown = false;
 			})
 			.appendTo( 'body' )
 			.modal( {

@@ -129,12 +129,15 @@
                             "opts": {
                                 "placeholder": "Seleziona una nazione",
                                 'multiple':true,
-                                "allowClear": true,
+                                "allowClear": true
                             }}
                     ]
                 });
 
-
+            // editor.on("preOpen", function (e, mode, action) {
+            //         $('#DTE_Field_categories_lists').val('1');
+            //         $('#DTE_Field_categories_lists').trigger('change')
+            // });
 
             // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
             //     $('body').find('#DTE_Field_barcodes_code').select2()

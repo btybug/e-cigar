@@ -89,14 +89,15 @@
  */
 
 (function( factory ){
-	if ( typeof define === 'function' && define.amd ) {
+    if ( typeof define === 'function' && define.amd ) {
 		// AMD
 		define( ['jquery', 'datatables', 'datatables-editor'], factory );
 	}
 	else if ( typeof exports === 'object' ) {
 		// Node / CommonJS
 		module.exports = function ($, dt) {
-			if ( ! $ ) { $ = require('jquery'); }
+
+            if ( ! $ ) { $ = require('jquery'); }
 			factory( $, dt || $.fn.dataTable || require('datatables') );
 		};
 	}
@@ -153,6 +154,7 @@ _fieldTypes.select2 = {
  
         // On open, need to have the instance update now that it is in the DOM
         this.one( 'open.select2-'+DataTable.Editor.safeId( conf.id ), function () {
+
             conf._input.select2( options );
             if ( open ) {
                 conf._input.select2( 'open' );
@@ -172,8 +174,14 @@ _fieldTypes.select2 = {
             val.join( conf.separator ) :
             val;
     },
+
+    originalValue: function (conf) {
+        return conf._input.originalValue;
+    },
  
     set: function ( conf, val ) {
+
+
         if ( conf.separator && ! $.isArray( val ) ) {
             val = val.split( conf.separator );
         }
@@ -204,9 +212,12 @@ _fieldTypes.select2 = {
                     needAjax = true;
                 }
             }
+
+            conf._input.originalValue = val;
         }
  
         if ( needAjax ) {
+
             $.ajax( $.extend( {
                 beforeSend: function ( jqXhr, settings ) {
                     // Add an initial data request to the server, but don't
@@ -256,9 +267,30 @@ _fieldTypes.select2 = {
             }, conf.opts.ajax ) );
         }
         else {
-            conf._input
-                .val( val )
-                .trigger( 'change', {editor: true} );
+            // console.log($(conf._input[0]));
+            if($(conf._input[0]).attr("id") === 'DTE_Field_categories_lists') {
+                setTimeout(() => {
+                    // console.log(conf._input[0], $('body').find("#items-table").DataTable().rows('.selected').data()[0].categories.split(','));
+                    const value_array = []
+                    const text_array = $('body').find("#items-table").DataTable().rows('.selected').data()[0].categories.split(',');
+                    text_array.map((cat) => {
+                        const opt = $('#DTE_Field_categories_lists').find('option');
+                        for(let a = 0; a < opt.length; a++) {
+                            opt[a].text.trim() === cat.trim() && value_array.push($(opt[a]).val().toString());
+                        }
+                    });
+                    $(conf._input[0]).val(value_array);
+                    $(conf._input[0]).trigger('change');
+                }, 1000);
+                // $(conf._input[0]).trigger("change");
+            }
+
+            // $(conf._input[0][2]).attr('selected', 'selected')
+            // $(conf._input[0]).trigger('change');
+            // conf._input
+            //     .val( val )
+            //     .trigger( 'change', {editor: true} );
+            // $("body").find(".categories").select2();
         }
     },
  
