@@ -2,10 +2,13 @@
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
-                <span
-                    class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
-                <i class="fas fa-times"></i>
-            </span>
+
+                @if($vSettings->count_limit > 1)
+                    <span
+                        class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
+                    <i class="fas fa-times"></i>
+                </span>
+                @endif
             @endif
             <select name="variations[{{ $vSettings->variation_id }}][]"
                     id="single_v_select_{{ $vSettings->id.uniqid() }}"
