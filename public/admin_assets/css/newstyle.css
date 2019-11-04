@@ -1637,6 +1637,9 @@ color: #ffffff;
     box-shadow: 0 0 5px #000;
     margin-top: 5px;
 }
+.fix-modal--required{
+    height: calc(100% - 69px);
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{

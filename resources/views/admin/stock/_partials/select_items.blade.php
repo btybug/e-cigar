@@ -17,7 +17,7 @@
         </div>
     </div>
 </div>
-<div class="items-box d-flex flex-column">
+<div class="items-box d-flex flex-column fix-modal--required">
     <div class="modal-body">
         <ul class="all-list modal-stickers--list">
             @include("admin.stock._partials.items_render")
