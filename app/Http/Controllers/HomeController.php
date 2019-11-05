@@ -29,14 +29,15 @@ class HomeController extends Controller
     {
 //        40564344854
 
-        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
-        \GoogleCloudPrint::asText()
-            ->content('Sahak like rainbow color :D')
-            ->printer($printerId)
-            ->marginsInCentimeters(1, 1, 1, 1)
-            ->send();
-
-        dd('done');
+//        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
+//        \GoogleCloudPrint::asText()
+//            ->content('Sahak like rainbow color :D')
+//            ->printer($printerId)
+//            ->marginsInCentimeters(1, 1, 1, 1)
+//            ->send();
+//
+//        dd('done');
+        
         $banners = $this->settings->getEditableData('banners');
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
         $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
