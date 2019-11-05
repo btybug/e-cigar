@@ -4,24 +4,36 @@
 @section('content-header')
 @stop
 @section('content')
-
-
-
     <div class="admin-find-wrapper">
 
+        <div class="form-group row border-bottom pb-2">
+            <label for="find" class="col-sm-2 col-form-label">Find</label>
+            <div class="col-sm-4">
+
+            </div>
+        </div>
         <div class="find-form">
             @include('admin.find.items.form')
         </div>
-        <div class="find-wrapper-results mt-5">
 
+        <div class="find-wrapper-results mt-5">
+            <div class="find-wrapper-results-head">
+                <h3>Results</h3>
+                <div class="find-wrapper-results-head-right">
+                    <button class="btn btn-warning btn-edit mr-3">Edit</button>
+                    <select class="form-control">
+                        <option value="">Action</option>
+                        <option value="">Print Barcode</option>
+                        <option value="">Print Qr Code</option>
+                    </select>
+                </div>
+            </div>
 
             <div class="find-wrapper-results-content row">
                 @include('admin.find.items.results')
             </div>
 
         </div>
-
-
     </div>
 
 @stop
@@ -142,12 +154,12 @@
             //         $('#DTE_Field_categories_lists').trigger('change')
             // });
 
-            // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
-            //     $('body').find('#DTE_Field_barcodes_code').select2()
-            //     editor.inline( this, {
-            //         onBlur: 'submit'
-            //     } );
-            // } );
+            $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
+                $('body').find('#DTE_Field_barcodes_code').select2()
+                editor.inline( this, {
+                    onBlur: 'submit'
+                } );
+            } );
                 // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
                 //     editor.inline(this);
                 // });

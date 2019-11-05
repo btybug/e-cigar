@@ -65,6 +65,27 @@
         </div>
         <div class="col-sm-6">
             <div class="form-group row">
+                <label class="col-md-4 control-label" for="radios">Status</label>
+                <div class="col-md-4">
+                    <div class="radio">
+                        <label for="radios-0">
+                            <input type="radio" name="status" id="radios-0" value="1"
+                                   @if( @$data['status']==='1')checked="checked" @endif>
+                            Published
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label for="radios-1">
+                            <input type="radio" name="status" id="radios-1" value="0"
+                                   @if( @$data['status']==='0')checked="checked" @endif>
+                            Draft
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
                 <div class="col-sm-10">
                     <button type="submit">Find</button>
                 </div>
