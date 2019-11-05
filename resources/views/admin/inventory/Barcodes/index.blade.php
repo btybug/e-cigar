@@ -75,20 +75,40 @@
                 ],
                 order: [ [0, 'desc'] ]
             });
-            //
-            // JsBarcode("#barcode", text, {
-            //     format: "CODE128",
-            //     font: text_font,
-            //     fontSize: 18,
-            //     textMargin: 0,
-            //     height,
-            //     width,
-            //     margin,
-            //     backgroundColor: back_color,
-            //     lineColor: line_color,
-            //     textAlign: text_align
-            // })
-            //     .render();
+
+            $('body').find('.barcodes').each(function(key, value) {
+                console.log($(value).data('barcode'));
+            });
+
+            let width = 2;
+            let height = 100;
+            let margin = 10;
+            let back_color = '#ffffff';
+            let line_color = '#000000';
+            let text_align = 'center';
+            let text_font = 'sans-serif';
+
+            table.on('draw.dt', function () {
+                $('body').find('.barcodes').each(function(key, value) {
+                    console.log($(value).data('barcode'));
+                    JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
+                        format: "CODE128",
+                        font: text_font,
+                        fontSize: 18,
+                        textMargin: 0,
+                        height,
+                        width,
+                        margin,
+                        backgroundColor: back_color,
+                        lineColor: line_color,
+                        textAlign: text_align
+                    })
+                        .render();
+                });
+            } );
+
+
+
         });
     </script>
     @stop
