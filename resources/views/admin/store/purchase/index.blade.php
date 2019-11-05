@@ -3,44 +3,62 @@
 
 @stop
 @section('content')
-    <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Purchase</h2>
-            @ok('admin_inventory_purchase_new')
-            <div class="pull-right">
-                <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="info-tab" href="javascript:void(0)" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Purchase</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="general-tab" href="{!! route('admin_inventory_other') !!}" role="tab"
+                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Others</a>
+                </li>
+
+            </ul>
+            <div class="tab-content w-100">
+                <div class="card panel panel-default">
+                    <div class="card-header panel-heading clearfix">
+                        <h2 class="m-0 pull-left">Purchase</h2>
+                        @ok('admin_inventory_purchase_new')
+                        <div class="pull-right">
+                            <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
+                        </div>
+                        @endok
+                    </div>
+                    <div class="card-body panel-body">
+                        <select name="table_head" id="table_head_id" class="selectpicker" multiple>
+                            <option value="#" data-column="0" data-name="id">#</option>
+                            <option value="Name" data-column="1" data-name="name">Name</option>
+                            <option value="SKU" data-column="2" data-name="sku">SKU</option>
+                            <option value="Owner" data-column="3" data-name="user_id">Owner</option>
+                            <option value="Qty" data-column="4" data-name="qty">Qty</option>
+                            <option value="Price" data-column="5" data-name="price">Price</option>
+                            <option value="Purchase Date" data-column="6" data-name="purchase_date">Purchase Date</option>
+                            <option value="Entry Date" data-column="7" data-name="created_at">Entry Date</option>
+                            <option value="Actions" data-column="8" data-name="actions">Actions</option>
+                        </select>
+                        <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>SKU</th>
+                                <th>Owner</th>
+                                <th>Qty</th>
+                                <th>Price</th>
+                                <th>Purchase Date</th>
+                                <th>Entry Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
-            @endok
-        </div>
-        <div class="card-body panel-body">
-            <select name="table_head" id="table_head_id" class="selectpicker" multiple>
-                <option value="#" data-column="0" data-name="id">#</option>
-                <option value="Name" data-column="1" data-name="name">Name</option>
-                <option value="SKU" data-column="2" data-name="sku">SKU</option>
-                <option value="Owner" data-column="3" data-name="user_id">Owner</option>
-                <option value="Qty" data-column="4" data-name="qty">Qty</option>
-                <option value="Price" data-column="5" data-name="price">Price</option>
-                <option value="Purchase Date" data-column="6" data-name="purchase_date">Purchase Date</option>
-                <option value="Entry Date" data-column="7" data-name="created_at">Entry Date</option>
-                <option value="Actions" data-column="8" data-name="actions">Actions</option>
-            </select>
-            <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Name</th>
-                    <th>SKU</th>
-                    <th>Owner</th>
-                    <th>Qty</th>
-                    <th>Price</th>
-                    <th>Purchase Date</th>
-                    <th>Entry Date</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-            </table>
         </div>
     </div>
+
 @stop
 @section('js')
     <script>

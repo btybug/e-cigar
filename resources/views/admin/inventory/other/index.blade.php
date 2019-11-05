@@ -1,27 +1,48 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Others</h2>
-            @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_others_new') !!}">Add new</a></div>@endok
-        </div>
-        <div class="card-body panel-body">
-            <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Item Name</th>
-                    <th>Qty</th>
-                    <th>Reason</th>
-                    <th>Moderator</th>
-                    <th>Created At</th>
-                    <th>Updated At</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-            </table>
+    <div class="container-fluid">
+        <div class="row">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link" id="info-tab" href="{!! route('admin_inventory_purchase') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Purchase</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" id="general-tab" href="javascript:void(0)" role="tab"
+                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Others</a>
+                </li>
+
+            </ul>
+            <div class="tab-content w-100">
+                <div class="card panel panel-default">
+                    <div class="card-header panel-heading clearfix">
+                        <div class="pull-left">
+                            <h2 class="m-0">Others</h2>
+                        </div>
+                        @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_others_new') !!}">Add new</a></div>@endok
+
+                    </div>
+                    <div class="card-body panel-body">
+                        <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Item Name</th>
+                                <th>Qty</th>
+                                <th>Reason</th>
+                                <th>Moderator</th>
+                                <th>Created At</th>
+                                <th>Updated At</th>
+                                <th>Actions</th>
+                            </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
 @stop
 @section('js')
     <script>
