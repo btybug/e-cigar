@@ -136,7 +136,7 @@
                     fields: [
                         {label: "ID:", name: "id", type: 'readonly'},
                         {label: "Name:", name: "name"},
-                        {label: "status:", name: "status",type:'status'},
+                        {label: "Status:", name: "status",type:'select'},
                         {label: "Price:", name: "default_price"},
                         {label: "Brand:", name: "brands",type: "select2"},
                         {label: "Categories:", name: "categories_lists",type: "select2",
@@ -158,6 +158,7 @@
                 editor.inline( window.LaravelDataTables["items-table"].cell(this).index(), {
                     onBlur: 'submit'
                 } );
+                // editor.inline( this );
             } );
                 // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
                 //     editor.inline(this);

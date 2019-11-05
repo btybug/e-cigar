@@ -90,6 +90,7 @@ class ItemsDataTable extends DataTable
     public function getOptions()
     {
         return [
+            'status'=>collect([['label'=>'Select Status','value'=>null],['label'=>'Draft','value'=>'0'],['label'=>'Published','value'=>'1']]),
             'barcodes_code'=>Barcodes::select('code as label','code as value')->get()->toArray(),
             'brands'=>Category::where('type','brands')->join('categories_translations','categories_translations.category_id','categories.id')->
                 where('locale',app()->getLocale())->select('categories_translations.name as label','categories.id as value')->get(),
@@ -115,7 +116,7 @@ class ItemsDataTable extends DataTable
             ],
             ['name' => 'id', 'data' => 'id', 'title' => '<input type="checkbox">id'],
             'name',
-            'status',
+            ['name' => 'statuse', 'data' => 'status', 'title' => 'Status','editField'=> "status"],
             'default_price',
             ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
             ['name' => 'categories', 'data' => 'categories','type'=>'select2','title' => 'Categories','editField'=> "categories_lists"],

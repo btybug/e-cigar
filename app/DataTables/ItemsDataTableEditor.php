@@ -78,7 +78,10 @@ class ItemsDataTableEditor extends DataTablesEditor
             unset($data['categories_lists']);
         };
         if(isset($data['status'])){
-            $data['status']=($data['status']=='Draft')?0:1;
+            if(is_null($data['status'])){
+                  unset($data['status']);
+            }
+
         };
 
         return $data;
