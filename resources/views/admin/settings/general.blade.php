@@ -30,6 +30,10 @@
                                                 <label for="description">Description</label>
                                                 {!! Form::textarea('site_description',null,['class'=>'form-control','rows'=>5]) !!}
                                             </div>
+                                            <div class="form-group">
+                                                <label for="description">Site Code</label>
+                                                {!! Form::text('site_code',null,['class'=>'form-control']) !!}
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

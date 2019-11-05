@@ -151,6 +151,13 @@ function get_site_name()
     return ($name) ? $name->val : '';
 }
 
+function get_site_code()
+{
+    $settings = new \App\Models\Settings();
+    $name = $settings->getData('admin_general_settings', 'site_code');
+    return ($name) ? $name->val : '';
+}
+
 function BBgetDateFormat($date, $format = null)
 {
     if (!$date) null;
@@ -900,7 +907,8 @@ function generate_number($prefix)
 
 function get_customer_number()
 {
-    $number = generate_number('AMC');
+    $code = get_site_code();
+    $number = generate_number($code.'-C-');
     $data = check_customer_number($number);
     if ($data) {
         get_customer_number();
@@ -911,7 +919,8 @@ function get_customer_number()
 
 function get_order_number()
 {
-    $number = generate_number('AMO');
+    $code = get_site_code();
+    $number = generate_number($code.'-O-');
     $data = check_order_number($number);
     if ($data) {
         get_order_number();
