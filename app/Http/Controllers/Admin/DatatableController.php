@@ -613,9 +613,9 @@ class DatatableController extends Controller
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
             })->addColumn('name', function ($attr) {
-                return $attr->item->name;
+                return ($attr->item)?$attr->item->name:null;
             })->addColumn('sku', function ($attr) {
-                return $attr->item->sku;
+                return ($attr->item)?$attr->item->sku:null;
             })->editColumn('created_at', function ($faq) {
                 return BBgetDateFormat($faq->created_at);
             })->editColumn('purchase_date', function ($faq) {
