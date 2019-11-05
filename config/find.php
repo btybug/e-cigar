@@ -8,7 +8,7 @@ return [
         'url'=>'admin/find/order'
     ],
     'products' => [
-        'url'=>'admin/find/product'
+        'url'=>'admin/find/products'
     ],
     'items' => [
         'url'=>'admin/find/items'

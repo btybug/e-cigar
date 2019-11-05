@@ -8,11 +8,7 @@ use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\ItemCategories;
 use App\Models\Items;
-use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
-use Yajra\DataTables\Html\Editor\Fields\BelongsTo;
-use Yajra\DataTables\Html\Editor\Fields\Select;
 use Yajra\DataTables\Services\DataTable;
 
 class ItemsDataTable extends DataTable

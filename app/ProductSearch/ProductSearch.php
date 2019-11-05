@@ -18,6 +18,14 @@ class ProductSearch
 
         return static::getResults($query, $sql, $filters);
     }
+    public static function applyQuery(Request $filters, $category = null, $sql = false)
+    {
+        $query = static::applyDecoratorsFromRequest(
+            $filters, static::createObject($category, $filters)
+        );
+
+        return $query;
+    }
 
     private static function applyDecoratorsFromRequest(Request $request, Builder $query)
     {

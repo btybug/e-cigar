@@ -20,7 +20,7 @@ Route::group(['prefix' => 'find'], function () {
     Route::post('/customers-find', 'Admin\FindController@postCustomersResults')->name('find_customers_results');
     Route::resource('customer', 'Find\CustomerController');
     Route::resource('order', 'Find\OrderController');
-    Route::resource('product', 'Find\ProductController');
+    Route::resource('products', 'Find\ProductController');
     Route::resource('items', 'Find\ItemsController');
 
 });

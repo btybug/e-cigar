@@ -1,4 +1,4 @@
-{!! Form::open(['class' => 'form-horizontal','url' => route('find_product_results'),'id' => 'findForm']) !!}
+{!! Form::open(['class' => 'form-horizontal','url' =>url('admin/find/products'),'id' => 'findForm','method'=>'GET']) !!}
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group row">
@@ -60,6 +60,13 @@
                                 <i class="fa fa-calendar"></i></button>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button type="submit">Find</button>
                 </div>
             </div>
         </div>

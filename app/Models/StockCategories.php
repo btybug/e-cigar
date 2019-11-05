@@ -32,4 +32,9 @@ class StockCategories extends Model
     {
         return $this->belongsTo(Stock::class, 'stock_id');
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class,'categories_id');
+    }
 }

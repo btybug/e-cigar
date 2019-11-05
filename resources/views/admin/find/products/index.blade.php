@@ -69,4 +69,106 @@
             $("body").find(".barcodes").select2();
         })
     </script>
+    <script>
+
+        (function ($, DataTable) {
+
+            if ( ! DataTable.ext.editorFields ) {
+                DataTable.ext.editorFields = {};
+            }
+
+            var Editor = DataTable.Editor;
+            var _fieldTypes = DataTable.ext.editorFields;
+
+            _fieldTypes.status = {
+                create: function ( conf ) {
+                    var that = this;
+
+                    conf._enabled = true;
+
+                    // Create the elements to use for the input
+                    conf._input = $(
+                        '<div id="'+Editor.safeId( conf.id )+'">'+
+                        '<button type="button" class="inputButton" value="Draft">Draft</button>'+
+                        '<button type="button" class="inputButton" value="Published">Published</button>'+
+                        '</div>');
+
+                    // Use the fact that we are called in the Editor instance's scope to call
+                    // the API method for setting the value when needed
+                    $('button.inputButton', conf._input).click( function () {
+                        if ( conf._enabled ) {
+                            that.set( conf.name, $(this).attr('value') );
+                        }
+
+                        return false;
+                    } );
+
+                    return conf._input;
+                },
+
+                get: function ( conf ) {
+                    return $('button.selected', conf._input).attr('value');
+                },
+
+                set: function ( conf, val ) {
+                    $('button.selected', conf._input).removeClass( 'selected' );
+                    $('button.inputButton[value='+val+']', conf._input).addClass('selected');
+                },
+
+                enable: function ( conf ) {
+                    conf._enabled = true;
+                    $(conf._input).removeClass( 'disabled' );
+                },
+
+                disable: function ( conf ) {
+                    conf._enabled = false;
+                    $(conf._input).addClass( 'disabled' );
+                }
+            };
+
+        })(jQuery, jQuery.fn.dataTable);
+
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            });
+
+            var editor = new $.fn.dataTable.Editor({
+                ajax: "/admin/find/products",
+                table: $('body').find("#products-table"),
+                display: "bootstrap",
+                idSrc: 'id',
+                fields: [
+                    {label: "ID:", name: "id", type: 'readonly'},
+                    {label: "Name:", name: "name"},
+                    {label: "Brand:", name: "brand_id"},
+                    {label: "Price:", name: "price"},
+                    {label: "Slug:", name: "slug"},
+                    {label: "Categories:", name: "categories"},
+                    {label: "Created at:", name: "created_at"}
+                ]
+            });
+
+
+            // editor.on("preOpen", function (e, mode, action) {
+            //         $('#DTE_Field_categories_lists').val('1');
+            //         $('#DTE_Field_categories_lists').trigger('change')
+            // });
+
+            // $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
+            //     $('body').find('#DTE_Field_barcodes_code').select2()
+            //     editor.inline( this, {
+            //         onBlur: 'submit'
+            //     } );
+            // } );
+            // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
+            //     editor.inline(this);
+            // });
+
+            {{$dataTable->generateScripts()}}
+
+        });
+    </script>
 @stop
