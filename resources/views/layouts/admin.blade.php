@@ -140,6 +140,8 @@
     {message}
   </div>
 </script>
+@inject('settings','\App\Models\Settings')
+<textarea name="" id="barcode-settings" class="hidden" cols="30" rows="10">{!! $settings->getEditableData('barcodes')->toJson() !!}</textarea>
 <!-- ./wrapper -->
 {{--<!-- jQuery 3 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}

@@ -29,7 +29,7 @@ class BarcodesController extends Controller
 
     public function postSettings(Request $request,Settings $settings)
     {
-        
+
         $settings->updateOrCreateSettings('barcodes', $request->all());
         return response()->json(['success'=>true]);
     }
