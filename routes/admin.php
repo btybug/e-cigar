@@ -418,6 +418,7 @@ Route::group(['prefix' => 'inventory'], function () {
     });
     Route::group(['prefix' => 'barcode'], function () {
         Route::get('/', 'Admin\BarcodesController@getIndex')->name('admin_inventory_barcodes');
+        Route::post('/settings', 'Admin\BarcodesController@postSettings')->name('admin_inventory_barcodes_settings');
         Route::get('/new', 'Admin\BarcodesController@getNew')->name('admin_inventory_barcodes_new');
         Route::post('/new', 'Admin\BarcodesController@postNew')->name('post_admin_inventory_barcodes_new');
         Route::get('/view/{id}', 'Admin\BarcodesController@getBarcodeView')->name('admin_inventory_barcode_view');

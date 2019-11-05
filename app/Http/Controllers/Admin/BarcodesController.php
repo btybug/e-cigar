@@ -11,7 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
-use App\Services\BarcodesService;
+use App\Models\Settings;
 use App\Services\EAN13render;
 use Illuminate\Http\Request;
 
@@ -27,6 +27,12 @@ class BarcodesController extends Controller
         return $this->view('index');
     }
 
+    public function postSettings(Request $request,Settings $settings)
+    {
+        
+        $settings->updateOrCreateSettings('barcodes', $request->all());
+        return response()->json(['success'=>true]);
+    }
     public function getNew()
     {
         return $this->view('new');
