@@ -713,10 +713,16 @@ class OrdersController extends Controller
         }
 
         $pdf = \PDF::loadView('admin.pdf.invoice', $data)->save(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf");
+        $pdfShipping = \PDF::loadView('admin.pdf.shipping', $data)->save(storage_path("app".DS."printer").DS.$order->order_number."-shipping.pdf");
 
         $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
         \GoogleCloudPrint::asPdf()
             ->file(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf")
+            ->printer($printerId)
+            ->send();
+
+        \GoogleCloudPrint::asPdf()
+            ->file(storage_path("app".DS."printer").DS.$order->order_number."-shipping.pdf")
             ->printer($printerId)
             ->send();
 

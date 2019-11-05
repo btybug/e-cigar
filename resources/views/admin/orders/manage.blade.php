@@ -496,7 +496,7 @@
                                         @include('admin.pdf.invoice')
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-docs-shipping" role="tabpanel" aria-labelledby="v-pills-docs-shipping-tab">
-                                        Shipping
+                                        @include('admin.pdf.shipping')
                                     </div>
                                 </div>
 
