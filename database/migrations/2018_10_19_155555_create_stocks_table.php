@@ -21,7 +21,6 @@ class CreateStocksTable extends Migration
             $table->tinyInteger('is_promotion')->default(0);
             $table->string('slug')->unique();
             $table->tinyInteger('type')->default(0);
-            $table->unsignedInteger('price')->default(0);
             $table->string('image')->nullable();
             $table->text('other_images')->nullable();
             $table->string('what_is_image')->nullable();
