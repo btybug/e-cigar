@@ -694,7 +694,7 @@ console.log(barcode_settings)
 
                             $('body').find('.barcodes').each(function(key, value) {
                                 JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
-                                    format: "CODE128",
+                                    format,
                                     font: text_font,
                                     fontSize: font_size,
                                     textMargin: text_margin,
