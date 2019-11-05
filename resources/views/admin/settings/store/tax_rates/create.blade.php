@@ -19,7 +19,7 @@
 
             <div class="card-body panel-body">
                 <div class="row">
-                    <div class="col-md-9">
+                    <div class="col-xl-9">
                         {!! Form::model($model,['class'=>'','url'=>route('post_admin_settings_tax_create_or_update',($model)?$model->id:null)]) !!}
                         @if(count(get_languages()))
                             <ul class="nav nav-tabs">
