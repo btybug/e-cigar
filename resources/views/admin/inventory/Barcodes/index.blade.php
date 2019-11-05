@@ -1,8 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
+        <div class="card-header panel-heading">
             <h2 class="m-0 pull-left">Barcodes</h2>
+                <span class="btn btn-success ml-2" data-toggle="modal" data-target="#barcodeModalCenter">
+  Settings
+</span>
+
             @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_barcodes_new') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
@@ -17,6 +21,27 @@
                 </tr>
                 </thead>
             </table>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="barcodeModalCenter" tabindex="-1" role="dialog" aria-labelledby="barcodeModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="barcodeModalCenterTitle">Barcode title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. A ad amet culpa dolor eius excepturi facere illo iure
+                    minima modi nihil, odio provident qui quisquam saepe suscipit vel veniam voluptatem.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>
+            </div>
         </div>
     </div>
 @stop
