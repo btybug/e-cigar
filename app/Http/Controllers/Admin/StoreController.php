@@ -220,7 +220,7 @@ class StoreController extends Controller
     {
         $model = Purchase::findOrFail($id);
         $items = Items::where('type','simple')->get()->pluck('name', 'id')->all();
-        $suppliers = Suppliers::all()->pluck('name', 'id');
+        $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id',$model->warehouse_id)->get()->pluck('name','id')->all();
         $shelves = WarehouseRacks::where('warehouse_id',$model->warehouse_id)->where('parent_id',$model->rack_id)->get()->pluck('name','id')->all();
