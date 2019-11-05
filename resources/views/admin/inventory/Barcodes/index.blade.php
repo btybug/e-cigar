@@ -34,7 +34,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form class="w-75 d-flex flex-column mx-auto" style="padding-bottom: 100px" id="barcode_form">
+                    <form class="w-75 d-flex flex-column mx-auto" style="padding-bottom: 20px" id="barcode_form">
                         <div id="barcode_container" style="margin-bottom: 15px; display: flex; justify-content: center; align-items: center; height: 200px">
                             <svg id="barcode"></svg>
                             <div id="invalid_barcode" style="display: none; color: red; weight: bold; text-align: center; font-size: 30px">Invalid Value</div>
@@ -167,15 +167,13 @@
                                 <input type="range" name="text_margin" class="custom-range" min="-15" max="40" step="1" id="barcode_text_margin" style="width: 75%" value="0">
                                 <div class="value" style="width: 10%; text-align: end">0</div>
                             </div>
-
-                            <button type="submit" class="btn btn-primary" id="save_barcode">Save</button>
                         </div>
                         {{--            <button id="svg">Svg -></button>--}}
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" id="save_barcode">Save</button>
                 </div>
             </div>
         </div>
@@ -600,7 +598,26 @@
 
                 $('body').on('click', '#save_barcode', function(ev) {
                     ev.preventDefault();
-                    console.log($('#barcode_form').serialize());
+                    function getFormData($form){
+                        var unindexed_array = $form.serializeArray();
+                        var indexed_array = {};
+
+                        $.map(unindexed_array, function(n, i){
+                            indexed_array[n['name']] = n['value'];
+                        });
+
+                        return indexed_array;
+                    }
+
+                    var $form = $("#barcode_form");
+                    var data = getFormData($form);
+
+                    data = Object.assign(data, {
+                        text_switch: $('#barcode_text_switch').is(':checked'),
+                        bold: $('#barcode_bold').is(':checked'),
+                        italic: $('#barcode_italic').is(':checked')
+                    })
+                    console.log(data);
                 })
 
 
@@ -609,9 +626,18 @@
                 //         .then(uri => console.log(uri));
                 // })
                 // saveSvgAsPng(document.getElementById("barcode"), "barcode.png", {scale: 10});
-            }
+            };
 
-            barcode_edit()
+            barcode_edit();
+            $('#barcodeModalCenter').on('show.bs.modal', function() {
+                // $('#barcode_background_color').css('z-index', '999999999999999')
+                // $('#barcode_line_color').css('z-index', '999999999999999')
+                // $('.example-content-widget').css('z-index', '999999999999999')
+                // $('.example-content.well').css('z-index', '999999999999999')
+
+                $('#barcode_background_color').colorpicker();
+                $('#barcode_line_color').colorpicker();
+            })
         });
     </script>
     @stop
