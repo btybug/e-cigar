@@ -41,13 +41,13 @@
                         </div>
                         <div style="margin-bottom: 15px; display: flex">
                             {{--                <label for="barcode_text" class="barcode_text">Barcode Text</label>--}}
-                            <input class="form-control" type="text" placeholder="Default input" name="text" id="barcode_text" value="555" style="width: 70%"/>
+                            <input class="form-control" type="text" placeholder="Default input" name="text" id="barcode_text" value="5060730202285" style="width: 70%"/>
                             <select class="form-control" name="format" id="barcode_format" style="width: 30%">
                                 <option value="CODE128">CODE128 auto</option>
                                 <option value="CODE128A">CODE128 A</option>
                                 <option value="CODE128B">CODE128 B</option>
                                 <option value="CODE128C">CODE128 C</option>
-                                <option value="EAN13">EAN13</option>
+                                <option value="EAN13" selected>EAN13</option>
                                 <option value="EAN8">EAN8</option>
                                 <option value="UPC">UPC</option>
                                 <option value="CODE39">CODE39</option>
@@ -237,8 +237,8 @@
             } );
 
             const barcode_edit = function() {
-                let text = 555;
-                let format = "CODE128";
+                let text = 5060730202285;
+                let format = "EAN13";
                 let width = 2;
                 let height = 100;
                 let margin = 10;
