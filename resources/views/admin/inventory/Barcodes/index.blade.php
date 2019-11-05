@@ -47,7 +47,6 @@
 @stop
 @section('js')
     <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
-
     <script>
         $(function () {
             var table = $('#stocks-table').DataTable({
@@ -76,6 +75,20 @@
                 ],
                 order: [ [0, 'desc'] ]
             });
+            //
+            // JsBarcode("#barcode", text, {
+            //     format: "CODE128",
+            //     font: text_font,
+            //     fontSize: 18,
+            //     textMargin: 0,
+            //     height,
+            //     width,
+            //     margin,
+            //     backgroundColor: back_color,
+            //     lineColor: line_color,
+            //     textAlign: text_align
+            // })
+            //     .render();
         });
     </script>
     @stop

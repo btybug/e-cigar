@@ -25,7 +25,7 @@
 
 
 
-<!-- Date Picker -->
+    <!-- Date Picker -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
 <!-- Daterange picker -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.css") !!}
@@ -56,7 +56,6 @@
   <!--[if lt IE 9]>
   <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
   <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-
   <![endif]-->
 
   <!-- Google Font -->
@@ -283,6 +282,9 @@
   });
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js" integrity="sha256-BjqnfACYltVzhRtGNR2C4jB9NAN0WxxzECeje7/XpwE=" crossorigin="anonymous"></script>
+<script src="{{url('public/js/saveSvgAsPng.js')}}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/js/bootstrap-colorpicker.js" integrity="sha256-DQMtbH0EZgaw6tLtBLk8KW50A7ouiB4oc8+hwuienog=" crossorigin="anonymous"></script>
 
 @yield('js')
 @stack('javascript')

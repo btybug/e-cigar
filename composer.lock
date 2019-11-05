@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0d7fc0eddcbc695bd75cb77218e8d8c2",
+    "content-hash": "b67117217b4122e838352e6895ab60a3",
     "packages": [
         {
             "name": "actuallymab/laravel-comment",
@@ -243,6 +243,50 @@
                 }
             ],
             "time": "2018-12-13T10:34:14+00:00"
+        },
+        {
+            "name": "bnbwebexpertise/laravel-google-cloud-print",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bnbwebexpertise/laravel-google-cloud-print.git",
+                "reference": "61b2b8006db90d9fa11f2de55bead92003dbb4dd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bnbwebexpertise/laravel-google-cloud-print/zipball/61b2b8006db90d9fa11f2de55bead92003dbb4dd",
+                "reference": "61b2b8006db90d9fa11f2de55bead92003dbb4dd",
+                "shasum": ""
+            },
+            "require": {
+                "google/apiclient": "^2.1",
+                "illuminate/config": "5.x",
+                "illuminate/session": "5.x",
+                "illuminate/support": "5.x",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "0.9.*",
+                "phpunit/phpunit": "~4.6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Bnb\\GoogleCloudPrint\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jérémy Gaulin",
+                    "email": "jeremy@bnb.re"
+                }
+            ],
+            "description": "Google Cloud Print Service Provider for Laravel 5",
+            "time": "2017-02-23T17:56:58+00:00"
         },
         {
             "name": "cartalyst/collections",
