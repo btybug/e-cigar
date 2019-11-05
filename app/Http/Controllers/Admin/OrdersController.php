@@ -708,8 +708,24 @@ class OrdersController extends Controller
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
         ];
 
-        $pdf = \PDF::loadView('admin.pdf.invoice', $data);
+        if(! \File::isDirectory(storage_path("app".DS."printer"))){
+            \File::makeDirectory(storage_path("app".DS."printer"));
+        }
 
-        return $pdf->download('invoice.pdf');
+        $pdf = \PDF::loadView('admin.pdf.invoice', $data)->save(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf");
+
+        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
+        \GoogleCloudPrint::asPdf()
+            ->file(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf")
+            ->printer($printerId)
+            ->send();
+
+//        \GoogleCloudPrint::asText()
+//            ->content('Sahak like rainbow color :D')
+//            ->printer($printerId)
+//            ->marginsInCentimeters(1, 1, 1, 1)
+//            ->send();
+
+        return redirect()->back()->with("success","Printing started !!!");
     }
 }
