@@ -9,6 +9,7 @@
         "actuallymab/laravel-comment": "^0.6.1",
         "barryvdh/laravel-dompdf": "^0.8.4",
         "barryvdh/laravel-ide-helper": "^2.5",
+        "bnbwebexpertise/laravel-google-cloud-print": "^0.1.2",
         "cartalyst/stripe-laravel": "9.0.*",
         "chumper/zipper": "^1.0",
         "dacastro4/laravel-gmail": "v0.6.1.1",
