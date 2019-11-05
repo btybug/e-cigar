@@ -1669,6 +1669,12 @@ color: #ffffff;
     height: 200px;
     object-fit: cover;
 }
+.blog-contact-us--view .status-wall{
+    border: 1px solid #b9b9b9;
+    padding: 20px;
+    margin-bottom: 15px;
+    background-color: #e2e2e266;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{
@@ -1784,6 +1790,7 @@ color: #ffffff;
     .releted__products-panel .option-elm-attributes .wrap-item img{
         height: 150px !important;
     }
+    
 }
 @media (max-width: 500px) {
     li.paginate_button.previous {
