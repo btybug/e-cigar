@@ -27,6 +27,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        40564344854
+
         $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
         \GoogleCloudPrint::asText()
             ->content('Sahak like rainbow color :D')
