@@ -183,6 +183,29 @@
     <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
     <script>
         $(function () {
+            const shortAjax = function (URL, obj = {}, cb) {
+                fetch(URL, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(obj)
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        return cb(json);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            };
+
             var table = $('#stocks-table').DataTable({
                 ajax: "{!! route('datatable_all_barcodes') !!}",
                 "processing": true,
@@ -210,27 +233,48 @@
                 order: [ [0, 'desc'] ]
             });
 
+            const barcode_settings = JSON.parse($('#barcode-settings').text());
+console.log(barcode_settings)
             table.on('draw.dt', function () {
-                let width = 2;
-                let height = 100;
-                let margin = 10;
-                let back_color = '#ffffff';
-                let line_color = '#000000';
-                let text_align = 'center';
-                let text_font = 'sans-serif';
+                let width = Number(barcode_settings.width);
+                let height = Number(barcode_settings.height);
+                let margin = Number(barcode_settings.margin);
+                let back_color = barcode_settings.background_color;
+                let line_color = barcode_settings.line_color;
+                let text_align = barcode_settings.text_align;
+                let text_font = barcode_settings.text_font;
+                let format = barcode_settings.format;
+                let font_size = Number(barcode_settings.font_size);
+                let text_margin = Number(barcode_settings.text_margin);
+                let displayValue = Boolean(Number(barcode_settings.text_switch));
+                let bold = Number(barcode_settings.bold);
+                let italic = Number(barcode_settings.italic);
+                let fontOptions = '';
+
+                if(bold && italic) {
+                    fontOptions = 'bold italic'
+                } else if(bold) {
+                    fontOptions = 'bold'
+                } else if(italic) {
+                    fontOptions = 'italic'
+                } else {
+                    fontOptions = ''
+                }
+
                 $('body').find('.barcodes').each(function(key, value) {
-                    console.log($(value).data('barcode'));
                     JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
                         format: "CODE128",
                         font: text_font,
-                        fontSize: 18,
-                        textMargin: 0,
+                        fontSize: font_size,
+                        textMargin: text_margin,
                         height,
                         width,
                         margin,
                         backgroundColor: back_color,
                         lineColor: line_color,
-                        textAlign: text_align
+                        textAlign: text_align,
+                        fontOptions,
+                        displayValue
                     })
                         .render();
                 });
@@ -616,9 +660,15 @@
                         text_switch: $('#barcode_text_switch').is(':checked'),
                         bold: $('#barcode_bold').is(':checked'),
                         italic: $('#barcode_italic').is(':checked')
-                    })
+                    });
                     console.log(data);
-                    $('#barcodeModalCenter').modal('hide');
+                    shortAjax('/admin/inventory/barcode/settings', data, (res) => {
+                        if(res.success) {
+
+                            $('#barcodeModalCenter').modal('hide');
+                        }
+                    }
+                    )
                 })
 
 
