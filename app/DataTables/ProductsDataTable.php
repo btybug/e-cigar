@@ -45,7 +45,7 @@ class ProductsDataTable extends DataTable
     public function query(Stock $model,Request $request)
     {
         $products = ProductSearch::applyQuery($request);
-        return $products;
+        return $products->groupBy('stocks.id');
     }
 
     /**

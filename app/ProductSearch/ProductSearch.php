@@ -116,7 +116,6 @@ class ProductSearch
 
     private static function createObject($category = null, $request)
     {
-//        $builder->whereIn('stock_categories.categories_id',$value);
 
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
         $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
