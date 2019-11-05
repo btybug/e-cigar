@@ -165,7 +165,7 @@ class StoreController extends Controller
 
     public function getPurchase()
     {
-        return $this->view('purchase.index', compact(''));
+        return $this->view('purchase.index');
     }
 
     public function getPurchaseNew()
