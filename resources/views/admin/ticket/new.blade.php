@@ -20,7 +20,7 @@
            <div class="card-body panel-body">
 
                <div class="row sortable-panels">
-                   <div class="col-md-7 ">
+                   <div class="col-xl-7 col-sm-6">
                        <div class="form-group">
                            <div class="row">
                                <div class="col-sm-12">
@@ -36,8 +36,8 @@
                                    </div>
                                    <div class="form-group">
                                        <div class="form-group row">
-                                           <label class="col-sm-3">Attachments</label>
-                                           <div class="col-sm-9">
+                                           <label class="col-lg-3">Attachments</label>
+                                           <div class="col-lg-9">
                                                {!! Form::file('attachments[]',['multiple' => true]) !!}
                                            </div>
                                        </div>
@@ -46,40 +46,40 @@
                            </div>
                        </div>
                    </div>
-                   <div class="col-md-5 ">
+                   <div class="col-xl-5 col-sm-6">
                        <div class="view-product-wall list-group">
                            <div class="author-wall wall ">
-                               <div class="row">
-                                   {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                               <div class="row form-group">
+                                   {{Form::label('author', 'Author',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {{ Auth::user()->name }}
                                    </div>
                                </div>
                            </div>
-                           <div class="status-wall wall ">
+                           <div class="status-wall wall form-group">
                                <div class="row">
-                                   {{Form::label('user', 'User',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                                   {{Form::label('user', 'User',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {!! Form::select('user_id',$users,null,
                                                    ['class' => 'form-control','id'=> 'user']) !!}
                                    </div>
                                </div>
                            </div>
-                           <div class="status-wall wall ">
+                           <div class="status-wall wall form-group">
                                <div class="row">
-                                   {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                                   {{Form::label('status', 'Status',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {!! Form::select('status_id',$statuses,null,
                                                    ['class' => 'form-control','id'=> 'status']) !!}
                                    </div>
                                </div>
                            </div>
-                           <div class="tag-wall wall ">
+                           <div class="tag-wall wall form-group">
                                <div class="row">
-                                   <label class="col-sm-3 control-label" for="input-category"><span
+                                   <label class="col-lg-3 control-label" for="input-category"><span
                                                data-toggle="tooltip" title=""
                                                data-original-title="Choose all products under selected category.">Tags</span></label>
-                                   <div class="col-sm-9">
+                                   <div class="col-lg-9">
                                        <input type="text" name="" value="" placeholder="Tags"
                                               id="input-tags" class="form-control" autocomplete="off">
                                        <ul class="dropdown-menu"></ul>
@@ -102,10 +102,10 @@
                                    </div>
                                </div>
                            </div>
-                           <div class="status-wall wall ">
+                           <div class="status-wall wall form-group">
                                <div class="row">
-                                   {{Form::label('category_id', 'Category',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                                   {{Form::label('category_id', 'Category',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {!! Form::select('category_id',['' => 'Select'] + $categories,null,
                                                    ['class' => 'form-control','id'=> 'category']) !!}
                                    </div>
@@ -114,19 +114,19 @@
                            <div id="category-related">
 
                            </div>
-                           <div class="status-wall wall ">
+                           <div class="status-wall wall form-group">
                                <div class="row">
-                                   {{Form::label('priority_id', 'Priority',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                                   {{Form::label('priority_id', 'Priority',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {!! Form::select('priority_id',$priorities,null,
                                                    ['class' => 'form-control','id'=> 'priority']) !!}
                                    </div>
                                </div>
                            </div>
-                           <div class="status-wall wall ">
+                           <div class="status-wall wall form-group">
                                <div class="row">
-                                   {{Form::label('staff', 'Responsible staff',['class' => 'col-sm-3'])}}
-                                   <div class="col-sm-9">
+                                   {{Form::label('staff', 'Responsible staff',['class' => 'col-lg-3'])}}
+                                   <div class="col-lg-9">
                                        {!! Form::select('staff_id',$staff,null,
                                                    ['class' => 'form-control','id'=> 'staff']) !!}
                                    </div>
