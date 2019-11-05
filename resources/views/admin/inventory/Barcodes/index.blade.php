@@ -664,7 +664,48 @@ console.log(barcode_settings)
                     console.log(data);
                     shortAjax('/admin/inventory/barcode/settings', data, (res) => {
                         if(res.success) {
+                            let width = Number(data.width);
+                            let height = Number(data.height);
+                            let margin = Number(data.margin);
+                            let back_color = data.background_color;
+                            let line_color = data.line_color;
+                            let text_align = data.text_align;
+                            let text_font = data.text_font;
+                            let format = data.format;
+                            let font_size = Number(data.font_size);
+                            let text_margin = Number(data.text_margin);
+                            let displayValue = Boolean(Number(data.text_switch));
+                            let bold = Number(data.bold);
+                            let italic = Number(data.italic);
+                            let fontOptions = '';
 
+                            if(bold && italic) {
+                                fontOptions = 'bold italic'
+                            } else if(bold) {
+                                fontOptions = 'bold'
+                            } else if(italic) {
+                                fontOptions = 'italic'
+                            } else {
+                                fontOptions = ''
+                            }
+
+                            $('body').find('.barcodes').each(function(key, value) {
+                                JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
+                                    format: "CODE128",
+                                    font: text_font,
+                                    fontSize: font_size,
+                                    textMargin: text_margin,
+                                    height,
+                                    width,
+                                    margin,
+                                    backgroundColor: back_color,
+                                    lineColor: line_color,
+                                    textAlign: text_align,
+                                    fontOptions,
+                                    displayValue
+                                })
+                                    .render();
+                            });
                             $('#barcodeModalCenter').modal('hide');
                         }
                     }
