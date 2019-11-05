@@ -219,7 +219,7 @@ class StoreController extends Controller
     public function EditPurchase($id)
     {
         $model = Purchase::findOrFail($id);
-        $items = Items::where('type','simple')->get()->pluck('name', 'id');
+        $items = Items::where('type','simple')->get()->pluck('name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id');
         $warehouses = Warehouse::all()->pluck('name','id')->all();
         $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id',$model->warehouse_id)->get()->pluck('name','id')->all();
