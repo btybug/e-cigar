@@ -44,7 +44,7 @@
                 <div class="card-body panel-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-md-5">
+                            <div class="col-xl-5 col-md-6">
                                 <div class="row">
                                     <label for="text" class="col-md-4">we ship to</label>
                                     <div class="col-md-8">
@@ -62,7 +62,7 @@
                     <div class="card-body panel-body">
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-xl-5 col-md-6">
                                     <div class="row">
                                         <label class="col-md-4">Availabile stock status</label>
                                         <div class="col-md-8">
@@ -75,7 +75,7 @@
                         </div>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-md-5">
+                                <div class="col-xl-5 col-md-6">
                                     <div class="row">
                                         <label class="col-md-4">Out of stock status</label>
                                         <div class="col-md-8">
@@ -83,7 +83,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-7">
+                                <div class="col-xl-7 col-md-6">
                                     <label class="radio-inline mr-2">
                                         {!! Form::radio('out_of_stock_status',1,true) !!} Enable Back order
                                     </label>
