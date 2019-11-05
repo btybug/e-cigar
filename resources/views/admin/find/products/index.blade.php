@@ -147,7 +147,7 @@
                     {label: "Price:", name: "price"},
                     {label: "Slug:", name: "slug"},
                     {label: "Categories:", name: "categories"},
-                    {label: "Created at:", name: "created_at"}
+                    {label: "Status:", name: "status"}
                 ]
             });
 

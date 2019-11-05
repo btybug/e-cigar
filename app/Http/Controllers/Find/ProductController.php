@@ -13,8 +13,8 @@ class ProductController extends Controller
 {
     public function index(ProductsDataTable $dataTable)
     {
-        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->get()->pluck('name', 'id')->all();
         $data=request()->all();
         return $dataTable->render('admin.find.products.index',compact(['categories','brands','data']));
     }

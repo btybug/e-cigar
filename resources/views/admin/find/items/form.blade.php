@@ -4,7 +4,7 @@
             <div class="form-group row">
                 <label for="barcode" class="col-sm-2 col-form-label">Product name</label>
                 <div class="col-sm-10">
-                    {!! Form::text('name',null,['class' => 'form-control','placeholder' => 'product name']) !!}
+                    {!! Form::text('name',@$data['name'],['class' => 'form-control','placeholder' => 'product name']) !!}
                 </div>
             </div>
         </div>
@@ -36,7 +36,7 @@
             <div class="form-group row">
                 <label for="product-name" class="col-sm-2 col-form-label">Price start</label>
                 <div class="col-sm-10">
-                    {!! Form::number('amount[]',null,['class' => 'form-control','placeholder' => 'product price start']) !!}
+                    {!! Form::number('amount[]',@$data['amount'][0],['class' => 'form-control','placeholder' => 'product price start']) !!}
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
             <div class="form-group row">
                 <label for="product-name" class="col-sm-2 col-form-label">Price to</label>
                 <div class="col-sm-10">
-                    {!! Form::number('amount[]',null,['class' => 'form-control','placeholder' => 'product price to']) !!}
+                    {!! Form::number('amount[]',@$data['amount'][1],['class' => 'form-control','placeholder' => 'product price to']) !!}
                 </div>
             </div>
         </div>

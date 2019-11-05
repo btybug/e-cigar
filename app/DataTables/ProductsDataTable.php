@@ -25,6 +25,11 @@ class ProductsDataTable extends DataTable
             ->editColumn('brand_id',function ($item){
                 $brand= Category::find($item->brand_id);
                 return  ($brand)?$brand->name:null;
+            })->editColumn('status',function ($item){
+                switch ($item->status){
+                    case 0:return 'Draft';break;
+                    case 1:return 'Published';break;
+                }
             })->editColumn('categories',function ($item){
                 $ItemCategories= StockCategories::where('stock_id',$item->id)->get();
                 $text='';
@@ -98,7 +103,7 @@ class ProductsDataTable extends DataTable
             'price',
             'slug',
             'categories',
-            'created_at',
+            'status',
 
         ];
 //        return [
