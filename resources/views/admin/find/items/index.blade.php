@@ -138,8 +138,7 @@
                         {label: "Name:", name: "name"},
                         {label: "status:", name: "status",type:'status'},
                         {label: "Price:", name: "default_price"},
-                        {label: "Barcode:", name: "barcodes_code",type: "select2"},
-                        {label: "Brand:", name: "brands",type: "select"},
+                        {label: "Brand:", name: "brands",type: "select2"},
                         {label: "Categories:", name: "categories_lists",type: "select2",
                             "opts": {
                                 "placeholder": "Seleziona una nazione",
@@ -156,7 +155,7 @@
 
             $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
                 $('body').find('#DTE_Field_barcodes_code').select2()
-                editor.inline( this, {
+                editor.inline( window.LaravelDataTables["items-table"].cell(this).index(), {
                     onBlur: 'submit'
                 } );
             } );

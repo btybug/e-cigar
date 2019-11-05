@@ -113,13 +113,12 @@ class ItemsDataTable extends DataTable
                 'orderable' => false,
                 'searchable' => false
             ],
-            'id',
+            ['name' => 'id', 'data' => 'id', 'title' => '<input type="checkbox">id'],
             'name',
             'status',
             'default_price',
-            ['name' => 'barcodes', 'data' => 'barcode_id', 'title' => 'Barcode','editField'=> "barcodes_code"],
             ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
-            ['name' => 'categories', 'data' => 'categories', 'title' => 'Categories','editField'=> "categories_lists"],
+            ['name' => 'categories', 'data' => 'categories','type'=>'select2','title' => 'Categories','editField'=> "categories_lists"],
         ];
     }
 
