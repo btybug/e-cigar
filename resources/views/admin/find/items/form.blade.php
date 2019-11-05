@@ -20,7 +20,7 @@
             <div class="form-group row">
                 <label for="product-name" class="col-sm-2 col-form-label">Brands</label>
                 <div class="col-sm-10">
-                    {!! Form::select('brands[]',$brands,@implode(',',$data['brands']),['class' => 'form-control brands','multiple' => true]) !!}
+                    {!! Form::select('brands[]',$brands,@$data['brands'],['class' => 'form-control brands','multiple' => true]) !!}
                 </div>
             </div>
         </div>
@@ -28,7 +28,7 @@
             <div class="form-group row">
                 <label for="product-id" class="col-sm-2 col-form-label">Categories</label>
                 <div class="col-sm-10">
-                    {!! Form::select('categories[]',$categories,@implode(',',$data['categories']),['class' => 'form-control categories','multiple' => true]) !!}
+                    {!! Form::select('categories[]',$categories,@$data['categories'],['class' => 'form-control categories','multiple' => true]) !!}
                 </div>
             </div>
         </div>
@@ -67,7 +67,7 @@
             <div class="form-group row">
                 <label for="barcodes" class="col-sm-2 col-form-label">Barcodes</label>
                 <div class="col-sm-10">
-                    {!! Form::select('barcodes[]',$barcodes,@implode(',',$data['barcodes']),['class' => 'form-control barcodes','id'=>'barcodes','multiple' => true]) !!}
+                    {!! Form::select('barcodes[]',$barcodes,@$data['barcodes'],['class' => 'form-control barcodes','id'=>'barcodes','multiple' => true]) !!}
                 </div>
             </div>
         </div>
