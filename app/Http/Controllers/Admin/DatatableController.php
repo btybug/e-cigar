@@ -607,7 +607,7 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    
+
     public function getPurchases()
     {
         return Datatables::of(Purchase::query())
