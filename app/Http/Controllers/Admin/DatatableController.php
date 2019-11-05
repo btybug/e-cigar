@@ -629,6 +629,7 @@ class DatatableController extends Controller
 
     public function getItemPurchases($item_id)
     {
+        
         return Datatables::of(Purchase::where('item_id', $item_id))
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
