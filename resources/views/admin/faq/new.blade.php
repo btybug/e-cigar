@@ -20,7 +20,7 @@
                         {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                     </div>
                     <div class="row sortable-panels">
-                        <div class="col-md-9 ">
+                        <div class="col-lg-8 col-md-7 col-sm-8">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -101,13 +101,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 ">
+                        <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="view-product-wall">
 
                                 <div class="status-wall wall">
                                     <div class="row">
-                                        {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
-                                        <div class="col-sm-9">
+                                        {{Form::label('status', 'Status',['class' => 'col-xl-3'])}}
+                                        <div class="col-xl-9">
                                             {!! Form::select('status',[0 => 'Draft',1 => 'Published'],null,
                                                         ['class' => 'form-control','id'=> 'status']) !!}
                                         </div>
@@ -115,10 +115,10 @@
                                 </div>
                                 <div class="tag-wall wall">
                                     <div class="row">
-                                        <label class="col-sm-3 control-label" for="input-category"><span
+                                        <label class="col-xl-3 control-label" for="input-category"><span
                                                     data-toggle="tooltip" title=""
                                                     data-original-title="Choose all products under selected category.">Tags</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-xl-9">
                                             <input type="text" name="" value="" placeholder="Tags"
                                                    id="input-tags" class="form-control" autocomplete="off">
                                             <ul class="dropdown-menu"></ul>
@@ -142,10 +142,10 @@
                                 </div>
                                 <div class="category-wall wall">
                                     <div class="row">
-                                        <label class="col-sm-3 control-label" for="input-category"><span
+                                        <label class="col-xl-3 control-label" for="input-category"><span
                                                     data-toggle="tooltip" title=""
                                                     data-original-title="Choose all products under selected category.">Category</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-xl-9">
                                             <div class="form-group">
                                                 {!! Form::hidden('categories',(isset($checkedCategories))
                                                 ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
@@ -168,24 +168,24 @@
                         <div class="card-body panel-body">
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-facebook-title" class="col-xl-2 col-lg-3 col-sm-4">Facebook Title</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('fb[og:title]',($model)?$model->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$model)]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-facebook-desc" class="col-xl-2 col-lg-3 col-sm-4">Facebook Description</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('fb[og:description]',($model)?$model->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$model)]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-2 col-xs-12">Facebook Image</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label class="col-xl-2 col-lg-3 col-sm-4">Facebook Image</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$model)]) !!}
 
                                     </div>
@@ -199,8 +199,8 @@
                         <div class="card-body panel-body">
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-twitter-title" class="col-xl-2 col-lg-3 col-sm-4">Twitter Title</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('twitter[og:title]',($model)?$model->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
                                     </div>
@@ -208,8 +208,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-twitter-desc" class="col-xl-2 col-lg-3 col-sm-4">Twitter Description</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('twitter[og:description]',($model)?$model->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$model)]) !!}
 
                                     </div>
@@ -217,8 +217,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-2 col-xs-12">Twitter Image</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label class="col-xl-2 col-lg-3 col-sm-4">Twitter Image</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$model)]) !!}
                                     </div>
                                 </div>

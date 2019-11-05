@@ -1678,6 +1678,15 @@ color: #ffffff;
         flex: 0 0 50% !important;
         max-width: 50% !important;
     }
+    .category-wall.wall .jstree-wholerow-ul{
+        width: 100%;
+    }
+    .category-wall.wall .jstree-default>.jstree-wholerow-ul .jstree-clicked{
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 100%;
+    }
 }
 @media (max-width: 991px) {
     .main-header_nav-middle .main-header_nav-middle-list .find-link{
