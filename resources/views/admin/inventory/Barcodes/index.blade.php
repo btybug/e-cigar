@@ -263,7 +263,7 @@ console.log(barcode_settings)
 
                 $('body').find('.barcodes').each(function(key, value) {
                     JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
-                        format: "CODE128",
+                        format,
                         font: text_font,
                         fontSize: font_size,
                         textMargin: text_margin,
@@ -274,7 +274,10 @@ console.log(barcode_settings)
                         lineColor: line_color,
                         textAlign: text_align,
                         fontOptions,
-                        displayValue
+                        displayValue,
+                        invalid: function() {
+                            console.log('invalid')
+                        }
                     })
                         .render();
                 });
