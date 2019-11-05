@@ -618,6 +618,7 @@
                         italic: $('#barcode_italic').is(':checked')
                     })
                     console.log(data);
+                    $('#barcodeModalCenter').modal('hide');
                 })
 
 
