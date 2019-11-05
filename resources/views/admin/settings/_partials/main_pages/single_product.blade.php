@@ -10,7 +10,7 @@
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
             <p class="d-inline-block">Right column Ads</p>
-            <div class="col-sm-2 pull-right">
+            <div class="pull-right">
                 <button type="button" class="btn btn-primary add-new-social-input">
                     <i
                         class="fa fa-plus"></i></button>
@@ -23,39 +23,39 @@
                         $data = json_decode($model->data,true);
                     @endphp
                     @foreach($data['images'] as $key => $banner)
-            <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                <div class="col-sm-7 p-0">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            {!! media_button('single_product[images][]',$banner) !!}
+                    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                        <div class="col-xl-7 p-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    {!! media_button('single_product[images][]',$banner) !!}
 
+                                </div>
+                            </div>
+
+                                <div class="form-group row mt-3">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="single_product[urls][]" class="form-control" id="staticEmail" value="{!! $data['urls'][$key] !!}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="single_product[tags][]" class="form-control" id="staticEmail" value="{!! $data['tags'][$key] !!}">
+                                    </div>
+                                </div>
+
+
+                        </div>
+                        <div class="col-xl-3">
+                            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                <i class="fa fa-minus"></i></button>
                         </div>
                     </div>
-
-                        <div class="form-group row mt-3">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="single_product[urls][]" class="form-control" id="staticEmail" value="{!! $data['urls'][$key] !!}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
-                            <div class="col-sm-10">
-                                <input type="text" name="single_product[tags][]" class="form-control" id="staticEmail" value="{!! $data['tags'][$key] !!}">
-                            </div>
-                        </div>
-
-
-                </div>
-                <div class="col-sm-3">
-                    <button class="plus-icon remove-new-banner-input btn btn-danger">
-                        <i class="fa fa-minus"></i></button>
-                </div>
-            </div>
                     @endforeach
                     @else
                     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                        <div class="col-sm-7 p-0">
+                        <div class="col-xl-7 p-0">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     {!! media_button('single_product[images][]') !!}
@@ -76,7 +76,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 @endif
             </div>

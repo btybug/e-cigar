@@ -10,7 +10,7 @@
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
             <p class="d-inline-block">Right column Ads</p>
-            <div class="col-sm-2 pull-right">
+            <div class="pull-right">
                 <button type="button" class="btn btn-primary add-new-social-input">
                     <i
                         class="fa fa-plus"></i></button>
@@ -24,7 +24,7 @@
                     @endphp
                     @foreach($data['images'] as $key => $banner)
                         <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                            <div class="col-sm-7 p-0">
+                            <div class="col-xl-7 p-0">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         {!! media_button('my_account[images][]',$banner) !!}
@@ -45,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
+                            <div class="col-xl-3">
                                 <button class="plus-icon remove-new-banner-input btn btn-danger">
                                     <i class="fa fa-minus"></i></button>
                             </div>
@@ -53,7 +53,7 @@
                     @endforeach
                 @else
                     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                        <div class="col-sm-7 p-0">
+                        <div class="col-xl-7 p-0">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     {!! media_button('my_account[images][]') !!}
@@ -86,7 +86,7 @@
 {!! Form::close() !!}
 <script type="template" id="add-more-banners">
     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-        <div class="col-sm-7 p-0">
+        <div class="col-xl-7 p-0">
             <div class="input-group">
                 <div class="input-group-prepend">
                     {!! media_button('my_account[images][]',$model) !!}

@@ -7,47 +7,30 @@
     <div class="container-fluid">
         <div class="row flex-column">
             @include("admin.settings._partials.menu",['active'=> 'main_pages'])
-        </div>
-        <div class="tab-content">
-            <div class="row">
-                <div class="col-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='banners') active @endif" href="?p=banners">Home page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='tc') active @endif" href="?p=tc">T&C</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='about_us')active @endif" href="?p=about_us">About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='single_product')active @endif" href="?p=single_product">Single
+            <div class="tab-content">
+                <div class="row">
+                    <div class="col-sm-3 col-4 pr-md-3 pr-0">
+                        <div class="nav flex-column list-group mt-3">
+                            <a class="list-group-item list-group-item-action @if($p=='banners') active @endif" href="?p=banners">Home page</a>
+                            <a class="list-group-item list-group-item-action @if($p=='tc') active @endif" href="?p=tc">T&C</a>
+                            <a class="list-group-item list-group-item-action @if($p=='about_us')active @endif" href="?p=about_us">About us</a>
+                            <a class="list-group-item list-group-item-action @if($p=='single_product')active @endif" href="?p=single_product">Single
                                 Product</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='single_post')active @endif" href="?p=single_post">Single
+                            <a class="list-group-item list-group-item-action @if($p=='single_post')active @endif" href="?p=single_post">Single
                                 Post</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='confirmation_page')active @endif" href="?p=confirmation_page">Confirmation
+                            <a class="list-group-item list-group-item-action @if($p=='confirmation_page')active @endif" href="?p=confirmation_page">Confirmation
                                 Page</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='my_account')active @endif" href="?p=my_account">My Account</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
-                        </li>
-                    </ul>
+                            <a class="list-group-item list-group-item-action @if($p=='my_account')active @endif" href="?p=my_account">My Account</a>
+                            <a class="list-group-item list-group-item-action @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
+                        </div>
+                    </div>
+                    <div class="col-sm-9 col-8">
+                        @include("admin.settings._partials.main_pages.".$p)
+                    </div>
                 </div>
-                <div class="col-9">
-                    @include("admin.settings._partials.main_pages.".$p)
-                </div>
+
             </div>
-
         </div>
-
 
     </div>
     <script type="template" id="add-more-banners">

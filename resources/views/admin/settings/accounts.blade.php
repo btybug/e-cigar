@@ -27,7 +27,7 @@
                                                 <label for="sendingEmail">E-Mail Address</label>
 
                                             </td>
-                                            <td>
+                                            <td style="min-width: 150px">
                                                 {!! Form::hidden('old['.$from->id.'][type]','from') !!}
                                                 {!! Form::text("old[".$from->id."][email]",$from->email,['class'=>'form-control','aria-describedby'=>'sendingEmail']) !!}
 
@@ -36,7 +36,7 @@
                                                 <label for="sendingEmailDesc">Description</label>
 
                                             </td>
-                                            <td>
+                                            <td style="min-width: 150px">
                         <textarea rows="5" class="form-control" name="old[{!!$from->id!!}][description]"
                                   aria-describedby="sendingEmailDesc"
                                   placeholder="Enter Description">{!!$from->description!!}</textarea>

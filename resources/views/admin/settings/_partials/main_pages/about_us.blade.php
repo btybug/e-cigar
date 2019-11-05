@@ -29,11 +29,11 @@
                                 <div id="{{ strtolower($language->code) }}"
                                      class="tab-pane fade  @if($loop->first) in active show @endif">
                                     <div class="form-group row">
-                                        <label class="col-sm-2 control-label col-form-label text-right"><span
+                                        <label class="col-lg-2 control-label col-form-label text-lg-right"><span
                                                 data-toggle="tooltip"
                                                 title=""
                                                 data-original-title="Description">Description</span></label>
-                                        <div class="col-sm-10">
+                                        <div class="col-lg-10">
                                             {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                         </div>
                                     </div>

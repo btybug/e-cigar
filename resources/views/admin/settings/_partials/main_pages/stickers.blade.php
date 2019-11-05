@@ -18,15 +18,15 @@
                                     $data = json_decode($model->data,true);
                                 @endphp
                                 @foreach($data as $key => $banner)
-                                    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                                        <div class="col-sm-6 p-0">
+                                    <div class="mb-2 d-flex flex-wrap banner-item w-100">
+                                        <div class="col-xl-6 col-md-6 p-0">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     {!! media_button('stickers[]',$banner) !!}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-xl-3 col-md-3 offset-md-3">
                                             @if(!$key)
                                                 <button type="button"
                                                         class="btn btn-primary add-new-social-input">
@@ -40,15 +40,15 @@
                                     </div>
                                 @endforeach
                             @else
-                                <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                                    <div class="col-sm-6 p-0">
+                                <div class="mb-2 d-flex flex-wrap banner-item w-100">
+                                    <div class="col-xl-6 col-sm-6 p-0">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 {!! media_button('stickers[]',$model) !!}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-sm-3">
+                                    <div class="col-xl-3 col-sm-6 text-sm-right text-xl-left">
                                         <button type="button" class="btn btn-primary add-new-social-input">
                                             <i
                                                 class="fa fa-plus"></i></button>
@@ -67,7 +67,7 @@
 </div>
 
 <script type="template" id="add-more-banners">
-    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+    <div class="mb-2 d-flex flex-wrap banner-item w-100">
         <div class="col-sm-6 p-0">
             <div class="input-group">
                 <div class="input-group-prepend">

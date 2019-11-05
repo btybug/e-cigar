@@ -1758,7 +1758,9 @@ color: #ffffff;
         object-fit: contain;
 
     }
-
+.settings-connection-email-name{
+    font-size: 20px;
+}
 }
 @media (max-width: 500px) {
     li.paginate_button.previous {
