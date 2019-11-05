@@ -715,7 +715,8 @@ class DatatableController extends Controller
                 return ($attr->barcode)?$attr->barcode->code:'no barcode';
             })
             ->editColumn('brand_id', function ($attr) {
-                return ($attr->brand)?$attr->brand->name:'no brand';
+                $brand=Category::find($attr->brand_id);
+                return ($brand)?$brand->name:'no brand';
             })->editColumn('status', function ($attr) {
                 return ($attr->status)?"Active":'Draft';
             })->editColumn('long_description', function ($attr) {
