@@ -47,6 +47,7 @@
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_backend_activity') !!}",
                 dom: 'Bfrtip',
+                "scrollX": true,
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],

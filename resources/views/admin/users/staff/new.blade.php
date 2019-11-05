@@ -18,7 +18,7 @@
        <div class="card-body panel-body">
 
            <div class="row">
-               <div class="col-md-9">
+               <div class="col-xl-9">
                    <div class="tab-content">
                            <div id="users_profile" class="tab-pane fade in active show">
                                {!! Form::open(['class'=>'']) !!}

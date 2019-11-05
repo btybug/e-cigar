@@ -16,7 +16,7 @@
         </div>
         <div class="card-body panel-body">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-xl-3 col-sm-4">
                     <!-- Profile Image -->
                     <div class="box box-primary mar-0">
                         <div class="box-body box-profile">
@@ -43,7 +43,7 @@
                     <!-- /.box -->
                 </div>
                 <!-- /.col -->
-                <div class="col-md-9">
+                <div class="col-xl-9 col-sm-8">
                         {{--<ul class="nav nav-tabs">--}}
                         {{--<li class="active"><a href="#profile" data-toggle="tab">Profile</a></li>--}}
                         {{--<li><a href="#passwordDiv" data-toggle="tab">Password</a></li>--}}
@@ -60,47 +60,47 @@
                                         {!! Form::hidden('id') !!}
 
                                         <div class="form-group row">
-                                            <label for="inputName" class="col-sm-2 control-label">First Name</label>
+                                            <label for="inputName" class="col-lg-2 control-label">First Name</label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-lg-10">
                                                 {!! Form::text('name',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputEmail" class="col-sm-2 control-label">Last Name</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::text('last_name',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="email" class="col-sm-2 control-label">E-mail </label>
+                                            <label for="email" class="col-lg-2 control-label">E-mail </label>
 
-                                            <div class="col-sm-10">
+                                            <div class="col-lg-10">
                                                 {!! Form::text('email',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 control-label">Phone</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputExperience" class="col-lg-2 control-label">Phone</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::text('phone',null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputSkills" class="col-sm-2 control-label">Country</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputSkills" class="col-lg-2 control-label">Country</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::select('country',$countries,null,['class'=>'form-control']) !!}
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 control-label">Gender</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputExperience" class="col-lg-2 control-label">Gender</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
 
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 control-label">Status</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputExperience" class="col-lg-2 control-label">Status</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::hidden('status',null) !!}
                                                 @if($user->email_verified_at == null)
                                                     <div class="form-control">Email Not Verified</div>
@@ -112,8 +112,8 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label for="inputExperience" class="col-sm-2 control-label">Membership</label>
-                                            <div class="col-sm-10">
+                                            <label for="inputExperience" class="col-lg-2 control-label">Membership</label>
+                                            <div class="col-lg-10">
                                                 {!! Form::select('role_id',[null=>'No Membership']+$roles,null,['class'=>'form-control']) !!}
 
                                             </div>
@@ -121,7 +121,7 @@
 
 
                                         <div class="form-group row">
-                                            <div class="col-sm-12 text-right">
+                                            <div class="col-lg-12 text-right">
                                                 <button type="submit" class="btn btn-success">Update</button>
                                             </div>
                                         </div>
@@ -137,10 +137,10 @@
                                         @if($user->verification_type && $user->verification_image)
                                             {!! Form::open() !!}
                                         <div class="row">
-                                            <div class="form-group col-md-10">
+                                            <div class="form-group col-lg-8">
                                                 <div class="row">
-                                                <label for="inputExperience" class="col-sm-4 control-label">Uploaded Doc : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
-                                                <div class="col-sm-8">
+                                                <label for="inputExperience" class="col-lg-4 control-label">Uploaded Doc : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
+                                                <div class="col-lg-8">
                                                     <img class="img" src="{{ $user->verification_image }}" width="100"/>
                                                 </div>
                                                 </div>
@@ -148,7 +148,7 @@
                                                     <button type="button" class="btn btn-info">View</button>
                                                 </div>
                                             </div>
-                                            <div class="form-group col-md-2">
+                                            <div class="form-group col-lg-4 ml-lg-auto">
                                                 @if(! $user->status)
                                                     <div>
                                                         <button type="button" class="btn btn-success approve-verify">Approve</button>

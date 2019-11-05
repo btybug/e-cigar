@@ -5,12 +5,12 @@
 @section('content')
     <div class="row " style="zoom: 75%">
 
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             <div class="col-md-6 pull-left">
                 <h2 class="m-0">User All Logs</h2>
             </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -30,7 +30,7 @@
                 </thead>
             </table>
         </div>
-        <div class="col-xs-12">
+        <div class="col-sm-12">
             <div class="col-md-6 pull-left">
                 <h2 class="m-0">User Submit Actions</h2>
             </div>
@@ -43,6 +43,7 @@
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_user_activity',$user->id) !!}",
                 dom: 'Bfrtip',
+                "scrollX": true,
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
