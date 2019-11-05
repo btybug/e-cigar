@@ -20,7 +20,7 @@
                         {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
                     </div>
                     <div class="row sortable-panels">
-                        <div class="col-md-9 ">
+                        <div class="col-lg-8 col-md-7 col-sm-8">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
@@ -104,7 +104,7 @@
                                                     @if(isset($post) && count($post->stocks))
                                                         @foreach($post->stocks as $stock)
                                                             <li data-id="{{ $stock->id }}"
-                                                                class="option-elm-attributes col-md-3">
+                                                                class="option-elm-attributes col-xl-3 col-lg-4 col-sm-6 mb-2">
                                                                 <div class="wrap-item">
                                                                 <a href="#">
                                                                     <span><img src="https://alternatevape.com/wp-content/uploads/2011/05/alternate-vape-products-cbd-vape.jpg" alt=""></span>
@@ -131,12 +131,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3 ">
+                        <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="view-product-wall">
                                 <div class="author-wall wall">
                                     <div class="row">
-                                        {{Form::label('author', 'Author',['class' => 'col-sm-3'])}}
-                                        <div class="col-sm-9">
+                                        {{Form::label('author', 'Author',['class' => 'col-xl-3'])}}
+                                        <div class="col-xl-9">
                                             {!! Form::select('user_id',$authors,null,
                                                         ['class' => 'form-control','id'=> 'status']) !!}
                                         </div>
@@ -144,8 +144,8 @@
                                 </div>
                                 <div class="status-wall wall">
                                     <div class="row">
-                                        {{Form::label('status', 'Status',['class' => 'col-sm-3'])}}
-                                        <div class="col-sm-9">
+                                        {{Form::label('status', 'Status',['class' => 'col-xl-3'])}}
+                                        <div class="col-xl-9">
                                             {!! Form::select('status',[0 => 'Draft',1 => 'Published'],null,
                                                         ['class' => 'form-control','id'=> 'status']) !!}
                                         </div>
@@ -153,8 +153,8 @@
                                 </div>
                                 <div class="comment-wall wall">
                                     <div class="row">
-                                        {{Form::label('comment', 'Enable comment',['class' => 'col-sm-3'])}}
-                                        <div class="col-sm-9">
+                                        {{Form::label('comment', 'Enable comment',['class' => 'col-xl-3'])}}
+                                        <div class="col-xl-9">
                                             YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
                                             NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
                                         </div>
@@ -170,10 +170,10 @@
                             </div> -->
                                 <div class="tag-wall wall">
                                     <div class="row">
-                                        <label class="col-sm-3 control-label" for="input-category"><span
+                                        <label class="col-xl-3 control-label" for="input-category"><span
                                                     data-toggle="tooltip" title=""
                                                     data-original-title="Choose all products under selected category.">Tags</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-xl-9">
                                             <input type="text" name="" value="" placeholder="Tags"
                                                    id="input-tags" class="form-control" autocomplete="off">
                                             <ul class="dropdown-menu"></ul>
@@ -197,10 +197,10 @@
                                 </div>
                                 <div class="category-wall wall">
                                     <div class="row">
-                                        <label class="col-sm-3 control-label" for="input-category"><span
+                                        <label class="col-xl-3 control-label" for="input-category"><span
                                                     data-toggle="tooltip" title=""
                                                     data-original-title="Choose all products under selected category.">Category</span></label>
-                                        <div class="col-sm-9">
+                                        <div class="col-xl-9">
                                             <div class="form-group">
                                                 {!! Form::hidden('categories',(isset($checkedCategories))
                                                 ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
@@ -216,7 +216,7 @@
                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Featured image</b>
                                     </p>
                                 </div>
-                                <div class="card-body">
+                                <div class="card-body blog-img-card-body">
                                     {!! media_button('image',$post,false,'drive',
                                            "<div class='edit-featured-img-outer'><img src='{img_path_for_media}' class='img img-responsive {data_id}' /></div>"
                                        ) !!}
@@ -235,24 +235,24 @@
                         <div class="card-body panel-body">
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-facebook-title" class="col-md-2 col-xs-12">Facebook Title</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-facebook-title" class="col-xl-2 col-lg-3 col-sm-4">Facebook Title</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('fb[og:title]',($post)?$post->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$post)]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-facebook-desc" class="col-md-2 col-xs-12">Facebook Description</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-facebook-desc" class="col-xl-2 col-lg-3 col-sm-4">Facebook Description</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('fb[og:description]',($post)?$post->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$post)]) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-2 col-xs-12">Facebook Image</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label class="col-xl-2 col-lg-3 col-sm-4">Facebook Image</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$post)]) !!}
 
                                     </div>
@@ -266,8 +266,8 @@
                         <div class="card-body panel-body">
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-twitter-title" class="col-md-2 col-xs-12">Twitter Title</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-twitter-title" class="col-xl-2 col-lg-3 col-sm-4">Twitter Title</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('twitter[og:title]',($post)?$post->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
 
                                     </div>
@@ -275,8 +275,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label for="seo-twitter-desc" class="col-md-2 col-xs-12">Twitter Description</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label for="seo-twitter-desc" class="col-xl-2 col-lg-3 col-sm-4">Twitter Description</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text('twitter[og:description]',($post)?$post->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
 
                                     </div>
@@ -284,8 +284,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="row">
-                                    <label class="col-md-2 col-xs-12">Twitter Image</label>
-                                    <div class="col-md-5 col-xs-12">
+                                    <label class="col-xl-2 col-lg-3 col-sm-4">Twitter Image</label>
+                                    <div class="col-xl-5 col-lg-9 col-sm-8">
                                         {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$post)]) !!}
                                     </div>
                                 </div>
@@ -293,8 +293,9 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-xl-9">
                             <div class="seo-general-content">
+                                <div class="table-responsive">
                                 <table class="form-table">
                                     <tbody>
                                     <tr>
@@ -334,68 +335,71 @@
                                     </tr>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                             <div class="seo-advanced">
-                                <table class="form-table">
-                                    <tbody>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
-                                        </th>
-                                        <td>
-                                            {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($post)?$post->getSeoField('robots','robot'):null,['class'=>'']) !!}
+                                <div class="table-responsive">
+                                    <table class="form-table">
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
+                                            </th>
+                                            <td>
+                                                {!! Form::select('robot[robots]',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],($post)?$post->getSeoField('robots','robot'):null,['class'=>'']) !!}
 
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">Meta Robots Follow</th>
-                                        <td>
-                                            <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0"
-                                                   value="0">
-                                            <label for="seo_meta-robots-nofollow_0">Follow</label>
-                                            <input type="radio" id="seo_meta-robots-nofollow_1"
-                                                   value="1">
-                                            <label for="seo_meta-robots-nofollow_1">Nofollow</label>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
-                                        </th>
-                                        <td>
-                                            <select multiple="multiple" size="7" style="height: 144px;"
-                                                    id="seo_meta-robots-adv"
-                                                    class="">
-                                                <option selected="selected" value="-">Site-wide default: None</option>
-                                                <option value="none">None</option>
-                                                <option value="noodp">NO ODP</option>
-                                                <option value="noydir">NO YDIR</option>
-                                                <option value="noimageindex">No Image Index</option>
-                                                <option value="noarchive">No Archive</option>
-                                                <option value="nosnippet">No Snippet</option>
-                                            </select>
-                                            <div>Advanced <code>meta</code> robots settings for this page.</div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th scope="row">
-                                            <label for="seo_canonical">Canonical URL:</label>
-                                        </th>
-                                        <td>
-                                            <input type="text" id="seo_canonical" value=""
-                                                   class="form-control"><br>
-                                            <div>The canonical URL that this page should point to, leave empty to default to
-                                                permalink. <a target="_blank"
-                                                              href="#">Cross
-                                                    domain canonical</a> supported too.
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">Meta Robots Follow</th>
+                                            <td>
+                                                <input type="radio" checked="checked" id="seo_meta-robots-nofollow_0"
+                                                       value="0">
+                                                <label for="seo_meta-robots-nofollow_0">Follow</label>
+                                                <input type="radio" id="seo_meta-robots-nofollow_1"
+                                                       value="1">
+                                                <label for="seo_meta-robots-nofollow_1">Nofollow</label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
+                                            </th>
+                                            <td>
+                                                <select multiple="multiple" size="7" style="height: 144px;"
+                                                        id="seo_meta-robots-adv"
+                                                        class="">
+                                                    <option selected="selected" value="-">Site-wide default: None</option>
+                                                    <option value="none">None</option>
+                                                    <option value="noodp">NO ODP</option>
+                                                    <option value="noydir">NO YDIR</option>
+                                                    <option value="noimageindex">No Image Index</option>
+                                                    <option value="noarchive">No Archive</option>
+                                                    <option value="nosnippet">No Snippet</option>
+                                                </select>
+                                                <div>Advanced <code>meta</code> robots settings for this page.</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row">
+                                                <label for="seo_canonical">Canonical URL:</label>
+                                            </th>
+                                            <td>
+                                                <input type="text" id="seo_canonical" value=""
+                                                       class="form-control"><br>
+                                                <div>The canonical URL that this page should point to, leave empty to default to
+                                                    permalink. <a target="_blank"
+                                                                  href="#">Cross
+                                                        domain canonical</a> supported too.
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-xl-3">
 
                         </div>
                     </div>

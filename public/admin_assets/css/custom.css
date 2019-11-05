@@ -998,7 +998,8 @@ body>.wrapper{
     margin-top: 15px;
     padding: 10px;
     min-height: 30px;
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
 }
 
 
