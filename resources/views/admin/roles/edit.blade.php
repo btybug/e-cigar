@@ -19,7 +19,7 @@
             </div>
             <div class="card-body panel-body">
 
-                <div class="col-md-4">
+                <div class="col-xl-5 col-lg-6">
                     <div class="row flex-column">
                         <!-- Password input-->
                         <div class="form-group row">

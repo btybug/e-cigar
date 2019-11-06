@@ -458,6 +458,7 @@
             $('#orders-table').DataTable({
                     ajax: "{!! route('datatable_user_orders',$user->id) !!}",
                 dom: 'Bfrtip',
+                "scrollX": true,
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
