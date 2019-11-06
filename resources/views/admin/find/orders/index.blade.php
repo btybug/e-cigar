@@ -1,18 +1,8 @@
-
-
 @extends('layouts.admin')
 @section('content-header')
 @stop
 @section('content')
-
     <div class="admin-find-wrapper">
-
-        <div class="form-group row border-bottom pb-2">
-            <label for="find" class="col-sm-2 col-form-label">Find</label>
-            <div class="col-sm-4">
-
-            </div>
-        </div>
         <div class="find-form">
             @include('admin.find.orders.form')
         </div>
@@ -36,8 +26,6 @@
 
         </div>
     </div>
-
-
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>

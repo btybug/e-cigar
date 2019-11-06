@@ -41,6 +41,7 @@ class ItemsDataTable extends DataTable
              $text='';
              foreach ($ItemCategories as $itemCategory){
                 $category= $itemCategory->category;
+                if($category)
                  $text.=$category->name.',';
              }
              return  trim($text,',');
@@ -71,9 +72,10 @@ class ItemsDataTable extends DataTable
             ->setTableId('items-table')
             ->minifiedAjax()
             ->parameters([
-                'dom' => 'Bfrtip',
+                'dom' => 'lBfrtip',
                 'order' => [1, 'asc'],
                 'tfoot ',
+                'lengthMenu'=>[[10, 25, 50, -1], [10, 25, 50, "All"]],
                 'searching'=>false,
                 'select' => [
                     'style' => 'os',
