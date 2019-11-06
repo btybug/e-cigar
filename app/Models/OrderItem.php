@@ -19,6 +19,11 @@ class OrderItem extends Model
         return $this->belongsTo(Orders::class,'order_id');
     }
 
+    public function stock()
+    {
+        return $this->hasOne(Stock::class,'id','stock_id');
+    }
+
     public function scopeMain($query)
     {
         return $query->whereNull('parent_id');
