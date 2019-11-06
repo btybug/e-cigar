@@ -16712,9 +16712,6 @@ outline: none;
   box-shadow: 0px 0 4px 3px #f39c12;
 }
 
-.wizardViewModal--new{
-
-}
 .wizardViewModal--new .modal-body{
     overflow: auto;
 }
@@ -16761,10 +16758,6 @@ outline: none;
     height: 60px;
     margin-left: 0;
 }
-.wizardViewModal--new .modal-footer .footer-list{
-    /*height: 50px;*/
-}
-
 
 .product-single-info_row-items .menu-item-selected{
     padding-right: 0;
