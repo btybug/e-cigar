@@ -39,7 +39,9 @@ class ProductsDataTable extends DataTable
                     $text.=$category->name.',';
                 }
                 return  trim($text,',');
-            });
+            })->addColumn('actions', function ($stock) {
+                return  ((userCan('admin_stock_edit')) ? "<a class='badge btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'><i class='fa fa-edit'></i></a>" : '');
+            })->rawColumns(['actions']);
     }
 
     /**
@@ -76,6 +78,8 @@ class ProductsDataTable extends DataTable
                     'selector' => 'td:first-child',
                 ],
                 'buttons' => [
+                    'selectAll',
+                    'selectNone'
 //                    ['extend' => 'create', 'editor' => 'editor'],
 //                    ['extend' => 'edit', 'editor' => 'editor'],
 //                    ['extend' => 'remove', 'editor' => 'editor'],
@@ -106,6 +110,14 @@ class ProductsDataTable extends DataTable
             'slug',
             'categories',
             'status',
+            [
+                'data' => 'actions',
+                'defaultContent' => '',
+                'className' => '',
+                'title' => 'Actions',
+                'orderable' => false,
+                'searchable' => false
+            ]
 
         ];
 //        dd( [

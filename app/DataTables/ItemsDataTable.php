@@ -32,9 +32,9 @@ class ItemsDataTable extends DataTable
                  case 1:return 'Published';break;
              }
             })->addColumn('actions', function ($attr) {
-                return "<a class='badge btn-warning' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
-            <a class='badge btn-info' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>
-            <a class='badge btn-danger' href='" . route('admin_items_archive', $attr->id) . "'><i class='fa fa-archive'></i></a>";
+                return "<a class='badge btn-warning' target='blank' href='".route('admin_items_edit',$attr->id)."'><i class='fa fa-edit'></i></a>
+            <a class='badge btn-info' target='_blank' href='" . route('admin_items_purchase', $attr->id) . "'><i class='fa fa-eye'></i></a>
+            <a class='badge btn-danger'  href='" . route('admin_items_archive', $attr->id) . "'><i class='fa fa-archive'></i></a>";
             })
             ->editColumn('brand_id',function ($item){
              $brand= Category::find($item->brand_id);

@@ -76,8 +76,8 @@
                     </div>
                     <div class="radio">
                         <label for="radios-1">
-                            <input type="radio" name="status" id="radios-1" value="0"
-                                   @if( @$data['status']==='0')checked="checked" @endif>
+                            <input type="radio" name="status" id="radios-1" value="3"
+                                   @if( @$data['status']==='3')checked="checked" @endif>
                             Draft
                         </label>
                     </div>

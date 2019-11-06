@@ -4,6 +4,7 @@ namespace App\ProductSearch\Filters;
 
 use App\ProductSearch\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class Status implements Filter
 {
@@ -17,6 +18,7 @@ class Status implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        return $builder->where('stocks.status',$value);
+        $value= ($value==3)?0:$value;
+        return $builder->where('stocks.status',(bool)$value);
     }
 }

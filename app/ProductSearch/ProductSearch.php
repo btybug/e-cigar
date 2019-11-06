@@ -40,6 +40,7 @@ class ProductSearch
 
     private static function createFilterDecorator($name)
     {
+
         return __NAMESPACE__ . '\\Filters\\' .
             str_replace(' ', '',
                 ucwords(str_replace('_', ' ', $name)));
@@ -146,7 +147,7 @@ class ProductSearch
             ->leftJoin('stock_attributes', 'stocks.id', '=', 'stock_attributes.stock_id')
             ->leftJoin('favorites', 'stocks.id', '=', 'favorites.stock_id')
             ->where('stock_translations.locale', app()->getLocale())
-            ->where('stocks.status', true)
+//            ->where('stocks.status', true)
             ->where('stocks.is_offer', false);
 
         return $query->select('stocks.*', 'stock_translations.name',
