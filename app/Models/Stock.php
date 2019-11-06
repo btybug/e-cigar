@@ -32,6 +32,7 @@ class Stock extends Translatable
         'other_images' => 'json',
         'videos' => 'json',
         'posters' => 'json',
+        'downloads' => 'json',
     ];
 
     const TYPES = [

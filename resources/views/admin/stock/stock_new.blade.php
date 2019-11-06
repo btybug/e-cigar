@@ -387,6 +387,8 @@
                                                                                 href="#wiitb">What's in the box</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#ads">Ads</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#downloads">Downloads</a></li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -678,6 +680,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div id="downloads" class="tab-pane fade ">
+                                                        {!! media_button('downloads',$model,true) !!}
                                                     </div>
                                                 </div>
                                             </div>
