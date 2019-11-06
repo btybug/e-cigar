@@ -726,6 +726,16 @@ class OrdersController extends Controller
             ->printer($printerId)
             ->send();
 
+        foreach ($order->items as $item){
+            if($item->stock && $item->stock->downloads && count($item->stock->downloads)){
+                foreach ($item->stock->downloads as $download){
+                    \GoogleCloudPrint::asPdf()
+                        ->url(url($download))
+                        ->printer($printerId)
+                        ->send();
+                }
+            }
+        }
 //        \GoogleCloudPrint::asText()
 //            ->content('Sahak like rainbow color :D')
 //            ->printer($printerId)
