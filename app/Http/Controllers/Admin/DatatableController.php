@@ -728,6 +728,30 @@ class DatatableController extends Controller
             })->rawColumns(['actions','category'])->make(true);
     }
 
+    public function getAllItemsInModal()
+    {
+        return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin('barcodes','items.barcode_id','=','barcodes.id')
+            ->leftJoin('categories','items.brand_id','=','categories.id')
+            ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
+            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code','categories_translations.name')
+            ->where('items.is_archive', false)
+            ->where('item_translations.locale', \Lang::getLocale()))
+            ->addColumn('category', function ($attr) {
+                $str = '';
+                if($attr->categories && count($attr->categories)){
+                    foreach ($attr->categories as $category){
+                        $str .= "<span class='badge badge-dark'>".$category->name."</span>";
+                    }
+                }
+                return $str;
+            })
+            ->editColumn('brand_id', function ($attr) {
+                $brand=Category::find($attr->brand_id);
+                return ($brand)?$brand->name:'no brand';
+            })->rawColumns(['category'])->make(true);
+    }
+
     public function getAllItemsArchived()
     {
         return Datatables::of(Items::archive())
