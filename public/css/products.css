@@ -3320,6 +3320,61 @@ outline: none;
   border: 1px solid #000000;
   box-shadow: 0px 0 4px 3px #f39c12;
 }
+
+.wizardViewModal--new{
+
+}
+.wizardViewModal--new .modal-body{
+    overflow: auto;
+}
+.wizardViewModal--new .modal-header{
+    border-radius: 0;
+    color: #ffffff;
+    background: #24C6DC;
+    background: -webkit-linear-gradient(to right, #514A9D, #24C6DC);
+    background: linear-gradient(to right, #514A9D, #24C6DC);
+}
+
+.wizardViewModal--new .modal-body .tab-content{
+    overflow: auto;
+    min-height: calc(100% - 68px);
+    height: 10px;
+    padding: 0 15px;
+}
+.wizardViewModal--new .modal-body .nav-tabs{
+    margin: 10px 15px;
+}
+.wizardViewModal--new .modal-body .nav-tabs .nav-link{
+    font-size: 20px;
+    padding: .5rem 1.5rem;
+}
+.wizardViewModal--new .modal-footer .footer-list-item{
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 4px #ccc;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+.wizardViewModal--new .modal-footer .footer-list-item .title{
+    margin-right: 5px;
+    font-size: 18px;
+
+}
+.wizardViewModal--new .modal-footer .footer-list-item .close-icon{
+    color: red;
+    cursor: pointer;
+}
+.wizardViewModal--new .modal-footer .selected-items_popup{
+    height: 60px;
+    margin-left: 0;
+}
+.wizardViewModal--new .modal-footer .footer-list{
+    /*height: 50px;*/
+}
+
+
 .product-single-info_row-items .menu-item-selected{
     padding-right: 0;
 }
