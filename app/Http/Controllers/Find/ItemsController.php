@@ -7,6 +7,7 @@ use App\DataTables\ItemsDataTableEditor;
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
 use App\Models\Category;
+use App\Models\Items;
 use Google\Auth\Cache\Item;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class ItemsController extends Controller
     }
 
     public function getBarcodes(Request $request){
-        $barcodes=Item::leftJoin('barcodes','items.barcode_id','barcodes.id')->whereIn('items.id',$request->get('ids'))->select('barcodes.code')->get();
+        $barcodes=Items::leftJoin('barcodes','items.barcode_id','barcodes.id')->whereIn('items.id',$request->get('ids'))->select('barcodes.code')->get();
         return response()->json(['barcodes'=>$barcodes->pluck('code')]);
     }
 }
