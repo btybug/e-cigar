@@ -20,11 +20,11 @@
             <div class="find-wrapper-results-head">
                 <h3>Results</h3>
                 <div class="find-wrapper-results-head-right">
-                    <button class="btn btn-warning btn-edit mr-3">Edit</button>
-                    <select class="form-control">
+                    <button class="btn btn-warning btn-edit mr-3 edit_selected">Edit</button>
+                    <select class="form-control edit_selected_option">
                         <option value="">Action</option>
-                        <option value="">Print Barcode</option>
-                        <option value="">Print Qr Code</option>
+                        <option value="barcode">Print Barcode</option>
+                        <option value="qr_code">Print Qr Code</option>
                     </select>
                 </div>
             </div>
@@ -119,6 +119,29 @@
         })(jQuery, jQuery.fn.dataTable);
 
         $(function () {
+            const shortAjax = function (URL, obj = {}, cb) {
+                fetch(URL, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(obj)
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        return cb(json);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            };
+
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': '{{csrf_token()}}'
@@ -163,9 +186,21 @@
                 //     editor.inline(this);
                 // });
 
-                    {{$dataTable->generateScripts()}}
+            $('body').on('click', '.edit_selected', function(ev) {
+                if($('.edit_selected_option').val() === 'barcode') {
+                    const ids = [];
+                    $('#items-table tbody tr.selected').each(function() {
+                        ids.push($(this).find('td.sorting_1').text());
+                    });
+                    shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+                        console.log(res);
+                    });
+                }
+            });
+
+            {{$dataTable->generateScripts()}}
 
 
-                });
+        });
     </script>
 @stop

@@ -251,6 +251,6 @@ window.onload = function() {
             if($(this).val()!==null){
                 window.location.href=$(this).val();
             }
-        })
-    })
+        });
+    });
 };

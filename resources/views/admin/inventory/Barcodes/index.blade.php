@@ -178,7 +178,7 @@
             </div>
         </div>
     </div>
-@stop
+    <img src="" alt="barcode" id="img"/>
 @section('js')
     <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
     <script>
@@ -277,6 +277,10 @@
                         displayValue
                     })
                         .render();
+                    var s = new XMLSerializer().serializeToString(document.getElementById(`code_${$(value).data('barcode')}`));
+                    var encodedData = window.btoa(s);
+                    $("#img").attr('src', 'data:image/svg+xml;base64,' + encodedData);
+                    console.log(encodedData);
                 });
             } );
 
