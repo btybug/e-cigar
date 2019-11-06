@@ -25,6 +25,7 @@
                         <option value="">Action</option>
                         <option value="barcode">Print Barcode</option>
                         <option value="qr_code">Print Qr Code</option>
+                        <option value="download_barcode">Download Barcode</option>
                     </select>
                 </div>
             </div>
@@ -262,42 +263,41 @@
 
             const barcode_settings = JSON.parse($('#barcode-settings').text());
             $('body').on('click', '.edit_selected', function(ev) {
+                let width = Number(barcode_settings.width);
+                let height = Number(barcode_settings.height);
+                let margin = Number(barcode_settings.margin);
+                let back_color = barcode_settings.background_color;
+                let line_color = barcode_settings.line_color;
+                let text_align = barcode_settings.text_align;
+                let text_font = barcode_settings.text_font;
+                let format = barcode_settings.format;
+                let font_size = Number(barcode_settings.font_size);
+                let text_margin = Number(barcode_settings.text_margin);
+                let displayValue = Boolean(Number(barcode_settings.text_switch));
+                let bold = Number(barcode_settings.bold);
+                let italic = Number(barcode_settings.italic);
+                let fontOptions = '';
+
+                if(bold && italic) {
+                    fontOptions = 'bold italic'
+                } else if(bold) {
+                    fontOptions = 'bold'
+                } else if(italic) {
+                    fontOptions = 'italic'
+                } else {
+                    fontOptions = ''
+                }
 
                 if($('.edit_selected_option').val() === 'barcode') {
                     if($('#items-table tbody tr.selected').length === 0) {
-                        // alert('Select ')
                         return false;
                     }
+
                     const ids = [];
                     $('#items-table tbody tr.selected').each(function() {
                         ids.push($(this).find('td.sorting_1').text());
                     });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
-                        let width = Number(barcode_settings.width);
-                        let height = Number(barcode_settings.height);
-                        let margin = Number(barcode_settings.margin);
-                        let back_color = barcode_settings.background_color;
-                        let line_color = barcode_settings.line_color;
-                        let text_align = barcode_settings.text_align;
-                        let text_font = barcode_settings.text_font;
-                        let format = barcode_settings.format;
-                        let font_size = Number(barcode_settings.font_size);
-                        let text_margin = Number(barcode_settings.text_margin);
-                        let displayValue = Boolean(Number(barcode_settings.text_switch));
-                        let bold = Number(barcode_settings.bold);
-                        let italic = Number(barcode_settings.italic);
-                        let fontOptions = '';
-
-                        if(bold && italic) {
-                            fontOptions = 'bold italic'
-                        } else if(bold) {
-                            fontOptions = 'bold'
-                        } else if(italic) {
-                            fontOptions = 'italic'
-                        } else {
-                            fontOptions = ''
-                        }
-
                         res.barcodes.map(function(value, key) {
                             JsBarcode('#svg_barcode', value, {
                                 format,
@@ -327,6 +327,45 @@
                             console.log(encodedData);
                         })
                         $('#barcodeModalPrint').modal('show');
+                        console.log(res);
+                    });
+                } else if($('.edit_selected_option').val() === 'download_barcode') {
+                    const ids = [];
+                    $('#items-table tbody tr.selected').each(function() {
+                        ids.push($(this).find('td.sorting_1').text());
+                    });
+                    shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+                        res.barcodes.map(function(value, key) {
+                            JsBarcode('#svg_barcode', value, {
+                                format,
+                                font: text_font,
+                                fontSize: font_size,
+                                textMargin: text_margin,
+                                height,
+                                width,
+                                margin,
+                                background: back_color,
+                                lineColor: line_color,
+                                textAlign: text_align,
+                                fontOptions,
+                                displayValue
+                            })
+                                .render();
+                            $('#svg_barcode').css('display', 'none')
+                            saveSvgAsPng(document.getElementById('svg_barcode'), `barcode_${value}.png`, {scale: 10});
+
+                            // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
+                            // var encodedData = window.btoa(s);
+                            //
+                            // var img = $(`<img id="${'barcode_'+value}">`); //Equivalent: $(document.createElement('img'))
+                            // var li = $('<li style="list-style-type: none; margin: 0 20px 20px 0"></li>');
+                            // img.attr('src', 'data:image/svg+xml;base64,' + encodedData);
+                            // img.appendTo(li);
+                            //
+                            // li.appendTo('.barcodes_image_list');
+                            // console.log(encodedData);
+                        })
+                        // $('#barcodeModalPrint').modal('show');
                         console.log(res);
                     });
                 }
