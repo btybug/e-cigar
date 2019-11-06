@@ -82,6 +82,9 @@ class ItemsDataTable extends DataTable
                     'selector' => 'td:first-child',
                 ],
                 'buttons' => [
+
+        'selectAll',
+        'selectNone'
 //                    ['extend' => 'create', 'editor' => 'editor'],
 //                    ['extend' => 'edit', 'editor' => 'editor'],
 //                    ['extend' => 'remove', 'editor' => 'editor'],
@@ -113,7 +116,7 @@ class ItemsDataTable extends DataTable
                 'data' => null,
                 'defaultContent' => '',
                 'className' => 'select-checkbox',
-                'title' => '<input type="checkbox">',
+                'title' => '',
                 'orderable' => false,
                 'searchable' => false
             ],
