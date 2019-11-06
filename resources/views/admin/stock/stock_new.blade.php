@@ -46,7 +46,7 @@
                                         <div class="col-md-12">
                                             <div class="basic-center basic-wall">
                                                 <div class="row">
-                                                    <div class="col-md-8">
+                                                    <div class="col-lg-8 col-md-7 col-sm-8">
                                                         @if(count(get_languages()))
                                                             <ul class="nav nav-tabs">
                                                                 @foreach(get_languages() as $language)
@@ -67,21 +67,21 @@
                                                                          class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                         <div class="form-group row mt-3">
                                                                             <label
-                                                                                class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                                     data-toggle="tooltip"
                                                                                     title=""
                                                                                     data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                            <div class="col-sm-10">
+                                                                            <div class="col-xl-10">
                                                                                 {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                             </div>
                                                                         </div>
                                                                         <div class="form-group row">
                                                                             <label
-                                                                                class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                                     data-toggle="tooltip"
                                                                                     title=""
                                                                                     data-original-title="Short Description">Short Description</span></label>
-                                                                            <div class="col-sm-10">
+                                                                            <div class="col-xl-10">
                                                                                 {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                             </div>
                                                                         </div>
@@ -92,9 +92,9 @@
                                                         <div class="form-group">
                                                             <div class="row">
                                                                 <label for="product_id"
-                                                                       class="control-label col-sm-4 control-label col-form-label text-right">Product
+                                                                       class="control-label col-xl-4 control-label col-form-label text-xl-right">Product
                                                                     Slug (for url)</label>
-                                                                <div class="col-sm-8">
+                                                                <div class="col-xl-8">
                                                                     {!! Form::text('slug', null,
                                                                     ['class' => 'form-control']) !!}
                                                                 </div>
@@ -112,7 +112,7 @@
                                                         {{--</div>--}}
                                                         {{--</div>--}}
                                                         {{--</div>--}}
-                                                        <div class="form-group w-75">
+                                                        <div class="form-group col-xl-8 col-lg-10 p-0">
                                                             <div class="card panel panel-default">
                                                                 <div class="card-header panel-heading">
                                                                     <p class="pull-left mb-0">
@@ -151,7 +151,7 @@
 {{--                                                            </div>--}}
 {{--                                                        </div>--}}
                                                     </div>
-                                                    <div class="col-md-4">
+                                                    <div class="col-lg-4 col-md-5 col-sm-4">
                                                             <div class="stock-basic-tab-right-top">
                                                                 <div class="stock_widget--block">
                                                                     <div class="stock_widget--block-header">
@@ -266,9 +266,9 @@
                                                                         <div class="form-group">
                                                                             <div class="row">
                                                                                 <label for="faq_tab"
-                                                                                       class="control-label col-sm-3 control-label">Faq
+                                                                                       class="control-label col-xl-3 col-7 control-label">Faq
                                                                                     Tab</label>
-                                                                                <div class="col-sm-9">
+                                                                                <div class="col-xl-9 col-5">
                                                                                     {!! Form::hidden('faq_tab',false) !!}
                                                                                     {!! Form::checkbox('faq_tab', true,null,
                                                                                      ['class' => '','id' => 'faq_tab']) !!}
@@ -278,9 +278,9 @@
                                                                         <div class="form-group">
                                                                             <div class="row">
                                                                                 <label for="reviews_tab"
-                                                                                       class="control-label col-sm-3 control-label">Reviews
+                                                                                       class="control-label col-xl-3 col-7 control-label">Reviews
                                                                                     Tab</label>
-                                                                                <div class="col-sm-9">
+                                                                                <div class="col-xl-9 col-5">
                                                                                     {!! Form::hidden('reviews_tab',false) !!}
 
                                                                                     {!! Form::checkbox('reviews_tab', true,null,
