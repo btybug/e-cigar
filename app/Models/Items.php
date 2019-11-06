@@ -25,7 +25,7 @@ class Items extends Translatable
 
     public $translatedAttributes = ['name', 'short_description', 'long_description'];
 
-    protected $appends = array('qty','barcodes');
+    protected $appends = array('qty');
 
     const ACTIVE = 1;
     const DRAFT = 1;
@@ -40,10 +40,10 @@ class Items extends Translatable
         return $query->where('status', self::ACTIVE)->where('is_archive',false);
     }
 
-    public function getBarcodesAttribute()
-    {
-        return Barcodes::all()->pluck('code','id');
-    }
+//    public function getBarcodesAttribute()
+//    {
+//        return Barcodes::all()->pluck('code','id');
+//    }
 
     public function scopeMain($query)
     {
