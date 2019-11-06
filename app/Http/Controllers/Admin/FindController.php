@@ -118,4 +118,25 @@ class FindController extends Controller
         $html = view("admin.find.orders.results", compact(['orders']))->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
+
+    public function printHtmlBarcode(Request $request)
+    {
+        if(! \File::isDirectory(storage_path("app".DS."printer"))){
+            \File::makeDirectory(storage_path("app".DS."printer"));
+        }
+
+        if(! \File::isDirectory(storage_path("app".DS."printer".DS."barcodes"))){
+            \File::makeDirectory(storage_path("app".DS."printer".DS."barcodes"));
+        }
+
+        $html = \File::put(storage_path("app".DS."printer".DS."barcodes".DS."barocodes.html"),$request->get('print'));
+
+        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
+        \GoogleCloudPrint::asHtml()
+            ->file(storage_path("app".DS."printer".DS."barcodes".DS."barocodes.html"))
+            ->printer($printerId)
+            ->send();
+
+        return response()->json(['error' => false]);
+    }
 }
