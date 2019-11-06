@@ -129,8 +129,8 @@
                     } else {
                         $(this).closest('.search_list_item').addClass('d-flex');
                         $(this).closest('.search_list_item').removeClass('d-none');
-                        var instance = new Mark($(this).find('.search_item_name'));
 
+                        var instance = new Mark($(this).find('.search_item_name'));
                         instance.unmark({
                             "element": "span",
                             "className": "highlight_mark"

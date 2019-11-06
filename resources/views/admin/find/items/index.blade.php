@@ -341,7 +341,7 @@
                                 lineColor: line_color,
                                 textAlign: text_align,
                                 fontOptions,
-                                displayValue
+                                displayValue,
                             })
                                 .render();
                             $('#svg_barcode').css('display', 'none')
