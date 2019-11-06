@@ -1474,7 +1474,7 @@
                 }, function (res) {
                     if (!res.error) {
                         $("#itemsModal .modal-content").html(res.html);
-                        $("#itemsModal #searchStickers").select2();
+                        // $("#itemsModal #searchStickers").select2();
                         $("#itemsModal").modal();
                     }
                 });
