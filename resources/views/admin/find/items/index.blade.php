@@ -249,7 +249,7 @@
                     $printSection.innerHTML = "";
                     $printSection.appendChild(domClone);
                     var page = new XMLSerializer().serializeToString(document.getElementById('printThis'));
-                    shortAjax('/admin/find/items/barcodes', {print: page}, function(res) {
+                    shortAjax('/admin/find/items/html', {print: page}, function(res) {
                         console.log(res);
                         if(res.success) {
                             $('#barcodeModalPrint').modal('hide');
@@ -262,7 +262,12 @@
 
             const barcode_settings = JSON.parse($('#barcode-settings').text());
             $('body').on('click', '.edit_selected', function(ev) {
+
                 if($('.edit_selected_option').val() === 'barcode') {
+                    if($('#items-table tbody tr.selected').length === 0) {
+                        // alert('Select ')
+                        return false;
+                    }
                     const ids = [];
                     $('#items-table tbody tr.selected').each(function() {
                         ids.push($(this).find('td.sorting_1').text());

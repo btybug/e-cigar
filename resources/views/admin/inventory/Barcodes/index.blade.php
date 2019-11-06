@@ -283,6 +283,9 @@
                     // $("#img").attr('src', 'data:image/svg+xml;base64,' + encodedData);
                     // console.log(encodedData);
                 });
+                $('body').on('click', '.barcodes', function(ev) {
+                    saveSvgAsPng(document.getElementById($(ev.target).closest('svg.barcodes').attr('id')), `${$(ev.target).closest('svg.barcodes').attr('id')}.png`, {scale: 10});
+                })
             } );
 
             const barcode_edit = function() {
