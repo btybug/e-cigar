@@ -22,7 +22,7 @@ class FiltersController extends Controller
     public function index()
     {
 
-        return $this->view('index', compact('filters'));
+        return $this->view('index');
     }
 
     public function getCreateOrEdit($id = null)
