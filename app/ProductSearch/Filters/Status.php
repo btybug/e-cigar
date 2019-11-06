@@ -5,7 +5,7 @@ namespace App\ProductSearch\Filters;
 use App\ProductSearch\Filters\Filter;
 use Illuminate\Database\Eloquent\Builder;
 
-class Slug implements Filter
+class Status implements Filter
 {
 
     /**
@@ -17,6 +17,6 @@ class Slug implements Filter
      */
     public static function apply(Builder $builder, $value)
     {
-        return $builder->where('stocks.slug','LIKE' ,"%".$value."%");
+        return $builder->where('stocks.status',$value);
     }
 }
