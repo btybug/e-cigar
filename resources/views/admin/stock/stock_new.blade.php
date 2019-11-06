@@ -1310,6 +1310,28 @@
     <script>
 
         $(document).ready(function () {
+            const shortAjax = function (URL, obj = {}, cb) {
+                fetch(URL, {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify(obj)
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        return cb(json);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            };
             tinymce.init({
                 selector: ".stock-tiny-area",
                 plugins: [
@@ -1606,25 +1628,90 @@
                 });
             });
 
-            $("body").on("change", "#itemsModal #searchStickers", function () {
+            $("body").on("input", "#itemsModal #searchStickers", function () {
                 let stickers = $(this).val();
-                let data_id = $(this).attr('data-section-id');
+                {{--let data_id = $(this).attr('data-section-id');--}}
 
-                let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
-                let existings = [];
-                $_this.find('.v-item-change')
-                    .each(function (i, e) {
-                        existings.push($(e).val());
-                    });
-                AjaxCall("{{ route('admin_stock_search_items') }}", {
-                    items: existings,
-                    stickers: stickers
+                {{--let $_this = $('body').find('[data-unqiue="' + data_id + '"]');--}}
+                {{--let existings = [];--}}
+                {{--$_this.find('.v-item-change')--}}
+                {{--    .each(function (i, e) {--}}
+                {{--        existings.push($(e).val());--}}
+                {{--    });--}}
+                {{--AjaxCall("{{ route('admin_stock_search_items') }}", {--}}
+                {{--    items: existings,--}}
+                {{--    stickers: stickers--}}
+                {{--}, function (res) {--}}
+                {{--    if (!res.error) {--}}
+                {{--        $("#itemsModal .modal-stickers--list").html(res.html);--}}
+                {{--    }--}}
+                {{--});--}}
+
+                AjaxCall("{{ route('datatable_all_items_in_modal') }}", {
+                    "draw": "1",
+                    "columns": [
+
+                        {
+                            "data": "id",
+                            "name": "id",
+                            "searchable": "false",
+                            "orderable": "false"
+                        },
+                        {
+                            "data": "name",
+                            "name": "item_translations.name",
+                            "searchable": "true",
+                            "orderable": "true"
+                        },{
+                            "data": "category",
+                            "name": "categories_translations.name",
+                            "searchable": "true",
+                            "orderable": "true"
+                        },{
+                            "data": "barcode",
+                            "name": "barcodes.code",
+                            "searchable": "true",
+                            "orderable": "true"
+                        },
+                        {
+                            "data": "image",
+                            "name": "image",
+                            "searchable": "false",
+                            "orderable": "false"
+                        }
+                    ],
+                    "order": [
+                        {
+                            "column": "0",
+                            "dir": "asc"
+                        }
+                    ],
+                    "start": "0",
+                    "length": "-1",
+                    "search": {
+                        "value": stickers === '' ? null : stickers,
+                        "regex": "false"
+                    },
+                    "_": "1573066032263"
                 }, function (res) {
-                    if (!res.error) {
-                        $("#itemsModal .modal-stickers--list").html(res.html);
-                    }
-                });
-            })
+
+                        let ids = res.data.map(function(item) {
+                            return item.id;
+                        });
+
+                        if(stickers == '') {
+                            $('body').find('.option-elm-modal').removeClass('d-none');
+                        } else {
+                            $('body').find('.option-elm-modal').each(function() {
+                                if(ids.indexOf($(this).data('id').toString()) === -1) {
+                                    $(this).addClass('d-none');
+                                } else {
+                                    $(this).removeClass('d-none');
+                                }
+                            });
+                        }
+                })
+            });
 
             $('body').on('click', '#itemsModal .option-elm-modal', function () {
                 $(this).toggleClass('active')
