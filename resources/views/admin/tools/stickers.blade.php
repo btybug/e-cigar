@@ -34,9 +34,9 @@
                         </div>
                         <div class="search-attributes-scrolled">
                             @foreach($stickers as $sticker)
-                                <div class="form-group row bord-top bg-light attr-option" data-item-id="{!! $sticker->id !!}"
+                                <div class="form-group row bord-top bg-light attr-option search_list_item d-flex" data-item-id="{!! $sticker->id !!}"
                                      data-parent-id="1">
-                                    <div class="col-6">
+                                    <div class="col-6 search_item_name">
                                         {!! $sticker->name !!}
                                     </div>
                                     <div class="col-6">
@@ -90,32 +90,43 @@
 @section("js")
     <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
     <script>
-        $(function () {
+        $( document ).ready(function() {
+            $("body").on("click", ".attr-option", function (e) {
+                e.preventDefault()
+                let id = $(this).attr("data-item-id")
+                AjaxCall("{!! route('admin_tools_stickers_manage_form') !!}", {id}, function (res) {
+                    if (!res.error) {
+                        $("body").find(".options-form").html(res.html)
+                        $('#colorselector_2').colorselector();
+                    }
+                })
+            });
+
+            $("body").on("click", ".add-new-order", function (e) {
+                e.preventDefault()
+                AjaxCall("{!! route('admin_tools_stickers_new_form') !!}", {}, function (res) {
+                    if (!res.error) {
+                        $("body").find(".options-form").html(res.html)
+                        $('#colorselector_2').colorselector();
+                    }
+                })
+            });
+
             $('#colorselector_2').colorselector();
-        });
-    </script>
-    <script>
-        $("body").on("click", ".attr-option", function (e) {
-            e.preventDefault()
-            let id = $(this).attr("data-item-id")
-            AjaxCall("{!! route('admin_tools_stickers_manage_form') !!}", {id}, function (res) {
-                if (!res.error) {
-                    $("body").find(".options-form").html(res.html)
-                    $('#colorselector_2').colorselector();
-                }
+
+            $('body').on('input', '#search-input', function(ev) {
+                // console.log($('.search-attributes-scrolled .search_list_item'));
+                $('.search-attributes-scrolled .search_list_item').each(function() {
+                    if(!$(this).find('.search_item_name').text().trim().toUpperCase().includes($(ev.target).val().toUpperCase())) {
+                        $(this).closest('.search_list_item').addClass('d-none');
+                        $(this).closest('.search_list_item').removeClass('d-flex');
+                    } else {
+                        $(this).closest('.search_list_item').addClass('d-flex');
+                        $(this).closest('.search_list_item').removeClass('d-none');
+                    }
+                });
             })
         });
-
-        $("body").on("click", ".add-new-order", function (e) {
-            e.preventDefault()
-            AjaxCall("{!! route('admin_tools_stickers_new_form') !!}", {}, function (res) {
-                if (!res.error) {
-                    $("body").find(".options-form").html(res.html)
-                    $('#colorselector_2').colorselector();
-                }
-            })
-        });
-
     </script>
 @stop
 
