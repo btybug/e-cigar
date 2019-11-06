@@ -1678,6 +1678,14 @@ color: #ffffff;
 .view-product-wall.list-group .tag-wall .bootstrap-tagsinput{
     width: 100%;
 }
+.dashboard--panel .panel-heading .panel-title{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden
+}
+.icon-search-mobile-none{
+    display: none;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
     .basic-center.basic-wall .media-videos-preview{
@@ -1793,7 +1801,29 @@ color: #ffffff;
     .releted__products-panel .option-elm-attributes .wrap-item img{
         height: 150px !important;
     }
+    .main-header_nav-middle-list .find-link{
+        position: relative;
+    }
 
+    .main-header_nav-middle-list .find-link select{
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 0 17px !important;
+        width: 0;
+        height: 36px !important;
+    }
+    .main-header_nav-middle-list .find-link select::-ms-expand {
+        display: none;
+    }
+    .main-header_nav-middle-list .find-link .icon-search-mobile-none{
+        position: absolute;
+        display: block;
+        left: 46%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        cursor: pointer;
+    }
 }
 @media (max-width: 500px) {
     li.paginate_button.previous {

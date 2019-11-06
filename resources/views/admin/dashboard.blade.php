@@ -68,16 +68,16 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-3  connectedSortable" data-placement="small_left">
+        <div class="col-xl-3 col-lg-6 connectedSortable" data-placement="small_left">
             {!! render_widgets('small_left') !!}
         </div>
-        <div class="col-md-3  connectedSortable" data-placement="small_middle_left">
+        <div class="col-xl-3 col-lg-6 connectedSortable" data-placement="small_middle_left">
             {!! render_widgets('small_middle_left') !!}
         </div>
-        <div class="col-md-3  connectedSortable" data-placement="small_middle_right">
+        <div class="col-xl-3 col-lg-6 connectedSortable" data-placement="small_middle_right">
             {!! render_widgets('small_middle_right') !!}
         </div>
-        <div class="col-md-3  connectedSortable" data-placement="small_right">
+        <div class="col-xl-3 col-lg-6 connectedSortable" data-placement="small_right">
             {!! render_widgets('small_right') !!}
         </div>
     </div>
