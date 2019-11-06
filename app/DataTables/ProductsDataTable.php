@@ -8,6 +8,7 @@ use App\Models\StockCategories;
 use App\ProductSearch\ProductSearch;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
+use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
 class ProductsDataTable extends DataTable
@@ -65,8 +66,9 @@ class ProductsDataTable extends DataTable
                     ->columns($this->getColumns())
                     ->minifiedAjax()
             ->parameters([
-                'dom' => 'Bfrtip',
+                'dom' => 'lBfrtip',
                 'order' => [1, 'asc'],
+                'lengthMenu'=>[[10, 25, 50, -1], [10, 25, 50, "All"]],
                 'tfoot ',
                 'searching'=>false,
                 'select' => [
@@ -75,8 +77,8 @@ class ProductsDataTable extends DataTable
                 ],
                 'buttons' => [
 //                    ['extend' => 'create', 'editor' => 'editor'],
-                    ['extend' => 'edit', 'editor' => 'editor'],
-                    ['extend' => 'remove', 'editor' => 'editor'],
+//                    ['extend' => 'edit', 'editor' => 'editor'],
+//                    ['extend' => 'remove', 'editor' => 'editor'],
                 ]
             ]);
     }
@@ -106,7 +108,7 @@ class ProductsDataTable extends DataTable
             'status',
 
         ];
-//        return [
+//        dd( [
 //            Column::computed('action')
 //                  ->exportable(false)
 //                  ->printable(false)
@@ -116,7 +118,7 @@ class ProductsDataTable extends DataTable
 //            Column::make('add your columns'),
 //            Column::make('created_at'),
 //            Column::make('updated_at'),
-//        ];
+//        ]);
     }
 
     /**
