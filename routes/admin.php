@@ -22,6 +22,7 @@ Route::group(['prefix' => 'find'], function () {
     Route::resource('order', 'Find\OrderController');
     Route::resource('products', 'Find\ProductController');
     Route::resource('items', 'Find\ItemsController');
+    Route::get('items/barcodes', 'Find\ItemsController@getBarcodes');
 
 });
 
