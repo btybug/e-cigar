@@ -68,6 +68,7 @@ class ItemsDataTable extends DataTable
     {
         return $this->builder()
             ->columns($this->getColumns())
+            ->setTableId('items-table')
             ->minifiedAjax()
             ->parameters([
                 'dom' => 'Bfrtip',
@@ -110,17 +111,25 @@ class ItemsDataTable extends DataTable
                 'data' => null,
                 'defaultContent' => '',
                 'className' => 'select-checkbox',
-                'title' => '',
+                'title' => '<input type="checkbox">',
                 'orderable' => false,
                 'searchable' => false
             ],
-            ['name' => 'id', 'data' => 'id', 'title' => '<input type="checkbox">id'],
+            'id',
             'name',
             ['name' => 'statuse', 'data' => 'status', 'title' => 'Status','editField'=> "status"],
             'default_price',
             ['name' => 'brand', 'data' => 'brand_id', 'title' => 'Brand','editField'=> "brands"],
             ['name' => 'categories', 'data' => 'categories','type'=>'select2','title' => 'Categories','editField'=> "categories_lists"],
-        ];
+            [
+                'data' => null,
+                'defaultContent' => '',
+                'className' => '',
+                'title' => 'Actions',
+                'orderable' => false,
+                'searchable' => false
+            ]
+            ];
     }
 
     /**
