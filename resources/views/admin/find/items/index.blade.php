@@ -364,6 +364,24 @@
                 }
             });
 
+
+
+
+            // $('body').on('change', '#items-table thead th.select-checkbox input', function(ev) {
+            //     var ctrl_click = jQuery.Event("click");
+            //     ctrl_click.ctrlKey = true;
+            //     ctrl_click.charCode = 17;
+            //
+            //     console.log(ctrl_click);
+            //     if($(ev.target).is(':checked')) {
+            //         console.log(111111);
+            //         $('#items-table tbody tr:not(.selected)').each(function() {
+            //             console.log($(this).find('td.select-checkbox'));
+            //             $(this).find('td.select-checkbox').trigger(ctrl_click)
+            //         })
+            //     }
+            // });
+
             {{$dataTable->generateScripts()}}
 
 
