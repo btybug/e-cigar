@@ -191,6 +191,7 @@ class PaymentService
                     'order_id' => $order->id,
                     'name' => $item->attributes->product->name,
                     'sku' => '',
+                    'stock_id' => $item->attributes->product->id,
                     'variation_id' => $variation_id,
                     'price' => $item->price,
                     'qty' => $item->quantity,
