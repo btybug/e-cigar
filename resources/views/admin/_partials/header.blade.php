@@ -20,10 +20,10 @@
             @inject('findService','App\Services\FindService')
 
             <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
-                <li class="find-link">
-                    {!! Form::select('find',[null=>'Select Find Type']+$findService->getOptions(),'@yield("find")',['class' => 'form-control ','id' => 'admin_find']) !!}
-                        <span class="mr-1 mobile-none">Find</span>
-                        <i class="fa fa-search"></i></a>
+                <li class="find-link align-self-stretch">
+                    {!! Form::select('find',[null=>'Select Find Type']+$findService->getOptions(),'@yield("find")',['class' => 'form-control btn btn-primary h-100','id' => 'admin_find']) !!}
+{{--                        <span class="mr-1 mobile-none">Find</span>--}}
+{{--                        <i class="fa fa-search"></i></a>--}}
                 </li>
                 <li class="dropdown">
                     <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i><span class="mobile-none">Create new</span></button>
