@@ -362,8 +362,8 @@
                             </div>
                             <div id="technical" class="tab-pane basic-details-tab media-new-tab fade ">
                                 <div class="container-fluid p-25">
-                                    <div class="row d-flex">
-                                        <div class="col-md-3">
+                                    <div class="row">
+                                        <div class="col-xl-3 col-lg-4 col-3 pr-0">
                                             <div class="basic-left basic-wall h-100">
                                                 <div class="all-list">
                                                     <ul class="nav nav-tabs media-list">
@@ -391,7 +391,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-9">
+                                        <div class="col-xl-9 col-lg-8 col-9">
                                             <div class="basic-center basic-wall scrollbar_media_tab h-100">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
@@ -434,7 +434,7 @@
                                                     </div>
                                                     <div id="mediastickers" class="tab-pane fade ">
                                                         <div
-                                                            class="panel-heading d-flex justify-content-between align-items-center">
+                                                            class="panel-heading d-flex justify-content-between align-items-center mb-2">
                                                             <h4>
                                                                 Stickers
                                                             </h4>
@@ -466,7 +466,7 @@
                                                     </div>
                                                     <div id="mediarelatedproducts" class="tab-pane fade ">
                                                         <div
-                                                            class="panel-heading d-flex justify-content-between align-items-center">
+                                                            class="panel-heading d-flex justify-content-between align-items-center mb-2">
                                                             <h4>
                                                                 Related Products
                                                             </h4>
@@ -555,11 +555,11 @@
                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                                     <div class="form-group row">
                                                                                         <label
-                                                                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                            class="col-xl-2 control-label col-form-label text-right"><span
                                                                                                 data-toggle="tooltip"
                                                                                                 title=""
                                                                                                 data-original-title="what_is_content">Content</span></label>
-                                                                                        <div class="col-sm-10">
+                                                                                        <div class="col-xl-10">
                                                                                             {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                                         </div>
                                                                                     </div>
@@ -643,7 +643,7 @@
                                                             <div class="row">
                                                                 <div class="col-md-12">
                                                                     @if(count(get_languages()))
-                                                                        <ul class="nav nav-tabs">
+                                                                        <ul class="nav nav-tabs mb-2">
                                                                             @foreach(get_languages() as $language)
                                                                                 <li class="nav-item"><a
                                                                                         class="nav-link @if($loop->first) active @endif"
@@ -663,11 +663,11 @@
                                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
                                                                                     <div class="form-group row">
                                                                                         <label
-                                                                                            class="col-sm-2 control-label col-form-label text-right"><span
+                                                                                            class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                                                 data-toggle="tooltip"
                                                                                                 title=""
                                                                                                 data-original-title="Short Description">Long Description</span></label>
-                                                                                        <div class="col-sm-10">
+                                                                                        <div class="col-xl-10">
                                                                                             {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                                         </div>
                                                                                     </div>
@@ -688,8 +688,8 @@
                             </div>
                             <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
-                                    <div class="d-flex mb-2">
-                                        <div class="col-md-2">
+                                    <div class="row mb-2">
+                                        <div class="col-xl-2 col-md-4 col-sm-6">
                                             <label>Price
                                                 per:</label>
                                             {!! Form::select('type',[
@@ -697,7 +697,7 @@
                                                 1 => 'Whole Product'
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                         </div>
-                                        <div class="col-md-2">
+                                        <div class="col-xl-2 col-md-4 col-sm-6">
                                             <div
                                                 class="product-price @if(! $model || ($model && ! $model->type)) hide @endif">
                                                 <label>Price:</label>
@@ -708,7 +708,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="col-md-12 v-box">
+                                    <div class="v-box">
                                         @if($model && isset($variations))
                                             @foreach($variations as $v)
                                                 @include("admin.stock._partials.variation",['required' => 1])
