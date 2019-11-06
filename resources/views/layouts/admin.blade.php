@@ -33,7 +33,7 @@
   {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
   {!! Html::style("public/plugins/bootstrap-select/bootstrap-select.min.css") !!}
 
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.css" integrity="sha256-iu+Hq7JHYN0rAeT3Y+c4lEKIskeGgG/MpAyrj6W9iTI=" crossorigin="anonymous" />
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
   <link rel="stylesheet" href="{{asset('public/admin_assets/css/media-tree.css')}}">
   <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">

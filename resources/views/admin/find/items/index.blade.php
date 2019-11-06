@@ -44,7 +44,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css">
     <link rel="stylesheet" href="/public/js/DataTables/css/editor.dataTables.css">
     <link rel="stylesheet" href="/public/js/DataTables/css/editor.bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.css" integrity="sha256-iu+Hq7JHYN0rAeT3Y+c4lEKIskeGgG/MpAyrj6W9iTI=" crossorigin="anonymous" />
 @stop
 @section('js')
 

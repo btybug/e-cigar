@@ -234,8 +234,9 @@
             });
 
             const barcode_settings = JSON.parse($('#barcode-settings').text());
-console.log(barcode_settings)
+
             table.on('draw.dt', function () {
+                console.log(2, 'barcode_settings', barcode_settings)
                 let width = Number(barcode_settings.width);
                 let height = Number(barcode_settings.height);
                 let margin = Number(barcode_settings.margin);
@@ -270,7 +271,7 @@ console.log(barcode_settings)
                         height,
                         width,
                         margin,
-                        backgroundColor: back_color,
+                        background: back_color,
                         lineColor: line_color,
                         textAlign: text_align,
                         fontOptions,
@@ -319,7 +320,7 @@ console.log(barcode_settings)
                     height,
                     width,
                     margin,
-                    backgroundColor: back_color,
+                    background: back_color,
                     lineColor: line_color,
                     textAlign: text_align,
                     displayValue
@@ -352,7 +353,7 @@ console.log(barcode_settings)
                 });
 
                 $('body').on('input', '#barcode_height', function(ev) {
-                    height = $(ev.target).val();
+                    height = Number($(ev.target).val());
                     $('#barcode_height').next('.value').text(height)
                     JsBarcode("#barcode", text, {
                         format,
@@ -372,7 +373,7 @@ console.log(barcode_settings)
                 })
 
                 $('body').on('input', '#barcode_width', function(ev) {
-                    width = $(ev.target).val();
+                    width = Number($(ev.target).val());
                     $('#barcode_width').next('.value').text(width);
                     JsBarcode("#barcode", text, {
                         format,
@@ -604,8 +605,8 @@ console.log(barcode_settings)
                 })
 
                 $('body').on('input', '#barcode_font_size', function(ev) {
-                    font_size = $(ev.target).val();
-                    $('#barcode_font_size').next('.value').text(font_size)
+                    font_size = Number($(ev.target).val());
+                    $('#barcode_font_size').next('.value').text(font_size);
                     JsBarcode("#barcode", text, {
                         format,
                         font: text_font,
@@ -664,9 +665,9 @@ console.log(barcode_settings)
                         bold: $('#barcode_bold').is(':checked'),
                         italic: $('#barcode_italic').is(':checked')
                     });
-                    console.log(data);
                     shortAjax('/admin/inventory/barcode/settings', data, (res) => {
                         if(res.success) {
+                            console.log(1, 'data', data);
                             let width = Number(data.width);
                             let height = Number(data.height);
                             let margin = Number(data.margin);
@@ -691,7 +692,7 @@ console.log(barcode_settings)
                             } else {
                                 fontOptions = ''
                             }
-
+                            console.log(back_color);
                             $('body').find('.barcodes').each(function(key, value) {
                                 JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
                                     format,
@@ -701,7 +702,7 @@ console.log(barcode_settings)
                                     height,
                                     width,
                                     margin,
-                                    backgroundColor: back_color,
+                                    background: back_color,
                                     lineColor: line_color,
                                     textAlign: text_align,
                                     fontOptions,
@@ -724,15 +725,6 @@ console.log(barcode_settings)
             };
 
             barcode_edit();
-            $('#barcodeModalCenter').on('show.bs.modal', function() {
-                // $('#barcode_background_color').css('z-index', '999999999999999')
-                // $('#barcode_line_color').css('z-index', '999999999999999')
-                // $('.example-content-widget').css('z-index', '999999999999999')
-                // $('.example-content.well').css('z-index', '999999999999999')
-
-                $('#barcode_background_color').colorpicker();
-                $('#barcode_line_color').colorpicker();
-            })
         });
     </script>
     @stop
