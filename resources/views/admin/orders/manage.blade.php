@@ -255,8 +255,7 @@
                                                                  alt="{{ $item->name }}">
                                                         </div>
                                                         <h6 class="font-18 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
-                                                        <p class="font-18 lh-1 order__product-sec-title">Cola Shades
-                                                            E-Juice</p>
+                                                        <p class="font-18 lh-1 order__product-sec-title"></p>
                                                         <div class="order__product-info">
                                                             @if(count($item->options['options']))
                                                                 <ul class="list-unstyled mb-0">
@@ -466,6 +465,11 @@
                                                                 alt="icon"></span>
                                         <span class="font-20 text-main-clr name">Shipping Label</span>
                                     </a>
+                                    <a class="nav-link item-link" id="v-pills-docs-downloads-tab" data-toggle="pill" href="#v-pills-docs-downloads" role="tab" aria-controls="v-pills-docs-downloads" aria-selected="false">
+                                        <span class="icon"><img src="/public/img/delivery-icon.png"
+                                                                alt="icon"></span>
+                                        <span class="font-20 text-main-clr name">Downloads</span>
+                                    </a>
                                 </div>
 {{--                                <ul class="list-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">--}}
 {{--                                    <li class="item-wrap">--}}
@@ -497,6 +501,9 @@
                                     </div>
                                     <div class="tab-pane fade" id="v-pills-docs-shipping" role="tabpanel" aria-labelledby="v-pills-docs-shipping-tab">
                                         @include('admin.pdf.shipping')
+                                    </div>
+                                    <div class="tab-pane fade" id="v-pills-docs-downloads" role="tabpanel" aria-labelledby="v-pills-docs-downloads-tab">
+                                        @include('admin.pdf.downloads')
                                     </div>
                                 </div>
 
