@@ -41,7 +41,7 @@
                         </div>
                         <div style="margin-bottom: 15px; display: flex">
                             {{--                <label for="barcode_text" class="barcode_text">Barcode Text</label>--}}
-                            <input class="form-control" type="text" placeholder="Default input" name="text" id="barcode_text" value="5060730202285" style="width: 70%"/>
+                            <input class="form-control" type="text" placeholder="Default input" readonly name="text" id="barcode_text" value="5060730202285" style="width: 70%"/>
                             <select class="form-control" name="format" id="barcode_format" style="width: 30%">
                                 <option value="CODE128">CODE128 auto</option>
                                 <option value="CODE128A">CODE128 A</option>
@@ -236,7 +236,6 @@
             const barcode_settings = JSON.parse($('#barcode-settings').text());
 
             table.on('draw.dt', function () {
-                console.log(2, 'barcode_settings', barcode_settings)
                 let width = Number(barcode_settings.width);
                 let height = Number(barcode_settings.height);
                 let margin = Number(barcode_settings.margin);
@@ -275,10 +274,7 @@
                         lineColor: line_color,
                         textAlign: text_align,
                         fontOptions,
-                        displayValue,
-                        invalid: function() {
-                            console.log('invalid')
-                        }
+                        displayValue
                     })
                         .render();
                 });
@@ -286,21 +282,21 @@
 
             const barcode_edit = function() {
                 let text = 5060730202285;
-                let format = "EAN13";
-                let width = 2;
-                let height = 100;
-                let margin = 10;
-                let back_color = '#ffffff';
-                let line_color = '#000000';
-                let text_align = 'center';
-                let text_font = 'sans-serif';
-                let font_size = 20;
-                let text_margin = 0;
-                let displayValue = true;
-                let bold = $('#text_bold').is(':checked');
-                let italic =  $('#text_italic').is(':checked');
+                let width = Number(barcode_settings.width);
+                let height = Number(barcode_settings.height);
+                let margin = Number(barcode_settings.margin);
+                let back_color = barcode_settings.background_color;
+                let line_color = barcode_settings.line_color;
+                let text_align = barcode_settings.text_align;
+                let text_font = barcode_settings.text_font;
+                let format = barcode_settings.format;
+                let font_size = Number(barcode_settings.font_size);
+                let text_margin = Number(barcode_settings.text_margin);
+                let displayValue = Boolean(Number(barcode_settings.text_switch));
+                let bold = Number(barcode_settings.bold);
+                let italic = Number(barcode_settings.italic);
                 let fontOptions = '';
-                $('#text_bold').is(':checked')
+
                 if(bold && italic) {
                     fontOptions = 'bold italic'
                 } else if(bold) {
@@ -309,6 +305,39 @@
                     fontOptions = 'italic'
                 } else {
                     fontOptions = ''
+                }
+                $('#barcode_height').val(barcode_settings.height);
+                $('#barcode_height').next('.value').text(height)
+                $('#barcode_width').val(barcode_settings.width);
+                $('#barcode_width').next('.value').text(width)
+                $('#barcode_margin').val(barcode_settings.margin);
+                $('#barcode_margin').next('.value').text(margin)
+                $('#barcode_background_color').val(back_color);
+                $('#barcode_line_color').val(line_color);
+                $('#barcode_text_switch').attr('checked', displayValue);
+                $('#barcode_text_font').val(text_font);
+                $('#barcode_format').val(format);
+                $('#barcode_font_size').val(barcode_settings.font_size);
+                $('#barcode_font_size').next('.value').text(font_size)
+                $('#barcode_text_margin').val(barcode_settings.text_margin);
+                $('#barcode_text_margin').next('.value').text(text_margin)
+                $('#barcode_background_color').val(back_color);
+                $('#barcode_background_color').css('background-color', back_color);
+                $('#barcode_line_color').val(line_color);
+                $('#barcode_line_color').css('background-color', line_color);
+                $('#text_bold').attr('checked', !!bold);
+                $('#text_italic').attr('checked', !!italic);
+
+                $('[name="text_align"]').each(function(key, radio) {
+                    $(radio).val() === text_align && $(radio).trigger('click')
+                });
+
+                if(displayValue) {
+                    $('#barcode_text_options').addClass('d-block');
+                    $('#barcode_text_options').removeClass('d-none');
+                } else {
+                    $('#barcode_text_options').addClass('d-none');
+                    $('#barcode_text_options').removeClass('d-block');
                 }
 
                 JsBarcode("#barcode", text, {
@@ -327,30 +356,30 @@
                 })
                     .render();
 
-                $('body').on('input', '#barcode_text', function(ev) {
-                    text = $(ev.target).val();
-                    if(text === '') {
-                        $('#barcode').css('display', 'none');
-                        $('#invalid_barcode').css('display', 'block');
-                    } else {
-                        $('#invalid_barcode').css('display', 'none');
-                        JsBarcode("#barcode", text, {
-                            format,
-                            font: text_font,
-                            fontOptions,
-                            textMargin: text_margin,
-                            fontSize: font_size,
-                            height,
-                            width,
-                            margin,
-                            background: back_color,
-                            lineColor: line_color,
-                            textAlign: text_align,
-                            displayValue
-                        })
-                            .render();
-                    }
-                });
+                // $('body').on('input', '#barcode_text', function(ev) {
+                //     text = $(ev.target).val();
+                //     if(text === '') {
+                //         $('#barcode').css('display', 'none');
+                //         $('#invalid_barcode').css('display', 'block');
+                //     } else {
+                //         $('#invalid_barcode').css('display', 'none');
+                //         JsBarcode("#barcode", text, {
+                //             format,
+                //             font: text_font,
+                //             fontOptions,
+                //             textMargin: text_margin,
+                //             fontSize: font_size,
+                //             height,
+                //             width,
+                //             margin,
+                //             background: back_color,
+                //             lineColor: line_color,
+                //             textAlign: text_align,
+                //             displayValue
+                //         })
+                //             .render();
+                //     }
+                // });
 
                 $('body').on('input', '#barcode_height', function(ev) {
                     height = Number($(ev.target).val());
@@ -486,7 +515,6 @@
                 });
 
                 $('body').on('change', '[name="text_align"]', function(ev) {
-                    console.log($(ev.target).val());
 
                     text_align = $(ev.target).val();
                     JsBarcode("#barcode", text, {
@@ -507,7 +535,6 @@
                 });
 
                 $('body').on('change', '#barcode_text_font', function(ev) {
-                    console.log($(ev.target).val());
 
                     text_font = $(ev.target).val();
                     JsBarcode("#barcode", text, {
@@ -528,7 +555,6 @@
                 });
 
                 $('body').on('change', '#barcode_format', function(ev) {
-                    console.log($(ev.target).val());
 
                     format = $(ev.target).val();
                     JsBarcode("#barcode", text, {
@@ -662,12 +688,11 @@
 
                     data = Object.assign(data, {
                         text_switch: $('#barcode_text_switch').is(':checked'),
-                        bold: $('#barcode_bold').is(':checked'),
-                        italic: $('#barcode_italic').is(':checked')
+                        bold: $('#text_bold').is(':checked'),
+                        italic: $('#text_italic').is(':checked')
                     });
                     shortAjax('/admin/inventory/barcode/settings', data, (res) => {
                         if(res.success) {
-                            console.log(1, 'data', data);
                             let width = Number(data.width);
                             let height = Number(data.height);
                             let margin = Number(data.margin);
@@ -692,7 +717,6 @@
                             } else {
                                 fontOptions = ''
                             }
-                            console.log(back_color);
                             $('body').find('.barcodes').each(function(key, value) {
                                 JsBarcode(`#code_${$(value).data('barcode')}`, $(value).data('barcode'), {
                                     format,
@@ -717,12 +741,16 @@
                 })
 
 
+                $('#barcodeModalCenter').on('show')
+
                 // $('#svg').on('click', function(ev) {
                 //     svgAsDataUri(document.getElementById("barcode"), {})
                 //         .then(uri => console.log(uri));
                 // })
                 // saveSvgAsPng(document.getElementById("barcode"), "barcode.png", {scale: 10});
             };
+
+
 
             barcode_edit();
         });
