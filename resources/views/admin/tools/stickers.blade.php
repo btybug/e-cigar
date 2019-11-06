@@ -36,7 +36,7 @@
                             @foreach($stickers as $sticker)
                                 <div class="form-group row bord-top bg-light attr-option search_list_item d-flex" data-item-id="{!! $sticker->id !!}"
                                      data-parent-id="1">
-                                    <div class="col-6 search_item_name">
+                                    <div class="col-6 search_item_name" data-name="{!! $sticker->name !!}">
                                         {!! $sticker->name !!}
                                     </div>
                                     <div class="col-6">
@@ -85,9 +85,15 @@
     <link rel="stylesheet"
           href="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <style>
+        .highlight_mark {
+            background-color: #33b5e5;
+        }
+    </style>
 @stop
 
 @section("js")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js" integrity="sha256-m4GLhtBF1Ue31vdmii9AEzvSYnBTJFzYkVToaD047Z4=" crossorigin="anonymous"></script>
     <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
     <script>
         $( document ).ready(function() {
@@ -114,15 +120,25 @@
 
             $('#colorselector_2').colorselector();
 
+
             $('body').on('input', '#search-input', function(ev) {
-                // console.log($('.search-attributes-scrolled .search_list_item'));
                 $('.search-attributes-scrolled .search_list_item').each(function() {
-                    if(!$(this).find('.search_item_name').text().trim().toUpperCase().includes($(ev.target).val().toUpperCase())) {
+                    if(!$(this).find('.search_item_name').data('name').trim().toUpperCase().includes($(ev.target).val().toUpperCase())) {
                         $(this).closest('.search_list_item').addClass('d-none');
                         $(this).closest('.search_list_item').removeClass('d-flex');
                     } else {
                         $(this).closest('.search_list_item').addClass('d-flex');
                         $(this).closest('.search_list_item').removeClass('d-none');
+                        var instance = new Mark($(this).find('.search_item_name'));
+
+                        instance.unmark({
+                            "element": "span",
+                            "className": "highlight_mark"
+                        });
+                        instance.mark($(ev.target).val(), {
+                            "element": "span",
+                            "className": "highlight_mark"
+                        });
                     }
                 });
             })
