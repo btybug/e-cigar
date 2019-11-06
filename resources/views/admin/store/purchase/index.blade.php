@@ -17,15 +17,15 @@
 
             </ul>
             <div class="tab-content w-100">
-                <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                        <h2 class="m-0 pull-left">Purchase</h2>
-                        @ok('admin_inventory_purchase_new')
-                        <div class="pull-right">
-                            <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
-                        </div>
-                        @endok
+                <div class="clearfix mb-2">
+                    {{--                        <h2 class="m-0 pull-left">Purchase</h2>--}}
+                    @ok('admin_inventory_purchase_new')
+                    <div class="pull-right">
+                        <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
                     </div>
+                    @endok
+                </div>
+                <div class="card panel panel-default">
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                             <option value="#" data-column="0" data-name="id">#</option>

@@ -14,14 +14,14 @@
 
             </ul>
             <div class="tab-content w-100">
-                <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                        <div class="pull-left">
-                            <h2 class="m-0">Others</h2>
-                        </div>
-                        @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_others_new') !!}">Add new</a></div>@endok
+                <div class="mb-2 clearfix">
+                    {{--                        <div class="pull-left">--}}
+                    {{--                            <h2 class="m-0">Others</h2>--}}
+                    {{--                        </div>--}}
+                    @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_others_new') !!}">Add new</a></div>@endok
 
-                    </div>
+                </div>
+                <div class="card panel panel-default">
                     <div class="card-body panel-body">
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
