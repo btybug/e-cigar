@@ -226,9 +226,9 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'code', name: 'code'},
-                    {data: 'item', name: 'item'},
-                    {data: 'barcode', name: 'barcode',orderable : false},
-                    {data: 'actions', name: 'actions',orderable : false}
+                    {data: 'item_name', name: 'item_translations.name'},
+                    {data: 'barcode', name: 'barcode',orderable : false,'searchable':false},
+                    {data: 'actions', name: 'actions',orderable : false,'searchable':false}
                 ],
                 order: [ [0, 'desc'] ]
             });

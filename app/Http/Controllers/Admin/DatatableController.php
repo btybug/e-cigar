@@ -852,11 +852,11 @@ class DatatableController extends Controller
     public function getAllBarcodes()
     {
         return Datatables::of(
-            Barcodes::query()
+            Barcodes::leftJoin('items','items.barcode_id','=','barcodes.id')
+                ->leftJoin('item_translations','items.id','=','item_translations.items_id')
+                ->where('item_translations.locale',app()->getLocale())->select('barcodes.*','item_translations.name as item_name')
         )
-            ->addColumn('item', function ($barcode) {
-                return ($barcode->item) ? "<a href='".route("admin_items_edit",$barcode->item->id)."' >" .$barcode->item->name. "</a>" : "not connected";
-            })
+
             ->editColumn('barcode', function ($barcode) {
                 return '<svg id="code_'.$barcode->code.'" class="barcodes" data-barcode="'.$barcode->code.'" width="200px"></svg>';
             })
