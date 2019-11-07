@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Filters;
+use App\Models\Items;
 use App\Models\StockVariation;
 use Illuminate\Http\Request;
 
@@ -64,8 +65,14 @@ class FilterApiControll extends Controller
     {
         $variation = StockVariation::where('variation_id',$request->group)->first();
         $filters = ($variation && $variation->filter) ? $variation->filter->filters : collect([]);
+        $all = Items::leftJoin("filter_items",'items.id',"filter_items.item_id")
+            ->leftJoin('filters','filter_items.filter_id','filters.id')
+            ->select('items.*')
+            ->whereIn('filters.id',$filters->pluck('id','id')->all())
+            ->groupBy('items.id')
+            ->get();
 
-        $html = view("filters.filter_modal_body",compact(['filters']))->render();
+        $html = view("filters.filter_modal_body",compact(['filters','all']))->render();
 
         return response()->json(['error' => false,'html'=> $html]);
     }

@@ -15,7 +15,18 @@
         <div class="shopping-cart_wrapper p-0">
             <div class="content-wrap shoping-card">
                 <ul class="row content">
-                    
+                    @foreach($all as $item)
+                        <li class="col-md-3" data-id="{{ $item->id }}">
+                            <div class="item-content">
+                                <div class="item-photo">
+                                    <img src="{{ $item->image }}" alt="photo">
+                                </div>
+                                <div class="item-title">
+                                    <span>{!! $item->name !!}</span>
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
