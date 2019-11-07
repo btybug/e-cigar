@@ -4,10 +4,10 @@
            aria-controls="wizardAll" aria-selected="true">All</a>
     </li>
     @foreach($filters as $key => $filter)
-    <li class="nav-item">
-        <a class="nav-link" id="wizardItem{{ $key }}-tab" data-toggle="tab" href="#wizardItem{{ $key }}" role="tab"
-           aria-controls="wizardItem{{ $key }}" aria-selected="false">{{ $filter->name }}</a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" id="wizardItem{{ $key }}-tab" data-toggle="tab" href="#wizardItem{{ $key }}" role="tab"
+               aria-controls="wizardItem{{ $key }}" aria-selected="false">{{ $filter->name }}</a>
+        </li>
     @endforeach
 </ul>
 <div class="tab-content main-scrollbar" id="myTabContent">
@@ -15,6 +15,7 @@
         <div class="shopping-cart_wrapper p-0">
             <div class="content-wrap shoping-card">
                 <ul class="row content">
+                    
                     <li class="col-md-3" data-id="1">
                         <div class="item-content">
                             <div class="item-photo">
@@ -54,19 +55,18 @@
             <div class="shopping-cart_wrapper p-0">
                 <div class="content-wrap shoping-card">
                     <ul class="row content">
-                        @foreach($filter->filter_products as $item)
-                        <li class="col-md-3" data-id="{{ $item->id }}">
-                            <div class="item-content">
-                                <div class="item-photo">
-                                    <img src="{{ $item->image }}" alt="photo">
+                        @foreach($filter->items as $item)
+                            <li class="col-md-3" data-id="{{ $item->id }}">
+                                <div class="item-content">
+                                    <div class="item-photo">
+                                        <img src="{{ $item->image }}" alt="photo">
+                                    </div>
+                                    <div class="item-title">
+                                        <span>{!! $item->name !!}</span>
+                                    </div>
                                 </div>
-                                <div class="item-title">
-                                    <span>{!! $item->name !!}</span>
-                                </div>
-                            </div>
-                        </li>
+                            </li>
                         @endforeach
-
                     </ul>
                 </div>
             </div>
