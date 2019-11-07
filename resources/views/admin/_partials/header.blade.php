@@ -22,7 +22,7 @@
             <ul class="d-flex flex-wrap list-unstyled main-header_nav-middle-list">
                 <li class="find-link align-self-stretch">
 
-                        {!! Form::select('find',[null=>'Select Find Type']+$findService->getOptions(),'@yield("find")',['class' => 'form-control btn btn-primary h-100','id' => 'admin_find']) !!}
+                        {!! Form::select('find',$findService->getOptions(),'@yield("find")',['class' => 'form-control btn btn-primary h-100','id' => 'admin_find','placeholder'=>'Find']) !!}
 
                         <i class="fa fa-search icon-search-mobile-none"></i>
                     {{--                        <span class="mr-1 mobile-none">Find</span>--}}
