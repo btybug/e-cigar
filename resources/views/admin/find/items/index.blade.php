@@ -371,7 +371,7 @@
                     $('#items-table tbody tr.selected').each(function() {
                         ids.push($(this).find('td.sorting_1').text());
                     });
-                    shortAjax('admin/find/items/qrcodes', {ids}, function(res) {
+                    shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
                         console.log(res)
                     });
                 }
