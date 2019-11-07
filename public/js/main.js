@@ -1581,6 +1581,10 @@ $(document).ready(function () {
                                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                                     },
                                     success: function (data) {
+                                        $("#wizardViewModal .modal-body").html(data.html);
+                                        $("#wizardViewModal").modal();
+                                    },
+                                    error: function() {
                                         $("#wizardViewModal .modal-body").empty();
                                         $("#wizardViewModal").modal();
                                     }

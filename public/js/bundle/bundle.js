@@ -4083,6 +4083,10 @@ $(document).ready(function () {
                                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                             },
                             success: function success(data) {
+                                $("#wizardViewModal .modal-body").html(data.html);
+                                $("#wizardViewModal").modal();
+                            },
+                            error: function error() {
                                 $("#wizardViewModal .modal-body").empty();
                                 $("#wizardViewModal").modal();
                             }
