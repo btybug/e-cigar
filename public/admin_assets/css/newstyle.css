@@ -662,7 +662,7 @@ label {
 }
 .stock-page--head{
     padding: 0;
-    height: 63px;
+    /*height: 63px;*/
 }
 .stock-page--head .head-left{
     align-self: center;
@@ -1685,6 +1685,18 @@ color: #ffffff;
 }
 .icon-search-mobile-none{
     display: none;
+}
+.stock-variations-tab table select.v-item-change{
+    min-width: 84px;
+}
+.stock-variations-tab table input.v-name{
+    min-width: 80px;
+}
+.stock-variations-tab table select.price-type-change{
+    min-width: 80px;
+}
+.stock-variations-tab table input.v-price{
+    min-width: 55px;
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1199px) {
