@@ -393,14 +393,12 @@
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
                         console.log(res.qrcodes);
 
-                        res.qrcodes.map(function(er, key) {
-                            if(key%10 === 0) {
-                                setTimeout(() => {
-                                    forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
-                                }, 2000)
-                                // forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
-                            }
-                            forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
+                        res.qrcodes.map(function(arr) {
+                            // setTimeout(function() {
+                                arr.map(function(er, key) {
+                                    forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png');
+                                });
+                            // }, 1000);
                         });
                     });
                 }
