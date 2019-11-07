@@ -23,6 +23,7 @@ Route::group(['prefix' => 'find'], function () {
     Route::resource('products', 'Find\ProductController');
     Route::resource('items', 'Find\ItemsController');
     Route::post('items/barcodes', 'Find\ItemsController@getBarcodes');
+    Route::post('items/qrcodes', 'Find\ItemsController@getQrcodes');
     Route::post('items/html', 'Admin\FindController@printHtmlBarcode')->name('find_items_barcode_html');
 
 });

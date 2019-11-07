@@ -36,4 +36,21 @@ class ItemsController extends Controller
             ->whereIn('items.id',$request->get('ids'))->get();
         return response()->json(['barcodes'=>$barcodes]);
     }
+
+    public function getQrcodes(Request $request){
+        $barcodes=Items::leftJoin('barcodes','items.barcode_id','barcodes.id')
+            ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->where('item_translations.locale',app()->getLocale())
+            ->select('barcodes.code as value','item_translations.name as file_name')
+            ->whereIn('items.id',$request->get('ids'))->get();
+
+        $fileArray = [];
+        foreach ($barcodes as $item){
+            $d = new \DNS2D();
+            $d->setStorPath(public_path("qrcodes"));
+            $fileArray[] = $d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200);
+        }
+
+        return response()->json(['barcodes'=>$fileArray]);
+    }
 }
