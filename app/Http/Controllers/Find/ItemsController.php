@@ -49,6 +49,7 @@ class ItemsController extends Controller
             ->select('barcodes.code as value','item_translations.name as file_name')
             ->whereIn('items.id',$request->get('ids'))->get();
 
+        $count = 1;
         $fileArray = [];
         foreach ($barcodes as $item){
             $d = new DNS2D();
@@ -59,6 +60,8 @@ class ItemsController extends Controller
             ];
         }
 
+        $fileArray = collect($fileArray)->chunk(10);
+        
         return response()->json(['qrcodes'=>$fileArray]);
     }
 }
