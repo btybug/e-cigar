@@ -874,7 +874,7 @@ class DatatableController extends Controller
         )
 
             ->editColumn('barcode', function ($barcode) {
-                return '<svg id="code_'.$barcode->code.'" class="barcodes" data-barcode="'.$barcode->code.'" width="200px"></svg>';
+                return '<svg id="code_'.$barcode->code.'" data-name="'.$barcode->item_name.'" class="barcodes" data-barcode="'.$barcode->code.'" width="200px"></svg>';
             })
             ->addColumn('actions', function ($code) {
                 return "
