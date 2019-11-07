@@ -29,7 +29,7 @@
                  aria-labelledby="nav-order-details-tab">
                 <div class="order-details__tab">
                     <div class="row">
-                        <div class="col-md-9">
+                        <div class="col-lg-9">
                             <div class="order-details__tab-left">
                                 <div class="shopping__cart-confirm w-100">
                                     <div class="row list-shipping">
@@ -124,7 +124,7 @@
                                     <h2 class="font-sec-reg font-22 lh-1 title">Order Details</h2>
                                     <ul class="row list-order">
                                         @foreach($order->items()->where('is_refunded',false)->get() as $item)
-                                            <li class="col-md-4">
+                                            <li class="col-xl-4 col-sm-6">
                                                 <div class="order__product-wall">
                                                     <div class="main-info">
                                                         <div class="order__product-photo">
@@ -240,7 +240,7 @@
                                     <h2 class="font-sec-reg font-22 lh-1 title">Refunded</h2>
                                     <ul class="row list-order">
                                         @foreach($order->items()->where('is_refunded',true)->get() as $item)
-                                            <li class="col-md-4">
+                                            <li class="col-xl-4 col-sm-6">
                                                 <div class="order__product-wall">
                                                     <div class="main-info">
                                                         <div class="order__product-photo">
@@ -352,7 +352,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-lg-3">
                             <div class="order-details__tab-right">
                                 <div class="customers-notes">
                                     <div class="font-sec-reg text-tert-clr font-23 notes-head">

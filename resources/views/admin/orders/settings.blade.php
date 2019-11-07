@@ -16,10 +16,10 @@
         <div class="card-body panel-body">
 
             <div class="row sortable-panels">
-                <div class="col-md-9">
+                <div class="col-xl-9">
                     <div class="form-group row">
-                        <label class="col-md-2 col-form-label">Select status - Order made</label>
-                        <div class="col-md-10">
+                        <label class="col-lg-2 col-form-label">Select status - Order made</label>
+                        <div class="col-lg-10">
                             {!! Form::select('open',$statuses,null,['class'=>'form-control']) !!}
                         </div>
                     </div>

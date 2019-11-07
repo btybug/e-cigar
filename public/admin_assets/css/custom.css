@@ -1107,7 +1107,7 @@ div.remover-container .remover-container-zone .file {
 }
 .head-order-wrap{
     box-shadow: 0 3px 21px 0 rgba(0, 0, 0, 0.11);
-    height: 56px;
+    min-height: 56px;
     border-bottom: 1px solid #d7d7d7;
     background-color: #fff;
     padding-right: 68px;

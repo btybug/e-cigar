@@ -13,7 +13,7 @@
         </div>
         <div class="card-body panel-body">
             <div class="row order-main-cnt">
-                <div class="col-md-8">
+                <div class="col-sm-8">
                     <div class="order-main-cnt_left-col">
                         <div class="tab-content-store-settings">
                             <div class="row">
@@ -47,7 +47,7 @@
                     </div>
 
                 </div>
-                <div class="col-md-4 scroll_content">
+                <div class="col-sm-4 scroll_content">
                     <div class="cart-right">
                         <div class="order-summary-outer">
                             <div class="order-summary">
