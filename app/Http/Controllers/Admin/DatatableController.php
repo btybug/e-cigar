@@ -737,15 +737,7 @@ class DatatableController extends Controller
             ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code','categories_translations.name')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
-            ->addColumn('category', function ($attr) {
-                $str = '';
-                if($attr->categories && count($attr->categories)){
-                    foreach ($attr->categories as $category){
-                        $str .= "<span class='badge badge-dark'>".$category->name."</span>";
-                    }
-                }
-                return $str;
-            })
+
             ->editColumn('brand_id', function ($attr) {
                 $brand=Category::find($attr->brand_id);
                 return ($brand)?$brand->name:'no brand';
