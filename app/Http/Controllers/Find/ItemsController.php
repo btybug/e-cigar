@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Items;
 use Google\Auth\Cache\Item;
 use Illuminate\Http\Request;
+use Milon\Barcode\DNS2D;
 
 class ItemsController extends Controller
 {
@@ -38,6 +39,10 @@ class ItemsController extends Controller
     }
 
     public function getQrcodes(Request $request){
+        if(! \File::isDirectory(public_path().DS."qrcodes")){
+            \File::makeDirectory(public_path().DS."qrcodes");
+        }
+
         $barcodes=Items::leftJoin('barcodes','items.barcode_id','barcodes.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->where('item_translations.locale',app()->getLocale())
@@ -46,9 +51,9 @@ class ItemsController extends Controller
 
         $fileArray = [];
         foreach ($barcodes as $item){
-            $d = new \DNS2D();
-            $d->setStorPath(public_path("qrcodes"));
-            $fileArray[] = $d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200);
+            $d = new DNS2D();
+            $d->setStorPath(public_path().DS."qrcodes".DS);
+            $fileArray[] = url("public/".$d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200));
         }
 
         return response()->json(['barcodes'=>$fileArray]);
