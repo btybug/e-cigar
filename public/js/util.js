@@ -159,7 +159,6 @@ $(document).ready(function () {
     // }
 
     $(document).on('click', function(ev) {
-        console.log($(ev.target).closest('#autocomplite_content_search'));
         if($(ev.target).closest('#autocomplite_content_search').length > 0) {
 
         } else {
