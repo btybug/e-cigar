@@ -77,12 +77,10 @@ class ItemsDataTableEditor extends DataTablesEditor
             $model->categories()->sync($data['categories_lists']);
             unset($data['categories_lists']);
         };
-        if(isset($data['status'])){
+
             if(is_null($data['status'])){
                   unset($data['status']);
             }
-
-        };
 
         return $data;
     }
