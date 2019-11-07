@@ -55,6 +55,9 @@
             $("body").find("#customer").select2();
             $("body").find("#payment_method").select2();
             $("body").find("#status").select2();
+            $("body").find(".barcodes").select2();
+
+            {{$dataTable->generateScripts()}}
         })
     </script>
 @stop
