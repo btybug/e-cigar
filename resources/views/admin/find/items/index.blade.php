@@ -345,7 +345,7 @@
                             })
                                 .render();
                             $('#svg_barcode').css('display', 'none');
-                            saveSvgAsPng(document.getElementById('svg_barcode'), `${barcode.name.replace(/\s/g, '_')}.png`, {scale: 10});
+                            saveSvgAsPng(document.getElementById('svg_barcode'), `${barcode.file_name.replace(/\s/g, '_')}.png`, {scale: 10});
 
                             // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
                             // var encodedData = window.btoa(s);

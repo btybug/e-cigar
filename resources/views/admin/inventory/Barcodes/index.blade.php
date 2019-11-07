@@ -284,7 +284,7 @@
                     // console.log(encodedData);
                 });
                 $('body').on('click', '.barcodes', function(ev) {
-                    saveSvgAsPng(document.getElementById($(ev.target).closest('svg.barcodes').attr('id')), `${$(ev.target).closest('svg.barcodes').attr('id')}.png`, {scale: 10});
+                    saveSvgAsPng(document.getElementById($(ev.target).closest('svg.barcodes').attr('id')), `${$(ev.target).closest('svg.barcodes').attr('data-name').replace(/\s/g, '_')}.png`, {scale: 10});
                 })
             } );
 
