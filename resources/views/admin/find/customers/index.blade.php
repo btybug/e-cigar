@@ -61,4 +61,35 @@
     <script src="{{url('public/js/DataTables/js/editor.bootstrap.min.js')}}"></script>
     <script src="{{url('public/js/DataTables/js/editor.select2.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $(function () {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': '{{csrf_token()}}'
+                }
+            });
+
+            var editor = new $.fn.dataTable.Editor({
+                ajax: "/admin/find/customer",
+                table: $('body').find("#users-table"),
+                display: "bootstrap",
+                idSrc: 'id',
+                fields: [
+                    {label: "Name:", name: "name"},
+                    {label: "Last Name:", name: "last_name"},
+                    {label: "Phone:", name: "phone"},
+                    {label: "Country:", name: "country"},
+                    {label: "Gender:", name: "gender"},
+                    {label: "Age:", name: "age"},
+                    {label: "Email:", name: "email"},
+                    {label: "Password:", name: "password", type: "password"}
+                ]
+            });
+
+            $('#users').on('click', 'tbody td:not(:first-child)', function (e) {
+                editor.inline(this);
+            });
+            {{$dataTable->generateScripts()}}
+        })
+    </script>
 @stop

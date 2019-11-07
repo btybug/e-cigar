@@ -4,23 +4,23 @@ namespace App\Http\Controllers\Find;
 
 use App\DataTables\ItemsDataTable;
 use App\DataTables\ItemsDataTableEditor;
+use App\DataTables\UsersDataTable;
+use App\DataTables\UsersDataTableEditor;
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
 use App\Models\Category;
 
 class CustomerController extends Controller
 {
-    public function index(ItemsDataTable $dataTable)
+    public function index(UsersDataTable $dataTable)
     {
-        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
-        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-        $barcodes = Barcodes::all()->pluck('code', 'id');
+
         $data=request()->all();
-        return $dataTable->render('admin.find.customers.index',compact(['categories','brands','barcodes','data']));
+        return $dataTable->render('admin.find.customers.index',compact(['data']));
     }
 
 
-    public function store(ItemsDataTableEditor $editor)
+    public function store(UsersDataTableEditor $editor)
     {
         return $editor->process(request());
     }
