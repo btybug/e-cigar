@@ -32,7 +32,8 @@ class ItemsController extends Controller
         $barcodes=Items::leftJoin('barcodes','items.barcode_id','barcodes.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->where('item_translations.locale',app()->getLocale())
-            ->whereIn('items.id',$request->get('ids'))->select('barcodes.code as value','item_translations.name')->get();
+            ->select('barcodes.code as value','item_translations.name')
+            ->whereIn('items.id',$request->get('ids'))->get();
         return response()->json(['barcodes'=>$barcodes->toArray()]);
     }
 }
