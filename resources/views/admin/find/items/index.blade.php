@@ -353,7 +353,7 @@
                             })
                                 .render();
                             $(`#svg_${barcode.value}`).css('display', 'none');
-                            saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_')}.png`, {scale: 10});
+                            saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
 
                             // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
                             // var encodedData = window.btoa(s);
@@ -376,8 +376,8 @@
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
                         res.qrcodes.map(function(er) {
                             var link = document.createElement('a');
-                            link.href = er;
-                            link.download = 'Download.jpg';
+                            link.href = er.url;
+                            link.download = er.name.replace(/\s/g, '_').trim() + '.png';
                             document.body.appendChild(link);
                             link.click();
                             document.body.removeChild(link);
