@@ -11,12 +11,13 @@
             <div class="find-wrapper-results-head">
                 <h3>Results</h3>
                 <div class="find-wrapper-results-head-right">
-                    <button class="btn btn-warning btn-edit mr-3">Edit</button>
-                    <select class="form-control">
+
+                    <select class="form-control mr-3">
                         <option value="">Action</option>
                         <option value="">Print Barcode</option>
                         <option value="">Print Qr Code</option>
                     </select>
+                    <button class="btn btn-warning btn-edit ">GO</button>
                 </div>
             </div>
 
