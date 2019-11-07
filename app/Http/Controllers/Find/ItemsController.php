@@ -61,12 +61,6 @@ class ItemsController extends Controller
         }
 
         $fileArray = array_chunk($fileArray,10);
-//        $fileArray = collect($fileArray)->chunk(10);
-//        foreach ($fileArray as $key => $value){
-//            $fileArray[$key] = $value->toArray();
-//        }
-//
-//        $fileArray = $fileArray->toArray();
 
         return response()->json(['qrcodes'=>$fileArray]);
     }
