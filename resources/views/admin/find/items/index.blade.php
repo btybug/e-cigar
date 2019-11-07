@@ -321,8 +321,9 @@
 
                             li.appendTo('.barcodes_image_list');
                             console.log(encodedData);
-                        })
+                        });
                         $('#barcodeModalPrint').modal('show');
+                        $('#svg_barcode_print').css('display', 'none')
                         console.log(res);
                     });
                 } else if($('.edit_selected_option').val() === 'download_barcode') {
