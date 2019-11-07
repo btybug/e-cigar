@@ -52,7 +52,7 @@
             </div>
         </div>
     </div>
-    <svg id="svg_barcode" style="display: none"></svg>
+    <div id="svg_barcode" style="display: none"></div>
 
 @stop
 @section('css')
@@ -328,8 +328,11 @@
                         ids.push($(this).find('td.sorting_1').text());
                     });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+                        res.barcodes.map(function(barcode) {
+                            $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
+                        });
                         res.barcodes.map(function(barcode, key) {
-                            JsBarcode('#svg_barcode', barcode.value, {
+                            JsBarcode(`#svg_${barcode.value}`, barcode.value, {
                                 format,
                                 font: text_font,
                                 fontSize: font_size,
@@ -344,8 +347,8 @@
                                 displayValue,
                             })
                                 .render();
-                            $('#svg_barcode').css('display', 'none');
-                            saveSvgAsPng(document.getElementById('svg_barcode'), `${barcode.file_name.replace(/\s/g, '_')}.png`, {scale: 10});
+                            $(`#svg_${barcode.value}`).css('display', 'none');
+                            saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_')}.png`, {scale: 10});
 
                             // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
                             // var encodedData = window.btoa(s);
