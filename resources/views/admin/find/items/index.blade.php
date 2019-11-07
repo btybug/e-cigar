@@ -373,15 +373,35 @@
                     $('#items-table tbody tr.selected').each(function() {
                         ids.push($(this).find('td.sorting_1').text());
                     });
+
+                    function toDataURL(url) {
+                        return fetch(url).then((response) => {
+                            return response.blob();
+                        }).then(blob => {
+                            return URL.createObjectURL(blob);
+                        });
+                    }
+
+                    async function forceDownload(url, fileName){
+                        const a = document.createElement("a");
+                        a.href = await toDataURL(url);
+                        a.download = fileName;
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                    }
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
-                        res.qrcodes.map(function(er) {
-                            var link = document.createElement('a');
-                            link.href = er.url;
-                            link.download = er.name.replace(/\s/g, '_').trim() + '.png';
-                            document.body.appendChild(link);
-                            link.click();
-                            document.body.removeChild(link);
-                        })
+                        console.log(res.qrcodes);
+
+                        res.qrcodes.map(function(er, key) {
+                            if(key%10 === 0) {
+                                setTimeout(() => {
+                                    forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
+                                }, 2000)
+                                // forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
+                            }
+                            forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png')
+                        });
                     });
                 }
             });
