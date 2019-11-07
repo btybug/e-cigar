@@ -61,7 +61,7 @@ class ItemsController extends Controller
         }
 
         $fileArray = collect($fileArray)->chunk(10)->toArray();
-        dd($fileArray);
+        
         return response()->json(['qrcodes'=>$fileArray]);
     }
 }
