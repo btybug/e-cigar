@@ -393,12 +393,12 @@
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
                         console.log(res.qrcodes);
 
-                        res.qrcodes.map(function(arr) {
-                            // setTimeout(function() {
+                        res.qrcodes.map(function(arr, key) {
+                            setTimeout(function() {
                                 arr.map(function(er, key) {
                                     forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png');
-                                });   
-                            // }, 1000);
+                                });
+                            }, key*3000);
                         });
                     });
                 }
