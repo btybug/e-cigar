@@ -397,7 +397,7 @@
                             // setTimeout(function() {
                                 arr.map(function(er, key) {
                                     forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png');
-                                });
+                                });   
                             // }, 1000);
                         });
                     });
