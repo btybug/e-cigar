@@ -16,36 +16,6 @@
             <div class="content-wrap shoping-card">
                 <ul class="row content">
                     
-                    <li class="col-md-3" data-id="1">
-                        <div class="item-content">
-                            <div class="item-photo">
-                                <img src="https://www.enca.com/sites/default/files/2019-09/Vaping.jpg" alt="photo">
-                            </div>
-                            <div class="item-title">
-                                <span>Nicotine salt 20mg</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-md-3" data-id="2">
-                        <div class="item-content">
-                            <div class="item-photo">
-                                <img src="https://www.enca.com/sites/default/files/2019-09/Vaping.jpg" alt="photo">
-                            </div>
-                            <div class="item-title">
-                                <span>Throat hit 12mg</span>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="col-md-3" data-id="3">
-                        <div class="item-content">
-                            <div class="item-photo">
-                                <img src="https://www.enca.com/sites/default/files/2019-09/Vaping.jpg" alt="photo">
-                            </div>
-                            <div class="item-title">
-                                <span>Throat hit 18mg</span>
-                            </div>
-                        </div>
-                    </li>
                 </ul>
             </div>
         </div>
