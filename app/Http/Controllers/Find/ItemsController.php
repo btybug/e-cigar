@@ -53,7 +53,10 @@ class ItemsController extends Controller
         foreach ($barcodes as $item){
             $d = new DNS2D();
             $d->setStorPath(public_path().DS."qrcodes".DS);
-            $fileArray[] = url("public/".$d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200));
+            $fileArray[] = [
+              'url' => url("public/".$d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200)),
+              'name' =>   $item->file_name
+            ];
         }
 
         return response()->json(['qrcodes'=>$fileArray]);
