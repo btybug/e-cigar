@@ -1737,18 +1737,21 @@ color: #ffffff;
     .order__admin-wrapper .head-order-wrap .right-head{
         margin-top: 5px;
     }
-    .head-order-wrap .left-head .title{
+    .order__admin-wrapper .head-order-wrap .left-head .title{
         margin-right: 100px;
     }
 
-    .order-details__tab{
+    .order__admin-wrapper .order-details__tab{
         padding: 0 15px;
     }
-    .order-details__tab .order-details__tab-left{
+    .order__admin-wrapper .order-details__tab .order-details__tab-left{
         padding-right: 0 !important;
     }
-    .order-details__tab-right{
+    .order__admin-wrapper .order-details__tab-right{
         padding-left: 0 !important;
+    }
+    .right--media-col-wrapper .upload--head{
+        flex-wrap: wrap;
     }
 }
 @media (max-width: 991px) {
@@ -1876,6 +1879,12 @@ color: #ffffff;
     .order-main-cnt_left-col .tab-content-store-settings,
     .order-main-cnt .scroll_content{
         height: auto;
+    }
+    .media_right_content .folderitems .file-box{
+        padding-left: 30px;
+    }
+    .media_right_content .bread-crumbs>nav{
+        margin-left: 15px;
     }
 }
 @media (max-width: 500px) {
