@@ -16,7 +16,7 @@
                         <option value="">Print Barcode</option>
                         <option value="">Print Qr Code</option>
                     </select>
-                    <button class="btn btn-warning btn-edit ">Edit</button>
+                    <button class="btn btn-warning btn-edit ">GO</button>
                 </div>
             </div>
 
