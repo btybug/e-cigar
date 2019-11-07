@@ -63,6 +63,10 @@ class FilterApiControll extends Controller
     public function postRenderTabs(Request $request)
     {
         $variation = StockVariation::where('variation_id',$request->group)->first();
-        dd($variation);
+        $filters = ($variation && $variation->filter) ? $variation->filter->filters : collect([]);
+
+        $html = view("filters.filter_modal_body",compact(['filters']))->render();
+
+        return response()->json(['error' => false,'html'=> $html]);
     }
 }
