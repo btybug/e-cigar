@@ -13,13 +13,13 @@
             <div class="find-wrapper-results-head">
                 <h3>Results</h3>
                 <div class="find-wrapper-results-head-right">
-                    <button class="btn btn-warning btn-edit mr-3 edit_selected">Edit</button>
-                    <select class="form-control edit_selected_option">
+                    <select class="form-control edit_selected_option mr-3 ">
                         <option value="">Action</option>
                         <option value="barcode">Print Barcode</option>
                         <option value="qr_code">Print Qr Code</option>
                         <option value="download_barcode">Download Barcode</option>
                     </select>
+                    <button class="btn btn-warning btn-edit edit_selected">GO</button>
                 </div>
             </div>
 
