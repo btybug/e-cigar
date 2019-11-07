@@ -3905,7 +3905,7 @@ $(document).ready(function () {
 
                         $.ajax({
                             type: "post",
-                            url: "/filters",
+                            url: "/filters/render-tabs",
                             cache: false,
                             data: {
                                 group: self.attr('data-group'),
@@ -3918,21 +3918,23 @@ $(document).ready(function () {
                             },
                             success: function success(data) {
                                 if (!data.error) {
-                                    var modal_group_id = self.attr('data-group');
-                                    $('#wizardViewModal').attr('data-group', modal_group_id);
-                                    var contantPlace = $('.contents-wrapper .content');
-                                    var wizardPlace = $('.shopping-cart-head .nav-pills');
 
-                                    wizardPlace.empty();
-                                    wizardPlace.append(data.wizard);
-                                    if (data.type === "filter") {
-                                        contantPlace.html(data.filters);
-                                    } else if (data.type === "items") {
-                                        contantPlace.html(data.items_html);
-                                        makeOutOfStockSelectOption($('#wizardViewModal'), 'filter');
-                                        $('.shopping-cart_wrapper .next-btn').addClass('d-none');
-                                        $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
-                                    }
+                                    $('#wizardViewModal .modal-body').appendTo(data.html);
+                                    // const modal_group_id = self.attr('data-group');
+                                    // $('#wizardViewModal').attr('data-group', modal_group_id);
+                                    // const contantPlace = $('.contents-wrapper .content');
+                                    // const wizardPlace = $('.shopping-cart-head .nav-pills');
+                                    //
+                                    // wizardPlace.empty();
+                                    // wizardPlace.append(data.wizard);
+                                    // if (data.type === "filter") {
+                                    //     contantPlace.html(data.filters);
+                                    // } else if (data.type === "items") {
+                                    //     contantPlace.html(data.items_html);
+                                    //     makeOutOfStockSelectOption($('#wizardViewModal'), 'filter');
+                                    //     $('.shopping-cart_wrapper .next-btn').addClass('d-none');
+                                    //     $('.shopping-cart_wrapper .add-items-btn').removeClass('d-none');
+                                    // }
                                 } else {
                                     alert("error");
                                 }
