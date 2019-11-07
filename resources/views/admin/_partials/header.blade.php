@@ -24,20 +24,26 @@
 
                         {!! Form::select('find',$findService->getOptions(),'@yield("find")',['class' => 'form-control btn btn-primary h-100','id' => 'admin_find','placeholder'=>'Find']) !!}
 
-                        <i class="fa fa-search icon-search-mobile-none"></i>
+                        <i class="fa fa-search icon-search-mobile-none icon-search-mobile-js"></i>
                     {{--                        <span class="mr-1 mobile-none">Find</span>--}}
 
                 </li>
-                <li class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i><span class="mobile-none">Create new</span></button>
-                    <div class="dropdown-menu dropdown-menu-right">
-                        <a href="{!! route('admin_staff_new') !!}" class="dropdown-item">Staff</a>
-                        <a href="#" class="dropdown-item">Customer</a>
-                        <a href="{!! route('admin_stock_new') !!}" class="dropdown-item">Product</a>
-                        <a href="http://e-cigar.com/admin/tools/attributes/new" class="dropdown-item">Item</a>
-                        <a href="{!! route('admin_blog_create') !!}" class="dropdown-item">Post</a>
-                    </div>
+                <li class="find-link align-self-stretch">
+                    {!! Form::select('find',$findService->getOptions(),'@yield("find")',['class' => 'form-control btn btn-primary h-100','id' => 'admin_find','placeholder'=>'Create new']) !!}
+
+                    <i class="fa fa-plus icon-search-mobile-none icon-plus-mobile-js"></i>
+
                 </li>
+{{--                <li class="dropdown">--}}
+{{--                    <button class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fa fa-plus mr-10"></i><span class="mobile-none">Create new</span></button>--}}
+{{--                    <div class="dropdown-menu dropdown-menu-right">--}}
+{{--                        <a href="{!! route('admin_staff_new') !!}" class="dropdown-item">Staff</a>--}}
+{{--                        <a href="#" class="dropdown-item">Customer</a>--}}
+{{--                        <a href="{!! route('admin_stock_new') !!}" class="dropdown-item">Product</a>--}}
+{{--                        <a href="http://e-cigar.com/admin/tools/attributes/new" class="dropdown-item">Item</a>--}}
+{{--                        <a href="{!! route('admin_blog_create') !!}" class="dropdown-item">Post</a>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
             </ul>
         </div>
 
