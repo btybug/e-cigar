@@ -16,7 +16,7 @@
             <div class="content-wrap shoping-card">
                 <ul class="row content">
                     @foreach($all as $item)
-                        <li class="col-md-3" data-id="{{ $item->id }}">
+                        <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                             <div class="item-content">
                                 <div class="item-photo">
                                     <img src="{{ $item->image }}" alt="photo">
@@ -37,7 +37,7 @@
                 <div class="content-wrap shoping-card">
                     <ul class="row content">
                         @foreach($filter->items as $item)
-                            <li class="col-md-3" data-id="{{ $item->id }}">
+                            <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                                 <div class="item-content">
                                     <div class="item-photo">
                                         <img src="{{ $item->image }}" alt="photo">
