@@ -56,6 +56,6 @@ class ItemsController extends Controller
             $fileArray[] = url("public/".$d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200));
         }
 
-        return response()->json(['barcodes'=>$fileArray]);
+        return response()->json(['qrcodes'=>$fileArray]);
     }
 }
