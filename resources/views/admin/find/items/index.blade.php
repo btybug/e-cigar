@@ -18,6 +18,7 @@
                         <option value="barcode">Print Barcode</option>
                         <option value="qr_code">Print Qr Code</option>
                         <option value="download_barcode">Download Barcode</option>
+                        <option value="download_qr_code">Download Qr Code</option>
                     </select>
                     <button class="btn btn-warning btn-edit edit_selected">GO</button>
                 </div>
@@ -53,6 +54,7 @@
         </div>
     </div>
     <div id="svg_barcode" style="display: none"></div>
+    <svg id="svg_barcode_print" style="display: none"></svg>
 
 @stop
 @section('css')
@@ -291,8 +293,9 @@
                         ids.push($(this).find('td.sorting_1').text());
                     });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
-                        res.barcodes.map(function(value, key) {
-                            JsBarcode('#svg_barcode', value, {
+                        $('.barcodes_image_list').empty();
+                        res.barcodes.map(function(barcode, key) {
+                            JsBarcode('#svg_barcode_print', barcode.value, {
                                 format,
                                 font: text_font,
                                 fontSize: font_size,
@@ -307,11 +310,11 @@
                                 displayValue
                             })
                                 .render();
-                            $('#svg_barcode').css('display', 'none')
-                            var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
+                            $('#svg_barcode').css('display', 'none');
+                            var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode_print'));
                             var encodedData = window.btoa(s);
 
-                            var img = $(`<img id="${'barcode_'+value}">`); //Equivalent: $(document.createElement('img'))
+                            var img = $(`<img id="${'barcode_'+barcode.value}">`); //Equivalent: $(document.createElement('img'))
                             var li = $('<li style="list-style-type: none; margin: 0 20px 20px 0"></li>');
                             img.attr('src', 'data:image/svg+xml;base64,' + encodedData);
                             img.appendTo(li);
@@ -362,6 +365,14 @@
                             // console.log(encodedData);
                         });
                         // $('#barcodeModalPrint').modal('show');
+                    });
+                } else if($('.edit_selected_option').val() === 'download_qr_code') {
+                    const ids = [];
+                    $('#items-table tbody tr.selected').each(function() {
+                        ids.push($(this).find('td.sorting_1').text());
+                    });
+                    shortAjax('admin/find/items/qrcodes', {ids}, function(res) {
+                        console.log(res)
                     });
                 }
             });
