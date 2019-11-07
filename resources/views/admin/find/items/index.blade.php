@@ -328,8 +328,8 @@
                         ids.push($(this).find('td.sorting_1').text());
                     });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
-                        res.barcodes.map(function(value, key) {
-                            JsBarcode('#svg_barcode', value, {
+                        res.barcodes.map(function(barcode, key) {
+                            JsBarcode('#svg_barcode', barcode.value, {
                                 format,
                                 font: text_font,
                                 fontSize: font_size,
@@ -344,8 +344,8 @@
                                 displayValue,
                             })
                                 .render();
-                            $('#svg_barcode').css('display', 'none')
-                            saveSvgAsPng(document.getElementById('svg_barcode'), `barcode_${value}.png`, {scale: 10});
+                            $('#svg_barcode').css('display', 'none');
+                            saveSvgAsPng(document.getElementById('svg_barcode'), `${barcode.name.replace(/\s/g, '_')}.png`, {scale: 10});
 
                             // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
                             // var encodedData = window.btoa(s);
@@ -357,9 +357,8 @@
                             //
                             // li.appendTo('.barcodes_image_list');
                             // console.log(encodedData);
-                        })
+                        });
                         // $('#barcodeModalPrint').modal('show');
-                        console.log(res);
                     });
                 }
             });
