@@ -65,7 +65,6 @@ class ItemsController extends Controller
            return  $i->toArray();
         });
 
-        dd($x->toArray());
         return response()->json(['qrcodes'=>$fileArray]);
     }
 }
