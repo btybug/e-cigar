@@ -703,15 +703,8 @@
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                         </div>
                                         <div class="col-xl-2 col-md-4 col-sm-6">
-                                            <div
-                                                class="product-price @if(! $model || ($model && ! $model->type)) hide @endif">
-                                                <label>Price:</label>
-                                                <div>
-                                                    {!! Form::number('price',null,['class' => 'form-control']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                     <div class="v-box">
                                         @if($model && isset($variations))
