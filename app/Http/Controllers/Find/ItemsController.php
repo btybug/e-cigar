@@ -55,7 +55,7 @@ class ItemsController extends Controller
             $d->setStorPath(public_path().DS."qrcodes".DS);
             $fileArray[] = [
               'url' => url("public/".$d->getBarcodePNGPath('https://kaliony.com/landings/' . $item->value, "QRCODE" ,200, 200)),
-              'name' =>   $item->file_name
+              'name' =>   "QR_".$item->file_name
             ];
         }
 
