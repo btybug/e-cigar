@@ -4053,12 +4053,20 @@ $(document).ready(function () {
 
         var filterModalSingleInit = function filterModalSingleInit() {
             (function () {
+
+                function activate_item(self, id, name) {
+                    if ($(self).hasClass('active')) {
+                        $(self).removeClass('active');
+                        $('#wizardViewModal .footer-list').find("li[data-id=\"" + id + "\"]").remove();
+                    } else {
+                        $(self).addClass('active');
+                        $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + " data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
+                    }
+                }
+
                 $("#singleProductPageCnt .filters-modal-wizard").each(function (index) {
                     var button_group_id = $(this).attr('data-group');
-                    // <li class="footer-list-item" data-id="">
-                    //         <span class="title">Item name 1</span>
-                    //     <span class="close-icon"><i class="fa fa-times"></i></span>
-                    //     </li>
+
                     $("body").on('click', ".filters-modal-wizard[data-group=\"" + button_group_id + "\"]", function () {
                         var group_id = $(this).attr('data-group');
                         $("#wizardViewModal").attr('data-group', button_group_id);
@@ -4075,8 +4083,6 @@ $(document).ready(function () {
                             cache: false,
                             data: {
                                 group: group_id
-                                // selectedIds,
-                                // type: "popup"
                             },
                             headers: {
                                 "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
@@ -4087,13 +4093,7 @@ $(document).ready(function () {
                                     $(this).find(".item-content").on('click', function () {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
-                                        if ($(this).hasClass('active')) {
-                                            $(this).removeClass('active');
-                                            $('#wizardViewModal .footer-list').find("li[data-id=\"" + id + "\"]").remove();
-                                        } else {
-                                            $(this).addClass('active');
-                                            $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
-                                        }
+                                        activate_item(this, id, name);
                                     });
                                 });
                                 $("#wizardViewModal").modal();
@@ -4182,6 +4182,13 @@ $(document).ready(function () {
                             // });
                         });
                     });
+
+                    // $('body').on('click', '#wizardViewModal .item-selected-footer', function() {
+                    //     let id = $(this).closest('.footer-list-item').attr('data-id');
+                    //     let name = $(this).closest('.footer-list-item').attr('data-name');
+                    //     activate_item($(`#wizardViewModal .content[data-id="${id}"]`).find('.item-content'), id, name);
+                    //     $(this).closest('.footer-list-item').remove();
+                    // });
                 });
             })();
         };
