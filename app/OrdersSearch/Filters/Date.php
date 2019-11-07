@@ -1,6 +1,6 @@
 <?php
 
-namespace App\ProductSearch\Filters;
+namespace App\OrdersSearch\Filters;
 
 use App\Models\AttributeStickers;
 use App\ProductSearch\Filters\Filter;
@@ -22,7 +22,7 @@ class Date implements Filter
                 $value[1] = Carbon::parse($value[1])->format('Y-m-d');
             }
 
-            $query->whereBetween('stocks.created_at', $value);
+            $query->whereBetween('orders.created_at', $value);
         });
 
         return $builder;
