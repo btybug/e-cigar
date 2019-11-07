@@ -63,16 +63,19 @@ class FilterApiControll extends Controller
 
     public function postRenderTabs(Request $request)
     {
-        $variation = StockVariation::where('variation_id',$request->group)->first();
-        $filters = ($variation && $variation->filter) ? $variation->filter->filters : collect([]);
-        $all = Items::leftJoin("filter_items",'items.id',"filter_items.item_id")
-            ->leftJoin('filters','filter_items.filter_id','filters.id')
-            ->select('items.*')
-            ->whereIn('filters.id',$filters->pluck('id','id')->all())
-            ->groupBy('items.id')
-            ->get();
+        $variations = StockVariation::where('variation_id',$request->group)->get();
+        $filters = ($variations && $variations->first()->filter) ? $variations->first()->filter->filters : collect([]);
 
-        $html = view("filters.filter_modal_body",compact(['filters','all']))->render();
+//        $all = Items::leftJoin("filter_items",'items.id',"filter_items.item_id")
+//            ->leftJoin('filters','filter_items.filter_id','filters.id')
+//            ->leftJoin('filters','filter_items.filter_id','filters.id')
+//            ->select('items.*')
+//            ->whereIn('filters.id',$filters->pluck('id','id')->all())
+//            ->groupBy('items.id')
+//            ->get();
+
+
+        $html = view("filters.filter_modal_body",compact(['filters','variations']))->render();
 
         return response()->json(['error' => false,'html'=> $html]);
     }

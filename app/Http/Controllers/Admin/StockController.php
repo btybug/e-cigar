@@ -483,7 +483,8 @@ class StockController extends Controller
 
     public function postFilterItems(Request $request)
     {
-        $category = Filters::with(['children', 'items'])->whereNotNull('category_id')->where('category_id', $request->get('id', 0))->get();
+        $category = Filters::with(['children', 'items'])
+            ->whereNotNull('category_id')->where('category_id', $request->get('id', 0))->get();
 //        var_dump($category);exit;
         $x = Filters::getRecursiveItems($category, 0);
         $items = collect($x)->unique('id');

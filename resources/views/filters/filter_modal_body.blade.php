@@ -15,7 +15,7 @@
         <div class="shopping-cart_wrapper p-0">
             <div class="content-wrap shoping-card">
                 <ul class="row content">
-                    @foreach($all as $item)
+                    @foreach($variations as $item)
                         <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                             <div class="item-content">
                                 <div class="item-photo">
