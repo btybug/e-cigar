@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Filters;
+use App\Models\StockVariation;
 use Illuminate\Http\Request;
 
 class FilterApiControll extends Controller
@@ -57,5 +58,11 @@ class FilterApiControll extends Controller
         $html = $this->view($view.".filters", compact([ 'filters','category','children']))->render();
         $wizard = $this->view($view.".wizard", compact(['filters','category']))->render();
         return \Response::json(['error' => false, 'filters' => $html, 'wizard'=>$wizard,'items_html' => $items_html, 'type' => $type]);
+    }
+
+    public function postRenderTabs(Request $request)
+    {
+        $variation = StockVariation::where('variation_id',$request->group)->first();
+        dd($variation);
     }
 }

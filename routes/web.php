@@ -238,6 +238,7 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
 });
 Route::group(['prefix' => 'filters'], function () {
     Route::post('/', 'Frontend\FilterApiControll@postGetNext');
+    Route::post('/render-tabs', 'Frontend\FilterApiControll@postRenderTabs');
 });
 Route::group(['prefix' => 'search'], function () {
     Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
