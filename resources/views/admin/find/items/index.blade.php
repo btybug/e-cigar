@@ -54,6 +54,7 @@
         </div>
     </div>
     <div id="svg_barcode" style="display: none"></div>
+    <div id="qr_codes"></div>
     <svg id="svg_barcode_print" style="display: none"></svg>
 
 @stop
@@ -373,7 +374,14 @@
                         ids.push($(this).find('td.sorting_1').text());
                     });
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
-                        console.log(res)
+                        res.qrcodes.map(function(er) {
+                            var link = document.createElement('a');
+                            link.href = er;
+                            link.download = 'Download.jpg';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        })
                     });
                 }
             });
