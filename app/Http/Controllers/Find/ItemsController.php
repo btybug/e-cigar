@@ -64,4 +64,14 @@ class ItemsController extends Controller
 
         return response()->json(['qrcodes'=>$fileArray]);
     }
+
+    public function getEditForm(Request $request)
+    {
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+        $items=Items::whereIn('id',$request->get('ides'))->get();
+        $html=\View::make('admin.find.items.edit',compact('categories','brands','barcodes','items'));
+        return response()->json(['html'=>$html]);
+    }
 }

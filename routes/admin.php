@@ -21,10 +21,11 @@ Route::group(['prefix' => 'find'], function () {
     Route::resource('customer', 'Find\CustomerController');
     Route::resource('order', 'Find\OrderController');
     Route::resource('products', 'Find\ProductController');
-    Route::resource('items', 'Find\ItemsController');
+    Route::get('items', 'Find\ItemsController@index');
     Route::post('items/barcodes', 'Find\ItemsController@getBarcodes');
     Route::post('items/qrcodes', 'Find\ItemsController@getQrcodes');
     Route::post('items/html', 'Admin\FindController@printHtmlBarcode')->name('find_items_barcode_html');
+    Route::post('items/edit', 'Find\ItemsController@getEditForm');
 
 });
 
