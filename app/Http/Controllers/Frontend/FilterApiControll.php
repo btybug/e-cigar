@@ -75,7 +75,7 @@ class FilterApiControll extends Controller
 //            ->get();
 
 
-        $html = view("filters.filter_modal_body",compact(['filters','variations']))->render();
+        $html = view("filters.filter_modal_body",compact(['filters','variations']))->with('group',$request->group)->render();
 
         return response()->json(['error' => false,'html'=> $html]);
     }
