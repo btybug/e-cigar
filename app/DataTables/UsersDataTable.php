@@ -3,6 +3,8 @@
 namespace App\DataTables;
 
 use App\User;
+use App\UserSearch\UserSearch;
+use Illuminate\Http\Request;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
@@ -30,9 +32,10 @@ class UsersDataTable extends DataTable
      * @param \App\User $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Request $request)
     {
-        return $model->newQuery();
+        $products = UserSearch::applyQuery($request);
+        return $products;
     }
 
     /**

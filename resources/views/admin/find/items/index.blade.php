@@ -116,62 +116,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
 
-        (function ($, DataTable) {
-
-            if ( ! DataTable.ext.editorFields ) {
-                DataTable.ext.editorFields = {};
-            }
-
-            var Editor = DataTable.Editor;
-            var _fieldTypes = DataTable.ext.editorFields;
-
-            _fieldTypes.status = {
-                create: function ( conf ) {
-                    var that = this;
-
-                    conf._enabled = true;
-
-                    // Create the elements to use for the input
-                    conf._input = $(
-                        '<div id="'+Editor.safeId( conf.id )+'">'+
-                        '<button type="button" class="inputButton" value="Draft">Draft</button>'+
-                        '<button type="button" class="inputButton" value="Published">Published</button>'+
-                        '</div>');
-
-                    // Use the fact that we are called in the Editor instance's scope to call
-                    // the API method for setting the value when needed
-                    $('button.inputButton', conf._input).click( function () {
-                        if ( conf._enabled ) {
-                            that.set( conf.name, $(this).attr('value') );
-                        }
-
-                        return false;
-                    } );
-
-                    return conf._input;
-                },
-
-                get: function ( conf ) {
-                    return $('button.selected', conf._input).attr('value');
-                },
-
-                set: function ( conf, val ) {
-                    $('button.selected', conf._input).removeClass( 'selected' );
-                    $('button.inputButton[value='+val+']', conf._input).addClass('selected');
-                },
-
-                enable: function ( conf ) {
-                    conf._enabled = true;
-                    $(conf._input).removeClass( 'disabled' );
-                },
-
-                disable: function ( conf ) {
-                    conf._enabled = false;
-                    $(conf._input).addClass( 'disabled' );
-                }
-            };
-
-        })(jQuery, jQuery.fn.dataTable);
 
         $(function () {
             const shortAjax = function (URL, obj = {}, cb) {
@@ -197,50 +141,12 @@
                     });
             };
 
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': '{{csrf_token()}}'
-                }
-            });
+
             $("body").find(".categories").select2();
             $("body").find(".brands").select2();
             $("body").find(".barcodes").select2();
-                var editor = new $.fn.dataTable.Editor({
-                    ajax: "/admin/find/items",
-                    table: $('body').find("#items-table"),
-                    display: "bootstrap",
-                    "scrollX": true,
-                    idSrc: 'id',
-                    fields: [
-                        {label: "ID:", name: "id", type: 'readonly'},
-                        {label: "Name:", name: "name"},
-                        {label: "Status:", name: "status",type:'select'},
-                        {label: "Price:", name: "default_price"},
-                        {label: "Brand:", name: "brands",type: "select"},
-                        {label: "Categories:", name: "categories_lists",type: "select",
-                            "opts": {
-                                "placeholder": "Seleziona una nazione",
-                                'multiple':true,
-                                "allowClear": true
-                            }}
-                    ]
-                });
 
-            // editor.on("preOpen", function (e, mode, action) {
-            //         $('#DTE_Field_categories_lists').val('1');
-            //         $('#DTE_Field_categories_lists').trigger('change')
-            // });
 
-            $('#items-table').on( 'click', 'tbody td:not(:first-child)', function (e) {
-                $('body').find('#DTE_Field_barcodes_code').select2()
-                editor.inline( window.LaravelDataTables["items-table"].cell(this).index(), {
-                    onBlur: 'submit'
-                } );
-                // editor.inline( this );
-            } );
-                // $('body').find('#items-table').on('click', 'tbody td:not(:first-child)', function (e) {
-                //     editor.inline(this);
-                // });
             $('#barcodeModalPrint #print_barcodes').on('click', function() {
 
                 printElement(document.getElementById("printThis"));
@@ -476,20 +382,6 @@
 
 
 
-            // $('body').on('change', '#items-table thead th.select-checkbox input', function(ev) {
-            //     var ctrl_click = jQuery.Event("click");
-            //     ctrl_click.ctrlKey = true;
-            //     ctrl_click.charCode = 17;
-            //
-            //     console.log(ctrl_click);
-            //     if($(ev.target).is(':checked')) {
-            //         console.log(111111);
-            //         $('#items-table tbody tr:not(.selected)').each(function() {
-            //             console.log($(this).find('td.select-checkbox'));
-            //             $(this).find('td.select-checkbox').trigger(ctrl_click)
-            //         })
-            //     }
-            // });
 
             {{$dataTable->generateScripts()}}
 

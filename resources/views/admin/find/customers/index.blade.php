@@ -7,12 +7,6 @@
 
     <div class="admin-find-wrapper">
 
-        <div class="form-group row border-bottom pb-2">
-            <label for="find" class="col-sm-2 col-form-label">Find</label>
-            <div class="col-sm-4">
-
-            </div>
-        </div>
         <div class="find-form">
             @include('admin.find.customers.form')
         </div>

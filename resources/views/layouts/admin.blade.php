@@ -296,6 +296,8 @@
 {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
 {{--<!-- jQuery UI 1.11.4 -->--}}
 {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+<script> $.ajaxSetup({headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'}});
+</script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>--}}
 {{--<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>--}}
 {!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
@@ -368,9 +370,6 @@
       cache: false,
       datatype: "json",
       data: data,
-      headers: {
-        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-      },
       success: function (data) {
         if (success) {
           success(data);
@@ -408,9 +407,6 @@
           url: item.data('url'),
           type: 'POST',
           dataType: 'JSON',
-          headers: {
-              'X-CSRF-TOKEN': $("input[name='_token']").val()
-          },
           data: {
               slug: item.data('slug')
           }

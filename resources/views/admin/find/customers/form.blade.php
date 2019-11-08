@@ -1,4 +1,4 @@
-{!! Form::open(['class' => 'form-horizontal','url' => route('find_customers_results'),'id' => 'findForm']) !!}
+{!! Form::open(['class' => 'form-horizontal','url' =>url('admin/find/customer'),'id' => 'findForm','method'=>'GET']) !!}
 <div class="row">
     <div class="col-sm-6">
         <div class="form-group row">
@@ -29,6 +29,14 @@
             <label for="phone" class="col-sm-2 col-form-label">Phone</label>
             <div class="col-sm-10">
                 <input type="text" name="phone" class="form-control" id="phone" placeholder="+37444311113">
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <div class="form-group row">
+            <div class="col-sm-10">
+                <button type="submit">Find</button>
             </div>
         </div>
     </div>
