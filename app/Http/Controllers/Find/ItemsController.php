@@ -70,8 +70,8 @@ class ItemsController extends Controller
         $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
         $brands = Category::where('type', 'brands')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
-        $items=Items::whereIn('id',$request->get('ides'))->get();
-        $html=\View::make('admin.find.items.edit',compact('categories','brands','barcodes','items'));
+        $items=Items::whereIn('id',$request->get('ids',[]))->get();
+        $html=\View::make('admin.find.items.edit',compact('categories','brands','barcodes','items'))->render();
         return response()->json(['html'=>$html]);
     }
 }
