@@ -56,6 +56,7 @@ class OrdersDataTable extends DataTable
                 'dom' => 'lBfrtip',
                 'order' => [1, 'asc'],
                 'tfoot ',
+                'scrollX'=>true,
                 'lengthMenu' => [[10, 25, 50, -1], [10, 25, 50, "All"]],
                 'searching' => false,
                 'select' => [

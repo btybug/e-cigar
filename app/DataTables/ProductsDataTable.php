@@ -70,6 +70,7 @@ class ProductsDataTable extends DataTable
             ->parameters([
                 'dom' => 'lBfrtip',
                 'order' => [1, 'asc'],
+                'scrollX'=>true,
                 'lengthMenu'=>[[10, 25, 50, -1], [10, 25, 50, "All"]],
                 'tfoot ',
                 'searching'=>false,
