@@ -57,6 +57,8 @@
     <div id="qr_codes"></div>
     <svg id="svg_barcode_print" style="display: none"></svg>
 
+
+
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -369,6 +371,8 @@
                         // $('#barcodeModalPrint').modal('show');
                     });
                 } else if($('.edit_selected_option').val() === 'download_qr_code') {
+                    $('.loader_container').css('display', 'block');
+                    $('body').css('overflow', 'hidden');
                     const ids = [];
                     $('#items-table tbody tr.selected').each(function() {
                         ids.push($(this).find('td.sorting_1').text());
@@ -392,6 +396,8 @@
                     }
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
                         console.log(res.qrcodes);
+                        $('.loader_container').css('display', 'none');
+                        $('body').css('overflow', 'auto');
 
                         res.qrcodes.map(function(arr, key) {
                             setTimeout(function() {

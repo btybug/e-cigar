@@ -22,7 +22,149 @@
 {!! Html::style("public/admin_theme/dist/css/skins/_all-skins.min.css") !!}
 <!-- Morris chart -->
 {!! Html::style("public/admin_theme/bower_components/morris.js/morris.css") !!}
+<style>
+    .loader_text {
+        color: #fff;
+        font-size: 30px;
+        text-align: center;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        position: absolute;
+        width: 300px;
+        top: 90%;
+        left: 50%;
+        margin: 0;
+    }
 
+    .loader_container {
+        position: fixed;
+        z-index: 999999999;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+        display: none;
+    }
+
+    .lds-css {
+        margin: 0;
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+    }
+
+    @keyframes lds-spinner {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    @-webkit-keyframes lds-spinner {
+        0% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+    .lds-spinner {
+        position: relative;
+    }
+    .lds-spinner div {
+        left: 95px;
+        top: 52px;
+        position: absolute;
+        -webkit-animation: lds-spinner linear 2s infinite;
+        animation: lds-spinner linear 2s infinite;
+        background: #fff;
+        width: 10px;
+        height: 24px;
+        border-radius: 174%;
+        -webkit-transform-origin: 5px 48px;
+        transform-origin: 5px 48px;
+    }
+    .lds-spinner div:nth-child(1) {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+        -webkit-animation-delay: -1.833333333333333s;
+        animation-delay: -1.833333333333333s;
+    }
+    .lds-spinner div:nth-child(2) {
+        -webkit-transform: rotate(30deg);
+        transform: rotate(30deg);
+        -webkit-animation-delay: -1.666666666666667s;
+        animation-delay: -1.666666666666667s;
+    }
+    .lds-spinner div:nth-child(3) {
+        -webkit-transform: rotate(60deg);
+        transform: rotate(60deg);
+        -webkit-animation-delay: -1.5s;
+        animation-delay: -1.5s;
+    }
+    .lds-spinner div:nth-child(4) {
+        -webkit-transform: rotate(90deg);
+        transform: rotate(90deg);
+        -webkit-animation-delay: -1.333333333333333s;
+        animation-delay: -1.333333333333333s;
+    }
+    .lds-spinner div:nth-child(5) {
+        -webkit-transform: rotate(120deg);
+        transform: rotate(120deg);
+        -webkit-animation-delay: -1.166666666666667s;
+        animation-delay: -1.166666666666667s;
+    }
+    .lds-spinner div:nth-child(6) {
+        -webkit-transform: rotate(150deg);
+        transform: rotate(150deg);
+        -webkit-animation-delay: -1s;
+        animation-delay: -1s;
+    }
+    .lds-spinner div:nth-child(7) {
+        -webkit-transform: rotate(180deg);
+        transform: rotate(180deg);
+        -webkit-animation-delay: -0.833333333333333s;
+        animation-delay: -0.833333333333333s;
+    }
+    .lds-spinner div:nth-child(8) {
+        -webkit-transform: rotate(210deg);
+        transform: rotate(210deg);
+        -webkit-animation-delay: -0.666666666666667s;
+        animation-delay: -0.666666666666667s;
+    }
+    .lds-spinner div:nth-child(9) {
+        -webkit-transform: rotate(240deg);
+        transform: rotate(240deg);
+        -webkit-animation-delay: -0.5s;
+        animation-delay: -0.5s;
+    }
+    .lds-spinner div:nth-child(10) {
+        -webkit-transform: rotate(270deg);
+        transform: rotate(270deg);
+        -webkit-animation-delay: -0.333333333333333s;
+        animation-delay: -0.333333333333333s;
+    }
+    .lds-spinner div:nth-child(11) {
+        -webkit-transform: rotate(300deg);
+        transform: rotate(300deg);
+        -webkit-animation-delay: -0.166666666666667s;
+        animation-delay: -0.166666666666667s;
+    }
+    .lds-spinner div:nth-child(12) {
+        -webkit-transform: rotate(330deg);
+        transform: rotate(330deg);
+        -webkit-animation-delay: 0s;
+        animation-delay: 0s;
+    }
+    .lds-spinner {
+        width: 200px !important;
+        height: 200px !important;
+        -webkit-transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+        transform: translate(-100px, -100px) scale(1) translate(100px, 100px);
+    }
+</style>
 
 
     <!-- Date Picker -->
@@ -70,6 +212,13 @@
   @stack('style')
 </head>
 <body class="hold-transition skin-blue">
+<div class="loader_container">
+    <div class="lds-css ng-scope">
+        <div class="lds-spinner" style="width:100%;height:100%"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+        <span class="loader_text">Please wait...</span>
+    </div>
+
+</div>
 <div class="wrapper">
 
 @include('admin._partials.header')
