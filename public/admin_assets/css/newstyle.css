@@ -1717,12 +1717,18 @@ color: #ffffff;
     border: none;
     color: #ffffff;
 }
+.edit-list--container .heading .heading-btn:focus{
+    outline: none;
+}
 .edit-list--container .edit-list--container-content{
     padding: 15px;
     height: 274px;
     overflow: auto;
     box-shadow: 0 0 4px #ccc;
 }
+.edit-list--container .edit-list--container-content::-webkit-scrollbar {  width: 8px;}
+.edit-list--container .edit-list--container-content::-webkit-scrollbar-track {  background: #ebeef4; }
+.edit-list--container .edit-list--container-content::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
