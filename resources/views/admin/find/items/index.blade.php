@@ -460,7 +460,7 @@
                 console.log();
                 let data = Object.assign(getFormData($(ev.target).closest('form')), {'categories[]': $(ev.target).closest('form').find('[name="categories[]"]').val()});
                 shortAjax('/admin/find/items/save', data, function(res) {
-                    console.log(res);
+                    window.LaravelDataTables["items-table"].ajax.reload()
                 });
             });
             $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
