@@ -346,7 +346,7 @@
                         $('.edit-list--container .edit-list--container-content').html(res.html);
                         $('.custom-select').select2();
                         $('.edit-list--container').show();
-                        $(".edit-list--container").draggable({ handle:'.heading'});
+                        // $(".edit-list--container").draggable({ handle:'.heading'});
                     });
                 }
             });
@@ -370,15 +370,85 @@
                     window.LaravelDataTables["items-table"].ajax.reload()
                 });
             });
+
+            let min;
+            let max;
+            let i;
             $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
                 if($(ev.target).closest('.heading-btn').hasClass('editing_close')) {
                     $('.edit-list--container').find('.edit-list--container-content').empty();
+                    $('body').css('overflow', 'unset');
                     $('.edit-list--container').hide();
+                    $('.edit-list--container').removeClass('max-wrap');
+                    $('.edit-list--container').removeClass('min-wrap');
+                    $('body').css('overflow', 'unset');
                 } else if($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
-                    $('.edit-list--container').find('.edit-list--container-content').empty();
-                    $('.edit-list--container').hide();
+                    i = $(ev.target).closest('.heading-btn').find('i');
+                    if(!$('.edit-list--container').hasClass('max-wrap')) {
+                        min = $('.edit-list--container').hasClass('min-wrap');
+                        max = true;
+                        min && $('.edit-list--container').removeClass('min-wrap');
+                        i.removeClass('fa-window-maximize');
+                        i.addClass('fa-window-restore');
+                        $('.edit-list--container').addClass('max-wrap');
+                        $('body').css('overflow', 'hidden');
+                    } else {
+                        max = false;
+                        // $(".edit-list--container").draggable({ handle:'.heading'});
+                        min && $('.edit-list--container').addClass('min-wrap');
+                        i.removeClass('fa-window-restore');
+                        i.addClass('fa-window-maximize');
+                        $('.edit-list--container').removeClass('max-wrap');
+                        $('body').css('overflow', 'unset');
+                    }
+                } else if($(ev.target).closest('.heading-btn').hasClass('editing_minimize')) {
+                    if($('.edit-list--container').hasClass('min-wrap')) {
+                        if(max) {
+                            i.removeClass('fa-window-maximize');
+                            i.addClass('fa-window-restore');
+                            $('.edit-list--container').addClass('max-wrap');
+                            $('body').css('overflow', 'hidden');
+                        }
+                        $('.edit-list--container').removeClass('min-wrap');
+                    } else {
+                        if(max) {
+                            i.removeClass('fa-window-restore');
+                            i.addClass('fa-window-maximize');
+                            $('.edit-list--container').removeClass('max-wrap');
+                            $('body').css('overflow', 'unset');
+                        }
+                        $('.edit-list--container').addClass('min-wrap');
+                    }
                 }
             });
+
+
+            let clicked_mouse = false;
+
+            $('.edit-list--container .heading').on('mousedown', function() {
+                clicked_mouse = true;
+            });
+
+            $('.edit-list--container .heading').on('mouseup', function() {
+                clicked_mouse = false;
+            });
+            $('.edit-list--container .heading').on('mousemove', function(ev) {
+                if(clicked_mouse) {
+                    let afterLeft = $('.edit-list--container').css('left');
+                    let afterTop = $('.edit-list--container').css('top');
+                    let width = $('.edit-list--container').css('width').slice(0, $('.edit-list--container').css('width').length - 2);
+                    let height = $('.edit-list--container').css('height').slice(0, $('.edit-list--container').css('height').length - 2);
+                    $('.edit-list--container').css('left', ev.pageX - Number(width) + 'px')
+                    // $('.edit-list--container').css('top', ev.pageY - Number(height) + 'px')
+
+                    console.log(ev, Number(width), ev.pageY, Number(height));
+                } else {
+                    return false
+                }
+            });
+
+
+
 
 
 
