@@ -1,4 +1,4 @@
 
-<div class="row mx-auto">
+<div class="find-wrapper-results-content-inner">
     {{$dataTable->table(['id' => 'orders-table'])}}
 </div>

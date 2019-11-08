@@ -36,7 +36,7 @@
     <div class="col-sm-6">
         <div class="form-group row">
             <div class="col-sm-10">
-                <button type="submit">Find</button>
+                <button type="submit" class="btn btn-primary">Find</button>
             </div>
         </div>
     </div>

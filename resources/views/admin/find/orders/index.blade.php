@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <div class="find-wrapper-results-content row">
+            <div class="find-wrapper-results-content">
                 @include('admin.find.orders.results')
             </div>
 

@@ -688,6 +688,9 @@ header.main-header .logo .logo-img{
 .admin-find-wrapper .find-wrapper-results .find-wrapper-results-content{
     /*max-height: 420px;*/
     /*overflow: auto;*/
+    max-width: 950px;
+    width: 100%;
+    margin: 0 auto;
 }
 .admin-find-wrapper .find-wrapper-results-head{
     display: flex;
