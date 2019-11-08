@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <div class="find-wrapper-results-content row">
+            <div class="find-wrapper-results-content">
                 @include('admin.find.items.results')
             </div>
         </div>
@@ -209,6 +209,7 @@
                     ajax: "/admin/find/items",
                     table: $('body').find("#items-table"),
                     display: "bootstrap",
+                    "scrollX": true,
                     idSrc: 'id',
                     fields: [
                         {label: "ID:", name: "id", type: 'readonly'},
