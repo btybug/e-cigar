@@ -455,8 +455,10 @@
             }
             $('body').on('click', '.edit-list--container .edit_item_custom', function(ev) {
                 ev.preventDefault();
-                console.log(getFormData($(ev.target).closest('form')));
-                shortAjax('/admin/find/items/save', getFormData($(ev.target).closest('form')), function(res) {
+                console.log($(ev.target).closest('form').find('[name="categories[]"]').val());
+                console.log();
+                let data = Object.assign(getFormData($(ev.target).closest('form')), {'categories[]': $(ev.target).closest('form').find('[name="categories[]"]').val()});
+                shortAjax('/admin/find/items/save', data, function(res) {
                     console.log(res);
                 });
             });
