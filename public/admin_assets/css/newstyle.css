@@ -1704,12 +1704,12 @@ color: #ffffff;
 .edit-list--container{
     display: none;
     position: fixed;
-    width: 100% !important;
-    right: 30px!important;
-    bottom: 50px!important;
-    max-width: 800px!important;
+    width: 100%;
+    right: 30px;
+    bottom: 50px;
+    max-width: 800px;
     background-color: #fff;
-    z-index: 99999!important;
+    z-index: 99999;
 }
 .edit-list--container .heading{
     border-bottom: 1px solid #ccc;
@@ -1726,27 +1726,27 @@ color: #ffffff;
 }
 .edit-list--container .edit-list--container-content{
     padding: 15px;
-    height: 300px!important;
-    overflow: auto!important;
+    height: 300px;
+    overflow: auto;
 }
 .edit-list--container .edit-list--container-content::-webkit-scrollbar {  width: 8px;}
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-track {  background: #ebeef4; }
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 .edit-list--container.min-wrap{
-    max-width: 75px!important;
-    height: 34px !important;
+    max-width: 75px;
+    height: 34px;
 }
 .edit-list--container.min-wrap .edit-list--container-content{
     display: none;
 }
 .edit-list--container.max-wrap{
-    max-width: 100% !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    top: 0!important;
+    max-width: 100%;
+    right: 0;
+    bottom: 0;
+    top: 0;
 }
 .edit-list--container.max-wrap .edit-list--container-content{
-    height: calc(100% - 34px) !important;
+    height: calc(100% - 34px);
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
