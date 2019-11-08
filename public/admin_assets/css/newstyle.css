@@ -1731,6 +1731,7 @@ color: #ffffff;
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 .edit-list--container.min-wrap{
     max-width: 75px;
+    height: 34px !important;
 }
 .edit-list--container.min-wrap .edit-list--container-content{
     display: none;
