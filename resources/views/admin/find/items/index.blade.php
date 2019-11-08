@@ -296,7 +296,11 @@
                     if($('#items-table tbody tr.selected').length === 0) {
                         return false;
                     }
+                    if(ids.length === 0) {
+                        return false;
+                    }
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+
                         $('.barcodes_image_list').empty();
                         res.barcodes.map(function(barcode, key) {
                             JsBarcode('#svg_barcode_print', barcode.value, {
@@ -331,7 +335,15 @@
                         console.log(res);
                     });
                 } else if($('.edit_selected_option').val() === 'download_barcode') {
+                    $('.loader_container').css('display', 'block');
+                    $('body').css('overflow', 'hidden');
+                    if(ids.length === 0) {
+                        $('.loader_container').css('display', 'none');
+                        $('body').css('overflow', 'auto');
+                        return false;
+                    }
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+
                         res.barcodes.map(function(barcode) {
                             $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
                         });
@@ -352,6 +364,8 @@
                             })
                                 .render();
                             $(`#svg_${barcode.value}`).css('display', 'none');
+                            $('.loader_container').css('display', 'none');
+                            $('body').css('overflow', 'auto');
                             saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
 
                             // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
@@ -387,7 +401,13 @@
                         a.click();
                         document.body.removeChild(a);
                     }
+                    if(ids.length === 0) {
+                        $('.loader_container').css('display', 'none');
+                        $('body').css('overflow', 'auto');
+                        return false;
+                    }
                     shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
+
                         console.log(res.qrcodes);
                         $('.loader_container').css('display', 'none');
                         $('body').css('overflow', 'auto');
@@ -401,9 +421,15 @@
                         });
                     });
                 } else if($('.edit_selected_option').val() === 'edit') {
+                    if(ids.length === 0) {
+                        $('.loader_container').css('display', 'none');
+                        $('body').css('overflow', 'auto');
+                        return false;
+                    }
                     shortAjax('/admin/find/items/edit', {ids}, function(res) {
+
                         console.log(res);
-                       
+
                     });
                 }
             });
