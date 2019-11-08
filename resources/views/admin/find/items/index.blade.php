@@ -65,7 +65,7 @@
         <button class="heading-btn"><i class="fa fa-times"></i></button>
     </div>
     <div class="edit-list--container-content main-scrollbar">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, qui?
+        
     </div>
 </div>
 
@@ -436,11 +436,16 @@
                         return false;
                     }
                     shortAjax('/admin/find/items/edit', {ids}, function(res) {
-                        $('.edit-list--container').html(res.html);
-
+                        $('.edit-list--container .edit-list--container-content').html(res.html);
+                        $('.custom-select').select2();
+                        $('.edit-list--container').show();
                     });
                 }
             });
+
+            // $('body').on('click', '.edit-list--container .fa-times', function(ev) {
+            //
+            // });
 
 
 
