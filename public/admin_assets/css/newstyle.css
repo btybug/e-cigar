@@ -1705,8 +1705,10 @@ color: #ffffff;
     display: none;
     position: fixed;
     width: 100%;
-    right: 30px;
-    bottom: 50px;
+    top: 50px;
+    left: 50px;
+    /*right: 30px;*/
+    /*bottom: 50px;*/
     max-width: 800px;
     background-color: #fff;
     z-index: 99999;
