@@ -48,7 +48,7 @@
                                         <label for="_0" class="custom-control-label">Published</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        {!! Form::radio('status',1,null,['class'=>'custom-control-input']) !!}
+                                        {!! Form::radio('status',0,null,['class'=>'custom-control-input']) !!}
                                         <label for="_1" class="custom-control-label">Draft</label>
                                     </div>
                                 </div>
@@ -56,7 +56,7 @@
                         {!! Form::hidden('id') !!}
                             <div class="form-group row">
                                 <div class="offset-4 col-8">
-                                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+                                    <button name="submit" type="submit" class="btn btn-primary edit_item_custom">Submit</button>
                                 </div>
                             </div>
                        {!! Form::close() !!}
