@@ -423,29 +423,29 @@
             });
 
 
-            let clicked_mouse = false;
-
-            $('.edit-list--container .heading').on('mousedown', function() {
-                clicked_mouse = true;
-            });
-
-            $('.edit-list--container .heading').on('mouseup', function() {
-                clicked_mouse = false;
-            });
-            $('.edit-list--container .heading').on('mousemove', function(ev) {
-                if(clicked_mouse) {
-                    let afterLeft = $('.edit-list--container').css('left');
-                    let afterTop = $('.edit-list--container').css('top');
-                    let width = $('.edit-list--container').css('width').slice(0, $('.edit-list--container').css('width').length - 2);
-                    let height = $('.edit-list--container').css('height').slice(0, $('.edit-list--container').css('height').length - 2);
-                    $('.edit-list--container').css('left', ev.pageX - Number(width) + 'px')
-                    // $('.edit-list--container').css('top', ev.pageY - Number(height) + 'px')
-
-                    console.log(ev, Number(width), ev.pageY, Number(height));
-                } else {
-                    return false
-                }
-            });
+            // let clicked_mouse = false;
+            //
+            // $('.edit-list--container .heading').on('mousedown', function() {
+            //     clicked_mouse = true;
+            // });
+            //
+            // $('.edit-list--container .heading').on('mouseup', function() {
+            //     clicked_mouse = false;
+            // });
+            // $('.edit-list--container .heading').on('mousemove', function(ev) {
+            //     if(clicked_mouse) {
+            //         let afterLeft = $('.edit-list--container').css('left');
+            //         let afterTop = $('.edit-list--container').css('top');
+            //         let width = $('.edit-list--container').css('width').slice(0, $('.edit-list--container').css('width').length - 2);
+            //         let height = $('.edit-list--container').css('height').slice(0, $('.edit-list--container').css('height').length - 2);
+            //         $('.edit-list--container').css('left', ev.pageX - Number(width) + 'px')
+            //         // $('.edit-list--container').css('top', ev.pageY - Number(height) + 'px')
+            //
+            //         console.log(ev, Number(width), ev.pageY, Number(height));
+            //     } else {
+            //         return false
+            //     }
+            // });
 
 
 
