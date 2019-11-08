@@ -440,6 +440,7 @@
                         $('.edit-list--container .edit-list--container-content').html(res.html);
                         $('.custom-select').select2();
                         $('.edit-list--container').show();
+                        $(".edit-list--container").draggable({ handle:'.heading'});
                     });
                 }
             });
