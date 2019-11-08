@@ -1699,6 +1699,7 @@ color: #ffffff;
     min-width: 55px;
 }
 .edit-list--container{
+    display: none;
     position: fixed;
     width: 100%;
     right: 30px;

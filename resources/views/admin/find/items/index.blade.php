@@ -64,7 +64,7 @@
         <button class="heading-btn"><i class="fa fa-window-maximize"></i></button>
         <button class="heading-btn"><i class="fa fa-times"></i></button>
     </div>
-    <div class="edit-list--container-content">
+    <div class="edit-list--container-content main-scrollbar">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, qui?
     </div>
 </div>
