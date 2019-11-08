@@ -60,9 +60,9 @@
 
 <div class="edit-list--container">
     <div class="d-flex justify-content-end heading">
-        <button class="heading-btn"><i class="fa fa-minus"></i></button>
-        <button class="heading-btn"><i class="fa fa-window-maximize"></i></button>
-        <button class="heading-btn"><i class="fa fa-times"></i></button>
+        <button class="heading-btn editing_minimize"><i class="fa fa-minus"></i></button>
+        <button class="heading-btn editing_max"><i class="fa fa-window-maximize"></i></button>
+        <button class="heading-btn editing_close"><i class="fa fa-times"></i></button>
     </div>
     <div class="edit-list--container-content main-scrollbar">
         
@@ -463,7 +463,15 @@
                     console.log(res);
                 });
             });
-
+            $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
+                if($(ev.target).closest('.heading-btn').hasClass('editing_close')) {
+                    $('.edit-list--container').find('.edit-list--container-content').empty();
+                    $('.edit-list--container').hide();
+                } else if($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
+                    $('.edit-list--container').find('.edit-list--container-content').empty();
+                    $('.edit-list--container').hide();
+                }
+            });
 
 
 
