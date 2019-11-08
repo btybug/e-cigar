@@ -456,9 +456,10 @@
             }
             $('body').on('click', '.edit-list--container .edit_item_custom', function(ev) {
                 ev.preventDefault();
-                console.log($(ev.target).closest('form').find('[name="categories[]"]').val());
+                console.log($(ev.target).closest('form').find('[name="categories"]').val());
                 console.log();
-                let data = Object.assign(getFormData($(ev.target).closest('form')), {'categories[]': $(ev.target).closest('form').find('[name="categories[]"]').val()});
+                let data = Object.assign(getFormData($(ev.target).closest('form')), {'categories': $(ev.target).closest('form').find('[name="categories"]').val()});
+                console.log(data);
                 shortAjax('/admin/find/items/save', data, function(res) {
                     window.LaravelDataTables["items-table"].ajax.reload()
                 });
