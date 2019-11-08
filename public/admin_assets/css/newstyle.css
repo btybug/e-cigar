@@ -1698,6 +1698,30 @@ color: #ffffff;
 .stock-variations-tab table input.v-price{
     min-width: 55px;
 }
+.edit-list--container{
+    position: fixed;
+    width: 100%;
+    right: 30px;
+    bottom: 50px;
+    max-width: 600px;
+    background-color: #fff;
+}
+.edit-list--container .heading{
+    border-bottom: 1px solid #ccc;
+    padding: 5px 0;
+    background-color: #3a94c3;
+}
+.edit-list--container .heading .heading-btn{
+    background: transparent;
+    border: none;
+    color: #ffffff;
+}
+.edit-list--container .edit-list--container-content{
+    padding: 15px;
+    height: 274px;
+    overflow: auto;
+    box-shadow: 0 0 4px #ccc;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

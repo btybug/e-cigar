@@ -58,7 +58,16 @@
     <div id="qr_codes"></div>
     <svg id="svg_barcode_print" style="display: none"></svg>
 
-
+<div class="edit-list--container">
+    <div class="d-flex justify-content-end heading">
+        <button class="heading-btn"><i class="fa fa-minus"></i></button>
+        <button class="heading-btn"><i class="fa fa-window-maximize"></i></button>
+        <button class="heading-btn"><i class="fa fa-times"></i></button>
+    </div>
+    <div class="edit-list--container-content">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, qui?
+    </div>
+</div>
 
 @stop
 @section('css')
