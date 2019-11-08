@@ -422,40 +422,29 @@
                 }
             });
 
-            const heading = document.getElementById('heading')
-
-            heading.onmousedown = function(event) { // (1) start the process
-
-                // (2) prepare to moving: make absolute and on top by z-index
-                heading.style.position = 'absolute';
-                heading.style.zIndex = 1000;
-                // move it out of any current parents directly into body
-                // to make it positioned relative to the body
-                document.body.append(heading);
-                // ...and put that absolutely positioned ball under the pointer
-
-                moveAt(event.pageX, event.pageY);
-
-                // centers the ball at (pageX, pageY) coordinates
-                function moveAt(pageX, pageY) {
-                    heading.style.left = pageX - heading.offsetWidth / 2 + 'px';
-                    heading.style.top = pageY - heading.offsetHeight / 2 + 'px';
-                }
-
-                function onMouseMove(event) {
-                    moveAt(event.pageX, event.pageY);
-                }
-
-                // (3) move the ball on mousemove
-                document.addEventListener('mousemove', onMouseMove);
-
-                // (4) drop the ball, remove unneeded handlers
-                heading.onmouseup = function() {
-                    document.removeEventListener('mousemove', onMouseMove);
-                    heading.onmouseup = null;
-                };
-
-            };
+            // const heading = document.getElementById('heading');
+            //
+            // heading.onmousedown = function(event) {
+            //
+            //     moveAt(event.pageX, event.pageY, event.clientX, event.clientY);
+            //
+            //     function moveAt(pageX, pageY, clientX, clientY) {
+            //         heading.style.left = pageX - heading.offsetWidth + 'px';
+            //         heading.style.top = pageY - heading.offsetHeight + 'px';
+            //     }
+            //
+            //     function onMouseMove(event) {
+            //         moveAt(event.pageX, event.pageY, event.clientX, event.clientY);
+            //     }
+            //
+            //     document.addEventListener('mousemove', onMouseMove);
+            //
+            //     heading.onmouseup = function() {
+            //         document.removeEventListener('mousemove', onMouseMove);
+            //         heading.onmouseup = null;
+            //     };
+            //
+            // };
 
 
             // let clicked_mouse = false;
