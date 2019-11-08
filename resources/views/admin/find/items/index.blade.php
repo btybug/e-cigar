@@ -436,8 +436,7 @@
                         return false;
                     }
                     shortAjax('/admin/find/items/edit', {ids}, function(res) {
-
-                        console.log(res);
+                        $('.edit-list--container').html(res.html);
 
                     });
                 }
