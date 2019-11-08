@@ -26,6 +26,7 @@ Route::group(['prefix' => 'find'], function () {
     Route::post('items/qrcodes', 'Find\ItemsController@getQrcodes');
     Route::post('items/html', 'Admin\FindController@printHtmlBarcode')->name('find_items_barcode_html');
     Route::post('items/edit', 'Find\ItemsController@getEditForm');
+    Route::post('items/save', 'Find\ItemsController@postSave');
 
 });
 

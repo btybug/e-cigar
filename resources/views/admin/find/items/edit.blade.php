@@ -37,19 +37,19 @@
                             <div class="form-group row">
                                 <label for="select" class="col-4 col-form-label">Categories</label>
                                 <div class="col-8">
-                                    {!! Form::select('categories[]',$categories,$item->categories->pluck('id'),['class'=>'custom-select','multiple']) !!}
+                                    {!! Form::select('categories',$categories,$item->categories->pluck('id'),['class'=>'custom-select','multiple'=>true]) !!}
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-4">Status</label>
                                 <div class="col-8">
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        {!! Form::radio('status',1,null,['class'=>'custom-control-input']) !!}
-                                        <label for="_0" class="custom-control-label">Published</label>
+                                        {!! Form::radio('status',1,null,['class'=>'','id'=>$item->id.'_published']) !!}
+                                        <label for="{!! $item->id !!}_published'" class="">Published</label>
                                     </div>
                                     <div class="custom-control custom-radio custom-control-inline">
-                                        {!! Form::radio('status',0,null,['class'=>'custom-control-input']) !!}
-                                        <label for="_1" class="custom-control-label">Draft</label>
+                                        {!! Form::radio('status',0,null,['class'=>'','id'=>$item->id.'_draft']) !!}
+                                        <label for="{!! $item->id !!}_draft" class="">Draft</label>
                                     </div>
                                 </div>
                             </div>

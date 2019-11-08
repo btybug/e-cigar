@@ -74,4 +74,13 @@ class ItemsController extends Controller
         $html=\View::make('admin.find.items.edit',compact('categories','brands','barcodes','items'))->render();
         return response()->json(['html'=>$html]);
     }
+
+    public function postSave(Request $request)
+    {
+        $data=$request->except(['_token','id','categories']);
+        $item=Items::find($request->id);
+        $item->categories()->sync($request->get('categories'));
+        $item->update($data);
+       return response()->json(['success'=>true]);
+    }
 }
