@@ -15,6 +15,7 @@
                 <div class="find-wrapper-results-head-right">
                     <select class="form-control edit_selected_option mr-3 ">
                         <option value="">Action</option>
+                        <option value="edit">Edit</option>
                         <option value="barcode">Print Barcode</option>
                         <option value="qr_code">Print Qr Code</option>
                         <option value="download_barcode">Download Barcode</option>
@@ -286,15 +287,15 @@
                     fontOptions = ''
                 }
 
+                const ids = [];
+                $('#items-table tbody tr.selected').each(function() {
+                    ids.push($(this).find('td.sorting_1').text());
+                });
+
                 if($('.edit_selected_option').val() === 'barcode') {
                     if($('#items-table tbody tr.selected').length === 0) {
                         return false;
                     }
-
-                    const ids = [];
-                    $('#items-table tbody tr.selected').each(function() {
-                        ids.push($(this).find('td.sorting_1').text());
-                    });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
                         $('.barcodes_image_list').empty();
                         res.barcodes.map(function(barcode, key) {
@@ -330,10 +331,6 @@
                         console.log(res);
                     });
                 } else if($('.edit_selected_option').val() === 'download_barcode') {
-                    const ids = [];
-                    $('#items-table tbody tr.selected').each(function() {
-                        ids.push($(this).find('td.sorting_1').text());
-                    });
                     shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
                         res.barcodes.map(function(barcode) {
                             $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
@@ -373,10 +370,6 @@
                 } else if($('.edit_selected_option').val() === 'download_qr_code') {
                     $('.loader_container').css('display', 'block');
                     $('body').css('overflow', 'hidden');
-                    const ids = [];
-                    $('#items-table tbody tr.selected').each(function() {
-                        ids.push($(this).find('td.sorting_1').text());
-                    });
 
                     function toDataURL(url) {
                         return fetch(url).then((response) => {
@@ -406,6 +399,11 @@
                                 });
                             }, key*3000);
                         });
+                    });
+                } else if($('.edit_selected_option').val() === 'edit') {
+                    shortAjax('/admin/find/items/edit', {ids}, function(res) {
+                        console.log(res);
+                       
                     });
                 }
             });
