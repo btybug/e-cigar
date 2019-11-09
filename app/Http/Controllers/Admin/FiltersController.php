@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Filters;
 use App\Models\Items;
+use App\Models\StockVariation;
 use Illuminate\Http\Request;
 
 class FiltersController extends Controller
@@ -158,6 +159,28 @@ class FiltersController extends Controller
             $items = array_merge($filter->getParentItems()->toArray(), $request->get('items', []));
             $filter->items()->sync($items);
             $filter->syncChild();
+
+
+//            $filters = Filters::where('category_id',$filter->category_id)->get();
+//            $syncItems = [];
+//            foreach ($filters as $filter){
+//                if($filter->items && count($filter->items)){
+//                    foreach ($filter->items as $item){
+//                        $syncItems[$item->id] = $item->id;
+//                    }
+//                }
+//            }
+//
+//            $sections = StockVariation::where('type','filter')->where('filter_category_id',$filter->category_id)->groupBy('variation_id')->get();
+//            if(count($sections)){
+//                foreach ($sections as $section){
+//                    $variations = StockVariation::where('type','filter')
+//                        ->where('filter_category_id',$filter->category_id)->where('variation_id',$section->variation_id)->get();
+//
+//                }
+//            }
+//
+//            dd($sections,$filters,$filter,$filter->getParentItems()->toArray(),$items);
         }
         return redirect()->back();
     }
