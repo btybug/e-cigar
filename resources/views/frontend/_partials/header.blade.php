@@ -141,7 +141,7 @@
                 </a>
 
                     <div class="d-flex align-self-center cat-search">
-                        @if(Request::route()->getPrefix() != '/wholesaler')
+                        @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')
 
                             @if(\Request::route() && \Request::route()->getName() != 'categories_front')
                                 <div class="category-select">
@@ -186,7 +186,7 @@
                         @endif
                     </div>
                     <div class="favorite-add-cart d-flex align-items-center">
-                        @if(Request::route()->getPrefix() != '/wholesaler')
+                        @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')
                             <span class="position-relative pointer add-links-wrap_icon search-mobile-icon">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -218,7 +218,7 @@
 </div>
 
 
-                        @if(Request::route()->getPrefix() != '/wholesaler')
+                        @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')
 
                         <a @if(\Auth::check()) href="{!! route('my_account_favourites') !!}" @else data-toggle="modal" data-target="#loginModal" href="javascript:void(0)" @endif
                            class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">
@@ -283,7 +283,7 @@
     </div>
 @endif
 <div id="cartSidebar" class="hidden-sidebar cart-aside d-flex flex-column p-0">
-    @if(Request::route()->getPrefix() != '/wholesaler')
+    @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')
         @include('frontend._partials.shopping_cart_options')
     @else
         @include('frontend.wholesaler._partials.shopping_cart_options')
