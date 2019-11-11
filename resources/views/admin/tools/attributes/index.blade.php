@@ -153,7 +153,7 @@
                 [
                     {data: 'id',name: 'id'},
                     {data: 'name', name: 'attributes_translations.name'},
-                    {data: 'category', name: 'category'},
+                    {data: 'category', name: 'categories_translations.name'},
                     {data: 'image', name: 'image'},
                     {data: 'icon', name: 'icon'},
                     {data: 'filter', name: 'filter'},

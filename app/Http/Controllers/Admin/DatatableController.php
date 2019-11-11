@@ -125,7 +125,8 @@ class DatatableController extends Controller
             Attributes::leftJoin('attributes_translations', 'attributes.id', '=', 'attributes_translations.attributes_id')
                 ->leftJoin("attribute_categories", 'attributes.id', '=', 'attribute_categories.attribute_id')
                 ->leftJoin("categories", 'attribute_categories.categories_id', '=', 'categories.id')
-                ->select('attributes.*','attributes_translations.name')
+                ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
+                ->select('attributes.*','attributes_translations.name','categories_translations.name as category')
                 ->where('attributes_translations.locale', \Lang::getLocale())
                     ->whereNull('attributes.parent_id')
                     ->groupBy('attributes.id')
@@ -693,14 +694,15 @@ class DatatableController extends Controller
             ->leftJoin('barcodes','items.barcode_id','=','barcodes.id')
             ->leftJoin('categories','items.brand_id','=','categories.id')
             ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
-            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code','categories_translations.name')
+            ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code',
+                'categories_translations.name as category')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
 //            ->editColumn('name', function ($attr) {
 //                return $attr->name;
 //            }),
 //                \DB::raw('SUM(purchases.qty) as pqty,SUM(others.qty) as oqty')
-            ->addColumn('category', function ($attr) {
+            ->editColumn('brand_id', function ($attr) {
                 $str = '';
                 if($attr->categories && count($attr->categories)){
                     foreach ($attr->categories as $category){
