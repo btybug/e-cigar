@@ -4054,18 +4054,22 @@ $(document).ready(function () {
         var filterModalSingleInit = function filterModalSingleInit() {
             (function () {
 
-                function activate_item(self, id, name) {
+                function activate_item(self, id, name, group_id) {
                     if ($(self).hasClass('active')) {
                         $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
                             $(this).find('.item-content').removeClass('active');
                         });
                         $('#wizardViewModal .footer-list').find("li[data-id=\"" + id + "\"]").remove();
                     } else {
-                        $(self).addClass('active');
-                        $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
-                            $(this).find('.item-content').addClass('active');
-                        });
-                        $('#wizardViewModal .footer-list').find(".footer-list-item[data-id=\"" + id + "\"]").length === 0 && $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + "\" data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
+                        var group_element = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]");
+                        if (group_element.find('.product__single-item-info-bottom').length < group_element.data('limit')) {
+                            console.log(group_element);
+                            $(self).addClass('active');
+                            $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
+                                $(this).find('.item-content').addClass('active');
+                            });
+                            $('#wizardViewModal .footer-list').find(".footer-list-item[data-id=\"" + id + "\"]").length === 0 && $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + "\" data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
+                        }
                     }
                 }
 
@@ -4100,14 +4104,14 @@ $(document).ready(function () {
                                     $(this).find(".item-content").on('click', function () {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name);
+                                        activate_item(this, id, name, group_id);
                                     });
                                     console.log(selected_ides);
                                     console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
                                     if (selected_ides.includes($(this).data('id'))) {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name);
+                                        activate_item(this, id, name, group_id);
                                     }
                                 });
                                 // $(`#wizardViewModal ul.content li`).each(function() {
