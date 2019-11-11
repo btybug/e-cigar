@@ -161,26 +161,66 @@ class FiltersController extends Controller
             $filter->syncChild();
 
 
-//            $filters = Filters::where('category_id',$filter->category_id)->get();
-//            $syncItems = [];
-//            foreach ($filters as $filter){
-//                if($filter->items && count($filter->items)){
-//                    foreach ($filter->items as $item){
-//                        $syncItems[$item->id] = $item->id;
-//                    }
-//                }
-//            }
-//
-//            $sections = StockVariation::where('type','filter')->where('filter_category_id',$filter->category_id)->groupBy('variation_id')->get();
-//            if(count($sections)){
-//                foreach ($sections as $section){
-//                    $variations = StockVariation::where('type','filter')
-//                        ->where('filter_category_id',$filter->category_id)->where('variation_id',$section->variation_id)->get();
-//
-//                }
-//            }
-//
-//            dd($sections,$filters,$filter,$filter->getParentItems()->toArray(),$items);
+            $filters = Filters::where('category_id',$filter->category_id)->get();
+            $syncItems = [];
+            foreach ($filters as $filter){
+
+                if($filter->items && count($filter->items)){
+                    foreach ($filter->items as $item){
+                        $syncItems[$item->id] = $item;
+                    }
+                }
+            }
+
+            $sections = StockVariation::where('type','filter')->where('filter_category_id',$filter->category_id)->groupBy('variation_id')->get();
+            if(count($sections)){
+                foreach ($sections as $section){
+                    $variations = StockVariation::where('type','filter')
+                        ->where('filter_category_id',$filter->category_id)->where('variation_id',$section->variation_id)->pluck('item_id','item_id')->all();
+
+                    if(count($variations)){
+                        $newData = array_diff_key($syncItems,$variations);
+                        $deletableVariations = array_diff_key($variations,$syncItems);
+
+                        foreach ($newData as $newDatum){
+
+                            StockVariation::create([
+                                'stock_id' => $section->stock_id,
+                                'item_id' => $newDatum->id,
+                                'variation_id' => $section->variation_id,
+                                'type' => $section->type,
+                                'title' => $section->title,
+                                'is_required' => $section->is_required,
+                                'name' => $newDatum->name,
+                                'description' => $section->description,
+                                'image' => $newDatum->image,
+                                'qty' => $section->qty,
+                                'price' => $newDatum->default_price,
+                                'count_limit' => $section->count_limit,
+                                'min_count_limit' => $section->min_count_limit,
+                                'common_price' => $section->common_price,
+                                'display_as' => $section->display_as,
+                                'price_per' => $section->price_per,
+                                'filter_category_id' => $section->filter_category_id,
+                                'price_type' => $section->price_type,
+                                'discount_type' => $section->discount_type,
+                                'ordering' => $section->ordering,
+                            ]);
+//                            $section->replicate();
+//                            $section->item_id = $newDatum->id;
+//                            $section->name = $newDatum->name;
+//                            $section->image = $newDatum->image;
+//                            $section->price = $newDatum->default_price;
+//                            $section->save();
+                        }
+
+                        StockVariation::where('type','filter')
+                            ->where('filter_category_id',$filter->category_id)->where('variation_id',$section->variation_id)
+                            ->whereIn('item_id',$deletableVariations)->delete();
+                    }
+                }
+            }
+
         }
         return redirect()->back();
     }
