@@ -40,6 +40,7 @@
                             @php
                             $item = \App\Models\StockVariation::where('variation_id',$group)->where('item_id',$item->id)->first();
                             @endphp
+                            @if($item)
                             <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                                 <div class="item-content">
                                     <div class="item-photo">
@@ -50,6 +51,7 @@
                                     </div>
                                 </div>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>
