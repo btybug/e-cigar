@@ -346,7 +346,7 @@
                         $('.edit-list--container .edit-list--container-content').html(res.html);
                         $('.custom-select').select2();
                         $('.edit-list--container').show();
-                        // $(".edit-list--container").draggable({ handle:'.heading'});
+                        $(".edit-list--container").draggable({ handle:'.heading'});
                     });
                 }
             });
@@ -379,12 +379,18 @@
                     $('.edit-list--container').find('.edit-list--container-content').empty();
                     $('body').css('overflow', 'unset');
                     $('.edit-list--container').hide();
+                    $(".edit-list--container").draggable('destroy');
+
                     $('.edit-list--container').removeClass('max-wrap');
                     $('.edit-list--container').removeClass('min-wrap');
                     $('body').css('overflow', 'unset');
                 } else if($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
                     i = $(ev.target).closest('.heading-btn').find('i');
+
                     if(!$('.edit-list--container').hasClass('max-wrap')) {
+                        if($(".edit-list--container").data('draggable')) {
+                            $(".edit-list--container").draggable('destroy');
+                        }
                         min = $('.edit-list--container').hasClass('min-wrap');
                         max = true;
                         min && $('.edit-list--container').removeClass('min-wrap');
@@ -394,7 +400,7 @@
                         $('body').css('overflow', 'hidden');
                     } else {
                         max = false;
-                        // $(".edit-list--container").draggable({ handle:'.heading'});
+                        $(".edit-list--container").draggable({ handle:'.heading'});
                         min && $('.edit-list--container').addClass('min-wrap');
                         i.removeClass('fa-window-restore');
                         i.addClass('fa-window-maximize');
@@ -408,6 +414,9 @@
                             i.addClass('fa-window-restore');
                             $('.edit-list--container').addClass('max-wrap');
                             $('body').css('overflow', 'hidden');
+                        } else {
+                            $(".edit-list--container").draggable({ handle:'.heading'});
+
                         }
                         $('.edit-list--container').removeClass('min-wrap');
                     } else {

@@ -1703,52 +1703,67 @@ color: #ffffff;
 }
 .edit-list--container{
     display: none;
-    position: fixed;
-    width: 100%;
-    top: 50px;
-    left: 50px;
+    position: fixed !important;
+    width: 100% !important;
+    bottom: 30px;
+    right: 30px;
     /*right: 30px;*/
     /*bottom: 50px;*/
-    max-width: 800px;
-    background-color: #fff;
-    z-index: 99999;
+    max-width: 800px !important;
+    background-color: #fff !important;
+    z-index: 99999 !important;
 }
 .edit-list--container .heading{
-    border-bottom: 1px solid #ccc;
-    padding: 5px 0;
-    background-color: #3a94c3;
+    border-bottom: 1px solid #ccc !important;
+    padding: 5px 0 !important;
+    background-color: #3a94c3 !important;
 }
 .edit-list--container .heading .heading-btn{
-    background: transparent;
-    border: none;
-    color: #ffffff;
+    background: transparent !important;
+    border: none !important;
+    color: #ffffff !important;
 }
 .edit-list--container .heading .heading-btn:focus{
-    outline: none;
+    outline: none !important;
 }
 .edit-list--container .edit-list--container-content{
-    padding: 15px;
+    padding: 15px !important;
     height: 300px;
-    overflow: auto;
+    overflow: auto !important;
+    background-color: white;
 }
 .edit-list--container .edit-list--container-content::-webkit-scrollbar {  width: 8px;}
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-track {  background: #ebeef4; }
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 .edit-list--container.min-wrap{
-    max-width: 75px;
-    height: 34px;
+    max-width: 75px !important;
+    height: 34px !important;
+    bottom: 30px !important;
+    right: 30px !important;
 }
+.edit-list--container.min-wrap .heading.pos_right_bottom {
+    position: fixed;
+    bottom: 30px !important;
+    right: 30px !important;
+}
+.edit-list--container.min-wrap.pos_right_bottom {
+    position: fixed;
+    bottom: 30px !important;
+    right: 30px !important;
+}
+
 .edit-list--container.min-wrap .edit-list--container-content{
     display: none;
 }
 .edit-list--container.max-wrap{
-    max-width: 100%;
-    right: 0;
-    bottom: 0;
-    top: 0;
+    max-width: 100% !important;
+    left: 0 !important;
+    bottom: 0 !important;
+    top: 0 !important;
 }
 .edit-list--container.max-wrap .edit-list--container-content{
-    height: calc(100% - 34px);
+    height: calc(100vh - 34px) !important;
+    background-color: white;
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
