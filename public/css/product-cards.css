@@ -3790,6 +3790,77 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     min-height: 300px;
 }
 
+.product--inputs-wrap .custom-control-input {
+    position: relative;
+    display: none;
+}
+
+.product--inputs-wrap .custom-control-input-radio + label:before {
+    border-radius: 50%;
+    border: 1px solid #d7d7d7;
+    content: '';
+    display: inline-block;
+    height: 21px;
+    margin-right: 14px;
+    width: 21px;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+    transition: all .2s;
+}
+
+.product--inputs-wrap .custom-control-input-radio:checked + label:before {
+    background: #fff;
+    box-shadow: inset 0 0 0 6px #5184e5;
+    border-color: #5184e5;
+}
+
+.product--inputs-wrap .check-icon {
+    left: 0;
+    top: 0;
+    display: inline-block;
+    border: 1px solid #d7d7d7;
+    height: 21px;
+    width: 21px;
+}
+
+.product--inputs-wrap .custom-control-input + label {
+    padding-left: 38px;
+    display: flex;
+    align-items: center;
+    min-height: 1px;
+    border: none;
+}
+.product--inputs-wrap .custom-control-input-radio + label{
+    padding-left: 0;
+    display: block;
+}
+.product_radio-single .product--inputs-wrap {
+    margin-bottom: 7px;
+}
+.product--inputs-wrap .check-icon svg {
+    width: 12px;
+}
+
+.product--inputs-wrap .check-icon path {
+    stroke: #fff;
+    stroke-dasharray: 75.0536117553711px; /*equals to strok length*/
+    stroke-dashoffset: -75.0536117553711px; /* negative of stroke dasharray*/
+    fill: transparent;
+    transition: stroke-dashoffset .5s .3s linear, fill .5s;
+}
+
+.product--inputs-wrap .custom-control-input:checked + label .check-icon {
+    background: #5184e5;
+}
+
+.product--inputs-wrap .custom-control-input:checked + label .check-icon path {
+    stroke-dashoffset: 0;
+    fill: #fff;
+    transition: stroke-dashoffset .5s linear, fill .4s .5s;
+}
+
 /*------------product single page END-------------*/
 /*------------Special offer pop up START-------------*/
 #specialPopUpModal .modal-dialog {

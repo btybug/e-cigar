@@ -39,17 +39,17 @@
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
-            <div class="product_radio-single">
+            <div class="product_radio-single d-flex flex-column">
                 @foreach($variation as $item)
                     @php
                         $x = uniqid();
                     @endphp
                     <div
-                        class="custom-radio custom-control-inline">
+                        class="custom-radio custom-control-inline product--inputs-wrap">
                         <input type="radio"
                                @if(isset($selected) && $selected->id == $item->id) checked
                                @endif data-out="{{ out_of_stock($item) }}"
-                               class="custom-control-input"
+                               class="custom-control-input custom-control-input-radio"
                                id="single_v_select_{{ $item->id.$x }}" name="variations[{{ $item->variation_id }}][]"
                                value="{{ $item->id }}">
                         <label class="custom-label"
@@ -67,7 +67,7 @@
                     $x = uniqid();
                 @endphp
                 <div
-                    class="custom-radio custom-control-inline">
+                    class="custom-radio custom-control-inline product--inputs-wrap">
                     <input type="checkbox"
                            data-out="{{ out_of_stock($selected) }}"
                            class="custom-control-input"
@@ -77,6 +77,11 @@
                     <label class="custom-label checkbox-select"
                            for="single_v_select_{{ $selected->id.$x }}">
                         <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
+                        <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                                            <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
+  <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
+</svg>
+                                        </span>
                     </label>
                 </div>
             </div>
