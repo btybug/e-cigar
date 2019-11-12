@@ -41,6 +41,7 @@ class ProductsController extends Controller
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
         $filters = (new Attributes)->getFiltersByCategory($type);
+        
         $data = $request->except('_token');
         $sc = $request->get('subcategory','all');
         $selecteds = [];

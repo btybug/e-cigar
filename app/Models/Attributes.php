@@ -88,7 +88,7 @@ class Attributes extends Translatable
             $attrs = $attrs->where('categories.slug', $slug);
         }
 
-        return $attrs->get();
+        return $attrs->groupBy('attributes.id')->get();
     }
 
     public function getFiltersByOffer($slug)
