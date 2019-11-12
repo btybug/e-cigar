@@ -1602,6 +1602,10 @@ $(document).ready(function () {
                             },
                             success: function (data) {
                                 $("#wizardViewModal .modal-body").html(data.html);
+                                selected_ides.length = 0;
+                                $(`.product__single-item-info[data-group-id="${button_group_id}"]`).find('.product__single-item-info-bottom').each(function(a, b) {
+                                    $(this).data('id') && selected_ides.push($(this).data('id'));
+                                });
                                 $("#wizardViewModal ul.content li").each(function() {
                                     $(this).find(".item-content").on('click', function () {
                                         let id = $(this).closest('li').attr('data-id');
@@ -1716,9 +1720,7 @@ $(document).ready(function () {
 
                                 // console.log('group_id', group_id);
 
-                                $(`.product__single-item-info[data-group-id="${button_group_id}"]`).find('.product__single-item-info-bottom').each(function(a, b) {
-                                    $(this).data('id') && selected_ides.push($(this).data('id'));
-                                });
+
                             });
                     });
 
