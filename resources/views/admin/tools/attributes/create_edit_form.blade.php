@@ -282,6 +282,13 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
+        $("body").on("keyup",".search-attr", function() {
+            var value = $(this).val().toLowerCase();
+            $("ul.modal-stickers--list .option-elm-modal").filter(function() {
+                $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
+            });
+        });
+
         $('.filter--display input:radio[name="filter"]').change(function() {
             var filter = $(this).filter(':checked').val();
 
@@ -311,7 +318,7 @@
                     res.data.forEach(item => {
                         let html = `<li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-sticker-event" data-name="${item.name}"
+                                                </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
                         $("#stickerModal .modal-body .all-list").append(html);
                     });
