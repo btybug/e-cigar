@@ -4,8 +4,8 @@
             <div class="">
                 <div class="row">
                     {{--<div class="col-md-2">--}}
-                    {{--Min Limit : {!! Form::number("variations[$main_unique][min_count_limit]",--}}
-                    {{--(($main) ? $main->min_count_limit : null),['class' => 'form-control']) !!}--}}
+                    {!! Form::hidden("variations[$main_unique][min_count_limit]",1) !!}
+                    {!! Form::hidden("variations[$main_unique][count_limit]",1) !!}
                     {{--</div>--}}
                     {{--<div class="col-md-2">--}}
                     {{--How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",--}}
