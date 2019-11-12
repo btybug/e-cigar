@@ -1552,7 +1552,7 @@ $(document).ready(function () {
         const filterModalSingleInit = () => {
             (function () {
 
-                function activate_item(self, id, name, group_id) {
+                function activate_item(self, id, name, group_id, click) {
                     if($(self).hasClass('active')) {
                         $("#wizardViewModal #myTabContent").find(`li[data-id="${id}"]`).each(function() {
                             $(this).find('.item-content').removeClass('active');
@@ -1560,8 +1560,8 @@ $(document).ready(function () {
                         $('#wizardViewModal .footer-list').find(`li[data-id="${id}"]`).remove();
                     } else {
                         const group_element = $(`.product__single-item-info[data-group-id="${group_id}"]`);
-                        if(group_element.find('.product__single-item-info-bottom').length < group_element.data('limit')) {
-                            console.log(group_element)
+
+                        if($("#wizardViewModal #myTabContent #wizardAll").find('.item-content.active').length < group_element.data('limit')) {
                             $(self).addClass('active');
                             $("#wizardViewModal #myTabContent").find(`li[data-id="${id}"]`).each(function() {
                                 $(this).find('.item-content').addClass('active');
@@ -1669,6 +1669,7 @@ $(document).ready(function () {
                             })
                             .then(function (json) {
                                 console.log(json);
+
                                 const items_row = $(`[data-group-id="${button_group_id}"]`).find('.product-single-info_row-items');
                                 items_row.html(json.html);
 
@@ -1714,7 +1715,7 @@ $(document).ready(function () {
                                 });
 
                                 // console.log('group_id', group_id);
-                                selected_ides.length = 0;
+
                                 $(`.product__single-item-info[data-group-id="${button_group_id}"]`).find('.product__single-item-info-bottom').each(function(a, b) {
                                     $(this).data('id') && selected_ides.push($(this).data('id'));
                                 });
