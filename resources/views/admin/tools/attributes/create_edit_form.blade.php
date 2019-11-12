@@ -327,7 +327,7 @@
             });
         });
 
-        $("body").on("click", ".add-sticker-event", function () {
+        $("body").on("click", ".add-related-event", function () {
             let id = $(this).data("id");
             let name = $(this).data("name");
             $(".get-all-stickers-tab")
