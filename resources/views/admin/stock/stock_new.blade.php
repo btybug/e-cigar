@@ -1378,6 +1378,13 @@
                         $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
                     });
                 });
+
+                $("body").on("keyup",".search-sticker", function() {
+                    var value = $(this).val().toLowerCase();
+                    $("ul.modal-stickers--list .option-elm-modal").filter(function() {
+                        $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
+                    });
+                });
             });
             $("body").on("click", '.add-discount', function (e) {
                 var main = $(this).data('main');
