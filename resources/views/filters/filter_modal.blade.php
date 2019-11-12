@@ -13,8 +13,10 @@
               
             </div>
             <div class="modal-footer bord-top d-flex justify-content-between popup-modal-footer py-0">
-                <div class="d-flex selected-items_popup w-100 main-scrollbar">
-                    <ul class="d-flex flex-wrap footer-list">
+
+                <div class="d-flex flex-column align-items-start selected-items_popup w-100 ">
+                    <span class="font-weight-bold text-danger message_place_js"></span>
+                    <ul class="d-flex flex-wrap footer-list w-100 main-scrollbar">
                         <li class="footer-list-item">
                             <span class="title">Item name 1</span>
                             <span class="close-icon"><i class="fa fa-times"></i></span>

@@ -4051,36 +4051,98 @@ $(document).ready(function () {
         // };
         // filterModalSingleInit();
 
+        function limite_message(group_id) {
+            var place = $('#wizardViewModal .message_place_js');
+            var limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('limit');
+            var min_limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('min-limit');
+            var count = $('#wizardAll').find('.item-content.active').length;
+            var message = '';
+
+            // console.log(count, min_limit, limit)
+            if (count < min_limit || count > limit) {
+                $('#wizardViewModal .b_save').attr('disabled', true);
+            } else {
+                $('#wizardViewModal .b_save').attr('disabled', false);
+            }
+
+            if (limit !== 1) {
+                if (min_limit >= 1 && count === 0) {
+                    message = "You need to select items";
+                } else if (min_limit >= 1 && count < min_limit && limit !== count) {
+                    message = min_limit - count + " items left";
+                } else if (count >= min_limit) {
+                    message = '';
+                }
+            }
+
+            if (limit === 1 && count === 0) {
+                message = 'You need to select one item';
+            } else if (limit === 1 && count !== 0) {
+                message = '';
+            }
+
+            console.log(limit, min_limit, count, message, group_id);
+            place.text(message);
+        }
+
         var filterModalSingleInit = function filterModalSingleInit() {
             (function () {
 
-                function activate_item(self, id, name, group_id, click) {
-                    if ($(self).hasClass('active')) {
-                        $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
-                            $(this).find('.item-content').removeClass('active');
-                        });
-                        $('#wizardViewModal .footer-list').find("li[data-id=\"" + id + "\"]").remove();
-                    } else {
-                        var group_element = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]");
+                function activate_item(self, id, name, group_id) {
+                    var limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('limit');
+                    if (limit !== 1) {
+                        if ($(self).hasClass('active')) {
+                            $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
+                                $(this).find('.item-content').removeClass('active');
+                            });
+                            $('#wizardViewModal .footer-list').find("li[data-id=\"" + id + "\"]").remove();
+                        } else {
+                            var group_element = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]");
 
-                        if ($("#wizardViewModal #myTabContent #wizardAll").find('.item-content.active').length < group_element.data('limit')) {
+                            if ($("#wizardViewModal #myTabContent #wizardAll").find('.item-content.active').length < group_element.data('limit')) {
+                                $(self).addClass('active');
+                                $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
+                                    $(this).find('.item-content').addClass('active');
+                                });
+                                $('#wizardViewModal .footer-list').find(".footer-list-item[data-id=\"" + id + "\"]").length === 0 && $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + "\" data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
+                            }
+                        }
+                    } else {
+                        // if($(self).hasClass('active')) {
+                        // $("#wizardViewModal #myTabContent").find(`li[data-id="${id}"]`).each(function() {
+                        //     $(this).find('.item-content').removeClass('active');
+                        // });
+                        // $('#wizardViewModal .footer-list').find(`li[data-id="${id}"]`).remove();
+                        // } else {
+                        $("#wizardViewModal #myTabContent").find('li').each(function () {
+                            if ($(this).data('id') === id) {
+                                $(this).find('.item-content').addClass('active');
+                            } else {
+                                $(this).find('.item-content').removeClass('active');
+                            }
+                        });
+
+                        var _group_element = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]");
+
+                        if ($("#wizardViewModal #myTabContent #wizardAll").find('.item-content.active').length < _group_element.data('limit')) {
                             $(self).addClass('active');
                             $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
                                 $(this).find('.item-content').addClass('active');
                             });
-                            $('#wizardViewModal .footer-list').find(".footer-list-item[data-id=\"" + id + "\"]").length === 0 && $('#wizardViewModal .footer-list').append("<li class=\"footer-list-item\" data-id=\"" + id + "\" data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
+                            $('#wizardViewModal .footer-list').find(".footer-list-item[data-id=\"" + id + "\"]").length === 0 && $('#wizardViewModal .footer-list').html("<li class=\"footer-list-item\" data-id=\"" + id + "\" data-name=\"" + name + "\">\n                                                            <span class=\"title\">" + name + "</span>\n                                                            <span class=\"close-icon item-selected-footer\"><i class=\"fa fa-times\"></i></span>\n                                                        </li>");
                         }
+                        // }
                     }
                 }
 
                 $("#singleProductPageCnt .filters-modal-wizard").each(function (index) {
                     var button_group_id = $(this).attr('data-group');
                     selected_ides = [];
-
+                    var x_group = void 0;
                     $("body").on('click', ".filters-modal-wizard[data-group=\"" + button_group_id + "\"]", function () {
                         var group_id = $(this).data('group');
-
-                        $("#wizardViewModal").attr('data-group', button_group_id);
+                        x_group = group_id;
+                        $("#wizardViewModal").attr('data-group', group_id);
 
                         // const selectedIds = $(this).closest('.product-single-info_row').find('.menu-item-selected').toArray().map(function (item) {
                         //     return $(item).attr('data-id');
@@ -4101,7 +4163,7 @@ $(document).ready(function () {
                             success: function success(data) {
                                 $("#wizardViewModal .modal-body").html(data.html);
                                 selected_ides.length = 0;
-                                $(".product__single-item-info[data-group-id=\"" + button_group_id + "\"]").find('.product__single-item-info-bottom').each(function (a, b) {
+                                $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").find('.product__single-item-info-bottom').each(function (a, b) {
                                     $(this).data('id') && selected_ides.push($(this).data('id'));
                                 });
                                 $("#wizardViewModal ul.content li").each(function () {
@@ -4109,15 +4171,18 @@ $(document).ready(function () {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
+                                        limite_message(group_id);
                                     });
-                                    console.log(selected_ides);
-                                    console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
+                                    // console.log(selected_ides);
+                                    // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
                                     if (selected_ides.includes($(this).data('id'))) {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
+                                        limite_message(group_id);
                                     }
                                 });
+                                limite_message(group_id);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //
                                 // });
@@ -4130,12 +4195,17 @@ $(document).ready(function () {
                         });
                     });
 
-                    $("#wizardViewModal").on('click', '.close-icon.item-selected-footer', function (ev) {
+                    $('body').on('click', "#wizardViewModal[data-group=\"" + button_group_id + "\"] .close-icon.item-selected-footer", function (ev) {
                         var id = $(this).closest('li').data('id');
+                        var group_id = button_group_id;
                         $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
                             $(this).find('.active').removeClass('active');
                         });
                         $(this).closest('li').remove();
+                        console.log(x_group, group_id);
+                        if (x_group === group_id) {
+                            limite_message(x_group);
+                        }
                     });
 
                     $('body').on('click', "#wizardViewModal[data-group=\"" + button_group_id + "\"] .b_save", function () {
@@ -4168,7 +4238,7 @@ $(document).ready(function () {
                         }).then(function (response) {
                             return response.json();
                         }).then(function (json) {
-                            console.log(json);
+                            // console.log(json);
 
                             var items_row = $("[data-group-id=\"" + button_group_id + "\"]").find('.product-single-info_row-items');
                             items_row.html(json.html);
@@ -4341,6 +4411,7 @@ $(document).ready(function () {
             (function () {
 
                 function activate_item(self, id, name, group_id, click) {
+                    limite_message();
                     if ($(self).hasClass('active')) {
                         $("#wizardViewModal #myTabContent").find("li[data-id=\"" + id + "\"]").each(function () {
                             $(this).find('.item-content').removeClass('active');
