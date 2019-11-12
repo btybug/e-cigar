@@ -11,7 +11,7 @@
                         <h2 class="m-0">Promotions</h2>
                     </div>
                     <div class="pull-right">
-                        <div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
+                        <div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_promotions_new') !!}">Add new</a></div>
                     </div>
                 </div>
                 <div class="card-body panel-body">
