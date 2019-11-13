@@ -2381,6 +2381,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 .products__item-wrapper .products__item-title {
     margin-bottom: 17px;
+    line-height: normal !important;
 }
 
 .products__item-wrapper .products__item-desc {
