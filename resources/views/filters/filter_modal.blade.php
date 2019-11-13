@@ -14,8 +14,7 @@
             </div>
             <div class="modal-footer bord-top d-flex justify-content-between popup-modal-footer py-0">
 
-                <div class="d-flex flex-column align-items-start selected-items_popup w-100 ">
-                    <span class="font-weight-bold text-danger message_place_js"></span>
+                <div class="align-items-start selected-items_popup ">
                     <ul class="d-flex flex-wrap footer-list w-100 main-scrollbar">
                         <li class="footer-list-item">
                             <span class="title">Item name 1</span>
@@ -43,9 +42,13 @@
                         </li>
                     </ul>
                 </div>
-                <button type="button" class="btn btn-primary b_save ml-2" data-section-id="">
-                    Add selected
-                </button>
+                <div class="d-flex align-items-center footer--right">
+                    <span class="font-weight-bold text-danger message_place_js font-16" >Lorem ipsum dolor sit amet.</span>
+                    <button type="button" class="btn btn-primary b_save ml-2" data-section-id="">
+                        Add selected
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>

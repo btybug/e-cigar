@@ -4051,13 +4051,13 @@ $(document).ready(function () {
         // };
         // filterModalSingleInit();
 
-        function limite_message(group_id) {
+        function limite_message(group_id, active_item) {
             var place = $('#wizardViewModal .message_place_js');
             var limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('limit');
             var min_limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('min-limit');
             var count = $('#wizardAll').find('.item-content.active').length;
             var message = '';
-
+            console.log(22222222222);
             // console.log(count, min_limit, limit)
             if (count < min_limit || count > limit) {
                 $('#wizardViewModal .b_save').attr('disabled', true);
@@ -4070,7 +4070,9 @@ $(document).ready(function () {
                     message = "You need to select items";
                 } else if (min_limit >= 1 && count < min_limit && limit !== count) {
                     message = min_limit - count + " items left";
-                } else if (count >= min_limit) {
+                } else if (count === limit && !active_item) {
+                    message = 'You allowed to select items only';
+                } else if (count >= min_limit && count <= limit) {
                     message = '';
                 }
             }
@@ -4081,7 +4083,7 @@ $(document).ready(function () {
                 message = '';
             }
 
-            console.log(limit, min_limit, count, message, group_id);
+            // console.log(limit, min_limit, count, message,  group_id);
             place.text(message);
         }
 
@@ -4171,7 +4173,8 @@ $(document).ready(function () {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
-                                        limite_message(group_id);
+                                        var active_item = $(this).hasClass('active');
+                                        limite_message(group_id, active_item);
                                     });
                                     // console.log(selected_ides);
                                     // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
