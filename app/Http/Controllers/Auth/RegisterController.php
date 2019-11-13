@@ -62,8 +62,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $comapyData = [];
-        $wholesaler = $data['wholesaler'];
-        if($wholesaler){
+
+        if(isset($data['wholesaler']) && $data['wholesaler']){
             $comapyData = [
                 'company_name' => 'required',
                 'company_number' => 'required',
