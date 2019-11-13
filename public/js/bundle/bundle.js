@@ -4515,7 +4515,7 @@ $(document).ready(function () {
                             });
                         });
 
-                        fetch("/products/get-variation-menu-raws", {
+                        fetch("/products/get-offer-menu-raws", {
                             method: "post",
                             headers: {
                                 "Content-Type": "application/json",
@@ -4547,6 +4547,9 @@ $(document).ready(function () {
                                 $(this).closest('.menu-item-selected').find('.price-placee').html(getCurrencySymbol() + $(this).closest('.menu-item-selected').attr('data-price') * Number($(this).val()));
                             });
                             setTotalPrice(countTotalPrice());
+
+                            countOfferPrice();
+                            countOfferTotalPrice();
 
                             $('#wizardViewModal').modal('hide');
 
