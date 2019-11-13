@@ -76,17 +76,38 @@ class AttributesController extends Controller
         $data['user_id'] = \Auth::id();
         $attr = Attributes::updateOrCreate($request->id, $data);
         $attr->stickers()->sync($request->get('stickers'));
+        $oldCatgories = $attr->categories()->pluck('id','id')->all();
         $attr->categories()->sync(json_decode($request->get('categories', [])));
 
         $items = Items::leftJoin('item_categories','items.id','item_categories.item_id')
             ->select('items.*')->whereIn('item_categories.categories_id',$attr->categories()->pluck('id','id')->all())->groupBy('items.id')->get();
+
+        $removeFrom = array_diff($oldCatgories,$attr->categories()->pluck('id','id')->all());
+
+        $oldItems = Items::leftJoin('item_categories','items.id','item_categories.item_id')
+            ->select('items.*')->whereIn('item_categories.categories_id',$removeFrom)->groupBy('items.id')->get();
+
+        $spec =  [
+          "5dcc18860215f"  => [
+              "attributes_id" => $attr->id
+          ]
+        ];
+
         if(count($items)){
             foreach ($items as $item){
-                $item->specificationsPivot()->sync($request->get('specifications', []));
-                $this->itemService->makeOptions($item, $request->get('options', []));
+                if(! $item->specifications()->where('attributes_id',$attr->id)->first()){
+                    $item->specificationsPivot()->attach($spec);
+                }
             }
         }
-        dd($items, $attr->categories()->pluck('id','id')->all());
+
+        if(count($oldItems)){
+            foreach ($oldItems as $item){
+                if($item->specifications()->where('attributes_id',$attr->id)->first()){
+                    $item->specificationsPivot()->detach($spec);
+                }
+            }
+        }
 
         return redirect()->route('admin_store_attributes');
     }
