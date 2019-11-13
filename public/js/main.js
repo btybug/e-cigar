@@ -1569,7 +1569,7 @@ $(document).ready(function () {
                 } else if (min_limit >= 1 && count < min_limit && limit !== count) {
                     message = `${min_limit - count} items left`;
                 } else if(count === limit && !active_item) {
-                    message = 'You allowed to select items only';
+                    message = `You allowed to select ${limit} items only`;
                 } else if(count >= min_limit && count <= limit) {
                     message = '';
                 }
