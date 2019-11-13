@@ -62,6 +62,11 @@ class Stock extends Translatable
         return $this->belongsTo(Category::class, 'brand_id', 'id');
     }
 
+    public function main_item()
+    {
+        return $this->hasOne(Items::class, 'id', 'main_item_id');
+    }
+
     public function offers()
     {
         return $this->belongsToMany(Category::class, 'stock_categories', 'stock_id', 'categories_id')

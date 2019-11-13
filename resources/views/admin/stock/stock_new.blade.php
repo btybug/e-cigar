@@ -125,6 +125,37 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+
+                                                        <div class="form-group col-xl-8 col-lg-10 p-0">
+                                                            <div class="card panel panel-default">
+                                                                <div class="card-header panel-heading">
+                                                                    <p class="pull-left mb-0">
+                                                                        <b data-toggle="tooltip" title="" data-original-title="Main Item">
+                                                                            Main Item
+                                                                        </b>
+                                                                    </p>
+                                                                </div>
+                                                                <div class="card-body stock-basic-future-photo-body-wrap">
+                                                                    {!! Form::hidden('main_item_id',(($model)?$model->main_item_id:null),
+                                                                    ['id' => 'main_item']) !!}
+                                                                    <a href="javascript:void(0)" class="btn btn-primary select-main-item">
+                                                                        @if($model && $model->main_item)
+                                                                            Change Main Item
+                                                                        @else
+                                                                            Select Main Item
+                                                                        @endif
+                                                                    </a>
+                                                                    <span class="main_item_name">
+                                                                        @if($model && $model->main_item)
+                                                                            {!! $model->main_item->name !!}
+                                                                        @else
+                                                                            Not Selected
+                                                                        @endif
+
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 {{--                                                        <div class="form-group">--}}
 {{--                                                            <div class="row">--}}
 {{--                                                                <label for="faq_tab"--}}
@@ -373,9 +404,7 @@
                                                         </li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediastickers">Stickers</a></li>
-                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                                href="#mediaspecifications">Specifications</a>
-                                                        </li>
+
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediavideos">Videos</a>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
@@ -499,39 +528,39 @@
                                                             </ul>
                                                         </div>
                                                     </div>
-                                                    <div id="mediaspecifications" class="tab-pane fade ">
-                                                        <div class="table-responsive">
-                                                            <table class="table table--store-settings">
-                                                                <thead>
-                                                                <tr class="bg-my-light-pink">
-                                                                    <th>Attributes</th>
-                                                                    <th></th>
-                                                                    <th></th>
-                                                                </tr>
-                                                                </thead>
+                                                    {{--<div id="mediaspecifications" class="tab-pane fade ">--}}
+                                                        {{--<div class="table-responsive">--}}
+                                                            {{--<table class="table table--store-settings">--}}
+                                                                {{--<thead>--}}
+                                                                {{--<tr class="bg-my-light-pink">--}}
+                                                                    {{--<th>Attributes</th>--}}
+                                                                    {{--<th></th>--}}
+                                                                    {{--<th></th>--}}
+                                                                {{--</tr>--}}
+                                                                {{--</thead>--}}
 
-                                                                <tbody class="v-options-list">
-                                                                @if($model && $model->stockAttrs)
-                                                                    @foreach($model->stockAttrs as $selected)
-                                                                        @include('admin.inventory._partials.specifications')
-                                                                    @endforeach
-                                                                @endif
-                                                                </tbody>
+                                                                {{--<tbody class="v-options-list">--}}
+                                                                {{--@if($model && $model->stockAttrs)--}}
+                                                                    {{--@foreach($model->stockAttrs as $selected)--}}
+                                                                        {{--@include('admin.inventory._partials.specifications')--}}
+                                                                    {{--@endforeach--}}
+                                                                {{--@endif--}}
+                                                                {{--</tbody>--}}
 
-                                                                <tfoot>
-                                                                <tr class="add-new-ship-filed-container">
-                                                                    <td colspan="4" class="text-right">
-                                                                        <button type="button"
-                                                                                class="btn btn-primary add-specification_button">
-                                                                            <i
-                                                                                class="fa fa-plus-circle add-specification"></i>
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                                </tfoot>
-                                                            </table>
-                                                        </div>
-                                                    </div>
+                                                                {{--<tfoot>--}}
+                                                                {{--<tr class="add-new-ship-filed-container">--}}
+                                                                    {{--<td colspan="4" class="text-right">--}}
+                                                                        {{--<button type="button"--}}
+                                                                                {{--class="btn btn-primary add-specification_button">--}}
+                                                                            {{--<i--}}
+                                                                                {{--class="fa fa-plus-circle add-specification"></i>--}}
+                                                                        {{--</button>--}}
+                                                                    {{--</td>--}}
+                                                                {{--</tr>--}}
+                                                                {{--</tfoot>--}}
+                                                            {{--</table>--}}
+                                                        {{--</div>--}}
+                                                    {{--</div>--}}
                                                     <div id="wiitb" class="tab-pane fade ">
                                                         <div class="basic-center basic-wall">
                                                             <div class="row">
@@ -1010,6 +1039,22 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="mainItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="mainItemModalLabel">Add main item</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
@@ -1307,7 +1352,39 @@
     <script>
 
         $(document).ready(function () {
-            const shortAjax = function (URL, obj = {}, cb) {
+            $("body").on('click','.select-main-item',function (ev) {
+                let items = [];
+                $("body").find('.v-item-change').map(function (v,i) {
+                    items.push($(i).val());
+                })
+
+                if(items.length > 0){
+                    AjaxCall("{{ route('admin_stock_main_item') }}", {items: items}, function (res) {
+                        if (!res.error) {
+                            $("body").find("#mainItemModal .modal-body").html(res.html);
+                            $("#mainItemModal").modal();
+                        }
+                    });
+                }
+                console.log(items)
+                // $("#mainItemModal").modal();
+            });
+
+            $("body").on('click','.add-main-item',function (ev) {
+                let item  = $("body").find('.main_item_value');
+                if(item.val()){
+                    $("#main_item").val(item.val());
+                    $(".select-main-item").text("Change main item");
+
+                    var selectedText = $("body").find(".main_item_value option:selected").html();
+                    $(".main_item_name").text(selectedText);
+                    $("#mainItemModal").modal('hide');
+                }
+
+            });
+
+
+                const shortAjax = function (URL, obj = {}, cb) {
                 fetch(URL, {
                     method: "post",
                     headers: {

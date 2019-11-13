@@ -121,8 +121,8 @@ class StockController extends Controller
         $this->stockService->savePackageVariation($stock, $request->get('variations', []));
 
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
-        $stock->specifications()->sync($request->get('specifications'));
-        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
+//        $stock->specifications()->sync($request->get('specifications'));
+//        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
 
         $ads = $request->get('ads',[]);
         $adNotDeletable = [];
@@ -148,16 +148,16 @@ class StockController extends Controller
 
         $stock->ads()->whereNotIn('id',$adNotDeletable)->delete();
 
-        if($options && count($options)){
-            foreach ($options as $option){
-                StockAttribute::create([
-                    'attributes_id' => $option['attributes_id'],
-                    'sticker_id' => $option['sticker_id'],
-                    'parent_id' => $option['parent_id'],
-                    'stock_id' => $stock->id,
-                ]);
-            }
-        }
+//        if($options && count($options)){
+//            foreach ($options as $option){
+//                StockAttribute::create([
+//                    'attributes_id' => $option['attributes_id'],
+//                    'sticker_id' => $option['sticker_id'],
+//                    'parent_id' => $option['parent_id'],
+//                    'stock_id' => $stock->id,
+//                ]);
+//            }
+//        }
 
         $offer_products = $request->get('offer_products',[]);
 
@@ -571,4 +571,17 @@ class StockController extends Controller
 
         return response()->json(['error' => false,'html' => $html]);
     }
+
+    public function mainItem(Request $request)
+    {
+        $data = $request->get('items',[]);
+
+        $items = Items::whereIn('id',$data)->get()->pluck('name','id')->all();
+
+        $html = view("admin.stock._partials.main_items",compact(['items']))->render();
+
+        return response()->json(['error' => false,'html' => $html]);
+    }
+
+
 }
