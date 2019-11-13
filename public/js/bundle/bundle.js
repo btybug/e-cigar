@@ -4182,10 +4182,10 @@ $(document).ready(function () {
                                         var id = $(this).closest('li').attr('data-id');
                                         var name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
-                                        limite_message(group_id);
+                                        limite_message(group_id, true);
                                     }
                                 });
-                                limite_message(group_id);
+                                limite_message(group_id, true);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //
                                 // });

@@ -1683,9 +1683,8 @@ $(document).ready(function () {
                                         let id = $(this).closest('li').attr('data-id');
                                         let name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
-                                        const active_item = $(this).hasClass('active')
+                                        const active_item = $(this).hasClass('active');
                                         limite_message(group_id, active_item);
-
                                     });
                                     // console.log(selected_ides);
                                     // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
@@ -1693,12 +1692,11 @@ $(document).ready(function () {
                                         let id = $(this).closest('li').attr('data-id');
                                         let name = $(this).closest('li').attr('data-name');
                                         activate_item(this, id, name, group_id);
-                                        limite_message(group_id);
-
+                                        limite_message(group_id, true);
                                     }
 
                                 });
-                                limite_message(group_id);
+                                limite_message(group_id, true);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //
                                 // });
