@@ -13,12 +13,23 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AttributesPost;
 use App\Models\Attributes;
 use App\Models\Category;
+use App\Models\Items;
+use App\Services\ItemService;
 use Illuminate\Http\Request;
 
 class AttributesController extends Controller
 {
 
     protected $view = 'admin.tools.attributes';
+
+    private $itemService;
+
+    public function __construct(
+        ItemService $itemService
+    )
+    {
+        $this->itemService = $itemService;
+    }
 
     public function getAttributes()
     {
@@ -42,6 +53,9 @@ class AttributesController extends Controller
         $attr = Attributes::updateOrCreate($request->id, $data);
         $attr->stickers()->sync($request->get('stickers',[]));
         $attr->categories()->sync(json_decode($request->get('categories', [])));
+
+        dd($request->get('categories', []));
+
         return redirect()->route('admin_store_attributes');
     }
 
@@ -63,6 +77,16 @@ class AttributesController extends Controller
         $attr = Attributes::updateOrCreate($request->id, $data);
         $attr->stickers()->sync($request->get('stickers'));
         $attr->categories()->sync(json_decode($request->get('categories', [])));
+
+        $items = Items::leftJoin('item_categories','items.id','item_categories.item_id')
+            ->select('items.*')->whereIn('item_categories.categories_id',$attr->categories()->pluck('id','id')->all())->groupBy('items.id')->get();
+        if(count($items)){
+            foreach ($items as $item){
+                $item->specificationsPivot()->sync($request->get('specifications', []));
+                $this->itemService->makeOptions($item, $request->get('options', []));
+            }
+        }
+        dd($items, $attr->categories()->pluck('id','id')->all());
 
         return redirect()->route('admin_store_attributes');
     }
