@@ -36,7 +36,7 @@
                 </div>
                 <div class="footer-info col-md-5 col-lg-4 col-xl-3 text-md-right p-0 mt-md-0 mt-4 text-sm-left text-center">
                     <a href="#" class="d-block footer-logo">
-                        <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}">
+                        <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" title="{{ get_site_name() }}">
                     </a>
                     <div class="footer-desc mb-3">
                         <p class="mb-0">There are many variations of passages<br/>
@@ -44,10 +44,10 @@
                     </div>
                     <div class="footer-payment">
                         <div>
-                            <img src="/public/img/paypal.png" alt="paypal">
-                            <img src="/public/img/visa.png" alt="visa">
-                            <img src="/public/img/maestro.png" alt="maestro">
-                            <img src="/public/img/mc.png" alt="mc">
+                            <img src="/public/img/paypal.png" alt="paypal" title="paypal">
+                            <img src="/public/img/visa.png" alt="visa" title="visa">
+                            <img src="/public/img/maestro.png" alt="maestro" title="maestro">
+                            <img src="/public/img/mc.png" alt="mc" title="mc">
                         </div>
                     </div>
 

@@ -587,7 +587,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<div class="d-flex wrap-wall w-100">';
         echo '<div class="left-photo hidden-xsd-none d-sm-block">';
         echo '<figure class="thumbnail">';
-        echo '<img class="img-fluid" src="' . user_avatar($comment->author->id) . '">';
+        echo '<img class="img-fluid" src="' . user_avatar($comment->author->id) . '" alt="'.$comment->author->name.'" title="'.$comment->author->name.'">';
         echo '</figure>';
         echo '</div>';
 
@@ -695,7 +695,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
         if ($reply->getTable() == 'history') {
             echo '<div class="admin_updated">
-<div class="image label label-default"><img src="' . user_avatar($reply->user->id) . '" alt="img"></div>
+<div class="image label label-default"><img src="' . user_avatar($reply->user->id) . '" alt="'.$reply->user->name.'" title="'.$reply->user->name.'"></div>
 <p class="font-18 text-gray-clr mb-0"><span class="label label-default">' . $reply->user->name . ' has ' . $reply->body . '</span></p>
 </div>';
         } else {
@@ -708,7 +708,7 @@ function replyRender($replies, $i = 0, $parent = false)
 
             echo '<div class="col-lg-2 col-md-2 hidden-xsd-none d-sm-block">';
             echo '<figure class="thumbnail">';
-            echo '<img class="img-fluid" src="' . user_avatar($reply->author->id) . '">';
+            echo '<img class="img-fluid" src="' . user_avatar($reply->author->id) . '" alt="'.$reply->user->name.'" title="'.$reply->user->name.'">';
             if ($reply->author) {
                 if ($reply->author->isAdministrator()) {
                     echo '<figcaption class="text-center">Admin</figcaption>';

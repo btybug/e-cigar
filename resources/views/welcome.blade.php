@@ -44,7 +44,10 @@
                             @foreach($categories as $category)
                                 <li class="col-md-6">
                                     <div class="position-relative home_categories-item">
-                                        <img src="{!! media_image_tmb($category->image) !!}" alt="photo">
+                                        <img src="{!! media_image_tmb($category->image) !!}"
+                                             alt="{{ $category->name }}"
+                                             title="{{ $category->name }}"
+                                        />
                                         <div class="d-flex flex-column position-absolute home_categories-item-inner">
                                             <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
                                             <p>{{ $category->description }}</p>
@@ -109,7 +112,7 @@
                         <div class="brand-wall">
                             <div class="brand-item">
                                 <a href="javascript:void(0)" class="brand-link">
-                                    <img src="{{ $brand->image }}" alt="brand-logo">
+                                    <img src="{{ $brand->image }}" alt="{{ $brand-> name }}" title="{{ $brand-> name }}">
                                 </a>
                             </div>
                         </div>

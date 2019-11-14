@@ -71,7 +71,7 @@
                             <span class="news-card main-transition position-relative">
                                 <span class="news-card_view d-block position-relative">
                                     <!--news main image-->
-                                        <img class="card-img-top"  src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! ($post->image && getImage($post->image))? getImage($post->image)->seo_alt:'' !!}">
+                                        <img class="card-img-top"  src="{!! ($post->image)?$post->image:'http://demo.laravelcommerce.com/resources/assets/images/news_images/1504015363.about_contact_pages.svg' !!}" alt="{!! $post->title !!}" title="{!! $post->title !!}">
                                     <!--share icon-->
                                     <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
                                     <svg iewBox="0 0 20 21" width="20px" height="21px">

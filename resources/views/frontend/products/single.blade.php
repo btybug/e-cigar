@@ -126,7 +126,9 @@
                                                     <div class="h-100">
                                                         <img class="single-product_top-img"
                                                              src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                                                             alt="{!! checkImage( $vape->name) !!}"
+                                                             title="{!! checkImage( $vape->name) !!}"
+                                                        >
                                                     </div>
                                                 @endif
                                             <!--new label-->
@@ -141,7 +143,9 @@
                                                 @if($vape->image)
                                                     <div class="product-card_thumb-img-holder pointer active_slider">
                                                         <img class="" src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                                                             alt="{!! checkImage($vape->name) !!}"
+                                                             title="{!! checkImage($vape->name) !!}"
+                                                        >
                                                     </div>
                                                 @endif
                                                 @if($vape->variations && count($vape->variations))
@@ -151,7 +155,9 @@
                                                                  data-id="{{ $variation['id'] }}">
                                                                 <img class=""
                                                                      src="{{ checkImage($variation["image"]) }}"
-                                                                     alt="{!! @getImage($variation["image"])->seo_alt !!}">
+                                                                     alt="{!! checkImage($variation["name"]) !!}"
+                                                                     title="{!! checkImage($variation["name"]) !!}"
+                                                                >
                                                             </div>
                                                         @endif
                                                     @endforeach
@@ -352,8 +358,8 @@
                                                             </div>
                                                         </div>
                                                     @endif
-
                                                     @if($vape->other_images && count($vape->other_images))
+
                                                         <div class="tecnical_gallery">
                                                             <div class="tecnical_gallery-all">
                                                                 @foreach($vape->other_images as $other_image)
@@ -362,7 +368,9 @@
                                                                        data-lightbox-gallery="gallery_name"
                                                                        title="{!! @getImage($other_image)->seo_alt !!}">
                                                                         <img src="{{ checkImage($other_image) }}"
-                                                                             alt="{!! @getImage($other_image)->seo_alt !!}">
+                                                                             alt="{!! $vape->name !!}-gallery"
+                                                                             title="{!! $vape->name !!}-gallery"
+                                                                        >
                                                                     </a>
                                                                 @endforeach
                                                             </div>

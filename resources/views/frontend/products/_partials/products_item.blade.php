@@ -11,23 +11,23 @@
                             @endif
                         </span>
                         <span class="position-relative products__item-photo d-block">
-                            <img src="{{ (media_image_tmb($product->image)) }}" alt="product">
+                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
                         </span>
                     </span>
                 <span class="products__item-main-content">
                     <span class="products__item-photo-thumb">
-                         <span class="products__item-photo-thumb-item active-slider">
-                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}">
+                         <span class="products__item-photo-thumb-item active-slider" title="{{ $product->name }}">
+                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                          </span>
                         @if($product->variations)
                             @php $count = 0; @endphp
                             @foreach($product->variations()->take(3)->get() as $variation)
                                 @if($variation->image)
                                     @php $count++; @endphp
-                                    <span class="products__item-photo-thumb-item">
-                                        <img src="{{ (media_image_tmb($variation->image)) }}" alt="{{ $variation->name }}">
+                                    <span class="products__item-photo-thumb-item" title="{{ $variation->name }}">
+                                        <img src="{{ (media_image_tmb($variation->image)) }}" alt="{{ $variation->name }}" title="{{ $variation->name }}">
                                     </span>
                                 @endif
                             @endforeach
@@ -44,7 +44,7 @@
                             <span class="d-flex flex-wrap align-items-center products__item-discount-all">
                                 @if(count($product->stickers))
                                     @foreach($product->stickers()->take(2)->get() as $sticker)
-                                         <span class="products__item-discount">
+                                         <span class="products__item-discount" title="{{ $sticker->name }}">
                                              <img src="{{ $sticker->image }}" alt="{{ $sticker->name }}">
                                          </span>
                                     @endforeach

@@ -21,7 +21,7 @@
                         <div class="left-content">
                             @if($post->image)
                                 <div class="main-photo">
-                                    <img src="{{ $post->image }}" alt="girl">
+                                    <img src="{{ $post->image }}" alt="{{ $post->title }}" title="{{ $post->title }}">
                                 </div>
                             @endif
 

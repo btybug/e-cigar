@@ -137,7 +137,7 @@
         <div class="container main-max-width">
             <div class="d-flex justify-content-between align-items-center header-bottom-wrapper">
                 <a href="{!! url('/') !!}" class="d-md-block d-none logo">
-                    <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}">
+                    <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" title="{{ get_site_name() }}">
                 </a>
 
                     <div class="d-flex align-self-center cat-search">
