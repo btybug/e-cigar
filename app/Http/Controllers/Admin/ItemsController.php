@@ -107,8 +107,6 @@ class ItemsController extends Controller
 
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
 
-        dd($request->get('specifications', []),$request->get('options', []));
-
         return redirect()->route($route);
     }
 
