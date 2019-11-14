@@ -10,7 +10,7 @@
             <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>
             <div class="pull-right">
                 {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
-                @if($model)
+                @if($model && ! isset($offer))
                 <a target="_blank" class="btn btn-info" href="{{ route('product_single', ['type' =>"vape", 'slug' => $model->slug]) }}">View</a>
                 @endif
             </div>

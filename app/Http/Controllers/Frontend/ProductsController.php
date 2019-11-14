@@ -87,6 +87,8 @@ class ProductsController extends Controller
         $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
         if (!$vape) abort(404);
 
+        if ($vape->is_offer) abort(404);
+
         $variations = $vape->variations()->required()->with('options')->get();
         $ads = $this->settings->getEditableData('single_product');
         if($ads && isset($ads['data'])){
