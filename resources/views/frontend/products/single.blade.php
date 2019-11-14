@@ -286,7 +286,7 @@
                                                                 Features</h3>
                                                             <div class="d-flex flex-wrap technical-features-content">
                                                                     @foreach($vape->main_item->specifications as $stockAttr)
-                                                                        
+
                                                                         @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
                                                                             <div
                                                                                 class="d-flex technical-features-content-wall">
