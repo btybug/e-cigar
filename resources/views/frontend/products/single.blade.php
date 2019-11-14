@@ -105,7 +105,7 @@
                                         <div class="brand-wall">
                                             <div class="brand-item">
                                                 <a href="javascript:void(0)" class="brand-link">
-                                                    <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}">
+                                                    <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}">
                                                 </a>
                                             </div>
                                         </div>

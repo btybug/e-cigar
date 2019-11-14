@@ -36,7 +36,7 @@
                             <div class="admin-tags d-flex flex-wrap justify-content-between align-items-center">
                                 <div class="admin d-flex mb-1">
                                     <div class="admin-photo">
-                                        <img src=" {{ user_avatar($post->author->id) }}" alt="admin" class="rounded-circle">
+                                        <img src=" {{ user_avatar($post->author->id) }}" alt="{{ $post->author->name }}" title="{{ $post->author->name }}" class="rounded-circle">
                                     </div>
                                     <div class="admin-main ">
                                         <div class="admin-by font-main-bold font-15 text-tert-clr lh-1">
@@ -91,7 +91,7 @@
                                 @foreach($ads['images'] as $key => $ad)
                                     <div class="advertisment @if(!$loop->first) mt-20 @endif">
                                         <a href="{!! $ads['urls'][$key] !!}">
-                                            <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                            <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}" title="{!! $ads['tags'][$key] !!}">
                                         </a>
                                     </div>
                                 @endforeach
