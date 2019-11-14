@@ -1352,6 +1352,9 @@
     <script>
 
         $(document).ready(function () {
+
+
+
             $("body").on('click','.select-main-item',function (ev) {
                 let items = [];
                 $("body").find('.v-item-change').map(function (v,i) {
@@ -2292,6 +2295,13 @@
                 $(this)
                     .parent()
                     .remove();
+            });
+
+            $('body').on('click', 'a.nav-link[href="#mediastickers"]', function() {
+                setTimeout(function() {
+                    console.log(789456123)
+                    $( ".get-all-stickers-tab" ).sortable()
+                }, 0)
             });
 
             $("body").on('click', '.select-stickers', function () {
