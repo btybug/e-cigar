@@ -280,12 +280,13 @@
                                                         </div>
                                                     @endif
 
-                                                    @if($vape->stockAttrs && count($vape->stockAttrs))
+                                                    @if($vape->main_item &&  $vape->main_item->specifications  && count($vape->main_item->specifications))
                                                         <div class="technical-features">
                                                             <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
                                                                 Features</h3>
                                                             <div class="d-flex flex-wrap technical-features-content">
-                                                                    @foreach($vape->stockAttrs as $stockAttr)
+                                                                    @foreach($vape->main_item->specifications as $stockAttr)
+                                                                        
                                                                         @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
                                                                             <div
                                                                                 class="d-flex technical-features-content-wall">
