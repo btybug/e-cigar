@@ -106,7 +106,6 @@
 {{--    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>--}}
     <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
-    <script src="{{url('public/js/DataTables/js/dataTables.editor.js')}}"></script>
 
     <script src="{{url('public/js/DataTables/js/editor.bootstrap4.js')}}"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
