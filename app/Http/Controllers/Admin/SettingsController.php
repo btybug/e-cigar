@@ -405,7 +405,12 @@ class SettingsController extends Controller
     public function getStorePrinting(Settings $settings)
     {
         $model = $settings->getEditableData('printing');
-        return $this->view('store.print', compact('model'));
+        $printers = collect([]);
+
+        if($model && $model->printers){
+            $printers = collect(json_decode($model->printers,true));
+        }
+        return $this->view('store.print', compact('model','printers'));
     }
 
     public function postStorePrinting(Request $request, Settings $settings)

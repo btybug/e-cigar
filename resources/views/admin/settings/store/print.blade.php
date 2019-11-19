@@ -61,23 +61,24 @@
                                     </tr>
                                     </thead>
                                     <tbody id="currency-list">
-                                    {{--@foreach($siteCurrencies as $key => $currency)--}}
-                                        {{--<tr>--}}
-                                            {{--<td>--}}
-                                                {{--{!! Form::text("printers[$key][name]",null,['class'=>'form-control']) !!}--}}
-                                            {{--</td>--}}
-                                            {{--<td>--}}
-                                                {{--{!! Form::text("printers[$key][id]",null,['class'=>'form-control']) !!}--}}
-                                            {{--</td>--}}
-                                            {{--<td>--}}
-                                                {{--{!! Form::select("printers[$key][folder]",[],null,['class'=>'form-control']) !!}--}}
-                                            {{--</td>--}}
+                                    @foreach($printers as $key => $v)
+                                        <tr>
+                                            <td>
+                                                {!! Form::text("printers[$key][name]",$v['name'],['class'=>'form-control']) !!}
+                                            </td>
+                                            <td>
+                                                {!! Form::text("printers[$key][id]",$v['id'],['class'=>'form-control']) !!}
+                                            </td>
+                                            <td>
+                                                {!! Form::select("printers[$key][folder]",['invoice' => 'Invoice','shipping' => "Shipping labels",'downloads' => "Downloads"],
+                                                $v['folder'],['class'=>'form-control']) !!}
+                                            </td>
 
-                                            {{--<td class="text-right w-5">--}}
-                                                {{--<button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>--}}
-                                            {{--</td>--}}
-                                        {{--</tr>--}}
-                                    {{--@endforeach--}}
+                                            <td class="text-right w-5">
+                                                <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
+                                            </td>
+                                        </tr>
+                                    @endforeach
 
                                     </tbody>
                                     <tfoot>
@@ -91,7 +92,9 @@
 
                                 </table>
                             </div>
-
+                            <div>
+                                <button type="submit" class="btn btn-info pull-right">Save printers</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,7 +111,7 @@
                 {!! Form::text("printers[{id}][id]",null,['class'=>'form-control']) !!}
             </td>
             <td>
-                {!! Form::select("printers[{id}][folder]",[],null,['class'=>'form-control']) !!}
+                {!! Form::select("printers[{id}][folder]",['invoice' => 'Invoice','shipping' => "Shipping labels",'downloads' => "Downloads"],null,['class'=>'form-control']) !!}
             </td>
 
             <td class="text-right w-5">
