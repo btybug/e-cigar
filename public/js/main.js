@@ -3123,7 +3123,7 @@ $(document).ready(function () {
 
             product__single_items.each(function() {
                 const group_id = $(this).data('group-id');
-                const products = [];
+                let products = [];
                 $(this).find('.product__single-item-info-bottom').each(function() {
                     let id;
                     let qty;
@@ -3181,7 +3181,8 @@ $(document).ready(function () {
                             }
                         }
                     }
-                    products.push({
+
+                    id === 'no' ? (products = 'no') : products.push({
                         id,
                         qty,
                         discount_id
@@ -3190,9 +3191,9 @@ $(document).ready(function () {
 
                 variations.push({
                     group_id,
-                    products: products.filter(function(el) {
+                    products: products !== 'no' ? products.filter(function(el) {
                         return el.id !== undefined;
-                    })
+                    }) : 'no'
                 });
 
 

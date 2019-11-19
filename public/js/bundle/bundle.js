@@ -5613,7 +5613,8 @@ $(document).ready(function () {
                             }
                         }
                     }
-                    products.push({
+
+                    id === 'no' ? products = 'no' : products.push({
                         id: id,
                         qty: qty,
                         discount_id: discount_id
@@ -5622,9 +5623,9 @@ $(document).ready(function () {
 
                 variations.push({
                     group_id: group_id,
-                    products: products.filter(function (el) {
+                    products: products !== 'no' ? products.filter(function (el) {
                         return el.id !== undefined;
-                    })
+                    }) : 'no'
                 });
             });
             // console.log({product_id,product_qty, variations});
