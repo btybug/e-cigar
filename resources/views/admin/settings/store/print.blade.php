@@ -44,110 +44,40 @@
         </ul>
         <div class="tab-content">
             {!! Form::model($model,['class'=>'form-horizontal']) !!}
-            <div class="card panel panel-default mb-3">
-                <div class="card-body panel-body">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-xl-5 col-md-6">
-                                <div class="row">
-                                    <label for="text" class="col-md-4">we ship to</label>
-                                    <div class="col-md-8">
-                                        {!! Form::text('we_ship_to',null,['class'=>'form-control']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div>
+
                 <div class="card panel panel-default mb-3">
-                    <div class="card-header panel-heading">Stock availability</div>
-                    <div class="card-body panel-body">
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xl-5 col-md-6">
-                                    <div class="row">
-                                        <label class="col-md-4">Availabile stock status</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-xl-5 col-md-6">
-                                    <div class="row">
-                                        <label class="col-md-4">Out of stock status</label>
-                                        <div class="col-md-8">
-                                            <input type="text" class="form-control">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-7 col-md-6">
-                                    <label class="radio-inline mr-2">
-                                        {!! Form::radio('out_of_stock_status',1,true) !!} Enable Back order
-                                    </label>
-                                    <label class="radio-inline">
-                                        {!! Form::radio('out_of_stock_status',0,null) !!} Disable order
-                                    </label>
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card panel panel-default mb-3">
-                    <div class="card-header panel-heading">Currency</div>
+                    <div class="card-header panel-heading">Printers</div>
                     <div class="card-body panel-body">
                         <div class="form-group">
                             <div class="table-responsive">
                                 <table class="table table-striped table-bordered">
                                     <thead>
                                     <tr class="bg-info text-white">
-                                        <th>Default</th>
-                                        <th>Code</th>
                                         <th>Name</th>
-                                        <th>Symbol</th>
-                                        <th>Currency Exchange Rate</th>
-                                        <th>Update using Api</th>
+                                        <th>ID</th>
+                                        <th>Folder</th>
                                         <th></th>
                                     </tr>
                                     </thead>
                                     <tbody id="currency-list">
-                                    @foreach($siteCurrencies as $currency)
-                                        <tr>
-                                            <td>
-                                                {!! Form::radio('is_default',$currency->code,($currency->is_default)?true:null,['class'=>'c-default']) !!}
-                                            </td>
-                                            <td>
-                                                {!! Form::select("currencies[$currency->id][code]",$currencies,$currency->code,['class'=>'form-control c-code']) !!}
-                                            </td>
-                                            <td>
-                                                {!! Form::text("currencies[$currency->id][name]",$currency->name,['class'=>'form-control c-name']) !!}
-                                            </td>
-                                            <td>
-                                                {!! Form::text("currencies[$currency->id][symbol]",$currency->symbol,['class'=>'form-control c-symbol','readonly' =>true]) !!}
-                                            </td>
-                                            <td>
-                                                {!! Form::text("currencies[$currency->id][rate]",$currency->rate,['class'=>'form-control c-rate']) !!}
-                                            </td>
-                                            <td class="w-10">
-                                                <button type="button" data-code="{{ $currency->code }}" class="btn btn-primary get-live-rate">Get live rate</button>
-                                            </td>
-                                            <td class="text-right w-5">
-                                                <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
-                                            </td>
-                                        </tr>
-                                    @endforeach
+                                    {{--@foreach($siteCurrencies as $key => $currency)--}}
+                                        {{--<tr>--}}
+                                            {{--<td>--}}
+                                                {{--{!! Form::text("printers[$key][name]",null,['class'=>'form-control']) !!}--}}
+                                            {{--</td>--}}
+                                            {{--<td>--}}
+                                                {{--{!! Form::text("printers[$key][id]",null,['class'=>'form-control']) !!}--}}
+                                            {{--</td>--}}
+                                            {{--<td>--}}
+                                                {{--{!! Form::select("printers[$key][folder]",[],null,['class'=>'form-control']) !!}--}}
+                                            {{--</td>--}}
+
+                                            {{--<td class="text-right w-5">--}}
+                                                {{--<button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>--}}
+                                            {{--</td>--}}
+                                        {{--</tr>--}}
+                                    {{--@endforeach--}}
 
                                     </tbody>
                                     <tfoot>
@@ -161,9 +91,7 @@
 
                                 </table>
                             </div>
-                            <div>
-                                <button type="submit" class="btn btn-info">Update All exchange rates</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -174,23 +102,15 @@
     <script type="template" id="currency_row">
         <tr>
             <td>
-                {!! Form::radio('is_default',null,null,['class'=>'c-default']) !!}
+                {!! Form::text("printers[{id}][name]",null,['class'=>'form-control']) !!}
             </td>
             <td>
-                {!! Form::select('currencies[{id}][code]',$currencies,null,['class'=>'form-control c-code']) !!}
+                {!! Form::text("printers[{id}][id]",null,['class'=>'form-control']) !!}
             </td>
             <td>
-                {!! Form::text('currencies[{id}][name]',null,['class'=>'form-control c-name']) !!}
+                {!! Form::select("printers[{id}][folder]",[],null,['class'=>'form-control']) !!}
             </td>
-            <td>
-                {!! Form::text('currencies[{id}][symbol]',null,['class'=>'form-control c-symbol','disabled' =>true]) !!}
-            </td>
-            <td>
-                {!! Form::text('currencies[{id}][rate]',null,['class'=>'form-control c-rate']) !!}
-            </td>
-            <td class="w-10">
-                <button type="button" data-code="" class="btn btn-primary get-live-rate">Get live rate</button>
-            </td>
+
             <td class="text-right w-5">
                 <button type="button" class="btn btn-danger btn-sm remove-row"><i class="fa fa-minus"></i></button>
             </td>
