@@ -87,6 +87,9 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/payment-gateways/cash', 'Admin\SettingsController@getStorePaymentsGatewaysCash')->name('admin_payment_gateways_cash');
         Route::post('/payment-gateways/cash', 'Admin\SettingsController@postStorePaymentsGatewaysCash')->name('post_admin_payment_gateways_cash');
 
+        Route::get('/printing', 'Admin\SettingsController@getStorePrinting')->name('admin_settings_printing');
+        Route::post('/printing', 'Admin\SettingsController@postStorePrinting')->name('admin_settings_printing_post');
+
         Route::group(['prefix' => 'shipping'], function () {
             Route::get('/', 'Admin\SettingsController@getGeoZones')->name('admin_settings_shipping');
             Route::get('/new/{id?}', 'Admin\SettingsController@geoZoneForm')->name('admin_settings_geo_zones_new');

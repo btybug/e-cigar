@@ -37,6 +37,10 @@
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_tax_rates') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
+            <li class="nav-item ">
+                <a class="nav-link " id="printing-tab" href="{!! route('admin_settings_printing') !!}" role="tab"
+                   aria-controls="printing" aria-selected="true" aria-expanded="true">Printing</a>
+            </li>
         </ul>
         <div>
             <div class="" aria-labelledby="general-tab">

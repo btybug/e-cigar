@@ -402,6 +402,18 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function getStorePrinting(Settings $settings)
+    {
+        $model = $settings->getEditableData('printing');
+        return $this->view('store.print', compact('model'));
+    }
+
+    public function postStorePrinting(Request $request, Settings $settings)
+    {
+        $settings->updateOrCreateSettings('printing', $request->except('_token'));
+        return redirect()->back();
+    }
+
     public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
         $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;

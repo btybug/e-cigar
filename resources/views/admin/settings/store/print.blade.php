@@ -6,7 +6,7 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link active" id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
+                <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
             </li>
             <li class="nav-item ">
@@ -38,7 +38,7 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
             <li class="nav-item ">
-                <a class="nav-link " id="printing-tab" href="{!! route('admin_settings_printing') !!}" role="tab"
+                <a class="nav-link active" id="printing-tab" href="{!! route('admin_settings_printing') !!}" role="tab"
                    aria-controls="printing" aria-selected="true" aria-expanded="true">Printing</a>
             </li>
         </ul>

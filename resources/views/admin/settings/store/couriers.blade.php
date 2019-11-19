@@ -51,6 +51,10 @@
                    aria-controls="general" aria-selected="true" aria-expanded="true">Tax Rates</a>
             </li>
             @endok
+            <li class="nav-item ">
+                <a class="nav-link " id="printing-tab" href="{!! route('admin_settings_printing') !!}" role="tab"
+                   aria-controls="printing" aria-selected="true" aria-expanded="true">Printing</a>
+            </li>
         </ul>
         <div class="" id="myTabContent">
             <div class="" aria-labelledby="general-tab">
