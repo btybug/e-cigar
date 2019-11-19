@@ -3698,6 +3698,8 @@
                         $(".shipping-payment").html(res.shippingHtml);
                         $(".order-summary").html(res.summaryHtml);
                         $(".customer-details-modal").modal('hide')
+                    }else{
+                        alert(res.message);
                     }
                 });
             });

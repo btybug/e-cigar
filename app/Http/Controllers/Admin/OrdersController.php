@@ -130,9 +130,13 @@ class OrdersController extends Controller
         $user = null;
         $products = Stock::all()->pluck('name', 'id')->all();
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
-        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-            ->whereNull('role_id')
-            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
+
+//        $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
+//            ->whereNull('role_id')
+//            ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title')->pluck('name', 'users.id');
+//
+        $users = User::all()->pluck('name', 'id')->all();
+
         $countries = $this->countries->all()->pluck('name.common', 'name.common')->toArray();
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
@@ -258,6 +262,8 @@ class OrdersController extends Controller
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+
+        if(! $default_shipping) return \Response::json(['error' => true, 'message' => "User not have default shipping address"]);
         $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
         if ($geoZone && count($geoZone->deliveries)) {
