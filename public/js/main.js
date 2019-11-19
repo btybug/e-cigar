@@ -464,7 +464,10 @@ $(document).ready(function () {
             const select_element_id = $(this).val();
             const vpid = $('#vpid').val();
             const $self = $(this);
-            fetch("/products/get-variation-menu-raw", {
+            const val = $(this).val();
+            const item = row.closest('.product__single-item-info');
+            if(val !== 'no') {
+               fetch("/products/get-variation-menu-raw", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json",
@@ -487,6 +490,11 @@ $(document).ready(function () {
 
                     row.html(data.html);
                     row.find('.select-2').select2({minimumResultsForSearch: -1});
+                    if(item.data('per-price') === 'product') {
+                        item.find('.product__single-item-info-price').data('single-price', item.data('price')*1);
+                        let currency = $('#symbol').val();
+                        item.find('.product__single-item_price').text(currency + item.data('price')*1);
+                    }
                     // row.find('.product-qty').select2();
                     $self.closest('.product__single-item-info').css('border-color', '#d7d7d7');
                     setTotalPrice(countTotalPrice());
@@ -494,6 +502,20 @@ $(document).ready(function () {
                 .catch(function (error) {
                     console.log(error);
                 });
+            } else {
+                if(item.data('per-price') === 'item') {
+                    // item.data('price', 0);
+                    item.find('.product__single-item-info-price').data('single-price', 0);
+                    let currency = $('#symbol').val();
+                    item.find('.product__single-item-info-price span').text(currency + item.find('.product__single-item-info-price').data('single-price')*1);
+                } else if(item.data('per-price') === 'product') {
+                    // item.data('price', 0);
+                    item.find('.product__single-item-info-price').data('single-price', 0);
+                    let currency = $('#symbol').val();
+                    item.find('.product__single-item_price').text(currency + item.find('.product__single-item-info-price').data('single-price')*1);
+                }
+                setTotalPrice(countTotalPrice());
+            }
         });
 
         $('body').on('change', '#specialPopUpModal select.select-variation-option.single-product-select', function(ev) {

@@ -3041,33 +3041,55 @@ $(document).ready(function () {
             var select_element_id = $(this).val();
             var vpid = $('#vpid').val();
             var $self = $(this);
-            fetch("/products/get-variation-menu-raw", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json",
-                    Accept: "application/json",
-                    "X-Requested-With": "XMLHttpRequest",
-                    "X-CSRF-Token": $('input[name="_token"]').val()
-                },
-                credentials: "same-origin",
-                body: JSON.stringify({
-                    group_id: group_id,
-                    select_element_id: select_element_id,
-                    vpid: vpid
-                })
-            }).then(function (response) {
-                return response.json();
-            }).then(function (data) {
-                console.log(444444, '--------');
+            var val = $(this).val();
+            var item = row.closest('.product__single-item-info');
+            if (val !== 'no') {
+                fetch("/products/get-variation-menu-raw", {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin",
+                    body: JSON.stringify({
+                        group_id: group_id,
+                        select_element_id: select_element_id,
+                        vpid: vpid
+                    })
+                }).then(function (response) {
+                    return response.json();
+                }).then(function (data) {
+                    console.log(444444, '--------');
 
-                row.html(data.html);
-                row.find('.select-2').select2({ minimumResultsForSearch: -1 });
-                // row.find('.product-qty').select2();
-                $self.closest('.product__single-item-info').css('border-color', '#d7d7d7');
+                    row.html(data.html);
+                    row.find('.select-2').select2({ minimumResultsForSearch: -1 });
+                    if (item.data('per-price') === 'product') {
+                        item.find('.product__single-item-info-price').data('single-price', item.data('price') * 1);
+                        var currency = $('#symbol').val();
+                        item.find('.product__single-item_price').text(currency + item.data('price') * 1);
+                    }
+                    // row.find('.product-qty').select2();
+                    $self.closest('.product__single-item-info').css('border-color', '#d7d7d7');
+                    setTotalPrice(countTotalPrice());
+                }).catch(function (error) {
+                    console.log(error);
+                });
+            } else {
+                if (item.data('per-price') === 'item') {
+                    // item.data('price', 0);
+                    item.find('.product__single-item-info-price').data('single-price', 0);
+                    var currency = $('#symbol').val();
+                    item.find('.product__single-item-info-price span').text(currency + item.find('.product__single-item-info-price').data('single-price') * 1);
+                } else if (item.data('per-price') === 'product') {
+                    // item.data('price', 0);
+                    item.find('.product__single-item-info-price').data('single-price', 0);
+                    var _currency = $('#symbol').val();
+                    item.find('.product__single-item_price').text(_currency + item.find('.product__single-item-info-price').data('single-price') * 1);
+                }
                 setTotalPrice(countTotalPrice());
-            }).catch(function (error) {
-                console.log(error);
-            });
+            }
         });
 
         $('body').on('change', '#specialPopUpModal select.select-variation-option.single-product-select', function (ev) {
