@@ -122,7 +122,7 @@ class ShoppingCartController extends Controller
         $product = Stock::where('status', true)->find($request->product_id);
         if ($product) {
             $error = $this->cartService->validateProduct($product, $request->variations);
-
+//            dd($this->cartService->variations,$this->cartService->price);
             if (!$error) {
                 $cart_id = uniqid();
                 Cart::add($cart_id, $product->id, $this->cartService->price, $request->product_qty, ['variations' => $this->cartService->variations, 'product' => $product]);

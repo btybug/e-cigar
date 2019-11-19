@@ -74,10 +74,9 @@
                                                                             @endforeach
                                                                         @endif
                                                                     </div>
-
                                                                     <div
                                                                         class="font-15 font-main-bold align-self-center col-3 pr-0 text-right">
-                                                                        {!!  convert_price($option['group']->price,$currency, false)  !!}
+                                                                        {!!  convert_price($option['price'],$currency, false)  !!}
                                                                     </div>
                                                                 </li>
                                                             @else
@@ -130,6 +129,32 @@
                                                                             </div>
                                                                         </li>
                                                                     @endforeach
+                                                                @else
+                                                                    <li class="single-row-product">
+                                                                        <div
+                                                                            class="d-flex flex-column w-100 col-9 p-0">
+                                                                            <div class="w-100">
+                                                                                <div class="row">
+                                                                                    <div
+                                                                                        class="col-sm-8 font-15 font-main-bold">
+                                                                                        {{ $option['group']->name }}
+
+                                                                                    </div>
+                                                                                    <div
+                                                                                        class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
+                                                                                        <span>x 0</span>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+
+                                                                        <div
+                                                                            class="font-15 font-main-bold align-self-center col-3 pr-0 text-right">
+                                                                            {!!  convert_price($option['price'],$currency, false)  !!}
+                                                                        </div>
+                                                                    </li>
                                                                 @endif
                                                             @endif
 
