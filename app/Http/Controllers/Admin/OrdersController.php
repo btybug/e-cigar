@@ -10,11 +10,13 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Events\ClaimReferralBonus;
+use App\Events\OrderSubmitted;
 use App\Http\Controllers\Admin\Requests\OrderHistoryRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\Coupons;
 use App\Models\Items;
+use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\OrdersJob;
 use App\Models\Others;
@@ -22,8 +24,10 @@ use App\Models\Statuses;
 use App\Models\Settings;
 use App\Models\Stock;
 use App\Models\StockVariation;
+use App\Models\StockVariationDiscount;
 use App\Models\StripePayments;
 use App\Models\ZoneCountries;
+use App\Models\ZoneCountryRegions;
 use App\Services\CartService;
 use App\Services\OrdersService;
 use App\User;
@@ -43,6 +47,7 @@ class OrdersController extends Controller
     private $countries;
     private $geoZones;
     private $orderService;
+    private $amount;
 
     public function __construct(
         Statuses $statuses,
@@ -464,57 +469,154 @@ class OrdersController extends Controller
         $customer_notes = session()->get('order_new_customer_notes');
         $coupon = session()->get('order_new_coupon');
 
+        $this->amount = CartService::getTotalPriceSum(true) + Cart::session(Orders::ORDER_NEW_SESSION_ID)->getTotal();
+        $geoZone = null;
+        $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
+        $region = ($shippingAddress) ? ZoneCountryRegions::find($shippingAddress->region) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
-        $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
-        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $user, $customer_notes, $coupon) {
+        $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region,$user) {
             $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
-            $items = $this->cartService->getCartItems(true);
+            $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
             $order_number = get_order_number();
 
             $order = Orders::create([
-                'user_id' => $user->id,
+                'user_id' => \Auth::id(),
                 'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
-                'amount' => Cart::session(Orders::ORDER_NEW_SESSION_ID)->getTotal(),
+                'amount' => $this->amount,
                 'billing_addresses_id' => $billingId,
                 'shipping_method' => $shipping->getAttributes()->courier->name,
                 'payment_method' => 'cash',
                 'shipping_price' => $shipping->getValue(),
-                'currency' => 'usd',
-                'order_number' => $order_number,
-                'customer_notes' => $customer_notes,
-                'coupon_code' => $coupon,
+                'currency' => get_currency(),
+                'order_number' => $order_number
             ]);
-            if (user_can_claim($user)) {
-                event(new ClaimReferralBonus($user->inviter, $user));
-            }
-            $settings = $this->settings->getEditableData('orders_statuses');
-            if ($settings && isset($settings['submitted'])) {
-                $historyData['user_id'] = $user->id;
-                $historyData['status_id'] = $settings['submitted'];
-                $order->history()->create($historyData);
-            }
+
+            $status = $setting = $this->settings->getData('order', 'open');
+            $historyData['user_id'] = $user->id;
+            $historyData['status_id'] = ($status) ? $status->val : $this->statuses->where('type', 'order')->first()->id;
+            $historyData['note'] = 'Order made';
+
+            $order->history()->create($historyData);
 
             $shippingAddress = $shippingAddress->toArray();
+            $shippingAddress['country'] = ($zone) ? $zone->name : null;
+            $shippingAddress['region'] = ($region) ? $region->name : null;
+
             unset($shippingAddress['id']);
             unset($shippingAddress['created_at']);
             unset($shippingAddress['updated_at']);
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
 
-            $this->cartService->saveOrderItems($items, $order);
+            $sales = [];
+            foreach ($items as $variation_id => $item) {
+                $options = [];
+                foreach ($item->attributes->variations as $variation) {
+                    $dataV = [];
+                    $dataV['price'] = $variation['price'];
+                    $dataV['options'] = [];
+                    foreach ($variation['options'] as $option) {
+                        if (isset($sales[$option['option']->item_id])) {
+                            $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + $option['qty'];
+                        } else {
+                            $sales[$option['option']->item_id] = $option['qty'];
+                        }
+                        $discount = null;;
+                        if($option['option']->price_type == 'discount'){
+                            if($option['option']->discount_type =='fixed'){
+                                $discount = StockVariationDiscount::where("variation_id",$option['option']->id)->first();
+                            }else{
+                                $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
+                            }
+                        }
+
+                        $dataV['options'][] = [
+                            'qty' => $option['qty'],
+                            'name' => $option['option']->name,
+                            'title' => $option['option']->title,
+                            'id' => $option['option']->id,
+                            'image' => $option['option']->image,
+                            'variation' => $option['option'],
+                            'unique_id' => uniqid(),
+                            'discount' => $discount
+                        ];
+                    }
+                    $options[$variation['group']->variation_id] = $dataV;
+                }
+
+                $extras = [];
+                if($item->attributes->has('extra') && isset($item->attributes->extra['data'])){
+                    foreach ($item->attributes->extra['data'] as $extra) {
+                        $dataV = [];
+                        $dataV['price'] = $extra['price'];
+                        $dataV['options'] = [];
+                        foreach ($extra['variations']['options'] as $option) {
+                            if (isset($sales[$option['option']->item_id])) {
+                                $sales[$option['option']->item_id] = $sales[$option['option']->item_id] + 1;
+                            } else {
+                                $sales[$option['option']->item_id] = 1;
+                            }
+
+                            $discount = null;;
+                            if($option['option']->price_type == 'discount'){
+                                if($option['option']->discount_type =='fixed'){
+                                    $discount = StockVariationDiscount::where("variation_id",$option['option']->id)->first();
+                                }else{
+                                    $discount = $option['option']->discounts()->where('from','<=',$option['qty'])->where('to','>=',$option['qty'])->first();
+                                }
+                            }
+
+                            $dataV['options'][] = [
+                                'qty' => $option['qty'],
+                                'name' => $option['option']->name,
+                                'title' => $option['option']->title,
+                                'id' => $option['option']->id,
+                                'image' => $option['option']->image,
+                                'variation' => $option['option'],
+                                'unique_id' => uniqid(),
+                                'discount' => $discount
+                            ];
+                        }
+                        $extras[$extra['variations']['group']->variation_id] = $dataV;
+                    }
+                }
+
+
+                if (count($sales)) {
+                    foreach ($sales as $item_id => $sale) {
+                        Others::create([
+                            'item_id' => $item_id,
+                            'user_id' => $user->id,
+                            'qty' => (int)$sale * $item->quantity,
+                            'reason' => 'sold',
+                            'grouped' => $order->id,
+                        ]);
+                    }
+                }
+
+                OrderItem::create([
+                    'order_id' => $order->id,
+                    'name' => $item->attributes->product->name,
+                    'sku' => '',
+                    'stock_id' => $item->attributes->product->id,
+                    'variation_id' => $variation_id,
+                    'price' => $item->price,
+                    'qty' => $item->quantity,
+                    'amount' => $item->price * $item->quantity,
+                    'image' => $item->attributes->product->image,
+                    'options' => ['options' => $options, 'extras' => $extras]
+                ]);
+            }
 
             OrdersJob::makeNew($order->id);
-
-            session()->forget('order_new_shipping_address_id', 'order_new_user_id', 'order_new_customer_notes', 'order_new_coupon');
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
+            event(new OrderSubmitted($user, $order));
 
             return $order;
         });
-
 
         return \Response::json(['error' => false, 'url' => route('admin_orders')]);
     }

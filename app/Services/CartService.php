@@ -59,9 +59,9 @@ class CartService
         return ($cart) ? $price * $cart->quantity : $price;
     }
 
-    public static function getTotalPriceSum()
+    public static function getTotalPriceSum($session = false)
     {
-        $data = Cart::getContent();
+        $data = ($session) ? Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent() :Cart::getContent() ;
         $price = 0;
         foreach ($data as $cart) {
             $itemPrice = 0;
