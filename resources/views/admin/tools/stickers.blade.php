@@ -84,6 +84,7 @@
 @section('css')
     <link rel="stylesheet"
           href="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.css?v='.rand(111,999))}}">
+    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <style>
         .highlight_mark {
@@ -95,8 +96,12 @@
 @section("js")
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js" integrity="sha256-m4GLhtBF1Ue31vdmii9AEzvSYnBTJFzYkVToaD047Z4=" crossorigin="anonymous"></script>
     <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
+    <script src="/public/plugins/select2/select2.full.min.js"></script>
+
     <script>
         $( document ).ready(function() {
+            $(".sticker_attribute").select2();
+
             $("body").on("click", ".attr-option", function (e) {
                 e.preventDefault()
                 let id = $(this).attr("data-item-id")
@@ -104,6 +109,8 @@
                     if (!res.error) {
                         $("body").find(".options-form").html(res.html)
                         $('#colorselector_2').colorselector();
+                        $("body").find(".sticker_attribute").select2();
+
                     }
                 })
             });
@@ -114,6 +121,8 @@
                     if (!res.error) {
                         $("body").find(".options-form").html(res.html)
                         $('#colorselector_2').colorselector();
+                        $("body").find(".sticker_attribute").select2();
+
                     }
                 })
             });

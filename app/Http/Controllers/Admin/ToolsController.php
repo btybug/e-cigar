@@ -10,6 +10,7 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Attributes;
 use App\Models\Stickers;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class ToolsController extends Controller
     public function stickers()
     {
         $stickers = Stickers::all();
-        return $this->view('stickers',compact(['stickers']));
+        $attributes = Attributes::get()->pluck('name','id')->all();
+        return $this->view('stickers',compact(['stickers','attributes']));
     }
 
     public function postStickersManage(Request $request)

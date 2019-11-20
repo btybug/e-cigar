@@ -45,8 +45,12 @@
             @endif
         </div>
         <div class="form-group">
-            <label>Sticker Name</label>
+            <label>Sticker slug</label>
             {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+        </div>
+        <div class="form-group">
+            <label>Attributes</label>
+            {!! Form::select('attributes[]',$attributes,null,['class'=>'form-control sticker_attribute','multiple' => true]) !!}
         </div>
         <div class="form-group">
             <label>Image</label>
