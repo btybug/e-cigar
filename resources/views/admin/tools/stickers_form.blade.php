@@ -28,7 +28,7 @@
                             <div class="row">
                                 <div class="col-md-10">
                                     <label>Sticker Name</label>
-                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
+                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                 </div>
                             </div>
                         </div>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label>Attributes</label>
-            {!! Form::select('attributes[]',$attributes,null,['class'=>'form-control sticker_attribute','multiple' => true]) !!}
+            {!! Form::select('attributes[]',$attributes,($model)?$model->attrs->pluck('id','id')->all():null,['class'=>'form-control sticker_attribute','multiple' => true]) !!}
         </div>
         <div class="form-group">
             <label>Image</label>

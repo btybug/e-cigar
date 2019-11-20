@@ -128,7 +128,7 @@ class DatatableController extends Controller
                 ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
                 ->select('attributes.*','attributes_translations.name','categories_translations.name as category')
                 ->where('attributes_translations.locale', \Lang::getLocale())
-                    ->whereNull('attributes.parent_id')
+//                    ->whereNull('attributes.parent_id')
                     ->groupBy('attributes.id')
         )
             ->editColumn('name', function ($attr) {
