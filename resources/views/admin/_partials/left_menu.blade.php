@@ -300,6 +300,21 @@
 
             </li>
             @endHasAccess
+            @hasAccess('admin_ebay')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-handshake-o"></i>
+                    <span>eBay</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                   <li><a href="{{route('admin_ebay')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                </ul>
+
+            </li>
+            @endHasAccess
         </ul>
     </section>
     <!-- /.sidebar -->

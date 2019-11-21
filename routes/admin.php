@@ -646,6 +646,7 @@ Route::group(['prefix' => 'wholesellers'], function () {
     Route::get('/manage/{id}', 'Admin\WholesallersController@manage')->name('admin_wholesallers_manage');
 });
 
+
 Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_download');
 Route::get('/fix-barcodes', function () {
     $barcodes = \App\Models\Barcodes::all()->pluck('code');
@@ -663,4 +664,8 @@ Route::get('/datatable-test', function () {
   return view('admin.test');
 });
 
+
+Route::group(['prefix' => 'ebay'], function () {
+    Route::get('/', 'Admin\EbayController@settings')->name('admin_ebay');
+});
 
