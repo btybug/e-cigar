@@ -311,8 +311,9 @@
                 </a>
                 <ul class="treeview-menu">
                    <li><a href="{{route('admin_ebay')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                    <li><a href="{{route('admin_ebay_listing')}}"><i class="fa fa-circle-o"></i>Listing</a></li>
+                    <li><a href="{{route('admin_ebay_orders')}}"><i class="fa fa-circle-o"></i>Orders</a></li>
                 </ul>
-
             </li>
             @endHasAccess
         </ul>

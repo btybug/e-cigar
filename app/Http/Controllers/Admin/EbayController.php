@@ -14,4 +14,9 @@ class EbayController extends Controller
     {
         return $this->view('settings');
     }
+
+    public function listing()
+    {
+        return $this->view('listing');
+    }
 }
