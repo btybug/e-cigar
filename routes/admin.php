@@ -348,6 +348,34 @@ Route::group(['prefix' => 'orders'], function () {
 
     Route::post('/cash-payment', 'Admin\OrdersController@orderCash')->name('admin_orders_new_cash');
     Route::post('/stripe-charge', 'Admin\OrdersController@stripeCharge')->name('admin_orders_new_cash');
+
+    Route::group(['prefix' => 'invoices'], function () {
+        Route::get('/', 'Admin\InvoiceOrdersController@index')->name('admin_orders_invoice');
+        Route::get('/manage/{id}', 'Admin\InvoiceOrdersController@getManage')->name('admin_orders_invoice_manage');
+        Route::get('/edit/{id}', 'Admin\InvoiceOrdersController@getEdit')->name('admin_orders_invoice_edit');
+        Route::post('/edit/{id}', 'Admin\InvoiceOrdersController@postEdit')->name('admin_orders_invoice_edit_post');
+        Route::get('/new', 'Admin\InvoiceOrdersController@getNew')->name('admin_orders_invoice_new');
+        Route::post('/add-note', 'Admin\InvoiceOrdersController@addNote')->name('admin_orders_invoice_add_note');
+        Route::get('/settings', 'Admin\InvoiceOrdersController@getSettings')->name('admin_orders_invoice_settings');
+        Route::post('/settings', 'Admin\InvoiceOrdersController@postSettings')->name('admin_orders_invoice_settings_save');
+        Route::post('/get-item', 'Admin\InvoiceOrdersController@getItem')->name('admin_orders_invoice_get_product');
+
+        Route::post('/collecting/{id}', 'Admin\InvoiceOrdersController@postCollecting')->name('admin_orders_invoice_collecting');
+        Route::post('/get-item-by-id', 'Admin\InvoiceOrdersController@ItemById')->name('admin_orders_invoice_items_by_id');
+
+
+        Route::post('/get-user', 'Admin\InvoiceOrdersController@postGetUser')->name('admin_orders_invoice_get_user');
+        Route::post('/add-user', 'Admin\InvoiceOrdersController@postAddUser')->name('admin_orders_invoice_add_user');
+
+        Route::post('/add-to-cart', 'Admin\InvoiceOrdersController@postAddToCart')->name('shop_add_to_cart_admin_orders_invoice');
+        Route::post('/update-cart', 'Admin\InvoiceOrdersController@postUpdateQty')->name('shop_update_cart_admin_orders_invoice');
+        Route::post('/remove-from-cart', 'Admin\InvoiceOrdersController@postRemoveFromCart')->name('shop_remove_from_cart_admin_orders_invoice');
+        Route::post('/apply-coupon', 'Admin\InvoiceOrdersController@postApplyCoupon')->name('admin_orders_invoice_apply_coupon');
+        Route::post('/order-new-customer-notes', 'Admin\InvoiceOrdersController@postApplyCustomerNotes')->name('admin_orders_invoice_apply_customer_notes');
+
+        Route::post('/cash-payment', 'Admin\InvoiceOrdersController@orderCash')->name('admin_orders_invoice_new_cash');
+        Route::post('/stripe-charge', 'Admin\InvoiceOrdersController@stripeCharge')->name('admin_orders_invoice_new_cash');
+    });
 });
 
 Route::group(['prefix' => 'inventory'], function () {

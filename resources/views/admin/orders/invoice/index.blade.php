@@ -6,20 +6,19 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item ">
-                <a class="nav-link active" id="general-tab" href="{!! route('admin_orders') !!}" role="tab"
+                <a class="nav-link " id="general-tab" href="{!! route('admin_orders') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Orders</a>
             </li>
-            <li class="nav-item ">
-                <a class="nav-link" id="invoice-tab" href="{!! route('admin_orders_invoice') !!}" role="tab"
+            <li class="nav-item active">
+                <a class="nav-link active" id="invoice-tab" href="{!! route('admin_orders_invoice') !!}" role="tab"
                    aria-controls="shipping" aria-selected="false">Invoices</a>
             </li>
         </ul>
         <div class="tab-content">
             <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
-           <h2 class="m-0 pull-left">{!! __('Orders') !!}</h2>
+           <h2 class="m-0 pull-left">{!! __('Invoices') !!}</h2>
             <div class="pull-right">
-                @ok('admin_orders_settings')<a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>@endok
                 @ok('admin_orders_new')<a class="btn btn-primary pull-right mr-1" href="{!! route('admin_orders_new') !!}">New Order</a>@endok
             </div>
         </div>
