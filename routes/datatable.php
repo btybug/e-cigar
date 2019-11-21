@@ -30,6 +30,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-backend-activity','Admin\DatatableController@getBackendActivity')->name('datatable_backend_activity');
 
     Route::get('/settings/get-all-orders','Admin\DatatableController@getAllOrders')->name('datatable_all_orders');
+    Route::get('/settings/get-all-orders-invoice','Admin\DatatableController@getAllOrdersInvoice')->name('datatable_all_orders_invoice');
     Route::get('/settings/get-user-orders/{user_id}','Admin\DatatableController@getUserOrders')->name('datatable_user_orders');
     Route::get('/settings/get-all-statuses','Admin\DatatableController@getAllStatuses')->name('datatable_all_statuses');
     Route::get('/settings/get-bulk-posts','Admin\DatatableController@getBulkPosts')->name('datatable_bulk_posts');

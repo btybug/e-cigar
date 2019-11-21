@@ -445,6 +445,34 @@ class DatatableController extends Controller
             ->make(true);
     }
 
+    public function getAllOrdersInvoice()
+    {
+        return Datatables::of(
+            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
+                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')
+        )
+            ->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })->editColumn('status', function ($attr) {
+                $status = $attr->history()->whereNotNull('status_id')->latest()->first();
+                return ($status && $status->status) ?
+                    '<span class="badge badge-secondary" style="background-color: ' . $status->status->color . '">' . $status->status->name . '</span>' : null;
+            })->editColumn('updated_at', function ($attr) {
+                return BBgetDateFormat($attr->updated_at);
+            })->editColumn('user', function ($attr) {
+                return $attr->user->name . ' ' . $attr->user->last_name;
+            })
+            ->editColumn('type', function ($attr) {
+                return ($attr->type) ? "Wholesaler" : "User";
+            })
+            ->addColumn('actions', function ($post) {
+                return (userCan('admin_orders_invoice_manage')) ?
+                    "<a class='badge btn-info' href='" . route('admin_orders_invoice_manage', $post->id) . "'><i class='fa fa-eye'></i></a>" .
+                    "<a class='badge btn-warning' href='" . route('admin_orders_invoice_edit', $post->id) . "'><i class='fa fa-edit'></i></a>"  : '' ;
+            })->rawColumns(['actions', 'status'])
+            ->make(true);
+    }
+
     public function getAllStatuses()
     {
         return Datatables::of(Statuses::query())

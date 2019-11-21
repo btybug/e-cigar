@@ -161,7 +161,7 @@
                 <div class="modal-body">
                     <div id="stripe-method" class="d-none payment-method-data">
                         <script src="https://js.stripe.com/v3/"></script>
-                        <form action="/admin/orders/stripe-charge" method="post" id="payment-form">
+                        <form action="/admin/orders/invoices/stripe-charge" method="post" id="payment-form">
                             {!! csrf_field()!!}
                             <div class="form-row">
                                 <label for="card-element">
@@ -737,7 +737,7 @@
                 clearTimeout(timeout);
                 timeout = setTimeout(function () {
                     console.log(value);
-                    AjaxCall("/admin/orders/apply-coupon", {
+                    AjaxCall("/admin/orders/invoices/apply-coupon", {
                         code: value,
                         user_id: $("#order_user").val()
                     }, function (res) {
@@ -755,7 +755,7 @@
                 let value = $(this).val();
                 clearTimeout(timeout);
                 timeout = setTimeout(function () {
-                    AjaxCall("/admin/orders/order-new-customer-notes", {
+                    AjaxCall("/admin/orders/invoices/order-new-customer-notes", {
                         note: value,
                         user_id: $("#order_user").val()
                     }, function (res) {
@@ -789,7 +789,7 @@
 
                 if (method == 'cash') {
                     AjaxCall(
-                        "/admin/orders/cash-payment",
+                        "/admin/orders/invoices/cash-payment",
                         {},
                         res => {
                             if (!res.error) {
@@ -809,7 +809,7 @@
 
             $("body").on('change', '.select-product', function () {
                 let id = $(this).val();
-                AjaxCall("{{ route('admin_orders_items_by_id') }}", {id: id}, function (res) {
+                AjaxCall("{{ route('admin_orders_invoice_items_by_id') }}", {id: id}, function (res) {
                     if (!res.error) {
                         var isExists = $(".promotion-elm[data-id='" + res.data.id + "']");
                         if (isExists.length == 0) {
@@ -902,7 +902,7 @@
                 var id = $(this).data('id');
                 $('.get-all-extra-tab').find('.promotion-elm').removeClass('active');
                 $(this).addClass('active');
-                AjaxCall("/admin/orders/get-item", {id: id}, function (res) {
+                AjaxCall("/admin/orders/invoices/get-item", {id: id}, function (res) {
                     if (!res.error) {
                         $(".extra-variations").html(res.html);
                         // get_price();
@@ -4100,7 +4100,7 @@
                             } else {
                                 $.ajax({
                                     type: "post",
-                                    url: "/admin/orders/add-to-cart",
+                                    url: "/admin/orders/invoices/add-to-cart",
                                     cache: false,
                                     datatype: "json",
                                     data: {product_id,product_qty,user_id, variations},
@@ -4454,7 +4454,7 @@
 
             $("body").on('change', '.select-user', function () {
                 var id = $(this).val();
-                AjaxCall("/admin/orders/get-user", {id: id}, function (res) {
+                AjaxCall("/admin/orders/invoices/get-user", {id: id}, function (res) {
                     if (!res.error) {
                         $(".user-details").html(res.html);
                     }
@@ -4463,7 +4463,7 @@
 
             $("body").on('click', '.add-user', function () {
                 var id = $('.select-user').val();
-                AjaxCall("/admin/orders/add-user", {id: id}, function (res) {
+                AjaxCall("/admin/orders/invoices/add-user", {id: id}, function (res) {
                     if (!res.error) {
                         $(".user-add-details").html(res.html);
                         $(".shipping-payment").html(res.shippingHtml);
@@ -4489,7 +4489,7 @@
                 if (itemId && itemId != '') {
                     $.ajax({
                         type: "post",
-                        url: "/admin/orders/add-to-cart",
+                        url: "/admin/orders/invoices/add-to-cart",
                         cache: false,
                         datatype: "json",
                         data: {
@@ -4526,7 +4526,7 @@
                 if (uid && uid != '') {
                     $.ajax({
                         type: "post",
-                        url: "/admin/orders/update-cart",
+                        url: "/admin/orders/invoices/update-cart",
                         cache: false,
                         datatype: "json",
                         data: {uid: uid, condition: condition, user_id: userID},
@@ -4557,7 +4557,7 @@
                 if (uid && uid != '') {
                     $.ajax({
                         type: "post",
-                        url: "/admin/orders/update-cart",
+                        url: "/admin/orders/invoices/update-cart",
                         cache: false,
                         datatype: "json",
                         data: {uid: uid, condition: condition, value: value, user_id: userID},
@@ -4587,7 +4587,7 @@
                 if (uid && uid != '') {
                     $.ajax({
                         type: "post",
-                        url: "/admin/orders/remove-from-cart",
+                        url: "/admin/orders/invoices/remove-from-cart",
                         cache: false,
                         datatype: "json",
                         data: {uid: uid, user_id: userID},
@@ -4616,7 +4616,7 @@
                 var data = form.serialize();
                 form.find('.errors').html('');
                 $.ajax({
-                    url: "{!! route('orders_add_note') !!}",
+                    url: "{!! route('admin_orders_invoice_add_note') !!}",
                     type: 'POST',
                     data: data,
                     success: function (data) {
