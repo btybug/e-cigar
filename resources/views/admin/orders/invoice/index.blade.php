@@ -19,7 +19,7 @@
         <div class="card-header panel-heading clearfix">
            <h2 class="m-0 pull-left">{!! __('Invoices') !!}</h2>
             <div class="pull-right">
-                @ok('admin_orders_new')<a class="btn btn-primary pull-right mr-1" href="{!! route('admin_orders_invoice_new') !!}">New Order</a>@endok
+                @ok('admin_orders_invoice_new')<a class="btn btn-primary pull-right mr-1" href="{!! route('admin_orders_invoice_new') !!}">New Order</a>@endok
             </div>
         </div>
         <div class="card-body panel-body">

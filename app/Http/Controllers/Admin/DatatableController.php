@@ -22,6 +22,7 @@ use App\Models\MarketType;
 use App\Models\Matches;
 use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
+use App\Models\OrderInvoice;
 use App\Models\Orders;
 use App\Models\Others;
 use App\Models\Posts;
@@ -448,8 +449,8 @@ class DatatableController extends Controller
     public function getAllOrdersInvoice()
     {
         return Datatables::of(
-            Orders::leftJoin('orders_addresses', 'orders.id', '=', 'orders_addresses.order_id')
-                ->select('orders.*', 'orders_addresses.country', 'orders_addresses.region', 'orders_addresses.city')
+            OrderInvoice::leftJoin('order_invoice_addresses', 'order_invoices.id', '=', 'order_invoice_addresses.order_id')
+                ->select('order_invoices.*', 'order_invoice_addresses.country', 'order_invoice_addresses.region', 'order_invoice_addresses.city')
         )
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at);

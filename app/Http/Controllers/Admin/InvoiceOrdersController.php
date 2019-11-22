@@ -16,6 +16,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Addresses;
 use App\Models\Coupons;
 use App\Models\Items;
+use App\Models\OrderInvoice;
+use App\Models\OrderInvoiceItem;
 use App\Models\OrderItem;
 use App\Models\Orders;
 use App\Models\OrdersJob;
@@ -73,7 +75,7 @@ class InvoiceOrdersController extends Controller
 
     public function getManage($id, Settings $settings)
     {
-        $order = Orders::where('id', $id)
+        $order = OrderInvoice::where('id', $id)
             ->with('shippingAddress')
             ->with('billingAddress')
             ->with('history')
@@ -96,14 +98,14 @@ class InvoiceOrdersController extends Controller
 
     public function getEdit($id)
     {
-        $order = Orders::findOrFail($id);
+        $order = OrderInvoice::findOrFail($id);
 
         return $this->view('edit', compact('order'));
     }
 
     public function postEdit($id, Request $request)
     {
-        $order = Orders::findOrFail($id);
+        $order = OrderInvoice::findOrFail($id);
         if($request->order_item_id == 'all'){
             $items = $order->items;
             foreach ($items as $item){
@@ -157,7 +159,7 @@ class InvoiceOrdersController extends Controller
 
     public function addNote(OrderHistoryRequest $request, OrdersService $ordersService)
     {
-        $order = Orders::findOrFail($request->id);
+        $order = OrderInvoice::findOrFail($request->id);
         $status_id = $request->get('status_id', null);
         $order->history()->create([
             'status_id' => $request->get('status_id', null),
@@ -210,7 +212,7 @@ class InvoiceOrdersController extends Controller
 
     public function postCollecting($id, Request $request)
     {
-        $order = Orders::findOrfail($id);
+        $order = OrderInvoice::findOrfail($id);
 //        dd($request->all());
         $error = true;
         $message = '';
@@ -469,9 +471,9 @@ class InvoiceOrdersController extends Controller
         $customer_notes = session()->get('order_new_customer_notes');
         $coupon = session()->get('order_new_coupon');
 
-        $this->amount = CartService::getTotalPriceSum(true) + Cart::session(Orders::ORDER_NEW_SESSION_ID)->getTotal();
+        $this->amount = CartService::getTotalPriceSum(true) + Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getTotal();
         $geoZone = null;
-        $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+        $items = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getContent();
 
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
@@ -479,11 +481,11 @@ class InvoiceOrdersController extends Controller
         $geoZone = ($zone) ? $zone->geoZone : null;
 
         $order = \DB::transaction(function () use ($billingId, $shippingId, $geoZone, $shippingAddress, $zone, $region,$user) {
-            $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
-            $items = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+            $shipping = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
+            $items = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getContent();
             $order_number = get_order_number();
 
-            $order = Orders::create([
+            $order = OrderInvoice::create([
                 'user_id' => \Auth::id(),
                 'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
                 'amount' => $this->amount,
@@ -598,7 +600,7 @@ class InvoiceOrdersController extends Controller
                     }
                 }
 
-                OrderItem::create([
+                OrderInvoiceItem::create([
                     'order_id' => $order->id,
                     'name' => $item->attributes->product->name,
                     'sku' => '',
@@ -611,9 +613,6 @@ class InvoiceOrdersController extends Controller
                     'options' => ['options' => $options, 'extras' => $extras]
                 ]);
             }
-
-            OrdersJob::makeNew($order->id);
-            event(new OrderSubmitted($user, $order));
 
             return $order;
         });
@@ -635,7 +634,7 @@ class InvoiceOrdersController extends Controller
 // This is a $20.00 charge in US Dollar.
         $charge = $stripe->charges()->create(
             array(
-                'amount' => Cart::session(Orders::ORDER_NEW_SESSION_ID)->getTotal(),
+                'amount' => Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getTotal(),
                 'currency' => 'usd',
                 'source' => $request->get('stripeToken')
             )
@@ -649,10 +648,10 @@ class InvoiceOrdersController extends Controller
         $transaction = StripePayments::create($data);
         $order = $this->orderStripe($transaction, $user);
 
-        if (!Cart::session(Orders::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') && session()->has('order_new_user_id') && $order) {
+        if (!Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->isEmpty() && session()->has('order_new_shipping_address_id') && session()->has('order_new_user_id') && $order) {
             session()->forget('order_new_user_id', 'order_new_shipping_address_id', 'order_new_customer_notes', 'order_new_coupon');
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
+            Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->clear();
+            Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
             return redirect('admin_orders');
         }
@@ -667,14 +666,14 @@ class InvoiceOrdersController extends Controller
         $shippingAddress = Addresses::find($shippingId);
         $zone = ($shippingAddress) ? ZoneCountries::find($shippingAddress->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
-        $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
+        $shipping = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
 
         $order = \DB::transaction(function () use ($billingId, $shippingId, $transaction, $geoZone, $shippingAddress, $zone, $user, $customer_notes, $coupon) {
-            $shipping = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
+            $shipping = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getCondition($geoZone->name);
             $items = $this->cartService->getCartItems(true);
             $order_number = get_order_number();
 
-            $order = Orders::create([
+            $order = OrderInvoice::create([
                 'user_id' => $user->id,
                 'transaction_id' => $transaction->id,
                 'code' => getUniqueCode('orders', 'code', Countries::where('name.common', $zone->name)->first()->cca2),
@@ -705,14 +704,57 @@ class InvoiceOrdersController extends Controller
             unset($shippingAddress['user_id']);
             $order->shippingAddress()->create($shippingAddress);
 
-            $this->cartService->saveOrderItems($items, $order);
+            foreach ($items as $variation_id => $item) {
+                $main = $item[$variation_id];
+                unset($item[$variation_id]);
+                $options = [];
+                foreach ($main->attributes->variation->options as $option) {
+                    $options[$option->attr->name] = $option->option->name;
+                }
 
-            OrdersJob::makeNew($order->id);
+                $mainOrder = OrderInvoiceItem::create([
+                    'order_id' => $order->id,
+                    'name' => $main->attributes->variation->stock->name,
+                    'sku' => $main->name,
+                    'variation_id' => $variation_id,
+                    'price' => $main->price,
+                    'qty' => $main->quantity,
+                    'amount' => $main->price * $main->quantity,
+                    'image' => $main->attributes->variation->stock->image,
+                    'options' => $options
+                ]);
+                if (count($item)) {
+                    foreach ($item as $vid) {
+                        $variationOpt = $vid->attributes->variation;
+
+                        $options = [];
+                        foreach ($variationOpt->options as $option) {
+                            $options[$option->attr->name] = $option->option->name;
+                        }
+
+                        OrderInvoiceItem::create([
+                            'order_id' => $order->id,
+                            'name' => $variationOpt->stock->name,
+                            'sku' => $variationOpt->name,
+                            'variation_id' => $variationOpt->variation_id,
+                            'price' => $vid->price,
+                            'qty' => $vid->quantity,
+                            'amount' => $vid->price * $vid->quantity,
+                            'image' => $variationOpt->stock->image,
+                            'options' => $options,
+                            'parent_id' => $mainOrder->id,
+                            'type' => $vid->attributes->type
+                        ]);
+                    }
+                }
+            }
+
+//            OrdersJob::makeNew($order->id);
 
             return $order;
         });
 
-        return \Response::json(['error' => false, 'url' => route('admin_orders')]);
+        return \Response::json(['error' => false, 'url' => route('admin_orders_invoice')]);
     }
 
     public function postApplyCoupon(Request $request)
@@ -722,10 +764,10 @@ class InvoiceOrdersController extends Controller
             ->where('start_date', '<=', $now)->where('end_date', '>=', $now)->first();
 //        Cart::getConditions();
 //        dd(Cart::session(Orders::ORDER_NEW_SESSION_ID)->getConditions());
-        Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('coupon');
-        $cartItems = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getContent();
+        Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->removeConditionsByType('coupon');
+        $cartItems = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getContent();
         foreach ($cartItems as $cartItem) {
-            Cart::session(Orders::ORDER_NEW_SESSION_ID)->clearItemConditions($cartItem->id);
+            Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->clearItemConditions($cartItem->id);
         }
 
         $error = false;
@@ -742,7 +784,7 @@ class InvoiceOrdersController extends Controller
             }
 
             if ($error == false) {
-                $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+                $subtotal = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getSubTotal();
                 if ($subtotal >= $coupon->total_amount) {
                     if ($coupon->based == 'cart') {
                         $cc = new \Darryldecode\Cart\CartCondition(array(
@@ -784,7 +826,7 @@ class InvoiceOrdersController extends Controller
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
         $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
         $geoZone = ($zone) ? $zone->geoZone : null;
-        $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+        $subtotal = Cart::session(OrderInvoice::ORDER_NEW_SESSION_ID)->getSubTotal();
         $delivery = ($geoZone) ? $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first() : null;
 
         $shippingHtml = $this->view("_partials.shipping_payment", compact('user', 'delivery', 'geoZone'))->render();
@@ -805,7 +847,7 @@ class InvoiceOrdersController extends Controller
     {
 // This  $data array will be passed to our PDF blade
         $settings = $settings->getEditableData('admin_general_settings');
-        $order = Orders::findOrFail($id);
+        $order = OrderInvoice::findOrFail($id);
         $data = [
             'order' => $order,
             'settings' => $settings,
