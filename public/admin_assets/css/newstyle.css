@@ -1822,6 +1822,10 @@ color: #ffffff;
     margin-left: 0;
 }
 /*wizard modal end*/
+.ebay-setting--page .card-header .btn-link{
+    min-width: 210px;
+    text-align: left;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

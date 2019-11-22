@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div id="accordion">
+    <div id="accordion" class="ebay-setting--page">
         <div class="card">
             <div class="card-header" id="headingSettings">
                 <h5 class="mb-0">
