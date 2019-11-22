@@ -22,8 +22,8 @@ class CreateOrderInvoiceHistoryTable extends Migration
             $table->timestamps();
 
             $table->foreign('order_id')->references('id')->on('order_invoices')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('status_id')->references('id')->on('statuses');
+//            $table->foreign('user_id')->references('id')->on('users');
+//            $table->foreign('status_id')->references('id')->on('statuses');
 
 
         });
