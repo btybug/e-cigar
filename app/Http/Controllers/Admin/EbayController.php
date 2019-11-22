@@ -19,4 +19,9 @@ class EbayController extends Controller
     {
         return $this->view('listing');
     }
+
+    public function orders()
+    {
+        return $this->view('orders');
+    }
 }

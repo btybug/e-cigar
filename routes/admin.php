@@ -695,7 +695,7 @@ Route::get('/datatable-test', function () {
 
 Route::group(['prefix' => 'ebay'], function () {
     Route::get('/', 'Admin\EbayController@settings')->name('admin_ebay');
-    Route::get('/listing', 'Admin\EbayController@settings')->name('admin_ebay_listing');
-    Route::get('/orders', 'Admin\EbayController@settings')->name('admin_ebay_orders');
+    Route::get('/listing', 'Admin\EbayController@listing')->name('admin_ebay_listing');
+    Route::get('/orders', 'Admin\EbayController@orders')->name('admin_ebay_orders');
 });
 
