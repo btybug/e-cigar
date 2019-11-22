@@ -1826,6 +1826,17 @@ color: #ffffff;
     min-width: 210px;
     text-align: left;
 }
+.ebay-listing-page--wrapper{
+
+}
+.ebay-listing-page--wrapper .table-bordered>thead>tr>th,
+.ebay-listing-page--wrapper .table-bordered>tbody>tr>th,
+.ebay-listing-page--wrapper .table-bordered>tfoot>tr>th,
+.ebay-listing-page--wrapper .table-bordered>thead>tr>td,
+.ebay-listing-page--wrapper .table-bordered>tbody>tr>td,
+.ebay-listing-page--wrapper .table-bordered>tfoot>tr>td {
+    border: 1px solid #222d32;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
