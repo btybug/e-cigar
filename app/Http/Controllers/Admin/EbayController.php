@@ -160,7 +160,6 @@ class EbayController extends Controller
     public function getAppToken()
     {
         $config = config('ebay');
-        $container['sdk-config'] = $config;
         $service = new OAuthService([
             'credentials' => $config['sandbox']['credentials'],
             'ruName' => $config['sandbox']['ruName'],

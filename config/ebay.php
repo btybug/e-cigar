@@ -62,6 +62,6 @@ return [
         ],
         'authToken' => env('EBAY_PROD_AUTH_TOKEN'),
         'oauthUserToken' => env('EBAY_PROD_OAUTH_USER_TOKEN'),
-        'ruName'=>'e-cigar'
+        'ruName'=>'Sahak_Hakobyan-SahakHak-ecigar-vdoib'
     ]
 ];
