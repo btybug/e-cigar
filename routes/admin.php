@@ -697,5 +697,10 @@ Route::group(['prefix' => 'ebay'], function () {
     Route::get('/', 'Admin\EbayController@settings')->name('admin_ebay');
     Route::get('/listing', 'Admin\EbayController@listing')->name('admin_ebay_listing');
     Route::get('/orders', 'Admin\EbayController@orders')->name('admin_ebay_orders');
+    Route::get('/test', 'Admin\EbayController@test')->name('admin_ebay_test');
+    Route::get('/app', 'Admin\EbayController@app');
+    Route::get('/get-app-token', 'Admin\EbayController@getAppToken')->name('admin_ebay_get_app_token');
+    Route::get('/get-user-token', 'Admin\EbayController@getUserToken')->name('admin_ebay_get_user_token');
+    Route::post('/get-user-token-back', 'Admin\EbayController@getUserTokenBack')->name('admin_ebay_get_user_token_back');
 });
 

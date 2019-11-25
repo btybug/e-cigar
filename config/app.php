@@ -177,6 +177,7 @@ return [
         Barryvdh\DomPDF\ServiceProvider::class,
         Chumper\Zipper\ZipperServiceProvider::class,
         Bnb\GoogleCloudPrint\LaravelServiceProvider::class,
+        Hkonnet\LaravelEbay\EbayServiceProvider::class,
 //        Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
         /*
          * Application Service Providers...
@@ -249,6 +250,7 @@ return [
         'PDF' => Barryvdh\DomPDF\Facade::class,
         'Zipper' => Chumper\Zipper\Zipper::class,
         'GoogleCloudPrint' => Bnb\GoogleCloudPrint\Facades\GoogleCloudPrint::class,
+        'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
     ],
 
