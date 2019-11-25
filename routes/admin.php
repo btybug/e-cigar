@@ -701,6 +701,6 @@ Route::group(['prefix' => 'ebay'], function () {
     Route::get('/app', 'Admin\EbayController@app');
     Route::get('/get-app-token', 'Admin\EbayController@getAppToken')->name('admin_ebay_get_app_token');
     Route::get('/get-user-token', 'Admin\EbayController@getUserToken')->name('admin_ebay_get_user_token');
-    Route::post('/get-user-token-back', 'Admin\EbayController@getUserTokenBack')->name('admin_ebay_get_user_token_back');
+
 });
 

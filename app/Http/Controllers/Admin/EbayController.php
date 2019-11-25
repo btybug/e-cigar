@@ -183,9 +183,9 @@ class EbayController extends Controller
     {
         $config = config('ebay');
         $service = new OAuthService([
-            'credentials' => $config['production']['credentials'],
+            'credentials' => $config['sandbox']['credentials'],
             'ruName' => 'Sahak_Hakobyan-SahakHak-ecigar-wxntiqisb',
-            'sandbox' => false
+            'sandbox' => true
         ]);
         $state = uniqid();
         $url =  $service->redirectUrlForUser([
@@ -203,7 +203,7 @@ class EbayController extends Controller
 
     public function getUserTokenBack(Request $request)
     {
-        \File::put('ebay.json',$request->all()->toJson());
+        \File::put('ebay.json',json_encode($request->all(),true));
     }
 }
 
