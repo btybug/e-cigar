@@ -63,6 +63,7 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
     <div class="modal fade releted-products-add-modal" id="view-result" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -142,28 +143,38 @@
             }, function (res) {
                 if (!res.error) {
                     $("#itemsModal .modal-content").html(res.html);
-                    $("#itemsModal #searchStickers").select2();
+                    // $("#itemsModal #searchStickers").select2();
                     $("#itemsModal").modal();
                 }
             });
         });
 
-        $("body").on("change", "#itemsModal #searchStickers", function () {
-            let stickers = $(this).val();
-            let data_id = $(this).attr('data-section-id');
-
-            let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
-            let existings = [];
-            $_this.find('.v-item-change')
-                .each(function (i, e) {
-                    existings.push($(e).val());
-                });
-            AjaxCall("{{ route('admin_stock_search_items') }}", {items: existings, stickers: stickers}, function (res) {
-                if (!res.error) {
-                    $("#itemsModal .modal-stickers--list").html(res.html);
-                }
+        $("body").on("keyup","#searchStickers", function() {
+            var value = $(this).val().toLowerCase();
+            console.log(value)
+            $("ul.modal-stickers--list .option-elm-modal").filter(function() {
+                console.log($("#itemsModal").find('li.searchable'))
+                $(this).toggle($("#itemsModal").find('li.searchable').data('name').toLowerCase().indexOf(value) > -1)
             });
         });
+
+        {{--$("body").on("input", "#itemsModal #searchStickers", function () {--}}
+            {{--let stickers = $(this).val();--}}
+            {{--let data_id = $(this).attr('data-section-id');--}}
+
+            {{--console.log(stickers);--}}
+            {{--let $_this = $('body').find('[data-unqiue="' + data_id + '"]');--}}
+            {{--let existings = [];--}}
+            {{--$_this.find('.v-item-change')--}}
+                {{--.each(function (i, e) {--}}
+                    {{--existings.push($(e).val());--}}
+                {{--});--}}
+            {{--AjaxCall("{{ route('admin_stock_search_items') }}", {items: existings, stickers: stickers}, function (res) {--}}
+                {{--if (!res.error) {--}}
+                    {{--$("#itemsModal .modal-stickers--list").html(res.html);--}}
+                {{--}--}}
+            {{--});--}}
+        {{--});--}}
 
 
         $('body').on('click', '#itemsModal .option-elm-modal', function () {
