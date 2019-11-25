@@ -217,8 +217,8 @@ class EbayController extends Controller
             'code' => $request->getQueryParam('code')
         ]));
         $token=[
-            'state' => $request->getQueryParam('state'),
-            'code' => $request->getQueryParam('code'),
+            'state' => $request->get('state'),
+            'code' => $request->get('code'),
             'statusCode' => $api->getStatusCode(),
             'accessToken' => $api->access_token,
             'tokenType' => $api->token_type,
