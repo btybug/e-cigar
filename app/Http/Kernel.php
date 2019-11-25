@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\ActivityMiddleware;
 use App\Http\Middleware\CorsMiddlewaer;
 use App\Http\Middleware\CurrencyMiddleware;
+use App\Http\Middleware\HttpsProtocol;
 use App\Http\Middleware\UserCan;
 use App\Http\Middleware\WholesalerIsVerifiedMiddleware;
 use App\Http\Middleware\WholesalerMiddleware;
@@ -44,6 +45,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ActivityMiddleware::class,
             CurrencyMiddleware::class,
+            HttpsProtocol::class
         ],
         'admin' => [
             \App\Http\Middleware\EncryptCookies::class,
