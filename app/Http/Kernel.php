@@ -46,7 +46,6 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             ActivityMiddleware::class,
             CurrencyMiddleware::class,
-            HttpsProtocol::class
         ],
         'admin' => [
             \App\Http\Middleware\EncryptCookies::class,
