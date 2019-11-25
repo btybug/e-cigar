@@ -10,6 +10,7 @@ use DTS\eBaySDK\Account\Enums;
 use DTS\eBaySDK\Account\Services;
 use DTS\eBaySDK\Account\Types;
 use DTS\eBaySDK\OAuth\Services\OAuthService;
+use DTS\eBaySDK\OAuth\Types\GetUserTokenRestRequest;
 use Illuminate\Http\Request;
 
 
@@ -212,7 +213,7 @@ class EbayController extends Controller
 
     public function getUserTokenBack(Request $request)
     {
-        $api = $this->oAuthService->getUserToken(new Types\GetUserTokenRestRequest([
+        $api = $this->oAuthService->getUserToken(new GetUserTokenRestRequest([
             'code' => $request->getQueryParam('code')
         ]));
         $token=[
