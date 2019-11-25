@@ -214,7 +214,7 @@ class EbayController extends Controller
     public function getUserTokenBack(Request $request)
     {
         $api = $this->oAuthService->getUserToken(new GetUserTokenRestRequest([
-            'code' => $request->getQueryParam('code')
+            'code' => $request->get('code')
         ]));
         $token=[
             'state' => $request->get('state'),
