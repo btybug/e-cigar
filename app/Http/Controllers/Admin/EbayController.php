@@ -16,7 +16,17 @@ use Illuminate\Http\Request;
 class EbayController extends Controller
 {
     protected $view = 'admin.ebay';
+    protected $oAuthService;
 
+    public function __construct()
+    {
+        $config = config('ebay');
+        $this->oAuthService = new OAuthService([
+            'credentials' => $config['sandbox']['credentials'],
+            'ruName' => $config['sandbox']['ruName'],
+            'sandbox' => true
+        ]);
+    }
     public function settings()
     {
         return $this->view('settings');
@@ -202,7 +212,22 @@ class EbayController extends Controller
 
     public function getUserTokenBack(Request $request)
     {
-        \File::put('ebay.json',json_encode($request->all(),true));
+        $api = $this->oAuthService->getUserToken(new Types\GetUserTokenRestRequest([
+            'code' => $request->getQueryParam('code')
+        ]));
+        $token=[
+            'state' => $request->getQueryParam('state'),
+            'code' => $request->getQueryParam('code'),
+            'statusCode' => $api->getStatusCode(),
+            'accessToken' => $api->access_token,
+            'tokenType' => $api->token_type,
+            'expiresIn' => $api->expires_in,
+            'refreshToken' => $api->refresh_token,
+            'error' => $api->error,
+            'errorDescription' => $api->error_description
+        ];
+        \File::put('ebay.json',json_encode($token,true));
+        return $this->view();
     }
 }
 
