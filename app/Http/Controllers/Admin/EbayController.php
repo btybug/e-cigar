@@ -183,7 +183,7 @@ class EbayController extends Controller
         $config = config('ebay');
         $service = new OAuthService([
             'credentials' => $config['sandbox']['credentials'],
-            'ruName' => 'Sahak_Hakobyan-SahakHak-ecigar-wxntiqisb',
+            'ruName' => $config['sandbox']['ruName'],
             'sandbox' => true
         ]);
         $state = uniqid();
