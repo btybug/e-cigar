@@ -52,7 +52,7 @@ return [
         ],
         'authToken' => env('EBAY_SANDBOX_AUTH_TOKEN'),
         'oauthUserToken' => env('EBAY_SANDBOX_OAUTH_USER_TOKEN'),
-        'ruName'=>'e-cigar'
+        'ruName'=>'Sahak_Hakobyan-SahakHak-ecigar-vdoib'
     ],
     'production' => [
         'credentials' => [
