@@ -244,3 +244,4 @@ Route::group(['prefix' => 'search'], function () {
     Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
 });
 Route::any('/get-user-token-back', 'Admin\EbayController@getUserTokenBack')->name('admin_ebay_get_user_token_back');
+Route::any('/auth-accepted', 'Admin\EbayController@getUserTokenBack');
