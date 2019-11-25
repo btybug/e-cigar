@@ -228,7 +228,7 @@ class EbayController extends Controller
             'errorDescription' => $api->error_description
         ];
         \File::put('ebay.json',json_encode($token,true));
-        return $this->view();
+        return $this->view('templates.auth_accepted');
     }
 }
 
