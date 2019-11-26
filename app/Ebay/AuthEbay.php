@@ -90,6 +90,7 @@ class AuthEbay
 
     public function scopeGetAccount()
     {
+        dd($this->accessToken);
         $this->oAuthService = new Services\AccountService([
             'authorization' => $this->accessToken
         ]);
