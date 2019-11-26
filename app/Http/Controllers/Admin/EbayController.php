@@ -170,14 +170,7 @@ class EbayController extends Controller
 
     public function getAppToken()
     {
-        $config = config('ebay');
-        $service = new OAuthService([
-            'credentials' => $config['sandbox']['credentials'],
-            'ruName' => $config['sandbox']['ruName'],
-            'sandbox' => true
-        ]);
-
-        $api = $service->getAppToken();
+        $api = $this->oAuthService->getAppToken();
         return $this->view('templates.get_app_token', [
             'statusCode' => $api->getStatusCode(),
             'accessToken' => $api->access_token,
@@ -191,14 +184,8 @@ class EbayController extends Controller
 
     public function getUserToken()
     {
-        $config = config('ebay');
-        $service = new OAuthService([
-            'credentials' => $config['sandbox']['credentials'],
-            'ruName' => $config['sandbox']['ruName'],
-            'sandbox' => true
-        ]);
         $state = uniqid();
-        $url =  $service->redirectUrlForUser([
+        $url =  $this->oAuthService->redirectUrlForUser([
             'state' => $state,
             'scope' => [
                 'https://api.ebay.com/oauth/api_scope/sell.account',
@@ -227,7 +214,10 @@ class EbayController extends Controller
             'error' => $api->error,
             'errorDescription' => $api->error_description
         ];
-        \File::put('ebay.json',json_encode($token,true));
+        if (!\File::isDirectory(storage_path('app/ebay'))){
+            \File::makeDirectory(storage_path('app/ebay'));
+        }
+        \File::put(storage_path('app/ebay/token.json'),json_encode($token,true));
         return $this->view('templates.auth_accepted',$token);
     }
 }
