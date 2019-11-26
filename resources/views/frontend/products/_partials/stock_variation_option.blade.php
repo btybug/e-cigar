@@ -16,7 +16,7 @@
                     style="width: 100%"
                     class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
                 @if(!$vSettings->min_count_limit || $vSettings->min_count_limit == 0)
-                    <option value="no" data-out="1" @if(!isset($selected)) selected @else no="no"  @endif>
+                    <option value="no" data-out="1" @if(!isset($selected) || !$selected) selected @endif>
                         No, Thank you
                     </option>
                 @endif
