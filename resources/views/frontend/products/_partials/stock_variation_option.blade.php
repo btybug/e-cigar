@@ -16,7 +16,7 @@
                     style="width: 100%"
                     class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
                 @if(!$vSettings->min_count_limit || $vSettings->min_count_limit == 0)
-                    <option value="no" data-out="1">
+                    <option value="no" data-out="1" @if(!isset($selected)) selected @else no="no"  @endif>
                         No, Thank you
                     </option>
                 @endif
@@ -118,7 +118,7 @@
 </div>
 <div class="col-md-3 d-flex justify-content-center">
     @if($vSettings->price_per == 'item')
-        @if($selected->discount_type == 'range')
+        @if($selected && $selected->discount_type == 'range')
             <div class="d-flex flex-column w-100 align-items-center">
                 <span class="text-tert-clr">*Quality Discount</span>
                 <div class="product__single-item-inp-num">
@@ -132,7 +132,7 @@
                     </div>
                 </div>
             </div>
-        @elseif($selected->discount_type == 'fixed')
+        @elseif($selected && $selected->discount_type == 'fixed')
             <div
                 class="d-flex flex-column w-100 align-items-center">
                 <span class="text-tert-clr">*Quality Discount</span>
@@ -152,7 +152,7 @@
     @endif
 </div>
 <div class="col-md-3 pr-0 d-flex justify-content-end">
-    @if($selected->price_per =='item' && ! $selected->stock->type)
+    @if($selected && $selected->price_per =='item' && ! $selected->stock->type)
         @if($selected->price_type == 'static')
             <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">
                 <span class="font-40">
@@ -189,5 +189,11 @@
                 @endif
             @endif
         @endif
+    @else
+        <div class="product__single-item-info-price lh-1" data-single-price="0">
+                <span class="font-40">
+                        {{ convert_price(0,$currency, false) }}
+                </span>
+        </div>
     @endif
 </div>
