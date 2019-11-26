@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Ebay\AuthEbay;
 use App\Ebay\Ebay;
 use App\Http\Controllers\Controller;
 use DTS\eBaySDK\Account\Enums;
@@ -165,6 +166,7 @@ class EbayController extends Controller
 
     public function app()
     {
+        dd(AuthEbay::getAccount());
         return $this->view('templates.index');
     }
 
