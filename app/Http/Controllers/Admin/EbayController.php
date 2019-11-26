@@ -196,11 +196,7 @@ class EbayController extends Controller
             'state' => $state,
             'scope' => [
                 'https://api.ebay.com/oauth/api_scope/sell.account',
-                'https://api.ebay.com/oauth/api_scope/sell.inventory',
-                'https://api.ebay.com/oauth/api_scope/sell.fulfillment',
-                'https://api.ebay.com/oauth/api_scope/sell.marketing',
-                'https://api.ebay.com/oauth/api_scope',
-                'https://api.ebay.com/oauth/api_scope/sell.onboarding'
+                'https://api.ebay.com/oauth/api_scope/sell.inventory'
             ]
         ]);
         return $this->view('templates.get_user_token',[
