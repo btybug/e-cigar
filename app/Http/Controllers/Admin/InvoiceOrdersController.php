@@ -99,8 +99,18 @@ class InvoiceOrdersController extends Controller
     public function getEdit($id)
     {
         $order = OrderInvoice::findOrFail($id);
+        $user = $order->user;
+        $products = Stock::all()->pluck('name', 'id')->all();
+        $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
+        $users = User::all()->pluck('name', 'id')->all();
 
-        return $this->view('edit', compact('order'));
+        $countries = $this->countries->all()->pluck('name.common', 'name.common')->toArray();
+        $countriesShipping = [null => 'Select Country'] + $this->geoZones
+                ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
+                ->select('zone_countries.*', 'zone_countries.name as country')
+                ->groupBy('country')->pluck('country', 'id')->toArray();
+
+        return $this->view('new', compact('order','user','products','statuses','users','countries','countriesShipping'));
     }
 
     public function postEdit($id, Request $request)

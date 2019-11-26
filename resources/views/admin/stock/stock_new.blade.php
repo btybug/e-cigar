@@ -1040,7 +1040,7 @@
     </div>
 
 
-    <div class="modal fade" id="mainItemModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal fade" id="mainItemModal" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1365,6 +1365,8 @@
                     AjaxCall("{{ route('admin_stock_main_item') }}", {items: items}, function (res) {
                         if (!res.error) {
                             $("body").find("#mainItemModal .modal-body").html(res.html);
+                            $("body").find(".main_item_value").select2();
+
                             $("#mainItemModal").modal();
                         }
                     });
