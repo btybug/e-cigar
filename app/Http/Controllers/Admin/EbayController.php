@@ -166,8 +166,13 @@ class EbayController extends Controller
 
     public function app()
     {
-        dd(AuthEbay::getAccount());
+
         return $this->view('templates.index');
+    }
+
+    public function getAccount()
+    {
+        dd(AuthEbay::getAccount());
     }
 
     public function getAppToken()

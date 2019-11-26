@@ -17,4 +17,7 @@
 <p>These examples will generate oauth tokens for the eBay <strong>sandbox</strong>.
 <p><a class="btn btn-primary" href="{!! route('admin_ebay_get_app_token') !!}" role="button">Get an application token</a></p>
 <p><a class="btn btn-primary" href="{!! route('admin_ebay_get_user_token') !!}" role="button">Get an user token</a></p>
+@if(\App\Ebay\AuthEbay::exists())
+    <p><a class="btn btn-primary" href="{!! route('admin_ebay_get_account') !!}" role="button">Get Account</a></p>
+@endif
 @stop

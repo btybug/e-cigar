@@ -109,4 +109,9 @@ class AuthEbay
               return $response->paymentPolicies;
         }
     }
+
+    public function scopeExists()
+    {
+        return isset($this->accessToken);
+    }
 }
