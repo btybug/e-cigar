@@ -103,14 +103,26 @@ class InvoiceOrdersController extends Controller
         $products = Stock::all()->pluck('name', 'id')->all();
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
         $users = User::all()->pluck('name', 'id')->all();
-
+        $delivery = null;
         $countries = $this->countries->all()->pluck('name.common', 'name.common')->toArray();
         $countriesShipping = [null => 'Select Country'] + $this->geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-        return $this->view('new', compact('order','user','products','statuses','users','countries','countriesShipping'));
+        $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
+
+        if(! $default_shipping) return \Response::json(['error' => true, 'message' => "User not have default shipping address"]);
+        $zone = ($default_shipping) ? ZoneCountries::find($default_shipping->country) : null;
+        $geoZone = ($zone) ? $zone->geoZone : null;
+        if ($geoZone && count($geoZone->deliveries)) {
+            $subtotal = Cart::session(Orders::ORDER_NEW_SESSION_ID)->getSubTotal();
+            $delivery = $geoZone->deliveries()->where('min', '<=', $subtotal)->where('max', '>=', $subtotal)->first();
+        }
+
+
+        return $this->view('new', compact('order','user','products',
+            'statuses','users','countries','countriesShipping','delivery','geoZone'));
     }
 
     public function postEdit($id, Request $request)
