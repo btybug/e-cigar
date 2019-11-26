@@ -90,9 +90,8 @@ class AuthEbay
 
     public function scopeGetAccount()
     {
-        dd($this->accessToken);
         $this->oAuthService = new Services\AccountService([
-            'authorization' => $this->accessToken
+            'authorization' => $this->token
         ]);
         $request = new Types\GetFulfillmentPoliciesByMarketplaceRestRequest();
         $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
