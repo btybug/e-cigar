@@ -130,6 +130,6 @@ class AuthEbay
             'https://api.ebay.com/oauth/api_scope/sell.inventory'
         ];
         $response = $this->oAuthService->refreshUserToken($request);
-        dd($response);
+        dd($response->toArray());
     }
 }
