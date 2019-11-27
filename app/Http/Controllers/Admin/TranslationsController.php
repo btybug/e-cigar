@@ -45,7 +45,8 @@ class TranslationsController extends Controller
 
     public function getIndex()
     {
-        return $this->view('index', compact([]));
+        $model = null;
+        return $this->view('index', compact(['model']));
     }
 
 }
