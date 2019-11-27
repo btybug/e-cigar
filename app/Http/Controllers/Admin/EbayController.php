@@ -172,6 +172,7 @@ class EbayController extends Controller
 
     public function getAccount()
     {
+        dd(AuthEbay::getFreshToken());
         dd(AuthEbay::getAccount());
     }
 
@@ -207,6 +208,7 @@ class EbayController extends Controller
 
     public function getUserTokenBack(Request $request)
     {
+
         $api = $this->oAuthService->getUserToken(new GetUserTokenRestRequest([
             'code' => $request->get('code')
         ]));

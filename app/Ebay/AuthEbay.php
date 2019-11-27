@@ -7,6 +7,7 @@ use \DTS\eBaySDK\Account\Services;
 use \DTS\eBaySDK\Account\Types;
 use \DTS\eBaySDK\Account\Enums;
 use DTS\eBaySDK\OAuth\Services\OAuthService;
+use DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest;
 
 
 class AuthEbay
@@ -113,5 +114,16 @@ class AuthEbay
     public function scopeExists()
     {
         return isset($this->accessToken);
+    }
+
+    public function scopeGetFreshToken(){
+        $request = new RefreshUserTokenRestRequest();
+        $request->refresh_token = $this->refreshToken;
+        $request->scope = [
+            'https://api.ebay.com/oauth/api_scope/sell.account',
+            'https://api.ebay.com/oauth/api_scope/sell.inventory'
+        ];
+        $response = $this->oAuthService->refreshUserToken($request);
+        dd($response);
     }
 }
