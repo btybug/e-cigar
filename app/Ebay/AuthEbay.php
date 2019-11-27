@@ -3,6 +3,7 @@
 
 namespace App\Ebay;
 
+use Carbon\Carbon;
 use \DTS\eBaySDK\Account\Services;
 use \DTS\eBaySDK\Account\Types;
 use \DTS\eBaySDK\Account\Enums;
@@ -31,6 +32,8 @@ class AuthEbay
     protected $mode;
 
     protected $oAuthService;
+    protected $state;
+    protected $code;
 
 
 
@@ -78,6 +81,8 @@ class AuthEbay
                 $this->tokenType = $this->token['tokenType'];
                 $this->expiresIn = $this->token['expiresIn'];
                 $this->refreshToken = $this->token['refreshToken'];
+                $this->state = $this->token['state'];
+                $this->code = $this->token['code'];
 
             }
         }
@@ -92,7 +97,7 @@ class AuthEbay
     public function scopeGetAccount()
     {
         $this->oAuthService = new Services\AccountService([
-            'authorization' => $this->accessToken
+            'authorization' => $this->getFreshToken()
         ]);
         $request = new Types\GetFulfillmentPoliciesByMarketplaceRestRequest();
         $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
@@ -116,7 +121,8 @@ class AuthEbay
         return isset($this->accessToken);
     }
 
-    public function scopeGetFreshToken(){
+    protected function getFreshToken(){
+        if(Carbon::now()->lessThan(Carbon::parse($this->expiresIn))){
         $config = config('ebay');
         $this->oAuthService = new OAuthService([
             'credentials' => $config['sandbox']['credentials'],
@@ -130,6 +136,15 @@ class AuthEbay
             'https://api.ebay.com/oauth/api_scope/sell.inventory'
         ];
         $response = $this->oAuthService->refreshUserToken($request);
-        dd($response);
+        $dataToken=$response->toArray();
+        $dataToken['expires_in']=time()+$dataToken['expires_in']-60;
+        $dataToken['tokenType']=$this->tokenType;
+        $dataToken['refreshToken']=$this->refreshToken;
+        $dataToken['state']=$this->state;
+        $dataToken['code']=$this->code;
+        \File::put(storage_path('app/ebay/token.json'),json_encode($dataToken,true));
+        $this->run();
+        }
+        return $this->accessToken;
     }
 }

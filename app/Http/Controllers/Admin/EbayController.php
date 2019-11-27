@@ -172,7 +172,6 @@ class EbayController extends Controller
 
     public function getAccount()
     {
-        dd(AuthEbay::getFreshToken());
         dd(AuthEbay::getAccount());
     }
 
