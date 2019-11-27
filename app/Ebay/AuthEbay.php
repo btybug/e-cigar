@@ -117,6 +117,12 @@ class AuthEbay
     }
 
     public function scopeGetFreshToken(){
+        $config = config('ebay');
+        $this->oAuthService = new OAuthService([
+            'credentials' => $config['sandbox']['credentials'],
+            'ruName' => $config['sandbox']['ruName'],
+            'sandbox' => true
+        ]);
         $request = new RefreshUserTokenRestRequest();
         $request->refresh_token = $this->refreshToken;
         $request->scope = [
