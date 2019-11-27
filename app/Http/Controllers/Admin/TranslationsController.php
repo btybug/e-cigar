@@ -46,7 +46,10 @@ class TranslationsController extends Controller
     public function getIndex()
     {
         $model = null;
-        return $this->view('index', compact(['model']));
+        $products = Stock::all();
+        $languages = SiteLanguages::all();
+
+        return $this->view('index', compact(['model','products','languages']));
     }
 
 }
