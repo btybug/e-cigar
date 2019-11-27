@@ -85,7 +85,7 @@ class SettingsController extends Controller
     {
         $languages = SiteLanguages::all();
         $keys = $languages->where('default', true)->first()->getTranslations();
-
+        dd($keys);
         return $this->view('language_manager', compact(['languages', 'keys']));
     }
 
