@@ -189,7 +189,7 @@
                 @endif
             @endif
         @endif
-    @else
+    @elseif($vSettings->price_per == 'item')
         <div class="product__single-item-info-price lh-1" data-single-price="0">
                 <span class="font-40">
                         {{ convert_price(0,$currency, false) }}
