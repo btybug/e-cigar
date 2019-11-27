@@ -134,6 +134,7 @@ class AuthEbay
             'sandbox' => true
         ]);
         $request = new RefreshUserTokenRestRequest();
+        dd($this->refreshToken);
         $request->refresh_token = $this->refreshToken;
         $request->scope = [
             'https://api.ebay.com/oauth/api_scope/sell.account',
