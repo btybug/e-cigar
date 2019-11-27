@@ -96,8 +96,12 @@ class AuthEbay
 
     public function scopeGetAccount()
     {
+        $config = config('ebay');
         $this->oAuthService = new Services\AccountService([
-            'authorization' => $this->getFreshToken()
+            'credentials' => $config['sandbox']['credentials'],
+            'authorization' => $this->getFreshToken(),
+            'ruName' => $config['sandbox']['ruName'],
+            'sandbox' => true
         ]);
         $request = new Types\GetFulfillmentPoliciesByMarketplaceRestRequest();
         $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
