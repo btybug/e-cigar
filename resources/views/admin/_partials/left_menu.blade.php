@@ -241,6 +241,8 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_settings_general') <li><a href="{{route('admin_settings_languages')}}"><i class="fa fa-circle-o"></i> Languages</a></li>@endok
+                    @ok('admin_settings_translations') <li><a href="{{route('admin_settings_translations')}}"><i class="fa fa-circle-o"></i>
+                            Translations</a></li>@endok
                     @ok('admin_settings_general')
                     <li><a href="{{route('admin_settings_general')}}"><i class="fa fa-circle-o"></i> General</a></li>
                     @endok

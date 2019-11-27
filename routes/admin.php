@@ -149,6 +149,10 @@ Route::group(['prefix' => 'settings'], function () {
     });
 
 
+    Route::group(['prefix' => 'languages'], function () {
+        Route::get('/', 'Admin\TranslationsController@getIndex')->name('admin_settings_translations');
+    });
+
 });
 Route::group(['prefix' => 'emails-notifications'], function () {
     Route::get('/send-email', 'Admin\EmailsNotificationsController@sendEmail')->name('admin_emails_notifications_send_email');
