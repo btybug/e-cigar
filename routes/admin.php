@@ -155,6 +155,9 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/items', 'Admin\TranslationsController@getItems')->name('admin_settings_translations_items');
         Route::post('/items', 'Admin\TranslationsController@postItems')->name('admin_settings_translations_items_post');
+
+        Route::get('/attributes', 'Admin\TranslationsController@getAttrs')->name('admin_settings_translations_attrs');
+        Route::post('/attributes', 'Admin\TranslationsController@postAttrs')->name('admin_settings_translations_attrs_post');
     });
 
 });

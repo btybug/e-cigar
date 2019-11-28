@@ -13,6 +13,10 @@
                 <a class="nav-link active" id="items-tab" href="{!! route('admin_settings_translations_items') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " id="attr-tab" href="{!! route('admin_settings_translations_attrs') !!}" role="tab"
+                   aria-controls="general" aria-selected="true" aria-expanded="true">Attributes</a>
+            </li>
         </ul>
         <div class="tab-content">
             {!! Form::open(['class'=>'form-horizontal']) !!}

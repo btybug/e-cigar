@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\AccountsRequest;
 use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
 use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Attributes;
 use App\Models\Common;
 use App\Models\Couriers;
 use App\Models\Currencies;
@@ -81,6 +82,28 @@ class TranslationsController extends Controller
         if(count($data)){
             foreach ($data as $p_id => $datum){
                 Items::updateOrCreate($p_id, [],$datum);
+            }
+        }
+
+        return redirect()->back();
+    }
+
+    public function getAttrs()
+    {
+        $model = null;
+        $attrs = Attributes::all();
+        $languages = SiteLanguages::all();
+
+        return $this->view('attrs', compact(['model','attrs','languages']));
+    }
+
+    public function postAttrs(Request $request)
+    {
+        $data  = $request->get('translatable',[]);
+
+        if(count($data)){
+            foreach ($data as $p_id => $datum){
+                Attributes::updateOrCreate($p_id, [],$datum);
             }
         }
 
