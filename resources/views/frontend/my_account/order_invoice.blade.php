@@ -10,7 +10,7 @@
                     <div class="text-center">
                         <button type="submit"
                                 class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">
-                            Logout
+                            {!! __('logout') !!}
                         </button>
                     </div>
                     {!! Form::close() !!}

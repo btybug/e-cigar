@@ -14,7 +14,7 @@
                     <option value="{!! route('my_account_tickets') !!}">{!! __('tickets') !!}</option>
                     <option value="{!! route('my_account_referrals') !!}">{!! __('referrals') !!}</option>
                     <option value="{!! route('my_account_special_offers') !!}">{!! __('special_offer') !!}</option>
-                    <option value="">Address</option>
+                    <option value="">{!! __('address') !!}</option>
                 </select>
                 {{--<select id="accounts"--}}
                 {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark" style="width: 100%">--}}

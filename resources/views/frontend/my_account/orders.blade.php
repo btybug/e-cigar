@@ -6,15 +6,15 @@
                 <select id="accounts--selects"
                         class="select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark"
                         style="width: 100%">
-                    <option value="{!! route('my_account') !!}">Account</option>
-                    <option value="{!! route('messages') !!}">Notifications</option>
-                    <option value="{!! route('my_account_favourites') !!}">Favorites</option>
-                    <option value="{!! route('my_account_orders') !!}">Orders</option>
-                    <option value="{!! route('my_account_address') !!}">Address</option>
-                    <option value="{!! route('my_account_tickets') !!}">Tickets</option>
-                    <option value="{!! route('my_account_referrals') !!}">Referals</option>
-                    <option value="{!! route('my_account_special_offers') !!}">Special Offers</option>
-                    <option value="">Address</option>
+                    <option value="{!! route('my_account') !!}">{!! __('account') !!}</option>
+                    <option value="{!! route('messages') !!}">{!! __('notifications') !!}</option>
+                    <option value="{!! route('my_account_favourites') !!}">{!! __('favorites') !!}</option>
+                    <option value="{!! route('my_account_orders') !!}">{!! __('orders') !!}</option>
+                    <option value="{!! route('my_account_address') !!}">{!! __('address') !!}</option>
+                    <option value="{!! route('my_account_tickets') !!}">{!! __('tickets') !!}</option>
+                    <option value="{!! route('my_account_referrals') !!}">{!! __('referrals') !!}</option>
+                    <option value="{!! route('my_account_special_offers') !!}">{!! __('special_offer') !!}</option>
+                    <option value="">{!! __('address') !!}</option>
                 </select>
                 {{--<select id="accounts"--}}
                 {{--class="select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark" style="width: 100%">--}}
@@ -33,7 +33,7 @@
                 <div class="mt-auto">
                     {!! Form::open(['url'=>route('logout')]) !!}
                     <div class="text-center">
-                        <button type="submit" class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">Logout</button>
+                        <button type="submit" class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">{!! __('logout') !!}</button>
                     </div>
                     {!! Form::close() !!}
                 </div>
@@ -47,13 +47,13 @@
                                 <table class="table-ntfs table table-bordered table-striped order-table">
                                     <thead>
                                     <tr>
-                                        <th class="text-capitalize">Order number</th>
-                                        <th class="text-capitalize">Order date</th>
-                                        <th class="text-capitalize">Number of products</th>
-                                        <th class="text-capitalize">Total amount</th>
-                                        <th class="text-capitalize">Type</th>
-                                        <th class="text-capitalize">Status</th>
-                                        <th class="text-capitalize">Action</th>
+                                        <th class="text-capitalize">{!! __('order_number') !!}</th>
+                                        <th class="text-capitalize">{!! __('order_date') !!}</th>
+                                        <th class="text-capitalize">{!! __('number_of_products') !!}</th>
+                                        <th class="text-capitalize">{!! __('total_amount') !!}</th>
+                                        <th class="text-capitalize">{!! __('type') !!}</th>
+                                        <th class="text-capitalize">{!! __('status') !!}</th>
+                                        <th class="text-capitalize">{!! __('action') !!}</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -71,14 +71,14 @@
                                                         {!! $order->history->first()->status->name !!}
                                                     </button>
                                                 @else
-                                                    No Status
+                                                    {!! __('no_status') !!}
                                                 @endif
                                             </td>
                                             <td>
                                                 <a href="{!! route('my_account_order_invoice',$order->id) !!}"
-                                                   class="btn ntfs-btn text-sec-clr order-table_btn mr-2 rounded-0">View</a>
+                                                   class="btn ntfs-btn text-sec-clr order-table_btn mr-2 rounded-0">{!! __('view') !!}</a>
 
-                                                <button type="button" class="btn btn-transp order-table_btn rounded-0">Purchase</button>
+                                                <button type="button" class="btn btn-transp order-table_btn rounded-0">{!! __('purchase') !!}</button>
 
                                         </tr>
                                     @endforeach
