@@ -22,7 +22,7 @@
         @endif
     </ul>
     <div class="d-flex brands_main-content-top-more">
-        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $offer->slug]) }}" class="name">Read more</a>
+        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $offer->slug]) }}" class="name">{!! __('read_more') !!}</a>
         <span class="icon">
         <svg
             xmlns="http://www.w3.org/2000/svg"

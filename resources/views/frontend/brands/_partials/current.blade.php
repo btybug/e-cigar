@@ -23,7 +23,7 @@
             @endif
         </ul>
         <div class="d-flex brands_main-content-top-more more-info-btn">
-            <span class="name">Read more</span>
+            <span class="name">{!! __('read_more') !!}</span>
             <span class="icon">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@
             </li>
         </ul>
         <div class="d-flex brands_main-content-top-more less-info-btn">
-            <span class="name">VIEW LESS</span>
+            <span class="name text-uppercase">{!! __('view_less') !!}</span>
             <span class="icon">
                                             <svg
                                                 xmlns="http://www.w3.org/2000/svg"

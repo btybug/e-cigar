@@ -6,7 +6,7 @@
                 <div class="container main-max-width h-100">
                     <div class="d-flex brands_page-top-inner h-100">
                         <div class="brands_page-top-title">
-                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">Popular Brands</h1>
+                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">{!! __('popular_brands') !!}</h1>
                         </div>
                         <div class="brands_page-top-slider">
                             <div class="brand-wall">
@@ -102,11 +102,11 @@
                     <div class="d-flex flex-wrap">
                         <div class="brands_aside">
                             <div class="select-wall">
-                                {!! Form::select('brand_filter',['' => 'All Brands'] + $parentBrands,null,
+                                {!! Form::select('brand_filter',['' => __('all_brands')] + $parentBrands,null,
                                 ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}
 
                             </div>
-                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">Categories</div>
+                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">{!! __('categories') !!}</div>
                             <ul class="brands_aside-list">
                                 @include("frontend.brands._partials.list")
                             </ul>

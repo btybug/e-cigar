@@ -67,7 +67,7 @@
                                 {!! $post->long_description !!}
                             </div>
                             <div class="news-share mb-md-0 mb-2">
-                                <h5 class="font-15 text-tert-clr">Share</h5>
+                                <h5 class="font-15 text-tert-clr">{!! __('share') !!}</h5>
                                 <ul class="d-flex">
                                     <li class="col-3 p-0"><a href="#"
                                                              class="d-flex align-items-center justify-content-center facebook-bg"><span><i
@@ -103,7 +103,7 @@
                 <div class="mb-50">
                     @if(count($relatedPosts))
                         <div class="line-wall"></div>
-                        <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">RELATED POSTS</h5>
+                        <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">{!! __('related_posts') !!}</h5>
                         <div class="related-sliders">
                             <div class="realated-slider">
                                 @foreach($relatedPosts as $relatedPost)
@@ -144,7 +144,7 @@
                     </svg>
                                                                 <span class="d-inline-block text-main-clr ml-2">123</span>
                                                                 <!--views tooltip-->
-                                                                <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">view</span>
+                                                                <span class="news-card_views-tooltip d-inline-flex align-items-center justify-content-center font-12 font-main-light main-transition position-absolute">{!! __('view') !!}</span>
                                                             </span>
                                                             <span class="d-inline-flex align-items-center">
                                                                 <svg
@@ -170,7 +170,7 @@
 
                     @if(count($post->stocks))
                     <!--RELATED PRODUCTS-->
-                        <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr my-4">RELATED PRODUCTS</h5>
+                        <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr my-4">{!! __('related_products') !!}</h5>
                         <div class="related-sliders related-slid-product">
                             <div class="realated-slider">
                                 @foreach($post->stocks as $product)
@@ -200,7 +200,7 @@
                                                         @if($product->new_price)
                                                             <!--sale label-->
                                                                 <span class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">
-                                                sale
+                                                {!! __('sale') !!}
                                             </span>
                                                             @endif
                                                         </div>
@@ -274,7 +274,7 @@
                                                     <a href="javascript:void(0)"
                                                        class="product-card_btn d-inline-flex align-items-center text-center font-15 text-sec-clr text-uppercase text-white cursor-pointer add-to-card-modal"
                                                        data-id="{{ $product->id }}">
-                                                        <span class="product-card_btn-text">add to cart</span>
+                                                        <span class="product-card_btn-text">{!! __('add_to_cart') !!}</span>
                                                         <span class="d-inline-block ml-auto">
                                 <svg viewBox="0 0 18 22" width="18px" height="22px">
     <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
@@ -291,7 +291,7 @@
                         </div>
                     @endif
                 <!--Comments-->
-                    <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">Comments</h5>
+                    <h5 class="font-sec-bold font-20 text-uppercase text-tert-clr mb-4">{!! __('comments') !!}</h5>
                     <div class="row">
                         <div class="col-md-9">
                             <div class="comments-wrapper">
@@ -333,7 +333,7 @@
                                                             <div class="button-comment">
                                                                 <button type="button"
                                                                         class="btn btn-block add-comment-btn">
-                                                                    <span class="post-title">Post a Comment</span>
+                                                                    <span class="post-title">{!! __('post_comment') !!}</span>
                                                                     <span class="icon">
 <svg
         xmlns="http://www.w3.org/2000/svg"
