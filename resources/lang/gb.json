@@ -195,7 +195,10 @@
     "save": "Save",
     "your_customer_number": "Your customer number",
     "referred_user": "Referred user",
-    "active": "Active"
+    "active": "Active",
+    "subtotal": "Subtotal",
+    "view_cart": "View Cart",
+    "checkout": "Checkout"
 
 
 }
