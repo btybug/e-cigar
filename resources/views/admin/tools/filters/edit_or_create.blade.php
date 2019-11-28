@@ -152,8 +152,6 @@
 
         $("body").on("input", "#itemsModal #searchStickers", function () {
             let stickers = $(this).val();
-            console.log(3333333333, stickers)
-
 
                 $("body").find('.option-elm-modal').each(function() {
                     var instance = new Mark($(this).find('.name-item span'));
