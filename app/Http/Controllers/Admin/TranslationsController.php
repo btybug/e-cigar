@@ -65,4 +65,26 @@ class TranslationsController extends Controller
         return redirect()->back();
     }
 
+    public function getItems()
+    {
+        $model = null;
+        $items = Items::all();
+        $languages = SiteLanguages::all();
+
+        return $this->view('items', compact(['model','items','languages']));
+    }
+
+    public function postItems(Request $request)
+    {
+        $data  = $request->get('translatable',[]);
+
+        if(count($data)){
+            foreach ($data as $p_id => $datum){
+                Items::updateOrCreate($p_id, [],$datum);
+            }
+        }
+
+        return redirect()->back();
+    }
+
 }
