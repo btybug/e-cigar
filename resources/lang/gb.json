@@ -70,5 +70,14 @@
     "price_high": "Price high",
     "price_low": "Price low",
     "not_found_title": "Page not found",
-    "not_found_desc": "Lorem ipsum dolor sit, consectetur elit, sed do eiusmod."
+    "not_found_desc": "Lorem ipsum dolor sit, consectetur elit, sed do eiusmod.",
+    "all_products": "All Products",
+    "sale_only": "On Sale Only",
+    "reset": "Reset",
+    "filters": "Filters",
+    "selected": "SELECTED",
+    "price": "Price",
+    "show": "Show",
+    "cancel": "Cancel",
+    "select_variation": "Select variation"
 }

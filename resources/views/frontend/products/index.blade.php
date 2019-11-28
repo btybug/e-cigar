@@ -6,7 +6,7 @@
                 <div class="content-head d-flex flex-wrap justify-content-between align-items-center position-relative">
 
                     <div class="category-select">
-                        {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
+                        {!! Form::select('category',['' => __('all_products')]+$categories->toArray(),($category)?$category->slug:null,
                         [
                             'class' => 'select-filter all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
                             'style' =>'width: 100%',
@@ -16,7 +16,7 @@
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
                         <div class="sale-only d-flex align-items-center">
                     <span class="text-gray-clr">
-                        On Sale Only:
+                        {!! __('sale_only') !!}:
                     </span>
                             <label class="switch-custom">
                                 <input type="checkbox">
@@ -46,14 +46,14 @@
         </span>
                         </div>
                         <div class="sort-by_select sort-by-products d-flex align-items-center position-relative">
-                            <label for="sortBy" class="text-main-clr mb-0">SORT BY: </label>
+                            <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('sort_by') !!}: </label>
                             <div class="select-wall">
                                 {!! Form::select('sort_by',[
                                     '' => 'Select',
-                                    'newest' => 'Newest',
-                                    'oldest' => 'Oldest',
-                                    'price_desc' => 'Price high',
-                                    'price_asc' => 'Price low',
+                                    'newest' => __('newest'),
+                                    'oldest' => __('oldest'),
+                                    'price_desc' => __('price_high'),
+                                    'price_asc' => __('price_low'),
                                 ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
                                     'id' => 'sortBy',
                                     'class' => 'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
@@ -138,14 +138,14 @@
                             <div class="selected_filter-sidebar-wrapper">
                                 @if(count($selecteds))
                                     <div class="d-flex justify-content-between head">
-                                        <h5 class="font-main-bold">SELECTED</h5>
+                                        <h5 class="font-main-bold text-uppercase">{!! __('selected') !!}</h5>
                                         <a href="javascript:void(0)"
-                                           class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                                           class="text-tert-clr text-uderlined font-15 reset-form">{!! __('reset') !!}</a>
                                     </div>
                                 @endif
                             </div>
                             <div class="filter-sidebar-wrapper">
-                                <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">Filters</h2>
+                                <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">{!! __('filters') !!}</h2>
                                 <div class="all-filters">
                                     <div class="mobile-back-reset">
                                         <a href="#" class="back-link">
@@ -153,11 +153,11 @@
                                         </a>
                                         <a href="javascript:void(0)"
                                            class="text-tert-clr text-uderlined font-15 reset-form">
-                                            Reset
+                                            {!! __('reset') !!}
                                         </a>
                                     </div>
                                     <div class="search-filters position-relative">
-                                        <input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="Serach for anything">
+                                        <input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="{!! __('search_for_anything') !!}">
                                         <span class="position-absolute d-flex align-items-center search-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px">
 <path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"></path>
@@ -168,7 +168,7 @@
                                         <div class="main-filters border-0 p-0">
                                             <div class="filter-single-wall">
                                                 <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                                    <h5 class="font-sec-reg text-uppercase font-17">Price</h5>
+                                                    <h5 class="font-sec-reg text-uppercase font-17">{!! __('price') !!}</h5>
                                                     <span class="icon-head">
                                                 <i class="fas fa-minus"></i>
                                             </span>
@@ -190,7 +190,7 @@
                                     </div>
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                            <h5 class="font-sec-reg text-uppercase font-17">Brands</h5>
+                                            <h5 class="font-sec-reg text-uppercase font-17">{!! __('brands') !!}</h5>
                                             <span class="icon-head">
                                                 <i class="fas fa-minus"></i>
                                             </span>
@@ -215,7 +215,7 @@
                                         </div>
                                     @endforeach
                                     <div class="mobile-show-filters-wrap">
-                                        <a href="#" class="bg-blue-clr text-sec-clr show-filter-link">Show</a>
+                                        <a href="#" class="bg-blue-clr text-sec-clr show-filter-link">{!! __('show') !!}</a>
                                     </div>
                                 </div>
                             </div>
@@ -260,7 +260,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Select variation</h4>
+                    <h4 class="modal-title">{!! __('select_variation') !!}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
 
@@ -269,10 +269,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{!! __('cancel') !!}</button>
                     <a href="javascript:void(0)"
                        class="btn border-0 rounded-0 btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
-                        <span class="product-card_btn-text mr-2">add to cart</span>
+                        <span class="product-card_btn-text mr-2">{!! __('add_to_cart') !!}</span>
                         <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
                                 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
