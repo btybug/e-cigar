@@ -10,8 +10,7 @@
             <div class="container main-max-width h-100 p-0">
                 <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between h-100">
                     <a href="{{ route('categories_front') }}"
-                       class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue
-                        shopping</a>
+                       class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">{!! __('continue_shopping') !!}</a>
                     <div class="d-flex align-items-center ml-lg-auto continue-shp-wrapp_right">
                         <div class="continue-shp-wrapp_qty position-relative">
                             <!--minus qty-->
@@ -35,7 +34,7 @@
                         <a href="#"
                            class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase"
                            data-toggle="modal" data-target="#specialPopUpModal">
-                            <span class="product-card_btn-text">add to cart</span>
+                            <span class="product-card_btn-text">{!! __('add_to_cart') !!}</span>
                             <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
                                 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
@@ -192,15 +191,15 @@
                                                         class="d-flex align-items-center product__single-delivery-left">
                                                         <div
                                                             class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">
-                                                            Delivery
+                                                            {!! __('Delivery') !!}
                                                         </div>
                                                         <div class="product__single-delivery-select">
                                                             <div class="select-wall product__select-wall">
                                                                 <select name="" id=""
                                                                         class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
                                                                         style="width: 250px">
-                                                                    <option value="">United Kingdom</option>
-                                                                    <option value="">Armenia</option>
+                                                                    <option value="">{!! __('united_kingdom') !!}</option>
+                                                                    <option value="">{!! __('armenia') !!}</option>
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -208,11 +207,10 @@
                                                     <div
                                                         class="d-flex align-items-center product__single-delivery-right">
                                                         <div class="product__single-delivery-free font-20 lh-1">
-                                                            Free on orders over £10
+                                                            {!! __('free_on_orders_over') !!} £10
                                                         </div>
                                                         <a href="#"
-                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">More
-                                                            Details</a>
+                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
                                                     </div>
 
                                                 </div>
@@ -229,25 +227,25 @@
                                         <div class="carousel-tabs">
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition active"
                                                data-toggle="pill" href="#pills-tecnical" role="tab"
-                                               aria-controls="pills-tecnical" aria-selected="true">Technical</a>
+                                               aria-controls="pills-tecnical" aria-selected="true">{!! __('technical') !!}</a>
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-videos" role="tab"
-                                               aria-controls="pills-videos" aria-selected="true">Videos</a>
+                                               aria-controls="pills-videos" aria-selected="true">{!! __('Videos') !!}</a>
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-offers" role="tab"
-                                               aria-controls="pills-offers" aria-selected="true">Offers</a>
+                                               aria-controls="pills-offers" aria-selected="true">{!! __('offers') !!}</a>
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-related" role="tab"
-                                               aria-controls="pills-related" aria-selected="false">Related</a>
+                                               aria-controls="pills-related" aria-selected="false">{!! __('related') !!}</a>
                                             @if($vape->reviews_tab)
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-reviews" role="tab"
-                                                   aria-controls="pills-reviews" aria-selected="false">Reviews</a>
+                                                   aria-controls="pills-reviews" aria-selected="false">{!! __('reviews') !!}</a>
                                             @endif
                                             @if($vape->faq_tab)
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-faq" role="tab"
-                                                   aria-controls="pills-faq" aria-selected="false">FAQ</a>
+                                                   aria-controls="pills-faq" aria-selected="false">{!! __('faq') !!}</a>
                                             @endif
                                         </div>
                                     </div>
@@ -265,7 +263,7 @@
                                                     @if(trim(strip_tags($vape->long_description)))
                                                         <div class="tecnical-desc">
                                                             <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                                Description</h3>
+                                                                {!! __('description') !!}</h3>
                                                             <div class="tecnical-desc_heading">
                                                                 <div class="row">
                                                                     <div class="col-lg-12 font-15 text-gray-clr">
@@ -283,7 +281,7 @@
                                                     @if($vape->main_item &&  $vape->main_item->specifications  && count($vape->main_item->specifications))
                                                         <div class="technical-features">
                                                             <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                                Features</h3>
+                                                                {!! __('features') !!}</h3>
                                                             <div class="d-flex flex-wrap technical-features-content">
                                                                     @foreach($vape->main_item->specifications as $stockAttr)
 
@@ -340,7 +338,7 @@
                                                     @if(trim(strip_tags($vape->long_description)))
                                                         <div class="technical-inside-box">
                                                             <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                                inside tHE BOX</h3>
+                                                                {!! __('inside_box') !!}</h3>
                                                             <div class="d-flex flex-wrap technical-inside-box-inner">
                                                                 <div class="technical-inside-box-left lh-1">
                                                                     {!! $vape->what_is_content !!}
@@ -559,11 +557,9 @@
             <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
                 <div class="modal-content">
                     <div class="modal-header special__popup-head">
-                        <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
-                            Offer</h5>
+                        <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">{!! __('special_offer') !!}</h5>
                         <div class="font-main-light font-20 text-main-clr align-self-stretch text-truncate special__popup-head-mid">
-                            <span class="w-100 text-truncate">You
-                            might be interested in the following offers</span>
+                            <span class="w-100 text-truncate">{!! __('special_offer_desc') !!}</span>
 
                         </div>
                         <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
