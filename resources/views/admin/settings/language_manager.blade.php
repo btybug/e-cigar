@@ -69,6 +69,26 @@
 @section('css')
     <link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <style>
+        textarea {
+            resize: auto;
+        }
+
+        .glyphicon-ok:before {
+            content: "\f00c";
+        }
+        .glyphicon-remove:before {
+            content: "\f00d";
+        }
+        .glyphicon {
+            display: inline-block;
+            font: normal normal normal 14px/1 FontAwesome;
+            font-size: inherit;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+    </style>
 @stop
 @section('js')
     <script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
@@ -77,7 +97,10 @@
         $(document).ready(function(){
             $.fn.editable.defaults.ajaxOptions = { headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}};
 
-            $('.x-editable').editable();
+            $('.x-editable').editable({
+                mode: 'inline',
+                type: 'textarea'
+            });
         })
     </script>
 @stop
