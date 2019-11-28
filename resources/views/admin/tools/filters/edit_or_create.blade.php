@@ -117,6 +117,7 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 @stop
+
 @section('js')
     <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
     <script src="/public/plugins/select2/select2.full.min.js"></script>
@@ -149,13 +150,131 @@
             });
         });
 
-        $("body").on("keyup","#searchStickers", function() {
-            var value = $(this).val().toLowerCase();
-            console.log(value)
-            $("ul.modal-stickers--list .option-elm-modal").filter(function() {
-                console.log($("#itemsModal").find('li.searchable'))
-                $(this).toggle($("#itemsModal").find('li.searchable').data('name').toLowerCase().indexOf(value) > -1)
-            });
+        $("body").on("input", "#itemsModal #searchStickers", function () {
+            let stickers = $(this).val();
+            console.log(3333333333, stickers)
+
+
+                $("body").find('.option-elm-modal').each(function() {
+                    var instance = new Mark($(this).find('.name-item span'));
+                    if(!stickers) {
+                        $(this).removeClass('d-none');
+                        instance.unmark({
+                            "element": "span",
+                            "className": "highlight_mark"
+                        });
+                    } else {
+                        if ($(this).data('name').toLowerCase().includes(stickers.toLowerCase())) {
+                            $(this).removeClass('d-none');
+
+                            instance.unmark({
+                                "element": "span",
+                                "className": "highlight_mark"
+                            });
+                            instance.mark(stickers, {
+                                "element": "span",
+                                "className": "highlight_mark"
+                            });
+                        } else {
+                            instance.unmark({
+                                "element": "span",
+                                "className": "highlight_mark"
+                            });
+                            $(this).addClass('d-none');
+                        }
+                    }
+
+
+
+
+                });
+
+
+            // let ids = res.data.map(function(item) {
+            //     return item.id;
+            // });
+
+            {{--let data_id = $(this).attr('data-section-id');--}}
+
+            {{--let $_this = $('body').find('[data-unqiue="' + data_id + '"]');--}}
+            {{--let existings = [];--}}
+            {{--$_this.find('.v-item-change')--}}
+            {{--    .each(function (i, e) {--}}
+            {{--        existings.push($(e).val());--}}
+            {{--    });--}}
+            {{--AjaxCall("{{ route('admin_stock_search_items') }}", {--}}
+            {{--    items: existings,--}}
+            {{--    stickers: stickers--}}
+            {{--}, function (res) {--}}
+            {{--    if (!res.error) {--}}
+            {{--        $("#itemsModal .modal-stickers--list").html(res.html);--}}
+            {{--    }--}}
+            {{--});--}}
+
+            {{--AjaxCall("{{ route('datatable_all_items_in_modal') }}", {--}}
+            {{--    "draw": "1",--}}
+            {{--    "columns": [--}}
+
+            {{--        {--}}
+            {{--            "data": "id",--}}
+            {{--            "name": "id",--}}
+            {{--            "searchable": "false",--}}
+            {{--            "orderable": "false"--}}
+            {{--        },--}}
+            {{--        {--}}
+            {{--            "data": "name",--}}
+            {{--            "name": "item_translations.name",--}}
+            {{--            "searchable": "true",--}}
+            {{--            "orderable": "true"--}}
+            {{--        },{--}}
+            {{--            "data": "category",--}}
+            {{--            "name": "categories_translations.name",--}}
+            {{--            "searchable": "true",--}}
+            {{--            "orderable": "true"--}}
+            {{--        },{--}}
+            {{--            "data": "barcode",--}}
+            {{--            "name": "barcodes.code",--}}
+            {{--            "searchable": "true",--}}
+            {{--            "orderable": "true"--}}
+            {{--        },--}}
+            {{--        {--}}
+            {{--            "data": "image",--}}
+            {{--            "name": "image",--}}
+            {{--            "searchable": "false",--}}
+            {{--            "orderable": "false"--}}
+            {{--        }--}}
+            {{--    ],--}}
+            {{--    "order": [--}}
+            {{--        {--}}
+            {{--            "column": "0",--}}
+            {{--            "dir": "asc"--}}
+            {{--        }--}}
+            {{--    ],--}}
+            {{--    "start": "0",--}}
+            {{--    "length": "-1",--}}
+            {{--    "search": {--}}
+            {{--        "value": stickers === '' ? null : stickers,--}}
+            {{--        "regex": "false"--}}
+            {{--    },--}}
+            {{--    "_": "1573066032263"--}}
+            {{--}, function (res) {--}}
+
+                // let ids = res.data.map(function(item) {
+                //     return item.id;
+                // });
+                //
+                // if(stickers == '') {
+                //     $('body').find('.option-elm-modal').removeClass('d-none');
+                // } else {
+                //     $('body').find('.option-elm-modal').each(function() {
+                //         if(ids.indexOf($(this).data('id').toString()) === -1) {
+                //             $(this).addClass('d-none');
+                //         } else {
+                //             $(this).removeClass('d-none');
+                //         }
+                //     });
+                // }
+            // })
         });
 
         {{--$("body").on("input", "#itemsModal #searchStickers", function () {--}}
@@ -269,6 +388,10 @@
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
     <style>
+        .highlight_mark {
+            background-color: #33b5e5;
+        }
+
         #itemsModal .items-box {
             flex: 1;
         }
