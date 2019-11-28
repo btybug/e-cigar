@@ -12,7 +12,7 @@
                     @if($product->brand)
                         {{ $product->brand->name }}
                     @else
-                        No brand
+                        {!! __('no_brand') !!}
                     @endif
                 </span>
                 <span class="position-relative products__item-photo d-block">
@@ -86,7 +86,7 @@
     <div  class="flex-wrap justify-content-between align-items-center products__item-bottom">
         <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}"
            class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-            view more
+            {!! __('view_more') !!}
         </a>
         @if(Auth::check())
             <span class="products__item-favourite product-card_like-icon {{ ($product->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}">

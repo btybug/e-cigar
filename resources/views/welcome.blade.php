@@ -33,12 +33,12 @@
             </section>
             <div class="container home_width p-home-mobile">
                 <section class="home_categories">
-                    <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">OUR</span> <span>CATEGORIES</span>
+                    <h2 class="font-sec-reg home_main-title text-center text-uppercase">
+                        <span class="font-sec-bold">{!! __('our') !!}</span>
+                        <span>{!! __('categories') !!}</span>
                     </h2>
-                    <p class="font-main-light font-15 text-center home_title-desc">Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                        <br/> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                        orci.</p>
+                    <p class="font-main-light font-15 text-center home_title-desc">
+                        {!! __('cat_desc') !!} </p>
                     <ul class="row home_categories_list">
                         @if(count($categories))
                             @foreach($categories as $category)
@@ -51,8 +51,7 @@
                                         <div class="d-flex flex-column position-absolute home_categories-item-inner">
                                             <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
                                             <p>{{ $category->description }}</p>
-                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                                products</a>
+                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">{!! __('view_products') !!}</a>
                                         </div>
                                     </div>
                                 </li>
@@ -99,14 +98,11 @@
                 </section>
             </div>
             <section class="home_brands-wrapper">
-                <h2 class="font-sec-reg home_main-title text-center text-white"><span class="font-sec-bold">OUR</span>
-                    <span>BRANDS</span>
+                <h2 class="font-sec-reg home_main-title text-center text-white text-uppercase">
+                    <span class="font-sec-bold">{!! __('our') !!}</span>
+                    <span>{!! __('brands') !!}</span>
                 </h2>
-                <p class="font-main-light font-15 text-center home_title-desc text-sec-clr">Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                    <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                    orci.
-                </p>
+                <p class="font-main-light font-15 text-center home_title-desc text-sec-clr">{!! __('brands_desc') !!}</p>
                 <div class="home_brands-slider">
                     @foreach($brands as $brand)
                         <div class="brand-wall">
@@ -123,14 +119,11 @@
 
                 <section class="home_products-wrapper">
                     <div class="container home_width">
-                        <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">TOP</span>
-                            <span>PRODUCTS</span>
+                        <h2 class="font-sec-reg home_main-title text-center text-uppercase">
+                            <span class="font-sec-bold">{!! __('top') !!}</span>
+                            <span>{!! __('products') !!}</span>
                         </h2>
-                        <p class="font-main-light font-15 text-center home_title-desc mb-0">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                            <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                            orci.
-                        </p>
+                        <p class="font-main-light font-15 text-center home_title-desc mb-0">{!! __('products_desc') !!}</p>
                         <div class="home_products-version-mobile d-sm-none d-block">
                             <div class="home_products-version-mobile-select">
                                 <select class="select-2 select-2--no-search main-select main-select-2arrows not-selected top-selectbox" name="" id="" style="width: 100%">
@@ -172,14 +165,10 @@
                         <div class="col-md-6 home_reviews-left-border">
                             <div class="home_reviews-left">
                                 <div class="font-sec-reg text-uppercase text-main-clr home_reviews-left-title">
-                                    <span class="font-sec-bold">CUSTOMERS</span>
-                                    <span>REVIEWS</span>
+                                    <span class="font-sec-bold">{!! __('customers') !!}</span>
+                                    <span>{!! __('reviews') !!}</span>
                                 </div>
-                                <p class="font-main-light font-15 home_reviews-left-desc">There are many variations of
-                                    passages of Lorem Ipsum available, but
-                                    the majority have suffered alteration in some form, by injected humour,
-                                    or randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure.</p>
+                                <p class="font-main-light font-15 home_reviews-left-desc">{!! __('reviews_desc') !!}</p>
                             </div>
                         </div>
                         <div class="col-md-6">

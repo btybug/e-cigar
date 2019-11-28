@@ -36,10 +36,10 @@
                         <div class="form-inline my-lg-0 h-100 align-self-lg-auto align-self-baseline pointer">
                                 <span class="d-inline-block">
                                     <a href="javascript:void(0);" class="text-sec-clr header-login-link"
-                                       data-toggle="modal" data-target="#loginModal">Login</a>
+                                       data-toggle="modal" data-target="#loginModal">{!! __('login') !!}</a>
                                     <span class="text-sec-clr">&nbsp;/&nbsp;</span>
                                     <a href="javascript:void(0);" class="text-sec-clr header-login-link"
-                                       data-toggle="modal" data-target="#registerModal">Register</a>
+                                       data-toggle="modal" data-target="#registerModal">{!! __('register') !!}</a>
                                 </span>
                         </div>
                     @endif
@@ -47,10 +47,10 @@
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                         <ul class="navbar-nav mr-auto mt-lg-0">
                             <li class="nav-item active">
-                                <a class="nav-link" href="{!! url('/') !!}">Home</a>
+                                <a class="nav-link" href="{!! url('/') !!}">{!! __('home') !!}</a>
                             </li>
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link pr-nav-l" href="{!! route('categories_front') !!}">Products
+                                <a class="nav-link pr-nav-l" href="{!! route('categories_front') !!}">{!! __('products') !!}
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -71,15 +71,15 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{!! route('product_offers') !!}">Offers</a>
+                                <a class="nav-link" href="{!! route('product_offers') !!}">{!! __('offers') !!}</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{!! route('blog') !!}">News</a>
+                                <a class="nav-link" href="{!! route('blog') !!}">{!! __('news') !!}</a>
                             </li>
 
                             <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link br-nav-l" href="{!! route('brands') !!}">Brands
+                                <a class="nav-link br-nav-l" href="{!! route('brands') !!}">{!! __('brands') !!}
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -119,11 +119,11 @@
                                 {{--</ul>--}}
                             {{--</li>--}}
                             <li class="nav-item">
-                                <a class="nav-link " href="{!! route('product_support') !!}">Support</a>
+                                <a class="nav-link " href="{!! route('product_support') !!}">{!! __('support') !!}</a>
                             </li>
                             @if(Auth::check() && Auth::user()->isWholeseler())
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('wholesaler') !!}">Wholesaler</a>
+                                    <a class="nav-link" href="{!! route('wholesaler') !!}">{!! __('wholesaler') !!}</a>
                                 </li>
                             @endif
                         </ul>
@@ -148,7 +148,7 @@
                                     @php
                                         $categories = \App\Models\Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name','slug');
                                     @endphp
-                                    {!! Form::select('category',['' => 'All Categories'] + $categories->toArray(),null,
+                                    {!! Form::select('category',['' => __('all_categories')] + $categories->toArray(),null,
                                         [
                                             'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected',
                                             'style' =>'width: 190px',
@@ -160,7 +160,7 @@
                             <div class="search position-relative search_conteiner_1">
                                 <input type="search" class="form-control" id="search-product"
                                        value="{{ (\Request::has('q')) ? \Request::get('q') :null }}"
-                                       placeholder="Serach for anything">
+                                       placeholder="{!! __('Search for anything') !!}">
                                 <span class="position-absolute d-flex align-items-center search_icon_header">
                                     <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +180,7 @@
 </svg>
                                 </span>
                                 <div id="autocomplite_content_search">
-                                    <span class="not_found d-none" >Not Found</span>
+                                    <span class="not_found d-none" >{!! __('not_found') !!}</span>
                                 </div>
                             </div>
                         @endif
@@ -207,7 +207,7 @@
                                 </span>
                         @endif
 <div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative">
-    <label for="sortBy" class="text-main-clr mb-0">CURRENCY: </label>
+    <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('currency') !!}: </label>
     <div class="d-inline-block select-wall simple_select_wrapper currency--wrap">
         {!! Form::select('currency',site_currencies(),@$currency,[
            'class' =>'select-2 currency--select-2 main-select main-select-2arrows arrow-dark',
@@ -268,7 +268,7 @@
         @include('frontend.my_account._partials.left_bar')
         {!! Form::open(['url'=>route('logout'),'class' => 'mt-auto']) !!}
         <button class="profile-sidebar_logout-btn d-inline-flex align-items-center justify-content-center font-14 text-uppercase text-white pointer">
-            Logout
+            {!! __('logout') !!}
         </button>
         {!! Form::close() !!}
         <span class="profileSidebar-close">

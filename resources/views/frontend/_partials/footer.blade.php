@@ -39,8 +39,7 @@
                         <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" title="{{ get_site_name() }}">
                     </a>
                     <div class="footer-desc mb-3">
-                        <p class="mb-0">There are many variations of passages<br/>
-                            of Lorem Ipsum available, but the majority</p>
+                        <p class="mb-0">{!! __('footer_desc') !!}</p>
                     </div>
                     <div class="footer-payment">
                         <div>
@@ -64,9 +63,9 @@
                 <div class="footer-subscribe">
 
                     <div class="d-flex position-relative align-items-center">
-                        <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">SUBSCRIBE
+                        <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">{!! __('subscribe') !!}
                             </label>
-                        {!! Form::email('subscribe_email',null,['class' => 'form-control','placeholder' => 'Your email','id' => 'footer-subscribe']) !!}
+                        {!! Form::email('subscribe_email',null,['class' => 'form-control','placeholder' => __('placeholder_your_email'),'id' => 'footer-subscribe']) !!}
                         <span class="arrow position-absolute">
                                         <svg viewBox="0 0 24 8"
                                              width="24px" height="8px">
@@ -114,7 +113,7 @@
 {{--                    </select>--}}
 {{--                </div>--}}
                 <div class="copyright">
-                    &#9400; Copyright 2019 Kaliony UK
+                    &#9400; {!! __('copyright') !!}
                 </div>
             </div>
         </div>
