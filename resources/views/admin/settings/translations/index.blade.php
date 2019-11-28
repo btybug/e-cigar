@@ -52,7 +52,7 @@
                                                     {!! Form::text('translatable['.$product->id.']['.strtolower($language->code).'][name]',get_translated($product,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                 </div>
                                             </div>
-                                            <div class="form-group row">
+                                            <div class="form-group row mt-3">
                                                 <label
                                                     class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                         data-toggle="tooltip"
@@ -60,6 +60,16 @@
                                                         data-original-title="Short Description">Short Description</span></label>
                                                 <div class="col-xl-10">
                                                     {!! Form::textarea('translatable['.$product->id.']['.strtolower($language->code).'][short_description]',get_translated($product,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label
+                                                    class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                        data-toggle="tooltip"
+                                                        title=""
+                                                        data-original-title="Short Description">Long Description</span></label>
+                                                <div class="col-xl-10">
+                                                    {!! Form::textarea('translatable['.$product->id.']['.strtolower($language->code).'][long_description]',get_translated($product,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -84,8 +94,31 @@
 
 @stop
 @section('js')
+    <script src="/public/js/tinymce/tinymce.min.js"></script>
+
     <script>
         $(function () {
+            function initTinyMce(e) {
+                tinymce.init({
+                    selector: e,
+                    height: 500,
+                    theme: 'modern',
+                    plugins: 'print preview fullpage  searchreplace autolink directionality  visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools  contextmenu colorpicker textpattern help',
+                    toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+                    image_advtab: true,
+                    templates: [
+                        {title: 'Test template 1', content: 'Test 1'},
+                        {title: 'Test template 2', content: 'Test 2'}
+                    ],
+                    content_css: [
+                        '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                        '//www.tinymce.com/css/codepen.min.css'
+                    ]
+                });
+            }
+
+            initTinyMce(".tinyMcArea")
+
             function makeid() {
                 var text = "";
                 var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
