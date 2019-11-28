@@ -87,7 +87,7 @@
                                                     <div class="font-13 text-gray-clr">
                                                         <p class="mb-2">
                                                             <span class="d-inline-block mr-2">{{ $user->dob }}</span>
-                                                            <span>{{ ($user->age) ? $user->age .' years' : null }}</span>
+                                                            <span>{{ ($user->age) ? $user->age .' '.__('years') : null }}</span>
 
                                                         </p>
                                                         <p>{{ ucfirst($user->gender) }}</p>
@@ -99,7 +99,7 @@
                                         <div class="text-md-left text-center">
                                             <button type="button" class="btn btn-transp rounded-0" data-toggle="modal"
                                                     data-target="#exampleModal">
-                                                Change Password
+                                                {!! __('change_password') !!}
                                             </button>
                                         </div>
 
@@ -110,15 +110,15 @@
                                     <!--profile status-->
                                     <div class="profile-status-wrap text-centet mb-3">
                                         <h2 class="profile-status-wrap_title font-20 font-main-bold text-uppercase text-center mb-3">
-                                            Status</h2>
-                                        <p>Verified User</p>
+                                            {!! __('status') !!}</h2>
+                                        <p>{!! __('verified_user') !!}</p>
                                     </div>
                                     @if(!$user->orders()->count() && !$user->referred_by)
                                         {!! Form::model($user,['url'=>route('post_my_account_referrals')]) !!}
                                     @endif
                                     <div class="form-group row no-gutters p-0">
-                                        <label for="username" class="col-md-2">
-                                            Referred by
+                                        <label for="username" class="col-md-2 col-form-label">
+                                           {!! __('referred_by') !!}
                                         </label>
                                         <div class="col-md-6">
                                             @if(!$user->orders()->count() && !$user->referred_by)
@@ -134,7 +134,7 @@
                                         </div>
                                         @if(!$user->orders()->count() && !$user->referred_by)
                                             <div class="col-md-2">
-                                                <button type="submit" class="btn btn-success">Submit</button>
+                                                <button type="submit" class="btn btn-success">{!! __('submit') !!}</button>
                                             </div>
                                         @endif
                                     </div>
@@ -196,7 +196,7 @@
                                                 <div class="col-xl-8">
                                                     <div class="form-group row">
                                                         <label for="username" class="col-md-4">
-                                                            First Name
+                                                            {!! __('first_name') !!}
                                                             <span class="required text-danger">*</span>
                                                         </label>
                                                         <div class="col-md-8">
@@ -205,7 +205,7 @@
                                                     </div>
                                                     <div class="form-group row">
                                                         <label for="username" class="col-md-4">
-                                                            Last Name
+                                                            {!! __('last_name') !!}
                                                             <span class="required text-danger">*</span>
                                                         </label>
                                                         <div class="col-md-8">
@@ -215,30 +215,30 @@
 
                                                     <div class="form-group row">
                                                         <label for="username" class="col-md-4">
-                                                            Date of birth
+                                                            {!! __('date_of_birth') !!}
                                                             <span class="required text-danger">*</span>
                                                         </label>
                                                         <div class="col-sm-6">
                                                             <div class="input-group date">
-                                                                {!! Form::text('dob',null,['placeholder' => 'Date of Birth',
+                                                                {!! Form::text('dob',null,['placeholder' => __('date_of_birth'),
                                                               'id'=>'dob', 'class'=> 'form-control date']) !!}
                                                                 <span class="input-group-btn">
 <button type="button" class="btn btn-default"><i class="fa fa-calendar"></i></button>
 </span></div>
                                                         </div>
                                                         <div class="col-md-2">
-                                                            {{ ($user->age) ? $user->age .' years' : null }}
+                                                            {{ ($user->age) ? $user->age .' '.__('years') : null }}
                                                         </div>
                                                     </div>
 
 
                                                     <div class="form-group row">
                                                         <label for="username" class="col-md-4">
-                                                            Gender
+                                                            {!! __('gender') !!}
                                                             <span class="required text-danger">*</span>
                                                         </label>
                                                         <div class="col-md-8">
-                                                            {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
+                                                            {!! Form::select('gender',['male'=>__('male'),'female'=>__('female')],null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -250,12 +250,12 @@
 
 
                                     <div class="card account-card rounded-0 mb-5">
-                                        <h2 class="card-title font-20"> Contact Details</h2>
+                                        <h2 class="card-title font-20"> {!! __('contact_details') !!}</h2>
 
                                         <div class="card-body">
                                             <div class="form-group row mail">
                                                 <label for="username" class="col-md-4">
-                                                    Email address
+                                                    {!! __('email_address') !!}
                                                     <span class="required text-danger">*</span>
                                                 </label>
 
@@ -266,7 +266,7 @@
                                             <div class="form-group row">
 
                                                 <label for="username" class="col-md-4">
-                                                    Phone
+                                                    {!! __('phone') !!}
                                                     <span class="required text-danger">*</span>
                                                 </label>
                                                 <div class="col-md-8">
@@ -402,7 +402,7 @@
                                     {{--</div>--}}
                                     <div class="form-group">
 
-                                        <input type="submit" class="btn ntfs-btn rounded-0" value="Save changes">
+                                        <input type="submit" class="btn ntfs-btn rounded-0" value="{!! __('save_changes') !!}">
                                     </div>
                                     {!! Form::close() !!}
                                 </div>
@@ -410,12 +410,12 @@
                                 {!! Form::model($newsletters,['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}
                                 {{--                                {!! Form::model('email_settings[22,21]',['class'=>'form-horizontal','url' => route('account_email_settings')]) !!}--}}
                                 <div class="card account-card rounded-0 mb-5">
-                                    <h2 class="card-title font-20"> Email settings </h2>
+                                    <h2 class="card-title font-20">{!! __('email_settings') !!}</h2>
 
                                     <div class="card-body">
                                         <!--subscribe to-->
                                         <div>
-                                            <p class="mb-2">Subscribe to:</p>
+                                            <p class="mb-2">{!! __('subscribe_to') !!}:</p>
                                             <div class="modal-accounts d-flex flex-column flex-sm-row align-items-start align-items-sm-center">
                                                 @foreach($categories as $category)
                                                     <div class="position-relative mr-0 mr-sm-5 mb-3 mb-sm-0">
@@ -441,7 +441,7 @@
                                                 @endforeach
                                                 <div class="form-group mb-0">
                                                     <input type="submit" class="btn ntfs-btn rounded-0"
-                                                           value="Save settings">
+                                                           value="{!! __('save_settings') !!}">
                                                 </div>
                                             </div>
                                         </div>
@@ -457,7 +457,7 @@
                                         {!! Form::open(['url'=>route('my_account_change_password')]) !!}
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Change Password</h5>
+                                                <h5 class="modal-title" id="exampleModalLabel">{!! __('change_password') !!}</h5>
                                                 <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
@@ -467,7 +467,7 @@
                                                 <div>
                                                     <div class="form-group row username">
                                                         <label for="currentPass" class="col-md-4">
-                                                            Current Password
+                                                            {!! __('current_password') !!}
                                                         </label>
                                                         <div class="col-md-8">
                                                             <input type="password" name='current_password'
@@ -477,7 +477,7 @@
                                                     </div>
                                                     <div class="form-group row confirm">
                                                         <label for="exampleInputPassword2" class="col-md-4">
-                                                            New Password
+                                                            {!! __('new_password') !!}
                                                         </label>
                                                         <div class="col-md-8">
                                                             <input type="password" name="password" class="form-control"
@@ -486,7 +486,7 @@
                                                     </div>
                                                     <div class="form-group row confirm">
                                                         <label for="exampleInputPassword3" class="one col-md-4">
-                                                            Confirm New Password
+                                                            {!! __('confirm_new_password') !!}
                                                         </label>
                                                         <div class="col-md-8">
                                                             <input type="password" name="password_confirmation"
@@ -498,9 +498,9 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-transp rounded-0"
-                                                        data-dismiss="modal">Close
+                                                        data-dismiss="modal">{!! __('close') !!}
                                                 </button>
-                                                <button type="submit" class="btn ntfs-btn rounded-0">Save changes
+                                                <button type="submit" class="btn ntfs-btn rounded-0">{!! __('save_changes') !!}
                                                 </button>
                                             </div>
                                         </div>
