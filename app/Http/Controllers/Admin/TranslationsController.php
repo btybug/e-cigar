@@ -52,4 +52,17 @@ class TranslationsController extends Controller
         return $this->view('index', compact(['model','products','languages']));
     }
 
+    public function postIndex(Request $request)
+    {
+        $data  = $request->get('translatable',[]);
+
+        if(count($data)){
+            foreach ($data as $p_id => $datum){
+                Stock::updateOrCreate($p_id, [],$datum);
+            }
+        }
+
+        return redirect()->back();
+    }
+
 }
