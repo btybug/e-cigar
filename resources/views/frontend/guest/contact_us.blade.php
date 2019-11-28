@@ -15,7 +15,7 @@
                                         <div class="item-photo">
                                             <img src="/public/img/message-icon.png" alt="contact" title="Contact Us">
                                         </div>
-                                        <div class="item-name font-20">Contact Us</div>
+                                        <div class="item-name font-20">{!! __('contact_us') !!}</div>
                                     </a>
                                 </li>
                             @endif
@@ -24,7 +24,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/delivery-icon.png" alt="Delivery" title="Delivery">
                                     </div>
-                                    <div class="item-name font-20">Delivery</div>
+                                    <div class="item-name font-20">{!! __('delivery') !!}</div>
                                 </a>
                             </li>
                             <li class="item-wrap">
@@ -33,7 +33,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/paper-icon.png" alt="Terms Conditions" title="Terms & Conditions">
                                     </div>
-                                    <div class="item-name font-20">Terms & Conditions</div>
+                                    <div class="item-name font-20">{!! __('terms_and_conditions') !!}</div>
                                 </a>
                             </li>
 
@@ -42,7 +42,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/faq-icon.png" alt="FAQ" title="FAQ">
                                     </div>
-                                    <div class="item-name font-20">FAQ</div>
+                                    <div class="item-name font-20">{!! __('faq') !!}</div>
                                 </a>
                             </li>
                         </ul>
@@ -50,12 +50,12 @@
                     <div class="col-lg-6 col-md-8">
                         {!! Form::open([]) !!}
                         <div class="contact-main-content">
-                            <h1 class="font-sec-reg font-22 lh-1 text-tert-clr main-title">Send Us a Message</h1>
+                            <h1 class="font-sec-reg font-22 lh-1 text-tert-clr main-title">{!! __('send_us_message') !!}</h1>
                             <div class="form-group row">
                                 <div class="col-lg-6">
                                     <div class="row mb-3 mb-lg-0">
                                         <label for="contactname"
-                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">Name</label>
+                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">{!! __('name') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
                                             <input type="text" class="form-control border-light" id="contactname"
                                                    value="">
@@ -65,7 +65,7 @@
                                 <div class="col-lg-6">
                                     <div class="row">
                                         <label for="contactphone"
-                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">Phone</label>
+                                               class="col-xl-2 col-sm-3 col-form-label font-sec-light">{!! __('phone') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
                                             <input type="tel" class="form-control border-light" id="contactphone"
                                                    value="">
@@ -77,7 +77,7 @@
                                 <div class="col-lg-6">
                                     <div class="row">
                                         <label for="contactemail"
-                                               class="col-xl-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">E-mail</label>
+                                               class="col-xl-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('e_mail') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
                                             <input type="email" class="form-control border-light" id="contactemail"
                                                    value="">
@@ -88,7 +88,7 @@
                             <div class="form-group row subject-group">
                                 <div class="col-md-12">
                                     <div class="row">
-                                        <label for="contactsubject" class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">Subject</label>
+                                        <label for="contactsubject" class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('subject') !!}</label>
                                         <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
                                             <input type="text" class="form-control" id="contactsubject"
                                                    value="">
@@ -100,7 +100,7 @@
                                 <div class="col-md-12">
                                     <div class="row">
                                         <label for="contactarea"
-                                               class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">Message</label>
+                                               class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('message') !!}</label>
                                         <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
                                             <textarea name="" id="contactarea" cols="30" rows="10"
                                                       class="form-control"></textarea>
@@ -127,11 +127,11 @@
 </svg>
     </label>
 </span>
-                                            <span class="font-sec-light font-20">Attachment</span>
+                                            <span class="font-sec-light font-20">{!! __('attachment') !!}</span>
                                         </div>
                                         <button
                                             class="font-sec-light font-20 d-flex justify-content-center align-items-center bg-blue-clr text-sec-clr submit-btn">
-                                            Submit
+                                            {!! __('submit') !!}
                                         </button>
                                     </div>
                                 </div>
@@ -206,7 +206,7 @@
                             </div>
                             <div class="social-wall">
                                 <div class="head">
-                                    <span class="font-sec-light font-20 lh-1 text-tert-clr">Chat With Us</span>
+                                    <span class="font-sec-light font-20 lh-1 text-tert-clr">{!! __('chat_with_us') !!}</span>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-between social-body">
                                     <a href="#" class="mr-1 d-flex align-items-center">

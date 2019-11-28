@@ -14,7 +14,7 @@
                                        <div class="item-photo">
                                            <img src="/public/img/message-icon.png" alt="contact" title="Contact Us">
                                        </div>
-                                       <div class="item-name font-20">Contact Us</div>
+                                       <div class="item-name font-20">{!! __('contact_us') !!}</div>
                                    </a>
                                </li>
                            @endif
@@ -23,7 +23,7 @@
                                    <div class="item-photo">
                                        <img src="/public/img/delivery-icon.png" alt="Delivery" title="Delivery">
                                    </div>
-                                   <div class="item-name font-20">Delivery</div>
+                                   <div class="item-name font-20">{!! __('delivery') !!}</div>
                                </a>
                            </li>
                            <li class="item-wrap">
@@ -32,7 +32,7 @@
                                    <div class="item-photo">
                                        <img src="/public/img/paper-icon.png" alt="Terms Conditions" title="Terms & Conditions">
                                    </div>
-                                   <div class="item-name font-20">Terms & Conditions</div>
+                                   <div class="item-name font-20">{!! __('terms_and_conditions') !!}</div>
                                </a>
                            </li>
 
@@ -41,13 +41,13 @@
                                    <div class="item-photo">
                                        <img src="/public/img/faq-icon.png" alt="FAQ" title="FAQ">
                                    </div>
-                                   <div class="item-name font-20">FAQ</div>
+                                   <div class="item-name font-20">{!! __('faq') !!}</div>
                                </a>
                            </li>
                        </ul>
                    </div>
                    <div class="col-md-9">
-                       <h3>Terms and Conditions</h3>
+                       <h3>{!! __('terms_and_conditions') !!}</h3>
                        <div>
                            {!! @$model->description !!}
                        </div>

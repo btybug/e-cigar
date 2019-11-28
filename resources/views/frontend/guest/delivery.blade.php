@@ -14,7 +14,7 @@
                                         <div class="item-photo">
                                             <img src="/public/img/message-icon.png" alt="contact" title="contact">
                                         </div>
-                                        <div class="item-name font-20">Contact Us</div>
+                                        <div class="item-name font-20">{!! __('contact_us') !!}</div>
                                     </a>
                                 </li>
                             @endif
@@ -23,7 +23,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/delivery-icon.png" alt="Delivery" title="Delivery">
                                     </div>
-                                    <div class="item-name font-20">Delivery</div>
+                                    <div class="item-name font-20">{!! __('delivery') !!}</div>
                                 </a>
                             </li>
                             <li class="item-wrap">
@@ -32,7 +32,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/paper-icon.png" alt="Terms Conditions" title="Terms & Conditions">
                                     </div>
-                                    <div class="item-name font-20">Terms & Conditions</div>
+                                    <div class="item-name font-20">{!! __('terms_and_conditions') !!}</div>
                                 </a>
                             </li>
 
@@ -41,7 +41,7 @@
                                     <div class="item-photo">
                                         <img src="/public/img/faq-icon.png" alt="FAQ" title="FAQ">
                                     </div>
-                                    <div class="item-name font-20">FAQ</div>
+                                    <div class="item-name font-20">{!! __('faq') !!}</div>
                                 </a>
                             </li>
                         </ul>
@@ -51,17 +51,17 @@
                             <div class="row justify-content-center mb-5">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="country">Select Country</label>
+                                        <label for="country">{!! __('select_country') !!}</label>
                                         {!! Form::select('country',$countries,null,['class'=>'form-control','id'=>'country']) !!}
                                     </div>
                                 </div>
 
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label for="city">Select City</label>
+                                        <label for="city">{!! __('select_city') !!}</label>
                                         <div class="city-choser">
                                             <select id="city" disabled readonly="true" class="form-control">
-                                                <option selected>Choose...</option>
+                                                <option selected>{!! __('choose') !!}...</option>
                                             </select>
                                         </div>
                                     </div>
