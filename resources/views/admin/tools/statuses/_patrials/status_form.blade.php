@@ -27,7 +27,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label>Status Name</label>
-                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>true]) !!}
+                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control','required'=>(($loop->first)?true:false)]) !!}
                                 </div>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <label>Description</label>
-                                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>true,'rows'=>5]) !!}
+                                    {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($model,strtolower($language->code),'description'),['class'=>'form-control','required'=>(($loop->first)?true:false),'rows'=>5]) !!}
                                 </div>
                             </div>
                         </div>
