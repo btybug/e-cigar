@@ -22,65 +22,74 @@
             {!! Form::open(['class'=>'form-horizontal']) !!}
             <div class="card panel panel-default mb-3">
                 <div class="card-body panel-body">
-                    <div class="form-group">
-                        {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
-                    </div>
 
                     <div class="form-group">
-                        @foreach($attrs as $attr)
-                        <div class="row">
-                            <h3>{!! $attr->name !!} translation</h3>
-                        </div>
-                        <div class="row">
-                            @if(count(get_languages()))
-                                <ul class="nav nav-tabs">
-                                    @foreach(get_languages() as $language)
-                                        <li class="nav-item"><a
-                                                class="nav-link @if($loop->first) active @endif"
-                                                data-toggle="tab"
-                                                href="#{{ strtolower($language->code).$attr->id }}">
+                        <div class="accordion" id="accordionTranslation">
+                            @foreach($attrs as $attr)
+                                <div class="card">
+                                    <div class="card-header" id="heading{!! $attr->id !!}">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse{!! $attr->id !!}" aria-expanded="true" aria-controls="collapse{!! $attr->id !!}">
+                                                <h6>{!! $attr->name !!} translation</h6>
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapse{!! $attr->id !!}" class="collapse" aria-labelledby="heading{!! $attr->id !!}" data-parent="#accordionTranslation">
+                                        <div class="card-body">
+                                            <div class="text-right mb-2">
+                                                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
+                                            </div>
+                                            @if(count(get_languages()))
+                                                <ul class="nav nav-tabs">
+                                                    @foreach(get_languages() as $language)
+                                                        <li class="nav-item"><a
+                                                                class="nav-link @if($loop->first) active @endif"
+                                                                data-toggle="tab"
+                                                                href="#{{ strtolower($language->code).$attr->id }}">
                                                                             <span
                                                                                 class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                            </a></li>
-                                    @endforeach
-                                </ul>
-                            @endif
-                            <div class="tab-content mt-20">
-                                @if(count(get_languages()))
-                                    @foreach(get_languages() as $language)
-                                        <div id="{{ strtolower($language->code).$attr->id }}"
-                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                            <div class="form-group row mt-3">
-                                                <label
-                                                    class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                        data-toggle="tooltip"
-                                                        title=""
-                                                        data-original-title="Attribute Name Title">Product Name</span></label>
-                                                <div class="col-xl-10">
-                                                    {!! Form::text('translatable['.$attr->id.']['.strtolower($language->code).'][name]',get_translated($attr,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                </div>
-                                            </div>
-                                            <div class="form-group row mt-3">
-                                                <label
-                                                    class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                        data-toggle="tooltip"
-                                                        title=""
-                                                        data-original-title="Short Description">Short Description</span></label>
-                                                <div class="col-xl-10">
-                                                    {!! Form::textarea('translatable['.$attr->id.']['.strtolower($language->code).'][short_description]',get_translated($attr,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                </div>
-                                            </div>
+                                                            </a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+                                            <div class="tab-content mt-20">
+                                                @if(count(get_languages()))
+                                                    @foreach(get_languages() as $language)
+                                                        <div id="{{ strtolower($language->code).$attr->id }}"
+                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                            <div class="form-group row mt-3">
+                                                                <label
+                                                                    class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                        data-toggle="tooltip"
+                                                                        title=""
+                                                                        data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('translatable['.$attr->id.']['.strtolower($language->code).'][name]',get_translated($attr,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row mt-3">
+                                                                <label
+                                                                    class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                        data-toggle="tooltip"
+                                                                        title=""
+                                                                        data-original-title="Short Description">Short Description</span></label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::textarea('translatable['.$attr->id.']['.strtolower($language->code).'][short_description]',get_translated($attr,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                </div>
+                                                            </div>
 
+                                                        </div>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                                    </div>
+                                </div>
+                            @endforeach
                         </div>
-                        @endforeach
                     </div>
-                    <div class="form-group">
-                        {!! Form::submit('Save',['class' => 'btn btn-primary pull-right']) !!}
-                    </div>
+                    
                 </div>
             </div>
             {!! Form::close() !!}
