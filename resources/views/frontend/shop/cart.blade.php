@@ -13,7 +13,7 @@
                                ref="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">1</span>
                                 <span
-                                    class="name text-uppercase font-main-bold font-16 text-truncate">SHOPPING CART</span>
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('shopping_cart') !!}</span>
                                 <span class="icon">
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@
                             <a class="item d-flex align-items-center justify-content-between"
                                href="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">2</span>
-                                <span class="name text-uppercase font-main-bold font-16 text-truncate">CHECKOUT</span>
+                                <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('checkout') !!}</span>
                                 <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@
                             <a class="item d-flex align-items-center justify-content-between"
                                href="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">3</span>
-                                <span class="name text-uppercase font-main-bold font-16 text-truncate">Payment</span>
+                                <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('payment') !!}</span>
                                 <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@
                                href="javascript:void(0);">
                                 <span class="font-sec-reg text-main-clr num">4</span>
                                 <span
-                                    class="name text-uppercase font-main-bold font-16 text-truncate">Confirmation</span>
+                                    class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('confirmation') !!}</span>
                                 <span class="icon">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -97,10 +97,9 @@
         <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
             <div class="modal-content">
                 <div class="modal-header special__popup-head">
-                    <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
-                        Offer</h5>
-                    <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">You
-                        might be interested in the following offers
+                    <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">{!! __('special_offer') !!}</h5>
+                    <div class="font-main-light font-20 text-main-clr align-self-stretch special__popup-head-mid">
+                        {!! __('special_popup_head_desc') !!}
                     </div>
                     <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">

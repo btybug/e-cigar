@@ -4,8 +4,8 @@
             <div class="col-lg-10 pl-0">
                 <div class="shopping-cart-payment shopping__cart-payment-wrapper">
                     <div class="head-wrap">
-                        <h1 class="font-sec-reg font-24 lh-1 title">Payment Methode</h1>
-                        <p class="font-18 desc lh-1 m-0">Select a payment methode</p>
+                        <h1 class="font-sec-reg font-24 lh-1 title">{!! __('payment_method') !!}</h1>
+                        <p class="font-18 desc lh-1 m-0">{!! __('select_payment_method') !!}</p>
                     </div>
                     <div class="row">
                         <div class="col-md-4">
@@ -66,7 +66,7 @@
                                         <form action="/stripe-charge" method="post" id="payment-form">
                                             {!! csrf_field()!!}
                                             <div class="form-group row item-wrap card-number">
-                                                <label for="cardNumber" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">Card Number <span class="sup">*</span></label>
+                                                <label for="cardNumber" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">{!! __('card_number') !!} <span class="sup">*</span></label>
                                                 <div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">
                                                     <div id="cardNumber" class="field form-control"></div>
                                                     <span class="cards-icon d-inline-flex align-items-center">
@@ -74,20 +74,20 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row item-wrap">
-                                                <label for="cardName" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">Name on Card <span class="sup">*</span></label>
+                                                <label for="cardName" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">{!! __('name_on_card') !!} <span class="sup">*</span></label>
                                                 <div class="col-xl-6 col-sm-8 p-xl-0 center-col">
                                                     <input type="text" class="form-control" id="cardName" placeholder="Connor Silva">
                                                 </div>
                                             </div>
                                             <div class="form-group row item-wrap expiry-date">
-                                                <label for="card-expiry-element" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">Expiry Date <span class="sup">*</span></label>
+                                                <label for="card-expiry-element" class="col-xl-2 col-sm-4 pr-sm-0 col-form-label text-gray-clr d-flex flex-nowrap">{!! __('expiry_date') !!}<span class="sup">*</span></label>
                                                 <div class="col-xl-6 col-sm-8 p-xl-0 center-col">
                                                     <div class="d-flex flex-wrap justify-content-between">
                                                         <div class="col-sm-4 p-0 d-flex">
                                                             <div id="card-expiry-element" class="field  form-control"></div>
                                                         </div>
                                                         <div class="col-sm-8 p-0 d-flex flex-wrap secure-code">
-                                                            <label for="secureCode" class="col-sm-6 col-form-label text-gray-clr text-sm-right d-flex flex-nowrap">Security Code <span class="sup">*</span></label>
+                                                            <label for="secureCode" class="col-sm-6 col-form-label text-gray-clr text-sm-right d-flex flex-nowrap">{!! __('security_code') !!} <span class="sup">*</span></label>
                                                             <div class="col-sm-6 pr-0">
                                                                 <div id="secureCode" class="field  form-control"></div>
                                                             </div>
@@ -99,7 +99,7 @@
                                                 <div class="col-sm-8 pr-0">
                                                     <div class="d-flex flex-wrap justify-content-between align-self-center">
                                                         <button type="submit" class=" btn btn-primary text-uppercase mt-1 font-15 btn-done submit-stripe-btn">
-                                                            Pay
+                                                            {!! __('pay') !!}
                                                         </button>
                                                     </div>
 
@@ -107,7 +107,7 @@
                                                 <div class="col-sm-9 pr-sm-0">
                                                     <div class="error"></div>
                                                     <div class="success">
-                                                        Success! Your Stripe token is <span class="token"></span>
+                                                        {!! __('success_token_desc') !!} <span class="token"></span>
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-3 p-0 center-col">
@@ -119,7 +119,9 @@
                                 </div>
                                 @if(in_array('cash',$geoZone->payment_options) && $active_payments_gateways->cash)
                                 <div id="cash-method" class="payment-method-data d-none">
-                                    <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done submit-cash">PAY CASH</button>
+                                    <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done submit-cash">
+                                        {!! __('pay_cash') !!}
+                                    </button>
                                 </div>
                                 @endif
                             </div>

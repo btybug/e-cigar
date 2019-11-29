@@ -43,7 +43,7 @@
                                                     </svg>
                                                     </span>
                                                         <a href="#"
-                                                           class="text-tert-clr font-18 lh-1 edit-link">Edit</a>
+                                                           class="text-tert-clr font-18 lh-1 edit-link">{!! __('edit') !!}</a>
                                                     </div>
                                                 </div>
                                             </td>
@@ -164,7 +164,7 @@
                                             </td>
                                             <td class="qty-td">
                                                 <div class="d-flex align-items-center qty-col">
-                                                    <span class="font-sec-light font-24 lh-1">QTY</span>
+                                                    <span class="font-sec-light font-24 lh-1">{!! __('qty') !!}</span>
                                                     <div class="product__single-item-inp-num">
                                                         <div class="quantity">
                                                             <input type="number" min="1" step="1"
@@ -192,7 +192,7 @@
                                             <tr>
                                                 <td colspan="5">
                                                     <div class=" d-flex footer">
-                                                        <div class="add-offers font-26 font-sec-reg">Added <br/>Offers
+                                                        <div class="add-offers font-26 font-sec-reg" style="width: min-content">{!! __('added_offers') !!}
                                                         </div>
                                                         <ul class="d-flex flex-wrap list-product">
                                                             @if($item->attributes->has('extra') && isset($item->attributes->extra['data']))
@@ -212,7 +212,7 @@
                                                                                     {!! convert_price($extra['price'],$currency) !!}
                                                                                 </span>
                                                                                 <a  href="javascript:void(0)" data-section-id="{{ $key }}" data-uid="{{ $extra['key'] }}" class="remove-btn remove-extra-from-cart">
-                                                                                    Remove
+                                                                                    {!! __('remove') !!}
                                                                                 </a>
                                                                             </div>
                                                                         </div>
@@ -220,7 +220,7 @@
                                                                 @endforeach
                                                             @else
                                                                 <li class="single-wall no-product">
-                                                                    <span class="font-26">No offer is added</span>
+                                                                    <span class="font-26">{!! __('no_offer_added') !!}</span>
                                                                 </li>
                                                             @endif
 
@@ -229,8 +229,8 @@
                                                            class="d-flex flex-column align-items-center justify-content-center text-sec-clr bg-blue-clr add-offers-btn">
                                                                             <span class="icon"><i
                                                                                     class="fas fa-plus"></i></span>
-                                                            <div class="text">
-                                                                Added <br/>Offers
+                                                            <div class="text" style="width: min-content">
+                                                                {!! __('added_offers') !!}
                                                             </div>
                                                         </a>
                                                     </div>
