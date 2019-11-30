@@ -6,18 +6,13 @@
 
         <div class="seo-pages mt-20">
             <div class="">
-                <div class="row m-0 justify-content-end">
-                    @ok('post_admin_seo_pages')
-                    <button class="btn btn-info" id="form-submit">Save</button>
-                    @endok
-                </div>
                 <div class="row mt-20">
 
                     <div class="col-md-9 col-8">
                         <div class="card panel panel-default">
                             <div class="card-header panel-heading">General</div>
-                            {!! Form::model($model) !!}
-
+                            {!! Form::model($seo,['url'=>route('post_admin_settings_main_pages_seo')]) !!}
+                            {!! Form::hidden('id') !!}
                             <div class="clearfix"></div>
                             <div class="tab-content setting-general-footer--tabs">
                                 <div class="tab-pane fade active in show" id="tab1"
@@ -43,7 +38,7 @@
                                                                 <div class="row">
                                                                     <label for="seo-title" class="col-xl-3 col-md-4 col-sm-3">Title</label>
                                                                     <div class="col-xl-5 col-md-8 col-sm-9">
-                                                                        {!! Form::text('translatable['.strtolower($language->code).'][go:title]',null,['class'=>'form-control']) !!}
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($seo,strtolower($language->code),'title'),['class'=>'form-control']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -51,7 +46,7 @@
                                                                 <div class="row">
                                                                     <label for="seo-desc" class="col-xl-3 col-md-4 col-sm-3">Description</label>
                                                                     <div class="col-xl-5 col-md-8 col-sm-9">
-                                                                        {!! Form::text('translatable['.strtolower($language->code).'][go:description]',null,['class'=>'form-control']) !!}
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][description]',get_translated($seo,strtolower($language->code),'description'),['class'=>'form-control']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -59,32 +54,35 @@
                                                                 <div class="row">
                                                                     <label for="seo-keywords" class="col-xl-3 col-md-4 col-sm-3">Focus keywords</label>
                                                                     <div class="col-xl-5 col-md-8 col-sm-9">
-                                                                        {!! Form::text('translatable['.strtolower($language->code).'][go:keywords]',null,['class'=>'form-control']) !!}
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][keywords]',get_translated($seo,strtolower($language->code),'keywords'),['class'=>'form-control']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="seo-meta-robots" class="col-xl-3 col-md-4 col-sm-3">Meta Robots</label>
-                                                                    <div class="col-xl-5 col-md-8 col-sm-9">
-                                                                        {!! Form::select('translatable['.strtolower($language->code).'][robots]',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
 
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
                                             @endif
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <label for="seo-meta-robots" class="col-xl-3 col-md-4 col-sm-3">Meta
+                                                        Robots</label>
+                                                    <div class="col-xl-5 col-md-8 col-sm-9">
+                                                        {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($seo)?$seo->robots:null,['class'=>'form-control']) !!}
+
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                {!! Form::close() !!}
                             </div>
 
 
                             {!! Form::hidden('p',$p) !!}
-                            <button type="submit" id="submit" class="hidden"></button>
+                            @ok('post_admin_seo_pages')
+                            <button type="submit" id="submit" class="btn btn-info">Save</button>
+                            @endok
                             {!! Form::close() !!}
                         </div>
                     </div>

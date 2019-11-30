@@ -25,6 +25,7 @@ use App\Models\Gmail;
 use App\Models\Items;
 use App\Models\Languages;
 use App\Models\MailTemplates;
+use App\Models\MainPagesSeo;
 use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
@@ -607,7 +608,16 @@ class SettingsController extends Controller
         if ($p == 'banners'){
             $items=Stock::all()->pluck('name','id');
         }
-        return $this->view('main_pages', compact(['model', 'p','items','top']));
+        $seo=MainPagesSeo::where('page_name',$p)->first();
+        return $this->view('main_pages', compact(['model', 'p','items','top','seo']));
+    }
+
+    public function postMainPagesSeo(Request $request)
+    {
+        $data=$request->except('_token','p','translatable');
+        $data['page_name']=$request->get('p','banners');
+        MainPagesSeo::updateOrCreate($request->id,$data);
+        return redirect()->back();
     }
 
     public function postHomePage(Request $request, Settings $settings)
