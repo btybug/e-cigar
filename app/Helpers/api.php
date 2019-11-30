@@ -1442,10 +1442,10 @@ function main_pages_seo($main_page=null){
     if($main_page){
        $seo= \App\Models\MainPagesSeo::where('page_name',$main_page)->first();
        if($seo){
-           $HTML .= Html::meta('og:image', $seo->image)->toHtml() . "\n\r";
-           $HTML .= Html::meta('og:title', $seo->title)->toHtml() . "\n\r";
-           $HTML .= Html::meta('og:description', $seo->description)->toHtml() . "\n\r";
-           $HTML .= Html::meta('og:keywords', $seo->keywords)->toHtml() . "\n\r";
+           $HTML .= '<meta property="og:image" content="'.$seo->image.'">' . "\n\r";
+           $HTML .= '<meta property="og:title" content="'.$seo->title.'">' . "\n\r";
+           $HTML .= '<meta property="og:description" content="'.$seo->description.'">' . "\n\r";
+           $HTML .= '<meta property="og:keywords" content="'.$seo->keywords.'">' . "\n\r";
        }
     }
     return $HTML;
