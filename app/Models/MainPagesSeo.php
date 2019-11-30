@@ -11,7 +11,7 @@ class MainPagesSeo extends Translatable
 {
     protected $table = 'main_pages_seo';
 
-    public $translatedAttributes = ['title', 'description', 'keywords'];
+    public $translatedAttributes = ['title', 'description', 'keywords','image'];
 
     protected $guarded = ['id'];
 
