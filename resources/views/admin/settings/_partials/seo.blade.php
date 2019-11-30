@@ -68,7 +68,9 @@
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        @if(get_translated($seo,strtolower($language->code),'image'))
                                                         <img src="{!! get_translated($seo,strtolower($language->code),'image') !!}" alt="">
+                                                            @endif
                                                     </div>
                                                 @endforeach
                                             @endif
