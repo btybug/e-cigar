@@ -7,6 +7,7 @@
     <div class="container-fluid">
         <div class="row flex-column">
             @include("admin.settings._partials.menu",['active'=> 'main_pages'])
+
             <div class="tab-content">
                 <div class="row">
                     <div class="col-sm-3 col-4 pr-md-3 pr-0">
@@ -25,7 +26,23 @@
                         </div>
                     </div>
                     <div class="col-sm-9 col-8">
-                        @include("admin.settings._partials.main_pages.".$p)
+
+
+                        <nav>
+                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                <a class="nav-item nav-link active" id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">Content</a>
+                                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SEO</a>
+                            </div>
+                        </nav>
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
+                                @include("admin.settings._partials.main_pages.".$p)
+                            </div>
+                            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                                @include("admin.settings._partials.seo")
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
