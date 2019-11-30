@@ -17,6 +17,7 @@ class CreateMainPagesSeoTranslationsTable extends Migration
             $table->increments('id');
             $table->integer('main_pages_seo_id')->unsigned();
             $table->string('locale')->index();
+            $table->text('image');
             $table->string('title');
             $table->longText('description');
             $table->text('keywords');

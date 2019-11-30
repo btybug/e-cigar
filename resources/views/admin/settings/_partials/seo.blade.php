@@ -42,6 +42,7 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
+
                                                             <div class="form-group">
                                                                 <div class="row">
                                                                     <label for="seo-desc" class="col-xl-3 col-md-4 col-sm-3">Description</label>
@@ -58,7 +59,14 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="seo-title" class="col-xl-3 col-md-4 col-sm-3">Image</label>
+                                                                    <div class="col-xl-5 col-md-8 col-sm-9">
+                                                                        {!! media_button('translatable['.strtolower($language->code).'][image]', (new stdClass(['image'=>get_translated($seo,strtolower($language->code),'image')]))) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 @endforeach
