@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend',['page_name'=>'tc'])
 @section('content')
    <main class="main-content">
        <section class="support__pages-wrapper ">

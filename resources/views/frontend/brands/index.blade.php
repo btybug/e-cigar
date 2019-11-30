@@ -1,4 +1,4 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend',['page_name'=>'banner'])
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
