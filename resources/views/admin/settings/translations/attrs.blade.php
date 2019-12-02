@@ -73,9 +73,9 @@
                                                                     class="col-xl-2 control-label col-form-label text-xl-right"><span
                                                                         data-toggle="tooltip"
                                                                         title=""
-                                                                        data-original-title="Short Description">Short Description</span></label>
+                                                                        data-original-title="Short Description">Description</span></label>
                                                                 <div class="col-xl-10">
-                                                                    {!! Form::textarea('translatable['.$attr->id.']['.strtolower($language->code).'][short_description]',get_translated($attr,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                    {!! Form::textarea('translatable['.$attr->id.']['.strtolower($language->code).'][description]',get_translated($attr,strtolower($language->code),'description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                 </div>
                                                             </div>
 
@@ -93,6 +93,9 @@
                 </div>
             </div>
             {!! Form::close() !!}
+            <p class="pull-right">
+                {!! $attrs->links('vendor.pagination.bootstrap-4',['filterModel' => []]) !!}
+            </p>
         </div>
     </div>
 @stop

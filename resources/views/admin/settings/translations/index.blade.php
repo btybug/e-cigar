@@ -101,6 +101,10 @@
                 </div>
             </div>
             {!! Form::close() !!}
+
+            <p class="pull-right">
+            {!! $products->links('vendor.pagination.bootstrap-4',['filterModel' => []]) !!}
+            </p>
         </div>
     </div>
 @stop

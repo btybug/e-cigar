@@ -47,7 +47,7 @@ class TranslationsController extends Controller
     public function getIndex()
     {
         $model = null;
-        $products = Stock::all();
+        $products = Stock::paginate(10);
         $languages = SiteLanguages::all();
 
         return $this->view('index', compact(['model','products','languages']));
@@ -69,7 +69,7 @@ class TranslationsController extends Controller
     public function getItems()
     {
         $model = null;
-        $items = Items::all();
+        $items = Items::paginate(10);
         $languages = SiteLanguages::all();
 
         return $this->view('items', compact(['model','items','languages']));
@@ -91,7 +91,7 @@ class TranslationsController extends Controller
     public function getAttrs()
     {
         $model = null;
-        $attrs = Attributes::all();
+        $attrs = Attributes::paginate(10);
         $languages = SiteLanguages::all();
 
         return $this->view('attrs', compact(['model','attrs','languages']));
