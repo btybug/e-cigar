@@ -33,7 +33,8 @@
         "spatie/laravel-sitemap": "^5.2",
         "torann/geoip": "^1.0",
         "yajra/laravel-datatables-editor": "^1.17",
-        "yajra/laravel-datatables-oracle": "~8.0"
+        "yajra/laravel-datatables-oracle": "~8.0",
+        "laravel/passport": "^7.3"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",
