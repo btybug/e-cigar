@@ -5,10 +5,14 @@ namespace App\Ebay;
 
 use Carbon\Carbon;
 use \DTS\eBaySDK\Account\Services;
+use \DTS\eBaySDK\Order\Services\OrderService;
 use \DTS\eBaySDK\Account\Types;
 use \DTS\eBaySDK\Account\Enums;
 use DTS\eBaySDK\OAuth\Services\OAuthService;
 use DTS\eBaySDK\OAuth\Types\RefreshUserTokenRestRequest;
+use DTS\eBaySDK\Shopping\Enums\SeverityCodeType;
+use DTS\eBaySDK\Shopping\Services\ShoppingService;
+use DTS\eBaySDK\Shopping\Types\GetCategoryInfoRequestType;
 
 
 class AuthEbay
@@ -76,7 +80,7 @@ class AuthEbay
     {
         if (\File::exists(storage_path('app/ebay/token.json'))) {
             $this->token = json_decode(\File::get(storage_path('app/ebay/token.json')), true);
-            if ($this->array_keys_exists(['accessToken', 'tokenType', 'expiresIn', 'refreshToken'],$this->token)) {
+            if ($this->array_keys_exists(['accessToken', 'tokenType', 'expiresIn', 'refreshToken','state'],$this->token)) {
                 $this->accessToken = $this->token['accessToken'];
                 $this->tokenType = $this->token['tokenType'];
                 $this->expiresIn = $this->token['expiresIn'];
@@ -98,26 +102,64 @@ class AuthEbay
     {
         $config = config('ebay');
         $this->oAuthService = new Services\AccountService([
-            'credentials' => $config['sandbox']['credentials'],
             'authorization' => $this->getFreshToken(),
-            'ruName' => $config['sandbox']['ruName'],
             'sandbox' => true
         ]);
         $request = new Types\GetFulfillmentPoliciesByMarketplaceRestRequest();
         $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
         $response = $this->oAuthService->getFulfillmentPoliciesByMarketPlace($request);
+
+
         if (isset($response->errors)) {
             $message='';
             foreach ($response->errors as $error) {
 
-                $message.=      "%s: %s\n%s\n\n".$error->errorId. $error->message. $error->longMessage;
+                $message.=      "%s: %s\n%s\n\n".$error->errorId.' '.$error->message.' '.$error->longMessage;
 
             }
             throw new \Exception($message,$response->getStatusCode());
         }
         if ($response->getStatusCode() === 200) {
-              return $response->paymentPolicies;
+              return $response;
         }
+    }
+
+    public function scopeGetCategories()
+    {
+        $config = config('ebay');
+        $service = new ShoppingService([
+            'credentials' => $config['sandbox']['credentials'],
+            'sandbox' => true
+        ]);
+
+        /**
+         * Create the request object.
+         */
+        $request = new GetCategoryInfoRequestType();
+
+        $request->CategoryID = '-1';
+        $request->IncludeSelector = 'ChildCategories';
+
+        /**
+         * Send the request.
+         */
+        $response = $service->getCategoryInfo($request);
+
+        /**
+         * Output the result of calling the service operation.
+         */
+        if (isset($response->Errors)) {
+            foreach ($response->Errors as $error) {
+                printf(
+                    "%s: %s\n%s\n\n",
+                    $error->SeverityCode === DTS\eBaySDK\Shopping\Enums\SeverityCodeType::C_ERROR ? 'Error' : 'Warning',
+                    $error->ShortMessage,
+                    $error->LongMessage
+                );
+            }
+        }
+
+   dd($response->CategoryArray->Category);
     }
 
     public function scopeExists()
@@ -126,7 +168,7 @@ class AuthEbay
     }
 
     protected function getFreshToken(){
-        if(Carbon::now()->lessThan(Carbon::parse($this->expiresIn))){
+        if(time()>$this->expiresIn){
         $config = config('ebay');
         $this->oAuthService = new OAuthService([
             'credentials' => $config['sandbox']['credentials'],
@@ -134,20 +176,26 @@ class AuthEbay
             'sandbox' => true
         ]);
         $request = new RefreshUserTokenRestRequest();
-        dd($this->refreshToken);
         $request->refresh_token = $this->refreshToken;
         $request->scope = [
             'https://api.ebay.com/oauth/api_scope/sell.account',
-            'https://api.ebay.com/oauth/api_scope/sell.inventory'
+            'https://api.ebay.com/oauth/api_scope/sell.fulfillment',
+            'https://api.ebay.com/oauth/api_scope/sell.inventory',
+
         ];
         $response = $this->oAuthService->refreshUserToken($request);
         $dataToken=$response->toArray();
-        $dataToken['expires_in']=time()+$dataToken['expires_in']-60;
-        $dataToken['tokenType']=$this->tokenType;
-        $dataToken['refreshToken']=$this->refreshToken;
-        $dataToken['state']=$this->state;
-        $dataToken['code']=$this->code;
-        \File::put(storage_path('app/ebay/token.json'),json_encode($dataToken,true));
+                $this->token['accessToken']= $response->access_token ;
+                $this->token['tokenType']=  $response->token_type;
+                $this->token['expiresIn']=  time()+$response->expires_in-60;
+                $this->token['refreshToken']=  $response->refresh_token;
+
+//        $dataToken['expires_in']=time()+$dataToken['expires_in']-60;
+//        $dataToken['tokenType']=$this->tokenType;
+//        $dataToken['refreshToken']=$this->refreshToken;
+//        $dataToken['state']=$this->state;
+
+        \File::put(storage_path('app/ebay/token.json'),json_encode($this->token,true));
         $this->run();
         }
         return $this->accessToken;

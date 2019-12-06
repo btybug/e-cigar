@@ -44,129 +44,8 @@ class EbayController extends Controller
         return $this->view('orders');
     }
 
-    public function test()
-    {
-        $e = new Ebay();
-        dd($e->getAccessToken());
-        $service = new Services\AccountService([
-            'authorization' => config('ebay.production.oauthUserToken')
-        ]);
-        /**
-         * Create the request object.
-         */
-        $request = new Types\GetFulfillmentPoliciesByMarketplaceRestRequest();
-        /**
-         * Note how URI parameters are just properties on the request object.
-         */
-        $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
-        /**
-         * Send the request.
-         */
-        $response = $service->getFulfillmentPoliciesByMarketPlace($request);
-        /**
-         * Output the result of calling the service operation.
-         */
-        echo "====================\nFulfillment Policies\n====================\n";
-        printf("\nStatus Code: %s\n\n", $response->getStatusCode());
-        if (isset($response->errors)) {
-            foreach ($response->errors as $error) {
-                printf(
-                    "%s: %s\n%s\n\n",
-                    $error->errorId,
-                    $error->message,
-                    $error->longMessage
-                );
-            }
-        }
-        if ($response->getStatusCode() === 200) {
-            foreach ($response->fulfillmentPolicies as $policy) {
-                printf(
-                    "(%s) %s: %s\n",
-                    $policy->fulfillmentPolicyId,
-                    $policy->name,
-                    $policy->description
-                );
-            }
-        }
-        /**
-         * Create the request object.
-         */
-        $request = new Types\GetPaymentPoliciesByMarketplaceRestRequest();
-        /**
-         * Note how URI parameters are properties on the request object.
-         */
-        $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
-        /**
-         * Send the request.
-         */
-        $response = $service->getPaymentPoliciesByMarketPlace($request);
-        /**
-         * Output the result of calling the service operation.
-         */
-        echo "\n================\nPayment Policies\n================\n";
-        printf("\nStatus Code: %s\n\n", $response->getStatusCode());
-        if (isset($response->errors)) {
-            foreach ($response->errors as $error) {
-                printf(
-                    "%s: %s\n%s\n\n",
-                    $error->errorId,
-                    $error->message,
-                    $error->longMessage
-                );
-            }
-        }
-        if ($response->getStatusCode() === 200) {
-            foreach ($response->paymentPolicies as $policy) {
-                printf(
-                    "(%s) %s: %s\n",
-                    $policy->paymentPolicyId,
-                    $policy->name,
-                    $policy->description
-                );
-            }
-        }
-        /**
-         * Create the request object.
-         */
-        $request = new Types\GetReturnPoliciesByMarketplaceRestRequest();
-        /**
-         * Note how URI parameters are properties on the request object.
-         */
-        $request->marketplace_id = Enums\MarketplaceIdEnum::C_EBAY_US;
-        /**
-         * Send the request.
-         */
-        $response = $service->getReturnPoliciesByMarketPlace($request);
-        /**
-         * Output the result of calling the service operation.
-         */
-        echo "\n===============\nReturn Policies\n===============\n";
-        printf("\nStatus Code: %s\n\n", $response->getStatusCode());
-        if (isset($response->errors)) {
-            foreach ($response->errors as $error) {
-                printf(
-                    "%s: %s\n%s\n\n",
-                    $error->errorId,
-                    $error->message,
-                    $error->longMessage
-                );
-            }
-        }
-        if ($response->getStatusCode() === 200) {
-            foreach ($response->returnPolicies as $policy) {
-                printf(
-                    "(%s) %s: %s\n",
-                    $policy->returnPolicyId,
-                    $policy->name,
-                    $policy->description
-                );
-            }
-        }
-    }
-
     public function app()
     {
-
         return $this->view('templates.index');
     }
 
@@ -182,7 +61,7 @@ class EbayController extends Controller
             'statusCode' => $api->getStatusCode(),
             'accessToken' => $api->access_token,
             'tokenType' => $api->token_type,
-            'expiresIn' => $api->expires_in,
+            'expiresIn' =>time()+$api->expires_in-60,
             'refreshToken' => $api->refresh_token,
             'error' => $api->error,
             'errorDescription' => $api->error_description
@@ -196,7 +75,8 @@ class EbayController extends Controller
             'state' => $state,
             'scope' => [
                 'https://api.ebay.com/oauth/api_scope/sell.account',
-                'https://api.ebay.com/oauth/api_scope/sell.inventory'
+                'https://api.ebay.com/oauth/api_scope/sell.inventory',
+                'https://api.ebay.com/oauth/api_scope/sell.fulfillment'
             ]
         ]);
         return $this->view('templates.get_user_token',[
@@ -207,7 +87,6 @@ class EbayController extends Controller
 
     public function getUserTokenBack(Request $request)
     {
-
         $api = $this->oAuthService->getUserToken(new GetUserTokenRestRequest([
             'code' => $request->get('code')
         ]));
@@ -217,7 +96,7 @@ class EbayController extends Controller
             'statusCode' => $api->getStatusCode(),
             'accessToken' => $api->access_token,
             'tokenType' => $api->token_type,
-            'expiresIn' => $api->expires_in,
+            'expiresIn' =>time()+$api->expires_in-60,
             'refreshToken' => $api->refresh_token,
             'error' => $api->error,
             'errorDescription' => $api->error_description
