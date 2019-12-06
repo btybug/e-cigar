@@ -40,7 +40,7 @@ class CategoriesController extends Controller
         $categories = Category::whereNull('parent_id')->where('type', $type)->get();
         $allCategories = Category::where('type', $type)->get();
         enableMedia('drive');
-        return $this->view('index', compact('categories', 'model', 'allCategories', 'type'));
+        return $this->view('index', compact('categories','allCategories', 'type'));
     }
 
     public function postCategoryForm(Request $request, $type)
