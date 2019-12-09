@@ -57,7 +57,7 @@ class OrdersController extends Controller
 
     public function addItemToBascked(Request $request,OrderService $service)
     {
-        $shop = Shops::find($request->get('shop_id'));
+        $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->find($request->get('order_id'));
         $item =$shop->default_rack()->items()->find($request->get('product_id'));
         if (!$order->items()->where('item_id', $item->id)->exists()) {
