@@ -25,6 +25,8 @@
             @endif
             <li class="nav-item"><a class="nav-link @if($item->type =='bundle') active @endif" id="nav-sales-tab" data-toggle="tab" href="#sales" role="tab"
                                     aria-controls="nav-sales" aria-selected="false">Sales</a></li>
+                <li class="nav-item"><a class="nav-link" id="nav-locations-tab" data-toggle="tab" href="#locations" role="tab"
+                                        aria-controls="nav-locations" aria-selected="false">Locations</a></li>
         </ul>
         <div class="tab-content">
             @if($item->type!='bundle')
@@ -84,7 +86,52 @@
                 <div id="sales" class="tabe-pane fade @if($item->type=='bundle') show active  @endif media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-sales-tab">
 
                 </div>
+                <div id="locations" class="tabe-pane fade media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-locations-tab">
+                    <div class="form-group row">
+                        <div class="col-xl-12 mt-5">
+                            <div class="table-responsive">
+                                <table class="table table--store-settings">
+                                    <thead>
+                                    <tr class="bg-my-light-pink">
+                                        <th>Warehouse</th>
+                                        <th>Rack</th>
+                                        <th>Shelve</th>
+                                        <th>Qty</th>
+                                    </tr>
+                                    </thead>
 
+                                    <tbody class="v-options-list-locations">
+                                    @if($item && $item->locations)
+                                        @foreach($item->locations as $location)
+                                            <tr class="v-options-list-item location-item">
+                                                <td>
+                                                    <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
+                                                </td>
+                                                <td>
+                                                    <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
+                                                </td>
+                                                <td>
+                                                    @if($location->rack)
+                                                        @php
+                                                            $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
+                                                        @endphp
+                                                        <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
+                                                    @endif
+                                                </td>
+                                                <td colspan="2" class="text-right">
+                                                    <div class="form-control">{{ $location->qty }}</div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
         </div>
     </div>
 @stop

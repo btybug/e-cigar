@@ -39,7 +39,6 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#locations">Locations</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -221,59 +220,6 @@
                                             {!! media_button('media',$model,true) !!}
                                         </div>
 
-                                        <div id="locations" class="tab-pane fade">
-                                            <div class="form-group row">
-                                                <div class="col-xl-2">
-                                                    Locations
-                                                </div>
-                                                <div class="col-xl-10">
-                                                    <div class="table-responsive">
-                                                        <table class="table table--store-settings">
-                                                            <thead>
-                                                            <tr class="">
-                                                                <th colspan="4" class="text-left pl-2">Locations</th>
-
-                                                            </tr>
-                                                            <tr class="bg-my-light-pink">
-                                                                <th>Warehouse</th>
-                                                                <th>Rack</th>
-                                                                <th>Shelve</th>
-                                                                <th>Qty</th>
-                                                            </tr>
-                                                            </thead>
-
-                                                            <tbody class="v-options-list-locations">
-                                                            @if($model && $model->locations)
-                                                                @foreach($model->locations as $location)
-                                                                    <tr class="v-options-list-item location-item">
-                                                                        <td>
-                                                                            <div class="form-control">{{ ($location->warehouse)?$location->warehouse->name:null }}</div>
-                                                                        </td>
-                                                                        <td>
-                                                                            <div class="form-control">{{ ($location->rack)?$location->rack->name:null }}</div>
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($location->rack)
-                                                                                @php
-                                                                                    $shelve = $location->rack->children()->where('id',$location->shelve_id)->first();
-                                                                                @endphp
-                                                                                <div class="form-control">{{ ($shelve)?$shelve->name:null }}</div>
-                                                                            @endif
-                                                                        </td>
-                                                                        <td colspan="2" class="text-right">
-                                                                            <div class="form-control">{{ $location->qty }}</div>
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                                             <div class="row">
                                                 <div class="col-md-12">
