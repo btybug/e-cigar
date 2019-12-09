@@ -12,8 +12,12 @@ class ItemsController
 {
     public function getItems(Request $request)
     {
-        $items=Items::where('status',1)->get();
-       return response()->json($items);
+        $w_id = $request->get('shop_id');
+        $items = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin("item_locations", "items.id", "=", "item_locations.item_id")
+            ->where("item_locations.warehouse_id", "=", $w_id)->get();
+
+        return response()->json($items);
     }
 
     public function getCategories(Request $request)

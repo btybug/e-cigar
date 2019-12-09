@@ -7,7 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Services\OrderService;
 use App\Models\Orders;
-use App\Models\Shops;
+use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -27,7 +27,7 @@ class OrdersController extends Controller
     protected $latters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     public function getBasketNumber(Request $request)
     {
-        $shop = Shops::findOrFail($request->get('shop_id'));
+        $shop = Warehouse::findOrFail($request->get('shop_id'));
         $lastOrder = $shop->Orders()->orderBy('id', 'DESC')->first();
         $uniqId = $this->stringId($shop->id,$this->numberId($lastOrder?$lastOrder->id:0));
         $order=Orders::create(['shop_id'=>$shop->id,'status'=>0,'order_number'=>$uniqId,'staff_id'=>$request->get('staff_id')]);
