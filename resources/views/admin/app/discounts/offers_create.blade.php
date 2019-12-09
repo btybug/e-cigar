@@ -65,7 +65,6 @@
         $(document).ready(function () {
             $('body').on('change','#offers_select',function () {
                 if($(this).val()==='buy_x_get'){
-                    console.log($(this));
                     $(this).closest('.card-body').find(`.${$(this).val()}`).removeClass('d-none')
                 }else {
                     $(this).closest('.card-body').find('.content-select-wrap').addClass('d-none')
