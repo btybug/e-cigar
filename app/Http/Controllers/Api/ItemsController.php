@@ -16,7 +16,9 @@ class ItemsController
         $items = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin("item_locations", "items.id", "=", "item_locations.item_id")
             ->with('categories')
-            ->where("item_locations.warehouse_id", "=", $w_id)->groupBy('items.id')->get();
+            ->where("item_locations.warehouse_id", "=", $w_id)
+            ->groupBy('items.id')
+            ->get();
 
         return response()->json($items);
     }
