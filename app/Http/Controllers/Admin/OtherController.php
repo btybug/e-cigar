@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\Requests\OtherRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Items;
 use App\Models\Others;
+use App\Models\Warehouse;
 
 class OtherController extends Controller
 {
@@ -28,7 +29,9 @@ class OtherController extends Controller
 
         $items = Items::where('type', 'simple')->get()->pluck('name', 'id');
         $model = Others::find($id);
-        return $this->view('new', compact('model', 'items'));
+        $warehouses = Warehouse::all()->pluck('name','id')->all();
+
+        return $this->view('new', compact('model', 'items','warehouses'));
     }
 
     public function postOthers(OtherRequest $request)
