@@ -19,6 +19,7 @@ class CreateBasketTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->string('order_number');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->unsignedInteger('staff_id')->nullable();
             $table->double('discount',3,2)->nullable();
             $table->text('additional_data')->nullable();
             $table->text('note')->nullable();
