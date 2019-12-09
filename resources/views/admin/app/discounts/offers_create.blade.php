@@ -11,30 +11,36 @@
                     <div class="col-md-8">
                         {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
                         {!! Form::hidden('id') !!}
-                        <div class="form-group row required">
-                            <label class="col-md-2 control-label" for="input-code">
-                                <span data-toggle="tooltip" title="" data-original-title="">Name</span></label>
-                            <div class="col-md-10">
-                                {!! Form::text('name',null,[ 'class'=> 'form-control']) !!}
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="customer_buy" placeholder="8">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="get_free" class="col-sm-8 col-form-label">He will get free</label>
+                                    <div class="col-sm-4">
+                                        <input type="text" class="form-control" id="get_free" placeholder="1">
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row required">
-                            <label class="col-md-2 control-label" for="input-code">
-                                <span data-toggle="tooltip" title="" data-original-title="">Discount type</span></label>
-                            <div class="col-md-10">
-                                {!! Form::select('type',[0=> 'Percentage',1=> 'Fixed Amount'],null,[ 'class'=> 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 control-label" for="input-discount">Discount amount</label>
-                            <div class="col-md-10">
-                                {!! Form::number('amount',null,['placeholder' => 'Amount','class'=> 'form-control']) !!}
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-2 control-label" for="input-status"></label>
-                            <div class="col-md-10 text-right">
-                                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
+                            <div class="col-md-6 offset-md-2">
+                                <div class="form-group row">
+                                    <select name="" id="" class="form-control">
+                                        <option value="">Select item1,Select item2</option>
+                                        <option value="">item1</option>
+                                        <option value="">item2</option>
+                                    </select>
+                                </div>
+                                <div class="form-group row">
+                                    <select name="" id="" class="form-control">
+                                        <option value="">Select gift(juice)</option>
+                                        <option value="">item1</option>
+                                        <option value="">item2</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
                         {!! Form::close() !!}
