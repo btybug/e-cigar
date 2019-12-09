@@ -43,7 +43,7 @@
 
     </td>
     <td colspan="2" class="text-right">
-        <button type="button" class="btn btn-danger delete-v-option_button"><i
-                class="fa fa-minus-circle delete-v-option"></i></button>
+        {{--<button type="button" class="btn btn-danger delete-v-option_button"><i--}}
+                {{--class="fa fa-minus-circle delete-v-option"></i></button>--}}
     </td>
 </tr>

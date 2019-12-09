@@ -482,13 +482,13 @@
                                                             </tbody>
 
                                                             <tfoot>
-                                                            <tr class="add-new-ship-filed-container">
-                                                                <td colspan="4" class="text-right">
-                                                                    <button type="button" class="btn btn-primary add-specification_button"><i
-                                                                            class="fa fa-plus-circle add-specification"></i>
-                                                                    </button>
-                                                                </td>
-                                                            </tr>
+                                                            {{--<tr class="add-new-ship-filed-container">--}}
+                                                                {{--<td colspan="4" class="text-right">--}}
+                                                                    {{--<button type="button" class="btn btn-primary add-specification_button"><i--}}
+                                                                            {{--class="fa fa-plus-circle add-specification"></i>--}}
+                                                                    {{--</button>--}}
+                                                                {{--</td>--}}
+                                                            {{--</tr>--}}
                                                             </tfoot>
                                                         </table>
                                                     </div>
