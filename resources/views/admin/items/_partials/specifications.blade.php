@@ -3,7 +3,7 @@
 @endphp
 <tr class="v-options-list-item">
     <td class="w-20">
-        <select data-uid="{{ $uniqueID }}" name="specifications[{{ $uniqueID }}][attributes_id]"
+        <select disabled="disabled" data-uid="{{ $uniqueID }}" name="specifications[{{ $uniqueID }}][attributes_id]"
                 class="form-control select-specification" placeholder="Select">
             <option val="">Select</option>
 
