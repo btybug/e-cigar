@@ -701,7 +701,7 @@ Route::get('/fix-barcodes', function () {
     dd('finish');
 });
 Route::get('/datatable-test', function () {
-  return view('admin.test');
+    return view('admin.test');
 });
 
 

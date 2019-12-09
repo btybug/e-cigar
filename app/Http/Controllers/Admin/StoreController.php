@@ -56,19 +56,19 @@ class StoreController extends Controller
     public function getCouponsNew()
     {
         $coupons = null;
-        $products = Stock::all()->pluck('name','id')->all();
+        $products = Stock::all()->pluck('name', 'id')->all();
         $users = User::pluck('name', 'users.id')->all();
 
-        return $this->view('coupons_new', compact('coupons','products','users'));
+        return $this->view('coupons_new', compact('coupons', 'products', 'users'));
     }
 
-    public function CouponsSave(CouponsRequest $request,UserService $userService)
+    public function CouponsSave(CouponsRequest $request, UserService $userService)
     {
         $data = $request->except('_token');
         $coupon = Coupons::updateOrCreate($request->id, $data);
 
-        if($coupon && $coupon->send_email){
-            $category = Category::where('slug','special_offer')->first();
+        if ($coupon && $coupon->send_email) {
+            $category = Category::where('slug', 'special_offer')->first();
             $from = Emails::where('type', 'from')->first();
             $data = [
                 'category_id' => $category->id,
@@ -77,23 +77,23 @@ class StoreController extends Controller
                 'status' => 1,
             ];
             $translatable = [
-               'gb' => [
-                   'subject' => $coupon->name,
-                   'content' => 'Content of coupon '.$coupon->name
-               ]
+                'gb' => [
+                    'subject' => $coupon->name,
+                    'content' => 'Content of coupon ' . $coupon->name
+                ]
             ];
 
-            if($coupon->target){
+            if ($coupon->target) {
                 $users = $coupon->users;
-            }else{
-                $users = User::all()->pluck( 'id');
+            } else {
+                $users = User::all()->pluck('id');
             }
 
             $emailCustomer = CustomEmails::updateOrCreate($request->id, $data, $translatable);
             $emailCustomer->users()->attach($users, ['status' => 1]);
 
-            if(count($users)){
-                foreach ($users as $user_id){
+            if (count($users)) {
+                foreach ($users as $user_id) {
                     ReferalCoupon::create([
                         'user_id' => $user_id,
                         'coupon_id' => $coupon->id,
@@ -108,7 +108,7 @@ class StoreController extends Controller
     public function cancelCoupon(Request $request)
     {
         $coupons = Coupons::findOrFail($request->id);
-        $coupons->update(['status'=>false]);
+        $coupons->update(['status' => false]);
 
         return redirect(route('admin_store_coupons'));
     }
@@ -130,8 +130,8 @@ class StoreController extends Controller
     {
         $model = Coupons::find($request->id);
         $html = '';
-        if(\View::exists("admin.store.coupon_themes.$request->theme")){
-            $html = \View("admin.store.coupon_themes.$request->theme",compact(['model']))->with('data',$request->all())->render();
+        if (\View::exists("admin.store.coupon_themes.$request->theme")) {
+            $html = \View("admin.store.coupon_themes.$request->theme", compact(['model']))->with('data', $request->all())->render();
         }
 
         return \Response::json(['error' => false, 'html' => $html]);
@@ -173,20 +173,20 @@ class StoreController extends Controller
         $model = null;
         $items = Items::get()->pluck('name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
 
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses'));
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
     {
-        $data = $request->except('_token','qty','locations');
+        $data = $request->except('_token', 'qty', 'locations');
         $data['purchase_date'] = Carbon::parse($data['purchase_date']);
         $data['user_id'] = \Auth::id();
         $purchase = Purchase::updateOrCreate($request->only('id'), $data);
         $item = Items::find($request->get('item_id'));
 
-        if($item){
+        if ($item) {
             $purchase->qty = $this->saveLocations($item, $request->get('locations', []));
             $purchase->save();
         }
@@ -219,12 +219,12 @@ class StoreController extends Controller
     public function EditPurchase($id)
     {
         $model = Purchase::findOrFail($id);
-        $items = Items::where('type','simple')->get()->pluck('name', 'id')->all();
+        $items = Items::where('type', 'simple')->get()->pluck('name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
-        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id',$model->warehouse_id)->get()->pluck('name','id')->all();
-        $shelves = WarehouseRacks::where('warehouse_id',$model->warehouse_id)->where('parent_id',$model->rack_id)->get()->pluck('name','id')->all();
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers','warehouses','racks','shelves'));
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
+        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
+        $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
+        return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses', 'racks', 'shelves'));
     }
 
 
@@ -244,7 +244,7 @@ class StoreController extends Controller
 
     public function postItemLocations(Request $request)
     {
-        $warehouses = Warehouse::all()->pluck('name','id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $html = $this->view("purchase.locations", compact('warehouses'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
