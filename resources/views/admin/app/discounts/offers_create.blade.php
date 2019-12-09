@@ -20,6 +20,16 @@
             {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
             {!! Form::hidden('id') !!}
             <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" id="offer_name" placeholder="Offer">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-4">
                     <div class="form-group row">
                         <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
@@ -50,6 +60,9 @@
                         </select>
                     </div>
                 </div>
+            </div>
+            <div class="text-left">
+                <button type="submit" class="btn btn-primary">Save</button>
             </div>
             {!! Form::close() !!}
         </div>
