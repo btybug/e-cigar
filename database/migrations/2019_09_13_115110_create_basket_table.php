@@ -15,6 +15,7 @@ class CreateBasketTable extends Migration
     {
         Schema::create('basket', function (Blueprint $table) {
             $table->increments('id');
+            $table->unsignedInteger('shop_id');
             $table->tinyInteger('status')->default(0);
             $table->string('order_number');
             $table->integer('user_id')->unsigned()->nullable();
