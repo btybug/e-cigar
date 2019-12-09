@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Http\Services\App;
+namespace App\Services\App;
 
 
 class OrderService

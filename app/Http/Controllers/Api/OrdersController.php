@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Services\App\OrderService;
 use App\Models\App\Orders;
 use App\Models\Warehouse;
+use App\Services\App\OrderService;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
