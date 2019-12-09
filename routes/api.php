@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 
-//Route::middleware('auth:api')->group(function () {
+Route::middleware('auth:api')->group(function () {
     Route::get('/user','ShopController@getUser');
     Route::get('/shops', 'ShopController@getShop');
 //    Route::middleware('shopping',function (){
@@ -28,5 +28,4 @@ use Illuminate\Http\Request;
     Route::post('/get-basket', 'OrdersController@getBasket');
     Route::post('/get-authorize', 'OrdersController@getAuthorize');
     Route::post('/close-basket', 'OrdersController@getCloseBasket');
-//    });
-//});
+    });
