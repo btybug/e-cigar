@@ -1848,6 +1848,7 @@ color: #ffffff;
     margin-right: 0 !important;
     padding: .4rem 0.7rem!important;
     color: #ffffff!important;
+    margin-left: auto;
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
