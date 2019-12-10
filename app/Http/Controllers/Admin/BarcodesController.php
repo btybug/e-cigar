@@ -49,6 +49,7 @@ class BarcodesController extends Controller
         $data['code']=explode(',',$data['code']);
         $v=\Validator::make($data,['code.*'=>'required|unique:barcodes,code']);
         if($v->fails()) return redirect()->back()->withErrors($v);
+        dd($data['code']);
         foreach ($data['code'] as $code){
             $barcode= Barcodes::create(['code'=>$code]);
             $path=EAN13render::get($code,public_path('barcodes'.DS.$code.'.png'),200,100);

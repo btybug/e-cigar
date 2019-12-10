@@ -45,13 +45,16 @@ class OtherController extends Controller
         }
         $data['parent_id'] = $id;
         $data['user_id'] = \Auth::id();
-        Others::create($data);
+        $other = Others::create($data);
 
         $item = Items::find($request->get('item_id'));
 
         if($item){
-            $other->qty = $this->saveLocations($item, $request->get('locations', []));
-            $other->save();
+            $qty = $this->saveLocations($item, $request->get('locations', []));
+            if($qty > 0){
+                $other->qty = $qty;
+                $other->save();
+            }
         }
 
         return redirect()->route('admin_inventory_other');
@@ -63,15 +66,13 @@ class OtherController extends Controller
         $deletableArray = [];
         if (count($data)) {
             foreach ($data as $datum) {
-                $qty += $datum['qty'];
                 $existing = $item->locations()->where('warehouse_id', $datum['warehouse_id'])
                     ->where('rack_id', $datum['rack_id'])
                     ->where('shelve_id', $datum['shelve_id'])->first();
                 if ($existing) {
-                    $datum['qty'] += $existing->qty;
+                    $qty += $datum['qty'];
+                    $datum['qty'] = $existing->qty - $qty;
                     $existing->update($datum);
-                } else {
-                    $location = $item->locations()->create($datum);
                 }
             }
         }
