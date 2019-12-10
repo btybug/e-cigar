@@ -61,4 +61,9 @@ class WarehouseRacks extends Translatable
             return $data;
         }
     }
+
+    public function items()
+    {
+       return $this->hasMany(ItemsLocations::class,'rack_id');
+    }
 }
