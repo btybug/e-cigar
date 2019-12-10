@@ -40,6 +40,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/store/get-purchases','Admin\DatatableController@getPurchases')->name('datatable_all_purchases');
     Route::get('/items/purchases/{item_id}','Admin\DatatableController@getItemPurchases')->name('datatable_item_purchases');
     Route::get('/items/others/{item_id}','Admin\DatatableController@getItemOthers')->name('datatable_item_others');
+    Route::get('/items/sales/{item_id}','Admin\DatatableController@getItemSales')->name('datatable_item_sales');
 
     Route::get('/store/get-items','Admin\DatatableController@getAllItems')->name('datatable_all_items');
     Route::post('/store/get-items-in-modal','Admin\DatatableController@getAllItemsInModal')->name('datatable_all_items_in_modal');

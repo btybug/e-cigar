@@ -55,18 +55,45 @@
                     </table>
                 </div>
             </div>
-                <div id="others" class="tabe-pane fade media-new-tab basic-details-tab" role="tabpanel"
-                     aria-labelledby="nav-others-tab">
+            <div id="others" class="tabe-pane fade media-new-tab basic-details-tab" role="tabpanel"
+                 aria-labelledby="nav-others-tab">
+                <div class="row justify-content-end mt-2">
+                    <div class="col-md-3">
+                        <div class="row">
+                            <div class="col-md-6">Total Quantity:</div>
+                            <div class="col-md-6">{!! $item->others()->where('reason','!=','sold')->sum('qty') !!}</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <table id="categories-table-others" class="table table-style table-bordered" cellspacing="0"
+                           width="100%">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>SKU</th>
+                            <th>Owner</th>
+                            <th>Qty</th>
+                            <th>Reason</th>
+                            <th>Purchase Date</th>
+                            <th>Entry Date</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+            @endif
+                <div id="sales" class="tabe-pane fade @if($item->type=='bundle') show active  @endif media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-sales-tab">
                     <div class="row justify-content-end mt-2">
                         <div class="col-md-3">
                             <div class="row">
                                 <div class="col-md-6">Total Quantity:</div>
-                                <div class="col-md-6">{!! $item->others->sum('qty') !!}</div>
+                                <div class="col-md-6">{!! $item->others()->where('reason','sold')->sum('qty') !!}</div>
                             </div>
                         </div>
                     </div>
                     <div>
-                        <table id="categories-table-others" class="table table-style table-bordered" cellspacing="0"
+                        <table id="categories-table-sales" class="table table-style table-bordered" cellspacing="0"
                                width="100%">
                             <thead>
                             <tr>
@@ -81,10 +108,6 @@
                             </thead>
                         </table>
                     </div>
-                </div>
-            @endif
-                <div id="sales" class="tabe-pane fade @if($item->type=='bundle') show active  @endif media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-sales-tab">
-
                 </div>
                 <div id="locations" class="tabe-pane fade media-new-tab basic-details-tab" role="tabpanel" aria-labelledby="nav-locations-tab">
                     <div class="form-group row">
@@ -176,6 +199,27 @@
             });
             $('#categories-table-others').DataTable({
                 ajax: "{!! route('datatable_item_others',$item->id) !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                "scrollX": true,
+                dom: 'Bfrtip',
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'sku', name: 'sku'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'qty', name: 'qty'},
+                    {data: 'reason', name: 'reason'},
+                    {data: 'purchase_date', name: 'purchase_date'},
+                    {data: 'created_at', name: 'created_at'}
+                ]
+            });
+
+            $('#categories-table-sales').DataTable({
+                ajax: "{!! route('datatable_item_sales',$item->id) !!}",
                 "processing": true,
                 "serverSide": true,
                 "bPaginate": true,
