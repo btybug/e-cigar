@@ -46,9 +46,9 @@
                                                 </td>
                                             @endforeach
                                             <td>
-                                                <div class="d-flex">
-                                                    <a href="#" data-toggle="tooltip" data-placement="bottom"  title="{!! $language->name !!}"  class="btn btn-sm btn-warning mr-1"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}" class="btn btn-sm bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                <div class="datatable-td__action">
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom"  title="{!! $language->name !!}"  class="btn btn-sm btn-warning mr-1">Edit</a>
+                                                    <a href="#" data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}" class="btn btn-sm bg-red">x</a>
                                                 </div>
 
                                             </td>

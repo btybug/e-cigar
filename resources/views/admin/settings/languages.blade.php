@@ -67,17 +67,18 @@
                                         <td>{!! $language->code !!}</td>
                                         <td>{!! ($language->shared) ? "YES" : "NO" !!}</td>
                                         <td>
+                                            <div class="datatable-td__action">
                                             @ok('admin_settings_languages_edit')
                                             <a href="{!! route('admin_settings_languages_edit',$language->id) !!}"
                                                data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}"
-                                               class="btn btn-sm btn-warning"><i class="fa fa-pencil-square-o"
-                                                                                 aria-hidden="true"></i></a>
+                                               class="btn btn-sm btn-warning">Edit</a>
                                             @endok
                                             @ok('admin_settings_languages_delete')
                                             <a href="{!! route('admin_settings_languages_delete',$language->id) !!}"
                                                data-toggle="tooltip" data-placement="bottom" title="{!! $language->name !!}"
-                                               class="btn btn-sm bg-red"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                               class="btn btn-danger btn-sm bg-red">x</a>
                                             @endok
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach

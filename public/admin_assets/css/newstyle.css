@@ -1837,6 +1837,18 @@ color: #ffffff;
 .ebay-listing-page--wrapper .table-bordered>tfoot>tr>td {
     border: 1px solid #222d32;
 }
+.datatable-td__action{
+    display: flex;
+    align-items: normal;
+}
+.datatable-td__action a{
+    margin-right: 8px !important;
+}
+.datatable-td__action .btn-danger{
+    margin-right: 0 !important;
+    padding: .4rem 0.7rem!important;
+    color: #ffffff!important;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
