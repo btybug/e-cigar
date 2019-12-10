@@ -40,4 +40,5 @@ class Warehouse extends Translatable
     {
         return $this->hasMany(\App\Models\App\Orders::class,'shop_id');
     }
+
 }

@@ -4,6 +4,7 @@
 namespace App\Models\App;
 
 
+use App\Models\ItemsLocations;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
@@ -26,7 +27,7 @@ class Orders extends Model
 
     public function basketItems()
     {
-        return $this->belongsToMany(RackItems::class,'orders_items','basket_id','item_id','id','id');
+        return $this->belongsToMany(ItemsLocations::class,'basket_items','basket_id','item_id','id','id');
     }
 
     public function status()
