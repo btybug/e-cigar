@@ -175,17 +175,17 @@ class PaymentService
                 }
 
 
-                if (count($sales)) {
-                    foreach ($sales as $item_id => $sale) {
-                        Others::create([
-                            'item_id' => $item_id,
-                            'user_id' => \Auth::id(),
-                            'qty' => (int)$sale * $item->quantity,
-                            'reason' => 'sold',
-                            'grouped' => $order->id,
-                        ]);
-                    }
-                }
+//                if (count($sales)) {
+//                    foreach ($sales as $item_id => $sale) {
+//                        Others::create([
+//                            'item_id' => $item_id,
+//                            'user_id' => \Auth::id(),
+//                            'qty' => (int)$sale * $item->quantity,
+//                            'reason' => 'sold',
+//                            'grouped' => $order->id,
+//                        ]);
+//                    }
+//                }
 
                 OrderItem::create([
                     'order_id' => $order->id,
