@@ -10,13 +10,13 @@ class OrdersItems extends Model
 {
     protected $table = 'basket_items';
 
-    protected $fillable=['order_id','item_id','qty','price'];
+    protected $fillable=['basket_id','item_id','qty','price'];
 
     public $timestamps = false;
 
     public function order()
     {
-        return $this->belongsTo(Orders::class,'order_id');
+        return $this->belongsTo(Orders::class,'basket_id');
     }
 
     public function items()

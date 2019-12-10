@@ -21,12 +21,12 @@ class Orders extends Model
 
     public function items()
     {
-        return $this->hasMany(OrdersItems::class,'order_id');
+        return $this->hasMany(OrdersItems::class,'basket_id');
     }
 
     public function basketItems()
     {
-        return $this->belongsToMany(RackItems::class,'orders_items','order_id','item_id','id','id');
+        return $this->belongsToMany(RackItems::class,'orders_items','basket_id','item_id','id','id');
     }
 
     public function status()
