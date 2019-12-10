@@ -61,9 +61,9 @@ class OrdersController extends Controller
         $order = $shop->orders()->find($request->get('order_id'));
         $item =$shop->default_rack()->items()->where('item_id',$request->get('product_id'))->first();
         if (!$order->items()->where('item_id', $item->id)->exists()) {
-            $order->basketItems()->attach([$item->id => ['qty' => $request->get('qty'), 'price' => $item->item->price]]);
+            $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->item->default_price]]);
         } else {
-            $order->items()->where('item_id', $item->id)->update(['qty' => $request->get('qty'), 'price' => $item->item->price]);
+            $order->items()->where('item_id', $item->id)->update(['qty' => $request->get('qty'), 'price' => $item->item->default_price]);
         }
 
         return response()->json(['success' => true]);
