@@ -1208,8 +1208,7 @@ var count = 0;
           folder_id: globalFolderId
         };
       }
-    })
-    .on("filebatchselected", (event, files) => {
+    }).on("filebatchselected", (event, files) => {
       $("#uploader").fileinput("upload");
     })
     .on("filebatchuploadsuccess", (event, files) => {

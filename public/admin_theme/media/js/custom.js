@@ -1,6 +1,6 @@
 var _global_folder_id = 1;
 var url = {
-    getFolderCildrens: "/api/api-media/get-folder-childs",
+    getFolderCildrens: "/api-media/get-folder-childs",
     jsTree: "/api/api-media/jstree"
 };
 var globalArr = [];
@@ -622,7 +622,7 @@ function App() {
             tree = true,
             cb
         ) {
-            shortAjax("/api/api-media/get-folder-childs", obj, res => {
+            shortAjax("/api-media/get-folder-childs", obj, res => {
                 if (!res.error) {
                     let mainContainer = document.querySelector(
                         `[data-type="main-container"]`
