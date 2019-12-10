@@ -1042,7 +1042,7 @@ var count = 0;
                    },
                    tree = false,
                    cb) => {
-      shortAjax("/api/api-media/get-folder-childs", obj, res => {
+      shortAjax("/api-media/get-folder-childs", obj, res => {
         if (!res.error) {
           const mainContainer = document.querySelector(
               `[data-type="main-container"]`
@@ -1083,7 +1083,7 @@ var count = 0;
 
     //********App -> requests -> removeTreeFolder********start
     removeTreeFolder: (obj = {}, cb) => {
-      shortAjax("/api/api-media/get-remove-folder", obj, res => {
+      shortAjax("/api-media/get-remove-folder", obj, res => {
         if (!res.error) {
           cb();
           // this.requests.drawingItems(undefined, true);
@@ -1094,7 +1094,7 @@ var count = 0;
 
     //********App -> requests -> saveSeo********start
     saveSeo: (obj = {}, cb) => {
-      normAjax("/api/api-media/save-seo", obj, res => {
+      normAjax("/api-media/save-seo", obj, res => {
         if (!res.error) {
           cb();
         }
@@ -1104,7 +1104,7 @@ var count = 0;
 
     //********App -> requests -> editImageName********start
     editImageName: (obj = {}, cb) => {
-      shortAjax("/api/api-media/rename-item", obj, res => {
+      shortAjax("/api-media/rename-item", obj, res => {
         if (!res.error) {
           (typeof cb) === "function" && cb(res);
         }
@@ -1114,7 +1114,7 @@ var count = 0;
 
     //********App -> requests -> editImageName********start
     editFolderName: (obj = {}, cb) => {
-      shortAjax("/api/api-media/rename-folder", obj, res => {
+      shortAjax("/api-media/rename-folder", obj, res => {
         if (!res.error) {
           // cb(res);
         }
@@ -1124,7 +1124,7 @@ var count = 0;
 
     //********App -> requests -> transferImage********start
     transferImage: (obj = JSON.stringify({}), cb) => {
-      shortAjax("/api/api-media/transfer-item", obj, res => {
+      shortAjax("/api-media/transfer-item", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
         }
@@ -1134,7 +1134,7 @@ var count = 0;
 
     //********App -> requests -> transferFolder********start
     transferFolder: (obj = {}, cb) => {
-      shortAjax("/api/api-media/get-sort-folder", obj, res => {
+      shortAjax("/api-media/get-sort-folder", obj, res => {
         if (!res.error) {
           this.requests.drawingItems();
           cb && cb();
@@ -1145,7 +1145,7 @@ var count = 0;
 
     //********App -> requests -> removeImage********start
     removeImage: (obj = {}, cb, cb2) => {
-      shortAjax("/api/api-media/get-remove-item", obj, res => {
+      shortAjax("/api-media/get-remove-item", obj, res => {
         if (!res.error) {
           this.requests.drawingItems(undefined,undefined,cb2);
           cb();
@@ -1156,7 +1156,7 @@ var count = 0;
 
     //********App -> requests -> addNewFolder********start
       addNewFolder: (obj = {}, cb) => {
-        shortAjax("/api/api-media/get-create-folder-child", obj, res => {
+        shortAjax("/api-media/get-create-folder-child", obj, res => {
           if (!res.error) {
             this.requests.drawingItems();
             cb(res);
@@ -1167,7 +1167,7 @@ var count = 0;
 
     //********App -> requests -> getImageDetails********start
       getImageDetails: (obj = {}, cb) => {
-        shortAjax("/api/api-media/get-item-details", obj, res => {
+        shortAjax("/api-media/get-item-details", obj, res => {
           if (!res.error) {
             cb(res.data);
           }
@@ -1175,7 +1175,7 @@ var count = 0;
       },
 
       copyImages: (obj = {}, cb) => {
-        shortAjax("/api/api-media/copy-item", {item_id: obj}, res => {
+        shortAjax("/api-media/copy-item", {item_id: obj}, res => {
           if (!res.error) {
             typeof cb === "function" && cb(res.data);
           }
