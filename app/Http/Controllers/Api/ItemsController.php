@@ -15,7 +15,7 @@ class ItemsController
     {
         $w_id = $request->get('shop_id');
         $warehouse=Warehouse::findOrFail($w_id);
-        $rack=$warehouse->dafault_rack();
+        $rack=$warehouse->default_rack();
         $items = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin("item_locations", "items.id", "=", "item_locations.item_id")
             ->with('categories')
