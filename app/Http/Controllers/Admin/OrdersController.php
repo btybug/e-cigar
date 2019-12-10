@@ -211,36 +211,89 @@ class OrdersController extends Controller
     public function postCollecting($id, Request $request)
     {
         $order = Orders::findOrfail($id);
-//        dd($request->all());
         $error = true;
         $message = '';
         $success = false;
         if($request->unique_id){
             $error = false;
-
-            $collect = $order->collections()->create([
-                'unique_id' => $request->unique_id
-            ]);
+            $item = Items::find($request->item_id);
+            $warehouse = $request->warehouse;
+            $rack = $request->rack;
+            $shelve = $request->shelve;
+            $qty = $request->qty;
 
             $settings = $this->settings->getEditableData('orders_statuses');
 
             $count = $request->count;
-            $collected = $order->collections->count();
+            $collected = $order->collections->count()+1;
             $itemsNeedCollect = $count - $collected;
             if ($count == $collected) {
                 $success = true;
+
                 if ($settings && isset($settings['collected'])) {
+
                     $historyData['user_id'] = \Auth::id();
                     $historyData['status_id'] = $settings['collected'];
-                    $order->history()->create($historyData);
+
+                    $existing = $item->locations()->where('warehouse_id',$warehouse)
+                        ->where('rack_id', $rack)
+                        ->where('shelve_id', $shelve)->first();
+                    if ($existing) {
+                        if ($existing->qty < $qty) {
+                            return redirect()->back()->with('error', "This item is not exists in warehouse");
+                        }
+                        $collect = $order->collections()->create([
+                            'unique_id' => $request->unique_id
+                        ]);
+                        $order->history()->create($historyData);
+
+                        $existing->update([
+                            'qty' => $existing->qty - $qty
+                        ]);
+
+                        Others::create([
+                            'item_id' => $item->id,
+                            'user_id' => $order->user_id,
+                            'qty' => (int)$qty,
+                            'reason' => 'sold',
+                            'grouped' => $order->id,
+                        ]);
+                    }
+
                 }
             } else {
                 $message = "You need collect $itemsNeedCollect item(s)";
 
                 if ($collected == 1 && $settings && isset($settings['partially_collected'])) {
+                    dd(2);
+
                     $historyData['user_id'] = \Auth::id();
                     $historyData['status_id'] = $settings['partially_collected'];
-                    $order->history()->create($historyData);
+
+                    $existing = $item->locations()->where('warehouse_id',$warehouse)
+                        ->where('rack_id', $rack)
+                        ->where('shelve_id', $shelve)->first();
+                    if ($existing) {
+                        if ($existing->qty < $qty) {
+                            return redirect()->back()->with('error', "This item is not exists in warehouse");
+                        }
+                        $collect = $order->collections()->create([
+                            'unique_id' => $request->unique_id
+                        ]);
+                        $order->history()->create($historyData);
+
+                        $existing->update([
+                            'qty' => $existing->qty - $qty
+                        ]);
+
+                        Others::create([
+                            'item_id' => $item->id,
+                            'user_id' => $order->user_id,
+                            'qty' => (int)$qty,
+                            'reason' => 'sold',
+                            'grouped' => $order->id,
+                        ]);
+                    }
                 }
             }
         }

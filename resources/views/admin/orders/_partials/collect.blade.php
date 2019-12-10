@@ -7,7 +7,7 @@
 
 @endphp
 
-<div class="table-responsive @if($count > 0) table-mt @endif">
+<div class="table-responsive  @if($count > 0) table-mt @endif">
     <table class="table table-bordered">
         @if($count == 0)
         <thead>
@@ -24,7 +24,7 @@
         </thead>
         @endif
         <tbody>
-        <tr>
+        <tr class="collect-item">
             <td class="photo-td w-20">
                 <div class="photo">
                     <img src="{{ $o['image'] }}" alt="product">
@@ -49,14 +49,14 @@
                     <span class="font-sec-light font-16 lh-1">QTY</span>
                     <div class="product__single-item-inp-num">
                         <div class="quantity">
-                            <input type="number" readonly="" step="1" value="{{ $o['qty'] }}">
+                            <input type="number" readonly="" step="1" class="itm-qty" value="{{ $o['qty'] }}">
                         </div>
                     </div>
                 </div>
             </td>
             <td class="warehouse-td align_middle w-25">
                 @if(count($locations) > 1)
-                    <select class="form-control location">
+                    <select class="form-control warehouse">
                         @foreach($locations  as $location)
                             <option value="{{ $location->warehouse_id }}">{{ $location->warehouse->name }}</option>
                         @endforeach
@@ -65,13 +65,14 @@
                     @php
                     $location = (count($locations)) ? $locations->first() : null
                     @endphp
+                    {!! Form::hidden('',$location->warehouse->id,['class' => 'warehouse']) !!}
                     <span class="font-sec-reg font-20 text-tert-clr lh-1">{{ ($location) ? $location->warehouse->name : "No Warehouse" }}</span>
                 @endif
 
             </td>
             <td class="shilf-td align_middle w-20">
                 @if(count($locations) > 1)
-                    <select class="form-control">
+                    <select class="form-control rack">
                         @foreach($locations  as $location)
                             <option value="{{ $location->rack_id }}">{{ $location->rack->name }}</option>
                         @endforeach
@@ -80,12 +81,14 @@
                     @php
                         $location = (count($locations)) ? $locations->first() : null
                     @endphp
+                    {!! Form::hidden('',$location->rack->id,['class' => 'rack']) !!}
+
                     <span class="font-sec-reg font-20 text-main-clr lh-1">{{ ($location) ? $location->rack->name : "No rack" }}</span>
                 @endif
             </td>
             <td class="rak-td align_middle w-20">
                 @if(count($locations) > 1)
-                    <select class="form-control">
+                    <select class="form-control shelve">
                         @foreach($locations  as $location)
                             <option value="{{ $location->shelve_id }}">{{ $location->shelve->name }}</option>
                         @endforeach
@@ -94,6 +97,8 @@
                     @php
                         $location = (count($locations)) ? $locations->first() : null
                     @endphp
+                    {!! Form::hidden('',$location->shelve->id,['class' => 'shelve']) !!}
+
                     <span class="font-sec-reg font-20 text-red-clr lh-1">{{ ($location) ? $location->shelve->name : "No shelve" }}</span>
                 @endif
             </td>
@@ -110,7 +115,7 @@
                         <path fill-rule="evenodd" fill="rgb(255, 255, 255)"
                               d="M7.636,15.030 L1.909,9.075 L0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
                         </svg></span>
-                    <span class="square-icon check-collecting @if($collected)  d-none @endif" data-unique="{{ $o['unique_id'] }}" ></span>
+                    <span class="square-icon check-collecting @if($collected)  d-none @endif" data-item="{{ $item->id }}" data-unique="{{ $o['unique_id'] }}" ></span>
                 </div>
             </td>
         </tr>

@@ -914,9 +914,19 @@
                 let $_this = $(this);
                 if(! $_this.hasClass('d-none')){
                     let unique_id = $_this.data("unique");
+                    let item_id = $_this.data("item");
+                    let warehouse = $_this.closest('.collect-item').find(".warehouse").val();
+                    let rack = $_this.closest('.collect-item').find(".rack").val();
+                    let shelve = $_this.closest('.collect-item').find(".shelve").val();
+                    let qty = $_this.closest('.collect-item').find(".itm-qty").val();
 
                     AjaxCall("{!! route('admin_orders_collecting',$order->id) !!}", {
                         unique_id: unique_id,
+                        item_id: item_id,
+                        warehouse: warehouse,
+                        rack: rack,
+                        shelve: shelve,
+                        qty: qty,
                         count: $("#item_count").val()
                     }, function (res) {
                         if (!res.error) {
