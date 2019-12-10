@@ -31,6 +31,11 @@ class Warehouse extends Translatable
         return $this->hasMany(WarehouseRacks::class,'warehouse_id');
     }
 
+    public function default_rack()
+    {
+        return $this->categories()->where('is_default',1)->first();
+    }
+
     public function orders()
     {
         return $this->hasMany(\App\Models\App\Orders::class,'shop_id');

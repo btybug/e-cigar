@@ -121,8 +121,11 @@ class WarehouseController extends Controller
         $data = $request->except('_token', 'translatable');
         $warehouse = Warehouse::findOrFail($w_id);
         $data['warehouse_id'] = $warehouse->id;
-        $category = WarehouseRacks::updateOrCreate($request->id, $data,$request->get('translatable'));
 
+        if(!$warehouse->default_rack()){
+            $data['is_default'] = 1;
+        }
+        $category = WarehouseRacks::updateOrCreate($request->id, $data,$request->get('translatable'));
         return redirect()->back();
     }
 
