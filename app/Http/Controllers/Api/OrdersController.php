@@ -59,7 +59,7 @@ class OrdersController extends Controller
     {
         $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->find($request->get('order_id'));
-        $item =$shop->default_rack()->items()->find($request->get('product_id'));
+        $item =$shop->default_rack()->items()->where('item_id',$request->get('product_id'))->first();
         if (!$order->items()->where('item_id', $item->id)->exists()) {
             $order->basketItems()->attach([$item->id => ['qty' => $request->get('qty'), 'price' => $item->item->price]]);
         } else {
