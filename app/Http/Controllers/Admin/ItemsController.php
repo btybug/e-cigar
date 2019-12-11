@@ -18,6 +18,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\ItemsLocations;
 use App\Models\ItemsPackages;
+use App\Models\ItemsTransfers;
 use App\Models\Suppliers;
 use App\Models\Warehouse;
 use App\Services\BarcodesService;
@@ -349,27 +350,53 @@ class ItemsController extends Controller
 
     public function transfer()
     {
+        return $this->view('transfer.index', compact(['items', 'warehouses', 'racks', 'shelves']));
+    }
+
+    public function newTransfer()
+    {
         $items = Items::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
-        return $this->view('transfer.index', compact(['items', 'warehouses', 'racks', 'shelves']));
+        return $this->view('transfer.new', compact(['items', 'warehouses', 'racks', 'shelves']));
     }
 
     public function PostTransfer(Request $request)
     {
         $model = Items::findOrFail($request->item_id);
         $from = ItemsLocations::findOrFail($request->from);
-        $to = ItemsLocations::findOrFail($request->to);
+        $to = ItemsLocations::where('item_id',$model->id)
+            ->where('warehouse_id',$request->to_w)
+            ->where('rack_id',$request->to_r)
+            ->where('shelve_id',$request->to_s)->first();
+
         if ($from->qty < $request->qty) {
             return redirect()->back()->with('error', "Max qty that you can transfer is $from->qty");
         }
 
         $from->update(['qty' => ($from->qty - $request->qty)]);
-        $to->update(['qty' => ($to->qty + $request->qty)]);
+        if($to){
+            $to->update(['qty' => ($to->qty + $request->qty)]);
+        }else{
+            $to = ItemsLocations::create([
+                'item_id' => $model->id,
+                'warehouse_id' => $request->to_w,
+                'rack_id' => $request->to_r,
+                'shelve_id' => $request->to_s,
+                'qty' => $request->qty,
+            ]);
+        }
 
-        return redirect()->back()->with('message', "Successfully transfered");
+        ItemsTransfers::create([
+            'user_id' => \Auth::id(),
+            'item_id' => $model->id,
+            'from_id' => $from->id,
+            'to_id' => $to->id,
+            'qty' => $request->qty,
+        ]);
 
+        return redirect()->route('admin_items_transfer')->with('message', "Successfully transfered");
     }
 
     public function postItemLocations(Request $request)

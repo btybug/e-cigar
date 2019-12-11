@@ -439,7 +439,8 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'transfer'], function () {
         Route::get('/', 'Admin\ItemsController@transfer')->name('admin_items_transfer');
-        Route::post('/', 'Admin\ItemsController@PostTransfer')->name('admin_transfer_post');
+        Route::get('/new', 'Admin\ItemsController@newTransfer')->name('admin_items_new_transfer');
+        Route::post('/new', 'Admin\ItemsController@PostTransfer')->name('admin_transfer_post');
         Route::post('/get-item-locations', 'Admin\ItemsController@postItemLocations')->name('admin_items_transfer_locations');
     });
 

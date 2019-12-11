@@ -56,6 +56,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/inventory/get-all-filters','Admin\DatatableController@getAllFilters')->name('datatable_all_filters');
 
     Route::get('/inventory/get-all-warehouses','Admin\DatatableController@getAllWarehouses')->name('datatable_all_warehouses');
+    Route::get('/inventory/get-all-transfers','Admin\DatatableController@getAllTransfers')->name('datatable_all_transfers');
 
     Route::get('/stock/get-promotions','Admin\DatatableController@getAllPromotions')->name('datatable_all_promotions');
 

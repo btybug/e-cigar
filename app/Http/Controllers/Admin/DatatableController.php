@@ -15,6 +15,7 @@ use App\Models\Faq;
 use App\Models\Filters;
 use App\Models\GeoZones;
 use App\Models\Items;
+use App\Models\ItemsTransfers;
 use App\Models\Landing;
 use App\Models\LogActivities;
 use App\Models\MailTemplates;
@@ -1077,6 +1078,24 @@ class DatatableController extends Controller
                 return $html .= '<a href="javascript:void(0)" data-href="'.route("admin_landings_delete").'"
                 class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
             })->rawColumns(['actions','url'])->make(true);
+    }
+
+    public function getAllTransfers()
+    {
+        return Datatables::of(
+            ItemsTransfers::query()
+            )->editColumn('user_id', function ($item) {
+                return $item->user->name. " ". $item->user->last_name;
+            })->editColumn('item_id', function ($item) {
+                return $item->item->name;
+            })->editColumn('from_id', function ($item) {
+                return $item->from->transfer_location;
+            })->editColumn('to_id', function ($item) {
+                return $item->to->transfer_location;
+            })->editColumn('created_at', function ($item) {
+                return BBgetDateFormat($item->created_at);
+            })
+            ->rawColumns([])->make(true);
     }
 
     public function getAllAppLandings(Request $request)
