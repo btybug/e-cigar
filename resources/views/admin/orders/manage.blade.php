@@ -906,7 +906,6 @@
                 var data = $("body").find('.check-collecting');
                 data.each(function (e,i) {
                     $(i).click();
-                    console.log(e,i)
                 })
             })
 

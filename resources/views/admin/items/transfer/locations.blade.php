@@ -46,15 +46,24 @@
     {!! Form::open(['url' => route('admin_transfer_post')]) !!}
         {!! Form::hidden('item_id',$model->id) !!}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <label>From</label>
                 {!! Form::select('from',$data,null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-4">
-                <label>To</label>
-                {!! Form::select('to',$data,null,['class' => 'form-control']) !!}
+            <label>To</label>
+            <div class="col-md-12 d-flex flex-wrap mt-5 location-item">
+                <div class="col-md-4">
+                    {!! Form::select('to_w',['' => 'Select warehouse']+$warehouses,null,['class' => 'form-control warehouse']) !!}
+                </div>
+                <div class="col-md-4">
+                    {!! Form::select('to_r',['' => 'Select rack']+$racks,null,['class' => 'form-control rack']) !!}
+                </div>
+                <div class="col-md-4">
+                    {!! Form::select('to_s',['' => 'Select shelve']+$shelves,null,['class' => 'form-control shelve']) !!}
+                </div>
+
             </div>
-            <div class="col-md-4">
+            <div class="col-md-12">
                 <label>QTY</label>
                 {!! Form::number('qty',null,['class' => 'form-control']) !!}
             </div>

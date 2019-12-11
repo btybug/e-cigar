@@ -376,8 +376,11 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($request->item_id);
         $data = $model->locations()->get()->pluck('transfer_location', 'id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
+        $racks = [];
+        $shelves = [];
 
-        $html = View("admin.items.transfer.locations", compact('model', 'data'))->render();
+        $html = View("admin.items.transfer.locations", compact('model', 'data','warehouses','racks','shelves'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
