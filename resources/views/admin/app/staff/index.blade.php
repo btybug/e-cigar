@@ -23,7 +23,7 @@
 
                             </div>
                             <div class="col-lg-2 text-right">
-                                <button class="btn btn-info">Add</button>
+                                <button class="btn btn-info staff_add">Add</button>
                             </div>
                         </div>
                     </div>
@@ -59,14 +59,15 @@
     <script>
         $(function () {
 
-            $('#warehouse').on('change', function() {
+            $('.staff_add').on('click', function() {
                 $.ajax({
                     type: "post",
                     url: "{!! route('app_staff_add') !!}",
                     cache: false,
                     datatype: "json",
                     data: {
-                        warehouse_id: $(this).val()
+                        warehouse_id: $('#warehouse').val(),
+                        user_name: $('#staff_select').val()
                     },
                     success: function (data) {
                         if (success) {
