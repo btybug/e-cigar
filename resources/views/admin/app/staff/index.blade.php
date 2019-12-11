@@ -19,7 +19,7 @@
 
                         <div class="row justify-content-end">
                             <div class="col-lg-3">
-                                <select name="" id="" class="form-control">
+                                <select name="" id="staff_select" class="form-control">
                                     <option value="">Add Staff member</option>
                                     <option value="">staff 1</option>
                                     <option value="">staff 2</option>
@@ -61,11 +61,15 @@
 @section('js')
     <script>
         $(function () {
+
+            $('#warehouse').on('change', function() {
+                
+            });
+
             $('#items-table').DataTable({
                 ajax: {
                     url:"{!! route('datatable_all_app_staff') !!}",
                     data:{warehouse_id:$('#warehouse').val()},
-
                 },
                 "processing": true,
                 "serverSide": true,
@@ -81,13 +85,13 @@
                     {extend: 'csv', className: 'btn btn-primary'},
                     {extend: 'excel', className: 'btn btn-info'},
                     {extend: 'pdf', className: 'btn btn-success'},
-                    {extend: 'print', className: 'btn btn-warning'},
-                    {
-                        text: 'Create',
-                        action: function (e, dt, node, config) {
-                            window.location.href = '{!! route('app_staff_manage') !!}'
-                        }
-                    }
+                    {extend: 'print', className: 'btn btn-warning'}
+                    {{--,{--}}
+                    {{--    text: 'Create',--}}
+                    {{--    action: function (e, dt, node, config) {--}}
+                    {{--        window.location.href = '{!! route('app_staff_manage') !!}'--}}
+                    {{--    }--}}
+                    {{--}--}}
                 ],
                 columns: [
                     {data: 'id', name: 'id'},
