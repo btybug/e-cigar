@@ -329,6 +329,7 @@
                 </a>
                 <ul class="treeview-menu">
                    <li><a href="{{route('app_customer_discounts')}}"><i class="fa fa-circle-o"></i>Discounts</a></li>
+                    <li><a href="{{route('app_staff')}}"><i class="fa fa-circle-o"></i>Staff</a></li>
                 </ul>
             </li>
             @endHasAccess

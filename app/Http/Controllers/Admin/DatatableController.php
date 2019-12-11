@@ -1077,4 +1077,11 @@ class DatatableController extends Controller
                 class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
             })->rawColumns(['actions','url'])->make(true);
     }
+
+    public function getAllAppLandings(Request $request)
+    {
+
+        return Datatables::of(User::leftJoin('app_staff','app_staff.users_id','users.id')->where('app_staff.warehouses_id',$request->warehouse_id))
+            ->make(true);
+    }
 }

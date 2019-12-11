@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Admin\App\Customers;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StaffRequest;
-use App\Http\Requests\StaffRolelRequest;
-use App\Models\Staff;
-use App\Models\StaffRoles;
-use App\Traits\UploadTrait;
+use App\Models\Warehouse;
 
 class StaffController extends Controller
 {
-    use UploadTrait;
 
     public function getStaff()
     {
-        return view('staff.index');
+        $warehouse=Warehouse::all()->pluck('name','id');
+        return view('admin.app.staff.index',compact('warehouse'));
     }
 
     public function getCreateStaffMember($id=null)
@@ -25,7 +21,7 @@ class StaffController extends Controller
         $roles = \Auth::user()->roles()->pluck('name', 'id');
         $shops = \Auth::user()->shops()->pluck('name', 'id');
         $model=($id)?Staff::findOrfail($id):null;
-        return view('staff.create_edit', compact('roles', 'shops','model'));
+        return view('admin.app.staff.create_edit', compact('roles', 'shops','model'));
     }
 
     public function postCreateStaffMember(StaffRequest $request,$id=null)

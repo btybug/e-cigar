@@ -60,6 +60,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/stock/get-promotions','Admin\DatatableController@getAllPromotions')->name('datatable_all_promotions');
 
     Route::get('/get-landings','Admin\DatatableController@getAllLandings')->name('datatable_all_landings');
+    Route::get('/get-landings','Admin\DatatableController@getAllAppLandings')->name('datatable_all_app_staff');
 
 });
 
