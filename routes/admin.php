@@ -704,7 +704,6 @@ Route::get('/datatable-test', function () {
     return view('admin.test');
 });
 
-
 Route::group(['prefix' => 'ebay'], function () {
     Route::get('/', 'Admin\EbayController@settings')->name('admin_ebay');
     Route::get('/listing', 'Admin\EbayController@listing')->name('admin_ebay_listing');
@@ -718,18 +717,4 @@ Route::group(['prefix' => 'ebay'], function () {
 
 });
 
-Route::group(['prefix' => 'app'], function () {
-    Route::get('/', 'Customers\DiscountController@index')->name('customer_discounts');
-    Route::get('/create', 'Customers\DiscountController@create')->name('customer_discounts_create');
-    Route::get('/edit/{id}', 'Customers\DiscountController@edit')->name('customer_discounts_edit');
-    Route::post('/create', 'Customers\DiscountController@postCreate')->name('customer_discounts_create_post');
-    Route::post('/edit/{id}', 'Customers\DiscountController@postEdit')->name('customer_discounts_edit_post');
-
-    Route::get('/offers', 'Customers\DiscountController@offers')->name('customer_offers');
-    Route::get('/offers/create', 'Customers\DiscountController@offersCreate')->name('customer_offers_create');
-    Route::get('/offers/edit/{id}', 'Customers\DiscountController@offersEdit')->name('customer_offers_edit');
-    Route::post('/offers/create', 'Customers\DiscountController@postOffersCreate')->name('customer_offers_create_post');
-    Route::post('/offers/edit/{id}', 'Customers\DiscountController@postOffersEdit')->name('customer_offers_edit_post');
-
-});
 
