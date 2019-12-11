@@ -60,7 +60,27 @@
         $(function () {
 
             $('#warehouse').on('change', function() {
-                
+                $.ajax({
+                    type: "post",
+                    url: "{!! route('app_staff_add') !!}",
+                    cache: false,
+                    datatype: "json",
+                    data: {
+                        warehouse_id: $(this).val()
+                    },
+                    success: function (data) {
+                        if (success) {
+                            success(data);
+                        }
+                        return data;
+                    },
+                    error: function (errorThrown) {
+                        if (error) {
+                            error(errorThrown);
+                        }
+                        return errorThrown;
+                    }
+                });
             });
 
             $('#items-table').DataTable({
