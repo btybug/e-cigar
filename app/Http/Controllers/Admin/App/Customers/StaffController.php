@@ -13,12 +13,21 @@ use Illuminate\Http\Request;
 class StaffController extends Controller
 {
 
-    public function getStaff()
+    public function getStaff(Request $request)
     {
-        $warehouse=Warehouse::all()->pluck('name','id');
+        $warehouse=Warehouse::all();
+        $q=$request->get('q',$warehouse[0]->id);
+
         $users=User::join('roles', 'users.role_id', '=', 'roles.id')
-            ->where('roles.type', 'backend')->select('users.*', 'roles.title')->pluck('users.name','id');
-        return view('admin.app.staff.index',compact('warehouse','users'));
+            ->leftJoin('app_staff','app_staff.users_id','users.id')
+            ->where('app_staff.warehouses_id','!=',$q)
+            ->orWhere('app_staff.warehouses_id',null)
+            ->where('roles.type', 'backend')
+
+            ->select('users.*', 'roles.title')
+            ->pluck('users.name','id');
+        $warehouse=$warehouse->pluck('name','id');
+        return view('admin.app.staff.index',compact('warehouse','users','q'));
     }
 
     public function postCreateStaffMember(Request $request)

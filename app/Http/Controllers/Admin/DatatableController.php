@@ -45,6 +45,7 @@ use App\Models\TranslationsEntry;
 use App\Models\Warehouse;
 use App\User;
 use function foo\func;
+use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -1080,8 +1081,8 @@ class DatatableController extends Controller
 
     public function getAllAppLandings(Request $request)
     {
-
-        return Datatables::of(User::leftJoin('app_staff','app_staff.users_id','users.id')->where('app_staff.warehouses_id',$request->warehouse_id))
+        return Datatables::of(User::leftJoin('app_staff','app_staff.users_id','users.id')
+            ->where('app_staff.warehouses_id',$request->get('warehouse_id')))
             ->make(true);
     }
 }

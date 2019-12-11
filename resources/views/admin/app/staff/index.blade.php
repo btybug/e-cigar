@@ -11,7 +11,7 @@
                         <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Select warehouse</label>
                             <div class="col-sm-4">
-                                {!! Form::select('warehouse',$warehouse,null,['class'=>'form-control','id'=>'warehouse']) !!}
+                                {!! Form::select('warehouse',$warehouse,$q,['class'=>'form-control','id'=>'warehouse']) !!}
                             </div>
                         </div>
                     </div>
@@ -41,14 +41,6 @@
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Gender</th>
-                        <th>Address</th>
-                        <th>Role</th>
-                        <th>Shop</th>
-                        <th>Rating</th>
-                        <th>Status</th>
-                        <th>Family status</th>
-                        <th>Hired At</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                 </table>
@@ -59,6 +51,10 @@
     <script>
         $(function () {
 
+            $('#warehouse').on('change',function () {
+                window.location.href= "{!! route('app_staff') !!}"+'?q='+$(this).val();
+            })
+
             $('.staff_add').on('click', function() {
                 $.ajax({
                     type: "post",
@@ -67,7 +63,7 @@
                     datatype: "json",
                     data: {
                         warehouse_id: $('#warehouse').val(),
-                        user_name: $('#staff_select').val()
+                        user_id: $('#staff_select').val()
                     },
                     success: function (data) {
                         if (success) {
@@ -87,7 +83,7 @@
             $('#items-table').DataTable({
                 ajax: {
                     url:"{!! route('datatable_all_app_staff') !!}",
-                    data:{warehouse_id:$('#warehouse').val()},
+                    data:{warehouse_id:"{!! $q !!}"}
                 },
                 "processing": true,
                 "serverSide": true,
@@ -118,14 +114,6 @@
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
                     {data: 'gender', name: 'gender'},
-                    {data: 'address', name: 'address'},
-                    {data: 'role_id', name: 'role_id'},
-                    {data: 'shop_id', name: 'shop_id'},
-                    {data: 'rating', name: 'rating'},
-                    {data: 'status', name: 'status'},
-                    {data: 'family_status', name: 'family_status'},
-                    {data: 'hired_at', name: 'hired_at'},
-                    {data: 'actions', name: 'actions'},
                 ]
             });
         })
