@@ -16,7 +16,7 @@ Route::group(['prefix' => 'discounts'], function () {
 });
 Route::group(['prefix' => 'staff'], function () {
     Route::get('/', 'Customers\StaffController@getStaff')->name('app_staff');
-    Route::post('/manage-staff', 'Customers\StaffController@postCreateStaffMember');
+    Route::post('/manage-staff', 'Customers\StaffController@postCreateStaffMember')->name('app_staff_add');
     Route::get('/view-staff-member/{id}', 'Customers\StaffController@getViewStaffMember')->name('app_staff_view');
     Route::get('/roles', 'Customers\StaffController@getRoles')->name('app_staff_roles');
     Route::get('/manage-role/{id?}', 'Customers\StaffController@getCreateRole')->name('app_staff_roles_create');
