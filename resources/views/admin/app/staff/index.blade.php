@@ -93,18 +93,23 @@
                 ]
             });
             $('.staff_add').on('click', function () {
+                const warehouse_id = $('#warehouse').val();
+                const user_id = $('#staff_select').val();
                 $.ajax({
                     type: "post",
                     url: "{!! route('app_staff_add') !!}",
                     cache: false,
                     datatype: "json",
                     data: {
-                        warehouse_id: $('#warehouse').val(),
-                        user_id: $('#staff_select').val()
+                        warehouse_id,
+                        user_id
                     },
                     success: function (data) {
                         if (!data.error) {
                             table.ajax.reload();
+                            $('#staff_select option[value="'+user_id+'"]').each(function() {
+                                $(this).remove();
+                            });
                         }
 
                         // return data;
