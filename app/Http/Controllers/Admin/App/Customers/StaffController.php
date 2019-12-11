@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin\App\Customers;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\App\AppStaff;
 use App\Models\Warehouse;
+use Illuminate\Http\Request;
 
 class StaffController extends Controller
 {
@@ -16,24 +18,11 @@ class StaffController extends Controller
         return view('admin.app.staff.index',compact('warehouse'));
     }
 
-    public function getCreateStaffMember($id=null)
+    public function postCreateStaffMember(Request $request)
     {
-        $roles = \Auth::user()->roles()->pluck('name', 'id');
-        $shops = \Auth::user()->shops()->pluck('name', 'id');
-        $model=($id)?Staff::findOrfail($id):null;
-        return view('admin.app.staff.create_edit', compact('roles', 'shops','model'));
-    }
-
-    public function postCreateStaffMember(StaffRequest $request,$id=null)
-    {
-        $image = $request->file('photo');
-        $folder = '/staff';
-        $name = $request->get('name');
-        $image = $this->uploadOne($image, $folder, 'public', $name);
-        $data = $request->only(['name','last_name','phone','gender','email','address','birthday','pass_type','pass','photo','salary','status','family_status','rating' ,'role_id','shop_id','hired_at']);
-        $data['photo']=$image;
-        Staff::updateOrCreate(['id'=>$id],$data);
-        return redirect()->route('staff');
+        $warehouse=Warehouse::findOrFail($request->get('warehouse_id'));
+        $warehouse->staff()->attach($request->get('user_id'));
+        return response()->json(['error'=>false]);
     }
 
     public function getViewStaffMember($id)
