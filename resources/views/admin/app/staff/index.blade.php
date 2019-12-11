@@ -5,7 +5,34 @@
                 <h4 class="card-title ">Staff</h4>
                 <p class="card-category"> Here is a subtitle for this table</p>
             </div>
-            {!! Form::select('warehouse',$warehouse,null,['class'=>'form-control','id'=>'warehouse']) !!}
+            <div class="px-3 my-3">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group row">
+                            <label class="col-sm-3 col-form-label">Select warehouse</label>
+                            <div class="col-sm-4">
+                                {!! Form::select('warehouse',$warehouse,null,['class'=>'form-control','id'=>'warehouse']) !!}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="row justify-content-end">
+                            <div class="col-lg-3">
+                                <select name="" id="" class="form-control">
+                                    <option value="">Add Staff member</option>
+                                    <option value="">staff 1</option>
+                                    <option value="">staff 2</option>
+                                </select>
+                            </div>
+                            <div class="col-lg-2 text-right">
+                                <button class="btn btn-info">Add</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div class="card-body panel-body">
                 <table id="items-table" class="table table-style table-bordered table-items-wrapper" cellspacing="0"
                        width="100%">
