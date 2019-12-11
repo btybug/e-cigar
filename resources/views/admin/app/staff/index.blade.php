@@ -19,11 +19,8 @@
 
                         <div class="row justify-content-end">
                             <div class="col-lg-3">
-                                <select name="" id="staff_select" class="form-control">
-                                    <option value="">Add Staff member</option>
-                                    <option value="">staff 1</option>
-                                    <option value="">staff 2</option>
-                                </select>
+                                {!! Form::select('user_id',$users,null,['class'=>'form-control','id'=>'staff_select']) !!}
+
                             </div>
                             <div class="col-lg-2 text-right">
                                 <button class="btn btn-info">Add</button>

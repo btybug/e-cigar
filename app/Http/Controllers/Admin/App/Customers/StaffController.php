@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\App\Customers;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppStaff;
 use App\Models\Warehouse;
+use App\User;
 use Illuminate\Http\Request;
 
 class StaffController extends Controller
@@ -15,7 +16,9 @@ class StaffController extends Controller
     public function getStaff()
     {
         $warehouse=Warehouse::all()->pluck('name','id');
-        return view('admin.app.staff.index',compact('warehouse'));
+        $users=User::join('roles', 'users.role_id', '=', 'roles.id')
+            ->where('roles.type', 'backend')->select('users.*', 'roles.title')->pluck('users.name','id');
+        return view('admin.app.staff.index',compact('warehouse','users'));
     }
 
     public function postCreateStaffMember(Request $request)
