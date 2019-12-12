@@ -14,7 +14,7 @@
             @ok('admin_settings_shipping')
             <li class="nav-item ">
                 <a class="nav-link" id="shipping-tab" href="{!! route('admin_settings_shipping') !!}" role="tab"
-                   aria-controls="shipping" aria-selected="false">Shipping</a>
+                   aria-controls="shipping" aria-selected="false">GEO zones</a>
             </li>
             @endok
             @ok('admin_settings_payment_gateways')
