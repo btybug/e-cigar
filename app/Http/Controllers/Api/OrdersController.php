@@ -124,7 +124,7 @@ class OrdersController extends Controller
 
     public function getCloseBasket(Request $request)
     {
-        $shop = Shops::find($request->get('shop_id'));
+        $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->findOrFail($request->get('order_id'));
         $order->note=$request->get('note');
         $order->save();
