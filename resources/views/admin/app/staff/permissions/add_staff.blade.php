@@ -1,6 +1,7 @@
 @extends('layouts.admin',['activePage'=>'staff'])
 @section('content')
-
+{!! Form::open() !!}
+<button class="btn btn-success">Save</button>
     <div class="accordion" id="accordionExample">
         @foreach($permissionGrouped as $key=>$permissions)
             <div class="card">
@@ -20,10 +21,10 @@
                         @foreach($permissions as $permission)
                             <div class="form-group">
                                 <div class="custom-control custom-checkbox">
-                                    <input type="checkbox" class="custom-control-input" id="customCheck1"
-                                           name="example1">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck{!! $permission->id !!}"
+                                           name="permission[]" value="{!! $permission->id !!}" @if(isset($existing[$permission->id])) checked @endif>
                                     <label class="custom-control-label"
-                                           for="customCheck1">{!! $permission->slug !!}</label>
+                                           for="customCheck{!! $permission->id !!}">{!! $permission->slug !!}</label>
                                 </div>
                             </div>
                         @endforeach
@@ -32,4 +33,5 @@
             </div>
         @endforeach
     </div>
+    {!! Form::close() !!}
 @stop

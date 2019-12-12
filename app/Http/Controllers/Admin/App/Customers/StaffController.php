@@ -67,18 +67,27 @@ class StaffController extends Controller
         return redirect()->route('staff_roles');
     }
 
-    public function getStaffPermission()
+    public function getStaffPermission($id)
     {
+        $user= User::find($id);
+        $existing=$user->appPermissions->pluck('slug','id');
         $permissions=AppPermissions::all();
         $permissionGrouped=[];
         foreach($permissions as $permission){
             $permissionGrouped[$permission->type][]=$permission;
         }
-        return view('admin.app.staff.permissions.add_staff',compact('permissionGrouped'));
+        return view('admin.app.staff.permissions.add_staff',compact('permissionGrouped','existing'));
     }
 
     public function getAppPermissions()
     {
         return view('admin.app.staff.permissions.index');
+    }
+
+    public function postStaffPermission($id,Request $request)
+    {
+       $user= User::find($id);
+        $user->appPermissions()->sync($request->get('permission'));
+        return redirect()->back();
     }
 }

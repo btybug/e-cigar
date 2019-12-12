@@ -23,6 +23,7 @@ Route::group(['prefix' => 'staff'], function () {
     Route::post('/manage-role/{id?}', 'Customers\StaffController@postCreateOrEditRole')->name('app_staff_roles_create');
 
     Route::get('/add-permission/{id}', 'Customers\StaffController@getStaffPermission')->name('app_staff_add_permission');
+    Route::post('/add-permission/{id}', 'Customers\StaffController@postStaffPermission');
     Route::get('/permissions', 'Customers\StaffController@getAppPermissions')->name('app_permissions');
 
 });
