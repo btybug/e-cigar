@@ -87,8 +87,8 @@ class GuestController extends Controller
 
         $countries = [null => 'Select Country'] + $geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-                ->select('zone_countries.*', 'zone_countries.name as country')
-                ->groupBy('country')->pluck('country', 'country')->toArray();
+                ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')
+                ->groupBy('country')->pluck('country', 'g_id')->toArray();
         return $this->view('delivery', compact('countries'));
     }
 
@@ -99,10 +99,14 @@ class GuestController extends Controller
 
     public function getCities(Request $request)
     {
-        $zones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-            ->select('zone_countries.*', 'zone_countries.name as country')
-            ->orderBy('name');
-        return ['error' => false, 'html' => \View::make($this->view . '._partials,regions')];
+        $geo_zone = GeoZones::find($request->value);
+
+        $coontries = new Countries();
+        $posible = array();
+        $country = $coontries->where('name.common', $request->value)->first();
+
+        dd($country->regions,$request->all());
+        return ['error' => false, 'html' => \View::make($this->view . '._partials.regions')];
     }
 
     public function getDeliveryPrices(Request $request)
