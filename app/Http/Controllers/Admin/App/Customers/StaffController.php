@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\App\Customers;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\App\AppPermissions;
 use App\Models\App\AppStaff;
 use App\Models\Warehouse;
 use App\User;
@@ -64,5 +65,20 @@ class StaffController extends Controller
         $data['customer_id'] = \Auth::id();
         StaffRoles::updateOrCreate(['id' => $id], $data);
         return redirect()->route('staff_roles');
+    }
+
+    public function getStaffPermission()
+    {
+        $permissions=AppPermissions::all();
+        $permissionGrouped=[];
+        foreach($permissions as $permission){
+            $permissionGrouped[$permission->type][]=$permission;
+        }
+        return view('admin.app.staff.permissions.add_staff',compact('permissionGrouped'));
+    }
+
+    public function getAppPermissions()
+    {
+        return view('admin.app.staff.permissions.index');
     }
 }

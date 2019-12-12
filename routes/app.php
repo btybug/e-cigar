@@ -21,4 +21,8 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/roles', 'Customers\StaffController@getRoles')->name('app_staff_roles');
     Route::get('/manage-role/{id?}', 'Customers\StaffController@getCreateRole')->name('app_staff_roles_create');
     Route::post('/manage-role/{id?}', 'Customers\StaffController@postCreateOrEditRole')->name('app_staff_roles_create');
+
+    Route::get('/add-permission/{id}', 'Customers\StaffController@getStaffPermission')->name('app_staff_add_permission');
+    Route::get('/permissions', 'Customers\StaffController@getAppPermissions')->name('app_permissions');
+
 });

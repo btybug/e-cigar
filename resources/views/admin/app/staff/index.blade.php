@@ -41,6 +41,7 @@
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Gender</th>
+                    <th>Actions</th>
                 </tr>
                 </thead>
             </table>
@@ -90,6 +91,7 @@
                     {data: 'email', name: 'email'},
                     {data: 'phone', name: 'phone'},
                     {data: 'gender', name: 'gender'},
+                    {data: 'actions', name: 'actions'},
                 ]
             });
             $('.staff_add').on('click', function () {
