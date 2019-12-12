@@ -42,14 +42,16 @@
                                 <div class="item-name font-20">{!! __('faq') !!}</div>
                             </a>
                         </li>
+
                         <li class="col-md-4 col-sm-6">
-                            <a href="javascript:void(0);" class="d-flex align-items-center item-link">
+                            <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link">
+                                <div class="item-photo">
+                                    <img src="/public/img/faq-icon.png" alt="FAQ" title="FAQ">
+                                </div>
+                                <div class="item-name font-20">{!! __('About us') !!}</div>
                             </a>
                         </li>
-                        <li class="col-md-4 col-sm-6">
-                            <a href="javascript:void(0);" class="d-flex align-items-center item-link">
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
 
