@@ -88,6 +88,7 @@ class GuestController extends Controller
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
                 ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')
                 ->groupBy('country')->pluck('country', 'country')->toArray();
+
         return $this->view('delivery', compact('countries'));
     }
 
@@ -99,6 +100,7 @@ class GuestController extends Controller
     public function getCities(Request $request)
     {
         $regions = [];
+        $deliveries = [];
         $geoZones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
             ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')->get();
 
@@ -106,6 +108,12 @@ class GuestController extends Controller
             foreach ($geoZones as $geoZone){
                 $countries = $geoZone->countries()->where('name',$request->value)->get();
                 if(count($countries)){
+                    if(count($geoZone->deliveries)){
+                        foreach ($geoZone->deliveries as $delivery){
+                            $deliveries[] = $delivery;
+                        }
+                    }
+
                     foreach ($countries as $country){
                         if(count($country->regions)){
                             $regions = array_merge($regions,$country->regions()->pluck('name','name')->all());
@@ -116,7 +124,7 @@ class GuestController extends Controller
         }
 
         $rHtml = \View::make($this->view . '._partials.regions',compact(['regions']))->render();
-        $sHtml = \View::make($this->view . '._partials.shipping_methods',compact(['regions']))->render();
+        $sHtml = \View::make($this->view . '._partials.shipping_methods',compact(['deliveries']))->render();
 
          return ['error' => false, 'html' => $rHtml,'sHtml' => $sHtml];
     }
