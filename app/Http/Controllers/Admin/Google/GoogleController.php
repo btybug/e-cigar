@@ -85,7 +85,7 @@ class GoogleController extends Controller
             $ga->setRedirectUri(url(env('GOOGLE_REDIRECT_URI')));
             $ga->setAccessType ("offline");
             $ga->setApprovalPrompt ("force");
-            $ga->authenticate($request->code);
+            $ga->fetchAccessTokenWithAuthCode($request->code);
             $auth = $ga->getAccessToken();
             if (isset($auth['access_token'])) {
                 $plus = new \Google_Service_Plus($ga);
