@@ -84,11 +84,10 @@ class GuestController extends Controller
 
     public function getDelivery(GeoZones $geoZones)
     {
-
         $countries = [null => 'Select Country'] + $geoZones
                 ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
                 ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')
-                ->groupBy('country')->pluck('country', 'g_id')->toArray();
+                ->groupBy('country')->pluck('country', 'country')->toArray();
         return $this->view('delivery', compact('countries'));
     }
 
@@ -99,14 +98,27 @@ class GuestController extends Controller
 
     public function getCities(Request $request)
     {
-        $geo_zone = GeoZones::find($request->value);
+        $regions = [];
+        $geoZones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
+            ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')->get();
 
-        $coontries = new Countries();
-        $posible = array();
-        $country = $coontries->where('name.common', $request->value)->first();
+        if($geoZones){
+            foreach ($geoZones as $geoZone){
+                $countries = $geoZone->countries()->where('name',$request->value)->get();
+                if(count($countries)){
+                    foreach ($countries as $country){
+                        if(count($country->regions)){
+                            $regions = array_merge($regions,$country->regions()->pluck('name','name')->all());
+                        }
+                    }
+                }
+            }
+        }
 
-        dd($country->regions,$request->all());
-        return ['error' => false, 'html' => \View::make($this->view . '._partials.regions')];
+        $rHtml = \View::make($this->view . '._partials.regions',compact(['regions']))->render();
+        $sHtml = \View::make($this->view . '._partials.shipping_methods',compact(['regions']))->render();
+
+         return ['error' => false, 'html' => $rHtml,'sHtml' => $sHtml];
     }
 
     public function getDeliveryPrices(Request $request)
