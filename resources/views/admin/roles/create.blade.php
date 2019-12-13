@@ -28,12 +28,13 @@
                                 </div>
                             </div>
                             <!-- Password input-->
-                            <div class="form-group row">
-                                <label class="col-md-3" for="passwordinput">Type</label>
-                                <div class="col-md-9">
-                                    {!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}
-                                </div>
-                            </div>
+                            {!! Form::hidden('type','backend') !!}
+                            {{--<div class="form-group row">--}}
+                                {{--<label class="col-md-3" for="passwordinput">Type</label>--}}
+                                {{--<div class="col-md-9">--}}
+                                    {{--{!! Form::select('type',['backend'=>'Admin Panel','frontend'=>'Front Site'],null,['class'=>'form-control input-md']) !!}--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
                             <div class="form-group row">
                                 <label class="col-md-3" for="passwordinput">Description</label>
                                 <div class="col-md-9">
