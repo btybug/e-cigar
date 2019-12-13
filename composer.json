@@ -12,7 +12,7 @@
         "bnbwebexpertise/laravel-google-cloud-print": "^0.1.2",
         "cartalyst/stripe-laravel": "9.0.*",
         "chumper/zipper": "^1.0",
-        "dacastro4/laravel-gmail": "v0.6.1.1",
+        "dacastro4/laravel-gmail": "v3.0.0",
         "darryldecode/cart": "~4.0",
         "davejamesmiller/laravel-breadcrumbs": "5.x",
         "dimsav/laravel-translatable": "^9.2",
