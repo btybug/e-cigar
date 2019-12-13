@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Admin\App\Customers;
 
 use App\Http\Controllers\Controller;
 use App\Models\App\AppPermissions;
-use App\Models\App\AppStaff;
+use App\Models\App\AppStaffPermissions;
 use App\Models\Warehouse;
 use App\User;
 use Illuminate\Http\Request;
@@ -88,10 +88,14 @@ class StaffController extends Controller
     {
        $user= User::find($id);
        $data=[];
-       foreach ($request->get('permission',[]) as $permission){
-           $data[$permission]=['warehouse_id'=>$warehouse_id];
+       foreach ($request->get('permission',[]) as $key=>$permission){
+           $data[$key]['user_id'] = $id;
+           $data[$key]['warehouse_id'] = $warehouse_id;
+           $data[$key]['permission_id'] = $permission;
        }
-        $user->appPermissions()->sync($data);
+
+        AppStaffPermissions::where('user_id', $id)->where('warehouse_id', $warehouse_id)->delete();
+       \DB::table('app_staff_permissions')->insert($data);
         return redirect()->back();
     }
 }
