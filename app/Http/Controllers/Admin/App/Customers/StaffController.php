@@ -67,10 +67,10 @@ class StaffController extends Controller
         return redirect()->route('staff_roles');
     }
 
-    public function getStaffPermission($id)
+    public function getStaffPermission($id,$warehouse_id)
     {
         $user= User::find($id);
-        $existing=$user->appPermissions->pluck('slug','id');
+        $existing=$user->appPermissions()->where('app_staff_permissions.warehouse_id',$warehouse_id)->pluck('app_permissions.slug','app_permissions.id');
         $permissions=AppPermissions::all();
         $permissionGrouped=[];
         foreach($permissions as $permission){
@@ -84,10 +84,14 @@ class StaffController extends Controller
         return view('admin.app.staff.permissions.index');
     }
 
-    public function postStaffPermission($id,Request $request)
+    public function postStaffPermission($id,$warehouse_id,Request $request)
     {
        $user= User::find($id);
-        $user->appPermissions()->sync($request->get('permission'));
+       $data=[];
+       foreach ($request->get('permission',[]) as $permission){
+           $data[$permission]=['warehouse_id'=>$warehouse_id];
+       }
+        $user->appPermissions()->sync($data);
         return redirect()->back();
     }
 }

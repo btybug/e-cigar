@@ -1098,12 +1098,12 @@ class DatatableController extends Controller
             ->rawColumns([])->make(true);
     }
 
-    public function getAllAppLandings(Request $request)
+    public function getAllAppStaff(Request $request)
     {
         return Datatables::of(User::leftJoin('app_staff','app_staff.users_id','users.id')
-            ->where('app_staff.warehouses_id',$request->get('warehouse_id')))
-            ->addColumn('actions', function ($attr) {
-                $html = "<a class='btn btn-warning' href='" . route('app_staff_add_permission', $attr->id) . "'>Permission</a>";
+            ->where('app_staff.warehouses_id',$request->get('warehouse_id'))->select('users.*'))
+            ->addColumn('actions', function ($attr)use ($request) {
+                $html = "<a class='btn btn-warning' href='" . route('app_staff_add_permission', [$attr->id,$request->get('warehouse_id')]) . "'>Permission</a>";
                 return $html ;
             })->rawColumns(['actions'])
             ->make(true);

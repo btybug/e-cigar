@@ -17,6 +17,7 @@ class CreateAppStaffPermissionsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('user_id');
             $table->unsignedInteger('permission_id');
+            $table->unsignedInteger('warehouse_id');
             $table->timestamp('deadline')->nullable();
             $table->timestamps();
         });
