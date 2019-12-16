@@ -1104,6 +1104,7 @@ class DatatableController extends Controller
             ->where('app_staff.warehouses_id',$request->get('warehouse_id'))->select('users.*'))
             ->addColumn('actions', function ($attr)use ($request) {
                 $html = "<a class='btn btn-warning' href='" . route('app_staff_add_permission', [$attr->id,$request->get('warehouse_id')]) . "'>Permission</a>";
+                $html .= "<a class='btn btn-warning' href='" . route('app_staff_badge', [$attr->id,$request->get('warehouse_id')]) . "'>Badge</a>";
                 return $html ;
             })->rawColumns(['actions'])
             ->make(true);

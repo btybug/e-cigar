@@ -26,4 +26,6 @@ Route::group(['prefix' => 'staff'], function () {
     Route::post('/add-permission/{id}/{w_id}', 'Customers\StaffController@postStaffPermission');
     Route::get('/permissions', 'Customers\StaffController@getAppPermissions')->name('app_permissions');
 
+    Route::get('/badge', 'Customers\StaffController@getAppBadge')->name('app_staff_badge');
+
 });
