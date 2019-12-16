@@ -12,6 +12,100 @@ namespace App\Models;
 use App\Models\Common\Translatable;
 use App\Models\Translations\ItemTranslations;
 
+/**
+ * App\Models\Items
+ *
+ * @property int $id
+ * @property string|null $sku
+ * @property int $barcode_id
+ * @property int|null $brand_id
+ * @property string $type
+ * @property array|null $manual_codes
+ * @property string|null $alert
+ * @property int $quantity
+ * @property string $image
+ * @property int $default_price
+ * @property int $status
+ * @property float|null $length
+ * @property float|null $width
+ * @property float|null $height
+ * @property float|null $weight
+ * @property float|null $item_length
+ * @property float|null $item_width
+ * @property float|null $item_height
+ * @property float|null $item_weight
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $is_archive
+ * @property int $landing
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemCategories[] $ItemCategories
+ * @property-read int|null $item_categories_count
+ * @property-read \App\Models\Barcodes $barcode
+ * @property-read \App\Models\Category $brand
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Category[] $categories
+ * @property-read int|null $categories_count
+ * @property-read mixed $qty
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemsLocations[] $locations
+ * @property-read int|null $locations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemsMedia[] $media
+ * @property-read int|null $media_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Others[] $others
+ * @property-read int|null $others_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemsPackages[] $packages
+ * @property-read int|null $packages_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Purchase[] $purchase
+ * @property-read int|null $purchase_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemSpecification[] $specifications
+ * @property-read int|null $specifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Attributes[] $specificationsPivot
+ * @property-read int|null $specifications_pivot_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Suppliers[] $suppliers
+ * @property-read int|null $suppliers_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Translations\ItemTranslations[] $translations
+ * @property-read int|null $translations_count
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\ItemsMedia[] $videos
+ * @property-read int|null $videos_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items active()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items archive()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable listsTranslations($translationField)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items main()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable notTranslatedIn($locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable orWhereTranslation($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable orWhereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable orderByTranslation($key, $sortmethod = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable translated()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable translatedIn($locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereAlert($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereBarcodeId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereBrandId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereDefaultPrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereIsArchive($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereItemHeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereItemLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereItemWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereItemWidth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereLanding($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereManualCodes($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereSku($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable whereTranslation($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable whereTranslationLike($key, $value, $locale = null)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereWeight($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Items whereWidth($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable withTranslation()
+ * @mixin \Eloquent
+ */
 class Items extends Translatable
 {
     protected $table = 'items';

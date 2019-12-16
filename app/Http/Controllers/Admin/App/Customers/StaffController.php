@@ -38,7 +38,7 @@ class StaffController extends Controller
         return response()->json(['error'=>false]);
     }
 
-    public function getViewStaffMember($id)
+    public function getAppBadge($id,$warehouse_id)
     {
         $model=Staff::findOrfail($id);
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
@@ -93,7 +93,6 @@ class StaffController extends Controller
            $data[$key]['warehouse_id'] = $warehouse_id;
            $data[$key]['permission_id'] = $permission;
        }
-
         AppStaffPermissions::where('user_id', $id)->where('warehouse_id', $warehouse_id)->delete();
        \DB::table('app_staff_permissions')->insert($data);
         return redirect()->back();

@@ -11,6 +11,43 @@ namespace App\Models\Media;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * App\Models\Media\Items
+ *
+ * @property int $id
+ * @property string $original_name
+ * @property string $real_name
+ * @property string $extension
+ * @property string $size
+ * @property int $folder_id
+ * @property string|null $seo_keywords
+ * @property string|null $seo_caption
+ * @property string|null $seo_description
+ * @property string|null $seo_alt
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $key
+ * @property-read mixed $relative_url
+ * @property-read mixed $type
+ * @property-read mixed $url
+ * @property-read \App\Models\Media\Folders $storage
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereExtension($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereFolderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereOriginalName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereRealName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereSeoAlt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereSeoCaption($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereSeoDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereSeoKeywords($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereSize($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Items whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class Items extends Model
 {
     public $types = [

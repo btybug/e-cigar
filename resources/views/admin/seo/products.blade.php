@@ -68,11 +68,13 @@
 
 
 @stop
+@section('css')
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
+    @stop
 @section('js')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-
-
-        $(document).ready(function() {
+      $(function () {
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
@@ -83,11 +85,10 @@
                 });
                 $(selectId).select2({
                     multiple: true,
-                    initSelection: function (element, callback) {
-                        var selected_items = JSON.parse(localStorage.getItem(storageName));
-
-                        callback(selected_items);
-                    }
+                    // initSelection: function (element, callback) {
+                    //     var selected_items = JSON.parse(localStorage.getItem(storageName));
+                    //     callback(selected_items);
+                    // }
                 });
 
                 var tableHeadArray = tableData;
@@ -121,7 +122,6 @@
                     ],
                     columns: tableHeadArray
                 });
-
                 function init() {
                     var selected_items = [];
                     $(`${selectId} option`).each(function() {

@@ -48,7 +48,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-8">
-                        {!! Form::open([]) !!}
+                        {!! Form::open() !!}
                         <div class="contact-main-content">
                             <h1 class="font-sec-reg font-22 lh-1 text-tert-clr main-title">{!! __('send_us_message') !!}</h1>
                             <div class="form-group row">
@@ -57,7 +57,7 @@
                                         <label for="contactname"
                                                class="col-xl-2 col-sm-3 col-form-label font-sec-light">{!! __('name') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
-                                            <input type="text" class="form-control border-light" id="contactname"
+                                            <input name="name" type="text" class="form-control border-light" id="contactname"
                                                    value="">
                                         </div>
                                     </div>
@@ -67,7 +67,7 @@
                                         <label for="contactphone"
                                                class="col-xl-2 col-sm-3 col-form-label font-sec-light">{!! __('phone') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
-                                            <input type="tel" class="form-control border-light" id="contactphone"
+                                            <input  name="phone" type="tel" class="form-control border-light" id="contactphone"
                                                    value="">
                                         </div>
                                     </div>
@@ -79,7 +79,7 @@
                                         <label for="contactemail"
                                                class="col-xl-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('e_mail') !!}</label>
                                         <div class="col-xl-10 col-sm-9">
-                                            <input type="email" class="form-control border-light" id="contactemail"
+                                            <input name="email" type="email" class="form-control border-light" id="contactemail"
                                                    value="">
                                         </div>
                                     </div>
@@ -90,7 +90,7 @@
                                     <div class="row">
                                         <label for="contactsubject" class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('subject') !!}</label>
                                         <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
-                                            <input type="text" class="form-control" id="contactsubject"
+                                            <input name="subject" type="text" class="form-control" id="contactsubject"
                                                    value="">
                                         </div>
                                     </div>
@@ -102,7 +102,7 @@
                                         <label for="contactarea"
                                                class="col-xl-1 col-lg-2 col-sm-3 pr-sm-0 pr-3 col-form-label font-sec-light">{!! __('message') !!}</label>
                                         <div class="col-xl-11 col-lg-10 pl-lg-0 pl-lg-0 pl-xl-3 col-sm-9">
-                                            <textarea name="" id="contactarea" cols="30" rows="10"
+                                            <textarea name="message" id="contactarea" cols="30" rows="10"
                                                       class="form-control"></textarea>
                                         </div>
                                     </div>

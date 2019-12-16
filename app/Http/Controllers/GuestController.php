@@ -159,7 +159,7 @@ class GuestController extends Controller
         return $this->view('contact_us',compact(['settings']));
     }
 
-    public function postContactUs(ContactUsRequest $request)
+    public function postContactUs(Request $request)
     {
 
         $data = $request->all();
@@ -167,9 +167,10 @@ class GuestController extends Controller
         $result = [
             'name' => trim(htmlspecialchars($data['name'])),
             'phone' => isset($data['phone']) ? trim(htmlspecialchars($data['phone'])) : null,
-            'category' => trim(htmlspecialchars($data['category'])),
+            'category' => 'contact_us',
+//            'category' => trim(htmlspecialchars($data['category'])),
             'email' => $data['email'],
-            'uniq_id' => uniqid($data['category'] . "_"),
+            'uniq_id' => uniqid( "contact_us_"),
             'message' => trim(htmlspecialchars($data['message'])),
         ];
 //            $mail=Gmail::message()->subject('about_team_5c4ef6c1e44b1')->preload()->all();

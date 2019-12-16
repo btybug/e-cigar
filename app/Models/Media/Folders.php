@@ -17,7 +17,35 @@ use Illuminate\Database\Schema\Blueprint;
 
 /**
  * Class Folders
+ *
  * @package App\Models\Media
+ * @property int $id
+ * @property string $name
+ * @property string|null $prefix
+ * @property int $parent_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Media\Folders[] $children
+ * @property-read int $children_count
+ * @property-read bool $folder
+ * @property-read int|null $items_count
+ * @property-read mixed $key
+ * @property-read mixed $text
+ * @property-read mixed|string $title
+ * @property-read \Illuminate\Contracts\Routing\UrlGenerator|string $url
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Media\Items[] $items
+ * @property-read \App\Models\Media\Folders $parent
+ * @property-read \App\Models\Media\Settings $settings
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders whereParentId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders wherePrefix($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Media\Folders whereUpdatedAt($value)
+ * @mixin \Eloquent
  */
 class Folders extends Model
 {

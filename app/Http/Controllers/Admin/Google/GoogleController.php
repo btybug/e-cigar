@@ -88,7 +88,7 @@ class GoogleController extends Controller
             $ga->fetchAccessTokenWithAuthCode($request->code);
             $auth = $ga->getAccessToken();
             if (isset($auth['access_token'])) {
-                $plus = new \Google_Service_People($ga);
+                $plus = new \Google_Service_Gmail($ga);
                 $ga->accessToken=$accessToken = $auth['access_token'];
                 $refreshToken = $auth['refresh_token'];
                 $tokenExpires = $auth['expires_in'];

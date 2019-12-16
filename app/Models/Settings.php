@@ -11,6 +11,28 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\Settings
+ *
+ * @property int $id
+ * @property string|null $sub_id
+ * @property string $section
+ * @property string $key
+ * @property string|null $val
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereKey($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereSection($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereSubId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Settings whereVal($value)
+ * @mixin \Eloquent
+ */
 class Settings extends Model
 {
     protected $table = 'bty_settings';
