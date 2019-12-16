@@ -99,7 +99,7 @@ class GoogleController extends Controller
                     'expires_in'=>$tokenExpires,
                     'token_created'=>$tokenCreated,
                     'created' => time(),
-                    'email'=> '',
+                    'email'=> 'sahak@ukdevplus.co.uk',
 //                    'email'=> $plus->people->get('me')->emails[0]->value,
 
                 ];
