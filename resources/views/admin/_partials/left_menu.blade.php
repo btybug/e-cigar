@@ -277,6 +277,12 @@
 
             </li>
             @endHasAccess
+
+            @ok('import_index')
+            <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
+                    <span>Reports</span></a></li>
+            @endok
+
             @ok('admin_landings')
             <li><a href="{{route('admin_landings')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Landings</span></a></li>

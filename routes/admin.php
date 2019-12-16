@@ -685,6 +685,11 @@ Route::group(['prefix' => 'wholesellers'], function () {
     Route::get('/manage/{id}', 'Admin\WholesallersController@manage')->name('admin_wholesallers_manage');
 });
 
+Route::group(['prefix' => 'reports'], function () {
+    Route::get('/', 'Admin\ReportsController@getList')->name('admin_reports');
+    Route::get('/new', 'Admin\ReportsController@getIndex')->name('admin_reports_new');
+});
+
 
 Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_download');
 Route::get('/fix-barcodes', function () {
