@@ -45,6 +45,15 @@
                                     <div class="item-name font-20">{!! __('faq') !!}</div>
                                 </a>
                             </li>
+
+                                <li class="item-wrap">
+                                    <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link">
+                                        <div class="item-photo">
+                                            <img src="/public/img/faq-icon.png" alt="about_us" title="about_us">
+                                        </div>
+                                        <div class="item-name font-20">{!! __('about_us') !!}</div>
+                                    </a>
+                                </li>
                         </ul>
                     </div>
                     <div class="col-md-9">
