@@ -581,6 +581,9 @@ class DatatableController extends Controller
         $robot = $settings->getEditableData('seo_robot_stocks');
 
         return Datatables::of(Stock::query())
+            ->addColumn('p_name', function ($stock) use ($general) {
+                return $stock->name;
+            })
             ->editColumn('og:title', function ($stock) use ($general) {
 
                 return ($stock->getSeoField('og:title')) ? $stock->getSeoField('og:title') : getSeo($general, 'og:title', $stock);
