@@ -783,8 +783,10 @@ class DatatableController extends Controller
             ->leftJoin('categories_translations','categories.id','=','categories_translations.category_id')
             ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code',
                 'categories_translations.name as category')
+            ->groupBy('items.id')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
+
 //            ->editColumn('name', function ($attr) {
 //                return $attr->name;
 //            }),
