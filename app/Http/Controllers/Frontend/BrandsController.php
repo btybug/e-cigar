@@ -17,8 +17,8 @@ class BrandsController extends Controller
 
     public function index($slug = null)
     {
-        $brands = Category::where('type', 'brands')->whereNotNull('parent_id')->get();
-        $parentBrands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get();
+        if(! count($brands)) abort(404);
         $slug = ($slug) ? $slug : $brands->first()->slug;
         $current = ($slug) ? Category::where('slug', $slug)->first() : null;
         $products = ($current) ? $current->brandProducts() : collect([]);
@@ -33,12 +33,12 @@ class BrandsController extends Controller
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
             ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
-        return $this->view('index', compact('brands', 'slug', 'current', 'parentBrands', 'products', 'categories', 'stockCategories','f'));
+        return $this->view('index', compact('brands', 'slug', 'current', 'products', 'categories', 'stockCategories','f'));
     }
 
     public function postBrand(Request $request)
     {
-        $current = Category::where('type', 'brands')->whereNotNull('parent_id')->where('id', $request->id)->first();
+        $current = Category::where('type', 'brands')->whereNull('parent_id')->where('id', $request->id)->first();
         if ($current) {
             $products = $current->brandProducts();
             $stockCategories = StockCategories::

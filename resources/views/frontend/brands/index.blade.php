@@ -101,11 +101,11 @@
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap">
                         <div class="brands_aside">
-                            <div class="select-wall">
-                                {!! Form::select('brand_filter',['' => __('all_brands')] + $parentBrands,null,
-                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}
+{{--                            <div class="select-wall">--}}
+{{--                                {!! Form::select('brand_filter',['' => __('all_brands')] + $parentBrands,null,--}}
+{{--                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}--}}
 
-                            </div>
+{{--                            </div>--}}
                             <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">{!! __('categories') !!}</div>
                             <ul class="brands_aside-list">
                                 @include("frontend.brands._partials.list")
