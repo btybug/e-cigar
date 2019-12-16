@@ -65,7 +65,7 @@ class DatatableController extends Controller
                 return '<div class="users-table--td-btn datatable-td__action">
                     <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>
-                    <a href="javascript:void(0)" data-href="' . route("admin_users_delete") . '" 
+                    <a href="javascript:void(0)" data-href="' . route("admin_users_delete") . '"
                 class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>
                     </div>
                     ';
@@ -84,7 +84,7 @@ class DatatableController extends Controller
                 return '<div class="datatable-td__action">
                     <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
                     <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>
-                    <a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '" 
+                    <a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"
                 class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>
                     </div>
                     ';
@@ -337,7 +337,7 @@ class DatatableController extends Controller
                 return '<div class="datatable-td__action">
                 ' .
                     ((userCan('admin_stock_edit')) ? "<a class='btn btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'>Edit</a>" : '')
-                    .'<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'" 
+                    .'<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'"
                 class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>'.'</div>';
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
@@ -358,7 +358,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">
                             <a class="btn btn-warning mr-1" href="' . route("admin_stock_edit_offer", $stock->id) . '">Edit</a>' .
-                        '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'" 
+                        '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'"
                         class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>
                 </div>';
             })->rawColumns(['actions', 'name', 'image'])
@@ -788,7 +788,6 @@ class DatatableController extends Controller
 //            ->editColumn('name', function ($attr) {
 //                return $attr->name;
 //            }),
-//                \DB::raw('SUM(purchases.qty) as pqty,SUM(others.qty) as oqty')
             ->editColumn('brand_id', function ($attr) {
                 $str = '';
                 if($attr->categories && count($attr->categories)){
@@ -995,7 +994,7 @@ class DatatableController extends Controller
             return BBgetDateFormat($faq->created_at);
         })->addColumn('actions', function ($attr) {
             $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_campaign_edit', $attr->id) . "'>Edit</a>";
-            return  $html .= '<a href="javascript:void(0)" data-href="' . route("admin_campaign_delete") . '" 
+            return  $html .= '<a href="javascript:void(0)" data-href="' . route("admin_campaign_delete") . '"
                 class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
         })->rawColumns(['actions'])->make(true);
     }
@@ -1032,7 +1031,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($attr) {
                 $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'>Edit</a>";
                 $html .= '<a href="'.route("admin_warehouses_manage",$attr->id).'" class="btn btn-info" >Activity</a>';
-            return  $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'" 
+            return  $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'"
                 class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
         })->rawColumns(['actions','image'])->make(true);
     }
