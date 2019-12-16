@@ -47,9 +47,10 @@ class ReportsController extends Controller
 
     public function getIndex(Request $request, ItemsDataTable $dataTable)
     {
+        $model = null;
         $options = $this->findService->getOptions();
         $data = $request->all();
-        return $dataTable->render('admin.reports.index', compact(['options','data']));
+        return $dataTable->render('admin.reports.index', compact(['options','data','model']));
     }
 
     public function postCallFind(Request $request, ItemsDataTable $dataTable)

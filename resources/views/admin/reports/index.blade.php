@@ -5,9 +5,47 @@
 @section('content')
     <div class="admin-find-wrapper">
         <div class="form-group row border-bottom pb-2">
-            <label for="find" class="col-sm-2 col-form-label">Find</label>
-            <div class="col-sm-4">
-                {!! Form::select('find',$options,null,['class' => 'form-control','id' => 'find']) !!}
+           <h3>Report</h3>
+            <div class="col-sm-12">
+            {!! Form::model($model) !!}
+            <!-- Password input-->
+                <div class="form-group row">
+                    <label class="col-md-2" for="passwordinput">Type</label>
+                    <div class="col-md-10">
+                        {!! Form::select('find',$options,null,['class' => 'form-control','id' => 'find']) !!}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-md-2" for="passwordinput">Title</label>
+                    <div class="col-md-10">
+                        {!! Form::text('title',null,['class'=>'form-control input-md']) !!}
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group row">
+                    <label class="col-md-2" for="passwordinput">Description</label>
+                    <div class="col-md-10">
+                        {!! Form::textarea('description',null,['class'=>'form-control input-md']) !!}
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group row">
+                    <label class="col-md-2" for="passwordinput">SQL query</label>
+                    <div class="col-md-10">
+                        {!! Form::textarea('sql_query',null,['class'=>'form-control input-md','id' => 'query-log','readonly' => true]) !!}
+                    </div>
+                </div>
+
+                <!-- Button -->
+                <div class="form-group row">
+                    <div class="col-sm-12 text-right">
+                        <button id="singlebutton" type="submit" class="btn btn-info save-role">Save</button>
+                    </div>
+                </div>
+
+                </form>
             </div>
         </div>
         <div class="find-form">
