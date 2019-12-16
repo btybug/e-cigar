@@ -22,7 +22,7 @@
                         <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
                     </div>
                     <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" multiple>
+                        <select name="table_head" id="table_head_id" multiple class="form-control">
                             <option value="#" data-column="0" data-name="id">#</option>
                             <option value="OG title" data-column="1" data-name="og:title">OG title</option>
                             <option value="OG image" data-column="2" data-name="og:image">OG image</option>
