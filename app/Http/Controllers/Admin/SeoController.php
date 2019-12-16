@@ -71,20 +71,6 @@ class SeoController extends Controller
     }
 
 
-    public function getPages(Request $request, Settings $settings)
-    {
-        $p = $request->get('p', 'home');
-        $model = $settings->getEditableData('frontend_seo_' . $p);
-        $pages = getFrontendPages();
-        return $this->view('pages', compact('pages', 'p', 'model'));
-    }
-
-    public function postPages(Request $request, Settings $settings)
-    {
-        $p = $request->get('p', 'home');
-        $settings->updateOrCreateSettings('frontend_seo_' . $p, $request->except('_token', 'p'));
-        return redirect()->back();
-    }
 
     public function getBulkProducts()
     {

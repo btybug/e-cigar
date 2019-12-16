@@ -18,12 +18,6 @@
                        aria-controls="shipping" aria-selected="false">Stocks</a>
                 </li>
                 @endok
-                @ok('admin_seo_pages')
-                <li class="nav-item ">
-                    <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_pages') !!}" role="tab"
-                       aria-controls="shipping" aria-selected="false">Pages</a>
-                </li>
-                @endok
             </ul>
             <div class="row">
                 <div class="col-xl-6 col-lg-5">
