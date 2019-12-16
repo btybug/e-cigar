@@ -183,7 +183,9 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
+                displayLength: 10,
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
@@ -203,7 +205,9 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
+                displayLength: 10,
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],
@@ -224,7 +228,9 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
+                displayLength: 10,
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [
                     'csv', 'excel', 'pdf', 'print'
                 ],

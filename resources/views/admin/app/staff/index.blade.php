@@ -66,7 +66,9 @@
                 "serverSide": true,
                 "bPaginate": true,
                 // "ordering": false,
-                dom: 'Bfrtip',
+                dom: 'Bflrtip',
+                displayLength: 10,
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 'columnDefs': [{
                     'targets': 0, /* column index */
                     'orderable': false, /* true or false */
