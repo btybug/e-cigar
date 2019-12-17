@@ -6514,7 +6514,7 @@ flex-direction: column;
         /*height: 350px;*/
     }
     .product__single-wrapper .tecnical_gallery_obj-holder{
-        height: 300px;
+        /*height: 300px;*/
     }
     .product-card-thumbs--single .fs-carousel-container{
         width: calc(100% - 65px);
