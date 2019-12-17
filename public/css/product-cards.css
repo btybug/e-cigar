@@ -3538,8 +3538,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     background-color: transparent;
     padding: 0;
     height: auto;
-    max-height: 700px;
-    max-width: 700px;
+    max-height: 1000px;
+    max-width: 1000px;
 }
 
 .product__single-wrapper .single-product-dtls-wrap .product-card-thumbs--single .fs-carousel-wrapper {
