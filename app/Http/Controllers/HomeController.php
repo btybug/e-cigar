@@ -37,11 +37,11 @@ class HomeController extends Controller
 //            ->send();
 //
 //        dd('done');
-        
+
         $banners = $this->settings->getEditableData('banners');
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
         $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
-        $brands = Category::where('type','brands')->whereNotNull('parent_id')->get();
+        $brands = Category::where('type','brands')->whereNull('parent_id')->get();
         $tops = $this->settings->getEditableData('top');
         $tops = ($tops->data) ? json_decode($tops->data, true) : [];
 //        dd($tops);
