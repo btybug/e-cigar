@@ -25,6 +25,7 @@ class SearchControll extends Controller
             'stocks.image',
             'stocks.slug',
             'stock_translations.*',
+            'stock_translations.id as tr_id',
             'categories.slug as category'
         );
         if ($category) {
