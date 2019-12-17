@@ -30,6 +30,7 @@
                         @endok
                     </div>
                     <div class="card-body panel-body">
+                        <div class="d-flex justify-content-between">
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <option value="#" data-column="0" data-name="#" selected>#</option>
                             <option value="#" data-column="1" data-name="id" selected>id</option>
@@ -43,6 +44,18 @@
                             <option value="Created At" data-column="9" data-name="created_at">Created At</option>
                             <option value="Actions" data-column="10" data-name="actions" selected>Actions</option>
                         </select>
+                        <div class="find-wrapper-results-head-right d-flex">
+                            <select class="form-control edit_selected_option mr-3 ">
+                                <option value="">Action</option>
+                                <option value="edit">Edit</option>
+                                <option value="barcode">Print Barcode</option>
+                                <option value="qr_code">Print Qr Code</option>
+                                <option value="download_barcode">Download Barcode</option>
+                                <option value="download_qr_code">Download Qr Code</option>
+                            </select>
+                            <button class="btn btn-warning btn-edit edit_selected">GO</button>
+                        </div>
+                        </div>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -79,6 +92,9 @@
                 </div>
             </div>
         </div>
+        <div id="svg_barcode" style="display: none"></div>
+        <div id="qr_codes"></div>
+        <svg id="svg_barcode_print" style="display: none"></svg>
     </div>
 
 
@@ -166,13 +182,45 @@
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
+                        {
+                            extend: 'copyHtml5',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'csvHtml5',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'excelHtml5',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'pdfHtml5',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
+                        {
+                            extend: 'print',
+                            exportOptions: {
+                                columns: ':visible'
+                            }
+                        },
                         // 'selectAll',
                         // 'selectNone',
-                        {
-                            extend: 'collection',
-                            text: 'Export',
-                            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-                        },
+                        // {
+                        //     extend: 'collection',
+                        //     text: 'Export',
+                        //     buttons: [
+                                
+                        //     ]
+                        // },
                         {
                             extend: 'collection',
                             text: 'Download',

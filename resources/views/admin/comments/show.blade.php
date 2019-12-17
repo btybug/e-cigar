@@ -53,7 +53,7 @@
                     {data: 'replies', name: 'replies'},
                     {data: 'guest_name', name: 'guest_name'},
                     {data: 'guest_email', name: 'guest_email'},
-                   {data: 'created_at', name: 'created_at'},
+                    {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ]
             });
