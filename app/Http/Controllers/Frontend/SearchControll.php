@@ -22,6 +22,7 @@ class SearchControll extends Controller
                 ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
 
         $query = $query->select(
+            'stocks.id',
             'stocks.image',
             'stocks.slug',
             'stock_translations.*',
