@@ -30,15 +30,17 @@
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <option value="#" data-column="0" data-name="id">#</option>
                             <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="Image" data-column="2" data-name="image">Image</option>
-                            <option value="Added/Last Modified Date" data-column="3" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="4" data-name="actions">Actions</option>
+                            <option value="Short Description" data-column="2" data-name="short_description">Short Description</option>
+                            <option value="Image" data-column="3" data-name="image">Image</option>
+                            <option value="Added/Last Modified Date" data-column="4" data-name="created_at">Added/Last Modified Date</option>
+                            <option value="Actions" data-column="5" data-name="actions">Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Short Description</th>
                                 <th>Image</th>
                                 <th>Added/Last Modified Date</th>
                                 <th>Actions</th>
@@ -138,6 +140,7 @@
                 [
                     {id: '#', name: 'id'},
                     {id: 'Name', name: 'name'},
+                    {id: 'Short Description', name: 'short_description'},
                     {id: 'Image', name: 'image'},
                     {id: 'Added/Last Modified Date', name: 'created_at'},
                     {id: 'Actions', name: 'actions'}
@@ -146,6 +149,7 @@
                 [
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
+                    {data: 'short_description', name: 'stock_translations.short_description'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}

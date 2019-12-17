@@ -35,14 +35,15 @@
                             <option value="#" data-column="0" data-name="#" selected>#</option>
                             <option value="#" data-column="1" data-name="id" selected>id</option>
                             <option value="Name" data-column="2" data-name="name" selected>Name</option>
-                            <option value="Brand" data-column="3" data-name="brand_id" selected>Brand</option>
-                            <option value="Barcode" data-column="4" data-name="barcode_id" selected>Barcode</option>
-                            <option value="Quantity" data-column="5" data-name="quantity" selected>Quantity</option>
-                            <option value="Category" data-column="6" data-name="category" selected>Category</option>
-                            <option value="Price" data-column="7" data-name="price" selected>Price</option>
-                            <option value="Status" data-column="8" data-name="status" selected>Status</option>
-                            <option value="Created At" data-column="9" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="10" data-name="actions" selected>Actions</option>
+                            <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
+                            <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
+                            <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
+                            <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
+                            <option value="Category" data-column="7" data-name="category" selected>Category</option>
+                            <option value="Price" data-column="8" data-name="price" selected>Price</option>
+                            <option value="Status" data-column="9" data-name="status" selected>Status</option>
+                            <option value="Created At" data-column="10" data-name="created_at">Created At</option>
+                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>
                         </select>
                         <div class="find-wrapper-results-head-right d-flex">
                             <select class="form-control edit_selected_option mr-3 ">
@@ -62,6 +63,7 @@
                                 <th><div class="text-center" style="margin-left: 17.282px"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>id</th>
                                 <th>Name</th>
+                                <th>Short Description</th>
                                 <th>Brand</th>
                                 <th>Barcode</th>
                                 <th>Quantity</th>
@@ -77,6 +79,7 @@
                                 <th></th>
                                 <th>id</th>
                                 <th>Name</th>
+                                <th>Short Description</th>
                                 <th>Brand</th>
                                 <th>Barcode</th>
                                 <th>Quantity</th>
@@ -337,6 +340,7 @@
                     {id: '#', name: 'id'},
                     {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
+                    {id: 'Short Description', name: 'short_description'},
                     {id: 'Brand', name: 'brand_id'},
                     {id: 'Barcode', name: 'barcode_id'},
                     {id: 'Quantity', name: 'quantity'},
@@ -355,6 +359,7 @@
                         orderable: false},
                     {data: 'id', name: 'items.id'},
                     {data: 'name', name: 'item_translations.name'},
+                    {data: 'short_description', name: 'item_translations.short_description'},
                     {data: 'brand_id', name: 'categories_translations.name'},
                     {data: 'barcode_id', name: 'barcodes.code'},
                     {data: 'quantity', name: 'items.quantity'},
