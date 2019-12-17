@@ -4,22 +4,29 @@
 <tr class="v-options-list-item">
     <td class="w-20">
         <div class="form-control">
-            @if(isset($model))
-                {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->attributes_id:null) !!}
-            @else
-                {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->id:null) !!}
-            @endif
-                @foreach($allAttrs as $allAttr)
-                    @if(isset($model))
-                        @if(isset($selected) && $selected->attributes_id == $allAttr->id)
+            {{--@if(isset($model))--}}
+                {{--{!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->attributes_id:null) !!}--}}
+            {{--@else--}}
+                {{--{!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->id:null) !!}--}}
+            {{--@endif--}}
+
+            @foreach($allAttrs as $allAttr)
+                @if(isset($model))
+                    @if(isset($selected) && $selected->attributes_id == $allAttr->id)
+                        @if($allAttr->name)
                             {{ $allAttr->name }}
-                        @endif
-                    @else
-                        @if(isset($selected) && $selected->id == $allAttr->id)
-                            {{ $allAttr->name }}
+                            {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->attributes_id:null) !!}
                         @endif
                     @endif
-                @endforeach
+                @else
+                    @if(isset($selected) && $selected->id == $allAttr->id)
+                        @if($allAttr->name)
+                            {{ $allAttr->name }}
+                            {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->id:null) !!}
+                        @endif
+                    @endif
+                @endif
+            @endforeach
         </div>
         {{--<select readonly="true" data-uid="{{ $uniqueID }}" name="specifications[{{ $uniqueID }}][attributes_id]"--}}
                 {{--class="form-control select-specification" placeholder="Select">--}}
