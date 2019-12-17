@@ -34,6 +34,7 @@ class SearchControll extends Controller
             ->where('stocks.status', true)
             ->where('stocks.is_offer', false)
             ->where('stock_translations.name', 'LIKE', '%' . $name . '%')
+            ->groupBy("stocks.id")
             ->get();
         return response()->json(['data' => $result->toArray(), 'code' => 200,'category'=>$category]);
     }
