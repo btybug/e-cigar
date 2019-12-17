@@ -1,6 +1,30 @@
 @php
     $uniqueID = uniqid();
+    $name = null;
+    $id = null;
 @endphp
+@foreach($allAttrs as $allAttr)
+    @if(isset($model))
+        @if(isset($selected) && $selected->attributes_id == $allAttr->id)
+            @if($allAttr->name)
+                @php
+                    $name = $allAttr->name;
+                    $id = (isset($selected))?$selected->attributes_id:null;
+                @endphp
+            @endif
+        @endif
+    @else
+        @if(isset($selected) && $selected->id == $allAttr->id)
+            @if($allAttr->name)
+                @php
+                    $name = $allAttr->name;
+                   $id = (isset($selected))?$selected->id:null;
+                @endphp
+            @endif
+        @endif
+    @endif
+@endforeach
+@if($name)
 <tr class="v-options-list-item">
     <td class="w-20">
         <div class="form-control">
@@ -9,24 +33,10 @@
             {{--@else--}}
                 {{--{!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->id:null) !!}--}}
             {{--@endif--}}
-
-            @foreach($allAttrs as $allAttr)
-                @if(isset($model))
-                    @if(isset($selected) && $selected->attributes_id == $allAttr->id)
-                        @if($allAttr->name)
-                            {{ $allAttr->name }}
-                            {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->attributes_id:null) !!}
-                        @endif
-                    @endif
-                @else
-                    @if(isset($selected) && $selected->id == $allAttr->id)
-                        @if($allAttr->name)
-                            {{ $allAttr->name }}
-                            {!! Form::hidden("specifications[$uniqueID ][attributes_id]",(isset($selected))?$selected->id:null) !!}
-                        @endif
-                    @endif
-                @endif
-            @endforeach
+            {!! $name !!}
+            @if($id)
+                {!! Form::hidden("specifications[$uniqueID ][attributes_id]",$id) !!}
+            @endif
         </div>
         {{--<select readonly="true" data-uid="{{ $uniqueID }}" name="specifications[{{ $uniqueID }}][attributes_id]"--}}
                 {{--class="form-control select-specification" placeholder="Select">--}}
@@ -72,3 +82,4 @@
                 {{--class="fa fa-minus-circle delete-v-option"></i></button>--}}
     </td>
 </tr>
+@endif
