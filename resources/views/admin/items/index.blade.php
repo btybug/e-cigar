@@ -416,6 +416,19 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            text: 'Edit',
+                            action: function ( e, dt, node, config ) {
+                                const ids = [];
+                                $('#stocks-table tbody tr.selected').each(function() {
+                                    ids.push($(this).find('td.id_n').text());
+                                });
+
+                                shortAjax('/admin/find/items/items_edit', {ids}, function(res) {
+                                    console.log(res)
+                                })
+                            }
                         }
                     ],
                     // language: {
