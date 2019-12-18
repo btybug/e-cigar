@@ -1732,6 +1732,9 @@ color: #ffffff;
     overflow: auto !important;
     background-color: white;
 }
+header.main-header{
+    z-index: 998 !important;
+}
 .edit-list--container .edit-list--container-content::-webkit-scrollbar {  width: 8px;}
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-track {  background: #ebeef4; }
 .edit-list--container .edit-list--container-content::-webkit-scrollbar-thumb {  background: #9cbcf9; }
