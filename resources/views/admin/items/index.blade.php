@@ -397,7 +397,8 @@
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
-                                        shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
+                                        
+                                        ids.length > 0 && shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
                                             console.log(res)
                                         })
                                     }
@@ -410,7 +411,7 @@
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
-                                        shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
+                                        ids.length > 0 && shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
                                             console.log(res)
                                         })
                                     }
@@ -425,7 +426,7 @@
                                     ids.push($(this).find('td.id_n').text());
                                 });
 
-                                shortAjax('/admin/find/items/items_edit', {ids}, function(res) {
+                                ids.length > 0 && shortAjax('/admin/find/items/items_edit', {ids}, function(res) {
                                     console.log(res)
                                 })
                             }
@@ -441,13 +442,14 @@
                         {
                             orderable: false,
                             className: 'select-checkbox',
-                            targets:   0,
+                            targets: 0,
                             'checkboxes': {
                                 'selectRow': true
                             }
                         },
                         { className: "id_n", "targets": [ 1 ] }
                     ],
+                    "order": [[ 1, "desc" ]],
                     select: {
                         style:    'multi',
                         selector: '.select-checkbox'
