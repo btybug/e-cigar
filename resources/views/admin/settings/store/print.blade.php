@@ -70,7 +70,9 @@
                                                 {!! Form::text("printers[$key][id]",$v['id'],['class'=>'form-control']) !!}
                                             </td>
                                             <td>
-                                                {!! Form::select("printers[$key][folder]",['invoice' => 'Invoice','shipping' => "Shipping labels",'downloads' => "Downloads"],
+                                                {!! Form::select("printers[$key][folder]",
+                                                ['invoice' => 'Invoice','shipping' => "Shipping labels",
+                                                'downloads' => "Downloads",'qr' => "QR code",'barcode' => "Barcode"],
                                                 $v['folder'],['class'=>'form-control']) !!}
                                             </td>
 
