@@ -342,7 +342,7 @@
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
-                                        
+
                                         $('.loader_container').css('display', 'block');
                                         $('body').css('overflow', 'hidden');
 
@@ -392,13 +392,27 @@
                                 {
                                     text: 'Barcode',
                                     action: function ( e, dt, node, config ) {
-                                        action(dt, '/admin/inventory/items/datatable-selections', 'print', 'barcode')
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('td.id_n').text());
+                                        });
+
+                                        shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
+                                            console.log(res)
+                                        })
                                     }
                                 },
                                 {
                                     text: 'QR Code',
                                     action: function ( e, dt, node, config ) {
-                                        action(dt, '/admin/inventory/items/datatable-selections', 'print', 'qr_code')
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('td.id_n').text());
+                                        });
+
+                                        shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
+                                            console.log(res)
+                                        })
                                     }
                                 }
                             ]
