@@ -113,7 +113,8 @@
                 {!! Form::text("printers[{id}][id]",null,['class'=>'form-control']) !!}
             </td>
             <td>
-                {!! Form::select("printers[{id}][folder]",['invoice' => 'Invoice','shipping' => "Shipping labels",'downloads' => "Downloads"],null,['class'=>'form-control']) !!}
+                {!! Form::select("printers[{id}][folder]", ['invoice' => 'Invoice','shipping' => "Shipping labels",
+                                                'downloads' => "Downloads",'qr' => "QR code",'barcode' => "Barcode"],null,['class'=>'form-control']) !!}
             </td>
 
             <td class="text-right w-5">
