@@ -30,7 +30,6 @@
                         @endok
                     </div>
                     <div class="card-body panel-body">
-                        <div class="d-flex justify-content-between">
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <option value="#" data-column="0" data-name="#" selected>#</option>
                             <option value="#" data-column="1" data-name="id" selected>id</option>
@@ -45,17 +44,6 @@
                             <option value="Created At" data-column="10" data-name="created_at">Created At</option>
                             <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>
                         </select>
-                        <div class="find-wrapper-results-head-right d-flex">
-                            <select class="form-control edit_selected_option mr-3 ">
-                                <option value="">Action</option>
-                                <option value="edit">Edit</option>
-                                <option value="barcode">Print Barcode</option>
-                                <option value="qr_code">Print Qr Code</option>
-                                <option value="download_barcode">Download Barcode</option>
-                                <option value="download_qr_code">Download Qr Code</option>
-                            </select>
-                            <button class="btn btn-warning btn-edit edit_selected">GO</button>
-                        </div>
                         </div>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -133,29 +121,27 @@
             });
 
 
-            const shortAjax = function(url, data, success, error) {
-                $.ajax({
-                    type: "get",
-                    url: url,
-                    cache: false,
-                    datatype: "json",
-                    data: data,
+            const shortAjax = function (URL, obj = {}, cb) {
+                fetch(URL, {
+                    method: "post",
                     headers: {
-                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
                     },
-                    success: function(data) {
-                        if (success) {
-                            success(data);
-                        }
-                        return data;
-                    },
-                    error: function(errorThrown) {
-                        if (error) {
-                            error(errorThrown);
-                        }
-                        return errorThrown;
-                    }
-                });
+                    credentials: "same-origin",
+                    body: JSON.stringify(obj)
+                })
+                    .then(function (response) {
+                        return response.json();
+                    })
+                    .then(function (json) {
+                        return cb(json);
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
             };
 
 
@@ -205,6 +191,35 @@
                     };
                 }
             });
+
+                const barcode_settings = JSON.parse($('#barcode-settings').text());
+
+                let width = Number(barcode_settings.width);
+                let height = Number(barcode_settings.height);
+                let margin = Number(barcode_settings.margin);
+                let back_color = barcode_settings.background_color;
+                let line_color = barcode_settings.line_color;
+                let text_align = barcode_settings.text_align;
+                let text_font = barcode_settings.text_font;
+                let format = barcode_settings.format;
+                let font_size = Number(barcode_settings.font_size);
+                let text_margin = Number(barcode_settings.text_margin);
+                let displayValue = Boolean(Number(barcode_settings.text_switch));
+                let bold = Number(barcode_settings.bold);
+                let italic = Number(barcode_settings.italic);
+                let fontOptions = '';
+
+                if(bold && italic) {
+                    fontOptions = 'bold italic'
+                } else if(bold) {
+                    fontOptions = 'bold'
+                } else if(italic) {
+                    fontOptions = 'italic'
+                } else {
+                    fontOptions = ''
+                }
+
+
                 var table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
@@ -216,34 +231,40 @@
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
                         {
-                            extend: 'copyHtml5',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        {
-                            extend: 'csvHtml5',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        {
-                            extend: 'excelHtml5',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        {
-                            extend: 'pdfHtml5',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        {
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'excelHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdfHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'print',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            ]
                         },
                         // 'selectAll',
                         // 'selectNone',
@@ -261,13 +282,105 @@
                                 {
                                     text: 'Barcode',
                                     action: function(e, dt) {
-                                        action(dt, '/admin/inventory/items/datatable-selections', 'download', 'barcode')
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('td.id_n').text());
+                                        });
+                                        console.log(ids)
+                                        $('.loader_container').css('display', 'block');
+                                        $('body').css('overflow', 'hidden');
+                                        if(ids.length === 0) {
+                                            $('.loader_container').css('display', 'none');
+                                            $('body').css('overflow', 'auto');
+                                            return false;
+                                        }
+                                        shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+
+                                            res.barcodes.map(function(barcode) {
+                                                $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
+                                            });
+                                            res.barcodes.map(function(barcode, key) {
+                                                JsBarcode(`#svg_${barcode.value}`, barcode.value, {
+                                                    format,
+                                                    font: text_font,
+                                                    fontSize: font_size,
+                                                    textMargin: text_margin,
+                                                    height,
+                                                    width,
+                                                    margin,
+                                                    background: back_color,
+                                                    lineColor: line_color,
+                                                    textAlign: text_align,
+                                                    fontOptions,
+                                                    displayValue,
+                                                })
+                                                    .render();
+                                                $(`#svg_${barcode.value}`).css('display', 'none');
+                                                $('.loader_container').css('display', 'none');
+                                                $('body').css('overflow', 'auto');
+                                                saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
+
+                                                // var s = new XMLSerializer().serializeToString(document.getElementById('svg_barcode'));
+                                                // var encodedData = window.btoa(s);
+                                                //
+                                                // var img = $(`<img id="${'barcode_'+value}">`); //Equivalent: $(document.createElement('img'))
+                                                // var li = $('<li style="list-style-type: none; margin: 0 20px 20px 0"></li>');
+                                                // img.attr('src', 'data:image/svg+xml;base64,' + encodedData);
+                                                // img.appendTo(li);
+                                                //
+                                                // li.appendTo('.barcodes_image_list');
+                                                // console.log(encodedData);
+                                            });
+                                            // $('#barcodeModalPrint').modal('show');
+                                        });
                                     }
                                 },
                                 {
                                     text: 'QR Code',
                                     action: function (e, dt) {
-                                        action(dt, '/admin/inventory/items/datatable-selections', 'download', 'qr_code')
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('td.id_n').text());
+                                        });
+                                        
+                                        $('.loader_container').css('display', 'block');
+                                        $('body').css('overflow', 'hidden');
+
+                                        function toDataURL(url) {
+                                            return fetch(url).then((response) => {
+                                                return response.blob();
+                                            }).then(blob => {
+                                                return URL.createObjectURL(blob);
+                                            });
+                                        }
+
+                                        async function forceDownload(url, fileName){
+                                            const a = document.createElement("a");
+                                            a.href = await toDataURL(url);
+                                            a.download = fileName;
+                                            document.body.appendChild(a);
+                                            a.click();
+                                            document.body.removeChild(a);
+                                        }
+                                        if(ids.length === 0) {
+                                            $('.loader_container').css('display', 'none');
+                                            $('body').css('overflow', 'auto');
+                                            return false;
+                                        }
+                                        shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
+
+                                            console.log(res.qrcodes);
+                                            $('.loader_container').css('display', 'none');
+                                            $('body').css('overflow', 'auto');
+
+                                            res.qrcodes.map(function(arr, key) {
+                                                setTimeout(function() {
+                                                    arr.map(function(er, key) {
+                                                        forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png');
+                                                    });
+                                                }, key*3000);
+                                            });
+                                        });
                                     }
                                 }
                             ]
@@ -297,14 +410,17 @@
                     //         selectNone: "Select none"
                     //     }
                     // },
-                    columnDefs: [ {
-                        orderable: false,
-                        className: 'select-checkbox',
-                        targets:   0,
-                        'checkboxes': {
-                            'selectRow': true
-                        }
-                    } ],
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets:   0,
+                            'checkboxes': {
+                                'selectRow': true
+                            }
+                        },
+                        { className: "id_n", "targets": [ 1 ] }
+                    ],
                     select: {
                         style:    'multi',
                         selector: '.select-checkbox'
