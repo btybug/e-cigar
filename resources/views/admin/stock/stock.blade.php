@@ -28,16 +28,17 @@
                     <div class="card-body panel-body">
 
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="Short Description" data-column="2" data-name="short_description">Short Description</option>
-                            <option value="Image" data-column="3" data-name="image">Image</option>
-                            <option value="Added/Last Modified Date" data-column="4" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="5" data-name="actions">Actions</option>
+                            <!-- <option value="id" data-column="1" data-name="id">#</option> -->
+                            <option value="Name" data-column="2" data-name="name">Name</option>
+                            <option value="Short Description" data-column="3" data-name="short_description">Short Description</option>
+                            <option value="Image" data-column="4" data-name="image">Image</option>
+                            <option value="Added/Last Modified Date" data-column="5" data-name="created_at">Added/Last Modified Date</option>
+                            <option value="Actions" data-column="6" data-name="actions">Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Short Description</th>
@@ -46,6 +47,17 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Select</th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Short Description</th>
+                                <th>Image</th>
+                                <th>Added/Last Modified Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
                         </table>
 
                     </div>
@@ -100,13 +112,83 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
+                    "order": [[ 1, "asc" ]],
                     dom: 'Bflrtip',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
-                        'csv', 'excel', 'pdf', 'print'
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'excelHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdfHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'print',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            ]
+                        }
                     ],
-                    columns: tableHeadArray
+                    "autoWidth": false,
+                    columns: tableHeadArray,
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0,
+                            width: '30px',
+                            'checkboxes': {
+                                'selectRow': true
+                            }
+                        },
+                    ],
+                    select: {
+                        style:    'multi',
+                        selector: '.select-checkbox'
+                    },
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        },
+                        columns: ':visible:not(.not-exported)',
+                        rows: '.selected'
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            console.log(column)
+                            var input = document.createElement("input");
+                            column[0][0] !== 0 && column[0][0] !== 6 && $(input).appendTo($(column.footer()).empty())
+                                .on('keyup change clear', function () {
+                                    column.search($(this).val(), false, false, true).draw();
+                                });
+                        });
+                    }
                 });
 
                 function init() {
@@ -133,12 +215,22 @@
                 $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
+                
+                $("body").on( "change", ".select_all_checkbox",function(e) {
+                    // console.log(table.rows({selected: true}).length);
+                    if ($(this).is( ":checked" )) {
+                        table.rows(  ).select();
+                    } else {
+                        table.rows(  ).deselect();
+                    }
+                });
             }
 
             tableInit(
                 "stock_table",
                 [
                     {id: '#', name: 'id'},
+                    {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
                     {id: 'Short Description', name: 'short_description'},
                     {id: 'Image', name: 'image'},
@@ -147,6 +239,11 @@
                 ],
                 '#table_head_id',
                 [
+                    {  data: null,
+                        name: 'id',
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
                     {data: 'short_description', name: 'stock_translations.short_description'},

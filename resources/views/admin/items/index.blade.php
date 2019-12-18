@@ -48,7 +48,7 @@
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th><div class="text-center" style="margin-left: 17.282px"><input type="checkbox" class="select_all_checkbox"/></div></th>
+                                <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Short Description</th>
@@ -64,7 +64,7 @@
                             </thead>
                             <tfoot>
                             <tr>
-                                <th></th>
+                                <th>Select</th>
                                 <th>id</th>
                                 <th>Name</th>
                                 <th>Short Description</th>
@@ -496,8 +496,9 @@
                     initComplete: function () {
                         this.api().columns().every(function () {
                             var column = this;
+                            console.log(column)
                             var input = document.createElement("input");
-                            $(input).appendTo($(column.footer()).empty())
+                            column[0][0] !== 0 && column[0][0] !== 11 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
                                 });
