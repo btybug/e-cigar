@@ -28,6 +28,7 @@ use App\Services\ItemService;
 use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
 use Svg\Document;
+use function foo\func;
 
 class ItemsController extends Controller
 {
@@ -491,12 +492,52 @@ class ItemsController extends Controller
     public function postItemRowEdit(Request $request)
     {
         $model = Items::findOrFail($request->id);
-        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
 
         $html = \View::make("admin.items._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
 
         return response()->json(['error' => false, 'html' => $html]);
+    }
+
+    public function postItemRowEditSave(Request $request)
+    {
+        $model = Items::findOrFail($request->id);
+
+        Items::updateOrCreate($request->id,$request->except(['name','_token','categories']),['gb' => [
+            'name' => $request->name
+        ]]);
+        $model->categories()->sync($request->get('categories', []));
+
+        return response()->json(['error' => false]);
+    }
+
+    public function postItemRowsEdit($ids)
+    {
+        $ids = explode(',',$ids);
+        $items = Items::findMany($ids);
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+
+        return $this->view('rows_edit', compact(['items', 'categories', 'brands', 'barcodes']));
+    }
+
+    public function postItemRowsEditSave(Request $request)
+    {
+        $items = $request->get('items',[]);
+        if(count($items)){
+                foreach ($items as $id => $item){
+                    $model = Items::findOrFail($id);
+                    Items::updateOrCreate($id,array_except($item,['name','categories']),['gb' => [
+                        'name' => $item['name']
+                    ]]);
+                    $cat = (count($item['categories']))? $item['categories'] : [];
+                    $model->categories()->sync($cat);
+                }
+            return response()->json(['error' => false]);
+        }
+        return response()->json(['error' => true]);
     }
 }

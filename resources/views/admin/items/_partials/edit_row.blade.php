@@ -1,4 +1,4 @@
-<div class="row">
+<div class="">
     <h3> Edit Item</h3>
     {!! Form::model($model,['url' => route('post_admin_items_edit_row_save')]) !!}
     <div class="form-group row">
@@ -17,13 +17,13 @@
     <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Brand</label>
         <div class="col-8">
-            {!! Form::select('brand_id',$brands,null,['class'=>'custom-select']) !!}
+            {!! Form::select('brand_id',$brands,null,['class'=>'custom-select','style' => 'width:100%']) !!}
         </div>
     </div>
     <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Categories</label>
         <div class="col-8">
-            {!! Form::select('categories',$categories,$model->categories->pluck('id'),['class'=>'custom-select','multiple'=>true]) !!}
+            {!! Form::select('categories[]',$categories,$model->categories()->pluck('id','id'),['class'=>'custom-select','style' => 'width:100%','multiple'=>true]) !!}
         </div>
     </div>
     <div class="form-group row">

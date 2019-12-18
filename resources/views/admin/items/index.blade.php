@@ -107,6 +107,8 @@
 
     <script>
         $(function () {
+            var table;
+
             $("body").on('click','.edit-row',function () {
                 let id = $(this).data('id');
 
@@ -119,6 +121,28 @@
                     }
                 });
             });
+
+
+            $("body").on('click','.edit_item_custom',function (e) {
+                e.preventDefault();
+                let form = $(this).closest('form').serialize();
+
+                AjaxCall("{!! route('post_admin_items_edit_row_save') !!}", form, function (res) {
+                    if (!res.error) {
+
+                        $('.edit-list--container').find('.edit-list--container-content').empty();
+                        $('body').css('overflow', 'unset');
+                        $('.edit-list--container').hide();
+                        $(".edit-list--container").draggable('destroy');
+
+                        $('.edit-list--container').removeClass('max-wrap');
+                        $('.edit-list--container').removeClass('min-wrap');
+                        $('body').css('overflow', 'unset');
+                        table.ajax.reload();
+                    }
+                });
+            });
+
 
 
             const shortAjax = function (URL, obj = {}, cb) {
@@ -220,7 +244,7 @@
                 }
 
 
-                var table = $(tableId).DataTable({
+                table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
                     "serverSide": true,
@@ -397,7 +421,7 @@
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
-                                        
+
                                         ids.length > 0 && shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
                                             console.log(res)
                                         })
@@ -427,9 +451,12 @@
                                     ids.push($(this).find('td.id_n').text());
                                 });
 
-                                ids.length > 0 && shortAjax('/admin/find/items/items_edit', {ids}, function(res) {
-                                    console.log(res)
-                                })
+                                if(ids.length > 0){
+                                    window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                }
+                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                {{--    console.log(res)--}}
+                                {{--})--}}
                             }
                         }
                     ],
@@ -501,7 +528,7 @@
                         }
                     }
                 });
-                
+
 
                 function init() {
                     var selected_items = [];
