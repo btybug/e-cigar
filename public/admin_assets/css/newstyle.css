@@ -1711,7 +1711,7 @@ color: #ffffff;
     /*bottom: 50px;*/
     max-width: 800px !important;
     background-color: #fff !important;
-    z-index: 99999 !important;
+    z-index: 999 !important;
 }
 .edit-list--container .heading{
     border-bottom: 1px solid #ccc !important;
