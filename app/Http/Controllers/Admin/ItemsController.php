@@ -487,4 +487,16 @@ class ItemsController extends Controller
         $zipper = new Zipper();
         $zipper->make('public/codes.zip')->add($fileArray);
     }
+
+    public function postItemRowEdit(Request $request)
+    {
+        $model = Items::findOrFail($request->id);
+        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+
+        $html = \View::make("admin.items._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
+
+        return response()->json(['error' => false, 'html' => $html]);
+    }
 }

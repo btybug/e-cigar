@@ -450,6 +450,8 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
         Route::get('/new-bundle', 'Admin\ItemsController@getNewBundle')->name('admin_items_new_bundle');
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
+        Route::post('/edit-row', 'Admin\ItemsController@postItemRowEdit')->name('post_admin_items_edit_row');
+        Route::post('/edit-row-save', 'Admin\ItemsController@postItemRowEditSave')->name('post_admin_items_edit_row_save');
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
         Route::get('/archive/{item_id}', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
