@@ -31,8 +31,8 @@
                     </div>
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <option value="#" data-column="0" data-name="#" selected>#</option>
-                            <option value="#" data-column="1" data-name="id" selected>id</option>
+                            <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
+                            <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
                             <option value="Name" data-column="2" data-name="name" selected>Name</option>
                             <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
                             <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
@@ -439,16 +439,19 @@
                     //         selectNone: "Select none"
                     //     }
                     // },
+                    "autoWidth": false,
                     columnDefs: [
                         {
                             orderable: false,
                             className: 'select-checkbox',
                             targets: 0,
+                            width: '30px',
                             'checkboxes': {
                                 'selectRow': true
                             }
                         },
-                        { className: "id_n", "targets": [ 1 ] }
+                        { className: "id_n", "targets": [ 1 ], width: '30px' },
+                        { "targets": [ 11 ], width: '20%' },
                     ],
                     "order": [[ 1, "asc" ]],
                     select: {
