@@ -312,6 +312,37 @@
 
     </script>
     <script>
+        function orderSummeryScroll(){
+            if($( window ).width()>=992){
+                let orderSummery = $('.shopping__cart-wrapper .card.order-summary');
+                let orderSummeryHeight = $(orderSummery).height();
+                let orderSummeryParent = $(orderSummery).parent().width();
+                let fixmeTop = $(orderSummery).offset().top - 50;
+
+                $(window).scroll(function() {
+
+                    let currentScroll = $(window).scrollTop();
+
+                    if (currentScroll >= fixmeTop) {
+                        $(orderSummery).addClass('fix_order-summary').width(orderSummeryParent)
+                        $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                            'min-height':orderSummeryHeight+'px'
+                        })
+                    } else {
+                        $(orderSummery).removeClass('fix_order-summary').width('auto')
+                        $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                            'min-height':'auto'
+                        })
+                    }
+
+                });
+            }
+
+        }
+        orderSummeryScroll();
+        $( window ).resize(function() {
+            orderSummeryScroll()
+        });
 //        $(document).ready(function () {
 
             $("body").on("click", ".back-step", function (event) {

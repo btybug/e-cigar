@@ -110,7 +110,7 @@
                 @else
                     <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
                        href="{{ @$submit_route }}">
-                        {!! __('shopping_details') !!}
+                        {!! __('checkout') !!}
                     </a>
                 @endif
             @endif
@@ -118,10 +118,10 @@
         </div>
         <div class="order-summary-btn-wall text-center">
             @if($back_route)
-            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
-               href="{{ @$back_route }}">
-                {!! __('back') !!}
-            </a>
+{{--            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"--}}
+{{--               href="{{ @$back_route }}">--}}
+{{--                {!! __('back') !!}--}}
+{{--            </a>--}}
             @endif
         </div>
     </div>

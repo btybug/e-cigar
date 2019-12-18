@@ -1867,6 +1867,7 @@ header .search-icon-mobile {
 .shopping-cart_wrapper .shopping-cart-content .shopping-cart-inner .right-content .order-summary .card-header {
     background-color: #d3e2ff;
     line-height: 1;
+    font-size: 24px;
     border-radius: 7px 7px 0 0;
 }
 
