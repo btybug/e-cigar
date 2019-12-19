@@ -7,54 +7,55 @@
         <div class="card-body panel-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
+                    <a class="nav-link " id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Posts</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo_bulk_products') !!}" role="tab"
+                <li class="nav-item ">
+                    <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo_bulk_products') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Products</a>
                 </li>
-                @ok('admin_seo_pages')
+                @ok('admin_seo_bulk_pages')
                 <li class="nav-item ">
                     <a class="nav-link" id="admin_seo_pages" href="{!! route('admin_seo_bulk_pages') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Pages</a>
                 </li>
                 @endok
-                @ok('admin_seo_brands')
+                @ok('admin_seo_bulk_brands')
                 <li class="nav-item ">
-                    <a class="nav-link" id="admin_seo_pages" href="{!! route('admin_seo_bulk_brands') !!}" role="tab"
+                    <a class="nav-link active" id="admin_seo_pages" href="{!! route('admin_seo_bulk_brands') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Brands</a>
                 </li>
                 @endok
             </ul>
             <div class="pt-25">
                 <div class="card panel panel-default">
+
                     <div class="card-header panel-heading clearfix">
-                     <h3 class="m-0 pull-left">Inventory</h3>
-                        <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
+                        <div class="pull-left">
+                            <h3 class="m-0">{!! __('orders') !!}</h3>
+                        </div>
                     </div>
                     <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" multiple class="form-control">
+                        <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                             <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Product Name" data-column="1" data-name="id">#</option>
-                            <option value="OG title" data-column="2" data-name="title">OG title</option>
-                            <option value="OG image" data-column="3" data-name="image">OG image</option>
-                            <option value="OG description" data-column="4" data-name="description">OG description</option>
-                            <option value="OG Keywords" data-column="5" data-name="keywords">OG Keywords</option>
-                            <option value="Robots" data-column="6" data-name="robots">Robots</option>
-                            <option value="FB title" data-column="7" data-name="fb_title">FB title</option>
-                            <option value="FB image" data-column="8" data-name="fb_image">FB image</option>
-                            <option value="FB description" data-column="9" data-name="fb_description">FB description</option>
-                            <option value="TW title" data-column="10" data-name="twitter_title">TW title</option>
-                            <option value="TW image" data-column="11" data-name="twitter_image">TW image</option>
-                            <option value="TW description" data-column="12" data-name="twitter_description">TW description</option>
-                            <option value="Actions" data-column="13" data-name="actions">Actions</option>
+                            <option value="Post Name" data-column="1" data-name="post_name">Brand Name</option>
+                            <option value="OG title" data-column="1" data-name="og:title">OG title</option>
+                            <option value="OG image" data-column="2" data-name="og:image">OG image</option>
+                            <option value="OG description" data-column="3" data-name="og:description">OG description</option>
+                            <option value="OG Keywords" data-column="4" data-name="og:keywords">OG Keywords</option>
+                            <option value="FB title" data-column="5" data-name="fb:title">FB title</option>
+                            <option value="FB image" data-column="6" data-name="fb:image">FB image</option>
+                            <option value="FB description" data-column="7" data-name="fb:description">FB description</option>
+                            <option value="TW title" data-column="8" data-name="tw:title">TW title</option>
+                            <option value="TW image" data-column="9" data-name="tw:image">TW image</option>
+                            <option value="TW description" data-column="10" data-name="tw:description">TW description</option>
+                            <option value="Actions" data-column="11" data-name="actions">Actions</option>
                         </select>
-                        <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                        <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Product Name</th>
+                                <th>Brand Name</th>
                                 <th>OG title</th>
                                 <th>OG image</th>
                                 <th>OG description</th>
@@ -68,7 +69,6 @@
                                 <th>TW title</th>
                                 <th>TW image</th>
                                 <th>TW description</th>
-
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -79,36 +79,45 @@
         </div>
     </div>
 
-
-
 @stop
+
 @section('css')
+    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    @stop
+@stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script>
-      $(function () {
+
+        $(function () {
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
                 }
-                JSON.parse(localStorage.getItem(storageName)).map((el) => {
-                    $(selectId).find(`[data-name="${el.name}"]`).attr('selected', 'selected')
-                });
-                $(selectId).select2({
-                    multiple: true,
-                    // initSelection: function (element, callback) {
-                    //     var selected_items = JSON.parse(localStorage.getItem(storageName));
-                    //     callback(selected_items);
-                    // }
+
+                let selId = JSON.parse(localStorage.getItem(storageName)).map((el) => {
+                    return el.id;
                 });
 
+                $(selectId).selectpicker({
+                    // actionsBox: true,
+                    dropupAuto: true,
+                    // header: 'Select',
+                    liveSearch: true,
+                    liveSearchPlaceholder: 'Search',
+                    multipleSeparator: ' | ',
+                    style: 'btn-default',
+                    // width: 'auto'
+
+                });
+
+                $(selectId).selectpicker('val', selId);
                 var tableHeadArray = tableData;
 
                 tableArray = tableHeadArray.map((head) => {
                     const id = head.data;
+
                     var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
                         return el.name === id;
                     });
@@ -134,8 +143,10 @@
                     buttons: [
                         'csv', 'excel', 'pdf', 'print'
                     ],
-                    columns: tableHeadArray
+                    columns: tableHeadArray,
+                    order: [[0, 'desc']]
                 });
+
                 function init() {
                     var selected_items = [];
                     $(`${selectId} option`).each(function() {
@@ -156,33 +167,33 @@
 
                 init();
 
-                $(selectId).on('change.select2', function (e) {
+                $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
             }
 
             tableInit(
-                "seo_product_table",
+                "bulk_table",
                 [
-                    {id: '#', text: '#', name: 'id'},
-                    {id: 'Product Name', text: 'Product Name', name: 'p_name'},
-                    {id: 'OG title', text: 'OG title', name: 'og:title'},
-                    {id: 'OG image', text: 'OG image', name: 'og:image'},
-                    {id: 'OG description', text: 'OG description', name: 'og:description'},
-                    {id: 'OG Keywords', text: 'OG Keywords', name: 'og:keywords'},
-                    {id: 'Robots', text: 'Robots', name: 'robots'},
-                    {id: 'FB title', text: 'FB title', name: 'fb:title'},
-                    {id: 'FB image', text: 'FB image', name: 'fb:image'},
-                    {id: 'FB description', text: 'FB description', name: 'fb:description'},
-                    {id: 'TW title', text: 'TW title', name: 'tw:title'},
-                    {id: 'TW image', text: 'TW image', name: 'tw:image'},
-                    {id: 'TW description', text: 'TW description', name: 'tw:description'},
-                    {id: 'Actions', text: 'Actions', name: 'actions'},
+                    {id: '#', name: 'id'},
+                    {id: 'Brand Name', name: 'post_name'},
+                    {id: 'OG title', name: 'og:title'},
+                    {id: 'OG image', name: 'og:image'},
+                    {id: 'OG description', name: 'og:description'},
+                    {id: 'OG Keywords', name: 'og:keywords'},
+                    {id: 'Robots', name: 'robots'},
+                    {id: 'FB title', name: 'fb:title'},
+                    {id: 'FB image', name: 'fb:image'},
+                    {id: 'FB description', name: 'fb:description'},
+                    {id: 'TW title', name: 'tw:title'},
+                    {id: 'TW image', name: 'tw:image'},
+                    {id: 'TW description', name: 'tw:description'},
+                    {id: 'Actions', name: 'actions'}
                 ],
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
-                    {data: 'p_name', name: 'p_name'},
+                    {data: 'brand_name', name: 'brand_name'},
                     {data: 'title', name: 'title'},
                     {data: 'image', name: 'image'},
                     {data: 'description', name: 'description'},
@@ -196,8 +207,8 @@
                     {data: 'twitter_description', name: 'twitter_description'},
                     {data: 'actions', name: 'actions'}
                 ],
-                '#stocks-table',
-                "{!! route('datatable_bulk_stocks') !!}"
+                '#posts-table',
+                "{!! route('datatable_bulk_brands') !!}"
             )
         });
     </script>

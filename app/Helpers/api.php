@@ -853,6 +853,7 @@ function meta($object, $type = 'seo_posts')
 function parametazor($string, $object)
 {
     preg_match('/{(.*?)}/', $string, $matches);
+
     if (count($matches)) {
         $string = str_replace($matches[0], $object->{$matches[1]}, $string);
         $string = parametazor($string, $object);

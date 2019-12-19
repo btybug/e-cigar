@@ -99,6 +99,16 @@ class Category extends Translatable
         return $this->belongsTo(self::class, 'parent_id');
     }
 
+    public function seo()
+    {
+        return $this->hasOne(BrandsSeo::class);
+    }
+    public function getSeoField($name, $type = 'general')
+    {
+        $seo = $this->seo;
+        return ($seo) ? $seo->{$name} : null;
+    }
+
     public static function recursiveItems($iems, $i = 0, $data = [], $selected = [])
     {
         if (count($iems)) {

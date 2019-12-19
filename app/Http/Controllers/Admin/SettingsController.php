@@ -608,17 +608,10 @@ class SettingsController extends Controller
         if ($p == 'banners'){
             $items=Stock::all()->pluck('name','id');
         }
-        $seo=MainPagesSeo::where('page_name',$p)->first();
-        return $this->view('main_pages', compact(['model', 'p','items','top','seo']));
+        return $this->view('main_pages', compact(['model', 'p','items','top']));
     }
 
-    public function postMainPagesSeo(Request $request)
-    {
-        $data=$request->except('_token','p','translatable');
-        $data['page_name']=$request->get('p','banners');
-        MainPagesSeo::updateOrCreate($request->id,$data);
-        return redirect()->back();
-    }
+
 
     public function postHomePage(Request $request, Settings $settings)
     {

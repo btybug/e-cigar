@@ -56,7 +56,7 @@ Route::group(['prefix' => 'settings'], function () {
 
         Route::get('/main-pages', 'Admin\SettingsController@getMainPages')->name('admin_settings_main_pages');
         Route::post('/main-pages', 'Admin\SettingsController@postMainPages')->name('post_admin_settings_main_pages');
-        Route::post('/main-pages/seo', 'Admin\SettingsController@postMainPagesSeo')->name('post_admin_settings_main_pages_seo');
+
 
 
         Route::get('/home-page', 'Admin\SettingsController@getHomePage')->name('admin_settings_home_page');
@@ -637,7 +637,12 @@ Route::group(['prefix' => 'seo'], function () {
     Route::get('/stocks', 'Admin\SeoController@getStocks')->name('admin_seo_stocks');
     Route::post('/stocks', 'Admin\SeoController@postStocks')->name('stocks_admin_seo_stocks');
 
+    Route::get('/brands', 'Admin\SeoController@getBrands')->name('admin_seo_brands');
+    Route::post('/brands', 'Admin\SeoController@postBrands')->name('post_admin_seo_brands');
+
     Route::get('/bulk', 'Admin\SeoController@getBulk')->name('admin_seo_bulk');
+
+
 
     Route::get('/bulk/edit-post-seo/{id}', 'Admin\SeoController@getBulkEditPost')->name('admin_seo_bulk_edit_post');
     Route::post('/bulk/edit-post-seo/{id}', 'Admin\SeoController@createOrUpdatePostSeo')->name('post_admin_seo_bulk_edit_post');
@@ -645,6 +650,9 @@ Route::group(['prefix' => 'seo'], function () {
     Route::get('/bulk/edit-stcok-seo/{id}', 'Admin\SeoController@getBulkEditProduct')->name('admin_seo_bulk_edit_stock');
     Route::post('/bulk/edit-stcok-seo/{id}', 'Admin\SeoController@createOrUpdateStockSeo')->name('post_admin_seo_bulk_edit_stock');
     Route::get('/bulk/products', 'Admin\SeoController@getBulkProducts')->name('admin_seo_bulk_products');
+    Route::get('/bulk/pages', 'Admin\SeoController@getMainPages')->name('admin_seo_bulk_pages');
+    Route::post('/main-pages/seo', 'Admin\SeoController@postMainPagesSeo')->name('post_admin_settings_main_pages_seo');
+    Route::get('/bulk/brands', 'Admin\SeoController@getBulkBrands')->name('admin_seo_bulk_brands');
 });
 
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');

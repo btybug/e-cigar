@@ -241,13 +241,13 @@ class Stock extends Translatable
 
     public function seo()
     {
-        return $this->hasMany(StockSeo::class, 'stock_id');
+        return $this->hasOne(StockSeo::class, 'stock_id');
     }
 
-    public function getSeoField($name, $type = 'general')
+    public function getSeoField($name, $lang = 'gb')
     {
-        $seo = $this->seo()->where('name', $name)->where('type', $type)->first();
-        return ($seo) ? $seo->content : null;
+        $seo = $this->seo;
+        return ($seo) ? $seo->{$name} : null;
     }
 
     public function type_attrs()

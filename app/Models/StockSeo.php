@@ -9,6 +9,8 @@
 namespace App\Models;
 
 
+use App\Models\Common\Translatable;
+use App\Models\Translations\StockSeoTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -33,8 +35,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\StockSeo whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class StockSeo extends Model
+class StockSeo extends Translatable
 {
     protected $table = 'stock_seo';
+    public $translatedAttributes = ['keyword', 'title', 'description','fb_title','fb_description','twitter_title','twitter_description'];
+
     protected $guarded = ['id'];
+
+    public $translationModel = StockSeoTranslations::class;
 }

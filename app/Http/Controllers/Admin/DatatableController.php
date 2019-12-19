@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Campaign;
@@ -10,9 +11,7 @@ use App\Models\Comment;
 use App\Models\Competitions;
 use App\Models\ContactUs;
 use App\Models\Coupons;
-use App\Models\Emails;
 use App\Models\Faq;
-use App\Models\Filters;
 use App\Models\GeoZones;
 use App\Models\Items;
 use App\Models\ItemsTransfers;
@@ -41,15 +40,10 @@ use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
 use App\Models\Transaction;
-use App\Models\Translations;
 use App\Models\TranslationsEntry;
 use App\Models\Warehouse;
 use App\User;
-use function foo\func;
-use function GuzzleHttp\Promise\all;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 
@@ -138,7 +132,7 @@ class DatatableController extends Controller
                 ->select('attributes.*','attributes_translations.name','categories_translations.name as category')
                 ->where('attributes_translations.locale', \Lang::getLocale())
 //                    ->whereNull('attributes.parent_id')
-                    ->groupBy('attributes.id')
+                ->groupBy('attributes.id')
         )
             ->editColumn('name', function ($attr) {
                 return $attr->name;
@@ -358,7 +352,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">
                             <a class="btn btn-warning mr-1" href="' . route("admin_stock_edit_offer", $stock->id) . '">Edit</a>' .
-                        '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'"
+                    '<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'"
                         class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>
                 </div>';
             })->rawColumns(['actions', 'name', 'image'])
@@ -534,42 +528,93 @@ class DatatableController extends Controller
         $fbSeo = $settings->getEditableData('seo_fb_posts')->toArray();
         $robot = $settings->getEditableData('seo_robot_posts');
         return Datatables::of(Posts::query())
-            ->editColumn('og:title', function ($post) use ($general) {
+            ->addColumn('post_title', function ($post) use ($general) {
+                return $post->title;
+            })
+            ->editColumn('title', function ($post) use ($general) {
 
-                return ($post->getSeoField('og:title')) ? $post->getSeoField('og:title') : getSeo($general, 'og:title', $post);
+                return ($post->getSeoField('title')) ? $post->getSeoField('title') : getSeo($general, 'og:title', $post);
             })
-            ->addColumn('og:image', function ($post) use ($general) {
-                return ($post) ? "<img src='" . $post->getSeoField('og:image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:keywords', $post) . "' width='50px'/>";
+            ->addColumn('image', function ($post) use ($general) {
+                return ($post->getSeoField('image')) ? "<img src='" . $post->getSeoField('image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:image', $post) . "' width='50px'/>";
             })
-            ->addColumn('og:description', function ($post) use ($general) {
-                return ($post->getSeoField('og:description')) ? $post->getSeoField('og:description') : getSeo($general, 'og:description', $post);
+            ->addColumn('description', function ($post) use ($general) {
+                return ($post->getSeoField('description')) ? $post->getSeoField('description') : getSeo($general, 'og:description', $post);
             })
-            ->addColumn('og:keywords', function ($post) use ($general) {
-                return ($post->getSeoField('og:keywords')) ? $post->getSeoField('og:keywords') : getSeo($general, 'og:keywords', $post);
+            ->addColumn('keywords', function ($post) use ($general) {
+                return ($post->getSeoField('keywords')) ? $post->getSeoField('keywords') : getSeo($general, 'og:keywords', $post);
             })
-            ->addColumn('fb:title', function ($post) use ($fbSeo) {
-                return ($post->getSeoField('og:title', 'fb')) ? $post->getSeoField('og:title', 'fb') : getSeo($fbSeo, 'og:title', $post);
+            ->addColumn('fb_title', function ($post) use ($fbSeo) {
+                return ($post->getSeoField('fb_title', 'fb')) ? $post->getSeoField('fb_title', 'fb') : getSeo($fbSeo, 'og:title', $post);
             })
-            ->addColumn('fb:description', function ($post) use ($fbSeo) {
-                return ($post->getSeoField('og:description', 'fb')) ? $post->getSeoField('og:description', 'fb') : getSeo($fbSeo, 'og:description', $post);
+            ->addColumn('fb_description', function ($post) use ($fbSeo) {
+                return ($post->getSeoField('fb_description', 'fb')) ? $post->getSeoField('fb_description', 'fb') : getSeo($fbSeo, 'og:description', $post);
             })
-            ->addColumn('fb:image', function ($post) use ($fbSeo) {
-                return ($post->getSeoField('og:image', 'fb')) ? $post->getSeoField('og:image', 'fb') : "<img src='" . getSeo($fbSeo, 'og:keywords', $post) . "' width='50px'/>";
+            ->addColumn('fb_image', function ($post) use ($fbSeo) {
+                return ($post->getSeoField('fb_image', 'fb')) ? $post->getSeoField('fb_image', 'fb') : "<img src='" . getSeo($fbSeo, 'og:image', $post) . "' width='50px'/>";
             })
-            ->addColumn('tw:title', function ($post) use ($twitterSeo) {
-                return ($post->getSeoField('og:title', 'twitter')) ? $post->getSeoField('og:title', 'twitter') : getSeo($twitterSeo, 'og:title', $post);
+            ->addColumn('twitter_title', function ($post) use ($twitterSeo) {
+                return ($post->getSeoField('twitter_title', 'twitter')) ? $post->getSeoField('twitter_title', 'twitter') : getSeo($twitterSeo, 'og:title', $post);
             })
-            ->addColumn('tw:description', function ($post) use ($twitterSeo) {
-                return ($post->getSeoField('og:description', 'twitter')) ? $post->getSeoField('og:description', 'twitter') : getSeo($twitterSeo, 'og:description', $post);
+            ->addColumn('twitter_description', function ($post) use ($twitterSeo) {
+                return ($post->getSeoField('twitter_description', 'twitter')) ? $post->getSeoField('twitter_description', 'twitter') : getSeo($twitterSeo, 'og:description', $post);
             })
-            ->addColumn('tw:image', function ($post) use ($twitterSeo) {
-                return ($post->getSeoField('og:image', 'twitter')) ? $post->getSeoField('og:image', 'twitter') : "<img src='" . getSeo($twitterSeo, 'og:keywords', $post) . "' width='50px'/>";;
+            ->addColumn('twitter_image', function ($post) use ($twitterSeo) {
+                return ($post->getSeoField('twitter_image', 'twitter')) ? $post->getSeoField('twitter_image', 'twitter') : "<img src='" . getSeo($twitterSeo, 'og:image', $post) . "' width='50px'/>";;
             })->addColumn('robots', function ($post) {
                 return "";
             })->addColumn('actions', function ($post) {
                 return userCan('admin_seo_bulk_edit_post') ? "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_seo_bulk_edit_post', $post->id) . "'>Edit</a></div>" : null;
             })
-            ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
+            ->rawColumns(['actions', 'name', 'image', 'fb_image', 'twitter_image'])
+            ->make(true);
+    }
+    public function getBulkBrands(Settings $settings)
+    {
+        $general = $settings->getEditableData('seo_brand')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_brand')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_brand')->toArray();
+        $robot = $settings->getEditableData('seo_robot_brand');
+        return Datatables::of(Category::where('type','brands'))
+            ->addColumn('brand_name', function ($brand) use ($general) {
+                return $brand->name;
+            })
+            ->editColumn('title', function ($brand) use ($general) {
+
+                return ($brand->getSeoField('title')) ? $brand->getSeoField('title') : getSeo($general, 'og:title', $brand);
+            })
+            ->addColumn('image', function ($brand) use ($general) {
+                return ($brand->getSeoField('image')) ? "<img src='" . $brand->getSeoField('image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:image', $brand) . "' width='50px'/>";
+            })
+            ->addColumn('description', function ($brand) use ($general) {
+                return ($brand->getSeoField('description')) ? $brand->getSeoField('description') : getSeo($general, 'og:description', $brand);
+            })
+            ->addColumn('keywords', function ($brand) use ($general) {
+                return ($brand->getSeoField('keywords')) ? $brand->getSeoField('keywords') : getSeo($general, 'og:keywords', $brand);
+            })
+            ->addColumn('fb_title', function ($brand) use ($fbSeo) {
+                return ($brand->getSeoField('fb_title', 'fb')) ? $brand->getSeoField('fb_title', 'fb') : getSeo($fbSeo, 'og:title', $brand);
+            })
+            ->addColumn('fb_description', function ($brand) use ($fbSeo) {
+                return ($brand->getSeoField('fb_description', 'fb')) ? $brand->getSeoField('fb_description', 'fb') : getSeo($fbSeo, 'og:description', $brand);
+            })
+            ->addColumn('fb_image', function ($brand) use ($fbSeo) {
+                return ($brand->getSeoField('fb_image', 'fb')) ? $brand->getSeoField('fb_image', 'fb') : "<img src='" . getSeo($fbSeo, 'og:image', $brand) . "' width='50px'/>";
+            })
+            ->addColumn('twitter_title', function ($brand) use ($twitterSeo) {
+                return ($brand->getSeoField('twitter_title', 'twitter')) ? $brand->getSeoField('twitter_title', 'twitter') : getSeo($twitterSeo, 'og:title', $brand);
+            })
+            ->addColumn('twitter_description', function ($brand) use ($twitterSeo) {
+                return ($brand->getSeoField('twitter_description', 'twitter')) ? $brand->getSeoField('twitter_description', 'twitter') : getSeo($twitterSeo, 'og:description', $brand);
+            })
+            ->addColumn('twitter_image', function ($brand) use ($twitterSeo) {
+                return ($brand->getSeoField('twitter_image', 'twitter')) ? $brand->getSeoField('twitter_image', 'twitter') : "<img src='" . getSeo($twitterSeo, 'og:image', $brand) . "' width='50px'/>";;
+            })->addColumn('robots', function ($brand) {
+                return "";
+            })->addColumn('actions', function ($brand) {
+                return userCan('admin_seo_bulk_edit_post') ? "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_seo_bulk_edit_post', $brand->id) . "'>Edit</a></div>" : null;
+            })
+            ->rawColumns(['actions', 'name', 'image', 'fb_image', 'twitter_image'])
             ->make(true);
     }
 
@@ -584,42 +629,42 @@ class DatatableController extends Controller
             ->addColumn('p_name', function ($stock) use ($general) {
                 return $stock->name;
             })
-            ->editColumn('og:title', function ($stock) use ($general) {
+            ->editColumn('title', function ($stock) use ($general) {
 
-                return ($stock->getSeoField('og:title')) ? $stock->getSeoField('og:title') : getSeo($general, 'og:title', $stock);
+                return ($stock->getSeoField('title')) ? $stock->getSeoField('title') : getSeo($general, 'og:title', $stock);
             })
-            ->addColumn('og:image', function ($stock) use ($general) {
-                return ($stock) ? "<img src='" . $stock->getSeoField('og:image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:keywords', $stock) . "' width='50px'/>";
+            ->addColumn('image', function ($stock) use ($general) {
+                return ($stock) ? "<img src='" . $stock->getSeoField('image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:image', $stock) . "' width='50px'/>";
             })
-            ->addColumn('og:description', function ($stock) use ($general) {
-                return ($stock->getSeoField('og:description')) ? $stock->getSeoField('og:description') : getSeo($general, 'og:description', $stock);
+            ->addColumn('description', function ($stock) use ($general) {
+                return ($stock->getSeoField('description')) ? $stock->getSeoField('description') : getSeo($general, 'og:description', $stock);
             })
-            ->addColumn('og:keywords', function ($stock) use ($general) {
-                return ($stock->getSeoField('og:keywords')) ? $stock->getSeoField('og:keywords') : getSeo($general, 'og:keywords', $stock);
+            ->addColumn('keywords', function ($stock) use ($general) {
+                return ($stock->getSeoField('keywords')) ? $stock->getSeoField('keywords') : getSeo($general, 'og:keywords', $stock);
             })
-            ->addColumn('fb:title', function ($stock) use ($fbSeo) {
-                return ($stock->getSeoField('og:title', 'fb')) ? $stock->getSeoField('og:title', 'fb') : getSeo($fbSeo, 'og:title', $stock);
+            ->addColumn('fb_title', function ($stock) use ($fbSeo) {
+                return ($stock->getSeoField('fb_title', 'fb')) ? $stock->getSeoField('fb_title', 'fb') : getSeo($fbSeo, 'og:title', $stock);
             })
-            ->addColumn('fb:description', function ($stock) use ($fbSeo) {
-                return ($stock->getSeoField('og:description', 'fb')) ? $stock->getSeoField('og:description', 'fb') : getSeo($fbSeo, 'og:description', $stock);
+            ->addColumn('fb_description', function ($stock) use ($fbSeo) {
+                return ($stock->getSeoField('fb_description', 'fb')) ? $stock->getSeoField('fb_description', 'fb') : getSeo($fbSeo, 'og:description', $stock);
             })
-            ->addColumn('fb:image', function ($stock) use ($fbSeo) {
-                return ($stock->getSeoField('og:image', 'fb')) ? $stock->getSeoField('og:image', 'fb') : "<img src='" . getSeo($fbSeo, 'og:keywords', $stock) . "' width='50px'/>";
+            ->addColumn('fb_image', function ($stock) use ($fbSeo) {
+                return ($stock->getSeoField('fb_image', 'fb')) ? $stock->getSeoField('fb_image', 'fb') : "<img src='" . getSeo($fbSeo, 'og:image', $stock) . "' width='50px'/>";
             })
-            ->addColumn('tw:title', function ($stock) use ($twitterSeo) {
-                return ($stock->getSeoField('og:title', 'twitter')) ? $stock->getSeoField('og:title', 'twitter') : getSeo($twitterSeo, 'og:title', $stock);
+            ->addColumn('twitter_title', function ($stock) use ($twitterSeo) {
+                return ($stock->getSeoField('twitter_title', 'twitter')) ? $stock->getSeoField('twitter_title', 'twitter') : getSeo($twitterSeo, 'og:title', $stock);
             })
-            ->addColumn('tw:description', function ($stock) use ($twitterSeo) {
-                return ($stock->getSeoField('og:description', 'twitter')) ? $stock->getSeoField('og:description', 'twitter') : getSeo($twitterSeo, 'og:description', $stock);
+            ->addColumn('twitter_description', function ($stock) use ($twitterSeo) {
+                return ($stock->getSeoField('twitter_description', 'twitter')) ? $stock->getSeoField('twitter_description', 'twitter') : getSeo($twitterSeo, 'og:description', $stock);
             })
-            ->addColumn('tw:image', function ($stock) use ($twitterSeo) {
-                return ($stock->getSeoField('og:image', 'twitter')) ? $stock->getSeoField('og:image', 'twitter') : "<img src='" . getSeo($twitterSeo, 'og:keywords', $stock) . "' width='50px'/>";;
+            ->addColumn('twitter_image', function ($stock) use ($twitterSeo) {
+                return ($stock->getSeoField('twitter_image', 'twitter')) ? $stock->getSeoField('twitter_image', 'twitter') : "<img src='" . getSeo($twitterSeo, 'og:image', $stock) . "' width='50px'/>";;
             })->addColumn('robots', function ($stock) {
                 return "";
             })->addColumn('actions', function ($stock) {
                 return (userCan('admin_seo_bulk_edit_stock')) ? "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_seo_bulk_edit_stock', $stock->id) . "'>Edit</a></div>" : null;
             })
-            ->rawColumns(['actions', 'name', 'og:image', 'fb:image', 'tw:image'])
+            ->rawColumns(['actions', 'name', 'image', 'fb_image', 'twitter_image'])
             ->make(true);
     }
 
@@ -719,6 +764,7 @@ class DatatableController extends Controller
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
+
     public function getItemOthers($item_id)
     {
         return Datatables::of(Others::where('item_id', $item_id)->where('reason','!=','sold'))
@@ -789,8 +835,6 @@ class DatatableController extends Controller
             ->groupBy('items.id')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
-
-
             ->editColumn('category', function ($attr) {
                 $str = '';
                 if($attr->categories && count($attr->categories)){
@@ -831,7 +875,6 @@ class DatatableController extends Controller
             ->select('items.*','item_translations.name','item_translations.short_description','barcodes.code','categories_translations.name')
             ->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
-
             ->editColumn('brand_id', function ($attr) {
                 $brand=Category::find($attr->brand_id);
                 return ($brand)?$brand->name:'no brand';
@@ -975,7 +1018,6 @@ class DatatableController extends Controller
                 ->leftJoin('item_translations','items.id','=','item_translations.items_id')
                 ->where('item_translations.locale',app()->getLocale())->select('barcodes.*','item_translations.name as item_name')
         )
-
             ->editColumn('barcode', function ($barcode) {
                 return '<svg id="code_'.$barcode->code.'" data-name="'.$barcode->item_name.'" class="barcodes" data-barcode="'.$barcode->code.'" width="200px"></svg>';
             })
@@ -1035,22 +1077,22 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($attr) {
                 $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'>Edit</a>";
                 $html .= '<a href="'.route("admin_warehouses_manage",$attr->id).'" class="btn btn-info" >Activity</a>';
-            return  $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'"
+                return  $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'"
                 class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
-        })->rawColumns(['actions','image'])->make(true);
+            })->rawColumns(['actions','image'])->make(true);
     }
 
     public function getAllPromotions()
     {
         return Datatables::of(
             StockSales::query()
-            )->editColumn('id', function ($item) {
-                return "id";
-            })->editColumn('start_date', function ($item) {
-                return BBgetDateFormat($item->start_date);
-            })->editColumn('end_date', function ($item) {
-                return BBgetDateFormat($item->end_date);
-            })
+        )->editColumn('id', function ($item) {
+            return "id";
+        })->editColumn('start_date', function ($item) {
+            return BBgetDateFormat($item->start_date);
+        })->editColumn('end_date', function ($item) {
+            return BBgetDateFormat($item->end_date);
+        })
             ->editColumn('stock_id', function ($item) {
                 return $item->stock->name;
             })
@@ -1071,11 +1113,11 @@ class DatatableController extends Controller
     {
         return Datatables::of(
             Landing::query()
-            )->editColumn('url', function ($item) {
-                return "<a href='/landings/$item->url' target='_blank'>/landings/".$item->url."</a>";
-            })->editColumn('created_at', function ($item) {
-                return BBgetDateFormat($item->created_at);
-            })
+        )->editColumn('url', function ($item) {
+            return "<a href='/landings/$item->url' target='_blank'>/landings/".$item->url."</a>";
+        })->editColumn('created_at', function ($item) {
+            return BBgetDateFormat($item->created_at);
+        })
             ->addColumn('actions', function ($attr) {
                 $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_landings_edit', $attr->id) . "'>Edit</a>";
                 return $html .= '<a href="javascript:void(0)" data-href="'.route("admin_landings_delete").'"
@@ -1087,17 +1129,17 @@ class DatatableController extends Controller
     {
         return Datatables::of(
             ItemsTransfers::query()
-            )->editColumn('user_id', function ($item) {
-                return $item->user->name. " ". $item->user->last_name;
-            })->editColumn('item_id', function ($item) {
-                return $item->item->name;
-            })->editColumn('from_id', function ($item) {
-                return $item->from->transfer_location;
-            })->editColumn('to_id', function ($item) {
-                return $item->to->transfer_location;
-            })->editColumn('created_at', function ($item) {
-                return BBgetDateFormat($item->created_at);
-            })
+        )->editColumn('user_id', function ($item) {
+            return $item->user->name. " ". $item->user->last_name;
+        })->editColumn('item_id', function ($item) {
+            return $item->item->name;
+        })->editColumn('from_id', function ($item) {
+            return $item->from->transfer_location;
+        })->editColumn('to_id', function ($item) {
+            return $item->to->transfer_location;
+        })->editColumn('created_at', function ($item) {
+            return BBgetDateFormat($item->created_at);
+        })
             ->rawColumns([])->make(true);
     }
 

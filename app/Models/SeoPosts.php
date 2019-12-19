@@ -9,6 +9,8 @@
 namespace App\Models;
 
 
+use App\Models\Common\Translatable;
+use App\Models\Translations\PostsSeoTranslations;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -33,8 +35,12 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\SeoPosts whereUpdatedAt($value)
  * @mixin \Eloquent
  */
-class SeoPosts extends Model
+class SeoPosts extends Translatable
 {
     protected $table = 'post_seo';
+    public $translatedAttributes = ['keyword', 'title', 'description','image','fb_title','fb_description','fb_image','twitter_title','twitter_description','twitter_image'];
+
     protected $guarded = ['id'];
+
+    public $translationModel = PostsSeoTranslations::class;
 }

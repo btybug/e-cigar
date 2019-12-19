@@ -6,29 +6,36 @@
         </div>
         <div class="card-body panel-body">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
+
                 @ok('admin_seo')
-                <li class="nav-item ">
-                    <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
+                <li class="nav-item">
+                    <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Posts</a>
                 </li>
                 @endok
                 @ok('admin_seo_stocks')
-                <li class="nav-item ">
-                    <a class="nav-link" id="admin_seo_stocks" href="{!! route('admin_seo_stocks') !!}" role="tab"
+                <li class="nav-item">
+                    <a class="nav-link " id="payment_gateways" href="{!! route('admin_seo_brands') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Stocks</a>
                 </li>
                 @endok
                 @ok('admin_seo_brands')
                 <li class="nav-item">
-                    <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_brands') !!}" role="tab"
+                    <a class="nav-link active" id="payment_gateways" href="{!! route('admin_seo_brands') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Brands</a>
                 </li>
                 @endok
+
             </ul>
             <div class="row">
                 <div class="col-xl-6 col-lg-5">
                     {!! Form::model($general) !!}
-                  @ok('post_admin_seo')<div class="text-right mt-20"><button type="submit" class="btn btn-info">Save</button></div>@endok
+                    @ok('stocks_admin_seo_stocks')
+                    <div class="text-right mt-20">
+                        <button type="submit" class="btn btn-info">Save</button>
+                    </div>
+                    @endok
+                    <div class="clearfix"></div>
                     <div class="seo-page-general">
                         <div class="card panel panel-default mt-20">
                             <div class="card-header panel-heading">General</div>
@@ -43,17 +50,17 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="seo-desc" class="col-xl-3 col-md-4 col-sm-3">Description</label>
+                                        <label for="seo-title" class="col-xl-3 col-md-4 col-sm-3">Image</label>
                                         <div class="col-xl-5 col-md-8 col-sm-9">
-                                            {!! Form::text('og:description',null,['class'=>'form-control']) !!}
+                                            {!! Form::text('og:image',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
-                                        <label for="seo-title" class="col-xl-3 col-md-4 col-sm-3">Image</label>
+                                        <label for="seo-desc" class="col-xl-3 col-md-4 col-sm-3">Description</label>
                                         <div class="col-xl-5 col-md-8 col-sm-9">
-                                            {!! Form::text('og:image',null,['class'=>'form-control']) !!}
+                                            {!! Form::text('og:description',null,['class'=>'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -76,6 +83,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <div class="card panel panel-default mt-20">
                             <div class="card-header panel-heading">FB</div>
                             <div class="card-body panel-body">
@@ -146,36 +154,30 @@
                                     <table class="table table-bordered">
                                         <thead>
                                         <tr>
-                                            <th>Code </th>
+                                            <th>Code</th>
                                             <th>Description</th>
-                                            <th>is translatable  </th>
+                                            <th>is translatable</th>
                                         </tr>
                                         </thead>
                                         <tbody>
                                         <tr>
-                                            <td>{title}</td>
-                                            <td>Post Title</td>
+                                            <td>{name}</td>
+                                            <td>Stock name</td>
                                             <td>Yes</td>
                                         </tr>
                                         <tr>
-                                            <td>{keywords}</td>
-                                            <td>Post Tags will (tag1,tag2,tag3...)</td>
-                                            <td>No</td>
-
-                                        </tr>
-                                        <tr>
                                             <td>{short_description}</td>
-                                            <td>Post short description</td>
+                                            <td>Stock short description</td>
                                             <td>Yes</td>
                                         </tr>
                                         <tr>
                                             <td>{long_description}</td>
-                                            <td>Post long description</td>
+                                            <td>Stock long description</td>
                                             <td>Yes</td>
                                         </tr>
                                         <tr>
                                             <td>{image}</td>
-                                            <td>Post Image</td>
+                                            <td>Stock Image</td>
                                             <td>No</td>
                                         </tr>
                                         </tbody>
@@ -190,10 +192,7 @@
 
 
     </div>
-
-
-
-    @stop
+@stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
 @stop

@@ -34,6 +34,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/settings/get-user-orders/{user_id}','Admin\DatatableController@getUserOrders')->name('datatable_user_orders');
     Route::get('/settings/get-all-statuses','Admin\DatatableController@getAllStatuses')->name('datatable_all_statuses');
     Route::get('/settings/get-bulk-posts','Admin\DatatableController@getBulkPosts')->name('datatable_bulk_posts');
+    Route::get('/settings/get-bulk-brands','Admin\DatatableController@getBulkBrands')->name('datatable_bulk_brands');
     Route::get('/settings/get-bulk-stock','Admin\DatatableController@getBulkStock')->name('datatable_bulk_stocks');
     Route::get('/tickets/get-all','Admin\DatatableController@getTickets')->name('datatable_tickets');
     Route::get('/faq/get-all','Admin\DatatableController@getFaq')->name('datatable_all_faq');

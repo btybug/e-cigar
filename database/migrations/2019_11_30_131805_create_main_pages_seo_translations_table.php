@@ -17,10 +17,10 @@ class CreateMainPagesSeoTranslationsTable extends Migration
             $table->increments('id');
             $table->integer('main_pages_seo_id')->unsigned();
             $table->string('locale')->index();
-            $table->text('image');
-            $table->string('title');
-            $table->longText('description');
-            $table->text('keywords');
+            $table->text('image')->nullable();
+            $table->string('title')->nullable();
+            $table->longText('description')->nullable();
+            $table->text('keywords')->nullable();
             $table->unique(['main_pages_seo_id','locale']);
             $table->foreign('main_pages_seo_id')->references('id')->on('main_pages_seo')->onDelete('cascade');
             $table->timestamps();
