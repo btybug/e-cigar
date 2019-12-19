@@ -222,7 +222,17 @@ class StockController extends Controller
         $stock->special_filters()->sync($special_filters);
 
         $stock->related_products()->sync($request->get('related_products'));
-        $stock->stickers()->sync($request->get('stickers'));
+
+        $stock->stickers()->detach();
+        $stickers = $request->get('stickers',[]);
+        if(count($stickers)){
+            foreach ($stickers as $sticker){
+                $stock->stickers()->create([
+                    'sticker_id' => $sticker['id'],
+                    'ordering' => $sticker['ordering'],
+                ]);
+            }
+        }
         $this->createOrUpdateSeo($request, $stock->id);
 
         return redirect()->back();

@@ -486,7 +486,7 @@
                                                                             </div>
                                                                             <input type="hidden" name="stickers[{{$key}}][id]"
                                                                                    value="{{ $sticker->id }}">
-                                                                            <input type="hidden" name="stickers[{{ $key }}][ordering]"
+                                                                            <input type="hidden" class="sticker-ordering" name="stickers[{{ $key }}][ordering]"
                                                                                    value="{{ $sticker->ordering }}">
                                                                         </li>
                                                                     @endforeach
@@ -2408,7 +2408,7 @@
                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
                                 <input type="hidden" name="stickers[${gu}][id]" value="${id}">
-                                <input type="hidden" name="stickers[${gu}][ordering]" value="${ordering}">
+                                <input type="hidden" class="sticker-ordering" name="stickers[${gu}][ordering]" value="${ordering}">
                                 </li>`);
                 $(this)
                     .parent()
