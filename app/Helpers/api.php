@@ -813,15 +813,15 @@ function time_ago($datetime, $full = false)
 
 function stockSeo($stock)
 {
-    $seoes = $stock->seo;
-    $HTML = '';
-    if ($stock->image) {
-        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
-    }
-    foreach ($seoes as $seo) {
-        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
-    }
-    return $HTML;
+//    $seoes = $stock->seo;
+//    $HTML = '';
+//    if ($stock->image) {
+//        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
+//    }
+//    foreach ($seoes as $seo) {
+//        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
+//    }
+//    return $HTML;
 }
 
 function meta($object, $type = 'seo_posts')
