@@ -2776,7 +2776,7 @@ $(document).ready(function () {
 
         $(".product__single-top .brands-top-slider").carousel({
             pagination: false,
-            controls: false,
+            // controls: false,
             infinite: true,
             matchWidth: false,
             show: {
