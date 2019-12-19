@@ -50,6 +50,19 @@ const normAjax = function (URL, obj = {}, cb) {
 };
 //********normAjax********end
 
+
+if(location.pathname === "/admin/media/trash") {
+  const trashButtons = `<button class="btn btn-danger empty_trash_js">EMPTY TRASH</button>
+  <button type="button" class="btn btn-primary undo_delete_js" data-role="btnUploader" bb-media-click="show_uploader">UNDO DELETE
+  </button>`;
+
+  $('.left--media-col').addClass('d-none');
+  $('.right--media-col').toggleClass('col-lg-10 col-lg-12');
+  $('[aria-label="breadcrumb"] .bread-crumbs-list').addClass('d-none');
+  $('.upload-content .upload--head').empty();
+  $('.upload-content .upload--head').html(trashButtons)
+}
+
 /*
  Helpers
  **TYPES**
