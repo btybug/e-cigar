@@ -2369,8 +2369,22 @@
             $('body').on('click', 'a.nav-link[href="#mediastickers"]', function() {
                 setTimeout(function() {
                     console.log(789456123)
-                    $( ".get-all-stickers-tab" ).sortable()
+                    $( ".get-all-stickers-tab" ).sortable({
+                        stop: function() {
+                            $('.sticker-ordering').each(function(index, elm){
+                                $(elm).val(index);
+                            })
+                        }
+                    })
                 }, 0)
+                $('.sticker-ordering').each(function(index, elm){
+                    $(elm).val(index);
+                })
+                // $('[type="submit"]').on('click', function() {
+                //     $('.sticker-ordering').each(function(index, elm){
+                //         $(elm).val(index);
+                //     })
+                // })
             });
 
             $("body").on('click', '.select-stickers', function () {
