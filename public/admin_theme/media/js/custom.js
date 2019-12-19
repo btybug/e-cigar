@@ -822,6 +822,7 @@ function App() {
             });
         },
         select_item(elm, e) {
+
             let id = e.target.closest(".file").getAttribute("data-id");
             if (e.type === "dblclick") {
                 e.target.closest(".file-box").classList.remove("active");
@@ -836,6 +837,8 @@ function App() {
                 });
             } else if (e.type === "click") {
                 if (multiple) {
+                    console.log('54454854654684')
+
                     e.target.closest(".file-box").classList.toggle("active");
                     let relativeInput = document.querySelector(
                         ".file-realtive-url"
@@ -852,8 +855,16 @@ function App() {
                             self.multipleImages.push(url);
                         });
                 } else {
+
                     self.helpers.hideAllActiveImages();
-                    e.target.closest(".file-box").classList.toggle("active");
+                    console.log('ewewesdsdsd', e.target.closest(".file-box"))
+                    if(!$(e.target.closest(".file-box")).hasClass('active')) {
+                        $(e.target.closest(".file-box")).addClass('active');
+                    } else {
+                        console.log(22222222222)
+
+                        e.target.closest(".file-box").classList.remove("active");
+                    }
                     document.querySelector(
                         ".file-realtive-url"
                     ).value = e.target

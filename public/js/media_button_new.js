@@ -1456,6 +1456,7 @@ var count = 0;
           };
 
       } else if (e.type === "click") {
+        console.log(333333)
         e.target.closest(".file-box").classList.toggle("active");
         if(this.selectedImage.includes(id)) {
           const index = this.selectedImage.indexOf(id);

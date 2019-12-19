@@ -152,6 +152,23 @@
                                     }
                                 }
                             ]
+                        },
+                        {
+                            text: 'Edit',
+                            className: 'd-none edit_hidden_button',
+                            action: function ( e, dt, node, config ) {
+                                const ids = [];
+                                $('#stocks-table tbody tr.selected').each(function() {
+                                    ids.push($(this).find('td.id_n').text());
+                                });
+
+                                if(ids.length > 0){
+                                    window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                }
+                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                {{--    console.log(res)--}}
+                                {{--})--}}
+                            }
                         }
                     ],
                     "autoWidth": false,
@@ -188,6 +205,28 @@
                                     column.search($(this).val(), false, false, true).draw();
                                 });
                         });
+                    }
+                });
+
+                table.on( 'select', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length !== 0) {
+                            console.log(111)
+
+                            $('.edit_hidden_button').removeClass('d-none');
+                            $('.edit_hidden_button').addClass('d-block');
+                        }
+                    }
+                });
+
+                table.on( 'deselect', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length === 0) {
+                            console.log(222)
+
+                            $('.edit_hidden_button').removeClass('d-block');
+                            $('.edit_hidden_button').addClass('d-none');
+                        }
                     }
                 });
 
