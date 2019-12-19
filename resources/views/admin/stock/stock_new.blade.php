@@ -2372,7 +2372,7 @@
                     $( ".get-all-stickers-tab" ).sortable({
                         stop: function() {
                             $('.sticker-ordering').each(function(index, elm){
-                                $(elm).val(index);
+                                $(elm).val(index+1);
                             })
                         }
                     })
