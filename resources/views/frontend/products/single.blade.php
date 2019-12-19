@@ -100,7 +100,7 @@
                                     </div>
                                 </div>
                                 <div class="brands-top-slider">
-                                    @foreach($vape->stickers as $sticker)
+                                    @foreach($vape->stickers()->orderBy('ordering')->get() as $sticker)
                                         <div class="brand-wall">
                                             <div class="brand-item">
                                                 <a href="javascript:void(0)" class="brand-link">
