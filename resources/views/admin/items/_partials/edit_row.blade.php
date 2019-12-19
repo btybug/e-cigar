@@ -7,6 +7,12 @@
             {!! Form::text('name',null,['class'=>'form-control']) !!}
         </div>
     </div>
+    <div class="form-group row">
+        <label for="text2" class="col-4 col-form-label">Short Description</label>
+        <div class="col-8">
+            {!! Form::text('short_description',null,['class'=>'form-control']) !!}
+        </div>
+    </div>
 
     <div class="form-group row">
         <label for="text1" class="col-4 col-form-label">Price</label>

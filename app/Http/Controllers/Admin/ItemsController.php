@@ -505,8 +505,9 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($request->id);
 
-        Items::updateOrCreate($request->id,$request->except(['name','_token','categories']),['gb' => [
-            'name' => $request->name
+        Items::updateOrCreate($request->id,$request->except(['name','_token','categories','short_description']),['gb' => [
+            'name' => $request->name,
+            'short_description' => $request->short_description,
         ]]);
         $model->categories()->sync($request->get('categories', []));
 
@@ -530,8 +531,9 @@ class ItemsController extends Controller
         if(count($items)){
                 foreach ($items as $id => $item){
                     $model = Items::findOrFail($id);
-                    Items::updateOrCreate($id,array_except($item,['name','categories']),['gb' => [
-                        'name' => $item['name']
+                    Items::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
+                        'name' => $item['name'],
+                        'short_description' => $item['short_description']
                     ]]);
                     $cat = (count($item['categories']))? $item['categories'] : [];
                     $model->categories()->sync($cat);

@@ -25,6 +25,16 @@
                     </tr>
                     <tr>
                         <td>
+                            Short description
+                        </td>
+                        @foreach($items as $item)
+                            <td>
+                                {!! Form::text("items[$item->id][short_description]",$item->short_description,['class'=>'form-control']) !!}
+                            </td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td>
                             Price
                         </td>
                         @foreach($items as $item)
