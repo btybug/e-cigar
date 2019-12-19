@@ -473,7 +473,7 @@
                                                         <div class="panel-body product-body">
                                                             <ul class="get-all-stickers-tab stickers--all--lists">
                                                                 @if(isset($model) && count($model->stickers))
-                                                                    @foreach($model->stickers as $sticker)
+                                                                    @foreach($model->stickers()->orderBy('ordering','asc')->get() as $key => $sticker)
                                                                         <li style="display: flex"
                                                                             data-id="{{ $sticker->id }}"
                                                                             class="option-elm-attributes">
@@ -484,8 +484,10 @@
                                                                                    class="remove-all-attributes btn btn-sm btn-danger">
                                                                                     <i class="fa fa-trash"></i></a>
                                                                             </div>
-                                                                            <input type="hidden" name="stickers[]"
+                                                                            <input type="hidden" name="stickers[{{$key}}][id]"
                                                                                    value="{{ $sticker->id }}">
+                                                                            <input type="hidden" name="stickers[{{ $key }}][ordering]"
+                                                                                   value="{{ $sticker->ordering }}">
                                                                         </li>
                                                                     @endforeach
                                                                 @endif
@@ -2397,13 +2399,16 @@
             $("body").on("click", ".add-sticker-event", function () {
                 let id = $(this).data("id");
                 let name = $(this).data("name");
+                let gu = guid();
+                let ordering = Number($(".get-all-stickers-tab").find('.option-elm-attributes').length) + 1;
                 $(".get-all-stickers-tab")
                     .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
                                 href="#">${name}</a>
                                 <div class="buttons">
                                 <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
                                 </div>
-                                <input type="hidden" name="stickers[]" value="${id}">
+                                <input type="hidden" name="stickers[${gu}][id]" value="${id}">
+                                <input type="hidden" name="stickers[${gu}][ordering]" value="${ordering}">
                                 </li>`);
                 $(this)
                     .parent()
