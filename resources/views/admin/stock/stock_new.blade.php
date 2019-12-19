@@ -1550,6 +1550,7 @@
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners").html();
                 html = html.replace(/{count}/g, uid);
+                html = html.replace(/media_/g, 'media_' + uid);
                 $(".social-media-group").append(html);
             });
             $("body").on("click", ".remove-new-banner-input", function () {
@@ -1560,6 +1561,7 @@
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners-tags").html();
                 html = html.replace(/{count}/g, uid);
+                html = html.replace(/media_/g, 'media_' + uid);
                 $(".banner-group").append(html);
             });
 
