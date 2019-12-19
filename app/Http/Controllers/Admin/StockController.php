@@ -227,9 +227,8 @@ class StockController extends Controller
         $stickers = $request->get('stickers',[]);
         if(count($stickers)){
             foreach ($stickers as $sticker){
-                $stock->stickers()->create([
-                    'sticker_id' => $sticker['id'],
-                    'ordering' => $sticker['ordering'],
+                $stock->stickers()->attach($sticker['id'],[
+                    'ordering' => $sticker['ordering']
                 ]);
             }
         }
