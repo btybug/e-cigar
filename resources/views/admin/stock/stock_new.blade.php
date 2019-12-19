@@ -403,7 +403,9 @@
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediavideos">Videos</a>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                                href="#mediaotherimage">Images</a></li>
+                                                                                href="#banners">Banners</a></li>
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#mediaotherimage">Extra Images</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediarelatedproducts">Related
                                                                 Products</a></li>
@@ -660,6 +662,74 @@
                                                                                 <i class="fa fa-minus"></i></button>
                                                                         </div>
                                                                     </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="banners" class="tab-pane fade ">
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading clearfix">
+                                                                <p class="d-inline-block">Banners</p>
+                                                                <div class="col-sm-2 pull-right">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary add-new-banner-input">
+                                                                        <i
+                                                                            class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="form-group d-flex flex-wrap align-items-center banner-group">
+
+                                                                    @if($model && count($model->banners))
+                                                                        @foreach($model->banners as $key => $banner)
+                                                                    <div
+                                                                        class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                                        <div class="col-sm-7 p-0">
+
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            {!! media_button("banners[$key][image]",$banner->image) !!}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="form-group row mt-3">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Url</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Tag</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][tags]" value="{{ $banner->tags }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Alt text</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][alt]" value="{{ $banner->alt }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                        </div>
+                                                                        <div class="col-sm-3">
+                                                                            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                                                                <i class="fa fa-minus"></i></button>
+                                                                        </div>
+                                                                    </div>
+                                                                        @endforeach
+                                                                    @endif
+
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -1280,6 +1350,44 @@
             </div>
         </div>
     </script>
+
+    <script type="template" id="add-more-banners-tags">
+        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+            <div class="col-sm-7 p-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        {!! media_button('banners[{count}][image]',$model) !!}
+
+                    </div>
+                </div>
+
+                <div class="form-group row mt-3">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="banners[{count}][url]" class="form-control"  value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="banners[{count}][tags]" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alt text</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="banners[{count}][alt]" class="form-control" value="">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-sm-3">
+                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </script>
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -1447,6 +1555,14 @@
             $("body").on("click", ".remove-new-banner-input", function () {
                 $(this).closest(".banner-item").remove();
             });
+
+            $("body").on("click", ".add-new-banner-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-banners-tags").html();
+                html = html.replace(/{count}/g, uid);
+                $(".banner-group").append(html);
+            });
+
 
             $(document).ready(function(){
                 $(".search-attr").on("keyup", function() {

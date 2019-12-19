@@ -295,4 +295,9 @@ class Stock extends Translatable
     {
         return $this->hasMany(StockAds::class, 'stock_id');
     }
+
+    public function banners()
+    {
+        return $this->hasMany(StockBanners::class, 'stock_id');
+    }
 }

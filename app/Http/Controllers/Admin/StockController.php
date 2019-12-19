@@ -114,7 +114,7 @@ class StockController extends Controller
         $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications','offer_products',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation',
             'extra_product', 'promotion_prices', 'promotion_type','categories', 'offers', 'general', 'related_products',
-            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads','special_filters');
+            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads', 'banners','special_filters');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
@@ -147,6 +147,31 @@ class StockController extends Controller
         }
 
         $stock->ads()->whereNotIn('id',$adNotDeletable)->delete();
+
+        $banners = $request->get('banners',[]);
+//        dd($banners);
+        $bannerNotDeletable = [];
+        if(count($banners)){
+            foreach ($banners as $banner){
+                if(isset($banner['id'])){
+                    $stock_ba = $stock->banners()->where('id',$banner['id'])->first();
+                    if($stock_ba){
+                        if($banner['image']){
+                            $stock_ba->fill($banner);
+                            $stock_ba->save();
+                            $bannerNotDeletable[] = $stock_ba->id;
+                        }
+                    }
+                }else{
+                    if($banner['image']) {
+                        $stock_ba = $stock->banners()->create($banner);
+                        $bannerNotDeletable[] = $stock_ba->id;
+                    }
+                }
+            }
+        }
+
+        $stock->banners()->whereNotIn('id',$bannerNotDeletable)->delete();
 
 //        if($options && count($options)){
 //            foreach ($options as $option){
