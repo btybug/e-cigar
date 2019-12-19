@@ -1,73 +1,38 @@
 @extends('layouts.admin')
 @section('content')
     <div class="container-fluid">
+        <div><h3>Items Multiple Edit</h3></div>
         <div class="table-responsive">
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Columns</th>
-                    @foreach($items as $item)
-                        <th>{{ $item->name }}</th>
-                    @endforeach
+                    <th>Product Name</th>
+                    <th>Short description</th>
+                    <th>Price</th>
+                    <th>Brand</th>
+                    <th>Categories</th>
+                    <th>Status</th>
                 </tr>
                 </thead>
                 {!! Form::open(['id' => 'rowsEditForm']) !!}
                 <tbody>
-                    <tr>
-                        <td>
-                            Product Name
-                        </td>
-                        @foreach($items as $item)
+                    @foreach($items as $item)
+                        <tr>
                             <td>
                                 {!! Form::text("items[$item->id][name]",$item->name,['class'=>'form-control']) !!}
                             </td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td>
-                            Short description
-                        </td>
-                        @foreach($items as $item)
                             <td>
                                 {!! Form::text("items[$item->id][short_description]",$item->short_description,['class'=>'form-control']) !!}
                             </td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td>
-                            Price
-                        </td>
-                        @foreach($items as $item)
                             <td>
                                 {!! Form::number("items[$item->id][default_price]",$item->default_price,['class'=>'form-control','min'=>0,'step'=>0.01]) !!}
                             </td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td>
-                            Brand
-                        </td>
-                        @foreach($items as $item)
                             <td>
                                 {!! Form::select("items[$item->id][brand_id]",$brands,$item->brand_id,['class'=>'custom-select','style' => 'width:100%']) !!}
                             </td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td>
-                            Categories
-                        </td>
-                        @foreach($items as $item)
                             <td>
                                 {!! Form::select("items[$item->id][categories][]",$categories,$item->categories()->pluck('id','id'),['class'=>'custom-select','style' => 'width:100%','multiple'=>true]) !!}
                             </td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td>
-                            Status
-                        </td>
-                        @foreach($items as $item)
                             <td>
                                 <div class="custom-control custom-radio custom-control-inline">
                                     {!! Form::radio("items[$item->id][status]",1,($item->status == 1)?true:false,['class'=>'','id'=>$item->id.'_published']) !!}
@@ -78,13 +43,13 @@
                                     <label for="{!! $item->id !!}_draft" class="">Draft</label>
                                 </div>
                             </td>
-                        @endforeach
-                    </tr>
+                        </tr>
+                    @endforeach
                     {!! Form::close() !!}
                 </tbody>
                 <tfoot>
                  <tr>
-                     <td colspan="5">
+                     <td colspan="6">
                          <button type="button" class="saveRows btn btn-primary float-right">Save</button>
                      </td>
                  </tr>
