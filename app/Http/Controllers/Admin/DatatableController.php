@@ -630,11 +630,10 @@ class DatatableController extends Controller
                 return $stock->name;
             })
             ->editColumn('title', function ($stock) use ($general) {
-
                 return ($stock->getSeoField('title')) ? $stock->getSeoField('title') : getSeo($general, 'og:title', $stock);
             })
             ->addColumn('image', function ($stock) use ($general) {
-                return ($stock) ? "<img src='" . $stock->getSeoField('image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:image', $stock) . "' width='50px'/>";
+                return ($stock->getSeoField('image')) ? "<img src='" . $stock->getSeoField('image') . "' width='50px'/>" : "<img src='" . getSeo($general, 'og:image', $stock) . "' width='50px'/>";
             })
             ->addColumn('description', function ($stock) use ($general) {
                 return ($stock->getSeoField('description')) ? $stock->getSeoField('description') : getSeo($general, 'og:description', $stock);
