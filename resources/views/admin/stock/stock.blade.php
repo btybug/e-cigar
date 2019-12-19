@@ -65,10 +65,62 @@
             </div>
         </div>
     </div>
+
+    <div class="edit-list--container"  id="heading">
+        <div class="d-flex justify-content-end heading">
+            <button class="heading-btn editing_minimize"><i class="fa fa-minus"></i></button>
+            <button class="heading-btn editing_max"><i class="fa fa-window-maximize"></i></button>
+            <button class="heading-btn editing_close"><i class="fa fa-times"></i></button>
+        </div>
+        <div class="edit-list--container-content main-scrollbar">
+
+        </div>
+    </div>
+@stop
+@section('css')
+    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
 @stop
 @section('js')
+    <script src="/public/plugins/select2/select2.full.min.js"></script>
+
     <script>
         $(document).ready(function() {
+
+            var table;
+
+            $("body").on('click','.edit-row',function () {
+                let id = $(this).data('id');
+
+                AjaxCall("{!! route('post_admin_stock_edit_row') !!}", {id:id}, function (res) {
+                    if (!res.error) {
+                        $('.edit-list--container .edit-list--container-content').html(res.html);
+                        $('.edit-list--container .custom-select').select2();
+                        $('.edit-list--container').show();
+                        $(".edit-list--container").draggable({ handle:'.heading'});
+                    }
+                });
+            });
+
+
+            $("body").on('click','.edit_item_custom',function (e) {
+                e.preventDefault();
+                let form = $(this).closest('form').serialize();
+
+                AjaxCall("{!! route('post_admin_stock_edit_row_save') !!}", form, function (res) {
+                    if (!res.error) {
+
+                        $('.edit-list--container').find('.edit-list--container-content').empty();
+                        $('body').css('overflow', 'unset');
+                        $('.edit-list--container').hide();
+                        $(".edit-list--container").draggable('destroy');
+
+                        $('.edit-list--container').removeClass('max-wrap');
+                        $('.edit-list--container').removeClass('min-wrap');
+                        $('body').css('overflow', 'unset');
+                        table.ajax.reload();
+                    }
+                });
+            });
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
@@ -106,7 +158,7 @@
                         };
                     }
                 });
-                var table = $(tableId).DataTable({
+                table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
                     "serverSide": true,
@@ -161,9 +213,9 @@
                                 $('#stocks-table tbody tr.selected').each(function() {
                                     ids.push($(this).find('td.id_n').text());
                                 });
-
+                                console.log(ids,88784315487786)
                                 if(ids.length > 0){
-                                    window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                    window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
                                 }
                                 {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
                                 {{--    console.log(res)--}}
@@ -293,6 +345,63 @@
                 '#stocks-table',
                 "{!! route('datatable_all_stocks') !!}"
             )
+
+            $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
+                if($(ev.target).closest('.heading-btn').hasClass('editing_close')) {
+                    $('.edit-list--container').find('.edit-list--container-content').empty();
+                    $('body').css('overflow', 'unset');
+                    $('.edit-list--container').hide();
+                    $(".edit-list--container").draggable('destroy');
+
+                    $('.edit-list--container').removeClass('max-wrap');
+                    $('.edit-list--container').removeClass('min-wrap');
+                    $('body').css('overflow', 'unset');
+                } else if($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
+                    i = $(ev.target).closest('.heading-btn').find('i');
+
+                    if(!$('.edit-list--container').hasClass('max-wrap')) {
+                        if($(".edit-list--container").data('draggable')) {
+                            $(".edit-list--container").draggable('destroy');
+                        }
+                        min = $('.edit-list--container').hasClass('min-wrap');
+                        max = true;
+                        min && $('.edit-list--container').removeClass('min-wrap');
+                        i.removeClass('fa-window-maximize');
+                        i.addClass('fa-window-restore');
+                        $('.edit-list--container').addClass('max-wrap');
+                        $('body').css('overflow', 'hidden');
+                    } else {
+                        max = false;
+                        $(".edit-list--container").draggable({ handle:'.heading'});
+                        min && $('.edit-list--container').addClass('min-wrap');
+                        i.removeClass('fa-window-restore');
+                        i.addClass('fa-window-maximize');
+                        $('.edit-list--container').removeClass('max-wrap');
+                        $('body').css('overflow', 'unset');
+                    }
+                } else if($(ev.target).closest('.heading-btn').hasClass('editing_minimize')) {
+                    if($('.edit-list--container').hasClass('min-wrap')) {
+                        if(max) {
+                            i.removeClass('fa-window-maximize');
+                            i.addClass('fa-window-restore');
+                            $('.edit-list--container').addClass('max-wrap');
+                            $('body').css('overflow', 'hidden');
+                        } else {
+                            $(".edit-list--container").draggable({ handle:'.heading'});
+
+                        }
+                        $('.edit-list--container').removeClass('min-wrap');
+                    } else {
+                        if(max) {
+                            i.removeClass('fa-window-restore');
+                            i.addClass('fa-window-maximize');
+                            $('.edit-list--container').removeClass('max-wrap');
+                            $('body').css('overflow', 'unset');
+                        }
+                        $('.edit-list--container').addClass('min-wrap');
+                    }
+                }
+            });
         });
 
     </script>

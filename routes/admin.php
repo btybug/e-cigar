@@ -484,6 +484,12 @@ Route::group(['prefix' => 'stock'], function () {
     Route::get('/new', 'Admin\StockController@stockNew')->name('admin_stock_new');
     Route::get('/edit/{id}', 'Admin\StockController@getStockEdit')->name('admin_stock_edit');
     Route::post('/delete', 'Admin\StockController@delete')->name('admin_stock_delete');
+
+    Route::post('/edit-row', 'Admin\StockController@postItemRowEdit')->name('post_admin_stock_edit_row');
+    Route::get('/edit-rows/{ids}', 'Admin\StockController@postItemRowsEdit')->name('post_admin_stock_edit_row_many');
+    Route::post('/edit-rows', 'Admin\StockController@postItemRowsEditSave')->name('post_admin_stock_edit_row_many_save');
+    Route::post('/edit-row-save', 'Admin\StockController@postItemRowEditSave')->name('post_admin_stock_edit_row_save');
+
     Route::group(['prefix' => 'offers'], function () {
         Route::get('/', 'Admin\StockController@stockOffers')->name('admin_stock_offers');
         Route::get('/new', 'Admin\StockController@offerNew')->name('admin_stock_new_offer');

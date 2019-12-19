@@ -329,6 +329,8 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">
+                    <a class="btn edit-row" style="background-color: #86caff;color:black" data-id="'.$stock->id.'"><i class="fa fa-road"></i></a>
+
                 ' .
                     ((userCan('admin_stock_edit')) ? "<a class='btn btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'>Edit</a>" : '')
                     .'<a href="javascript:void(0)" data-href="'.route("admin_stock_delete").'"

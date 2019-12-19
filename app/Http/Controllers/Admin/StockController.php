@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
 use App\Models\Attributes;
+use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\Filters;
 use App\Models\Items;
@@ -617,5 +618,58 @@ class StockController extends Controller
         return response()->json(['error' => false,'html' => $html]);
     }
 
+    public function postItemRowEdit(Request $request)
+    {
+        $model = Stock::findOrFail($request->id);
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+
+        $html = \View::make("admin.stock._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
+
+        return response()->json(['error' => false, 'html' => $html]);
+    }
+
+    public function postItemRowEditSave(Request $request)
+    {
+        $model = Stock::findOrFail($request->id);
+
+        Stock::updateOrCreate($request->id,$request->except(['name','_token','categories','short_description']),['gb' => [
+            'name' => $request->name,
+            'short_description' => $request->short_description,
+        ]]);
+        $model->categories()->sync($request->get('categories', []));
+
+        return response()->json(['error' => false]);
+    }
+
+    public function postItemRowsEdit($ids)
+    {
+        $ids = explode(',',$ids);
+        $items = Stock::findMany($ids);
+        $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
+        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $barcodes = Barcodes::all()->pluck('code', 'id');
+
+        return $this->view('rows_edit', compact(['items', 'categories', 'brands', 'barcodes']));
+    }
+
+    public function postItemRowsEditSave(Request $request)
+    {
+        $items = $request->get('items',[]);
+        if(count($items)){
+            foreach ($items as $id => $item){
+                $model = Stock::findOrFail($id);
+                Stock::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
+                    'name' => $item['name'],
+                    'short_description' => $item['short_description']
+                ]]);
+                $cat = (count($item['categories']))? $item['categories'] : [];
+                $model->categories()->sync($cat);
+            }
+            return response()->json(['error' => false]);
+        }
+        return response()->json(['error' => true]);
+    }
 
 }
