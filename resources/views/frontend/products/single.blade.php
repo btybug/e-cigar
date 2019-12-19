@@ -147,6 +147,18 @@
                                                         >
                                                     </div>
                                                 @endif
+                                                @if($vape->other_images && count($vape->other_images))
+                                                    @foreach($vape->other_images as $img)
+                                                        <div class="product-card_thumb-img-holder pointer"
+                                                             data-id="null">
+                                                            <img class=""
+                                                                 src="{{ $img }}"
+                                                                 alt="{!! $img !!}"
+                                                                 title="{!! $img !!}"
+                                                            >
+                                                        </div>
+                                                    @endforeach
+                                                @endif
                                                 @if($vape->variations && count($vape->variations))
                                                     @foreach($vape->variations()->required()->where('type','!=','filter')->get() as $variation)
                                                         @if(isset($variation['image']))
@@ -228,15 +240,25 @@
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition active"
                                                data-toggle="pill" href="#pills-tecnical" role="tab"
                                                aria-controls="pills-tecnical" aria-selected="true">{!! __('technical') !!}</a>
+
+                                            @if($vape->videos && count($vape->videos))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-videos" role="tab"
                                                aria-controls="pills-videos" aria-selected="true">{!! __('Videos') !!}</a>
+                                            @endif
+
+                                            @if($vape->special_offers && count($vape->special_offers))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-offers" role="tab"
                                                aria-controls="pills-offers" aria-selected="true">{!! __('offers') !!}</a>
+                                            @endif
+
+                                            @if($vape->related_products && count($vape->related_products))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-related" role="tab"
                                                aria-controls="pills-related" aria-selected="false">{!! __('related') !!}</a>
+                                            @endif
+
                                             @if($vape->reviews_tab)
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-reviews" role="tab"
@@ -348,27 +370,25 @@
                                                                         @if($vape->what_is_image)
                                                                             <img src="{{ $vape->what_is_image }}"
                                                                                  alt="what is in box">
-                                                                        @else
-                                                                            <img src="/public/img/temp/inside-box.jpg"
-                                                                                 alt="what is in box">
                                                                         @endif
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     @endif
-                                                    @if($vape->other_images && count($vape->other_images))
+
+                                                    @if($vape->banners && count($vape->banners))
 
                                                         <div class="tecnical_gallery">
                                                             <div class="tecnical_gallery-all">
-                                                                @foreach($vape->other_images as $other_image)
-                                                                    <a href="{{ $other_image }}"
+                                                                @foreach($vape->banners as $banner)
+                                                                    <a href="{{ $banner->url }}"
                                                                        class="tecnical_gallery_obj-holder lightbox-item"
                                                                        data-lightbox-gallery="gallery_name"
-                                                                       title="{!! @getImage($other_image)->seo_alt !!}">
-                                                                        <img src="{{ checkImage($other_image) }}"
-                                                                             alt="{!! $vape->name !!}-gallery"
-                                                                             title="{!! $vape->name !!}-gallery"
+                                                                       title="{!! @getImage($banner->image)->seo_alt !!}">
+                                                                        <img src="{{ checkImage($banner->image) }}"
+                                                                             alt="{!! $banner->alt !!}-gallery"
+                                                                             title="{!! $banner->tags !!}-gallery"
                                                                         >
                                                                     </a>
                                                                 @endforeach

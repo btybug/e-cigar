@@ -623,11 +623,12 @@
                                                             <div class="card-body">
                                                                 <div
                                                                     class="form-group d-flex flex-wrap align-items-center social-media-group">
+                                                                    @if($model && count($model->ads))
+                                                                        @foreach($model->ads as $key => $ad)
                                                                     <div
                                                                         class="col-md-12 mb-2 d-flex flex-wrap banner-item">
                                                                         <div class="col-sm-7 p-0">
-                                                                            @if($model && count($model->ads))
-                                                                                @foreach($model->ads as $key => $ad)
+
                                                                                     <div class="input-group">
                                                                                         <div class="input-group-prepend">
                                                                                             {!! media_button("ads[$key][image]",$ad->image) !!}
@@ -652,9 +653,7 @@
                                                                                                    class="form-control">
                                                                                         </div>
                                                                                     </div>
-                                                                                @endforeach
 
-                                                                            @endif
 
                                                                         </div>
                                                                         <div class="col-sm-3">
@@ -662,6 +661,9 @@
                                                                                 <i class="fa fa-minus"></i></button>
                                                                         </div>
                                                                     </div>
+                                                                        @endforeach
+
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
