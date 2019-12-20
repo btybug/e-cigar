@@ -15,12 +15,6 @@
     </div>
 
     <div class="form-group row">
-        <label for="text1" class="col-4 col-form-label">Price</label>
-        <div class="col-8">
-            {!! Form::number('default_price',null,['class'=>'form-control','min'=>0,'step'=>0.01]) !!}
-        </div>
-    </div>
-    <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Brand</label>
         <div class="col-8">
             {!! Form::select('brand_id',$brands,null,['class'=>'custom-select','style' => 'width:100%']) !!}
