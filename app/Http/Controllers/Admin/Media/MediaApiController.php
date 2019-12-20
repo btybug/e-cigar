@@ -63,7 +63,7 @@ class MediaApiController extends Controller
         $validator = \Validator::make($data, [
             'folder_id' => 'exists:drive_folders,id',
             'slug' => 'required_without_all:folder_id|alpha_dash',
-            'folder_name' => 'required|alpha_dash',
+            'folder_name' => 'required',
         ]);
         if ($validator->fails()) {
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
@@ -99,7 +99,7 @@ class MediaApiController extends Controller
         if (!$folder) {
             return \Response::json(['error' => true, 'message' => [0 => 'undefined folder!!!']]);
         }
-        return \Response::json(['error' => false, 'data' => $folder->rename($data)]);
+        return \Response::json(['error' => false, 'data' => $folder->editFolder($data)]);
 
     }
 
