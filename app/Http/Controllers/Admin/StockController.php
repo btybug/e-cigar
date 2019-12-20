@@ -233,7 +233,7 @@ class StockController extends Controller
                 ]);
             }
         }
-        $this->createOrUpdateSeo($request, $stock->id);
+//        $this->createOrUpdateSeo($request, $stock->id);
 
         return redirect()->back();
     }
