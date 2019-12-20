@@ -51,17 +51,9 @@ const normAjax = function (URL, obj = {}, cb) {
 //********normAjax********end
 
 
-if(location.pathname === "/admin/media/trash") {
-  const trashButtons = `<button class="btn btn-danger empty_trash_js">EMPTY TRASH</button>
-  <button type="button" class="btn btn-primary undo_delete_js" data-role="btnUploader" bb-media-click="show_uploader">UNDO DELETE
-  </button>`;
 
-  $('.left--media-col').addClass('d-none');
-  $('.right--media-col').toggleClass('col-lg-10 col-lg-12');
-  $('[aria-label="breadcrumb"] .bread-crumbs-list').addClass('d-none');
-  $('.upload-content .upload--head').empty();
-  $('.upload-content .upload--head').html(trashButtons)
-}
+
+
 
 /*
  Helpers
@@ -1107,6 +1099,14 @@ var count = 0;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
           this.helpers.makeDnD();
           this.selectedImage.length = 0;
+          if(location.pathname === "/admin/media/trash") {
+            $('.file-title').attr('contenteditable', 'false');
+            $('.title-change').css('cursore', 'pointer')
+            $('.file-title').hover(function() {
+              $(this).css('box-shadow', 'none',);
+            })
+            
+          }
           cb ? cb() : null;
         }
       });
@@ -1146,7 +1146,7 @@ var count = 0;
 
     //********App -> requests -> editImageName********start
     editFolderName: (obj = {}, cb) => {
-      shortAjax("/api-media/rename-folder", obj, res => {
+      shortAjax("/api-media/get-edit-folder", obj, res => {
         if (!res.error) {
           // cb(res);
         }
@@ -1336,7 +1336,7 @@ var count = 0;
       );
     },
     //********App -> events -> remove_folder********end
-
+    
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
@@ -1961,3 +1961,41 @@ document
     .onclick = function() {
       $('.remover-container').toggleClass('d-none');
     };
+
+
+    if(location.pathname === "/admin/media/trash") {
+      const trashButtons = `<button class="btn btn-danger empty_trash_js">EMPTY TRASH</button>
+      <button type="button" class="btn btn-primary undo_delete_js" data-role="btnUploader" bb-media-click="show_uploader">UNDO DELETE
+      </button>`;
+    
+      $('.left--media-col').addClass('d-none');
+      $('.right--media-col').toggleClass('col-lg-10 col-lg-12');
+      $('.right--media-col').toggleClass('col-sm-8 col-sm-12');
+      $('.right--media-col').toggleClass('col-md-9 col-md-12');
+      $('[aria-label="breadcrumb"] .bread-crumbs-list').addClass('d-none');
+      $('.upload-content .upload--head').empty();
+      $('.upload-content .upload--head').html(trashButtons);
+    
+      $('body .file-title').each(function() {
+        $(this).attr('contenteditable', 'false');
+      })
+    }
+    
+    $('body').on('click', '.empty_trash_js', function() {
+      const imagesArray = [];
+      const folderArray = [];
+      $('.image-container.active').each(function() {
+        imagesArray.push($(this).find('[data-id]').attr('data-id'))
+      })
+      $('.folder-container.active').each(function() {
+        folderArray.push($(this).find('div[data-id]').attr('data-id'))
+      })
+      
+      console.log(folderArray)
+    
+      app.requests.removeImage({
+        item_id: imagesArray,
+        trash: false 
+      })
+      // removeTreeFolder({});
+    })
