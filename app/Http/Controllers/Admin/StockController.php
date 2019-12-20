@@ -41,13 +41,13 @@ class StockController extends Controller
 
     public function stock()
     {
-        $stocks = Stock::all();
-        foreach ($stocks as $stock){
-            $stock->translate('gb')->slug = $stock->name;
-            $stock->save();
-        }
-
-        dd('done');
+//        $stocks = Stock::all();
+//        foreach ($stocks as $stock){
+//            $stock->translate('gb')->slug = $stock->name;
+//            $stock->save();
+//        }
+//
+//        dd('done');
 
         return $this->view('stock');
     }
