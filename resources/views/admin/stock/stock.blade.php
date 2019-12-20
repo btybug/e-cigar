@@ -250,9 +250,8 @@
                     initComplete: function () {
                         this.api().columns().every(function () {
                             var column = this;
-                            console.log(column)
                             var input = document.createElement("input");
-                            column[0][0] !== 0 && column[0][0] !== 6 && $(input).appendTo($(column.footer()).empty())
+                            column[0][0] !== 0 && column[0][0] !== 6 && column[0][0] !== 4 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
                                 });

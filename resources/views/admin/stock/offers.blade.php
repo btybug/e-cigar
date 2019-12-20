@@ -29,15 +29,16 @@
                     <div class="card-body panel-body">
 
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="Image" data-column="2" data-name="image">Image</option>
-                            <option value="Added/Last Modified Date" data-column="3" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="4" data-name="actions">Actions</option>
+                            <!-- <option value="#" data-column="0" data-name="id">#</option> -->
+                            <option value="Name" data-column="2" data-name="name">Name</option>
+                            <option value="Image" data-column="3" data-name="image">Image</option>
+                            <option value="Added/Last Modified Date" data-column="4" data-name="created_at">Added/Last Modified Date</option>
+                            <option value="Actions" data-column="5" data-name="actions">Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
+                                <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>#</th>
                                 <th>Name</th>
                                 <th>Image</th>
@@ -45,6 +46,16 @@
                                 <th>Actions</th>
                             </tr>
                             </thead>
+                            <tfoot>
+                            <tr>
+                                <th>Select</th>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Image</th>
+                                <th>Added/Last Modified Date</th>
+                                <th>Actions</th>
+                            </tr>
+                            </tfoot>
                         </table>
 
                     </div>
@@ -99,13 +110,122 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
+                    "order": [[ 1, "asc" ]],
                     dom: 'Bflrtip',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
-                        'csv', 'excel', 'pdf', 'print'
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'excelHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdfHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'print',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            text: 'Edit',
+                            className: 'd-none edit_hidden_button',
+                            action: function ( e, dt, node, config ) {
+                                const ids = [];
+                                $('#stocks-table tbody tr.selected').each(function() {
+                                    ids.push($(this).find('td.id_n').text());
+                                });
+
+                                if(ids.length > 0){
+                                    window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                }
+                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                {{--    console.log(res)--}}
+                                {{--})--}}
+                            }
+                        }
                     ],
-                    columns: tableHeadArray
+                    "autoWidth": false,
+                    columns: tableHeadArray,
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0,
+                            width: '30px',
+                            'checkboxes': {
+                                'selectRow': true
+                            }
+                        },
+                    ],
+                    select: {
+                        style:    'multi',
+                        selector: '.select-checkbox'
+                    },
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        },
+                        columns: ':visible:not(.not-exported)',
+                        rows: '.selected'
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            console.log(column)
+                            var input = document.createElement("input");
+                            column[0][0] !== 0 && column[0][0] !== 5 && column[0][0] !== 3 && $(input).appendTo($(column.footer()).empty())
+                                .on('keyup change clear', function () {
+                                    column.search($(this).val(), false, false, true).draw();
+                                });
+                        });
+                    }
+                });
+
+                table.on( 'select', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length !== 0) {
+                            console.log(111)
+
+                            $('.edit_hidden_button').removeClass('d-none');
+                            $('.edit_hidden_button').addClass('d-block');
+                        }
+                    }
+                });
+
+                table.on( 'deselect', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length === 0) {
+                            console.log(222)
+
+                            $('.edit_hidden_button').removeClass('d-block');
+                            $('.edit_hidden_button').addClass('d-none');
+                        }
+                    }
                 });
 
                 function init() {
@@ -132,12 +252,22 @@
                 $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
+
+                $("body").on( "change", ".select_all_checkbox",function(e) {
+                    // console.log(table.rows({selected: true}).length);
+                    if ($(this).is( ":checked" )) {
+                        table.rows(  ).select();
+                    } else {
+                        table.rows(  ).deselect();
+                    }
+                });
             }
 
             tableInit(
                 "stock_table",
                 [
                     {id: '#', name: 'id'},
+                    {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
                     {id: 'Image', name: 'image'},
                     {id: 'Added/Last Modified Date', name: 'created_at'},
@@ -145,6 +275,11 @@
                 ],
                 '#table_head_id',
                 [
+                    {  data: null,
+                        name: 'id',
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
                     {data: 'image', name: 'image'},
