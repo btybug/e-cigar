@@ -175,7 +175,10 @@ class Folders extends Model
         $id = $data['folder_id'];
         if (!$data['trash']) {
             $folder = self::find($id);
-            if (File::isDirectory($folder->path())) File::deleteDirectory($folder->path());
+            $items=$folder->items;
+            foreach ($items as $item){
+                File::delete($item->path());
+            }
             if ($folder->delete()) {
 
                 return true;
@@ -196,9 +199,9 @@ class Folders extends Model
     {
         parent::boot();
        return static::deleting(function ($tutorial) {
-            foreach ($tutorial->childs as $child) {
-                $child->delete();
-            }
+               foreach ($tutorial->childs as $child) {
+                   $child->delete();
+           }
         });
     }
 
@@ -230,9 +233,14 @@ class Folders extends Model
         return $this->belongsTo('App\Models\Media\Folders', 'parent_id');
     }
 
+    public function childs()
+    {
+        return $this->hasMany(Folders::class,'parent_id');
+    }
+
     public function items()
     {
-        return $this->hasMany('App\Models\Media\Items', 'folder_id');
+        return $this->hasMany(Items::class, 'folder_id');
     }
 
     //end Api Functions
@@ -288,10 +296,6 @@ class Folders extends Model
             $count = null;
 
         }
-        if (!File::isDirectory($this->path())) {
-            $this->delete();
-            return \Response::json(['error' => true, 'message' => ['invalid dir']]);
-        }
         $data['settings']['slug'] = $data['folder_name'] . $this->id;
 
         $settings_data = $data['settings'];
@@ -304,8 +308,6 @@ class Folders extends Model
         );
         $settings_data['folder_id'] = $self->id;
         $settings = Settings::create($settings_data);
-        File::makeDirectory($self->path());
-        File::put($self->path('.gitignore'), '');
         return \Response::json(['error' => false, 'data' => $self->toArray()]);
 
     }
@@ -346,13 +348,7 @@ class Folders extends Model
         }
 
         $count = self::where('name', $data['folder_name'])->where('parent_id', $parent->id)->count();
-        if ($count) {
-            $count++;
-            $path = $parent->path . '/' . $data['folder_name'] . "($count)";
-        } else {
-            $count = null;
-            $path = $parent->path . '/' . $data['folder_name'];
-        }
+
         $data['settings']['slug'] = $data['folder_name'] . $parent->id;
         $settings = $this->settings()->update($data['settings']);
         unset($data['settings']);
@@ -387,15 +383,10 @@ class Folders extends Model
         } else {
             $count = null;
         }
-        $sourceDir = $folder->path();
-        $success = File::copyDirectory($sourceDir, $parent->path($folder->title));
-        if ($success) {
-            File::deleteDirectory($sourceDir);
             $folder->parent_id = $data['parent_id'];
             $folder->prefix = $count;
             $folder->save();
             return \Response::json(['error' => false, 'data' => $folder]);
-        }
     }
 
     public function info()
@@ -406,5 +397,20 @@ class Folders extends Model
         unset($info['settings_id']);
         $info['settings'] = $this->settings->toArray();
         return $info;
+    }
+
+    public function uploadPath($i=1)
+    {
+        if (File::isDirectory(public_path('media'.DS.'drive'.DS.$i))){
+          if( count(File::allFiles(public_path('media'.DS.'drive'.DS.$i)))>=50){
+              $i++;
+             return $this->uploadPath($i);
+            }else{
+              return ['path'=>public_path('media'.DS.'drive'.DS.$i),'folder'=>$i];
+          }
+        }else{
+            File::makeDirectory(public_path('media'.DS.'drive'.DS.$i));
+            return ['path'=>public_path('media'.DS.'drive'.DS.$i),'folder'=>$i];
+        }
     }
 }

@@ -137,15 +137,17 @@ class Items extends Model
         $item = self::find($item_id);
 
         if ($item) {
+            $folder = Folders::find($item->folder_id);
+            $uploadPath=$folder->uploadPath();
             $originalName = md5(uniqid()) . '.' . $item->extension;
             $realName = str_replace('.' . $item->extension, '_copy.' . $item->extension, $item->real_name);
             $newItem = $item->replicate();
             $newItem->original_name = $originalName; // the new project_id
             $newItem->real_name = $realName; // the new project_id
+            $newItem->original_folder = $uploadPath['folder'];
             if ($newItem->save()) {
-                $folder = Folders::find($item->folder_id);
-                if ($folder && \File::isDirectory($folder->path())) {
-                    if (\File::copy($item->url, $folder->path() . DS . $originalName))
+                if ($folder) {
+                    if (\File::copy($item->url, $uploadPath['path'] . DS . $originalName))
                         return false;
                 }
             }
@@ -158,23 +160,12 @@ class Items extends Model
     {
         $item = self::find($item_id);
         $folder = Folders::find($folder_id);
-        if ($item) {
-            if ($folder && \File::isDirectory($folder->path())) {
-                $oldFolder = $item->storage;
-                if (\File::exists($oldFolder->url($item->original_name, false))) {
-                    if (\File::copy($oldFolder->url($item->original_name, false), $folder->path() . DS . $item->original_name))
-                        $item->folder_id = $folder_id;
-                    if ($item->save()) {
-                        unlink($oldFolder->url($item->original_name, false));
-                        return $item;
-                    }
-                } else {
-                    return $item->delete();
-                }
-
+        if ($item && $folder) {
+            $item->folder_id = $folder_id;
+            if ($item->save()) {
+                return $item;
             }
         }
-
         return false;
     }
 
@@ -206,17 +197,17 @@ class Items extends Model
 
     public function getUrlAttribute()
     {
-        return $this->storage->url() . '/' . $this->original_name;
+        return url('public/media/drive/' . $this->original_folder . '/' . $this->original_name);
     }
 
     public function getRelativeUrlAttribute()
     {
-        return str_replace('http://' . $_SERVER['SERVER_NAME'], '', $this->storage->url()) . '/' . $this->original_name;
+        return 'public/media/drive/' . $this->original_folder . '/' . $this->original_name;
     }
 
     public function storage()
     {
-        return $this->belongsTo('App\Models\Media\Folders', 'folder_id');
+        return $this->belongsTo(Folders::class, 'folder_id');
     }
 //[
 //{"title": "Some title 1", "description": "Some desc 1", "content": "My content"},
@@ -230,5 +221,10 @@ class Items extends Model
             $result[]=["title"=>$template->real_name, "description"=>$template->seo_description, "url"=>$template->url];
         }
         return json_encode($result);
+    }
+
+    public function path()
+    {
+        return public_path('media' . DS . 'drive' . DS . $this->original_folder . DS . $this->original_name);
     }
 }
