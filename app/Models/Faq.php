@@ -106,12 +106,12 @@ class Faq extends Translatable
 
     public function seo()
     {
-        return $this->hasMany(SeoPosts::class, 'post_id');
+        return $this->hasOne(SeoPosts::class, 'post_id');
     }
 
     public function getSeoField($name, $type = 'general')
     {
-        $seo = $this->seo()->where('name', $name)->where('type', $type)->first();
-        return ($seo) ? $seo->content : null;
+        $seo = $this->seo;
+        return ($seo) ? $seo->{$name} : null;
     }
 }
