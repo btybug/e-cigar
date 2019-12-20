@@ -350,15 +350,15 @@ class Folders extends Model
         $count = self::where('name', $data['folder_name'])->where('parent_id', $parent->id)->count();
 
         $data['settings']['slug'] = $data['folder_name'] . $parent->id;
-        $settings = $this->settings()->update($data['settings']);
+//        $settings = $this->settings()->update($data['settings']);
         unset($data['settings']);
         $self = $this->update([
             'name' => $data['folder_name'],
-            'parent_id' => $this->id,
+//            'parent_id' => $this->id,
             'prefix' => $count,
-            'settings_id' => $settings->id,
+//            'settings_id' => $settings->id,
         ]);
-        return $self->toArray();
+        return $this->toArray();
     }
 
     public function settings()
