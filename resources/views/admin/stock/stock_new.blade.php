@@ -85,20 +85,18 @@
                                                                                 {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
                                                                             </div>
                                                                         </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="product_id"
+                                                                                   class="control-label col-xl-4 control-label col-form-label text-xl-right">Product
+                                                                                Slug (for url)</label>
+                                                                            <div class="col-xl-8">
+                                                                                {!! Form::text('translatable['.strtolower($language->code).'][slug]',get_translated($model,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
+
+                                                                            </div>
+                                                                        </div>
                                                                     </div>
                                                                 @endforeach
                                                             @endif
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <div class="row">
-                                                                <label for="product_id"
-                                                                       class="control-label col-xl-4 control-label col-form-label text-xl-right">Product
-                                                                    Slug (for url)</label>
-                                                                <div class="col-xl-8">
-                                                                    {!! Form::text('slug', null,
-                                                                    ['class' => 'form-control']) !!}
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                         {{--<div class="form-group">--}}
                                                         {{--<div class="row">--}}

@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int $stock_id
  * @property string $locale
  * @property string $name
+ * @property string $slug
  * @property string|null $short_description
  * @property string|null $long_description
  * @property string|null $what_is_content
@@ -30,5 +31,5 @@ class StockTranslation extends Model
 {
     protected $table = 'stock_translations';
     public $timestamps = false;
-    protected $fillable = ['name','short_description','long_description','what_is_content'];
+    protected $fillable = ['name','slug','short_description','long_description','what_is_content'];
 }

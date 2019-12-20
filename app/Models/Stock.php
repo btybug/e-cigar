@@ -21,7 +21,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property int|null $brand_id
  * @property int $status
  * @property int $is_promotion
- * @property string $slug
  * @property int $type
  * @property string|null $image
  * @property array|null $other_images
@@ -104,7 +103,6 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereOfferType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereOtherImages($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereReviewsTab($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereSpecialFilter($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Stock whereStatus($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Common\Translatable whereTranslation($key, $value, $locale = null)
@@ -126,7 +124,7 @@ class Stock extends Translatable
 
     public $translationModel = StockTranslation::class;
 
-    public $translatedAttributes = ['name', 'short_description', 'long_description', 'what_is_content'];
+    public $translatedAttributes = ['name','slug', 'short_description', 'long_description', 'what_is_content'];
     /**specifications
      * @var array
      */

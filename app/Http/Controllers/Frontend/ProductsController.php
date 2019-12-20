@@ -82,9 +82,8 @@ class ProductsController extends Controller
     {
 //        Cart::clear();
 //        $x = Cart::getContent();
-
         enableFilter();
-        $vape = Stock::with(['variations', 'stockAttrs'])->where('slug', $slug)->first();
+        $vape = Stock::with(['variations', 'stockAttrs','translations'])->whereTranslation('slug', $slug)->first();
         if (!$vape) abort(404);
 
         if ($vape->is_offer) abort(404);
@@ -173,7 +172,7 @@ class ProductsController extends Controller
 
 
 
-        
+
         if ($variation) {
             $promotionPrice = $variation->stock->active_sales()->where('variation_id', $variation->id)->first();
             $price = ($promotionPrice) ? $promotionPrice->price : $variation->price;

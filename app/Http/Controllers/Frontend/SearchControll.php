@@ -24,7 +24,7 @@ class SearchControll extends Controller
         $query = $query->select(
             'stocks.id',
             'stocks.image',
-            'stocks.slug',
+            'stock_translations.slug',
             'stock_translations.name',
             'stock_translations.short_description',
             'categories.slug as category'
