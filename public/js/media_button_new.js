@@ -1965,7 +1965,7 @@ document
 
     if(location.pathname === "/admin/media/trash") {
       const trashButtons = `<button class="btn btn-danger empty_trash_js">EMPTY TRASH</button>
-      <button type="button" class="btn btn-primary undo_delete_js" data-role="btnUploader" bb-media-click="show_uploader">UNDO DELETE
+      <button type="button" class="btn btn-primary undo_delete_js">UNDO DELETE
       </button>`;
     
       $('.left--media-col').addClass('d-none');
@@ -1998,4 +1998,51 @@ document
         trash: false 
       })
       // removeTreeFolder({});
+    })
+
+
+    // transferImage: (obj = JSON.stringify({}), cb) => {
+    //   shortAjax("/api-media/transfer-item", obj, res => {
+    //     if (!res.error) {
+    //       this.requests.drawingItems();
+    //     }
+    //   });
+    // },
+    // //********App -> requests -> transferImage********end
+
+    // //********App -> requests -> transferFolder********start
+    // transferFolder: (obj = {}, cb) => {
+    //   shortAjax("/api-media/get-sort-folder", obj, res => {
+    //     if (!res.error) {
+    //       this.requests.drawingItems();
+    //       cb && cb();
+    //     }
+    //   });
+    // },
+
+    $('body').on('click', '.undo_delete_js', function() {
+      const imagesArray = [];
+      const folderArray = [];
+      $('.image-container.active').each(function() {
+        imagesArray.push($(this).find('[data-id]').attr('data-id'))
+      })
+      $('.folder-container.active').each(function() {
+        folderArray.push($(this).find('div[data-id]').attr('data-id'))
+      })
+      
+      console.log(folderArray)
+    
+      imagesArray.map(function(image) {
+        app.requests.transferImage({
+          item_id: image,
+          folder_id: 1 
+        })
+      })
+
+      folderArray.map(function(folder_id) {
+        app.requests.transferFolder({
+          parent_id: 1,
+          folder_id: folder_id 
+        })
+      })
     })
