@@ -1853,6 +1853,57 @@ header.main-header{
     color: #ffffff!important;
     margin-left: auto;
 }
+.media__folder-list{
+    background-color: #ffffff;
+}
+.media__folder-list .ui-sortable-handle.active{
+    background-color: #e8f0fe;
+    color: #1967d2;
+    font-weight: 600;
+}
+.media__folder-list .oooo:hover{
+    background-color: rgba(0,0,0,.04) !important;
+    color: #5f6368;
+}
+.media__folder-list .icon-folder-name{
+    padding-right: 20px;
+    font-size: 23px;
+    line-height: 1;
+    align-self: center;
+    width: 44px;
+    display: flex;
+    align-items: center;
+}
+.media__folder-list .dd-handle {
+    box-shadow: none!important;
+    border: none!important;
+    border-radius: 0 20px 20px 0;
+    color: #5f6368;
+}
+.media__folder-list .sortable li{
+    margin: 0;
+}
+.media__folder-list .oooo{
+    box-shadow: none!important;
+    border: none!important;
+    border-radius: 0 20px 20px 0;
+    color: #5f6368;
+}
+.media__folder-list .icon-folder-opening{
+    width: 15px;
+    align-self: center;
+    font-size: 18px;
+}
+.media__folder-list ol.sortable ol{
+    margin: 0;
+}
+.media__folder-list ol.sortable ol .dd-handle {
+    padding-left: 28px;
+}
+.media__folder-list ol.sortable ol .icon-folder-name{
+    padding-right: 10px;
+    width: 31px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
