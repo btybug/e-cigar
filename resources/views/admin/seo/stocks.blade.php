@@ -83,7 +83,43 @@
                                </div>
                            </div>
                        </div>
+                       <div class="card panel panel-default mt-20 ">
+                           <div class="card-header panel-heading">Robots</div>
+                           <div class="card-body panel-body">
+                               <table class="form-table table">
+                                   <tbody>
+                                   <tr>
+                                       <th scope="row" style="width: 24%;">
+                                           <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
+                                       </th>
+                                       <td>
+                                           <select class="form-control" name="robots"><option value="" selected="selected">As default Index</option><option value="1">Index</option><option value="0">No Index</option></select>
 
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <th scope="row" style="width: 24%;">Meta Robots Follow</th>
+                                       <td>
+                                           <input id="seo_meta-robots-nofollow_0" name="robots_follow" type="radio" value="0">
+                                           <label for="seo_meta-robots-nofollow_0">Follow</label>
+                                           <input id="seo_meta-robots-nofollow_0" name="robots_follow" type="radio" value="1">
+                                           <label for="seo_meta-robots-nofollow_1">Nofollow</label>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                       <th scope="row" style="width: 24%;">
+                                           <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
+                                       </th>
+                                       <td>
+                                           <select style="height: 144px" id="seo_meta-robots-adv" multiple="multiple" name="meta_robots_advanced"><option value="" selected="selected">Site-wide default: None</option><option value="none">None</option><option value="noodp">NO ODP</option><option value="noydir">None</option><option value="noimageindex">No Image Index</option><option value="noarchive">No Archive</option><option value="nosnippet">No Snippet</option></select>
+
+                                           <div>Advanced <code>meta</code> robots settings for this page.</div>
+                                       </td>
+                                   </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+                       </div>
                        <div class="card panel panel-default mt-20">
                            <div class="card-header panel-heading">FB</div>
                            <div class="card-body panel-body">
