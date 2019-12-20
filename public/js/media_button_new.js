@@ -105,21 +105,84 @@ const App = function() {
                 <span class="file-title click-no title-change"  contenteditable="true">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                  </button>
-                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
-                      <i class="fa fa-trash" style="color:#ffffff"></i>
-                    </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                  </span>
-                </span>
+                
             </a>
         </div>`);
     },
+
+    //ACTION BUTTON jsdel
+
+    //folder
+    // <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+    //               <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+    //                 <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+    //               </button>
+    //               <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+    //                 <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+    //                   <i class="fa fa-trash" style="color:#ffffff"></i>
+    //                 </button>
+    //                 <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+    //                 <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+    //               </span>
+    //             </span>
+
+    //image
+    // <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+    //                           <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+    //                             <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+    //                           </button>
+    //                           <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+    //                             <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
+    //                               <i class="fa fa-trash" style="color:#ffffff"></i>
+    //                             </button>
+    //                             <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+    //                             <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+    //                           </span>
+    //                         </span>
+
+    //html
+    // <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
+    //                           <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+    //                             <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+    //                           </button>
+    //                           <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+    //                             <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
+    //                               <i class="fa fa-trash" style="color:#ffffff"></i>
+    //                             </button>
+    //                             <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
+    //                             <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+    //                           </span>
+    //                         </span>
+
+    //tree
+    // <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+    //               <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+    //                 <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+    //               </button>
+    //               <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+    //                 <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+    //                   <i class="fa fa-trash" style="color:#ffffff"></i>
+    //                 </button>
+    //                 <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+    //                 <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+    //               </span>
+    //             </span>
+
+    //branch
+    // <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+    //               <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+    //                 <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
+    //               </button>
+    //               <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+    //                 <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+    //                   <i class="fa fa-trash" style="color:#ffffff"></i>
+    //                 </button>
+    //                 <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+    //                 <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+    //               </span>
+    //             </span>
+
+
     //********App -> htmlMaker -> makeFolder********end
 
     //********App -> htmlMaker -> makeImage********start
@@ -137,18 +200,7 @@ const App = function() {
                             <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
                             </div>
                             <!--<small>Added: ${data.updated_at}</small>-->
-                            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-                              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                              </button>
-                              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
-                                  <i class="fa fa-trash" style="color:#ffffff"></i>
-                                </button>
-                                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-                                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                              </span>
-                            </span>
+                            
                         </a>
                     </div>`);
 
@@ -171,18 +223,7 @@ const App = function() {
                             <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
                             </div>
                             <!--<small>Added: ${data.updated_at}</small>-->
-                            <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-                              <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                                <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                              </button>
-                              <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                                <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_image">
-                                  <i class="fa fa-trash" style="color:#ffffff"></i>
-                                </button>
-                                <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="open_full_modal"><i class="fa fa-cog"></i></button>
-                                <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                              </span>
-                            </span>
+                            
                         </a>
                     </div>`);
       },
@@ -190,18 +231,7 @@ const App = function() {
     makeTreeLeaf: (id, name) => {
       return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
-                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
-                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                  </button>
-                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
-                      <i class="fa fa-trash" style="color:#ffffff"></i>
-                    </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                  </span>
-                </span>
+                  
                 </li>`);
     },
 
@@ -210,18 +240,7 @@ const App = function() {
                 <div class="oooo" bb-media-click="get_folder_items" draggable="true">
                   <div class="disclose oooo"><span class="closer"></span></div>
                   <div class="dd-handle oooo">${name}</div>
-                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
-                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                  </button>
-                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
-                      <i class="fa fa-trash" style="color:#ffffff"></i>
-                    </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                  </span>
-                </span>
+                  
                 </div>
                 <ol class="dd-list">${makeTree(children).join(' ')}</ol>
                </li>`);
@@ -1322,21 +1341,30 @@ var count = 0;
     get_folder_items: (elm, e) => {
       const self = this;
       console.log('self', e.target)
-      !$(e.target).hasClass('closer') && (function(){
-        const id = elm.closest("[data-id]").getAttribute("data-id");
-        globalFolderId = id;
-        if (id && !elm.classList.contains("disabled")) {
-          self.requests.drawingItems(
-              {
-                folder_id: Number(id),
-                files: true,
-                access_token: "string"
-              },
-              $(e.target).data('core') === true,
-              () => self.htmlMaker.currentId = id
-          );
+      if(e.type === 'dblclick') {
+        !$(e.target).hasClass('closer') && (function(){
+          const id = elm.closest("[data-id]").getAttribute("data-id");
+          globalFolderId = id;
+          if (id && !elm.classList.contains("disabled")) {
+            self.requests.drawingItems(
+                {
+                  folder_id: Number(id),
+                  files: true,
+                  access_token: "string"
+                },
+                $(e.target).data('core') === true,
+                () => self.htmlMaker.currentId = id
+            );
+          }
+        })();
+      } else if(e.type === 'click') {
+        if(!$(e.target).closest('.file-box.folder-container').hasClass('active')) {
+          $(e.target).closest('.file-box.folder-container').addClass('active')
+        } else {
+          $(e.target).closest('.file-box.folder-container').removeClass('active')
         }
-      })();
+        
+      }
     },
     //********App -> events -> get_folder_items********end
 
