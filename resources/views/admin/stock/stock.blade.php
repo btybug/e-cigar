@@ -211,10 +211,12 @@
                             action: function ( e, dt, node, config ) {
                                 const ids = [];
                                 $('#stocks-table tbody tr.selected').each(function() {
-                                    ids.push($(this).find('td.id_n').text());
+                                    ids.push($(this).find('.classes__id').text());
                                 });
-                                console.log(ids,88784315487786)
+
+
                                 if(ids.length > 0){
+                                    // alert(666)
                                     window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
                                 }
                                 {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
@@ -235,6 +237,10 @@
                                 'selectRow': true
                             }
                         },
+                        {
+                            className: 'classes__id',
+                            targets: 1,
+                        }
                     ],
                     select: {
                         style:    'multi',
