@@ -12,10 +12,10 @@
         <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
             <span class="sr-only">Toggle navigation</span>
         </a>
-        <a href="{{route('admin_dashboard')}}" class="logo-admin-mobile">
-            <!-- logo for regular state and mobile devices -->
-            <span class="d-block"><img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" class="logo-img"></span>
-        </a>
+{{--        <a href="{{route('admin_dashboard')}}" class="logo-admin-mobile">--}}
+{{--            <!-- logo for regular state and mobile devices -->--}}
+{{--            <span class="d-block"><img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" class="logo-img"></span>--}}
+{{--        </a>--}}
         <div class="main-header_nav-middle">
             @inject('findService','App\Services\FindService')
 
