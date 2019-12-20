@@ -28,8 +28,8 @@
                 <script>
                 </script>
                 <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="{!! $folder->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -49px; cursor: pointer">{!! strtoupper($folder->name) !!}</div>
-                <div class="folder-list" id="folder-list2"  data-media="folder" data-menudata>
-                  <ol class="dd-list sortable" id="fff">
+                <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
+                  <ol class="dd-list sortable ui-sortable" id="fff">
 
                   </ol>
                 </div>

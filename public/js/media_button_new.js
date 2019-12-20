@@ -1,3 +1,44 @@
+let template = () => {
+  return `
+  <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
+                    <ol class="dd-list sortable ui-sortable" id="fff">
+                        <li class="dd-item mjs-nestedSortable-leaf" data-id="3" data-name="test" id="item_3" bb-media-type="folder">
+                            <div class="dd-handle oooo ui-sortable-handle active" bb-media-click="get_folder_items" draggable="true">
+                                <span class="icon-folder-opening"></span>
+                                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                                test
+                            </div>
+                        </li>
+                        <li class="dd-item mjs-nestedSortable-leaf" data-id="4" data-name="banners" id="item_4" bb-media-type="folder">
+                            <div class="dd-handle oooo ui-sortable-handle" bb-media-click="get_folder_items" draggable="true">
+                                <span class="icon-folder-opening"></span>
+                                <span class="icon-folder-name"><i class="fa fa-trash"></i></span>
+                                banners
+                            </div>
+                        </li>
+                        <li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="new" data-id="5" id="item_5" bb-media-type="folder">
+                            <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
+                                <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
+                                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                                new
+
+                            </div>
+                            <ol class="dd-list">
+                                <li class="dd-item mjs-nestedSortable-leaf" data-id="6" data-name="new" id="item_6" bb-media-type="folder">
+                                    <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
+                                        <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
+                                        <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                                        new
+                                    </div>
+
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+  `
+}
+
 //********shortAjax********start
 const shortAjax = function (URL, obj = {}, cb) {
   fetch(URL, {
@@ -232,33 +273,44 @@ const App = function() {
       },
 
     makeTreeLeaf: (id, name) => {
-      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder">
-                  <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">${name}</div>
-                  
-                </li>`);
+      return (`<li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${name}" id="item_${id}" bb-media-type="folder">
+                <div class="dd-handle oooo ui-sortable-handle active" bb-media-click="get_folder_items" draggable="true">
+                    <span class="icon-folder-opening"></span>
+                    <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                    ${name}
+                </div>
+            </li>`);
     },
 
     makeTreeBranch: (id, name, children, makeTree) => {
-      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}" bb-media-type="folder">
-                <div class="oooo" bb-media-click="get_folder_items" draggable="true">
-                  <div class="disclose oooo"><span class="closer"></span></div>
-                  <div class="dd-handle oooo">${name}</div>
-                  
-                </div>
-                <ol class="dd-list">${makeTree(children).join(' ')}</ol>
-               </li>`);
+      return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id="${id}" id="item_${id}" bb-media-type="folder">
+                    <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
+                        <div class="disclose oooo"><span class="closer"></span></div>
+                        <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                        ${name}
+                    </div>
+                    <ol class="dd-list">
+                      ${makeTree(children).join(' ')}
+                    </ol>
+                </li>`);
     },
 
     makeTreeBranchInsteadLeaf: (id, branchName, leafName) => {
-      return (`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
-                 <div class="disclose oooo"><span class="closer"></span></div>
-                 <div class="dd-handle oooo">${branchName}</div>
-               </div>
-               <ol class="dd-list">
-                 <li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${leafName}" id="item_${id}" >
-                   <div class="dd-handle oooo" bb-media-click="get_folder_items"  draggable="true">${leafName}</div>
-                 </li>
-               </ol>`);
+      return (`<div class="oooo" bb-media-click="get_folder_items" draggable="true">
+                <div class="disclose oooo"><span class="closer"></span></div>
+                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                ${branchName}
+              </div>
+              <ol class="dd-list">
+                  <li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${leafName}" id="item_${id}">
+                      <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
+                          <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
+                          <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                          ${leafName}
+                      </div>
+
+                  </li>
+              </ol>`);
     },
 
     treeMove: (nodeId, parentId) => {
