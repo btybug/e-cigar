@@ -8,6 +8,7 @@
                 <tr>
                     <th>Product Name</th>
                     <th>Short description</th>
+                    <th>Long description</th>
                     <th>Brand</th>
                     <th>Categories</th>
                     <th>Status</th>
@@ -22,6 +23,9 @@
                             </td>
                             <td>
                                 {!! Form::text("items[$item->id][short_description]",$item->short_description,['class'=>'form-control']) !!}
+                            </td>
+                            <td>
+                                {!! Form::textarea("items[$item->id][long_description]",$item->long_description,['class'=>'form-control long-description']) !!}
                             </td>
 
                             <td>
@@ -60,6 +64,7 @@
 @stop
 @section('js')
     <script src="/public/plugins/select2/select2.full.min.js"></script>
+    <script src="/public/js/tinymce/tinymce.min.js"></script>
     <script>
         $('.custom-select').select2();
 
@@ -70,6 +75,18 @@
                 if (!res.error) {
                     window.location.href = "/admin/stock";
                 }
+            });
+        })
+
+        $(function () {
+            tinymce.init({
+                selector: ".long-description",
+                plugins: [
+                    "advlist autolink lists link image charmap print preview anchor",
+                    "searchreplace visualblocks code fullscreen",
+                    "insertdatetime media table paste"
+                ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
             });
         })
     </script>
