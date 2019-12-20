@@ -94,3 +94,9 @@ ol.sortable {
   background-color: rgba(170, 102, 255, 0.2);
   border:1px dashed rgba(85, 85, 85, 0.45);
 }
+.dd-list .dd-list .dd-handle:before{
+  display: none;
+}
+.dd-list ol li:before{
+  display: none;
+}

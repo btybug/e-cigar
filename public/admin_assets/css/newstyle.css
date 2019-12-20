@@ -1862,7 +1862,7 @@ header.main-header{
     font-weight: 600;
 }
 .media__folder-list .oooo:hover{
-    background-color: rgba(0,0,0,.04) !important;
+    /* background-color: rgba(0,0,0,.04) !important; */
     color: #5f6368;
 }
 .media__folder-list .icon-folder-name{

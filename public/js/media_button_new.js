@@ -274,9 +274,9 @@ const App = function() {
 
     makeTreeLeaf: (id, name) => {
       return (`<li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${name}" id="item_${id}" bb-media-type="folder">
-                <div class="dd-handle oooo ui-sortable-handle active" bb-media-click="get_folder_items" draggable="true">
+                <div class="dd-handle oooo ui-sortable-handle" bb-media-click="get_folder_items" draggable="true">
                     <span class="icon-folder-opening"></span>
-                    <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                    <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                     ${name}
                 </div>
             </li>`);
@@ -286,7 +286,7 @@ const App = function() {
       return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id="${id}" id="item_${id}" bb-media-type="folder">
                     <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
                         <div class="disclose oooo"><span class="closer"></span></div>
-                        <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                        <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                         ${name}
                     </div>
                     <ol class="dd-list">
@@ -298,14 +298,14 @@ const App = function() {
     makeTreeBranchInsteadLeaf: (id, branchName, leafName) => {
       return (`<div class="oooo" bb-media-click="get_folder_items" draggable="true">
                 <div class="disclose oooo"><span class="closer"></span></div>
-                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
-                ${branchName}
+                <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
+                ${branchName} 
               </div>
               <ol class="dd-list">
                   <li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${leafName}" id="item_${id}">
                       <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
                           <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
-                          <span class="icon-folder-name"><i class="fa fa-home"></i></span>
+                          <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                           ${leafName}
                       </div>
 
@@ -378,115 +378,115 @@ const App = function() {
 
       $(el).children().html(makeTree(data).join(' '));
 
-      $('document').ready(() => {
-        $(el + '>ol').nestedSortable({
-          disableNesting: 'no-nest',
-          forcePlaceholderSize: true,
-          handle: 'div',
-          helper: 'clone',
-          items: 'li',
-          opacity: .6,
-          placeholder: 'placeholder',
-          tabSize: 15,
-          tolerance: 'pointer',
-          toleranceElement: '> div',
-          isTree: true,
-          startCollapsed: true,
-          update: function (ev, data) {
+      // $('document').ready(() => {
+      //   $(el + '>ol').nestedSortable({
+      //     disableNesting: 'no-nest',
+      //     forcePlaceholderSize: true,
+      //     handle: 'div',
+      //     helper: 'clone',
+      //     items: 'li',
+      //     opacity: .6,
+      //     placeholder: 'placeholder',
+      //     tabSize: 15,
+      //     tolerance: 'pointer',
+      //     toleranceElement: '> div',
+      //     isTree: true,
+      //     startCollapsed: true,
+      //     update: function (ev, data) {
 
-            const id = $(ev.originalEvent.target).closest('li').attr('data-id') || currentDragTreeElementId;
-            const treeArray = $(this).nestedSortable('toArray');
-            const parent_id = treeArray.filter((el) => el.id === id)[0].parent_id;
-            let parentId = null;
-            $(this).nestedSortable('toArray').map((el)=>{
-              (el.id && Number(el.id)) === Number(id) && (parentId = el.parent_id);
-            });
+      //       const id = $(ev.originalEvent.target).closest('li').attr('data-id') || currentDragTreeElementId;
+      //       const treeArray = $(this).nestedSortable('toArray');
+      //       const parent_id = treeArray.filter((el) => el.id === id)[0].parent_id;
+      //       let parentId = null;
+      //       $(this).nestedSortable('toArray').map((el)=>{
+      //         (el.id && Number(el.id)) === Number(id) && (parentId = el.parent_id);
+      //       });
 
-            const getData = (treeData) => {
-              return treeData && treeData.map((el) => {
-                return {key: el.id, name: $(`li.dd-item[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
-              });
-            };
+      //       const getData = (treeData) => {
+      //         return treeData && treeData.map((el) => {
+      //           return {key: el.id, name: $(`li.dd-item[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
+      //         });
+      //       };
 
-            const findParent = (treeData, p_id) => {
-              var parent;
-              !Array.isArray(findParent.children) && (findParent.children = []);
-              parent = treeData && treeData.find((el) => {
-                    el.children && findParent.children.push(...el.children);
-                return Number(el.id) === Number(p_id);
-              });
+      //       const findParent = (treeData, p_id) => {
+      //         var parent;
+      //         !Array.isArray(findParent.children) && (findParent.children = []);
+      //         parent = treeData && treeData.find((el) => {
+      //               el.children && findParent.children.push(...el.children);
+      //           return Number(el.id) === Number(p_id);
+      //         });
 
-              if(parent) {
-                return parent;
-              } else {
-                const p = findParent(findParent.children, p_id);
-                if(p) {
-                  return p;
-                }
-              }
-            };
+      //         if(parent) {
+      //           return parent;
+      //         } else {
+      //           const p = findParent(findParent.children, p_id);
+      //           if(p) {
+      //             return p;
+      //           }
+      //         }
+      //       };
 
-            const parentTransformToLeaf = () => {
-              $(currentParentOfDrag.find('ol')[0]).children().length === 0 &&
-                $(currentParentOfDrag[0]).replaceWith(makeTreeLeaf(currentParentOfDrag.attr('data-id'), currentParentOfDrag.text().trim()));
-            };
-            const dataOfBranch = parentId && getData([findParent($(this).nestedSortable('toHierarchy'), parentId)]);
-            const leafTransformToParent = (data) => {
-              $(`li.dd-item[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li.dd-item[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
-            };
+      //       const parentTransformToLeaf = () => {
+      //         $(currentParentOfDrag.find('ol')[0]).children().length === 0 &&
+      //           $(currentParentOfDrag[0]).replaceWith(makeTreeLeaf(currentParentOfDrag.attr('data-id'), currentParentOfDrag.text().trim()));
+      //       };
+      //       const dataOfBranch = parentId && getData([findParent($(this).nestedSortable('toHierarchy'), parentId)]);
+      //       const leafTransformToParent = (data) => {
+      //         $(`li.dd-item[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li.dd-item[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
+      //       };
 
-            parentId === null && (function () {
-              transferFolder(
-                  {
-                    folder_id: Number(id),
-                    parent_id: Number(1),
-                    access_token: "string"
-                  }
-              );
-            })();
-            transferFolder(
-                {
-                  folder_id: Number(id),
-                  parent_id: Number(parentId),
-                  access_token: "string"
-                }
-            );
+      //       parentId === null && (function () {
+      //         transferFolder(
+      //             {
+      //               folder_id: Number(id),
+      //               parent_id: Number(1),
+      //               access_token: "string"
+      //             }
+      //         );
+      //       })();
+      //       transferFolder(
+      //           {
+      //             folder_id: Number(id),
+      //             parent_id: Number(parentId),
+      //             access_token: "string"
+      //           }
+      //       );
 
-            dndForTree();
+      //       dndForTree();
 
-            parentTransformToLeaf();
-            parentId && leafTransformToParent(dataOfBranch);
+      //       parentTransformToLeaf();
+      //       parentId && leafTransformToParent(dataOfBranch);
 
-            findParent.children = [];
-            document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
-              $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
-            }});
-          },
-          change: function(ev, data) {
-          },
-          sort: function (ev, data) {
-          },
-          revert: function() {
-          },
-          relocate: function() {
-            dndForTree();
-          },
-          start: function (ev, data) {
-            currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
-            currentDragTreeElementId = $(ev.originalEvent.target).closest('li').attr('data-id');
-          },
-          stop: function(ev, data) {
-            // $('#page-wrapper .over-auto').css('overflow', 'auto');
-          },
-          out: function(ev, data) {
-            // $('#page-wrapper .over-auto').css('overflow', 'unset');
-          },
-          over: function () {
-            // $('#page-wrapper .over-auto').css('overflow', 'auto');
-          }
-        });
+      //       findParent.children = [];
+      //       document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
+      //         $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
+      //       }});
+      //     },
+      //     change: function(ev, data) {
+      //     },
+      //     sort: function (ev, data) {
+      //     },
+      //     revert: function() {
+      //     },
+      //     relocate: function() {
+      //       dndForTree();
+      //     },
+      //     start: function (ev, data) {
+      //       currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
+      //       currentDragTreeElementId = $(ev.originalEvent.target).closest('li').attr('data-id');
+      //     },
+      //     stop: function(ev, data) {
+      //       // $('#page-wrapper .over-auto').css('overflow', 'auto');
+      //     },
+      //     out: function(ev, data) {
+      //       // $('#page-wrapper .over-auto').css('overflow', 'unset');
+      //     },
+      //     over: function () {
+      //       // $('#page-wrapper .over-auto').css('overflow', 'auto');
+      //     }
+      //   });
 
-      });
+      // });
 
       dndForTree();
 
