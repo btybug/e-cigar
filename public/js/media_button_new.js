@@ -225,7 +225,7 @@ const App = function() {
                             <span class="corner"></span>
                 
                             <div class="icon">
-                                <img width="180px" data-lightbox="image" src="/public/media/tmp/${data.original_name}">
+                                <img width="180px" data-lightbox="image" src="${data.extension.toUpperCase() === 'PNG' || data.extension.toUpperCase() === 'JPG' || data.extension.toUpperCase() === 'JPEG' ? '/public/media/tmp/' + data.original_name : data.url}">
                                 <i class="fa fa-file"></i>
                             </div>
                             <div class="file-name">
@@ -260,6 +260,27 @@ const App = function() {
                         </a>
                     </div>`);
       },
+
+      makePdfItem: (data) => {
+        console.log(data);
+
+        return (`<div draggable="true" data-id="${data.id}" class="file" >
+                      <a  bb-media-click="select_item" bb-media-type="image">
+                          <span class="corner"></span>
+              
+                          <div class="icon">
+                              <img width="180px" data-lightbox="image" src="/public/images/pdf.png">
+                              <i class="fa fa-file"></i>
+                          </div>
+                          <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
+                          <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                          <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
+                          </div>
+                          <!--<small>Added: ${data.updated_at}</small>-->
+                          
+                      </a>
+                  </div>`);
+    },
 
     makeTreeLeaf: (id, name) => {
       return (`<li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${name}" id="item_${id}" bb-media-type="folder">
@@ -1135,6 +1156,10 @@ var count = 0;
               if(file.extension === "html") {
                   html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeHtmlItem(
                       file
+                  )}</div>`;
+              } else if(file.extension === "pdf") {
+                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makePdfItem(
+                    file
                   )}</div>`;
               } else {
                   html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
