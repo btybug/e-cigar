@@ -135,8 +135,10 @@ class SeoController extends Controller
 
     public function createOrUpdateStockSeo(Request $request, $id)
     {
-        $data = $request->except('_token', 'translatable');
-        StockSeo::updateOrCreate($request->get('id'), $data);
+
+        $data = $request->except('_token', 'translatable','stock');
+        StockSeo::updateOrCreate($request->get('id'), $data,$request->get('translatable'));
+        Stock::updateOrCreate($request->get('stock_id'), [],$request->get('stock')['translatable']);
         return redirect()->back();
     }
 

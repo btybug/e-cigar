@@ -85,6 +85,20 @@
                                                                 </div>
                                                             </td>
                                                         </tr>
+                                                        <tr>
+                                                            <th scope="row">
+                                                                <label for="seo_canonical">Canonical URL:</label>
+                                                            </th>
+                                                            <td>
+                                                                {!! Form::text('stock[translatable]['.strtolower($language->code).'][slug]',get_translated($stock,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
+                                                                <br>
+                                                                <div>The canonical URL that this page should point to, leave empty to default to
+                                                                    permalink. <a target="_blank"
+                                                                                  href="#">Cross
+                                                                        domain canonical</a> supported too.
+                                                                </div>
+                                                            </td>
+                                                        </tr>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -209,20 +223,7 @@
                         </div>
                         <table class="form-table table">
                             <tbody>
-                            <tr>
-                                <th scope="row">
-                                    <label for="seo_canonical">Canonical URL:</label>
-                                </th>
-                                <td>
-                                    {!! Form::text('canonical_url',null,['class'=>'form-control']) !!}
-                                    <br>
-                                    <div>The canonical URL that this page should point to, leave empty to default to
-                                        permalink. <a target="_blank"
-                                                      href="#">Cross
-                                            domain canonical</a> supported too.
-                                    </div>
-                                </td>
-                            </tr>
+
                             </tbody>
                         </table>
                     </div>
