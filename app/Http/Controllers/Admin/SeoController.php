@@ -110,7 +110,10 @@ class SeoController extends Controller
         $twitterSeo = $settings->getEditableData('seo_twitter_posts')->toArray();
         $robot = $settings->getEditableData('seo_robot_posts');
         $seo = $post->seo;
-
+        $seo=($seo)?$seo:new SeoPosts();
+        $seo->robots=(is_null($seo->robots))?$robot->robots:$seo->robots;
+        $seo->robots_follow=(is_null($seo->robots_follow))?@$general['robots_follow']:$seo->robots_follow;
+        $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?@$general['meta_robots_advanced']:$seo->meta_robots_advanced;
         return $this->view('edit_post', compact('post', 'general', 'fbSeo', 'seo', 'twitterSeo', 'robot'));
     }
 
@@ -124,9 +127,10 @@ class SeoController extends Controller
         $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
         $robot = $settings->getEditableData('seo_robot_stocks');
         $seo = $stock->seo;
+        $seo=($seo)?$seo:new StockSeo();
         $seo->robots=(is_null($seo->robots))?$robot->robots:$seo->robots;
-        $seo->robots_follow=(is_null($seo->robots_follow))?$general['robots_follow']:$seo->robots_follow;
-        $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?$general['meta_robots_advanced']:$seo->meta_robots_advanced;
+        $seo->robots_follow=(is_null($seo->robots_follow))?@$general['robots_follow']:$seo->robots_follow;
+        $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?@$general['meta_robots_advanced']:$seo->meta_robots_advanced;
         return $this->view('edit_stock', compact('stock', 'general', 'fbSeo', 'twitterSeo', 'robot', 'seo'));
     }
 
