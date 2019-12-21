@@ -185,7 +185,7 @@
                                             <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                         </th>
                                         <td>
-                                            {!! Form::select('robots',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],get_translated($seo,strtolower($language->code),'robots'),['class'=>'form-control']) !!}
+                                            {!! Form::select('robots',[null=>isset($robot)?(($robot->robots)?'As default Index':'As default No Index'):null,'1'=>'Index','0'=>'No Index'],null,['class'=>'form-control']) !!}
 
                                         </td>
                                     </tr>
@@ -212,7 +212,7 @@
                                             'noarchive'=>'No Archive',
                                             'nosnippet'=>'No Snippet',
                                             ],
-                                           null,['style'=>'height: 144px','id'=>'seo_meta-robots-adv','multiple'=>'multiple']) !!}
+                                           @json_decode($seo->meta_robots_advanced,true),['style'=>'height: 144px','id'=>'seo_meta-robots-adv','multiple'=>'multiple']) !!}
 
                                             <div>Advanced <code>meta</code> robots settings for this page.</div>
                                         </td>

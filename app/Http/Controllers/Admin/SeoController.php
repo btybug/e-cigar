@@ -119,10 +119,14 @@ class SeoController extends Controller
         $stock = Stock::findOrFail($id);
 
         $general = $settings->getEditableData('seo_stocks')->toArray();
+
         $fbSeo = $settings->getEditableData('seo_fb_stocks')->toArray();
         $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
         $robot = $settings->getEditableData('seo_robot_stocks');
         $seo = $stock->seo;
+        $seo->robots=(is_null($seo->robots))?$robot->robots:$seo->robots;
+        $seo->robots_follow=(is_null($seo->robots_follow))?$general['robots_follow']:$seo->robots_follow;
+        $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?$general['meta_robots_advanced']:$seo->meta_robots_advanced;
         return $this->view('edit_stock', compact('stock', 'general', 'fbSeo', 'twitterSeo', 'robot', 'seo'));
     }
 
