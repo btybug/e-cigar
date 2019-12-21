@@ -35,44 +35,66 @@
                     </div>
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" multiple class="form-control">
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Product Name" data-column="1" data-name="id">#</option>
-                            <option value="OG title" data-column="2" data-name="title">OG title</option>
-                            <option value="OG image" data-column="3" data-name="image">OG image</option>
-                            <option value="OG description" data-column="4" data-name="description">OG description</option>
-                            <option value="OG Keywords" data-column="5" data-name="keywords">OG Keywords</option>
-                            <option value="Robots" data-column="6" data-name="robots">Robots</option>
-                            <option value="FB title" data-column="7" data-name="fb_title">FB title</option>
-                            <option value="FB image" data-column="8" data-name="fb_image">FB image</option>
-                            <option value="FB description" data-column="9" data-name="fb_description">FB description</option>
-                            <option value="TW title" data-column="10" data-name="twitter_title">TW title</option>
-                            <option value="TW image" data-column="11" data-name="twitter_image">TW image</option>
-                            <option value="TW description" data-column="12" data-name="twitter_description">TW description</option>
-                            <option value="Actions" data-column="13" data-name="actions">Actions</option>
+                                <!-- <option value="#" data-column="0" data-name="id">#</option> -->
+                                <option value="Product Name" data-column="2" data-name="id">Product Name</option>
+                                <option value="OG title" data-column="3" data-name="title">OG title</option>
+                                <option value="OG image" data-column="4" data-name="image">OG image</option>
+                                <option value="OG description" data-column="5" data-name="description">OG description</option>
+                                <option value="OG Keywords" data-column="6" data-name="keywords">OG Keywords</option>
+                                <option value="Robots" data-column="7" data-name="robots">Robots</option>
+                                <option value="FB title" data-column="8" data-name="fb_title">FB title</option>
+                                <option value="FB image" data-column="9" data-name="fb_image">FB image</option>
+                                <option value="FB description" data-column="10" data-name="fb_description">FB description</option>
+                                <option value="TW title" data-column="11" data-name="twitter_title">TW title</option>
+                                <option value="TW image" data-column="12" data-name="twitter_image">TW image</option>
+                                <option value="TW description" data-column="13" data-name="twitter_description">TW description</option>
+                                <option value="Actions" data-column="14" data-name="actions">Actions</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
-                            <tr>
-                                <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
-                                <th>ID</th>
-                                <th>Product Name</th>
-                                <th>OG title</th>
-                                <th>OG image</th>
-                                <th>OG description</th>
-                                <th>OG Keywords</th>
-                                <th>Robots</th>
+                                <tr>
+                                    <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>OG title</th>
+                                    <th>OG image</th>
+                                    <th>OG description</th>
+                                    <th>OG Keywords</th>
+                                    <th>Robots</th>
 
-                                <th>FB title</th>
-                                <th>FB image</th>
-                                <th>FB description</th>
+                                    <th>FB title</th>
+                                    <th>FB image</th>
+                                    <th>FB description</th>
 
-                                <th>TW title</th>
-                                <th>TW image</th>
-                                <th>TW description</th>
+                                    <th>TW title</th>
+                                    <th>TW image</th>
+                                    <th>TW description</th>
 
-                                <th>Actions</th>
-                            </tr>
+                                    <th>Actions</th>
+                                </tr>
                             </thead>
+                            <tfoot>
+                                <tr>
+                                    <th>Select</th>
+                                    <th>#</th>
+                                    <th>Product Name</th>
+                                    <th>OG title</th>
+                                    <th>OG image</th>
+                                    <th>OG description</th>
+                                    <th>OG Keywords</th>
+                                    <th>Robots</th>
+
+                                    <th>FB title</th>
+                                    <th>FB image</th>
+                                    <th>FB description</th>
+
+                                    <th>TW title</th>
+                                    <th>TW image</th>
+                                    <th>TW description</th>
+
+                                    <th>Actions</th>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>
@@ -129,12 +151,69 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
+                    "order": [[ 1, "asc" ]],
                     dom: 'Bflrtip',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
-                        'csv', 'excel', 'pdf', 'print'
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'csvHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'excelHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'pdfHtml5',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                },
+                                {
+                                    extend: 'print',
+                                    exportOptions: {
+                                        columns: ':visible'
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            text: 'Edit',
+                            className: 'd-none edit_hidden_button',
+                            action: function ( e, dt, node, config ) {
+                                const ids = [];
+                                $('#stocks-table tbody tr.selected').each(function() {
+                                    ids.push($(this).find('.classes__id').text());
+                                });
+
+
+                                if(ids.length > 0){
+                                    // alert(666)
+                                    window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
+                                }
+                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                {{--    console.log(res)--}}
+                                {{--})--}}
+                            }
+                        }
                     ],
+                    "autoWidth": false,
+                    columns: tableHeadArray,
                     columnDefs: [
                         {
                             orderable: false,
@@ -165,14 +244,37 @@
                         this.api().columns().every(function () {
                             var column = this;
                             var input = document.createElement("input");
-                            column[0][0] !== 0 && column[0][0] !== 6 && column[0][0] !== 4 && $(input).appendTo($(column.footer()).empty())
+
+                            column[0][0] !== 0 && column[0][0] !== 14 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
                                 });
                         });
                     },
-                    columns: tableHeadArray
                 });
+
+                table.on( 'select', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length !== 0) {
+                            console.log(111)
+
+                            $('.edit_hidden_button').removeClass('d-none');
+                            $('.edit_hidden_button').addClass('d-block');
+                        }
+                    }
+                });
+
+                table.on( 'deselect', function ( e, dt, type, indexes ) {
+                    if ( type === 'row' ) {
+                        if($('tr[role="row"].selected').length === 0) {
+                            console.log(222)
+
+                            $('.edit_hidden_button').removeClass('d-block');
+                            $('.edit_hidden_button').addClass('d-none');
+                        }
+                    }
+                });
+
                 function init() {
                     var selected_items = [];
                     $(`${selectId} option`).each(function() {
@@ -196,13 +298,22 @@
                 $(selectId).on('change.select2', function (e) {
                     init();
                 });
+
+                $("body").on( "change", ".select_all_checkbox",function(e) {
+                    // console.log(table.rows({selected: true}).length);
+                    if ($(this).is( ":checked" )) {
+                        table.rows(  ).select();
+                    } else {
+                        table.rows(  ).deselect();
+                    }
+                });
             }
 
             tableInit(
                 "seo_product_table",
                 [
                     {id: '#', text: '#', name: 'id'},
-                    {id: 'ID', text: 'ID', name: 'id'},
+                    {id: 'id', text: 'Id', name: 'id'},
                     {id: 'Product Name', text: 'Product Name', name: 'p_name'},
                     {id: 'OG title', text: 'OG title', name: 'og:title'},
                     {id: 'OG image', text: 'OG image', name: 'og:image'},
@@ -218,7 +329,12 @@
                     {id: 'Actions', text: 'Actions', name: 'actions'},
                 ],
                 '#table_head_id',
-                [   {  data: null, name: 'id', defaultContent: '', className: 'select-checkbox', orderable: false},
+                [
+                    {  data: null,
+                        name: 'id',
+                        defaultContent: '',
+                        className: 'select-checkbox',
+                        orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'p_name', name: 'p_name'},
                     {data: 'title', name: 'title'},

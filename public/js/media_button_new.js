@@ -138,18 +138,7 @@ const App = function() {
                 <span class="file-title click-no title-change"  contenteditable="true">${data.title}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                <span class="dropdown file-actions d-none" style="position: absolute; right: 5px; top: 5px; max-width: 100px;">
-                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                  </button>
-                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
-                      <i class="fa fa-trash" style="color:#ffffff"></i>
-                    </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
-                  </span>
-                </span>
+                
             </a>
         </div>`);
     },
