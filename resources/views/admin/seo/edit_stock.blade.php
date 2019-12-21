@@ -87,7 +87,7 @@
                                                         </tr>
                                                         <tr>
                                                             <th scope="row">
-                                                                <label for="seo_canonical">Canonical URL:</label>
+                                                                <label for="seo_canonical">URL:</label>
                                                             </th>
                                                             <td>
                                                                 {!! Form::text('stock[translatable]['.strtolower($language->code).'][slug]',get_translated($stock,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
