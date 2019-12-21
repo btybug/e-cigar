@@ -21,7 +21,7 @@
                 <div id="{{ strtolower($language->code) }}"
                      class="tab-pane fade  @if($loop->first) in active show @endif">
                     <div class="container-fluid">
-                        <div><h3>Stock Multiple Edit</h3></div>
+                        <div><h3>Stock Multiple SEO Edit</h3></div>
                         <div class="table-responsive">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
