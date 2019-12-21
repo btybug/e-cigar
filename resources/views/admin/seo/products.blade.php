@@ -53,7 +53,8 @@
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
-                                <th>#</th>
+                                <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
+                                <th>ID</th>
                                 <th>Product Name</th>
                                 <th>OG title</th>
                                 <th>OG image</th>
@@ -134,6 +135,42 @@
                     buttons: [
                         'csv', 'excel', 'pdf', 'print'
                     ],
+                    columnDefs: [
+                        {
+                            orderable: false,
+                            className: 'select-checkbox',
+                            targets: 0,
+                            width: '30px',
+                            'checkboxes': {
+                                'selectRow': true
+                            }
+                        },
+                        {
+                            className: 'classes__id',
+                            targets: 1,
+                        }
+                    ],
+                    select: {
+                        style:    'multi',
+                        selector: '.select-checkbox'
+                    },
+                    exportOptions: {
+                        modifier: {
+                            selected: null
+                        },
+                        columns: ':visible:not(.not-exported)',
+                        rows: '.selected'
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var input = document.createElement("input");
+                            column[0][0] !== 0 && column[0][0] !== 6 && column[0][0] !== 4 && $(input).appendTo($(column.footer()).empty())
+                                .on('keyup change clear', function () {
+                                    column.search($(this).val(), false, false, true).draw();
+                                });
+                        });
+                    },
                     columns: tableHeadArray
                 });
                 function init() {
@@ -165,6 +202,7 @@
                 "seo_product_table",
                 [
                     {id: '#', text: '#', name: 'id'},
+                    {id: 'ID', text: 'ID', name: 'id'},
                     {id: 'Product Name', text: 'Product Name', name: 'p_name'},
                     {id: 'OG title', text: 'OG title', name: 'og:title'},
                     {id: 'OG image', text: 'OG image', name: 'og:image'},
@@ -180,7 +218,7 @@
                     {id: 'Actions', text: 'Actions', name: 'actions'},
                 ],
                 '#table_head_id',
-                [
+                [   {  data: null, name: 'id', defaultContent: '', className: 'select-checkbox', orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'p_name', name: 'p_name'},
                     {data: 'title', name: 'title'},
