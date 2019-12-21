@@ -72,15 +72,6 @@
                                        </div>
                                    </div>
                                </div>
-                               <div class="form-group">
-                                   <div class="row">
-                                       <label for="seo-meta-robots" class="col-xl-3 col-md-4 col-sm-3">Meta Robots</label>
-                                       <div class="col-xl-5 col-md-8 col-sm-9">
-                                           {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
-
-                                       </div>
-                                   </div>
-                               </div>
                            </div>
                        </div>
                        <div class="card panel panel-default mt-20 ">
@@ -93,16 +84,16 @@
                                            <label for="seo_meta-robots-noindex">Meta Robots Index:</label>
                                        </th>
                                        <td>
-                                           <select class="form-control" name="robots"><option value="" selected="selected">As default Index</option><option value="1">Index</option><option value="0">No Index</option></select>
-
+                                           {!! Form::select('robots',['1'=>'Index','0'=>'No Index'],isset($robot)?$robot->robots:null,['class'=>'form-control']) !!}
                                        </td>
                                    </tr>
                                    <tr>
                                        <th scope="row" style="width: 24%;">Meta Robots Follow</th>
                                        <td>
-                                           <input id="seo_meta-robots-nofollow_0" name="robots_follow" type="radio" value="0">
+                                           {!! Form::radio('robots_follow',0,['id'=>'seo_meta-robots-nofollow_0']) !!}
                                            <label for="seo_meta-robots-nofollow_0">Follow</label>
-                                           <input id="seo_meta-robots-nofollow_0" name="robots_follow" type="radio" value="1">
+
+                                           {!! Form::radio('robots_follow',1,['id'=>'seo_meta-robots-nofollow_0']) !!}
                                            <label for="seo_meta-robots-nofollow_1">Nofollow</label>
                                        </td>
                                    </tr>
@@ -111,8 +102,16 @@
                                            <label for="seo_meta-robots-adv">Meta Robots Advanced:</label>
                                        </th>
                                        <td>
-                                           <select style="height: 144px" id="seo_meta-robots-adv" multiple="multiple" name="meta_robots_advanced"><option value="" selected="selected">Site-wide default: None</option><option value="none">None</option><option value="noodp">NO ODP</option><option value="noydir">None</option><option value="noimageindex">No Image Index</option><option value="noarchive">No Archive</option><option value="nosnippet">No Snippet</option></select>
-
+                                           {!! Form::select('meta_robots_advanced[]',
+                                       [null=>'Site-wide default: None',
+                                       'none'=>'None',
+                                       'noodp'=>'NO ODP',
+                                       'noydir'=>'None',
+                                       'noimageindex'=>'No Image Index',
+                                       'noarchive'=>'No Archive',
+                                       'nosnippet'=>'No Snippet',
+                                       ],
+                                      @json_decode($general['meta_robots_advanced']),['style'=>'height: 144px','id'=>'seo_meta-robots-adv','multiple'=>'multiple']) !!}
                                            <div>Advanced <code>meta</code> robots settings for this page.</div>
                                        </td>
                                    </tr>
