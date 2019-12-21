@@ -168,4 +168,27 @@ class SeoController extends Controller
     {
         return $this->view('brands');
     }
+
+    public function postItemRowsEdit($ids, Settings $settings)
+    {
+
+        $ids = explode(',', $ids);
+        $stocks = Stock::findMany($ids);
+        $general = $settings->getEditableData('seo_stocks')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_stocks')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_stocks')->toArray();
+        $robot = $settings->getEditableData('seo_robot_stocks');
+
+        return $this->view('rows_edit', compact('stocks', 'general', 'fbSeo', 'twitterSeo', 'robot'));
+    }
+
+    public function postItemRowsEditSave(Request $request)
+    {
+        $stocks= $request->except('_token');
+        foreach ($stocks as $key=>$stock){
+            StockSeo::updateOrCreate($stock['seo_id'], ['stock_id'=>$key],$stock['translatable']);
+            Stock::updateOrCreate($key, [],$stock['stock']['translatable']);
+        }
+        return redirect()->back();
+    }
 }
