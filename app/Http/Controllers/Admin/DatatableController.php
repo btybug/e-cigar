@@ -663,7 +663,7 @@ class DatatableController extends Controller
             })->addColumn('robots', function ($stock) {
                 return "";
             })->addColumn('actions', function ($stock) {
-                return (userCan('admin_seo_bulk_edit_stock')) ? "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_seo_bulk_edit_stock', $stock->id) . "'>Edit</a></div>" : null;
+                return (userCan('admin_seo_bulk_edit_stock')) ? "<div class='datatable-td__action'><a class='btn btn-info' href='" . route('post_admin_seo_stock_edit_row_many', $stock->id) . "'>Edit Fast</a><a class='btn btn-warning' href='" . route('admin_seo_bulk_edit_stock', $stock->id) . "'>Edit</a></div>" : null;
             })
             ->rawColumns(['actions', 'name', 'image', 'fb_image', 'twitter_image'])
             ->make(true);
