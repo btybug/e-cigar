@@ -24,13 +24,7 @@
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="form-group row">
-                                            {{Form::label('purl', 'Post Url',['class' => 'col-sm-3'])}}
-                                            <div class="col-sm-9">
-                                                <label>news/</label>
-                                                {{Form::text('url', null,['class' =>'form-control','id'=>'purl','placeholder' => 'Enter URL ...'])}}
-                                            </div>
-                                        </div>
+
 
                                         <div class="form-group">
                                             @if(count(get_languages()))
@@ -52,6 +46,10 @@
                                                             <div class="form-group">
                                                                 <label>Title</label>
                                                                 {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($post,strtolower($language->code),'title'),['class'=>'form-control']) !!}
+                                                            </div>
+                                                            <div class="form-group ">
+                                                                {{Form::label('purl', 'Post Url')}}
+                                                                    {{Form::text('translatable['.strtolower($language->code).'][url]', get_translated($post,strtolower($language->code),'url'),['class' =>'form-control','id'=>'purl','placeholder' => 'Enter URL ...'])}}
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Short Description</label>

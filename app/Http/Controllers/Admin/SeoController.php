@@ -25,7 +25,7 @@ class SeoController extends Controller
 
     public function getPosts(Settings $settings)
     {
- 
+
         $general = $settings->getEditableData('seo_posts');
         $fb = $settings->getEditableData('seo_fb_posts');
         $twitter = $settings->getEditableData('seo_twitter_posts');
@@ -139,6 +139,7 @@ class SeoController extends Controller
     {
         $data = $request->except('_token', 'translatable','post');
         SeoPosts::updateOrCreate($request->get('id'), $data);
+        Posts::updateOrCreate($request->get('post_id'), [],$request->get('post')['translatable']);
         return redirect()->back();
     }
 

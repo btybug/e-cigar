@@ -90,7 +90,7 @@
                                                                 <label for="seo_canonical">URL:</label>
                                                             </th>
                                                             <td>
-                                                                {!! Form::text('stock[translatable]['.strtolower($language->code).'][slug]',get_translated($post,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
+                                                                {!! Form::text('post[translatable]['.strtolower($language->code).'][url]',get_translated($post,strtolower($language->code),'url'),['class'=>'form-control']) !!}
                                                                 <br>
                                                                 <div>The canonical URL that this page should point to, leave empty to default to
                                                                     permalink. <a target="_blank"
