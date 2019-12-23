@@ -25,11 +25,7 @@ class SeoController extends Controller
 
     public function getPosts(Settings $settings)
     {
-        $posts=\DB::table('posts')->get();
-        foreach ($posts as $post){
-            \DB::table('posts_translations')->where('locale','gb')->where('posts_id',$post->id)->update(['url'=>$post->url]);
-        }
-        dd(1);
+ 
         $general = $settings->getEditableData('seo_posts');
         $fb = $settings->getEditableData('seo_fb_posts');
         $twitter = $settings->getEditableData('seo_twitter_posts');
