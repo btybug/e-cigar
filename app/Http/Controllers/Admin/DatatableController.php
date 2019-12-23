@@ -323,7 +323,7 @@ class DatatableController extends Controller
         ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('stocks.*','stock_translations.name')
             ->where('stocks.is_offer', false)
-            ->where('stock_translations.locale', \Lang::getLocale()))
+            ->where('stock_translations.locale', \Lang::getLocale())->groupBy('stocks.id'))
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
             })->addColumn('brand', function ($stock) {
