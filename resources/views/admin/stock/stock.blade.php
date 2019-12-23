@@ -412,7 +412,7 @@
                         orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
-                    {data: 'brand', name: 'brand.name'},
+                    {data: 'brand', name: 'brand'},
                     {data: 'categories', name: 'categories_translations.name'},
                     {data: 'short_description', name: 'stock_translations.short_description'},
                     {data: 'image', name: 'image'},
