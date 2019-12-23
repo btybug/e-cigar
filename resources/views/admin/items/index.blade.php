@@ -33,7 +33,7 @@
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
                             <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
-                            <option value="Name" data-column="2" data-name="name" selected>Name</option>
+{{--                            <option value="Name" data-column="2" data-name="name" selected>Name</option>--}}
                             <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
                             <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
                             <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
@@ -42,7 +42,7 @@
                             <option value="Price" data-column="8" data-name="price" selected>Price</option>
                             <option value="Status" data-column="9" data-name="status" selected>Status</option>
                             <option value="Created At" data-column="10" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>
+{{--                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>--}}
                         </select>
                         </div>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
