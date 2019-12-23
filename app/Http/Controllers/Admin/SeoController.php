@@ -191,6 +191,19 @@ class SeoController extends Controller
 
         return $this->view('rows_edit', compact('stocks', 'general', 'fbSeo', 'twitterSeo', 'robot'));
     }
+    public function postPostsRowsEdit($ids, Settings $settings)
+    {
+
+        $ids = explode(',', $ids);
+        $posts = Posts::findMany($ids);
+
+        $general = $settings->getEditableData('seo_posts')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_posts')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_posts')->toArray();
+        $robot = $settings->getEditableData('seo_robot_posts');
+
+        return $this->view('posts_rows_edit', compact('posts', 'general', 'fbSeo', 'twitterSeo', 'robot'));
+    }
 
     public function postItemRowsEditSave(Request $request)
     {
@@ -198,6 +211,15 @@ class SeoController extends Controller
         foreach ($stocks as $key=>$stock){
             StockSeo::updateOrCreate($stock['seo_id'], ['stock_id'=>$key],$stock['translatable']);
             Stock::updateOrCreate($key, [],$stock['stock']['translatable']);
+        }
+        return redirect()->back();
+    }
+    public function postPostsRowsEditSave(Request $request)
+    {
+        $stocks= $request->except('_token');
+        foreach ($stocks as $key=>$stock){
+            SeoPosts::updateOrCreate($stock['seo_id'], ['post_id'=>$key],$stock['translatable']);
+            Posts::updateOrCreate($key, [],$stock['post']['translatable']);
         }
         return redirect()->back();
     }

@@ -666,6 +666,9 @@ Route::group(['prefix' => 'seo'], function () {
 
     Route::get('/bulk/products/edit-rows/{ids}', 'Admin\SeoController@postItemRowsEdit')->name('post_admin_seo_stock_edit_row_many');
     Route::post('/bulk/products/edit-rows/{ids}', 'Admin\SeoController@postItemRowsEditSave')->name('post_admin_seo_stock_edit_row_many_save');
+
+    Route::get('/bulk/posts/edit-rows/{ids}', 'Admin\SeoController@postPostsRowsEdit')->name('post_admin_seo_post_edit_row_many');
+    Route::post('/bulk/posts/edit-rows/{ids}', 'Admin\SeoController@postPostsRowsEditSave')->name('post_admin_seo_post_edit_row_many_save');
 });
 
 Route::post('/get-categories', 'Admin\CategoriesController@getCategory')->name('admin_get_categories');
