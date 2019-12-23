@@ -323,6 +323,10 @@ class DatatableController extends Controller
             ->where('stock_translations.locale', \Lang::getLocale()))
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
+            })->addColumn('brand', function ($stock) {
+                return $stock->brand->name;
+            })->addColumn('categories', function ($stock) {
+                return implode(',',$stock->categories->pluck('name')->toArray());
             })
             ->editColumn('created_at', function ($stock) {
                 return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);

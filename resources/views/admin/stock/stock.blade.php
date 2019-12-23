@@ -30,10 +30,11 @@
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <!-- <option value="id" data-column="1" data-name="id">#</option> -->
                             <option value="Name" data-column="2" data-name="name">Name</option>
-                            <option value="Short Description" data-column="3" data-name="short_description">Short Description</option>
-                            <option value="Image" data-column="4" data-name="image">Image</option>
-                            <option value="Added/Last Modified Date" data-column="5" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="6" data-name="actions">Actions</option>
+                            <option value="Brand" data-column="3" data-name="brand">Brand</option>
+                            <option value="Categories" data-column="4" data-name="category">Categories</option>
+                            <option value="Short Description" data-column="5" data-name="short_description">Short Description</option>
+                            <option value="Image" data-column="6" data-name="image">Image</option>
+                            <option value="Added/Last Modified Date" data-column="7" data-name="created_at">Added/Last Modified Date</option>
                         </select>
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
@@ -41,6 +42,8 @@
                                 <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Brand</th>
+                                <th>Categories</th>
                                 <th>Short Description</th>
                                 <th>Image</th>
                                 <th>Added/Last Modified Date</th>
@@ -52,6 +55,8 @@
                                 <th>Select</th>
                                 <th>#</th>
                                 <th>Name</th>
+                                <th>Brand</th>
+                                <th>Categories</th>
                                 <th>Short Description</th>
                                 <th>Image</th>
                                 <th>Added/Last Modified Date</th>
@@ -120,7 +125,7 @@
                 });
             });
 
-            
+
 
 
             $("body").on('click','.edit_item_custom',function (e) {
@@ -151,9 +156,9 @@
 
 
                 if(ids.length > 0){
-                    AjaxCall("{!! route('post_admin_stock_edit_row') !!}", {idS:ids}, function (res) {
+                    AjaxCall("{!! route('post_admin_stock_multi_delete') !!}", {idS:ids}, function (res) {
                         if (!res.error) {
-                            
+                            table.ajax.reload();
                         }
                     });
                 }
@@ -373,7 +378,7 @@
                 $(selectId).on('changed.bs.select', function (e) {
                     init();
                 });
-                
+
                 $("body").on( "change", ".select_all_checkbox",function(e) {
                     // console.log(table.rows({selected: true}).length);
                     if ($(this).is( ":checked" )) {
@@ -390,6 +395,8 @@
                     {id: '#', name: 'id'},
                     {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
+                    {id: 'Brand', name: 'brand'},
+                    {id: 'Categories', name: 'categories'},
                     {id: 'Short Description', name: 'short_description'},
                     {id: 'Image', name: 'image'},
                     {id: 'Added/Last Modified Date', name: 'created_at'},
@@ -404,6 +411,8 @@
                         orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
+                    {data: 'brand', name: 'brand'},
+                    {data: 'categories', name: 'categories'},
                     {data: 'short_description', name: 'stock_translations.short_description'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},

@@ -19,9 +19,7 @@ use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
-use App\Models\StockAttribute;
 use App\Models\StockOfferProducts;
-use App\Models\StockSales;
 use App\Models\StockSeo;
 use App\Services\StockService;
 use Illuminate\Http\Request;
@@ -628,6 +626,13 @@ class StockController extends Controller
         $html = \View::make("admin.stock._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
 
         return response()->json(['error' => false, 'html' => $html]);
+    }
+
+    public function postMultyDelete(Request $request)
+    {
+        $idS = $request->get('idS');
+        Stock::whereIn('id',$idS)->delete();
+        return response()->json(['error' => false]);
     }
 
     public function postItemRowEditSave(Request $request)
