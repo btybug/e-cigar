@@ -60,7 +60,7 @@
     <div class="package_price stock-items-tab-prices @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
         <div class="row flex-nowrap">
             <div class="col-md-2">
-                {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['' => 'Choose','static' => 'Static','dynamic'=>'Dynamic option','Discount' => 'Discount fixed','range'=>'Discount range'],
+                {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['' => 'Dynamic option','static' => 'Static','Discount' => 'Discount fixed','range'=>'Discount range'],
                 ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change']) !!}
             </div>
             <div class="col-md-10">
