@@ -36,19 +36,6 @@
         <div class="card-body panel-body">
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="stockRequiredSettings-{!! $k!!}" role="tabpanel" aria-labelledby="stockRequiredSettings-tab-{!! $k!!}">
-                    <div class="row mb-2">
-                        <div class="col-xl-2 col-md-4 col-sm-6">
-                            <label>Price
-                                per:</label>
-                            {!! Form::select('type',[
-                                0 => 'Section',
-                                1 => 'Whole Product'
-                            ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
-                        </div>
-                        <div class="col-xl-2 col-md-4 col-sm-6">
-
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-sm-6 d-flex flex-wrap head-left px-0 py-2">
                             <div class="col-xl-3">
