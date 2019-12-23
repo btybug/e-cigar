@@ -206,23 +206,35 @@
                             ]
                         },
                         {
+                            extend: 'collection',
                             text: 'Edit',
                             className: 'd-none edit_hidden_button',
-                            action: function ( e, dt, node, config ) {
-                                const ids = [];
-                                $('#stocks-table tbody tr.selected').each(function() {
-                                    ids.push($(this).find('.classes__id').text());
-                                });
+                            buttons: [
+                                {
+                                    text: 'Delete',
+                                    action: function() {
+                                        
+                                    }
+                                },
+                                {
+                                    text: 'Quick Edit',
+                                    action: function ( e, dt, node, config ) {
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('.classes__id').text());
+                                        });
 
 
-                                if(ids.length > 0){
-                                    // alert(666)
-                                    window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
+                                        if(ids.length > 0){
+                                            // alert(666)
+                                            window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
+                                        }
+                                        {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                        {{--    console.log(res)--}}
+                                        {{--})--}}
+                                    },
                                 }
-                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
-                                {{--    console.log(res)--}}
-                                {{--})--}}
-                            }
+                            ]
                         }
                     ],
                     "autoWidth": false,
