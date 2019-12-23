@@ -789,10 +789,23 @@
                             </div>
                             <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
+                                    <div class="row mb-2">
+                                        <div class="col-xl-2 col-md-4 col-sm-6">
+                                            <label>Price
+                                                per:</label>
+                                            {!! Form::select('type',[
+                                                0 => 'Section',
+                                                1 => 'Whole Product'
+                                            ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
+                                        </div>
+                                        <div class="col-xl-2 col-md-4 col-sm-6">
+
+                                        </div>
+                                    </div>
                                     <div class="v-box">
                                         @if($model && isset($variations))
-                                            @foreach($variations as $k=>$v)
-                                                @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
+                                            @foreach($variations as $v)
+                                                @include("admin.stock._partials.variation",['required' => 1])
                                             @endforeach
                                         @endif
                                     </div>
