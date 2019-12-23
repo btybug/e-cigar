@@ -51,7 +51,7 @@
     </div>
 </div>
 @section('js')
-    <script src="/public/js/tinymce/tinymce.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
 
     <script type="text/javascript">
         $(function () {
