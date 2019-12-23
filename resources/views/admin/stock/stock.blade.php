@@ -219,31 +219,31 @@
                                 {
                                     extend: 'copyHtml5',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: 'th:visible:not(:last-child)'
                                     }
                                 },
                                 {
                                     extend: 'csvHtml5',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: 'th:visible:not(:last-child)'
                                     }
                                 },
                                 {
                                     extend: 'excelHtml5',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: 'th:visible:not(:last-child)'
                                     }
                                 },
                                 {
                                     extend: 'pdfHtml5',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: 'th:visible:not(:last-child)'
                                     }
                                 },
                                 {
                                     extend: 'print',
                                     exportOptions: {
-                                        columns: ':visible'
+                                        columns: 'th:visible:not(:last-child)'
                                     }
                                 }
                             ]
