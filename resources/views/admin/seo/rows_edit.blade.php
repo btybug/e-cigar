@@ -26,6 +26,8 @@
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
                                 <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
                                     <th>Focus Keyword:</th>
                                     <th>SEO Title:</th>
                                     <th>Meta description:</th>
@@ -36,7 +38,15 @@
                                 @foreach($stocks as $stock)
                                     <tr>
                                         <td>
+                                            {!! $stock->id !!}
+                                        </td>
+                                        <td>
+                                            {!! get_translated($stock,strtolower($language->code),'name') !!}
+
+                                        </td>
+                                        <td>
                                             {!! Form::text($stock->id.'[translatable]['.strtolower($language->code).'][keywords]',get_translated($stock->seo,strtolower($language->code),'keywords'),['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$stock)]) !!}
+
 
                                         </td>
                                         <td>
