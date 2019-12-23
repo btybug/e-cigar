@@ -29,7 +29,7 @@
 
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <!-- <option value="id" data-column="1" data-name="id">#</option> -->
-                            <option value="Name" data-column="2" data-name="name">Name</option>
+{{--                            <option value="Name" data-column="2" data-name="name">Name</option>--}}
                             <option value="Brand" data-column="3" data-name="brand">Brand</option>
                             <option value="Categories" data-column="4" data-name="category">Categories</option>
                             <option value="Short Description" data-column="5" data-name="short_description">Short Description</option>
