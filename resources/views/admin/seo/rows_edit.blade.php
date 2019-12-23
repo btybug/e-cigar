@@ -4,7 +4,7 @@
         <div class="card-header clearfix">
             <h2 class="m-0 pull-left">SEO</h2>
             <div class="pull-right">
-                <button class="btn btn-info">Save</button>
+                <button class="btn btn-info save">Save</button>
             </div>
         </div>
         <div class="card-body">
@@ -80,7 +80,6 @@
                         </div>
                     @endforeach
                 @endif
-                <button type="submit" class="saveRows btn btn-primary float-right">Save</button>
             </div>
         </div>
 
@@ -89,3 +88,12 @@
     </div>
 
 @stop
+@section('js')
+    <script>
+        $(function () {
+            $('.save').on('click',function () {
+                $('form#rowsEditForm').submit();
+            })
+        })
+    </script>
+    @stop
