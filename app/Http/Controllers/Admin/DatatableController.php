@@ -318,6 +318,9 @@ class DatatableController extends Controller
     public function getAllStocks()
     {
         return Datatables::of(Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+        ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
+        ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
+        ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('stocks.*','stock_translations.name')
             ->where('stocks.is_offer', false)
             ->where('stock_translations.locale', \Lang::getLocale()))

@@ -325,7 +325,7 @@
                         this.api().columns().every(function () {
                             var column = this;
                             var input = document.createElement("input");
-                            column[0][0] !== 0 && column[0][0] !== 6 && column[0][0] !== 4 && $(input).appendTo($(column.footer()).empty())
+                            column[0][0] !== 0 && column[0][0] !== 6 && column[0][0] !== 8 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
                                 });
@@ -412,8 +412,8 @@
                         orderable: false},
                     {data: 'id', name: 'id'},
                     {data: 'name', name: 'stock_translations.name'},
-                    {data: 'brand', name: 'brand'},
-                    {data: 'categories', name: 'categories'},
+                    {data: 'brand', name: 'brand.name'},
+                    {data: 'categories', name: 'categories_translations.name'},
                     {data: 'short_description', name: 'stock_translations.short_description'},
                     {data: 'image', name: 'image'},
                     {data: 'created_at', name: 'created_at'},
