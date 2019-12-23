@@ -75,8 +75,8 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs','offers','dataOffers',
-            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters','special_filters']));
+        return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs', 'offers', 'dataOffers',
+            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters', 'special_filters']));
     }
 
     public function getStockEdit($id)
@@ -104,16 +104,16 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands','offers','dataOffers',
-            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters','special_filters']));
+        return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands', 'offers', 'dataOffers',
+            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters', 'special_filters']));
     }
 
     public function postStock(ProductsRequest $request)
     {
-        $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications','offer_products',
+        $data = $request->except('_token', 'translatable', 'options', 'promotions', 'specifications', 'offer_products',
             'variations', 'variation_single', 'package_variation_price', 'package_variation_count_limit', 'package_variation',
-            'extra_product', 'promotion_prices', 'promotion_type','categories', 'offers', 'general', 'related_products',
-            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads', 'banners','special_filters');
+            'extra_product', 'promotion_prices', 'promotion_type', 'categories', 'offers', 'general', 'related_products',
+            'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads', 'banners', 'special_filters');
         $data['user_id'] = \Auth::id();
         $stock = Stock::updateOrCreate($request->id, $data);
 
@@ -123,21 +123,21 @@ class StockController extends Controller
 //        $stock->specifications()->sync($request->get('specifications'));
 //        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
 
-        $ads = $request->get('ads',[]);
+        $ads = $request->get('ads', []);
         $adNotDeletable = [];
-        if(count($ads)){
-            foreach ($ads as $ad){
-                if(isset($ad['id'])){
-                    $stock_ad = $stock->ads()->where('id',$ad['id'])->first();
-                    if($stock_ad){
-                        if($ad['image']){
+        if (count($ads)) {
+            foreach ($ads as $ad) {
+                if (isset($ad['id'])) {
+                    $stock_ad = $stock->ads()->where('id', $ad['id'])->first();
+                    if ($stock_ad) {
+                        if ($ad['image']) {
                             $stock_ad->fill($ad);
                             $stock_ad->save();
                             $adNotDeletable[] = $stock_ad->id;
                         }
                     }
-                }else{
-                    if($ad['image']) {
+                } else {
+                    if ($ad['image']) {
                         $stock_ad = $stock->ads()->create($ad);
                         $adNotDeletable[] = $stock_ad->id;
                     }
@@ -145,24 +145,24 @@ class StockController extends Controller
             }
         }
 
-        $stock->ads()->whereNotIn('id',$adNotDeletable)->delete();
+        $stock->ads()->whereNotIn('id', $adNotDeletable)->delete();
 
-        $banners = $request->get('banners',[]);
+        $banners = $request->get('banners', []);
 //        dd($banners);
         $bannerNotDeletable = [];
-        if(count($banners)){
-            foreach ($banners as $banner){
-                if(isset($banner['id'])){
-                    $stock_ba = $stock->banners()->where('id',$banner['id'])->first();
-                    if($stock_ba){
-                        if($banner['image']){
+        if (count($banners)) {
+            foreach ($banners as $banner) {
+                if (isset($banner['id'])) {
+                    $stock_ba = $stock->banners()->where('id', $banner['id'])->first();
+                    if ($stock_ba) {
+                        if ($banner['image']) {
                             $stock_ba->fill($banner);
                             $stock_ba->save();
                             $bannerNotDeletable[] = $stock_ba->id;
                         }
                     }
-                }else{
-                    if($banner['image']) {
+                } else {
+                    if ($banner['image']) {
                         $stock_ba = $stock->banners()->create($banner);
                         $bannerNotDeletable[] = $stock_ba->id;
                     }
@@ -170,7 +170,7 @@ class StockController extends Controller
             }
         }
 
-        $stock->banners()->whereNotIn('id',$bannerNotDeletable)->delete();
+        $stock->banners()->whereNotIn('id', $bannerNotDeletable)->delete();
 
 //        if($options && count($options)){
 //            foreach ($options as $option){
@@ -183,50 +183,50 @@ class StockController extends Controller
 //            }
 //        }
 
-        $offer_products = $request->get('offer_products',[]);
+        $offer_products = $request->get('offer_products', []);
 
-        if($stock->is_offer){
-            if($stock->offer_type){
+        if ($stock->is_offer) {
+            if ($stock->offer_type) {
                 $notDeletableProducts = [];
-                if($offer_products && count($offer_products)){
-                    foreach ($offer_products as $offer_product){
-                        $product = StockOfferProducts::where('stock_id',$offer_product)
-                        ->where('offer_id',$stock->id)->first();
-                        if(! $product){
+                if ($offer_products && count($offer_products)) {
+                    foreach ($offer_products as $offer_product) {
+                        $product = StockOfferProducts::where('stock_id', $offer_product)
+                            ->where('offer_id', $stock->id)->first();
+                        if (!$product) {
                             StockOfferProducts::create([
-                               'stock_id' =>  $offer_product,
-                               'offer_id' =>  $stock->id,
+                                'stock_id' => $offer_product,
+                                'offer_id' => $stock->id,
                             ]);
                         }
                         $notDeletableProducts[] = $offer_product;
                     }
                 }
 
-                StockOfferProducts::where('offer_id',$stock->id)->whereNotIn('stock_id',$notDeletableProducts)->delete();
+                StockOfferProducts::where('offer_id', $stock->id)->whereNotIn('stock_id', $notDeletableProducts)->delete();
                 $stock->offers()->detach();
-            }else{
+            } else {
                 $categories = json_decode($request->get('offers', []), true);
                 $stock->offers()->sync($categories);
 
-                StockOfferProducts::where('offer_id',$stock->id)->delete();
+                StockOfferProducts::where('offer_id', $stock->id)->delete();
             }
 
-        }else{
+        } else {
             $categories = json_decode($request->get('categories', []), true);
             $stock->categories()->sync($categories);
             $stock->special_offers()->sync($offer_products);
         }
 
-        $special_filters = $request->get('special_filters',[]);
+        $special_filters = $request->get('special_filters', []);
         $stock->special_filters()->sync($special_filters);
 
         $stock->related_products()->sync($request->get('related_products'));
 
         $stock->stickers()->detach();
-        $stickers = $request->get('stickers',[]);
-        if(count($stickers)){
-            foreach ($stickers as $sticker){
-                $stock->stickers()->attach($sticker['id'],[
+        $stickers = $request->get('stickers', []);
+        if (count($stickers)) {
+            foreach ($stickers as $sticker) {
+                $stock->stickers()->attach($sticker['id'], [
                     'ordering' => $sticker['ordering']
                 ]);
             }
@@ -258,8 +258,8 @@ class StockController extends Controller
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
-        return $this->view('stock_new', compact(['model','brands', 'general','offers','dataOffers',
-            'twitterSeo', 'fbSeo', 'robot','offer','special_filters']));
+        return $this->view('stock_new', compact(['model', 'brands', 'general', 'offers', 'dataOffers',
+            'twitterSeo', 'fbSeo', 'robot', 'offer', 'special_filters']));
     }
 
     public function getOfferEdit($id)
@@ -284,8 +284,8 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 //dd($model->offer_products);
 
-        return $this->view('stock_new', compact(['model', 'variations','brands','offers','dataOffers','offer','checkedOffers',
-            'filters','stockItems','special_filters',
+        return $this->view('stock_new', compact(['model', 'variations', 'brands', 'offers', 'dataOffers', 'offer', 'checkedOffers',
+            'filters', 'stockItems', 'special_filters',
             'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
     }
 
@@ -457,7 +457,7 @@ class StockController extends Controller
     public function getStocks(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::where('is_offer',false)->whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::where('is_offer', false)->whereNotIn('id', $request->get('arr', []))->get();
 
         return \Response::json(['error' => false, 'data' => $attr]);
     }
@@ -465,7 +465,7 @@ class StockController extends Controller
     public function getSpecialOffers(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::where('is_offer',true)->where('offer_type',true)->whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::where('is_offer', true)->where('offer_type', true)->whereNotIn('id', $request->get('arr', []))->get();
 
         return \Response::json(['error' => false, 'data' => $attr]);
     }
@@ -474,10 +474,10 @@ class StockController extends Controller
     {
         $error = true;
         $html = '';
-        $offer = Stock::where('is_offer',true)->where('offer_type',true)->where('id', $request->get('id'))->first();
-        if($offer){
+        $offer = Stock::where('is_offer', true)->where('offer_type', true)->where('id', $request->get('id'))->first();
+        if ($offer) {
             $error = false;
-            $html = view("admin.stock._partials.special_offer_item",compact(['offer']))->render();
+            $html = view("admin.stock._partials.special_offer_item", compact(['offer']))->render();
         }
         return \Response::json(['error' => $error, 'html' => $html]);
     }
@@ -491,7 +491,7 @@ class StockController extends Controller
 
     public function postSelectItems(Request $request)
     {
-        $items = Items::whereNotIn('id', $request->get('items', []))->where('status', Items::ACTIVE)->where('is_archive',false)->get();
+        $items = Items::whereNotIn('id', $request->get('items', []))->where('status', Items::ACTIVE)->where('is_archive', false)->get();
         $uniqueId = $request->get('uniqueId');
         $stickers = array_filter(Stickers::all()->pluck('name', 'id')->all());
 
@@ -600,20 +600,20 @@ class StockController extends Controller
         $uniqueID = $request->group;
         $data = $request->get('discount');
 
-        $html = view("admin.stock._partials.discount_data",compact(['data','type','main_unique','uniqueID']))->render();
+        $html = view("admin.stock._partials.discount_data", compact(['data', 'type', 'main_unique', 'uniqueID']))->render();
 
-        return response()->json(['error' => false,'html' => $html]);
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
     public function mainItem(Request $request)
     {
-        $data = $request->get('items',[]);
+        $data = $request->get('items', []);
 
-        $items = Items::whereIn('id',$data)->get()->pluck('name','id')->all();
+        $items = Items::whereIn('id', $data)->get()->pluck('name', 'id')->all();
 
-        $html = view("admin.stock._partials.main_items",compact(['items']))->render();
+        $html = view("admin.stock._partials.main_items", compact(['items']))->render();
 
-        return response()->json(['error' => false,'html' => $html]);
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
     public function postItemRowEdit(Request $request)
@@ -623,7 +623,7 @@ class StockController extends Controller
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
 
-        $html = \View::make("admin.stock._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
+        $html = \View::make("admin.stock._partials.edit_row", compact(['model', 'categories', 'brands', 'barcodes']))->render();
 
         return response()->json(['error' => false, 'html' => $html]);
     }
@@ -631,7 +631,7 @@ class StockController extends Controller
     public function postMultyDelete(Request $request)
     {
         $idS = $request->get('idS');
-        Stock::whereIn('id',$idS)->delete();
+        Stock::whereIn('id', $idS)->delete();
         return response()->json(['error' => false]);
     }
 
@@ -639,7 +639,7 @@ class StockController extends Controller
     {
         $model = Stock::findOrFail($request->id);
 
-        Stock::updateOrCreate($request->id,$request->except(['name','_token','categories','short_description']),['gb' => [
+        Stock::updateOrCreate($request->id, $request->except(['name', '_token', 'categories', 'short_description']), ['gb' => [
             'name' => $request->name,
             'short_description' => $request->short_description,
         ]]);
@@ -650,7 +650,7 @@ class StockController extends Controller
 
     public function postItemRowsEdit($ids)
     {
-        $ids = explode(',',$ids);
+        $ids = explode(',', $ids);
         $items = Stock::findMany($ids);
         $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -661,15 +661,15 @@ class StockController extends Controller
 
     public function postItemRowsEditSave(Request $request)
     {
-        $items = $request->get('items',[]);
-        if(count($items)){
-            foreach ($items as $id => $item){
+        $items = $request->get('items', []);
+        if (count($items)) {
+            foreach ($items as $id => $item) {
                 $model = Stock::findOrFail($id);
-                Stock::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
+                Stock::updateOrCreate($id, array_except($item, ['name', 'categories', 'short_description']), ['gb' => [
                     'name' => $item['name'],
                     'short_description' => $item['short_description']
                 ]]);
-                $cat = (count($item['categories']))? $item['categories'] : [];
+                $cat = (count($item['categories'])) ? $item['categories'] : [];
                 $model->categories()->sync($cat);
             }
             return response()->json(['error' => false]);
