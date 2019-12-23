@@ -76,6 +76,25 @@
 
         </div>
     </div>
+    <div class="modal" tabindex="-1" id="confirm_delete" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>do you really want to delete selected items?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary delete_rows">Yes</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
@@ -101,6 +120,8 @@
                 });
             });
 
+            
+
 
             $("body").on('click','.edit_item_custom',function (e) {
                 e.preventDefault();
@@ -120,6 +141,22 @@
                         table.ajax.reload();
                     }
                 });
+            });
+
+            $('body').on('click', '.delete_rows', function() {
+                const ids = [];
+                $('#stocks-table tbody tr.selected').each(function() {
+                    ids.push($(this).find('.classes__id').text());
+                });
+
+
+                if(ids.length > 0){
+                    AjaxCall("{!! route('post_admin_stock_edit_row') !!}", {idS:ids}, function (res) {
+                        if (!res.error) {
+                            
+                        }
+                    });
+                }
             });
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
@@ -212,8 +249,21 @@
                             buttons: [
                                 {
                                     text: 'Delete',
+                                    attr:  {
+                                        'data-toggle': 'modal',
+                                        'data-target': '#confirm_delete'
+                                    },
                                     action: function() {
-                                        
+
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('.classes__id').text());
+                                        });
+
+
+                                        if(ids.length > 0){
+                                            // alert(666)
+                                        }
                                     }
                                 },
                                 {
