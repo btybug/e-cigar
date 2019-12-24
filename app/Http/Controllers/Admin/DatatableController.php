@@ -327,7 +327,7 @@ class DatatableController extends Controller
             ->editColumn('image', function ($stock) {
                 return ($stock->image) ? "<img src='$stock->image' width='50px'/>" : "No image";
             })->addColumn('brand', function ($stock) {
-                return $stock->brand->name;
+                return ($stock->brand)?$stock->brand->name:null;
             })->addColumn('categories', function ($stock) {
                 return implode(',',$stock->categories->pluck('name')->toArray());
             })
