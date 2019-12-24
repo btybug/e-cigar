@@ -197,7 +197,7 @@ class Items extends Model
 
     public function getUrlAttribute()
     {
-        return url('public/media/drive/' . $this->original_folder . '/' . $this->original_name);
+        return url('/public/media/drive/' . $this->original_folder . '/' . $this->original_name);
     }
 
     public function getRelativeUrlAttribute()
