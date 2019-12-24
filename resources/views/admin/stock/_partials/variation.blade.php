@@ -8,10 +8,14 @@
 
     <ul class="nav nav-tabs" id="myTab" role="tablist">
         <li class="nav-item">
-            <a class="nav-link active" id="stockRequiredSettings-tab-{!! $k!!}" data-toggle="tab" href="#stockRequiredSettings-{!! $k!!}" role="tab" aria-controls="stockRequiredSettings-{!! $k!!}" aria-selected="true">Settings</a>
+            <a class="nav-link active" id="stockRequiredSettings-tab-{!! $k!!}" data-toggle="tab"
+               href="#stockRequiredSettings-{!! $k!!}" role="tab" aria-controls="stockRequiredSettings-{!! $k!!}"
+               aria-selected="true">Settings</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" id="stockRequiredItems-tab-{!! $k!!}" data-toggle="tab" href="#stockRequiredItems-{!! $k!!}" role="tab" aria-controls="stockRequiredItems-{!! $k!!}" aria-selected="false">Items</a>
+            <a class="nav-link" id="stockRequiredItems-tab-{!! $k!!}" data-toggle="tab"
+               href="#stockRequiredItems-{!! $k!!}" role="tab" aria-controls="stockRequiredItems-{!! $k!!}"
+               aria-selected="false">Items</a>
         </li>
     </ul>
 
@@ -35,7 +39,8 @@
         </div>
         <div class="card-body panel-body">
             <div class="tab-content" id="myTabContent">
-                <div class="tab-pane fade show active" id="stockRequiredSettings-{!! $k!!}" role="tabpanel" aria-labelledby="stockRequiredSettings-tab-{!! $k!!}">
+                <div class="tab-pane fade show active" id="stockRequiredSettings-{!! $k!!}" role="tabpanel"
+                     aria-labelledby="stockRequiredSettings-tab-{!! $k!!}">
                     <div class="row">
                         <div class="col-sm-6 d-flex flex-wrap head-left px-0 py-2">
                             <div class="col-xl-3">
@@ -48,7 +53,8 @@
                                ],($main) ? $main->type : null,
                                ['class' => 'form-control variation-product-select']) !!}
                                     </div>
-                                    <div class="col-md-6 mt-md-0 mt-1 filter-option {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
+                                    <div
+                                        class="col-md-6 mt-md-0 mt-1 filter-option {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
                                         {!! Form::select("variations[$main_unique][filter_category_id]",['' => 'Select Filter']+$filters,($main) ? $main->filter_category_id : null,
                                         ['class' => 'form-control filter-select']) !!}
                                     </div>
@@ -57,7 +63,8 @@
 
                         </div>
                         <div class="col-sm-5 d-flex justify-content-end p-0">
-                            <div class="col-md-12 px-md-3 px-0 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
+                            <div
+                                class="col-md-12 px-md-3 px-0 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
                                 <div class="row h-100 align-items-center">
                                     <div class="col-lg-5">
                                         <div class="row">
@@ -101,7 +108,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="stockRequiredItems-{!! $k!!}" role="tabpanel" aria-labelledby="stockRequiredItems-tab-{!! $k!!}">
+                <div class="tab-pane fade" id="stockRequiredItems-{!! $k!!}" role="tabpanel"
+                     aria-labelledby="stockRequiredItems-tab-{!! $k!!}">
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="product-wall">
@@ -114,27 +122,27 @@
                                 </div>
                                 <div class="w-100">
                                     <div class="table-responsive stock-items-tabs-main-wrapper">
-{{--                                        <table class="table table-style table-bordered mt-2" cellspacing="0"--}}
-{{--                                               width="100%">--}}
-{{--                                            <thead>--}}
-{{--                                            <tr>--}}
-{{--                                                <th>Item</th>--}}
-{{--                                                <th>Name</th>--}}
-{{--                                                <th>Qty</th>--}}
-{{--                                                <th>Image</th>--}}
-{{--                                                <th class="package_price @if(! $main || ($main && $main->price_per == 'product')) hide @endif">Price Area</th>--}}
-{{--                                                <th>Actions</th>--}}
-{{--                                            </tr>--}}
-{{--                                            </thead>--}}
-{{--                                            <tbody class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">--}}
-{{--                                            <tbody class="filter-variation-box ">--}}
-{{--                                            @if($main && count($v))--}}
-{{--                                                @foreach($v as $package_variation)--}}
-{{--                                                    @include('admin.inventory._partials.variation_package_item')--}}
-{{--                                                @endforeach--}}
-{{--                                            @endif--}}
-{{--                                            </tbody>--}}
-{{--                                        </table>--}}
+                                        {{--                                        <table class="table table-style table-bordered mt-2" cellspacing="0"--}}
+                                        {{--                                               width="100%">--}}
+                                        {{--                                            <thead>--}}
+                                        {{--                                            <tr>--}}
+                                        {{--                                                <th>Item</th>--}}
+                                        {{--                                                <th>Name</th>--}}
+                                        {{--                                                <th>Qty</th>--}}
+                                        {{--                                                <th>Image</th>--}}
+                                        {{--                                                <th class="package_price @if(! $main || ($main && $main->price_per == 'product')) hide @endif">Price Area</th>--}}
+                                        {{--                                                <th>Actions</th>--}}
+                                        {{--                                            </tr>--}}
+                                        {{--                                            </thead>--}}
+                                        {{--                                            <tbody class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">--}}
+                                        {{--                                            <tbody class="filter-variation-box ">--}}
+                                        {{--                                            @if($main && count($v))--}}
+                                        {{--                                                @foreach($v as $package_variation)--}}
+                                        {{--                                                    @include('admin.inventory._partials.variation_package_item')--}}
+                                        {{--                                                @endforeach--}}
+                                        {{--                                            @endif--}}
+                                        {{--                                            </tbody>--}}
+                                        {{--                                        </table>--}}
                                         <div class="stock-items-tabs-wall-head">
                                             <div class="stock-items-tab-head-name">
                                                 Item
@@ -147,7 +155,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-4">
-                                                    <div class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
+                                                    <div
+                                                        class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
                                                         Price : {!! Form::text("variations[$main_unique][common_price]",
                                                                 ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
                                                     </div>
@@ -157,12 +166,13 @@
                                                 Actions
                                             </div>
                                         </div>
-                                       <div class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">
-                                        @if($main && count($v))
-                                            @foreach($v as $package_variation)
-                                                @include('admin.inventory._partials.variation_package_item')
-                                            @endforeach
-                                        @endif
+                                        <div
+                                            class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">
+                                            @if($main && count($v))
+                                                @foreach($v as $package_variation)
+                                                    @include('admin.inventory._partials.variation_package_item')
+                                                @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
