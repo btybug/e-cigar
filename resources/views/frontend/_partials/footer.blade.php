@@ -1,7 +1,8 @@
 
 <footer class="main-footer font-main-light">
-    <div class="footer-top">
-        <div class="container main-max-width">
+    <div class="footer-top home__page-wrapper">
+{{--        <div class="container main-max-width">--}}
+        <div class="container home_width">
             <div class="d-flex flex-wrap">
                 <div class="footer-menu-subscribe col-lg-8 col-md-7 col-xl-9 p-0">
                     <div class="footer-menu">
@@ -38,17 +39,17 @@
                     <a href="#" class="d-block footer-logo">
                         <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" title="{{ get_site_name() }}">
                     </a>
-                    <div class="footer-desc mb-3">
-                        <p class="mb-0">{!! __('footer_desc') !!}</p>
-                    </div>
-                    <div class="footer-payment">
-                        <div>
-                            <img src="/public/img/paypal.png" alt="paypal" title="paypal">
-                            <img src="/public/img/visa.png" alt="visa" title="visa">
-                            <img src="/public/img/maestro.png" alt="maestro" title="maestro">
-                            <img src="/public/img/mc.png" alt="mc" title="mc">
-                        </div>
-                    </div>
+{{--                    <div class="footer-desc mb-3">--}}
+{{--                        <p class="mb-0">{!! __('footer_desc') !!}</p>--}}
+{{--                    </div>--}}
+{{--                    <div class="footer-payment">--}}
+{{--                        <div>--}}
+{{--                            <img src="/public/img/paypal.png" alt="paypal" title="paypal">--}}
+{{--                            <img src="/public/img/visa.png" alt="visa" title="visa">--}}
+{{--                            <img src="/public/img/maestro.png" alt="maestro" title="maestro">--}}
+{{--                            <img src="/public/img/mc.png" alt="mc" title="mc">--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
 
 
 
@@ -57,30 +58,30 @@
 {{--                    </div>--}}
                 </div>
             </div>
-            <div class="d-flex flex-wrap justify-content-between align-items-center footer-subscribe-social-wrap">
+            <div class="d-flex flex-wrap justify-content-end mb-3 align-items-center footer-subscribe-social-wrap">
 
-                {!! Form::open(['url' => route('subscribe_to_newsletter')]) !!}
-                <div class="footer-subscribe">
+{{--                {!! Form::open(['url' => route('subscribe_to_newsletter')]) !!}--}}
+{{--                <div class="footer-subscribe">--}}
 
-                    <div class="d-flex position-relative align-items-center">
-                        <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">{!! __('subscribe') !!}
-                            </label>
-                        {!! Form::email('subscribe_email',null,['class' => 'form-control','placeholder' => __('placeholder_your_email'),'id' => 'footer-subscribe']) !!}
-                        <span class="arrow position-absolute">
-                                        <svg viewBox="0 0 24 8"
-                                             width="24px" height="8px">
-        <path fill-rule="evenodd" fill="rgb(81, 132, 229)"
-              d="M23.791,3.998 L18.090,0.000 L18.090,2.888 L0.791,2.888 L0.791,5.109 L18.090,5.109 L18.090,7.997 L23.791,3.998 Z"/>
-        </svg>
-                                    </span>
-                    </div>
-                    @if ($errors->has('subscribe_email'))
-                        <span class="invalid-feedback" style="display: block" role="alert">
-                                    <strong>{{ $errors->first('subscribe_email') }}</strong>
-                                </span>
-                    @endif
-                </div>
-                {!! Form::close() !!}
+{{--                    <div class="d-flex position-relative align-items-center">--}}
+{{--                        <label for="footer-subscribe" class="font-main-bold text-uppercase mb-0 text-nowrap">{!! __('subscribe') !!}--}}
+{{--                            </label>--}}
+{{--                        {!! Form::email('subscribe_email',null,['class' => 'form-control','placeholder' => __('placeholder_your_email'),'id' => 'footer-subscribe']) !!}--}}
+{{--                        <span class="arrow position-absolute">--}}
+{{--                                        <svg viewBox="0 0 24 8"--}}
+{{--                                             width="24px" height="8px">--}}
+{{--        <path fill-rule="evenodd" fill="rgb(81, 132, 229)"--}}
+{{--              d="M23.791,3.998 L18.090,0.000 L18.090,2.888 L0.791,2.888 L0.791,5.109 L18.090,5.109 L18.090,7.997 L23.791,3.998 Z"/>--}}
+{{--        </svg>--}}
+{{--                                    </span>--}}
+{{--                    </div>--}}
+{{--                    @if ($errors->has('subscribe_email'))--}}
+{{--                        <span class="invalid-feedback" style="display: block" role="alert">--}}
+{{--                                    <strong>{{ $errors->first('subscribe_email') }}</strong>--}}
+{{--                                </span>--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+{{--                {!! Form::close() !!}--}}
                 <div class="footer-social">
                     <ul class="d-inline-flex flex-wrap">
                         <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
@@ -97,11 +98,16 @@
                     </ul>
                 </div>
             </div>
+            <div class="d-flex flex-wrap justify-content-end align-items-center">
+                <div class="copyright">
+                    &#9400; {!! __('copyright') !!}
+                </div>
+            </div>
         </div>
     </div>
-    <div class="footer-bottom">
-        <div class="container main-max-width">
-            <div class="d-flex flex-wrap justify-content-end align-items-center">
+{{--    <div class="footer-bottom">--}}
+{{--        <div class="container main-max-width">--}}
+{{--            <div class="d-flex flex-wrap justify-content-end align-items-center">--}}
 {{--                <div class="footer_select-lang d-flex align-items-center">--}}
 {{--                    <label for="langSelect" class="text-tert-clr mb-0">Language:</label>--}}
 {{--                    <select id="langSelect"--}}
@@ -112,12 +118,12 @@
 {{--                        <option>Russian</option>--}}
 {{--                    </select>--}}
 {{--                </div>--}}
-                <div class="copyright">
-                    &#9400; {!! __('copyright') !!}
-                </div>
-            </div>
-        </div>
+{{--                <div class="copyright">--}}
+{{--                    &#9400; {!! __('copyright') !!}--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
 
-    </div>
+{{--    </div>--}}
 </footer>
 <div class="dark-bg_body"></div>
