@@ -25,7 +25,9 @@
                 {!! __('shipping') !!} {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
             </div>
             <div
-                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select">
+                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select @if($page === 'payment') payment--row-shipping @endif">
+                @if($page != 'payment')
+
                 <div class="select-wall">
                     <select name="" id=""
                             class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
@@ -34,11 +36,14 @@
                         <option value="">{!! __('armenia') !!}</option>
                     </select>
                 </div>
+                @endif
                 <div
                     class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency, false) : convert_price(0,$currency, false) !!}</div>
             </div>
 
         </div>
+
+        @if($page != 'payment')
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
             <div
@@ -68,6 +73,7 @@
             </div>
 
         </div>
+        @endif
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center border-bottom-0">
             <div class="name">
@@ -97,31 +103,44 @@
                         @if($default_shipping)
                             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn go-to-payment"
                                href="javascript:void(0)">
-                                {!! __('checkout') !!}
+                                @if($page == 'checkout')
+                                    {!! __('payment') !!}
+                                @else
+                                    {!! __('checkout') !!}
+                                @endif
                             </a>
                         @else
 
                             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn address-book-new"
                                href="javascript:void(0)">
-                                {!! __('checkout') !!}
+                                @if($page == 'checkout')
+                                    {!! __('payment') !!}
+                                @else
+                                    {!! __('checkout') !!}
+                                @endif
                             </a>
                         @endif
                     @endif
                 @else
                     <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
                        href="{{ @$submit_route }}">
-                        {!! __('checkout') !!}
+                        @if($page == 'checkout')
+                            {!! __('payment') !!}
+                        @else
+                            {!! __('checkout') !!}
+                        @endif
+
                     </a>
                 @endif
             @endif
 
         </div>
         <div class="order-summary-btn-wall text-center">
-            @if($back_route)
-{{--            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"--}}
-{{--               href="{{ @$back_route }}">--}}
-{{--                {!! __('back') !!}--}}
-{{--            </a>--}}
+            @if($back_route && $page == 'checkout')
+                <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
+                   href="{{ @$back_route }}">
+                    {!! __('back') !!}
+                </a>
             @endif
         </div>
     </div>

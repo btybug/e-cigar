@@ -2,6 +2,81 @@
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-10 pl-0">
+
+                    <div class="d-flex shopping-cart-head">
+                        {{--                    <div class="shopping-cart-head-back-btn">--}}
+
+                        {{--                    </div>--}}
+                        <ul class="nav nav-pills">
+                            <li class="nav-item col-md-3">
+                                <a class="item active d-flex align-items-center justify-content-between"
+                                   ref="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">1</span>
+                                    <span
+                                        class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('shopping_cart') !!}</span>
+                                    <span class="icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">2</span>
+                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('checkout') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">3</span>
+                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('payment') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">4</span>
+                                    <span
+                                        class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('confirmation') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                 @if(! \Cart::isEmpty())
                     <div class="shopping__cart-tab-main new__scroll h-100">
                         @foreach(\Cart::getContent() as $key => $item)
@@ -253,7 +328,7 @@
             <div class="col-lg-2 pr-md-right">
                 <div class="right-content order-summary">
                     {{--                        SUMMARY</h3>--}}
-                    @include("frontend.shop._partials.order_summary",['submit_route' => route("shop_check_out"),"back_route" => route("home")])
+                    @include("frontend.shop._partials.order_summary",['page' =>'cart','submit_route' => route("shop_check_out"),"back_route" => route("home")])
                 </div>
             </div>
         </div>
