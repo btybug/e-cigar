@@ -98,6 +98,26 @@
 
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" id="confirm_delete" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delete</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>do you really want to delete selected items?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                <button type="button" class="btn btn-primary delete_rows">Yes</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
@@ -169,7 +189,22 @@
             };
 
 
+            $('body').on('click', '.delete_rows', function() {
+                const ids = [];
+                $('#stocks-table tbody tr.selected').each(function() {
+                    ids.push($(this).find('td.id_n').text());
+                });
 
+
+                if(ids.length > 0){
+                    AjaxCall("{!! route('post_admin_stock_multi_delete') !!}", {idS:ids}, function (res) {
+                        if (!res.error) {
+                            table.ajax.reload();
+                            $('#confirm_delete').modal('hide');
+                        }
+                    });
+                }
+            });
 
             const action = function ( dt, url, method, type ) {
                 const ids = [];
@@ -443,22 +478,66 @@
                             ]
                         },
                         {
+                            extend: 'collection',
                             text: 'Edit',
                             className: 'd-none edit_hidden_button',
-                            action: function ( e, dt, node, config ) {
-                                const ids = [];
-                                $('#stocks-table tbody tr.selected').each(function() {
-                                    ids.push($(this).find('td.id_n').text());
-                                });
+                            buttons: [
+                                {
+                                    text: 'Delete',
+                                    attr:  {
+                                        'data-toggle': 'modal',
+                                        'data-target': '#confirm_delete'
+                                    },
+                                    action: function() {
 
-                                if(ids.length > 0){
-                                    window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('.classes__id').text());
+                                        });
+
+
+                                        if(ids.length > 0){
+                                            // alert(666)
+                                        }
+                                    }
+                                },
+                                {
+                                    text: 'Quick Edit',
+                                    action: function ( e, dt, node, config ) {
+                                        const ids = [];
+                                        $('#stocks-table tbody tr.selected').each(function() {
+                                            ids.push($(this).find('td.id_n').text());
+                                        });
+
+
+                                        if(ids.length > 0){
+                                            // alert(666)
+                                            window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                        }
+                                        {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                        {{--    console.log(res)--}}
+                                        {{--})--}}
+                                    },
                                 }
-                                {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
-                                {{--    console.log(res)--}}
-                                {{--})--}}
-                            }
-                        }
+                            ]
+                        },
+                        // {
+                        //     text: 'Edit',
+                        //     className: 'd-none edit_hidden_button',
+                        //     action: function ( e, dt, node, config ) {
+                        //         const ids = [];
+                        //         $('#stocks-table tbody tr.selected').each(function() {
+                        //             ids.push($(this).find('td.id_n').text());
+                        //         });
+
+                        //         if(ids.length > 0){
+                        //             window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                        //         }
+                        //         {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                        //         {{--    console.log(res)--}}
+                        //         {{--})--}}
+                        //     }
+                        // }
                     ],
                     // language: {
                     //     buttons: {
