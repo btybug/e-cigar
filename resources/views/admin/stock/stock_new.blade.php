@@ -21,12 +21,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs admin-profile-left">
-                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#basic">Basic
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic
                                     Details</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#variations">Required</a>
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#variations">Required</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
@@ -36,7 +36,7 @@
                     {!! Form::hidden('id',null,['id' => "stockID"]) !!}
                     <div class="col-md-12">
                         <div class="tab-content tabs_content">
-                            <div id="basic" class="tab-pane fade basic-details-tab ">
+                            <div id="basic" class="tab-pane fade in active show   basic-details-tab ">
                                 <div class="container-fluid p-25">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -815,7 +815,7 @@
 
                                 </div>
                             </div>
-                            <div id="variations" class="tab-pane  in active show  basic-details-tab stock-variations-tab fade">
+                            <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class="row mb-2">
                                         <div class="col-xl-2 col-md-4 col-sm-6">
