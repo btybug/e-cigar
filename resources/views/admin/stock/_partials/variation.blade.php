@@ -139,8 +139,19 @@
                                             <div class="stock-items-tab-head-name">
                                                 Item
                                             </div>
-                                            <div class="stock-items-tab-head-price">
-                                                Price Area
+                                            <div class="stock-items-tab-head-price d-flex flex-wrap">
+                                                <div class="col-lg-4">
+                                                    <div class="section_price">
+                                                        Price
+                                                        per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Section','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
+                                                        Price : {!! Form::text("variations[$main_unique][common_price]",
+                                                                ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="stock-items-tab-head-action">
                                                 Actions

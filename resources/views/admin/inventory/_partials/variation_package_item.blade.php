@@ -6,7 +6,13 @@
         <div class="d-flex">
             <div class="stock-item-photo-wrap">
                 <div class="item-photo">
-                    <img src="https://www.halocigs.com/media/catalog/product/cache/3fba745dcec88e97bfe808bedc471260/s/m/smok-nord-kit-rainbow_2_1.jpg" alt="photo">
+                    @if($package_variation && $package_variation->image)
+                        <img src="{{ $package_variation->image }}" alt="photo">
+                    @elseif($main && $main->stock)
+                        <img src="{{ $main->stock->image }}" alt="photo">
+                    @else
+                        <img src="/public/images/no_image.png" alt="photo">
+                    @endif
                 </div>
                 <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]" class="form-control v-item-change">
                     @if($package_variation->item->is_archive)
@@ -20,16 +26,26 @@
                 </select>
             </div>
             <div class="stock-item-name-desc ml-2">
-                <select name="" id="" class="form-control">
-                    <option value="">Img 1</option>
-                    <option value="">Img 2</option>
+                <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control">
+                    @if($main && $main->stock)
+                        <option value="{{ $main->stock->image }}"  selected>Main Image</option>
+                        @if($main->stock->other_images && count($main->stock->other_images))
+                            @foreach ($main->stock->other_images as $key => $value)
+                                <option value="{{ $value }}" {{ ($package_variation && $value == $package_variation->image) ? 'selected' : '' }}>
+                                    Extra Image {{$key+1}}
+                                </option>
+                            @endforeach
+                        @endif
+                    @endif
                 </select>
+
                 <div class="my-1">
                     {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($package_variation) ? $package_variation->name : null,['class' => 'form-control v-name']) !!}
                     {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
                 </div>
                 <div class="stock-item-desc">
-                    {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,['class' => 'form-control stock-tiny-area']) !!}
+                    {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
+['class' => 'form-control stock-tiny-area','style' => 'height:300px !important;']) !!}
 
                 </div>
             </div>
@@ -60,7 +76,8 @@
     <div class="package_price stock-items-tab-prices @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
         <div class="row flex-nowrap">
             <div class="col-md-2">
-                {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['' => 'Dynamic option','static' => 'Static','Discount' => 'Discount fixed','range'=>'Discount range'],
+                {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
+            'fixed' => 'Discount fixed','range'=>'Discount range'],
                 ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change']) !!}
             </div>
             <div class="col-md-10">
@@ -68,9 +85,8 @@
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,
                     ['class' => 'form-control v-price','step' => 'any']) !!}
                 </div>
-                <div class="price-discount @if($package_variation && $package_variation->price_type =='discount') show @else d-none @endif">
-                    <a data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}" href="javascript:void(0)" class="btn btn-info add-discount">Discount price</a>
-                    <div class="discount-data-v" data-d-v="{{ $uniqueID }}">
+                <div data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}" class="price-discount @if($package_variation && ( $package_variation->price_type =='fixed' ||  $package_variation->price_type =='range')) show @else d-none @endif">
+                    <div class="discount-data-v discount-type-box" data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}">
                         @if($package_variation && count($package_variation->discounts))
                             @include("admin.stock._partials.discount_data",['ajax' => false])
                         @endif

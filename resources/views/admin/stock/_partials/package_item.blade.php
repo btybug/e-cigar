@@ -7,18 +7,6 @@
                         Display as: {!! Form::select("variations[$main_unique][display_as]",
                         ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
-                    <div class="col-lg-2">
-                        <div class="section_price">
-                            Price
-                            per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Section','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="section_price product_price @if($main && $main->price_per == 'item') d-none @endif">
-                            Price : {!! Form::number("variations[$main_unique][common_price]",
-                                                                ($main) ? $main->common_price : null,['class' => 'form-control','step'=>'any']) !!}
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

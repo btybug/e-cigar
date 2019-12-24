@@ -21,12 +21,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <ul class="nav nav-tabs admin-profile-left">
-                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#basic">Basic
                                     Details</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#variations">Required</a>
+                            <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#variations">Required</a>
                             </li>
                             @if(! isset($offer))
                                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Special
@@ -40,7 +40,7 @@
                     {!! Form::hidden('id',null,['id' => "stockID"]) !!}
                     <div class="col-md-12">
                         <div class="tab-content tabs_content">
-                            <div id="basic" class="tab-pane fade in active show basic-details-tab ">
+                            <div id="basic" class="tab-pane fade basic-details-tab ">
                                 <div class="container-fluid p-25">
                                     <div class="row">
                                         <div class="col-md-12">
@@ -787,7 +787,7 @@
 
                                 </div>
                             </div>
-                            <div id="variations" class="tab-pane basic-details-tab stock-variations-tab fade">
+                            <div id="variations" class="tab-pane  in active show  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class="row mb-2">
                                         <div class="col-xl-2 col-md-4 col-sm-6">
@@ -1442,6 +1442,10 @@
 
         .get-all-extra-tab .buttons {
             margin-left: auto;
+        }
+
+        .tox .tox-tinymce{
+            height: 300px !important;
         }
 
     </style>
@@ -2201,13 +2205,24 @@
                 if (value == 'static') {
                     parent.find('.price-discount').removeClass('show').addClass('d-none');
                     parent.find('.price-static').removeClass('d-none').addClass('show');
-                } else if (value == 'discount') {
-                    parent.find('.price-static').removeClass('show').addClass('d-none');
-                    parent.find('.price-discount').removeClass('d-none').addClass('show');
-                } else {
+                } else if (value == 'dynamic') {
                     parent.find('.price-static').removeClass('show').addClass('d-none');
                     parent.find('.price-discount').removeClass('show').addClass('d-none');
+                } else if (value == 'fixed'){
+                    parent.find('.price-static').removeClass('show').addClass('d-none');
+                    parent.find('.price-discount').removeClass('d-none').addClass('show');
 
+                    var html = $('#fixed-discount-temp').html();
+                    var id = guid();
+                    html = html.replace(/{count}/g, id);
+                    parent.find(".discount-type-box").html(html);
+                }else if (value == 'range'){
+                    parent.find('.price-static').removeClass('show').addClass('d-none');
+                    parent.find('.price-discount').removeClass('d-none').addClass('show');
+                    var id = guid();
+                    var html = $('#range-discount-temp').html();
+                    html = html.replace(/{count}/g, id);
+                    parent.find(".discount-type-box").html(html);
                 }
 
             });

@@ -15,18 +15,7 @@
                         Display as: {!! Form::select("variations[$main_unique][display_as]",
                         ['menu' => 'Select Box','list' => 'Radio'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
-                    <div class="col-lg-2">
-                        <div class="section_price">
-                            Price
-                            per: {!! Form::select("variations[$main_unique][price_per]",['product' => 'Section','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
-                        </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
-                            Price : {!! Form::text("variations[$main_unique][common_price]",
-                                                                ($main) ? $main->common_price : null,['class' => 'form-control']) !!}
-                        </div>
-                    </div>
+
                 </div>
             </div>
         </div>
