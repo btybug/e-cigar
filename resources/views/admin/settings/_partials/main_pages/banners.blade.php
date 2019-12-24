@@ -59,6 +59,112 @@
 
                     </div>
                 </div>
+                <div class="card panel panel-default social-profile-page mb-3">
+                    <div class="card-header panel-heading">Categories</div>
+                    <div class="card-body panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Title</label>
+                            <div class="col-md-11">
+                                <input type="text" class="form-control" placeholder="title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Description </label>
+                            <div class="col-md-11">
+                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card panel panel-default social-profile-page mb-3">
+                    <div class="card-header panel-heading">Brands</div>
+                    <div class="card-body panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Title</label>
+                            <div class="col-md-11">
+                                <input type="text" class="form-control" placeholder="title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Description </label>
+                            <div class="col-md-11">
+                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card panel panel-default social-profile-page mb-3">
+                    <div class="card-header panel-heading">
+                        <span class="pull-left mt-1">Main section</span>
+                        <button type="button" class="btn btn-primary pull-right add-new-product">
+                            <i class="fa fa-plus"></i></button>
+                    </div>
+                    <div class="card-body panel-body">
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Title</label>
+                            <div class="col-md-11">
+                                <input type="text" class="form-control" placeholder="title">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-1 col-form-label">Description </label>
+                            <div class="col-md-11">
+                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                            </div>
+
+                        </div>
+                        <div class="form-group d-flex flex-wrap align-items-center top-products-group">
+                            @if(isset($top->data))
+                                @php
+                                $data=@json_decode($top->data,true);
+                                @endphp
+                            @foreach($data['name'] as $key=>$title)
+                            <div class="row banner-item w-100 mb-2">
+                                <div class="col-sm-8 pr-sm-0">
+                                    <div class="d-flex flex-column flex-sm-row">
+                                        <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">
+                                        {!! Form::select('top[products]['.$key.'][]',$items,$data['products'][$key],['class'=>'top-items-select','multiple'=>true]) !!}
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    @if($key>0)
+                                        <button type="button" class="btn btn-danger remove-product">
+                                            <i class="fa fa-minus"></i></button>
+                                        @else
+{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
+{{--                                            <i class="fa fa-plus"></i></button>--}}
+                                        <button type="button" class="btn btn-danger remove-product">
+                                            <i class="fa fa-minus"></i></button>
+                                        @endif
+
+                                </div>
+                            </div>
+                                @endforeach
+                            @else
+                                <div class="row banner-item w-100 mb-2">
+                                    <div class="col-sm-8 pr-sm-0">
+                                        <div class="d-flex flex-column flex-sm-row">
+                                            <input type="text" class="form-control mr-2" name="top[name][]">
+                                            {!! Form::select('top[products][0][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
+{{--                                            <i class="fa fa-plus"></i></button>--}}
+                                        <button type="button" class="btn btn-primary add-new-product">
+                                            <i class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            @endif
+
+                        </div>
+                    </div>
+                </div>
 
                 <div class="card panel panel-default social-profile-page mb-3">
                     <div class="card-header panel-heading">Bottom banners</div>
@@ -107,68 +213,6 @@
                             @endif
                         </div>
 
-                    </div>
-                </div>
-                <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">
-                        <span class="pull-left mt-1">Main section</span>
-                        <button type="button" class="btn btn-primary pull-right add-new-product">
-                            <i class="fa fa-plus"></i></button>
-                    </div>
-                    <div class="card-body panel-body">
-                        <div class="form-group">
-                            <label for="titleMainSection">Title</label>
-                            <input type="text" class="form-control" id="titleMainSection" placeholder="title">
-                        </div>
-                        <div class="form-group">
-                            <label>Description </label>
-                            <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                        </div>
-                        <div class="form-group d-flex flex-wrap align-items-center top-products-group">
-                            @if(isset($top->data))
-                                @php
-                                $data=@json_decode($top->data,true);
-                                @endphp
-                            @foreach($data['name'] as $key=>$title)
-                            <div class="row banner-item w-100 mb-2">
-                                <div class="col-sm-8 pr-sm-0">
-                                    <div class="d-flex flex-column flex-sm-row">
-                                        <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">
-                                        {!! Form::select('top[products]['.$key.'][]',$items,$data['products'][$key],['class'=>'top-items-select','multiple'=>true]) !!}
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    @if($key>0)
-                                        <button type="button" class="btn btn-danger remove-product">
-                                            <i class="fa fa-minus"></i></button>
-                                        @else
-{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
-{{--                                            <i class="fa fa-plus"></i></button>--}}
-                                        <button type="button" class="btn btn-danger remove-product">
-                                            <i class="fa fa-minus"></i></button>
-                                        @endif
-
-                                </div>
-                            </div>
-                                @endforeach
-                            @else
-                                <div class="row banner-item w-100 mb-2">
-                                    <div class="col-sm-8 pr-sm-0">
-                                        <div class="d-flex flex-column flex-sm-row">
-                                            <input type="text" class="form-control mr-2" name="top[name][]">
-                                            {!! Form::select('top[products][0][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
-{{--                                            <i class="fa fa-plus"></i></button>--}}
-                                        <button type="button" class="btn btn-primary add-new-product">
-                                            <i class="fa fa-plus"></i></button>
-                                    </div>
-                                </div>
-                            @endif
-
-                        </div>
                     </div>
                 </div>
             </div>
