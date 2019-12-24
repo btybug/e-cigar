@@ -26,7 +26,7 @@
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#technical">Technical</a>
                             </li>
-                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#variations">Required</a>
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#variations">Price</a>
                             </li>
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
