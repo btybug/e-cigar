@@ -25,8 +25,8 @@
                 {!! __('shipping') !!} {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
             </div>
             <div
-                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select @if($page === 'payment') payment--row-shipping @endif">
-                @if($page != 'payment')
+                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select @if($page === 'payment' || $page === 'checkout') payment--row-shipping @endif">
+                @if($page != 'payment' && $page != 'checkout')
 
                 <div class="select-wall">
                     <select name="" id=""
