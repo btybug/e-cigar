@@ -12,27 +12,35 @@
 
                 <div class="tab-pane fade active in show" id="admin_settings_general">
                     <div class="row">
-                        <div class="col-lg-9 col-sm-8">
+                        <div class="col-lg-7 col-sm-6">
                             <div class="card panel panel-default mb-3">
                                 <div class="card-header panel-heading">Basics</div>
                                 <div class="card-body panel-body">
                                     <div class="row">
                                         <div class="col-xl-7 col-lg-10">
-                                            <div class="form-group">
-                                                <label for="SiteName">Site Name</label>
-                                                {!! Form::text('site_name',env('SITE_NAME'),['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="SiteName" class="col-md-3 col-form-label">Site Name</label>
+                                                <div class="col-md-9">
+                                                    {!! Form::text('site_name',env('SITE_NAME'),['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="siteLogo">Site Logo</label>
-                                                {!! media_button('siteLogo',$model) !!}
+                                            <div class="form-group row">
+                                                <label for="siteLogo" class="col-md-3 col-form-label">Site Logo</label>
+                                                <div class="col-md-9">
+                                                    {!! media_button('siteLogo',$model) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">Description</label>
-                                                {!! Form::textarea('site_description',null,['class'=>'form-control','rows'=>5]) !!}
+                                            <div class="form-group row">
+                                                <label for="description" class="col-md-3 col-form-label">Description</label>
+                                                <div class="col-md-9">
+                                                    {!! Form::textarea('site_description',null,['class'=>'form-control','rows'=>5]) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="description">Site Code</label>
-                                                {!! Form::text('site_code',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="description" class="col-md-3 col-form-label">Site Code</label>
+                                                <div class="col-md-9">
+                                                    {!! Form::text('site_code',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -145,43 +153,56 @@
                                 <div class="card-header panel-heading">Address</div>
                                 <div class="card-body panel-body">
                                     <div class="row">
-                                        <div class="col-xl-4 col-lg-5">
-                                            <div class="form-group">
-                                                <label for="firstAddress">1st line address</label>
-                                                {!! Form::text('first_address',null,['class'=>'form-control']) !!}
+                                        <div class="col-md-6">
+                                            <div class="form-group row">
+                                                <label for="firstAddress" class="col-md-4 col-form-label">1st line address</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::text('first_address',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="secondAddress">2nd line address</label>
-                                                {!! Form::text('second_address',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="secondAddress" class="col-md-4 col-form-label">2nd line address</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::text('second_address',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                
-                                                <label for="country">Country</label>
-                                                {!! Form::select('country',$countries,null,['class'=>'form-control','id' => 'first_line_country','style'=>'width:100%']) !!}
+                                            <div class="form-group row">
+                                                <label for="country" class="col-md-4 col-form-label">Country</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::select('country',$countries,null,['class'=>'form-control','id' => 'first_line_country','style'=>'width:100%']) !!}
+                                                </div>
 
                                             </div>
-                                            <div class="form-group">
-                                                <label for="city">City</label>
-                                                <div id="regions">
-                                                    {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="city" class="col-md-4 col-form-label">City</label>
+                                                <div class="col-md-8">
+                                                    <div id="regions">
+                                                        {!! Form::text('city',null,['class'=>'form-control']) !!}
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            <div class="form-group">
-                                                <label for="postCode">Post Code</label>
-                                                {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="postCode" class="col-md-4 col-form-label">Post Code</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::text('post_code',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="postCode">Phone</label>
-                                                {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="postCode" class="col-md-4 col-form-label">Phone</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="postCode">Email</label>
-                                                {!! Form::email('email',null,['class'=>'form-control']) !!}
+                                            <div class="form-group row">
+                                                <label for="postCode" class="col-md-4 col-form-label">Email</label>
+                                                <div class="col-md-8">
+                                                    {!! Form::email('email',null,['class'=>'form-control']) !!}
+                                                </div>
                                             </div>
 
                                         </div>
-                                        <div class="offset-xl-1 col-xl-6 col-lg-7">
+                                        <div class="col-md-6">
                                             <div class="settings-map-outer">
                                                 <iframe
                                                     src="https://www.google.com/maps/embed/v1/place?key=&q=Armenia"
@@ -196,11 +217,44 @@
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="col-lg-5 col-sm-6">
+                            <div class="text-right">
+                                <button class="btn btn-info mb-20 mt20" type="submit">Save</button>
+                            </div>
+                            <div class="card panel panel-default mb-3">
+                                <div class="card-header panel-heading">Date/Time Format</div>
+                                <div class="card-body panel-body">
+                                    <div class="form-group row">
+                                        <label for="dateFormat" class="col-md-3 col-form-label">Date Format</label>
+                                        <div class="col-md-9">
+                                            {!! Form::select('date_format',[
+                                        'd M Y'=>'1 July 2019',
+                                        'M-D-y'=>'May-09-78',
+                                        'm/d/y'=>'12/22/78',
+                                        'd/M/Y'=>'31/DEC/2018',
+                                        'D/M/Y'=>'02/MAY/2016',
+                                        'Y/M/D'=>'2013/FEB/27',
+                                        ],null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="timeFormat" class="col-md-3 col-form-label">Time Format</label>
+                                        <div class="col-md-9">
+                                            {!! Form::select('time_format',[
+                                          '12hrs'=>'12hrs',
+                                          '24hrs'=>'24hrs',
+                                          'seconds'=>'Seconds',
+                                          ],null,['class'=>'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="card panel panel-default mb-3">
                                 <div class="card-header panel-heading">Opening Hours</div>
                                 <div class="card-body panel-body form-inline">
                                     <div class="row w-100">
-                                        <div class="col-xl-7">
+                                        <div class="col-xl-12">
                                             <div class="table-responsive">
                                                 <table class="table table--opening-hours" id="working-hours">
                                                     @if($model && isset($model->opening_hours) && @json_decode($model->opening_hours,true))
@@ -318,7 +372,7 @@
                                 <div class="card-header panel-heading">Holidays</div>
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-xl-7">
+                                        <div class="col-xl-12">
                                             <div class="table-responsive">
                                                 <table class="table table--holidays" id="calendar">
                                                     @if($model && isset($model->calendar) && @json_decode($model->calendar,true))
@@ -376,35 +430,6 @@
                                                 </table>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-sm-4">
-                            <div class="text-right">
-                                <button class="btn btn-info mb-20 mt20" type="submit">Save</button>
-                            </div>
-                            <div class="card panel panel-default">
-                                <div class="card-header panel-heading">Heading</div>
-                                <div class="card-body panel-body">
-                                    <div class="form-group">
-                                        <label for="dateFormat">Date Format</label>
-                                        {!! Form::select('date_format',[
-                                        'd M Y'=>'1 July 2019',
-                                        'M-D-y'=>'May-09-78',
-                                        'm/d/y'=>'12/22/78',
-                                        'd/M/Y'=>'31/DEC/2018',
-                                        'D/M/Y'=>'02/MAY/2016',
-                                        'Y/M/D'=>'2013/FEB/27',
-                                        ],null,['class'=>'form-control']) !!}
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="timeFormat">Time Format</label>
-                                        {!! Form::select('time_format',[
-                                      '12hrs'=>'12hrs',
-                                      '24hrs'=>'24hrs',
-                                      'seconds'=>'Seconds',
-                                      ],null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
