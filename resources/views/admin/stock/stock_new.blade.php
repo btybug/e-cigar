@@ -106,19 +106,6 @@
                                                         {{--</div>--}}
                                                         {{--</div>--}}
                                                         {{--</div>--}}
-                                                        <div class="form-group col-xl-8 col-lg-10 p-0">
-                                                            <div class="card panel panel-default">
-                                                                <div class="card-header panel-heading">
-                                                                    <p class="pull-left mb-0">
-                                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Feature
-                                                                            image</b>
-                                                                    </p>
-                                                                </div>
-                                                                <div class="card-body stock-basic-future-photo-body-wrap">
-                                                                    {!! media_button('image',$model) !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
 
                                                         <div class="form-group col-xl-8 col-lg-10 p-0">
                                                             <div class="card panel panel-default">
@@ -418,7 +405,17 @@
                                             <div class="basic-center basic-wall scrollbar_media_tab h-100">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
-
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading">
+                                                                <p class="pull-left mb-0">
+                                                                    <b data-toggle="tooltip" title="" data-original-title="Change featured image">Feature
+                                                                        image</b>
+                                                                </p>
+                                                            </div>
+                                                            <div class="card-body stock-basic-future-photo-body-wrap">
+                                                                {!! media_button('image',$model) !!}
+                                                            </div>
+                                                        </div>
                                                         <div class="card panel panel-default">
                                                             <div class="card-header panel-heading clearfix">
                                                                 <p class="d-inline-block">Extra Images</p>
