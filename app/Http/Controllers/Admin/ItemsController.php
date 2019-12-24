@@ -180,7 +180,7 @@ class ItemsController extends Controller
 
     private function saveImages(Request $request, $item)
     {
-        $images = $request->get('other_images');
+        $images = $request->get('media');
         if ($images) {
             $data = [];
             foreach ($images as $image) {
