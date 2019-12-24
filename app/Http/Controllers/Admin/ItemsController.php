@@ -9,26 +9,23 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Http\Controllers\Admin\Requests\SupplierRequest;
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Category;
 use App\Models\Items;
 use App\Models\ItemsLocations;
+use App\Models\ItemsMedia;
 use App\Models\ItemsPackages;
 use App\Models\ItemsTransfers;
 use App\Models\Suppliers;
 use App\Models\Warehouse;
 use App\Services\BarcodesService;
-use App\Services\D1Barcode;
-use App\Services\EAN13render;
 use App\Services\ItemService;
 use Chumper\Zipper\Zipper;
 use Illuminate\Http\Request;
-use Svg\Document;
-use function foo\func;
 
 class ItemsController extends Controller
 {
@@ -98,9 +95,9 @@ class ItemsController extends Controller
             'item_length','item_width','item_height','item_weight');
 //        dd($data);
         $item = Items::updateOrCreate($request->id, $data);
-        $this->saveImages($request, $item);
-        $this->saveVideos($request, $item);
-        $this->saveDownloads($request, $item);
+        $this->saveMedia($request->get('media', []), $item);
+        $this->saveMedia($request->get('videos', []), $item, 'video');
+        $this->saveMedia($request->get('downloads', []), $item, 'download');
         $this->savePackages($item, $request->get('packages', []));
 
 
@@ -112,7 +109,7 @@ class ItemsController extends Controller
 
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
 
-        return redirect()->route($route);
+        return redirect()->back();
     }
 
     public function getEdit($id)
@@ -180,42 +177,35 @@ class ItemsController extends Controller
 
     private function saveImages(Request $request, $item)
     {
-        $images = $request->get('media');
+        $images = $request->get('media', []);
+        $item->media('type', 'image')->whereNotIn('url', $images)->delete();
         if ($images) {
             $data = [];
             foreach ($images as $image) {
-                $data[] = ['url' => $image, 'type' => 'image', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
+                ItemsMedia::updateOrCreate(['url' => $image, 'type' => 'image', 'item_id' => $item->id]);
             }
-            return \DB::table('items_media')->insert($data);
+
         }
         return null;
     }
 
-    private function saveVideos(Request $request, $item)
+    private function saveMedia(array $images, $item, $type = 'image')
     {
-        $videos = $request->get('videos');
-        if ($videos) {
-            $data = [];
-            foreach ($videos as $video) {
-                $data[] = ['url' => $video, 'type' => 'video', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
-            }
-            return \DB::table('items_media')->insert($data);
+        if(!count($images)) return null;
+        $olds=$item->media->where('type',$type)->pluck('url')->toArray();
+
+        foreach ($images as $image) {
+            if(!in_array($image,$olds))
+                ItemsMedia::create(['url' => $image, 'type' => $type, 'item_id' => $item->id]);
         }
-        return null;
+        foreach ($olds as $old){
+            if(!in_array($old,$images)){
+                ItemsMedia::where('item_id',$item->id)->where('type',$type)->where('url',$old)->delete();
+            }
+        }
     }
 
-    private function saveDownloads(Request $request, $item)
-    {
-        $downloads = $request->get('downloads');
-        if ($downloads) {
-            $data = [];
-            foreach ($downloads as $download) {
-                $data[] = ['url' => $download, 'type' => 'download', 'item_id' => $item->id, 'created_at' => date('Y-m-d h:i:s')];
-            }
-            return \DB::table('items_media')->insert($data);
-        }
-        return null;
-    }
+
 
     public function getPurchase($id)
     {
@@ -529,15 +519,15 @@ class ItemsController extends Controller
     {
         $items = $request->get('items',[]);
         if(count($items)){
-                foreach ($items as $id => $item){
-                    $model = Items::findOrFail($id);
-                    Items::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
-                        'name' => $item['name'],
-                        'short_description' => $item['short_description']
-                    ]]);
-                    $cat = (count($item['categories']))? $item['categories'] : [];
-                    $model->categories()->sync($cat);
-                }
+            foreach ($items as $id => $item){
+                $model = Items::findOrFail($id);
+                Items::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
+                    'name' => $item['name'],
+                    'short_description' => $item['short_description']
+                ]]);
+                $cat = (count($item['categories']))? $item['categories'] : [];
+                $model->categories()->sync($cat);
+            }
             return response()->json(['error' => false]);
         }
         return response()->json(['error' => true]);

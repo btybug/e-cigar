@@ -32,8 +32,7 @@
                                     <div class="all-list">
                                         <ul class="nav nav-tabs media-list">
                                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basics">Basics</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#videos">Videos</a>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#images">Images</a>
+                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#media">Media</a>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#logistic">Logistic</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
@@ -180,39 +179,58 @@
                                                     </div>
                                                 </div>
                                         </div>
-                                        <div id="videos" class="tab-pane fade">
-                                            <div class="media-videos">
-                                                <div class="input-group " style="display: flex">
-                                                    <input type="text" class="form-control video-url-link"
-                                                           placeholder="Video Url" aria-label="Video Url"
-                                                           aria-describedby="basic-addon2">
-                                                    <div class="input-group-append">
-                                                        <button class="btn btn-primary add-video-url"
-                                                                type="button">Add Link
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                                <div class="media-videos-preview" style="display: flex;flex-wrap: wrap">
-                                                    @if(isset($model->videos) && $model->videos && count($model->videos))
-                                                        @foreach($model->videos as $video)
-                                                            <div class="video-single-item" style="display: flex">
-                                                                <iframe width="200" height="200"
-                                                                        src="https://www.youtube.com/embed/{{ $video->url }}">
-                                                                </iframe>
-                                                                <div>
-                                                                    <button class="btn btn-danger remove-video-single-item">
-                                                                        <i class="fa fa-trash"></i></button>
-                                                                </div>
-                                                                <input type="hidden" name="video[]"
-                                                                       value="{{  $video->url }}"></div>
-                                                        @endforeach
-                                                    @endif
 
+                                        <div id="media" class="tab-pane fade">
+                                            <div class="card panel panel-default">
+                                                <div class="card-header panel-heading">
+                                                    <p class="pull-left mb-0">
+                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Image</b>
+                                                    </p>
+                                                </div>
+                                                <div class="card-body stock-basic-future-photo-body-wrap">
+                                                    {!! media_button('media',$model,true) !!}
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div id="images" class="tab-pane fade">
-                                            {!! media_button('media',$model,true) !!}
+                                            <div class="card panel panel-default">
+                                                <div class="card-header panel-heading">
+                                                    <p class="pull-left mb-0">
+                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Videos</b>
+                                                    </p>
+                                                </div>
+                                                <div class="card-body stock-basic-future-photo-body-wrap">
+                                                    <div class="media-videos">
+                                                        <div class="input-group " style="display: flex">
+                                                            <input type="text" class="form-control video-url-link"
+                                                                   placeholder="Video Url" aria-label="Video Url"
+                                                                   aria-describedby="basic-addon2">
+                                                            <div class="input-group-append">
+                                                                <button class="btn btn-primary add-video-url"
+                                                                        type="button">Add Link
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="media-videos-preview" style="display: flex;flex-wrap: wrap">
+                                                            @if(isset($model->videos) && $model->videos && count($model->videos))
+                                                                @foreach($model->videos as $video)
+                                                                    <div class="video-single-item" style="display: flex">
+                                                                        <iframe width="200" height="200"
+                                                                                src="https://www.youtube.com/embed/{{ $video->url }}">
+                                                                        </iframe>
+                                                                        <div>
+                                                                            <button class="btn btn-danger remove-video-single-item">
+                                                                                <i class="fa fa-trash"></i></button>
+                                                                        </div>
+                                                                        <input type="hidden" name="video[]"
+                                                                               value="{{  $video->url }}"></div>
+                                                                @endforeach
+                                                            @endif
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
                                         </div>
 
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
