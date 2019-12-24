@@ -28,10 +28,6 @@
                             </li>
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#variations">Required</a>
                             </li>
-                            @if(! isset($offer))
-                                <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#extra">Special
-                                        Offers</a></li>
-                            @endif
                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">Seo</a></li>
                         </ul>
                     </div>
@@ -399,11 +395,7 @@
                                                                                 href="#mediastickers">Stickers</a></li>
 
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                                href="#mediavideos">Videos</a>
-                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                                href="#banners">Banners</a></li>
-                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
-                                                                                href="#mediaotherimage">Extra Images</a></li>
+                                                                                href="#mediaotherimage">Media</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#mediarelatedproducts">Related
                                                                 Products</a></li>
@@ -413,6 +405,11 @@
                                                                                 href="#ads">Ads</a></li>
                                                         <li class="nav-item"><a class="nav-link" data-toggle="tab"
                                                                                 href="#downloads">Downloads</a></li>
+                                                        @if(! isset($offer))
+                                                        <li class="nav-item"><a class="nav-link" data-toggle="tab"
+                                                                                href="#specialOffers">Special Offers</a></li>
+                                                        @endif
+
                                                     </ul>
                                                 </div>
                                             </div>
@@ -421,10 +418,90 @@
                                             <div class="basic-center basic-wall scrollbar_media_tab h-100">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
-                                                        {!! media_button('other_images',$model,true) !!}
-                                                    </div>
-                                                    <div id="mediavideos" class="tab-pane fade">
-                                                        <div class="media-videos">
+
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading clearfix">
+                                                                <p class="d-inline-block">Extra Images</p>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                {!! media_button('other_images',$model,true) !!}
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading clearfix">
+                                                                <p class="d-inline-block">Banners</p>
+                                                                <div class="col-sm-2 pull-right">
+                                                                    <button type="button"
+                                                                            class="btn btn-primary add-new-banner-input">
+                                                                        <i
+                                                                            class="fa fa-plus"></i></button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div
+                                                                    class="form-group d-flex flex-wrap align-items-center banner-group">
+
+                                                                    @if($model && count($model->banners))
+                                                                        @foreach($model->banners as $key => $banner)
+                                                                            <div
+                                                                                class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                                                <div class="col-sm-7 p-0">
+
+                                                                                    <div class="input-group">
+                                                                                        <div class="input-group-prepend">
+                                                                                            {!! media_button("banners[$key][image]",$banner->image) !!}
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                    <div class="form-group row mt-3">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Url</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Tag</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][tags]" value="{{ $banner->tags }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <div class="form-group row">
+                                                                                        <label for="staticEmail"
+                                                                                               class="col-sm-2 col-form-label">Alt text</label>
+                                                                                        <div class="col-sm-10">
+                                                                                            <input type="text"
+                                                                                                   name="banners[{{ $key }}][alt]" value="{{ $banner->alt }}"
+                                                                                                   class="form-control">
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-sm-3">
+                                                                                    <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                                                                        <i class="fa fa-minus"></i></button>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endforeach
+                                                                    @endif
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="card panel panel-default">
+                                                            <div class="card-header panel-heading clearfix">
+                                                                <p class="d-inline-block">Videos</p>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                 <div class="media-videos">
                                                             <div class="input-group " style="display: flex">
                                                                 <input type="text" class="form-control video-url-link"
                                                                        placeholder="Video Url" aria-label="Video Url"
@@ -456,7 +533,8 @@
 
                                                             </div>
                                                         </div>
-
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                     <div id="mediastickers" class="tab-pane fade ">
                                                         <div
@@ -492,6 +570,24 @@
                                                             </ul>
                                                         </div>
                                                     </div>
+                                                    @if(! isset($offer))
+                                                    <div id="specialOffers" class="tab-pane fade ">
+                                                        <div class="container-fluid p-25">
+                                                            <div class="text-right m-4">
+                                                                <a class="btn btn-info text-white select-special-offers"
+                                                                   data-required="0"><i
+                                                                        class="fa fa-plus"></i> Add Special Offers</a>
+                                                            </div>
+                                                            <div class="row get-special-offers-tab">
+                                                                @if($model && count($model->special_offers))
+                                                                    @foreach($model->special_offers as $offer)
+                                                                        @include("admin.stock._partials.special_offer_item")
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    @endif
                                                     <div id="mediarelatedproducts" class="tab-pane fade ">
                                                         <div
                                                             class="panel-heading d-flex justify-content-between align-items-center mb-2">
@@ -668,74 +764,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div id="banners" class="tab-pane fade ">
-                                                        <div class="card panel panel-default">
-                                                            <div class="card-header panel-heading clearfix">
-                                                                <p class="d-inline-block">Banners</p>
-                                                                <div class="col-sm-2 pull-right">
-                                                                    <button type="button"
-                                                                            class="btn btn-primary add-new-banner-input">
-                                                                        <i
-                                                                            class="fa fa-plus"></i></button>
-                                                                </div>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                <div
-                                                                    class="form-group d-flex flex-wrap align-items-center banner-group">
-
-                                                                    @if($model && count($model->banners))
-                                                                        @foreach($model->banners as $key => $banner)
-                                                                    <div
-                                                                        class="col-md-12 mb-2 d-flex flex-wrap banner-item">
-                                                                        <div class="col-sm-7 p-0">
-
-                                                                                    <div class="input-group">
-                                                                                        <div class="input-group-prepend">
-                                                                                            {!! media_button("banners[$key][image]",$banner->image) !!}
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                    <div class="form-group row mt-3">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Url</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
-                                                                                                   class="form-control">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Tag</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][tags]" value="{{ $banner->tags }}"
-                                                                                                   class="form-control">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Alt text</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][alt]" value="{{ $banner->alt }}"
-                                                                                                   class="form-control">
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                        </div>
-                                                                        <div class="col-sm-3">
-                                                                            <button class="plus-icon remove-new-banner-input btn btn-danger">
-                                                                                <i class="fa fa-minus"></i></button>
-                                                                        </div>
-                                                                    </div>
-                                                                        @endforeach
-                                                                    @endif
-
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div id="long_desc" class="tab-pane fade in active show">
                                                         <div class="basic-center basic-wall">
                                                             <div class="row">
@@ -816,24 +844,7 @@
                                     </div>
                                 </div>
                             </div>
-                            @if(! isset($offer))
-                                <div id="extra" class="tab-pane basic-details-tab stock-extra-tab fade">
-                                    <div class="container-fluid p-25">
-                                        <div class="text-right m-4">
-                                            <a class="btn btn-info text-white select-special-offers"
-                                               data-required="0"><i
-                                                    class="fa fa-plus"></i> Add Special Offers</a>
-                                        </div>
-                                        <div class="row get-special-offers-tab">
-                                            @if($model && count($model->special_offers))
-                                                @foreach($model->special_offers as $offer)
-                                                    @include("admin.stock._partials.special_offer_item")
-                                                @endforeach
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
+
                             <div id="seo" class="tab-pane basic-details-tab tab_seo fade">
                                 <div class="container-fluid p-25">
                                     <div class="row">
