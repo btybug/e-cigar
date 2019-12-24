@@ -110,8 +110,20 @@
                     </div>
                 </div>
                 <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">Top Products</div>
+                    <div class="card-header panel-heading">
+                        <span class="pull-left mt-1">Main section</span>
+                        <button type="button" class="btn btn-primary pull-right add-new-product">
+                            <i class="fa fa-plus"></i></button>
+                    </div>
                     <div class="card-body panel-body">
+                        <div class="form-group">
+                            <label for="titleMainSection">Title</label>
+                            <input type="text" class="form-control" id="titleMainSection" placeholder="title">
+                        </div>
+                        <div class="form-group">
+                            <label>Description </label>
+                            <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
+                        </div>
                         <div class="form-group d-flex flex-wrap align-items-center top-products-group">
                             @if(isset($top->data))
                                 @php
@@ -130,8 +142,10 @@
                                         <button type="button" class="btn btn-danger remove-product">
                                             <i class="fa fa-minus"></i></button>
                                         @else
-                                        <button type="button" class="btn btn-primary add-new-product">
-                                            <i class="fa fa-plus"></i></button>
+{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
+{{--                                            <i class="fa fa-plus"></i></button>--}}
+                                        <button type="button" class="btn btn-danger remove-product">
+                                            <i class="fa fa-minus"></i></button>
                                         @endif
 
                                 </div>
@@ -146,6 +160,8 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
+{{--                                        <button type="button" class="btn btn-primary add-new-product">--}}
+{{--                                            <i class="fa fa-plus"></i></button>--}}
                                         <button type="button" class="btn btn-primary add-new-product">
                                             <i class="fa fa-plus"></i></button>
                                     </div>
