@@ -8,6 +8,7 @@
 
 
 use App\Models\Media\Folders;
+use App\Models\Settings;
 
 $_MEDIA_BUTTON = false;
 $_MEDIA_SLUG = null;
@@ -813,16 +814,29 @@ function time_ago($datetime, $full = false)
 
 function stockSeo($stock)
 {
-//    $seoes = $stock->seo;
-//    $HTML = '';
+    $lang=app()->getLocale();
+    $settings=new Settings();
+    $seo = $stock->seo;
+    $general = $settings->getEditableData('seo_stocks')->toArray();
+    $robot = $settings->getEditableData('seo_robot_stocks');
+    $HTML = '';
+    $keywords=get_translated($seo,strtolower($lang),'keywords');
+    $title=get_translated($seo,strtolower($lang),'title');
+    $description=get_translated($seo,strtolower($lang),'description');
+    $image=get_translated($seo,strtolower($lang),'image');
+    $HTML.=($keywords)? Html::meta('keywords',$keywords)->toHtml():Html::meta('keywords',getSeo($general,'og:keywords',$stock))->toHtml();
+    $HTML.=($title)? Html::meta('og:title',$title)->toHtml():Html::meta('og:title',getSeo($general,'og:title',$stock))->toHtml();
+    $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$stock))->toHtml();
+    $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$stock))->toHtml();
 //    if ($stock->image) {
 //        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
 //    }
 //    foreach ($seoes as $seo) {
 //        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
 //    }
-//    return $HTML;
+    return $HTML;
 }
+
 
 function meta($object, $type = 'seo_posts')
 {
