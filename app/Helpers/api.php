@@ -7,7 +7,6 @@
  */
 
 
-use App\Models\Media\Folders;
 use App\Models\Settings;
 
 $_MEDIA_BUTTON = false;
@@ -819,6 +818,8 @@ function stockSeo($stock)
     $seo = $stock->seo;
     $general = $settings->getEditableData('seo_stocks')->toArray();
     $robot = $settings->getEditableData('seo_robot_stocks');
+    $r = (is_null($seo->robots)) ? ((!$robot->robots) ? $robot->robots : '') : $seo->robots;
+    if (!$r) return null;
     $HTML = '';
     $keywords=get_translated($seo,strtolower($lang),'keywords');
     $title=get_translated($seo,strtolower($lang),'title');
@@ -828,12 +829,7 @@ function stockSeo($stock)
     $HTML.=($title)? Html::meta('og:title',$title)->toHtml():Html::meta('og:title',getSeo($general,'og:title',$stock))->toHtml();
     $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$stock))->toHtml();
     $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$stock))->toHtml();
-//    if ($stock->image) {
-//        $HTML .= Html::meta('og:image', url($stock->image))->toHtml() . "\n\r";
-//    }
-//    foreach ($seoes as $seo) {
-//        $HTML .= Html::meta($seo->name, $seo->content)->toHtml() . "\n\r";
-//    }
+
     return $HTML;
 }
 
