@@ -2006,6 +2006,14 @@ header.main-header{
     padding: 0;
     box-shadow: none;
 }
+.tools-stickers-page--body{
+    background: #ecf0f5;
+    padding-left: 0;
+    padding-right: 0;
+}
+.tools-stickers-page--body .tools-stickers-left-area{
+    border: 1px solid #ccc;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
