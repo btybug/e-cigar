@@ -37,6 +37,7 @@ function App() {
     var prevFolder = [];
     var globalFolderId = document.getElementById('core-folder').value;
     this.multipleImages = [];
+    this.singleUrl = '';
     this.htmlMaker = {
         makeFolder: function(data) {
             return `<div data-id="${data.id}"  class="file ">
@@ -609,6 +610,26 @@ function App() {
                     hiddenInputName
                 );
             });
+        },
+        makeSinglImagesAndInputs(arr) {
+            console.log(self.singleUrl)
+            let placeholder = document.querySelector(
+                `.multiple-image-box-${inputId}`
+            );
+            let hiddenInput = document.querySelector(`.${inputId}`);
+            let hiddenInputName = hiddenInput.getAttribute("data-name");
+            let parent = hiddenInput.parentNode;
+            // placeholder.innerHTML = "";
+            arr.forEach(img => {
+                placeholder.innerHTML += self.htmlMaker.makePreviewImgThumb(
+                    img,
+                    multiple
+                );
+                parent.innerHTML += self.htmlMaker.makeHiddenInputForMultiple(
+                    img,
+                    hiddenInputName
+                );
+            });
         }
     };
     this.requests = {
@@ -870,44 +891,77 @@ function App() {
                     ).value = e.target
                         .closest(".file")
                         .getAttribute("data-relative-url");
+                        self.singleUrl = e.target
+                        .closest(".file")
+                        .getAttribute("data-relative-url");
                 }
             }
         },
         open_images(elm, e) {
-
+            console.log(self.multipleImages)
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
-                let urlValue = document.querySelector(".file-realtive-url")
-                    .value;
-                console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
-                const exArray = urlValue.match(/[^\.]+/g);
-                const ex = exArray[exArray.length - 1];
+                console.log(elm)
+                // img-thumb-container
+                const card = $(`button#${inputId}`).closest('.card');
+                if(card.find('img.img-responsive').length === 0) {
+                   
+                    // console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
 
-                if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
-                    document.querySelector(`.${inputId}`).value = urlValue;
-                    console.log('files', document.getElementById('uploader').files);
-                    console.log(location)
+                    card.find('input.modal-input-path').remove();
+                    card.find('.bestbetter-modal-open').append(`
+                        <input type="text" name="image"
+                            value="${self.singleUrl}" placeholder="file name"
+                                class="modal-input-path d-none ${inputId}" readonly>
+                    `)
+                    card.find('.card-body .card-container-stock-media').append(`
+                        <div class="img-thumb-container" style="margin: 10px;">
+                            <div class="inner">
+                        <img src="${self.singleUrl}" class="img img-responsive ${inputId + "_media_single_img"}" width="100px" data-id="${inputId + "_media_single_img"}" alt="${self.singleUrl}"/>
+                        <span data-src="${self.singleUrl}" data-id="${inputId}" class="remove-thumb-img" data-is-multiple="false">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </div>
+                        </div>
+                    `)
 
-
-                    if(document.querySelector(`.${inputId}_media_single_img`)) {
-                        document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
-                        document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
-                        });
-                    }
-
+                    
+                    
+                    console.log('fuuuuuuuck')
                 } else {
-                    document.querySelector(`.${inputId}`).value = urlValue;
-                    tinymce.activeEditor.uploadImages(function(success) {
-                        $.post(`${location.origin}${urlValue}`, tinymce.activeEditor.getContent()).done(function() {
-                            console.log("Uploaded images and posted content as an ajax request.");
+                    let urlValue = document.querySelector(".file-realtive-url")
+                        .value;
+                    console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
+                    const exArray = urlValue.match(/[^\.]+/g);
+                    const ex = exArray[exArray.length - 1];
+
+                    if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
+                        document.querySelector(`.${inputId}`).value = urlValue;
+                        console.log('files', document.getElementById('uploader').files);
+                        console.log(location)
+
+
+                        if(document.querySelector(`.${inputId}_media_single_img`)) {
+                            document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
+                            document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
+                            });
+                        }
+
+                    } else {
+                        document.querySelector(`.${inputId}`).value = urlValue;
+                        tinymce.activeEditor.uploadImages(function(success) {
+                            $.post(`${location.origin}${urlValue}`, tinymce.activeEditor.getContent()).done(function() {
+                                console.log("Uploaded images and posted content as an ajax request.");
+                            });
                         });
-                    });
-                    document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                        document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                    }
+                    document.querySelector(`.${inputId}`).value = urlValue;
                 }
-                // document.querySelector(`.${inputId}`).value = urlValue;
+                
             }
-            document.querySelector(".file-realtive-url").value = "";
+            // document.querySelector(".file-realtive-url").value = "";
             self.helpers.hideAllActiveImages();
 
         },
@@ -1050,6 +1104,8 @@ $("body").on("click", ".remove-thumb-img", function(e) {
         .closest(".img-thumb-container")
         .remove();
 });
+
+
 
 
 
@@ -1215,3 +1271,5 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 // //         function(res) {}
 // //     );
 // // });
+
+

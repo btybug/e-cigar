@@ -411,25 +411,8 @@
                                             <div class="basic-center basic-wall scrollbar_media_tab h-100 shadow-none">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
-                                                        <div class="card panel panel-default mb-3">
-                                                            <div class="card-header panel-heading">
-                                                                <p class="pull-left mb-0">
-                                                                    <b data-toggle="tooltip" title="" data-original-title="Change featured image">Feature
-                                                                        image</b>
-                                                                </p>
-                                                            </div>
-                                                            <div class="card-body stock-basic-future-photo-body-wrap">
-                                                                {!! media_widget('image',$model) !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="card panel panel-default mb-3">
-                                                            <div class="card-header panel-heading clearfix">
-                                                                <p class="d-inline-block">Extra Images</p>
-                                                            </div>
-                                                            <div class="card-body">
-                                                                {!! media_button('other_images',$model,true) !!}
-                                                            </div>
-                                                        </div>
+                                                        {!! media_widget('image',$model) !!}
+                                                        {!! media_widget('other_images',$model,true) !!}
 
                                                         <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading clearfix">
