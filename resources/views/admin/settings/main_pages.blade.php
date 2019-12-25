@@ -15,13 +15,7 @@
                             <a class="list-group-item list-group-item-action @if($p=='banners') active @endif" href="?p=banners">Home page</a>
                             <a class="list-group-item list-group-item-action @if($p=='tc') active @endif" href="?p=tc">T&C</a>
                             <a class="list-group-item list-group-item-action @if($p=='about_us')active @endif" href="?p=about_us">About us</a>
-                            <a class="list-group-item list-group-item-action @if($p=='single_product')active @endif" href="?p=single_product">Single
-                                Product</a>
-                            <a class="list-group-item list-group-item-action @if($p=='single_post')active @endif" href="?p=single_post">Single
-                                Post</a>
-                            <a class="list-group-item list-group-item-action @if($p=='confirmation_page')active @endif" href="?p=confirmation_page">Confirmation
-                                Page</a>
-                            <a class="list-group-item list-group-item-action @if($p=='my_account')active @endif" href="?p=my_account">My Account</a>
+                            <a class="list-group-item list-group-item-action @if($p=='ads')active @endif" href="?p=ads">Ads</a>
                             <a class="list-group-item list-group-item-action @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
                         </div>
                     </div>

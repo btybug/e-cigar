@@ -86,7 +86,7 @@ class SettingsController extends Controller
     {
         $languages = SiteLanguages::all();
         $keys = $languages->where('default', true)->first()->getTranslations();
-        
+
         return $this->view('language_manager', compact(['languages', 'keys']));
     }
 
@@ -597,7 +597,16 @@ class SettingsController extends Controller
     {
         $p = $request->get('p', 'banners');
         $top=null;
-        if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers") {
+        $model=null;
+        $models = [];
+        if($p == 'ads'){
+            $models = [];
+            $models['single_product'] = $settings->getEditableData('single_product');
+            $models['single_post'] = $settings->getEditableData('single_post');
+            $models['my_account'] = $settings->getEditableData('my_account');
+            $models['confirmation_page'] = $settings->getEditableData('confirmation_page');
+
+        } else if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers") {
             $model = $settings->getEditableData($p);
             $top = $settings->getEditableData('top');
 
@@ -608,7 +617,8 @@ class SettingsController extends Controller
         if ($p == 'banners'){
             $items=Stock::all()->pluck('name','id');
         }
-        return $this->view('main_pages', compact(['model', 'p','items','top']));
+
+        return $this->view('main_pages', compact(['model', 'p','items','top','models']));
     }
 
 
@@ -625,7 +635,7 @@ class SettingsController extends Controller
     {
         $p = $request->get('p', 'banners');
 //        dd($request->all());
-        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers") {
+        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p = 'confirmation_page') {
             $banners = array_filter($request->get($p, []));
             $settings->updateOrCreateSettings($p, ['data' => $banners]);
         } else {
