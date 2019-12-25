@@ -15,24 +15,14 @@
                             <a class="list-group-item list-group-item-action @if($p=='banners') active @endif" href="?p=banners">Home page</a>
                             <a class="list-group-item list-group-item-action @if($p=='tc') active @endif" href="?p=tc">T&C</a>
                             <a class="list-group-item list-group-item-action @if($p=='about_us')active @endif" href="?p=about_us">About us</a>
+                            <a class="list-group-item list-group-item-action @if($p=='privacy')active @endif" href="?p=privacy">Privacy</a>
+                            <a class="list-group-item list-group-item-action @if($p=='cookies')active @endif" href="?p=cookies">Cookies</a>
                             <a class="list-group-item list-group-item-action @if($p=='ads')active @endif" href="?p=ads">Ads</a>
                             <a class="list-group-item list-group-item-action @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
                         </div>
                     </div>
                     <div class="col-sm-9 col-8">
-
-
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="nav-content-tab" data-toggle="tab" href="#nav-content" role="tab" aria-controls="nav-content" aria-selected="true">Content</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="nav-content" role="tabpanel" aria-labelledby="nav-content-tab">
-                                @include("admin.settings._partials.main_pages.".$p)
-                            </div>
-                        </div>
-
+                        @include("admin.settings._partials.main_pages.".$p)
                     </div>
                 </div>
 

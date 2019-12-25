@@ -634,11 +634,12 @@ class SettingsController extends Controller
     public function postMainPages(Request $request, Settings $settings)
     {
         $p = $request->get('p', 'banners');
-//        dd($request->all());
-        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p = 'confirmation_page') {
+
+        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page') {
             $banners = array_filter($request->get($p, []));
             $settings->updateOrCreateSettings($p, ['data' => $banners]);
         } else {
+
             $data = $request->except('_token', 'translatable','p');
             Common::updateOrCreate($request->id, $data,$request->get('translatable'));
         }

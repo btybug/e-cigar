@@ -59,44 +59,6 @@
 
                     </div>
                 </div>
-                <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">Categories</div>
-                    <div class="card-body panel-body">
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Title</label>
-                            <div class="col-md-11">
-                                <input type="text" class="form-control" placeholder="title">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Description </label>
-                            <div class="col-md-11">
-                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
-                <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">Brands</div>
-                    <div class="card-body panel-body">
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Title</label>
-                            <div class="col-md-11">
-                                <input type="text" class="form-control" placeholder="title">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Description </label>
-                            <div class="col-md-11">
-                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                            </div>
-
-                        </div>
-
-                    </div>
-                </div>
 
                 <div class="card panel panel-default social-profile-page mb-3">
                     <div class="card-header panel-heading">
@@ -105,19 +67,7 @@
                             <i class="fa fa-plus"></i></button>
                     </div>
                     <div class="card-body panel-body">
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Title</label>
-                            <div class="col-md-11">
-                                <input type="text" class="form-control" placeholder="title">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label class="col-md-1 col-form-label">Description </label>
-                            <div class="col-md-11">
-                                <textarea style="height: 80px" class="form-control " name="" id="" cols="30" rows="10" placeholder="Description"></textarea>
-                            </div>
 
-                        </div>
                         <div class="form-group d-flex flex-wrap align-items-center top-products-group">
                             @if(isset($top->data))
                                 @php
@@ -127,7 +77,38 @@
                             <div class="row banner-item w-100 mb-2">
                                 <div class="col-sm-8 pr-sm-0">
                                     <div class="d-flex flex-column flex-sm-row">
-                                        <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">
+                                        @if(count(get_languages()))
+                                            <ul class="nav nav-tabs">
+                                                @foreach(get_languages() as $language)
+                                                    <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
+                                                                             data-toggle="tab"
+                                                                             href="#{{ strtolower($language->code) }}">
+                                                            <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                        </a></li>
+                                                @endforeach
+                                            </ul>
+                                        @endif
+                                        <div class="tab-content">
+                                            @if(count(get_languages()))
+                                                @foreach(get_languages() as $language)
+                                                    <div id="{{ strtolower($language->code) }}"
+                                                         class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                        <div class="form-group row">
+                                                            <label class="col-lg-2 control-label col-form-label text-lg-right"><span
+                                                                    data-toggle="tooltip"
+                                                                    title=""
+                                                                    data-original-title="Description">Name</span></label>
+                                                            <div class="col-lg-10">
+{{--                                                                <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">--}}
+
+                                                                {!! Form::text('top[name]['.$key.']['.strtolower($language->code).']',$title[strtolower($language->code)],['class'=>'form-control mr-2']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @endif
+                                        </div>
+
                                         {!! Form::select('top[products]['.$key.'][]',$items,$data['products'][$key],['class'=>'top-items-select','multiple'=>true]) !!}
                                     </div>
                                 </div>
@@ -149,8 +130,43 @@
                                 <div class="row banner-item w-100 mb-2">
                                     <div class="col-sm-8 pr-sm-0">
                                         <div class="d-flex flex-column flex-sm-row">
-                                            <input type="text" class="form-control mr-2" name="top[name][]">
-                                            {!! Form::select('top[products][0][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
+                                            @php
+                                            $unique = uniqid();
+                                            @endphp
+                                            @if(count(get_languages()))
+                                                <ul class="nav nav-tabs">
+                                                    @foreach(get_languages() as $language)
+                                                        <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
+                                                                                 data-toggle="tab"
+                                                                                 href="#{{ strtolower($language->code) }}">
+                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                            </a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                                <div class="tab-content">
+                                                    @if(count(get_languages()))
+                                                        @foreach(get_languages() as $language)
+                                                            <div id="{{ strtolower($language->code) }}"
+                                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                <div class="form-group row">
+                                                                    <label class="col-lg-2 control-label col-form-label text-lg-right"><span
+                                                                            data-toggle="tooltip"
+                                                                            title=""
+                                                                            data-original-title="Description">Name</span></label>
+                                                                    <div class="col-lg-10">
+                                                                        {{--                                                                <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">--}}
+
+                                                                        {!! Form::text('top[name]['.$unique.']['.strtolower($language->code).']',null,['class'=>'form-control mr-2']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+
+                                            {!! Form::select('top[products]['.$unique.'][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
                                         </div>
                                     </div>
                                     <div class="col-sm-3">
@@ -166,55 +182,7 @@
                     </div>
                 </div>
 
-                <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">Bottom banners</div>
-                    <div class="card-body panel-body">
-                        <div class="form-group d-flex flex-wrap align-items-center social-media-group">
-                            @if($model && isset($model->social_media) && @json_decode($model->social_media,true))
-                                @php
-                                    $social_medias=json_decode($model->social_media,true);
-                                @endphp
-                                @foreach($social_medias as $key=>$social_media)
-                                    <div class="clearfix"></div>
-                                    <div class="col-sm-6 p-0">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                {!! Form::file('home_page['.$key.'][slider]') !!}
-                                                {{--{!! Form::hidden('social_media['.$key.'][social]',$social_media['social'],['class'=>'social_type']) !!}--}}
-                                            </div>
-                                            {{--{!! Form::text('social_media['.$key.'][url]', $social_media['url'], ['class' => 'form-control','id' => 'socialMedia','placeholder' => 'Profile URL','aria-label' => 'Text input with dropdown button']) !!}--}}
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-3">
-                                        @if(!$key)
-                                            <button type="button"
-                                                    class="btn btn-primary add-new-social-input">
-                                                <i
-                                                    class="fa fa-plus"></i></button>
-                                        @else
-                                            <button
-                                                class="plus-icon remove-new-social-input btn btn-danger">
-                                                <i class="fa fa-minus"></i></button>
-                                        @endif
-                                    </div>
-                                @endforeach
-                            @else
-                                <div class="col-sm-6 p-0">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            {!! Form::file('home_page[0][slider]') !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-3">
-                                    <button type="button" class="btn btn-primary add-new-social-input"><i
-                                            class="fa fa-plus"></i></button>
-                                </div>
-                            @endif
-                        </div>
 
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -239,8 +207,41 @@
 <script type="template" id="add-top-items">
     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
         <div class="col-sm-8 p-0">
+            @php
+                $unique = uniqid();
+            @endphp
             <div class="input-group-prepend">
-                <input type="text" class="form-control" name="top[name][]">
+                @if(count(get_languages()))
+                    <ul class="nav nav-tabs">
+                        @foreach(get_languages() as $language)
+                            <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
+                                                     data-toggle="tab"
+                                                     href="#{{ strtolower($language->code) }}">
+                                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                </a></li>
+                        @endforeach
+                    </ul>
+                @endif
+                <div class="tab-content">
+                    @if(count(get_languages()))
+                        @foreach(get_languages() as $language)
+                            <div id="{{ strtolower($language->code) }}"
+                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                <div class="form-group row">
+                                    <label class="col-lg-2 control-label col-form-label text-lg-right"><span
+                                            data-toggle="tooltip"
+                                            title=""
+                                            data-original-title="Description">Name</span></label>
+                                    <div class="col-lg-10">
+                                        {{--                                                                <input type="text" class="form-control mr-2"  name="top[name][]" value="{!! $title !!}">--}}
+
+                                        {!! Form::text('top[name][{index}]['.strtolower($language->code).']',null,['class'=>'form-control mr-2']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
+                </div>
                 {!! Form::select('top[products][{index}][]',$items,null,['class'=>'top-items-select','multiple'=>true]) !!}
             </div>
         </div>
