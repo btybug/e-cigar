@@ -35,7 +35,7 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#media">Media</a>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#logistic">Logistic</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
+{{--                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>--}}
 {{--                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>--}}
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
                                         </ul>
@@ -322,7 +322,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="card panel panel-default">
+                                                    <div class="card panel panel-default mb-3">
                                                         <div class="card-header panel-heading">
                                                             <div class="row">
                                                                 <div class="col-sm-12 clearfix">
@@ -345,6 +345,26 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    @if($model == null || $model->type != 'bundle')
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                Alert
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <div class="form-group row">
+                                                                    <label for="packaging_weight"
+                                                                           class="col-sm-2">Alert</label>
+                                                                    <div class="col-sm-10">
+                                                                        <input class="form-control"
+                                                                               name="alert"
+                                                                               id="packaging_weight" type="text">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
@@ -421,29 +441,12 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="settings" class="tab-pane fade">
-                                            @if($model == null || $model->type != 'bundle')
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        Settings
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="form-group row">
-                                                            <label for="packaging_weight"
-                                                                   class="col-sm-2">Alert</label>
-                                                            <div class="col-sm-10">
-                                                                <input class="form-control"
-                                                                       name="alert"
-                                                                       id="packaging_weight" type="text">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                @endif
-                                        </div>
-                                        <div id="management" class="tab-pane fade">
+{{--                                        <div id="settings" class="tab-pane fade">--}}
+{{--                                            --}}
+{{--                                        </div>--}}
+{{--                                        <div id="management" class="tab-pane fade">--}}
 
-                                        </div>
+{{--                                        </div>--}}
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="card panel panel-default">
                                                 <div class="card-header">
