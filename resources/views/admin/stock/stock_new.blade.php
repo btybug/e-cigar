@@ -411,7 +411,7 @@
                                                                 </p>
                                                             </div>
                                                             <div class="card-body stock-basic-future-photo-body-wrap">
-                                                                {!! media_button('image',$model) !!}
+                                                                {!! media_widget('image',$model) !!}
                                                             </div>
                                                         </div>
                                                         <div class="card panel panel-default">

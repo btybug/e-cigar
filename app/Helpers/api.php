@@ -102,6 +102,18 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
 }
 
+function media_widget(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
+{
+    $folder = App\Models\Media\Folders::where('name', $slug)->where('parent_id', 0)->first(['id', 'name']);
+
+    enableMedia();
+    $id = $folder->id;
+    global $_MEDIA_FOLDER;
+    $_MEDIA_FOLDER = $folder;
+    $uniqId = uniqid('media_');
+    return view('media.widget', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
+}
+
 function get_media_folder()
 {
     global $_MEDIA_FOLDER;
@@ -1312,7 +1324,7 @@ function render_widgets($placeholder)
         if (has_permission(Auth::user()->role, $widget->widget) && isset($permissions[$widget->widget])) {
             $content = view($permissions[$widget->widget]['view'])->render();
             $html .= '
-      
+
             <div id="' . $widget->widget . '" style="position: relative" class="box--wall">
                       <div class="card panel panel-default dashboard--panel">
   <div class="card-header panel-heading box-header">
@@ -1333,7 +1345,7 @@ function render_widgets($placeholder)
                   ' . $content . '
                 </div></div>
 </div>
-                
+
             </div>';
         }
 
