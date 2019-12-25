@@ -3,10 +3,22 @@
     <main class="main-content">
         <div class="brands_page-wrapper stickers__page-wrapper">
             <div class="container main-max-width">
-                <div class="stickers-ads-wrapper">
-                    <a href="#" class="d-block h-100">
-                        <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                    </a>
+                <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="brands_main-content-wrapper">
@@ -62,6 +74,13 @@
                 "980px": 3,
                 "1220px": 9
             }
+        });
+        $(".stickers-ads-wrapper-carousel").carousel({
+            pagination: false,
+            controls: false,
+            infinite: true,
+            autoAdvance:true,
+            autoTime:4000
         });
         $('body').on('click', '.brands_aside-item-link', function () {
             let value = $(this).data('id');

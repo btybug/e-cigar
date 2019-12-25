@@ -6,10 +6,22 @@
     <main class="main-content">
         <div class="brands_page-wrapper">
             <div class="container main-max-width">
-                <div class="stickers-ads-wrapper">
-                    <a href="#" class="d-block h-100">
-                        <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                    </a>
+                <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
+                    <div>
+                        <a href="#" class="d-block h-100">
+                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="brands_main-content-wrapper">
@@ -65,7 +77,15 @@
         $('body').on('click','.mobile-brands_aside-title',function () {
             $(this).parent().find('.brands_aside-list').slideToggle()
         })
+        $(".stickers-ads-wrapper-carousel").carousel({
+            pagination: false,
+            controls: false,
+            infinite: true,
+            autoAdvance:true,
+            autoTime:4000
+        });
         $(".brands_page-top-slider").carousel({
+            single: true,
             pagination: false,
             controls: false,
             infinite: true,
