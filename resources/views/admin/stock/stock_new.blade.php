@@ -5,7 +5,7 @@
 @section('content')
 
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
-    <div class="card">
+    <div class="card border-0">
         <div class="card-header clearfix">
             <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>
             <div class="pull-right">
@@ -15,11 +15,11 @@
                 @endif
             </div>
         </div>
-        <div class="card-body">
+        <div class="card-body stock-edit-page--body">
             <section class="content stock-page mt-0 p-0">
 
                 <div class="">
-                    <div class="border border-dark">
+                    <div class="tabs-stock-edit">
                         <ul class="nav nav-tabs admin-profile-left">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic
                                     Details</a>
@@ -37,7 +37,7 @@
                     <div class="">
                         <div class="tab-content tabs_content">
                             <div id="basic" class="tab-pane fade in active show   basic-details-tab ">
-                                <div class="container-fluid p-25 pt-0 mt-4 border border-dark">
+                                <div class="container-fluid p-25 pt-0 mt-4 border">
                                     <div class="">
                                         <div class="">
                                             <div class="basic-center basic-wall shadow-none">
@@ -838,18 +838,14 @@
                             </div>
                             <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
-                                    <div class="row mb-2">
-                                        <div class="col-xl-2 col-md-4 col-sm-6">
-                                            <label>Price
-                                                per:</label>
-                                            {!! Form::select('type',[
+                                    <div class=" row mb-2">
+                                            <label class="col-md-1 col-form-label">Price per:</label>
+                                            <div class="col-md-3">
+                                                {!! Form::select('type',[
                                                 0 => 'Section',
                                                 1 => 'Whole Product'
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
-                                        </div>
-                                        <div class="col-xl-2 col-md-4 col-sm-6">
-
-                                        </div>
+                                            </div>
                                     </div>
                                     <div class="v-box">
                                         @if($model && isset($variations))

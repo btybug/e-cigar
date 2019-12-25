@@ -1964,6 +1964,36 @@ header.main-header{
     padding-top: 10px;
     padding-bottom: 10px;
 }
+.stock-edit-page--body{
+    background: #ecf0f5;
+    padding-left: 0;
+    padding-right: 0;
+}
+.stock-edit-page--body .basic-center.basic-wall{
+    background: none;
+    border: none;
+    padding: 0;
+}
+.stock-edit-page--body .stock_widget--block-body{
+    background: #fff;
+}
+.stock-edit-page--body .tabs-stock-edit{
+    box-shadow: 0 0 5px 2px #ccc;
+    background-color: #ffffff;
+}
+.stock-edit-page--body .tabs-stock-edit .nav-link{
+    font-size: 16px;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+.stock-edit-page--body .tabs-stock-edit .nav-link.active{
+    background: #2ab9d6;
+    color: #fff;
+}
+.stock-edit-price-tab-ordering{
+    max-width: 100px;
+    flex: 0 0 100px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

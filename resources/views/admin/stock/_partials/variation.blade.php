@@ -21,16 +21,17 @@
 
     <div class="card panel panel-default stock-page" data-unqiue="{{ $main_unique }}">
         <div class="card-header panel-heading clearfix d-flex pr-0 stock-page--head">
-            <div class="col-sm-2 py-2">
-                <div class="row">
-                    <div class="col-md-3">
-                        <label class="col-form-label">Ordering</label>
-                    </div>
-                    <div class="col-md-9">
-                        {!! Form::number("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
+            <div class="col-sm-1 py-2 stock-edit-price-tab-ordering">
+                {!! Form::number("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
                ['class' => 'form-control','placeholder' => 'Sort']) !!}
-                    </div>
-                </div>
+{{--                <div class="row">--}}
+{{--                    <div class="col-md-3">--}}
+{{--                        <label class="col-form-label">Ordering</label>--}}
+{{--                    </div>--}}
+{{--                    <div class="col-md-9">--}}
+
+{{--                    </div>--}}
+{{--                </div>--}}
             </div>
             <div class="col-sm-1 ml-auto col d-flex pr-0 head-right justify-content-end">
                 {!! Form::hidden("variations[$main_unique][is_required]",$required) !!}
