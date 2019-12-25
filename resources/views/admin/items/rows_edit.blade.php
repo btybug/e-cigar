@@ -6,7 +6,7 @@
             <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                    <th>Product Name</th>
+                    <th>Name</th>
                     <th>Short description</th>
                     <th>Price</th>
                     <th>Brand</th>
