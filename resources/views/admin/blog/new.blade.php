@@ -158,41 +158,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            <!-- <div class="tag-wall wall">
-                            <div class="row">
-                                {{--{{Form::label('tags', 'Tags',['class' => 'col-sm-3'])}}--}}
-                                    <div class="col-sm-9">
-{{--{{Form::text('tags', null,['class' =>'form-control','id'=>'tags','data-role'=>'tagsinput'])}}--}}
-                                    </div>
-                                </div>
-                            </div> -->
-                                <div class="tag-wall wall">
-                                    <div class="row">
-                                        <label class="col-xl-3 control-label" for="input-category"><span
-                                                    data-toggle="tooltip" title=""
-                                                    data-original-title="Choose all products under selected category.">Tags</span></label>
-                                        <div class="col-xl-9">
-                                            <input type="text" name="" value="" placeholder="Tags"
-                                                   id="input-tags" class="form-control" autocomplete="off">
-                                            <ul class="dropdown-menu"></ul>
-                                            <div id="coupon-category" class="well well-sm view-coupon">
-                                                <ul class="coupon-tags-list">
-                                                    @if($post && $post->tags)
-                                                        <?php
-                                                        $tags = json_decode($post->tags, true);
-                                                        ?>
-                                                        @foreach($tags as $tag)
-                                                            <li><span class="remove-search-tag"><i
-                                                                            class="fa fa-minus-circle"></i></span>{{ $tag }}
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                            </div>
-                                            {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
-                                        </div>
-                                    </div>
-                                </div>
+                          
                                 <div class="category-wall wall">
                                     <div class="row">
                                         <label class="col-xl-3 control-label" for="input-category"><span

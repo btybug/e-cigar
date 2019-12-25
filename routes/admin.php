@@ -570,12 +570,7 @@ Route::group(['prefix' => '/tools'], function () {
         Route::post('get-manage-form', 'Admin\StatusController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
     });
 
-    Route::group(['prefix' => 'tags'], function () {
-        Route::get('/', 'Admin\TagsController@getIndex')->name('admin_stock_tags');
-        Route::post('/save', 'Admin\TagsController@tagsSave')->name('admin_stock_tags_save');
-        Route::post('/search', 'Admin\TagsController@postSearch')->name('admin_stock_tags_save');
-        Route::post('/delete', 'Admin\TagsController@postDelete')->name('admin_stock_tags_delete');
-    });
+
 
     Route::group(['prefix' => 'attributes'], function () {
         Route::get('/', 'Admin\AttributesController@getAttributes')->name('admin_store_attributes');

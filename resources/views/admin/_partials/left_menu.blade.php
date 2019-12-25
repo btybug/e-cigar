@@ -60,7 +60,7 @@
                     @ok('admin_customers')
                     <li><a href="{{route('admin_customers')}}"><i class="fa fa-circle-o"></i>Customers</a></li>
                     @endok
-                   
+
                     @ok('admin_role_membership')
                     <li><a href="{{route('admin_role_membership')}}"><i class="fa fa-circle-o"></i>Role/Membership</a>
                     </li>
@@ -184,9 +184,6 @@
                     @ok('admin_categories_list')
                     <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
-                    @ok('admin_stock_tags')
-                    <li><a href="{{route('admin_stock_tags')}}"><i class="fa fa-circle-o"></i> Tags</a></li>
-                    @endok
                     <li><a href="{{route('admin_tools_filters')}}"><i class="fa fa-circle-o"></i>Filters</a></li>
                     @ok('admin_stock_statuses')
                     <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
@@ -254,27 +251,27 @@
             </li>
             @endHasAccess
 
-            @hasAccess('manage_api')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-handshake-o"></i>
-                    <span>Manage Api</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    @ok('admin_manage_api')<li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>@endok
-                    @ok('admin_manage_api_products')
-                    <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>
-                    @endok
-                    @ok('admin_manage_api_items')
-                    <li><a href="{{route('admin_manage_api_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>
-                    @endok
-                </ul>
+{{--            @hasAccess('manage_api')--}}
+{{--            <li class="treeview">--}}
+{{--                <a href="#">--}}
+{{--                    <i class="fa fa-handshake-o"></i>--}}
+{{--                    <span>Manage Api</span>--}}
+{{--                    <span class="pull-right-container">--}}
+{{--              <i class="fa fa-angle-left pull-right"></i>--}}
+{{--            </span>--}}
+{{--                </a>--}}
+{{--                <ul class="treeview-menu">--}}
+{{--                    @ok('admin_manage_api')<li><a href="{{route('admin_manage_api')}}"><i class="fa fa-circle-o"></i>Manage</a></li>@endok--}}
+{{--                    @ok('admin_manage_api_products')--}}
+{{--                    <li><a href="{{route('admin_manage_api_products')}}"><i class="fa fa-circle-o"></i>Products</a></li>--}}
+{{--                    @endok--}}
+{{--                    @ok('admin_manage_api_items')--}}
+{{--                    <li><a href="{{route('admin_manage_api_items')}}"><i class="fa fa-circle-o"></i>Items</a></li>--}}
+{{--                    @endok--}}
+{{--                </ul>--}}
 
-            </li>
-            @endHasAccess
+{{--            </li>--}}
+{{--            @endHasAccess--}}
 
             @ok('import_index')
             <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
