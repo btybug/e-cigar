@@ -47,6 +47,9 @@
                                     <div class="tab-content media-list-tab-content">
                                         <div id="basics" class="tab-pane fade in active show">
                                             <div class="card">
+                                                <div class="card-header">
+                                                    Basic Details
+                                                </div>
                                                 <div class="card-body">
                                                     @if(count(get_languages()))
                                                         <ul class="nav nav-tabs mb-3">
@@ -321,63 +324,76 @@
                                             </div>
                                         </div>
                                         <div id="downloads" class="tab-pane fade">
-                                            <div class="p-3 bg-white mb-3">
-                                                <div class="d-flex flex-wrap mb-5">
-                                                    <label class="col-form-label mr-2">Select Manual downloads</label>
-                                                    {!! Form::select('select_download',['' => 'Select']+$downloads,null,['class' =>'form-control select-download w-20']) !!}
+                                            <div class="card mb-3">
+                                                <div class="card-header">
+                                                    Barcode
                                                 </div>
+                                                <div class="card-body">
+                                                    <div class="">
+                                                        <div class="d-flex flex-wrap mb-5">
+                                                            <label class="col-form-label mr-2">Select Manual downloads</label>
+                                                            {!! Form::select('select_download',['' => 'Select']+$downloads,null,['class' =>'form-control select-download w-20']) !!}
+                                                        </div>
 
-                                                <div class="manual-codes mb-5">
-                                                    @if($model && $model->manual_codes)
-                                                        @foreach($model->manual_codes as $key => $item)
-                                                            @if(isset($item['id']))
-                                                                @php
-                                                                    $manual = \App\Models\Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$item['id'])->first();
-                                                                @endphp
-                                                                @if($manual)
-                                                                    <div class="row manual-code mt-5" data-id="{!! $manual->id !!}">
-                                                                        {!! Form::hidden("manual_codes[$key][id]",$manual->id) !!}
-                                                                        <div class="col-xl-3">
-                                                                            {!! $manual->name !!}
-                                                                        </div>
-                                                                        <div class="col-xl-6">
-                                                                            {!! media_button("manual_codes[$key][image]",$item['image']) !!}
-                                                                        </div>
-                                                                        <div class="col-xl-3">
-                                                                            <a class="btn btn-success" href="{{ route("admin_items_download_code",[$key,'manual',$model->id]) }}">Download</a>
-                                                                            <a class="btn btn-danger delete-manual-code" href="javascript:void(0)">Delete</a>
-                                                                        </div>
-                                                                    </div>
-                                                                @endif
+                                                        <div class="manual-codes mb-5">
+                                                            @if($model && $model->manual_codes)
+                                                                @foreach($model->manual_codes as $key => $item)
+                                                                    @if(isset($item['id']))
+                                                                        @php
+                                                                            $manual = \App\Models\Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$item['id'])->first();
+                                                                        @endphp
+                                                                        @if($manual)
+                                                                            <div class="row manual-code mt-5" data-id="{!! $manual->id !!}">
+                                                                                {!! Form::hidden("manual_codes[$key][id]",$manual->id) !!}
+                                                                                <div class="col-xl-3">
+                                                                                    {!! $manual->name !!}
+                                                                                </div>
+                                                                                <div class="col-xl-6">
+                                                                                    {!! media_button("manual_codes[$key][image]",$item['image']) !!}
+                                                                                </div>
+                                                                                <div class="col-xl-3">
+                                                                                    <a class="btn btn-success" href="{{ route("admin_items_download_code",[$key,'manual',$model->id]) }}">Download</a>
+                                                                                    <a class="btn btn-danger delete-manual-code" href="javascript:void(0)">Delete</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endif
+                                                                @endforeach
                                                             @endif
-                                                        @endforeach
+                                                        </div>
+                                                        @if($model && $model->barcode)
+                                                            <div class="row mt-5">
+                                                                <div class="col-xl-3">
+                                                                    BARCODE
+                                                                </div>
+                                                                <div class="col-xl-6">
+                                                                    @if(strlen($model->barcode->code) == 13)
+                                                                        <img src="{!! url('public/barcodes/'.$model->barcode->code.'.png') !!}" />
+                                                                    @else
+                                                                        Barcode is invalid, need to be 13 numbers
+                                                                    @endif
+                                                                </div>
+
+                                                                <div class="col-xl-3">
+                                                                    @if(strlen($model->barcode->code) == 13)
+                                                                        <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode->code,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="qr-code card @if($model && $model->landing)@else d-none @endif">
+                                                <div class="card-header">
+                                                     QR code
+                                                </div>
+                                                <div class="card-body">
+                                                    @if($model)
+                                                        @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                     @endif
                                                 </div>
-                                                @if($model && $model->barcode)
-                                                    <div class="row mt-5">
-                                                        <div class="col-xl-3">
-                                                            BARCODE
-                                                        </div>
-                                                        <div class="col-xl-6">
-                                                            @if(strlen($model->barcode->code) == 13)
-                                                                <img src="{!! url('public/barcodes/'.$model->barcode->code.'.png') !!}" />
-                                                            @else
-                                                                Barcode is invalid, need to be 13 numbers
-                                                            @endif
-                                                        </div>
-
-                                                        <div class="col-xl-3">
-                                                            @if(strlen($model->barcode->code) == 13)
-                                                                <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode->code,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                            <div class="qr-code p-3 bg-white @if($model && $model->landing)@else d-none @endif">
-                                                @if($model)
-                                                    @include("admin.items._partials.qr",['code' => $model->barcode->code])
-                                                @endif
                                             </div>
                                         </div>
                                         <div id="settings" class="tab-pane fade">
@@ -420,6 +436,9 @@
                                         </div>
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="card panel panel-default">
+                                                <div class="card-header">
+                                                    Specifications
+                                                </div>
                                                 <div class="card-body panel-body" id="v-option-form">
                                                     <div class="form-group">
                                                         <div class="row">
