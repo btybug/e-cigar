@@ -46,145 +46,171 @@
                                 <div class="basic-center basic-wall">
                                     <div class="tab-content media-list-tab-content">
                                         <div id="basics" class="tab-pane fade in active show">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Basic Details
-                                                </div>
-                                                <div class="card-body">
-                                                    @if(count(get_languages()))
-                                                        <ul class="nav nav-tabs mb-3">
-                                                            @foreach(get_languages() as $language)
-                                                                <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
-                                                                                         data-toggle="tab"
-                                                                                         href="#{{ strtolower($language->code) }}">
-                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                                    </a></li>
-                                                            @endforeach
-                                                        </ul>
-                                                    @endif
-                                                    <div class="tab-content">
-                                                        @if(count(get_languages()))
-                                                            @foreach(get_languages() as $language)
-                                                                <div id="{{ strtolower($language->code) }}"
-                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                    <div class="form-group row">
-                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                        <div class="col-xl-10">
-                                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Short Description">Short Description</span></label>
-                                                                        <div class="col-xl-10">
-                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                                data-toggle="tooltip"
-                                                                                title=""
-                                                                                data-original-title="Short Description">Long Description</span></label>
-                                                                        <div class="col-xl-10">
-                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Barcode</label>
-                                                            @if(! count($barcodes))
-                                                                <div class="col-lg-8">
-                                                                    <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
-                                                                </div>
-                                                            @else
-                                                                <div class="col-lg-8">
-                                                                    {!! Form::select('barcode_id', $barcodes,null,
-                                                                    ['class' => 'form-control','id' => 'barcode']) !!}
-                                                                </div>
+                                            <div class="row">
+                                                <div class="col-md-7">
+                                                    <div class="card mb-3">
+                                                        <div class="card-header">
+                                                            Basic Details
+                                                        </div>
+                                                        <div class="card-body">
+                                                            @if(count(get_languages()))
+                                                                <ul class="nav nav-tabs mb-3">
+                                                                    @foreach(get_languages() as $language)
+                                                                        <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
+                                                                                                 data-toggle="tab"
+                                                                                                 href="#{{ strtolower($language->code) }}">
+                                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                            </a></li>
+                                                                    @endforeach
+                                                                </ul>
                                                             @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="product_id" class="control-label col-lg-4 col-form-label text-lg-right">Product
-                                                                SKU</label>
-                                                            <div class="col-lg-8">
-                                                                {!! Form::text('sku', null,
-                                                                ['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="status" class="control-label col-lg-4 col-form-label text-lg-right">
-                                                                Status</label>
-                                                            <div class="col-lg-8">
-                                                                {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
-                                                                ['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group row">
-                                                        <label for="landing"
-                                                               class=" col-xl-2">Allow landing</label>
-                                                        <div class="col-xl-10">
-                                                            {!! Form::hidden('landing',0) !!}
-                                                            {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="feature_image"
-                                                                   class="control-label col-lg-4 col-form-label text-lg-right">Feature image</label>
-                                                            <div class="col-lg-8">
-                                                                {!! media_button('image',$model) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Default price</label>
-
-                                                            <div class="col-lg-8">
-                                                                {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="form-group">
-                                                        <label class="col-sm-12 control-label pl-0">Brands</label>
-                                                        <div id="brands_treeview_json">
-                                                            <div class="filter-wall cat-name d-flex flex-wrap">
-                                                                <div class="col-md-7 p-0">
-                                                                    @foreach($brands as $brand)
-                                                                        <div
-                                                                            class="single-wrap ml-4">
-                                                                            <div
-                                                                                class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                <label
-                                                                                    class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                    for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                </label>
+                                                            <div class="tab-content">
+                                                                @if(count(get_languages()))
+                                                                    @foreach(get_languages() as $language)
+                                                                        <div id="{{ strtolower($language->code) }}"
+                                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                            <div class="form-group row">
+                                                                                <label class="col-xl-2 control-label col-form-label"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
+                                                                                        data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                                <div class="col-xl-10">
+                                                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-xl-2 control-label col-form-label"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
+                                                                                        data-original-title="Short Description">Short Description</span></label>
+                                                                                <div class="col-xl-10">
+                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-xl-2 control-label col-form-label"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
+                                                                                        data-original-title="Short Description">Long Description</span></label>
+                                                                                <div class="col-xl-10">
+                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     @endforeach
+                                                                @endif
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="landing"
+                                                                       class=" col-xl-2">Allow landing</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::hidden('landing',0) !!}
+                                                                    {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
                                                                 </div>
                                                             </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="barcode" class="control-label col-xl-2 col-form-label">Default price</label>
 
+                                                                    <div class="col-xl-10">
+                                                                        {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-5">
+                                                    <div class="card mb-3">
+                                                        <div class="card-header">
+                                                            Connections
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="barcode" class="control-label col-lg-4 col-form-label">Barcode</label>
+                                                                    @if(! count($barcodes))
+                                                                        <div class="col-lg-8">
+                                                                            <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
+                                                                        </div>
+                                                                    @else
+                                                                        <div class="col-lg-8">
+                                                                            {!! Form::select('barcode_id', $barcodes,null,
+                                                                            ['class' => 'form-control','id' => 'barcode']) !!}
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="product_id" class="control-label col-lg-4 col-form-label">Product
+                                                                        SKU</label>
+                                                                    <div class="col-lg-8">
+                                                                        {!! Form::text('sku', null,
+                                                                        ['class' => 'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="status" class="control-label col-lg-4 col-form-label">
+                                                                        Status</label>
+                                                                    <div class="col-lg-8">
+                                                                        {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
+                                                                        ['class' => 'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label class="col-lg-4 control-label">Brands</label>
+                                                                    <div class="col-sm-8">
+                                                                        <select name="" id="" class="form-control">
+                                                                            <option value="">1</option>
+                                                                            <option value="">2</option>
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div id="brands_treeview_json">
+                                                                    <div class="filter-wall cat-name d-flex flex-wrap">
+                                                                        <div class="col-md-7 p-0">
+                                                                            @foreach($brands as $brand)
+                                                                                <div
+                                                                                    class="single-wrap ml-4">
+                                                                                    <div
+                                                                                        class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                        {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                        <label
+                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                            for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
 
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            Feature image
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label for="feature_image"
+                                                                           class="control-label col-lg-4 col-form-label text-lg-right">Feature image</label>
+                                                                    <div class="col-lg-8">
+                                                                        {!! media_button('image',$model) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
 
                                         </div>
