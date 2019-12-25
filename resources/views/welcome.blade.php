@@ -123,13 +123,14 @@
                             <span class="font-sec-bold">{!! __('top') !!}</span>
                             <span>{!! __('products') !!}</span>
                         </h2>
+
                         <p class="font-main-light font-15 text-center home_title-desc mb-0">{!! __('products_desc') !!}</p>
                         <div class="home_products-version-mobile d-sm-none d-block">
                             <div class="home_products-version-mobile-select">
                                 <select class="select-2 select-2--no-search main-select main-select-2arrows not-selected top-selectbox" name="" id="" style="width: 100%">
                                     @if(count($tops))
                                         @foreach($tops['name'] as $k => $top)
-                                            <option value="{{$k}}">{{ $top}}</option>
+                                            <option value="{{$k}}">{{ $top['gb'] }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -142,7 +143,7 @@
                             @foreach($tops['name'] as $k => $top)
                                 <div class="top-parent col @if($loop->first) active @endif">
                                     <a href="javascript:void(0)" data-key="{{ $k }}" class="products-version-link top-link">
-                                        {{ $top }}
+                                        {{ $top['gb'] }}
                                     </a>
                                 </div>
                             @endforeach
@@ -152,7 +153,7 @@
                     <div class="home-top-products">
 
                         @php
-                            $topProducts = (count($tops) && isset($tops['products'][0])) ? $tops['products'][0] : [];
+                            $topProducts = (count($tops)) ? array_first($tops['products']) : [];
                         @endphp
                         @include("frontend._partials.top_products",['topProducts' => $topProducts])
                     </div>
