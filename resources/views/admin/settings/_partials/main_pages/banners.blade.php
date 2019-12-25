@@ -69,7 +69,7 @@
                     <div class="card-body panel-body">
 
                         <div class="form-group d-flex flex-wrap align-items-center top-products-group">
-                            @if(isset($top->data) && 1==0)
+                            @if(isset($top->data))
                                 @php
                                 $data=@json_decode($top->data,true);
                                 @endphp
