@@ -99,7 +99,7 @@
                                         class="{{ $icon['social'] }}"></i></span></a></li>
                             @endforeach
                         @endif
-                        
+
                     </ul>
                 </div>
             </div>

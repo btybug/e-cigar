@@ -606,7 +606,7 @@ class SettingsController extends Controller
             $models['my_account'] = $settings->getEditableData('my_account');
             $models['confirmation_page'] = $settings->getEditableData('confirmation_page');
 
-        } else if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers") {
+        } else if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers" || $p == "brands") {
             $model = $settings->getEditableData($p);
             $top = $settings->getEditableData('top');
 
@@ -635,7 +635,7 @@ class SettingsController extends Controller
     {
         $p = $request->get('p', 'banners');
 
-        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page') {
+        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page'  || $p == "brands") {
             $banners = array_filter($request->get($p, []));
             $settings->updateOrCreateSettings($p, ['data' => $banners]);
         } else {

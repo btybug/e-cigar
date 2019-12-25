@@ -10,7 +10,7 @@
             </div>
             <div class="col-md-12">
                 <div class="card panel panel-default social-profile-page mb-3">
-                    <div class="card-header panel-heading">Main slider</div>
+                    <div class="card-header panel-heading">Brands slider</div>
                     <div class="card-body panel-body">
                         <div class="form-group d-flex flex-wrap align-items-center social-media-group">
                             @if($model && isset($model->data) && @json_decode($model->data,true))
@@ -22,7 +22,7 @@
                                         <div class="col-xl-6 col-md-6 p-0">
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
-                                                    {!! media_button('stickers[]',$banner) !!}
+                                                    {!! media_button('brands[]',$banner) !!}
                                                 </div>
                                             </div>
                                         </div>
@@ -44,7 +44,7 @@
                                     <div class="col-xl-6 col-sm-6 p-0">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
-                                                {!! media_button('stickers[]',$model) !!}
+                                                {!! media_button('brands[]',$model) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -71,7 +71,7 @@
         <div class="col-sm-6 p-0">
             <div class="input-group">
                 <div class="input-group-prepend">
-                    {!! media_button('stickers[]',$model) !!}
+                    {!! media_button('brands[]',$model) !!}
                 </div>
             </div>
         </div>
