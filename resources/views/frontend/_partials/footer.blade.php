@@ -39,6 +39,12 @@
                     <a href="#" class="d-block footer-logo">
                         <img src="{!! get_site_logo() !!}" alt="{{ get_site_name() }}" title="{{ get_site_name() }}">
                     </a>
+                    @php
+                        $general_settings = get_general_settings();
+                    @endphp
+                    @if($general_settings)
+                       {!! $general_settings['first_address'].", ".$general_settings['second_address'].", ".$general_settings['city'].", ".$general_settings['country'].", ".$general_settings['post_code'] !!}
+                    @endif
 {{--                    <div class="footer-desc mb-3">--}}
 {{--                        <p class="mb-0">{!! __('footer_desc') !!}</p>--}}
 {{--                    </div>--}}
@@ -83,18 +89,17 @@
 {{--                </div>--}}
 {{--                {!! Form::close() !!}--}}
                 <div class="footer-social">
+                    @php
+                    $icons = get_social_icons();
+                    @endphp
                     <ul class="d-inline-flex flex-wrap">
-                        <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
-                                        class="fab fa-facebook-f"></i></span></a></li>
-                        <li><a href="#"
-                                              class="d-flex align-items-center justify-content-center"><span><i
-                                        class="fab fa-instagram"></i></span></a></li>
-                        <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
-                                        class="fab fa-twitter"></i></span></a></li>
-                        <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
-                                        class="fab fa-google-plus-g"></i></span></a></li>
-                        <li><a href="#" class="d-flex align-items-center justify-content-center"><span><i
-                                        class="fab fa-youtube"></i></span></a></li>
+                        @if(count($icons))
+                            @foreach($icons as $icon)
+                        <li><a href="{{ $icon['url'] }}" class="d-flex align-items-center justify-content-center"><span><i
+                                        class="{{ $icon['social'] }}"></i></span></a></li>
+                            @endforeach
+                        @endif
+                        
                     </ul>
                 </div>
             </div>

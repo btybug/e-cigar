@@ -1007,6 +1007,20 @@ function get_footer_links()
         ->with('children')->get()->toArray();
 }
 
+function get_general_settings(){
+    $settings = new Settings();
+    $model = $settings->getEditableData('admin_general_settings');
+
+    return $model;
+}
+
+function get_social_icons(){
+    $settings = new Settings();
+    $model = $settings->getEditableData('admin_general_settings');
+    $icons = ($model && $model->social_media) ? json_decode($model->social_media,true) : [];
+    return $icons;
+}
+
 function colors()
 {
     return [
