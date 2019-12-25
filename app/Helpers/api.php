@@ -842,6 +842,10 @@ function stockSeo($stock)
     $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$stock))->toHtml();
     $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$stock))->toHtml();
 
+    $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'title',$stock))->toHtml();
+    $HTML.=($description)? Html::meta('description',$description)->toHtml():Html::meta('description',getSeo($general,'og:description',$stock))->toHtml();
+    $HTML .=($image)? Html::meta('image',$image)->toHtml():Html::meta('image',getSeo($general,'image',$stock))->toHtml();
+
     return $HTML;
 }
 
