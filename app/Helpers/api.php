@@ -830,7 +830,7 @@ function stockSeo($stock)
     $seo = $stock->seo;
     $general = $settings->getEditableData('seo_stocks')->toArray();
     $robot = $settings->getEditableData('seo_robot_stocks');
-    $r = (is_null($seo->robots)) ? ((!$robot->robots) ? $robot->robots : '') : $seo->robots;
+    $r = (is_null($seo) || is_null($seo->robots)) ? ((!$robot->robots) ? $robot->robots : '') : $seo->robots;
     if (!$r) return null;
     $HTML = '';
     $keywords=get_translated($seo,strtolower($lang),'keywords');
