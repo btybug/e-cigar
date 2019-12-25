@@ -240,7 +240,7 @@
                     const id = head.data;
                 var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
                     return el.name === id;
-            });
+                });
                 if(visible) {
                     return head;
                 } else {
