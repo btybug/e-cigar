@@ -65,10 +65,6 @@ class UserController extends Controller
         return $this->view('staff');
     }
 
-    public function showWholesallers()
-    {
-        return $this->view('wholesallers');
-    }
 
     public function newStaff(Countries $countries)
     {
