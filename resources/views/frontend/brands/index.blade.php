@@ -5,25 +5,25 @@
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
+            @if($sliders && isset($sliders->data) && @json_decode($sliders->data,true))
             <div class="container main-max-width">
                 <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
-                    <div>
-                        <a href="#" class="d-block h-100">
-                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#" class="d-block h-100">
-                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                        </a>
-                    </div>
-                    <div>
-                        <a href="#" class="d-block h-100">
-                            <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                        </a>
-                    </div>
+
+                        @php
+                            $data = json_decode($sliders->data,true);
+                        @endphp
+                        @foreach($data as $slider)
+                            <div>
+                                <a href="javascript:void(0)" class="d-block h-100">
+                                    <img src="{{ $slider }}" alt="ads">
+                                </a>
+                            </div>
+                        @endforeach
+
                 </div>
             </div>
+            @endif
+
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap">

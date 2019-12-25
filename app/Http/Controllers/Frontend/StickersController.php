@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockCategories;
@@ -31,8 +32,10 @@ class StickersController extends Controller
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
             ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
+        $settings = new Settings();
+        $sliders = $settings->getEditableData('stickers');
 
-        return $this->view('index', compact('stickers', 'slug', 'current','products','stockCategories','f'));
+        return $this->view('index', compact('stickers', 'slug', 'current','products','stockCategories','f','sliders'));
     }
 
     public function postSticker(Request $request)

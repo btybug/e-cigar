@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Settings;
 use App\Models\Stock;
 use App\Models\StockCategories;
 use Illuminate\Http\Request;
@@ -33,7 +34,10 @@ class BrandsController extends Controller
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
             ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
-        return $this->view('index', compact('brands', 'slug', 'current', 'products', 'categories', 'stockCategories','f'));
+        $settings = new Settings();
+        $sliders = $settings->getEditableData('brands');
+
+        return $this->view('index', compact('brands', 'slug', 'current', 'products', 'categories', 'stockCategories','f','sliders'));
     }
 
     public function postBrand(Request $request)
