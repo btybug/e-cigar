@@ -75,14 +75,7 @@
                     </div>
                     @ok('admin_tools_stickers_manage')
                     <div class="col-xl-9 col-lg-8 col-md-7">
-                        <div class="card">
-                            <div class="card-header">
-                                Stickers
-                            </div>
-                            <div class="card-body">
-                                @include('admin.tools.stickers_form')
-                            </div>
-                        </div>
+                        @include('admin.tools.stickers_form')
                     </div>
                     @endok
                 </div>

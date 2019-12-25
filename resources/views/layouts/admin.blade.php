@@ -12,7 +12,8 @@
 <!-- Bootstrap 4.3.1 -->
 {!! Html::style("public/admin_theme/bower_components/bootstrap-4/css/bootstrap.min.css") !!}
 <!-- Font Awesome -->
-{!! Html::style("public/admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}
+{{--{!! Html::style("public/admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}--}}
+{!! Html::style("public/admin_theme/fontawesome-5/css/all.min.css") !!}
 <!-- Ionicons -->
 {!! Html::style("public/admin_theme/bower_components/Ionicons/css/ionicons.min.css") !!}
 <!-- Theme style -->

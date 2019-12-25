@@ -68,22 +68,30 @@
                                                                 <i class="{!! $social_media['social'] !!}"></i>
                                                             </button>
                                                             <div class="dropdown-menu">
-                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-facebook icon-green') active @endif"
+                                                                <a class="dropdown-item @if($social_media['social']=='fab fa-facebook-f icon-green') active @endif"
                                                                    href="javascript:void(0);">
-                                                                    <i class="fa fa-facebook icon-green"></i>
+{{--                                                                    <i class="fa fa-facebook icon-green"></i>--}}
+                                                                    <i class="fab fa-facebook-f"></i>
                                                                     <span class="name">Facebook</span>
                                                                 </a>
-                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-twitter icon-green') active @endif" href="javascript:void(0);">
-                                                                    <i class="fa fa-twitter icon-green"></i>
+                                                                <a class="dropdown-item @if($social_media['social']=='fab fa-twitter icon-green') active @endif" href="javascript:void(0);">
+{{--                                                                    <i class="fa fa-twitter icon-green"></i>--}}
+                                                                    <i class="fab fa-twitter"></i>
                                                                     <span class="name">Twitter</span>
                                                                 </a>
-                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-yahoo icon-purple') active @endif" href="javascript:void(0);">
-                                                                    <i class="fa fa-yahoo icon-purple"></i>
-                                                                    <span class="name">Yahoo</span>
+                                                                <a class="dropdown-item @if($social_media['social']=='fab fa-pinterest icon-purple') active @endif" href="javascript:void(0);">
+{{--                                                                    <i class="fa fa-yahoo icon-purple"></i>--}}
+                                                                    <i class="fab fa-pinterest"></i>
+                                                                    <span class="name">Pinterest</span>
                                                                 </a>
-                                                                <a class="dropdown-item @if($social_media['social']=='fa fa-google icon-red') active @endif" href="javascript:void(0);">
-                                                                    <i class="fa fa-google icon-red"></i>
-                                                                    <span class="name">Google</span>
+                                                                <a class="dropdown-item @if($social_media['social']=='fab fa-instagram icon-red') active @endif" href="javascript:void(0);">
+{{--                                                                    <i class="fa fa-google icon-red"></i>--}}
+                                                                    <i class="fab fa-instagram"></i>
+                                                                    <span class="name">Instagram</span>
+                                                                </a>
+                                                                <a class="dropdown-item @if($social_media['social']=='fab fa-linkedin icon-red') active @endif" href="javascript:void(0);">
+                                                                    <i class="fab fa-linkedin"></i>
+                                                                    <span class="name">Linkendin</span>
                                                                 </a>
                                                             </div>
 
