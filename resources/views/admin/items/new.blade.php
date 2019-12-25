@@ -245,6 +245,31 @@
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                                             <div class="row">
                                                 <div class="col-md-12">
+                                                    <div class="card panel panel-default mb-3">
+                                                        <div class="card-header panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 clearfix">
+                                                                    <h3 class="pull-left m-0">All Suppliers</h3>
+                                                                    <button type="button" class="btn btn-primary pull-right select-suppliers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body panel-body">
+                                                            <div class="d-flex flex-wrap suppliers-block">
+                                                                @if($model)
+                                                                    @foreach($model->suppliers as $supplier)
+                                                                        <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
+                                                                            <h4 class="text">{{ $supplier->name }}</h4>
+                                                                            <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
+                                                                            <input type="hidden" name="suppliers[]" value="{{ $supplier->id }}" />
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
                                                     <div class="card mb-3">
                                                         <div class="card-header">
                                                             Packaging Size
@@ -317,31 +342,6 @@
                                                                 <div class="col-xl-10">
                                                                     {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
                                                                 </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <div class="card panel panel-default mb-3">
-                                                        <div class="card-header panel-heading">
-                                                            <div class="row">
-                                                                <div class="col-sm-12 clearfix">
-                                                                    <h3 class="pull-left m-0">All Suppliers</h3>
-                                                                    <button type="button" class="btn btn-primary pull-right select-suppliers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card-body panel-body">
-                                                            <div class="d-flex flex-wrap suppliers-block">
-                                                                @if($model)
-                                                                    @foreach($model->suppliers as $supplier)
-                                                                        <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
-                                                                            <h4 class="text">{{ $supplier->name }}</h4>
-                                                                            <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
-                                                                            <input type="hidden" name="suppliers[]" value="{{ $supplier->id }}" />
-                                                                        </div>
-                                                                    @endforeach
-                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
