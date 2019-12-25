@@ -515,6 +515,12 @@ class ItemsController extends Controller
         return $this->view('rows_edit', compact(['items', 'categories', 'brands', 'barcodes']));
     }
 
+    public function postItemMultiDelete(Request $request)
+    {
+        Items::whereIn('id',$request->get('idS'))->delete();
+        return response()->json(['error'=>false,]);
+    }
+
     public function postItemRowsEditSave(Request $request)
     {
         $items = $request->get('items',[]);

@@ -197,7 +197,7 @@
 
 
                 if(ids.length > 0){
-                    AjaxCall("{!! route('post_admin_stock_multi_delete') !!}", {idS:ids}, function (res) {
+                    AjaxCall("{!! route('post_admin_items_multi_delete') !!}", {idS:ids}, function (res) {
                         if (!res.error) {
                             table.ajax.reload();
                             $('#confirm_delete').modal('hide');
