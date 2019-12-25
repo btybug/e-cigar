@@ -658,6 +658,9 @@ Route::group(['prefix' => 'seo'], function () {
     Route::get('/bulk/edit-post-seo/{id}', 'Admin\SeoController@getBulkEditPost')->name('admin_seo_bulk_edit_post');
     Route::post('/bulk/edit-post-seo/{id}', 'Admin\SeoController@createOrUpdatePostSeo')->name('post_admin_seo_bulk_edit_post');
 
+    Route::get('/bulk/edit-brands-seo/{id}', 'Admin\SeoController@getBulkEditBrands')->name('admin_seo_bulk_edit_post');
+    Route::post('/bulk/edit-brands-seo/{id}', 'Admin\SeoController@createOrUpdateBrandsSeo')->name('post_admin_seo_bulk_edit_post');
+
     Route::get('/bulk/edit-stcok-seo/{id}', 'Admin\SeoController@getBulkEditProduct')->name('admin_seo_bulk_edit_stock');
     Route::post('/bulk/edit-stcok-seo/{id}', 'Admin\SeoController@createOrUpdateStockSeo')->name('post_admin_seo_bulk_edit_stock');
     Route::get('/bulk/products', 'Admin\SeoController@getBulkProducts')->name('admin_seo_bulk_products');

@@ -10,6 +10,8 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\BrandsSeo;
+use App\Models\Category;
 use App\Models\Common;
 use App\Models\MainPagesSeo;
 use App\Models\Posts;
@@ -116,6 +118,21 @@ class SeoController extends Controller
         $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?@$general['meta_robots_advanced']:$seo->meta_robots_advanced;
         return $this->view('edit_post', compact('post', 'general', 'fbSeo', 'seo', 'twitterSeo', 'robot'));
     }
+    public function getBulkEditBrands($id, Settings $settings)
+    {
+        $brand = Category::findOrFail($id);
+
+        $general = $settings->getEditableData('seo_brand')->toArray();
+        $fbSeo = $settings->getEditableData('seo_fb_brand')->toArray();
+        $twitterSeo = $settings->getEditableData('seo_twitter_brand')->toArray();
+        $robot = $settings->getEditableData('seo_robot_brand');
+        $seo = $brand->seo;
+        $seo=($seo)?$seo:new BrandsSeo();
+        $seo->robots=(is_null($seo->robots))?$robot->robots:$seo->robots;
+        $seo->robots_follow=(is_null($seo->robots_follow))?@$general['robots_follow']:$seo->robots_follow;
+        $seo->meta_robots_advanced=(is_null($seo->meta_robots_advanced))?@$general['meta_robots_advanced']:$seo->meta_robots_advanced;
+        return $this->view('edit_brand', compact('brand', 'general', 'fbSeo', 'seo', 'twitterSeo', 'robot'));
+    }
 
     public function getBulkEditProduct($id, Settings $settings)
     {
@@ -140,6 +157,13 @@ class SeoController extends Controller
         $data = $request->except('_token', 'translatable','post');
         SeoPosts::updateOrCreate($request->get('id'), $data);
         Posts::updateOrCreate($request->get('post_id'), [],$request->get('post')['translatable']);
+        return redirect()->back();
+    }
+    public function createOrUpdateBrandsSeo(Request $request, $id)
+    {
+        $data = $request->except('_token', 'translatable','brand');
+        BrandsSeo::updateOrCreate($request->get('id'), $data);
+        Category::updateOrCreate($request->get('category_id'), [],$request->get('brand')['translatable']);
         return redirect()->back();
     }
 
