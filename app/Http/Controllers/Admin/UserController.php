@@ -100,7 +100,6 @@ class UserController extends Controller
                 ->select('zone_countries.*', 'zone_countries.name as country')
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
-          $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         return $this->view('edit', compact('user', 'countries', 'roles', 'billing_address', 'default_shipping', 'address', 'countriesShipping'));
     }
 
