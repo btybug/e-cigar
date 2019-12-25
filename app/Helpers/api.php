@@ -850,6 +850,34 @@ function stockSeo($stock)
 
     return $HTML;
 }
+function brandSeo($brand=null)
+{
+    if (!$brand) return null;
+    $lang=app()->getLocale();
+    $settings=new Settings();
+    $seo = $brand->seo;
+    $general = $settings->getEditableData('seo_brand')->toArray();
+    $robot = $settings->getEditableData('seo_robot_brand');
+    $r = (is_null($seo) || is_null($seo->robots)) ?  $robot->robots : $seo->robots;
+    if (!$r) return null;
+    $HTML = '';
+    $keywords=get_translated($seo,strtolower($lang),'keywords');
+    $title=get_translated($seo,strtolower($lang),'title');
+    $description=get_translated($seo,strtolower($lang),'description');
+    $image=get_translated($seo,strtolower($lang),'image');
+    $HTML .= ($title)?'<title>'.$title.'</title>':'<title>'.getSeo($general,'og:title',$brand).'</title>';
+    $HTML.=($keywords)? Html::meta('keywords',$keywords)->toHtml():Html::meta('keywords',getSeo($general,'og:keywords',$brand))->toHtml();
+    $HTML.=($title)? Html::meta('og:title',$title)->toHtml():Html::meta('og:title',getSeo($general,'og:title',$brand))->toHtml();
+    $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$brand))->toHtml();
+    $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$brand))->toHtml();
+
+
+    $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'title',$brand))->toHtml();
+    $HTML.=($description)? Html::meta('description',$description)->toHtml():Html::meta('description',getSeo($general,'og:description',$brand))->toHtml();
+    $HTML .=($image)? Html::meta('image',$image)->toHtml():Html::meta('image',getSeo($general,'image',$brand))->toHtml();
+
+    return $HTML;
+}
 
 
 function meta($object, $type = 'seo_posts')

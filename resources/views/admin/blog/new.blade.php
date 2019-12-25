@@ -158,7 +158,7 @@
                                         </div>
                                     </div>
                                 </div>
-                          
+
                                 <div class="category-wall wall">
                                     <div class="row">
                                         <label class="col-xl-3 control-label" for="input-category"><span

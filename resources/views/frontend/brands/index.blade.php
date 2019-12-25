@@ -1,4 +1,7 @@
 @extends('layouts.frontend',['page_name'=>'banner'])
+@section('meta')
+    {!! brandSeo($current) !!}
+@stop
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">

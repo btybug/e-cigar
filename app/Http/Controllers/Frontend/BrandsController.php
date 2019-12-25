@@ -20,7 +20,7 @@ class BrandsController extends Controller
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get();
         if(! count($brands)) abort(404);
         $slug = ($slug) ? $slug : $brands->first()->slug;
-        $current = ($slug) ? Category::where('slug', $slug)->first() : null;
+        $current = ($slug) ? Category::where('type', 'brands')->where('slug', $slug)->firstOrFail() : null;
         $products = ($current) ? $current->brandProducts() : collect([]);
         $categories = Category::where('type', 'stocks')->whereNotNull('parent_id')->get();
         $stockCategories = StockCategories::
