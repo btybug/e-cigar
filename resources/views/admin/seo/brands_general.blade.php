@@ -162,22 +162,17 @@
                                         <tbody>
                                         <tr>
                                             <td>{name}</td>
-                                            <td>Stock name</td>
+                                            <td>Brand name</td>
                                             <td>Yes</td>
                                         </tr>
                                         <tr>
-                                            <td>{short_description}</td>
-                                            <td>Stock short description</td>
-                                            <td>Yes</td>
-                                        </tr>
-                                        <tr>
-                                            <td>{long_description}</td>
-                                            <td>Stock long description</td>
+                                            <td>{description}</td>
+                                            <td>Brand short description</td>
                                             <td>Yes</td>
                                         </tr>
                                         <tr>
                                             <td>{image}</td>
-                                            <td>Stock Image</td>
+                                            <td>Brand Image</td>
                                             <td>No</td>
                                         </tr>
                                         </tbody>

@@ -862,7 +862,7 @@ function brandSeo($brand=null)
     if (!$r) return null;
     $HTML = '';
     $keywords=get_translated($seo,strtolower($lang),'keywords');
-    $title=get_translated($seo,strtolower($lang),'title');
+    $title=get_translated($seo,strtolower($lang),'name');
     $description=get_translated($seo,strtolower($lang),'description');
     $image=get_translated($seo,strtolower($lang),'image');
     $HTML .= ($title)?'<title>'.$title.'</title>':'<title>'.getSeo($general,'og:title',$brand).'</title>';
