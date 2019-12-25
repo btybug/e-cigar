@@ -13,13 +13,13 @@
         </div>
         <div class="card-body panel-body">
             <div class="content main-content">
-                <ul class="nav nav-tabs admin-profile-left">
-                    <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
+{{--                <ul class="nav nav-tabs admin-profile-left">--}}
+{{--                    <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>--}}
 
-                    <li class="nav-item @if(! $bundle) hide @endif" data-tab="package">
-                        <a class="nav-link" data-toggle="tab" href="#package">Package</a>
-                    </li>
-                </ul>
+{{--                    <li class="nav-item @if(! $bundle) hide @endif" data-tab="package">--}}
+{{--                        <a class="nav-link" data-toggle="tab" href="#package">Package</a>--}}
+{{--                    </li>--}}
+{{--                </ul>--}}
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
 

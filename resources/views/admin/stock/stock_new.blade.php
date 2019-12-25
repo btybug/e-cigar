@@ -379,7 +379,7 @@
                                 <div class="container-fluid p-25">
                                     <div class="row">
                                         <div class="col-xl-3 col-lg-4 col-3 pr-0">
-                                            <div class="basic-left basic-wall h-100">
+                                            <div class="basic-left basic-wall">
                                                 <div class="all-list">
                                                     <ul class="nav nav-tabs media-list">
                                                         <li class="nav-item"><a class="nav-link active"
@@ -408,10 +408,10 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-9 col-lg-8 col-9">
-                                            <div class="basic-center basic-wall scrollbar_media_tab h-100">
+                                            <div class="basic-center basic-wall scrollbar_media_tab h-100 shadow-none">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
-                                                        <div class="card panel panel-default">
+                                                        <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading">
                                                                 <p class="pull-left mb-0">
                                                                     <b data-toggle="tooltip" title="" data-original-title="Change featured image">Feature
@@ -422,7 +422,7 @@
                                                                 {!! media_widget('image',$model) !!}
                                                             </div>
                                                         </div>
-                                                        <div class="card panel panel-default">
+                                                        <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading clearfix">
                                                                 <p class="d-inline-block">Extra Images</p>
                                                             </div>
@@ -431,7 +431,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="card panel panel-default">
+                                                        <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading clearfix">
                                                                 <p class="d-inline-block">Banners</p>
                                                                 <div class="col-sm-2 pull-right">
@@ -499,7 +499,7 @@
                                                         </div>
 
 
-                                                        <div class="card panel panel-default">
+                                                        <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading clearfix">
                                                                 <p class="d-inline-block">Videos</p>
                                                             </div>
@@ -540,37 +540,38 @@
                                                         </div>
                                                     </div>
                                                     <div id="mediastickers" class="tab-pane fade ">
-                                                        <div
-                                                            class="panel-heading d-flex justify-content-between align-items-center mb-2">
-                                                            <h4>
-                                                                Stickers
-                                                            </h4>
-                                                            <button type="button" class="btn btn-info select-stickers">
-                                                                Select
-                                                            </button>
-                                                        </div>
-                                                        <div class="panel-body product-body">
-                                                            <ul class="get-all-stickers-tab stickers--all--lists">
-                                                                @if(isset($model) && count($model->stickers))
-                                                                    @foreach($model->stickers()->orderBy('ordering','asc')->get() as $key => $sticker)
-                                                                        <li style="display: flex"
-                                                                            data-id="{{ $sticker->id }}"
-                                                                            class="option-elm-attributes">
-                                                                            <a href="#"
-                                                                               class="stick--link">{!! $sticker->name !!}</a>
-                                                                            <div class="buttons">
-                                                                                <a href="javascript:void(0)"
-                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
-                                                                                    <i class="fa fa-trash"></i></a>
-                                                                            </div>
-                                                                            <input type="hidden" name="stickers[{{$key}}][id]"
-                                                                                   value="{{ $sticker->id }}">
-                                                                            <input type="hidden" class="sticker-ordering" name="stickers[{{ $key }}][ordering]"
-                                                                                   value="{{ $sticker->ordering }}">
-                                                                        </li>
-                                                                    @endforeach
-                                                                @endif
-                                                            </ul>
+                                                        <div class="card">
+                                                            <div class="card-header panel-heading d-flex justify-content-between align-items-center mb-2">
+                                                                <h4>
+                                                                    Stickers
+                                                                </h4>
+                                                                <button type="button" class="btn btn-info select-stickers">
+                                                                    Select
+                                                                </button>
+                                                            </div>
+                                                            <div class="card-body panel-body product-body">
+                                                                <ul class="get-all-stickers-tab stickers--all--lists">
+                                                                    @if(isset($model) && count($model->stickers))
+                                                                        @foreach($model->stickers()->orderBy('ordering','asc')->get() as $key => $sticker)
+                                                                            <li style="display: flex"
+                                                                                data-id="{{ $sticker->id }}"
+                                                                                class="option-elm-attributes">
+                                                                                <a href="#"
+                                                                                   class="stick--link">{!! $sticker->name !!}</a>
+                                                                                <div class="buttons">
+                                                                                    <a href="javascript:void(0)"
+                                                                                       class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                        <i class="fa fa-trash"></i></a>
+                                                                                </div>
+                                                                                <input type="hidden" name="stickers[{{$key}}][id]"
+                                                                                       value="{{ $sticker->id }}">
+                                                                                <input type="hidden" class="sticker-ordering" name="stickers[{{ $key }}][ordering]"
+                                                                                       value="{{ $sticker->ordering }}">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     @if(! isset($offer))
@@ -592,36 +593,37 @@
                                                     </div>
                                                     @endif
                                                     <div id="mediarelatedproducts" class="tab-pane fade ">
-                                                        <div
-                                                            class="panel-heading d-flex justify-content-between align-items-center mb-2">
-                                                            <h4>
-                                                                Related Products
-                                                            </h4>
-                                                            <button type="button" class="btn btn-info select-products">
-                                                                Select
-                                                            </button>
-                                                        </div>
-                                                        <div class="panel-body product-body">
-                                                            <ul class="get-all-products-tab stickers--all--lists">
-                                                                @if(isset($model) && count($model->related_products))
-                                                                    @foreach($model->related_products as $related_product)
-                                                                        <li style="display: flex"
-                                                                            data-id="{{ $related_product->id }}"
-                                                                            class="option-elm-attributes">
-                                                                            <a href="#"
-                                                                               class="stick--link">{!! $related_product->name !!}</a>
-                                                                            <div class="buttons">
-                                                                                <a href="javascript:void(0)"
-                                                                                   class="remove-all-attributes btn btn-sm btn-danger">
-                                                                                    <i class="fa fa-trash"></i></a>
-                                                                            </div>
-                                                                            <input type="hidden"
-                                                                                   name="related_products[]"
-                                                                                   value="{{ $related_product->id }}">
-                                                                        </li>
-                                                                    @endforeach
-                                                                @endif
-                                                            </ul>
+                                                        <div class="card">
+                                                            <div class="card-header panel-heading d-flex justify-content-between align-items-center mb-2">
+                                                                <h4>
+                                                                    Related Products
+                                                                </h4>
+                                                                <button type="button" class="btn btn-info select-products">
+                                                                    Select
+                                                                </button>
+                                                            </div>
+                                                            <div class="card-body panel-body product-body">
+                                                                <ul class="get-all-products-tab stickers--all--lists">
+                                                                    @if(isset($model) && count($model->related_products))
+                                                                        @foreach($model->related_products as $related_product)
+                                                                            <li style="display: flex"
+                                                                                data-id="{{ $related_product->id }}"
+                                                                                class="option-elm-attributes">
+                                                                                <a href="#"
+                                                                                   class="stick--link">{!! $related_product->name !!}</a>
+                                                                                <div class="buttons">
+                                                                                    <a href="javascript:void(0)"
+                                                                                       class="remove-all-attributes btn btn-sm btn-danger">
+                                                                                        <i class="fa fa-trash"></i></a>
+                                                                                </div>
+                                                                                <input type="hidden"
+                                                                                       name="related_products[]"
+                                                                                       value="{{ $related_product->id }}">
+                                                                            </li>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </ul>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     {{--<div id="mediaspecifications" class="tab-pane fade ">--}}
