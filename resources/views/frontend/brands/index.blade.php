@@ -5,99 +5,11 @@
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
-            <div class="brands_page-top">
-                <div class="container main-max-width h-100">
-                    <div class="d-flex brands_page-top-inner h-100">
-                        <div class="brands_page-top-title">
-                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">{!! __('popular_brands') !!}</h1>
-                        </div>
-                        <div class="brands_page-top-slider">
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="container main-max-width">
+                <div class="stickers-ads-wrapper">
+                    <a href="#" class="d-block h-100">
+                        <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
+                    </a>
                 </div>
             </div>
             <div class="brands_main-content-wrapper">
