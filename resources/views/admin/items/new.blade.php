@@ -36,7 +36,7 @@
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#logistic">Logistic</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#downloads">Downloads</a></li>
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>
+{{--                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>--}}
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
                                         </ul>
                                     </div>
@@ -284,7 +284,7 @@
 
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <div class="card">
+                                                    <div class="card mb-3">
                                                         <div class="card-header">
                                                             Item size
                                                         </div>
@@ -317,6 +317,31 @@
                                                                 <div class="col-xl-10">
                                                                     {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
                                                                 </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <div class="card panel panel-default">
+                                                        <div class="card-header panel-heading">
+                                                            <div class="row">
+                                                                <div class="col-sm-12 clearfix">
+                                                                    <h3 class="pull-left m-0">All Suppliers</h3>
+                                                                    <button type="button" class="btn btn-primary pull-right select-suppliers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="card-body panel-body">
+                                                            <div class="d-flex flex-wrap suppliers-block">
+                                                                @if($model)
+                                                                    @foreach($model->suppliers as $supplier)
+                                                                        <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
+                                                                            <h4 class="text">{{ $supplier->name }}</h4>
+                                                                            <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
+                                                                            <input type="hidden" name="suppliers[]" value="{{ $supplier->id }}" />
+                                                                        </div>
+                                                                    @endforeach
+                                                                @endif
                                                             </div>
                                                         </div>
                                                     </div>
@@ -398,41 +423,26 @@
                                         </div>
                                         <div id="settings" class="tab-pane fade">
                                             @if($model == null || $model->type != 'bundle')
-                                                <div class="form-group row">
-                                                    <label for="packaging_weight"
-                                                           class="col-sm-2">Alert</label>
-                                                    <div class="col-sm-10">
-                                                        <input class="form-control"
-                                                               name="alert"
-                                                               id="packaging_weight" type="text">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        Settings
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <div class="form-group row">
+                                                            <label for="packaging_weight"
+                                                                   class="col-sm-2">Alert</label>
+                                                            <div class="col-sm-10">
+                                                                <input class="form-control"
+                                                                       name="alert"
+                                                                       id="packaging_weight" type="text">
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 @endif
                                         </div>
                                         <div id="management" class="tab-pane fade">
-                                            <div class="card panel panel-default">
-                                                <div class="card-header panel-heading">
-                                                    <div class="row">
-                                                        <div class="col-sm-12 clearfix">
-                                                            <h3 class="pull-left m-0">All Suppliers</h3>
-                                                            <button type="button" class="btn btn-primary pull-right select-suppliers"><i class="fa fa-plus fa-sm mr-10"></i>Add supplier</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="card-body panel-body">
-                                                    <div class="d-flex flex-wrap suppliers-block">
-                                                        @if($model)
-                                                            @foreach($model->suppliers as $supplier)
-                                                                <div class="inventory-attr-item" data-id="{{ $supplier->id }}">
-                                                                    <h4 class="text">{{ $supplier->name }}</h4>
-                                                                    <button type="button" class="btn btn-danger remove-suppliers"><i class="fa fa-close"></i></button>
-                                                                    <input type="hidden" name="suppliers[]" value="{{ $supplier->id }}" />
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
+
                                         </div>
                                         <div id="specifications" class="tab-pane fade">
                                             <div class="card panel panel-default">
