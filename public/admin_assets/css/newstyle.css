@@ -1994,6 +1994,18 @@ header.main-header{
     max-width: 100px;
     flex: 0 0 100px;
 }
+.item-edit-page--body{
+    background: #ecf0f5;
+    padding-left: 0;
+    padding-right: 0;
+
+}
+.item-edit-page--body .basic-center.basic-wall{
+    background: none;
+    border: none;
+    padding: 0;
+    box-shadow: none;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

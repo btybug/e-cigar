@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="card panel panel-default">
+    <div class="card panel panel-default border-0">
         {!! Form::model($model,['class'=>'form-horizontal','url' => route('post_admin_items_new')]) !!}
         <div class="card-header panel-heading d-flex">
                 <div class="col-9 pr-0 pl-sm-3 pl-0">
@@ -11,8 +11,8 @@
                 <button class="btn btn-info ml-4 float-right" type="submit">Save</button>
             </div>
         </div>
-        <div class="card-body panel-body">
-            <div class="content main-content">
+        <div class="card-body panel-body item-edit-page--body">
+            <div class="content main-content p-0">
 {{--                <ul class="nav nav-tabs admin-profile-left">--}}
 {{--                    <li class="nav-item" data-tab="info"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>--}}
 
@@ -28,7 +28,7 @@
 
                         <div class="row">
                             <div class="col-xl-3 col-4 pr-sm-3 pr-0">
-                                <div class="basic-left basic-wall h-100">
+                                <div class="basic-left basic-wall">
                                     <div class="all-list">
                                         <ul class="nav nav-tabs media-list">
                                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basics">Basics</a></li>
@@ -46,142 +46,148 @@
                                 <div class="basic-center basic-wall">
                                     <div class="tab-content media-list-tab-content">
                                         <div id="basics" class="tab-pane fade in active show">
-                                            @if(count(get_languages()))
-                                                <ul class="nav nav-tabs mb-3">
-                                                    @foreach(get_languages() as $language)
-                                                        <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
-                                                                    data-toggle="tab"
-                                                                    href="#{{ strtolower($language->code) }}">
-                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                            </a></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                            <div class="tab-content">
-                                                @if(count(get_languages()))
-                                                    @foreach(get_languages() as $language)
-                                                        <div id="{{ strtolower($language->code) }}"
-                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                            data-toggle="tooltip"
-                                                                            title=""
-                                                                            data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                <div class="col-xl-10">
-                                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                            data-toggle="tooltip"
-                                                                            title=""
-                                                                            data-original-title="Short Description">Short Description</span></label>
-                                                                <div class="col-xl-10">
-                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                <label class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                            data-toggle="tooltip"
-                                                                            title=""
-                                                                            data-original-title="Short Description">Long Description</span></label>
-                                                                <div class="col-xl-10">
-                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Barcode</label>
-                                                    @if(! count($barcodes))
-                                                        <div class="col-lg-8">
-                                                            <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
-                                                        </div>
-                                                    @else
-                                                        <div class="col-lg-8">
-                                                            {!! Form::select('barcode_id', $barcodes,null,
-                                                            ['class' => 'form-control','id' => 'barcode']) !!}
-                                                        </div>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    @if(count(get_languages()))
+                                                        <ul class="nav nav-tabs mb-3">
+                                                            @foreach(get_languages() as $language)
+                                                                <li class="nav-item "><a class="nav-link @if($loop->first) active @endif"
+                                                                                         data-toggle="tab"
+                                                                                         href="#{{ strtolower($language->code) }}">
+                                                                        <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                    </a></li>
+                                                            @endforeach
+                                                        </ul>
                                                     @endif
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="product_id" class="control-label col-lg-4 col-form-label text-lg-right">Product
-                                                        SKU</label>
-                                                    <div class="col-lg-8">
-                                                        {!! Form::text('sku', null,
-                                                        ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                <div class="form-group">
-                                                <div class="row">
-                                                    <label for="status" class="control-label col-lg-4 col-form-label text-lg-right">
-                                                        Status</label>
-                                                    <div class="col-lg-8">
-                                                        {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
-                                                        ['class' => 'form-control']) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                <div class="form-group row">
-                                                    <label for="landing"
-                                                           class=" col-xl-2">Allow landing</label>
-                                                    <div class="col-xl-10">
-                                                        {!! Form::hidden('landing',0) !!}
-                                                        {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
-                                                    </div>
-                                                </div>
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <label for="feature_image"
-                                                           class="control-label col-lg-4 col-form-label text-lg-right">Feature image</label>
-                                                    <div class="col-lg-8">
-                                                        {!! media_button('image',$model) !!}
-                                                    </div>
-                                                </div>
-                                            </div>
-                                                <div class="form-group">
-                                                    <div class="row">
-                                                        <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Default price</label>
-
-                                                        <div class="col-lg-8">
-                                                            {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="form-group">
-                                                    <label class="col-sm-12 control-label pl-0">Brands</label>
-                                                    <div id="brands_treeview_json">
-                                                        <div class="filter-wall cat-name d-flex flex-wrap">
-                                                            <div class="col-md-7 p-0">
-                                                                @foreach($brands as $brand)
-                                                                    <div
-                                                                        class="single-wrap ml-4">
-                                                                        <div
-                                                                            class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                            {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                            <label
-                                                                                class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                            </label>
+                                                    <div class="tab-content">
+                                                        @if(count(get_languages()))
+                                                            @foreach(get_languages() as $language)
+                                                                <div id="{{ strtolower($language->code) }}"
+                                                                     class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                    <div class="form-group row">
+                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                        <div class="col-xl-10">
+                                                                            {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
                                                                         </div>
                                                                     </div>
-                                                                @endforeach
+                                                                    <div class="form-group row">
+                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Short Description">Short Description</span></label>
+                                                                        <div class="col-xl-10">
+                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                        <label class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                                data-toggle="tooltip"
+                                                                                title=""
+                                                                                data-original-title="Short Description">Long Description</span></label>
+                                                                        <div class="col-xl-10">
+                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Barcode</label>
+                                                            @if(! count($barcodes))
+                                                                <div class="col-lg-8">
+                                                                    <a href="{{route('admin_inventory_barcodes_new')}}">New Barcode</a>
+                                                                </div>
+                                                            @else
+                                                                <div class="col-lg-8">
+                                                                    {!! Form::select('barcode_id', $barcodes,null,
+                                                                    ['class' => 'form-control','id' => 'barcode']) !!}
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="product_id" class="control-label col-lg-4 col-form-label text-lg-right">Product
+                                                                SKU</label>
+                                                            <div class="col-lg-8">
+                                                                {!! Form::text('sku', null,
+                                                                ['class' => 'form-control']) !!}
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="status" class="control-label col-lg-4 col-form-label text-lg-right">
+                                                                Status</label>
+                                                            <div class="col-lg-8">
+                                                                {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
+                                                                ['class' => 'form-control']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group row">
+                                                        <label for="landing"
+                                                               class=" col-xl-2">Allow landing</label>
+                                                        <div class="col-xl-10">
+                                                            {!! Form::hidden('landing',0) !!}
+                                                            {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="feature_image"
+                                                                   class="control-label col-lg-4 col-form-label text-lg-right">Feature image</label>
+                                                            <div class="col-lg-8">
+                                                                {!! media_button('image',$model) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <div class="row">
+                                                            <label for="barcode" class="control-label col-lg-4 col-form-label text-lg-right">Default price</label>
 
+                                                            <div class="col-lg-8">
+                                                                {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label class="col-sm-12 control-label pl-0">Brands</label>
+                                                        <div id="brands_treeview_json">
+                                                            <div class="filter-wall cat-name d-flex flex-wrap">
+                                                                <div class="col-md-7 p-0">
+                                                                    @foreach($brands as $brand)
+                                                                        <div
+                                                                            class="single-wrap ml-4">
+                                                                            <div
+                                                                                class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
+                                                                                {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
+                                                                                <label
+                                                                                    class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
+                                                                                    for="customRadio{{ $brand->id }}">{{ $brand->name }}
+                                                                                </label>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
                                                     </div>
                                                 </div>
+
+                                            </div>
+
                                         </div>
 
                                         <div id="media" class="tab-pane fade">
-                                            <div class="card panel panel-default">
+                                            <div class="card panel panel-default mb-3">
                                                 <div class="card-header panel-heading">
                                                     <p class="pull-left mb-0">
                                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Image</b>
@@ -191,7 +197,7 @@
                                                     {!! media_button('media',$model,true) !!}
                                                 </div>
                                             </div>
-                                            <div class="card panel panel-default">
+                                            <div class="card panel panel-default mb-3">
                                                 <div class="card-header panel-heading">
                                                     <p class="pull-left mb-0">
                                                         <b data-toggle="tooltip" title="" data-original-title="Change featured image">Videos</b>
@@ -236,77 +242,86 @@
                                         <div id="logistic" class="tab-pane basic-details-tab stock-new-tab fade">
                                             <div class="row">
                                                 <div class="col-md-12">
-                                                    <fieldset>
-                                                        <legend class="border-bottom">Packaging Size</legend>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_length"
-                                                                   class=" col-xl-2">Length</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('length',null,['class' => 'form-control']) !!}
+                                                    <div class="card mb-3">
+                                                        <div class="card-header">
+                                                            Packaging Size
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="form-group row">
+                                                                <label for="packaging_length"
+                                                                       class=" col-xl-2">Length</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('length',null,['class' => 'form-control']) !!}
 
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_width"
+                                                                       class="col-xl-2">Width</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('width',null,['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_height"
+                                                                       class="col-xl-2">Height</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('height',null,['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_weight"
+                                                                       class="col-xl-2">Weight</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('weight',null,['class' => 'form-control']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_width"
-                                                                   class="col-xl-2">Width</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('width',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_height"
-                                                                   class="col-xl-2">Height</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('height',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_weight"
-                                                                   class="col-xl-2">Weight</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('weight',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
+                                                    </div>
+
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <fieldset>
-                                                        <legend class="border-bottom">Item size</legend>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_length"
-                                                                   class=" col-xl-2">Length</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('item_length',null,['class' => 'form-control']) !!}
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            Item size
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="form-group row">
+                                                                <label for="packaging_length"
+                                                                       class=" col-xl-2">Length</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('item_length',null,['class' => 'form-control']) !!}
 
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_width"
+                                                                       class="col-xl-2">Width</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('item_width',null,['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_height"
+                                                                       class="col-xl-2">Height</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('item_height',null,['class' => 'form-control']) !!}
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label for="packaging_weight"
+                                                                       class="col-xl-2">Weight</label>
+                                                                <div class="col-xl-10">
+                                                                    {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
+                                                                </div>
                                                             </div>
                                                         </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_width"
-                                                                   class="col-xl-2">Width</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('item_width',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_height"
-                                                                   class="col-xl-2">Height</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('item_height',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group row">
-                                                            <label for="packaging_weight"
-                                                                   class="col-xl-2">Weight</label>
-                                                            <div class="col-xl-10">
-                                                                {!! Form::text('item_weight',null,['class' => 'form-control']) !!}
-                                                            </div>
-                                                        </div>
-                                                    </fieldset>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div id="downloads" class="tab-pane fade">
-                                            <div class="">
+                                            <div class="p-3 bg-white mb-3">
                                                 <div class="d-flex flex-wrap mb-5">
                                                     <label class="col-form-label mr-2">Select Manual downloads</label>
                                                     {!! Form::select('select_download',['' => 'Select']+$downloads,null,['class' =>'form-control select-download w-20']) !!}
@@ -359,7 +374,7 @@
                                                     </div>
                                                 @endif
                                             </div>
-                                            <div class="qr-code @if($model && $model->landing)@else d-none @endif">
+                                            <div class="qr-code p-3 bg-white @if($model && $model->landing)@else d-none @endif">
                                                 @if($model)
                                                     @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                 @endif
@@ -404,8 +419,8 @@
                                             </div>
                                         </div>
                                         <div id="specifications" class="tab-pane fade">
-                                            <div class="panel panel-default">
-                                                <div class="panel-body" id="v-option-form">
+                                            <div class="card panel panel-default">
+                                                <div class="card-body panel-body" id="v-option-form">
                                                     <div class="form-group">
                                                         <div class="row">
                                                             <div class="col-md-4">
