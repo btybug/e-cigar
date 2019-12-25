@@ -872,9 +872,9 @@ function brandSeo($brand=null)
     $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$brand))->toHtml();
 
 
-    $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'title',$brand))->toHtml();
+    $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'og:title',$brand))->toHtml();
     $HTML.=($description)? Html::meta('description',$description)->toHtml():Html::meta('description',getSeo($general,'og:description',$brand))->toHtml();
-    $HTML .=($image)? Html::meta('image',$image)->toHtml():Html::meta('image',getSeo($general,'image',$brand))->toHtml();
+    $HTML .=($image)? Html::meta('image',$image)->toHtml():Html::meta('image',getSeo($general,'og:image',$brand))->toHtml();
 
     return $HTML;
 }
