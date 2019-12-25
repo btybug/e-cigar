@@ -830,17 +830,19 @@ function stockSeo($stock)
     $seo = $stock->seo;
     $general = $settings->getEditableData('seo_stocks')->toArray();
     $robot = $settings->getEditableData('seo_robot_stocks');
-    $r = (is_null($seo) || is_null($seo->robots)) ? ((!$robot->robots) ? $robot->robots : '') : $seo->robots;
+    $r = (is_null($seo) || is_null($seo->robots)) ?  $robot->robots : $seo->robots;
     if (!$r) return null;
     $HTML = '';
     $keywords=get_translated($seo,strtolower($lang),'keywords');
     $title=get_translated($seo,strtolower($lang),'title');
     $description=get_translated($seo,strtolower($lang),'description');
     $image=get_translated($seo,strtolower($lang),'image');
+    $HTML .= ($title)?'<title>'.$title.'</title>':'<title>'.getSeo($general,'og:title',$stock).'</title>';
     $HTML.=($keywords)? Html::meta('keywords',$keywords)->toHtml():Html::meta('keywords',getSeo($general,'og:keywords',$stock))->toHtml();
     $HTML.=($title)? Html::meta('og:title',$title)->toHtml():Html::meta('og:title',getSeo($general,'og:title',$stock))->toHtml();
     $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$stock))->toHtml();
     $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$stock))->toHtml();
+
 
     $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'title',$stock))->toHtml();
     $HTML.=($description)? Html::meta('description',$description)->toHtml():Html::meta('description',getSeo($general,'og:description',$stock))->toHtml();
@@ -1469,6 +1471,7 @@ function main_pages_seo($main_page=null){
     if($main_page){
        $seo= \App\Models\MainPagesSeo::where('page_name',$main_page)->first();
        if($seo){
+           $HTML .= '<title>'.$seo->title.'</title>' . "\n\r";
            $HTML .= '<meta property="og:image" content="'.$seo->image.'">' . "\n\r";
            $HTML .= '<meta property="og:image:type" content="image/jpeg" />' . "\n\r";
            $HTML .= '<meta property="og:image:width" content="400" />' . "\n\r";

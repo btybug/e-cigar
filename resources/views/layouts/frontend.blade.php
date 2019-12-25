@@ -9,9 +9,12 @@
     <meta name="google-recaptcha-key" content="{!!env('GOOGLE_RECAPTCHA_KEY')!!}">
     <meta name="google-site-verification" content="bYambdrAC-nymmiVMr-A2jiKeKW8gEsCcCRozCLDp4o" />
     {!! main_pages_seo(isset($page_name)?$page_name:null) !!}
+
     @yield('meta')
-    <title>Document</title>
-    <!-- Start of ukdevplus Zendesk Widget script -->
+
+
+
+<!-- Start of ukdevplus Zendesk Widget script -->
     <script id="ze-snippet"
             src="https://static.zdassets.com/ekr/snippet.js?key=7cef91e3-cb9d-4443-9c06-2ac7bffed052"></script>
     <!-- End of ukdevplus Zendesk Widget script -->
