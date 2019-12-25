@@ -18,8 +18,8 @@
         <div class="card-body">
             <section class="content stock-page mt-0 p-0">
 
-                <div class="row">
-                    <div class="col-md-12">
+                <div class="">
+                    <div class="border border-dark">
                         <ul class="nav nav-tabs admin-profile-left">
                             <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#basic">Basic
                                     Details</a>
@@ -34,66 +34,74 @@
 
 
                     {!! Form::hidden('id',null,['id' => "stockID"]) !!}
-                    <div class="col-md-12">
+                    <div class="">
                         <div class="tab-content tabs_content">
                             <div id="basic" class="tab-pane fade in active show   basic-details-tab ">
-                                <div class="container-fluid p-25">
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="basic-center basic-wall">
+                                <div class="container-fluid p-25 pt-0 mt-4 border border-dark">
+                                    <div class="">
+                                        <div class="">
+                                            <div class="basic-center basic-wall shadow-none">
                                                 <div class="row">
                                                     <div class="col-lg-8 col-md-7 col-sm-8">
-                                                        @if(count(get_languages()))
-                                                            <ul class="nav nav-tabs">
-                                                                @foreach(get_languages() as $language)
-                                                                    <li class="nav-item"><a
-                                                                            class="nav-link @if($loop->first) active @endif"
-                                                                            data-toggle="tab"
-                                                                            href="#{{ strtolower($language->code) }}">
+                                                        <div class="card mb-3">
+                                                            <div class="card-header">
+                                                                Basic Details
+                                                            </div>
+                                                            <div class="card-body">
+                                                                @if(count(get_languages()))
+                                                                    <ul class="nav nav-tabs">
+                                                                        @foreach(get_languages() as $language)
+                                                                            <li class="nav-item"><a
+                                                                                    class="nav-link @if($loop->first) active @endif"
+                                                                                    data-toggle="tab"
+                                                                                    href="#{{ strtolower($language->code) }}">
                                                                             <span
                                                                                 class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                                        </a></li>
-                                                                @endforeach
-                                                            </ul>
-                                                        @endif
-                                                        <div class="tab-content mt-20">
-                                                            @if(count(get_languages()))
-                                                                @foreach(get_languages() as $language)
-                                                                    <div id="{{ strtolower($language->code) }}"
-                                                                         class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                                        <div class="form-group row mt-3">
-                                                                            <label
-                                                                                class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                                    data-toggle="tooltip"
-                                                                                    title=""
-                                                                                    data-original-title="Attribute Name Title">Product Name</span></label>
-                                                                            <div class="col-xl-10">
-                                                                                {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label
-                                                                                class="col-xl-2 control-label col-form-label text-xl-right"><span
-                                                                                    data-toggle="tooltip"
-                                                                                    title=""
-                                                                                    data-original-title="Short Description">Short Description</span></label>
-                                                                            <div class="col-xl-10">
-                                                                                {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <label for="product_id"
-                                                                                   class="control-label col-xl-4 control-label col-form-label text-xl-right">Product
-                                                                                Slug (for url)</label>
-                                                                            <div class="col-xl-8">
-                                                                                {!! Form::text('translatable['.strtolower($language->code).'][slug]',get_translated($model,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
+                                                                                </a></li>
+                                                                        @endforeach
+                                                                    </ul>
+                                                                @endif
+                                                                <div class="tab-content mt-20">
+                                                                    @if(count(get_languages()))
+                                                                        @foreach(get_languages() as $language)
+                                                                            <div id="{{ strtolower($language->code) }}"
+                                                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                                <div class="form-group row mt-3">
+                                                                                    <label
+                                                                                        class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                                            data-toggle="tooltip"
+                                                                                            title=""
+                                                                                            data-original-title="Attribute Name Title">Product Name</span></label>
+                                                                                    <div class="col-xl-10">
+                                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label
+                                                                                        class="col-xl-2 control-label col-form-label text-xl-right"><span
+                                                                                            data-toggle="tooltip"
+                                                                                            title=""
+                                                                                            data-original-title="Short Description">Short Description</span></label>
+                                                                                    <div class="col-xl-10">
+                                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <label for="product_id"
+                                                                                           class="control-label col-xl-4 control-label col-form-label text-xl-right">Product
+                                                                                        Slug (for url)</label>
+                                                                                    <div class="col-xl-8">
+                                                                                        {!! Form::text('translatable['.strtolower($language->code).'][slug]',get_translated($model,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
 
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                            @endif
+                                                                        @endforeach
+                                                                    @endif
+                                                                </div>
+                                                            </div>
                                                         </div>
+
                                                         {{--<div class="form-group">--}}
                                                         {{--<div class="row">--}}
                                                         {{--<label for="sku"--}}
@@ -107,7 +115,7 @@
                                                         {{--</div>--}}
                                                         {{--</div>--}}
 
-                                                        <div class="form-group col-xl-8 col-lg-10 p-0">
+                                                        <div class="form-group">
                                                             <div class="card panel panel-default">
                                                                 <div class="card-header panel-heading">
                                                                     <p class="pull-left mb-0">
