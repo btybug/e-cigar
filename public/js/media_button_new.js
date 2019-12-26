@@ -412,6 +412,7 @@ const App = function() {
       
       mapTree: (el, data) => {
         console.log(this)
+        el.html('');
         data.map((child) => {
           if(child.children.length === 0) {
             el.append(this.htmlMaker.myFuckingTree.makeTreeLeaf(child.id, child.name));
@@ -422,9 +423,8 @@ const App = function() {
         })
       },
     
-      makeTree: function(data) {
-        console.log(66698855525, data)
-        const treeRootElement = $('.tree_branch');
+      makeTree: function(data, rootSelector) {
+        const treeRootElement = $(rootSelector);
         data && this.mapTree(treeRootElement, data);
       },
     
@@ -446,7 +446,8 @@ const App = function() {
     //********App -> htmlMaker -> makeTreeFolder********start
     makeTreeFolder: (data, el) => {
       const self = this;
-      self.htmlMaker.myFuckingTree.makeTree(data);
+      $($('.media-tree_leaf-wrapper').find('.tree_branch')[0]).html('');
+      self.htmlMaker.myFuckingTree.makeTree(data, '.media__folder-list .tree_branch');
       var branch = document.querySelectorAll('.tree_branch');
     console.log('branch', branch)
     for (var i = 0; i < branch.length; i++) {
@@ -1352,6 +1353,7 @@ var count = 0;
           });
           if (tree) {
               console.log(res)
+            
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
           globalFolderId = res.settings.id;
@@ -2311,70 +2313,133 @@ document
     })
 
 
-    var tree = document.querySelectorAll('.tree_leaf');
-    var branch = document.querySelectorAll('.tree_branch');
-    console.log('branch', branch)
-    for (var i = 0; i < branch.length; i++) {
-      new Sortable(branch[i], {
-        group: 'b',
-        filter: '.filter',
-        draggable: ".tree_leaf",
-        sort: true,
-        animation: 150,
-        fallbackOnBody: true,
-        // swapThreshold: 0.65,
-        dataIdAttr: 'data-id',
-        forceFallback: false,
-        fallbackClass: "sortable-fallback",
-        swapThreshold: 0.60,
-        ghostClass: 'background-class',
-        swapClass: 'highlight', // The class applied to the hovered swap item
+    // var tree = document.querySelectorAll('.tree_leaf');
+    // var branch = document.querySelectorAll('.tree_branch');
+    // console.log('branch', branch)
+    // for (var i = 0; i < branch.length; i++) {
+    //   new Sortable(branch[i], {
+    //     group: 'b',
+    //     filter: '.filter',
+    //     draggable: ".tree_leaf",
+    //     sort: true,
+    //     animation: 150,
+    //     fallbackOnBody: true,
+    //     // swapThreshold: 0.65,
+    //     dataIdAttr: 'data-id',
+    //     forceFallback: false,
+    //     fallbackClass: "sortable-fallback",
+    //     swapThreshold: 0.60,
+    //     ghostClass: 'background-class',
+    //     swapClass: 'highlight', // The class applied to the hovered swap item
     
-        setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-          // console.log('dragEl', $(dragEl).data('id'))
-          dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
-        },
-        onEnd: function (/**Event*/evt) {
-          var itemEl = evt.item;  // dragged HTMLElement
-          // console.log()
-          if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
-            $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
-            $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
+    //     setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
+    //       // console.log('dragEl', $(dragEl).data('id'))
+    //       dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
+    //     },
+    //     onEnd: function (/**Event*/evt) {
+    //       var itemEl = evt.item;  // dragged HTMLElement
+    //       // console.log()
+    //       if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
+    //         $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
+    //         $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
             
-            $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
-            $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
-          }
+    //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
+    //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
+    //       }
     
-          if($(evt.from)[0].children.length === 0) {
-            $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
-            $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
+    //       if($(evt.from)[0].children.length === 0) {
+    //         $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
+    //         $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
     
-            // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
-            $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
-            $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
-          }
-        },
-        onMove: function (/**Event*/evt, /**Event*/originalEvent) {
-          // Example: https://jsbin.com/nawahef/edit?js,output
-          if($(evt.related).find('.tree_branch').hasClass('closed_branch')) {
-            const branch = $(evt.related).closest('.tree_leaf');
-            const opening_icon = $(evt.related).closest('.icon-folder-opening');
-            console.log(evt.target)
-            if(branch.hasClass('tree_leaf_with_branch')) {
-              console.log(22222222222);
-              if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
-                $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
-              }
+    //         // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
+    //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
+    //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
+    //       }
+    //     },
+    //     onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+    //       // Example: https://jsbin.com/nawahef/edit?js,output
+    //       if($(evt.related).find('.tree_branch').hasClass('closed_branch')) {
+    //         const branch = $(evt.related).closest('.tree_leaf');
+    //         const opening_icon = $(evt.related).closest('.icon-folder-opening');
+    //         console.log(evt.target)
+    //         if(branch.hasClass('tree_leaf_with_branch')) {
+    //           console.log(22222222222);
+    //           if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
+    //             $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
+    //           }
     
-              if(opening_icon.find('i').hasClass('fa-caret-right')) {
-                opening_icon.find('i').removeClass('fa-caret-right');
-                opening_icon.find('i').addClass('fa-caret-down');
-              }
-            }
-          }
+    //           if(opening_icon.find('i').hasClass('fa-caret-right')) {
+    //             opening_icon.find('i').removeClass('fa-caret-right');
+    //             opening_icon.find('i').addClass('fa-caret-down');
+    //           }
+    //         }
+    //       }
           
           
-        }
-      });
-    }
+    //     }
+    //   });
+    // }
     
+
+    
+
+    $('#moveMediaModal').on('show.bs.modal', function(ev) {
+      if($('.media_right_content .folderitems').find('.file-box.active').length > 0) {
+
+        $('#moveMediaModal').find('.move-disabled-js').prop('disabled', false);
+        $(this).find('.tree_container').html(`<div class="media-tree_leaf-wrapper" style="display: flex; justify-content: space-between;">
+          <ol class="first-branch">
+            <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_1" bb-media-type="folder">
+              <div class="tree_leaf_content active" bb-media-click="get_folder_items" draggable="true">
+                  <span class="icon-folder-opening"></span>
+                  <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
+                  Drive2
+              </div>
+            
+              <ol class="tree_branch" id="fff">
+
+              </ol>
+            </li>
+          </ol>
+        </div>`);
+
+        shortAjax("/api-media/get-folder-childs", {"folder_id":"1","files":true,"access_token":"string"}, res => {
+          app.htmlMaker.myFuckingTree.makeTree(res.data.children, '#moveMediaModal .tree_branch');
+        });
+      } else {
+        $(this).find('.tree_container').html('No selected items');
+        $('#moveMediaModal').find('.move-disabled-js').prop('disabled', true);
+      }
+    })
+
+    $('body').on('click', '#moveMediaModal .move-disabled-js', function() {
+      const activeFolders = [];
+      $($('.media_right_content .folderitems').find('.folder-container.active')).each(function() {
+        activeFolders.push($(this).find('.file').data('id'));
+      })
+     
+      const activeImages = [];
+      $($('.media_right_content .folderitems').find('.image-container.active')).each(function() {
+        activeImages.push($(this).find('.file').data('id'));
+      })
+      const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
+
+      activeImages.map(function(image) {
+        app.requests.transferImage({
+          item_id: image,
+          folder_id: selectedFolder 
+        })
+      })
+
+      activeFolders.map(function(folder_id) {
+        app.requests.transferFolder({
+          parent_id: selectedFolder,
+          folder_id: folder_id 
+        })
+      })
+    });
+
+    $('body').on('click', '#moveMediaModal .tree_leaf_content', function(ev) {
+      $('#moveMediaModal .tree_leaf_content.active').removeClass('active');
+      $($(ev.target).closest('.tree_leaf').find('.tree_leaf_content')[0]).addClass('active');
+    });
