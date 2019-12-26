@@ -398,7 +398,7 @@ const App = function() {
       
       makeTreeBranch: function(id, name) {
         return (`<li class="tree_leaf tree_leaf_with_branch" data-name="${name}" data-id="${id}" id="item_${id}" bb-media-type="folder">
-                      <div class="tree_leaf_content active" bb-media-click="get_folder_items" draggable="true">
+                      <div class="tree_leaf_content" bb-media-click="get_folder_items" draggable="true">
                           <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
                           <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                           <span class="folder-item--title">${name}</span>
@@ -491,6 +491,8 @@ const App = function() {
         },
         onMove: function (/**Event*/evt, /**Event*/originalEvent) {
           // Example: https://jsbin.com/nawahef/edit?js,output
+
+          // const nodeId = 
           
           if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
             const branch = $(evt.related).closest('.tree_leaf');
@@ -508,6 +510,17 @@ const App = function() {
               }
             }
           }
+
+          self.requests.transferFolder(
+            {
+              folder_id: Number(nodeId),
+              parent_id: Number(parentId),
+              access_token: "string"
+            },
+              () => {
+                // self.htmlMaker.treeMove(nodeId, parentId);
+              }
+          );
         }
       });
     }
