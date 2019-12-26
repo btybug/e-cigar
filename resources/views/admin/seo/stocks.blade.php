@@ -234,7 +234,7 @@
                                        <div class="d-flex">
                                            <input type="text" value="{!!$value!!}" class="form-control"
                                                   name="rich[{!! $key !!}]">
-                                           <span class="btn btn-danger delete-rich-property">x</span>
+                                           <span data-key="{!! $key !!}" class="btn btn-danger delete-rich-property">x</span>
                                        </div>
                                    </div>
                                @endforeach

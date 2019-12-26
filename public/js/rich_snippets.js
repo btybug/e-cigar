@@ -46,6 +46,7 @@ $('body').on('click', '.rich-property', function () {
     let i = input.clone();
     let iw = inputWrap.clone();
     let sp = span.clone();
+    sp.attr('data-key',$(this).attr('data-key'))
     i.attr('name','rich['+ $(this).attr('data-key')+']');
     iw.append(i);
     iw.append(sp);
@@ -58,7 +59,10 @@ $('body').on('click', '.rich-property', function () {
 
 });
     $('body').on('click','.delete-rich-property',function () {
+
         $(this).closest('.form-group').remove()
+        edit.splice(edit.indexOf($(this).attr('data-key')),1);
+        $('#rich-property-button').attr('data-edit',JSON.stringify(edit));
     })
 });
 // <div class="form-group">
