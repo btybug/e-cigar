@@ -221,13 +221,43 @@
                            </div>
                        </div>
                    </div>
+                   <div class="seo-page-general">
+                       <div class="card panel panel-default mt-20">
+                           <div class="card-header panel-heading d-flex justify-content-between align-items-center">
+                               <span>Rich Snippets</span>
+                               <button class="btn btn-info" id="rich-property-button">Add property</button>
+                           </div>
+                           <div class="card-body panel-body rich-body">
+
+                           </div>
+                       </div>
+                   </div>
                </div>
            </div>
        </div>
+    </div>
+    <div class="modal" tabindex="-1" role="dialog" id="rich-modal">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Rich Snippets</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body row">
 
-
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+@stop
+@section('js')
+    <script src="{{asset('public/js/rich_snippets.js?v='.rand(111,999))}}"></script>
 @stop

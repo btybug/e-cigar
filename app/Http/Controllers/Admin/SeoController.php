@@ -15,6 +15,7 @@ use App\Models\Category;
 use App\Models\Common;
 use App\Models\MainPagesSeo;
 use App\Models\Posts;
+use App\Models\RIchSnippets\RichProducts;
 use App\Models\SeoPosts;
 use App\Models\Settings;
 use App\Models\Stock;
@@ -246,5 +247,17 @@ class SeoController extends Controller
             Posts::updateOrCreate($key, [],$stock['post']['translatable']);
         }
         return redirect()->back();
+    }
+
+    public function getRichProperties(Request $request)
+    {
+        $type=$request->get('type');
+
+        switch ($type){
+            case "stock":$data=(new RichProducts())->properties  ;break;
+            case "post":  ;break;
+            default:$data=[];
+        }
+        return response()->json($data);
     }
 }
