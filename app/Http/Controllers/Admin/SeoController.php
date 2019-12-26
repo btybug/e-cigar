@@ -62,7 +62,7 @@ class SeoController extends Controller
         $fb = $request->only('fb');
         $twitter = $request->only('twitter');
         $robot = $request->only('robots');
-        $rich=$request->get('rich');
+        $rich=$request->get('rich',[]);
         $settings->updateOrCreateSettings('seo_stocks', $general);
         $settings->updateOrCreateSettings('seo_fb_stocks', $fb['fb']);
         $settings->updateOrCreateSettings('seo_twitter_stocks', $twitter['twitter']);

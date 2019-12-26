@@ -1,8 +1,7 @@
 $(function () {
     var data={};
-    var edit;
+    var edit=JSON.parse($('#rich-property-button').attr('data-edit'));
     $('#rich-property-button').on('click', function () {
-        edit=JSON.parse($(this).attr('data-edit'));
         AjaxCall('/admin/seo/rich-properties', {type: 'stock'}, success)
     });
 

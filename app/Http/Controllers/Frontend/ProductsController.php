@@ -93,7 +93,6 @@ class ProductsController extends Controller
         if($ads && isset($ads['data'])){
             $ads = json_decode($ads['data'],true);
         }
-
         return $this->view('single', compact(['vape', 'variations', 'type','ads']));
     }
 

@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 @section('meta')
     {!! stockSeo($vape) !!}
+    {!! \App\Models\RIchSnippets\RichProducts::create($vape->id,$type) !!}
 @stop
 @section('content')
     <div class="main-content">
