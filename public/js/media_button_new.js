@@ -470,8 +470,10 @@ const App = function() {
           dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
         },
         onEnd: function (/**Event*/evt) {
-          var itemEl = evt.item;  // dragged HTMLElement
-          // console.log()
+          
+          const nodeId = evt.item.getAttribute('data-id');
+          const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
+
           if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
             $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
             $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
@@ -488,6 +490,21 @@ const App = function() {
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
           }
+
+          console.log(evt.item.getAttribute('data-id'), evt.to.closest('.tree_leaf').getAttribute('data-id'))
+
+          
+          self.requests.transferFolder(
+            {
+              folder_id: Number(nodeId),
+              parent_id: Number(parentId),
+              access_token: "string"
+            },
+              () => {
+                console.log('You won!!!')
+                // self.htmlMaker.treeMove(nodeId, parentId);
+              }
+          );
         },
         onMove: function (/**Event*/evt, /**Event*/originalEvent) {
           // Example: https://jsbin.com/nawahef/edit?js,output
@@ -511,16 +528,6 @@ const App = function() {
             }
           }
 
-          self.requests.transferFolder(
-            {
-              folder_id: Number(nodeId),
-              parent_id: Number(parentId),
-              access_token: "string"
-            },
-              () => {
-                // self.htmlMaker.treeMove(nodeId, parentId);
-              }
-          );
         }
       });
     }
