@@ -461,7 +461,7 @@ const App = function() {
         dataIdAttr: 'data-id',
         forceFallback: false,
         fallbackClass: "sortable-fallback",
-        swapThreshold: 0.60,
+        swapThreshold: 0.20,
         ghostClass: 'background-class',
         swapClass: 'highlight', // The class applied to the hovered swap item
     
