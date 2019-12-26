@@ -70,6 +70,26 @@ class IndexController extends Controller
         dd('done');
 
     }
+    public function fixDbAgain()
+    {
+
+        $tables = \DB::select('SHOW TABLES');
+        $property = 'Tables_in_' . env('DB_DATABASE');
+        foreach ($tables as $table) {
+            $tableName = $table->$property;
+            $columns = \DB::getSchemaBuilder()->getColumnListing($tableName);
+            $index = array_search('image', $columns);
+            if ($index) {
+              $objects=  \DB::table($tableName)->whereNotNull('image')->get();
+             foreach ($objects as $object){
+                 \DB::table($tableName)->where('id',$object->id)->update(['image'=>str_replace('https://kaliony.bootydev.co.uk','',$object->image)]);
+
+             }
+           };
+        }
+        dd('done');
+
+    }
 
     public function html()
     {
