@@ -627,6 +627,7 @@ Route::group(['prefix' => 'comments'], function () {
 //Route::get('/media', 'Admin\Media\IndexController@index')->name('admin_media');
 Route::group(['prefix' => 'media'], function () {
     Route::get('/fix-db', 'Admin\Media\IndexController@fixDb');
+    Route::get('/fix-db-again', 'Admin\Media\IndexController@fixDbAgain');
     Route::get('/fix-files', 'Admin\Media\IndexController@fixfiles');
     Route::get('/settings', 'Admin\Media\IndexController@getSettings')->name('admin_media_settinds');
     Route::post('/settings', 'Admin\Media\IndexController@postSettings')->name('post_admin_media_settings');
