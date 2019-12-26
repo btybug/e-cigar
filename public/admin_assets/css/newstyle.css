@@ -2014,6 +2014,20 @@ header.main-header{
 .tools-stickers-page--body .tools-stickers-left-area{
     border: 1px solid #ccc;
 }
+.right--media-col-wrapper{
+    background-color: #ecf0f5 !important;
+}
+.right--media-col-wrapper .upload--head{
+    background-color: #284655;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    margin-top: 0;
+    padding-right: 15px;
+}
+.media_right_content{
+    background-color: #284655;
+    padding-top: 10px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

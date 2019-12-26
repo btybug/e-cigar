@@ -43,7 +43,7 @@
         <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 h-100 right--media-col">
           <div class="over-auto scrollbar_custom right--media-col-wrapper">
             <div class="row m-0">
-              <div class="col-lg-12 m-b-10 text-right d-flex" style="justify-content: space-between;">
+              <div class="col-lg-12 m-b-10 text-right d-flex p-0" style="justify-content: space-between;">
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head  mb-20 mt15">
                       <button class="btn btn-danger delete_items" >Delete</button>
@@ -97,8 +97,7 @@
                       {{--<a>Drive</a>--}}
                     {{--</li>--}}
                   {{--</ul>--}}
-                  <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fa fa-level-up"
-                                                                                                 aria-hidden="true"></i>
+                  <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fas fa-level-up-alt"></i>
                   </button>
                 </div>
               </div>
