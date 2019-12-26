@@ -27,9 +27,10 @@
                @endok
 
            </ul>
+           {!! Form::model($general) !!}
            <div class="row">
                <div class="col-xl-6 col-lg-5">
-                   {!! Form::model($general) !!}
+
                    @ok('stocks_admin_seo_stocks')
                    <div class="text-right mt-20">
                        <button type="submit" class="btn btn-info">Save</button>
@@ -178,7 +179,7 @@
                            </div>
                        </div>
                    </div>
-                   {!! Form::close() !!}
+
                </div>
                <div class="col-xl-6 col-lg-7">
                    <div class="seo-page-general">
@@ -225,17 +226,27 @@
                        <div class="card panel panel-default mt-20">
                            <div class="card-header panel-heading d-flex justify-content-between align-items-center">
                                <span>Rich Snippets</span>
-                               <button class="btn btn-info" id="rich-property-button">Add property</button>
+                               <button data-edit='{!! json_encode(array_keys($rich),true) !!}' type="button" class="btn btn-info" id="rich-property-button">Add property</button>
                            </div>
                            <div class="card-body panel-body rich-body">
-
+                               @foreach($rich as $key=>$value)
+                                   <div class="form-group"><label>{!! $richData[$key]['label'] !!}</label>
+                                       <div class="d-flex">
+                                           <input type="text" value="{!!$value!!}" class="form-control"
+                                                  name="rich[{!! $key !!}]">
+                                           <span class="btn btn-danger delete-rich-property">x</span>
+                                       </div>
+                                   </div>
+                               @endforeach
                            </div>
                        </div>
                    </div>
                </div>
            </div>
+           {!! Form::close() !!}
        </div>
     </div>
+
     <div class="modal" tabindex="-1" role="dialog" id="rich-modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -254,6 +265,7 @@
             </div>
         </div>
     </div>
+
 @stop
 @section('css')
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">

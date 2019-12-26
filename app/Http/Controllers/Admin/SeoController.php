@@ -42,7 +42,9 @@ class SeoController extends Controller
         $fb = $settings->getEditableData('seo_fb_stocks');
         $twitter = $settings->getEditableData('seo_twitter_stocks');
         $robot = $settings->getEditableData('seo_robot_stocks');
-        return $this->view('stocks', compact('general', 'fb', 'twitter', 'robot'));
+        $rich = $settings->getEditableData('rich_stocks')->toArray();
+        $richData=(new RichProducts())->properties;
+        return $this->view('stocks', compact('general', 'fb', 'twitter', 'robot','rich','richData'));
     }
 
     public function getBrands(Settings $settings)
@@ -60,10 +62,12 @@ class SeoController extends Controller
         $fb = $request->only('fb');
         $twitter = $request->only('twitter');
         $robot = $request->only('robots');
+        $rich=$request->get('rich');
         $settings->updateOrCreateSettings('seo_stocks', $general);
         $settings->updateOrCreateSettings('seo_fb_stocks', $fb['fb']);
         $settings->updateOrCreateSettings('seo_twitter_stocks', $twitter['twitter']);
         $settings->updateOrCreateSettings('seo_robot_stocks', $robot);
+        $settings->updateOrCreateSettings('rich_stocks', $rich);
         return redirect()->back();
     }
     public function postBrands(Request $request, Settings $settings)

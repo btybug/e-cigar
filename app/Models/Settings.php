@@ -41,6 +41,7 @@ class Settings extends Model
     public function updateOrCreateSettings($section, array $data,$subId=null)
     {
         $result=[];
+        $this->where('section',$section)->whereNotIn('key',$data)->delete();
         foreach ($data as $key=>$val){
             $val=(is_array($val))?json_encode($val,true):$val;
            if($this->where('section',$section)->where('key',$key)->where('sub_id',$subId)->exists()){
