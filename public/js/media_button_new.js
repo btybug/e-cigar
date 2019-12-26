@@ -490,9 +490,6 @@ const App = function() {
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
           }
-
-          console.log(evt.item.getAttribute('data-id'), evt.to.closest('.tree_leaf').getAttribute('data-id'))
-
           
           self.requests.transferFolder(
             {
@@ -1369,6 +1366,10 @@ var count = 0;
             })
             
           }
+          console.log(globalFolderId, 'globalFolderId');
+          $('.media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
+          $($(`.media-tree_leaf-wrapper .tree_leaf[data-id="${globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
+
           cb ? cb() : null;
         }
       });

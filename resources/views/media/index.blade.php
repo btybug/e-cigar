@@ -1,6 +1,26 @@
 @extends('layouts.admin')
 @section('content')
     <input type="hidden" id="core-folder" value="{!! $folder->id !!}">
+    <!-- Modal -->
+<div class="modal fade" id="moveMediaModal" tabindex="-1" role="dialog" aria-labelledby="moveMediaModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="moveMediaModalTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">
@@ -31,8 +51,8 @@
                 <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
                   <div class="media-tree_leaf-wrapper" style="display: flex; justify-content: space-between;">
                     <ol class="first-branch">
-                      <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_${id}" bb-media-type="folder">
-                        <div class="tree_leaf_content" bb-media-click="get_folder_items" draggable="true">
+                      <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_1" bb-media-type="folder">
+                        <div class="tree_leaf_content active" bb-media-click="get_folder_items" draggable="true">
                             <span class="icon-folder-opening"></span>
                             <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                             Drive2
@@ -64,7 +84,7 @@
                           <span data-media="selected"></span></div>
                       <div class="pl-3">
                           <button class="btn btn-danger delete_items" >Delete</button>
-                          <button class="btn btn-info">Move</button>
+                          <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveMediaModal">Move</button>
                           <button class="btn btn-warning copy-button" bb-media-click="copy_images">Copy</button>
                           <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
                                   bb-media-click="show_uploader">Uploader
@@ -402,6 +422,10 @@
 }
 .media-page--wrapper .ibox-content {
   padding-left: 0;
+}
+
+.media-page--wrapper .folder-item--title {
+  user-select: none;
 }
   </style>
   {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
