@@ -1477,7 +1477,10 @@
     <script>
 
         $(document).ready(function () {
-
+            $("body").on('change','.select-v-img',function () {
+                var value = $(this).val();
+                $(this).closest('.stock-items-tab-photo-td').find('.v-img').attr('src',value);
+            })
 
 
             $("body").on('click','.select-main-item',function (ev) {

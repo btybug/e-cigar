@@ -7,11 +7,11 @@
             <div class="stock-item-photo-wrap">
                 <div class="item-photo">
                     @if($package_variation && $package_variation->image)
-                        <img src="{{ $package_variation->image }}" alt="photo">
+                        <img src="{{ $package_variation->image }}" alt="photo" class="v-img">
                     @elseif($main && $main->stock)
-                        <img src="{{ $main->stock->image }}" alt="photo">
+                        <img src="{{ $main->stock->image }}" alt="photo"  class="v-img">
                     @else
-                        <img src="/public/images/no_image.png" alt="photo">
+                        <img src="/public/images/no_image.png" alt="photo"  class="v-img">
                     @endif
                 </div>
                 <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"
@@ -29,7 +29,7 @@
                 </select>
             </div>
             <div class="stock-item-name-desc ml-2">
-                <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control">
+                <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
                     @if($main && $main->stock)
                         <option value="{{ $main->stock->image }}" selected>Main Image</option>
                         @if($main->stock->other_images && count($main->stock->other_images))
