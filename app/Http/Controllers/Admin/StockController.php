@@ -115,6 +115,7 @@ class StockController extends Controller
             'extra_product', 'promotion_prices', 'promotion_type', 'categories', 'offers', 'general', 'related_products',
             'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads', 'banners', 'special_filters');
         $data['user_id'] = \Auth::id();
+//        dd($request->get('variations', []));
         $stock = Stock::updateOrCreate($request->id, $data);
 
         $this->stockService->savePackageVariation($stock, $request->get('variations', []));

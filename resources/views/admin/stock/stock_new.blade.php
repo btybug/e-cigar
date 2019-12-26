@@ -1245,15 +1245,15 @@
         <div class="d-flex flex-wrap discount-item">
             <div class="col-md-3">
                 <label>From</label>
-                {!! Form::number('discount[{count}][from]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-3">
                 <label>To</label>
-                {!! Form::number('discount[{count}][to]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-3">
                 <label>Price/Item</label>
-                {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-3">
                 <button class="btn btn-danger remove-discount-item">
@@ -1267,12 +1267,12 @@
         <div class="d-flex flex-wrap discount-item">
             <div class="col-md-4">
                 <label>Qty</label>
-                {!! Form::number('discount[{count}][qty]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
             </div>
 
             <div class="col-md-q">
                 <label>Total price</label>
-                {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-md-4">
                 <button class="btn btn-danger remove-discount-item">
@@ -1283,44 +1283,49 @@
     </script>
 
     <script type="template" id="range-discount-temp">
-        <div class="col-md-12 range-box">
-            <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-3">
-                    <label>From</label>
-                    {!! Form::number('discount[{count}][from]',null,['class' => 'form-control']) !!}
-                </div>
-                <div class="col-md-3">
-                    <label>To</label>
-                    {!! Form::number('discount[{count}][to]',null,['class' => 'form-control']) !!}
-                </div>
-                <div class="col-md-3">
-                    <label>Price/Item</label>
-                    {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
-                </div>
-                <div class="col-md-3">
-                    <button class="btn btn-danger remove-discount-item">
-                        <i class="fa fa-minus"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
         <div class="col-md-12 justify-content-center">
             <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
                     class="fa fa-plus"></i></a>
         </div>
+        <div class="col-md-12 range-box">
+            <div class="d-flex flex-wrap discount-item">
+                <div class="col-md-3">
+                    <label>From</label>
+                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <label>To</label>
+                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <label>Price/Item</label>
+                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                </div>
+                <div class="col-md-3">
+                    <button class="btn btn-danger remove-discount-item">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
     </script>
 
     <script type="template" id="fixed-discount-temp">
         <div class="col-md-12 fixed-box">
+            <div class="col-md-12 justify-content-center">
+                <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
+                        class="fa fa-plus"></i></a>
+            </div>
             <div class="d-flex flex-wrap discount-item">
                 <div class="col-md-4">
                     <label>Qty</label>
-                    {!! Form::number('discount[{count}][qty]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
                 </div>
 
                 <div class="col-md-q">
                     <label>Total price</label>
-                    {!! Form::number('discount[{count}][price]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-danger remove-discount-item">
@@ -1328,10 +1333,7 @@
                     </button>
                 </div>
             </div>
-            <div class="col-md-12 justify-content-center">
-                <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
-                        class="fa fa-plus"></i></a>
-            </div></div>
+        </div>
 
     </script>
     <script type="template" id="add-more-banners">
@@ -1736,14 +1738,23 @@
             $('body').on('click', '.add-range-discount', function () {
                 let html = $('#range-discount').html();
                 var id = guid();
+                var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
+                var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
                 html = html.replace(/{count}/g, id);
+                html = html.replace(/{main_unique}/g, main_unique);
+                html = html.replace(/{unique}/g, unique);
+
                 $(this).closest('.discount-type-box').find('.range-box').append(html);
             });
 
             $('body').on('click', '.add-fixed-discount', function () {
                 let html = $('#fixed-discount').html();
                 var id = guid();
+                var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
+                var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
                 html = html.replace(/{count}/g, id);
+                html = html.replace(/{main_unique}/g, main_unique);
+                html = html.replace(/{unique}/g, unique);
                 $(this).closest('.discount-type-box').find('.fixed-box').append(html);
             });
 
@@ -2214,6 +2225,8 @@
 
             $("body").on("change", ".price-type-change", function (e) {
                 let value = $(this).val();
+                let main_unique = $(this).attr('main_unique');
+                let unique = $(this).attr('unique');
                 let parent = $(this).closest('.package_price');
                 if (value == 'static') {
                     parent.find('.price-discount').removeClass('show').addClass('d-none');
@@ -2228,6 +2241,8 @@
                     var html = $('#fixed-discount-temp').html();
                     var id = guid();
                     html = html.replace(/{count}/g, id);
+                    html = html.replace(/{main_unique}/g, main_unique);
+                    html = html.replace(/{unique}/g, unique);
                     parent.find(".discount-type-box").html(html);
                 }else if (value == 'range'){
                     parent.find('.price-static').removeClass('show').addClass('d-none');
@@ -2235,6 +2250,8 @@
                     var id = guid();
                     var html = $('#range-discount-temp').html();
                     html = html.replace(/{count}/g, id);
+                    html = html.replace(/{main_unique}/g, main_unique);
+                    html = html.replace(/{unique}/g, unique);
                     parent.find(".discount-type-box").html(html);
                 }
 

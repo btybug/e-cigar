@@ -154,7 +154,7 @@ class StockService
     {
         $deletableArray = [];
         if (count($data)) {
-            dd($data);
+//            dd($data);
             foreach ($data as $variation_id => $datum) {
                 $newData = [];
                 $newData['ordering'] = ($datum['ordering']) ?? 0;

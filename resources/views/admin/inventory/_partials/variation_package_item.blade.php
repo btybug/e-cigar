@@ -54,11 +54,7 @@
                 </div>
             </div>
         </div>
-        <div class="desc-box">
-            @if($package_variation && $package_variation->description)
-                {!! $package_variation->description !!}
-            @endif
-        </div>
+
         {!! Form::hidden("variations[$main_unique][variations][$uniqueID][qty]",($package_variation) ? $package_variation->qty : null) !!}
         {{--{!! Form::select("variations[$main_unique][variations][$uniqueID][item_id]",$stockItems,($package_variation) ? $package_variation->item_id : null,--}}
         {{--['class' => 'form-control v-item-change']) !!}--}}
@@ -80,12 +76,12 @@
     <div
         class="package_price stock-items-tab-prices @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
         <div class="row flex-nowrap">
-            <div class="col-md-2">
+            <div class="col-md-4">
                 {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
             'fixed' => 'Discount fixed','range'=>'Discount range'],
-                ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change']) !!}
+                ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change','main_unique' => $main_unique,'unique' => $uniqueID]) !!}
             </div>
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <div
                     class="price-static @if($package_variation && $package_variation->price_type =='static') show @else d-none @endif">
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,
