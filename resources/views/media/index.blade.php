@@ -27,11 +27,23 @@
                 </div>
                 <script>
                 </script>
-                <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="{!! $folder->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -49px; cursor: pointer">{!! strtoupper($folder->name) !!}</div>
+                <!-- <div bb-media-click="get_folder_items" data-core="true" class="dd-item" draggable="true" data-id="{!! $folder->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white; margin-top: 50px; margin-bottom: -49px; cursor: pointer">{!! strtoupper($folder->name) !!}</div> -->
                 <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
-                  <ol class="dd-list sortable ui-sortable" id="fff">
+                  <div class="media-tree_leaf-wrapper" style="display: flex; justify-content: space-between;">
+                    <ol class="first-branch">
+                      <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_${id}" bb-media-type="folder">
+                        <div class="tree_leaf_content" bb-media-click="get_folder_items" draggable="true">
+                            <span class="icon-folder-opening"></span>
+                            <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
+                            Drive2
+                        </div>
+                      
+                        <ol class="tree_branch" id="fff">
 
-                  </ol>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
                 </div>
                 <div class="clearfix"></div>
               </div>
@@ -279,6 +291,118 @@
       box-shadow: 0 0 2px white;
     }
 
+
+
+
+
+
+
+
+
+
+
+    .media-tree_leaf-wrapper .tree_leaf {
+  /*border: 2px solid silver;*/
+  /*padding: 10px;*/
+  list-style: none;
+  /*background: gray;*/
+}
+
+.media-tree_leaf-wrapper .tree_branch {
+  /* border: 1px solid silver;
+  padding: 10px;
+  list-style: none;
+  background: silver; */
+}
+
+.media-tree_leaf-wrapper .tree_leaf .tree_leaf_with_branch {
+  /*border: 1px solid silver;*/
+  /*padding: 10px;*/
+  list-style: none;
+  /*background: silver;*/
+}
+
+/* .root {
+  width: 500px;
+} */
+
+
+/*.items_container {*/
+/*  width: 50%;*/
+/*  background: gray;*/
+/*  display: flex;*/
+/*  flex-wrap: wrap;*/
+/*}*/
+
+/*.item {*/
+/*  border: 1px solid silver;*/
+/*  padding: 10px;*/
+/*  list-style: none;*/
+/*  background: silver;*/
+/*  width: 50px;*/
+/*  height: 50px;*/
+/*  margin: 10px;*/
+/*}*/
+
+.media-tree_leaf-wrapper .background-class {
+  background-color: rgba(0,0,0,.01);
+}
+
+.media-tree_leaf-wrapper .tree_leaf_content.active{
+  background-color: #e8f0fe;
+  color: #1967d2;
+  font-weight: 600;
+}
+.media-tree_leaf-wrapper .icon-folder-opening{
+  width: 25px;
+  display: block;
+  padding-left: 10px;
+  flex: none;
+}
+.media-tree_leaf-wrapper .folder-item--title{
+  text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.media-tree_leaf-wrapper .icon-folder-name{
+  width: 40px;
+}
+.media-tree_leaf-wrapper .tree_leaf_content.active .icon-folder-opening{
+  color: #5f6368;
+}
+
+.media-tree_leaf-wrapper .tree_leaf_content{
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  cursor: pointer;
+  color: #5f6368;
+  border-radius: 0 20px 20px 0;
+}
+
+.media-tree_leaf-wrapper .tree_leaf_content:not(.active):hover{
+  background-color: rgba(0,0,0,.04);
+}
+.media-tree_leaf-wrapper .tree_branch{
+  /*padding: 0;*/
+  padding-left: 22px;
+}
+.media-tree_leaf-wrapper .tree_leaf_without_branch .tree_leaf_content{
+  /*padding-left: 40px;*/
+}
+
+.closed_branch {
+  display: none;
+  /* visibility: hidden;
+  height: 5px; */
+}
+.media-tree_leaf-wrapper .first-branch{
+  padding: 0;
+    width: 100%;
+}
+.media-page--wrapper .ibox-content {
+  padding-left: 0;
+}
   </style>
   {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
 
@@ -294,14 +418,15 @@
   {{--    {!! Html::script("public/js/bundle/media.js",['type' => 'module']) !!}--}}
 
   <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.ui-deps.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.ui-deps.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.edit.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.filter.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.dnd5.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.glyph.js"></script>
-  {!! Html::script("public/plugins/tree/jquery.nestable.min.js") !!}
-  {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js"></script>--}}
+  <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.glyph.js"></script> -->
+  <!-- {!! Html::script("public/plugins/tree/jquery.nestable.min.js") !!} -->
+  <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js"></script>--}} -->
+  <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 
   <script>
     $('document').ready(
