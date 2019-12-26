@@ -118,7 +118,7 @@
 </div>
 <div class="col-md-3 d-flex justify-content-center">
     @if($vSettings->price_per == 'item')
-        @if($selected && $selected->discount_type == 'range')
+        @if($selected && $selected->price_type == 'range')
             <div class="d-flex flex-column w-100 align-items-center">
                 <span class="text-tert-clr">*Quality Discount</span>
                 <div class="product__single-item-inp-num">
@@ -132,7 +132,7 @@
                     </div>
                 </div>
             </div>
-        @elseif($selected && $selected->discount_type == 'fixed')
+        @elseif($selected && $selected->price_type == 'fixed')
             <div
                 class="d-flex flex-column w-100 align-items-center">
                 <span class="text-tert-clr">*Quality Discount</span>
@@ -160,7 +160,7 @@
                 </span>
             </div>
         @else
-            @if($selected->discount_type == 'range')
+            @if($selected->price_type == 'range')
                 @php
                     $qty = (isset($qty))?:1;
                     $discount = $selected->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
@@ -174,7 +174,7 @@
                 @else
                     not found
                 @endif
-            @elseif($selected->discount_type == 'fixed')
+            @elseif($selected->price_type == 'fixed')
                 @php
                     $discount = $selected->discounts()->first();
                 @endphp
