@@ -358,9 +358,10 @@ class StockController extends Controller
         $items = Items::active()->whereIn('id', $request->items)->get();
         $main_unique = $request->get('main_unique');
         $stockItems = Items::all()->pluck('name', 'id')->all();
+        $stock = Stock::find($request->get('stockID'));
         $package_variation = null;
         $main = null;
-        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems', 'main_unique', 'main', 'items']))->render();
+        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems', 'main_unique', 'main', 'items','stock']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }

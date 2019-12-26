@@ -1984,6 +1984,7 @@
                 let data_id = current.attr('data-section-id');
                 let $_this = $('body').find('[data-unqiue="' + data_id + '"]');
                 let existings = [];
+                let stockID = $("#stockID").val();
                 $(".items-box").find('.option-elm-modal')
                     .each(function (i, e) {
                         if ($(e).hasClass('active')) {
@@ -1993,7 +1994,7 @@
 
                 AjaxCall(
                     "/admin/stock/add-package-variation",
-                    {main_unique: data_id, items: existings},
+                    {main_unique: data_id, items: existings,stockID: stockID},
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
@@ -2139,7 +2140,7 @@
             });
 
             $("body").on('click', '.delete-package-option', function () {
-                $(this).closest('tr').remove();
+                $(this).closest('.shock__edit-tr').remove();
             });
 
             $("body").on('click', '.duplicate-package-options', function () {
@@ -2416,10 +2417,10 @@
                 });
             });
 
-            $("body").on('click', '.delete-v-option_button', function () {
-                $(this).closest('tr').remove();
-                changeVariationOptions();
-            });
+            // $("body").on('click', '.delete-v-option_button', function () {
+            //     $(this).closest('tr').remove();
+            //     changeVariationOptions();
+            // });
 
             $("body").on('click', '.remove-extra-option', function () {
                 $(this).closest('li').remove();
