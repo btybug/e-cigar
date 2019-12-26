@@ -1146,7 +1146,7 @@ var count = 0;
           );
           mainContainer.innerHTML = "";
             res.data.children.forEach((folder, index) => {
-            var html = `<div class="file-box folder-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeFolder(
+            var html = `<div class="file-box folder-container col-xl-2 col-md-4 col-sm-6">${this.htmlMaker.makeFolder(
                 folder
             )}</div>`;
             mainContainer.innerHTML += html;
@@ -1154,15 +1154,15 @@ var count = 0;
             res.data.items.forEach((file, index) => {
               let html;
               if(file.extension === "html") {
-                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeHtmlItem(
+                  html = `<div data-image="${index}" class="file-box image-container col-xl-2 col-md-4 col-sm-6">${this.htmlMaker.makeHtmlItem(
                       file
                   )}</div>`;
               } else if(file.extension === "pdf") {
-                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makePdfItem(
+                  html = `<div data-image="${index}" class="file-box image-container col-xl-2 col-md-4 col-sm-6">${this.htmlMaker.makePdfItem(
                     file
                   )}</div>`;
               } else {
-                  html = `<div data-image="${index}" class="file-box image-container col-lg-2 col-md-3 col-sm-6 col-xs-12">${this.htmlMaker.makeImage(
+                  html = `<div data-image="${index}" class="file-box image-container col-xl-2 col-md-4 col-sm-6">${this.htmlMaker.makeImage(
                       file
                   )}</div>`;
               }

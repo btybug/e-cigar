@@ -4,17 +4,17 @@
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">
-      <div class="row dis-flex">
-        <div class="col-lg-2 col-md-3 col-sm-4 col-xs-12 h-100 left--media-col">
+      <div class="row dis-flex media-page--wrapper">
+        <div class="col-xl-2 col-md-3 col-sm-4 col-xs-12 h-100 left--media-col">
           <div class="ibox scrollbar_custom float-e-margins over-auto">
             <div class="ibox-content {!! $settings['leftcontainer']??null !!}">
               <div class="file-manager">
 
-                <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"
-                       role="button" href="#createFolder">
-                    <i class="fa fa-plus" aria-hidden="true"></i></a>
-                  <p>ADD FOLDERS</p>
-                  <span data-media="selected"></span></h5>
+{{--                <h5><a class="pull-right {!! $settings['addbutton']??null !!}" data-toggle="collapse"--}}
+{{--                       role="button" href="#createFolder">--}}
+{{--                    <i class="fa fa-plus" aria-hidden="true"></i></a>--}}
+{{--                  <p>ADD FOLDERS</p>--}}
+{{--                  <span data-media="selected"></span></h5>--}}
                 <div class="collapse" id="createFolder">
                   <div class="input-group">
                     <input type="text" class="form-control new-folder-input" data-mediafield="addfolder"
@@ -40,18 +40,24 @@
           </div>
 
         </div>
-        <div class="col-lg-10 col-md-9 col-sm-8 col-xs-12 h-100 right--media-col">
-          <div class="over-auto scrollbar_custom right--media-col-wrapper">
+        <div class="col-xl-10 col-md-9 col-sm-8 col-xs-12 h-100 right--media-col">
+          <div class=" right--media-col-wrapper">
             <div class="row m-0">
               <div class="col-lg-12 m-b-10 text-right d-flex p-0" style="justify-content: space-between;">
                 <div class="upload-content" style="width: 100%;">
-                  <div class="upload--head  mb-20 mt15">
-                      <button class="btn btn-danger delete_items" >Delete</button>
-                      <button class="btn btn-info">Move</button>
-                      <button class="btn btn-warning copy-button" bb-media-click="copy_images">Copy</button>
-                      <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
-                              bb-media-click="show_uploader">Uploader
-                      </button>
+                  <div class="upload--head d-flex justify-content-between  mb-20 mt15">
+                      <div class="pl-3"><a class="{!! $settings['addbutton']??null !!} btn btn-info" data-toggle="collapse"
+                             role="button" href="#createFolder">
+                              <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">ADD FOLDERS</span></a>
+                          <span data-media="selected"></span></div>
+                      <div class="pl-3">
+                          <button class="btn btn-danger delete_items" >Delete</button>
+                          <button class="btn btn-info">Move</button>
+                          <button class="btn btn-warning copy-button" bb-media-click="copy_images">Copy</button>
+                          <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
+                                  bb-media-click="show_uploader">Uploader
+                          </button>
+                      </div>
                   </div>
                   <div class="uploader-container mt15  mb-20 d-none">
                     <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple name="item[]"
@@ -81,7 +87,7 @@
             <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
               <div class="col-lg-12 m-b-15"></div>
             </div>
-            <div class="row m-0 {!! $settings['rightcontainer']??null !!} media_right_content">
+            <div class="row m-0 {!! $settings['rightcontainer']??null !!} over-auto scrollbar_custom media_right_content">
               <div class="col-sm-12 mb-20">
 
                 <div class="bread-crumbs d-flex " style="justify-content: space-between;">

@@ -2016,6 +2016,7 @@ header.main-header{
 }
 .right--media-col-wrapper{
     background-color: #ecf0f5 !important;
+    height: 100%;
 }
 .right--media-col-wrapper .upload--head{
     background-color: #284655;
@@ -2027,6 +2028,11 @@ header.main-header{
 .media_right_content{
     background-color: #284655;
     padding-top: 10px;
+    height: calc(100% - 81px) !important;
+}
+.media-page--wrapper .left--media-col{
+    padding-right: 12px;
+    background-color: #ecf0f5
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
@@ -2215,6 +2221,9 @@ header.main-header{
     }
     .media_right_content .bread-crumbs>nav{
         margin-left: 15px;
+    }
+    .media-page--wrapper .left--media-col{
+        display: none;
     }
 }
 @media (max-width: 500px) {
