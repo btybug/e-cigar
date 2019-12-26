@@ -65,7 +65,7 @@
                     @php
                     $location = (count($locations)) ? $locations->first() : null
                     @endphp
-                    {!! Form::hidden('',$location->warehouse->id,['class' => 'warehouse']) !!}
+                    {!! Form::hidden('',($location) ? $location->warehouse->id :null,['class' => 'warehouse']) !!}
                     <span class="font-sec-reg font-20 text-tert-clr lh-1">{{ ($location) ? $location->warehouse->name : "No Warehouse" }}</span>
                 @endif
 
@@ -81,7 +81,7 @@
                     @php
                         $location = (count($locations)) ? $locations->first() : null
                     @endphp
-                    {!! Form::hidden('',$location->rack->id,['class' => 'rack']) !!}
+                    {!! Form::hidden('',($location) ? $location->rack->id : null,['class' => 'rack']) !!}
 
                     <span class="font-sec-reg font-20 text-main-clr lh-1">{{ ($location) ? $location->rack->name : "No rack" }}</span>
                 @endif
@@ -97,7 +97,7 @@
                     @php
                         $location = (count($locations)) ? $locations->first() : null
                     @endphp
-                    {!! Form::hidden('',$location->shelve->id,['class' => 'shelve']) !!}
+                    {!! Form::hidden('',($location) ? $location->shelve->id : null,['class' => 'shelve']) !!}
 
                     <span class="font-sec-reg font-20 text-red-clr lh-1">{{ ($location) ? $location->shelve->name : "No shelve" }}</span>
                 @endif
