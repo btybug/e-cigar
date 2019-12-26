@@ -48,6 +48,7 @@ $('body').on('click', '.rich-property', function () {
     let sp = span.clone();
     sp.attr('data-key',$(this).attr('data-key'))
     i.attr('name','rich['+ $(this).attr('data-key')+']');
+    i.val(property.default);
     iw.append(i);
     iw.append(sp);
     l.text(property.label);
