@@ -1356,7 +1356,7 @@ var count = 0;
             
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
-          globalFolderId = res.settings.id;
+          this.globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res);
           this.helpers.makeDnD();
           this.selectedImage.length = 0;
@@ -1368,9 +1368,9 @@ var count = 0;
             })
             
           }
-          console.log(globalFolderId, 'globalFolderId');
+          console.log(this.globalFolderId, 'globalFolderId');
           $('.media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
-          $($(`.media-tree_leaf-wrapper .tree_leaf[data-id="${globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
+          $($(`.media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
 
           cb ? cb() : null;
         }
@@ -2412,6 +2412,31 @@ document
       }
     })
 
+    const imageTransfer = (activeImages, selectedFolder) => {
+      activeImages.map(function(image) {
+        app.requests.transferImage({
+          item_id: image,
+          folder_id: selectedFolder 
+        });
+      });
+    }
+
+    const folderTransfer = (activeFolders, selectedFolder) => {
+      activeFolders.map(function(folder_id) {
+        app.requests.transferFolder({
+          parent_id: selectedFolder,
+          folder_id: folder_id 
+        });
+      });
+    }
+
+    const transferMove = (activeImages, activeFolders, selectedFolder, cb) => {
+      imageTransfer(activeImages, selectedFolder);
+      folderTransfer(activeFolders, selectedFolder);
+       
+      cb();
+    }
+
     $('body').on('click', '#moveMediaModal .move-disabled-js', function() {
       const activeFolders = [];
       $($('.media_right_content .folderitems').find('.folder-container.active')).each(function() {
@@ -2424,22 +2449,129 @@ document
       })
       const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
 
-      activeImages.map(function(image) {
-        app.requests.transferImage({
-          item_id: image,
-          folder_id: selectedFolder 
-        })
-      })
+      transferMove(activeImages, activeFolders, selectedFolder, () => $('#moveMediaModal').modal('hide'));
+      // activeImages.map(function(image) {
+      //   app.requests.transferImage({
+      //     item_id: image,
+      //     folder_id: selectedFolder 
+      //   }, () => {
+      //     $('#moveMediaModal').modal('hide')
+      //   })
+      // })
 
-      activeFolders.map(function(folder_id) {
-        app.requests.transferFolder({
-          parent_id: selectedFolder,
-          folder_id: folder_id 
-        })
-      })
+      // activeFolders.map(function(folder_id) {
+      //   app.requests.transferFolder({
+      //     parent_id: selectedFolder,
+      //     folder_id: folder_id 
+      //   }, () => {
+      //     $('#moveMediaModal').modal('hide')
+      //   })
+      // })
     });
 
     $('body').on('click', '#moveMediaModal .tree_leaf_content', function(ev) {
       $('#moveMediaModal .tree_leaf_content.active').removeClass('active');
       $($(ev.target).closest('.tree_leaf').find('.tree_leaf_content')[0]).addClass('active');
+    });
+
+    $('body').on('click', '.add-folder-js', function() {
+      const newFolderName = $('.folderNameValue').val();
+
+
+      console.log(app.globalFolderId)
+      app.requests.addNewFolder(
+        {
+          folder_id: app.globalFolderId || 1,
+          folder_name: newFolderName,
+          access_token: "string"
+        }, (res) => {
+          $($(`.tree_leaf[data-id="${res.data.parent_id}"]`).find('.tree_branch')[0]).append(app.htmlMaker.myFuckingTree.makeTreeLeaf(res.data.id, res.data.name));
+          if($(`.tree_leaf[data-id="${res.data.parent_id}"]`).hasClass('tree_leaf_without_branch')) {
+            $(`.tree_leaf[data-id="${res.data.parent_id}"]`).removeClass('tree_leaf_without_branch');
+            $(`.tree_leaf[data-id="${res.data.parent_id}"]`).addClass('tree_leaf_with_branch');
+            $($(`.tree_leaf[data-id="${res.data.parent_id}"]`).find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
+            $($(`.tree_leaf[data-id="${res.data.parent_id}"]`).find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
+            var branch = document.querySelectorAll('.tree_branch');
+            for (var i = 0; i < branch.length; i++) {
+            new Sortable(branch[i], {
+              group: 'b',
+              filter: '.filter',
+              draggable: ".tree_leaf",
+              sort: true,
+              animation: 150,
+              fallbackOnBody: true,
+              // swapThreshold: 0.65,
+              dataIdAttr: 'data-id',
+              forceFallback: false,
+              fallbackClass: "sortable-fallback",
+              swapThreshold: 0.20,
+              ghostClass: 'background-class',
+              swapClass: 'highlight', // The class applied to the hovered swap item
+          
+              setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
+                // console.log('dragEl', $(dragEl).data('id'))
+                dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
+              },
+              onEnd: function (/**Event*/evt) {
+                
+                const nodeId = evt.item.getAttribute('data-id');
+                const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
+      
+                if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
+                  $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
+                  $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
+                  
+                  $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
+                  $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
+                }
+          
+                if($(evt.from)[0].children.length === 0) {
+                  $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
+                  $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
+          
+                  // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
+                  $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
+                  $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
+                }
+                
+                app.requests.transferFolder(
+                  {
+                    folder_id: Number(nodeId),
+                    parent_id: Number(parentId),
+                    access_token: "string"
+                  },
+                    () => {
+                      console.log('You won!!!')
+                      // self.htmlMaker.treeMove(nodeId, parentId);
+                    }
+                );
+              },
+              onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+                // Example: https://jsbin.com/nawahef/edit?js,output
+      
+                // const nodeId = 
+                
+                if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
+                  const branch = $(evt.related).closest('.tree_leaf');
+                  const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
+                  console.log(evt.related, 'ev t hshh d d ')
+                  if(branch.hasClass('tree_leaf_with_branch')) {
+                    console.log(22222222222);
+                    if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
+                      $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
+                    }
+          
+                    if(opening_icon.find('i').hasClass('fa-caret-right')) {
+                      opening_icon.find('i').removeClass('fa-caret-right');
+                      opening_icon.find('i').addClass('fa-caret-down');
+                    }
+                  }
+                }
+      
+              }
+            });
+          }
+          };
+          $('#addFolderModal').modal('hide');
+        });
     });
