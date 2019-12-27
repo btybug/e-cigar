@@ -158,7 +158,7 @@
             <div class="row m-0 collapse show-uploder" data-targetiuploder="folder">
               <div class="col-lg-12 m-b-15"></div>
             </div>
-            <div class="row m-0 {!! $settings['rightcontainer']??null !!} over-auto scrollbar_custom media_right_content">
+            <div class="m-0 {!! $settings['rightcontainer']??null !!} over-auto scrollbar_custom media_right_content">
               <div class="col-sm-12 mb-20">
 
                 <div class="bread-crumbs d-flex " style="justify-content: space-between;">
@@ -184,7 +184,7 @@
                 </div>
               </div>
               <div class="clearfix"></div>
-              <div class="row m-0 d-flex flex-wrap folderitems w-100" style="position: relative;" data-media="folderitem"
+              <div class="m-0 d-flex flex-wrap folderitems w-100" style="position: relative;" data-media="folderitem"
                    data-type="main-container">
               </div>
 
