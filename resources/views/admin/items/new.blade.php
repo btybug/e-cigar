@@ -165,31 +165,9 @@
                                                                 <div class="row">
                                                                     <label class="col-lg-4 control-label">Brands</label>
                                                                     <div class="col-sm-8">
-                                                                        <select name="" id="" class="form-control">
-                                                                            <option value="">1</option>
-                                                                            <option value="">2</option>
-                                                                        </select>
-                                                                    </div>
-                                                                </div>
-                                                                <div id="brands_treeview_json">
-                                                                    <div class="filter-wall cat-name d-flex flex-wrap">
-                                                                        <div class="col-md-7 p-0">
-                                                                            @foreach($brands as $brand)
-                                                                                <div
-                                                                                    class="single-wrap ml-4">
-                                                                                    <div
-                                                                                        class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                        {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                        <label
-                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                            for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                        </label>
-                                                                                    </div>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                    </div>
+                                                                        {!! Form::select('brand_id',[null=>'Select Brand']+$brands->pluck('name','id')->toArray(),null,['class'=>'form-control']) !!}
 
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
