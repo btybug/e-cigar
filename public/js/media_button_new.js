@@ -1130,39 +1130,39 @@ const App = function() {
   this.helpers = {
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, res) => {
-      const self = this;
-      const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
-                                        bb-media-click="get_folder_items" >
-                                     <a>Drive</a>
-                                   </li>`;
-      $('document').ready(() => {
-var count = 0;
-        const getTreeData = (data, id) => {
+//       const self = this;
+//       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
+//       breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+//                                         bb-media-click="get_folder_items" >
+//                                      <a>Drive</a>
+//                                    </li>`;
+//       $('document').ready(() => {
+// var count = 0;
+//         const getTreeData = (data, id) => {
 
-          const element = data.find((el) => {
-            return Number(el.id) === Number(id);
-          });
+//           const element = data.find((el) => {
+//             return Number(el.id) === Number(id);
+//           });
 
-          !Array.isArray(getTreeData.breadCrumbsData) && (getTreeData.breadCrumbsData = []);
-          element && getTreeData.breadCrumbsData.unshift({id: element.id, name: element.name});
-          element && (Number(element.parent_id) !== 1) && getTreeData(data, element.parent_id);
-          count++;
-        };
+//           !Array.isArray(getTreeData.breadCrumbsData) && (getTreeData.breadCrumbsData = []);
+//           element && getTreeData.breadCrumbsData.unshift({id: element.id, name: element.name});
+//           element && (Number(element.parent_id) !== 1) && getTreeData(data, element.parent_id);
+//           count++;
+//         };
 
 
-        const treeData = $('#folder-list2>ol').nestedSortable('toArray');
-        treeData.shift();
-        treeData[0] && (treeData[0].parent_id = "1");
-        getTreeData(treeData, id);
+//         const treeData = $('#folder-list2>ol').nestedSortable('toArray');
+//         treeData.shift();
+//         treeData[0] && (treeData[0].parent_id = "1");
+//         getTreeData(treeData, id);
 
-        getTreeData.breadCrumbsData.length > 0 && getTreeData.breadCrumbsData
-            .map((el, index) => {
-              index === getTreeData.breadCrumbsData.length-1 ?
-                  breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'disabled') :
-                  breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'active');
-            });
-      });
+//         getTreeData.breadCrumbsData.length > 0 && getTreeData.breadCrumbsData
+//             .map((el, index) => {
+//               index === getTreeData.breadCrumbsData.length-1 ?
+//                   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'disabled') :
+//                   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'active');
+//             });
+//       });
     },
     //********App -> helpers -> makeBreadCrumbs********end
 
@@ -1413,7 +1413,7 @@ var count = 0;
     editFolderName: (obj = {}, cb) => {
       shortAjax("/api-media/get-edit-folder", obj, res => {
         if (!res.error) {
-          // cb(res);
+          cb();
         }
       });
     },
@@ -1873,6 +1873,7 @@ var count = 0;
               access_token: "string"
             },
             () => {
+              
               $(`.file[data-id="${itemId}"]`).find('.file-title').html(name);
               this.events.close_name_modal();
             }
@@ -2066,6 +2067,12 @@ $('body').on('blur', '[contenteditable]', function(ev) {
           folder_id: Number(itemId),
           folder_name: name,
           access_token: "string"
+        },
+        () => {
+          console.log('897456468484654*-*-*-*-*')
+          const renamedFolder = $(`.media__folder-list .tree_leaf[data-id="${itemId}"]`);
+          renamedFolder.data('name', 'name');
+          $(renamedFolder.find('.folder-item--title')[0]).html(name)
         }
     );
   }
@@ -2389,8 +2396,8 @@ document
         $('#moveMediaModal').find('.move-disabled-js').prop('disabled', false);
         $(this).find('.tree_container').html(`<div class="media-tree_leaf-wrapper" style="display: flex; justify-content: space-between;">
           <ol class="first-branch">
-            <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_1" bb-media-type="folder">
-              <div class="tree_leaf_content active" bb-media-click="get_folder_items" draggable="true">
+            <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_1">
+              <div class="tree_leaf_content active">
                   <span class="icon-folder-opening"></span>
                   <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                   Drive2
@@ -2405,7 +2412,14 @@ document
 
         shortAjax("/api-media/get-folder-childs", {"folder_id":"1","files":true,"access_token":"string"}, res => {
           app.htmlMaker.myFuckingTree.makeTree(res.data.children, '#moveMediaModal .tree_branch');
+          $($('.media_right_content .folderitems').find('.folder-container.active')).each(function() {
+            $('#moveMediaModal').find(`.tree_leaf[data-id="${$(this).find('.file').data('id')}"] .tree_leaf_content`).each(function(index, el) {
+              console.log('-----------------------', $(el))
+              $(el).css({'pointer-events':' none', 'opacity': '0.3'});
+            });
+          })
         });
+
       } else {
         $(this).find('.tree_container').html('No selected items');
         $('#moveMediaModal').find('.move-disabled-js').prop('disabled', true);
@@ -2449,24 +2463,123 @@ document
       })
       const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
 
-      transferMove(activeImages, activeFolders, selectedFolder, () => $('#moveMediaModal').modal('hide'));
-      // activeImages.map(function(image) {
-      //   app.requests.transferImage({
-      //     item_id: image,
-      //     folder_id: selectedFolder 
-      //   }, () => {
-      //     $('#moveMediaModal').modal('hide')
-      //   })
-      // })
+      transferMove(activeImages, activeFolders, selectedFolder, () => {
 
-      // activeFolders.map(function(folder_id) {
-      //   app.requests.transferFolder({
-      //     parent_id: selectedFolder,
-      //     folder_id: folder_id 
-      //   }, () => {
-      //     $('#moveMediaModal').modal('hide')
-      //   })
-      // })
+        console.log($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${app.globalFolderId}"]`));
+        console.log($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"]`));
+        // app.requests.drawingItems({
+        //   folder_id: 1,
+        //   files: true,
+        //   access_token: "string"
+        // },
+        // true)
+
+        const from = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${app.globalFolderId}"]`);
+        const to = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"]`);
+
+        activeFolders.map((id) => {
+          from.find(`.tree_leaf[data-id="${id}"]`).appendTo(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"] > .tree_branch`);
+        });
+        
+
+        if(from.find('.tree_branch').length === 1 && from.find('.tree_leaf').length === 0 && from.hasClass('tree_leaf_with_branch')) {
+          from.removeClass('tree_leaf_with_branch');
+          from.addClass('tree_leaf_without_branch');
+          $(from.find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
+          $(from.find('.icon-folder-opening')[0]).find('i').addClass('d-none');
+        }
+
+        if(to.find('.tree_branch').length > 1 && to.hasClass('tree_leaf_without_branch')) {
+          to.removeClass('tree_leaf_without_branch');
+          to.addClass('tree_leaf_with_branch');
+          $(to.find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
+          $(from.find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
+        }
+
+
+            var branch = document.querySelectorAll('.tree_branch');
+            for (var i = 0; i < branch.length; i++) {
+            new Sortable(branch[i], {
+              group: 'b',
+              filter: '.filter',
+              draggable: ".tree_leaf",
+              sort: true,
+              animation: 150,
+              fallbackOnBody: true,
+              // swapThreshold: 0.65,
+              dataIdAttr: 'data-id',
+              forceFallback: false,
+              fallbackClass: "sortable-fallback",
+              swapThreshold: 0.20,
+              ghostClass: 'background-class',
+              swapClass: 'highlight', // The class applied to the hovered swap item
+          
+              setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
+                // console.log('dragEl', $(dragEl).data('id'))
+                dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
+              },
+              onEnd: function (/**Event*/evt) {
+                
+                const nodeId = evt.item.getAttribute('data-id');
+                const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
+      
+                if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
+                  $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
+                  $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
+                  
+                  $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
+                  $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
+                }
+          
+                if($(evt.from)[0].children.length === 0) {
+                  $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
+                  $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
+          
+                  // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
+                  $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
+                  $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
+                }
+                
+                app.requests.transferFolder(
+                  {
+                    folder_id: Number(nodeId),
+                    parent_id: Number(parentId),
+                    access_token: "string"
+                  },
+                    () => {
+                      console.log('You won!!!')
+                      // self.htmlMaker.treeMove(nodeId, parentId);
+                    }
+                );
+              },
+              onMove: function (/**Event*/evt, /**Event*/originalEvent) {
+                // Example: https://jsbin.com/nawahef/edit?js,output
+      
+                // const nodeId = 
+                
+                if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
+                  const branch = $(evt.related).closest('.tree_leaf');
+                  const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
+                  console.log(evt.related, 'ev t hshh d d ')
+                  if(branch.hasClass('tree_leaf_with_branch')) {
+                    console.log(22222222222);
+                    if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
+                      $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
+                    }
+          
+                    if(opening_icon.find('i').hasClass('fa-caret-right')) {
+                      opening_icon.find('i').removeClass('fa-caret-right');
+                      opening_icon.find('i').addClass('fa-caret-down');
+                    }
+                  }
+                }
+      
+              }
+            });
+          }
+        $('#moveMediaModal').modal('hide');
+      });
+      
     });
 
     $('body').on('click', '#moveMediaModal .tree_leaf_content', function(ev) {
