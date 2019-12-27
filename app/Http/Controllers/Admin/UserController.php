@@ -102,6 +102,7 @@ class UserController extends Controller
     public function editStaff(Request $request, Countries $countries)
     {
         $user = User::find($request->id);
+        if ($user->role->slug=='superadmin') abort(403);
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
         $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
         $billing_address = $user->addresses()->where('type', 'billing_address')->first();
@@ -120,7 +121,7 @@ class UserController extends Controller
     public function postEditStaff($id, StaffRequest $request)
     {
         $user = User::findOrFail($id);
-
+        if ($user->role->slug=='superadmin') abort(403);
         $user->update($request->except('_token'));
 
         return redirect()->back()->with('message', "Profile Updated successfully");
