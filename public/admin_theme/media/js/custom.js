@@ -910,25 +910,21 @@ function App() {
                     // console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
 
                     card.find('input.modal-input-path').remove();
-                    card.find('.bestbetter-modal-open').append(`
-                        <input type="text" name="image"
-                            value="${self.singleUrl}" placeholder="file name"
-                                class="modal-input-path d-none ${inputId}" readonly>
-                    `)
-                    card.find('.card-body .card-container-stock-media').append(`
-                        <div class="img-thumb-container" style="margin: 10px;">
-                            <div class="inner">
-                        <img src="${self.singleUrl}" class="img img-responsive ${inputId + "_media_single_img"}" width="100px" data-id="${inputId + "_media_single_img"}" alt="${self.singleUrl}"/>
-                        <span data-src="${self.singleUrl}" data-id="${inputId}" class="remove-thumb-img" data-is-multiple="false">
-                                    <i class="fa fa-trash"></i>
-                                </span>
-                            </div>
-                        </div>
-                    `)
-
-                    
-                    
-                    console.log('fuuuuuuuck')
+                    // card.find('.bestbetter-modal-open').append(`
+                    //     <input type="text" name="image"
+                    //         value="${self.singleUrl}" placeholder="file name"
+                    //             class="modal-input-path d-none ${inputId}" readonly>
+                    // `)
+                    // card.find('.card-body .card-container-stock-media').append(`
+                    //     <div class="img-thumb-container" style="margin: 10px;">
+                    //         <div class="inner">
+                    //     <img src="${self.singleUrl}" class="img img-responsive ${inputId + "_media_single_img"}" width="100px" data-id="${inputId + "_media_single_img"}" alt="${self.singleUrl}"/>
+                    //     <span data-src="${self.singleUrl}" data-id="${inputId}" class="remove-thumb-img" data-is-multiple="false">
+                    //                 <i class="fa fa-trash"></i>
+                    //             </span>
+                    //         </div>
+                    //     </div>
+                    // `)
                 } else {
                     let urlValue = document.querySelector(".file-realtive-url")
                         .value;
