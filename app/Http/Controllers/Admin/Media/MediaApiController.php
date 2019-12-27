@@ -125,7 +125,7 @@ class MediaApiController extends Controller
     {
         $data = $request->all();
         $validator = \Validator::make($data, [
-            'folder_id' => 'required|integer|exists:drive_folders,id',
+            'folder_id.*' => 'required|integer|exists:drive_folders,id',
             'parent_id' => 'required|integer|exists:drive_folders,id|not_in:' . $data['folder_id']
         ]);
         if ($validator->fails()) {

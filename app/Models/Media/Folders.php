@@ -374,19 +374,25 @@ class Folders extends Model
 
     public static function sort($data)
     {
-        $folder = self::find($data['folder_id']);
-        $parent = self::find($data['parent_id']);
+        $data=[];
+        if(is_array($data['folder_id']))
+            foreach ($data['folder_id'] as $folder_id){
+                $folder = self::find($folder_id);
+                $parent = self::find($folder_id);
 
-        $count = self::where('name', $folder->name)->where('parent_id', $data['parent_id'])->count();
-        if ($count) {
-            $count++;
-        } else {
-            $count = null;
-        }
-            $folder->parent_id = $data['parent_id'];
-            $folder->prefix = $count;
-            $folder->save();
-            return \Response::json(['error' => false, 'data' => $folder]);
+                $count = self::where('name', $folder->name)->where('parent_id', $data['parent_id'])->count();
+                if ($count) {
+                    $count++;
+                } else {
+                    $count = null;
+                }
+                $folder->parent_id = $data['parent_id'];
+                $folder->prefix = $count;
+                $folder->save();
+                $data[]=$folder;
+            }
+
+            return \Response::json(['error' => false, 'data' => $data]);
     }
 
     public function info()
