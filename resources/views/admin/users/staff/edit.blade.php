@@ -3,18 +3,31 @@
 
 @stop
 @section('content')
-    <div class="card panel panel-default users-log-wrapper">
+    <div class="card panel panel-default users-log-wrapper bg-transparent border-0">
         <div class="card-header panel-heading d-flex justify-content-between">
             <h2 class="m-0">{{ ($user) ? $user->name . ' ' . $user->last_name : "Admin Profile" }} </h2>
-            <nav aria-label="breadcrumb m-0 d-inline-flex">
-                <ol class="breadcrumb mb-0 bg-transparent">
-                    <li class="breadcrumb-item"><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>
-                            Dashboard</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
-                </ol>
-            </nav>
+{{--            <nav aria-label="breadcrumb m-0 d-inline-flex">--}}
+{{--                <ol class="breadcrumb mb-0 bg-transparent">--}}
+{{--                    <li class="breadcrumb-item"><a href="http://demo0.laravelcommerce.com/admin/dashboard/this_month"><i class="fa fa-dashboard"></i>--}}
+{{--                            Dashboard</a></li>--}}
+{{--                    <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>--}}
+{{--                </ol>--}}
+{{--            </nav>--}}
+            <div class="d-flex flex-wrap">
+                <div class="form-group mr-1">
+                    <div class="">
+                        <button type="submit" class="btn btn-success">Update</button>
+                    </div>
+                </div>
+                <div class="form-group text-right">
+                    {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
+                    {!! Form::hidden('email',$user->email) !!}
+                    <button type="submit" class="btn btn-warning">Send reset password email</button>
+                    {!! Form::close() !!}
+                </div>
+            </div>
         </div>
-        <div class="card-body panel-body">
+        <div class="card-body panel-body px-0">
             <div class="row">
                 <div class="col-xl-3 col-sm-4">
                     <!-- Profile Image -->
@@ -120,18 +133,13 @@
                                         </div>
 
 
-                                        <div class="form-group row">
-                                            <div class="col-lg-12 text-right">
-                                                <button type="submit" class="btn btn-success">Update</button>
-                                            </div>
-                                        </div>
+{{--                                        <div class="form-group row">--}}
+{{--                                            <div class="col-lg-12 text-right">--}}
+{{--                                                <button type="submit" class="btn btn-success">Update</button>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
                                         {!! Form::close() !!}
-                                        <div class="form-group text-right">
-                                            {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                                            {!! Form::hidden('email',$user->email) !!}
-                                            <button type="submit" class="btn btn-warning">Send reset password email</button>
-                                            {!! Form::close() !!}
-                                        </div>
+
 
 
                                         @if($user->verification_type && $user->verification_image)
@@ -171,11 +179,11 @@
 
                             </div>
                             <div id="users_logs" class="tab-pane fade">
-                                <div class="panel panel-default">
-                                    <div class="panel-heading">
+                                <div class="card panel panel-default">
+                                    <div class="card-header panel-heading">
                                         <h3 class="m-0">Logs</h3>
                                     </div>
-                                    <div class="panel-body">
+                                    <div class="card-body panel-body">
                                         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                                             <thead>
                                             <tr>
