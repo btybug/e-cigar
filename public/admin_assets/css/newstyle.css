@@ -2057,6 +2057,9 @@ header.main-header{
 .stock-items-tabs-wall--wrap .stock-item-desc .tox-tinymce .tox-sidebar-wrap{
     height: 200px;
 }
+.users-log-wrapper_col, .users-log-wrapper_tab-content > .tab-pane > .panel{
+    min-height: auto;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

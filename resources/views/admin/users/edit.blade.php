@@ -4,60 +4,39 @@
 @stop
 @section('content')
     <div class="card panel panel-default users-log-wrapper">
-        <div class="card-header panel-heading">
-            <div class="clearfix">
-                <div class="d-flex pull-left">
-                    <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
-                    <div class="d-inline-block ml-10">
-                        {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
-                        <h3 class="profile-username mt-0 mb-1">{!! $user->name.' '.$user->last_name !!}</h3>
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+            <div class="d-flex">
+                <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
+                <div class="d-inline-block ml-10">
+                    {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
+                    <h3 class="profile-username mt-0 mb-1">{!! $user->name.' '.$user->last_name !!}</h3>
 
-                        <p class="text-muted mb-0">{!! ($user->role)?$user->role->title:'User' !!}</p>
-                    </div>
+                    <p class="text-muted mb-0">{!! ($user->role)?$user->role->title:'User' !!}</p>
                 </div>
-
+            </div>
+            <div class="d-flex">
                 <div class="form-group pull-right">
                     {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                        {!! Form::hidden('email',$user->email) !!}
-                        <button type="submit" class="btn btn-warning">Send reset password email</button>
+                    {!! Form::hidden('email',$user->email) !!}
+                    <button type="submit" class="btn btn-warning">Send reset password email</button>
                     {!! Form::close() !!}
                 </div>
-
                 @if(! $user->email_verified_at)
                     <div class="form-group ">
                         {!! Form::open(['url'=>route('admin_users_approve')]) !!}
-                            {!! Form::hidden('id',$user->id) !!}
-                            <button type="submit" class="btn btn-success">Verify</button>
+                        {!! Form::hidden('id',$user->id) !!}
+                        <button type="submit" class="btn btn-success">Verify</button>
                         {!! Form::close() !!}
                     </div>
                 @else
-                    <div class="form-group ">
+                    <div class="form-group ml-1">
                         {!! Form::open(['url'=>route('admin_users_reject')]) !!}
                         {!! Form::hidden('id',$user->id) !!}
                         <button type="submit" class="btn btn-danger">Block</button>
                         {!! Form::close() !!}
                     </div>
                 @endif
-
-                @if($user->isWholeseler())
-                    @if(! $user->wholesaler_status)
-                        <div class="form-group ">
-                            {!! Form::open(['url'=>route('admin_users_wholesaler_approve')]) !!}
-                                {!! Form::hidden('id',$user->id) !!}
-                                <button type="submit" class="btn btn-success">Approve Wholesaler</button>
-                            {!! Form::close() !!}
-                        </div>
-                    @else
-                        <div class="form-group ">
-                            {!! Form::open(['url'=>route('admin_users_wholesaler_reject')]) !!}
-                            {!! Form::hidden('id',$user->id) !!}
-                            <button type="submit" class="btn btn-danger">Block Wholesaler</button>
-                            {!! Form::close() !!}
-                        </div>
-                    @endif
-                @endif
-
-                <div class="pull-right mr-10">
+                <div class="pull-right ml-1">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#msgModal">Send
                         message
                     </button>
@@ -80,6 +59,27 @@
 
 
                 </div>
+            </div>
+            <div class="w-100">
+
+                @if($user->isWholeseler())
+                    @if(! $user->wholesaler_status)
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_approve')]) !!}
+                                {!! Form::hidden('id',$user->id) !!}
+                                <button type="submit" class="btn btn-success">Approve Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @else
+                        <div class="form-group ">
+                            {!! Form::open(['url'=>route('admin_users_wholesaler_reject')]) !!}
+                            {!! Form::hidden('id',$user->id) !!}
+                            <button type="submit" class="btn btn-danger">Block Wholesaler</button>
+                            {!! Form::close() !!}
+                        </div>
+                    @endif
+                @endif
+
 
             </div>
 
@@ -90,7 +90,7 @@
             <div class="row d-flex">
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-3 col-4 pr-sm-3 pr-0">
                     <!-- Profile Image -->
-                    <div class="box box-primary m-0 users-log-wrapper_col">
+                    <div class="box box-primary m-0 users-log-wrapper_col" style="min-height: auto">
                         <div class="box-body box-profile">
                         </div>
                         <!-- /.box-body -->
@@ -137,6 +137,9 @@
                     <div class="tab-content users-log-wrapper_tab-content">
                         <div id="users_account" class="tab-pane fade in active show">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">
+                                    Account
+                                </div>
                                 <div class="card-body panel-body">
                                     <!-- The timeline -->
                                     {!! Form::model($user,['class'=>'']) !!}
@@ -255,6 +258,9 @@
 
                         </div>
                         <div id="users_logs" class="tab-pane fade">
+                            <div class="card-header">
+Logs
+                            </div>
                             <div class="card panel panel-default mb-0">
                                 <div class="card-body panel-body">
                                     <table id="users-table" class="table table-style table-bordered" cellspacing="0"
@@ -281,6 +287,7 @@
                         </div>
                         <div id="users_favourites" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">Favourites</div>
                                 <div class="card-body panel-body">
 
                                 </div>
@@ -288,6 +295,7 @@
                         </div>
                         <div id="users_orders" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">Orders</div>
                                 <div class="card-body panel-body">
                                     <table id="orders-table" class="table table-style table-bordered" cellspacing="0"
                                            width="100%">
@@ -314,6 +322,9 @@
                         </div>
                         <div id="users_address" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">
+                                    Address
+                                </div>
                                 <div class="card-body panel-body">
                                         <ul class="nav nav-pills nav-fill" role="tablist">
                                             <li class="mr-1">
@@ -339,8 +350,8 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">Name</label>
-                                                        <div class="col-lg-8">
+                                                               class="control-label col-lg-2 col-form-label">Name</label>
+                                                        <div class="col-lg-10">
                                                             <div class="row">
                                                                 <div class="col-sm-6 mb-sm-0 mb-1">
                                                                     {!! Form::text('first_name',null,['class'=>'form-control']) !!}
@@ -355,9 +366,9 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">Company
+                                                               class="control-label col-lg-2 col-form-label">Company
                                                             name</label>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('company',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -365,10 +376,10 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">1st
+                                                               class="control-label col-lg-2 col-form-label">1st
                                                             Line
                                                             address</label>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('first_line_address',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -376,10 +387,10 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">2nd
+                                                               class="control-label col-lg-2 col-form-label">2nd
                                                             line
                                                             address</label>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('second_line_address',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -387,8 +398,8 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">Country</label>
-                                                        <div class="col-lg-8">
+                                                               class="control-label col-lg-2 col-form-label">Country</label>
+                                                        <div class="col-lg-10">
                                                             {!! Form::select('country',['' => 'SELECT'] + $countries,null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -396,8 +407,8 @@
                                                 <div class="form-group ">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">Regions</label>
-                                                        <div class="col-lg-8">
+                                                               class="control-label col-lg-2 col-form-label">Regions</label>
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('region',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -405,8 +416,8 @@
                                                 <div class="form-group ">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">City</label>
-                                                        <div class="col-lg-8">
+                                                               class="control-label col-lg-2 col-form-label">City</label>
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('city',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -414,9 +425,9 @@
                                                 <div class="form-group">
                                                     <div class="row">
                                                         <label for="text"
-                                                               class="control-label col-lg-4 col-form-label text-lg-right">Post
+                                                               class="control-label col-lg-2 col-form-label">Post
                                                             Code</label>
-                                                        <div class="col-lg-8">
+                                                        <div class="col-lg-10">
                                                             {!! Form::text('post_code',null,['class'=>'form-control']) !!}
                                                         </div>
                                                     </div>
@@ -424,7 +435,7 @@
                                                 {!! Form::hidden('type','billing_address') !!}
                                                 {!! Form::hidden('id') !!}
                                                 <div class="form-group row">
-                                                    <div class="offset-lg-4 col-lg-8">
+                                                    <div class="">
                                                         <button type="submit" class="btn btn-primary">Submit</button>
                                                     </div>
                                                 </div>
@@ -467,6 +478,9 @@
                         </div>
                         <div id="users_tickets" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">
+                                    Tickets
+                                </div>
                                 <div class="card-body panel-body">
 
                                 </div>
@@ -474,6 +488,7 @@
                         </div>
                         <div id="users_referrals" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">Referrals</div>
                                 <div class="card-body panel-body">
 
                                 </div>
@@ -481,6 +496,7 @@
                         </div>
                         <div id="users_offer" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">Special Offer</div>
                                 <div class="card-body panel-body">
 
                                 </div>
@@ -488,6 +504,7 @@
                         </div>
                         <div id="users_special-note" class="tab-pane fade">
                             <div class="card panel panel-default mb-0">
+                                <div class="card-header">Special Note</div>
                                 <div class="card-body panel-body ">
                                     <div class="special-note-wall-box">
                                         @include('admin.users._partials.user_notes')
