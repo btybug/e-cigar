@@ -374,7 +374,7 @@ class Folders extends Model
 
     public static function sort($data)
     {
-        $data=[];
+        $result=[];
         if(is_array($data['folder_id']))
             foreach ($data['folder_id'] as $folder_id){
                 $folder = self::find($folder_id);
@@ -389,10 +389,10 @@ class Folders extends Model
                 $folder->parent_id = $data['parent_id'];
                 $folder->prefix = $count;
                 $folder->save();
-                $data[]=$folder;
+                $result[]=$folder;
             }
 
-            return \Response::json(['error' => false, 'data' => $data]);
+            return \Response::json(['error' => false, 'data' => $result]);
     }
 
     public function info()
