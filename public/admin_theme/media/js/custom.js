@@ -909,7 +909,7 @@ function App() {
                    
                     // console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
 
-                    card.find('input.modal-input-path').remove();
+                    // card.find('input.modal-input-path').remove();
                     // card.find('.bestbetter-modal-open').append(`
                     //     <input type="text" name="image"
                     //         value="${self.singleUrl}" placeholder="file name"
