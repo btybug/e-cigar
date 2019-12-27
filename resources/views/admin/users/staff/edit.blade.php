@@ -16,7 +16,7 @@
             <div class="d-flex flex-wrap">
                 <div class="form-group mr-1">
                     <div class="">
-                        <button type="submit" class="btn btn-success">Update</button>
+                        <button type="button" class="btn btn-success update-staff">Update</button>
                     </div>
                 </div>
                 <div class="form-group text-right">
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="card-body panel-body">
                                         <!-- The timeline -->
-                                        {!! Form::model($user,['class'=>'']) !!}
+                                        {!! Form::model($user,['class'=>'staff-form']) !!}
                                         {!! Form::hidden('id') !!}
 
                                         <div class="form-group row">
@@ -324,6 +324,9 @@
                 ;
             }
 
+            $('button.update-staff').on('click', function () {
+                $('form.staff-form').submit();
+            });
             $("body").on('click', '.address-book-new', function () {
                 var user_id = $("#userID").val()
                 AjaxCall(

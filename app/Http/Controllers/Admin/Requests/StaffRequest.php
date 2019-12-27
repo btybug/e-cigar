@@ -44,7 +44,7 @@ class StaffRequest extends FormRequest
            'country'=>'required',
            'phone'=>'required|numeric',
            'gender'=>'required|in:male,female',
-           'role_id'=>'required|exists:roles,id',
+           'role_id'=>'required|exists:roles,id|not_in:1',
        ];
     }
 }
