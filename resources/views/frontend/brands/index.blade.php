@@ -12,12 +12,24 @@
                         @php
                             $data = json_decode($sliders->data,true);
                         @endphp
-                        @foreach($data as $slider)
-                            <div>
-                                <a href="javascript:void(0)" class="d-block h-100">
-                                    <img src="{{ $slider }}" alt="ads">
-                                </a>
-                            </div>
+                        @foreach($data as $k => $slider)
+                                @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $banner = ltrim($slider, '/');
+                                        $html = (File::exists($banner)) ? File::get($banner) : "";
+                                    @endphp
+                                    <div>
+                                        <a href="javascript:void(0)" class="d-block h-100">
+                                            {!! $html !!}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div>
+                                        <a href="javascript:void(0)" class="d-block h-100">
+                                            <img src="{{ $slider }}" alt="ads">
+                                        </a>
+                                    </div>
+                                @endif
                         @endforeach
 
                 </div>

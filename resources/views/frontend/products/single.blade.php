@@ -383,15 +383,31 @@
                                                         <div class="tecnical_gallery">
                                                             <div class="tecnical_gallery-all">
                                                                 @foreach($vape->banners as $banner)
-                                                                    <a href="{{ $banner->url }}"
-                                                                       class="tecnical_gallery_obj-holder lightbox-item"
-                                                                       data-lightbox-gallery="gallery_name"
-                                                                       title="{!! @getImage($banner->image)->seo_alt !!}">
-                                                                        <img src="{{ checkImage($banner->image) }}"
-                                                                             alt="{!! $banner->alt !!}-gallery"
-                                                                             title="{!! $banner->tags !!}-gallery"
-                                                                        >
-                                                                    </a>
+                                                                    @if(pathinfo($banner->image,PATHINFO_EXTENSION) == 'html')
+                                                                        @php
+                                                                            $banner = ltrim($banner->image, '/');
+                                                                            $html = (File::exists($banner)) ? File::get($banner) : "";
+                                                                        @endphp
+                                                                        <div>
+                                                                            <a href="{{ $banner->url }}"
+                                                                               class="tecnical_gallery_obj-holder lightbox-item"
+                                                                               data-lightbox-gallery="gallery_name">
+                                                                                    {!! $html !!}
+                                                                            </a>
+                                                                        </div>
+                                                                    @else
+                                                                        <div>
+                                                                            <a href="{{ $banner->url }}"
+                                                                               class="tecnical_gallery_obj-holder lightbox-item"
+                                                                               data-lightbox-gallery="gallery_name"
+                                                                               title="{!! @getImage($banner->image)->seo_alt !!}">
+                                                                                <img src="{{ checkImage($banner->image) }}"
+                                                                                     alt="{!! $banner->alt !!}-gallery"
+                                                                                     title="{!! $banner->tags !!}-gallery"
+                                                                                >
+                                                                            </a>
+                                                                        </div>
+                                                                    @endif
                                                                 @endforeach
                                                             </div>
                                                         </div>

@@ -6,13 +6,19 @@
                 <div class="home__main-slider">
                     @if(count($banners))
                         @foreach($banners as $banner)
-                            @php
-                                $banner = ltrim($banner, '/');
-                                $html = (File::exists($banner)) ? File::get($banner) : "";
-                            @endphp
-                            <div>
-                                {!! $html !!}
-                            </div>
+                            @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                                @php
+                                    $banner = ltrim($banner, '/');
+                                    $html = (File::exists($banner)) ? File::get($banner) : "";
+                                @endphp
+                                <div>
+                                    {!! $html !!}
+                                </div>
+                            @else
+                                <div>
+                                    <img src="{{ $banner }}" alt="ads">
+                                </div>
+                            @endif
                         @endforeach
                     @endif
                 </div>
@@ -20,13 +26,19 @@
                 <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">
                     @if(count($banners))
                         @foreach($banners as $banner)
-                            @php
-                                $banner = ltrim($banner, '/');
-                                $html = (File::exists($banner)) ? File::get($banner) : "";
-                            @endphp
-                            <div class="thumb-wall">
-                                {!! $html !!}
-                            </div>
+                            @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                                @php
+                                    $banner = ltrim($banner, '/');
+                                    $html = (File::exists($banner)) ? File::get($banner) : "";
+                                @endphp
+                                <div class="thumb-wall">
+                                    {!! $html !!}
+                                </div>
+                            @else
+                                <div class="thumb-wall">
+                                    <img src="{{ $banner }}" alt="ads">
+                                </div>
+                            @endif
                         @endforeach
                     @endif
                 </div>
