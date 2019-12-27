@@ -378,7 +378,7 @@ class Folders extends Model
         if(is_array($data['folder_id']))
             foreach ($data['folder_id'] as $folder_id){
                 $folder = self::find($folder_id);
-                $parent = self::find($folder_id);
+
 
                 $count = self::where('name', $folder->name)->where('parent_id', $data['parent_id'])->count();
                 if ($count) {
