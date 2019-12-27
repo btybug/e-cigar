@@ -494,7 +494,7 @@ const App = function() {
           
           self.requests.transferFolder(
             {
-              folder_id: Number(nodeId),
+              folder_id: [Number(nodeId)],
               parent_id: Number(parentId),
               access_token: "string"
             },
@@ -1270,20 +1270,18 @@ const App = function() {
               .closest(".file")
               .getAttribute("data-id");
           if(Array.isArray(nodeId)) {
-            nodeId.map((id)=> {
                 self.requests.transferImage(
                   {
-                    item_id: Number(id),
+                    item_id: [Number(id)],
                     folder_id: Number(parentId),
                     access_token: "string"
                   }
                 );
-            });
           } else {
             if(self.htmlMaker.dragElementOfTree || $('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
               self.requests.transferFolder(
                 {
-                  folder_id: Number(nodeId),
+                  folder_id: [Number(nodeId)],
                   parent_id: Number(parentId),
                   access_token: "string"
                 },
@@ -1294,7 +1292,7 @@ const App = function() {
             } else {
               self.requests.transferImage(
                 {
-                  item_id: Number(nodeId),
+                  item_id: [Number(nodeId)],
                   folder_id: Number(parentId),
                   access_token: "string"
                 }
@@ -1623,6 +1621,19 @@ const App = function() {
           }
         })();
       } else if(e.type === 'click') {
+        if($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0) {
+          const id = elm.closest("[data-id]").getAttribute("data-id");
+          globalFolderId = id;
+          self.requests.drawingItems(
+            {
+              folder_id: Number(id),
+              files: true,
+              access_token: "string"
+            },
+            $(e.target).data('core') === true,
+            () => self.htmlMaker.currentId = id
+          );
+        }
         if(!$(e.target).closest('.file-box.folder-container').hasClass('active')) {
           $(e.target).closest('.file-box.folder-container').addClass('active')
         } else {
@@ -1964,20 +1975,20 @@ const App = function() {
               .closest(".file")
               .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
           if(Array.isArray(nodeId)) {
-            nodeId.map((id)=> {
+            
               self.requests.transferImage(
                   {
-                    item_id: Number(id),
+                    item_id: nodeId,
                     folder_id: Number(parentId),
                     access_token: "string"
                   }
               );
-            });
+        
           } else {
             if($('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
               self.requests.transferFolder(
                   {
-                    folder_id: Number(nodeId),
+                    folder_id: [Number(nodeId)],
                     parent_id: Number(parentId),
                     access_token: "string"
                   },
@@ -1988,7 +1999,7 @@ const App = function() {
             } else {
               self.requests.transferImage(
                   {
-                    item_id: Number(nodeId),
+                    item_id: [Number(nodeId)],
                     folder_id: Number(parentId),
                     access_token: "string"
                   }
@@ -2304,19 +2315,19 @@ document
       
       console.log(folderArray)
     
-      imagesArray.map(function(image) {
+   
         app.requests.transferImage({
-          item_id: image,
+          item_id: imagesArray,
           folder_id: 1 
         })
-      })
+      
 
-      folderArray.map(function(folder_id) {
+      
         app.requests.transferFolder({
           parent_id: 1,
-          folder_id: folder_id 
+          folder_id: folderArray 
         })
-      })
+     
     })
 
 
@@ -2427,20 +2438,16 @@ document
     })
 
     const imageTransfer = (activeImages, selectedFolder) => {
-      activeImages.map(function(image) {
         app.requests.transferImage({
-          item_id: image,
+          item_id: activeImages,
           folder_id: selectedFolder 
-        });
-      });
+        }); 
     }
 
     const folderTransfer = (activeFolders, selectedFolder) => {
-      activeFolders.map(function(folder_id) {
-        app.requests.transferFolder({
-          parent_id: selectedFolder,
-          folder_id: folder_id 
-        });
+      app.requests.transferFolder({
+        parent_id: selectedFolder,
+        folder_id: activeFolders 
       });
     }
 
@@ -2542,7 +2549,7 @@ document
                 
                 app.requests.transferFolder(
                   {
-                    folder_id: Number(nodeId),
+                    folder_id: [Number(nodeId)],
                     parent_id: Number(parentId),
                     access_token: "string"
                   },
@@ -2649,7 +2656,7 @@ document
                 
                 app.requests.transferFolder(
                   {
-                    folder_id: Number(nodeId),
+                    folder_id: [Number(nodeId)],
                     parent_id: Number(parentId),
                     access_token: "string"
                   },
