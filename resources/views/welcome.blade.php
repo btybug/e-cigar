@@ -6,7 +6,7 @@
                 <div class="home__main-slider">
                     @if(count($banners))
                         @foreach($banners as $banner)
-                            @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                            @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')
                                 @php
                                     $banner = ltrim($banner, '/');
                                     $html = (File::exists($banner)) ? File::get($banner) : "";
@@ -26,7 +26,7 @@
                 <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">
                     @if(count($banners))
                         @foreach($banners as $banner)
-                            @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                            @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')
                                 @php
                                     $banner = ltrim($banner, '/');
                                     $html = (File::exists($banner)) ? File::get($banner) : "";
