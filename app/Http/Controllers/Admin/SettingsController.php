@@ -142,10 +142,22 @@ class SettingsController extends Controller
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
         return $this->view('general', compact('model', 'countries'));
     }
-
     public function saveGeneral(Request $request, Settings $settings)
     {
         $settings->updateOrCreateSettings('admin_general_settings', $request->except('_token'));
+        return redirect()->back();
+    }
+
+    public function getDefaults(Settings $settings)
+    {
+        $model = $settings->getEditableData('admin_defaults_settings');
+        return $this->view('defaults', compact('model'));
+    }
+
+    public function saveDefaults(Request $request, Settings $settings)
+    {
+        dd( $request->except('_token'));
+        $settings->updateOrCreateSettings('admin_defaults_settings', $request->except('_token'));
         return redirect()->back();
     }
 

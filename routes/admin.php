@@ -77,6 +77,10 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/connections', 'Admin\SettingsController@getConnections')->name('admin_settings_connections');
         Route::post('/connections', 'Admin\SettingsController@postConnections')->name('post_admin_settings_connections');
     });
+    Route::group(['prefix' => 'defaults'], function () {
+        Route::get('/', 'Admin\SettingsController@getDefaults')->name('admin_settings_defaults');
+        Route::post('/', 'Admin\SettingsController@saveDefaults')->name('post_admin_settings_save_defaults');
+    });
     Route::group(['prefix' => 'events'], function () {
         Route::get('/', 'Admin\EventsController@getIndex')->name('admin_settings_events');
     });
