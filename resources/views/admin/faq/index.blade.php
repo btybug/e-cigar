@@ -4,9 +4,9 @@
 @stop
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between align-items-center">
             <h2 class="m-0 pull-left">Faq</h2>
-           @ok('admin_faq_create') <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_faq_create') !!}">Add new</a></div>@endok
+           @ok('admin_faq_create') <div class="pull-right"><a class="btn btn-primary" href="{!! route('admin_faq_create') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
             <select name="table_head" id="table_head_id" multiple>
