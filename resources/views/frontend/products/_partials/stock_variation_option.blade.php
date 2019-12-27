@@ -28,6 +28,9 @@
                     </option>
                 @endforeach
             </select>
+                <div class="desc-placeholder">
+                    {!! ($selected) ? $selected->description:null !!}
+                </div>
         </div>
     @elseif($vSettings->type == 'filter')
         <div class="select-wall product__select-wall">
@@ -36,6 +39,9 @@
             <i class="fas fa-times"></i>
             </span>
             <span class="font-sec-light font-26">{{ $selected->name }}</span>
+            <div class="desc-placeholder">
+                {!! ($selected) ? $selected->description:null !!}
+            </div>
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
@@ -93,6 +99,9 @@
             <i class="fas fa-times"></i>
             </span>
             <span class="font-sec-light font-26">{{ $selected->name }}</span>
+            <div class="desc-placeholder">
+                {!! ($selected) ? $selected->description:null !!}
+            </div>
         </div>
         {{--<div class="d-flex flex-wrap product__single-item-info-size">--}}
         {{--<div class="product_radio-single">--}}
