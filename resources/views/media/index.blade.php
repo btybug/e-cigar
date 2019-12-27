@@ -21,6 +21,31 @@
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="addFolderModal" tabindex="-1" role="dialog" aria-labelledby="addFolderModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addFolderModalTitle">Add Folder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body tree_container">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" id="folderNameValue">Folder Name</span>
+        </div>
+        <input type="text" class="form-control folderNameValue" aria-label="Default" aria-describedby="folderNameValue">
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary add-folder-js">Add</button>
+      </div>
+    </div>
+  </div>
+</div>
   <div id="page-wrapper" class="gray-bg">
 
     <div class="wrapper wrapper-content h-100">
@@ -78,10 +103,12 @@
               <div class="col-lg-12 m-b-10 text-right d-flex p-0" style="justify-content: space-between;">
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head d-flex justify-content-between  mb-20 mt15">
-                      <div class="pl-3"><a class="{!! $settings['addbutton']??null !!} btn btn-info" data-toggle="collapse"
+                  <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#addFolderModal">ADD FOLDER</button>
+
+                      <!-- <div class="pl-3"><a class="{!! $settings['addbutton']??null !!} btn btn-info" data-toggle="collapse"
                              role="button" href="#createFolder">
                               <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">ADD FOLDERS</span></a>
-                          <span data-media="selected"></span></div>
+                          <span data-media="selected"></span></div> -->
                       <div class="pl-3">
                           <button class="btn btn-danger delete_items" >Delete</button>
                           <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveMediaModal">Move</button>
