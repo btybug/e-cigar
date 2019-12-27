@@ -1,24 +1,26 @@
 @extends('layouts.admin')
 
 @section('content')
+    {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
     <div class="card panel panel-default bg-transparent border-0">
-        <div class="card-header panel-heading">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between align-items-center">
             <h2 class="m-0">{{ ($post) ? $post->title : "Add Post" }}</h2>
+            <div class="btn-save mt-1">
+                <button type="button" class="btn btn-success btn-view">View Product</button>
+                {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
+            </div>
         </div>
         <div class="card-body panel-body px-0">
-            <ul class="nav nav-tabs new-main-admin--tabs">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">SEO</a></li>
             </ul>
-            {!! Form::model($post,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+
             <div class="tab-content tabs_content">
                 <div id="info" class="tab-pane tab_info fade in active show">
 
                     {!! Form::hidden('id',null) !!}
-                    <div class="text-right btn-save pt-25">
-                        <button type="button" class="btn btn-success btn-view">View Product</button>
-                        {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-                    </div>
+
                     <div class="row sortable-panels">
                         <div class="col-lg-8 col-md-7 col-sm-8">
                             <div class="form-group">
@@ -399,12 +401,12 @@ SEO
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
+
 
         </div>
 
     </div>
-
+    {!! Form::close() !!}
     <div class="modal fade releted-products-add-modal" id="productsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
