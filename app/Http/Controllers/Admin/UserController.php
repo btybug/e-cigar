@@ -104,7 +104,7 @@ class UserController extends Controller
         $user = User::find($request->id);
         if ($user->role->slug=='superadmin') abort(403);
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
+        $roles = Roles::where('type', 'backend')->where('slug','!=','superadmin')->pluck('title', 'id')->toArray();
         $billing_address = $user->addresses()->where('type', 'billing_address')->first();
         $default_shipping = $user->addresses()->where('type', 'default_shipping')->first();
         $address = $user->addresses()->where(function ($query) {
