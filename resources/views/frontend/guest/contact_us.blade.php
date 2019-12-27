@@ -45,6 +45,32 @@
                                     <div class="item-name font-20">{!! __('faq') !!}</div>
                                 </a>
                             </li>
+
+                                <li class="item-wrap">
+                                    <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link">
+                                        <div class="item-photo">
+                                            <img src="/public/img/faq-icon.png" alt="about_us" title="about_us">
+                                        </div>
+                                        <div class="item-name font-20">{!! __('About us') !!}</div>
+                                    </a>
+                                </li>
+
+                                <li class="item-wrap">
+                                    <a href="{!! route('privacy') !!}" class="d-flex align-items-center item-link">
+                                        <div class="item-photo">
+                                            <img src="/public/img/faq-icon.png" alt="privacy" title="privacy">
+                                        </div>
+                                        <div class="item-name font-20">{!! __('privacy') !!}</div>
+                                    </a>
+                                </li>
+                                <li class="item-wrap">
+                                    <a href="{!! route('cookies') !!}" class="d-flex align-items-center item-link ">
+                                        <div class="item-photo">
+                                            <img src="/public/img/faq-icon.png" alt="cookies" title="cookies">
+                                        </div>
+                                        <div class="item-name font-20">{!! __('cookies') !!}</div>
+                                    </a>
+                                </li>
                         </ul>
                     </div>
                     <div class="col-lg-6 col-md-8">

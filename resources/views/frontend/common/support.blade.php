@@ -52,6 +52,23 @@
                             </a>
                         </li>
 
+                        <li class="col-md-4 col-sm-6">
+                            <a href="{!! route('privacy') !!}" class="d-flex align-items-center item-link">
+                                <div class="item-photo">
+                                    <img src="/public/img/faq-icon.png" alt="privacy" title="privacy">
+                                </div>
+                                <div class="item-name font-20">{!! __('privacy') !!}</div>
+                            </a>
+                        </li>
+                        <li class="col-md-4 col-sm-6">
+                            <a href="{!! route('cookies') !!}" class="d-flex align-items-center item-link">
+                                <div class="item-photo">
+                                    <img src="/public/img/faq-icon.png" alt="cookies" title="cookies">
+                                </div>
+                                <div class="item-name font-20">{!! __('cookies') !!}</div>
+                            </a>
+                        </li>
+
                     </ul>
                 </div>
 

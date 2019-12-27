@@ -1,4 +1,4 @@
-@extends('layouts.frontend',['page_name'=>'about_us'])
+@extends('layouts.frontend',['page_name'=>'cookies'])
 @section('content')
     <main class="main-content">
         <section class="support__pages-wrapper faq-page">
@@ -46,14 +46,13 @@
                             </li>
 
                             <li class="item-wrap">
-                                <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link active">
+                                <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link ">
                                     <div class="item-photo">
                                         <img src="/public/img/faq-icon.png" alt="about_us" title="about_us">
                                     </div>
                                     <div class="item-name font-20">{!! __('about_us') !!}</div>
                                 </a>
                             </li>
-
                                 <li class="item-wrap">
                                     <a href="{!! route('privacy') !!}" class="d-flex align-items-center item-link">
                                         <div class="item-photo">
@@ -62,14 +61,14 @@
                                         <div class="item-name font-20">{!! __('privacy') !!}</div>
                                     </a>
                                 </li>
-                                <li class="item-wrap">
-                                    <a href="{!! route('cookies') !!}" class="d-flex align-items-center item-link ">
-                                        <div class="item-photo">
-                                            <img src="/public/img/faq-icon.png" alt="cookies" title="cookies">
-                                        </div>
-                                        <div class="item-name font-20">{!! __('cookies') !!}</div>
-                                    </a>
-                                </li>
+                            <li class="item-wrap">
+                                <a href="{!! route('cookies') !!}" class="d-flex align-items-center item-link active">
+                                    <div class="item-photo">
+                                        <img src="/public/img/faq-icon.png" alt="cookies" title="cookies">
+                                    </div>
+                                    <div class="item-name font-20">{!! __('cookies') !!}</div>
+                                </a>
+                            </li>
                         </ul>
                     </div>
                     <div class="col-md-9">
