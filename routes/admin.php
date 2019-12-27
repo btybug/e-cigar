@@ -214,6 +214,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::post('/edit/{id}', 'Admin\UserController@postEdit')->name('post_admin_users_edit');
     Route::post('/send-reset-password-email', 'Admin\UserController@sendResetLinkEmail')->name('post_admin_users_reset_pass');
     Route::get('/activity/{id}', 'Admin\UserController@getUserActivity')->name('admin_users_activity');
+    Route::get('/verify/{id}', 'Admin\UserController@getUserVerify')->name('admin_users_verify');
 
     Route::group(['prefix' => 'roles-mebership'], function () {
         Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');

@@ -78,8 +78,8 @@ class DatatableController extends Controller
             ->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
                 return '<div class="datatable-td__action">
-                    <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>'.
-                    ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>':null).
+                    <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a><a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>'.
+                    ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>':null).
                     (($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>';
             })->addColumn('role', function ($user) {
                 return $user->role->title;

@@ -179,6 +179,13 @@ class UserController extends Controller
         return $this->view('activity_log', compact('user'));
     }
 
+    public function getUserVerify($id)
+    {
+        $user = User::findOrFail($id);
+        $user->markEmailAsVerified();
+          return redirect()->back();
+    }
+
     protected function sendResetResponse(Request $request, $response)
     {
         return redirect()->back()
