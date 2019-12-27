@@ -103,30 +103,32 @@
               <div class="col-lg-12 m-b-10 text-right d-flex p-0" style="justify-content: space-between;">
                 <div class="upload-content" style="width: 100%;">
                   <div class="upload--head d-flex justify-content-between  mb-20 mt15">
-                  <button  type="button" class="btn btn-info ml-3" data-toggle="modal" data-target="#addFolderModal">
-                      <i class="fa fa-plus" aria-hidden="true"></i>
-                      ADD FOLDER</button>
+                  <button  type="button" class="btn p-0 shadow-none d-flex ml-3" data-toggle="modal" data-target="#addFolderModal">
+                      <i class="fa fa-plus fa-2x mr-1" aria-hidden="true"></i>
+                      <span class="h5 mb-0">ADD FOLDER</span>
+                  </button>
 
                       <!-- <div class="pl-3"><a class="{!! $settings['addbutton']??null !!} btn btn-info" data-toggle="collapse"
                              role="button" href="#createFolder">
                               <i class="fa fa-plus" aria-hidden="true"></i><span class="pl-1">ADD FOLDERS</span></a>
                           <span data-media="selected"></span></div> -->
                       <div class="pl-3">
-                          <button class="btn btn-danger delete_items">
-                              <i class="far fa-trash-alt"></i>
-                              Delete
+                          <button class="btn p-0 shadow-none delete_items">
+                              <i class="far fa-trash-alt fa-2x"></i>
+{{--                              Delete--}}
                           </button>
-                          <button  type="button" class="btn btn-info" data-toggle="modal" data-target="#moveMediaModal">
-                              <i class="fas fa-arrows-alt"></i>
-                              Move
+                          <button  type="button" class="btn p-0 shadow-none" data-toggle="modal" data-target="#moveMediaModal">
+                              <i class="fas fa-arrows-alt fa-2x"></i>
+{{--                              Move--}}
                           </button>
-                          <button class="btn btn-warning copy-button" bb-media-click="copy_images">
-                              <i class="far fa-copy"></i>
-                              Copy</button>
-                          <button type="button" class="btn btn-primary uploader_button" data-role="btnUploader"
+                          <button class="btn p-0 shadow-none copy-button" bb-media-click="copy_images">
+                              <i class="far fa-copy fa-2x"></i>
+{{--                              Copy--}}
+                          </button>
+                          <button type="button" class="btn p-0 shadow-none uploader_button" data-role="btnUploader"
                                   bb-media-click="show_uploader">
-                              <i class="fas fa-cloud-upload-alt"></i>
-                              Uploader
+                              <i class="fas fa-cloud-upload-alt fa-2x"></i>
+{{--                              Uploader--}}
                           </button>
                       </div>
                   </div>
