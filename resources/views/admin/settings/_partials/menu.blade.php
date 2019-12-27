@@ -29,4 +29,10 @@
            aria-controls="general" aria-selected="true" aria-expanded="true">Connections</a>
     </li>
     @endok
+    @ok('admin_settings_defaults')
+    <li class="nav-item ">
+        <a class="nav-link @if($active == 'defaults')active @endif" id="general-tab" href="{!! route('admin_settings_defaults') !!}" role="tab"
+           aria-controls="defaults" aria-selected="true" aria-expanded="true">Defaults</a>
+    </li>
+    @endok
 </ul>

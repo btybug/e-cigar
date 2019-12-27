@@ -11,7 +11,7 @@
                             @endif
                         </span>
                         <span class="position-relative products__item-photo d-block">
-                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
+                            <img src="{{ (media_image_tmb(checkImage($product->image,'stock'))) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
                         </span>
@@ -27,7 +27,7 @@
                                 @if($variation->image)
                                     @php $count++; @endphp
                                     <span class="products__item-photo-thumb-item" title="{{ $variation->name }}">
-                                        <img src="{{ (media_image_tmb($variation->image)) }}" alt="{{ $variation->name }}" title="{{ $variation->name }}">
+                                        <img src="{{ (media_image_tmb(checkImage($variation->image,'stock'))) }}" alt="{{ $variation->name }}" title="{{ $variation->name }}">
                                     </span>
                                 @endif
                             @endforeach

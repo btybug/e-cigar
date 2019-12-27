@@ -125,9 +125,9 @@
                                                 @if($vape->image)
                                                     <div class="h-100">
                                                         <img class="single-product_top-img"
-                                                             src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! checkImage( $vape->name) !!}"
-                                                             title="{!! checkImage( $vape->name) !!}"
+                                                             src="{!! checkImage($vape->image,'stock') !!}"
+                                                             alt="{!! ( $vape->name) !!}"
+                                                             title="{!! ( $vape->name) !!}"
                                                         >
                                                     </div>
                                                 @endif
@@ -142,9 +142,9 @@
                                             <div class="d-flex product-card-thumbs product-card-thumbs--single">
                                                 @if($vape->image)
                                                     <div class="product-card_thumb-img-holder pointer active_slider">
-                                                        <img class="" src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! checkImage($vape->name) !!}"
-                                                             title="{!! checkImage($vape->name) !!}"
+                                                        <img class="" src="{!! checkImage($vape->image,'stock') !!}"
+                                                             alt="{!! ($vape->name) !!}"
+                                                             title="{!! ($vape->name) !!}"
                                                         >
                                                     </div>
                                                 @endif
@@ -153,7 +153,7 @@
                                                         <div class="product-card_thumb-img-holder pointer"
                                                              data-id="null">
                                                             <img class=""
-                                                                 src="{{ $img }}"
+                                                                 src="{{checkImage($img,'stock')}}"
                                                                  alt="{!! $img !!}"
                                                                  title="{!! $img !!}"
                                                             >
@@ -166,9 +166,9 @@
                                                             <div class="product-card_thumb-img-holder pointer"
                                                                  data-id="{{ $variation['id'] }}">
                                                                 <img class=""
-                                                                     src="{{ checkImage($variation["image"]) }}"
-                                                                     alt="{!! checkImage($variation["name"]) !!}"
-                                                                     title="{!! checkImage($variation["name"]) !!}"
+                                                                     src="{{ checkImage($variation["image"],'stock') }}"
+                                                                     alt="{!! ($variation["name"]) !!}"
+                                                                     title="{!! ($variation["name"]) !!}"
                                                                 >
                                                             </div>
                                                         @endif

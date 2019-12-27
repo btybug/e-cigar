@@ -1292,10 +1292,24 @@ function user_can_claim($user)
     return false;
 }
 
-function checkImage($img)
+function checkImage($img,$type=null)
 {
-    return $img;
-    return (File::exists(base_path().$img)) ? $img : no_image();
+        switch ($type){
+            case 'stock':$img= (File::exists(base_path().$img)) ? $img : stock_default_image();break;
+            case 'item':$img= (File::exists(base_path().$img)) ? $img : item_default_image();break;
+        }
+        return $img;
+
+}
+function stock_default_image(){
+    $settings= new Settings();
+    $settings = $settings->getEditableData('admin_defaults_settings');
+    return ($settings->stock_image)?$settings->stock_image:null;
+}
+function item_default_image(){
+    $settings= new Settings();
+    $settings = $settings->getEditableData('admin_defaults_settings');
+    return ($settings->stock_image)?$settings->item_image:null;
 }
 
 function no_image()
@@ -1526,4 +1540,20 @@ function main_pages_seo($main_page=null){
     }
     return $HTML;
 }
+
+
+function rich(){
+
+    $localBusiness = \Spatie\SchemaOrg\Schema::product()
+        ->name('Spatie')
+        ->image('https://e-cigar.com/public/media/drive/12/ff39e4af551574b9911e15aaedfb9119.png');
+
+    echo $localBusiness->toScript();
+}
+
+function UR_exists($url){
+    $headers=get_headers($url);
+    return stripos($headers[0],"200 OK")?true:false;
+}
+
 

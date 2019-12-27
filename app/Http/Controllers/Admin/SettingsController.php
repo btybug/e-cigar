@@ -156,7 +156,6 @@ class SettingsController extends Controller
 
     public function saveDefaults(Request $request, Settings $settings)
     {
-        dd( $request->except('_token'));
         $settings->updateOrCreateSettings('admin_defaults_settings', $request->except('_token'));
         return redirect()->back();
     }
