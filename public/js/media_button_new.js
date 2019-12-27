@@ -1621,7 +1621,7 @@ const App = function() {
           }
         })();
       } else if(e.type === 'click') {
-        if($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0) {
+        if($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0 && $(e.target).closest('.icon-folder-opening').length === 0) {
           const id = elm.closest("[data-id]").getAttribute("data-id");
           globalFolderId = id;
           self.requests.drawingItems(
