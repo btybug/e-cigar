@@ -172,7 +172,7 @@
                                     </div>
                                 </div>
                                 <div
-                                    class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">
+                                    class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @else package-variation-box @endif">
                                     @if($main && count($v))
                                         @foreach($v as $package_variation)
                                             @include('admin.inventory._partials.variation_package_item')
