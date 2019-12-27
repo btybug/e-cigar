@@ -252,15 +252,10 @@ class UserController extends Controller
     public function postRejectVerified(Request $request)
     {
         $user = User::findOrFail($request->id);
-        if ($user->email_verified_at) {
-            \DB::table("users")->update(['email_verified_at' => null]);
-            $user->update([
-                'status' => false
-            ]);
-            return redirect()->back();
-        }
-
-        abort(404);
+        $user->update([
+            'status' => false
+        ]);
+        return redirect()->back();
     }
 
     public function postApprove(Request $request)

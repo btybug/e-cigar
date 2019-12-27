@@ -15,27 +15,21 @@
                 </div>
             </div>
             <div class="d-flex">
-                <div class="form-group pull-right">
-                    {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
-                    {!! Form::hidden('email',$user->email) !!}
-                    <button type="submit" class="btn btn-warning">Send reset password email</button>
-                    {!! Form::close() !!}
-                </div>
-                @if(! $user->email_verified_at)
+               @if(! $user->email_verified_at)
                     <div class="form-group ">
                         {!! Form::open(['url'=>route('admin_users_approve')]) !!}
                         {!! Form::hidden('id',$user->id) !!}
                         <button type="submit" class="btn btn-success">Verify</button>
                         {!! Form::close() !!}
                     </div>
-                @else
-                    <div class="form-group ml-1">
-                        {!! Form::open(['url'=>route('admin_users_reject')]) !!}
-                        {!! Form::hidden('id',$user->id) !!}
-                        <button type="submit" class="btn btn-danger">Block</button>
-                        {!! Form::close() !!}
-                    </div>
                 @endif
+
+{{--                    <div class="form-group ml-1">--}}
+{{--                        {!! Form::open(['url'=>route('admin_users_reject')]) !!}--}}
+{{--                        {!! Form::hidden('id',$user->id) !!}--}}
+{{--                        <button type="submit" class="btn btn-danger">Block</button>--}}
+{{--                        {!! Form::close() !!}--}}
+{{--                    </div>--}}
                 <div class="pull-right ml-1">
                     <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#msgModal">Send
                         message
@@ -136,14 +130,18 @@
                     {{--</ul>--}}
                     <div class="tab-content users-log-wrapper_tab-content">
                         <div id="users_account" class="tab-pane fade in active show">
+                            {!! Form::model($user,['class'=>'']) !!}
+                            {!! Form::hidden('id') !!}
                             <div class="card panel panel-default mb-0">
                                 <div class="card-header">
                                     Account
+
+                                    <button type="submit" class="btn btn-success float-right">Update</button>
+
                                 </div>
                                 <div class="card-body panel-body">
                                     <!-- The timeline -->
-                                    {!! Form::model($user,['class'=>'']) !!}
-                                    {!! Form::hidden('id') !!}
+
 
                                     <div class="form-group row">
                                         <label for="inputName" class="col-xl-2 col-lg-3 control-label">First Name</label>
@@ -187,75 +185,67 @@
                                     <div class="form-group row">
                                         <label for="inputExperience" class="col-xl-2 col-lg-3 control-label">Status</label>
                                         <div class="col-xl-10 col-lg-9">
-                                            {!! Form::hidden('status',null) !!}
                                             @if($user->email_verified_at == null)
+                                                {!! Form::hidden('status',null) !!}
                                                 <div class="form-control">Email Not Verified</div>
-                                            @elseif($user->email_verified_at && ! $user->status)
-                                                <div class="form-control">ID Not Verified</div>
-                                            @elseif($user->email_verified_at && $user->status)
-                                                <div class="form-control">Active</div>
+                                            @else
+                                               {!! Form::select('status',[0 => 'Suspend',1=>'Active'],null,['class' => 'form-control']) !!}
                                             @endif
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="inputExperience" class="col-xl-2 col-lg-3 control-label">Membership</label>
+                                        <label for="inputExperience" class="col-xl-2 col-lg-3 control-label">Password</label>
                                         <div class="col-xl-10 col-lg-9">
-                                            {!! Form::select('role_id',[null=>'No Membership']+$roles,null,['class'=>'form-control']) !!}
+                                            {!! Form::open(['url'=>route('post_admin_users_reset_pass')]) !!}
+                                            {!! Form::hidden('email',$user->email) !!}
+                                            <button type="submit" class="btn btn-warning">Send reset password email</button>
+                                            {!! Form::close() !!}
 
                                         </div>
                                     </div>
-
-
-                                    <div class="form-group row">
-                                        <div class="col-sm-12 text-right">
-                                            <button type="submit" class="btn btn-success">Update</button>
-                                        </div>
-                                    </div>
-                                    {!! Form::close() !!}
-
-
-                                    @if($user->verification_type && $user->verification_image)
-                                        {!! Form::open() !!}
-                                        <div class="row">
-                                            <div class="form-group col-md-10">
-                                                <div class="row">
-                                                    <label for="inputExperience" class="col-sm-4 control-label">Uploaded
-                                                        Doc
-                                                        : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
-                                                    <div class="col-sm-8">
-                                                        <img class="img" src="{{ $user->verification_image }}"
-                                                             width="100"/>
-                                                    </div>
-                                                </div>
-                                                <div class="">
-                                                    <button type="button" class="btn btn-info">View</button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-md-2">
-                                                @if(! $user->status)
-                                                    <div>
-                                                        <button type="button" class="btn btn-success approve-verify">
-                                                            Approve
-                                                        </button>
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger reject-verify">
-                                                            Reject
-                                                        </button>
-                                                    </div>
-                                                @else
-                                                    <div>
-                                                        <div class="alert alert-success">Verified</div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        {!! Form::close() !!}
-                                    @endif
                                 </div>
                             </div>
+                            {!! Form::close() !!}
 
+                            @if($user->verification_type && $user->verification_image)
+                                {!! Form::open() !!}
+                                <div class="row">
+                                    <div class="form-group col-md-10">
+                                        <div class="row">
+                                            <label for="inputExperience" class="col-sm-4 control-label">Uploaded
+                                                Doc
+                                                : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
+                                            <div class="col-sm-8">
+                                                <img class="img" src="{{ $user->verification_image }}"
+                                                     width="100"/>
+                                            </div>
+                                        </div>
+                                        <div class="">
+                                            <button type="button" class="btn btn-info">View</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        @if(! $user->status)
+                                            <div>
+                                                <button type="button" class="btn btn-success approve-verify">
+                                                    Approve
+                                                </button>
+                                            </div>
+                                            <div>
+                                                <button type="button" class="btn btn-danger reject-verify">
+                                                    Reject
+                                                </button>
+                                            </div>
+                                        @else
+                                            <div>
+                                                <div class="alert alert-success">Verified</div>
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                {!! Form::close() !!}
+                            @endif
                         </div>
                         <div id="users_logs" class="tab-pane fade">
                             <div class="card-header">
