@@ -23,6 +23,10 @@
                                 </option>
                             @endforeach
                         </select>
+                        <div class="my-1">
+                            {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($item) ? $item->name : null,['class' => 'form-control v-name']) !!}
+                            {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
+                        </div>
                     </div>
                     <div class="stock-item-name-desc ml-2">
                         <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
@@ -39,11 +43,7 @@
                             @endif
                         </select>
 
-                        <div class="my-1">
-                            {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($item) ? $item->name : null,['class' => 'form-control v-name']) !!}
-                            {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
-                        </div>
-                        <div class="stock-item-desc">
+                        <div class="stock-item-desc mt-1">
                             {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($item) ? $item->description : null,
         ['class' => 'form-control stock-tiny-area','style' => 'height:300px !important;']) !!}
 

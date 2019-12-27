@@ -2034,6 +2034,18 @@ header.main-header{
     padding-right: 12px;
     background-color: #ecf0f5
 }
+.stock-items-tabs-wall--wrap .stock-items-tab-prices .discount-item{
+    border: 1px solid #cccc;
+    padding: 10px 0;
+    box-shadow: 0 0 4px #ccc;
+    margin: 5px 0;
+}
+.stock-items-tabs-wall--wrap .stock-item-desc .tox-tinymce{
+    height: auto!important;
+}
+.stock-items-tabs-wall--wrap .stock-item-desc .tox-tinymce .tox-sidebar-wrap{
+    height: 200px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

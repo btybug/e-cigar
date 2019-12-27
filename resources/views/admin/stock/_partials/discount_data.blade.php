@@ -1,5 +1,5 @@
 @if($package_variation->discount_type == 'range')
-    <div class="col-md-12 justify-content-center">
+    <div class="col-md-12">
         <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
                 class="fa fa-plus"></i></a>
     </div>
@@ -14,11 +14,11 @@
                     <label>To</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][to]",$datum->to,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label>Price/Item</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -28,23 +28,23 @@
     </div>
 @else
     <div class="col-md-12 fixed-box">
-        <div class="col-md-12 justify-content-center">
+        <div class="">
             <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
                     class="fa fa-plus"></i></a>
         </div>
 
         @foreach($package_variation->discounts as $key => $datum)
-            <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-4">
+            <div class="d-flex flex-wrap discount-item ">
+                <div class="col-md-5">
                     <label>Qty</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][qty]",$datum->qty,['class' => 'form-control']) !!}
                 </div>
 
-                <div class="col-md-q">
+                <div class="col-md-5">
                     <label>Total price</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>

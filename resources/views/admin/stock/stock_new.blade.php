@@ -1251,11 +1251,11 @@
                 <label>To</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <label>Price/Item</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-3">
+            <div class="col-md-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
@@ -1265,16 +1265,16 @@
 
     <script type="template" id="fixed-discount">
         <div class="d-flex flex-wrap discount-item">
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <label>Qty</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
             </div>
 
-            <div class="col-md-q">
+            <div class="col-md-5">
                 <label>Total price</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
@@ -1283,7 +1283,7 @@
     </script>
 
     <script type="template" id="range-discount-temp">
-        <div class="col-md-12 justify-content-center">
+        <div class="col-md-12">
             <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
                     class="fa fa-plus"></i></a>
         </div>
@@ -1297,11 +1297,11 @@
                     <label>To</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <label>Price/Item</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -1313,21 +1313,21 @@
 
     <script type="template" id="fixed-discount-temp">
         <div class="col-md-12 fixed-box">
-            <div class="col-md-12 justify-content-center">
+            <div class="">
                 <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
                         class="fa fa-plus"></i></a>
             </div>
             <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <label>Qty</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
                 </div>
 
-                <div class="col-md-q">
+                <div class="col-md-5">
                     <label>Total price</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>

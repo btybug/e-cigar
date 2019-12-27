@@ -33,6 +33,9 @@
 {{--                    </div>--}}
 {{--                </div>--}}
             </div>
+            <div class="col-sm-2 align-self-center">
+                {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
+            </div>
             <div class="col-sm-1 ml-auto col d-flex pr-0 head-right justify-content-end">
                 {!! Form::hidden("variations[$main_unique][is_required]",$required) !!}
                 <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-times"></i></button>
@@ -43,11 +46,8 @@
                 <div class="tab-pane fade show active" id="stockRequiredSettings-{!! $k!!}" role="tabpanel"
                      aria-labelledby="stockRequiredSettings-tab-{!! $k!!}">
                     <div class="row">
-                        <div class="col-sm-6 d-flex flex-wrap head-left px-0 py-2">
-                            <div class="col-xl-3">
-                                {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
-                            </div>
-                            <div class="col-xl-6 my-xl-0 my-1">
+                        <div class="col-sm-4 d-flex flex-wrap head-left px-0 py-2">
+                            <div class="col-xl-12 my-xl-0 my-1">
                                 <div class="row">
                                     <div class="col-md-6">
                                         {!! Form::select("variations[$main_unique][type]",['' => 'Select','package_product' => 'Multiple items','filter' => 'Filters','single' => 'Single item'
@@ -63,31 +63,32 @@
                             </div>
 
                         </div>
-                        <div class="col-sm-5 d-flex justify-content-end p-0">
+                        <div class="col-sm-8 d-flex justify-content-end p-0">
                             <div
                                 class="col-md-12 px-md-3 px-0 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
                                 <div class="row h-100 align-items-center">
-                                    <div class="col-lg-5">
+                                    <div class="col-md-5">
                                         <div class="row">
-                                            <label class="col-xl-6 col-form-label">
-                                                Min Limit :
+                                            <label class="col-xl-2 col-form-label">
+                                                Limit :
                                             </label>
-                                            <div class="col-xl-6 align-self-center">
+                                            <div class="col-xl-3 align-self-center p-0">
                                                 {!! Form::number("variations[$main_unique][min_count_limit]",
                                                 (($main) ? $main->min_count_limit : null),['class' => 'form-control']) !!}
+                                            </div>
+                                            <div class="col-xl-2 col-form-label">
+                                                To :
+                                            </div>
+                                            <div class="col-xl-3 align-self-center p-0">
+                                                {!! Form::number("variations[$main_unique][count_limit]",
+                                                                                ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div class="col-lg-7 mb-lg-0 mb-1">
+                                    <div class="col-md-3 mb-md-0 mb-1">
                                         <div class="row">
-                                            <div class="col-xl-8 col-form-label">
-                                                How Many items user can select :
-                                            </div>
-                                            <div class="col-xl-4 align-self-center">
-                                                {!! Form::number("variations[$main_unique][count_limit]",
-                                                                                ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
-                                            </div>
+
                                         </div>
 
                                     </div>
