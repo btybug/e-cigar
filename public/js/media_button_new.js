@@ -1369,8 +1369,8 @@ const App = function() {
             
           }
           console.log(this.globalFolderId, 'globalFolderId');
-          $('.media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
-          $($(`.media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
+          $('.media__folder-list .media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
+          $($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
 
           cb ? cb() : null;
         }
