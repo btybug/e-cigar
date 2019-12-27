@@ -3535,8 +3535,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .product__select-wall {
     display: flex;
+    flex-direction: column;
 }
-
+.product__select-wall .desc-placeholder p{
+    margin-bottom: 0;
+}
+.product__single-item-info-bottom.align-items-end{
+    align-items: normal !important;
+}
 .product__select-wall .remove-single_product-item {
     width: 25px;
     height: 25px;
