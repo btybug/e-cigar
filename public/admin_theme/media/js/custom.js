@@ -898,15 +898,15 @@ function App() {
             }
         },
         open_images(elm, e) {
-            console.log(self.multipleImages)
             if (multiple) {
                 self.helpers.makeMultiplaImagesAndInputs(self.multipleImages);
             } else {
-                console.log(elm)
+
                 // img-thumb-container
                 const card = $(`button#${inputId}`).closest('.card');
-                if(card.find('img.img-responsive').length === 0) {
-                   
+                // if(card.find('img.img-responsive').length === 0) {
+                //     console.log(456465465165)
+
                     // console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
 
                     // card.find('input.modal-input-path').remove();
@@ -925,7 +925,7 @@ function App() {
                     //         </div>
                     //     </div>
                     // `)
-                } else {
+                // } else {
                     let urlValue = document.querySelector(".file-realtive-url")
                         .value;
                     console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
@@ -954,7 +954,7 @@ function App() {
                         document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
                     }
                     document.querySelector(`.${inputId}`).value = urlValue;
-                }
+                // }
                 
             }
             // document.querySelector(".file-realtive-url").value = "";
