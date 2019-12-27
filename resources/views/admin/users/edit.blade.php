@@ -3,7 +3,7 @@
 
 @stop
 @section('content')
-    <div class="card panel panel-default users-log-wrapper">
+    <div class="card panel panel-default users-log-wrapper bg-transparent border-0">
         <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
             <div class="d-flex">
                 <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
@@ -85,7 +85,7 @@
 
         </div>
 
-        <div class="card-body panel-body">
+        <div class="card-body panel-body px-0">
 
             <div class="row d-flex">
                 <div class="col-xl-2 col-lg-3 col-md-4 col-sm-3 col-4 pr-sm-3 pr-0">
