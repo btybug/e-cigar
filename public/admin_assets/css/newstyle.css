@@ -2060,6 +2060,19 @@ header.main-header{
 .users-log-wrapper_col, .users-log-wrapper_tab-content > .tab-pane > .panel{
     min-height: auto;
 }
+.new-main-admin--tabs{
+    box-shadow: 0 0 5px 2px #ccc;
+    background-color: #ffffff;
+}
+.new-main-admin--tabs .nav-link {
+    font-size: 16px;
+    background-color: #ffffff;
+    border-radius: 0;
+}
+.new-main-admin--tabs .nav-link.active {
+    background: #2ab9d6;
+    color: #fff;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
