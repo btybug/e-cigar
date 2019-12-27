@@ -6,9 +6,9 @@
 
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
     <div class="card border-0">
-        <div class="card-header clearfix">
-            <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "New Product" }}</h2>
-            <div class="pull-right">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h2 class="m-0">{{ ($model) ? $model->name : "New Product" }}</h2>
+            <div>
                 {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                 @if($model && ! isset($offer))
                 <a target="_blank" class="btn btn-info" href="{{ route('product_single', ['type' =>"vape", 'slug' => $model->slug]) }}">View</a>
@@ -1283,10 +1283,7 @@
     </script>
 
     <script type="template" id="range-discount-temp">
-        <div class="col-md-12">
-            <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
-                    class="fa fa-plus"></i></a>
-        </div>
+
         <div class="col-md-12 range-box">
             <div class="d-flex flex-wrap discount-item">
                 <div class="col-md-3">
@@ -1308,15 +1305,15 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-2 offset-md-10 pl-1">
+            <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
+                    class="fa fa-plus"></i></a>
+        </div>
 
     </script>
 
     <script type="template" id="fixed-discount-temp">
         <div class="col-md-12 fixed-box">
-            <div class="">
-                <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
-                        class="fa fa-plus"></i></a>
-            </div>
             <div class="d-flex flex-wrap discount-item">
                 <div class="col-md-5">
                     <label>Qty</label>
@@ -1333,8 +1330,12 @@
                     </button>
                 </div>
             </div>
-        </div>
 
+        </div>
+        <div class="col-md-2 offset-md-10 pl-1">
+            <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
+                    class="fa fa-plus"></i></a>
+        </div>
     </script>
     <script type="template" id="add-more-banners">
         <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">

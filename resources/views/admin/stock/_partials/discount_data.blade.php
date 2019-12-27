@@ -1,8 +1,5 @@
 @if($package_variation->discount_type == 'range')
-    <div class="col-md-12">
-        <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
-                class="fa fa-plus"></i></a>
-    </div>
+
     <div class="col-md-12 range-box">
         @foreach($package_variation->discounts as $key => $datum)
             <div class="d-flex flex-wrap discount-item">
@@ -26,12 +23,13 @@
             </div>
         @endforeach
     </div>
+    <div class="col-md-2 offset-md-10 pl-1">
+        <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
+                class="fa fa-plus"></i></a>
+    </div>
 @else
     <div class="col-md-12 fixed-box">
-        <div class="">
-            <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
-                    class="fa fa-plus"></i></a>
-        </div>
+
 
         @foreach($package_variation->discounts as $key => $datum)
             <div class="d-flex flex-wrap discount-item ">
@@ -51,6 +49,10 @@
                 </div>
             </div>
         @endforeach
+    </div>
+    <div class="col-md-2 offset-md-10 pl-1">
+        <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
+                class="fa fa-plus"></i></a>
     </div>
 @endif
 

@@ -32,8 +32,6 @@
                     {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($package_variation) ? $package_variation->name : null,['class' => 'form-control v-name']) !!}
                     {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
                 </div>
-            </div>
-            <div class="stock-item-name-desc ml-2">
                 <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
                     @if($main && $main->stock)
                         <option value="{{ $main->stock->image }}" selected>Main Image</option>
@@ -47,6 +45,8 @@
                         @endif
                     @endif
                 </select>
+            </div>
+            <div class="stock-item-name-desc ml-2">
 
                 <div class="stock-item-desc mt-1">
                     {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
@@ -76,13 +76,13 @@
     {{--    </td>--}}
     <div
         class="package_price stock-items-tab-prices @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
-        <div class="row flex-nowrap">
+        <div class="row ">
             <div class="col-md-4">
                 {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
             'fixed' => 'Discount fixed','range'=>'Discount range'],
                 ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change','main_unique' => $main_unique,'unique' => $uniqueID]) !!}
             </div>
-            <div class="col-md-8">
+            <div class="col-md-12 mt-1">
                 <div
                     class="price-static @if($package_variation && $package_variation->price_type =='static') show @else d-none @endif">
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,

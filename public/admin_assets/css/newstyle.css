@@ -1920,15 +1920,17 @@ header.main-header{
     object-fit: cover;
 }
 .stock-items-tab-photo-td{
-    width: 650px;
+    width: 750px;
     border-right: 1px solid #ccc;
     padding-right: 10px;
 }
 .stock-items-tab-delete-td{
     width: 58px;
+    background: #ccc;
+    text-align: center;
 }
 .stock-items-tab-head-name{
-    width: 650px;
+    width: 750px;
     border-right: 1px solid #ccc;
     padding: 10px;
     padding-left: 0;
@@ -1939,6 +1941,15 @@ header.main-header{
 }
 .stock-items-tab-head-action{
     width: 58px;
+
+}
+.stock-items-tabs-wall-head .stock-items-tab-head-action{
+    background: #ccc;
+    text-align: center;
+    align-self: normal;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .stock-items-tabs-wall-head{
     display: flex;
@@ -2035,9 +2046,9 @@ header.main-header{
     background-color: #ecf0f5
 }
 .stock-items-tabs-wall--wrap .stock-items-tab-prices .discount-item{
-    border: 1px solid #cccc;
+    /*border: 1px solid #cccc;*/
     padding: 10px 0;
-    box-shadow: 0 0 4px #ccc;
+    /*box-shadow: 0 0 4px #ccc;*/
     margin: 5px 0;
 }
 .stock-items-tabs-wall--wrap .stock-item-desc .tox-tinymce{

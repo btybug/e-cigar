@@ -1,10 +1,11 @@
 <div class="package-box">
-    <div class="basic-center basic-wall" data-id="{{ $main_unique }}">
+    <div class="basic-center basic-wall shadow-none" data-id="{{ $main_unique }}">
         <div class="w-100">
             <div class="">
                 <div class="row">
-                    <div class="col-lg-2">
-                        Display as: {!! Form::select("variations[$main_unique][display_as]",
+                    <div class="col-lg-12">
+                        <label>Display as: </label>
+                        {!! Form::select("variations[$main_unique][display_as]",
                         ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
                 </div>
