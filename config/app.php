@@ -163,6 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
@@ -252,6 +253,7 @@ return [
         'GoogleCloudPrint' => Bnb\GoogleCloudPrint\Facades\GoogleCloudPrint::class,
         'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
+        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class
     ],
 
 ];
