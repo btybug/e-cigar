@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLogs;
 use App\Models\Category;
+use App\Models\Mongo;
 use App\Models\Settings;
 use Illuminate\Http\Request;
 
@@ -27,6 +29,8 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd(ActivityLogs::destroy(['5e07afd83f21000064001b26']));
+        dd(ActivityLogs::action('stock','create','16'));
 //        40564344854
 
 //        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
