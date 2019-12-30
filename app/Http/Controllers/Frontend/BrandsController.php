@@ -63,7 +63,8 @@ class BrandsController extends Controller
     }
     public function postCategoryProducts(Request $request)
     {
-        $current = Category::where('type', 'brands')->whereNotNull('parent_id')->where('id', $request->id)->first();
+        $current = Category::where('type', 'brands')->where('id', $request->id)->first();
+       
         if ($current) {
             $products = $current->brandProducts();
             $stockCategories = StockCategories::
