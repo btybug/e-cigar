@@ -501,6 +501,7 @@ class ItemsController extends Controller
             'name' => $request->name,
             'short_description' => $request->short_description,
         ]]);
+        ActivityLogs::action('items', 'update', $model->id);
         $model->categories()->sync($request->get('categories', []));
 
         return response()->json(['error' => false]);
