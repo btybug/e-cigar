@@ -79,8 +79,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($user) {
                 return '<div class="datatable-td__action">
                    <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>'.(($user->slug!='superadmin')?' <a href="' . route('admin_staff_edit', $user->id) .'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>'.
-                    ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>':null).
-                    (($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>':null);
+                    ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>':null).(($user->slug !='admin' || \Auth::user()->role->slug =='superadmin')? ((($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>'):null):null);
             })->addColumn('role', function ($user) {
                 return $user->role->title;
             })->rawColumns(['actions'])
@@ -113,7 +112,7 @@ class DatatableController extends Controller
         $query = Roles::query();
 
         return Datatables::of($query)->addColumn('actions', function ($role) {
-            if ($role->slug != 'superadmin' && $role->slug != 'customer')
+            if ($role->slug != 'superadmin' && $role->slug != 'admin' && $role->slug != 'customer')
                 return '<div class="datatable-td__action"><a href="' . route('admin_edit_role', $role->id) . '" class="btn btn-warning events-modal" >Edit</a></div>';
         })->addColumn('access', function ($role) {
             return ($role->type == 'backend') ? 'Admin Panel' : 'Frontend Pages';
