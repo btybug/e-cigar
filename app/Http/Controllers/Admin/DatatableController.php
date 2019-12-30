@@ -385,6 +385,7 @@ class DatatableController extends Controller
 
     public function getUserActivity($id)
     {
+        ActivityLogs::where('object_id', 16)->delete();
         return Datatables::of(ActivityLogs::where('user_id', 1)->get())
             ->editColumn('created_at', function ($attr) {
                 return BBgetDateFormat($attr->created_at,'d M Y H:i:s');
