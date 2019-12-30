@@ -31,7 +31,12 @@ class BlogController extends Controller
 
     public function getSingle($post_url)
     {
-        $post = Posts::active()->where('url',$post_url)->first();
+        $post = Posts::leftJoin('posts_translations','posts.id','posts_translations.posts_id')
+            ->where('posts.status',true)
+            ->where('posts_translations.url',$post_url)
+            ->where('posts_translations.locale','gb')
+            ->first();
+
         if(! $post) abort(404);
 
         $relatedPosts = Posts::leftJoin('post_categories','posts.id','post_categories.post_id')
