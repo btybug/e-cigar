@@ -5413,11 +5413,16 @@ max-width: 100%;
     margin-right: 24px;
     width: 62px;
 }
-
+.brands_main-content.products-box .stickers__right-top .left img{
+    margin-right: 24px;
+    width: 62px;
+}
 .stickers__page-wrapper .stickers__right-top .right {
     opacity: .6;
 }
-
+.brands_main-content.products-box .stickers__right-top .right {
+    opacity: .6;
+}
 .stickers__page-wrapper .brands_aside-list {
     margin-right: 10px;
     margin-top: 18px;
