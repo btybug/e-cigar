@@ -239,7 +239,7 @@ function userCan($permission)
 {
     if (!Auth::check()) return false;
     $role = Auth::user()->role;
-    if ($role->slug == 'superadmin') return true;
+    if ($role->slug == 'superadmin' || $role->slug == 'admin') return true;
     return $role->can($permission);
 }
 
@@ -830,6 +830,33 @@ function stockSeo($stock)
     $seo = $stock->seo;
     $general = $settings->getEditableData('seo_stocks')->toArray();
     $robot = $settings->getEditableData('seo_robot_stocks');
+    $r = (is_null($seo) || is_null($seo->robots)) ?  $robot->robots : $seo->robots;
+    if (!$r) return null;
+    $HTML = '';
+    $keywords=get_translated($seo,strtolower($lang),'keywords');
+    $title=get_translated($seo,strtolower($lang),'title');
+    $description=get_translated($seo,strtolower($lang),'description');
+    $image=get_translated($seo,strtolower($lang),'image');
+    $HTML .= ($title)?'<title>'.$title.'</title>':'<title>'.getSeo($general,'og:title',$stock).'</title>';
+    $HTML.=($keywords)? Html::meta('keywords',$keywords)->toHtml():Html::meta('keywords',getSeo($general,'og:keywords',$stock))->toHtml();
+    $HTML.=($title)? Html::meta('og:title',$title)->toHtml():Html::meta('og:title',getSeo($general,'og:title',$stock))->toHtml();
+    $HTML.=($description)? Html::meta('og:description',$description)->toHtml():Html::meta('og:description',getSeo($general,'og:description',$stock))->toHtml();
+    $HTML .=($image)? Html::meta('og:image',$image)->toHtml():Html::meta('og:image',getSeo($general,'og:image',$stock))->toHtml();
+
+
+    $HTML.=($title)? Html::meta('title',$title)->toHtml():Html::meta('title',getSeo($general,'og:title',$stock))->toHtml();
+    $HTML.=($description)? Html::meta('description',$description)->toHtml():Html::meta('description',getSeo($general,'og:description',$stock))->toHtml();
+    $HTML .=($image)? Html::meta('image',$image)->toHtml():Html::meta('image',getSeo($general,'og:image',$stock))->toHtml();
+
+    return $HTML;
+}
+function postSeo($stock)
+{
+    $lang=app()->getLocale();
+    $settings=new Settings();
+    $seo = $stock->seo;
+    $general = $settings->getEditableData('seo_posts')->toArray();
+    $robot = $settings->getEditableData('seo_robot_posts');
     $r = (is_null($seo) || is_null($seo->robots)) ?  $robot->robots : $seo->robots;
     if (!$r) return null;
     $HTML = '';

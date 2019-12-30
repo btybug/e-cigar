@@ -1,6 +1,6 @@
 @extends('layouts.frontend')
 @section('meta')
-    {!! meta($post) !!}
+    {!! postSeo($post) !!}
     <meta property="og:url" content="{!! route('blog_post',$post->url) !!}">
 @stop
 @section('content')
