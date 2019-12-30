@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductsRequest;
+use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Category;
@@ -123,7 +124,7 @@ class StockController extends Controller
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
 //        $stock->specifications()->sync($request->get('specifications'));
 //        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-
+        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
         $ads = $request->get('ads', []);
         $adNotDeletable = [];
         if (count($ads)) {
@@ -634,6 +635,10 @@ class StockController extends Controller
     {
         $idS = $request->get('idS');
         Stock::whereIn('id', $idS)->delete();
+        foreach ($idS as $id){
+            ActivityLogs::action('stock', 'delete',$id);
+        }
+
         return response()->json(['error' => false]);
     }
 
@@ -645,6 +650,7 @@ class StockController extends Controller
             'name' => $request->name,
             'short_description' => $request->short_description,
         ]]);
+        ActivityLogs::action('stock', 'update', $model->id);
         $model->categories()->sync($request->get('categories', []));
 
         return response()->json(['error' => false]);
@@ -673,6 +679,7 @@ class StockController extends Controller
                 ]]);
                 $cat = (count($item['categories'])) ? $item['categories'] : [];
                 $model->categories()->sync($cat);
+                ActivityLogs::action('stock', 'update', $model->id);
             }
             return response()->json(['error' => false]);
         }
