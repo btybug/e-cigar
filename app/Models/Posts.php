@@ -97,7 +97,7 @@ class Posts extends Translatable
         return $keywords;
     }
 
-    public $translatedAttributes = ['title', 'short_description', 'long_description'];
+    public $translatedAttributes = ['title', 'short_description', 'long_description','url'];
 
     public function author()
     {

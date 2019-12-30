@@ -30,5 +30,5 @@ class PostsTranslation extends Model
 
     protected $table = 'posts_translations';
 
-    protected $fillable = ['title', 'short_description', 'long_description'];
+    protected $fillable = ['title', 'short_description', 'long_description','url'];
 }
