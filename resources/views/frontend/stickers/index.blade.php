@@ -116,9 +116,9 @@
                 }
             });
         });
-        $('body').on('click', '.product-category', function () {
+        $('body').on('change', '.product-category', function () {
             let value = $(this).data('id');
-            let slug = $(this).data('key');
+            let slug = $(this).val();
             $.ajax({
                 type: "post",
                 url: "/get-category-products-stickers",

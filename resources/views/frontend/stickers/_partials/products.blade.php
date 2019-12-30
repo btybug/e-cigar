@@ -1,17 +1,13 @@
 <div
     class="d-flex justify-content-between align-items-center brands_main-content-products-top">
     <div class="left-wrapper">
-        <ul class="d-flex list-tabs">
-
+        <select class="form-control list-tabs product-category" data-id="{!! $current->id !!}">
             @foreach($stockCategories as $key=>$category)
-                <li>
-                    <a href="javascript:void(0)" data-key="{!! $key !!}" data-id="{!! $current->id !!}"
-                       class="font-sec-reg prod-link product-category @if($key==$f) active @endif">
-                        {!! $category !!}
-                    </a>
-                </li>
+                <option value="{!! $key !!}" @if($key==$f) selected @endif>
+                    {!! $category !!}
+                </option>
             @endforeach
-        </ul>
+        </select>
 
     </div>
     <div class="right-wrapper">
