@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Campaign;
@@ -74,13 +75,12 @@ class DatatableController extends Controller
 
         return Datatables::of(User::join('roles', 'users.role_id', '=', 'roles.id')
             ->where('roles.type', 'backend')
-            ->where('roles.slug', '!=','superadmin')
-            ->select('users.*', 'roles.title'))
+            ->select('users.*', 'roles.title','roles.slug'))
             ->addColumn('actions', function ($user) {
                 return '<div class="datatable-td__action">
-                    <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a><a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>'.
+                   <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>'.(($user->slug!='superadmin')?' <a href="' . route('admin_staff_edit', $user->id) .'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>'.
                     ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>':null).
-                    (($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>';
+                    (($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>':null);
             })->addColumn('role', function ($user) {
                 return $user->role->title;
             })->rawColumns(['actions'])
@@ -385,9 +385,9 @@ class DatatableController extends Controller
 
     public function getUserActivity($id)
     {
-        return Datatables::of(LogActivities::where('user_id', $id))
+        return Datatables::of(ActivityLogs::where('user_id', 1)->get())
             ->editColumn('created_at', function ($attr) {
-                return BBgetDateFormat($attr->created_at);
+                return BBgetDateFormat($attr->created_at,'d M Y H:i:s');
             })
             ->addColumn('actions', function ($post) {
                 return "<div class='datatable-td__action'>

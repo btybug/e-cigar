@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Http\Controllers\Admin\Requests\SupplierRequest;
 use App\Http\Controllers\Controller;
+use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Category;
@@ -44,6 +45,7 @@ class ItemsController extends Controller
 
     public function index()
     {
+
         return $this->view('index');
     }
 
@@ -106,7 +108,7 @@ class ItemsController extends Controller
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
-
+        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
 
         return redirect()->back();
@@ -128,7 +130,7 @@ class ItemsController extends Controller
         $racks = [];
         $shelves = [];
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
-
+        ActivityLogs::action('items', 'update', $model->id);
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
             'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));
     }
@@ -218,7 +220,7 @@ class ItemsController extends Controller
         $item = Items::FindOrFail($id);
         $item->is_archive = true;
         $item->save();
-
+        ActivityLogs::action('items', 'delete', $id);
         return redirect()->back();
     }
 
@@ -518,6 +520,9 @@ class ItemsController extends Controller
     public function postItemMultiDelete(Request $request)
     {
         Items::whereIn('id',$request->get('idS'))->delete();
+        foreach ($request->get('idS') as $id) {
+            ActivityLogs::action('items', 'delete', $id);
+        }
         return response()->json(['error'=>false,]);
     }
 
@@ -533,6 +538,7 @@ class ItemsController extends Controller
                 ]]);
                 $cat = (count($item['categories']))? $item['categories'] : [];
                 $model->categories()->sync($cat);
+                ActivityLogs::action('items', 'update', $model->id);
             }
             return response()->json(['error' => false]);
         }

@@ -15,16 +15,9 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Url</th>
-                    <th>Method</th>
-                    <th>Ip</th>
-                    <th>Iso Code</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>State Name</th>
-                    <th>Timezone</th>
-                    <th>Agent</th>
+                    <th>Object Name</th>
+                    <th>Object Id</th>
+                    <th>Action Type</th>
                     <th>Date</th>
                 </tr>
                 </thead>
@@ -50,17 +43,10 @@
                     'csv', 'excel', 'pdf', 'print'
                 ],
                 columns: [
-                    {data: 'id',name: 'id'},
-                    {data: 'url',name: 'url'},
-                    {data: 'method', name: 'method'},
-                    {data: 'ip', name: 'ip'},
-                    {data: 'iso_code', name: 'iso_code'},
-                    {data: 'country', name: 'country'},
-                    {data: 'city', name: 'city'},
-                    {data: 'state', name: 'state'},
-                    {data: 'state_name', name: 'state_name'},
-                    {data: 'timezone', name: 'timezone'},
-                    {data: 'agent', name: 'agent'},
+                    {data: '_id',name: '_id'},
+                    {data: 'object_name',name: 'object_name'},
+                    {data: 'object_id', name: 'object_id'},
+                    {data: 'action_type', name: 'action_type'},
                     {data: 'created_at', name: 'created_at'},
                 ],
                 order: [ [0, 'desc'] ]
