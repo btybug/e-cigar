@@ -24,6 +24,7 @@ class UserCan
                 if (!$role->can(\Request::route()->getName())) {
                     abort('401', 'Access Denied');
                 }
+                return $next($request);
             }
 
 
