@@ -16,7 +16,7 @@
                        data-out="{{ out_of_stock($variation->first()) }}"
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
-                <div class="form-control text-truncate">
+                <div class="form-control text-truncate product-single-wall--item">
                     {!! $variation->first()->name !!}
                 </div>
             @else
@@ -56,7 +56,7 @@
                        data-out="{{ out_of_stock($variation->first()) }}"
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
-                <div class="form-control text-truncate">
+                <div class="form-control text-truncate product-single-wall--item">
                     {!! $variation->first()->name !!}
                 </div>
             @else
