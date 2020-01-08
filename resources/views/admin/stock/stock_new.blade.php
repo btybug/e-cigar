@@ -9,7 +9,10 @@
         <div class="card-header d-flex justify-content-between align-items-center">
             <h2 class="m-0">{{ ($model) ? $model->name : "New Product" }}</h2>
             <div>
-                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
+                <button class="btn btn-primary save-prod">
+                    Save
+                </button>
+                <!-- {!! Form::submit('Save',['class' => 'btn btn-primary']) !!} -->
                 @if($model && ! isset($offer))
                 <a target="_blank" class="btn btn-info" href="{{ route('product_single', ['type' =>"vape", 'slug' => $model->slug]) }}">View</a>
                 @endif
@@ -414,7 +417,7 @@
                                                         {!! media_widget('image',$model, false, 'drive', null, 'Feature Image') !!}
                                                         {!! media_widget('other_images',$model,true, 'drive', null, 'Extra Images') !!}
 
-                                                        <div class="card panel panel-default mb-3">
+                                                        <div class="card panel panel-default mb-3 banner-block">
                                                             <div class="card-header panel-heading clearfix">
                                                                 <p class="d-inline-block">Banners</p>
                                                                 <div class="col-sm-2 pull-right">
@@ -1478,6 +1481,23 @@
     <script>
 
         $(document).ready(function () {
+
+
+            $('body').on('click', '.save-prod', function(e) {
+                const invalidBanners = $('.stock-form').serializeArray().filter((el) => {
+                    return el.name.includes('banners') && ( el.value.trim() === "" );
+                })
+
+                if(invalidBanners.length > 0) {
+                    e.preventDefault();
+                    alert('Please, add banner\'s properties...')
+                } else {
+                    $('.stock-form').submit();
+                }
+                
+            });
+
+
             $("body").on('change','.select-v-img',function () {
                 var value = $(this).val();
                 $(this).closest('.stock-items-tab-photo-td').find('.v-img').attr('src',value);
