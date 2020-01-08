@@ -21,4 +21,9 @@ class Brands extends Translatable
     {
         return $this->belongsToMany(Stickers::class,'brand_stickers','brand_id','sticker_id');
     }
+
+    public function products()
+    {
+        return $this->hasMany(Stock::class,'brand_id');
+    }
 }

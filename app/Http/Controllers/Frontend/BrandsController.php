@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Settings;
 use App\Models\Stock;
@@ -18,11 +19,11 @@ class BrandsController extends Controller
 
     public function index($slug = null)
     {
-        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get();
-        if(! count($brands)) abort(404);
+        $brands = Brands::all();
+        if(! $brands->count()) abort(404);
         $slug = ($slug) ? $slug : $brands->first()->slug;
-        $current = ($slug) ? Category::where('type', 'brands')->where('slug', $slug)->firstOrFail() : null;
-        $products = ($current) ? $current->brandProducts() : collect([]);
+        $current = ($slug) ? Brands::where('slug', $slug)->firstOrFail() : null;
+        $products = ($current) ? $current->products() : collect([]);
         $categories = Category::where('type', 'stocks')->whereNotNull('parent_id')->get();
         $stockCategories = StockCategories::
         leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
