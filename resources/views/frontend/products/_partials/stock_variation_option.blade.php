@@ -17,7 +17,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
-                    {!! $variation->first()->name !!}
+                    <span class="text-truncate">{!! $variation->first()->name !!}</span>
                 </div>
             @else
                 <select name="variations[{{ $vSettings->variation_id }}][]"
@@ -57,7 +57,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
-                    {!! $variation->first()->name !!}
+                    <span class="text-truncate">{!! $variation->first()->name !!}</span>
                 </div>
             @else
                 <div class="product_radio-single d-flex flex-column">
