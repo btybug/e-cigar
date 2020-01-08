@@ -388,6 +388,10 @@
             });
 
 
+            $("body").on("click", ".remove-all-attributes", function () {
+                $(this).closest('.option-elm-attributes').remove();
+            });
+
             $("body").on("click", ".add-attribute-event", function () {
                 let id = $(this).data("id");
                 let name = $(this).data("name");

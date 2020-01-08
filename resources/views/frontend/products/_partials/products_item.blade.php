@@ -21,15 +21,16 @@
                          <span class="products__item-photo-thumb-item active-slider" title="{{ $product->name }}">
                             <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                          </span>
-                        @if($product->variations)
+                        @if($product->other_images && count($product->other_images))
                             @php $count = 0; @endphp
-                            @foreach($product->variations()->take(3)->get() as $variation)
-                                @if($variation->image)
-                                    @php $count++; @endphp
-                                    <span class="products__item-photo-thumb-item" title="{{ $variation->name }}">
-                                        <img src="{{ (media_image_tmb(checkImage($variation->image,'stock'))) }}" alt="{{ $variation->name }}" title="{{ $variation->name }}">
-                                    </span>
+                            @foreach($product->other_images as $img)
+                                @if($count == 3)
+                                    @break
                                 @endif
+                                    @php $count++; @endphp
+                                    <span class="products__item-photo-thumb-item" title="Extra Image {{ $count }}">
+                                        <img src="{{ (media_image_tmb(checkImage($img,'stock'))) }}" alt="Extra Image {{ $count }}" title="Extra Image {{ $count }}">
+                                    </span>
                             @endforeach
                         @endif
                     </span>
