@@ -411,8 +411,8 @@
                                             <div class="basic-center basic-wall scrollbar_media_tab h-100 shadow-none">
                                                 <div class="tab-content">
                                                     <div id="mediaotherimage" class="tab-pane fade ">
-                                                        {!! media_widget('image',$model) !!}
-                                                        {!! media_widget('other_images',$model,true) !!}
+                                                        {!! media_widget('image',$model, false, 'drive', null, 'Feature Image') !!}
+                                                        {!! media_widget('other_images',$model,true, 'drive', null, 'Extra Images') !!}
 
                                                         <div class="card panel panel-default mb-3">
                                                             <div class="card-header panel-heading clearfix">
