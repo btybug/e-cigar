@@ -142,7 +142,9 @@
                                 <select class="select-2 select-2--no-search main-select main-select-2arrows not-selected top-selectbox" name="" id="" style="width: 100%">
                                     @if(count($tops))
                                         @foreach($tops['name'] as $k => $top)
-                                            <option value="{{$k}}">{{ $top['gb'] }}</option>
+                                            @if($top && isset($top["gb"]))
+                                            <option value="{{$k}}">{{ $top["gb"] }}</option>
+                                            @endif
                                         @endforeach
                                     @endif
                                 </select>
@@ -153,11 +155,13 @@
                     <div class="d-flex home_products-version">
                         @if(count($tops))
                             @foreach($tops['name'] as $k => $top)
-                                <div class="top-parent col @if($loop->first) active @endif">
-                                    <a href="javascript:void(0)" data-key="{{ $k }}" class="products-version-link top-link">
-                                        {{ $top['gb'] }}
-                                    </a>
-                                </div>
+                                @if($top && isset($top["gb"]))
+                                    <div class="top-parent col @if($loop->first) active @endif">
+                                        <a href="javascript:void(0)" data-key="{{ $k }}" class="products-version-link top-link">
+                                            {{ $top["gb"] }}
+                                        </a>
+                                    </div>
+                                @endif
                             @endforeach
                         @endif
                     </div>

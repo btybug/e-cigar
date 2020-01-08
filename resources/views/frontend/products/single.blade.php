@@ -352,7 +352,7 @@
                                                         </div>
                                                     @endif
 
-                                                    @if(trim(strip_tags($vape->long_description)))
+                                                    @if(trim(strip_tags($vape->what_is_content)))
                                                         <div class="technical-inside-box">
                                                             <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
                                                                 {!! __('inside_box') !!}</h3>
