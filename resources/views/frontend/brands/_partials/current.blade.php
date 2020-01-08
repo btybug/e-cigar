@@ -10,5 +10,8 @@
 <div class="brands_main-content-products-wrapper" id="sticker_related_products_list">
     @include('frontend.brands._partials.products')
 </div>
+<div>
+    {!! $current->description !!}
+</div>
 
 
