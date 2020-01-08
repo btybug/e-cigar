@@ -262,7 +262,7 @@
 
                                         if(ids.length > 0){
                                             // alert(666)
-                                            window.location.href = '/admin/stock/edit-rows/'+encodeURI(ids);
+                                            window.location.href = '/admin/seo/bulk/products/edit-rows/'+encodeURI(ids);
                                         }
                                         {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
                                         {{--    console.log(res)--}}
