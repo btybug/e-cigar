@@ -24,6 +24,12 @@ class BrandsController extends Controller
         $stickers = Stickers::all()->pluck('name', 'id');
         return $this->view('create',compact('stickers'));
     }
+    public function edit($id)
+    {
+        $stickers = Stickers::all()->pluck('name', 'id');
+        $model=Brands::findOrFail($id);
+        return $this->view('edit',compact('stickers','model'));
+    }
 
     public function postCreateOrUpdateBrand(Request $request)
     {

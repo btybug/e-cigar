@@ -237,8 +237,8 @@ class DatatableController extends Controller
         })->editColumn('icon', function ($brand) {
             return '<i class="'.$brand->icon.'"></i>';
         })
-            ->addColumn('actions', function ($message) {
-            return "<div class='datatable-td__action'><a class='btn btn-info' href='#'><i class='fa fa-edit'></i></a><a class='btn btn-danger' href='#'>x</a></div>";
+            ->addColumn('actions', function ($brand) {
+            return "<div class='datatable-td__action'><a class='btn btn-warning' href='".route('admin_blog_brands_edit',$brand->id)."'><i class='fa fa-edit'></i></a><a class='btn btn-danger' href='#'>x</a></div>";
         })->rawColumns(['actions','image','icon'])
             ->make(true);
 

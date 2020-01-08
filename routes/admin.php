@@ -288,6 +288,7 @@ Route::group(['prefix' => 'blog'], function () {
     Route::group(['prefix' => 'brands'], function () {
         Route::get('/', 'Admin\BrandsController@index')->name('admin_blog_brands');
         Route::get('/create', 'Admin\BrandsController@create')->name('admin_blog_brands_create');
+        Route::get('/edit/{id}', 'Admin\BrandsController@edit')->name('admin_blog_brands_edit');
         Route::post('/create-or-edit', 'Admin\BrandsController@postCreateOrUpdateBrand')->name('admin_blog_brands_create_or_edit');
         Route::get('/fix', 'Admin\BrandsController@fixBrands')->name('admin_blog_brands_fix');
     });
