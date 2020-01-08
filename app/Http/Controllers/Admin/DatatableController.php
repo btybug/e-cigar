@@ -434,14 +434,15 @@ class DatatableController extends Controller
 
     public function getBackendActivity()
     {
-        return Datatables::of(LogActivities::leftJoin('users', 'users.id', '=', 'log_activities.user_id')
-            ->whereNotNull('users.role_id')->whereNotNull('user_id')
-            ->select('log_activities.*', 'users.name', 'users.last_name'))
+
+        return Datatables::of(ActivityLogs::all())
             ->editColumn('created_at', function ($attr) {
-                return BBgetDateFormat($attr->created_at);
-            })->editColumn('user', function ($attr) {
-                if (!$attr->name) return 'GUEST';
-                return $attr->name . ' ' . $attr->last_name;
+                return BBgetDateFormat($attr->created_at, 'd M Y H:i:s');
+            })->editColumn('user_name', function ($attr) {
+
+                return $attr->user()->name;
+            })->editColumn('user_last_name', function ($attr) {
+                return $attr->user()->last_name;
             })
             ->addColumn('actions', function ($post) {
                 return "<div class='datatable-td__action'>

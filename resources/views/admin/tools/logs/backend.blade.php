@@ -21,17 +21,13 @@
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-                    <th>User</th>
-                    <th>Url</th>
-                    <th>Method</th>
-                    <th>Ip</th>
-                    <th>Iso Code</th>
-                    <th>Country</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>State Name</th>
-                    <th>Timezone</th>
-                    <th>Agent</th>
+                    <th>#</th>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>User last name</th>
+                    <th>Object Name</th>
+                    <th>Object Id</th>
+                    <th>Action Type</th>
                     <th>Date</th>
                 </tr>
                 </thead>
@@ -44,30 +40,28 @@
 @section('js')
     <script>
         $(function () {
-            $('#users-table').DataTable({
-                ajax:  "{!! route('datatable_backend_activity') !!}",
-                dom: 'Bflrtip',
-                displayLength: 10,
-                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-                "scrollX": true,
-                buttons: [
-                    'csv', 'excel', 'pdf', 'print'
-                ],
-                columns: [
-                    {data: 'user',name: 'user'},
-                    {data: 'url',name: 'url'},
-                    {data: 'method', name: 'method'},
-                    {data: 'ip', name: 'ip'},
-                    {data: 'iso_code', name: 'iso_code'},
-                    {data: 'country', name: 'country'},
-                    {data: 'city', name: 'city'},
-                    {data: 'state', name: 'state'},
-                    {data: 'state_name', name: 'state_name'},
-                    {data: 'timezone', name: 'timezone'},
-                    {data: 'agent', name: 'agent'},
-                    {data: 'created_at', name: 'created_at'},
-                ],
-                order: [ [0, 'desc'] ]
+            $(function () {
+                $('#users-table').DataTable({
+                    ajax:  "{!! route('datatable_backend_activity') !!}",
+                    dom: 'Bflrtip',
+                    displayLength: 10,
+                    lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+                    "scrollX": true,
+                    buttons: [
+                        'csv', 'excel', 'pdf', 'print'
+                    ],
+                    columns: [
+                        {data: '_id',name: '_id'},
+                        {data: 'user_id',name: 'user_id'},
+                        {data: 'user_name',name: 'user_name'},
+                        {data: 'user_last_name',name: 'user_last_name'},
+                        {data: 'object_name',name: 'object_name'},
+                        {data: 'object_id', name: 'object_id'},
+                        {data: 'action_type', name: 'action_type'},
+                        {data: 'created_at', name: 'created_at'},
+                    ],
+                    order: [ [0, 'desc'] ]
+                });
             });
         });
 
