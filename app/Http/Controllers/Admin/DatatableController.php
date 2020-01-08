@@ -633,10 +633,10 @@ class DatatableController extends Controller
         $fbSeo = $settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $settings->getEditableData('seo_robot_stocks');
 
-        return Datatables::of(Stock::query())
-            ->addColumn('p_name', function ($stock) use ($general) {
-                return $stock->name;
-            })
+        return Datatables::of(
+            Stock::join('stock_translations','stock_translations.stock_id','stocks.id')->where('locale',app()->getLocale())->select('stocks.*','stock_translations.name')
+        )
+
             ->editColumn('title', function ($stock) use ($general) {
                 return ($stock->getSeoField('title')) ? $stock->getSeoField('title') : getSeo($general, 'og:title', $stock);
             })
