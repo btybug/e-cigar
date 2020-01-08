@@ -68,112 +68,127 @@
                                         <h3 class="m-0">Profile</h3>
                                     </div>
                                     <div class="card-body panel-body">
-                                        <!-- The timeline -->
-                                        {!! Form::model($user,['class'=>'staff-form']) !!}
-                                        {!! Form::hidden('id') !!}
+                                        <ul class="nav nav-tabs mb-2" id="myTabProfile" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" id="tabUserProfile-tab" data-toggle="tab" href="#tabUserProfile" role="tab" aria-controls="tabUserProfile" aria-selected="true">Profile</a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" id="tabUserProfileChangePassword-tab" data-toggle="tab" href="#tabUserProfileChangePassword" role="tab" aria-controls="tabUserProfileChangePassword" aria-selected="false">Change Password</a>
+                                            </li>
+                                        </ul>
+                                        <div class="tab-content" id="myTabContentProfile">
+                                            <div class="tab-pane fade show active" id="tabUserProfile" role="tabpanel" aria-labelledby="tabUserProfile-tab">
+                                                <!-- The timeline -->
+                                                {!! Form::model($user,['class'=>'staff-form']) !!}
+                                                {!! Form::hidden('id') !!}
 
-                                        <div class="form-group row">
-                                            <label for="inputName" class="col-lg-2 control-label">First Name</label>
+                                                <div class="form-group row">
+                                                    <label for="inputName" class="col-lg-2 control-label">First Name</label>
 
-                                            <div class="col-lg-10">
-                                                {!! Form::text('name',null,['class'=>'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::text('last_name',null,['class'=>'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="email" class="col-lg-2 control-label">E-mail </label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::text('name',null,['class'=>'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputEmail" class="col-lg-2 control-label">Last Name</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::text('last_name',null,['class'=>'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="email" class="col-lg-2 control-label">E-mail </label>
 
-                                            <div class="col-lg-10">
-                                                {!! Form::text('email',null,['class'=>'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputExperience" class="col-lg-2 control-label">Phone</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::text('phone',null,['class'=>'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputSkills" class="col-lg-2 control-label">Country</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::select('country',$countries,null,['class'=>'form-control']) !!}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputExperience" class="col-lg-2 control-label">Gender</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
+                                                    <div class="col-lg-10">
+                                                        {!! Form::text('email',null,['class'=>'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-lg-2 control-label">Phone</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::text('phone',null,['class'=>'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputSkills" class="col-lg-2 control-label">Country</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::select('country',$countries,null,['class'=>'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-lg-2 control-label">Gender</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::select('gender',['male'=>'Male','female'=>'Female'],null,['class'=>'form-control']) !!}
 
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputExperience" class="col-lg-2 control-label">Status</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::hidden('status',null) !!}
-                                                @if($user->email_verified_at == null)
-                                                    <div class="form-control">Email Not Verified</div>
-                                                @elseif($user->email_verified_at && ! $user->status)
-                                                    <div class="form-control">ID Not Verified</div>
-                                                @elseif($user->email_verified_at && $user->status)
-                                                    <div class="form-control">Active</div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-lg-2 control-label">Status</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::hidden('status',null) !!}
+                                                        @if($user->email_verified_at == null)
+                                                            <div class="form-control">Email Not Verified</div>
+                                                        @elseif($user->email_verified_at && ! $user->status)
+                                                            <div class="form-control">ID Not Verified</div>
+                                                        @elseif($user->email_verified_at && $user->status)
+                                                            <div class="form-control">Active</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <label for="inputExperience" class="col-lg-2 control-label">Membership</label>
+                                                    <div class="col-lg-10">
+                                                        {!! Form::select('role_id',[null=>'No Membership']+$roles,null,['class'=>'form-control']) !!}
+
+                                                    </div>
+                                                </div>
+
+
+                                                {{--                                        <div class="form-group row">--}}
+                                                {{--                                            <div class="col-lg-12 text-right">--}}
+                                                {{--                                                <button type="submit" class="btn btn-success">Update</button>--}}
+                                                {{--                                            </div>--}}
+                                                {{--                                        </div>--}}
+                                                {!! Form::close() !!}
+
+
+
+                                                @if($user->verification_type && $user->verification_image)
+                                                    {!! Form::open() !!}
+                                                    <div class="row">
+                                                        <div class="form-group col-lg-8">
+                                                            <div class="row">
+                                                                <label for="inputExperience" class="col-lg-4 control-label">Uploaded Doc : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
+                                                                <div class="col-lg-8">
+                                                                    <img class="img" src="{{ $user->verification_image }}" width="100"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="">
+                                                                <button type="button" class="btn btn-info">View</button>
+                                                            </div>
+                                                        </div>
+                                                        <div class="form-group col-lg-4 ml-lg-auto">
+                                                            @if(! $user->status)
+                                                                <div>
+                                                                    <button type="button" class="btn btn-success approve-verify">Approve</button>
+                                                                </div>
+                                                                <div>
+                                                                    <button type="button" class="btn btn-danger reject-verify">Reject</button>
+                                                                </div>
+                                                            @else
+                                                                <div>
+                                                                    <div class="alert alert-success">Verified</div>
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    {!! Form::close() !!}
                                                 @endif
                                             </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label for="inputExperience" class="col-lg-2 control-label">Membership</label>
-                                            <div class="col-lg-10">
-                                                {!! Form::select('role_id',[null=>'No Membership']+$roles,null,['class'=>'form-control']) !!}
-
-                                            </div>
+                                            <div class="tab-pane fade" id="tabUserProfileChangePassword" role="tabpanel" aria-labelledby="tabUserProfileChangePassword-tab">
+                                                change password</div>
                                         </div>
 
-
-{{--                                        <div class="form-group row">--}}
-{{--                                            <div class="col-lg-12 text-right">--}}
-{{--                                                <button type="submit" class="btn btn-success">Update</button>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
-                                        {!! Form::close() !!}
-
-
-
-                                        @if($user->verification_type && $user->verification_image)
-                                            {!! Form::open() !!}
-                                        <div class="row">
-                                            <div class="form-group col-lg-8">
-                                                <div class="row">
-                                                <label for="inputExperience" class="col-lg-4 control-label">Uploaded Doc : {{ strtoupper(str_replace('_'," ",$user->verification_type)) }}</label>
-                                                <div class="col-lg-8">
-                                                    <img class="img" src="{{ $user->verification_image }}" width="100"/>
-                                                </div>
-                                                </div>
-                                                <div class="">
-                                                    <button type="button" class="btn btn-info">View</button>
-                                                </div>
-                                            </div>
-                                            <div class="form-group col-lg-4 ml-lg-auto">
-                                                @if(! $user->status)
-                                                    <div>
-                                                        <button type="button" class="btn btn-success approve-verify">Approve</button>
-                                                    </div>
-                                                    <div>
-                                                        <button type="button" class="btn btn-danger reject-verify">Reject</button>
-                                                    </div>
-                                                @else
-                                                    <div>
-                                                        <div class="alert alert-success">Verified</div>
-                                                    </div>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                            {!! Form::close() !!}
-                                        @endif
                                     </div>
                                 </div>
 
