@@ -259,7 +259,7 @@
                                                    data-toggle="pill" href="#pills-reviews" role="tab"
                                                    aria-controls="pills-reviews" aria-selected="false">{!! __('reviews') !!}</a>
                                             @endif
-                                            @if($vape->faq_tab)
+                                            @if($vape->faq_tab && count($vape->faqs))
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-faq" role="tab"
                                                    aria-controls="pills-faq" aria-selected="false">{!! __('faq') !!}</a>
@@ -471,7 +471,7 @@
                                                 </p>
                                             </div>
                                         @endif
-                                        @if($vape->faq_tab)
+                                        @if($vape->faq_tab && count($vape->faqs))
                                             <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
                                                  aria-labelledby="pills-faq-tab">
                                                 <div class="faq-wrapper">
@@ -499,39 +499,37 @@
 
                                             </div>
                                         @endif
+                                        @if($vape->videos && count($vape->videos))
                                         <div class="tab-pane fade show" id="pills-videos" role="tabpanel"
                                              aria-labelledby="pills-videos-tab">
                                             <div class="row video-carousel-wrap">
                                                 <div class="col-2">
                                                     <div class="video--carousel-thumb d-flex flex-column"
                                                          data-carousel-controller-for=".video--carousel">
-                                                        @if($vape->videos && count($vape->videos))
-                                                            @foreach($vape->videos as $video)
-                                                                <div class="video-item-thumb"><img
-                                                                        src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
-                                                                        alt="{{ $video }}"></div>
-                                                            @endforeach
-                                                        @endif
+                                                        @foreach($vape->videos as $video)
+                                                            <div class="video-item-thumb"><img
+                                                                    src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
+                                                                    alt="{{ $video }}"></div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                                 <div class="col-10">
                                                     <div class="video--carousel">
-                                                        @if($vape->videos && count($vape->videos))
-                                                            @foreach($vape->videos as $video)
-                                                                <div class="video-item">
-                                                                    <iframe width="100%" height="415"
-                                                                            src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
-                                                                            frameborder="0"
-                                                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                                            allowfullscreen></iframe>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-
+                                                        @foreach($vape->videos as $video)
+                                                            <div class="video-item">
+                                                                <iframe width="100%" height="415"
+                                                                        src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                                        frameborder="0"
+                                                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                        allowfullscreen></iframe>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($vape->special_offers && count($vape->special_offers))
                                         <div class="tab-pane fade show" id="pills-offers" role="tabpanel"
                                              aria-labelledby="pills-offers-tab">
                                             <div class="d-flex flex-wrap">
@@ -562,6 +560,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
                                     </div>
 
 
