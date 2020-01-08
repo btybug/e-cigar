@@ -186,11 +186,23 @@ class UserController extends Controller
     public function getOrderInvoice($id)
     {
         $order = Orders::where('id', $id)
+            ->where('user_id',\Auth::id())
             ->with('items')
             ->with('user')->first();
         if (!$order) abort(404);
 
         return $this->view('order_invoice', compact('order'));
+    }
+
+    public function getOrderReviews($id)
+    {
+        $order = Orders::where('id', $id)
+            ->where('user_id',\Auth::id())
+            ->with('items')
+            ->with('user')->first();
+        if (!$order) abort(404);
+
+        return $this->view('order_review', compact('order'));
     }
 
     public function getTickets()

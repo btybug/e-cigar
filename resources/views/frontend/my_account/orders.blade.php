@@ -77,6 +77,8 @@
                                             <td>
                                                 <a href="{!! route('my_account_order_invoice',$order->id) !!}"
                                                    class="btn ntfs-btn text-sec-clr order-table_btn mr-2 rounded-0">{!! __('view') !!}</a>
+                                                <a href="{!! route('my_account_order_reviews',$order->id) !!}"
+                                                   class="btn ntfs-btn text-sec-clr order-table_btn mr-2 rounded-0">{!! __('review') !!}</a>
 
                                                 <button type="button" class="btn btn-transp order-table_btn rounded-0">{!! __('purchase') !!}</button>
 
