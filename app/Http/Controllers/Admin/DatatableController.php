@@ -712,7 +712,7 @@ class DatatableController extends Controller
             ->editColumn('question', function ($faq) {
                 return $faq->question;
             })->editColumn('answer', function ($faq) {
-                return $faq->answer;
+                return '<div class="faq-ansver">'.$faq->answer.'</div>';
             })
             ->editColumn('user_id', function ($faq) {
                 return $faq->author->name;
