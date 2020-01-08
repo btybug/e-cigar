@@ -113,34 +113,34 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tag-wall wall">
-                                    <div class="row">
-                                        <label class="col-xl-3 control-label" for="input-category"><span
-                                                    data-toggle="tooltip" title=""
-                                                    data-original-title="Choose all products under selected category.">Tags</span></label>
-                                        <div class="col-xl-9">
-                                            <input type="text" name="" value="" placeholder="Tags"
-                                                   id="input-tags" class="form-control" autocomplete="off">
-                                            <ul class="dropdown-menu"></ul>
-                                            <div id="coupon-category" class="well well-sm view-coupon">
-                                                <ul class="coupon-tags-list">
-                                                    @if($model && $model->tags)
-                                                        <?php
-                                                        $tags = json_decode($model->tags, true);
-                                                        ?>
-                                                        @foreach($tags as $tag)
-                                                            <li><span class="remove-search-tag"><i
-                                                                            class="fa fa-minus-circle"></i></span>{{ $tag }}
-                                                            </li>
-                                                        @endforeach
-                                                    @endif
-                                                </ul>
-                                            </div>
+{{--                                <div class="tag-wall wall">--}}
+{{--                                    <div class="row">--}}
+{{--                                        <label class="col-xl-3 control-label" for="input-category"><span--}}
+{{--                                                    data-toggle="tooltip" title=""--}}
+{{--                                                    data-original-title="Choose all products under selected category.">Tags</span></label>--}}
+{{--                                        <div class="col-xl-9">--}}
+{{--                                            <input type="text" name="" value="" placeholder="Tags"--}}
+{{--                                                   id="input-tags" class="form-control" autocomplete="off">--}}
+{{--                                            <ul class="dropdown-menu"></ul>--}}
+{{--                                            <div id="coupon-category" class="well well-sm view-coupon">--}}
+{{--                                                <ul class="coupon-tags-list">--}}
+{{--                                                    @if($model && $model->tags)--}}
+<!--                                                        --><?php
+//                                                        $tags = json_decode($model->tags, true);
+//                                                        ?>
+{{--                                                        @foreach($tags as $tag)--}}
+{{--                                                            <li><span class="remove-search-tag"><i--}}
+{{--                                                                            class="fa fa-minus-circle"></i></span>{{ $tag }}--}}
+{{--                                                            </li>--}}
+{{--                                                        @endforeach--}}
+{{--                                                    @endif--}}
+{{--                                                </ul>--}}
+{{--                                            </div>--}}
                                             {!! Form::hidden('tags',null,['id' => 'tags-names','class' => 'search-hidden-input']) !!}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="category-wall wall">
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+                                <div class="category-wall wall mb-3">
                                     <div class="row">
                                         <label class="col-xl-3 control-label" for="input-category"><span
                                                     data-toggle="tooltip" title=""
@@ -154,6 +154,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {!! media_widget('other_images',$model,true) !!}
                             </div>
                         </div>
                     </div>
