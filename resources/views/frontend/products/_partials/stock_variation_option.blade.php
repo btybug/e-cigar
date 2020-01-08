@@ -17,7 +17,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control">
-                    {!! out_of_stock($variation->first()) !!}
+                    {!! $variation->first()->name !!}
                 </div>
             @else
                 <select name="variations[{{ $vSettings->variation_id }}][]"
@@ -63,7 +63,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control">
-                    {!! out_of_stock($variation->first()) !!}
+                    {!! $variation->first()->name !!}
                 </div>
             @else
                 <div class="product_radio-single d-flex flex-column">
