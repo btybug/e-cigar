@@ -102,7 +102,7 @@ function media_button(string $name, $model = null, bool $multiple = false, $slug
     return view('media.button', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
 }
 
-function media_widget(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null)
+function media_widget(string $name, $model = null, bool $multiple = false, $slug = 'drive', $html = null,$displayName = "Image")
 {
     $folder = App\Models\Media\Folders::where('name', $slug)->where('parent_id', 0)->first(['id', 'name']);
 

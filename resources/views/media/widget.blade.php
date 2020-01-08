@@ -4,8 +4,8 @@
     <!-- Trigger the modal with a button -->
     <div class="card panel panel-default">
         <div class="d-flex justify-content-between align-items-center card-header panel-heading">
-            <span>Image</span>
-        
+            <span>{!! $displayName !!}</span>
+
     <div class="bestbetter-modal-open">
         @if($multiple)
             @if(isset($model->$name) && (is_array($model->$name) || is_object($model->$name)) )
