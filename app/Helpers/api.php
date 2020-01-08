@@ -111,7 +111,7 @@ function media_widget(string $name, $model = null, bool $multiple = false, $slug
     global $_MEDIA_FOLDER;
     $_MEDIA_FOLDER = $folder;
     $uniqId = uniqid('media_');
-    return view('media.widget', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id']));
+    return view('media.widget', compact(['multiple', 'slug', 'name', 'model', 'uniqId', 'html', 'id','displayName']));
 }
 
 function get_media_folder()
