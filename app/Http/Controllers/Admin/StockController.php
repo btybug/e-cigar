@@ -49,6 +49,18 @@ class StockController extends Controller
         }
         dd('done');
     }
+    public function fixCategories()
+    {
+        $translations = Category::all();
+        foreach ($translations as $translation){
+            if($translation->slug){
+                $translation->slug=strtolower(preg_replace('!\s+!','-',$translation->slug));
+                $translation->save();
+            }
+
+        }
+        dd('done ca');
+    }
     public function stock()
     {
 //        $stocks = Stock::all();
