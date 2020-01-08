@@ -176,7 +176,7 @@
                             <div class="search position-relative search_conteiner_1">
                                 <input type="search" class="form-control" id="search-product"
                                        value="{{ (\Request::has('q')) ? \Request::get('q') :null }}"
-                                       placeholder="{!! __('Search for anything') !!}">
+                                       placeholder="{!! __('search_for_anything') !!}">
                                 <span class="position-absolute d-flex align-items-center search_icon_header">
                                     <svg
                                             xmlns="http://www.w3.org/2000/svg"
