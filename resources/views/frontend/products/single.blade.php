@@ -167,7 +167,14 @@
                                             <div class="product-single-info">
                                                 <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
                                                        id="vpid">
-
+                                                <div
+                                                    class="d-flex align-items-center product__single-delivery-right mb-3">
+                                                    <div class="product__single-delivery-free font-20 lh-1">
+                                                        {!! __('free_on_orders_over') !!} £20 to UK
+                                                    </div>
+                                                    <a href="#"
+                                                       class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
+                                                </div>
                                                 <div class="product__single-item">
                                                     {{--<div--}}
                                                         {{--class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">--}}
@@ -185,35 +192,35 @@
 
                                                     @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                                 </div>
-                                                <div
-                                                    class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">
-                                                    <div
-                                                        class="d-flex align-items-center product__single-delivery-left">
-                                                        <div
-                                                            class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">
-                                                            {!! __('Delivery') !!}
-                                                        </div>
-                                                        <div class="product__single-delivery-select">
-                                                            <div class="select-wall product__select-wall">
-                                                                <select name="" id=""
-                                                                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
-                                                                        style="width: 250px">
-                                                                    <option value="">{!! __('united_kingdom') !!}</option>
-                                                                    <option value="">{!! __('armenia') !!}</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="d-flex align-items-center product__single-delivery-right">
-                                                        <div class="product__single-delivery-free font-20 lh-1">
-                                                            {!! __('free_on_orders_over') !!} £10
-                                                        </div>
-                                                        <a href="#"
-                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
-                                                    </div>
+{{--                                                <div--}}
+{{--                                                    class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">--}}
+{{--                                                    <div--}}
+{{--                                                        class="d-flex align-items-center product__single-delivery-left">--}}
+{{--                                                        <div--}}
+{{--                                                            class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">--}}
+{{--                                                            {!! __('Delivery') !!}--}}
+{{--                                                        </div>--}}
+{{--                                                        <div class="product__single-delivery-select">--}}
+{{--                                                            <div class="select-wall product__select-wall">--}}
+{{--                                                                <select name="" id=""--}}
+{{--                                                                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"--}}
+{{--                                                                        style="width: 250px">--}}
+{{--                                                                    <option value="">{!! __('united_kingdom') !!}</option>--}}
+{{--                                                                    <option value="">{!! __('armenia') !!}</option>--}}
+{{--                                                                </select>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
+{{--                                                    <div--}}
+{{--                                                        class="d-flex align-items-center product__single-delivery-right">--}}
+{{--                                                        <div class="product__single-delivery-free font-20 lh-1">--}}
+{{--                                                            {!! __('free_on_orders_over') !!} £10--}}
+{{--                                                        </div>--}}
+{{--                                                        <a href="#"--}}
+{{--                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>--}}
+{{--                                                    </div>--}}
 
-                                                </div>
+{{--                                                </div>--}}
                                             </div>
                                         </div>
                                     </div>
