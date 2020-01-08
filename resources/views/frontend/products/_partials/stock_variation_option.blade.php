@@ -1,4 +1,4 @@
-<div class="col-md-6 pl-0">
+<div class="col-md-8 pl-0 ">
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
@@ -16,7 +16,7 @@
                        data-out="{{ out_of_stock($variation->first()) }}"
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
-                <div class="form-control">
+                <div class="form-control text-truncate">
                     {!! $variation->first()->name !!}
                 </div>
             @else
@@ -39,9 +39,6 @@
                     @endforeach
                 </select>
             @endif
-                <div class="desc-placeholder">
-                    {!! ($selected) ? $selected->description:null !!}
-                </div>
         </div>
     @elseif($vSettings->type == 'filter')
         <div class="select-wall product__select-wall">
@@ -50,9 +47,6 @@
             <i class="fas fa-times"></i>
             </span>
             <span class="font-sec-light font-26">{{ $selected->name }}</span>
-            <div class="desc-placeholder">
-                {!! ($selected) ? $selected->description:null !!}
-            </div>
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
@@ -62,7 +56,7 @@
                        data-out="{{ out_of_stock($variation->first()) }}"
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
-                <div class="form-control">
+                <div class="form-control text-truncate">
                     {!! $variation->first()->name !!}
                 </div>
             @else
@@ -121,9 +115,6 @@
             <i class="fas fa-times"></i>
             </span>
             <span class="font-sec-light font-26">{{ $selected->name }}</span>
-            <div class="desc-placeholder">
-                {!! ($selected) ? $selected->description:null !!}
-            </div>
         </div>
         {{--<div class="d-flex flex-wrap product__single-item-info-size">--}}
         {{--<div class="product_radio-single">--}}
@@ -147,11 +138,11 @@
     @endif
 
 </div>
-<div class="col-md-3 d-flex justify-content-center">
+<div class="col-md-2 d-flex justify-content-center">
     @if($vSettings->price_per == 'item')
         @if($selected && $selected->price_type == 'range')
             <div class="d-flex flex-column w-100 align-items-center">
-                <span class="text-tert-clr">*Quality Discount</span>
+                <span class="text-tert-clr">QTY</span>
                 <div class="product__single-item-inp-num">
                     <div class="quantity">
                         {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
@@ -166,14 +157,15 @@
         @elseif($selected && $selected->price_type == 'fixed')
             <div
                 class="d-flex flex-column w-100 align-items-center">
-                <span class="text-tert-clr">*Quality Discount</span>
+{{--                <span class="text-tert-clr">*Quality Discount</span>--}}
+                <span class="text-tert-clr">QTY</span>
                 <div class="select-wall product__select-wall w-100">
                     <select name="qty" id="" data-id="{{ $selected->id }}"
                             class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
                             style="width: 100%">
                         @if(count($selected->discounts))
                             @foreach($selected->discounts as $d)
-                                <option value="{{ $d->id }}">Pack of {{ $d->qty }}</option>
+                                <option value="{{ $d->id }}">{{ $d->qty }}</option>
                             @endforeach
                         @endif
                     </select>
@@ -182,7 +174,7 @@
         @endif
     @endif
 </div>
-<div class="col-md-3 pr-0 d-flex justify-content-end">
+<div class="col-md-2 pr-0 d-flex justify-content-end">
     @if($selected && $selected->price_per =='item' && ! $selected->stock->type)
         @if($selected->price_type == 'static')
             <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">
@@ -227,4 +219,9 @@
             </span>
         </div>
     @endif
+</div>
+<div class="col-md-8 col-md-offset-4">
+    <div class="desc-placeholder">
+        {!! ($selected) ? $selected->description:null !!}
+    </div>
 </div>
