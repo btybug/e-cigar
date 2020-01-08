@@ -145,7 +145,7 @@
 
                 </div>
                 <div id="seo" class="tab-pane tab_seo fade">
-                    
+
                     <div class="card panel panel-default mt-20">
                         <div class="card-header panel-heading">FB</div>
                         <div class="card-body panel-body">

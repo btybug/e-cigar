@@ -2073,6 +2073,11 @@ header.main-header{
     background: #2ab9d6;
     color: #fff;
 }
+table .faq-ansver{
+    max-height: 100px;
+    overflow: auto;
+    height: 100%;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
