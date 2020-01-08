@@ -160,20 +160,7 @@
                                                         </div>
                                                     @endforeach
                                                 @endif
-                                                @if($vape->variations && count($vape->variations))
-                                                    @foreach($vape->variations()->required()->where('type','!=','filter')->get() as $variation)
-                                                        @if(isset($variation['image']))
-                                                            <div class="product-card_thumb-img-holder pointer"
-                                                                 data-id="{{ $variation['id'] }}">
-                                                                <img class=""
-                                                                     src="{{ checkImage($variation["image"],'stock') }}"
-                                                                     alt="{!! ($variation["name"]) !!}"
-                                                                     title="{!! ($variation["name"]) !!}"
-                                                                >
-                                                            </div>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
+                                                
                                             </div>
                                         </div>
                                         <div class="col-lg-6 product-single-info-outer">
