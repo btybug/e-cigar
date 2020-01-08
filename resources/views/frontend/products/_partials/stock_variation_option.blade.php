@@ -13,10 +13,11 @@
             @if(count($variation) == 1)
                 <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
                        value="{!! $variation->first()->id  !!}"
+                       data-out="{{ out_of_stock($variation->first()) }}"
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control">
-                    {!! $variation->first()->name !!}
+                    {!! out_of_stock($variation->first()) !!}
                 </div>
             @else
                 <select name="variations[{{ $vSettings->variation_id }}][]"
@@ -55,26 +56,37 @@
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
-            <div class="product_radio-single d-flex flex-column">
-                @foreach($variation as $item)
-                    @php
-                        $x = uniqid();
-                    @endphp
-                    <div
-                        class="custom-radio custom-control-inline product--inputs-wrap">
-                        <input type="radio"
-                               @if(isset($selected) && $selected->id == $item->id) checked
-                               @endif data-out="{{ out_of_stock($item) }}"
-                               class="custom-control-input custom-control-input-radio"
-                               id="single_v_select_{{ $item->id.$x }}" name="variations[{{ $item->variation_id }}][]"
-                               value="{{ $item->id }}">
-                        <label class="custom-label"
-                               for="single_v_select_{{ $item->id.$x }}">
-                            <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
-                        </label>
-                    </div>
-                @endforeach
-            </div>
+            @if(count($variation) == 1)
+                <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
+                       value="{!! $variation->first()->id  !!}"
+                       data-out="{{ out_of_stock($variation->first()) }}"
+                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                       class="select-variation-option single-product-select">
+                <div class="form-control">
+                    {!! out_of_stock($variation->first()) !!}
+                </div>
+            @else
+                <div class="product_radio-single d-flex flex-column">
+                    @foreach($variation as $item)
+                        @php
+                            $x = uniqid();
+                        @endphp
+                        <div
+                            class="custom-radio custom-control-inline product--inputs-wrap">
+                            <input type="radio"
+                                   @if(isset($selected) && $selected->id == $item->id) checked
+                                   @endif data-out="{{ out_of_stock($item) }}"
+                                   class="custom-control-input custom-control-input-radio"
+                                   id="single_v_select_{{ $item->id.$x }}" name="variations[{{ $item->variation_id }}][]"
+                                   value="{{ $item->id }}">
+                            <label class="custom-label"
+                                   for="single_v_select_{{ $item->id.$x }}">
+                                <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
+                            </label>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'package_product')
         <div class="d-flex flex-wrap product__single-item-info-size">
