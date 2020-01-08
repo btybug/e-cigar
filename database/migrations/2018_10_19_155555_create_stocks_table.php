@@ -34,7 +34,7 @@ class CreateStocksTable extends Migration
                 ->on('users')->onDelete('CASCADE');
 
             $table->foreign('brand_id')->references('id')
-                ->on('categories')->onDelete('CASCADE');
+                ->on('brands')->onDelete('CASCADE');
         });
     }
 

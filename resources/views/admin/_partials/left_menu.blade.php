@@ -143,6 +143,7 @@
                 </a>
                 <ul class="treeview-menu">
                     @ok('admin_blog')<li><a href="{{route('admin_blog')}}"><i class="fa fa-circle-o"></i> Posts</a></li>@endok
+                    @ok('admin_blog_brands')<li><a href="{{route('admin_blog_brands')}}"><i class="fa fa-circle-o"></i> Brands</a></li>@endok
                     @ok('show_comments')<li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>@endok
                     @ok('admin_faq')<li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>@endok
                     @ok('admin_blog_contact_us')

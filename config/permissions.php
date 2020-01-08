@@ -369,6 +369,15 @@ return [
             ],
 
         ],
+        'brands' => [
+            'name' => 'Brands',
+            'routes' => ['admin_blog_brands'],
+            'description' => 'Able to see Brands page',
+            'children' => [
+
+            ],
+
+        ],
         'comments' => [
             'name' => 'Comments',
             'routes' => ['show_comments','datatable_all_post_comments'],

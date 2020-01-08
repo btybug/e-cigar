@@ -15,6 +15,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
+use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Items;
 use App\Models\ItemsLocations;
@@ -129,7 +130,7 @@ class ItemsController extends Controller
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = [];
         $shelves = [];
-        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $brands = Brands::all();
         ActivityLogs::action('items', 'update', $model->id);
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
             'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));

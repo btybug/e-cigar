@@ -1,8 +1,7 @@
 @php
 
-use App\Models\Category;
 
-$categories = Category::where('type', 'brands')->whereNull('parent_id')->get();
+$categories = \App\Models\Brands::all();
 @endphp
 
 @foreach($categories as $category)

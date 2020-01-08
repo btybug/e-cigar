@@ -1,5 +1,6 @@
 @extends('layouts.frontend',['page_name'=>'banner'])
 @section('meta')
+    {!! rich() !!}
     {!! brandSeo($current) !!}
 @stop
 @section('content')

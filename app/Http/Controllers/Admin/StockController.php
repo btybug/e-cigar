@@ -14,6 +14,7 @@ use App\Http\Requests\ProductsRequest;
 use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
+use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Filters;
 use App\Models\Items;
@@ -87,7 +88,7 @@ class StockController extends Controller
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
+        $brands =Brands::all();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
         $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
 

@@ -160,7 +160,7 @@ class Items extends Translatable
 
     public function brand()
     {
-        return $this->belongsTo(Category::class, 'items.brand_id');
+        return $this->belongsTo(Brands::class, 'items.brand_id');
     }
 
     public function media()

@@ -161,7 +161,7 @@ class Stock extends Translatable
 
     public function brand()
     {
-        return $this->belongsTo(Category::class, 'brand_id', 'id');
+        return $this->belongsTo(Brands::class, 'brand_id', 'id');
     }
 
     public function main_item()
