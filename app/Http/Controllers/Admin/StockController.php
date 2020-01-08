@@ -23,6 +23,7 @@ use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockOfferProducts;
 use App\Models\StockSeo;
+use App\Models\Translations\StockTranslation;
 use App\Services\StockService;
 use Illuminate\Http\Request;
 
@@ -39,6 +40,15 @@ class StockController extends Controller
         $this->settings = $settings;
     }
 
+    public function fixUrl()
+    {
+        $translations = StockTranslation::all();
+        foreach ($translations as $translation){
+            $translation->slug=strtolower(preg_replace('!\s+!','-',$translation->slug));
+            $translation->save();
+        }
+        dd('done');
+    }
     public function stock()
     {
 //        $stocks = Stock::all();
