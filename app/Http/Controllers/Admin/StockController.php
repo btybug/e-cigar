@@ -40,37 +40,9 @@ class StockController extends Controller
         $this->settings = $settings;
     }
 
-    public function fixUrl()
-    {
-        $translations = StockTranslation::all();
-        foreach ($translations as $translation){
-            $translation->slug=strtolower(preg_replace('!\s+!','-',$translation->slug));
-            $translation->save();
-        }
-        dd('done');
-    }
-    public function fixCategories()
-    {
-        $translations = Category::all();
-        foreach ($translations as $translation){
-            if($translation->slug){
-                $translation->slug=strtolower(preg_replace('!\s+!','-',$translation->slug));
-                $translation->save();
-            }
 
-        }
-        dd('done ca');
-    }
     public function stock()
     {
-//        $stocks = Stock::all();
-//        foreach ($stocks as $stock){
-//            $stock->translate('gb')->slug = $stock->name;
-//            $stock->save();
-//        }
-//
-//        dd('done');
-
         return $this->view('stock');
     }
 
