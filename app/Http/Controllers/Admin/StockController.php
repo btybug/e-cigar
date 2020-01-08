@@ -123,7 +123,7 @@ class StockController extends Controller
         $this->stockService->makeTypeOptions($stock, $request->get('type_attributes', []));
 //        $stock->specifications()->sync($request->get('specifications'));
 //        $options = $this->stockService->makeOptions($stock, $request->get('options', []));
-        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
+
         $ads = $request->get('ads', []);
         $adNotDeletable = [];
         if (count($ads)) {
@@ -234,6 +234,8 @@ class StockController extends Controller
         }
 //        $this->createOrUpdateSeo($request, $stock->id);
 
+        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
+        
         return redirect()->back();
     }
 
