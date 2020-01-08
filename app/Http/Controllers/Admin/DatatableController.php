@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ActivityLogs;
 use App\Models\Attributes;
 use App\Models\Barcodes;
+use App\Models\Brands;
 use App\Models\Campaign;
 use App\Models\Category;
 use App\Models\Comment;
@@ -225,6 +226,23 @@ class DatatableController extends Controller
             ->make(true);
     }
 
+    public function getAllBrands()
+    {
+        return Datatables::of(
+            Brands::join('brands_translations', 'brands_translations.brands_id', 'brands.id')
+                ->where('brands_translations.locale', app()->getLocale())
+                ->select('brands.*', 'brands_translations.name', 'brands_translations.description')
+        )->editColumn('image', function ($brand) {
+            return '<img src="'.media_image_tmb($brand->image).'" width="25px">';
+        })->editColumn('icon', function ($brand) {
+            return '<i class="'.$brand->icon.'"></i>';
+        })
+            ->addColumn('actions', function ($message) {
+            return "<div class='datatable-td__action'><a class='btn btn-info' href='#'><i class='fa fa-edit'></i></a><a class='btn btn-danger' href='#'>x</a></div>";
+        })->rawColumns(['actions','image','icon'])
+            ->make(true);
+
+    }
     public function getAllContactUs()
     {
         return Datatables::of(ContactUs::whereNull('parent_id')->orderBy('updated_at', 'DESC'))

@@ -18,6 +18,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/email/get-all','Admin\DatatableController@getAllEmails')->name('datatable_all_emails');
     Route::get('/newsletters-all','Admin\DatatableController@getAllNewsletters')->name('datatable_all_newsletters');
     Route::get('/blog/get-all','Admin\DatatableController@getAllPosts')->name('datatable_all_posts');
+    Route::get('/blog/get-all-brands','Admin\DatatableController@getAllBrands')->name('datatable_all_brands');
     Route::get('/blog/get-contact-us','Admin\DatatableController@getAllContactUs')->name('datatable_all_contact_us');
     Route::get('/coupons/get-all/{is_archive}','Admin\DatatableController@getAllCoupons')->name('datatable_all_coupons');
     Route::get('/blog/comments/get-all','Admin\DatatableController@getAllPostComments')->name('datatable_all_post_comments');

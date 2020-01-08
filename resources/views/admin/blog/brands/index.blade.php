@@ -10,7 +10,7 @@
         </div>
         <div class="card-body panel-body">
 
-            <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+            <table id="brands-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
                     <th>ID</th>
@@ -27,6 +27,30 @@
     </div>
 @stop
 @section('js')
+    <script>
+        $(function () {
+            $('#brands-table').DataTable({
+            ajax: "{!! route('datatable_all_brands') !!}",
+            "processing": true,
+            "serverSide": true,
+            "bPaginate": true,
+            dom: 'Bfrtip',
+            buttons: [
+            'csv', 'excel', 'pdf', 'print'
+            ],
+            columns: [
+            {data: 'id', name: 'id'},
+            {data: 'name', name: 'brands_translations.name'},
+            {data: 'icon', name: 'last_name'},
+            {data: 'image', name: 'image'},
+            {data: 'description', name: 'brands_translations.description'},
+            {data: 'slug', name: 'slug'},
+            {data: 'actions', name: 'actions'}
+            ]
+            });
+        });
+
+    </script>
 @stop
 @section('css')
 
