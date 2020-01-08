@@ -2,68 +2,80 @@
 
 
 @section('content')
-    <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
+    {!! Form::model($model,['url' => route('admin_faq_new'), 'id' => 'post_form','files' => true]) !!}
+    <div class="card panel panel-default border-0 bg-transparent">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
             <h2 class="m-0 pull-left">{{ ($model) ? $model->question : "Add Question" }}</h2>
+            <div class="text-right btn-save">
+                {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
+            </div>
         </div>
-        <div class="card-body panel-body">
-            <ul class="nav nav-tabs w-100">
+        <div class="card-body panel-body px-0">
+            <ul class="nav nav-tabs w-100 new-main-admin--tabs mb-4">
                 <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#info">Info</a></li>
                 <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#seo">SEO</a></li>
             </ul>
-            {!! Form::model($model,['url' => route('admin_faq_new'), 'id' => 'post_form','files' => true]) !!}
+
             <div class="tab-content tabs_content">
                 <div id="info" class="tab-pane tab_info fade in active show">
 
                     {!! Form::hidden('id',null) !!}
-                    <div class="text-right btn-save pt-25">
-                        {!! Form::submit('Save',['class' => 'btn btn-info']) !!}
-                    </div>
+
                     <div class="row sortable-panels">
                         <div class="col-lg-8 col-md-7 col-sm-8">
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <div class="form-group">
-                                            @if(count(get_languages()))
-                                                <ul class="nav nav-tabs tab_lang_horizontal">
-                                                    @foreach(get_languages() as $language)
-                                                        <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab"
-                                                                                                       href="#{{ strtolower($language->code) }}">
-                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                            </a></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-
-                                            <div class="tab-content">
-                                                @if(count(get_languages()))
-                                                    @foreach(get_languages() as $language)
-                                                        <div id="{{ strtolower($language->code) }}"
-                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                            <div class="form-group">
-                                                                <label>To Question</label>
-                                                                {!! Form::text('translatable['.strtolower($language->code).'][question]',get_translated($model,strtolower($language->code),'question'),['class'=>'form-control']) !!}
-                                                            </div>
-
-                                                            <div class="form-group">
-                                                                <label>To Answer</label>
-                                                                {!! Form::textarea('translatable['.strtolower($language->code).'][answer]',get_translated($model,strtolower($language->code),'answer'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Q&A
                                             </div>
-                                        </div>
+                                            <div class="card-body">
+                                                @if(count(get_languages()))
+                                                    <ul class="nav nav-tabs tab_lang_horizontal">
+                                                        @foreach(get_languages() as $language)
+                                                            <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab"
+                                                                                    href="#{{ strtolower($language->code) }}">
+                                                                    <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
+                                                                </a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
 
-                                        <div class="form-group">
-                                            <div class="form-group row">
-                                                <label class="col-sm-3">Gallery images</label>
-                                                <div class="col-sm-9">
-                                                    {!! media_button('gallery',$model,true) !!}
+                                                <div class="tab-content">
+                                                    @if(count(get_languages()))
+                                                        @foreach(get_languages() as $language)
+                                                            <div id="{{ strtolower($language->code) }}"
+                                                                 class="tab-pane fade  @if($loop->first) in active show @endif">
+                                                                <div class="form-group row">
+                                                                    <label class="col-lg-2 col-form-label">Question</label>
+                                                                    <div class="col-lg-10">
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][question]',get_translated($model,strtolower($language->code),'question'),['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="form-group row">
+                                                                    <label class="col-lg-2 col-form-label">Answer</label>
+                                                                    <div class="col-lg-10">
+                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][answer]',get_translated($model,strtolower($language->code),'answer'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                    @endif
                                                 </div>
                                             </div>
+
                                         </div>
+
+{{--                                        <div class="form-group">--}}
+{{--                                            <div class="form-group row">--}}
+{{--                                                <label class="col-sm-3">Gallery images</label>--}}
+{{--                                                <div class="col-sm-9">--}}
+{{--                                                    {!! media_button('gallery',$model,true) !!}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
 
                                         <div class="card panel panel-default mt-20">
                                             <div class="card-header panel-heading d-flex justify-content-between align-items-center">
@@ -104,29 +116,27 @@
                         <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="view-product-wall">
 
-                                <div class="status-wall wall">
-                                    <div class="row">
-                                        {{Form::label('status', 'Status',['class' => 'col-xl-3'])}}
-                                        <div class="col-xl-9">
+                                <div class="status-wall wall border-0 p-0">
+                                    <div class="card">
+                                        <div class="card-header">{{Form::label('status', 'Status')}}</div>
+                                        <div class="card-body">
                                             {!! Form::select('status',[0 => 'Draft',1 => 'Published'],null,
                                                         ['class' => 'form-control','id'=> 'status']) !!}
                                         </div>
                                     </div>
+
                                 </div>
 
-                                <div class="category-wall wall mb-3">
-                                    <div class="row">
-                                        <label class="col-xl-3 control-label" for="input-category"><span
-                                                    data-toggle="tooltip" title=""
-                                                    data-original-title="Choose all products under selected category.">Category</span></label>
-                                        <div class="col-xl-9">
-                                            <div class="form-group">
-                                                {!! Form::hidden('categories',(isset($checkedCategories))
-                                                ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
-                                                <div id="treeview_json"></div>
-                                            </div>
+                                <div class="category-wall wall mb-3 border-0 p-0">
+                                    <div class="card">
+                                        <div class="card-header">Category</div>
+                                        <div class="card-body">
+                                            {!! Form::hidden('categories',(isset($checkedCategories))
+                                                 ? json_encode($checkedCategories) : null,['id' => 'categories_tree']) !!}
+                                            <div id="treeview_json"></div>
                                         </div>
                                     </div>
+
                                 </div>
                                 {!! media_widget('other_images',$model,true,'drive',null,"Extra Images") !!}
                             </div>
@@ -135,9 +145,7 @@
 
                 </div>
                 <div id="seo" class="tab-pane tab_seo fade">
-                    <div class="text-right btn-save pt-25">
-                        <button type="submit" class="btn btn-info">Save</button>
-                    </div>
+                    
                     <div class="card panel panel-default mt-20">
                         <div class="card-header panel-heading">FB</div>
                         <div class="card-body panel-body">
@@ -309,10 +317,10 @@
                     </div>
                 </div>
             </div>
-            {!! Form::close() !!}
+
         </div>
     </div>
-
+    {!! Form::close() !!}
     <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
