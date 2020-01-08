@@ -44,7 +44,7 @@ class StockController extends Controller
     {
         $translations = StockTranslation::all();
         foreach ($translations as $translation){
-            $translation->slug=strtolower(str_replace('-',' ',$translation->slug));
+            $translation->slug=strtolower(preg_replace('!\s+!','-',$translation->slug));
             $translation->save();
         }
         dd('done');
