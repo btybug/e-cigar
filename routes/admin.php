@@ -298,6 +298,10 @@ Route::group(['prefix' => 'blog'], function () {
 
     });
 
+    Route::group(['prefix' => '/reviews'], function () {
+        Route::get('/', 'Admin\ReviewsController@index')->name('admin_reviews');
+    });
+
 //    Route::group(['prefix' => 'comments'], function () {
 //        Route::get('/', 'Admin\PostController@getComments')->name('admin_blog_comments');
 //        Route::get('/settings', 'Admin\PostController@getCommentSettings')->name('admin_blog_comments_settings');

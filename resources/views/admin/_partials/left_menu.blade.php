@@ -149,6 +149,7 @@
                     <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
                     @endok
                     @ok('admin_tickets')<li><a href="{{route('admin_tickets')}}"><i class="fa fa-circle-o"></i> Tickets</a></li>@endok
+                    @ok('admin_reviews')<li><a href="{{route('admin_reviews')}}"><i class="fa fa-circle-o"></i> Reviews</a></li>@endok
                 </ul>
             </li>
             @endHasAccess
