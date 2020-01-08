@@ -10,24 +10,34 @@
                 </span>
                 @endif
             @endif
-            <select name="variations[{{ $vSettings->variation_id }}][]"
-                    id="single_v_select_{{ $vSettings->id.uniqid() }}"
-                    data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
-                    style="width: 100%"
-                    class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
-                @if(!$vSettings->min_count_limit || $vSettings->min_count_limit == 0)
-                    <option value="no" data-out="1" @if(!isset($selected) || !$selected) selected @endif>
-                        No, Thank you
-                    </option>
-                @endif
-                @foreach($variation as $item)
-                    <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
-                            @endif data-out="{{ out_of_stock($item) }}">
-                        {{ $item->name }}
-                        <b>{{ out_of_stock_msg($item) }}</b>
-                    </option>
-                @endforeach
-            </select>
+            @if(count($variation) == 1)
+                <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
+                       value="{!! $variation->first()->id  !!}"
+                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                       class="select-variation-option single-product-select">
+                <div class="form-control">
+                    {!! $variation->first()->name !!}
+                </div>
+            @else
+                <select name="variations[{{ $vSettings->variation_id }}][]"
+                        id="single_v_select_{{ $vSettings->id.uniqid() }}"
+                        data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                        style="width: 100%"
+                        class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
+                    @if(!$vSettings->min_count_limit || $vSettings->min_count_limit == 0)
+                        <option value="no" data-out="1" @if(!isset($selected) || !$selected) selected @endif>
+                            No, Thank you
+                        </option>
+                    @endif
+                    @foreach($variation as $item)
+                        <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
+                                @endif data-out="{{ out_of_stock($item) }}">
+                            {{ $item->name }}
+                            <b>{{ out_of_stock_msg($item) }}</b>
+                        </option>
+                    @endforeach
+                </select>
+            @endif
                 <div class="desc-placeholder">
                     {!! ($selected) ? $selected->description:null !!}
                 </div>
