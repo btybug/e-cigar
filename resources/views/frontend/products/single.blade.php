@@ -476,9 +476,30 @@
                                         @if($vape->reviews_tab)
                                             <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
                                                  aria-labelledby="pills-tecnical-tab">
-                                                <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
-                                                    I bought one.
-                                                </p>
+                                                <section class="reviews__card-wrapper">
+                                                    <blockquote class="rating__card__quote">“Lorem ipsum dolor sit amet, cu pertinax nominati sea, id iriure utamur interpretaris sea, vix ne latine aliquam complectitur. Enim quas his no, mea ferri audire rationibus ei.”</blockquote>
+
+                                                    <div class="rating__card__stars">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                    <p class="rating__card__bottomText">by Edo on 10/1/20</p>
+                                                </section>
+                                                <section class="reviews__card-wrapper">
+                                                    <blockquote class="rating__card__quote">“Lorem ipsum dolor sit amet, cu pertinax nominati sea, id iriure utamur interpretaris sea, vix ne latine aliquam complectitur. Enim quas his no, mea ferri audire rationibus ei.”</blockquote>
+
+                                                    <div class="rating__card__stars">
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star checked"></span>
+                                                        <span class="fa fa-star"></span>
+                                                    </div>
+                                                    <p class="rating__card__bottomText">by Edo on 10/1/20</p>
+                                                </section>
                                             </div>
                                         @endif
                                         @if($vape->faq_tab && count($vape->faqs))

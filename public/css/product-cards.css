@@ -6169,6 +6169,54 @@ header .header-bottom .share-button svg {
     transition-duration: 0.25s;
     transition-delay: 0s;
 }
+/*RATING CARD*/
+.reviews__card-wrapper {
+    box-shadow: 0px 8px 29px -4px rgba(0, 0, 0, 0.55);
+    padding: 30px;
+    color: #545454;
+    font-weight: 100;
+    border-radius: 10px;
+    background: #EFF0F2;
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.reviews__card-wrapper .rating__card__quote {
+    padding: 30px 0;
+    margin: 0;
+    box-sizing: border-box;
+    line-height: 1.2;
+    font-size: 20px;
+    line-height: 1.54;
+}
+
+.reviews__card-wrapper .fa-star {
+    color: #545454;
+}
+
+.reviews__card-wrapper .checked {
+    color: #F78D28;
+}
+
+.reviews__card-wrapper .rating__card__stars {
+    margin: auto;
+    display: block;
+    text-align: center;
+}
+
+.reviews__card-wrapper .rating__card__stars__name {
+    font-size: 16px;
+    margin: 0 0 0 5px;
+}
+
+.reviews__card-wrapper .rating__card__bottomText {
+    margin: 30px auto 15px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
 @media (max-width: 1854px) {
     .shopping__cart-payment-wrapper{
         padding-left: 0;
