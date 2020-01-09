@@ -21,10 +21,10 @@
 {{--                    </div>--}}
 {{--                </div>--}}
             </div>
-            <div class="col-sm-4 align-self-center">
+            <div class="col-xl-4 col-lg-5 align-self-center">
                 <div class="row">
-                    <label class="col-form-label col-md-3">Section Title</label>
-                    <div class="col-md-5">
+                    <label class="col-form-label col-lg-3">Section Title</label>
+                    <div class="col-lg-5 align-self-center">
                         {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
                     </div>
                 </div>

@@ -993,7 +993,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     width: 100%;
     max-width: 290px;
 }
-
+.main-content-wrapper .content-head .right-head .sort-by_select.new-sort-by_select .select-wall{
+    border: 1px solid #d7d7d7;
+    margin-left: 8px;
+}
+.main-content-wrapper .content-head .right-head .sort-by_select.new-sort-by_select .select-wall .select2-selection__arrow b{
+    border-color: #353535 transparent transparent transparent !important;
+    border-width: 7px 4px 0 4px;
+}
 .main-content-wrapper .content-head .right-head .sort-by_select .select-wall {
     width: 100%;
 }

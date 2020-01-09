@@ -166,7 +166,7 @@
                                     @endphp
                                     {!! Form::select('category',['' => __('all_categories')] + $categories->toArray(),null,
                                         [
-                                            'class' => 'all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected',
+                                            'class' => 'all_categories select-2 select-2--no-search main-select select-1arrow products-filter-wrap_select not-selected',
                                             'style' =>'width: 190px',
                                             'id' => 'filter_sort'
                                         ]) !!}
@@ -222,7 +222,7 @@
 </svg>
                                 </span>
                         @endif
-<div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative">
+<div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative mr-3">
     <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('currency') !!}: </label>
     <div class="d-inline-block select-wall simple_select_wrapper currency--wrap">
         {!! Form::select('currency',site_currencies(),@$currency,[
@@ -236,13 +236,13 @@
 
                         @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')
 
-                        <a @if(\Auth::check()) href="{!! route('my_account_favourites') !!}" @else data-toggle="modal" data-target="#loginModal" href="javascript:void(0)" @endif
-                           class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">
-                            <svg viewBox="0 0 29 22" width="26px" height="22px">
-                                <path fill-rule="evenodd" fill="rgb(227, 40, 84)"
-                                      d="M23.901,2.043 C22.539,0.732 20.737,0.016 18.813,0.016 C16.890,0.016 15.081,0.738 13.720,2.048 L13.009,2.732 L12.287,2.037 C10.926,0.727 9.112,0.000 7.188,0.000 C5.270,0.000 3.462,0.722 2.106,2.027 C0.745,3.337 -0.005,5.077 0.001,6.928 C0.001,8.780 0.756,10.515 2.117,11.825 L12.469,21.788 C12.612,21.926 12.805,22.000 12.992,22.000 C13.180,22.000 13.373,21.931 13.516,21.793 L23.890,11.846 C25.251,10.536 26.001,8.796 26.001,6.944 C26.006,5.093 25.262,3.353 23.901,2.043 L23.901,2.043 Z"/>
-                            </svg>
-                        </a>
+{{--                        <a @if(\Auth::check()) href="{!! route('my_account_favourites') !!}" @else data-toggle="modal" data-target="#loginModal" href="javascript:void(0)" @endif--}}
+{{--                           class="d-inline-block pointer add-links-wrap_icon add-links-wrap_favorite active">--}}
+{{--                            <svg viewBox="0 0 29 22" width="26px" height="22px">--}}
+{{--                                <path fill-rule="evenodd" fill="rgb(227, 40, 84)"--}}
+{{--                                      d="M23.901,2.043 C22.539,0.732 20.737,0.016 18.813,0.016 C16.890,0.016 15.081,0.738 13.720,2.048 L13.009,2.732 L12.287,2.037 C10.926,0.727 9.112,0.000 7.188,0.000 C5.270,0.000 3.462,0.722 2.106,2.027 C0.745,3.337 -0.005,5.077 0.001,6.928 C0.001,8.780 0.756,10.515 2.117,11.825 L12.469,21.788 C12.612,21.926 12.805,22.000 12.992,22.000 C13.180,22.000 13.373,21.931 13.516,21.793 L23.890,11.846 C25.251,10.536 26.001,8.796 26.001,6.944 C26.006,5.093 25.262,3.353 23.901,2.043 L23.901,2.043 Z"/>--}}
+{{--                            </svg>--}}
+{{--                        </a>--}}
                         <span id="headerShopCartBtn" class="d-inline-block position-relative pointer add-links-wrap_icon sidebar_button_active_detector">
                             <span class="d-inline-block position-absolute absolute-center add-cart-number cart-count">{{ cartCount() }}</span>
                                 <svg
