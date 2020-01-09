@@ -1174,7 +1174,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
+                    <button type="button" class="btn btn-danger done_select_product_js" data-dismiss="modal">Done</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->

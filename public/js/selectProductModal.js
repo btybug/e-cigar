@@ -134,19 +134,22 @@ $('body').on('change', '#category_select', function() {
   });
 });
 
-// $("body").on("click", ".add-related-event", function () {
-//   let id = $(this).data("id");
-//   let name = $(this).data("name");
-//   $(".get-all-products-tab")
-//       .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-//                   href="#">${name}</a>
-//                   <div class="buttons">
-//                   <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-//                   </div>
-//                   <input type="hidden" name="related_products[]" value="${id}" />
-//                   </li>`);
-//   $(this)
-//       .parent()
-//       .remove();
-// });
+
+
+$("body").on("click", ".done_select_product_js", function () {
+  $('.select_product_js').each(function(index, product) {
+    if($(product).prop('checked')) {
+        const id = $(product).closest('.add-related-event').data('id');
+        const name =  $(product).closest('.add-related-event').data('name');
+        $(".get-all-products-tab")
+        .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                    href="#">${name}</a>
+                    <div class="buttons">
+                    <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                    </div>
+                    <input type="hidden" name="related_products[]" value="${id}" />
+                    </li>`);
+    }
+  })
+});
 
