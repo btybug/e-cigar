@@ -156,7 +156,7 @@ class Stock extends Translatable
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'stock_categories', 'stock_id', 'categories_id')
-            ->whereIn('categories.type', ['stocks','brands']);
+            ->whereIn('categories.type', ['stocks']);
     }
 
     public function brand()

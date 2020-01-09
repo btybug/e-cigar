@@ -462,9 +462,17 @@ class StockController extends Controller
     public function getStocks(Request $request)
     {
         $promotion = ($request->get("promotion")) ? true : false;
-        $attr = Stock::where('is_offer', false)->whereNotIn('id', $request->get('arr', []))->get();
+        $attr = Stock::join('stock_translations','stock_translations.stock_id','stocks.id')
+            ->where('locale',app()->getLocale())
+            ->where('stocks.is_offer', false)->whereNotIn('stocks.id', $request->get('arr', []))
+            ->with('brand')
+            ->with('categories')
+            ->select('stocks.id','stocks.brand_id','stock_translations.name')
+            ->get();
+        $brands=Brands::all()->pluck('name','id');
+        $categories=Category::where('type','stocks')->get()->pluck('name','id');
 
-        return \Response::json(['error' => false, 'data' => $attr]);
+        return \Response::json(['error' => false, 'data' => $attr,'brands'=>$brands,'categories'=>$categories]);
     }
 
     public function getSpecialOffers(Request $request)
