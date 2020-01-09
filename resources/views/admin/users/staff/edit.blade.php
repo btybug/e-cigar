@@ -194,7 +194,8 @@
                                                             <div class="card-body">
                                                                 <form method="POST" action="{{ route('change.password') }}">
                                                                     @csrf
-
+                                                                    <input type="hidden" name="id"
+                                                                           value="{!! $user->id !!}">
                                                                     @foreach ($errors->all() as $error)
                                                                         <p class="text-danger">{{ $error }}</p>
                                                                     @endforeach
