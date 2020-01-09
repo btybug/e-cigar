@@ -196,6 +196,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/edit/{id}', 'Admin\UserController@edit')->name('admin_users_edit');
     Route::get('/edit-staff/{id}', 'Admin\UserController@editStaff')->name('admin_staff_edit');
     Route::post('/edit-staff/{id}', 'Admin\UserController@postEditStaff')->name('post_admin_staff_edit');
+    Route::post('change-password', 'Admin\UserController@changePassword')->name('change.password');
 
     Route::post('/delete', 'Admin\UserController@delete')->name('admin_users_delete');
     Route::post('/delete-staff', 'Admin\UserController@deleteStaff')->name('admin_staff_delete');
