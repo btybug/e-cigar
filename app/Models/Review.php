@@ -3,6 +3,7 @@
 namespace App\Models;
 
 
+use App\Enums\ReviewStatusTypes;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,14 @@ class Review extends Model
     public static function updateOrCreate(int $id = null, array $data)
     {
         $model = self::find($id)??new static();
-        (isset($model->id)) ? $model->update($data) : $model->fill($data);
+        if(isset($model->id)) {
+            $data['status'] = ReviewStatusTypes::RESUBMITTED;
+            $model->update($data);
+        } else{
+            $data['status'] = ReviewStatusTypes::SUBMITTED;
+            $model->fill($data);
+        }
+
         $model->save();
         return $model;
     }

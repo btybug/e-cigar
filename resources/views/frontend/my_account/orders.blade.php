@@ -65,7 +65,7 @@
                                             <td>{!! convert_price($order->amount,get_currency()) !!}</td>
                                             <td>{!! ($order->type) ? 'Wholesaler' : 'User' !!}</td>
                                             <td>
-                                                @if($order->history->first()['status']['name'])
+                                                @if($order->history->first()['status'] && $order->history->first()['status']['name'])
                                                     <button type="button"
                                                             class="btn order-table_btn order-table_btn--status text-sec-clr rounded-0"  style="background: {!! $order->history->first()['status']['color'] !!}">
                                                         {!! $order->history->first()->status->name !!}

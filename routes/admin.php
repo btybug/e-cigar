@@ -219,6 +219,7 @@ Route::group(['prefix' => 'users'], function () {
 
     Route::get('/approve-review/{id}', 'Admin\UserController@getApproveReview')->name('admin_users_approve_review');
     Route::get('/disable-review/{id}', 'Admin\UserController@getDisableReview')->name('admin_users_disable_review');
+    Route::get('/allow-edit-review/{id}', 'Admin\UserController@getAllowEditReview')->name('admin_users_allow_edit_review');
 
     Route::group(['prefix' => 'roles-mebership'], function () {
         Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');

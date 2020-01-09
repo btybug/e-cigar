@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Enums\ReviewStatusTypes;
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Admin\Requests\StaffRequest;
 use App\Http\Controllers\Controller;
@@ -286,7 +287,7 @@ class UserController extends Controller
     {
         $review = Review::findOrFail($id);
         $review->update([
-            'status' => true
+            'status' => ReviewStatusTypes::PUBLISHED
         ]);
         return redirect()->back();
     }
@@ -295,7 +296,16 @@ class UserController extends Controller
     {
         $review = Review::findOrFail($id);
         $review->update([
-            'status' => false
+            'status' => ReviewStatusTypes::BLOCKED
+        ]);
+        return redirect()->back();
+    }
+
+    public function getAllowEditReview($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->update([
+            'status' => ReviewStatusTypes::ALLOW_EDIT
         ]);
         return redirect()->back();
     }
