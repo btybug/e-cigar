@@ -16,9 +16,9 @@
         </ul>
         <div class="tab-content">
             <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
-           <h2 class="m-0 pull-left">{!! __('Orders') !!}</h2>
-            <div class="pull-right">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+           <h2 class="m-0 mr-1">{!! __('Orders') !!}</h2>
+            <div>
                 @ok('admin_orders_settings')<a class="btn btn-warning pull-right" href="{!! route('admin_orders_settings') !!}">Settings</a>@endok
                 @ok('admin_orders_new')<a class="btn btn-primary pull-right mr-1" href="{!! route('admin_orders_new') !!}">New Order</a>@endok
             </div>

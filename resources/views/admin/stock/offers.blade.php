@@ -17,14 +17,12 @@
             </ul>
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                        <div class="pull-left">
+                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                             <h2 class="m-0">Offers</h2>
-                        </div>
-                        <div class="pull-right">
-                            <div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new_offer') !!}">Add new</a>
+
+                            <div class="ml-1"><a class="btn btn-primary" href="{!! route('admin_stock_new_offer') !!}">Add new</a>
                             </div>
-                        </div>
+
                     </div>
                     <div class="card-body panel-body">
 

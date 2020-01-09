@@ -6,8 +6,8 @@
 @section('content')
     {!! Form::model($settings,[]) !!}
     <div class="card panel panel-default stock-page">
-        <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Order Settings</h2>
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+            <h2 class="m-0 mr-1">Order Settings</h2>
             <div class="pull-right">
                 <a href="{!! route('admin_orders') !!}" class="btn btn-default btn-action">Back</a>
                 {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
