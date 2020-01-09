@@ -37,9 +37,9 @@
         </div>
         <div class="card-body panel-body">
             <div class="row">
-                <div class="col-sm-4 d-flex flex-wrap head-left px-0 py-2">
+                <div class="col-xl-5 col-lg-6 col-sm-7 col-7 d-flex flex-wrap head-left px-0 py-2">
                     <div class="col-xl-12 my-xl-0 my-1">
-                        <div class="row">
+                        <div class="row flex-nowrap">
                             <div class="col-md-4">
                                 <label>Item Options:</label>
                                 {!! Form::select("variations[$main_unique][type]",['single' => 'Single item','package_product' => 'Multiple items','filter' => 'Filters'
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="row">
-                                    <div class="col-sm-12 type-place">
+                                    <div class="type-place">
                                         <div class="product-wall">
                                             @if($main && $main->type =='package_product')
                                                 @include('admin.stock._partials.package_item')
@@ -71,7 +71,7 @@
                     </div>
 
                 </div>
-                <div class="col-sm-8 d-flex justify-content-end p-0">
+                <div class="col-xl-7 col-lg-6 col-sm-5 col-5 d-flex justify-content-end p-0">
                     <div
                         class="col-md-12 px-md-3 px-0 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
                         <div class="row h-100 align-items-center">
