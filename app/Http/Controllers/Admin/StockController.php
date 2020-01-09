@@ -469,8 +469,8 @@ class StockController extends Controller
             ->with('categories')
             ->select('stocks.id','stocks.brand_id','stock_translations.name')
             ->get();
-        $brands=Brands::all()->pluck('name','id');
-        $categories=Category::where('type','stocks')->get()->pluck('name','id');
+        $brands=Brands::all();
+        $categories=Category::where('type','stocks')->get();
 
         return \Response::json(['error' => false, 'data' => $attr,'brands'=>$brands,'categories'=>$categories]);
     }
