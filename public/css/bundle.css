@@ -13375,7 +13375,7 @@ textarea {
 .main-scrollbar::-webkit-scrollbar,
 .table-responsive::-webkit-scrollbar {
     height: 3px;
-    width: 5px;
+    width: 8px;
 }
 
 .main-scrollbar::-webkit-scrollbar-track,
@@ -13388,7 +13388,7 @@ textarea {
     background: #9cbcf9;
 }
 
-body::-webkit-scrollbar {  width: 8px;}
+body::-webkit-scrollbar {  width: 12px;}
 body::-webkit-scrollbar-track {  background: #ebeef4; }
 body::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 
@@ -14405,9 +14405,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     width: 100%;
     max-width: 290px;
 }
+.main-content-wrapper .content-head .right-head .sort-by_select.new-sort-by_select{
+    justify-content: flex-end;
+}
 .main-content-wrapper .content-head .right-head .sort-by_select.new-sort-by_select .select-wall{
     border: 1px solid #d7d7d7;
     margin-left: 8px;
+    width: 100%;
+    max-width: 110px;
 }
 .main-content-wrapper .content-head .right-head .sort-by_select.new-sort-by_select .select-wall .select2-selection__arrow b{
     border-color: #353535 transparent transparent transparent !important;
@@ -14451,7 +14456,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .sort-by_select > label {
-    margin-left: 20px;
+    /*margin-left: 20px;*/
+    margin-left: 2px;
     white-space: nowrap;
     color: #7c7c7c;
 }
@@ -17669,12 +17675,13 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 .profile-sidebar_avatar-holder {
     background: #e3e6ed;
-    height: 280px;
+    height: 150px;
     width: 100%;
+    flex: none;
 }
 
 .profile-sidebar_avatar-holder img {
-    height: 280px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     font-family: "object-fit: cover;";

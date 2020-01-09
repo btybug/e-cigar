@@ -222,16 +222,16 @@
 </svg>
                                 </span>
                         @endif
-<div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative mr-3">
-    <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('currency') !!}: </label>
-    <div class="d-inline-block select-wall simple_select_wrapper currency--wrap">
-        {!! Form::select('currency',site_currencies(),@$currency,[
-           'class' =>'select-2 currency--select-2 main-select main-select-2arrows arrow-dark',
-           'id' => 'change-currency'
-       ]) !!}
-        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
-    </div>
-</div>
+{{--<div class="sort-by_select sort-by-currency-wrap d-flex align-items-center position-relative mr-3">--}}
+{{--    <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('currency') !!}: </label>--}}
+{{--    <div class="d-inline-block select-wall simple_select_wrapper currency--wrap">--}}
+{{--        {!! Form::select('currency',site_currencies(),@$currency,[--}}
+{{--           'class' =>'select-2 currency--select-2 main-select main-select-2arrows arrow-dark',--}}
+{{--           'id' => 'change-currency'--}}
+{{--       ]) !!}--}}
+{{--        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}--}}
+{{--    </div>--}}
+{{--</div>--}}
 
 
                         @if(Request::route() && Request::route()->getPrefix() != '/wholesaler')

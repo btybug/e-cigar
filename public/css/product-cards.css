@@ -835,12 +835,13 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 .profile-sidebar_avatar-holder {
     background: #e3e6ed;
-    height: 280px;
+    height: 150px;
     width: 100%;
+    flex: none;
 }
 
 .profile-sidebar_avatar-holder img {
-    height: 280px;
+    height: 100%;
     width: 100%;
     object-fit: cover;
     font-family: "object-fit: cover;";

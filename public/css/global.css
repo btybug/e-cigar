@@ -346,7 +346,7 @@ textarea {
 .main-scrollbar::-webkit-scrollbar,
 .table-responsive::-webkit-scrollbar {
     height: 3px;
-    width: 5px;
+    width: 8px;
 }
 
 .main-scrollbar::-webkit-scrollbar-track,
@@ -359,7 +359,7 @@ textarea {
     background: #9cbcf9;
 }
 
-body::-webkit-scrollbar {  width: 8px;}
+body::-webkit-scrollbar {  width: 12px;}
 body::-webkit-scrollbar-track {  background: #ebeef4; }
 body::-webkit-scrollbar-thumb {  background: #9cbcf9; }
 
