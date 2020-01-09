@@ -1148,13 +1148,23 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group row">
-                        <label for="search-product" class="col-sm-2 col-form-label">Search</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-4">
+                            <select class="form-control search_option_js">
+                                <option value="general">General</option>
+                                <option value="brand">Brand</option>
+                                <option value="category">Category</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
                             <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
                         </div>
                     </div>
+                    <div class="d-flex justify-content-start align-items-center">
+                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                        <p>Select All</p>
+                    </div>
                     <ul class="all-list modal-stickers--list" id="stickers-modal-list">
-
+                        
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -2504,28 +2514,7 @@
             });
 
 
-            $("body").on('click', '.select-products', function () {
-                let arr = [];
-                $(".get-all-products-tab")
-                    .children()
-                    .each(function () {
-                        arr.push($(this).attr("data-id"));
-                    });
-                AjaxCall("/admin/get-stocks", {arr: arr, promotion: 0}, function (res) {
-                    if (!res.error) {
-                        $("#productsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal"><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></li>`;
-                            $("#productsModal .modal-body .all-list").append(html);
-                        })
-                        ;
-                        $("#productsModal").modal();
-                    }
-                });
-            });
+            
 
             $("body").on('click', '.select-promotions', function () {
                 let arr = [];
@@ -2575,21 +2564,7 @@
                     .remove();
             });
 
-            $("body").on("click", ".add-related-event", function () {
-                let id = $(this).data("id");
-                let name = $(this).data("name");
-                $(".get-all-products-tab")
-                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-                                href="#">${name}</a>
-                                <div class="buttons">
-                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                </div>
-                                <input type="hidden" name="related_products[]" value="${id}" />
-                                </li>`);
-                $(this)
-                    .parent()
-                    .remove();
-            });
+            
 
             $('body').on('click', 'a.nav-link[href="#mediastickers"]', function() {
                 setTimeout(function() {
