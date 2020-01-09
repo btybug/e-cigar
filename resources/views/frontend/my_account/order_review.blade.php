@@ -21,105 +21,98 @@
                 <div class="profile-inner-pg-right-cnt_inner h-100">
                     <div class="row flex-lg-row flex-column-reverse">
                         <div class="col-lg-9">
-                            <div class="table-responsive">
-                                <table class="table table-bordered table--order-dtls">
-                                    <thead>
-                                    <tr>
-                                        <td class="text-left">Product</td>
-                                        <td class="text-left">Items</td>
-                                        <td class="text-right">Quantity</td>
-                                        <td class="text-right">Unit Price</td>
-                                        <td class="text-right">Total</td>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($order->items()->where("is_refunded",false)->get() as $item)
-                                        <tr>
-                                            <td class="text-left">
-                                                <a class="font-20 text-tert-clr main-transition"
-                                                   href="">{!! $item->name !!}</a>
-                                            </td>
-                                            <td class="text-left">
-                                                @if(! $order->type)
-                                                @php
-                                                    $options=$item->options;
-                                                        $lastElement = end($options);
-                                                @endphp
+                            <div class="account--order-review-wrap">
+                                <ul class="nav nav-tabs mb-3" id="myTabReview" role="tablist">
+                                    <li class="nav-item">
+                                        <a class="nav-link active" id="reviewItem1-tab" data-toggle="tab" href="#reviewItem1" role="tab" aria-controls="reviewItem1" aria-selected="true">Item 1</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="reviewItem2-tab" data-toggle="tab" href="#reviewItem2" role="tab" aria-controls="reviewItem2" aria-selected="false">Item 1</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" id="reviewItem3-tab" data-toggle="tab" href="#reviewItem3" role="tab" aria-controls="reviewItem3" aria-selected="false">Item 1</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content" id="myTabContent">
+                                    <div class="tab-pane fade show active" id="reviewItem1" role="tabpanel" aria-labelledby="reviewItem1-tab">
+                                            <div class="account--order-review-first-tab">
+                                                <h1 class="text-uppercase title font-18 text-gray-clr font-main-bold">You're reviewing:smok nord kit</h1>
+                                                <p class="font-14">How do you rate this product?<span class="text-danger">*</span></p>
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th class="text-uppercase"></th>
+                                                            <th class="text-uppercase text-center">1 start</th>
+                                                            <th class="text-uppercase text-center">2 starts</th>
+                                                            <th class="text-uppercase text-center">3 starts</th>
+                                                            <th class="text-uppercase text-center">4 starts</th>
+                                                            <th class="text-uppercase text-center">5 starts</th>
 
-                                                <b>
-                                                    @foreach($options['options'] as $key=>$option)
-{{--                                                        {!! dd($option) !!}--}}
-
-                                                        <div class="row">
-                                                            @if(count($option['options']))
-                                                                <div class="col-md-8">
-                                                                    @foreach($option['options'] as $op)
-                                                                        <p>
-                                                                            {{ @$op['name'] }}
-                                                                        </p>
-                                                                    @endforeach
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td>Overall Rating</td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <input type="radio" name="rating">
                                                                 </div>
-                                                                <div class="col-md-4">
-                                                                    {{ convert_price($option['price'],$currency) }}
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <input type="radio" name="rating">
                                                                 </div>
-                                                            @endif
-                                                        </div>
-                                                    @endforeach
-                                                </b>
-                                                <p>
-                                                    <b>
-                                                        @foreach($options['extras'] as $key=>$option)
-                                                            <div class="col-md-12">
-                                                                <h3>Extras</h3>
-                                                            </div>
-                                                            <div class="row">
-                                                                @if(count($option['options']))
-                                                                    <div class="col-md-8">
-                                                @foreach($option['options'] as $op)
-                                                    <p>
-                                                        {{ $op['name'] }}
-                                                    </p>
-                                    @endforeach
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <input type="radio" name="rating">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <input type="radio" name="rating">
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="text-center">
+                                                                    <input type="radio" name="rating">
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="nicknameField">Nickname <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="nicknameField" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="summaryField">Summary <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" id="summaryField" >
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Review <span class="text-danger">*</span></label>
+                                                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                </div>
+                                                <button class="btn btn-primary">
+                                                    Save
+                                                </button>
 
-                            </div>
-                            <div class="col-md-4">
-                                {{ convert_price($option['price'],$currency) }}
-                            </div>
-                            @endif
-                        </div>
-                        @endforeach
-                        </b>
-                        </p>
-                        @endif
-                        </td>
-                        <td class="text-right">{!! $item->qty !!}</td>
-                        <td class="text-right">{!! convert_price($item->amount/$item->qty,$currency) !!}</td>
-                        <td class="text-right">{!! convert_price($item->amount,$currency) !!}</td>
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td colspan="4" class="text-right">Sub-Total</td>
-                            <td class="text-right">{!! convert_price($order->amount-$order->shipping_price,$currency) !!} </td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="text-right">Shipping ({!! $order->shipping_method !!})</td>
-                            <td class="text-right">{!! convert_price($order->shipping_price,$currency) !!}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4" class="text-right">Total</td>
-                            <td class="text-right">{!! convert_price($order->amount,$currency) !!}</td>
-                        </tr>
-                        </tbody>
-                        </table>
+                                            </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="reviewItem2" role="tabpanel" aria-labelledby="reviewItem2-tab">2</div>
+                                    <div class="tab-pane fade" id="reviewItem3" role="tabpanel" aria-labelledby="reviewItem3-tab">3</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        </div>
+
         {{--@include('frontend.my_account._partials.verify_bar.blade_old.php')--}}
 
-        </div>
+
     </main>
 @stop
