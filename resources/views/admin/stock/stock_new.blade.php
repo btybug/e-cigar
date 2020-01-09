@@ -1138,7 +1138,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
+    <div class="modal fade select-products__modal" id="productsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -1165,9 +1165,9 @@
                             </select>
                         </div>
                     </div>
-                    <div class="d-flex justify-content-start align-items-center">
+                    <div class="d-flex justify-content-start align-items-center mb-2">
                         <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
-                        <p>Select All</p>
+                        <p class="mb-0">Select All</p>
                     </div>
                     <ul class="all-list modal-stickers--list" id="stickers-modal-list">
                         

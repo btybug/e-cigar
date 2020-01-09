@@ -2078,6 +2078,18 @@ table .faq-ansver{
     overflow: auto;
     height: 100%;
 }
+.select-products__modal .modal-stickers--list{
+    flex-direction: column;
+    height: 350px;
+    overflow: auto;
+    flex-wrap: nowrap !important;
+}
+.add-related-event{
+    flex: none;
+}
+.select-products__modal .modal-stickers--list > li> a{
+    flex: 1;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
