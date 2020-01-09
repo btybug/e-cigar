@@ -2,7 +2,6 @@
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
-
                 @if($vSettings->count_limit > 1)
                     <span
                         class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
@@ -10,6 +9,7 @@
                 </span>
                 @endif
             @endif
+
             @if(count($variation) == 1)
                 <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
                        value="{!! $variation->first()->id  !!}"

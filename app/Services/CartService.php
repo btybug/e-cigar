@@ -289,7 +289,7 @@ class CartService
                                     $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                     if ($option) {
                                         $p['qty'] = ($p['qty'])??1;
-                                        if($option->price_type == 'discount'){
+                                        if($option->price_type == 'fixed' || $option->price_type == 'range'){
                                             if($p['discount_id'] == null){
                                                 $discount = $option->discounts()->where('from','<=',$p['qty'])->where('to','>=',$p['qty'])->first();
                                                 if($discount) {

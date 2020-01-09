@@ -321,6 +321,7 @@ class ProductsController extends Controller
         if($qty != null){
             $variation = StockVariation::findOrFail($request->variation_id);
             $discount = $variation->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
+
             if($discount){
                 $price = $discount->price * $qty;
                 return response()->json(['error' => false,'price' => $price]);

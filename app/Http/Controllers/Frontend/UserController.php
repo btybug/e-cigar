@@ -202,6 +202,8 @@ class UserController extends Controller
             ->with('user')->first();
         if (!$order) abort(404);
 
+        dd($order->items);
+
         return $this->view('order_review', compact('order'));
     }
 

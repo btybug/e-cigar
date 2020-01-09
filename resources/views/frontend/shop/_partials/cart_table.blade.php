@@ -158,19 +158,17 @@
                                                                 @if(count($option['options']))
                                                                     @foreach($option['options'] as $voption)
                                                                         @php
-                                                                            if($voption['option']->price_type == 'discount'){
-                                                                                if($voption['option']->discount_type =='fixed'){
-                                                                                    $price = 0;
-                                                                                    $discount = \App\Models\StockVariationDiscount::find($voption['discount_id']);
-                                                                                    if($discount){
-                                                                                        $price = $discount->price;
-                                                                                    }
-                                                                                }else{
-                                                                                    $price = 0;
-                                                                                    $discount = $voption['option']->discounts()->where('from','<=',$voption['qty'])->where('to','>=',$voption['qty'])->first();
-                                                                                    if($discount){
-                                                                                        $price = $discount->price* $voption['qty'];
-                                                                                    }
+                                                                            if($voption['option']->price_type == 'fixed'){
+                                                                                $price = 0;
+                                                                                $discount = \App\Models\StockVariationDiscount::find($voption['discount_id']);
+                                                                                if($discount){
+                                                                                    $price = $discount->price;
+                                                                                }
+                                                                            }else if($voption['option']->price_type == 'range'){
+                                                                                $price = 0;
+                                                                                $discount = $voption['option']->discounts()->where('from','<=',$voption['qty'])->where('to','>=',$voption['qty'])->first();
+                                                                                if($discount){
+                                                                                    $price = $discount->price* $voption['qty'];
                                                                                 }
                                                                             }else{
                                                                                 $price = $voption['option']->price * $voption['qty'];
@@ -184,7 +182,7 @@
                                                                                         <div
                                                                                             class="col-sm-8 font-15 font-main-bold">
                                                                                             {{ $voption['option']->name }}
-                                                                                            @if(isset($discount) && $voption['option']->discount_type == 'fixed')
+                                                                                            @if(isset($discount) && $voption['option']->price_type == 'fixed')
                                                                                                 ({{ "Pack of $discount->qty" }})
                                                                                             @endif
                                                                                         </div>

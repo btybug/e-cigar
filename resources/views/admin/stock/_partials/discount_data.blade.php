@@ -1,4 +1,4 @@
-@if($package_variation->discount_type == 'range')
+@if($package_variation->price_type == 'range')
 
     <div class="col-md-12 range-box">
         @foreach($package_variation->discounts as $key => $datum)
