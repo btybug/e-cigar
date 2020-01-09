@@ -1,3 +1,35 @@
+const selectProductModalInit = function () {
+  const search = $('#search-product');
+  const brands = $('#brand_select');
+  const categories = $('#category_select');
+
+  if($('.search_option_js').val() === 'general') {
+      brands.removeClass('d-inline');
+      brands.addClass('d-none');
+      categories.removeClass('d-inline');
+      categories.addClass('d-none');
+      search.removeClass('d-none');
+      search.addClass('d-inline');
+      search.val('')
+  } else if($('.search_option_js').val() === 'brand') {
+    search.removeClass('d-inline');
+    search.addClass('d-none');
+    categories.removeClass('d-inline');
+    categories.addClass('d-none');
+    brands.removeClass('d-none');
+    brands.addClass('d-inline');
+    $(brands.find('option')[0]).prop('selected', true)
+  } else if($('.search_option_js').val() === 'category') {
+    search.removeClass('d-inline');
+    search.addClass('d-none');
+    brands.removeClass('d-inline');
+    brands.addClass('d-none');
+    categories.removeClass('d-none');
+    categories.addClass('d-inline');
+    $(categories.find('option')[0]).prop('selected', true)
+  }
+}
+
 $("body").on('click', '.select-products', function () {
   let arr = [];
   $(".get-all-products-tab")
@@ -9,7 +41,11 @@ $("body").on('click', '.select-products', function () {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
           res.data.forEach(item => {
-            let html = `<li data-id="${item.id}" class="option-elm-modal">
+            let categories_ids = '-';
+            item.categories.map((cat) => {
+              categories_ids = categories_ids + cat.id + '-';
+            })
+            let html = `<li data-id="${item.id}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}" class="option-elm-modal">
                           <div class="btn btn-primary add-related-event searchable" data-name="${item.name}"
                             data-id="${item.id}"><input type="checkbox" class="select_product_js"/>
                           </div>
@@ -17,6 +53,17 @@ $("body").on('click', '.select-products', function () {
                         </li>`;
             $("#productsModal .modal-body .all-list").append(html);
           });
+          $('#category_select').append(`<option value="" disabled selected>Select Category</option>`)
+          res.categories.forEach(category => {
+            let html = `<option value="${category.id}">${category.name}</option>`;
+            $('#category_select').append(html)
+          });
+          $('#brand_select').append(`<option value="" disabled selected>Select Brand</option>`)
+          res.brands.forEach(brand => {
+            let html = `<option value="${brand.id}">${brand.name}</option>`;
+            $('#brand_select').append(html)
+          });
+          selectProductModalInit();
           $("#productsModal").modal();
       }
   });
@@ -46,6 +93,10 @@ $('body').on('change', '.select_product_js', function(ev) {
   } else if(flag === length) {
     $('.all_select_products_js').prop('checked', true);
   }
+});
+
+$('body').on('change', '.search_option_js', function() {
+  selectProductModalInit();
 });
 
 // $("body").on("click", ".add-related-event", function () {

@@ -1150,13 +1150,19 @@
                     <div class="form-group row">
                         <div class="col-sm-4">
                             <select class="form-control search_option_js">
-                                <option value="general">General</option>
-                                <option value="brand">Brand</option>
-                                <option value="category">Category</option>
+                                <option value="general" selected>General</option>
+                                <option value="brand">Brands</option>
+                                <option value="category">Categories</option>
                             </select>
                         </div>
                         <div class="col-sm-8">
                             <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
+                            <select class="form-control d-none" id="brand_select">
+                                
+                            </select>
+                            <select class="form-control d-none" id="category_select">
+                                
+                            </select>
                         </div>
                     </div>
                     <div class="d-flex justify-content-start align-items-center">
@@ -1856,7 +1862,10 @@
                 }
             });
 
+            
+
             $("body").on('click', '.select-offer-products', function () {
+                console.log()
                 let arr = [];
                 $(".get-all-offer-products-tab")
                     .children()
@@ -1872,8 +1881,8 @@
                                                 </a> <a class="btn btn-primary add-related-offer-event" data-name="${item.name}"
                                                 data-id="${item.id}">ADD</a></li>`;
                             $("#productsModal .modal-body .all-list").append(html);
-                        })
-                        ;
+                        });
+                        
                         $("#productsModal").modal();
                     }
                 });
