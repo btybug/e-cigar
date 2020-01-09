@@ -827,8 +827,8 @@
                             <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class=" row mb-2">
-                                            <label class="col-md-1 col-form-label">Price per:</label>
-                                            <div class="col-md-3">
+                                            <label class="col-xl-1 col-sm-2 col-3 col-form-label">Price per:</label>
+                                            <div class="col-xl-3 col-sm-4 col-9">
                                                 {!! Form::select('type',[
                                                 0 => 'Section',
                                                 1 => 'Whole Product'

@@ -23,8 +23,8 @@
             </div>
             <div class="col-xl-4 col-lg-5 align-self-center">
                 <div class="row">
-                    <label class="col-form-label col-lg-3">Section Title</label>
-                    <div class="col-lg-5 align-self-center">
+                    <label class="col-form-label col-xl-3 col-sm-4 col-4 px-md-3 px-0">Section Title</label>
+                    <div class="col-xl-5 col-sm-7 col-8 align-self-center">
                         {!! Form::text("variations[$main_unique][title]",($main) ? $main->title : null,['class' => 'form-control mr-1','placeholder' => 'Enter title ...']) !!}
                     </div>
                 </div>
