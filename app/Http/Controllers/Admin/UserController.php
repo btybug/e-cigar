@@ -72,7 +72,10 @@ class UserController extends Controller
     public function newStaff(Countries $countries)
     {
         $countries = $countries->all()->pluck('name.common', 'name.common')->toArray();
-        $roles = Roles::where('type', 'backend')->pluck('title', 'id')->toArray();
+        $roles = Roles::where('type', 'backend')
+            ->where('slug','!=','superadmin')
+            ->pluck('title', 'id')
+            ->toArray();
         return $this->view('staff.new', compact('countries', 'roles'));
     }
 
@@ -80,6 +83,7 @@ class UserController extends Controller
     {
         $data = $request->except('_token');
         $data['customer_number'] = generate_number("AMC");
+        $data['password']=Hash::make($request->password);
         User::create($data);
         return redirect()->route('admin_staff');
     }
@@ -137,7 +141,7 @@ class UserController extends Controller
             'new_password' => ['required'],
             'new_confirm_password' => ['same:new_password'],
         ]);
-        User::find(auth()->user()->id)->update(['password' => Hash::make($request->new_password)]);
+        User::findOrFail($request->get('id'))->update(['password' => Hash::make($request->new_password)]);
         return redirect()->back()->with(['message' => 'Password change successfully.']);
     }
 
