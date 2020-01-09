@@ -216,6 +216,9 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/activity/{id}', 'Admin\UserController@getUserActivity')->name('admin_users_activity');
     Route::get('/verify/{id}', 'Admin\UserController@getUserVerify')->name('admin_users_verify');
 
+    Route::get('/approve-review/{id}', 'Admin\UserController@getApproveReview')->name('admin_users_approve_review');
+    Route::get('/disable-review/{id}', 'Admin\UserController@getDisableReview')->name('admin_users_disable_review');
+
     Route::group(['prefix' => 'roles-mebership'], function () {
         Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
         Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');

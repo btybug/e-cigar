@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\Requests\StaffRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddressesRequest;
 use App\Models\Addresses;
+use App\Models\Review;
 use App\Models\Roles;
 use App\Models\UserNotes;
 use App\User;
@@ -260,6 +261,24 @@ class UserController extends Controller
     {
         $user = User::findOrFail($request->id);
         $user->update([
+            'status' => false
+        ]);
+        return redirect()->back();
+    }
+
+    public function getApproveReview($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->update([
+            'status' => true
+        ]);
+        return redirect()->back();
+    }
+
+    public function getDisableReview($id)
+    {
+        $review = Review::findOrFail($id);
+        $review->update([
             'status' => false
         ]);
         return redirect()->back();

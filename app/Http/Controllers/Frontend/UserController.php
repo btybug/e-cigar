@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\Requests\MyAccountContactRequest;
 use App\Http\Controllers\Frontend\Requests\MyAccountRequest;
 use App\Http\Controllers\Frontend\Requests\VerificationRequest;
 use App\Http\Requests\AddressesRequest;
+use App\Http\Requests\ReviewRequest;
 use App\Models\Addresses;
 use App\Models\Category;
 use App\Models\GeoZones;
@@ -20,6 +21,7 @@ use App\Models\Newsletter;
 use App\Models\Notifications\CustomEmails;
 use App\Models\Notifications\CustomEmailUser;
 use App\Models\Orders;
+use App\Models\Review;
 use App\Models\Statuses;
 use App\Models\Ticket;
 use App\Models\Settings;
@@ -202,9 +204,41 @@ class UserController extends Controller
             ->with('user')->first();
         if (!$order) abort(404);
 
-        dd($order->items);
+        $itemsID = [];
+        foreach ($order->items as $item){
+            if($item->options && count($item->options)){
+                if(isset($item->options['options'])){
+                    foreach ($item->options['options'] as $options){
+                        if($options && isset($options['options'])){
+                            foreach ($options['options'] as $option){
+                                if(isset($option['variation'])){
+                                    $itemsID[$option['variation']['item_id']] = $option['variation']['item_id'];
+                                }
+                            }
+                        }
+                    }
+                }
 
-        return $this->view('order_review', compact('order'));
+                if(isset($item->options['extras'])){
+                    //TODO
+                }
+            }
+
+        }
+
+        $items = \App\Models\Items::findMany($itemsID);
+
+        return $this->view('order_review', compact('order','items'));
+    }
+
+    public function postOrderReviews(ReviewRequest $request,$id)
+    {
+        $data = $request->except(['_token','id']);
+        $data['user_id'] = \Auth::id();
+        $data['order_id'] = $id;
+        $review = Review::updateOrCreate($request->id,$data);
+
+        return redirect()->back();
     }
 
     public function getTickets()

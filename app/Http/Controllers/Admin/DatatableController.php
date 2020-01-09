@@ -31,6 +31,7 @@ use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Purchase;
 use App\Models\Regions;
+use App\Models\Review;
 use App\Models\Roles;
 use App\Models\SelectionType;
 use App\Models\Settings;
@@ -1166,6 +1167,27 @@ class DatatableController extends Controller
             return BBgetDateFormat($item->created_at);
         })
             ->rawColumns([])->make(true);
+    }
+
+    public function getAllReviews()
+    {
+        return Datatables::of(
+            Review::query()
+        )->editColumn('user_id', function ($item) {
+            return $item->user->name. " ". $item->user->last_name;
+        })->editColumn('item_id', function ($item) {
+            return $item->item->name;
+        })->editColumn('order_id', function ($item) {
+            return $item->order->order_number;
+        })->editColumn('status', function ($item) {
+            return ($item->status) ? "<span class='alert alert-success'>Active</span>" : "<span class='alert alert-danger'>Inactive</span>";
+        })->editColumn('created_at', function ($item) {
+            return BBgetDateFormat($item->created_at);
+        })->editColumn('actions', function ($item) {
+            return ($item->status == false) ? "<a href='". route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Approve</a>" :
+                "<a href='". route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Disable</a>";
+        })->rawColumns(['actions','status'])
+            ->make(true);
     }
 
     public function getAllAppStaff(Request $request)

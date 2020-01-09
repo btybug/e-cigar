@@ -18,6 +18,7 @@
                     <th>ID</th>
                     <th>Author</th>
                     <th>Item</th>
+                    <th>Order Number</th>
                     <th>Summary</th>
                     <th>Review</th>
                     <th>Rate</th>
@@ -34,32 +35,32 @@
 @section('js')
     <script>
         $(function () {
-            {{--$('#posts-table').DataTable({--}}
-            {{--    ajax: "{!! route('datatable_tickets') !!}",--}}
-            {{--    "processing": true,--}}
-            {{--    "serverSide": true,--}}
-            {{--    "bPaginate": true,--}}
-            {{--    "scrollX": true,--}}
-            {{--    dom: 'Bflrtip',--}}
-            {{--    displayLength: 10,--}}
-            {{--    lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],--}}
-            {{--    buttons: [--}}
-            {{--        'csv', 'excel', 'pdf', 'print'--}}
-            {{--    ],--}}
-            {{--    columns: [--}}
-            {{--        {data: 'id', name: 'id'},--}}
-            {{--        {data: 'user_id', name: 'user_id'},--}}
-            {{--        {data: 'subject', name: 'subject'},--}}
-            {{--        {data: 'summary', name: 'summary'},--}}
-            {{--        {data: 'status_id', name: 'status_id'},--}}
-            {{--        {data: 'category_id', name: 'category_id'},--}}
-            {{--        {data: 'priority_id', name: 'priority_id'},--}}
-            {{--        {data: 'tags', name: 'tags'},--}}
-            {{--        {data: 'attachments', name: 'attachments'},--}}
-            {{--        {data: 'created_at', name: 'created_at'},--}}
-            {{--        {data: 'actions', name: 'actions'}--}}
-            {{--    ]--}}
-            {{--});--}}
+            $('#posts-table').DataTable({
+                ajax: "{!! route('datatable_reviews') !!}",
+                "processing": true,
+                "serverSide": true,
+                "bPaginate": true,
+                "scrollX": true,
+                dom: 'Bflrtip',
+                displayLength: 10,
+                lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+                buttons: [
+                    'csv', 'excel', 'pdf', 'print'
+                ],
+                columns: [
+                    {data: 'id', name: 'id'},
+                    {data: 'user_id', name: 'user_id'},
+                    {data: 'item_id', name: 'item_id'},
+                    {data: 'order_id', name: 'order_id'},
+                    {data: 'summary', name: 'summary'},
+                    {data: 'review', name: 'review'},
+                    {data: 'rate', name: 'rate'},
+                    {data: 'nickname', name: 'nickname'},
+                    {data: 'status', name: 'status'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'actions', name: 'actions'}
+                ]
+            });
         });
 
     </script>

@@ -23,20 +23,24 @@
                         <div class="col-lg-9">
                             <div class="account--order-review-wrap">
                                 <ul class="nav nav-tabs mb-3" id="myTabReview" role="tablist">
+                                    @foreach($items as $item)
                                     <li class="nav-item">
-                                        <a class="nav-link active" id="reviewItem1-tab" data-toggle="tab" href="#reviewItem1" role="tab" aria-controls="reviewItem1" aria-selected="true">Item 1</a>
+                                        <a class="nav-link @if($loop->first) active @endif" id="reviewItem{{$item->id}}-tab" data-toggle="tab" href="#reviewItem{{ $item->id }}"
+                                           role="tab" aria-controls="reviewItem{{ $item->id }}" aria-selected="true">{!! $item->name !!}</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="reviewItem2-tab" data-toggle="tab" href="#reviewItem2" role="tab" aria-controls="reviewItem2" aria-selected="false">Item 2</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="reviewItem3-tab" data-toggle="tab" href="#reviewItem3" role="tab" aria-controls="reviewItem3" aria-selected="false">Item 3</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
-                                    <div class="tab-pane fade show active" id="reviewItem1" role="tabpanel" aria-labelledby="reviewItem1-tab">
+                                    @foreach($items as $item)
+                                        <div class="tab-pane fade @if($loop->first) show active @endif" id="reviewItem{{$item->id}}" role="tabpanel" aria-labelledby="reviewItem{{$item->id}}-tab">
+                                            @php
+                                            $model = $order->reviews()->where('item_id',$item->id)->first();
+                                            @endphp
+                                            {!! Form::model($model,['class' => 'form-horizontal']) !!}
+                                            {!! Form::hidden('item_id',$item->id) !!}
+                                            {!! Form::hidden('id',null) !!}
                                             <div class="account--order-review-first-tab">
-                                                <h1 class="text-uppercase title font-18 text-gray-clr font-main-bold">You're reviewing:smok nord kit</h1>
+                                                <h1 class="text-uppercase title font-18 text-gray-clr font-main-bold">You're reviewing:{{ $item->name }}</h1>
                                                 <p class="font-14">How do you rate this product?<span class="text-danger">*</span></p>
                                                 <div class="table-responsive">
                                                     <table class="table table-bordered table-striped">
@@ -48,7 +52,6 @@
                                                             <th class="text-uppercase text-center">3 stars</th>
                                                             <th class="text-uppercase text-center">4 stars</th>
                                                             <th class="text-uppercase text-center">5 stars</th>
-
                                                         </tr>
                                                         </thead>
                                                         <tbody>
@@ -56,27 +59,27 @@
                                                             <td>Overall Rating</td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <input type="radio" name="rating">
+                                                                    {!! Form::radio('rate',1) !!}
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <input type="radio" name="rating">
+                                                                    {!! Form::radio('rate',2) !!}
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <input type="radio" name="rating">
+                                                                    {!! Form::radio('rate',3) !!}
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <input type="radio" name="rating">
+                                                                    {!! Form::radio('rate',4) !!}
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="text-center">
-                                                                    <input type="radio" name="rating">
+                                                                    {!! Form::radio('rate',5) !!}
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -85,24 +88,25 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="nicknameField">Nickname <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="nicknameField" >
+                                                    {!! Form::text('nickname',null,['class' => 'form-control']) !!}
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="summaryField">Summary <span class="text-danger">*</span></label>
-                                                    <input type="text" class="form-control" id="summaryField" >
+                                                    {!! Form::text('summary',null,['class' => 'form-control']) !!}
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Review <span class="text-danger">*</span></label>
-                                                    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+                                                    {!! Form::textarea('review',null,['class' => 'form-control','cols' => 30,'rows'=> 10]) !!}
                                                 </div>
-                                                <button class="btn btn-primary">
+                                                <button class="btn btn-primary float-right">
                                                     Save
                                                 </button>
 
                                             </div>
+                                            {!! Form::close() !!}
                                     </div>
-                                    <div class="tab-pane fade" id="reviewItem2" role="tabpanel" aria-labelledby="reviewItem2-tab">2</div>
-                                    <div class="tab-pane fade" id="reviewItem3" role="tabpanel" aria-labelledby="reviewItem3-tab">3</div>
+                                    @endforeach
+
                                 </div>
                             </div>
                         </div>

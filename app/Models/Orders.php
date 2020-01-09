@@ -105,4 +105,9 @@ class Orders extends Model
         return $this->hasOne(Coupons::class, 'code','coupon_code');
     }
 
+    public function reviews()
+    {
+        return $this->hasOne(Review::class, 'order_id','id');
+    }
+
 }
