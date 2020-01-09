@@ -6,11 +6,9 @@
     <div class="container-fluid">
         <div class="col-nd-12">
             <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
-                    <div class="pull-left">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                         <h2 class="m-0">Promotions</h2>
-                    </div>
-                    <div class="pull-right">
+                    <div class="ml-1">
                         <div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_stock_promotions_new') !!}">Add new</a></div>
                     </div>
                 </div>

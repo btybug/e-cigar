@@ -16,10 +16,10 @@
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade active in show" id="one" role="tabpanel" aria-labelledby="one-tab">
             <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
-                    <h2 class="pull-left m-0">Active Coupons</h2>
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+                    <h2 class="m-0 mr-1">Active Coupons</h2>
                     @ok('admin_store_coupons_new')
-                    <div class="pull-right">
+                    <div>
                         <a class="btn btn-primary" href="{!! route('admin_store_coupons_new') !!}">Add new</a>
                     </div>
                     @endok

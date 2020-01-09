@@ -5,9 +5,9 @@
 @section('content')
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
-            <div class="panel-heading clearfix">
-                <h2 class="m-0 pull-left">Tickets</h2>
-                <div class="pull-right">
+            <div class="panel-heading d-flex flex-wrap justify-content-between">
+                <h2 class="m-0 mr-1">Tickets</h2>
+                <div class="d-flex flex-wrap">
                    @ok('admin_tickets_settings') <a class="btn btn-warning mr-10 text-white" href="{!! route('admin_tickets_settings') !!}">Settings</a>@endok
                     @ok('admin_tickets_new')<a class="btn btn-primary" href="{!! route('admin_tickets_new') !!}">Add new</a>@endok
                 </div>
