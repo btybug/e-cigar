@@ -5,7 +5,7 @@
     {!! Form::hidden('id',$seo->id) !!}
 
     @endif
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <ul class="nav nav-tabs new-main-admin--tabs mb-3" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="tabSeo1-tab" data-toggle="tab" href="#tabSeo1" role="tab" aria-controls="tabSeo1" aria-selected="true">Tab 1</a>
         </li>
@@ -17,9 +17,9 @@
         <div class="tab-pane fade show active" id="tabSeo1" role="tabpanel" aria-labelledby="tabSeo1-tab">
             {!! Form::hidden('stock_id',$stock->id) !!}
             <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
-                    <h2 class="m-0 pull-left">SEO Edit Product</h2>
-                    <div class="pull-right btn-save">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+                    <h2 class="m-0 mr-1">SEO Edit Product</h2>
+                    <div class="btn-save">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
