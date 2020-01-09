@@ -27,10 +27,10 @@
                                         <a class="nav-link active" id="reviewItem1-tab" data-toggle="tab" href="#reviewItem1" role="tab" aria-controls="reviewItem1" aria-selected="true">Item 1</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="reviewItem2-tab" data-toggle="tab" href="#reviewItem2" role="tab" aria-controls="reviewItem2" aria-selected="false">Item 1</a>
+                                        <a class="nav-link" id="reviewItem2-tab" data-toggle="tab" href="#reviewItem2" role="tab" aria-controls="reviewItem2" aria-selected="false">Item 2</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="reviewItem3-tab" data-toggle="tab" href="#reviewItem3" role="tab" aria-controls="reviewItem3" aria-selected="false">Item 1</a>
+                                        <a class="nav-link" id="reviewItem3-tab" data-toggle="tab" href="#reviewItem3" role="tab" aria-controls="reviewItem3" aria-selected="false">Item 3</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content" id="myTabContent">
@@ -43,11 +43,11 @@
                                                         <thead>
                                                         <tr>
                                                             <th class="text-uppercase"></th>
-                                                            <th class="text-uppercase text-center">1 start</th>
-                                                            <th class="text-uppercase text-center">2 starts</th>
-                                                            <th class="text-uppercase text-center">3 starts</th>
-                                                            <th class="text-uppercase text-center">4 starts</th>
-                                                            <th class="text-uppercase text-center">5 starts</th>
+                                                            <th class="text-uppercase text-center">1 star</th>
+                                                            <th class="text-uppercase text-center">2 stars</th>
+                                                            <th class="text-uppercase text-center">3 stars</th>
+                                                            <th class="text-uppercase text-center">4 stars</th>
+                                                            <th class="text-uppercase text-center">5 stars</th>
 
                                                         </tr>
                                                         </thead>
