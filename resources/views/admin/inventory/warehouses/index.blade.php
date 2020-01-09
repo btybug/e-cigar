@@ -1,9 +1,9 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
-            <h2 class="m-0 pull-left">Warehouses</h2>
-           @ok('admin_warehouses_new') <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_warehouses_new') !!}">Add new</a></div>@endok
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+            <h2 class="m-0">Warehouses</h2>
+           @ok('admin_warehouses_new') <div><a class="btn btn-primary pull-right" href="{!! route('admin_warehouses_new') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">

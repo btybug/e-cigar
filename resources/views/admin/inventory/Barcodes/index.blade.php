@@ -1,13 +1,20 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading">
-            <h2 class="m-0 pull-left">Barcodes</h2>
-                <span class="btn btn-success ml-2" data-toggle="modal" data-target="#barcodeModalCenter">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+            <h2 class="m-0">Barcodes</h2>
+
+            <div class="d-flex flex-wrap">
+                <span class="btn btn-success mx-2" data-toggle="modal" data-target="#barcodeModalCenter">
   Settings
 </span>
+                @ok('admin_inventory_others_new')
+                <div>
+                    <a class="btn btn-primary" href="{!! route('admin_inventory_barcodes_new') !!}">Add new</a>
+                </div>
+                @endok
+            </div>
 
-            @ok('admin_inventory_others_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_inventory_barcodes_new') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
