@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('content')
-    <div class="card panel panel-default">
+    <div class="card panel panel-default border-0 bg-transparent">
         <div class="card-header panel-heading">
             <h2 class="m-0">SEO</h2>
         </div>
-        <div class="card-body panel-body">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <div class="card-body panel-body px-0">
+            <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Posts</a>
@@ -29,9 +29,9 @@
             </ul>
             <div class="pt-25">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                     <h3 class="m-0 pull-left">Inventory</h3>
-                        <div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
+                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+                     <h3 class="m-0 mr-1">Inventory</h3>
+                        <div><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
                     </div>
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" multiple class="form-control">
