@@ -99,7 +99,7 @@
                                                     {!! Form::textarea('review',null,['class' => 'form-control','cols' => 30,'rows'=> 10]) !!}
                                                 </div>
                                                 <button class="btn btn-primary float-right">
-                                                    Save
+                                                    Submit
                                                 </button>
 
                                             </div>

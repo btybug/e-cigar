@@ -1184,7 +1184,7 @@ class DatatableController extends Controller
         })->editColumn('created_at', function ($item) {
             return BBgetDateFormat($item->created_at);
         })->editColumn('actions', function ($item) {
-            return ($item->status == false) ? "<a href='". route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Approve</a>" :
+            return ($item->status == false) ? "<a href='". route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" :
                 "<a href='". route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Disable</a>";
         })->rawColumns(['actions','status'])
             ->make(true);
