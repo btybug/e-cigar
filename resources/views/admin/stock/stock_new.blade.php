@@ -1708,12 +1708,7 @@
 
 
             $(document).ready(function(){
-                $(".search-attr").on("keyup", function() {
-                    var value = $(this).val().toLowerCase();
-                    $("ul.all-list .option-elm-modal").filter(function() {
-                        $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
-                    });
-                });
+                
 
                 $("body").on("keyup",".search-sticker", function() {
                     var value = $(this).val().toLowerCase();
