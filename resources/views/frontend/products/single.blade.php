@@ -258,7 +258,7 @@
                                                aria-controls="pills-related" aria-selected="false">{!! __('related') !!}</a>
                                             @endif
 
-                                            @if($vape->reviews_tab)
+                                            @if($vape->reviews_tab && count($reviews))
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-reviews" role="tab"
                                                    aria-controls="pills-reviews" aria-selected="false">{!! __('reviews') !!}</a>
@@ -473,33 +473,24 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        @if($vape->reviews_tab)
+                                        @if($vape->reviews_tab && count($reviews))
                                             <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
                                                  aria-labelledby="pills-tecnical-tab">
-                                                <section class="reviews__card-wrapper">
-                                                    <blockquote class="rating__card__quote">“Lorem ipsum dolor sit amet, cu pertinax nominati sea, id iriure utamur interpretaris sea, vix ne latine aliquam complectitur. Enim quas his no, mea ferri audire rationibus ei.”</blockquote>
+                                                @foreach($reviews as $review)
+                                                    <section class="reviews__card-wrapper">
+                                                        <blockquote class="rating__card__quote">“{!! $review->review !!}”</blockquote>
 
-                                                    <div class="rating__card__stars">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                    <p class="rating__card__bottomText">by Edo on 10/1/20</p>
-                                                </section>
-                                                <section class="reviews__card-wrapper">
-                                                    <blockquote class="rating__card__quote">“Lorem ipsum dolor sit amet, cu pertinax nominati sea, id iriure utamur interpretaris sea, vix ne latine aliquam complectitur. Enim quas his no, mea ferri audire rationibus ei.”</blockquote>
+                                                        <div class="rating__card__stars">
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR1 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR2 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR3 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR4 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR5 )?'checked':'' }}"></span>
+                                                        </div>
+                                                        <p class="rating__card__bottomText">by {!! $review->nickname !!} on {!! BBgetDateFormat($review->created_at) !!}</p>
+                                                    </section>
+                                                @endforeach
 
-                                                    <div class="rating__card__stars">
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star checked"></span>
-                                                        <span class="fa fa-star"></span>
-                                                    </div>
-                                                    <p class="rating__card__bottomText">by Edo on 10/1/20</p>
-                                                </section>
                                             </div>
                                         @endif
                                         @if($vape->faq_tab && count($vape->faqs))

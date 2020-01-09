@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Enums\ReviewStatusTypes;
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\AttributeStickers;
@@ -9,6 +10,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\Posts;
 use App\Models\Products;
+use App\Models\Review;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
@@ -89,11 +91,13 @@ class ProductsController extends Controller
         if ($vape->is_offer) abort(404);
 
         $variations = $vape->variations()->required()->with('options')->get();
+
         $ads = $this->settings->getEditableData('single_product');
         if($ads && isset($ads['data'])){
             $ads = json_decode($ads['data'],true);
         }
-        return $this->view('single', compact(['vape', 'variations', 'type','ads']));
+        $reviews = Review::whereIn('item_id',$vape->variations()->pluck('item_id','item_id')->all())->where('status',ReviewStatusTypes::PUBLISHED)->latest()->get();
+        return $this->view('single', compact(['vape', 'variations', 'type','ads','reviews']));
     }
 
     public function getPrice(Request $request)
