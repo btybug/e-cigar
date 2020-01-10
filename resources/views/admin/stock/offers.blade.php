@@ -5,38 +5,43 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link " id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Stocks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
-                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+                <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link " id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
+                           aria-controls="general" aria-selected="true" aria-expanded="true">Stocks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
+                           aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
+                    </li>
+                </ul>
+                <div class="nav-item ml-2">
+                    <a class="nav-link btn btn-success" id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Settings</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
-                            <h2 class="m-0">Offers</h2>
-
-                            <div class="ml-1"><a class="btn btn-primary" href="{!! route('admin_stock_new_offer') !!}">Add new</a>
-                            </div>
-
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
+                                <!-- <option value="#" data-column="0" data-name="id">#</option> -->
+                                <option value="Name" data-column="2" data-name="name">Name</option>
+                                <option value="Image" data-column="3" data-name="image">Image</option>
+                                <option value="Added/Last Modified Date" data-column="4" data-name="created_at">Added/Last Modified Date</option>
+                                <option value="Actions" data-column="5" data-name="actions">Actions</option>
+                            </select>
+                        </div>
+                        <div class="ml-1">
+                            <a class="btn btn-primary" href="{!! route('admin_stock_new_offer') !!}">Add new</a>
+                        </div>
                     </div>
-                    <div class="card-body panel-body">
-
-                        <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <!-- <option value="#" data-column="0" data-name="id">#</option> -->
-                            <option value="Name" data-column="2" data-name="name">Name</option>
-                            <option value="Image" data-column="3" data-name="image">Image</option>
-                            <option value="Added/Last Modified Date" data-column="4" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="5" data-name="actions">Actions</option>
-                        </select>
+{{--                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">--}}
+{{--                            <h2 class="m-0">Offers</h2>--}}
+{{--                    </div>--}}
+                    <div class="card-body panel-body pt-0">
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -113,7 +118,7 @@
                     "bPaginate": true,
                     "scrollX": true,
                     "order": [[ 1, "asc" ]],
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
