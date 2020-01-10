@@ -20,14 +20,6 @@
                                                </li>
                                            @endforeach
                                        </ul>
-                                       {{--second column--}}
-                                       <ul class="ml-4">
-                                           @foreach($footer_link['children'] as $child)
-                                               <li>
-                                                   <a href="{!! $child['link'] !!}" target="_blank">{!! $child['title'] !!}</a>
-                                               </li>
-                                           @endforeach
-                                       </ul>
                                    </div>
                                 </div>
                             </div>
