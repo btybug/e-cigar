@@ -70,8 +70,8 @@
                                             <div class="chek-title">
                                                 <label for="stripe_paymant"  class="title font-weight-bold">Filter</label>
                                             </div>
-                                            @ok('admin_tools_filters')<a href="{!! route('admin_tools_filters') !!} " class="btn btn-sm btn-warning text-white">
-                                                <i class="fa fa-edit"></i>
+                                            @ok('admin_tools_filters')<a href="{!! route('admin_tools_filters') !!} " class="btn btn-sm btn-info text-white">
+                                                <i class="fa fa-link"></i>
                                                 <span class="item-link-edit-text ml-2">Go</span>
                                             </a>@endok
                                         </li>
