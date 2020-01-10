@@ -175,23 +175,7 @@
                 </ul>
             </li>
             @endHasAccess
-            @hasAccess('emails_notifications')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fa fa-newspaper-o"></i>
-                    <span>Emails & Notifications</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    @ok('admin_emails_notifications_emails')
-                    <li><a href="{{route('admin_emails_notifications_emails')}}"><i
-                                    class="fa fa-circle-o"></i>Emails</a></li>
-                    @endok
-                </ul>
-            </li>
-            @endHasAccess
+
 
             @hasAccess('settings')
             <li class="treeview">
@@ -214,6 +198,10 @@
                     @endok
                     @ok('admin_settings_events')
                     <li><a href="{{route('admin_settings_events')}}"><i class="fa fa-circle-o"></i>Events</a></li>
+                    @endok
+                    @ok('admin_emails_notifications_emails')
+                    <li><a href="{{route('admin_emails_notifications_emails')}}"><i
+                                class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
                 </ul>
             </li>

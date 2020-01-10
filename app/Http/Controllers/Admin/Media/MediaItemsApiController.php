@@ -90,9 +90,10 @@ class MediaItemsApiController extends Controller
                     ]);
 
                     if ($this->ifIsImage($originalName)) {
-                        $img = \Image::make($uploadPath['path'] . DIRECTORY_SEPARATOR . $originalName)->resize(300, null, function ($constraint) {
+                        $img = \Image::make($uploadPath['path'] . DIRECTORY_SEPARATOR . $originalName)->resize(150, null, function ($constraint) {
                             $constraint->aspectRatio();
                         });
+//                        $img->insert('public/watermark.jpg');
                         $img->save(public_path("media/tmp/$originalName"));
                     }
                 }
