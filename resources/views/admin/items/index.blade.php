@@ -3,40 +3,50 @@
 
     <div class="container-fluid">
         <div class="row">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="info-tab" href="{!! route('admin_items') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_items_archives') !!}" role="tab"
-                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Archive</a>
-                </li>
-            </ul>
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+                <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="info-tab" href="{!! route('admin_items') !!}" role="tab"
+                           aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " id="general-tab" href="{!! route('admin_items_archives') !!}" role="tab"
+                           aria-controls="accounts" aria-selected="true" aria-expanded="true">Archive</a>
+                    </li>
+                </ul>
+            </div>
+
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading d-flex justify-content-between">
-                        <h2 class="m-0 pull-left">Items</h2>
-                        @ok('admin_items_new')
-                        <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
-                        @endok
-                    </div>
-                    <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
-                            <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
-                            <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
-{{--                            <option value="Name" data-column="2" data-name="name" selected>Name</option>--}}
-                            <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
-                            <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
-                            <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
-                            <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
-                            <option value="Category" data-column="7" data-name="category" selected>Category</option>
-                            <option value="Price" data-column="8" data-name="price" selected>Price</option>
-                            <option value="Status" data-column="9" data-name="status" selected>Status</option>
-                            <option value="Created At" data-column="10" data-name="created_at">Created At</option>
-{{--                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>--}}
-                        </select>
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
+                                <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
+                                <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
+                                {{--                            <option value="Name" data-column="2" data-name="name" selected>Name</option>--}}
+                                <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
+                                <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
+                                <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
+                                <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
+                                <option value="Category" data-column="7" data-name="category" selected>Category</option>
+                                <option value="Price" data-column="8" data-name="price" selected>Price</option>
+                                <option value="Status" data-column="9" data-name="status" selected>Status</option>
+                                <option value="Created At" data-column="10" data-name="created_at">Created At</option>
+                                {{--                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>--}}
+                            </select>
                         </div>
+                        <div class="ml-1">
+                            @ok('admin_items_new')
+                            <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
+                            @endok
+                        </div>
+                    </div>
+{{--                    <div class="card-header panel-heading d-flex justify-content-between">--}}
+{{--                        <h2 class="m-0 pull-left">Items</h2>--}}
+{{--                        --}}
+{{--                    </div>--}}
+                    <div class="card-body panel-body pt-0">
+
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -277,7 +287,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [

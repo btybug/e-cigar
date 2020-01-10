@@ -2094,10 +2094,10 @@ table .faq-ansver{
     flex: 1;
 }
 .admin-general--tabs .nav-link{
-    padding: .5rem 5rem;
+    padding: .5rem 2rem;
 }
 .admin-general--tabs-wrapper a{
-    font-size: 32px !important;
+    font-size: 30px !important;
 }
 .admin-general--tabs-wrapper .btn.btn-success{
     background-color: #aaaaaa !important;
@@ -2116,6 +2116,9 @@ table .faq-ansver{
 }
 .stock-setting-admin-body--wrapper .payment_gateways_tab .list_paymant .item .item-link-edit-text{
     font-size: 18px;
+}
+.admin-datatable-margin .dataTables_wrapper{
+    /*margin: 0;*/
 }
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
