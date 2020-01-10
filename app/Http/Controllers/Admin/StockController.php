@@ -44,21 +44,21 @@ class StockController extends Controller
 
     public function stock()
     {
-        $stocks = Items::all();
-        foreach ($stocks as $stock){
-            $stock->translate('gb')->short_name = $stock->name;
-            $stock->save();
-        }
-
-        $filters = StockVariation::where('type','filter')->get();
-
-        if(count($filters)){
-            foreach ($filters as $filter){
-                $filter->image = $filter->item->image;
-                $filter->save();
-            }
-        }
-        dd('done');
+//        $stocks = Items::all();
+//        foreach ($stocks as $stock){
+//            $stock->translate('gb')->short_name = $stock->name;
+//            $stock->save();
+//        }
+//
+//        $filters = StockVariation::where('type','filter')->get();
+//
+//        if(count($filters)){
+//            foreach ($filters as $filter){
+//                $filter->image = $filter->item->image;
+//                $filter->save();
+//            }
+//        }
+//        dd('done');
 
         return $this->view('stock');
     }
