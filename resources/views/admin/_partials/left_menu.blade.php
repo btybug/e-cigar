@@ -146,6 +146,9 @@
                     @ok('admin_blog_brands')<li><a href="{{route('admin_blog_brands')}}"><i class="fa fa-circle-o"></i> Brands</a></li>@endok
                     @ok('show_comments')<li><a href="{{route('show_comments')}}"><i class="fa fa-circle-o"></i> Comments</a></li>@endok
                     @ok('admin_faq')<li><a href="{{route('admin_faq')}}"><i class="fa fa-circle-o"></i> FAQ</a></li>@endok
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
+                    @endok
                     @ok('admin_blog_contact_us')
                     <li><a href="{{route('admin_blog_contact_us')}}"><i class="fa fa-circle-o"></i>Contact us</a></li>
                     @endok
@@ -185,9 +188,7 @@
                 <ul class="treeview-menu">
 
                     <li><a href="{{route('admin_tools_filters')}}"><i class="fa fa-circle-o"></i>Filters</a></li>
-                    @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
-                    @endok
+
                 </ul>
             </li>
             @endHasAccess
