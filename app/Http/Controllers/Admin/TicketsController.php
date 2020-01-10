@@ -179,6 +179,12 @@ class TicketsController extends Controller
         return $this->view('settings', compact(['settings', 'statuses','categories','allCategories']));
     }
 
+    public function statuses($type)
+    {
+        $statuses=Statuses::where('type',$type)->get();
+        return $this->view('statuses',compact('statuses','type'));
+    }
+
     public function postSettings(Request $request)
     {
         $data = $request->except('_token');

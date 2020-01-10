@@ -307,6 +307,7 @@ Route::group(['prefix' => 'blog'], function () {
         Route::post('/new', 'Admin\TicketsController@postNew')->name('admin_tickets_new_save');
         Route::post('/reply', 'Admin\TicketsController@reply')->name('admin_tickets_reply');
         Route::get('/settings', 'Admin\TicketsController@getSettings')->name('admin_tickets_settings');
+        Route::get('/statuses/{type}', 'Admin\TicketsController@statuses')->name('admin_tickets_statuses');
         Route::post('/settings', 'Admin\TicketsController@postSettings')->name('admin_tickets_settings_save');
         Route::get('/close/{id}', 'Admin\TicketsController@getClose')->name('admin_tickets_close');
 

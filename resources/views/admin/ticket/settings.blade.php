@@ -47,64 +47,31 @@
             <div class="card-header panel-heading">
                 <div class="head-space-between">
                     <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Status</h2>
-                    <div class="form-group row bord-top">
-                        {!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}
-                        <input name="type" type="hidden" value="{!! $type !!}">
-                        {{--<div class="col-md-8">--}}
-                        {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
-                        {{--</div>--}}
-                        <div class="col-md-12 text-right">
-                            <button class="btn btn-primary add-new-order" type="submit"><span class="icon-plus"><i
-                                        class="fa fa-plus"></i></span>Add New
-                            </button>
-                        </div>
-                        {!! Form::close() !!}
-                    </div>
+
                 </div>
             </div>
             <div class="card-body panel-body">
                 <div class="row">
-                    <div class="col-xl-3 col-lg-4  col-md-5 attributes-container">
-                        <div class="mb-20 list-group">
-                            @foreach($statuses as $status)
-                                <div class="d-flex flex-wrap form-group row list-group-item bg-light  pointer"
-                                     data-item-id="{!! $status->id !!}"
-                                     data-parent-id="1">
-                                    <div class="col-6 attr-option" data-item-id="{!! $status->id !!}">
-                                        {!! ($status->name)??"Empty" !!}
-                                    </div>
-                                    <div class="col-6 text-right">
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            <div
-                                                style="width: 20px;height: 20px;background: {{ $status->color }}"></div>
-                                            @if(!$status->is_default)
-                                                {!! Form::model($status,['url' => route('post_admin_stock_statuses_delete')]) !!}
-                                                {!! Form::hidden('id',null) !!}
-                                                <button class="btn btn-sm btn-danger" type="submit"><i
-                                                        class='fa fa-trash'></i></button>
-                                                {!! Form::close() !!}
-                                            @endif
-                                        </div>
+                    <div class="payment_gateways_tab w-100">
+                        <h2>Statuses</h2>
+                        <ul class="list_paymant">
 
-                                    </div>
+                            <li class="item">
+                                <div class="chek-title">
+                                    <label for="paypal" class="title">Tickets</label>
                                 </div>
-                            @endforeach
-                        </div>
-                        {{--<div class="form-group row bord-top">--}}
-                        {{--{!! Form::open(['url'=>route('post_admin_stock_statuses_manage')]) !!}--}}
-                        {{--<input name="type" type="hidden" value="{!! $type !!}">--}}
-                        {{--<div class="col-md-8">--}}
-                        {{--<input class="form-control new-oreder-input"  name="translatable[gb][name]" type="text">--}}
-                        {{--</div>--}}
-                        {{--<div class="col-md-4 text-right">--}}
-                        {{--<button class="btn btn-primary add-new-order"  type="submit">Add </button>--}}
-                        {{--</div>--}}
-                        {{--</form>--}}
-                        {{--</div>--}}
+                                @ok('admin_tickets_statuses')<a href="{!! route('admin_tickets_statuses','tickets') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
+                            </li>
+                            <li class="item">
+                                <div class="chek-title">
+                                    <label for="paypal" class="title">Ticket Priority</label>
+                                </div>
+                                @ok('admin_tickets_statuses')<a href="{!! route('admin_tickets_statuses','ticket_priority') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
+                            </li>
+
+                        </ul>
                     </div>
-                    <div class="col-xl-9 col-lg-8  col-md-7">
-                        @include('admin.tools.statuses._patrials.status_form')
-                    </div>
+
                 </div>
 
             </div>
