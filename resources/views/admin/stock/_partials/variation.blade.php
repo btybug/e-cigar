@@ -122,27 +122,7 @@
                         </div>
                         <div class="w-100">
                             <div class="table-responsive stock-items-tabs-main-wrapper">
-                                {{--                                        <table class="table table-style table-bordered mt-2" cellspacing="0"--}}
-                                {{--                                               width="100%">--}}
-                                {{--                                            <thead>--}}
-                                {{--                                            <tr>--}}
-                                {{--                                                <th>Item</th>--}}
-                                {{--                                                <th>Name</th>--}}
-                                {{--                                                <th>Qty</th>--}}
-                                {{--                                                <th>Image</th>--}}
-                                {{--                                                <th class="package_price @if(! $main || ($main && $main->price_per == 'product')) hide @endif">Price Area</th>--}}
-                                {{--                                                <th>Actions</th>--}}
-                                {{--                                            </tr>--}}
-                                {{--                                            </thead>--}}
-                                {{--                                            <tbody class="@if($main && $main->type =='package_product') package-variation-box @elseif($main && $main->type =='single') package-variation-box @elseif($main && $main->type =='filter') filter-variation-box @endif">--}}
-                                {{--                                            <tbody class="filter-variation-box ">--}}
-                                {{--                                            @if($main && count($v))--}}
-                                {{--                                                @foreach($v as $package_variation)--}}
-                                {{--                                                    @include('admin.inventory._partials.variation_package_item')--}}
-                                {{--                                                @endforeach--}}
-                                {{--                                            @endif--}}
-                                {{--                                            </tbody>--}}
-                                {{--                                        </table>--}}
+                          
                                 <div class="stock-items-tabs-wall-head">
                                     <div class="stock-items-tab-head-name">
                                         Item

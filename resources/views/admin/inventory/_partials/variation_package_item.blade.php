@@ -7,9 +7,9 @@
             <div class="stock-item-photo-wrap">
                 <div class="item-photo">
                     @if($package_variation && $package_variation->image)
-                        <img src="{{ $package_variation->image }}" alt="photo" class="v-img">
+                        <img src="{{ media_image_tmb($package_variation->image) }}" alt="photo" class="v-img">
                     @elseif($main && $main->stock)
-                        <img src="{{ $main->stock->image }}" alt="photo"  class="v-img">
+                        <img src="{{ media_image_tmb($main->stock->image) }}" alt="photo"  class="v-img">
                     @else
                         <img src="/public/images/no_image.png" alt="photo"  class="v-img">
                     @endif
