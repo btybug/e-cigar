@@ -11,6 +11,9 @@
             <div class="text-right">
                 <a class="btn btn-primary" href="{!! route('create_admin_emails_notifications_send_email') !!}">Create notification</a>
             </div>
+            <div class="text-right">
+                <a class="btn btn-warning" href="{!! route('admin_emails_notifications_settings') !!}">Settings</a>
+            </div>
             @endok
         </div>
         <div class="card-body panel-body notification--body">

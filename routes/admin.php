@@ -168,6 +168,7 @@ Route::group(['prefix' => 'settings'], function () {
 });
 Route::group(['prefix' => 'emails-notifications'], function () {
     Route::get('/send-email', 'Admin\EmailsNotificationsController@sendEmail')->name('admin_emails_notifications_send_email');
+    Route::get('/settings', 'Admin\EmailsNotificationsController@settings')->name('admin_emails_notifications_settings');
     Route::get('/send-email/create', 'Admin\EmailsNotificationsController@sendEmailCreate')->name('create_admin_emails_notifications_send_email');
     Route::post('/send-email/create', 'Admin\EmailsNotificationsController@postSendEmailCreate')->name('post_create_admin_emails_notifications_send_email');
     Route::post('/send-email/create-send', 'Admin\EmailsNotificationsController@postSendEmailCreateSend')->name('post_create_send_admin_emails_notifications_send_email');
@@ -579,9 +580,6 @@ Route::group(['prefix' => '/tools'], function () {
 
     });
     Route::group(['prefix' => 'categories'], function () {
-        Route::get('/', 'Admin\CategoriesController@list')->name('admin_categories_list');
-
-        Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_store_categories');
         Route::post('/get-form/{type}', 'Admin\CategoriesController@postCategoryForm')->name('admin_store_categories_form');
         Route::post('/update-parent/{type}', 'Admin\CategoriesController@postCategoryUpdateParent')->name('admin_store_categories_update_parent');
         Route::post('/create-or-update/{type}', 'Admin\CategoriesController@postCreateOrUpdateCategory')->name('admin_store_categories_new_or_update');

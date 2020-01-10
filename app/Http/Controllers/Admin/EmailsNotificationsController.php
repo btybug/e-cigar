@@ -37,6 +37,15 @@ class EmailsNotificationsController extends Controller
         return $this->view('send.emails');
     }
 
+    public function settings()
+    {
+        $categories = Category::whereNull('parent_id')->where('type', 'notifications')->get();
+        $allCategories = Category::where('type', 'notifications')->get();
+        enableMedia('drive');
+        $type='notifications';
+        return $this->view('settings', compact('categories','allCategories', 'type'));
+    }
+
     public function sendEmailCreate($id = null)
     {
         $model = CustomEmails::find($id);
