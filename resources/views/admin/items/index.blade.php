@@ -18,7 +18,7 @@
                     <div class="card-header panel-heading d-flex justify-content-between">
                         <h2 class="m-0 pull-left">Items</h2>
                         @ok('admin_items_new')
-                        q<a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
+                        <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
                         @endok
                     </div>
                     <div class="card-body panel-body">
