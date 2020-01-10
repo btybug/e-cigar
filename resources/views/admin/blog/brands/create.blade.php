@@ -30,7 +30,7 @@
                             <div class="form-group row mt-10">
                                 <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Category Name</label>
                                 <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
-                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',null,['class'=>'form-control','required'=>true]) !!}
+                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',null,['class'=>'form-control','required'=> ($loop->first)?true:false]) !!}
                                 </div>
 
                             </div>
@@ -38,7 +38,7 @@
                                 <div class="form-group row">
                                     <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Description</label>
                                     <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
-                                        {!! Form::textarea('translatable['.strtolower($language->code).'][description]',null,['class'=>'form-control','required'=>true]) !!}
+                                        {!! Form::textarea('translatable['.strtolower($language->code).'][description]',null,['class'=>'form-control','required'=>($loop->first)?true:false]) !!}
                                     </div>
                                 </div>
 

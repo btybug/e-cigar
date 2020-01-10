@@ -64,40 +64,37 @@ class BrandsController extends Controller
     }
     public function postCategoryProducts(Request $request)
     {
-        $current = Category::where('type', 'brands')->where('id', $request->id)->first();
+        $current = Brands::findOrFail($request->id);
 
-        if ($current) {
-            $products = $current->brandProducts();
-            $stockCategories = StockCategories::
-            leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-                ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
-                ->where('categories_translations.locale', app()->getLocale())
-                ->whereIn('stock_categories.stock_id', $products->pluck('id'))
-                ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
-            $f = isset($stockCategories[$request->slug])?$request->slug:false;
-            $products = ($f)?$products
-                ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
-                ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-                ->where('categories.slug', $f)->select('stocks.*')
-                ->groupBy('stocks.id')->get():$products->get();
-            $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->render();
-            return response()->json(['error' => false, 'html' => $html]);
-        }
-
-        return response()->json(['error' => true]);
+        $products = $current->products();
+        $stockCategories = StockCategories::
+        leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
+            ->where('categories_translations.locale', app()->getLocale())
+            ->whereIn('stock_categories.stock_id', $products->pluck('id'))
+            ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
+        $f = isset($stockCategories[$request->slug])?$request->slug:false;
+        $products = ($f)?$products
+            ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
+            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
+            ->where('categories.slug', $f)->select('stocks.*')
+            ->groupBy('stocks.id')->get():$products->get();
+        $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->render();
+        return response()->json(['error' => false, 'html' => $html]);
     }
 
     public function postBrandProducts(Request $request)
     {
-        $parent = Category::where('type', 'brands')->whereNull('parent_id')->where('id', $request->id)->first();
+        $parent = Brands::findOrFail($request->id);
+
         if ($parent) {
             $stockCategories = $parent->children;
         }else{
-            $stockCategories = Category::where('type', 'brands')->whereNotNull('parent_id')->get();
+            $stockCategories = Brands::all();
         }
 
         $current = ($stockCategories && count($stockCategories)) ? $stockCategories->first() : null;
-        $products = ($current) ? $current->brandProducts() : collect([]);
+        $products = ($current) ? $current->products() : collect([]);
         $f = ($current) ? $current->id : null;
         $html = view('frontend.brands._partials.current', compact('current', 'products','f'))
             ->with('stockCategories',$stockCategories->pluck('name','slug'))->render();
