@@ -21,23 +21,30 @@
 
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                        <h2 class="m-0 pull-left">Attributes</h2>
-                        @ok('admin_store_attributes_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_store_attributes_new') !!}">Add new</a></div>@endok
-                    </div>
-                    <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="category" data-column="2" data-name="category">Category</option>
-                            <option value="image" data-column="3" data-name="image">Image</option>
-                            <option value="icon" data-column="4" data-name="icon">Icon</option>
-                            <option value="filter" data-column="5" data-name="filter">Render Style</option>
-                            <option value="display_as" data-column="6" data-name="display_as">Is Filter</option>
-                            <option value="Added/Last Modified Date" data-column="7" data-name="created_at">Added/Last Modified Date</option>
-                            <option value="Actions" data-column="8" data-name="actions">Actions</option>
-                        </select>
+{{--                    <div class="card-header panel-heading clearfix">--}}
+{{--                        <h2 class="m-0 pull-left">Attributes</h2>--}}
+{{--                    </div>--}}
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" multiple>
+                                <option value="#" data-column="0" data-name="id">#</option>
+                                <option value="Name" data-column="1" data-name="name">Name</option>
+                                <option value="category" data-column="2" data-name="category">Category</option>
+                                <option value="image" data-column="3" data-name="image">Image</option>
+                                <option value="icon" data-column="4" data-name="icon">Icon</option>
+                                <option value="filter" data-column="5" data-name="filter">Render Style</option>
+                                <option value="display_as" data-column="6" data-name="display_as">Is Filter</option>
+                                <option value="Added/Last Modified Date" data-column="7" data-name="created_at">Added/Last Modified Date</option>
+                                <option value="Actions" data-column="8" data-name="actions">Actions</option>
+                            </select>
+                        </div>
+                        <div class="ml-1">
+                            @ok('admin_store_attributes_new')<div class="pull-right"><a class="btn btn-primary pull-right" href="{!! route('admin_store_attributes_new') !!}">Add new</a></div>@endok
 
+                        </div>
+                    </div>
+
+                    <div class="card-body panel-body pt-0">
 
                         <table id="attributes-table" class="table table-style table-bordered " cellspacing="0" width="100%">
                             <thead>
@@ -104,7 +111,7 @@
                                 "serverSide": true,
                                 "bPaginate": true,
                                 "scrollX": true,
-                                dom: 'Bflrtip',
+                                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                                 displayLength: 10,
                                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                                 buttons: [

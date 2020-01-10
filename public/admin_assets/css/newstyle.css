@@ -2099,7 +2099,24 @@ table .faq-ansver{
 .admin-general--tabs-wrapper a{
     font-size: 32px !important;
 }
-
+.admin-general--tabs-wrapper .btn.btn-success{
+    background-color: #aaaaaa !important;
+}
+.admin-general--tabs-wrapper .nav-item.active .btn.btn-success{
+    background-color: #4285f4 !important;
+}
+.admin-general--tabs .nav-link.active {
+    background: #4285f4;
+}
+.stock-setting-admin-body--wrapper .payment_gateways_tab .list_paymant .item{
+    padding: 15px 10px;
+}
+.stock-setting-admin-body--wrapper .payment_gateways_tab .list_paymant .item .title{
+    font-size: 20px;
+}
+.stock-setting-admin-body--wrapper .payment_gateways_tab .list_paymant .item .item-link-edit-text{
+    font-size: 18px;
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
