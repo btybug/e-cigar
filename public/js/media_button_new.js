@@ -1262,8 +1262,108 @@ const App = function() {
           this.classList.remove("over");
           return false;
         });
-        folder.addEventListener("drop", function (e) {
+        folder.addEventListener("drop", function (e, file) {
           this.classList.remove("over");
+
+          console.log('e.dataTransfer.files', e.dataTransfer.files)
+
+
+    //       function addEventHandler(obj, evt, handler) {
+    //         if(obj.addEventListener) {
+    //             // W3C method
+    //             obj.addEventListener(evt, handler, false);
+    //         } else if(obj.attachEvent) {
+    //             // IE method.
+    //             obj.attachEvent('on'+evt, handler);
+    //         } else {
+    //             // Old school method.
+    //             obj['on'+evt] = handler;
+    //         }
+    //     }
+
+
+
+    //     e = e || window.event; // get window.event if e argument missing (in IE)   
+    //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
+    //   // alert('asasasasas')
+    //   var dt    = e.dataTransfer;
+    //   var files = dt.files;
+    //   for (var i=0; i<files.length; i++) {
+    //     var file = files[i];
+    //     var reader = new FileReader();
+          
+    //     //attach event handlers here...
+       
+    //     reader.readAsDataURL(file);
+    //   }
+
+    //   var list = document.querySelector('.upload-content')
+
+    //   Function.prototype.bindToEventHandler = function bindToEventHandler() {
+    //     var handler = this;
+    //     var boundParameters = Array.prototype.slice.call(arguments);
+    //     //create closure
+    //     return function(e) {
+    //         e = e || window.event; // get window.event if e argument missing (in IE)   
+    //         boundParameters.unshift(e);
+    //         handler.apply(this, boundParameters);
+    //     }
+    //   };
+
+
+
+    //   addEventHandler(reader, 'loadend', function(e, file) {
+    //     console.log('file============', file)
+    //     var bin           = this.result; 
+    //     var newFile       = document.createElement('div');
+    //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
+    //     // list.appendChild(newFile);  
+    //     var fileNumber = list.getElementsByTagName('div').length;
+    //     status.innerHTML = fileNumber < files.length 
+    //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
+    //                      : 'Done loading. processed '+fileNumber+' files.';
+    
+    //     var img = document.createElement("img"); 
+    //     img.file = file;   
+    //     img.src = bin;
+    //     // list.appendChild(img);
+
+    //     let formData = new FormData();
+
+    //     formData.append('item[]', file);
+    //     formData.append('_token', $('[name="csrf-token"]').attr('content'));
+    //     formData.append('folder_id', '1');
+
+    //     fetch('/api-media/upload', {
+    //       method: "post",
+    //       headers: {
+    //         "Content-Type": "multipart/form-data; boundary=----7dd322351017c",
+    //         Accept: "application/json, text/javascript, */*; q=0.01",
+    //         "X-Requested-With": "XMLHttpRequest",
+    //         "X-CSRF-Token": $('input[name="_token"]').val()
+    //       },
+    //       credentials: "same-origin",
+    //       body: formData
+    //     })
+    //       .then(function (response) {
+    //         return response.json();
+    //       })
+    //       .then(function (json) {
+    //         return console.log(json);
+    //       })
+    //       .catch(function (error) {
+    //         console.log(error);
+    //       });
+    //     // shortAjax(, formData, () => {
+    //     //   console.log('Hurrraaaa')
+    //     // });
+    // }.bindToEventHandler(file));
+    
+    
+
+
+
+          console.log('event***********', e)
           console.log(JSON.parse(e.dataTransfer.getData("node_id")))
           let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id")).data;
           let parentId = e.target
@@ -2695,3 +2795,85 @@ document
           $('#addFolderModal').modal('hide');
         });
     });
+
+    // $(document).on('load', function() {
+    //   if(window.FileReader) { 
+    //     addEventHandler(window, 'load', function() {
+    //       // var status = document.getElementById('status');
+    //       var drop   = document.querySelector('folderitems');
+    //       // var list   = document.getElementById('list');
+          
+    //       function cancel(e) {
+    //         if (e.preventDefault) { e.preventDefault(); }
+    //         return false;
+    //       }
+        
+    //       // Tells the browser that we *can* drop on this target
+    //       addEventHandler(drop, 'dragover', cancel);
+    //       addEventHandler(drop, 'dragenter', cancel);
+    //     });
+    //   } else { 
+    //     alert("don't")
+    //     // document.getElementById('status').innerHTML = 'Your browser does not support the HTML5 FileReader.';
+    //   }
+  
+  
+    //   function addEventHandler(obj, evt, handler) {
+    //     if(obj.addEventListener) {
+    //         // W3C method
+    //         obj.addEventListener(evt, handler, false);
+    //     } else if(obj.attachEvent) {
+    //         // IE method.
+    //         obj.attachEvent('on'+evt, handler);
+    //     } else {
+    //         // Old school method.
+    //         obj['on'+evt] = handler;
+    //     }
+    // }
+  
+  
+    // addEventHandler(drop, 'drop', function (e) {
+    //   e = e || window.event; // get window.event if e argument missing (in IE)   
+    //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
+    //   alert('asasasasas')
+    //   var dt    = e.dataTransfer;
+    //   var files = dt.files;
+    //   for (var i=0; i<files.length; i++) {
+    //     var file = files[i];
+    //     var reader = new FileReader();
+          
+    //     //attach event handlers here...
+       
+    //     reader.readAsDataURL(file);
+    //   }
+    //   return false;
+    // });
+  
+  
+  //   addEventHandler(reader, 'loadend', function(e, file) {
+  //     var bin           = this.result; 
+  //     var newFile       = document.createElement('div');
+  //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
+  //     list.appendChild(newFile);  
+  //     var fileNumber = list.getElementsByTagName('div').length;
+  //     status.innerHTML = fileNumber < files.length 
+  //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
+  //                      : 'Done loading. processed '+fileNumber+' files.';
+  
+  //     var img = document.createElement("img"); 
+  //     img.file = file;   
+  //     img.src = bin;
+  //     list.appendChild(img);
+  // }.bindToEventHandler(file));
+  
+  // Function.prototype.bindToEventHandler = function bindToEventHandler() {
+  //   var handler = this;
+  //   var boundParameters = Array.prototype.slice.call(arguments);
+  //   //create closure
+  //   return function(e) {
+  //       e = e || window.event; // get window.event if e argument missing (in IE)   
+  //       boundParameters.unshift(e);
+  //       handler.apply(this, boundParameters);
+  //   }
+  // };
+  //   })
