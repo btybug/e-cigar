@@ -28,5 +28,5 @@ class StickersTranslation extends Model
 
     protected $table = 'stickers_translations';
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name','description'];
 }

@@ -60,7 +60,7 @@ class Stickers extends Translatable
 
     protected $guarded = ['id'];
 
-    public $translatedAttributes = ['name'];
+    public $translatedAttributes = ['name','description'];
 
     public function categories()
     {
