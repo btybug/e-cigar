@@ -18,15 +18,7 @@
                     <div class="card-header panel-heading d-flex justify-content-between">
                         <h2 class="m-0 pull-left">Items</h2>
                         @ok('admin_items_new')
-                        <div class="dropdown">
-                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownAddItemButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Add new
-                            </button>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAddItemButton">
-                                <a class="dropdown-item" href="{!! route('admin_items_new') !!}">Simple Item</a>
-                                <a class="dropdown-item" href="{!! route('admin_items_new_bundle') !!}">Bundle Item</a>
-                            </div>
-                        </div>
+                        q<a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
                         @endok
                     </div>
                     <div class="card-body panel-body">
