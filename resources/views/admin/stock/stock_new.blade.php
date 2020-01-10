@@ -223,20 +223,7 @@
                                                                                 <div id="brands_treeview_json">
                                                                                     <div class="filter-wall cat-name row">
                                                                                         <div class="col-12">
-                                                                                            @foreach($brands as $brand)
-                                                                                                <div
-                                                                                                    class="single-wrap ml-4">
-                                                                                                    <div
-                                                                                                        class="custom-control custom-radio custom-control-inline align-items-center radio--packs">
-                                                                                                        {!! Form::radio("brand_id",$brand->id,null,['class' => 'custom-control-input','id' => 'customRadio'.$brand->id]) !!}
-                                                                                                        <label
-                                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                            for="customRadio{{ $brand->id }}">{{ $brand->name }}
-                                                                                                            {{--<span class="amount">(189)</span>--}}
-                                                                                                        </label>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endforeach
+                                                                                            {!! Form::select('brand_id',$brands->pluck('name','id'),null,['class'=>'form-control']) !!}
                                                                                         </div>
                                                                                     </div>
 
