@@ -189,15 +189,6 @@
                     <li><a href="{{route('admin_emails_notifications_emails')}}"><i
                                     class="fa fa-circle-o"></i>Emails</a></li>
                     @endok
-                    @ok('admin_emails_newsletters')
-                        <li><a href="{{route('admin_emails_newsletters')}}"><i
-                                    class="fa fa-circle-o"></i>Newsletters</a></li>
-                    @endok
-                    @ok('admin_emails_notifications_send_email')
-                    <li><a href="{{route('admin_emails_notifications_send_email')}}"><i class="fa fa-circle-o"></i>Notifications</a>
-                    </li>
-                    @endok
-
                 </ul>
             </li>
             @endHasAccess
