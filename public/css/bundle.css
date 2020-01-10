@@ -13467,6 +13467,7 @@ body.show-filter .main-filters .reset-wrapper {
     padding: 30px;
     background: rgba(255, 255, 255, 0.97);
     box-shadow: 4.5px 7.794px 12px 0 rgba(16, 16, 20, 0.3);
+    max-width: 1100px;
 }
 
 .nav-item--has-dropdown_dropdown.open {

@@ -14,15 +14,15 @@
                         ]) !!}
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
-                        <div class="sale-only d-flex align-items-center">
-                    <span class="text-gray-clr">
-                        {!! __('sale_only') !!}:
-                    </span>
-                            <label class="switch-custom">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+{{--                        <div class="sale-only d-flex align-items-center">--}}
+{{--                    <span class="text-gray-clr">--}}
+{{--                        {!! __('sale_only') !!}:--}}
+{{--                    </span>--}}
+{{--                            <label class="switch-custom">--}}
+{{--                                <input type="checkbox">--}}
+{{--                                <span class="slider round"></span>--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
                         <div class="product-grid-list align-self-center">
                     <span class="d-inline-block products-filter-wrap_display-icons">
             <span id="dispGrid" class="d-inline-block pointer grid display-icon active">
