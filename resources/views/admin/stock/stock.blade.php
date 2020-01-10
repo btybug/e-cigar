@@ -14,6 +14,10 @@
                     <a class="nav-link " id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
+                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Settings</a>
+                </li>
             </ul>
             <div class="tab-content w-100">
                 <div class="card panel panel-default">

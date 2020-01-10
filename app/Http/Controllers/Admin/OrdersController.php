@@ -175,8 +175,8 @@ class OrdersController extends Controller
 
     public function getSettings()
     {
-        $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id')->all();
         $settings = $this->settings->getEditableData('order');
+        $statuses=Statuses::where('type','order')->get();
 
         return $this->view('settings', compact(['settings', 'statuses']));
     }

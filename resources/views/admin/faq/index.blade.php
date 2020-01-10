@@ -6,6 +6,7 @@
     <div class="card panel panel-default">
         <div class="card-header panel-heading d-flex flex-wrap justify-content-between align-items-center">
             <h2 class="m-0 pull-left">Faq</h2>
+           @ok('admin_faq_settings') <div class="pull-right"><a class="btn btn-primary" href="{!! route('admin_faq_settings') !!}">Settings</a></div>@endok
            @ok('admin_faq_create') <div class="pull-right"><a class="btn btn-primary" href="{!! route('admin_faq_create') !!}">Add new</a></div>@endok
         </div>
         <div class="card-body panel-body">

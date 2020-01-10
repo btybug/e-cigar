@@ -281,6 +281,7 @@ Route::group(['prefix' => 'store'], function () {
 Route::group(['prefix' => 'blog'], function () {
     Route::get('/', 'Admin\PostController@index')->name('admin_blog');
     Route::get('create', 'Admin\PostController@create')->name('admin_blog_create');
+    Route::get('settings', 'Admin\PostController@settings')->name('admin_blog_settings');
     Route::post('delete', 'Admin\PostController@getDelete')->name('admin_post_delete');
     Route::get('edit/{id}', 'Admin\PostController@edit')->name('admin_post_edit');
     Route::post('create-new', 'Admin\PostController@newPost')->name('admin_new_post');
@@ -328,6 +329,7 @@ Route::group(['prefix' => 'blog'], function () {
 Route::group(['prefix' => 'faq'], function () {
     Route::get('/', 'Admin\FaqController@index')->name('admin_faq');
     Route::get('create', 'Admin\FaqController@create')->name('admin_faq_create');
+    Route::get('settings', 'Admin\FaqController@settings')->name('admin_faq_settings');
     Route::post('delete', 'Admin\FaqController@getDelete')->name('admin_faq_delete');
     Route::get('edit/{id}', 'Admin\FaqController@edit')->name('admin_faq_edit');
     Route::post('create-new', 'Admin\FaqController@newPost')->name('admin_faq_new');
@@ -361,7 +363,7 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/edit/{id}', 'Admin\OrdersController@postEdit')->name('admin_orders_edit_post');
     Route::get('/new', 'Admin\OrdersController@getNew')->name('admin_orders_new');
     Route::post('/add-note', 'Admin\OrdersController@addNote')->name('orders_add_note');
-    Route::get('/settings', 'Admin\OrdersController@getSettings')->name('admin_orders_settings');
+    Route::get('/settings', 'Admin\OrdersController@tickets')->name('admin_orders_settings');
     Route::post('/settings', 'Admin\OrdersController@postSettings')->name('admin_orders_settings_save');
     Route::post('/get-item', 'Admin\OrdersController@getItem')->name('orders_get_product');
 
@@ -516,6 +518,10 @@ Route::group(['prefix' => 'stock'], function () {
         Route::get('/', 'Admin\StockController@stockOffers')->name('admin_stock_offers');
         Route::get('/new', 'Admin\StockController@offerNew')->name('admin_stock_new_offer');
         Route::get('/edit/{id}', 'Admin\StockController@getOfferEdit')->name('admin_stock_edit_offer');
+    });
+
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/', 'Admin\StockController@stockSettings')->name('admin_stock_settings');
     });
 
 

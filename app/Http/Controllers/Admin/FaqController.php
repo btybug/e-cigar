@@ -53,6 +53,14 @@ class FaqController extends Controller
         return $this->view('new', compact('model', 'general', 'twitterSeo', 'fbSeo', 'robot', 'data'));
     }
 
+    public function settings()
+    {
+        $categories = Category::whereNull('parent_id')->where('type', 'faq')->get();
+        $allCategories = Category::where('type', 'faq')->get();
+        enableMedia('drive');
+        return $this->view('settings', compact('categories','allCategories'));
+    }
+
     public function newPost(FaqRequest $request, $locale = null)
     {
         $data = $request->except('_token', 'translatable', 'categories', 'stocks', 'fb', 'twitter', 'general', 'robot');

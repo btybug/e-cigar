@@ -9,40 +9,6 @@
             <ul class="list_paymant">
                 <li class="item">
                     <div class="chek-title">
-
-                        <label for="cash_paymant" class="title">Order</label>
-                    </div>
-                    @ok('admin_stock_statuses_manage')
-                    <a href="{!! route('admin_stock_statuses_manage','order') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
-                    @endok
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <label for="stripe_paymant"  class="title">User</label>
-                    </div>
-                    @ok('admin_stock_statuses_manage')<a href="{!! route('admin_stock_statuses_manage','user') !!} " class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <label for="paypal" class="title">Posts</label>
-                    </div>
-                    @ok('admin_stock_statuses_manage')<a href="{!! route('admin_stock_statuses_manage','post') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
-                </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <label for="paypal" class="title">Stock</label>
-                    </div>
-                    @ok('admin_stock_statuses_manage')<a href="{!! route('admin_stock_statuses_manage','stock') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
-                </li>
-
-                <li class="item">
-                    <div class="chek-title">
-                        <label for="paypal" class="title">Tickets</label>
-                    </div>
-                    @ok('admin_stock_statuses_manage')<a href="{!! route('admin_stock_statuses_manage','tickets') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok
-                </li>
-                <li class="item">
-                    <div class="chek-title">
                         <label for="paypal" class="title">Ticket Priority</label>
                     </div>
                     @ok('admin_stock_statuses_manage')<a href="{!! route('admin_stock_statuses_manage','ticket_priority') !!}" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>@endok

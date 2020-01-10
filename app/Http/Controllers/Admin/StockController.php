@@ -713,4 +713,12 @@ class StockController extends Controller
         return response()->json(['error' => true]);
     }
 
+    public function stockSettings()
+    {
+        $categories = Category::whereNull('parent_id')->where('type', 'stocks')->get();
+        $allCategories = Category::where('type', 'stocks')->get();
+        enableMedia('drive');
+        return $this->view('settings', compact('categories','allCategories'));
+    }
+
 }
