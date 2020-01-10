@@ -187,9 +187,6 @@
                     <li><a href="{{route('admin_categories_list')}}"><i class="fa fa-circle-o"></i> Categories</a></li>
                     @endok
                     <li><a href="{{route('admin_tools_filters')}}"><i class="fa fa-circle-o"></i>Filters</a></li>
-                    @ok('admin_stock_statuses')
-                    <li><a href="{{route('admin_stock_statuses')}}"><i class="fa fa-circle-o"></i> Statuses</a></li>
-                    @endok
                     @ok('admin_store_attributes')
                     <li><a href="{{route('admin_store_attributes')}}"><i class="fa fa-circle-o"></i> Attributes</a></li>
                     @endok

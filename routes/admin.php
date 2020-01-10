@@ -593,8 +593,6 @@ Route::group(['prefix' => '/tools'], function () {
     });
 
     Route::group(['prefix' => 'statuses'], function () {
-        Route::get('/', 'Admin\StatusController@getStatuses')->name('admin_stock_statuses');
-        Route::get('/manage/{type}', 'Admin\StatusController@getStatusesManage')->name('admin_stock_statuses_manage');
         Route::post('/manage/{id?}', 'Admin\StatusController@postStatusesManage')->name('post_admin_stock_statuses_manage');
         Route::post('/delete', 'Admin\StatusController@postStatusesDelete')->name('post_admin_stock_statuses_delete');
         Route::post('get-manage-form', 'Admin\StatusController@postGetManageStatusForm')->name('post_admin_stock_statuses_manage_form');
