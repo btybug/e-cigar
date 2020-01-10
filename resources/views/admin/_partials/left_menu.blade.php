@@ -136,7 +136,7 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i>
-                    <span>Blog</span>
+                    <span>Front pages</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
