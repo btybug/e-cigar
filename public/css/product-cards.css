@@ -6221,7 +6221,12 @@ header .header-bottom .share-button svg {
     text-align: center;
     font-size: 14px;
 }
-
+.brands-stickers-text--desc{
+    background-color: #d5d5d526;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
 
 @media (max-width: 1854px) {
     .shopping__cart-payment-wrapper{

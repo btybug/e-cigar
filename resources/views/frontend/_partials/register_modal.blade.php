@@ -12,35 +12,35 @@
                 </div>
                 <div class="col-md-8 col-sm-10">
                     <div class="modal_right">
-                        <h2 class="text-uppercase text-main-clr font-20 modal-title">{!! __('create_account') !!}</h2>
-                        <p class="font-13 text-gray-clr modal-text">{!! __('create_account_desc') !!}</p>
-                        <form method="POST" action="{{ route('register') }}" class="register-form" id="register-form-1">
+                        <h2 class="text-uppercase text-main-clr font-20 modal-title text-center">{!! __('create_account') !!}</h2>
+{{--                        <p class="font-13 text-gray-clr modal-text">{!! __('create_account_desc') !!}</p>--}}
+                        <form method="POST" action="{{ route('register') }}" class="register-form mt-5" id="register-form-1">
                             @csrf
-                            <div class="d-flex flex-wrap">
-                                <div class="mr-2">
-                                    <label class="text-gray-clr register-form_label">{!! __('become_wholesaler') !!}</label>
-                                </div>
-                                <div class="row no-gutters form-checkes-outer d-flex justify-content-between">
-                                    <div>
-                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"
-                                               name="wholesaler" id="wholesaler1" value="0" checked>
-                                        <label
-                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
-                                            for="wholesaler1">
-                                            {!! __('no') !!}
-                                        </label>
-                                    </div>
-                                    <div>
-                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"
-                                               name="wholesaler" id="wholesaler2" value="1">
-                                        <label
-                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
-                                            for="wholesaler2">
-                                            {!! __('yes') !!}
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
+{{--                            <div class="d-flex flex-wrap">--}}
+{{--                                <div class="mr-2">--}}
+{{--                                    <label class="text-gray-clr register-form_label">{!! __('become_wholesaler') !!}</label>--}}
+{{--                                </div>--}}
+{{--                                <div class="row no-gutters form-checkes-outer d-flex justify-content-between">--}}
+{{--                                    <div>--}}
+{{--                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"--}}
+{{--                                               name="wholesaler" id="wholesaler1" value="0" checked>--}}
+{{--                                        <label--}}
+{{--                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"--}}
+{{--                                            for="wholesaler1">--}}
+{{--                                            {!! __('no') !!}--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                    <div>--}}
+{{--                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"--}}
+{{--                                               name="wholesaler" id="wholesaler2" value="1">--}}
+{{--                                        <label--}}
+{{--                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"--}}
+{{--                                            for="wholesaler2">--}}
+{{--                                            {!! __('yes') !!}--}}
+{{--                                        </label>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="row d-none wholesaler-box">
                                 <div class="col-md-6">
                                     <div class="form-group">
@@ -60,14 +60,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="firstName" class="text-gray-clr register-form_label">{!! __('first_name') !!}</label>
+                                        <label for="firstName" class="text-gray-clr register-form_label">{!! __('first_name') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>
                                         <input id="firstName" type="text" class="form-control register-form_input-text"
                                                name="name" value="{{ old('name') }}">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="lastName" class="text-gray-clr register-form_label">{!! __('last_name') !!}</label>
+                                        <label for="lastName" class="text-gray-clr register-form_label">{!! __('last_name') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>
                                         <input id="lastName" type="text" class="form-control register-form_input-text"
                                                name="last_name" value="{{ old('last_name') }}">
                                     </div>
@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="e-mail" class="text-gray-clr register-form_label">{!! __('e_mail_address') !!}</label>
+                                        <label for="e-mail" class="text-gray-clr register-form_label">{!! __('e_mail_address') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>
                                         <input id="e-mail" type="text" class="form-control register-form_input-text"
                                                name="email" value="{{ old('email') }}">
 
@@ -95,14 +95,14 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="password" class="text-gray-clr register-form_label">{!! __('password') !!}</label>
+                                        <label for="password" class="text-gray-clr register-form_label">{!! __('password') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>
                                         <input id="password" name="password" type="password"
                                                class="form-control register-form_input-text">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label for="confirmPassword" class="text-gray-clr register-form_label">{!! __('confirm_password') !!}</label>
+                                        <label for="confirmPassword" class="text-gray-clr register-form_label">{!! __('confirm_password') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>
                                         <input id="confirmPassword" type="password"
                                                class="form-control register-form_input-text"
                                                name="password_confirmation">
