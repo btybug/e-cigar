@@ -715,10 +715,15 @@ class StockController extends Controller
 
     public function stockSettings()
     {
-        $categories = Category::whereNull('parent_id')->where('type', 'stocks')->get();
-        $allCategories = Category::where('type', 'stocks')->get();
+        return $this->view('settings');
+    }
+
+    public function stockCategories($type)
+    {
+        $categories = Category::whereNull('parent_id')->where('type', $type)->get();
+        $allCategories = Category::where('type', $type)->get();
         enableMedia('drive');
-        return $this->view('settings', compact('categories','allCategories'));
+        return $this->view('categories', compact('categories','allCategories','type'));
     }
 
 }

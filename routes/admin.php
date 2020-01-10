@@ -522,6 +522,7 @@ Route::group(['prefix' => 'stock'], function () {
 
     Route::group(['prefix' => 'settings'], function () {
         Route::get('/', 'Admin\StockController@stockSettings')->name('admin_stock_settings');
+        Route::get('/categories/{type}', 'Admin\StockController@stockCategories')->name('admin_stock_categories');
     });
 
 
