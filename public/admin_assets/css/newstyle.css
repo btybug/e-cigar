@@ -2090,6 +2090,16 @@ table .faq-ansver{
 .select-products__modal .modal-stickers--list > li> a{
     flex: 1;
 }
+.admin-general--tabs{
+    flex: 1;
+}
+.admin-general--tabs .nav-link{
+    padding: .5rem 5rem;
+}
+.admin-general--tabs-wrapper a{
+    font-size: 32px !important;
+}
+
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

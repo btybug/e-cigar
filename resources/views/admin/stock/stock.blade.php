@@ -5,27 +5,27 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
-                <li class="nav-item">
-                    <a class="nav-link active" id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
-                       aria-controls="general" aria-selected="true" aria-expanded="true">Stocks</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
-                       aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link " id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+                <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
+                           aria-controls="general" aria-selected="true" aria-expanded="true">Products</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
+                           aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
+                    </li>
+                </ul>
+                <div class="nav-item ml-2">
+                    <a class="nav-link btn btn-success" id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Settings</a>
-                </li>
-            </ul>
+                </div>
+            </div>
+
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
-                            <h2 class="m-0">Stock</h2>
-                        <div class="ml-1">
-                            @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
-                        </div>
+                    <div class="ml-auto my-2">
+                        @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
                     </div>
                     <div class="card-body panel-body">
 
