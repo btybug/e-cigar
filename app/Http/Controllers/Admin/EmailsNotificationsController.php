@@ -233,7 +233,7 @@ class EmailsNotificationsController extends Controller
 
     public function getNewsletters()
     {
-        return $this->view('newsletters', compact(''));
+        return $this->view('newsletters');
     }
 
     public function postDeleteNewsletter(Request $request)
