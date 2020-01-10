@@ -229,33 +229,6 @@
 
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group">
-                                                                                <label class="col-sm-12 control-label pl-sm-0">
-                                                                                    {!! Form::hidden('special_filter',0) !!}
-                                                                                    Special Filter {!! Form::checkbox('special_filter',1,null,['id' => 'specialOffer']) !!}
-                                                                                </label>
-                                                                                <div id="special_offer_treeview_json" class="@if(! $model || !$model->special_filter) hide @endif">
-                                                                                    <div class="filter-wall cat-name row ml-4">
-                                                                                        <div class="col-12 p-sm-0">
-                                                                                            @foreach($special_filters as $special_filter)
-                                                                                                <div
-                                                                                                    class="single-wrap">
-                                                                                                    <div
-                                                                                                        class="custom-control custom-checkbox custom-control-inline align-items-center">
-                                                                                                        {!! Form::checkbox("special_filters[]",$special_filter->id,null,
-                                                                                                        ['class' => 'custom-control-input','id' => 'special_filter'.$special_filter->id]) !!}
-                                                                                                        <label
-                                                                                                            class="product-single-info_radio-label custom-control-label text-gray-clr font-15"
-                                                                                                            for="special_filter{{ $special_filter->id }}">{{ $special_filter->name }}
-                                                                                                        </label>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            @endforeach
-                                                                                        </div>
-                                                                                    </div>
-
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
                                                                     </div>
 
