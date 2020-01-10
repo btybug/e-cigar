@@ -110,7 +110,7 @@ class ItemsController extends Controller
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
-        
+
         ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         return redirect()->back();
     }
