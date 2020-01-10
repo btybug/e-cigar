@@ -53,7 +53,7 @@
 
                 <div class="stock-item-desc mt-1">
                     {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
-['class' => 'form-control stock-tiny-area','style' => 'height:300px !important;']) !!}
+['class' => 'form-control stock-tiny-areas','style' => 'height:300px !important;']) !!}
 
                 </div>
             </div>
