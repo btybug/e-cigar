@@ -109,9 +109,9 @@ class ItemsController extends Controller
         $item->specificationsPivot()->sync($request->get('specifications', []));
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
-        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
-
+        
+        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         return redirect()->back();
     }
 
@@ -131,7 +131,7 @@ class ItemsController extends Controller
         $racks = [];
         $shelves = [];
         $brands = Brands::all();
-        ActivityLogs::action('items', 'update', $model->id);
+
         return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
             'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));
     }
