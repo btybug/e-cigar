@@ -311,7 +311,9 @@
         $(document).ready(function () {
             $(".home__main-slider").carousel({
                 pagination: true,
-                controls: false
+                controls: false,
+                autoAdvance:true,
+                autoTime:'3000'
             });
 
             $(".home__main-slider-thumb").carousel({
