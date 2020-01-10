@@ -82,6 +82,15 @@
                                                                                 <label class="col-xl-2 control-label col-form-label"><span
                                                                                         data-toggle="tooltip"
                                                                                         title=""
+                                                                                        data-original-title="Attribute Name Title">Short Name</span></label>
+                                                                                <div class="col-xl-10">
+                                                                                    {!! Form::text('translatable['.strtolower($language->code).'][short_name]',get_translated($model,strtolower($language->code),'short_name'),['class'=>'form-control']) !!}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <label class="col-xl-2 control-label col-form-label"><span
+                                                                                        data-toggle="tooltip"
+                                                                                        title=""
                                                                                         data-original-title="Short Description">Short Description</span></label>
                                                                                 <div class="col-xl-10">
                                                                                     {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}

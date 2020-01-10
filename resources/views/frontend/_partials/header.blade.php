@@ -229,7 +229,7 @@
 {{--           'class' =>'select-2 currency--select-2 main-select main-select-2arrows arrow-dark',--}}
 {{--           'id' => 'change-currency'--}}
 {{--       ]) !!}--}}
-{{--        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}--}}
+        {!! Form::hidden('currency_symbol',get_symbol(),['id' => 'symbol']) !!}
 {{--    </div>--}}
 {{--</div>--}}
 

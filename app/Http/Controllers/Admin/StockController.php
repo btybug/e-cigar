@@ -23,6 +23,7 @@ use App\Models\Stickers;
 use App\Models\Stock;
 use App\Models\StockOfferProducts;
 use App\Models\StockSeo;
+use App\Models\StockVariation;
 use App\Models\Translations\StockTranslation;
 use App\Services\StockService;
 use Illuminate\Http\Request;
@@ -43,6 +44,22 @@ class StockController extends Controller
 
     public function stock()
     {
+        $stocks = Items::all();
+        foreach ($stocks as $stock){
+            $stock->translate('gb')->short_name = $stock->name;
+            $stock->save();
+        }
+
+        $filters = StockVariation::where('type','filter')->get();
+
+        if(count($filters)){
+            foreach ($filters as $filter){
+                $filter->image = $filter->item->image;
+                $filter->save();
+            }
+        }
+        dd('done');
+
         return $this->view('stock');
     }
 
@@ -236,7 +253,7 @@ class StockController extends Controller
 //        $this->createOrUpdateSeo($request, $stock->id);
 
         ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
-        
+
         return redirect()->back();
     }
 

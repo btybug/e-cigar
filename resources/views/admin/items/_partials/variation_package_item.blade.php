@@ -8,7 +8,7 @@
                 <div class="d-flex">
                     <div class="stock-item-photo-wrap">
                         <div class="item-photo">
-                                <img src="{{ ($stock) ? $stock->image: $item->image }}" alt="photo"  class="v-img">
+                                <img src="{{ $item->image }}" alt="photo"  class="v-img">
                         </div>
                         <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"
                                 class="form-control v-item-change">
@@ -24,16 +24,17 @@
                             @endforeach
                         </select>
                         <div class="my-1">
-                            {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($item) ? $item->name : null,['class' => 'form-control v-name']) !!}
+                            {!! Form::text("variations[$main_unique][variations][$uniqueID][name]",($item) ? $item->short_name : null,['class' => 'form-control v-name']) !!}
                             {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
                         </div>
                         <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
-                            @if($stock)
-                                <option value="{{ $stock->image }}" selected>Main Image</option>
+                            <option value="{{ $item->image }}" selected>Original Image</option>
+                            @if(isset($stock) && $stock)
+                                <option value="{{ $stock->image }}" >Main Image</option>
                                 @if($stock->other_images && count($stock->other_images))
                                     @foreach ($stock->other_images as $key => $value)
                                         <option
-                                            value="{{ $value }}" {{ ($value == $item->image) ? 'selected' : '' }}>
+                                            value="{{ $value }}">
                                             Extra Image {{$key+1}}
                                         </option>
                                     @endforeach

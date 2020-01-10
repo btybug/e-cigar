@@ -117,12 +117,12 @@ class Items extends Translatable
     ];
     public $translationModel = ItemTranslations::class;
 
-    public $translatedAttributes = ['name', 'short_description', 'long_description'];
+    public $translatedAttributes = ['name','short_name', 'short_description', 'long_description'];
 
     protected $appends = array('qty');
 
     const ACTIVE = 1;
-    const DRAFT = 1;
+    const DRAFT = 0;
 
     public function getQtyAttribute()
     {
@@ -131,7 +131,7 @@ class Items extends Translatable
 
     public function scopeActive($query)
     {
-        return $query->where('status', self::ACTIVE)->where('is_archive',false);
+        return $query->where('status', self::ACTIVE)->where('is_archive',self::DRAFT);
     }
 
 //    public function getBarcodesAttribute()

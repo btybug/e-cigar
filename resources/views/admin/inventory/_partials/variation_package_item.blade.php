@@ -33,8 +33,11 @@
                     {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
                 </div>
                 <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
+                    @if($package_variation && $package_variation->item)
+                    <option value="{{ $package_variation->item->image }}" selected>Original Image</option>
+                    @endif
                     @if($main && $main->stock)
-                        <option value="{{ $main->stock->image }}" selected>Main Image</option>
+                        <option value="{{ $main->stock->image }}" {{ ($value == $main->stock->image) ? 'selected' : '' }}>Main Image</option>
                         @if($main->stock->other_images && count($main->stock->other_images))
                             @foreach ($main->stock->other_images as $key => $value)
                                 <option

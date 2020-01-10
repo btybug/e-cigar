@@ -1158,10 +1158,10 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
                             <select class="form-control d-none" id="brand_select">
-                                
+
                             </select>
                             <select class="form-control d-none" id="category_select">
-                                
+
                             </select>
                         </div>
                     </div>
@@ -1170,7 +1170,7 @@
                         <p class="mb-0">Select All</p>
                     </div>
                     <ul class="all-list modal-stickers--list" id="stickers-modal-list">
-                        
+
                     </ul>
                 </div>
                 <div class="modal-footer">
@@ -1511,7 +1511,7 @@
                 } else {
                     $('.stock-form').submit();
                 }
-                
+
             });
 
 
@@ -1709,7 +1709,7 @@
 
 
             $(document).ready(function(){
-                
+
 
                 $("body").on("keyup",".search-sticker", function() {
                     var value = $(this).val().toLowerCase();
@@ -1858,7 +1858,7 @@
                 }
             });
 
-            
+
 
             $("body").on('click', '.select-offer-products', function () {
                 console.log()
@@ -1878,7 +1878,7 @@
                                                 data-id="${item.id}">ADD</a></li>`;
                             $("#productsModal .modal-body .all-list").append(html);
                         });
-                        
+
                         $("#productsModal").modal();
                     }
                 });
@@ -1971,7 +1971,7 @@
                     uniqueId: parent.attr('data-unqiue')
                 }, function (res) {
                     if (!res.error) {
-                        parent.find(".filter-variation-box").html(res.html);
+                        parent.find(".package-variation-box").html(res.html);
                     }
                 });
             });
@@ -2519,7 +2519,7 @@
             });
 
 
-            
+
 
             $("body").on('click', '.select-promotions', function () {
                 let arr = [];
@@ -2569,7 +2569,7 @@
                     .remove();
             });
 
-            
+
 
             $('body').on('click', 'a.nav-link[href="#mediastickers"]', function() {
                 setTimeout(function() {
