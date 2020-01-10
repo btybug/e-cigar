@@ -24,11 +24,8 @@
 
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="ml-auto my-2">
-                        @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
-                    </div>
-                    <div class="card-body panel-body">
-
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                    <div>
                         <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                             <!-- <option value="id" data-column="1" data-name="id">#</option> -->
 {{--                            <option value="Name" data-column="2" data-name="name">Name</option>--}}
@@ -38,6 +35,15 @@
                             <option value="Image" data-column="6" data-name="image">Image</option>
                             <option value="Added/Last Modified Date" data-column="7" data-name="created_at">Added/Last Modified Date</option>
                         </select>
+                    </div>
+                    <div class="ml-1">
+                        @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
+                    </div>
+                    </div>
+                    
+                    <div class="card-body panel-body pt-0">
+
+                        
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -210,7 +216,7 @@
                     "bPaginate": true,
                     "scrollX": true,
                     "order": [[ 1, "asc" ]],
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
@@ -332,6 +338,7 @@
                                     column.search($(this).val(), false, false, true).draw();
                                 });
                         });
+
                     }
                 });
 
