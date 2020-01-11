@@ -132,8 +132,8 @@
                                                                  alt="{{ $item->name }}">
                                                         </div>
                                                         <h6 class="font-18 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
-                                                        <p class="font-18 lh-1 order__product-sec-title">Cola Shades
-                                                            E-Juice</p>
+                                                        {{--<p class="font-18 lh-1 order__product-sec-title">Cola Shades--}}
+                                                            {{--E-Juice</p>--}}
                                                         <div class="order__product-info">
                                                             @if(! $order->type)
                                                                 @if(count($item->options['options']))
@@ -144,7 +144,7 @@
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-9 font-15 font-main-bold">
-                                                                                            {{ $op['title'] ." - ". $op['name'] }}
+                                                                                            {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
                                                                                             @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
                                                                                                 ({{ "Pack of ".$op['discount']['qty'] }})
                                                                                             @endif
@@ -194,7 +194,7 @@
                                                                         </div>
                                                                         <div class="title-offers">
                                                                             <p class="font-18 lh-1 mb-0">
-                                                                                {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                                {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
                                                                                 @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
                                                                                     ({{ "Pack of ".$ext['discount']['qty'] }})
                                                                                 @endif
@@ -260,7 +260,7 @@
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-9 font-15 font-main-bold">
-                                                                                            {{ $op['title'] ." - ". $op['name'] }}
+                                                                                            {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
                                                                                             @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
                                                                                                 ({{ "Pack of ".$op['discount']['qty'] }})
                                                                                             @endif
@@ -310,7 +310,7 @@
                                                                         </div>
                                                                         <div class="title-offers">
                                                                             <p class="font-18 lh-1 mb-0">
-                                                                                {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                                {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
                                                                                 @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
                                                                                     ({{ "Pack of ".$ext['discount']['qty'] }})
                                                                                 @endif

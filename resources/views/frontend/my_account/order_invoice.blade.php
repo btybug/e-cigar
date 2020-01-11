@@ -53,7 +53,7 @@
                                                                 <div class="col-md-8">
                                                                     @foreach($option['options'] as $op)
                                                                         <p>
-                                                                            {{ @$op['name'] }}
+                                                                            {{ @$op['variation']['item']['short_name'] }}
                                                                         </p>
                                                                     @endforeach
                                                                 </div>
@@ -75,7 +75,7 @@
                                                                     <div class="col-md-8">
                                                 @foreach($option['options'] as $op)
                                                     <p>
-                                                        {{ $op['name'] }}
+                                                        {{ $op['variation']['item']['short_name'] }}
                                                     </p>
                                     @endforeach
 

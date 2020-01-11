@@ -137,7 +137,7 @@
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-8 font-15 font-main-bold">
-                                                                                            {{ $voption['option']->name }}
+                                                                                            {{ $voption['option']->item->short_name }}
 
                                                                                         </div>
                                                                                         <div
@@ -181,7 +181,7 @@
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-8 font-15 font-main-bold">
-                                                                                            {{ $voption['option']->name }}
+                                                                                            {{ $voption['option']->item->short_name }}
                                                                                             @if(isset($discount) && $voption['option']->price_type == 'fixed')
                                                                                                 ({{ "Pack of $discount->qty" }})
                                                                                             @endif
@@ -210,7 +210,7 @@
                                                                                 <div class="row">
                                                                                     <div
                                                                                         class="col-sm-8 font-15 font-main-bold">
-                                                                                        {{ $option['group']->name }}
+                                                                                        {{ $option['group']->item->short_name }}
 
                                                                                     </div>
                                                                                     <div
@@ -277,7 +277,7 @@
                                                                         </div>
                                                                         <div class="info-product">
                                                                             <h6 class="font-21 text-tert-clr title">
-                                                                            {{ $extra['offer']->name }}
+                                                                            {{ $extra['offer']->item->short_name }}
                                                                             </h6>
                                                                             <div
                                                                                 class="d-flex align-items-center price-wall">

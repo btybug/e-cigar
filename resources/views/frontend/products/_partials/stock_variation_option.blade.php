@@ -17,7 +17,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
-                    <span class="text-truncate">{!! $variation->first()->name !!}</span>
+                    <span class="text-truncate">{!! $variation->first()->item->short_name !!}</span>
                 </div>
             @else
                 <select name="variations[{{ $vSettings->variation_id }}][]"
@@ -33,7 +33,7 @@
                     @foreach($variation as $item)
                         <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
                                 @endif data-out="{{ out_of_stock($item) }}">
-                            {{ $item->name }}
+                            {{ $item->item->short_name }}
                             <b>{{ out_of_stock_msg($item) }}</b>
                         </option>
                     @endforeach
@@ -46,7 +46,7 @@
                 class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
             <i class="fas fa-times"></i>
             </span>
-            <span class="font-sec-light font-26">{{ $selected->name }}</span>
+            <span class="font-sec-light font-26">{{ $selected->item->short_name }}</span>
         </div>
     @elseif($vSettings->display_as == 'list' && $vSettings->type == 'single')
         <div class="d-flex flex-wrap product__single-item-info-size">
@@ -57,7 +57,7 @@
                        id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
-                    <span class="text-truncate">{!! $variation->first()->name !!}</span>
+                    <span class="text-truncate">{!! $variation->first()->item->short_name !!}</span>
                 </div>
             @else
                 <div class="product_radio-single d-flex flex-column">
@@ -75,7 +75,7 @@
                                    value="{{ $item->id }}">
                             <label class="custom-label"
                                    for="single_v_select_{{ $item->id.$x }}">
-                                <span class="font-sec-ex-light font-26 count">{{ $item->name }}</span>
+                                <span class="font-sec-ex-light font-26 count">{{ $item->item->short_name }}</span>
                             </label>
                         </div>
                     @endforeach
@@ -98,7 +98,7 @@
                            value="{{ $selected->id }}">
                     <label class="custom-label checkbox-select"
                            for="single_v_select_{{ $selected->id.$x }}">
-                        <span class="font-sec-ex-light font-26 count">{{ $selected->name }}</span>
+                        <span class="font-sec-ex-light font-26 count">{{ $selected->item->short_name }}</span>
                         <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
   <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
@@ -114,7 +114,7 @@
                 class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
             <i class="fas fa-times"></i>
             </span>
-            <span class="font-sec-light font-26">{{ $selected->name }}</span>
+            <span class="font-sec-light font-26">{{ $selected->item->short_name }}</span>
         </div>
         {{--<div class="d-flex flex-wrap product__single-item-info-size">--}}
         {{--<div class="product_radio-single">--}}

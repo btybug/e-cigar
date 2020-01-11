@@ -252,8 +252,8 @@ class StockController extends Controller
         }
 //        $this->createOrUpdateSeo($request, $stock->id);
 
-        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
-
+//        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
+//
         return redirect()->back();
     }
 

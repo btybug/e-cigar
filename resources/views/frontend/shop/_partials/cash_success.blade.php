@@ -176,8 +176,8 @@
                                                              alt="{{ $item->name }}">
                                                     </div>
                                                     <h6 class="font-20 text-tert-clr lh-1 order__product-title text-truncate">{{ $item->name }}</h6>
-                                                    <p class="font-20 lh-1 order__product-sec-title">Cola Shades
-                                                        E-Juice</p>
+                                                    {{--<p class="font-20 lh-1 order__product-sec-title">Cola Shades--}}
+                                                        {{--E-Juice</p>--}}
                                                     <div class="order__product-info">
                                                         @if(count($item->options['options']))
                                                             <ul class="list-unstyled mb-0">
@@ -185,9 +185,10 @@
                                                                     <li class="single-row-product">
                                                                         @foreach($option['options'] as $op)
                                                                             <div class="row">
+
                                                                                 <div
                                                                                     class="col-sm-9 font-15 font-main-bold">
-                                                                                    {{ $op['title'] ." - ". $op['name'] }}
+                                                                                    {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
                                                                                 </div>
                                                                                 <div
                                                                                     class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
@@ -215,7 +216,7 @@
                                                                     </div>
                                                                     <div class="title-offers">
                                                                         <p class="font-18 lh-1 mb-0">
-                                                                            {{ $ext['title'] ." - ". $ext['name'] }}
+                                                                            {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
                                                                         </p>
                                                                     </div>
                                                                 </div>

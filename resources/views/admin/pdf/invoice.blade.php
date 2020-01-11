@@ -118,7 +118,7 @@
                                             @endphp
                                             <div class="single-item">
                                                 <span class="single-item-name">
-                                                     {{ $op['title'] ." - ". $op['name'] }}
+                                                     {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
                                                     @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
                                                         ({{ "Pack of ".$op['discount']['qty'] }})
                                                     @endif
@@ -146,7 +146,7 @@
                                                 @endphp
                                                 <div class="single-item">
                                                     <span class="single-item-name">
-                                                         {{ $ext['title'] ." - ". $ext['name'] }}
+                                                         {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
                                                         @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
                                                             ({{ "Pack of ".$ext['discount']['qty'] }})
                                                         @endif
