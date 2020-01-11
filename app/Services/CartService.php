@@ -307,6 +307,9 @@ class CartService
                                                     $error = "Option not found";
                                                 }
                                             }
+                                        }elseif($option->price_type == 'dynamic'){
+                                            $this->price += $p['qty'] * $option->item->default_price;
+                                            $itemPrice += $p['qty'] * $option->item->default_price;
                                         }else{
                                             $this->price += $p['qty'] * $option->price;
                                             $itemPrice += $p['qty'] * $option->price;
@@ -391,7 +394,7 @@ class CartService
                                             $option = $offer->variations()->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
                                             if ($option) {
                                                 $p['qty'] = ($p['qty'])??1;
-                                                if($option->price_type == 'discount'){
+                                                if($option->price_type == 'fixed' || $option->price_type == 'range'){
                                                     if($p['discount_id'] == null){
                                                         $discount = $option->discounts()->where('from','<=',$p['qty'])->where('to','>=',$p['qty'])->first();
                                                         if($discount) {
@@ -409,6 +412,9 @@ class CartService
                                                             $error = "Option not found";
                                                         }
                                                     }
+                                                }elseif($option->price_type == 'dynamic'){
+                                                    $this->price += $p['qty'] * $option->item->default_price;
+                                                    $itemPrice += $p['qty'] * $option->item->default_price;
                                                 }else{
                                                     $this->price += $p['qty'] * $option->price;
                                                     $itemPrice += $p['qty'] * $option->price;

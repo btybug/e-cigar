@@ -170,6 +170,8 @@
                                                                                 if($discount){
                                                                                     $price = $discount->price* $voption['qty'];
                                                                                 }
+                                                                            }else if($voption['option']->price_type == 'dynamic'){
+                                                                                $price = $voption['option']->item->default_price * $voption['qty'];
                                                                             }else{
                                                                                 $price = $voption['option']->price * $voption['qty'];
                                                                             }

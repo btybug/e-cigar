@@ -28,7 +28,7 @@
         @endif
     @endif
     <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"
-         data-single-price="{{ ($selected)?$selected->price:0 }}">
+         data-single-price="{{ ($selected)?(($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price):0 }}">
         @include("frontend.products._partials.stock_variation_option")
     </div>
 

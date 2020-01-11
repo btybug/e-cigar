@@ -210,6 +210,12 @@
                 @else
                     not found
                 @endif
+            @elseif($selected->price_type == 'dynamic')
+                <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->item->default_price }}">
+                    <span class="font-40">
+                            {{ convert_price($selected->item->default_price,$currency, false) }}
+                    </span>
+                </div>
             @endif
         @endif
     @elseif($vSettings->price_per == 'item')

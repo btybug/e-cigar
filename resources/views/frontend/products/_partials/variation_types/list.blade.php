@@ -26,7 +26,7 @@
     @if(count($variation))
         @foreach($variation as $selected)
             <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"
-                 data-single-price="{{ $selected->price }}">
+                 data-single-price="{{ ($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price }}">
                 @include("frontend.products._partials.stock_variation_option")
             </div>
         @endforeach
