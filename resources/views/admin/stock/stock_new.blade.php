@@ -2569,8 +2569,8 @@
                         res.data.forEach(item => {
                             let html = `<li data-id="${item.id}" class="option-elm-modal"><a
                                                 href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-sticker-event searchable" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></li>`;
+                                                </a> <div class="btn btn-primary add-sticker-event searchable" data-name="${item.name}"
+                                                data-id="${item.id}">ADD</div></li>`;
                             $("#stickerModal .modal-body .all-list").append(html);
                         })
                         ;
