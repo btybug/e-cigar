@@ -44,7 +44,7 @@
                             <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->name }}">
                                 <div class="item-content">
                                     <div class="item-photo">
-                                        <img src="{{ $item->image }}" alt="photo">
+                                        <img src="{{ media_image_tmb($item->image) }}" alt="photo">
                                     </div>
                                     <div class="item-title">
                                         <span>{!! $item->name !!}</span>
