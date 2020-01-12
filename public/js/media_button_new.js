@@ -723,7 +723,28 @@ const App = function() {
     },
 
     remove_modal: (id, name, iorf) => {
-      return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
+      console.log(id, name, iorf)
+      // return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
+      //           <div class="modal-dialog" role="document">
+            
+      //             <!-- Modal content-->
+      //             <div class="modal-content">
+      //               <div class="modal-header">
+      //                 <h4 class="modal-title">Remove images</h4>
+      //                 <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
+      //               </div>
+      //               <div class="modal-body">
+      //                     <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
+      //               </div>
+      //               <div class="modal-footer">
+      //                <button bb-media-click="close_name_modal" type="button" class="btn btn-primary btn-save" data-dismiss="modal">Close</button>
+      //                       <button type="button" data-id=${id} class="btn btn-secondary btn-close" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
+      //               </div>
+      //             </div>
+            
+      //           </div>
+      //         </div>`);
+              return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog" role="document">
             
                   <!-- Modal content-->
@@ -733,11 +754,11 @@ const App = function() {
                       <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
                     </div>
                     <div class="modal-body">
-                          <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
+                          <p>Do You want to remove selected items?</p>
                     </div>
                     <div class="modal-footer">
                      <button bb-media-click="close_name_modal" type="button" class="btn btn-primary btn-save" data-dismiss="modal">Close</button>
-                            <button type="button" data-id=${id} class="btn btn-secondary btn-close" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
+                            <button type="button" class="btn btn-secondary btn-close done_remove_items">Remove</button>
                     </div>
                   </div>
             
@@ -1639,66 +1660,6 @@ const App = function() {
       this.requests.saveSeo($(elm).closest('form').serializeArray());
     },
     //********App -> events -> save_seo********end
-
-    remove_folder: (elm, e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      const id = (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id")),
-            name = e.target
-              .closest(".file") ? e.target
-              .closest(".file")
-              .querySelector(".file-name")
-              .textContent.trim() : elm.closest('.dd-item').querySelector('.dd-handle').innerText;
-      $('#modal_area').html(this.htmlMaker.remove_modal(id, name));
-    },
-
-    //********App -> events -> remove_folder********start
-    remove_folder_req: (elm, e) => {
-      e.stopPropagation();
-      e.preventDefault();
-
-      const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
-      if(!id) return;
-      const tree = $('#folder-list2>ol'),
-            leaf = tree.find(`[data-id="${id}"]`),
-            {makeTreeLeaf} = this.htmlMaker,
-            {close_name_modal} = this.events,
-            {removeTreeFolder} = this.requests;
-
-      removeTreeFolder(
-        {
-          folder_id: Number(id),
-          trash: 1,
-          access_token: "string"
-        },
-        () => {
-          !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-          close_name_modal();
-
-          const ol = leaf.closest('ol');
-          const li = leaf.closest('li');
-          const key = ol.closest('li').attr('data-id');
-          const name = ol.closest('li').children('div')[0] ? ol.closest('li').children('div')[0].innerText : null;
-
-          li.remove();
-          name && ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
-
-          if(globalFolderId === 1) {
-            tree.find(`[data-id="${id}"]`).remove();
-
-          }
-          // const ol = leaf.closest('ol');
-          // const li = leaf.closest('li');
-          // const key = ol.closest('li').attr('data-id');
-          // const name = ol.closest('li').children('div')[0].innerText;
-          // console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
-          //
-          // li.remove();
-          // ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
-        }
-      );
-    },
-    //********App -> events -> remove_folder********end
     
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
@@ -1891,7 +1852,16 @@ const App = function() {
     },
     //********App -> events -> modal_load_image********end
 
-    //********App -> events -> remove_image********start
+    //********App -> events -> remove_items********start
+    remove_items: (elm, e, elements) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      console.log(elm, e, elements);
+      const modal = this.htmlMaker.remove_modal();
+      $('#modal_area').html(modal);
+    },
+
     remove_image: (elm, e, elements) => {
       e.preventDefault();
       e.stopPropagation();
@@ -1905,17 +1875,84 @@ const App = function() {
       $('#modal_area').html(modal);
     },
 
-    remove_image_req: (elm, e) => {
-      const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
+    remove_folder: (elm, e) => {
+      e.stopPropagation();
+      e.preventDefault();
+      const id = (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id")),
+            name = e.target
+              .closest(".file") ? e.target
+              .closest(".file")
+              .querySelector(".file-name")
+              .textContent.trim() : elm.closest('.dd-item').querySelector('.dd-handle').innerText;
+      $('#modal_area').html(this.htmlMaker.remove_modal(id, name, 'folder'));
+    },
+
+    remove_image_req: (elm, e, ids) => {
+      // const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
+      if(ids.length === 0) return;
+
       this.requests.removeImage(
         {
-          item_id: this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
+          item_id: ids,
+          // this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
           trash: true,
           access_token: "string"
         },
         this.events.close_name_modal
       );
     },
+
+    
+
+    //********App -> events -> remove_folder********start
+    remove_folder_req: (elm, e, ids) => {
+      e.stopPropagation();
+      e.preventDefault();
+
+      // const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
+      if(ids.length === 0) return;
+      // const tree = $('#folder-list2>ol'),
+      //       leaf = tree.find(`[data-id="${id}"]`),
+      //       {makeTreeLeaf} = this.htmlMaker,
+      //       {close_name_modal} = this.events,
+      //       {removeTreeFolder} = this.requests;
+
+      this.requests.removeTreeFolder(
+        {
+          folder_id: ids,
+          // Number(id),
+          trash: 1,
+          access_token: "string"
+        },
+        () => {
+          this.requests.drawingItems();
+          // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
+          // close_name_modal();
+
+          // const ol = leaf.closest('ol');
+          // const li = leaf.closest('li');
+          // const key = ol.closest('li').attr('data-id');
+          // const name = ol.closest('li').children('div')[0] ? ol.closest('li').children('div')[0].innerText : null;
+
+          // li.remove();
+          // name && ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
+
+          // if(globalFolderId === 1) {
+          //   tree.find(`[data-id="${id}"]`).remove();
+
+          // }
+          // const ol = leaf.closest('ol');
+          // const li = leaf.closest('li');
+          // const key = ol.closest('li').attr('data-id');
+          // const name = ol.closest('li').children('div')[0].innerText;
+          // console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
+          //
+          // li.remove();
+          // ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
+        }
+      );
+    },
+    //********App -> events -> remove_folder********end
 
     copy_images: (elm, e) => {
       this.selectedImage.length > 0 &&  $('#modal_area').html(this.htmlMaker.copy_modal(this.selectedImage));
@@ -2196,8 +2233,33 @@ $('.delete_items').on('click', (ev) => {
     $('.remover-container').toggleClass('d-none');
     $('.uploader-container').addClass('d-none');
   };
-  app.selectedImage.length !== 0 ? app.events.remove_image(undefined, ev) : toggle();
+
+  console.log($('.file-box.active').length)
+
+  if($('.file-box.active').length !== 0) {
+    app.events.remove_items(undefined, ev);
+  } else {
+    toggle();
+  }
 });
+
+$('body').on('click','.done_remove_items', (ev) => {
+  const folders_ids = [];
+  $('.file-box.folder-container.active').map((el, i) => {
+    folders_ids.push(Number($(i).find('.file').data('id')));
+  });
+  const images_ids = [];
+  $('.file-box.image-container.active').map((el,i) => {
+    images_ids.push($(i).find('.file').data('id'));
+  });
+
+  console.log(folders_ids, images_ids)
+
+  app.events.remove_image_req(undefined, ev, images_ids);
+  folders_ids.map((id) => {
+    app.events.remove_folder_req(undefined, ev, Number(id));
+  })
+})
 
 const removeCheckedImage = (el) => {
   const id = $(el.closest('[data-id]')).attr('data-id');
