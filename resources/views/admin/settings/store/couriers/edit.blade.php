@@ -6,8 +6,8 @@
 
     <div class="inventory_attributes">
         <div class="card panel panel-default">
-                    <div class="card-header panel-heading clearfix">
-                        <h2 class="mb-0 pull-left">Attribute</h2>
+                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+                        <h2 class="mb-0 mr-1">Attribute</h2>
                         <div class="button-save text-right">
                             <a class="btn btn-default"
                                href="{!! route('admin_store_attributes') !!}">Back</a>

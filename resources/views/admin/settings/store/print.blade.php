@@ -4,7 +4,8 @@
 @stop
 @section('content')
     <div class="container-fluid">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+        <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
@@ -42,6 +43,7 @@
                    aria-controls="printing" aria-selected="true" aria-expanded="true">Printing</a>
             </li>
         </ul>
+        </div>
         <div class="tab-content">
             {!! Form::model($model,['class'=>'form-horizontal']) !!}
             <div>

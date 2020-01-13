@@ -27,29 +27,35 @@
 
             <div class="tab-content w-100">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading">
+                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                         <h2 class="m-0 pull-left">Notification</h2>
                         @ok('create_admin_emails_notifications_send_email')
-                        <div class="text-right">
-                            <a class="btn btn-primary"
-                               href="{!! route('create_admin_emails_notifications_send_email') !!}">Create
-                                notification</a>
-                        </div>
                         <div class="text-right">
                             <a class="btn btn-warning" href="{!! route('admin_emails_notifications_settings') !!}">Settings</a>
                         </div>
                         @endok
                     </div>
-                    <div class="card-body panel-body notification--body">
-                        <select name="table_head" id="table_head_id" class="selectpicker" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Status" data-column="1" data-name="status">Status</option>
-                            <option value="Type" data-column="2" data-name="category_id">Type</option>
-                            <option value="From" data-column="3" data-name="from">From</option>
-                            <option value="Subject" data-column="4" data-name="subject">Subject</option>
-                            <option value="Created At" data-column="5" data-name="created_at">Created At</option>
-                            <option value="Actions" data-column="6" data-name="actions">Actions</option>
-                        </select>
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" class="selectpicker" multiple>
+                                <option value="#" data-column="0" data-name="id">#</option>
+                                <option value="Status" data-column="1" data-name="status">Status</option>
+                                <option value="Type" data-column="2" data-name="category_id">Type</option>
+                                <option value="From" data-column="3" data-name="from">From</option>
+                                <option value="Subject" data-column="4" data-name="subject">Subject</option>
+                                <option value="Created At" data-column="5" data-name="created_at">Created At</option>
+                                <option value="Actions" data-column="6" data-name="actions">Actions</option>
+                            </select>
+                        </div>
+                        @ok('create_admin_emails_notifications_send_email')
+                        <div>
+                            <a class="btn btn-primary"
+                               href="{!! route('create_admin_emails_notifications_send_email') !!}">Create
+                                notification</a>
+                        </div>
+                        @endok
+                    </div>
+                    <div class="card-body panel-body notification--body pt-0">
                         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -118,7 +124,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     buttons: [

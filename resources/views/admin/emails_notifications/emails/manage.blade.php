@@ -2,15 +2,15 @@
 
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
             <div class="pull-left">
                 <h3>Email</h3>
                 {!! Form::model($model) !!}
             </div>
-            <div class="pull-right">
+            <div>
                 <div class="text-right btn-save">
                     {!! media_button('template',null,false,'html') !!}
-                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-primary mt-1">Save</button>
                 </div>
             </div>
         </div>
