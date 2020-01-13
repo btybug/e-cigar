@@ -1,9 +1,10 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
-            <h2 class="m-0">Barcodes</h2>
-
+{{--        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">--}}
+{{--            <h2 class="m-0">Barcodes</h2>--}}
+{{--        </div>--}}
+        <div class="d-flex justify-content-end px-4 mt-2">
             <div class="d-flex flex-wrap">
                 <span class="btn btn-success mx-2" data-toggle="modal" data-target="#barcodeModalCenter">
   Settings
@@ -14,9 +15,8 @@
                 </div>
                 @endok
             </div>
-
         </div>
-        <div class="card-body panel-body">
+        <div class="card-body panel-body pt-0">
             <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -220,7 +220,7 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [

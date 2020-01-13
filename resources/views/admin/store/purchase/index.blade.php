@@ -5,7 +5,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="row">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="info-tab" href="javascript:void(0)" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Purchase</a>
@@ -16,28 +17,37 @@
                 </li>
 
             </ul>
+            </div>
             <div class="tab-content w-100">
                 <div class="clearfix mb-2">
                     {{--                        <h2 class="m-0 pull-left">Purchase</h2>--}}
-                    @ok('admin_inventory_purchase_new')
-                    <div class="pull-right">
-                        <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
-                    </div>
-                    @endok
+
                 </div>
                 <div class="card panel panel-default">
-                    <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" class="selectpicker" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Name" data-column="1" data-name="name">Name</option>
-                            <option value="SKU" data-column="2" data-name="sku">SKU</option>
-                            <option value="Owner" data-column="3" data-name="user_id">Owner</option>
-                            <option value="Qty" data-column="4" data-name="qty">Qty</option>
-                            <option value="Price" data-column="5" data-name="price">Price</option>
-                            <option value="Purchase Date" data-column="6" data-name="purchase_date">Purchase Date</option>
-                            <option value="Entry Date" data-column="7" data-name="created_at">Entry Date</option>
-                            <option value="Actions" data-column="8" data-name="actions">Actions</option>
-                        </select>
+                    <div class="d-flex justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" class="selectpicker" multiple>
+                                <option value="#" data-column="0" data-name="id">#</option>
+                                <option value="Name" data-column="1" data-name="name">Name</option>
+                                <option value="SKU" data-column="2" data-name="sku">SKU</option>
+                                <option value="Owner" data-column="3" data-name="user_id">Owner</option>
+                                <option value="Qty" data-column="4" data-name="qty">Qty</option>
+                                <option value="Price" data-column="5" data-name="price">Price</option>
+                                <option value="Purchase Date" data-column="6" data-name="purchase_date">Purchase Date</option>
+                                <option value="Entry Date" data-column="7" data-name="created_at">Entry Date</option>
+                                <option value="Actions" data-column="8" data-name="actions">Actions</option>
+                            </select>
+                        </div>
+                        <div>
+                            @ok('admin_inventory_purchase_new')
+                            <div class="pull-right">
+                                <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
+                            </div>
+                            @endok
+                        </div>
+                    </div>
+                    <div class="card-body panel-body pt-0">
+
                         <table id="categories-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -108,7 +118,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [
