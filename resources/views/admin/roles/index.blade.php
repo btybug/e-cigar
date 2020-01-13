@@ -5,15 +5,18 @@
 @section('content')
     <div class="card panel panel-default">
 
-        <div class="card-header panel-heading clearfix">
-            <div class="pull-left">
-                <h2 class="m-0">Roles</h2>
-            </div>
-            <div class="pull-right">
+{{--        <div class="card-header panel-heading clearfix">--}}
+{{--            <div class="pull-left">--}}
+{{--                <h2 class="m-0">Roles</h2>--}}
+{{--            </div>--}}
+{{--            --}}
+{{--        </div>--}}
+        <div class="d-flex justify-content-end px-4 mt-2">
+            <div>
                 <a class="btn btn-warning pull-right text-white" href="{!! route('admin_create_role') !!}">Create Role</a>
             </div>
         </div>
-        <div class="card-body panel-body">
+        <div class="card-body panel-body pt-0">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -39,7 +42,7 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [
