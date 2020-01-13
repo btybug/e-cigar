@@ -6,6 +6,7 @@ use App\Http\Middleware\ActivityMiddleware;
 use App\Http\Middleware\CorsMiddlewaer;
 use App\Http\Middleware\CurrencyMiddleware;
 use App\Http\Middleware\HttpsProtocol;
+use App\Http\Middleware\SuperAdminMiddleware;
 use App\Http\Middleware\UserCan;
 use App\Http\Middleware\WholesalerIsVerifiedMiddleware;
 use App\Http\Middleware\WholesalerMiddleware;
@@ -90,6 +91,7 @@ class Kernel extends HttpKernel
         'wholesaler' => WholesalerMiddleware::class,
         'is_not_verifyed_wholesaler' => WholesalerNotVerifiedMiddleware::class,
         'verifyed_wholesaler' => WholesalerIsVerifiedMiddleware::class,
+        'superadmin' => SuperAdminMiddleware::class,
     ];
 
     /**

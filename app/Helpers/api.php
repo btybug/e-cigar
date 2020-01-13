@@ -239,6 +239,11 @@ function userCan($permission)
 {
     if (!Auth::check()) return false;
     $role = Auth::user()->role;
+    if($permission=='admin_role_membership'){
+        if ($role->slug != 'superadmin'){
+            return false;
+        }
+    };
     if ($role->slug == 'superadmin' || $role->slug == 'admin') return true;
     return $role->can($permission);
 }

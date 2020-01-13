@@ -222,7 +222,7 @@ Route::group(['prefix' => 'users'], function () {
     Route::get('/disable-review/{id}', 'Admin\UserController@getDisableReview')->name('admin_users_disable_review');
     Route::get('/allow-edit-review/{id}', 'Admin\UserController@getAllowEditReview')->name('admin_users_allow_edit_review');
 
-    Route::group(['prefix' => 'roles-mebership'], function () {
+    Route::group(['prefix' => 'roles-mebership','middleware'=>'superadmin'], function () {
         Route::get('/', 'Admin\RolesController@index')->name('admin_role_membership');
         Route::get('/create', 'Admin\RolesController@create')->name('admin_create_role');
         Route::post('/create', 'Admin\RolesController@postCreate')->name('post_admin_create_role');
