@@ -18842,7 +18842,21 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .home_slider-wrapper {
     position: relative;
 }
-
+.home_slider-wrapper .home__main-slider{
+    height: 700px;
+}
+.home_slider-wrapper .home__main-slider div img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+.home_slider-wrapper .home__main-slider .fs-carousel-viewport,
+.home_slider-wrapper .home__main-slider .fs-carousel-wrapper,
+.home_slider-wrapper .home__main-slider .fs-carousel-container,
+.home_slider-wrapper .home__main-slider .fs-carousel-canister,
+.home_slider-wrapper .home__main-slider .fs-carousel-item{
+    height: 100%;
+}
 .home__main-slider-thumb {
     position: absolute !important;
     top: 50px;
@@ -18918,6 +18932,19 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     }
 }
 /*home page slider end*/
+.bottom__main-slider {
+    height: 300px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.bottom__main-slider div {
+    height: 100%;
+}
+.bottom__main-slider img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 /*home brands start*/
 .home_brands-wrapper {
     background-image: url('/public/img/home-brand-bg.jpg');
@@ -20574,7 +20601,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     border-left: 0;
 }
 .product__single-wrapper .technical-features-content-right a{
-    color: #7c7c7c;
+    /*color: #7c7c7c;*/
+    color: #282828;
+    font-weight: bold;
 }
 .product__single-wrapper .technical-features-content .technical-features-content-wall:not(:first-of-type) .technical-features-content-right {
     border-top: 0;
@@ -23464,7 +23493,7 @@ flex-direction: column;
         font-size: 22px;
     }
 
-    .home__main-slider .main-slider-wall {
+    .home__main-slider .main-slider-wall,.home__main-slider {
         height: 500px;
     }
 
@@ -23911,7 +23940,7 @@ flex-direction: column;
         right: 0;
     }
 
-    .home__main-slider .main-slider-wall {
+    .home__main-slider .main-slider-wall,.home__main-slider {
         height: 280px;
     }
 }

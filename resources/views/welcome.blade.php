@@ -319,21 +319,6 @@
     <link href="/public/plugins/formstone/light.css" rel="stylesheet">
     <link href="/public/css/carousel.css" rel="stylesheet">
     <link href="/public/css/home-slider.css" rel="stylesheet">
-    <style>
-        .bottom__main-slider {
-            height: 300px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-        }
-        .bottom__main-slider div {
-            height: 100%;
-        }
-        .bottom__main-slider img {
-            height: 100%;
-            width: 100%;
-            object-fit: cover;
-        }
-    </style>
 @stop
 
 @section('js')
