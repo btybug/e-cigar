@@ -32,7 +32,7 @@
                                                         class="btn btn-primary add-new-social-input">
                                                     <i class="fa fa-plus"></i></button>
                                             @else
-                                                <button
+                                                <button type="button"
                                                     class="plus-icon remove-new-banner-input btn btn-danger">
                                                     <i class="fa fa-minus"></i></button>
                                             @endif
@@ -50,6 +50,58 @@
                                     </div>
                                     <div class="col-sm-3">
                                         <button type="button" class="btn btn-primary add-new-social-input">
+                                            <i
+                                                class="fa fa-plus"></i></button>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card panel panel-default social-profile-page mb-3">
+                    <div class="card-header panel-heading">Bottom slider</div>
+                    <div class="card-body panel-body">
+                        <div class="form-group d-flex flex-wrap align-items-center bottom-group">
+                            @if($bottom && isset($bottom->data) && @json_decode($bottom->data,true))
+                                @php
+                                    $data = json_decode($bottom->data,true);
+
+                                @endphp
+                                @foreach($data as $key => $bottom_banner)
+                                    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                        <div class="col-sm-6 p-0">
+                                            <div class="input-group">
+                                                <div class="input-group-prepend">
+                                                    {!! media_button('bottom_banner[]',$bottom_banner) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-3">
+                                            @if(!$key)
+                                                <button type="button"
+                                                        class="btn btn-primary add-new-bottom">
+                                                    <i class="fa fa-plus"></i></button>
+                                            @else
+                                                <button type="button"
+                                                    class="plus-icon remove-new-bottom-input btn btn-danger">
+                                                    <i class="fa fa-minus"></i></button>
+                                            @endif
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                    <div class="col-sm-6 p-0">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                {!! media_button('bottom_banner[]',$bottom) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button type="button" class="btn btn-primary add-new-bottom">
                                             <i
                                                 class="fa fa-plus"></i></button>
                                     </div>
@@ -199,7 +251,22 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                <button type="button" class="plus-icon remove-new-banner-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </script>
+<script type="template" id="add-more-bottom">
+        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+            <div class="col-sm-6 p-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        {!! media_button('bottom_banner[]',$model) !!}
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3">
+                <button class="plus-icon remove-new-bottom-input btn btn-danger">
                     <i class="fa fa-minus"></i></button>
             </div>
         </div>
@@ -271,12 +338,21 @@
             $('.timepicker1').timepicker();
             $('#first_line_country').select2();
             $('.top-items-select').select2();
+
+            $("body").on("click", ".add-new-bottom", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-bottom").html();
+                html = html.replace(/{count}/g, uid);
+                $(".bottom-group").append(html);
+            });
+
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners").html();
                 html = html.replace(/{count}/g, uid);
                 $(".social-media-group").append(html);
             });
+
             $("body").on("click", ".add-new-product", function () {
                 var html = $("#add-top-items").html();
                 html = html.replace(/{index}/g, $('.top-items-select').length);
@@ -284,6 +360,9 @@
                 $('.top-items-select').select2();
             });
 
+            $("body").on("click", ".remove-new-bottom-input", function () {
+                $(this).closest(".banner-item").remove();
+            });
             $("body").on("click", ".remove-new-banner-input", function () {
                 $(this).closest(".banner-item").remove();
             });

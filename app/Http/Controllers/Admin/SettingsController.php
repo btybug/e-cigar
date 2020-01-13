@@ -608,6 +608,7 @@ class SettingsController extends Controller
     {
         $p = $request->get('p', 'banners');
         $top=null;
+        $bottom=null;
         $model=null;
         $models = [];
         if($p == 'ads'){
@@ -620,6 +621,7 @@ class SettingsController extends Controller
         } else if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers" || $p == "brands") {
             $model = $settings->getEditableData($p);
             $top = $settings->getEditableData('top');
+            $bottom = $settings->getEditableData('bottom_banner');
 
         } else {
             $model = Common::where('type', $p)->first();
@@ -629,7 +631,7 @@ class SettingsController extends Controller
             $items=Stock::all()->pluck('name','id');
         }
 
-        return $this->view('main_pages', compact(['model', 'p','items','top','models']));
+        return $this->view('main_pages', compact(['model', 'p','items','top','models','bottom']));
     }
 
 
@@ -656,6 +658,9 @@ class SettingsController extends Controller
         }
         if ($request->exists('top')){
             $settings->updateOrCreateSettings('top', ['data'=>$request->get('top')]);
+        }
+        if ($request->exists('bottom_banner')){
+            $settings->updateOrCreateSettings('bottom_banner', ['data'=>$request->get('bottom_banner')]);
         }
         return redirect()->back();
     }

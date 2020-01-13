@@ -267,23 +267,43 @@
                     </div>
                 </div>
             </section>
-            <div class="container home_width p-home-mobile">
-                <section class="d-flex flex-wrap align-items-end justify-content-between home_delivery-wrapper">
-                    <div class="home_delivery-left">
-                        <div class="font-main-bold home_delivery-title">
-                            DPD NEXT DAY DELIVERY
+
+            @if($bottoms && count($bottoms))
+                <div class="container home_width p-home-mobile">
+                    <section class="d-flex flex-wrap align-items-end justify-content-between">
+                        <div class="bottom__main-slider">
+                            @foreach($bottoms as $bottom)
+                                @if(pathinfo($bottom,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $bottom = ltrim($bottom, '/');
+                                        $html = (File::exists($bottom)) ? File::get($bottom) : "";
+                                    @endphp
+                                    <div>
+                                        {!! $html !!}
+                                    </div>
+                                @else
+                                    <div>
+                                        <img src="{{ $bottom }}" alt="ads">
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-                        <p class="font-20 home_delivery-desc">Free on orders over $100 - Order before 4pm <br/>
-                            Saturday and Sunday delivery available.</p>
-                    </div>
-                    <div class="home_delivery-right lh-1">
-<span class="font-sec-bold home_delivery-price">
-50%
-</span>
-                        <span class="font-sec-reg home_delivery-off">OFF</span>
-                    </div>
-                </section>
-            </div>
+    {{--                    <div class="home_delivery-left">--}}
+    {{--                        <div class="font-main-bold home_delivery-title">--}}
+    {{--                            DPD NEXT DAY DELIVERY--}}
+    {{--                        </div>--}}
+    {{--                        <p class="font-20 home_delivery-desc">Free on orders over $100 - Order before 4pm <br/>--}}
+    {{--                            Saturday and Sunday delivery available.</p>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="home_delivery-right lh-1">--}}
+    {{--<span class="font-sec-bold home_delivery-price">--}}
+    {{--50%--}}
+    {{--</span>--}}
+    {{--                        <span class="font-sec-reg home_delivery-off">OFF</span>--}}
+    {{--                    </div>--}}
+                    </section>
+                </div>
+            @endif
             <button id="scrollTopBtn" class="scroll-top-btn d-flex align-items-center justify-content-center pointer">
                 <svg viewBox="0 0 17 10" width="17px" height="10px">
                     <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M0.000,8.111 L1.984,10.005 L8.498,3.789 L15.010,10.005 L16.995,8.111 L8.498,0.001 L0.000,8.111 Z"></path>
@@ -299,7 +319,21 @@
     <link href="/public/plugins/formstone/light.css" rel="stylesheet">
     <link href="/public/css/carousel.css" rel="stylesheet">
     <link href="/public/css/home-slider.css" rel="stylesheet">
-
+    <style>
+        .bottom__main-slider {
+            height: 300px;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+        .bottom__main-slider div {
+            height: 100%;
+        }
+        .bottom__main-slider img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    </style>
 @stop
 
 @section('js')
@@ -312,6 +346,13 @@
     <script>
         $(document).ready(function () {
             $(".home__main-slider").carousel({
+                pagination: true,
+                controls: false,
+                autoAdvance:true,
+                autoTime:'3000'
+            });
+
+            $(".bottom__main-slider").carousel({
                 pagination: true,
                 controls: false,
                 autoAdvance:true,

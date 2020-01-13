@@ -43,13 +43,15 @@ class HomeController extends Controller
 //        dd('done');
 
         $banners = $this->settings->getEditableData('banners');
+        $bottoms = $this->settings->getEditableData('bottom_banner');
+        $bottoms = ($bottoms->data) ? json_decode($bottoms->data, true) : [];
         $banners = ($banners->data) ? json_decode($banners->data, true) : [];
         $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
         $brands = Category::where('type','brands')->whereNull('parent_id')->get();
         $tops = $this->settings->getEditableData('top');
         $tops = ($tops->data) ? json_decode($tops->data, true) : [];
 //        dd($tops);
-        return view('welcome', compact(['banners','categories','brands','tops']));
+        return view('welcome', compact(['banners','categories','brands','tops','bottoms']));
     }
 
     public function topProduct(Request $request)
