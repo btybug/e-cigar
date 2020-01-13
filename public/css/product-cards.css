@@ -2002,7 +2002,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     position: relative;
 }
 .home_slider-wrapper .home__main-slider{
-    height: 700px;
+    height: 950px;
 }
 .home_slider-wrapper .home__main-slider div img{
     height: 100%;
@@ -2054,7 +2054,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 
 .home__main-slider .main-slider-wall {
-    height: 700px;
+    height: 950px;
 }
 .home_slider-wrapper .fs-carousel-pagination .fs-carousel-page.fs-carousel-active {
     width: 8px !important;
