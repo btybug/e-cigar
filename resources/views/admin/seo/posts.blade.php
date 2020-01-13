@@ -1,30 +1,32 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default border-0 bg-transparent">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">SEO</h2>
-        </div>
+{{--        <div class="card-header panel-heading">--}}
+{{--            <h2 class="m-0">SEO</h2>--}}
+{{--        </div>--}}
         <div class="card-body panel-body px-0">
-            <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
-                @ok('admin_seo')
-                <li class="nav-item ">
-                    <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
-                       aria-controls="shipping" aria-selected="false">Posts</a>
-                </li>
-                @endok
-                @ok('admin_seo_stocks')
-                <li class="nav-item ">
-                    <a class="nav-link" id="admin_seo_stocks" href="{!! route('admin_seo_stocks') !!}" role="tab"
-                       aria-controls="shipping" aria-selected="false">Stocks</a>
-                </li>
-                @endok
-                @ok('admin_seo_brands')
-                <li class="nav-item">
-                    <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_brands') !!}" role="tab"
-                       aria-controls="shipping" aria-selected="false">Brands</a>
-                </li>
-                @endok
-            </ul>
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+                <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    @ok('admin_seo')
+                    <li class="nav-item ">
+                        <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo') !!}" role="tab"
+                           aria-controls="shipping" aria-selected="false">Posts</a>
+                    </li>
+                    @endok
+                    @ok('admin_seo_stocks')
+                    <li class="nav-item ">
+                        <a class="nav-link" id="admin_seo_stocks" href="{!! route('admin_seo_stocks') !!}" role="tab"
+                           aria-controls="shipping" aria-selected="false">Stocks</a>
+                    </li>
+                    @endok
+                    @ok('admin_seo_brands')
+                    <li class="nav-item">
+                        <a class="nav-link" id="payment_gateways" href="{!! route('admin_seo_brands') !!}" role="tab"
+                           aria-controls="shipping" aria-selected="false">Brands</a>
+                    </li>
+                    @endok
+                </ul>
+            </div>
             <div class="row">
                 <div class="col-xl-6 col-lg-5">
                     {!! Form::model($general) !!}

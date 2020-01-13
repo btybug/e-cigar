@@ -8,7 +8,7 @@
             <h2 class="m-0 pull-left">Brands</h2>
             @ok('admin_blog_brands_create') <div class=""><a class="btn btn-primary pull-right" href="{!! route('admin_blog_brands_create') !!}">Add new</a></div>@endok
         </div>
-        <div class="card-body panel-body">
+        <div class="card-body panel-body pt-0">
 
             <table id="brands-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
@@ -34,7 +34,7 @@
             "processing": true,
             "serverSide": true,
             "bPaginate": true,
-            dom: 'Bfrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
             buttons: [
             'csv', 'excel', 'pdf', 'print'
             ],

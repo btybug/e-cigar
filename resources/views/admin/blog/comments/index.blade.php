@@ -82,7 +82,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [

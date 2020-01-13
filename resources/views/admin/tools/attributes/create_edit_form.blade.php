@@ -7,9 +7,9 @@
     <div class="inventory_attributes container-fluid">
         <div class="row flex-column">
             <div class="card panel panel-default mb-3">
-                <div class="card-header panel-heading clearfix">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                     <h2 class="m-0 pull-left">{{ ($model) ? $model->name : "Add Attribute" }}</h2>
-                    <div class="button-save pull-right">
+                    <div class="button-save">
                         {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                         <a class="btn btn-default"
                            href="{!! route('admin_store_attributes') !!}">Back</a>
@@ -223,7 +223,7 @@
 
             </div>
             <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between ">
                     {{--<h2>Options {{ $model->name }} </h2>--}}
                     <h2 class="m-0 pull-left">Attributes</h2>
                     <div class="pull-right">

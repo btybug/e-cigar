@@ -9,11 +9,13 @@
                 <h2 class="m-0 mr-1">Tickets</h2>
                 <div class="d-flex flex-wrap">
                    @ok('admin_tickets_settings') <a class="btn btn-warning mr-10 text-white" href="{!! route('admin_tickets_settings') !!}">Settings</a>@endok
-                    @ok('admin_tickets_new')<a class="btn btn-primary" href="{!! route('admin_tickets_new') !!}">Add new</a>@endok
                 </div>
             </div>
         </div>
-        <div class="card-body panel-body">
+        <div class="d-flex justify-content-end px-4 mt-2">
+            @ok('admin_tickets_new')<a class="btn btn-primary" href="{!! route('admin_tickets_new') !!}">Add new</a>@endok
+        </div>
+        <div class="card-body panel-body pt-0">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -43,7 +45,7 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [

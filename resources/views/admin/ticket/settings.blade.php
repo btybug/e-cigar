@@ -2,10 +2,10 @@
 @section('content')
     <div class="stock-page">
         {!! Form::model($settings,[]) !!}
-        <div class="card panel panel-default">
-            <div class="card-header panel-heading clearfix">
+        <div class="card panel panel-default mb-3">
+            <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                 <h2 class="m-0 pull-left">Settings</h2>
-                <div class="text-right btn-save pull-right">
+                <div class="text-right btn-save">
                     <a href="{!! route('admin_tickets') !!}" class="btn btn-action btn-default">Back</a>
                     {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
                 </div>
@@ -43,7 +43,7 @@
         $type='tickets'
     @endphp
     <div class="inventory_attributes">
-        <div class="card panel panel-default">
+        <div class="card panel panel-default mb-3">
             <div class="card-header panel-heading">
                 <div class="head-space-between">
                     <h2>{!! ucfirst(str_replace("_"," ",$type)) !!} Status</h2>

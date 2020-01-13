@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default border-0 bg-transparent">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">SEO</h2>
-        </div>
+{{--        <div class="card-header panel-heading">--}}
+{{--            <h2 class="m-0">SEO</h2>--}}
+{{--        </div>--}}
         <div class="card-body panel-body px-0">
-            <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
 
                 @ok('admin_seo')
                 <li class="nav-item">
@@ -27,6 +28,7 @@
                 @endok
 
             </ul>
+            </div>
             <div class="row">
                 <div class="col-xl-6 col-lg-5">
                     {!! Form::model($general) !!}

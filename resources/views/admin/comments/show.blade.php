@@ -9,7 +9,7 @@
                 {{--<div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_comments_settings') !!}">Settings</a></div>--}}
 
         </div>
-        <div class="card-body panel-body comment--body">
+        <div class="card-body panel-body comment--body pt-0">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>
                 <tr>
@@ -38,7 +38,7 @@
                 "serverSide": true,
                 "bPaginate": true,
                 "scrollX": true,
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 buttons: [
