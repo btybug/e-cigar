@@ -2,26 +2,28 @@
 @section('content')
     <main class="main-content">
         <div class="home__page-wrapper">
-            <section class="home_slider-wrapper">
-                <div class="home__main-slider">
+
                     @if(count($banners))
-                        @foreach($banners as $banner)
-                            @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')
-                                @php
-                                    $banner = ltrim($banner, '/');
-                                    $html = (File::exists($banner)) ? File::get($banner) : "";
-                                @endphp
-                                <div>
-                                    {!! $html !!}
-                                </div>
-                            @else
-                                <div>
-                                    <img src="{{ $banner }}" alt="ads">
-                                </div>
-                            @endif
-                        @endforeach
+                    <section class="home_slider-wrapper">
+                        <div class="home__main-slider">
+                            @foreach($banners as $banner)
+                                @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $banner = ltrim($banner, '/');
+                                        $html = (File::exists($banner)) ? File::get($banner) : "";
+                                    @endphp
+                                    <div>
+                                        {!! $html !!}
+                                    </div>
+                                @else
+                                    <div>
+                                        <img src="{{ $banner }}" alt="ads">
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </section>
                     @endif
-                </div>
 
 {{--                <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">--}}
 {{--                    @if(count($banners))--}}
@@ -42,7 +44,7 @@
 {{--                        @endforeach--}}
 {{--                    @endif--}}
 {{--                </div>--}}
-            </section>
+
             <div class="container home_width p-home-mobile">
                 <section class="home_categories">
                     <h2 class="font-sec-reg home_main-title text-center text-uppercase">
