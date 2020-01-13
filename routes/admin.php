@@ -629,6 +629,8 @@ Route::group(['prefix' => '/tools'], function () {
 
 Route::group(['prefix' => 'comments'], function () {
     Route::get('/', 'Admin\CommentsController@index')->name('show_comments');
+    Route::get('/settings', 'Admin\CommentsController@getSettings')->name('admin_blog_comments_settings');
+    Route::post('/settings', 'Admin\CommentsController@postSettings')->name('admin_blog_comments_settings_post');
     Route::get('/approve/{id}', 'Admin\CommentsController@approve')->name('approve_comments');
     Route::get('/unapprove/{id}', 'Admin\CommentsController@unapprove')->name('unapprove_comments');
     Route::post('/delete', 'Admin\CommentsController@delete')->name('delete_comments');

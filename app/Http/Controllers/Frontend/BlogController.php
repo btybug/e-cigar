@@ -54,9 +54,14 @@ class BlogController extends Controller
         return $this->view('single_post',compact('post','comments','relatedPosts','ads'));
     }
 
-    public function addComment(Request $request)
+    public function addComment(Request $request,Settings $settings)
     {
         $data = $request->all();
+        $setting = $settings->getEditableData('admin_comments_setting');
+
+        if(! $setting){
+            return \Response::json(['success' => false,'message' => 'System error','html' => '']);
+        }
 
         if(\Auth::check()){
             $rules = [
@@ -66,7 +71,7 @@ class BlogController extends Controller
 
             $result = [
                 'post_id' => $data['post_id'],
-                'status' => 1,
+                'status' => $setting->status,
                 'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
                 'author_id' => \Auth::id(),
                 'comment' => trim(htmlspecialchars($data['comment']))
@@ -82,7 +87,7 @@ class BlogController extends Controller
 
             $result = [
                 'post_id' => $data['post_id'],
-                'status' => 1,
+                'status' => $setting->status,
                 'comment' => trim(htmlspecialchars($data['comment'])),
                 'parent_id' => (isset($data['parent_id'])) ? $data['parent_id'] : null,
                 'guest_name' => trim(htmlspecialchars($data['guest_name'])),
@@ -100,8 +105,17 @@ class BlogController extends Controller
         $comment->create($result);
         $post = Posts::find($data['post_id']);
         $comments = $post->comments()->main()->get();
-        $html = \View::make('frontend.blog.single_post_comments',compact('comments'))->render();
+        if($setting->status == 1){
 
-        return \Response::json(['success' => true,'message' => 'Success','html' => $html]);
+            $html = \View::make('frontend.blog.single_post_comments',compact('comments'))->render();
+            $message = "Success";
+            $render = true;
+        }else{
+            $html = '';
+            $message = 'Your comment under admin confirmation..., Thank you for your activity !';
+            $render = false;
+        }
+
+        return \Response::json(['success' => true,'message' => $message,'html' => $html,'render' => $render]);
     }
 }

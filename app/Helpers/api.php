@@ -593,6 +593,8 @@ function getUniqueCode($table, $column, $prefix = '')
 
 function commentRender($comments, $i = 0, $parent = false)
 {
+    $settingService = new Settings();
+    $settings = $settingService->getEditableData('admin_comments_setting');
     if (count($comments)) {
         $comment = $comments[$i];
         //render main content
@@ -615,11 +617,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<header class="text-left">';
         echo '<div class="comment-user">';
         if ($comment->author) {
-            if ($comment->author->isAdministrator()) {
-                echo '<span class="text-center">Admin</span>';
-            } else {
-                echo '<span class="text-center">' . $comment->author->username . '</span>';
-            }
+            echo '<span class="text-center">' . $comment->author->username . '</span>';
         } else {
             echo '<span class="text-center">' . $comment->guest_name . '</span>';
         }
@@ -630,7 +628,18 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '</div>';
         echo '</div>';
         if (Auth::check()) {
-            echo '<div class="text-right reply-wrapper"><a href="#" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a></div>';
+            echo '<div class="text-right reply-wrapper">';
+            echo   '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a>';
+            if($settings){
+                if($settings->user_delete == 1){
+                    echo  '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-danger btn-sm delete-comment">Delete</a>';
+                }
+                if($settings->user_edit == 1) {
+                    echo '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-warning btn-sm edit-comment">Edit</a>';
+                }
+            }
+
+           echo '</div>';
         }
 
         echo '</div>';

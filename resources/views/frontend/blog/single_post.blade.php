@@ -355,6 +355,9 @@
                                         <div class="comments-refresh">
                                             @include('frontend.blog.single_post_comments')
                                         </div>
+                                        <div class="message-place">
+
+                                        </div>
                                         <!-- First Comment -->
                                     </div>
                                 @endif
@@ -632,9 +635,11 @@
                         } else {
                             form[0].reset();
                             $(".user-add-comment-secondry").remove();
-                            $("#msgModal .message-place").text(data.message);
+                            $(".message-place").text(data.message);
 //                            $("#msgModal").modal();
-                            $(".comments-refresh").html(data.html);
+                            if(data.render == true){
+                                $(".comments-refresh").html(data.html);
+                            }
                         }
                     },
                     error: function (data) {

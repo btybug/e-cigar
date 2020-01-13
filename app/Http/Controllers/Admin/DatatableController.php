@@ -285,12 +285,15 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($comment) {
                 $actions = '';
                 if (userCan('edit_comment')) {
-                    $actions = ($comment->status) ? '<div class="datatable-td__action"><a href="' . route('unapprove_comments', $comment->id) . '" class="btn btn-info"> Block</a>' : '<a href="' . route('approve_comments', $comment->id) . '" class="btn btn-success">Approve</a>';
+                    $actions = ($comment->status) ?
+                        '<div class="datatable-td__action"><a href="' . route('unapprove_comments', $comment->id) . '" class="btn btn-info"> Block</a>'
+                        : '<div class="datatable-td__action"><a href="' . route('approve_comments', $comment->id) . '" class="btn btn-success">Approve</a>';
                     $actions .= '<a class="btn btn-primary" href="' . route('reply_comment', $comment->id) . '">Reply</a>';
                     $actions .= '<a class="btn btn-warning" href="' . route('edit_comment', $comment->id) . '">Edit</a>';
                 }
 
-                userCan('delete_comments') ? $actions .= '<a class="btn btn-danger delete-button" data-key="' . $comment->id . '" data-href="' . route('delete_comments') . '">x</a></div>' : null;
+                userCan('delete_comments') ?
+                    $actions .= '<a class="btn btn-danger delete-button" data-key="' . $comment->id . '" data-href="' . route('delete_comments') . '">x</a></div>' : null;
                 return $actions;
             })->rawColumns(['actions', 'author', 'comment', 'replies', 'status'])
             ->make(true);
