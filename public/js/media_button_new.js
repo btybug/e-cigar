@@ -241,7 +241,6 @@ const App = function() {
     //********App -> htmlMaker -> makeImage********end
 
       makeHtmlItem: (data) => {
-          console.log(data);
 
           return (`<div draggable="true" data-id="${data.id}" class="file" >
                         <a  bb-media-click="select_item" bb-media-type="image">
@@ -262,7 +261,6 @@ const App = function() {
       },
 
       makePdfItem: (data) => {
-        console.log(data);
 
         return (`<div draggable="true" data-id="${data.id}" class="file" >
                       <a  bb-media-click="select_item" bb-media-type="image">
@@ -411,7 +409,6 @@ const App = function() {
       },
       
       mapTree: (el, data) => {
-        console.log(this)
         el.html('');
         data.map((child) => {
           if(child.children.length === 0) {
@@ -449,7 +446,6 @@ const App = function() {
       $($('.media-tree_leaf-wrapper').find('.tree_branch')[0]).html('');
       self.htmlMaker.myFuckingTree.makeTree(data, '.media__folder-list .tree_branch');
       var branch = document.querySelectorAll('.tree_branch');
-    console.log('branch', branch)
     for (var i = 0; i < branch.length; i++) {
       new Sortable(branch[i], {
         group: 'b',
@@ -499,7 +495,6 @@ const App = function() {
               access_token: "string"
             },
               () => {
-                console.log('You won!!!')
                 // self.htmlMaker.treeMove(nodeId, parentId);
               }
           );
@@ -512,9 +507,7 @@ const App = function() {
           if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
             const branch = $(evt.related).closest('.tree_leaf');
             const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
-            console.log(evt.related, 'ev t hshh d d ')
             if(branch.hasClass('tree_leaf_with_branch')) {
-              console.log(22222222222);
               if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                 $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
               }
@@ -533,9 +526,7 @@ const App = function() {
     $('body').on('click', '.icon-folder-opening', function(ev) {
       const branch = $(ev.target).closest('.tree_leaf');
       const opening_icon = $(ev.target).closest('.icon-folder-opening');
-      console.log(ev.target)
       if(branch.hasClass('tree_leaf_with_branch')) {
-        console.log(22222222222);
         if(!$(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
           $(branch.find('.tree_branch')[0]).addClass('closed_branch');
         } else {
@@ -555,7 +546,6 @@ const App = function() {
       let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
       const {dndForTree} = this.events;
       const {transferFolder} = this.requests;
-      console.log(data, 'hariva');
 
       // function makeTree (data) {
       //   const getTreeData = (data) => {
@@ -723,7 +713,6 @@ const App = function() {
     },
 
     remove_modal: (id, name, iorf) => {
-      console.log(id, name, iorf)
       // return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
       //           <div class="modal-dialog" role="document">
             
@@ -1286,9 +1275,6 @@ const App = function() {
         folder.addEventListener("drop", function (e, file) {
           this.classList.remove("over");
 
-          console.log('e.dataTransfer.files', e.dataTransfer.files)
-
-
     //       function addEventHandler(obj, evt, handler) {
     //         if(obj.addEventListener) {
     //             // W3C method
@@ -1381,11 +1367,6 @@ const App = function() {
     // }.bindToEventHandler(file));
     
     
-
-
-
-          console.log('event***********', e)
-          console.log(JSON.parse(e.dataTransfer.getData("node_id")))
           let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id")).data;
           let parentId = e.target
               .closest(".file")
@@ -1471,7 +1452,6 @@ const App = function() {
             mainContainer.innerHTML += html;
           });
           if (tree) {
-              console.log(res)
             
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
@@ -1487,7 +1467,6 @@ const App = function() {
             })
             
           }
-          console.log(this.globalFolderId, 'globalFolderId');
           $('.media__folder-list .media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
           $($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
 
@@ -1665,7 +1644,6 @@ const App = function() {
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
-      console.log('self', e.target)
       if(e.type === 'dblclick') {
         !$(e.target).hasClass('closer') && (function(){
           const id = elm.closest("[data-id]").getAttribute("data-id");
@@ -1790,7 +1768,6 @@ const App = function() {
       const id = e.target.closest(".file").getAttribute("data-id");
       if (e.type === "dblclick") {
           if($(e.target).closest('.file').data('type') === 'html') {
-              console.log('---------------------5---------------------')
 
               $.ajax({
                   type: "get",
@@ -1801,7 +1778,6 @@ const App = function() {
                       "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                   },
                   success: function (data) {
-                      console.log('data',data);
                       // $('#modal-id .modal-body').append(data);
                       // $('#modal-id').modal('show');
                   }
@@ -1822,7 +1798,6 @@ const App = function() {
           };
 
       } else if (e.type === "click") {
-        console.log(333333)
         e.target.closest(".file-box").classList.toggle("active");
         if(this.selectedImage.includes(id)) {
           const index = this.selectedImage.indexOf(id);
@@ -1858,7 +1833,6 @@ const App = function() {
       e.preventDefault();
       e.stopPropagation();
 
-      console.log(elm, e, elements);
       const modal = this.htmlMaker.remove_modal();
       $('#modal_area').html(modal);
     },
@@ -2218,7 +2192,6 @@ $('body').on('blur', '[contenteditable]', function(ev) {
           access_token: "string"
         },
         () => {
-          console.log('897456468484654*-*-*-*-*')
           const renamedFolder = $(`.media__folder-list .tree_leaf[data-id="${itemId}"]`);
           renamedFolder.data('name', 'name');
           $(renamedFolder.find('.folder-item--title')[0]).html(name)
@@ -2234,8 +2207,6 @@ $('.delete_items').on('click', (ev) => {
     $('.remover-container').toggleClass('d-none');
     $('.uploader-container').addClass('d-none');
   };
-
-  console.log($('.file-box.active').length)
 
   if($('.file-box.active').length !== 0) {
     app.events.remove_items(undefined, ev);
@@ -2364,19 +2335,16 @@ const drop = (ev, cb) => {
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
   const flag = data.item || 'image';
-  console.log(data)
   if(flag === 'image') {
     // console.log(data.data)
     if(Array.isArray(data.data)) {
       data.data.map(el=>{
-        console.log($('.remover-container-content').find(`[data-id="${el}"]`), 'hellllllllllll')
         if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
 
           removeImageDrop(ev, el);
         }
       });
     } else {
-      console.log($('.remover-container-content').find(`[data-id="${data.data}"]`), 'lehhhhhhhhhhhhhh')
       if($('.remover-container-content').find(`[data-id="${data.data}"]`).length === 0) {
 
         removeImageDrop(ev, data.data);
@@ -2443,7 +2411,6 @@ document
         folderArray.push($(this).find('div[data-id]').attr('data-id'))
       })
       
-      console.log(folderArray)
     
       app.requests.removeImage({
         item_id: imagesArray,
@@ -2480,17 +2447,12 @@ document
       })
       $('.folder-container.active').each(function() {
         folderArray.push($(this).find('div[data-id]').attr('data-id'))
-      })
-      
-      console.log(folderArray)
-    
+      })    
    
         app.requests.transferImage({
           item_id: imagesArray,
           folder_id: 1 
         })
-      
-
       
         app.requests.transferFolder({
           parent_id: 1,
@@ -2594,7 +2556,6 @@ document
           app.htmlMaker.myFuckingTree.makeTree(res.data.children, '#moveMediaModal .tree_branch');
           $($('.media_right_content .folderitems').find('.folder-container.active')).each(function() {
             $('#moveMediaModal').find(`.tree_leaf[data-id="${$(this).find('.file').data('id')}"] .tree_leaf_content`).each(function(index, el) {
-              console.log('-----------------------', $(el))
               $(el).css({'pointer-events':' none', 'opacity': '0.3'});
             });
           })
@@ -2640,9 +2601,6 @@ document
       const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
 
       transferMove(activeImages, activeFolders, selectedFolder, () => {
-
-        console.log($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${app.globalFolderId}"]`));
-        console.log($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"]`));
         // app.requests.drawingItems({
         //   folder_id: 1,
         //   files: true,
@@ -2723,7 +2681,6 @@ document
                     access_token: "string"
                   },
                     () => {
-                      console.log('You won!!!')
                       // self.htmlMaker.treeMove(nodeId, parentId);
                     }
                 );
@@ -2736,9 +2693,7 @@ document
                 if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
                   const branch = $(evt.related).closest('.tree_leaf');
                   const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
-                  console.log(evt.related, 'ev t hshh d d ')
                   if(branch.hasClass('tree_leaf_with_branch')) {
-                    console.log(22222222222);
                     if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                       $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
                     }
@@ -2767,7 +2722,6 @@ document
       const newFolderName = $('.folderNameValue').val();
 
 
-      console.log(app.globalFolderId)
       app.requests.addNewFolder(
         {
           folder_id: app.globalFolderId || 1,
@@ -2830,7 +2784,6 @@ document
                     access_token: "string"
                   },
                     () => {
-                      console.log('You won!!!')
                       // self.htmlMaker.treeMove(nodeId, parentId);
                     }
                 );
@@ -2843,9 +2796,7 @@ document
                 if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
                   const branch = $(evt.related).closest('.tree_leaf');
                   const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
-                  console.log(evt.related, 'ev t hshh d d ')
                   if(branch.hasClass('tree_leaf_with_branch')) {
-                    console.log(22222222222);
                     if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                       $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
                     }
