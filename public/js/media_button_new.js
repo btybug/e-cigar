@@ -1400,7 +1400,7 @@ const App = function() {
                 );
           } else {
             if(self.htmlMaker.dragElementOfTree || $('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
-              self.requests.transferFolder(
+              Number(nodeId) !== Number(parentId) && self.requests.transferFolder(
                 {
                   folder_id: [Number(nodeId)],
                   parent_id: Number(parentId),
@@ -1492,6 +1492,7 @@ const App = function() {
           $($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
 
           cb ? cb() : null;
+          return true;
         }
       });
     },
@@ -1887,37 +1888,37 @@ const App = function() {
       $('#modal_area').html(this.htmlMaker.remove_modal(id, name, 'folder'));
     },
 
-    remove_image_req: (elm, e, ids) => {
+    remove_image_req: async (elm, e, ids) => {
       // const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
       if(ids.length === 0) return;
 
-      this.requests.removeImage(
+      await this.requests.removeImage(
         {
           item_id: ids,
           // this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
           trash: true,
           access_token: "string"
-        },
-        this.events.close_name_modal
+        }
+        // this.events.close_name_modal
       );
     },
 
     
 
     //********App -> events -> remove_folder********start
-    remove_folder_req: (elm, e, ids) => {
+    remove_folder_req: async (elm, e, ids) => {
       e.stopPropagation();
       e.preventDefault();
 
       // const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
-      if(ids.length === 0) return;
+      if(ids.length === 0) return true;
       // const tree = $('#folder-list2>ol'),
       //       leaf = tree.find(`[data-id="${id}"]`),
       //       {makeTreeLeaf} = this.htmlMaker,
       //       {close_name_modal} = this.events,
       //       {removeTreeFolder} = this.requests;
 
-      this.requests.removeTreeFolder(
+      await this.requests.removeTreeFolder(
         {
           folder_id: ids,
           // Number(id),
@@ -1925,7 +1926,7 @@ const App = function() {
           access_token: "string"
         },
         () => {
-          this.requests.drawingItems();
+          
           // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           // close_name_modal();
 
@@ -2066,7 +2067,7 @@ const App = function() {
     //********App -> events -> folder_level_up********end
 
     //********App -> events -> close_name_modal********start
-    close_name_modal: (elm, e) => {
+    close_name_modal: async (elm, e) => {
       // this.requests.drawingItems(undefined, true);
       $(".custom_modal_edit").remove();
       $('.folderitems').on('mouseenter mouseleave', 'div.file', function(ev) {
@@ -2243,6 +2244,15 @@ $('.delete_items').on('click', (ev) => {
   }
 });
 
+const remove_req_function = async (ev, images_ids, folders_ids, cb) => {
+  await app.events.remove_image_req(undefined, ev, images_ids);
+  await folders_ids.map((id) => {
+    app.events.remove_folder_req(undefined, ev, Number(id));
+  })
+  await cb()
+  app.events.close_name_modal();
+}
+
 $('body').on('click','.done_remove_items', (ev) => {
   const folders_ids = [];
   $('.file-box.folder-container.active').map((el, i) => {
@@ -2253,12 +2263,9 @@ $('body').on('click','.done_remove_items', (ev) => {
     images_ids.push($(i).find('.file').data('id'));
   });
 
-  console.log(folders_ids, images_ids)
-
-  app.events.remove_image_req(undefined, ev, images_ids);
-  folders_ids.map((id) => {
-    app.events.remove_folder_req(undefined, ev, Number(id));
-  })
+  
+  remove_req_function(ev, images_ids, folders_ids, app.requests.drawingItems)
+  
 })
 
 const removeCheckedImage = (el) => {
