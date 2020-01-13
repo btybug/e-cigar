@@ -123,23 +123,23 @@
                         <div class="w-100">
                             <div class="table-responsive stock-items-tabs-main-wrapper">
                           
-                                <div class="stock-items-tabs-wall-head">
-                                    <div class="stock-items-tab-head-name">
+                                <div class="stock-items-tabs-wall-head d-flex">
+                                    <div class="stock-items-tab-head-name col-lg-6 col-3 pl-0">
                                         Item
                                     </div>
-                                    <div class="stock-items-tab-head-price d-flex flex-wrap">
-                                        <div class="col-md-5 py-2">
+                                    <div class="stock-items-tab-head-price d-flex flex-wrap col-lg-6 col-9 ">
+                                        <div class="col-sm-9 py-2">
                                             <div class="section_price">
                                                 <div class="row">
-                                                    <label class="col-form-label col-md-4">Price per:</label>
-                                                    <div class="col-md-8">
+                                                    <label class="col-form-label col-lg-4 col-sm-5 pl-0">Price per:</label>
+                                                    <div class="col-lg-8 col-sm-7 pl-0">
                                                         {!! Form::select("variations[$main_unique][price_per]",['product' => 'Section','item' => 'Item'],($main) ? $main->price_per : null,['class' => 'form-control price_per']) !!}
 
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-5 py-2">
+                                        <div class="col-sm-3 py-2 pl-0">
                                             <div
                                                 class="section_price product_price @if($main && $main->price_per == 'item') hide @endif">
                                                 {!! Form::text("variations[$main_unique][common_price]",

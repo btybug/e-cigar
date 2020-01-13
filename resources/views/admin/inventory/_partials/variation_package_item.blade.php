@@ -1,10 +1,10 @@
 @php
     $uniqueID = uniqid();
 @endphp
-<div class="shock__edit-tr stock-items-tabs-wall--wrap">
-    <div class="stock-items-tab-photo-td">
-        <div class="d-flex">
-            <div class="stock-item-photo-wrap">
+<div class="shock__edit-tr stock-items-tabs-wall--wrap d-flex flex-wrap">
+    <div class="stock-items-tab-photo-td col-lg-6 col-3 pl-0">
+        <div class="row">
+            <div class="stock-item-photo-wrap col-lg-5 pr-lg-0 pr-sm-3">
                 <div class="item-photo">
                     @if($package_variation && $package_variation->image)
                         <img src="{{ media_image_tmb($package_variation->image) }}" alt="photo" class="v-img">
@@ -48,9 +48,9 @@
                     @endif
                 </select>
             </div>
-            <div class="stock-item-name-desc ml-2">
+            <div class="stock-item-name-desc col-lg-7 mt-lg-0 mt-1">
 
-                <div class="stock-item-desc mt-1">
+                <div class="stock-item-desc ">
                     {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
 ['class' => 'form-control stock-tiny-areas','style' => 'height:300px !important;']) !!}
 
@@ -77,9 +77,9 @@
     {{--        {!! media_button("variations[$main_unique][variations][$uniqueID][image]",($package_variation) ? $package_variation->image : null ) !!}--}}
     {{--    </td>--}}
     <div
-        class="package_price stock-items-tab-prices @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
+        class="package_price stock-items-tab-prices col-lg-6 col-9 @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
         <div class="row ">
-            <div class="col-md-4">
+            <div class="col-xl-5 col-sm-7">
                 {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
             'fixed' => 'Discount fixed','range'=>'Discount range'],
                 ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change','main_unique' => $main_unique,'unique' => $uniqueID]) !!}

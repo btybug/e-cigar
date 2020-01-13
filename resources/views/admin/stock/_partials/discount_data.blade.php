@@ -28,21 +28,21 @@
                 class="fa fa-plus"></i></a>
     </div>
 @else
-    <div class="col-md-12 fixed-box">
+    <div class="fixed-box">
 
 
         @foreach($package_variation->discounts as $key => $datum)
-            <div class="d-flex flex-wrap discount-item ">
-                <div class="col-md-5">
+            <div class="row discount-item ">
+                <div class="col-xl-5 col-sm-4">
                     <label>Qty</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][qty]",$datum->qty,['class' => 'form-control']) !!}
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-xl-5 col-sm-4">
                     <label>Total price</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-2">
+                <div class="col-xl-5 col-sm-4 mt-sm-0 mt-2">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
