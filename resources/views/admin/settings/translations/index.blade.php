@@ -4,20 +4,22 @@
 @stop
 @section('content')
     <div class="container-fluid">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item active">
-                <a class="nav-link active" id="general-tab" href="{!! route('admin_settings_translations') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="items-tab" href="{!! route('admin_settings_translations_items') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link " id="attr-tab" href="{!! route('admin_settings_translations_attrs') !!}" role="tab"
-                   aria-controls="general" aria-selected="true" aria-expanded="true">Attributes</a>
-            </li>
-        </ul>
+        <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                <li class="nav-item active">
+                    <a class="nav-link active" id="general-tab" href="{!! route('admin_settings_translations') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="items-tab" href="{!! route('admin_settings_translations_items') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " id="attr-tab" href="{!! route('admin_settings_translations_attrs') !!}" role="tab"
+                       aria-controls="general" aria-selected="true" aria-expanded="true">Attributes</a>
+                </li>
+            </ul>
+        </div>
         <div class="tab-content">
             {!! Form::open(['class'=>'form-horizontal']) !!}
             <div class="card panel panel-default mb-3">

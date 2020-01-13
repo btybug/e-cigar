@@ -1,11 +1,13 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default border-0 bg-transparent">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">SEO</h2>
-        </div>
+{{--        <div class="card-header panel-heading">--}}
+{{--            <h2 class="m-0">SEO</h2>--}}
+{{--        </div>--}}
+
         <div class="card-body panel-body px-0">
-            <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link " id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Posts</a>
@@ -28,6 +30,7 @@
                 </li>
                 @endok
             </ul>
+            </div>
             <div class="row">
                 <div class="col-sm-3 col-4 pr-md-3 pr-0">
                     <div class="nav flex-column list-group mt-3">

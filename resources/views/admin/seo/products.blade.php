@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default border-0 bg-transparent">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">SEO</h2>
-        </div>
+{{--        <div class="card-header panel-heading">--}}
+{{--            <h2 class="m-0">SEO</h2>--}}
+{{--        </div>--}}
         <div class="card-body panel-body px-0">
-            <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
+            <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+            <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Posts</a>
@@ -27,14 +28,16 @@
                 </li>
                 @endok
             </ul>
+            </div>
             <div class="pt-25">
                 <div class="card panel panel-default">
-                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
-                     <h3 class="m-0 mr-1">Inventory</h3>
-                        <div><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
-                    </div>
-                    <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" multiple class="form-control">
+{{--                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">--}}
+{{--                     <h3 class="m-0 mr-1">Inventory</h3>--}}
+{{--                        --}}
+{{--                    </div>--}}
+                    <div class="d-flex flex-wrap justify-content-between px-4 mt-2">
+                        <div>
+                            <select name="table_head" id="table_head_id" multiple class="form-control" style="width: 100%">
                                 <!-- <option value="#" data-column="0" data-name="id">#</option> -->
                                 <option value="Product Name" data-column="2" data-name="id">Product Name</option>
                                 <option value="OG title" data-column="3" data-name="title">OG title</option>
@@ -49,7 +52,12 @@
                                 <option value="TW image" data-column="12" data-name="twitter_image">TW image</option>
                                 <option value="TW description" data-column="13" data-name="twitter_description">TW description</option>
                                 <option value="Actions" data-column="14" data-name="actions">Actions</option>
-                        </select>
+                            </select>
+                        </div>
+                        <div><a class="btn btn-primary pull-right" href="{!! route('admin_stock_new') !!}">Add new</a></div>
+                    </div>
+                    <div class="card-body panel-body pt-0">
+
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
@@ -187,7 +195,7 @@
                     "bPaginate": true,
                     "scrollX": true,
                     "order": [[ 1, "asc" ]],
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [

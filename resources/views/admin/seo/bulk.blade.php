@@ -1,11 +1,12 @@
 @extends('layouts.admin')
 @section('content')
     <div class="card panel panel-default border-0 bg-transparent">
-        <div class="card-header panel-heading">
-            <h2 class="m-0">SEO</h2>
-        </div>
+{{--        <div class="card-header panel-heading">--}}
+{{--            <h2 class="m-0">SEO</h2>--}}
+{{--        </div>--}}
          <div class="card-body panel-body px-0">
-             <ul class="nav nav-tabs new-main-admin--tabs" id="myTab" role="tablist">
+             <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+             <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
                  <li class="nav-item">
                      <a class="nav-link active" id="shipping-tab" href="{!! route('admin_seo_bulk') !!}" role="tab"
                         aria-controls="shipping" aria-selected="false">Posts</a>
@@ -27,14 +28,15 @@
                  </li>
                  @endok
              </ul>
+             </div>
              <div class="pt-25">
                  <div class="card panel panel-default">
 
-                     <div class="card-header panel-heading clearfix">
-                         <div class="pull-left">
-                             <h3 class="m-0">{!! __('orders') !!}</h3>
-                         </div>
-                     </div>
+{{--                     <div class="card-header panel-heading clearfix">--}}
+{{--                         <div class="pull-left">--}}
+{{--                             <h3 class="m-0">{!! __('orders') !!}</h3>--}}
+{{--                         </div>--}}
+{{--                     </div>--}}
                      <div class="card-body panel-body">
                          <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                              <option value="#" data-column="0" data-name="id">#</option>
@@ -137,7 +139,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [

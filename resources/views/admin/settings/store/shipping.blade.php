@@ -4,7 +4,8 @@
 @stop
 @section('content')
     <div class="container-fluid">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+        <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
             <li class="nav-item ">
                 <a class="nav-link " id="general-tab" href="{!! route('admin_settings_store') !!}" role="tab"
                    aria-controls="general" aria-selected="true" aria-expanded="true">General</a>
@@ -41,23 +42,27 @@
                    aria-controls="printing" aria-selected="true" aria-expanded="true">Printing</a>
             </li>
         </ul>
+        </div>
         <div id="content">
-            <div class="card panel panel-default mb-3">
-                <div class="card-header panel-heading clearfix">
-                    <h2 class="pull-left m-0">Geo Zones</h2>
-                    <div class="pull-right">
-                        <a href="{!! route('admin_settings_geo_zones_new') !!}" class="btn btn-primary">
-                            <i class="fa fa-plus"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+{{--            <div class="card panel panel-default mb-3">--}}
+{{--                <div class="card-header panel-heading clearfix">--}}
+{{--                    <h2 class="pull-left m-0">Geo Zones</h2>--}}
+{{--                    <div class="pull-right">--}}
+{{--                       --}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="card panel panel-default mb-3">
-                            <div class="card-header panel-heading">
-                                <h3 class="panel-title h5"><i class="fa fa-list"></i> Geo Zone List</h3>
-                            </div>
-                            <div class="card-body panel-body">
+{{--                            <div class="card-header panel-heading">--}}
+{{--                                <h3 class="panel-title h5"><i class="fa fa-list"></i> Geo Zone List</h3>--}}
+{{--                            </div>--}}
+                <div class="d-flex flex-wrap justify-content-end px-4 mt-2">
+                    <a href="{!! route('admin_settings_geo_zones_new') !!}" class="btn btn-primary">
+                        <i class="fa fa-plus"></i>
+                    </a>
+                </div>
+                            <div class="card-body panel-body pt-0">
                                 <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                                     <thead>
                                     <tr>
@@ -84,7 +89,7 @@
         $(function () {
             $('#users-table').DataTable({
                 ajax:  "{!! route('datatable_all_geo_zones') !!}",
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 "scrollX": true,

@@ -32,11 +32,11 @@
             <div class="pt-25">
                 <div class="card panel panel-default">
 
-                    <div class="card-header panel-heading clearfix">
-                        <div class="pull-left">
-                            <h3 class="m-0">{!! __('orders') !!}</h3>
-                        </div>
-                    </div>
+{{--                    <div class="card-header panel-heading clearfix">--}}
+{{--                        <div class="pull-left">--}}
+{{--                            <h3 class="m-0">{!! __('orders') !!}</h3>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                     <div class="card-body panel-body">
                         <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                             <option value="#" data-column="0" data-name="id">#</option>
@@ -139,7 +139,7 @@
                     "serverSide": true,
                     "bPaginate": true,
                     "scrollX": true,
-                    dom: 'Bflrtip',
+                    dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
                     lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                     buttons: [

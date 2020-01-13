@@ -7,7 +7,7 @@
         <div class="alert alert-danger error-place" style="display: none"></div>
         {!! Form::model($geo_zone,['url'=> route('admin_settings_geo_zone_save',($geo_zone)?$geo_zone->id:null),'class' => '','files' => true, 'id' => 'geo-zones-form' ]) !!}
         <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
                     <h2 class="pull-left m-0">Geo Zones</h2>
                     <div class="pull-right">
                         <button type="submit" class="btn btn-primary geo-zones-submit" data-original-title="Save"><i

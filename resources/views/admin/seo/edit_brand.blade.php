@@ -5,7 +5,8 @@
         {!! Form::hidden('id',$seo->id) !!}
 
     @endif
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+    <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
         <li class="nav-item">
             <a class="nav-link active" id="tabSeo1-tab" data-toggle="tab" href="#tabSeo1" role="tab" aria-controls="tabSeo1" aria-selected="true">Tab 1</a>
         </li>
@@ -13,13 +14,14 @@
             <a class="nav-link" id="tabSeo2-tab" data-toggle="tab" href="#tabSeo2" role="tab" aria-controls="tabSeo2" aria-selected="false">Tab 2</a>
         </li>
     </ul>
+    </div>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade show active" id="tabSeo1" role="tabpanel" aria-labelledby="tabSeo1-tab">
             {!! Form::hidden('category_id',$brand->id) !!}
             <div class="card panel panel-default">
-                <div class="card-header panel-heading clearfix">
-                    <h2 class="m-0 pull-left">SEO Edit Brand</h2>
-                    <div class="pull-right btn-save">
+                <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+                    <h2 class="m-0 mr-1">SEO Edit Brand</h2>
+                    <div class="btn-save">
                         <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </div>
