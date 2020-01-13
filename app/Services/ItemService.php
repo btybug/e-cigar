@@ -19,26 +19,67 @@ use App\Models\StockVariationOption;
  */
 class ItemService
 {
+    public function makeSpecifications($item, array $data = [])
+    {
+        $arrsNoNeedRemove = [];
+        if (count($data)) {
+            foreach ($data as $key => $attr) {
+                if(isset($attr['attributes_id'])){
+                    $isExists = ItemSpecification::where('item_id', $item->id)
+                        ->where('attributes_id', $attr['attributes_id'])->where('parent_id', null)->first();
+                    if($isExists){
+                        $arrsNoNeedRemove[] = $attr['attributes_id'];
+                    }else{
+                        ItemSpecification::create([
+                            'item_id' => $item->id,
+                            'parent_id' => null,
+                            'sticker_id' => null,
+                            'attributes_id' => $attr['attributes_id']
+                        ]);
+
+                        $arrsNoNeedRemove[] = $attr['attributes_id'];
+                    }
+                }
+            }
+        }
+        ItemSpecification::where('item_id', $item->id)->whereNotIn('attributes_id',$arrsNoNeedRemove)->delete();
+    }
+
     public function makeOptions($item, array $data = [])
     {
         if (count($data)) {
             foreach ($data as $parent_id => $ids) {
                 $parent = ItemSpecification::where('item_id', $item->id)
                     ->where('attributes_id', $parent_id)->where('parent_id', null)->first();
-
+                $optionsNoNeedDelete = [];
                 if ($parent && count($ids)) {
                     foreach ($ids as $id) {
+                        $option = ItemSpecification::where('item_id', $item->id)
+                            ->where('attributes_id', $parent_id)->where('sticker_id', $id)->first();
+
                         if ($id) {
-                            ItemSpecification::create([
-                                'item_id' => $item->id,
-                                'parent_id' => $parent->id,
-                                'sticker_id' => $id,
-                                'attributes_id' => $parent_id
-                            ]);
+                            if($option){
+                                $optionsNoNeedDelete[] = $id;
+                            }else{
+                                ItemSpecification::create([
+                                    'item_id' => $item->id,
+                                    'parent_id' => $parent->id,
+                                    'sticker_id' => $id,
+                                    'attributes_id' => $parent_id
+                                ]);
+
+                                $optionsNoNeedDelete[] = $id;
+                            }
                         }
                     }
                 }
+
+                ItemSpecification::where('item_id', $item->id)
+                    ->where('attributes_id', $parent_id)->whereNotIn('sticker_id',$optionsNoNeedDelete)->delete();
             }
+        }else{
+            ItemSpecification::where('item_id', $item->id)
+                ->whereNotNull('parent_id')->delete();
         }
     }
 
