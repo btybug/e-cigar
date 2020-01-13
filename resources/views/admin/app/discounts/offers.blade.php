@@ -1,29 +1,34 @@
 @extends('layouts.admin',['activePage'=>'discounts'])
 @section('content')
+    <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+        <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" data-tabs="tabs">
+            <li class="nav-item">
+                <a class="nav-link " href="{!! route("app_customer_discounts") !!}">
+                    Admin discounts
+                    <div class="ripple-container"></div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" href="{!! route("app_customer_offers") !!}">
+                    Offers
+                    <div class="ripple-container"></div>
+                </a>
+            </li>
+        </ul>
+    </div>
         <div class="card">
-            <div class="card-header card-header-tabs card-header-warning">
-                <div class="nav-tabs-navigation">
-                    <div class="nav-tabs-wrapper">
-                        <span class="nav-tabs-title">Discounts:</span>
-                        <ul class="nav nav-tabs" data-tabs="tabs">
-                            <li class="nav-item">
-                                <a class="nav-link " href="{!! route("app_customer_discounts") !!}">
-                                    Admin discounts
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link active" href="{!! route("app_customer_offers") !!}">
-                                    Offers
-                                    <div class="ripple-container"></div>
-                                </a>
-                            </li>
-                        </ul>
-                        <a class="pull-right btn btn-primary" href="{!! route('app_customer_offers_create') !!}">Create
-                            new</a>
-                    </div>
-                </div>
+{{--            <div class="card-header card-header-tabs card-header-warning">--}}
+{{--                <div class="nav-tabs-navigation">--}}
+{{--                    <div class="nav-tabs-wrapper">--}}
+{{--                        <span class="nav-tabs-title">Discounts:</span>--}}
+{{--                        --}}
+{{--                    </div>--}}
+{{--                </div>--}}
 
+{{--            </div>--}}
+            <div class="d-flex justify-content-end px-4 mt-2">
+                <a class="pull-right btn btn-primary" href="{!! route('app_customer_offers_create') !!}">Create
+                    new</a>
             </div>
             <div class="card-body">
                 <div class="tab-content">

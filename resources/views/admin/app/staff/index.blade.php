@@ -30,7 +30,7 @@
             </div>
         </div>
 
-        <div class="card-body panel-body">
+        <div class="card-body panel-body pt-0">
             <table id="items-table" class="table table-style table-bordered table-items-wrapper" cellspacing="0"
                    width="100%">
                 <thead>
@@ -66,7 +66,7 @@
                 "serverSide": true,
                 "bPaginate": true,
                 // "ordering": false,
-                dom: 'Bflrtip',
+                dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                 displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
                 'columnDefs': [{

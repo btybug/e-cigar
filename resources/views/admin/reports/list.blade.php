@@ -4,11 +4,11 @@
 
 @section('content')
     <div class="card panel panel-default">
-        <div class="card-header panel-heading clearfix">
-            <div class="pull-left">
+        <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
+            <div class="">
                 <h2 class="m-0">Reports</h2>
             </div>
-            <div class="pull-right">
+            <div class=>
                 @ok('admin_reports_new')<div class="pull-right "><a class="btn btn-primary pull-right" href="{!! route('admin_reports_new') !!}">Add new</a></div>@endok
             </div>
         </div>
