@@ -390,7 +390,21 @@ class Folders extends Model
                 $folder->prefix = $count;
                 $folder->save();
                 $result[]=$folder;
+            }else{
+            $folder = self::find($data['folder_id']);
+
+
+            $count = self::where('name', $folder->name)->where('parent_id', $data['parent_id'])->count();
+            if ($count) {
+                $count++;
+            } else {
+                $count = null;
             }
+            $folder->parent_id = $data['parent_id'];
+            $folder->prefix = $count;
+            $folder->save();
+            $result[]=$folder;
+        }
 
             return \Response::json(['error' => false, 'data' => $result]);
     }
