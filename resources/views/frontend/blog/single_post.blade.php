@@ -609,13 +609,13 @@
 
                     success: function (data) {
                         $('.error-box').html('');
+                        form[0].reset();
                         if (data.success == false) {
                             $(".message-place").text(data.message);
                             $.map(data.errors, function (k, v) {
                                 form.find('.' + v).text(k[0]);
                             });
                         } else {
-                            form[0].reset();
                             $(".user-add-comment-secondry").remove();
                             $(".message-place").text(data.message);
 //                            $("#msgModal").modal();
