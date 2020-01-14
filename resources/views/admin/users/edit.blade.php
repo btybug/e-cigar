@@ -6,7 +6,7 @@
     <div class="card panel panel-default users-log-wrapper bg-transparent border-0">
         <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
             <div class="d-flex">
-                <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar()!!}" alt="avatar">
+                <img class="profile-user-img img-responsive d-inline-block" src="{!!user_avatar($user->id)!!}" alt="avatar">
                 <div class="d-inline-block ml-10">
                     {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
                     <h3 class="profile-username mt-0 mb-1">{!! $user->name.' '.$user->last_name !!}</h3>

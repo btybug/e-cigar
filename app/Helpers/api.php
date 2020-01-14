@@ -617,7 +617,7 @@ function commentRender($comments, $i = 0, $parent = false)
         echo '<header class="text-left">';
         echo '<div class="comment-user">';
         if ($comment->author) {
-            echo '<span class="text-center">' . $comment->author->username . '</span>';
+            echo '<span class="text-center">' . $comment->author->name .' '. $comment->author->last_name . '</span>';
         } else {
             echo '<span class="text-center">' . $comment->guest_name . '</span>';
         }
@@ -631,10 +631,10 @@ function commentRender($comments, $i = 0, $parent = false)
             echo '<div class="text-right reply-wrapper">';
             echo   '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-secondary btn-sm reply">Reply</a>';
             if($settings){
-                if($settings->user_delete == 1){
+                if($settings->user_delete == 1 && $comment->author_id == Auth::id()){
                     echo  '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-danger btn-sm delete-comment">Delete</a>';
                 }
-                if($settings->user_edit == 1) {
+                if($settings->user_edit == 1 && $comment->author_id == Auth::id()) {
                     echo '<a href="javascript:void(0)" data-id="' . $comment->id . '" class="btn btn-warning btn-sm edit-comment">Edit</a>';
                 }
             }
@@ -1373,13 +1373,13 @@ function user_avatar($id = null)
         $user = $userRepo->find($id);
         if ($user) {
             if ($user->avatar) {
-                return "/storage/app/images/$user->email/" . $user->avatar;
+                return "/storage/app/images/users/$user->id/" . $user->avatar;
             }
         }
     } else {
         if (Auth::check()) {
             if (Auth::user()->avatar) {
-                return "/storage/app/images/".Auth::user()->email . "/" . Auth::user()->avatar;
+                return "/storage/app/images/users/".Auth::id() . "/" . Auth::user()->avatar;
             }
         }
     }

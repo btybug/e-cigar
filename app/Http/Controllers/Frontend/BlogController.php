@@ -59,7 +59,7 @@ class BlogController extends Controller
         $data = $request->all();
         $setting = $settings->getEditableData('admin_comments_setting');
 
-        if(! $setting->status){
+        if($setting->status === null){
             if (\App\Models\Gmail::check()) {
                 $message = "Something is wrong, please try again later or <a href=\"'.route('support_contact_us').'\">Contact Us</a>";
             }else{
@@ -122,5 +122,21 @@ class BlogController extends Controller
         }
 
         return \Response::json(['success' => true,'message' => $message,'html' => $html,'render' => $render]);
+    }
+
+    public function deleteComment(Request $request,Settings $settings)
+    {
+        $setting = $settings->getEditableData('admin_comments_setting');
+        $id = $request->get('id');
+        if($setting && $setting->user_delete == 1){
+           $comment =  Comment::where('id',$id)->where('author_id',\Auth::id())->first();
+           if($comment){
+               $comment->delete();
+               return \Response::json(['success' => true,'message' => "Your comment deleted successfully!!!"]);
+           }else{
+               return \Response::json(['success' => true,'message' => "You can't delete that comment"]);
+           }
+        }
+        return \Response::json(['success' => false,'message' => "Fails !!!"]);
     }
 }

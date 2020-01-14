@@ -16,7 +16,7 @@
                 <div class="form-group row">
                     {{Form::label('status', "Comment approve",['class' => 'col-sm-2 control-label'])}}
                     <div class="col-sm-10">
-                        {{Form::select('status',[''=> "Select",1 => "Need Admin Approve",0 => "No need Approve"],null,['class' => $errors->has('status') ? 'form-control  is-invalid' : "form-control ",])}}
+                        {{Form::select('status',[''=> "Select",1 => "No",0 => "Yes"],null,['class' => $errors->has('status') ? 'form-control  is-invalid' : "form-control ",])}}
                         @if ($errors->has('status'))<span
                             class="invalid-feedback"><strong>{{ $errors->first('status') }}</strong></span>
                         @endif

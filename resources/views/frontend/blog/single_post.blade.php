@@ -590,26 +590,6 @@
     {!! Html::script('public/js/custom/comments.js') !!}
     <script>
         $(document).ready(function () {
-
-//            $('.blog-products-slider').owlCarousel({
-//                nav: true,
-//                items: 1,
-//                dots: false,
-//                autoplay: true,
-//                loop: true,
-//                autoplayTimeout: 3000
-//            });
-//
-//            $('.blog-posts-slider').owlCarousel({
-//                nav: false,
-//                items: 3,
-//                dots: true,
-//                autoplay: true,
-//                autoplayTimeout: 5000,
-//                loop: true,
-//                margin: 10
-//            });
-
             $('body').on('click', '.cancel-comment', function (event) {
                 $(this).parents('form:first')[0].reset();
             });
@@ -626,6 +606,7 @@
                     url: "{!! route('comment_create_post') !!}",
                     type: 'POST',
                     data: data,
+
                     success: function (data) {
                         $('.error-box').html('');
                         if (data.success == false) {
@@ -641,6 +622,34 @@
                             if(data.render == true){
                                 $(".comments-refresh").html(data.html);
                             }
+                        }
+                    },
+                    error: function (data) {
+                        // $(".message-place").text(data.message);
+                    }
+                });
+            });
+
+            $('body').on('click', '.delete-comment', function (event) {
+                event.preventDefault();
+                let $_this= $(this);
+                var form = $(this).parents('form:first');
+
+                $.ajax({
+                    url: "{!! route('comment_delete_post') !!}",
+                    type: 'POST',
+                    data: {id : $(this).data('id')},
+                    headers: {
+                        'X-CSRF-TOKEN': '{{csrf_token()}}'
+                    },
+                    success: function (data) {
+                        $('.error-box').html('');
+                        if (data.success == false) {
+                            $(".message-place").text(data.message);
+                        } else {
+                            $(".user-add-comment-secondry").remove();
+                            $(".message-place").text(data.message);
+                            $_this.closest('.user-comment-img').remove();
                         }
                     },
                     error: function (data) {

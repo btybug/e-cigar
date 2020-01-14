@@ -101,6 +101,7 @@ Route::post('/get-category-products-stickers', 'Frontend\StickersController@post
 
 
 Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
+Route::post('/delete-comment', 'Frontend\BlogController@deleteComment')->name('comment_delete_post');
 
 
 Route::group(['prefix' => 'products'], function () {
