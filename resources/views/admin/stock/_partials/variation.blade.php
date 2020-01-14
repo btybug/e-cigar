@@ -36,18 +36,18 @@
             </div>
         </div>
         <div class="card-body panel-body">
-            <div class="row">
-                <div class="col-xl-5 col-lg-6 col-sm-7 col-7 d-flex flex-wrap head-left px-0 py-2">
-                    <div class="col-xl-12 my-xl-0 my-1">
-                        <div class="row flex-nowrap">
-                            <div class="col-md-4">
+            <div class="row mb-2">
+                <div class="col-xl-5 col-lg-7 col-md-12 head-left">
+                    <div class="">
+                        <div class="row">
+                            <div class="col-sm-4">
                                 <label>Item Options:</label>
                                 {!! Form::select("variations[$main_unique][type]",['single' => 'Single item','package_product' => 'Multiple items','filter' => 'Filters'
                        ],($main) ? $main->type : null,
                        ['class' => 'form-control variation-product-select']) !!}
                             </div>
-                            <div class="col-md-4">
-                                <div class="row">
+                            <div class="col-sm-4">
+                                <div class="">
                                     <div class="type-place">
                                         <div class="product-wall">
                                             @if($main && $main->type =='package_product')
@@ -62,7 +62,7 @@
                                 </div>
                             </div>
                             <div
-                                class="col-md-4 mt-md-0 mt-1 filter-option {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
+                                class="col-sm-4 filter-option {{ ($main && $main->type =='filter') ? '' : 'hide' }}">
                                 <label>Select Filter</label>
                                 {!! Form::select("variations[$main_unique][filter_category_id]",['' => '-----']+$filters,($main) ? $main->filter_category_id : null,
                                 ['class' => 'form-control filter-select']) !!}
@@ -71,26 +71,26 @@
                     </div>
 
                 </div>
-                <div class="col-xl-7 col-lg-6 col-sm-5 col-5 d-flex justify-content-end p-0">
+                <div class="col-xl-7 col-lg-5 col-md-12 d-flex justify-content-end p-0">
                     <div
-                        class="col-md-12 px-md-3 px-0 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
-                        <div class="row h-100 align-items-center">
-                            <div class="col-md-4">
-                                <div class="row">
+                        class="w-100 multi-option {{ ($main && ($main->type =='package_product' || $main->type =='filter' )) ? '' : 'hide' }}">
+                        <div class="h-100 align-items-center mb-md-0 mb-2">
+                            <div class="col-xl-6 col-lg-10 col-sm-7">
+                                <div class="">
 
-                                    <div class="col-md-12 align-self-center p-0">
+                                    <div class="align-self-center p-0">
                                         <label>
                                             Limit :
                                         </label>
                                         <div class="row">
-                                            <div class="col-md-4">
+                                            <div class="col-xl-4 col-5">
                                                 {!! Form::number("variations[$main_unique][min_count_limit]",
                                         (($main) ? $main->min_count_limit : null),['class' => 'form-control']) !!}
                                             </div>
-                                            <div class="col-md-2 align-self-center">
+                                            <div class="col-xl-2 col-2 d-flex justify-content-center align-self-center">
                                                 To
                                             </div>
-                                            <div class="col-md-4">
+                                            <div class="col-xl-4 col-5">
                                                 {!! Form::number("variations[$main_unique][count_limit]",
                                                                                                                        ($main) ? $main->count_limit : null,['class' => 'form-control']) !!}
                                             </div>

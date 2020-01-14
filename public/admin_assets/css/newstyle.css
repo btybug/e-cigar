@@ -2121,6 +2121,7 @@ table .faq-ansver{
 .admin-datatable-margin .dataTables_wrapper{
     /*margin: 0;*/
 }
+
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{
@@ -2210,6 +2211,10 @@ table .faq-ansver{
     }
     .multiple-image-placeholder .img-thumb-container .inner{
         height: 150px !important;
+    }
+    .stock-page .type-place .basic-center.basic-wall{
+        padding-left: 0 !important;
+        padding-right: 0 !important;
     }
 }
 @media (max-width: 767px) {
@@ -2311,6 +2316,9 @@ table .faq-ansver{
     }
     .media-page--wrapper .left--media-col{
         display: none;
+    }
+    .stock-page .type-place .basic-center.basic-wall{
+        margin: 5px 0;;
     }
 }
 @media (max-width: 500px) {

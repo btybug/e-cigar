@@ -1221,20 +1221,20 @@
     </div><!-- /.modal -->
 
     <script type="template" id="range-discount">
-        <div class="d-flex flex-wrap discount-item">
-            <div class="col-md-3">
+        <div class="row discount-item">
+            <div class="col-sm-3">
                 <label>From</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-3">
+            <div class="col-sm-3">
                 <label>To</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-4">
+            <div class="col-xl-4 col-sm-3">
                 <label>Price/Item</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-2 align-self-end">
+            <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
@@ -1243,17 +1243,17 @@
     </script>
 
     <script type="template" id="fixed-discount">
-        <div class="d-flex flex-wrap discount-item">
-            <div class="col-md-5">
+        <div class="row discount-item">
+            <div class="col-xl-5 col-sm-4">
                 <label>Qty</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
             </div>
 
-            <div class="col-md-5">
+            <div class="col-xl-5 col-sm-4">
                 <label>Total price</label>
                 {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
-            <div class="col-md-2 align-self-end">
+            <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
@@ -1263,28 +1263,28 @@
 
     <script type="template" id="range-discount-temp">
 
-        <div class="col-md-12 range-box">
-            <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-3">
+        <div class="range-box">
+            <div class="row discount-item">
+                <div class="col-sm-3">
                     <label>From</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-sm-3">
                     <label>To</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-4">
+                <div class="col-xl-4 col-sm-3">
                     <label>Price/Item</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
             </div>
         </div>
-        <div class="col-md-2 offset-md-10 pl-1">
+        <div class="col-xl-2 offset-xl-10 col-sm-3 offset-sm-9 pl-sm-4 pl-xl-4 pl-0">
             <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
                     class="fa fa-plus"></i></a>
         </div>
@@ -1292,18 +1292,18 @@
     </script>
 
     <script type="template" id="fixed-discount-temp">
-        <div class="col-md-12 fixed-box">
-            <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-5">
+        <div class="fixed-box">
+            <div class="row discount-item">
+                <div class="col-xl-5 col-sm-4">
                     <label>Qty</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
                 </div>
 
-                <div class="col-md-5">
+                <div class="col-xl-5 col-sm-4">
                     <label>Total price</label>
                     {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -1311,7 +1311,7 @@
             </div>
 
         </div>
-        <div class="col-md-2 offset-md-10 pl-1">
+        <div class="col-xl-2 offset-xl-10 col-sm-4 offset-sm-8 pl-sm-3 pl-xl-4 pl-0">
             <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
                     class="fa fa-plus"></i></a>
         </div>

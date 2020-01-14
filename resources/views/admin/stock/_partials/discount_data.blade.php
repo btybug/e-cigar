@@ -1,21 +1,21 @@
 @if($package_variation->price_type == 'range')
 
-    <div class="col-md-12 range-box">
+    <div class="range-box">
         @foreach($package_variation->discounts as $key => $datum)
-            <div class="d-flex flex-wrap discount-item">
-                <div class="col-md-3">
+            <div class="row discount-item">
+                <div class="col-sm-3">
                     <label>From</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][from]",$datum->from,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-3">
+                <div class="col-sm-3">
                     <label>To</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][to]",$datum->to,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-4">
+                <div class="col-xl-4 col-sm-3">
                     <label>Price/Item</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-md-2 align-self-end">
+                <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -23,7 +23,7 @@
             </div>
         @endforeach
     </div>
-    <div class="col-md-2 offset-md-10 pl-1">
+    <div class="col-xl-2 offset-xl-10 col-sm-3 offset-sm-9 pl-sm-4 pl-xl-4 pl-0">
         <a class="btn btn-primary add-range-discount add-discount-field" href="javascript:void(0)"><i
                 class="fa fa-plus"></i></a>
     </div>
@@ -42,7 +42,7 @@
                     <label>Total price</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-xl-5 col-sm-4 mt-sm-0 mt-2">
+                <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
@@ -50,7 +50,7 @@
             </div>
         @endforeach
     </div>
-    <div class="col-md-2 offset-md-10 pl-1">
+    <div class="col-xl-2 offset-xl-10 col-sm-4 offset-sm-8 pl-sm-3 pl-xl-4 pl-0">
         <a class="btn btn-primary add-fixed-discount add-discount-field" href="javascript:void(0)"><i
                 class="fa fa-plus"></i></a>
     </div>
