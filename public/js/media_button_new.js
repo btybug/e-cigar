@@ -1432,11 +1432,14 @@ const App = function() {
       });
     },
 
-    emptyTrash: (obj = {},) => {
+    emptyTrash: (obj = {}) => {
       shortAjax("/api-media/empty-trash", obj, res => {
         if (!res.error) {
-          this.requests.drawingItems(undefined,undefined,cb2);
-          
+          this.requests.drawingItems({
+            folder_id: 2,
+            files: true,
+            access_token: "string"
+          });
         }
       });
     },
