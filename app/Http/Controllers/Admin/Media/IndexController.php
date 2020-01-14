@@ -47,6 +47,33 @@ class IndexController extends Controller
         dd('done');
     }
 
+    public function cleanMedia()
+    {
+        $items=Items::all();
+        $mediaPath=public_path('media'.DS.'drive');
+        $mediaPathTmb=public_path('media'.DS.'tmp');
+        $mediaPathOld=public_path('media_old'.DS.'drive');
+        $mediaPathOldTmb=public_path('media_old'.DS.'tmp');
+        foreach ($items as $item){
+            if($item->original_folder){
+                if(!\File::isDirectory($mediaPath.DS.$item->original_folder)){
+                    \File::makeDirectory($mediaPath.DS.$item->original_folder);
+                }
+
+                if (\File::exists($mediaPathOld.DS.$item->original_folder.DS.$item->original_name)){
+                    \File::copy($mediaPathOld.DS.$item->original_folder.DS.$item->original_name,$mediaPath.DS.$item->original_folder.DS.$item->original_name);
+                    if (\File::exists($mediaPathOldTmb.DS.$item->original_name)){
+                        \File::copy($mediaPathOldTmb.DS.$item->original_name,$mediaPathTmb.DS.$item->original_name);
+                    }
+
+                }
+            }else{
+                $item->delete();
+            }
+        }
+        dd('done');
+    }
+
     public function fixDb()
     {
 

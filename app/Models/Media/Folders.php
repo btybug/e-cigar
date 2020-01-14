@@ -434,6 +434,7 @@ class Folders extends Model
 
     public static function emptyTrash()
     {
+        $result=[];
         $trash = self::where('name', 'trash')->first();
         $folders = self::where('parent_id', $trash->id)->get();
         foreach ($folders as $folder) {

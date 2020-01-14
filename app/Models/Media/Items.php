@@ -103,7 +103,7 @@ class Items extends Model
 
     public static function removeItem($data)
     {
-        if (!$data['trash']) {
+        if (isset($data['trash']) && $data['trash']) {
             $trash = Folders::where('name', 'trash')->first();
             $data['folder_id'] = $trash->id;
             return self::sort($data);
@@ -113,18 +113,26 @@ class Items extends Model
                     $i=self::find($id);
                     if (\File::exists($i->path()))
                     \File::delete($i->path());
+
+                }
+                if (\File::exists(media_image_tmb_path($i->url))){
+                    \File::delete(media_image_tmb_path($i->url));
                 }
 
                 return self::whereIn('id', $data['item_id'])->delete();
             }
-            return self::find($data['item_id'])->delete();
+            $i = self::find($data['item_id']);
+            if (\File::exists($i->path())) {
+                \File::delete($i->path());
+            }
+            return self::where('id', $data['item_id'])->delete();
         }
     }
 
     public static function emptyTrash()
     {
-        $trash = self::where('name', 'trash')->first();
-        $items['item_id'] = $trash->items->pluck('id');
+        $trash = Folders::where('name', 'trash')->first();
+        $items['item_id'] = $trash->items->pluck('id')->toArray();
         return self::removeItem($items);
 
     }
