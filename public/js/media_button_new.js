@@ -323,32 +323,33 @@ const App = function() {
 
     treeMove: (nodeId, parentId) => {
       if(Number(parentId) === 1) {
-        $('#folder-list2>ol').append($(`li.dd-item[data-id="${nodeId}"]`));
+          $('#folder-list2>ol').append($(`li.dd-item[data-id="${nodeId}"]`));
       } else {
         if($(`li.dd-item[data-id="${parentId}"]>ol`).length !== 0) {
-          $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
+            $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
         } else {
-          const ol = $('<ol></ol>');
-          ol.addClass('dd-list');
-          $(`li.dd-item[data-id="${parentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
-          $(`li.dd-item[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
-                 <div class="disclose oooo"><span class="closer"></span></div>
-                 <div class="dd-handle oooo">${$(`li.dd-item[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
-                 <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
-                  <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
-                    <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
-                  </button>
-                  <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
-                    <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
-                      <i class="fa fa-trash" style="color:#ffffff"></i>
+
+            const ol = $('<ol></ol>');
+            ol.addClass('dd-list');
+            $(`li.dd-item[data-id="${parentId}"]`).addClass('mjs-nestedSortable-branch mjs-nestedSortable-expanded');
+            $(`li.dd-item[data-id="${parentId}"]>div`).replaceWith(`<div class="oooo" bb-media-click="get_folder_items"  draggable="true">
+                  <div class="disclose oooo"><span class="closer"></span></div>
+                  <div class="dd-handle oooo">${$(`li.dd-item[data-id="${parentId}"]`).text().trim().split(' ')[0].trim()}</div>
+                  <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
+                    <button class="btn btn-sm btn-default dropdown-toggle click-no" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" style="padding: 0 10px">
+                      <i class="fa fa-ellipsis-h click-no" aria-hidden="true"></i>
                     </button>
-                    <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
-                    <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                    <span  class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1" style="min-width: 100%;box-shadow: 0 0 4px #777;padding: 6px;margin-top: auto;">
+                      <button class="btn btn-sm btn-danger dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px" bb-media-click="remove_folder">
+                        <i class="fa fa-trash" style="color:#ffffff"></i>
+                      </button>
+                      <button class="btn btn-sm btn-primary dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom: 3px"><i class="fa fa-cog"></i></button>
+                      <button class="btn btn-sm btn-warning dropdown-item" style="display: block;color: #fff;padding: 0px 10px;margin-bottom:0" bb-media-click="edit_item"><i class="fa fa-pencil"></i></button>
+                    </span>
                   </span>
-                </span>
-               </div>`)
-          $(`li.dd-item[data-id="${parentId}"]`).append(ol);
-          $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
+                </div>`)
+            $(`li.dd-item[data-id="${parentId}"]`).append(ol);
+            $(`li.dd-item[data-id="${parentId}"]>ol`).append($(`li.dd-item[data-id="${nodeId}"]`));
         }
       }
       if($(`li.dd-item[data-id="${this.dragElement}"]>ol`).children().length === 0) {
@@ -495,7 +496,7 @@ const App = function() {
               access_token: "string"
             },
               () => {
-                // self.htmlMaker.treeMove(nodeId, parentId);
+                  self.htmlMaker.treeMove(nodeId, parentId);
               }
           );
         },
@@ -523,153 +524,11 @@ const App = function() {
       });
     }
 
-    $('body').on('click', '.icon-folder-opening', function(ev) {
-      const branch = $(ev.target).closest('.tree_leaf');
-      const opening_icon = $(ev.target).closest('.icon-folder-opening');
-      if(branch.hasClass('tree_leaf_with_branch')) {
-        if(!$(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
-          $(branch.find('.tree_branch')[0]).addClass('closed_branch');
-        } else {
-          $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
-        }
     
-        if(!opening_icon.find('i').hasClass('fa-caret-right')) {
-          opening_icon.find('i').removeClass('fa-caret-down');
-          opening_icon.find('i').addClass('fa-caret-right');
-        } else {
-          opening_icon.find('i').removeClass('fa-caret-right');
-          opening_icon.find('i').addClass('fa-caret-down');
-        }
-      }
-    });
       const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
       let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
       const {dndForTree} = this.events;
       const {transferFolder} = this.requests;
-
-      // function makeTree (data) {
-      //   const getTreeData = (data) => {
-      //     return data.map((el) => {
-      //       const children = el.children.length === 0 ? null : getTreeData(el.children);
-      //       return {id: el.key, title: el.title, children: children};
-      //     });
-      //   };
-      //   return data && data.map((el)=>{
-      //     return !el.children || el.children.length === 0 ? makeTreeLeaf(el.key, el.name) : makeTreeBranch(el.key, el.name, el.children, makeTree);
-      //   });
-      // };
-
-      // $(el).children().html(makeTree(data).join(' '));
-
-      // $('document').ready(() => {
-      //   $(el + '>ol').nestedSortable({
-      //     disableNesting: 'no-nest',
-      //     forcePlaceholderSize: true,
-      //     handle: 'div',
-      //     helper: 'clone',
-      //     items: 'li',
-      //     opacity: .6,
-      //     placeholder: 'placeholder',
-      //     tabSize: 15,
-      //     tolerance: 'pointer',
-      //     toleranceElement: '> div',
-      //     isTree: true,
-      //     startCollapsed: true,
-      //     update: function (ev, data) {
-
-      //       const id = $(ev.originalEvent.target).closest('li').attr('data-id') || currentDragTreeElementId;
-      //       const treeArray = $(this).nestedSortable('toArray');
-      //       const parent_id = treeArray.filter((el) => el.id === id)[0].parent_id;
-      //       let parentId = null;
-      //       $(this).nestedSortable('toArray').map((el)=>{
-      //         (el.id && Number(el.id)) === Number(id) && (parentId = el.parent_id);
-      //       });
-
-      //       const getData = (treeData) => {
-      //         return treeData && treeData.map((el) => {
-      //           return {key: el.id, name: $(`li.dd-item[data-id="${el.id}"]`).text().trim().split(' ')[0].trim(), children: el.children && getData(el.children)};
-      //         });
-      //       };
-
-      //       const findParent = (treeData, p_id) => {
-      //         var parent;
-      //         !Array.isArray(findParent.children) && (findParent.children = []);
-      //         parent = treeData && treeData.find((el) => {
-      //               el.children && findParent.children.push(...el.children);
-      //           return Number(el.id) === Number(p_id);
-      //         });
-
-      //         if(parent) {
-      //           return parent;
-      //         } else {
-      //           const p = findParent(findParent.children, p_id);
-      //           if(p) {
-      //             return p;
-      //           }
-      //         }
-      //       };
-
-      //       const parentTransformToLeaf = () => {
-      //         $(currentParentOfDrag.find('ol')[0]).children().length === 0 &&
-      //           $(currentParentOfDrag[0]).replaceWith(makeTreeLeaf(currentParentOfDrag.attr('data-id'), currentParentOfDrag.text().trim()));
-      //       };
-      //       const dataOfBranch = parentId && getData([findParent($(this).nestedSortable('toHierarchy'), parentId)]);
-      //       const leafTransformToParent = (data) => {
-      //         $(`li.dd-item[data-id="${parent_id}"]`).replaceWith(makeTreeBranch(parent_id, $(`li.dd-item[data-id="${parent_id}"]`).text().trim().split(' ')[0].trim(), data[0].children, makeTree));
-      //       };
-
-      //       parentId === null && (function () {
-      //         transferFolder(
-      //             {
-      //               folder_id: Number(id),
-      //               parent_id: Number(1),
-      //               access_token: "string"
-      //             }
-      //         );
-      //       })();
-      //       transferFolder(
-      //           {
-      //             folder_id: Number(id),
-      //             parent_id: Number(parentId),
-      //             access_token: "string"
-      //           }
-      //       );
-
-      //       dndForTree();
-
-      //       parentTransformToLeaf();
-      //       parentId && leafTransformToParent(dataOfBranch);
-
-      //       findParent.children = [];
-      //       document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
-      //         $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
-      //       }});
-      //     },
-      //     change: function(ev, data) {
-      //     },
-      //     sort: function (ev, data) {
-      //     },
-      //     revert: function() {
-      //     },
-      //     relocate: function() {
-      //       dndForTree();
-      //     },
-      //     start: function (ev, data) {
-      //       currentParentOfDrag = $(ev.originalEvent.target).closest('li').parent().closest('li');
-      //       currentDragTreeElementId = $(ev.originalEvent.target).closest('li').attr('data-id');
-      //     },
-      //     stop: function(ev, data) {
-      //       // $('#page-wrapper .over-auto').css('overflow', 'auto');
-      //     },
-      //     out: function(ev, data) {
-      //       // $('#page-wrapper .over-auto').css('overflow', 'unset');
-      //     },
-      //     over: function () {
-      //       // $('#page-wrapper .over-auto').css('overflow', 'auto');
-      //     }
-      //   });
-
-      // });
 
       dndForTree();
 
@@ -1234,6 +1093,7 @@ const App = function() {
               e.dataTransfer.setData("node_id", JSON.stringify({data: self.selectedImage, item: 'image'})); // required otherwise doesn't work
               // setTimeout(() => (this.className = "invisible"), 0);
               // self.htmlMaker.currentId = id;
+              // console.log(1)
             } else if(!e.target.classList.contains('title-change')) {
               const width = elm.clientWidth;
               const height = elm.clientHeight;
@@ -1246,7 +1106,14 @@ const App = function() {
               crt.style.width = width + 'px';
               crt.style.height= height + "px";
               document.body.appendChild(crt);
-              const id = this.getAttribute("data-id");
+              // const id = this.getAttribute("data-id");
+              const id = [];
+              $('.file-box.folder-container.active').each((ind, el) => {
+                console.log($($(el).find('.file')))
+                id.push($($(el).find('.file')).attr("data-id"));
+              });
+              id.length === 0 && id.push($(this).attr("data-id"))
+              console.log(id)
               e.dataTransfer.setDragImage(crt, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
               e.dataTransfer.setData("node_id", JSON.stringify({data: id, item: $(e.target).closest('[bb-media-type]').attr('bb-media-type')})); // required otherwise doesn't work
@@ -1365,30 +1232,47 @@ const App = function() {
     //     //   console.log('Hurrraaaa')
     //     // });
     // }.bindToEventHandler(file));
-    
-    
-          let nodeId = self.htmlMaker.dragElementOfTree || JSON.parse(e.dataTransfer.getData("node_id")).data;
+          const transfer = JSON.parse(e.dataTransfer.getData("node_id"));
+          console.log(transfer)
+
+          let nodeId = self.htmlMaker.dragElementOfTree || transfer.data;
+          const type = transfer.item;
           let parentId = e.target
               .closest(".file")
               .getAttribute("data-id");
-          if(Array.isArray(nodeId)) {
+          if(type === 'image') {
+            console.log(nodeId)
                 self.requests.transferImage(
                   {
-                    item_id: [Number(id)],
+                    item_id: nodeId,
                     folder_id: Number(parentId),
                     access_token: "string"
                   }
                 );
-          } else {
-            if(self.htmlMaker.dragElementOfTree || $('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
+          } else if(type === 'folder') {
+            if(self.htmlMaker.dragElementOfTree || $($('.folderitems').find(`[data-id="${nodeId}"]`)[0]).closest('.folder-container')) {
+              let nodeId = transfer.data;
               Number(nodeId) !== Number(parentId) && self.requests.transferFolder(
                 {
-                  folder_id: [Number(nodeId)],
+                  folder_id: nodeId,
                   parent_id: Number(parentId),
                   access_token: "string"
                 },
                   () => {
-                    self.htmlMaker.treeMove(nodeId, parentId);
+                    nodeId.map((id) => {
+                      console.log(id, parentId)
+                      self.htmlMaker.treeMove(id, parentId);
+                    })
+                    
+                    self.requests.drawingItems({
+                      folder_id: self.globalFolderId,
+                      files: true,
+                      access_token: "string"
+                    }, true,
+                    () => {
+                      console.log(1111);
+                    });
+                    
                   }
               );
             } else {
@@ -1452,7 +1336,6 @@ const App = function() {
             mainContainer.innerHTML += html;
           });
           if (tree) {
-            
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
           this.globalFolderId = res.settings.id;
@@ -1545,6 +1428,15 @@ const App = function() {
         if (!res.error) {
           this.requests.drawingItems(undefined,undefined,cb2);
           cb();
+        }
+      });
+    },
+
+    emptyTrash: (obj = {},) => {
+      shortAjax("/api-media/empty-trash", obj, res => {
+        if (!res.error) {
+          this.requests.drawingItems(undefined,undefined,cb2);
+          
         }
       });
     },
@@ -1862,17 +1754,18 @@ const App = function() {
       $('#modal_area').html(this.htmlMaker.remove_modal(id, name, 'folder'));
     },
 
-    remove_image_req: async (elm, e, ids, resolve) => {
+    remove_image_req: (elm, e, ids, resolve) => {
       // const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
       if(ids.length === 0) resolve(true);
 
-      await this.requests.removeImage(
+      this.requests.removeImage(
         {
           item_id: ids,
           // this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
           trash: true,
           access_token: "string"
         }, () => {
+          console.log(11)
           resolve(true);
           // this.requests.drawingItems()
           // this.events.close_name_modal();
@@ -1884,7 +1777,7 @@ const App = function() {
     
 
     //********App -> events -> remove_folder********start
-    remove_folder_req: async (elm, e, ids, resolve) => {
+    remove_folder_req: (elm, e, ids, resolve) => {
       e.stopPropagation();
       e.preventDefault();
 
@@ -1896,7 +1789,7 @@ const App = function() {
       //       {close_name_modal} = this.events,
       //       {removeTreeFolder} = this.requests;
 
-      await this.requests.removeTreeFolder(
+      this.requests.removeTreeFolder(
         {
           folder_id: ids,
           // Number(id),
@@ -1904,6 +1797,7 @@ const App = function() {
           access_token: "string"
         },
         () => {
+          console.log(22)
           resolve(true);
 
           // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
@@ -2222,27 +2116,28 @@ $('.delete_items').on('click', (ev) => {
 
 const remove_req_function = async (ev, images_ids, folders_ids) => {
   const promise1 = new Promise(function(resolve, reject) {
+    console.log(1)
     app.events.remove_image_req(undefined, ev, images_ids, resolve);
   });
   const promise2 = new Promise(function(resolve, reject) {
+    console.log(2)
     app.events.remove_folder_req(undefined, ev, folders_ids, resolve);
   });
   const promise3 = new Promise(function(resolve, reject) {
+    
+  })
+
+  // images_ids.length > 0 && folders_ids.length > 0 && 
+  Promise.all([promise1, promise2]).then((value) => { 
     app.requests.drawingItems({
       folder_id: app.globalFolderId,
       files: true,
       access_token: "string"
     }, true,
     () => {
-      resolve(true);
+      app.events.close_name_modal();
     });
   })
-
-  Promise.all([promise1, promise2]).then(value => { 
-    promise3.then(function(res) {
-      app.events.close_name_modal();
-    })
-  });
 }
 
 $('body').on('click','.done_remove_items', (ev) => {
@@ -2423,21 +2318,7 @@ document
     }
     
     $('body').on('click', '.empty_trash_js', function() {
-      const imagesArray = [];
-      const folderArray = [];
-      $('.image-container.active').each(function() {
-        imagesArray.push($(this).find('[data-id]').attr('data-id'))
-      })
-      $('.folder-container.active').each(function() {
-        folderArray.push($(this).find('div[data-id]').attr('data-id'))
-      })
-      
-    
-      app.requests.removeImage({
-        item_id: imagesArray,
-        trash: false 
-      })
-      // removeTreeFolder({});
+      app.requests.emptyTrash();
     })
 
 
@@ -2805,7 +2686,7 @@ document
                     access_token: "string"
                   },
                     () => {
-                      // self.htmlMaker.treeMove(nodeId, parentId);
+                      self.htmlMaker.treeMove(nodeId, parentId);
                     }
                 );
               },
@@ -2918,3 +2799,24 @@ document
   //   }
   // };
   //   })
+
+  $('body').on('click', '.icon-folder-opening', function(ev) {
+    console.log(5555)
+    const branch = $(ev.target).closest('.tree_leaf');
+    const opening_icon = $(ev.target).closest('.icon-folder-opening');
+    if(branch.hasClass('tree_leaf_with_branch')) {
+      if(!$(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
+        $(branch.find('.tree_branch')[0]).addClass('closed_branch');
+      } else {
+        $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
+      }
+  
+      if(!opening_icon.find('i').hasClass('fa-caret-right')) {
+        opening_icon.find('i').removeClass('fa-caret-down');
+        opening_icon.find('i').addClass('fa-caret-right');
+      } else {
+        opening_icon.find('i').removeClass('fa-caret-right');
+        opening_icon.find('i').addClass('fa-caret-down');
+      }
+    }
+  });
