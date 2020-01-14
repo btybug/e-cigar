@@ -202,10 +202,8 @@ class MediaItemsApiController extends Controller
         if (isset($data['item_id']) and is_array($data['item_id'])) {
             $vdata = $data['item_id'];
             foreach ($data['item_id'] as $k => $v) {
-                $result = Items::transfer($v, $data['folder_id']);
-                if ($result == true) {
-                    break;
-                }
+                $result[] = Items::transfer($v, $data['folder_id']);
+
             }
         } else {
             $result = Items::transfer($data['item_id'], $data['folder_id']);
