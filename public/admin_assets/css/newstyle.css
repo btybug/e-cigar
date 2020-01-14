@@ -2177,6 +2177,12 @@ table .faq-ansver{
     .right--media-col-wrapper .upload--head{
         flex-wrap: wrap;
     }
+    .admin-general--tabs .nav-link{
+        padding: .4rem 1rem;
+    }
+    .admin-general--tabs-wrapper a{
+        font-size: 22px !important;
+    }
 }
 @media (max-width: 991px) {
     .main-header_nav-middle .main-header_nav-middle-list .find-link{
