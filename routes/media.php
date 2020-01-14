@@ -22,3 +22,4 @@ Route::post('/copy-item', 'Admin\Media\MediaItemsApiController@getCopyItems');
 Route::post('/transfer-item', 'Admin\Media\MediaItemsApiController@getTransferItems');
 Route::post('/get-item-details', 'Admin\Media\MediaItemsApiController@getItemDetalis');
 Route::post('/save-seo', 'Admin\Media\MediaItemsApiController@getSaveSeo');
+Route::post('/empty-trash', 'Admin\Media\MediaApiController@emptuTrash');

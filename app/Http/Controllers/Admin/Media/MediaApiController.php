@@ -2,9 +2,8 @@
 
 
 use App\Http\Controllers\Controller;
-use  App\Models\Media\Folders;
-use App\Models\Media\Settings;
-//use Chumper\Zipper\Zipper;
+use App\Models\Media\Folders;
+use App\Models\Media\Items;
 use Illuminate\Http\Request;
 
 class MediaApiController extends Controller
@@ -190,7 +189,14 @@ class MediaApiController extends Controller
         $zipFile->close();
         if (\File::exists($path)) {
             return response()->json(['url' => '/public/' . $folder->name . '.zip']);
-            return response()->download($path)->deleteFileAfterSend(true);
+//            return response()->download($path)->deleteFileAfterSend(true);
         }
+    }
+
+    public function emptuTrash()
+    {
+        $folders = Folders::emptyTrash();
+        $items = Items::emptyTrash();
+        return \Response::json(['error' => false, 'folders' => $folders, 'items' => $items]);
     }
 }

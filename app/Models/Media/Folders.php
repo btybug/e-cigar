@@ -432,4 +432,18 @@ class Folders extends Model
             return ['path' => public_path('media' . DS . 'drive' . DS . $i), 'folder' => $i];
         }
     }
+
+    public static function emptyTrash()
+    {
+        $trash = self::where('name', 'trash')->first();
+        $folders=self::where('parent_id',$trash->id)->get();
+        foreach ($folders as $folder) {
+            $items = $folder->items;
+            foreach ($items as $item) {
+                File::delete($item->path());
+            }
+            $result[] = $folder->delete();
+        }
+        return $result;
+    }
 }
