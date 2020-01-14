@@ -40,7 +40,7 @@ return [
             'username' => env('MONGO_DB_USERNAME'),
             'password' => env('MONGO_DB_PASSWORD'),
             'options'  => [],
-            'roles'=>['role'=>'dbAdmin','db'=>env('MONGO_DB_DATABASE')]
+           
 
         ],
 
