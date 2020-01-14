@@ -282,19 +282,25 @@
                             {{--<!-- /.row -->--}}
                         {{--</li>--}}
                         <!-- Menu Footer-->
-                        <li class="user-footer">
-                            <div class="pull-left">
-                                <a href="{{ route('admin_staff') }}" class="btn btn-default btn-flat">Staff</a>
+                        <li class="user-footer d-flex flex-wrap justify-content-between">
+                            <div>
+                                <a href="{{ route('admin_staff') }}" class="btn btn-primary btn-flat">Staff</a>
                             </div>
-                            <div class="pull-right">
+                            <div>
+                                <a href="#" class="btn btn-primary btn-flat">Profile</a>
+                            </div>
+
+                        </li>
+                        <li>
+                            <div>
                                 {!! Form::open(['url'=>route('logout')]) !!}
-                                <button type="submit" class="btn btn-default btn-flat">Sign out</button>
+                                <button type="submit" class="btn btn-danger btn-block btn-flat"><i class="fas fa-sign-out-alt"></i> Sign out</button>
                                 {!! Form::close() !!}
                             </div>
                         </li>
-                        <li id="userDropdownSkins">
-                            {{--here comes skins dynamicly--}}
-                        </li>
+{{--                        <li id="userDropdownSkins">--}}
+{{--                            --}}{{--here comes skins dynamicly--}}
+{{--                        </li>--}}
                     </ul>
                 </li>
                 <!-- Control Sidebar Toggle Button -->
