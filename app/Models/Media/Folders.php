@@ -374,7 +374,7 @@ class Folders extends Model
     public static function sort($data)
     {
         $result = [];
-        if (is_array($data['folder_id']))
+        if (is_array($data['folder_id'])) {
             foreach ($data['folder_id'] as $folder_id) {
                 $folder = self::find($folder_id);
 
@@ -389,7 +389,8 @@ class Folders extends Model
                 $folder->prefix = $count;
                 $folder->save();
                 $result[] = $folder;
-            } else {
+            }
+        } else {
             $folder = self::find($data['folder_id']);
 
 
@@ -436,7 +437,7 @@ class Folders extends Model
     public static function emptyTrash()
     {
         $trash = self::where('name', 'trash')->first();
-        $folders=self::where('parent_id',$trash->id)->get();
+        $folders = self::where('parent_id', $trash->id)->get();
         foreach ($folders as $folder) {
             $items = $folder->items;
             foreach ($items as $item) {
