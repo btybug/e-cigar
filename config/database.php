@@ -40,7 +40,7 @@ return [
             'username' => env('MONGO_DB_USERNAME'),
             'password' => env('MONGO_DB_PASSWORD'),
             'options'      => [
-                'database' => 'admin',
+                'database' => 'admin.test',
                 'username' => 'mongo',
                 'password' => 'mongo',
             ],
