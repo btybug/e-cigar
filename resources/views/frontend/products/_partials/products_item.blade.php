@@ -66,7 +66,7 @@
                                         </span>
                                     @else
                                         @php
-                                        $firstVariation = ($product->variations && count($product->variations))?$product->variations()->first():null;
+                                        $firstVariation = ($product->variations && count($product->variations))?$product->variations()->orderBy('ordering','asc')->first():null;
                                         @endphp
                                         <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
                                             {{ convert_price(($firstVariation)? ($firstVariation->price_per == 'product') ? (($firstVariation->common_price)?$firstVariation->common_price:0):
