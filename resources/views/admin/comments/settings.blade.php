@@ -33,15 +33,6 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    {{Form::label('user_edit', "Comment edit",['class' => 'col-sm-2 control-label'])}}
-                    <div class="col-sm-10">
-                        {{Form::select('user_edit',[''=> "Select",1 => "Yes",0 => "No"],null,['class' => $errors->has('user_edit') ? 'form-control  is-invalid' : "form-control ",])}}
-                        @if ($errors->has('user_edit'))<span
-                            class="invalid-feedback"><strong>{{ $errors->first('user_edit') }}</strong></span>
-                        @endif
-                    </div>
-                </div>
             </div>
         </div>
     {{ Form::close() }}
