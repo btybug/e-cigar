@@ -392,8 +392,6 @@ class Folders extends Model
             }
         } else {
             $folder = self::find($data['folder_id']);
-
-
             $count = self::where('name', $folder->name)->where('parent_id', $data['parent_id'])->count();
             if ($count) {
                 $count++;
