@@ -34,7 +34,7 @@
                     <div class="box box-primary mar-0">
                         <div class="box-body box-profile">
                             <img class="profile-user-img img-responsive img-circle"
-                                 src="{{ user_avatar() }}"
+                                 src="{{ user_avatar($user->id) }}"
                                  alt="{!! $user->name.' '.$user->last_name !!}">
                                 {!! Form::hidden('user_id',$user->id,['id' => 'userID']) !!}
                             <h3 class="profile-username text-center">{!! $user->name.' '.$user->last_name !!}</h3>
