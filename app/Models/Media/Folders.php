@@ -168,28 +168,27 @@ class Folders extends Model
 
     /**
      * @param $data
-     * @return bool
+     * @return array
      */
     public static function removeFolder($data)
     {
-        $id = $data['folder_id'];
+        $result = [];
         if (!$data['trash']) {
-            $folder = self::find($id);
-            $items=$folder->items;
-            foreach ($items as $item){
-                File::delete($item->path());
+            foreach ($data['folder_id'] as $id) {
+                $folder = self::find($id);
+                $items = $folder->items;
+                foreach ($items as $item) {
+                    File::delete($item->path());
+                }
+                $result[] = $folder->delete();
             }
-            if ($folder->delete()) {
 
-                return true;
-            }
         } else {
-            if (self::find($id)->trash()) {
-                return true;
+            foreach ($data['folder_id'] as $id) {
+                $result[] = self::find($id)->trash();
             }
-
         }
-        return false;
+        return $result;
     }
 
     /**
@@ -198,10 +197,10 @@ class Folders extends Model
     protected static function boot()
     {
         parent::boot();
-       return static::deleting(function ($tutorial) {
-               foreach ($tutorial->childs as $child) {
-                   $child->delete();
-           }
+        return static::deleting(function ($tutorial) {
+            foreach ($tutorial->childs as $child) {
+                $child->delete();
+            }
         });
     }
 
@@ -235,7 +234,7 @@ class Folders extends Model
 
     public function childs()
     {
-        return $this->hasMany(Folders::class,'parent_id');
+        return $this->hasMany(Folders::class, 'parent_id');
     }
 
     public function items()
@@ -374,9 +373,9 @@ class Folders extends Model
 
     public static function sort($data)
     {
-        $result=[];
-        if(is_array($data['folder_id']))
-            foreach ($data['folder_id'] as $folder_id){
+        $result = [];
+        if (is_array($data['folder_id']))
+            foreach ($data['folder_id'] as $folder_id) {
                 $folder = self::find($folder_id);
 
 
@@ -389,8 +388,8 @@ class Folders extends Model
                 $folder->parent_id = $data['parent_id'];
                 $folder->prefix = $count;
                 $folder->save();
-                $result[]=$folder;
-            }else{
+                $result[] = $folder;
+            } else {
             $folder = self::find($data['folder_id']);
 
 
@@ -403,10 +402,10 @@ class Folders extends Model
             $folder->parent_id = $data['parent_id'];
             $folder->prefix = $count;
             $folder->save();
-            $result[]=$folder;
+            $result[] = $folder;
         }
 
-            return \Response::json(['error' => false, 'data' => $result]);
+        return \Response::json(['error' => false, 'data' => $result]);
     }
 
     public function info()
@@ -419,18 +418,18 @@ class Folders extends Model
         return $info;
     }
 
-    public function uploadPath($i=1)
+    public function uploadPath($i = 1)
     {
-        if (File::isDirectory(public_path('media'.DS.'drive'.DS.$i))){
-          if( count(File::allFiles(public_path('media'.DS.'drive'.DS.$i)))>=50){
-              $i++;
-             return $this->uploadPath($i);
-            }else{
-              return ['path'=>public_path('media'.DS.'drive'.DS.$i),'folder'=>$i];
-          }
-        }else{
-            File::makeDirectory(public_path('media'.DS.'drive'.DS.$i));
-            return ['path'=>public_path('media'.DS.'drive'.DS.$i),'folder'=>$i];
+        if (File::isDirectory(public_path('media' . DS . 'drive' . DS . $i))) {
+            if (count(File::allFiles(public_path('media' . DS . 'drive' . DS . $i))) >= 50) {
+                $i++;
+                return $this->uploadPath($i);
+            } else {
+                return ['path' => public_path('media' . DS . 'drive' . DS . $i), 'folder' => $i];
+            }
+        } else {
+            File::makeDirectory(public_path('media' . DS . 'drive' . DS . $i));
+            return ['path' => public_path('media' . DS . 'drive' . DS . $i), 'folder' => $i];
         }
     }
 }
