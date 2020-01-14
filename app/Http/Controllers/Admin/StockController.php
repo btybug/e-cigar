@@ -253,7 +253,7 @@ class StockController extends Controller
         }
 //        $this->createOrUpdateSeo($request, $stock->id);
 
-//        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
+        ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
 //
         return redirect()->back();
     }
@@ -664,7 +664,7 @@ class StockController extends Controller
         $idS = $request->get('idS');
         Stock::whereIn('id', $idS)->delete();
         foreach ($idS as $id){
-//            ActivityLogs::action('stock', 'delete',$id);
+            ActivityLogs::action('stock', 'delete',$id);
         }
 
         return response()->json(['error' => false]);
@@ -678,7 +678,7 @@ class StockController extends Controller
             'name' => $request->name,
             'short_description' => $request->short_description,
         ]]);
-//        ActivityLogs::action('stock', 'update', $model->id);
+        ActivityLogs::action('stock', 'update', $model->id);
         $model->categories()->sync($request->get('categories', []));
 
         return response()->json(['error' => false]);
@@ -707,7 +707,7 @@ class StockController extends Controller
                 ]]);
                 $cat = (count($item['categories'])) ? $item['categories'] : [];
                 $model->categories()->sync($cat);
-//                ActivityLogs::action('stock', 'update', $model->id);
+                ActivityLogs::action('stock', 'update', $model->id);
             }
             return response()->json(['error' => false]);
         }
