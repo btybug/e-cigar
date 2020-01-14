@@ -25,6 +25,7 @@ use App\Models\StockOfferProducts;
 use App\Models\StockSeo;
 use App\Models\StockVariation;
 use App\Models\Translations\StockTranslation;
+use App\Services\PrinterService;
 use App\Services\StockService;
 use Illuminate\Http\Request;
 

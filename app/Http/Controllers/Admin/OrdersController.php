@@ -30,6 +30,7 @@ use App\Models\ZoneCountries;
 use App\Models\ZoneCountryRegions;
 use App\Services\CartService;
 use App\Services\OrdersService;
+use App\Services\PrinterService;
 use App\User;
 use Darryldecode\Cart\Facades\CartFacade as Cart;
 use PragmaRX\Countries\Package\Countries;
@@ -854,7 +855,7 @@ class OrdersController extends Controller
 
     }
 
-    public function printPdf(Request $request,$id,Settings $settings)
+    public function printPdf(Request $request,$id,Settings $settings,PrinterService $printerService)
     {
 // This  $data array will be passed to our PDF blade
         $settings = $settings->getEditableData('admin_general_settings');
@@ -876,32 +877,17 @@ class OrdersController extends Controller
         $pdf = \PDF::loadView('admin.pdf.invoice', $data)->save(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf");
         $pdfShipping = \PDF::loadView('admin.pdf.shipping', $data)->save(storage_path("app".DS."printer").DS.$order->order_number."-shipping.pdf");
 
-        $printerId = 'bc1b47fb-d23d-be25-3cb4-78cfa410fc3b';
-        \GoogleCloudPrint::asPdf()
-            ->file(storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf")
-            ->printer($printerId)
-            ->send();
+        $printerService->call("invoice",storage_path("app".DS."printer").DS.$order->order_number."-invoice.pdf");
 
-        \GoogleCloudPrint::asPdf()
-            ->file(storage_path("app".DS."printer").DS.$order->order_number."-shipping.pdf")
-            ->printer($printerId)
-            ->send();
+        $printerService->call("shipping",storage_path("app".DS."printer").DS.$order->order_number."-shipping.pdf");
 
         foreach ($order->items as $item){
             if($item->stock && $item->stock->downloads && count($item->stock->downloads)){
                 foreach ($item->stock->downloads as $download){
-                    \GoogleCloudPrint::asPdf()
-                        ->url(url($download))
-                        ->printer($printerId)
-                        ->send();
+                    $printerService->call("downloads",url($download));
                 }
             }
         }
-//        \GoogleCloudPrint::asText()
-//            ->content('Sahak like rainbow color :D')
-//            ->printer($printerId)
-//            ->marginsInCentimeters(1, 1, 1, 1)
-//            ->send();
 
         return redirect()->back()->with("success","Printing started !!!");
     }
