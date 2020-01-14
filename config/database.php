@@ -41,6 +41,7 @@ return [
             'password' => env('MONGO_DB_PASSWORD'),
             'use_mongo_id' => false,
             'options'      => [],
+            'roles'=> [  'role'=> 'root', 'db'=> 'admin'  ]
 
 
         ],
