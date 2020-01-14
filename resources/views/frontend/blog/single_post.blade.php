@@ -629,6 +629,7 @@
                     success: function (data) {
                         $('.error-box').html('');
                         if (data.success == false) {
+                            $(".message-place").text(data.message);
                             $.map(data.errors, function (k, v) {
                                 form.find('.' + v).text(k[0]);
                             });
@@ -643,7 +644,7 @@
                         }
                     },
                     error: function (data) {
-                        // alert(data.err);
+                        // $(".message-place").text(data.message);
                     }
                 });
             });

@@ -161,7 +161,7 @@ Route::group(['prefix' => '/support'], function () {
 
 Route::get('/landings/{url}', 'GuestController@landings')->name('landings');
 
-Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
+//Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 Route::get('/about-us', 'Frontend\CommonController@getAboutUs')->name('about_us');
 Route::get('/privacy', 'Frontend\CommonController@getPrivacy')->name('privacy');
 Route::get('/cookies', 'Frontend\CommonController@getCookies')->name('cookies');

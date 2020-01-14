@@ -59,8 +59,13 @@ class BlogController extends Controller
         $data = $request->all();
         $setting = $settings->getEditableData('admin_comments_setting');
 
-        if(! $setting){
-            return \Response::json(['success' => false,'message' => 'System error','html' => '']);
+        if(! $setting->status){
+            if (\App\Models\Gmail::check()) {
+                $message = "Something is wrong, please try again later or <a href=\"'.route('support_contact_us').'\">Contact Us</a>";
+            }else{
+                $message = "Something is wrong, please try again later";
+            }
+            return \Response::json(['success' => false,'message' => $message,'html' => '']);
         }
 
         if(\Auth::check()){
