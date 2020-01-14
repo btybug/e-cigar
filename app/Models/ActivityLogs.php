@@ -17,7 +17,7 @@ class ActivityLogs extends Model
     public static function action($object_name, $action_type, $object_id, $user_id = null)
     {
         $user_id=($user_id)?$user_id:\Auth::id();
-        return self::create(compact('user_id','object_name','object_id','action_type'));
+       // return self::create(compact('user_id','object_name','object_id','action_type'));
     }
 
     public function user()
