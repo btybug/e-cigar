@@ -1862,9 +1862,9 @@ const App = function() {
       $('#modal_area').html(this.htmlMaker.remove_modal(id, name, 'folder'));
     },
 
-    remove_image_req: async (elm, e, ids) => {
+    remove_image_req: async (elm, e, ids, resolve) => {
       // const itemId = this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? e.target.getAttribute("data-id") : this.selectedImage;
-      if(ids.length === 0) return;
+      if(ids.length === 0) resolve(true);
 
       await this.requests.removeImage(
         {
@@ -1872,6 +1872,10 @@ const App = function() {
           // this.selectedImage.length === 0 || (e.target.getAttribute("data-id").indexOf(',') < 0 && !this.selectedImage.includes(e.target.getAttribute("data-id"))) ? Number(itemId) : this.selectedImage,
           trash: true,
           access_token: "string"
+        }, () => {
+          resolve(true);
+          // this.requests.drawingItems()
+          // this.events.close_name_modal();
         }
         // this.events.close_name_modal
       );
@@ -1880,12 +1884,12 @@ const App = function() {
     
 
     //********App -> events -> remove_folder********start
-    remove_folder_req: async (elm, e, ids) => {
+    remove_folder_req: async (elm, e, ids, resolve) => {
       e.stopPropagation();
       e.preventDefault();
 
       // const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
-      if(ids.length === 0) return true;
+      if(ids.length === 0) resolve(true);
       // const tree = $('#folder-list2>ol'),
       //       leaf = tree.find(`[data-id="${id}"]`),
       //       {makeTreeLeaf} = this.htmlMaker,
@@ -1900,7 +1904,8 @@ const App = function() {
           access_token: "string"
         },
         () => {
-          
+          resolve(true);
+
           // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           // close_name_modal();
 
@@ -2215,13 +2220,29 @@ $('.delete_items').on('click', (ev) => {
   }
 });
 
-const remove_req_function = async (ev, images_ids, folders_ids, cb) => {
-  await app.events.remove_image_req(undefined, ev, images_ids);
-  await folders_ids.map((id) => {
-    app.events.remove_folder_req(undefined, ev, Number(id));
+const remove_req_function = async (ev, images_ids, folders_ids) => {
+  const promise1 = new Promise(function(resolve, reject) {
+    app.events.remove_image_req(undefined, ev, images_ids, resolve);
+  });
+  const promise2 = new Promise(function(resolve, reject) {
+    app.events.remove_folder_req(undefined, ev, folders_ids, resolve);
+  });
+  const promise3 = new Promise(function(resolve, reject) {
+    app.requests.drawingItems({
+      folder_id: app.globalFolderId,
+      files: true,
+      access_token: "string"
+    }, true,
+    () => {
+      resolve(true);
+    });
   })
-  await cb()
-  app.events.close_name_modal();
+
+  Promise.all([promise1, promise2]).then(value => { 
+    promise3.then(function(res) {
+      app.events.close_name_modal();
+    })
+  });
 }
 
 $('body').on('click','.done_remove_items', (ev) => {
@@ -2235,7 +2256,7 @@ $('body').on('click','.done_remove_items', (ev) => {
   });
 
   
-  remove_req_function(ev, images_ids, folders_ids, app.requests.drawingItems)
+  remove_req_function(ev, images_ids, folders_ids)
   
 })
 
