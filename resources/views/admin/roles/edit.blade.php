@@ -49,8 +49,9 @@
         </div>
 
         <div class="card panel panel-default mb-3">
-            <div class="card-header">
+            <div class="card-header d-flex flex-wrap justify-content-between align-items-center">
                 <h3 class="panel-heading m-0">Widgets</h3>
+                <label class="d-flex align-items-center"><span>Select All</span><input type="checkbox" class="ml-1 widgets_select_all_js"></label>
             </div>
             <div class="card-body panel-body">
                 @include('admin.roles._partials.widgets')
