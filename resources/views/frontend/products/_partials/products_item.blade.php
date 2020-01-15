@@ -60,20 +60,32 @@
                                         {{ convert_price($product->price,$currency, false) }}
                                     </span>
                                 @else
-                                    @if($product->price)
-                                        <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
-                                            {{ convert_price($product->price,$currency, false) }}
-                                        </span>
-                                    @else
+                                    @php
+                                    $firstVariation = ($product->variations && count($product->variations))?$product->variations()->orderBy('ordering','asc')->first():null;
+                                    @endphp
+                                    <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
                                         @php
-                                        $firstVariation = ($product->variations && count($product->variations))?$product->variations()->orderBy('ordering','asc')->first():null;
+                                            $price = 0;
                                         @endphp
-                                        <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
-                                            {{ convert_price(($firstVariation)? ($firstVariation->price_per == 'product') ? (($firstVariation->common_price)?$firstVariation->common_price:0):
-                                                     (($firstVariation->price)?$firstVariation->price:0):0,$currency, false) }}
-                                        </span>
-                                    @endif
+                                        @if($firstVariation)
+                                            @if($firstVariation->price_per == 'product')
+                                                @if($firstVariation->common_price)
+                                                   @php $price = $firstVariation->common_price ;@endphp
+                                                @endif
+                                            @else
+                                                @if($firstVariation->price_type == 'dynamic')
+                                                    @php $price = $firstVariation->item->default_price;@endphp
+                                                @else
+                                                    @if($firstVariation->price)
+                                                        @php  $price = $firstVariation->price.'7';@endphp
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
 
+
+                                        {{ convert_price($price,$currency, false) }}
+                                    </span>
                                 @endif
                             </span>
                         </span>
