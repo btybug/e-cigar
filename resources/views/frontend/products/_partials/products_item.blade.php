@@ -23,13 +23,13 @@
                          </span>
                         @if($product->other_images && count($product->other_images))
                             @php $count = 0; @endphp
-                            @foreach($product->other_images as $img)
+                            @foreach($product->other_images as $other_image)
                                 @if($count == 3)
                                     @break
                                 @endif
                                     @php $count++; @endphp
                                     <span class="products__item-photo-thumb-item" title="Extra Image {{ $count }}">
-                                        <img src="{{ (media_image_tmb(checkImage($img,'stock'))) }}" alt="Extra Image {{ $count }}" title="Extra Image {{ $count }}">
+                                        <img src="{{ (media_image_tmb(checkImage($other_image['image'],'stock'))) }}" alt="{{ $other_image['alt'] }}" title="{{ $other_image['alt'] }}">
                                     </span>
                             @endforeach
                         @endif

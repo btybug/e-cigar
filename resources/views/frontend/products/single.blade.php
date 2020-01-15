@@ -149,13 +149,13 @@
                                                     </div>
                                                 @endif
                                                 @if($vape->other_images && count($vape->other_images))
-                                                    @foreach($vape->other_images as $img)
+                                                    @foreach($vape->other_images as $other_image)
                                                         <div class="product-card_thumb-img-holder pointer"
                                                              data-id="null">
                                                             <img class=""
-                                                                 src="{{checkImage($img,'stock')}}"
-                                                                 alt="{!! $img !!}"
-                                                                 title="{!! $img !!}"
+                                                                 src="{{checkImage($other_image['image'],'stock')}}"
+                                                                 alt="{!! $other_image['alt'] !!}"
+                                                                 title="{!! $other_image['alt'] !!}"
                                                             >
                                                         </div>
                                                     @endforeach

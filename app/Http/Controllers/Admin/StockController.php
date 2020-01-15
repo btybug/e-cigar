@@ -61,6 +61,26 @@ class StockController extends Controller
 //        }
 //        dd('done');
 
+        $stocks = Stock::all();
+        foreach ($stocks as $stock){
+            $extra_images = $stock->other_images;
+            $otther_images = [];
+            if($extra_images && count($extra_images)){
+                foreach ($extra_images as $key => $image){
+                    $otther_images[$key] = [
+                        "image" => $image,
+                          "url" => "",
+                          "tags" => "",
+                          "alt" => "",
+                    ];
+                }
+            }
+
+            $stock->other_images = $otther_images;
+            $stock->save();
+        }
+        dd('done');
+
         return $this->view('stock');
     }
 
