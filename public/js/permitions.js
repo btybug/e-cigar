@@ -1,3 +1,35 @@
+$(document).on('ready', function() {
+  $('table').closest('.card').each(function(index, card) {
+    const $card = $(card);
+
+    const $checkboxes = $card.find('.checkbox_js');
+    const $widget_checkboxes = $card.find('.widget_checkbox_js');
+    const $widget_all_checkboxes = $card.find('.widgets_select_all_js');
+
+    if($widget_checkboxes.length > 0) {
+      count_checked_length($widget_checkboxes) === $widget_checkboxes.length 
+        && !$widget_all_checkboxes.is(':checked') 
+        && $widget_all_checkboxes.trigger('click');
+    } else {
+      const $view_checkboxes = $card.find('.view_checkbox_js');
+      const $edit_checkboxes = $card.find('.edit_checkbox_js');
+      const $create_checkboxes = $card.find('.create_checkbox_js');
+      const $delete_checkboxes = $card.find('.delete_checkbox_js');
+    
+      const $view_all_checkboxes = $card.find('.view_checkbox_all_js');
+      const $edit_all_checkboxes = $card.find('.edit_checkbox_all_js');
+      const $create_all_checkboxes = $card.find('.create_checkbox_all_js');
+      const $delete_all_checkboxes = $card.find('.delete_checkbox_all_js');
+  
+      check_length_and_trigger($checkboxes, $card.find('.select_all_js'));
+      check_length_and_trigger($view_checkboxes, $view_all_checkboxes);
+      check_length_and_trigger($edit_checkboxes, $edit_all_checkboxes);
+      check_length_and_trigger($create_checkboxes, $create_all_checkboxes);
+      check_length_and_trigger($delete_checkboxes, $delete_all_checkboxes);
+    }
+  })
+});
+
 function selectAll($checkboxes) {
   $checkboxes.each(function(index, checkbox) {
     const $checkbox = $(checkbox);
@@ -31,6 +63,12 @@ function has_class_select(checkbox_length, $has_access) {
     $has_access.trigger('click');
   } else if(checkbox_length === 0 && $has_access.is(':checked')) {
     $has_access.trigger('click');
+  }
+}
+
+function check_length_and_trigger($checkboxes, $all_checked) {
+  if(count_checked_length($checkboxes) === $checkboxes.length) {
+    !$all_checked.is(':checked') && $all_checked.trigger('click')
   }
 }
 
@@ -139,7 +177,6 @@ $('body').on('change', 'tbody .checkbox_js', function(ev) {
   }
 
   if(_create) {
-    // count_checked_length($view_checkboxes) === $view_checkboxes.length ? $card.find('.view_checkbox_all_js').prop('checked', true) : $card.find('.view_checkbox_all_js').prop('checked', false);
     if(count_checked_length($create_checkboxes) === $create_checkboxes.length) {
       $create_all_checkboxes.prop('checked', true)
       !$view_all_checkboxes.is(':checked') && $view_all_checkboxes.trigger('click')
@@ -150,7 +187,6 @@ $('body').on('change', 'tbody .checkbox_js', function(ev) {
   }
 
   if(_delete) {
-    // count_checked_length($view_checkboxes) === $view_checkboxes.length ? $card.find('.view_checkbox_all_js').prop('checked', true) : $card.find('.view_checkbox_all_js').prop('checked', false);
     if(count_checked_length($delete_checkboxes) === $delete_checkboxes.length) {
       $delete_all_checkboxes.prop('checked', true)
       !$view_all_checkboxes.is(':checked') && $view_all_checkboxes.trigger('click')
