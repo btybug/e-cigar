@@ -11,10 +11,12 @@
                     <a class="nav-link active" id="info-tab" href="javascript:void(0)" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Purchase</a>
                 </li>
+                @ok('admin_inventory_other')
                 <li class="nav-item">
                     <a class="nav-link " id="general-tab" href="{!! route('admin_inventory_other') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Others</a>
                 </li>
+                @endok
 
             </ul>
             </div>

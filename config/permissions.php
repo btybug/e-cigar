@@ -189,6 +189,9 @@ return [
                             'admin_warehouses_edit',
                             'admin_warehouses_manage',
                             'admin_warehouses_categories_form',
+                            'admin_warehouses_save',
+                            'admin_warehouses_categories_new_or_update',
+                            'admin_warehouses_categories_update_parent',
 
                         ],
                         'description' => 'Able to edit Warehouses',
@@ -212,7 +215,12 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit Purchase',
-                    'routes' => ['admin_inventory_purchase_edit', 'admin_inventory_purchase_get_stock_by_sku'],
+                    'routes' => [
+                        'admin_inventory_purchase_edit',
+                        'admin_inventory_purchase_get_stock_by_sku',
+                        'admin_inventory_purchase_save',
+                        'admin_item_locations'
+                    ],
                     'description' => 'Able to edit purchase',
                 ],
                 'delete' => [

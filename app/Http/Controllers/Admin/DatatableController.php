@@ -768,7 +768,12 @@ class DatatableController extends Controller
                 return BBgetDateFormat($faq->purchase_date);
             })
             ->addColumn('actions', function ($faq) {
-                return "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'>Edit</a></div>";
+                $html="<div class='datatable-td__action'>";
+                if(userCan('admin_inventory_purchase_edit')){
+                    $html.="<a class='btn btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'>Edit</a>";
+                }
+                $html.="</div>";
+                return $html;
             })->rawColumns(['actions', 'question', 'answer', 'created_at', 'status'])
             ->make(true);
     }
@@ -1102,10 +1107,13 @@ class DatatableController extends Controller
                 return ($attr->image) ? "<img src='$attr->image' class='img img-responsive' width='100px'/>" : "No image";
             })
             ->addColumn('actions', function ($attr) {
-                $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'>Edit</a>";
-                $html .= '<a href="'.route("admin_warehouses_manage",$attr->id).'" class="btn btn-info" >Activity</a>';
-                return  $html .= '<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'"
-                class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
+                $html="<div class='datatable-td__action'>";
+                $html.= userCan('admin_warehouses_edit')?"<a class='btn btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'>Edit</a>":'';
+                $html .= userCan('admin_warehouses_manage')?'<a href="'.route("admin_warehouses_manage",$attr->id).'" class="btn btn-info" >Activity</a>':null;
+                $html .= userCan('admin_warehouses_delete')?'<a href="javascript:void(0)" data-href="'.route("admin_warehouses_delete").'" class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a>':null;
+                $html.="</div>";
+                return  $html;
+
             })->rawColumns(['actions','image'])->make(true);
     }
 
