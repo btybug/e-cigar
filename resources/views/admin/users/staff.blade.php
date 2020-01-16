@@ -7,18 +7,24 @@
         <div class="row">
             <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
                 <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    @ok('admin_staff')
                     <li class="nav-item">
                         <a class="nav-link active" id="info-tab" href="{!! route('admin_staff') !!}" role="tab"
                            aria-controls="general" aria-selected="true" aria-expanded="true">Staff</a>
                     </li>
+                    @endok
+                    @ok('admin_tools_logs')
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab" href="{!! route('admin_tools_logs') !!}" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Activity Log Frontend</a>
                     </li>
+                    @endok
+                    @ok('admin_tools_logs_backend')
                     <li class="nav-item ">
                         <a class="nav-link" id="payment_gateways" href="{!! route('admin_tools_logs_backend') !!}" role="tab"
                            aria-controls="shipping" aria-selected="false">Activity Log Backend</a>
                     </li>
+                    @endok
                 </ul>
             </div>
             <div class="tab-content w-100">
@@ -29,9 +35,12 @@
 {{--            </div>--}}
 {{--           --}}
 {{--        </div>--}}
+
+           @ok('admin_staff_new')
            <div class="d-flex justify-content-end px-4 mt-2">
                <a href="{!! route('admin_staff_new') !!}" class="btn btn-info">Create new staff</a>
            </div>
+           @endok
         <div class="card-body panel-body pt-0">
 
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">

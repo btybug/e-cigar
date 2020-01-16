@@ -22,8 +22,8 @@ Route::group(['prefix' => 'find'], function () {
     Route::resource('order', 'Find\OrderController');
     Route::resource('products', 'Find\ProductController');
     Route::get('items', 'Find\ItemsController@index');
-    Route::post('items/barcodes', 'Find\ItemsController@getBarcodes');
-    Route::post('items/qrcodes', 'Find\ItemsController@getQrcodes');
+    Route::post('items/barcodes', 'Find\ItemsController@getBarcodes')->name('find_items_barcodes');
+    Route::post('items/qrcodes', 'Find\ItemsController@getQrcodes')->name('find_items_qrcodes');
     Route::post('items/html', 'Admin\FindController@printHtmlBarcode')->name('find_items_barcode_html');
     Route::post('items/edit', 'Find\ItemsController@getEditForm');
     Route::post('items/save', 'Find\ItemsController@postSave');
@@ -383,7 +383,7 @@ Route::group(['prefix' => 'orders'], function () {
     Route::post('/order-new-customer-notes', 'Admin\OrdersController@postApplyCustomerNotes')->name('admin_orders_apply_customer_notes');
 
     Route::post('/cash-payment', 'Admin\OrdersController@orderCash')->name('admin_orders_new_cash');
-    Route::post('/stripe-charge', 'Admin\OrdersController@stripeCharge')->name('admin_orders_new_cash');
+    Route::post('/stripe-charge', 'Admin\OrdersController@stripeCharge')->name('admin_orders_new_stripe');
 
     Route::group(['prefix' => 'invoices'], function () {
         Route::get('/', 'Admin\InvoiceOrdersController@index')->name('admin_orders_invoice');
@@ -415,7 +415,6 @@ Route::group(['prefix' => 'orders'], function () {
 });
 
 Route::group(['prefix' => 'inventory'], function () {
-    Route::get('/', 'Admin\InventoryController@inventory')->name('admin_inventory');
     Route::group(['prefix' => 'warehouses'], function () {
         Route::get('/', 'Admin\WarehouseController@index')->name('admin_warehouses');
         Route::get('/new', 'Admin\WarehouseController@getNew')->name('admin_warehouses_new');
@@ -472,7 +471,6 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
         Route::get('/archives', 'Admin\ItemsController@archives')->name('admin_items_archives');
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
-        Route::get('/new-bundle', 'Admin\ItemsController@getNewBundle')->name('admin_items_new_bundle');
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::post('/edit-row', 'Admin\ItemsController@postItemRowEdit')->name('post_admin_items_edit_row');
         Route::post('/multi-delete', 'Admin\ItemsController@postItemMultiDelete')->name('post_admin_items_multi_delete');
@@ -482,7 +480,6 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
         Route::get('/archive/{item_id}', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
-        Route::get('/activate/{item_id}', 'Admin\ItemsController@putActivate')->name('admin_items_activate');
         Route::post('/add-package', 'Admin\ItemsController@addPackage')->name('admin_items_package_add');
         Route::post('/add-location', 'Admin\ItemsController@addLocation')->name('admin_items_location_add');
         Route::post('/get-specifications', 'Admin\ItemsController@getSpecification')->name('admin_items_get_specification');
@@ -540,7 +537,7 @@ Route::group(['prefix' => 'stock'], function () {
     Route::post('/get-filter-items', 'Admin\StockController@postFilterItems')->name('admin_stock_filter_items');
     Route::post('/variation-option-view', 'Admin\StockController@postVariationOptionsView')->name('admin_stock_variation_type_view');
 
-    Route::post('/edit-variation', 'Admin\StockController@editVariation')->name('admin_stock_variation_add');
+    Route::post('/edit-variation', 'Admin\StockController@editVariation')->name('admin_stock_variation_edit');
     Route::post('/get-option-by-id', 'Admin\StockController@getOptionById')->name('admin_stock_variation_get_option');
     Route::post('/get-specifications', 'Admin\StockController@getSpecification')->name('admin_stock_variation_get_specification');
     Route::post('/get-specifications-by-category', 'Admin\StockController@postSpecificationByCategory')->name('admin_stock_specif_by_category');

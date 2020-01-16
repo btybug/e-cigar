@@ -100,7 +100,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapMediaRoutes()
     {
         Route::prefix('api-media')
-//            ->middleware('api')
+//            ->middleware('admin')
             ->namespace($this->namespace)
             ->group(base_path('routes/media.php'));
     }

@@ -11,9 +11,11 @@
 {{--            </div>--}}
 {{--            --}}
 {{--        </div>--}}
+        @ok('admin_customers_new')
         <div class="d-flex justify-content-end px-4 mt-2">
             <div class="pull-right"><a href="{!! route('admin_customers_new') !!}" class="btn btn-info">Create new customer</a></div>
         </div>
+        @endok
         <div class="card-body panel-body pt-0">
             <div class="table-responsive">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">

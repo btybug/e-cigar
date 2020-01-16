@@ -73,24 +73,6 @@ class ItemsController extends Controller
             'racks', 'shelves', 'data','brands','downloads'));
     }
 
-    public function getNewBundle()
-    {
-        $model = null;
-        $bundle = true;
-        $barcodes = $this->barcodeService->getPluck();
-        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
-        $racks = [];
-        $shelves = [];
-        $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
-
-        $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
-        $data = Category::recursiveItems($categories, 0, [], []);
-        $downloads = Category::where('type', 'downloads')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses', 'racks', 'shelves', 'data','brands','downloads'));
-    }
-
     public function postNew(ItemsRequest $request)
     {
         $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status',
@@ -345,7 +327,7 @@ class ItemsController extends Controller
 
     public function transfer()
     {
-        return $this->view('transfer.index', compact(['items', 'warehouses', 'racks', 'shelves']));
+        return $this->view('transfer.index');
     }
 
     public function newTransfer()

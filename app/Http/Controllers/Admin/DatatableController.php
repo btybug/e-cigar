@@ -60,13 +60,11 @@ class DatatableController extends Controller
             ->whereNull('role_id')
             ->orWhere('roles.type', 'frontend')->select('users.*', 'roles.title'))
             ->addColumn('actions', function ($user) {
-                return '<div class="users-table--td-btn datatable-td__action">
-                    <a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>
-                    <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>
-                    <a href="javascript:void(0)" data-href="' . route("admin_users_delete") . '"
-                class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>
-                    </div>
-                    ';
+                return '<div class="users-table--td-btn datatable-td__action">'
+                    . (userCan('admin_users_edit') ? '<a href="' . route('admin_users_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>' : null)
+                    . (userCan('admin_users_activity') ? '<a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>' : null)
+                    . (userCan('admin_users_delete') ? '<a href="javascript:void(0)" data-href="' . route("admin_users_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>' : null)
+                    . '</div>';
             })->addColumn('membership', function ($user) {
                 return ($user->role) ? $user->role->title : 'No Membership';
             })->rawColumns(['actions'])
@@ -80,9 +78,8 @@ class DatatableController extends Controller
             ->where('roles.type', 'backend')
             ->select('users.*', 'roles.title','roles.slug'))
             ->addColumn('actions', function ($user) {
-                return '<div class="datatable-td__action">
-                   <a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>'.(($user->slug!='superadmin')?' <a href="' . route('admin_staff_edit', $user->id) .'" class="btn btn-warning events-modal" data-object="competitions">Edit</a>'.
-                    ((!$user->hasVerifiedEmail())?'<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>':null).(($user->slug !='admin' || \Auth::user()->role->slug =='superadmin')? ((($user->role->slug!='superadmin')?'<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>':null).'</div>'):null):null);
+                return '<div class="datatable-td__action">' . ((userCan('admin_users_activity')) ? '<a href="' . route('admin_users_activity', $user->id) . '" class="btn btn-info">Activity</a>' : null) . (($user->slug != 'superadmin') ? (userCan('admin_staff_edit')) ? ' <a href="' . route('admin_staff_edit', $user->id) . '" class="btn btn-warning events-modal" data-object="competitions">Edit</a>' : null .
+                        ((!$user->hasVerifiedEmail()) ? '<a href="' . route('admin_users_verify', $user->id) . '" class="btn btn-warning">Verify</a>' : null) . (($user->slug != 'admin' || \Auth::user()->role->slug == 'superadmin') ? ((($user->role->slug != 'superadmin') ? ((userCan('admin_staff_delete')) ? '<a href="javascript:void(0)" data-href="' . route("admin_staff_delete") . '"class="delete-button btn btn-danger" data-key="' . $user->id . '">x</a>' : null) : null) . '</div>') : null) : null);
             })->addColumn('role', function ($user) {
                 return $user->role->title;
             })->rawColumns(['actions'])
@@ -887,12 +884,12 @@ class DatatableController extends Controller
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
-                return "<div class='datatable-td__action'>
-            <a class='btn edit-row' style='background-color: #86caff;color:black' data-id='".$attr->id."'><i class='fa fa-road'></i></a>
-            <a class='btn btn-warning' href='".route('admin_items_edit',$attr->id)."'>Edit</a>
-            <a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>
-            <a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>
-            </div>";
+                return "<div class='datatable-td__action'>"
+                    . (userCan('admin_items_edit') ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $attr->id . "'><i class='fa fa-road'></i></a>" : null)
+                    . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>" : null)
+                    . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
+                    . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
+                    . "</div>";
             })->rawColumns(['actions','category'])->make(true);
     }
 
@@ -1069,9 +1066,9 @@ class DatatableController extends Controller
         )->editColumn('created_at', function ($faq) {
             return BBgetDateFormat($faq->created_at);
         })->addColumn('actions', function ($attr) {
-            $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_campaign_edit', $attr->id) . "'>Edit</a>";
-            return  $html .= '<a href="javascript:void(0)" data-href="' . route("admin_campaign_delete") . '"
-                class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
+            $html = userCan('admin_campaign_edit') ? "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_campaign_edit', $attr->id) . "'>Edit</a>" : '';
+            return $html .= userCan('admin_campaign_delete') ? '<a href="javascript:void(0)" data-href="' . route("admin_campaign_delete") . '"
+                class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>' : null;
         })->rawColumns(['actions'])->make(true);
     }
 

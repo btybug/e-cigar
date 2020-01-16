@@ -226,7 +226,7 @@
                                 <div class="row">
                                     <label for="seo-facebook-title" class="col-xl-2 col-lg-3 col-sm-4">Facebook Title</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text('fb[og:title]',($post)?$post->getSeoField('og:title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:title',$post)]) !!}
+                                        {!! Form::text('fb[title]',($post)?$post->getSeoField('title','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'title',$post)]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -234,7 +234,7 @@
                                 <div class="row">
                                     <label for="seo-facebook-desc" class="col-xl-2 col-lg-3 col-sm-4">Facebook Description</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text('fb[og:description]',($post)?$post->getSeoField('og:description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'og:description',$post)]) !!}
+                                        {!! Form::text('fb[description]',($post)?$post->getSeoField('description','fb'):null,['class'=>'form-control','placeholder'=>getSeo($fbSeo,'description',$post)]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -242,7 +242,7 @@
                                 <div class="row">
                                     <label class="col-xl-2 col-lg-3 col-sm-4">Facebook Image</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'og:image',$post)]) !!}
+                                        {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($fbSeo,'image',$post)]) !!}
 
                                     </div>
                                 </div>
@@ -257,7 +257,7 @@
                                 <div class="row">
                                     <label for="seo-twitter-title" class="col-xl-2 col-lg-3 col-sm-4">Twitter Title</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text('twitter[og:title]',($post)?$post->getSeoField('og:title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
+                                        {!! Form::text('twitter[title]',($post)?$post->getSeoField('title','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'description',$post)]) !!}
 
                                     </div>
                                 </div>
@@ -266,7 +266,7 @@
                                 <div class="row">
                                     <label for="seo-twitter-desc" class="col-xl-2 col-lg-3 col-sm-4">Twitter Description</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text('twitter[og:description]',($post)?$post->getSeoField('og:description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'og:description',$post)]) !!}
+                                        {!! Form::text('twitter[description]',($post)?$post->getSeoField('description','twitter'):null,['class'=>'form-control','placeholder'=>getSeo($twitterSeo,'description',$post)]) !!}
 
                                     </div>
                                 </div>
@@ -275,7 +275,7 @@
                                 <div class="row">
                                     <label class="col-xl-2 col-lg-3 col-sm-4">Twitter Image</label>
                                     <div class="col-xl-5 col-lg-9 col-sm-8">
-                                        {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'og:image',$post)]) !!}
+                                        {!! Form::text(null,null,['class'=>'form-control','readonly','disabled','placeholder'=>getSeo($twitterSeo,'image',$post)]) !!}
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +298,7 @@ SEO
                                                         <img src="/public/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
-                                                        {!! Form::text('general[og:keywords]',($post)?$post->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$post)]) !!}
+                                                        {!! Form::text('general[keywords]',($post)?$post->getSeoField('keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'keywords',$post)]) !!}
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -307,7 +307,7 @@ SEO
                                                         <img src="/public/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
-                                                        {!! Form::text('general[og:title]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$post)]) !!}
+                                                        {!! Form::text('general[title]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'title',$post)]) !!}
                                                         <br>
                                                         <div>
                                                             <p><span class="wrong">Warning:</span>
@@ -322,7 +322,7 @@ SEO
                                                         <img src="/public/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
-                                                        {!! Form::textarea('general[og:description]',($post)?$post->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$post)]) !!}
+                                                        {!! Form::textarea('general[description]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'description',$post)]) !!}
                                                         <div>The <code>meta</code> description will be limited to 156 chars, 156 chars left.
                                                         </div>
                                                     </td>
@@ -635,7 +635,7 @@ SEO
   quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
   noneditable_noneditable_class: "mceNonEditable",
   toolbar_drawer: 'sliding',
-  spellchecker_dialog: true,
+  spellchecker_dial true,
   spellchecker_whitelist: ['Ephox', 'Moxiecode'],
   tinycomments_mode: 'embedded',
   content_style: ".mymention{ color: gray; }",

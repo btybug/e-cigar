@@ -11,11 +11,13 @@
 {{--            </div>--}}
 {{--            --}}
 {{--        </div>--}}
+        @ok('admin_campaign_create')
         <div class="d-flex justify-content-end px-4 mt-2">
             <div>
                 <a class="btn btn-warning pull-right text-white" href="{!! route('admin_campaign_create') !!}">Create</a>
             </div>
         </div>
+        @endok
         <div class="card-body panel-body pt-0">
             <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                 <thead>

@@ -9,10 +9,12 @@
                         <a class="nav-link active" id="info-tab" href="{!! route('admin_items') !!}" role="tab"
                            aria-controls="general" aria-selected="true" aria-expanded="true">Items</a>
                     </li>
+                    @ok('admin_inventory_purchase')
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab" href="{!! route('admin_items_archives') !!}" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Archive</a>
                     </li>
+                    @endok
                 </ul>
             </div>
 
@@ -35,11 +37,11 @@
                                 {{--                            <option value="Actions" data-column="11" data-name="actions" selected>Actions</option>--}}
                             </select>
                         </div>
+                        @ok('admin_items_new')
                         <div class="ml-1">
-                            @ok('admin_items_new')
                             <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
-                            @endok
                         </div>
+                        @endok
                     </div>
 {{--                    <div class="card-header panel-heading d-flex justify-content-between">--}}
 {{--                        <h2 class="m-0 pull-left">Items</h2>--}}
