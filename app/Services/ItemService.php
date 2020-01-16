@@ -48,11 +48,13 @@ class ItemService
     public function makeOptions($item, array $data = [])
     {
         if (count($data)) {
+            $attributes_ids = [];
             foreach ($data as $parent_id => $ids) {
                 $parent = ItemSpecification::where('item_id', $item->id)
                     ->where('attributes_id', $parent_id)->where('parent_id', null)->first();
                 $optionsNoNeedDelete = [];
                 if ($parent && count($ids)) {
+                    $attributes_ids[$parent_id] = $parent_id;
                     foreach ($ids as $id) {
                         $option = ItemSpecification::where('item_id', $item->id)
                             ->where('attributes_id', $parent_id)->where('sticker_id', $id)->first();
@@ -73,10 +75,13 @@ class ItemService
                         }
                     }
                 }
-
                 ItemSpecification::where('item_id', $item->id)
                     ->where('attributes_id', $parent_id)->whereNotIn('sticker_id',$optionsNoNeedDelete)->delete();
             }
+
+
+            ItemSpecification::where('item_id', $item->id)
+                ->whereNotIn('attributes_id', $attributes_ids)->whereNotNull('parent_id')->delete();
         }else{
             ItemSpecification::where('item_id', $item->id)
                 ->whereNotNull('parent_id')->delete();
