@@ -91,7 +91,6 @@ class OrdersController extends Controller
         $hidden[] = $model->collected;
 
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
-//        dd($statuses,$model,$hidden);
         return $this->view('manage', compact('order', 'statuses','settings'));
     }
 

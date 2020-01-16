@@ -1603,5 +1603,12 @@ function UR_exists($url){
     $headers=get_headers($url);
     return stripos($headers[0],"200 OK")?true:false;
 }
+function getItemShortname($id){
+    $item=\App\Models\Items::find($id);
+    if($item){
+        return $item->short_name;
+    }
+    return null;
 
+}
 

@@ -141,10 +141,11 @@
                                                                         @foreach($item->options['options'] as $option)
                                                                             <li class="single-row-product">
                                                                                 @foreach($option['options'] as $op)
+
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-9 font-15 font-main-bold">
-                                                                                            {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
+                                                                                            {{ $op['title'] ." - ". getItemShortname($op['variation']['item_id']) }}
                                                                                             @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
                                                                                                 ({{ "Pack of ".$op['discount']['qty'] }})
                                                                                             @endif
@@ -194,7 +195,7 @@
                                                                         </div>
                                                                         <div class="title-offers">
                                                                             <p class="font-18 lh-1 mb-0">
-                                                                                {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
+                                                                                {{ $ext['title'] ." - ". getItemShortname($ext['variation']['item_id']) }}
                                                                                 @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
                                                                                     ({{ "Pack of ".$ext['discount']['qty'] }})
                                                                                 @endif
@@ -260,7 +261,7 @@
                                                                                     <div class="row">
                                                                                         <div
                                                                                             class="col-sm-9 font-15 font-main-bold">
-                                                                                            {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
+                                                                                            {{ $op['title'] ." - ". getItemShortname($op['variation']['item_id'])}}
                                                                                             @if($op['discount'] && $op['variation']['discount_type'] == 'fixed')
                                                                                                 ({{ "Pack of ".$op['discount']['qty'] }})
                                                                                             @endif
@@ -310,7 +311,7 @@
                                                                         </div>
                                                                         <div class="title-offers">
                                                                             <p class="font-18 lh-1 mb-0">
-                                                                                {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
+                                                                                {{ $ext['title'] ." - ". getItemShortname($ext['variation']['item_id']) }}
                                                                                 @if($ext['discount'] && $ext['variation']['discount_type'] == 'fixed')
                                                                                     ({{ "Pack of ".$ext['discount']['qty'] }})
                                                                                 @endif
