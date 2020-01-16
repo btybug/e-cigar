@@ -268,27 +268,6 @@
             <li><a href="{{route('admin_landings')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Landings</span></a></li>
             @endok
-
-            @ok('import_index')
-            <li><a href="{{route('import_index')}}"><i class="fa fa-download" aria-hidden="true"></i>
-                    <span>Import</span></a></li>
-            @endok
-
-            @ok('admin_wholesallers')
-            <li class="treeview">
-                <a href="#">
-                    <i class="fas fa-wallet"></i>
-                    <span>Wholesallers</span>
-                    <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
-                </a>
-                <ul class="treeview-menu">
-                    <li><a href="{{route('admin_wholesallers')}}"><i class="far fa-circle fa-xs"></i>Requests</a></li>
-                </ul>
-
-            </li>
-            @endok
             {{--            @hasAccess('admin_ebay')--}}
             {{--            <li class="treeview">--}}
             {{--                <a href="#">--}}

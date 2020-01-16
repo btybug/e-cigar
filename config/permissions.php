@@ -978,52 +978,6 @@ return [
         ]
 
     ],
-    'import' => [
-        'import' => [
-            'name' => 'import',
-            'routes' => [
-                'import_index','view_file'
-            ],
-            'description' => 'Able to see import',
-            'children' => [
-                'create' => [
-                    'name' => 'Create reports',
-                    'routes' => ['import_import','add_file'],
-                    'description' => 'Able to create landings',
-                ],
-                'edit' => [
-                    'name' => 'Create reports',
-                    'routes' => ['admin_landings_edit','admin_landings_edit_post'],
-                    'description' => 'Able to Edit import',
-                ],
-                'delete' => [
-                    'name' => 'Create reports',
-                    'routes' => ['delete_file'],
-                    'description' => 'Able to delete import',
-                ],
-            ],
-
-        ]
-
-    ],
-    'wholesellers' => [
-        'wholesellers' => [
-            'name' => 'wholesellers',
-            'routes' => [
-                'admin_wholesallers','admin_wholesallers_view'
-            ],
-            'description' => 'Able to see wholesallers',
-            'children' => [
-                'edit' => [
-                    'name' => 'edit wholesellers',
-                    'routes' => ['admin_wholesallers_manage'],
-                    'description' => 'Able to Edit wholesellers',
-                ]
-            ],
-
-        ]
-
-    ],
     'manage_api' => [
         'manage_api' => [
             'name' => 'Manage Api',
