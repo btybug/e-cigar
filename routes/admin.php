@@ -7,7 +7,6 @@
  */
 
 use App\Services\EAN13render;
-
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
@@ -705,20 +704,6 @@ Route::post('/add-special-offers', 'Admin\StockController@addSpecialOffers')->na
 Route::post('/save-tags', 'Admin\StoreController@saveTags')->name('admin_store_save_tags');
 
 
-Route::group(['prefix' => 'import'], function () {
-
-    Route::get('/', 'Admin\ImportController@index')->name('import_index');
-
-    Route::post('/', 'Admin\ImportController@import')->name('import_import');
-
-//    Route::get('/export', 'Admin\ImportController@export')->name('import_export');
-
-    Route::post("/delete-file", 'Admin\ImportController@delete_file')->name('delete_file');
-
-    Route::post("/add-file", 'Admin\ImportController@add_file')->name('add_file');
-
-    Route::post("/view_file", 'Admin\ImportController@view_file')->name('view_file');
-});
 Route::group(['prefix' => 'gmail'], function () {
     Route::get('/', 'Admin\GmailController@index')->name('admin_gmail');
     Route::get('/settings', 'Admin\GmailController@settings')->name('admin_gmail_settings');
@@ -733,11 +718,6 @@ Route::group(['prefix' => 'gmail'], function () {
     })->name('google_log_out');
 });
 
-Route::group(['prefix' => 'wholesellers'], function () {
-    Route::get('/', 'Admin\WholesallersController@index')->name('admin_wholesallers');
-    Route::get('/view/{id}', 'Admin\WholesallersController@viewItems')->name('admin_wholesallers_view');
-    Route::get('/manage/{id}', 'Admin\WholesallersController@manage')->name('admin_wholesallers_manage');
-});
 
 Route::group(['prefix' => 'reports'], function () {
     Route::get('/', 'Admin\ReportsController@getList')->name('admin_reports');
