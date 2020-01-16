@@ -116,7 +116,7 @@ class StockController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $variations = collect($model->variations()->where('is_required', true)->get())->groupBy('variation_id');
+        $variations = collect($model->variations()->where('is_required', true)->orderBy('ordering','asc')->get())->groupBy('variation_id');
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
 
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
