@@ -2121,7 +2121,17 @@ table .faq-ansver{
 .admin-datatable-margin .dataTables_wrapper{
     /*margin: 0;*/
 }
-
+.stock-edit-page-collapse-icon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.stock-edit-page-collapse-icon[aria-expanded="false"]{
+    transform: rotate(-90deg);
+}
 /*---------------------Responsive-------------------*/
 @media (max-width: 1600px) {
     .order-details__tab .shopping__cart-confirm .list-shipping .left-col{

@@ -863,11 +863,17 @@
                                             </div>
                                     </div>
                                     <div class="v-box">
-                                        @if($model && isset($variations))
-                                            @foreach($variations as $k=>$v)
-                                                @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
-                                            @endforeach
-                                        @endif
+
+                                            <div class="accordion" id="accordionStockEdit">
+                                                <div id="stockEditSortablePrice" class="list-group">
+                                                    @if($model && isset($variations))
+                                                        @foreach($variations as $k=>$v)
+                                                            @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
+                                                        @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+
                                     </div>
                                     <div class="text-center m-4">
                                         <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i
@@ -1560,10 +1566,27 @@
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script> -->
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script src="/public/plugins/tinymce/tinymce.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
 
         $(document).ready(function () {
-
+            function editSortablePriceFunc(){
+                let editSortablePrice = Array.from($('#stockEditSortablePrice .required-single_wall'));
+                editSortablePrice.forEach((item,index)=>{
+                    $(item).find('.card-header .stock-edit-price-tab-ordering input').val(index+1)
+                })
+            }
+            new Sortable.create(stockEditSortablePrice, {
+                animation: 150,
+                ghostClass: 'blue-background-class',
+                onSort: function (/**Event*/evt) {
+                    // same properties as onEnd
+                    // alert(55)
+                    console.log(evt,6666)
+                    editSortablePriceFunc()
+                }
+            });
+            editSortablePriceFunc()
 
             $('body').on('click', '.save-prod', function(e) {
                 const invalidBanners = $('.stock-form').serializeArray().filter((el) => {
