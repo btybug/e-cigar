@@ -375,6 +375,8 @@ class UserController extends Controller
             ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
             ->get()->toArray();
 
+        dd($messages);
+
 //        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
 //            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
 //            ->leftJoin('categories', 'mail_templates.category_id', '=', 'categories.id')
