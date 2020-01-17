@@ -183,7 +183,7 @@
                     <div class="form-group row ">
                         <label for="email_type" class="col-sm-3">Type</label>
                         <div class="col-sm-9">
-                            {!! Form::select('category_id',$categories,null,['class'=>'form-control','id'=>'email_type']) !!}
+                            {!! Form::select('category_id',['' => 'Select'] + $categories->toArray(),null,['class'=>'form-control','id'=>'email_type']) !!}
                         </div>
                     </div>
                 </div>

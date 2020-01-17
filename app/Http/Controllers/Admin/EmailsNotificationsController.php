@@ -111,7 +111,6 @@ class EmailsNotificationsController extends Controller
 
     public function postSendEmailCreateSend(Request $request)
     {
-
         $category = Category::findOrFail($request->category_id);
         $users = $this->getEmailUsers($request->get('users'),$request->get('groups'),$category);
 
@@ -141,9 +140,7 @@ class EmailsNotificationsController extends Controller
     public function getEmailUsers($users,$groups,$category)
     {
         if($category->slug == 'newsletter'){
-            $users = User::leftJoin('roles', 'users.role_id', '=', 'roles.id')
-                ->whereNull('role_id')
-                ->orWhere('roles.type', 'frontend')->pluck('users.id')->all();
+            $users = User::pluck('users.id')->all();
         }
         $result = [];
         if($groups && count($groups)){

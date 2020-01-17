@@ -383,6 +383,7 @@ class UserController extends Controller
             ->where('mail_job.must_be_done', '<', Carbon::now())
             ->select('mail_job.*', 'mail_templates_translations.subject', 'categories_translations.name as category')
             ->get()->toArray();
+
         $messages = collect(array_merge($messages, $mailJob))->sortBy('created_at');
         return $this->view('notifications', compact('messages'));
     }
