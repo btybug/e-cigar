@@ -3141,7 +3141,9 @@ $(document).ready(function () {
 
         });
 
-        $("body").on('click', '.btn-add-to-cart', function () {
+        $("body").on('click', '.btn-add-to-cart', function (e) {
+            e.stopImmediatePropagation();
+            e.preventDefault();
             const product_id = $('#singleProductPageCnt #vpid').val();
             const product_qty = $('.continue-shp-wrapp_qty .field-input.product-qty-select').val();
             const variations = [];
@@ -3254,14 +3256,19 @@ $(document).ready(function () {
                             if(data.message === 'added') {
                                 $('#cartSidebar').html(data.headerHtml);
                                 $('.add-cart-number.cart-count').html(data.count);
-                                $('#specialPopUpModal .modal-body').html(data.specialHtml);
-                                $('.special__popup-main-product-item .select-2').each(function() {
-                                    $(this).select2({minimumResultsForSearch: -1});
-                                });
-                                filterModalOfferInit();
-                                filterSelectOfferInit();
-                                countOfferPrice();
-                                $("#specialPopUpModal").modal();
+                                console.log('data.show_popup', data.show_popup)
+                                if(data.show_popup) {
+                                    $('#specialPopUpModal .modal-body').html(data.specialHtml);
+                                    $('.special__popup-main-product-item .select-2').each(function() {
+                                        $(this).select2({minimumResultsForSearch: -1});
+                                    });
+                                    filterModalOfferInit();
+                                    filterSelectOfferInit();
+                                    countOfferPrice();
+                                    $("#specialPopUpModal").modal('show');
+                                } else {
+                                    $('#headerShopCartBtn').trigger('click');
+                                }
                             }
 
                             // $(".cart-count").html(data.count);
@@ -3291,7 +3298,6 @@ $(document).ready(function () {
             // $('.add-cart-number.cart-count').empty();
             $('#specialPopUpModal .modal-body').empty();
         });
-
 
         $("body").on("click", ".extra-sections", function () {
             let id = $(this).attr('data-product-id');
