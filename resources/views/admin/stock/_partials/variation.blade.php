@@ -9,12 +9,12 @@
 
     <div class="card panel panel-default stock-page" data-unqiue="{{ $main_unique }}">
         <div class="card-header panel-heading clearfix d-flex pr-0 stock-page--head">
-            <div class="pl-2">
+            <div class="pl-2 py-2">
                  <span class="stock-edit-page-collapse-icon" data-toggle="collapse" data-target="#collapseStock{{$main_unique}}" aria-expanded="false" aria-controls="collapseStock{{$main_unique}}">
                 <i class="far fa-caret-square-up fa-2x"></i>
             </span>
             </div>
-            <div class="col-sm-1 py-2 stock-edit-price-tab-ordering">
+            <div class="stock-edit-price-tab-ordering">
                 {!! Form::hidden("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
                ['class' => 'form-control','placeholder' => 'Sort']) !!}
 {{--                <div class="row">--}}

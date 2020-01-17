@@ -20,6 +20,8 @@
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
+                {!! Form::hidden("variations[$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         @endforeach
     </div>
@@ -42,11 +44,13 @@
                     <label>Total price</label>
                     {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
-                <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2">
+                <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
+                {!! Form::hidden("variations[$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         @endforeach
     </div>

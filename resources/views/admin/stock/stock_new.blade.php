@@ -1312,6 +1312,8 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
+            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
 
@@ -1331,6 +1333,8 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
+            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
 
@@ -1355,6 +1359,8 @@
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
+                {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         </div>
         <div class="col-xl-2 offset-xl-10 col-sm-3 offset-sm-9 pl-sm-4 pl-xl-4 pl-0">
@@ -1381,6 +1387,8 @@
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
+                {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
 
         </div>
@@ -1576,9 +1584,11 @@
                     $(item).find('.card-header .stock-edit-price-tab-ordering input').val(index+1)
                 })
             }
-            new Sortable.create(stockEditSortablePrice, {
+
+            new Sortable.create(document.querySelector('#stockEditSortablePrice'), {
                 animation: 150,
                 ghostClass: 'blue-background-class',
+                handle: '.stock-page--head',
                 onSort: function (/**Event*/evt) {
                     // same properties as onEnd
                     // alert(55)
@@ -1587,6 +1597,39 @@
                 }
             });
             editSortablePriceFunc()
+            function countSortableDiscount(box) {
+                let sortablePriceArray = Array.from(box.querySelectorAll('.discount-item'));
+                sortablePriceArray.forEach((item,index)=>{
+                    $(item).find('.sort-discount-hidden-field').val(index+1)
+                    // console.log(item,9999)
+                })
+            }
+            function sortableAll(className) {
+                if(document.querySelectorAll(className).length !== 0){
+
+                    for (var i = 0; i < document.querySelectorAll(className).length; i++) {
+
+                        // countSortableDiscount(className)
+                        // console.log(sortablePriceArray,88888);
+                        countSortableDiscount(document.querySelectorAll(className)[i])
+
+                        new Sortable.create(document.querySelectorAll(className)[i], {
+                            animation: 150,
+                            ghostClass: 'blue-background-class',
+                            onSort: function (/**Event*/evt) {
+                                // console.log(evt.target,22);
+                                countSortableDiscount(evt.target)
+                            }
+                        });
+                    }
+                }
+            }
+
+            sortableAll('.stock-items-tab-prices .fixed-box');
+            sortableAll('.stock-items-tab-prices .range-box');
+
+
+
 
             $('body').on('click', '.save-prod', function(e) {
                 const invalidBanners = $('.stock-form').serializeArray().filter((el) => {
@@ -1884,9 +1927,10 @@
                 html = html.replace(/{unique}/g, unique);
 
                 $(this).closest('.discount-type-box').find('.range-box').append(html);
+                countSortableDiscount(this.closest('.discount-type-box').querySelector('.range-box'))
             });
 
-            $('body').on('click', '.add-fixed-discount', function () {
+            $('body').on('click', '.add-fixed-discount', function (ev) {
                 let html = $('#fixed-discount').html();
                 var id = guid();
                 var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
@@ -1895,10 +1939,14 @@
                 html = html.replace(/{main_unique}/g, main_unique);
                 html = html.replace(/{unique}/g, unique);
                 $(this).closest('.discount-type-box').find('.fixed-box').append(html);
+                countSortableDiscount(this.closest('.discount-type-box').querySelector('.fixed-box'))
             });
 
             $('body').on('click', '.remove-discount-item', function () {
+                let parentElement =this.closest('.discount-item').parentElement
                 $(this).closest('.discount-item').remove();
+                countSortableDiscount(parentElement)
+
             });
 
             $('body').on('change', '.select-discount-type', function () {
@@ -2388,6 +2436,7 @@
                     html = html.replace(/{main_unique}/g, main_unique);
                     html = html.replace(/{unique}/g, unique);
                     parent.find(".discount-type-box").html(html);
+                    sortableAll('.stock-items-tab-prices .fixed-box');
                 }else if (value == 'range'){
                     parent.find('.price-static').removeClass('show').addClass('d-none');
                     parent.find('.price-discount').removeClass('d-none').addClass('show');
@@ -2397,6 +2446,7 @@
                     html = html.replace(/{main_unique}/g, main_unique);
                     html = html.replace(/{unique}/g, unique);
                     parent.find(".discount-type-box").html(html);
+                    sortableAll('.stock-items-tab-prices .range-box');
                 }
 
             });
