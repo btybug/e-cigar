@@ -373,9 +373,8 @@ class UserController extends Controller
             ->where('custom_email_user.user_id', $user->id)
             ->where('custom_emails.status', '>=', 1)
             ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
+            ->groupBy('custom_emails.id')
             ->get()->toArray();
-
-        dd($messages);
 
 //        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
 //            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
