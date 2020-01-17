@@ -145,8 +145,11 @@
                 <span class="text-tert-clr">QTY</span>
                 <div class="product__single-item-inp-num">
                     <div class="quantity">
+                        @php
+                            $to = $selected->discounts()->orderBy('to','asc')->first();
+                        @endphp
                         {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
-                            'data-id' => $selected->id,'min' => 1,'step' => 1]) !!}
+                            'data-id' => $selected->id,'min' => 1,'max'=> ($to)?$to->to:'','step' => 1]) !!}
                         <div class="inp-icons">
                             <span class="inp-up"></span>
                             <span class="inp-down"></span>
