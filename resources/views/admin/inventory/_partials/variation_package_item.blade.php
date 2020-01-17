@@ -41,7 +41,7 @@
                             @foreach ($main->stock->other_images as $key => $value)
                                 <option
                                     value="{{ $value['image'] }}" {{ ($package_variation && $value['image'] == $package_variation->image) ? 'selected' : '' }}>
-                                    @if(isset($value['alt']) && $value['alt']) {{ $value['alt'] }} @else Extra Image  {{$key+1}} @endif
+                                    @if(isset($value['alt']) && $value['alt']) {{ $value['alt'] }} @else Extra Image  {{(int)$key+1}} @endif
                                 </option>
                             @endforeach
                         @endif
