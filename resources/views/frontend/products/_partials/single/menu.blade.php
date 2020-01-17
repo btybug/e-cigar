@@ -4,8 +4,7 @@
      data-per-price="{{ $vSettings->price_per }}" data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
      data-min-limit="{{ $vSettings->min_count_limit }}">
 
-    <div
-        class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+    <div class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
         <div class="col-9 pl-0">
             <span class="font-sec-light font-26">{{ $vSettings->title }}</span>
         </div>
@@ -16,7 +15,6 @@
                         {{ convert_price($vSettings->price,$currency, false) }}
                 </span>
                 </div>
-
             @endif
         </div>
     </div>

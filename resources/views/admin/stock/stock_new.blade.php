@@ -863,7 +863,6 @@
                                             </div>
                                     </div>
                                     <div class="v-box">
-
                                             <div class="accordion" id="accordionStockEdit">
                                                 <div id="stockEditSortablePrice" class="list-group">
                                                     @if($model && isset($variations))
@@ -873,7 +872,6 @@
                                                     @endif
                                                 </div>
                                             </div>
-
                                     </div>
                                     <div class="text-center m-4">
                                         <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i
