@@ -155,7 +155,7 @@ class ShoppingCartController extends Controller
                 $popuphtml = \View('frontend.products._partials.offer_popup',['vape' => $product,'key' => $cart_id,
                     'price' => $this->cartService->price,'qty' => $request->product_qty])->render();
 
-                return \Response::json(['error' => false,'show_popup' => (count($vape->special_offers) > 0)?true:false, 'message' => 'added', 'key' => $cart_id,'product_id' => $product->id,
+                return \Response::json(['error' => false,'show_popup' => (count($product->special_offers) > 0)?true:false, 'message' => 'added', 'key' => $cart_id,'product_id' => $product->id,
                     'count' => $this->cartService->getCount(), 'headerHtml' => $headerhtml,'specialHtml' => $popuphtml]);
             }
 
