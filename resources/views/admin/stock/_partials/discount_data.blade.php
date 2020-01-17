@@ -1,7 +1,7 @@
 @if($package_variation->price_type == 'range')
 
     <div class="range-box">
-        @foreach($package_variation->discounts as $key => $datum)
+        @foreach($package_variation->discounts()->orderBy('ordering','asc')->get() as $key => $datum)
             <div class="row discount-item">
                 <div class="col-sm-3">
                     <label>From</label>
@@ -33,7 +33,7 @@
     <div class="fixed-box">
 
 
-        @foreach($package_variation->discounts as $key => $datum)
+        @foreach($package_variation->discounts()->orderBy('ordering','asc')->get() as $key => $datum)
             <div class="row discount-item ">
                 <div class="col-xl-5 col-sm-4">
                     <label>Qty</label>

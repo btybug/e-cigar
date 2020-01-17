@@ -167,7 +167,7 @@
                             class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
                             style="width: 100%">
                         @if(count($selected->discounts))
-                            @foreach($selected->discounts as $d)
+                            @foreach($selected->discounts()->orderBy('ordering','asc')->get() as $d)
                                 <option value="{{ $d->id }}">{{ $d->qty }}</option>
                             @endforeach
                         @endif

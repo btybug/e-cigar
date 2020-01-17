@@ -91,7 +91,8 @@
                     ['class' => 'form-control v-price','step' => 'any']) !!}
                 </div>
                 <div data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}"
-                     class="price-discount @if($package_variation && ( $package_variation->price_type =='fixed' ||  $package_variation->price_type =='range')) show @else d-none @endif">
+                     class="price-discount @if($package_variation && ( $package_variation->price_type =='fixed'
+                     ||  $package_variation->price_type =='range')) show @else d-none @endif">
                     <div class="discount-data-v discount-type-box" data-main="{{ $main_unique }}"
                          data-group="{{ $uniqueID }}">
                         @if($package_variation && count($package_variation->discounts))
