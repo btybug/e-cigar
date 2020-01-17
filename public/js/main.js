@@ -325,7 +325,10 @@ $(document).ready(function () {
             let nextV;
             console.log(222222, '--------')
             if($(this).hasClass('inp-up')) {
-                input_qty.val(qty*1 + 1);
+                if((qty*1 + 1) <= $(this).closest('.quantity').find('.product-qty_per_price').attr('max')){
+                    input_qty.val(qty*1 + 1);
+                    console.log(9999999, '--------');
+                }
                 flag = true;
             } else if($(this).hasClass('inp-down')) {
                 prevV = $(this).closest('.quantity').find('input.product-qty').val()*1;
