@@ -10,7 +10,7 @@
     <div class="card panel panel-default stock-page" data-unqiue="{{ $main_unique }}">
         <div class="card-header panel-heading clearfix d-flex pr-0 stock-page--head">
             <div class="pl-2">
-                 <span class="stock-edit-page-collapse-icon" data-toggle="collapse" data-target="#collapseStock{{$main->id}}" aria-expanded="false" aria-controls="collapseStock{{$main->id}}">
+                 <span class="stock-edit-page-collapse-icon" data-toggle="collapse" data-target="#collapseStock{{$main_unique}}" aria-expanded="false" aria-controls="collapseStock{{$main_unique}}">
                 <i class="far fa-caret-square-up fa-2x"></i>
             </span>
             </div>
@@ -40,7 +40,7 @@
                 <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-times"></i></button>
             </div>
         </div>
-        <div id="collapseStock{{$main->id}}" class="collapse" aria-labelledby="heading{{$main->id}}" data-parent="#accordionStockEdit">
+        <div id="collapseStock{{$main_unique}}" class="collapse" aria-labelledby="heading{{$main_unique}}" data-parent="#accordionStockEdit">
             <div class="card-body panel-body">
                 <div class="row mb-2">
                     <div class="col-xl-5 col-lg-7 col-md-12 head-left">
