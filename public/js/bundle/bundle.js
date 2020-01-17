@@ -3279,6 +3279,7 @@ $(document).ready(function () {
                 setTotalPrice(countTotalPrice());
             } else {
                 $(this).prop('checked', false);
+                setTotalPrice(countTotalPrice());
             }
             // const row = $(this).closest('.product__single-item-info-bottom');
             // const group_id = $(this).data('id');
@@ -3296,6 +3297,7 @@ $(document).ready(function () {
                 }
             } else {
                 $(this).prop('checked', false);
+                countOfferPrice();
             }
             // const row = $(this).closest('.product__single-item-info-bottom');
             // const group_id = $(this).data('id');
