@@ -366,15 +366,16 @@ class UserController extends Controller
     public function getNotifications()
     {
         $user = \Auth::getUser();
-        $messages = CustomEmails::leftJoin('categories', 'custom_emails.category_id', '=', 'categories.id')
+
+       $messages =   CustomEmails::leftJoin('categories', 'custom_emails.category_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
             ->leftJoin('custom_email_user', 'custom_emails.id', '=', 'custom_email_user.custom_email_id')
             ->leftJoin('users', 'custom_email_user.user_id', '=', 'users.id')
             ->where('custom_email_user.user_id', $user->id)
             ->where('custom_emails.status', '>=', 1)
+             ->where('categories_translations.locale', app()->getLocale())
             ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
-            ->groupBy('custom_emails.id')
-            ->get()->toArray();
+            ->get();
 
 //        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
 //            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
