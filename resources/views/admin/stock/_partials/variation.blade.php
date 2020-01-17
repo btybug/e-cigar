@@ -15,7 +15,7 @@
             </span>
             </div>
             <div class="col-sm-1 py-2 stock-edit-price-tab-ordering">
-                {!! Form::number("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
+                {!! Form::hidden("variations[$main_unique][ordering]",($main) ? $main->ordering : null,
                ['class' => 'form-control','placeholder' => 'Sort']) !!}
 {{--                <div class="row">--}}
 {{--                    <div class="col-md-3">--}}

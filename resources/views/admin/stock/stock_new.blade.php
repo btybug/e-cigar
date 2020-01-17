@@ -2262,10 +2262,10 @@
                     {required: $(this).attr('data-required')},
                     function (res) {
                         if (!res.error) {
-                            parent.find('.v-box').append(res.html);
+                            parent.find('#stockEditSortablePrice').append(res.html);
                             var value = $("#changeProductType").val();
                             let sections = parent.find('.stock-page');
-
+                            editSortablePriceFunc()
                             sections.each(function (k, v) {
                                 var data_id = $(v).attr('data-unqiue');
                                 section_prices(parent, data_id, value);
