@@ -35,7 +35,7 @@
                                     @foreach ($stock->other_images as $key => $value)
                                         <option
                                             value="{{ $value['image'] }}">
-                                            @if(isset($value['alt']) && $value['alt']) {{ $value['alt'] }}  @else Extra Image {{(int)$key+1}} @endif
+                                            @if(isset($value['alt']) && $value['alt']) {{ $value['alt'] }}  @else Extra Image  @endif
                                         </option>
                                     @endforeach
                                 @endif
