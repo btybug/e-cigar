@@ -375,16 +375,17 @@ class UserController extends Controller
             ->select('custom_emails.*', 'categories_translations.name as category', 'custom_email_user.is_read')
             ->get()->toArray();
 
-        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
-            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
-            ->leftJoin('categories', 'mail_templates.category_id', '=', 'categories.id')
-            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->where('mail_job.to', $user->email)
-            ->where('mail_job.must_be_done', '<', Carbon::now())
-            ->select('mail_job.*', 'mail_templates_translations.subject', 'categories_translations.name as category')
-            ->get()->toArray();
+//        $mailJob = MailJob::leftJoin('mail_templates', 'mail_job.template_id', '=', 'mail_templates.id')
+//            ->leftJoin('mail_templates_translations', 'mail_templates.id', '=', 'mail_templates_translations.mail_templates_id')
+//            ->leftJoin('categories', 'mail_templates.category_id', '=', 'categories.id')
+//            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+//            ->where('mail_job.to', $user->email)
+//            ->where('mail_job.must_be_done', '<', Carbon::now())
+//            ->select('mail_job.*', 'mail_templates_translations.subject', 'categories_translations.name as category')
+//            ->get()->toArray();
 
-        $messages = collect(array_merge($messages, $mailJob))->sortBy('created_at');
+//        $messages = collect(array_merge($messages, $mailJob))->sortBy('created_at');
+
         return $this->view('notifications', compact('messages'));
     }
 
