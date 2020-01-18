@@ -22,13 +22,13 @@
                     </div>
                 </div>
                 <div class="row align-items-center">
-                    <div class="col-5">
-                        <div class="form-group mb-0">
-                            <label class="cart-product-qty-label text-white font-main-light" for="cartProductqQty-1">QTY&nbsp;:&nbsp;</label>
-                            {!! Form::number('',$item->quantity,['class' => 'cart-product-qty-select qty-input','min' => '1','data-uid' => $item->id]) !!}
-                        </div>
-                    </div>
-                    <div class="col-7">
+                    {{--<div class="col-5">--}}
+                        {{--<div class="form-group mb-0">--}}
+                            {{--<label class="cart-product-qty-label text-white font-main-light" for="cartProductqQty-1">QTY&nbsp;:&nbsp;</label>--}}
+                            {{--{!! Form::number('',$item->quantity,['class' => 'cart-product-qty-select qty-input','min' => '1','data-uid' => $item->id]) !!}--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    <div class="col-12">
                         <span class="d-block cart-product-price font-24 font-sec-bold cart-product-price">
                             {{ convert_price(\App\Services\CartService::getPriceSum($item->id),@$currency, false) }}
                         </span>
