@@ -202,7 +202,7 @@
                 @endif
             @elseif($selected->price_type == 'fixed')
                 @php
-                    $discount = $selected->discounts()->first();
+                    $discount = $selected->discounts()->orderBy('ordering','asc')->first();
                 @endphp
                 @if($discount)
                     <div class="product__single-item-info-price lh-1" data-single-price="{{ $discount->price }}">
