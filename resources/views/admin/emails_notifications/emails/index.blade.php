@@ -10,7 +10,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" id="info-tab"
                            href="{!! route('admin_emails_notifications_emails') !!}" role="tab"
-                           aria-controls="general" aria-selected="true" aria-expanded="true">Emails</a>
+                           aria-controls="general" aria-selected="true" aria-expanded="true">Communications</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab"
@@ -20,7 +20,7 @@
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab" href="{!! route('admin_emails_newsletters') !!}"
                            role="tab"
-                           aria-controls="accounts" aria-selected="true" aria-expanded="true">Newsletters</a>
+                           aria-controls="accounts" aria-selected="true" aria-expanded="true">Subscriber</a>
                     </li>
                 </ul>
             </div>
