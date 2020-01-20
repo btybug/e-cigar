@@ -321,7 +321,7 @@
         </div>
     </div>
     {!! Form::close() !!}
-    <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="productsModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -342,6 +342,50 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
+                </div> -->
+            <!-- </div> -->
+            <!-- /.modal-content -->
+        <!-- </div> -->
+        <!-- /.modal-dialog -->
+    <!-- </div> -->
+    <!-- /.modal -->
+    <div class="modal fade select-products__modal" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Products</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <select class="form-control search_option_js">
+                                <option value="general" selected>General</option>
+                                <option value="brand">Brands</option>
+                                <option value="category">Categories</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
+                            <select class="form-control d-none" id="brand_select">
+
+                            </select>
+                            <select class="form-control d-none" id="category_select">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                        <p class="mb-0">Select All</p>
+                    </div>
+                    <ul class="all-list modal-stickers--list" id="stickers-modal-list">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary done_select_attributes_js" data-dismiss="modal">Add</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -365,48 +409,48 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
     <script>
         $(function () {
-            $("body").on('click', '.select-products', function () {
-                let arr = [];
-                $(".get-all-attributes-tab")
-                    .children()
-                    .each(function () {
-                        arr.push($(this).attr("data-id"));
-                    });
-                AjaxCall("/admin/get-stocks", {arr}, function (res) {
-                    if (!res.error) {
-                        $("#productsModal .modal-body .all-list").empty();
-                        res.data.forEach(item => {
-                            let html = `<li data-id="${item.id}" class="option-elm-modal list-group-item d-flex"><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></li>`;
-                        $("#productsModal .modal-body .all-list").append(html);
-                    });
-                        $("#productsModal").modal();
-                    }
-                });
-            });
+            // $("body").on('click', '.select-products', function () {
+            //     let arr = [];
+            //     $(".get-all-attributes-tab")
+            //         .children()
+            //         .each(function () {
+            //             arr.push($(this).attr("data-id"));
+            //         });
+            //     AjaxCall("/admin/get-stocks", {arr}, function (res) {
+            //         if (!res.error) {
+            //             $("#productsModal .modal-body .all-list").empty();
+            //             res.data.forEach(item => {
+            //                 let html = `<li data-id="${item.id}" class="option-elm-modal list-group-item d-flex"><a
+            //                                     href="#">${item.name}
+            //                                     </a> <a class="btn btn-primary add-attribute-event" data-name="${item.name}"
+            //                                     data-id="${item.id}">ADD</a></li>`;
+            //             $("#productsModal .modal-body .all-list").append(html);
+            //         });
+            //             $("#productsModal").modal();
+            //         }
+            //     });
+            // });
 
 
             $("body").on("click", ".remove-all-attributes", function () {
                 $(this).closest('.option-elm-attributes').remove();
             });
 
-            $("body").on("click", ".add-attribute-event", function () {
-                let id = $(this).data("id");
-                let name = $(this).data("name");
-                $(".get-all-attributes-tab")
-                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-                                href="#">${name}</a>
-                                <div class="buttons">
-                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                                </div>
-                                <input type="hidden" name="stocks[]" value="${id}">
-                                </li>`);
-                $(this)
-                    .parent()
-                    .remove();
-            });
+            // $("body").on("click", ".add-attribute-event", function () {
+            //     let id = $(this).data("id");
+            //     let name = $(this).data("name");
+            //     $(".get-all-attributes-tab")
+            //         .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+            //                     href="#">${name}</a>
+            //                     <div class="buttons">
+            //                     <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+            //                     </div>
+            //                     <input type="hidden" name="stocks[]" value="${id}">
+            //                     </li>`);
+            //     $(this)
+            //         .parent()
+            //         .remove();
+            // });
         });
 
         function render_categories_tree() {

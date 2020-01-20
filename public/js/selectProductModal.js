@@ -153,3 +153,21 @@ $("body").on("click", ".done_select_product_js", function () {
   })
 });
 
+$("body").on("click", ".done_select_attributes_js", function () {
+  console.log($('.select_product_js'))
+  $('.select_product_js').each(function(index, product) {
+    if($(product).prop('checked')) {
+        const id = $(product).closest('.add-related-event').data('id');
+        const name =  $(product).closest('.add-related-event').data('name');
+        $(".get-all-attributes-tab")
+        .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes">
+                  <a href="#" class="stick--link">${name}</a>
+                  <div class="buttons">
+                      <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger">
+                          <i class="fa fa-trash"></i></a>
+                  </div>
+                  <input type="hidden" name="stocks[]" value="${id}">
+                </li>`)
+    }
+  })
+});
