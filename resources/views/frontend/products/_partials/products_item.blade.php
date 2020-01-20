@@ -44,7 +44,7 @@
                         <span class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
                             <span class="d-flex flex-wrap align-items-center products__item-discount-all">
                                 @if(count($product->stickers))
-                                    @foreach($product->stickers()->take(2)->get() as $sticker)
+                                    @foreach($product->stickers()->orderBy('ordering')->take(2)->get() as $sticker)
                                          <span class="products__item-discount" title="{{ $sticker->name }}">
                                              <img src="{{ $sticker->image }}" alt="{{ $sticker->name }}">
                                          </span>
