@@ -176,6 +176,9 @@
                     @ok('admin_reviews')
                     <li><a href="{{route('admin_reviews')}}"><i class="far fa-circle fa-xs"></i> Reviews</a></li>
                     @endok
+                    @ok('admin_category')
+                    <li><a href="{{route('admin_category')}}"><i class="far fa-circle fa-xs"></i>Category</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess
@@ -259,11 +262,8 @@
             {{--            </li>--}}
             {{--            @endHasAccess--}}
 
-            
-            @hasAccess('admin_category')
-            <li><a href="{{route('admin_category')}}"><i class="fa fa-download" aria-hidden="true"></i>
-                    <span>Category</span></a></li>
-            @endHasAccess
+
+         
             @hasAccess('import')
             <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Reports</span></a></li>
