@@ -110,6 +110,7 @@
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
                         $("body").find('.brands_main-content-top').html(data.html);
+                        $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/stickers/' + value);
 
                     }
