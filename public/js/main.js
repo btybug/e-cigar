@@ -19,10 +19,17 @@ $( document ).ready(function () {
         this.products = function () {
             $("body").on('mouseover', ".products__item-wrapper .products__item-photo-thumb-item", function () {
                 $(this).closest('.products__item-wrapper').find('.products__item-photo-thumb-item').removeClass("active-slider")
-                let img_path = $(this).find("img").attr("src")
+                let img_path = $(this).find("img").attr("src");
                 $(this).closest('.products__item-wrapper').find(".products__item-photo img").addClass("active-slider").attr("src", img_path)
-                $(this).addClass("active-slider")
+                $(this).addClass("active-slider");
             })
+
+            $("body").on('mouseout', ".products__item-wrapper .products__item-photo-thumb-item", function () {
+                $(this).closest('.products__item-wrapper').find('.products__item-photo-thumb-item').removeClass("active-slider");
+                var img_path = $(this).closest(".products__item-photo-thumb").find("img").first().attr('src');
+                $(this).closest('.products__item-wrapper').find(".products__item-photo img").addClass("active-slider").attr("src", img_path);
+                $(this).addClass("active-slider");
+            });
         }
 
     }
