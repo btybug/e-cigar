@@ -36,17 +36,20 @@
         </span>
             </div>
             <div
-                class="sort-by_select sort-by-products d-flex align-items-center position-relative">
-                <label for="sortBy" class="text-main-clr mb-0">SORT BY: </label>
+                class="sort-by_select sort-by-products d-flex align-items-center position-relative border-0 new-sort-by_select">
+                <label for="sortBy" class="text-main-clr mb-0">{!! __('sort_by') !!}: </label>
                 <div class="select-wall">
-                    <select name="" id="sortBy"
-                            class="select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark"
-                            style="100%">
-                        <option value="">Newest</option>
-                        <option value="">Oldest</option>
-                        <option value="">Price high</option>
-                        <option value="">Price low</option>
-                    </select>
+                    {!! Form::select('sort_by',[
+
+                                    'newest' => __('newest'),
+                                    'oldest' => __('oldest'),
+                                    'price_desc' => __('price_high'),
+                                    'price_asc' => __('price_low'),
+                                ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
+                                    'id' => 'sortBy',
+                                    'class' => 'select-filter select-2 select-2--no-search main-select products-filter-wrap_select not-selected arrow-dark',
+                                    'style' => 'width: 100%',
+                                ]) !!}
                 </div>
             </div>
         </div>

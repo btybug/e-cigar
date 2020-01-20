@@ -49,7 +49,6 @@
                             <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('sort_by') !!}: </label>
                             <div class="select-wall">
                                 {!! Form::select('sort_by',[
-                                    '' => 'Select',
                                     'newest' => __('newest'),
                                     'oldest' => __('oldest'),
                                     'price_desc' => __('price_high'),
