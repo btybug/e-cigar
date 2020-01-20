@@ -13783,6 +13783,7 @@ header .header-bottom .cat-search {
 
 header .header-bottom .cat-search .search {
     flex: auto;
+    max-width: 300px;
 }
 
 header .header-bottom .cat-search .search .form-control {
@@ -13814,6 +13815,9 @@ header .header-bottom .cat-search .search > span {
 @media screen and (max-width: 575px) {
     header .header-bottom .cat-search .search > span {
         right: 5px;
+    }
+    header .header-bottom .cat-search .search{
+        max-width: 100%;
     }
 }
 

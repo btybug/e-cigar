@@ -56,7 +56,7 @@
                     <ul class="row home_categories_list">
                         @if(count($categories))
                             @foreach($categories as $category)
-                                <li class="col-md-6">
+                                <li class="col-md-4 col-sm-6">
                                     <div class="position-relative home_categories-item">
                                         <img src="{!! media_image_tmb($category->image) !!}"
                                              alt="{{ $category->name }}"
