@@ -963,9 +963,9 @@ class DatatableController extends Controller
                     return BBgetDateFormat($faq->created_at);
                 })
                 ->addColumn('actions', function ($attr) {
-                    return "<div class='datatable-td__action'>
-                        <a class='btn btn-warning' href='" . route('admin_inventory_others_new', $attr->id) . "'>Edit</a>
-</div>";
+                    return userCan('admin_inventory_others_edit')?"<div class='datatable-td__action'>
+                        <a class='btn btn-warning' href='" . route('admin_inventory_others_edit', $attr->id) . "'>Edit</a>
+</div>":null;
                 })->rawColumns(['actions'])->make(true);
         } else {
             $other = Others::find($id);

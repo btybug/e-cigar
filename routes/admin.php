@@ -455,7 +455,8 @@ Route::group(['prefix' => 'inventory'], function () {
 
     Route::group(['prefix' => 'other'], function () {
         Route::get('/', 'Admin\OtherController@getIndex')->name('admin_inventory_other');
-        Route::get('/manage/{id?}', 'Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::get('/manage', 'Admin\OtherController@getNew')->name('admin_inventory_others_new');
+        Route::get('/edtit/{id}', 'Admin\OtherController@getNew')->name('admin_inventory_others_edit');
         Route::post('/new', 'Admin\OtherController@postOthers')->name('post_admin_inventory_others_new');
     });
 
@@ -719,6 +720,9 @@ Route::group(['prefix' => 'gmail'], function () {
 });
 
 
+Route::group(['prefix' => 'category'], function () {
+    Route::get('/', 'Admin\CategoriesController@list')->name('admin_category');
+});
 Route::group(['prefix' => 'reports'], function () {
     Route::get('/', 'Admin\ReportsController@getList')->name('admin_reports');
     Route::get('/new', 'Admin\ReportsController@getIndex')->name('admin_reports_new');

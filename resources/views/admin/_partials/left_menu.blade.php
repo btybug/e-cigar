@@ -259,6 +259,10 @@
             {{--            </li>--}}
             {{--            @endHasAccess--}}
 
+            @hasAccess('admin_category')
+            <li><a href="{{route('admin_category')}}"><i class="fa fa-download" aria-hidden="true"></i>
+                    <span>Category</span></a></li>
+            @endHasAccess
             @hasAccess('import')
             <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Reports</span></a></li>

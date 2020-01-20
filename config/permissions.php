@@ -254,7 +254,7 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit Purchase',
-                    'routes' => ['admin_suppliers_edit', 'post_admin_suppliers_list', 'post_admin_suppliers_sync'],
+                    'routes' => ['admin_suppliers_edit', 'post_admin_suppliers_list', 'post_admin_suppliers_sync','post_admin_suppliers'],
                     'description' => 'Able to edit suppliers',
                 ],
                 'delete' => [
@@ -276,7 +276,7 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit other',
-                    'routes' => ['admin_inventory_others_new', 'post_admin_inventory_others_new'],
+                    'routes' => ['admin_inventory_others_edit', 'post_admin_inventory_others_new'],
                     'description' => 'Able to edit other',
                 ]
             ],

@@ -32,6 +32,7 @@ class CategoriesController extends Controller
 
     public function list()
     {
+
         return $this->view('list');
     }
 
@@ -92,4 +93,6 @@ class CategoriesController extends Controller
             ->where('categories_translations.locale', $lang)
             ->get();
     }
+
+
 }

@@ -9,7 +9,7 @@
                 <span class="btn btn-success mx-2" data-toggle="modal" data-target="#barcodeModalCenter">
   Settings
 </span>
-                @ok('admin_inventory_others_new')
+                @ok('admin_inventory_barcodes_new')
                 <div>
                     <a class="btn btn-primary" href="{!! route('admin_inventory_barcodes_new') !!}">Add new</a>
                 </div>
