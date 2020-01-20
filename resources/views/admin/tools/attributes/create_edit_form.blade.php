@@ -250,7 +250,7 @@
     {!! Form::close() !!}
 
 
-    <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
+    <!-- <div class="modal fade" id="stickerModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -271,6 +271,39 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Done</button>
+                </div> -->
+            <!-- </div> -->
+            <!-- /.modal-content -->
+        <!-- </div> -->
+        <!-- /.modal-dialog -->
+    <!-- </div> -->
+    <!-- /.modal -->
+
+    <div class="modal fade select-stickers__modal" id="stickerModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Stickers</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label for="search-attr" class="col-sm-2 col-form-label">Search</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control search-attr"  placeholder="Search">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                        <p class="mb-0">Select All</p>
+                    </div>
+                    <ul class="all-list modal-stickers--list">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary done_select_stickers_js" data-dismiss="modal">Done</button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -282,12 +315,12 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script>
-        $("body").on("keyup",".search-attr", function() {
-            var value = $(this).val().toLowerCase();
-            $("ul.modal-stickers--list .option-elm-modal").filter(function() {
-                $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
-            });
-        });
+        // $("body").on("keyup",".search-attr", function() {
+        //     var value = $(this).val().toLowerCase();
+        //     $("ul.modal-stickers--list .option-elm-modal").filter(function() {
+        //         $(this).toggle($(this).find('a.searchable').data('name').toLowerCase().indexOf(value) > -1)
+        //     });
+        // });
 
         $('.filter--display input:radio[name="filter"]').change(function() {
             var filter = $(this).filter(':checked').val();
@@ -305,41 +338,41 @@
             $(this).closest('.inventory-attr-item').remove();
         });
 
-        $("body").on('click', '.select-stickers', function () {
-            let arr = [];
-            $(".get-all-stickers-tab")
-                .children()
-                .each(function () {
-                    arr.push($(this).attr("data-id"));
-                });
-            AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
-                if (!res.error) {
-                    $("#stickerModal .modal-body .all-list").empty();
-                    res.data.forEach(item => {
-                        let html = `<li data-id="${item.id}" class="option-elm-modal"><a
-                                                href="#">${item.name}
-                                                </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
-                                                data-id="${item.id}">ADD</a></li>`;
-                        $("#stickerModal .modal-body .all-list").append(html);
-                    });
-                    $("#stickerModal").modal();
-                }
-            });
-        });
+        // $("body").on('click', '.select-stickers', function () {
+        //     let arr = [];
+        //     $(".get-all-stickers-tab")
+        //         .children()
+        //         .each(function () {
+        //             arr.push($(this).attr("data-id"));
+        //         });
+        //     AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
+        //         if (!res.error) {
+        //             $("#stickerModal .modal-body .all-list").empty();
+        //             res.data.forEach(item => {
+        //                 let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+        //                                         href="#">${item.name}
+        //                                         </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
+        //                                         data-id="${item.id}">ADD</a></li>`;
+        //                 $("#stickerModal .modal-body .all-list").append(html);
+        //             });
+        //             $("#stickerModal").modal();
+        //         }
+        //     });
+        // });
 
-        $("body").on("click", ".add-related-event", function () {
-            let id = $(this).data("id");
-            let name = $(this).data("name");
-            $(".get-all-stickers-tab")
-                .append(`<div class="inventory-attr-item" data-id="${id}">
-                                            <h3 class="text">${name}</h3>
-                                            <button  type="button" class="btn btn-danger remove-all-attributes "><i class="fa fa-close"></i></button>
-                                            <input type="hidden" name="stickers[]" value="${id}">
-                                        </div>`);
-            $(this)
-                .parent()
-                .remove();
-        });
+        // $("body").on("click", ".add-related-event", function () {
+        //     let id = $(this).data("id");
+        //     let name = $(this).data("name");
+        //     $(".get-all-stickers-tab")
+        //         .append(`<div class="inventory-attr-item" data-id="${id}">
+        //                                     <h3 class="text">${name}</h3>
+        //                                     <button  type="button" class="btn btn-danger remove-all-attributes "><i class="fa fa-close"></i></button>
+        //                                     <input type="hidden" name="stickers[]" value="${id}">
+        //                                 </div>`);
+        //     $(this)
+        //         .parent()
+        //         .remove();
+        // });
 
         $('body').on('change', '.inventory_attributes .display_as-select', function () {
             $(".display-as-wall").addClass("d-none")

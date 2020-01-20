@@ -85,7 +85,7 @@ $('body').on('change', '.all_select_products_js', function(ev) {
   let flag;
 
   $(ev.target).prop('checked') ? (flag = true) : (flag = false);
-  $('#productsModal .all-list').find('.select_product_js').each(function(index, product) {
+  $('.all-list').find('.select_product_js').each(function(index, product) {
     const $product = $(product);
     flag ? $product.prop('checked', true) : $product.prop('checked', false);
   });
@@ -135,6 +135,34 @@ $('body').on('change', '#category_select', function() {
 });
 
 
+$("body").on('click', '.select-stickers', function () {
+  let arr = [];
+  $(".get-all-stickers-tab")
+      .children()
+      .each(function () {
+          arr.push($(this).attr("data-id"));
+      });
+  AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
+      if (!res.error) {
+          $("#stickerModal .modal-body .all-list").empty();
+          res.data.forEach(item => {
+              let html = `<li data-id="${item.id}" class="option-elm-modal">
+                            <div class="btn btn-primary add-related-event searchable" data-name="${item.name}"
+                              data-id="${item.id}"><input type="checkbox" class="select_product_js"/>
+                            </div>
+                            <a href="#">${item.name}</a>
+                          </li>`;
+              // let html = `<li data-id="${item.id}" class="option-elm-modal"><a
+              //                         href="#">${item.name}
+              //                         </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
+              //                         data-id="${item.id}">ADD</a></li>`;
+              $("#stickerModal .modal-body .all-list").append(html);
+          });
+          $("#stickerModal").modal();
+      }
+  });
+});
+
 
 $("body").on("click", ".done_select_product_js", function () {
   $('.select_product_js').each(function(index, product) {
@@ -154,7 +182,6 @@ $("body").on("click", ".done_select_product_js", function () {
 });
 
 $("body").on("click", ".done_select_attributes_js", function () {
-  console.log($('.select_product_js'))
   $('.select_product_js').each(function(index, product) {
     if($(product).prop('checked')) {
         const id = $(product).closest('.add-related-event').data('id');
@@ -168,6 +195,22 @@ $("body").on("click", ".done_select_attributes_js", function () {
                   </div>
                   <input type="hidden" name="stocks[]" value="${id}">
                 </li>`)
+    }
+  })
+});
+
+$("body").on("click", ".done_select_stickers_js", function () {
+  $('.select_product_js').each(function(index, product) {
+    if($(product).prop('checked')) {
+        const id = $(product).closest('.add-related-event').data('id');
+        const name =  $(product).closest('.add-related-event').data('name');
+        $(".get-all-stickers-tab")
+                .append(`<div class="inventory-attr-item" data-id="${id}">
+                              <h3 class="text">${name}</h3>
+                              <button  type="button" class="btn btn-danger remove-all-attributes "><i class="fa fa-close"></i></button>
+                              <input type="hidden" name="stickers[]" value="${id}">
+                          </div>`);
+
     }
   })
 });
