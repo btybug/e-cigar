@@ -180,7 +180,7 @@
                                                 <div
                                                     class="d-flex align-items-center product__single-delivery-right mb-3">
                                                     <div class="product__single-delivery-free font-20 lh-1">
-                                                        {!! __('free_on_orders_over') !!} £20 to UK
+                                                        {!! __('free_on_orders_over') !!}
                                                     </div>
                                                     <a href="#"
                                                        class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
