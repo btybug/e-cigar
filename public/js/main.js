@@ -475,7 +475,17 @@ $(document).ready(function () {
             const vpid = $('#vpid').val();
             const $self = $(this);
             const val = $(this).val();
+            const img_variation = $(this).find('option:selected').attr('data-img');
             const item = row.closest('.product__single-item-info');
+
+            var img_path =  $(".product-single-view-outer").find('img[src="'+img_variation+'"]').first();
+            if(img_path){
+                $('.single-product_top-img').attr("src", img_path.attr('src'));
+                console.log(img_path,'img_src_exists');
+            }
+            // var img_path = $(".products__item-photo-thumb").find("img").first().attr('src');
+            // $(this).closest('.products__item-wrapper').find(".products__item-photo img").addClass("active-slider").attr("src", img_path);
+
             if(val !== 'no') {
                fetch("/products/get-variation-menu-raw", {
                 method: "post",
@@ -719,6 +729,12 @@ $(document).ready(function () {
                 $(this).prop('checked', false);
                 setTotalPrice(countTotalPrice());
             }
+
+            const img_variation = $(this).attr('data-img');
+            var img_path =  $(".product-single-view-outer").find('img[src="'+img_variation+'"]').first();
+            if(img_path){
+                $('.single-product_top-img').attr("src", img_path.attr('src'));
+            }
             // const row = $(this).closest('.product__single-item-info-bottom');
             // const group_id = $(this).data('id');
             // const select_element_id = $(this).val();
@@ -754,6 +770,12 @@ $(document).ready(function () {
             const select_element_id = $(this).val();
             const vpid = $('#vpid').val();
             const $self = $(this);
+
+            const img_variation = $self.attr('data-img');
+            var img_path =  $(".product-single-view-outer").find('img[src="'+img_variation+'"]').first();
+            if(img_path){
+                $('.single-product_top-img').attr("src", img_path.attr('src'));
+            }
 
             fetch("/products/get-variation-menu-raw", {
                 method: "post",

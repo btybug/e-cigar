@@ -31,7 +31,7 @@
                         </option>
                     @endif
                     @foreach($variation as $item)
-                        <option value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
+                        <option data-img="{{ $item->image }}" value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
                                 @endif data-out="{{ out_of_stock($item) }}">
                             {{ $item->item->short_name }}
                             <b>{{ out_of_stock_msg($item) }}</b>
@@ -67,7 +67,7 @@
                         @endphp
                         <div
                             class="custom-radio custom-control-inline product--inputs-wrap">
-                            <input type="radio"
+                            <input type="radio" data-img="{{ $item->image }}"
                                    @if(isset($selected) && $selected->id == $item->id) checked
                                    @endif data-out="{{ out_of_stock($item) }}"
                                    class="custom-control-input custom-control-input-radio"
@@ -90,7 +90,7 @@
                 @endphp
                 <div
                     class="custom-radio custom-control-inline product--inputs-wrap">
-                    <input type="checkbox"
+                    <input type="checkbox" data-img="{{ $selected->image }}"
                            data-out="{{ out_of_stock($selected) }}"
                            class="custom-control-input"
                            id="single_v_select_{{ $selected->id.$x}}"
