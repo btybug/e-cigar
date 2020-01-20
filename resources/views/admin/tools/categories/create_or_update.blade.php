@@ -1,5 +1,5 @@
 <div class="del-save--btn">
-    @if($model)
+    @if($model && ! $model->is_core)
         <div class="form-group m-r-5">
             <a class="btn btn-danger delete-button text-white" data-key="{{ $model->id }}" data-href="{{ route('admin_store_categories_delete',$type) }}">Delete</a>
         </div>
@@ -47,12 +47,26 @@
     @endif
 </div>
 @if($type!='filter')
+
+@if($model)
+    @if(! $model->is_core)
 <div class="form-group row">
     <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Slug</label>
     <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
         {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
     </div>
 </div>
+    @else
+        {!! Form::hidden('slug',null) !!}
+    @endif
+@else
+    <div class="form-group row">
+        <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Slug</label>
+        <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
+            {!! Form::text('slug',null,['class'=>'form-control','required'=>true]) !!}
+        </div>
+    </div>
+@endif
 
 <div class="form-group row">
     <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Custom classes</label>

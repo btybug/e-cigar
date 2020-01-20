@@ -28,9 +28,9 @@
                                         <a class="nav-link active" id="tab1-tab" data-toggle="tab" href="#tab1">To
                                             User</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2">To Admin</a>
-                                    </li>
+{{--                                    <li class="nav-item">--}}
+{{--                                        <a class="nav-link" id="tab2-tab" data-toggle="tab" href="#tab2">To Admin</a>--}}
+{{--                                    </li>--}}
                                 </ul>
                                 <div class="tab-content tab-content-store-settings pr-3">
                                     <div class="tab-pane fade active in show" id="tab1"
@@ -102,55 +102,55 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
-                                        <div class="form-group row">
-                                            {{Form::label('admin_from', 'From',['class' => 'col-xl-3'])}}
-                                            <div class="col-xl-9">
-                                                {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            {{Form::label('to_admin', 'To',['class' => 'col-xl-3'])}}
-                                            <div class="col-xl-9">
-                                                {{Form::select('admin[to]',$users,null,['class' =>'form-control','id'=>'to_admin'])}}
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            @if(count(get_languages()))
-                                                <ul class="nav nav-tabs">
-                                                    @foreach(get_languages() as $language)
-                                                        <li class="nav-item"><a
-                                                                    class="nav-link @if($loop->first) active @endif"
-                                                                    data-toggle="tab"
-                                                                    href="#{{ strtolower($language->code) }}">
-                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}
-                                                            </a></li>
-                                                    @endforeach
-                                                </ul>
-                                            @endif
-                                            <div class="tab-content pt-25">
-                                                @if(count(get_languages()))
-                                                    @foreach(get_languages() as $language)
-                                                        <div id="{{ strtolower($language->code) }}"
-                                                             class="tab-pane fade  @if($loop->first) in active show @endif">
-                                                            <div class="form-group row">
-                                                                {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-xl-3'])}}
-                                                                <div class="col-xl-9">
-                                                                    {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',null ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}
-                                                                </div>
-                                                            </div>
-                                                            <div class="form-group row">
-                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-xl-3'])}}
-                                                                <div class="col-xl-9">
-                                                                    {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',null ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    @endforeach
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
+{{--                                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">--}}
+{{--                                        <div class="form-group row">--}}
+{{--                                            {{Form::label('admin_from', 'From',['class' => 'col-xl-3'])}}--}}
+{{--                                            <div class="col-xl-9">--}}
+{{--                                                {{Form::select('admin[from]',$froms,null,['class' =>'form-control','id'=>'admin_from'])}}--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-group row">--}}
+{{--                                            {{Form::label('to_admin', 'To',['class' => 'col-xl-3'])}}--}}
+{{--                                            <div class="col-xl-9">--}}
+{{--                                                {{Form::select('admin[to]',$users,null,['class' =>'form-control','id'=>'to_admin'])}}--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                        <div class="form-group">--}}
+{{--                                            @if(count(get_languages()))--}}
+{{--                                                <ul class="nav nav-tabs">--}}
+{{--                                                    @foreach(get_languages() as $language)--}}
+{{--                                                        <li class="nav-item"><a--}}
+{{--                                                                    class="nav-link @if($loop->first) active @endif"--}}
+{{--                                                                    data-toggle="tab"--}}
+{{--                                                                    href="#{{ strtolower($language->code) }}">--}}
+{{--                                                                <span class="flag-icon flag-icon-{{ strtolower($language->code) }}"></span> {{ $language->code }}--}}
+{{--                                                            </a></li>--}}
+{{--                                                    @endforeach--}}
+{{--                                                </ul>--}}
+{{--                                            @endif--}}
+{{--                                            <div class="tab-content pt-25">--}}
+{{--                                                @if(count(get_languages()))--}}
+{{--                                                    @foreach(get_languages() as $language)--}}
+{{--                                                        <div id="{{ strtolower($language->code) }}"--}}
+{{--                                                             class="tab-pane fade  @if($loop->first) in active show @endif">--}}
+{{--                                                            <div class="form-group row">--}}
+{{--                                                                {{Form::label('subject_'.strtolower($language->code), 'Subject',['class' => 'col-xl-3'])}}--}}
+{{--                                                                <div class="col-xl-9">--}}
+{{--                                                                    {{Form::text('admin[translatable]['.strtolower($language->code).'][subject]',null ,['class' =>'form-control','id'=>'admin_subject_am','placeholder' => __('Subject')])}}--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                            <div class="form-group row">--}}
+{{--                                                                {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-xl-3'])}}--}}
+{{--                                                                <div class="col-xl-9">--}}
+{{--                                                                    {{Form::textarea('admin[translatable]['.strtolower($language->code).'][content]',null ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}--}}
+{{--                                                                </div>--}}
+{{--                                                            </div>--}}
+{{--                                                        </div>--}}
+{{--                                                    @endforeach--}}
+{{--                                                @endif--}}
+{{--                                            </div>--}}
+{{--                                        </div>--}}
+{{--                                    </div>--}}
                                 </div>
                             </div>
                         </div>
