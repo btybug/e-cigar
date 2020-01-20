@@ -272,7 +272,8 @@
                                                                 <div class="d-flex flex-wrap technical-features-content
                                                                     @if(count($vape->main_item->specifications_with_children) >= 10 ) technical-features-content-to-col @endif">
                                                                     @if(count($vape->main_item->specifications_with_children) >= 10)
-                                                                        <div class="row w-100">
+                                                                        <div class="w-100">
+                                                                        <div class="row ">
                                                                             @foreach($vape->main_item->specifications_with_children as $stockAttr)
                                                                                     @if($loop->iteration % 2 == 0)
                                                                                         <div class="col-md-6">
@@ -368,6 +369,7 @@
                                                                                         </div>
                                                                                     @endif
                                                                             @endforeach
+                                                                        </div>
                                                                         </div>
                                                                     @else
                                                                         @foreach($vape->main_item->specifications_with_children as $stockAttr)
