@@ -263,7 +263,7 @@
             {{--            @endHasAccess--}}
 
 
-         
+
             @hasAccess('import')
             <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Reports</span></a></li>

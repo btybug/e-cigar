@@ -10,21 +10,14 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\CouponsRequest;
-use App\Http\Requests\ShippingZonePost;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\CategoryPost;
-use App\Models\Coupons;
 use App\Models\Products;
-use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\Stickers;
-use Carbon\Carbon;
-use DB;
-use PragmaRX\Countries\Package\Countries;
-use Lang;
 use Illuminate\Http\Request;
+use Lang;
 
 class CategoriesController extends Controller
 {
@@ -32,8 +25,8 @@ class CategoriesController extends Controller
 
     public function list()
     {
-
-        return $this->view('list');
+        $categories=Category::groupBy('type')->get();
+        return $this->view('list',compact('categories'));
     }
 
     public function getCategories($type)
