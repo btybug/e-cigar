@@ -74,15 +74,14 @@
                                                 @endif
                                             @else
                                                 @if($firstVariation->price_type == 'dynamic')
-                                                    @php $price = $firstVariation->item->default_price;@endphp
+                                                    @php $price = $firstVariation->item->default_price; @endphp
                                                 @else
                                                     @if($firstVariation->price)
-                                                        @php  $price = $firstVariation->price.'7';@endphp
+                                                        @php  $price = $firstVariation->price; @endphp
                                                     @endif
                                                 @endif
                                             @endif
                                         @endif
-
 
                                         {{ convert_price($price,$currency, false) }}
                                     </span>
