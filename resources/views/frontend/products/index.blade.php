@@ -164,30 +164,7 @@
 {{--</svg>--}}
                         {{--</span>--}}
                                     {{--</div>--}}
-                                    <div class="filter-single-wall top-filters border-0">
-                                        <div class="main-filters border-0 p-0">
-                                            <div class="filter-single-wall">
-                                                <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                                    <h5 class="font-sec-reg text-uppercase font-17">{!! __('price') !!}</h5>
-                                                    <span class="icon-head">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                                </div>
-                                                <div class="list-filter ">
-                                                    <div class="slider-range d-flex flex-wrap align-items-center">
-                                                        <div id="slider-range" class="w-100"></div>
-                                                        <div class="amount w-100">
 
-                                                            <input type="hidden" id="amount_range" name="amount"
-                                                                   value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
-                                                            <input type="text" id="amount" name="" readonly
-                                                                   class="font-main-bold font-16 w-100 border-0">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between align-items-center head filter-main__head">
                                             <h5 class="font-sec-reg text-uppercase font-17">{!! __('brands') !!}</h5>
@@ -464,22 +441,23 @@
             var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
             console.log(rangeDataString);
             var rangeArray = rangeDataString.split(',');
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: '{{ convert_price(1000,$currency,false,true,true) }}',
-                values: rangeArray,
-                slide: function (event, ui) {
-                    $("#amount").val(ui.values[0] + " - " + ui.values[1]);
-                    $("#amount_range").val(ui.values[0] + "," + ui.values[1]);
-                },
-                change: function (event, ui) {
-                    doSubmitForm()
-                }
-            });
 
-            $("#amount").val($("#slider-range").slider("values", 0) +
-                " - " + $("#slider-range").slider("values", 1));
+            {{--$("#slider-range").slider({--}}
+            {{--    range: true,--}}
+            {{--    min: 0,--}}
+            {{--    max: '{{ convert_price(1000,$currency,false,true,true) }}',--}}
+            {{--    values: rangeArray,--}}
+            {{--    slide: function (event, ui) {--}}
+            {{--        $("#amount").val(ui.values[0] + " - " + ui.values[1]);--}}
+            {{--        $("#amount_range").val(ui.values[0] + "," + ui.values[1]);--}}
+            {{--    },--}}
+            {{--    change: function (event, ui) {--}}
+            {{--        doSubmitForm()--}}
+            {{--    }--}}
+            {{--});--}}
+
+            // $("#amount").val($("#slider-range").slider("values", 0) +
+            //     " - " + $("#slider-range").slider("values", 1));
 
             // $("body").on('click', '.save-filter-btn', function () {
             //     doSubmitForm();
