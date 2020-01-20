@@ -62,7 +62,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     border-bottom: 1px solid #d7d7d7;
 }
 .nav-item--has-dropdown_dropdown.menu-support_dropdown .single-product .product-photo img{
-    height: 140px!important;
+    /*height: 140px!important;*/
 }
 .sort-by-selects {
     background: #fff;

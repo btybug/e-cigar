@@ -255,14 +255,15 @@ header .header-top .products-menu-item .single-product:hover .product-more {
 
 header .header-top .products-menu-item .single-product .product-photo img {
     width: 100%;
-    height: 220px;
+    /*height: 220px;*/
+    height: 140px;
     object-fit: contain;
     font-family: 'object-fit: contain;';
 }
 
 @media screen and (max-width: 992px) {
     header .header-top .products-menu-item .single-product .product-photo img {
-        height: 140px;
+        height: 130px;
     }
 }
 
