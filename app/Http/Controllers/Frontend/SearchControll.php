@@ -14,7 +14,6 @@ class SearchControll extends Controller
 {
     public function postSearch(Request $request)
     {
-        $category = $request->get('category');
         $name = $request->get('name');
 
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
@@ -29,9 +28,7 @@ class SearchControll extends Controller
             'stock_translations.short_description',
             'categories.slug as category'
         );
-        if ($category) {
-            $query = $query->where('categories.slug', $category);
-        }
+
         $result=$query->where('stocks.status', true)
             ->where('stocks.is_offer', false)
             ->where('stock_translations.name', 'LIKE', '%' . $name . '%')
@@ -39,7 +36,7 @@ class SearchControll extends Controller
             ->groupBy("stocks.id")
             ->get();
 
-        return response()->json(['data' => $result->toArray(), 'code' => 200,'category'=>$category]);
+        return response()->json(['data' => $result->toArray(), 'code' => 200]);
     }
 
 }

@@ -234,7 +234,7 @@ $(document).ready(function () {
     }).data( "ui-autocomplete" )._renderItem = function( ul, item ) {
         // console.log(location, 55555555555, item);
         encodeURI(item.slug)
-        var inner_html = `  <a class="autocomplete_link_custom" style="all: unset;" href="${location.origin}/products/${encodeURI(item.category)}/${encodeURI(item.slug)}"> 
+        var inner_html = `  <a class="autocomplete_link_custom" style="all: unset;" href="${location.origin}/products/${encodeURI(item.category)}/${encodeURI(item.slug)}">
                                 <div class="autocomplete_content_custom">
                                     <div class="autocomplete_image_container_custom">
                                         <img class="autocomplete_image_custom" src="${item.image}">
@@ -242,11 +242,10 @@ $(document).ready(function () {
                                     <div class="autocomplete-right-main-content">
                                          <div class="autocomplete_title_container_custom">
                                             <h4 class="font-sec-reg font-17 text-main-clr lh-1 autocomplete_title_custom">${item.name}</h4>
-                                            <span class="font-main-bold font-14 lh-1 autocomplete-new-item">NEW</span>
                                         </div>
                                         <p class="font-main-light text-light-clr font-14 autocomplete_description_custom">${item.short_description}...</p>
                                     </div>
-                               
+
                                 </div>
                             </a>`;
         // console.log('--------------', item);
