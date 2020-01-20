@@ -293,7 +293,9 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit barcode',
-                    'routes' => ['admin_inventory_others_new', 'post_admin_inventory_others_new','admin_inventory_barcodes_settings'],
+                    'routes' => [
+                        'admin_inventory_barcodes_settings',
+                    ],
                     'description' => 'Able to edit barcode',
                 ],
                 'delete' => [
@@ -361,6 +363,25 @@ return [
                         'description' => 'Able to delete Stock',
                     ]
                 ],
+        ],
+        'offers' => [
+            'name' => 'offers',
+            'routes' => ['admin_stock_offers','datatable_all_stocks_offers'],
+            'description' => 'Able to see offers',
+            'children' => [
+                'create' => [
+                    'name' => 'Create offer',
+                    'routes' => ['admin_stock_edit_offer'],
+                    'description' => 'Able ',
+                ],
+                'edit' => [
+                    'name' => 'Edit ',
+                    'routes' => ['admin_stock_new_offer'],
+                    'description' => 'Able to Edit status',
+                ],
+
+            ],
+
         ],
         'orders' => [
             'name' => 'All Orders',
@@ -507,6 +528,7 @@ return [
             ],
 
         ],
+
     ],
 
     'front_pages' => [

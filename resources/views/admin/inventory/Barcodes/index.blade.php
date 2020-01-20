@@ -6,9 +6,11 @@
 {{--        </div>--}}
         <div class="d-flex justify-content-end px-4 mt-2">
             <div class="d-flex flex-wrap">
+                @ok('admin_inventory_barcodes_settings')
                 <span class="btn btn-success mx-2" data-toggle="modal" data-target="#barcodeModalCenter">
   Settings
 </span>
+                @endok
                 @ok('admin_inventory_barcodes_new')
                 <div>
                     <a class="btn btn-primary" href="{!! route('admin_inventory_barcodes_new') !!}">Add new</a>

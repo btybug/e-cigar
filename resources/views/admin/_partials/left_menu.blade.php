@@ -134,8 +134,9 @@
                     @ok('admin_store_coupons')
                     <li><a href="{{route('admin_store_coupons')}}"><i class="far fa-circle fa-xs"></i> Coupons</a></li>
                     @endok
-                    <li><a href="{{route('admin_stock_promotions')}}"><i class="far fa-circle fa-xs"></i> Promotions</a>
-                    </li>
+                    @ok('admin_stock_promotions')
+                    <li><a href="{{route('admin_stock_promotions')}}"><i class="far fa-circle fa-xs"></i>Promotions</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess

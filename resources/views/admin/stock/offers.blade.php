@@ -7,19 +7,24 @@
         <div class="row">
             <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
                 <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
+                    @ok('admin_stock')
                     <li class="nav-item">
                         <a class="nav-link " id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
-                           aria-controls="general" aria-selected="true" aria-expanded="true">Stocks</a>
+                           aria-controls="general" aria-selected="true" aria-expanded="true">Products</a>
                     </li>
+                    @endok
+
                     <li class="nav-item">
                         <a class="nav-link active" id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
                     </li>
                 </ul>
+                @ok('admin_stock_settings')
                 <div class="nav-item ml-2">
                     <a class="nav-link btn btn-success" id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Settings</a>
                 </div>
+                @endok
             </div>
 
             <div class="tab-content w-100">

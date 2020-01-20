@@ -11,15 +11,19 @@
                         <a class="nav-link active" id="info-tab" href="{!! route('admin_stock') !!}" role="tab"
                            aria-controls="general" aria-selected="true" aria-expanded="true">Products</a>
                     </li>
+                    @ok('admin_stock_offers')
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab" href="{!! route('admin_stock_offers') !!}" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Offers</a>
                     </li>
+                    @endok
                 </ul>
+                @ok('admin_stock_settings')
                 <div class="nav-item ml-2">
                     <a class="nav-link btn btn-success" id="general-tab" href="{!! route('admin_stock_settings') !!}" role="tab"
                        aria-controls="accounts" aria-selected="true" aria-expanded="true">Settings</a>
                 </div>
+                @endok
             </div>
 
             <div class="tab-content w-100">
