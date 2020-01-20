@@ -40,7 +40,7 @@
                         @endif
                     </span>
                     <span class="products__item-content-inner">
-                        <span class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
+                        <span class="font-sec-reg font-21 text-main-clr products__item-title">
                             {{ str_limit($product->name,27) }}
                         </span>
                         <span class="font-main-light font-15 products__item-desc">

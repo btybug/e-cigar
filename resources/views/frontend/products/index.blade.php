@@ -324,7 +324,10 @@
                 doSubmitForm()
             });
 
-
+            $('body').on('click','#displVertBtn',function () {
+                // console.log(6666)
+                $(this).closest('.main-content').find('.products__page-main_right-wrapper .products-box').height('auto')
+            })
             $("body").on("click",'.subcategory-select', function() {
                 $("body").find('.subcategory-select').removeClass('active');
                 $("body").find('.subcategory-select[data-slug="'+$(this).data('slug')+'"]').addClass('active');

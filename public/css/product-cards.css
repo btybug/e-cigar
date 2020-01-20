@@ -2413,7 +2413,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .products__item-wrapper .products__item-content-inner {
     padding: 21px 20px 12px;
-    min-height: 170px;
+    min-height: 220px;
     display: flex !important;
     flex-direction: column;
 }
