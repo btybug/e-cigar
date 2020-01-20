@@ -7,9 +7,9 @@
         <span class="font-sec-reg lh-1 font-28">{{ $current->products->count() }} Products</span>
     </div>
 </div>
-<div class="brands_main-content-products-wrapper" id="sticker_related_products_list">
-    @include('frontend.stickers._partials.products')
-</div>
 <div class="brands-stickers-text--desc">
     {!! $current->description !!}
+</div>
+<div class="brands_main-content-products-wrapper" id="sticker_related_products_list">
+    @include('frontend.stickers._partials.products')
 </div>
