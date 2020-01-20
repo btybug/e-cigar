@@ -182,6 +182,7 @@ Route::group(['prefix' => 'emails-notifications'], function () {
     Route::post('/edit-template/{id?}', 'Admin\EmailsNotificationsController@postCreateOrUpdate')->name('post_admin_mail_create_templates');
 
     Route::get('/newsletters', 'Admin\EmailsNotificationsController@getNewsletters')->name('admin_emails_newsletters');
+    Route::post('/add-subscriber', 'Admin\EmailsNotificationsController@postAddSubscriber')->name('admin_emails_newsletters_add_subscribe');
     Route::post('/delete-newsletter', 'Admin\EmailsNotificationsController@postDeleteNewsletter')->name('admin_emails_newsletter_delete');
 });
 

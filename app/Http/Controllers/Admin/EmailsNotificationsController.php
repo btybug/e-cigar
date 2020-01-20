@@ -233,6 +233,21 @@ class EmailsNotificationsController extends Controller
         return $this->view('newsletters');
     }
 
+    public function postAddSubscriber(Request $request)
+    {
+        $email = $request->get('email');
+        $newsletter = Newsletter::where('email',$email)->first();
+        $category = Category::where('slug','newsletter')->first();
+        if(! $newsletter && $category){
+            Newsletter::create([
+               'email' => $email,
+                'category_id' => $category->id
+            ]);
+        }
+
+        return redirect()->back();
+    }
+
     public function postDeleteNewsletter(Request $request)
     {
         $newsletter = Newsletter::findOrFail($request->slug);

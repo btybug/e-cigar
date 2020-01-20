@@ -31,15 +31,25 @@
 {{--                        <h2 class="m-0">Emails</h2>--}}
 {{--                    </div>--}}
                     <div class="card-body panel-body">
-                        <select name="table_head" id="table_head_id" class="selectpicker" multiple>
-                            <option value="#" data-column="0" data-name="id">#</option>
-                            <option value="Email" data-column="1" data-name="email">Email</option>
-                            <option value="Is Member" data-column="2" data-name="user_id">Is Member</option>
-                            <option value="Type/Category" data-column="3" data-name="category_id">Type/Category</option>
-                            <option value="Subscribed Date" data-column="4" data-name="created_at">Subscribed Date
-                            </option>
-                            <option value="Actions" data-column="5" data-name="actions">Actions</option>
-                        </select>
+                        <div class="d-flex justify-content-between px-4 mt-2">
+                            <div>
+                                <select name="table_head" id="table_head_id" class="selectpicker" multiple>
+                                    <option value="#" data-column="0" data-name="id">#</option>
+                                    <option value="Email" data-column="1" data-name="email">Email</option>
+                                    <option value="Is Member" data-column="2" data-name="user_id">Is Member</option>
+                                    <option value="Type/Category" data-column="3" data-name="category_id">Type/Category</option>
+                                    <option value="Subscribed Date" data-column="4" data-name="created_at">Subscribed Date
+                                    </option>
+                                    <option value="Actions" data-column="5" data-name="actions">Actions</option>
+                                </select>
+                            </div>
+                            <div>
+                                @ok('admin_emails_newsletters_add_subscribe')
+                                <a class="btn btn-primary add-subscriber"
+                                   href="javascript:void(0)">Add subscriber</a>
+                                @endok
+                            </div>
+                        </div>
                         <table id="users-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -57,11 +67,38 @@
             </div>
         </div>
     </div>
+
+    <div id="subscribeAddModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add subscriber</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    {!! Form::open(['id' => 'subscribeAddForm','url' => route('admin_emails_newsletters_add_subscribe')]) !!}
+                        <div class="form-group">
+                            <label>Email</label>
+                            {!! Form::email('email',null,['class' => 'form-control']) !!}
+                        </div>
+                        <div class="form-group">
+                            {!! Form::submit('Add',['class' => 'btn btn-primary float-right']) !!}
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+
+        </div>
+    </div>
 @stop
 @section('js')
     <script>
 
         $(document).ready(function () {
+            $("body").on('click','.add-subscriber',function () {
+                $("#subscribeAddModal").modal()
+            })
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if (!localStorage.getItem(storageName)) {
