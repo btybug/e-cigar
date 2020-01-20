@@ -16698,7 +16698,8 @@ outline: none;
 }
 
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content .item-photo {
-  height: 150px;
+    height: 288px;
+    background: #eeeeee;
 }
 
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content .item-title {
@@ -16710,7 +16711,7 @@ outline: none;
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content.active {
