@@ -259,6 +259,7 @@
             {{--            </li>--}}
             {{--            @endHasAccess--}}
 
+            
             @hasAccess('admin_category')
             <li><a href="{{route('admin_category')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Category</span></a></li>
