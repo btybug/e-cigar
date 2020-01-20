@@ -4,7 +4,7 @@
     <div class="card panel panel-default border-0 bg-transparent">
         <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
             <div class="pull-left">
-                <h3>Email</h3>
+                <h3>Communication</h3>
                 {!! Form::model($model) !!}
             </div>
             <div>
@@ -212,13 +212,6 @@ User
                             <div class="card-header">{{Form::label('is_active', 'Status',['class' => ''])}}</div>
                             <div class="card-body">
                                 {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
-                            </div>
-                        </div>
-                        <div class="card">
-                            <div class="card-header">Type</div>
-                            <div class="card-body">
-                                {!! Form::select('category_id',$categories,null,['class'=>'form-control','id'=>'email_type']) !!}
-
                             </div>
                         </div>
                 </div>
