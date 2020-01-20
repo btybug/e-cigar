@@ -1,7 +1,12 @@
 <li class="col-sm-6 col-xl-3">
     <div class="products__item-wrapper main-transition">
         <div class="products__item-wrapper-inner">
-            <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="products__item-top">
+            @php
+            $category = $product->categories()->whereNull('categories.parent_id')->first();
+            @endphp
+            <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
+               @if(isset($related)) target="__blank" @endif
+               class="products__item-top">
                     <span class="d-block products__item-photo-brand-name">
                         <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">
                             @if($product->brand)
@@ -92,7 +97,8 @@
                 </span>
             </a>
             <div  class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}"
+                <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
+                   @if(isset($related)) target="__blank" @endif
                    class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
                     {!! __('view_more') !!}
                 </a>

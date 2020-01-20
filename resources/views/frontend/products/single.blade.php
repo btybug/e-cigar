@@ -507,7 +507,7 @@
                                              aria-labelledby="pills-related-tab">
                                             <div class="d-flex flex-wrap">
                                                 <div class="product_single-main-tab-content">
-                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products])
+                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products,'related' => true])
                                                 </div>
                                                 <div class="product_single-right-ads">
                                                     @if($vape->ads && count($vape->ads))
