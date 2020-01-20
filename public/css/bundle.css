@@ -19338,8 +19338,11 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .products__item-wrapper .products__item-discount {
     margin-right: 20px;
-    width: 62px;
+    width: 52px;
     height: 46px;
+}
+.products__item-wrapper .products__item-discount-all .products__item-discount:last-of-type{
+    margin-right: 2px;
 }
 .products__item-wrapper .products__item-discount img{
     width: 100%;
@@ -23169,6 +23172,13 @@ header .header-bottom .share-button svg {
         -ms-flex: 0 0 83%;
         flex: 0 0 83%;
         max-width: 83%;
+    }
+}
+@media (min-width: 1199px) and (max-width: 1400px) {
+    .products__item-wrapper .products__item-discount {
+        margin-right: 12px;
+        width: 48px;
+        height: 42px;
     }
 }
 @media (min-width: 768px) and (max-width: 1199px) {
