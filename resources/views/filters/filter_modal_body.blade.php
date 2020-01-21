@@ -41,7 +41,7 @@
                             $item = \App\Models\StockVariation::where('variation_id',$group)->where('item_id',$item->id)->first();
                             @endphp
                             @if($item)
-                            <li class="col-md-3" data-id="{{ $item->id }}" data-name="{{ $item->item->short_name }}">
+                            <li class="col-lg-2 col-md-3 col-sm-6" data-id="{{ $item->id }}" data-name="{{ $item->item->short_name }}">
                                 <div class="item-content">
                                     <div class="item-photo">
                                         <img src="{{ media_image_tmb($item->image) }}" alt="photo">

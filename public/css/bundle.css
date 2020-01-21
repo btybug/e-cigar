@@ -19252,7 +19252,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     display: block;
     line-height: 1;
 }
-
+.products__item-wrapper .products__item-photo-brand-name{
+    border: 1px solid #d7d7d7;
+}
 .products__item-wrapper .products__item-main-content {
     border: 1px solid #d7d7d7;
     display: block;
