@@ -22946,6 +22946,9 @@ max-width: 100%;
 header .header-bottom .share-button svg {
     fill: #797979;
 }
+.faq-page-card-wrapper>.card-header:after {
+    display: none;
+}
 /*-------------------- autocomplete wall START------------------*/
 #autocomplite_content_search{
     position: absolute;
