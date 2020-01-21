@@ -23120,7 +23120,30 @@ header .header-bottom .share-button svg {
     border-radius: 5px;
     margin-top: 15px;
 }
-
+/*-------------------- FAQ Single page START------------------*/
+.faq-single-page-wrapper{
+    margin: 30px 0;
+}
+.faq-single-ads{
+    border: 1px solid #d7d7d7;
+    padding: 20px;
+}
+.faq-single-ads img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    font-family: 'object-fit: cover;';
+}
+.faq-single-main-title{
+    margin-bottom: 15px;
+    line-height: 1;
+}
+.faq-single-content{
+    border: 1px solid #d7d7d7;
+    height: 100%;
+    padding: 20px;
+}
+/*-------------------- FAQ Single page END------------------*/
 @media (max-width: 1854px) {
     .shopping__cart-payment-wrapper{
         padding-left: 0;
