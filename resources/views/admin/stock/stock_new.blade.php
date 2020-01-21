@@ -394,7 +394,7 @@
                                                                     @if($model && $model->other_images && count($model->other_images))
                                                                         @foreach($model->other_images as $key => $other_image)
                                                                             <div
-                                                                                class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="{{ $key }}">
+                                                                                class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{{ $key }}][url]">
                                                                                 <div class="col-sm-7 p-0">
 
                                                                                     <div class="input-group">
@@ -406,7 +406,6 @@
                                                                                            name="other_images[{{ $key }}][product_id]" value="null"
                                                                                            class="form-control product_id_hidden_js">
 
-
                                                                                     <div class="form-group row mt-3">
                                                                                         <label for="staticEmail"
                                                                                                class="col-sm-2 col-form-label">Url</label>
@@ -414,7 +413,7 @@
                                                                                             <input type="text"
                                                                                                    name="other_images[{{ $key }}][url]" value="{{ $other_image['url'] }}"
                                                                                                    class="form-control url_feald">
-                                                                                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="{{ $key }}">
+                                                                                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{{ $key }}][url]">
                                                                                                 Select
                                                                                             </button>
                                                                                         </div>
@@ -468,7 +467,7 @@
                                                                     @if($model && count($model->banners))
                                                                         @foreach($model->banners as $key => $banner)
                                                                             <div
-                                                                                class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                                                                                class="col-md-12 mb-2 d-flex flex-wrap banner-item" data-key="banners[{{ $key }}][product_id]">
                                                                                 <div class="col-sm-7 p-0">
 
                                                                                     <div class="input-group">
@@ -476,6 +475,9 @@
                                                                                             {!! media_button("banners[$key][image]",$banner->image) !!}
                                                                                         </div>
                                                                                     </div>
+                                                                                    <input type="hidden"
+                                                                                           name="banners[{{ $key }}][product_id]" value="null"
+                                                                                           class="form-control product_id_hidden_js">
 
                                                                                     <div class="form-group row mt-3">
                                                                                         <label for="staticEmail"
@@ -483,7 +485,10 @@
                                                                                         <div class="col-sm-10">
                                                                                             <input type="text"
                                                                                                    name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
-                                                                                                   class="form-control">
+                                                                                                   class="form-control url_feald">
+                                                                                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{{ $key }}][product_id]">
+                                                                                                Select
+                                                                                            </button>
                                                                                         </div>
                                                                                     </div>
                                                                                     <div class="form-group row">
@@ -1412,7 +1417,6 @@
 
                     </div>
                 </div>
-
                 <div class="form-group row mt-3">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
                     <div class="col-sm-10">
@@ -1436,7 +1440,7 @@
     </script>
 
     <script type="template" id="add-more-banners-tags">
-        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item" data-key="banners[{count}][product_id]">
             <div class="col-sm-7 p-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -1444,11 +1448,16 @@
 
                     </div>
                 </div>
-
+                <input type="hidden"
+                    name="banners[{count}][product_id]" value="null"
+                    class="form-control product_id_hidden_js">
                 <div class="form-group row mt-3">
                     <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
                     <div class="col-sm-10">
-                        <input type="text" name="banners[{count}][url]" class="form-control"  value="">
+                        <input type="text" name="banners[{count}][url]" class="form-control url_feald"  value="">
+                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{count}][product_id]">
+                            Select
+                        </button>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -1474,7 +1483,7 @@
     </script>
 
     <script type="template" id="add-more-other_images-tags">
-        <div class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="{count}">
+        <div class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{count}][url]">
             <div class="col-sm-7 p-0">
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -1490,7 +1499,7 @@
                     <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
                     <div class="col-sm-10">
                         <input type="text" name="other_images[{count}][url]" class="form-control url_feald"  value="">
-                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="{count}">
+                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{count}][url]">
                             Select
                         </button>
                     </div>
