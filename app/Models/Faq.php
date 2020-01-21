@@ -10,6 +10,7 @@ namespace App\Models;
 
 
 use App\Models\Common\Translatable;
+use App\Models\Translations\FaqTranslation;
 use App\Models\Translations\FaqTranslations;
 use App\User;
 
@@ -60,7 +61,7 @@ class Faq extends Translatable
 {
     protected $table = 'faq';
 
-    public $translationModel = FaqTranslations::class;
+    public $translationModel = FaqTranslation::class;
 
     protected $guarded = ['id'];
 

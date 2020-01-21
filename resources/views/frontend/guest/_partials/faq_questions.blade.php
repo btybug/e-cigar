@@ -7,7 +7,7 @@
                                         aria-controls="collapseOne-{{ $faq->id }}-content">
 
             <span>{{ $faq->question }}</span>
-            <a href="#"><i class="fas fa-long-arrow-alt-right"></i></a>
+            <a href="{!! route('faq_page_single',$faq->slug) !!}"><i class="fas fa-long-arrow-alt-right"></i></a>
         </div>
 {{--        <div class="collapse" id="collapseOne-{{ $faq->id }}-content"--}}
 {{--             aria-labelledby="collapseOne-{{ $faq->id }}-header" data-parent="#accordion-2" style="">--}}

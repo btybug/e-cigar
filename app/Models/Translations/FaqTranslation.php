@@ -22,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Translations\FaqTranslations whereQuestion($value)
  * @mixin \Eloquent
  */
-class FaqTranslations extends Model
+class FaqTranslation extends Model
 {
     public $timestamps = false;
 

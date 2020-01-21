@@ -36,12 +36,12 @@ class FaqController extends Controller
 
     public function index()
     {
-//        $stocks = Faq::all();
-//        foreach ($stocks as $stock){
-//            $stock->translate('gb')->slug = strtolower(str_replace(' ','-',$stock->question));
-//            $stock->save();
-//        }
-//        dd('fsyo');
+        $stocks = Faq::all();
+        foreach ($stocks as $stock){
+            $stock->translate('gb')->slug = strtolower(str_replace(' ','-',str_replace('?','',$stock->question)));
+            $stock->save();
+        }
+        dd('fsyo');
         return $this->view('index');
     }
 

@@ -145,6 +145,7 @@ Route::group(['prefix' => '/support'], function () {
     Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
 
     Route::get('/faq', 'GuestController@getFaq')->name('faq_page');
+    Route::get('/faq/{slug}', 'GuestController@getFaqSingle')->name('faq_page_single');
     Route::post('/faq-by-category', 'GuestController@getFaqByCategory')->name('faq');
 //    Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
 //    Route::get('/manuals', 'GuestController@getManuals')->name('manuals');

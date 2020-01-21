@@ -6,10 +6,12 @@ use App\Http\Requests\ContactUsRequest;
 use App\Models\Category;
 use App\Models\Common;
 use App\Models\ContactUs;
+use App\Models\Faq;
 use App\Models\GeoZones;
 use App\Models\Items;
 use App\Models\Landing;
 use App\Models\Settings;
+use App\Models\Stock;
 use App\Models\ZoneCountries;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
@@ -46,6 +48,14 @@ class GuestController extends Controller
         $category = $categories->first();
 
         return $this->view('faq', compact(['categories', 'category']));
+    }
+
+    public function getFaqSingle($slug)
+    {
+        $faq  = Faq::whereTranslation('slug', $slug,'gb')->first();
+
+        if(! $faq) abort(404);
+        return $this->view('faq_single', compact(['faq']));
     }
 
     public function getFaqByCategory(Request $request)
