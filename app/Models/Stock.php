@@ -148,6 +148,14 @@ class Stock extends Translatable
         '1' => 'Published'
     ];
 
+    protected $appends = array('page_link');
+
+    public function getPageLinkAttribute()
+    {
+        $category = $this->categories()->whereNull('categories.parent_id')->first();
+        return route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $this->slug]);
+    }
+
     public function specifications()
     {
         return $this->belongsToMany(Attributes::class, 'stock_attributes', 'stock_id', 'attributes_id');
