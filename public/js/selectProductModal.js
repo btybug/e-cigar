@@ -42,7 +42,7 @@ const selectProductModalInit = function () {
   }
 }
 
-$("body").on('click', '.select-products', function () {
+$("body").on('click', '.select-products, .select_product_for_url_js', function (ev) {
   let arr = [];
   $(".get-all-products-tab")
       .children()
@@ -76,6 +76,18 @@ $("body").on('click', '.select-products', function () {
             $('#brand_select').append(html)
           });
           selectProductModalInit();
+          if($(ev.target).hasClass('select_product_for_url_js')) {
+            console.log(1111)
+            $(".all_select_products_js").closest('div').removeClass('d-flex');
+            $(".all_select_products_js").closest('div').addClass('d-none');
+            $("#productsModal").attr('data-url', 'url');
+            $("#productsModal").attr('data-url-key', $(ev.target).data('key'));
+          } else {
+            $(".all_select_products_js").closest('div').removeClass('d-none');
+            $(".all_select_products_js").closest('div').addClass('d-flex');
+            $("#productsModal").attr('data-url', '');
+            $("#productsModal").attr('data-url-key', '');
+          }
           $("#productsModal").modal();
       }
   });
@@ -94,16 +106,24 @@ $('body').on('change', '.all_select_products_js', function(ev) {
 $('body').on('change', '.select_product_js', function(ev) {
   let flag = 0;
   const length = $('.select_product_js').length;
-  $('.select_product_js').each(function(index, product) {
-    const $product = $(product);
-    if($product.prop('checked')) {
-      flag += 1;
+  if($(ev.target).closest("#productsModal").attr("data-url") === "url") {
+    console.log(444)
+    $('.select_product_js').each(function(index, product) {
+      const $product = $(product);
+      product !== ev.target && $product.prop('checked', false);
+    });
+  } else {
+    $('.select_product_js').each(function(index, product) {
+      const $product = $(product);
+      if($product.prop('checked')) {
+        flag += 1;
+      }
+    });
+    if(flag < length) {
+      $('.all_select_products_js').prop('checked', false);
+    } else if(flag === length) {
+      $('.all_select_products_js').prop('checked', true);
     }
-  });
-  if(flag < length) {
-    $('.all_select_products_js').prop('checked', false);
-  } else if(flag === length) {
-    $('.all_select_products_js').prop('checked', true);
   }
 });
 
@@ -165,20 +185,33 @@ $("body").on('click', '.select-stickers', function () {
 
 
 $("body").on("click", ".done_select_product_js", function () {
-  $('.select_product_js').each(function(index, product) {
-    if($(product).prop('checked')) {
-        const id = $(product).closest('.add-related-event').data('id');
-        const name =  $(product).closest('.add-related-event').data('name');
-        $(".get-all-products-tab")
-        .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-                    href="#">${name}</a>
-                    <div class="buttons">
-                    <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                    </div>
-                    <input type="hidden" name="related_products[]" value="${id}" />
-                    </li>`);
-    }
-  })
+  if($('#productsModal').attr('data-url') !== 'url') {
+    $('#productsModal .select_product_js').each(function(index, product) {
+      if($(product).prop('checked')) {
+          const id = $(product).closest('.add-related-event').data('id');
+          const name =  $(product).closest('.add-related-event').data('name');
+          $(".get-all-products-tab")
+          .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                      href="#">${name}</a>
+                      <div class="buttons">
+                      <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                      </div>
+                      <input type="hidden" name="related_products[]" value="${id}" />
+                      </li>`);
+      }
+    })
+  } else {
+    $('#productsModal .select_product_js').each(function(index, product) {
+      if($(product).prop('checked')) {
+          const id = $(product).closest('.add-related-event').data('id');
+          const name =  $(product).closest('.add-related-event').data('name');
+          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`)
+            .find('.product_id_hidden_js').val($(product).closest('.option-elm-modal').data('id'));
+          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`).find('.url_feald').val('Edo')
+      }
+    })
+  }
+  
 });
 
 $("body").on("click", ".done_select_attributes_js", function () {
