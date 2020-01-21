@@ -59,7 +59,7 @@ $("body").on('click', '.select-products, .select_product_for_url_js', function (
             })
             let html = `<li data-id="${item.id}" class="option-elm-modal">
                           <div class="btn btn-primary add-related-event searchable" data-name="${item.name}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}"
-                            data-id="${item.id}"><input type="checkbox" class="select_product_js"/>
+                            data-id="${item.id}" data-product-url="${item.page_link}"><input type="checkbox" class="select_product_js"/>
                           </div>
                           <a href="#">${item.name}</a>
                         </li>`;
@@ -204,10 +204,10 @@ $("body").on("click", ".done_select_product_js", function () {
     $('#productsModal .select_product_js').each(function(index, product) {
       if($(product).prop('checked')) {
           const id = $(product).closest('.add-related-event').data('id');
-          const name =  $(product).closest('.add-related-event').data('name');
+          const product_url =  $(product).closest('.add-related-event').data('product-url');
           $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`)
-            .find('.product_id_hidden_js').val($(product).closest('.option-elm-modal').data('id'));
-          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`).find('.url_feald').val('Edo')
+            .find('.product_id_hidden_js').val(id);
+          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`).find('.url_feald').val(product_url);
       }
     })
   }
