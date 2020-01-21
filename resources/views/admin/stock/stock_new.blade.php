@@ -402,6 +402,10 @@
                                                                                             {!! media_button("other_images[$key][image]",$other_image['image']) !!}
                                                                                         </div>
                                                                                     </div>
+                                                                                    <input type="hidden"
+                                                                                           name="other_images[{{ $key }}][product_id]" value="null"
+                                                                                           class="form-control product_id">
+
 
                                                                                     <div class="form-group row mt-3">
                                                                                         <label for="staticEmail"
