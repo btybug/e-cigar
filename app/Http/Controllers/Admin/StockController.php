@@ -275,7 +275,7 @@ class StockController extends Controller
 
         ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $stock->id);
 //
-        return redirect()->back();
+        return redirect()->route('admin_stock_edit',$stock->id);
     }
 
     public function delete(Request $request)

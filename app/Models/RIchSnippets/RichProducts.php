@@ -57,7 +57,7 @@ class RichProducts
 
     public function image()
     {
-        return url($this->stock->image);
+        return ($this->stock->image) ?url($this->stock->image) : '';
     }
 
     public function brandName()
@@ -88,6 +88,7 @@ class RichProducts
         foreach ($_this->settings as $key => $value) {
             $localBusiness->$key($_this->parametazor($value));
         }
+
         return $localBusiness->toScript();
 
     }

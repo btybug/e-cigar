@@ -12,10 +12,10 @@
                 <button class="btn btn-primary save-prod">
                     Save
                 </button>
-                <!-- {!! Form::submit('Save',['class' => 'btn btn-primary']) !!} -->
                 @if($model && ! isset($offer))
                 <a target="_blank" class="btn btn-info" href="{{ route('product_single', ['type' =>"vape", 'slug' => $model->slug]) }}">View</a>
                 @endif
+                <a class="btn btn-secondary" href="{{ route('admin_stock') }}">Back</a>
             </div>
         </div>
         <div class="card-body stock-edit-page--body">
@@ -391,7 +391,7 @@
                                                                 <div
                                                                     class="form-group d-flex flex-wrap align-items-center other_images-group">
 
-                                                                    @if($model && count($model->other_images))
+                                                                    @if($model && $model->other_images && count($model->other_images))
                                                                         @foreach($model->other_images as $key => $other_image)
                                                                             <div
                                                                                 class="col-md-12 mb-2 d-flex flex-wrap other_images-item">

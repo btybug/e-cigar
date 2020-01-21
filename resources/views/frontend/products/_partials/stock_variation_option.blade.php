@@ -25,7 +25,8 @@
                         data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
                         style="width: 100%"
                         class="select-variation-option select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
-                    @if(!$vSettings->min_count_limit || $vSettings->min_count_limit == 0)
+                    @if($vSettings->type == 'package_product' && (!$vSettings->min_count_limit || $vSettings->min_count_limit == 0))
+
                         <option value="no" data-out="1" @if(!isset($selected) || !$selected) selected @endif>
                             No, Thank you
                         </option>
