@@ -306,4 +306,33 @@ class Stock extends Translatable
     {
         return $this->hasMany(StockBanners::class, 'stock_id');
     }
+
+    public function duplicate()
+    {
+        //copy attributes
+        $new = $this->replicate();
+
+        //save model before you recreate relations (so it has an id)
+        $new->push();
+
+        //reset relations on EXISTING MODEL (this way you can control which ones will be loaded
+        $this->relations = [];
+
+        //load relations on EXISTING MODEL
+        $this->load(
+            'specifications','categories','offers','related_products',
+            'special_offers','special_filters','offer_products','promotions',
+            'stickers','type_attrs','faqs','in_favorites'
+        );
+
+        //re-sync everything
+        foreach ($this->relations as $relationName => $values){
+            $new->{$relationName}()->sync($values);
+        }
+        foreach($this->translations as $translation){
+            $translation->stock_id=$new->id;
+            $translation->save();
+        };
+        return $new;
+    }
 }

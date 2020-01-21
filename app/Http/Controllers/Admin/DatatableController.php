@@ -237,7 +237,7 @@ class DatatableController extends Controller
             return '<i class="' . $brand->icon . '"></i>';
         })
             ->addColumn('actions', function ($brand) {
-                return "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_blog_brands_edit', $brand->id) . "'><i class='fa fa-edit'></i></a><a class='btn btn-danger' href='#'>x</a></div>";
+                return "<div class='datatable-td__action'>".(userCan('admin_blog_brands_edit')?"<a class='btn btn-warning' href='" . route('admin_blog_brands_edit', $brand->id) . "'><i class='fa fa-edit'></i></a>":null)."<a class='btn btn-danger' href='#'>x</a></div>";
             })->rawColumns(['actions', 'image', 'icon'])
             ->make(true);
 
@@ -356,9 +356,8 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">'
                     . ((userCan('admin_stock_edit')) ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $stock->id . "'><i class='fa fa-road'></i></a><a class='btn btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'>Edit</a>" : '')
-                    . ((userCan('admin_stock_delete')) ? '
-                    
-                    <a href="javascript:void(0)" data-href="' . route("admin_stock_delete") . '"
+                    . ((userCan('admin_stock_edit')) ? "<a class='btn  copy-stock' href='javascript:void(0)' style='background-color: #5cff29;color:black' data-id='" . $stock->id . "'><i class='fa fa-copy'></i></a>" : '')
+                    . ((userCan('admin_stock_delete')) ? '<a href="javascript:void(0)" data-href="' . route("admin_stock_delete") . '"
                 class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>' : null) . '</div>';
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
@@ -379,9 +378,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">'.
                     (userCan('admin_stock_edit_offer')?'<a class="btn btn-warning mr-1" href="' . route("admin_stock_edit_offer", $stock->id) . '">Edit</a>':null) .
-                    (userCan('admin_stock_delete')?'<a href="javascript:void(0)" data-href="' . route("admin_stock_delete") . '"
-                        class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>':null).'
-                </div>';
+                '</div>';
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }
@@ -524,8 +521,7 @@ class DatatableController extends Controller
                 return ($attr->type) ? "Wholesaler" : "User";
             })
             ->addColumn('actions', function ($post) {
-                return
-                    "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_orders_invoice_edit', $post->id) . "'>Edit</a></div>";
+                return "<div class='datatable-td__action'>".(userCan('admin_orders_invoice_edit')?"<a class='btn btn-warning' href='" . route('admin_orders_invoice_edit', $post->id) . "'>Edit</a>":null). "</div>";
             })->rawColumns(['actions', 'status'])
             ->make(true);
     }

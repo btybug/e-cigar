@@ -324,11 +324,18 @@ class StockController extends Controller
         $twitterSeo = $this->settings->getEditableData('seo_twitter_stocks')->toArray();
         $fbSeo = $this->settings->getEditableData('seo_fb_stocks')->toArray();
         $robot = $this->settings->getEditableData('seo_robot_stocks');
-//dd($model->offer_products);
 
         return $this->view('stock_new', compact(['model', 'variations', 'brands', 'offers', 'dataOffers', 'offer', 'checkedOffers',
             'filters', 'stockItems', 'special_filters',
             'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
+    }
+
+    public function postStockCopy(Request $request)
+    {
+        $id=$request->get('id');
+        $stock=Stock::findOrFail($id);
+        $stock->duplicate();
+        return response()->json(['error'=>false]);
     }
 
 

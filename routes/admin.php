@@ -527,6 +527,7 @@ Route::group(['prefix' => 'stock'], function () {
 
 
     Route::post('/save-stock', 'Admin\StockController@postStock')->name('admin_stock_save');
+    Route::post('/copy-stock', 'Admin\StockController@postStockCopy')->name('admin_stock_copy');
     Route::post('/link-all', 'Admin\StockController@linkAll')->name('admin_stock_link_all');
     Route::post('/variation-form', 'Admin\StockController@variationForm')->name('admin_stock_variation_form');
     Route::post('/add-variation', 'Admin\StockController@addVariation')->name('admin_stock_variation_add');

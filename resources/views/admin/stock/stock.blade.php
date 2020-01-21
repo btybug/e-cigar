@@ -136,7 +136,15 @@
                     }
                 });
             });
+            $("body").on('click','.copy-stock',function () {
+                let id=$(this).data('id');
+                AjaxCall("{!! route('admin_stock_copy') !!}",{id:id},function (res) {
+                    if (!res.error) {
+                        table.ajax.reload();
+                    }
+                });
 
+            });
 
 
 
