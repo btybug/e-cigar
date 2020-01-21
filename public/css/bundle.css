@@ -23140,8 +23140,9 @@ header .header-bottom .share-button svg {
 }
 .faq-single-content{
     border: 1px solid #d7d7d7;
-    height: 100%;
+    /*height: 100%;*/
     padding: 20px;
+    margin-bottom: 20px;
 }
 /*-------------------- FAQ Single page END------------------*/
 @media (max-width: 1854px) {
