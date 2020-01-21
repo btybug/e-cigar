@@ -205,9 +205,19 @@ $("body").on("click", ".done_select_product_js", function () {
       if($(product).prop('checked')) {
           const id = $(product).closest('.add-related-event').data('id');
           const product_url =  $(product).closest('.add-related-event').data('product-url');
-          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`)
-            .find('.product_id_hidden_js').val(id);
-          $(`.other_images-item[data-key="${$('#productsModal').attr('data-url-key')}"]`).find('.url_feald').val(product_url);
+          const key = $('#productsModal').attr('data-url-key');
+
+          $(`.other_images-item[data-key="${key}"]`).length !== 0 
+            ? $(`.other_images-item[data-key="${key}"]`)
+                .find('.product_id_hidden_js').val(id)
+            : $(`.banner-item[data-key="${key}"]`)
+                .find('.product_id_hidden_js').val(id);
+          
+          $(`.other_images-item[data-key="${key}"]`).length !== 0 
+          ? $(`.other_images-item[data-key="${key}"]`)
+              .find('.url_feald').val(product_url)
+          : $(`.banner-item[data-key="${key}"]`)
+              .find('.url_feald').val(product_url);
       }
     })
   }
