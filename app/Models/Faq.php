@@ -86,7 +86,7 @@ class Faq extends Translatable
         return $keywords;
     }
 
-    public $translatedAttributes = ['question', 'answer'];
+    public $translatedAttributes = ['question', 'answer','slug'];
 
     public function author()
     {

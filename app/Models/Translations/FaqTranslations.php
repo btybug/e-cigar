@@ -28,5 +28,5 @@ class FaqTranslations extends Model
 
     protected $table = 'faq_translations';
 
-    protected $fillable = ['answer', 'question'];
+    protected $fillable = ['answer', 'question','slug'];
 }

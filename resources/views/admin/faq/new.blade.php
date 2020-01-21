@@ -60,6 +60,13 @@
                                                                         {!! Form::textarea('translatable['.strtolower($language->code).'][answer]',get_translated($model,strtolower($language->code),'answer'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
                                                                     </div>
                                                                 </div>
+
+                                                                <div class="form-group row">
+                                                                    <label class="col-lg-2 col-form-label">Slug</label>
+                                                                    <div class="col-lg-10">
+                                                                        {!! Form::text('translatable['.strtolower($language->code).'][slug]',get_translated($model,strtolower($language->code),'slug'),['class'=>'form-control']) !!}
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         @endforeach
                                                     @endif
