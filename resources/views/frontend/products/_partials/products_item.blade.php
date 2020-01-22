@@ -80,6 +80,16 @@
                                             @else
                                                 @if($firstVariation->price_type == 'dynamic')
                                                     @php $price = $firstVariation->item->default_price; @endphp
+                                                @elseif($firstVariation->price_type == 'fixed')
+                                                    @php
+                                                        $discount = $firstVariation->discounts()->orderBy('qty','asc')->first();
+                                                        $price = ($discount)?$discount->price:0;
+                                                    @endphp
+                                                @elseif($firstVariation->price_type == 'range')
+                                                    @php
+                                                        $discount = $firstVariation->discounts()->orderBy('from','asc')->first();
+                                                        $price = ($discount)?$discount->price:0;
+                                                    @endphp
                                                 @else
                                                     @if($firstVariation->price)
                                                         @php  $price = $firstVariation->price; @endphp
