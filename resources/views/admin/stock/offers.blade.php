@@ -39,9 +39,11 @@
                                 <option value="Actions" data-column="5" data-name="actions">Actions</option>
                             </select>
                         </div>
+                        @ok('admin_stock_new_offer')
                         <div class="ml-1">
                             <a class="btn btn-primary" href="{!! route('admin_stock_new_offer') !!}">Add new</a>
                         </div>
+                        @endok
                     </div>
 {{--                    <div class="card-header panel-heading d-flex flex-wrap justify-content-between">--}}
 {{--                            <h2 class="m-0">Offers</h2>--}}

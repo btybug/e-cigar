@@ -251,7 +251,7 @@ class DatatableController extends Controller
             })->addColumn('options', function ($message) {
                 return '<input type="checkbox" data-id="' . $message->id . '">';
             })->addColumn('action', function ($message) {
-                return "<div class='datatable-td__action'>" . (userCan('admin_blog_contact_us_view') ? "<a class='btn btn-info' href='" . route('admin_blog_contact_us_view', $message->id) . "'><i class='fa fa-eye'></i></a>" : null) . "<a class='btn btn-danger' href='#'>x</a></div>";
+                return "<div class='datatable-td__action'>" . (userCan('admin_blog_contact_us_view') ? "<a class='btn btn-info' href='" . route('admin_blog_contact_us_view', $message->id) . "'><i class='fa fa-eye'></i></a>" : null) ."</div>";
             })->rawColumns(['action', 'options'])
             ->make(true);
     }
@@ -1208,30 +1208,31 @@ class DatatableController extends Controller
             return BBgetDateFormat($item->created_at);
         })->editColumn('actions', function ($item) {
             $status = "";
-            switch ($item->status) {
-                case ReviewStatusTypes::BLOCKED:
-                    $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
-                        "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
-                    break;
-                case ReviewStatusTypes::PUBLISHED:
-                    $status = "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
-                        "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
-                    break;
-                case ReviewStatusTypes::SUBMITTED:
-                    $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
-                        "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
-                        "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
-                    break;
-                case ReviewStatusTypes::ALLOW_EDIT:
-                    $status = "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>";
-                    break;
-                case ReviewStatusTypes::RESUBMITTED:
-                    $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
-                        "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
-                        "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
-                    break;
+            if(userCan('admin_users_allow_edit_review')){
+                switch ($item->status) {
+                    case ReviewStatusTypes::BLOCKED:
+                        $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
+                            "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
+                        break;
+                    case ReviewStatusTypes::PUBLISHED:
+                        $status = "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
+                            "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
+                        break;
+                    case ReviewStatusTypes::SUBMITTED:
+                        $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
+                            "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
+                            "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
+                        break;
+                    case ReviewStatusTypes::ALLOW_EDIT:
+                        $status = "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>";
+                        break;
+                    case ReviewStatusTypes::RESUBMITTED:
+                        $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
+                            "<a href='" . route('admin_users_disable_review', $item->id) . "' class='btn btn-danger'>Block</a>" .
+                            "<a href='" . route('admin_users_allow_edit_review', $item->id) . "' class='btn btn-warning'>Allow Edit</a>";
+                        break;
+                }
             }
-
             return $status;
         })->rawColumns(['actions', 'status'])
             ->make(true);

@@ -10,10 +10,12 @@
                     <a class="nav-link active" id="general-tab" href="{!! route('admin_orders') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Orders</a>
                 </li>
+                @ok('admin_orders_invoice')
                 <li class="nav-item ">
                     <a class="nav-link" id="invoice-tab" href="{!! route('admin_orders_invoice') !!}" role="tab"
                        aria-controls="shipping" aria-selected="false">Invoices</a>
                 </li>
+                @endok
             </ul>
         </div>
         <div class="tab-content">

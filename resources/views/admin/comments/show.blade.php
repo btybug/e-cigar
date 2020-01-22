@@ -6,8 +6,11 @@
     <div class="card panel panel-default">
         <div class="card-header panel-heading clearfix">
                 <h2 class="m-0 pull-left">Comments</h2>
-                <div class="col-md-6 "><a class="btn btn-primary pull-right" href="{!! route('admin_blog_comments_settings') !!}">Settings</a></div>
-
+            @ok('admin_blog_comments_settings')
+                <div class="col-md-6 ">
+                    <a class="btn btn-primary pull-right" href="{!! route('admin_blog_comments_settings') !!}">Settings</a>
+                </div>
+            @endok
         </div>
         <div class="card-body panel-body comment--body pt-0">
             <table id="posts-table" class="table table-style table-bordered" cellspacing="0" width="100%">

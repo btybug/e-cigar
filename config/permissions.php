@@ -431,6 +431,42 @@ return [
                 ]
             ],
         ],
+        'invoices' => [
+            'name' => 'All Invoices',
+            'routes' => ['admin_orders_invoice','datatable_all_orders_invoice'],
+            'description' => 'Able to see  Orders',
+            'children' =>
+                [
+                    'edit' => [
+                        'name' => 'Edit ',
+                        'routes' => [
+                            'admin_stock_new_offer',
+                            'admin_orders_invoice_edit_post',
+                            'admin_orders_invoice_add_note',
+                            'admin_orders_invoice_settings',
+                            'admin_orders_invoice_settings_save',
+                            'admin_orders_invoice_get_product',
+                            'admin_orders_invoice_collecting',
+                            'admin_orders_invoice_items_by_id',
+                            'admin_orders_invoice_get_user',
+                            'admin_orders_invoice_add_user',
+                            'shop_add_to_cart_admin_orders_invoice',
+                            'shop_update_cart_admin_orders_invoice',
+                            'shop_remove_from_cart_admin_orders_invoice',
+                            'admin_orders_invoice_apply_coupon',
+                            'admin_orders_invoice_apply_customer_notes',
+                            'admin_orders_invoice_new_cash',
+                            'admin_orders_invoice_new_cash',
+                        ],
+                        'description' => 'Able to Edit status',
+                    ],
+                    'create' => [
+                        'name' => 'Create invoice',
+                        'routes' => ['admin_orders_invoice_new'],
+                        'description' => 'Able ',
+                    ],
+                ],
+        ],
         'transactions' => [
             'name' => 'Transactions',
             'routes' => ['admin_store_transactions', 'admin_store_transactions_view','datatable_all_transactions'],
@@ -533,7 +569,7 @@ return [
 
     'front_pages' => [
         'posts' => [
-            'name' => 'Front Pages',
+            'name' => 'Front Posts',
             'routes' => ['admin_blog','datatable_all_posts'],
             'description' => 'Able to see blog page',
             'children' => [
@@ -544,7 +580,7 @@ return [
                 ],
                 'edit' => [
                     'name' => 'Edit Post',
-                    'routes' => ['admin_post_edit'],
+                    'routes' => ['admin_post_edit','admin_inventary_get_stocks'],
                     'description' => 'Edit any post',
                 ],
                 'delete' => [
@@ -557,7 +593,7 @@ return [
         ],
         'brands' => [
             'name' => 'Brands',
-            'routes' => ['admin_blog_brands'],
+            'routes' => ['admin_blog_brands','datatable_all_brands'],
             'description' => 'Able to see Brands page',
             'children' => [
                 'create' => [
@@ -581,7 +617,7 @@ return [
             'children' => [
                 'edit' => [
                     'name' => 'Edit Post Comment',
-                    'routes' => ['approve_comments', 'unapprove_comments', 'edit_comment', 'reply_comment', 'reply_comment_post', 'edit_comment_post'],
+                    'routes' => ['approve_comments','admin_blog_comments_settings','admin_blog_comments_settings_post','unapprove_comments', 'edit_comment', 'reply_comment', 'reply_comment_post', 'edit_comment_post'],
                     'description' => 'Approve or cancel pending Comment ',
                 ],
                 'delete' => [
@@ -632,7 +668,6 @@ return [
                         'admin_store_attributes_options_by_id_autocomplate',
                         'admin_store_attributes_by_id',
                         'admin_store_attributes_all_post',
-                        'admin_store_attributes_delete',
                         'admin_store_attributes_variations_table',
                     ],
                     'description' => 'Able to Create Attribute',
@@ -649,15 +684,21 @@ return [
                         'admin_store_attributes_options_by_id_autocomplate',
                         'admin_store_attributes_by_id',
                         'admin_store_attributes_all_post',
-                        'admin_store_attributes_delete',
                         'admin_store_attributes_variations_table',
+                        'admin_tools_stickers_all_post'
                     ],
                     'description' => 'View orders related to items',
+                ],'delete' => [
+                    'name' => 'View inventory item purchases',
+                    'routes' => [
+                        'admin_store_attributes_delete'
+                    ],
+                    'description' => 'delete',
                 ]
             ],
         ],
         'stickers' => [
-            'name' => 'Statuses',
+            'name' => 'Stickers',
             'routes' => ['admin_tools_stickers','admin_tools_stickers_manage_form', 'admin_tools_stickers_all_post'],
             'description' => 'Able to see/edit stickers',
             'children' => [
@@ -712,9 +753,14 @@ return [
         ],
         'reviews' => [
             'name' => 'Reviews',
-            'routes' => ['admin_reviews'],
+            'routes' => ['admin_reviews','datatable_reviews'],
             'description' => 'Able to see Tickets',
             'children' => [
+                'edit'=>[
+                    'name' => 'Edit reviews',
+                    'routes' => ['admin_users_approve_review', 'admin_users_disable_review','admin_users_allow_edit_review'],
+                    'description' => 'Able to edit Ticket',
+                ],
 
             ],
 
@@ -747,19 +793,6 @@ return [
             ],
 
         ],
-
-    ],
-    'tools' => [
-        'tools' => [
-            'name' => 'Tools',
-            'routes' => ['admin_tools'],
-            'description' => 'Able to see blog page',
-            'children' => [],
-
-        ],
-
-
-
 
     ],
     'settings' => [

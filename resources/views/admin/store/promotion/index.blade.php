@@ -21,7 +21,9 @@
                             <option value="Actions" data-column="6" data-name="actions">Actions</option>
                         </select>
                     </div>
+                    @ok('admin_stock_promotions_new')
                         <div><a class="btn btn-primary pull-right" href="{!! route('admin_stock_promotions_new') !!}">Add new</a></div>
+                    @endok
 
                 </div>
                 <div class="card-body panel-body pt-0">

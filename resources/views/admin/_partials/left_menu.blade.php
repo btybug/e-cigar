@@ -141,7 +141,7 @@
             </li>
             @endHasAccess
 
-            @hasAccess('blog')
+            @hasAccess('front_pages')
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-list-alt"></i>
@@ -265,7 +265,7 @@
 
 
 
-            @hasAccess('import')
+            @hasAccess('reports')
             <li><a href="{{route('admin_reports')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Reports</span></a></li>
             @endHasAccess

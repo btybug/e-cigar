@@ -12,10 +12,12 @@
                         <a class="nav-link active" id="info-tab" href="{!! route('admin_store_attributes') !!}" role="tab"
                            aria-controls="general" aria-selected="true" aria-expanded="true">Attributes</a>
                     </li>
+                    @ok('admin_tools_stickers')
                     <li class="nav-item">
                         <a class="nav-link " id="general-tab" href="{!! route('admin_tools_stickers') !!}" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Stickers</a>
                     </li>
+                    @endok
                 </ul>
             </div>
 

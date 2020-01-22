@@ -54,8 +54,6 @@ class AttributesController extends Controller
         $attr->stickers()->sync($request->get('stickers',[]));
         $attr->categories()->sync(json_decode($request->get('categories', [])));
 
-        dd($request->get('categories', []));
-
         return redirect()->route('admin_store_attributes');
     }
 
