@@ -53,6 +53,7 @@
     {{--*****packed in public/css/bundle.css***** --}}
     <link href="{{asset('public/css/invoice.css')}}" rel="stylesheet" />
     <link rel="stylesheet" href="{{asset('public/css/bundle.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('public/css/comments.css?v='.rand(111,999))}}">
     {{-- ********************************************* --}}
     {{-- <script src={{asset("public/js/jQuery3.3.1.js")}}></script> --}}
     {{-- <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script> --}}
@@ -132,7 +133,7 @@
 {{--<script src={{asset("public/js/register.js")}}></script>--}}
 {{-- *****packed in public/js/bundle/bundle.js***** --}}
 <script src={{asset("public/js/bundle/bundle.js?v=".rand(111,999))}}></script>
-
+{!! Html::script('public/js/custom/comments.js') !!}
 @stack('style')
 
 @yield('js')

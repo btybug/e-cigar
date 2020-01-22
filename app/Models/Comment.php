@@ -59,12 +59,13 @@ class Comment extends Model
 
     public function post()
     {
-        return $this->belongsTo(Posts::class, 'post_id', 'id');
+        return $this->belongsTo(Posts::class, 'section_id', 'id')->where('section','posts');
     }
 
     public function children()
     {
-        return $this->hasMany(self::class, 'parent_id', 'id')->where('status', true)->orderBy('created_at','desc');
+        return $this->hasMany(self::class, 'parent_id', 'id')
+            ->where('status', true)->orderBy('created_at','desc');
     }
 
     public function parent()

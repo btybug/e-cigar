@@ -591,6 +591,7 @@ function getUniqueCode($table, $column, $prefix = '')
     return $code;
 }
 
+
 function commentRender($comments, $i = 0, $parent = false)
 {
     $settingService = new Settings();

@@ -100,8 +100,8 @@ Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('po
 Route::post('/get-category-products-stickers', 'Frontend\StickersController@postCategoryProducts')->name('post_category_products_stickers');
 
 
-Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
-Route::post('/delete-comment', 'Frontend\BlogController@deleteComment')->name('comment_delete_post');
+Route::post('/add-comment', 'Frontend\CommentController@addComment')->name('comment_create_post');
+Route::post('/delete-comment', 'Frontend\CommentController@deleteComment')->name('comment_delete_post');
 
 
 Route::group(['prefix' => 'products'], function () {

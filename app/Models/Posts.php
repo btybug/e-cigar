@@ -106,12 +106,13 @@ class Posts extends Translatable
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'post_id', 'id');
+        return $this->hasMany(Comment::class, 'section_id', 'id')->where('section','posts');
     }
 
     public function approvedComments()
     {
-        return $this->comments()->whereNull('parent_id')->where('status', self::APPROVED)->orderBy('created_at', 'desc')->get();
+        return $this->comments()->whereNull('parent_id')->where('status', self::APPROVED)
+            ->orderBy('created_at', 'desc')->where('section','posts')->get();
     }
 
     public function categories()
