@@ -448,7 +448,7 @@
                                                      QR code
                                                 </div>
                                                 <div class="card-body">
-                                                    @if($model)
+                                                    @if($model && $model->barcode)
                                                         @include("admin.items._partials.qr",['code' => $model->barcode->code])
                                                     @endif
                                                 </div>
