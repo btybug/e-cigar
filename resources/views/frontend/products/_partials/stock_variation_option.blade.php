@@ -14,7 +14,8 @@
                 <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
                        value="{!! $variation->first()->id  !!}"
                        data-out="{{ out_of_stock($variation->first()) }}"
-                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}"
+                       data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
                     <span class="text-truncate">{!! $variation->first()->item->short_name !!}</span>
@@ -32,7 +33,8 @@
                         </option>
                     @endif
                     @foreach($variation as $item)
-                        <option data-img="{{ $item->image }}" value="{{ $item->id }}" @if(isset($selected) && $selected->id == $item->id) selected
+                        <option data-img="{{ $item->image }}" value="{{ $item->id }}"
+                                @if(isset($selected) && $selected->id == $item->id) selected
                                 @endif data-out="{{ out_of_stock($item) }}">
                             {{ $item->item->short_name }}
                             <b>{{ out_of_stock_msg($item) }}</b>
@@ -55,7 +57,8 @@
                 <input type="hidden" name="variations[{{ $vSettings->variation_id }}][]"
                        value="{!! $variation->first()->id  !!}"
                        data-out="{{ out_of_stock($variation->first()) }}"
-                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}" data-id="{{ $vSettings->id }}"
+                       id="single_v_select_{{ $vSettings->id.uniqid() }}" data-count="{{ $vSettings->count_limit }}"
+                       data-id="{{ $vSettings->id }}"
                        class="select-variation-option single-product-select">
                 <div class="form-control text-truncate product-single-wall--item">
                     <span class="text-truncate">{!! $variation->first()->item->short_name !!}</span>
@@ -72,7 +75,8 @@
                                    @if(isset($selected) && $selected->id == $item->id) checked
                                    @endif data-out="{{ out_of_stock($item) }}"
                                    class="custom-control-input custom-control-input-radio"
-                                   id="single_v_select_{{ $item->id.$x }}" name="variations[{{ $item->variation_id }}][]"
+                                   id="single_v_select_{{ $item->id.$x }}"
+                                   name="variations[{{ $item->variation_id }}][]"
                                    value="{{ $item->id }}">
                             <label class="custom-label"
                                    for="single_v_select_{{ $item->id.$x }}">
@@ -100,9 +104,11 @@
                     <label class="custom-label checkbox-select"
                            for="single_v_select_{{ $selected->id.$x }}">
                         <span class="font-sec-ex-light font-26 count">{{ $selected->item->short_name }}</span>
-                        <span class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
+                        <span
+                            class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
-  <path d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
+  <path
+      d="m.3,14c-0.2-0.2-0.3-0.5-0.3-0.7s0.1-0.5 0.3-0.7l1.4-1.4c0.4-0.4 1-0.4 1.4,0l.1,.1 5.5,5.9c0.2,0.2 0.5,0.2 0.7,0l13.4-13.9h0.1v-8.88178e-16c0.4-0.4 1-0.4 1.4,0l1.4,1.4c0.4,0.4 0.4,1 0,1.4l0,0-16,16.6c-0.2,0.2-0.4,0.3-0.7,0.3-0.3,0-0.5-0.1-0.7-0.3l-7.8-8.4-.2-.3z"></path>
 </svg>
                                         </span>
                     </label>
@@ -161,7 +167,7 @@
         @elseif($selected && $selected->price_type == 'fixed')
             <div
                 class="d-flex flex-column w-100 align-items-center">
-{{--                <span class="text-tert-clr">*Quality Discount</span>--}}
+                {{--                <span class="text-tert-clr">*Quality Discount</span>--}}
                 <span class="text-tert-clr">QTY</span>
                 <div class="select-wall product__select-wall w-100">
                     <select name="qty" id="" data-id="{{ $selected->id }}"
@@ -215,7 +221,8 @@
                     not found
                 @endif
             @elseif($selected->price_type == 'dynamic')
-                <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->item->default_price }}">
+                <div class="product__single-item-info-price lh-1"
+                     data-single-price="{{ $selected->item->default_price }}">
                     <span class="font-40">
                             {{ convert_price($selected->item->default_price,$currency, false) }}
                     </span>
