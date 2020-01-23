@@ -253,12 +253,12 @@ class CartService
     public function validateProduct($product, $vdata)
     {
         $error = false;
-        $extraVariations = $product->variations()->required()->groupby('stock_variations.variation_id')->get();
+        $extraVariations = $product->variations()->with('item')->required()->groupby('stock_variations.variation_id')->get();
 //        dd($vdata);
         if ($vdata && count($vdata) == count($extraVariations)) {
             foreach ($vdata as $k => $item) {
                 $data = [];
-                $group = $product->variations()->where('variation_id', $item['group_id'])->first();
+                $group = $product->variations()->with('item')->where('variation_id', $item['group_id'])->first();
                 if ($group) {
                     $data['group'] = $group;
                     $data['options'] = [];
@@ -272,7 +272,7 @@ class CartService
                                 $data['price'] = $group->price;
                                 $this->price += $group->price;
                                 foreach ($item['products'] as $p) {
-                                    $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                    $option = $product->variations()->with('item')->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                     if ($option) {
                                         $product_limit += $p['qty'];
                                         $data['options'][] = [
@@ -286,7 +286,7 @@ class CartService
                             } else {
                                 $itemPrice = 0;
                                 foreach ($item['products'] as $p) {
-                                    $option = $product->variations()->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                    $option = $product->variations()->with('item')->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                     if ($option) {
                                         $p['qty'] = ($p['qty'])??1;
                                         if($option->price_type == 'fixed' || $option->price_type == 'range'){
@@ -365,7 +365,7 @@ class CartService
                     $variations = [];
                     if(isset($vdata['variations']) && count($vdata['variations'])){
                         foreach ($vdata['variations'] as $variation){
-                            $group = $offer->variations()->where('variation_id', $variation['group_id'])->first();
+                            $group = $offer->variations()->with('item')->where('variation_id', $variation['group_id'])->first();
                             if ($group) {
                                 $variations['group'] = $group;
                                 $variations['key'] = uniqid();
@@ -377,7 +377,7 @@ class CartService
                                         $data['price'] += $group->price;
                                         $this->price += $group->price;
                                         foreach ($variation['products'] as $p) {
-                                            $option = $offer->variations()->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
+                                            $option = $offer->variations()->with('item')->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
                                             if ($option) {
                                                 $product_limit += $p['qty'];
                                                 $variations['options'][] = [
@@ -391,7 +391,7 @@ class CartService
                                     } else {
                                         $itemPrice = 0;
                                         foreach ($variation['products'] as $p) {
-                                            $option = $offer->variations()->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
+                                            $option = $offer->variations()->with('item')->where('variation_id', $variation['group_id'])->where('id', $p['id'])->first();
                                             if ($option) {
                                                 $p['qty'] = ($p['qty'])??1;
                                                 if($option->price_type == 'fixed' || $option->price_type == 'range'){

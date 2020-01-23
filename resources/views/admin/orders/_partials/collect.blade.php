@@ -36,7 +36,10 @@
                         {!! $o['title'] !!}
                     </p>
                     <p class="mb-0">
-                        {{ $o['variation']['item']['short_name'] }}
+                        @if(isset($o['variation']['item']))
+                            {{ $o['variation']['item']['short_name'] }}
+                        @endif
+
                         @if($o['discount'] && $variation['discount_type'] == 'fixed')
                             ({{ "Pack of ".$o['discount']['qty'] }})
                         @endif

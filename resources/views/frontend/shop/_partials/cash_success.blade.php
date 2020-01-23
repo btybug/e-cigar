@@ -2,78 +2,6 @@
 @section('content')
     <main class="main-content">
         <div class="shopping-cart_wrapper shopping__cart-wrapper">
-{{--            <div class="container main-max-width">--}}
-{{--                <div class="d-flex shopping-cart-head">--}}
-{{--                    <ul class="nav nav-pills">--}}
-{{--                        <li class="nav-item col-md-3">--}}
-{{--                            <a class="item visited d-flex align-items-center justify-content-between"--}}
-{{--                               ref="javascript:void(0);">--}}
-{{--                                <span class="font-sec-reg text-main-clr num">1</span>--}}
-{{--                                <span--}}
-{{--                                    class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('shopping_cart') !!}</span>--}}
-{{--                                <span class="icon">--}}
-{{--                                <svg--}}
-{{--                                    xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                    xmlns:xlink="http://www.w3.org/1999/xlink"--}}
-{{--                                    width="24px" height="19px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(81, 229, 109)"--}}
-{{--      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>--}}
-{{--</svg>--}}
-{{--                                </span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item col-md-3">--}}
-{{--                            <a class="item visited d-flex align-items-center justify-content-between"--}}
-{{--                               href="javascript:void(0);">--}}
-{{--                                <span class="font-sec-reg text-main-clr num">2</span>--}}
-{{--                                <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('checkout') !!}</span>--}}
-{{--                                <span class="icon">--}}
-{{--                                    <svg--}}
-{{--                                        xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                        xmlns:xlink="http://www.w3.org/1999/xlink"--}}
-{{--                                        width="24px" height="19px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(81, 229, 109)"--}}
-{{--      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>--}}
-{{--</svg>--}}
-{{--                                </span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item col-md-3">--}}
-{{--                            <a class="item visited d-flex align-items-center justify-content-between"--}}
-{{--                               href="javascript:void(0);">--}}
-{{--                                <span class="font-sec-reg text-main-clr num">3</span>--}}
-{{--                                <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('payment') !!}</span>--}}
-{{--                                <span class="icon">--}}
-{{--                                    <svg--}}
-{{--                                        xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                        xmlns:xlink="http://www.w3.org/1999/xlink"--}}
-{{--                                        width="24px" height="19px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(81, 229, 109)"--}}
-{{--      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>--}}
-{{--</svg>--}}
-{{--                                </span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                        <li class="nav-item col-md-3">--}}
-{{--                            <a class="item active d-flex align-items-center justify-content-between"--}}
-{{--                               href="javascript:void(0);">--}}
-{{--                                <span class="font-sec-reg text-main-clr num">4</span>--}}
-{{--                                <span--}}
-{{--                                    class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('confirmation') !!}</span>--}}
-{{--                                <span class="icon">--}}
-{{--                                    <svg--}}
-{{--                                        xmlns="http://www.w3.org/2000/svg"--}}
-{{--                                        xmlns:xlink="http://www.w3.org/1999/xlink"--}}
-{{--                                        width="24px" height="19px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(81, 229, 109)"--}}
-{{--      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>--}}
-{{--</svg>--}}
-{{--                                </span>--}}
-{{--                            </a>--}}
-{{--                        </li>--}}
-{{--                    </ul>--}}
-{{--                </div>--}}
-{{--            </div>--}}
             <div class="container main-max-width shopping__cart-mw">
                 <div class="cart-area">
                     <div id="singleProductPageCnt" class="shopping-cart-content">
@@ -188,7 +116,10 @@
 
                                                                                 <div
                                                                                     class="col-sm-9 font-15 font-main-bold">
-                                                                                    {{ $op['title'] ." - ". $op['variation']['item']['short_name'] }}
+                                                                                    {{ $op['title'] }}
+                                                                                    @if(isset($op['variation']['item']))
+                                                                                        {{ " - " .$op['variation']['item']['short_name'] }}
+                                                                                    @endif
                                                                                 </div>
                                                                                 <div
                                                                                     class="col-sm-2 font-main-bold pl-prod-qty-opt                                                                                                                                                                                    ">
@@ -216,7 +147,10 @@
                                                                     </div>
                                                                     <div class="title-offers">
                                                                         <p class="font-18 lh-1 mb-0">
-                                                                            {{ $ext['title'] ." - ". $ext['variation']['item']['short_name'] }}
+                                                                            {{ $ext['title'] }}
+                                                                            @if(isset($ext['variation']['item']))
+                                                                                {{ " - " .$ext['variation']['item']['short_name'] }}
+                                                                            @endif
                                                                         </p>
                                                                     </div>
                                                                 </div>
