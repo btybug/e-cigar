@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\App;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\Warehouse;
+use Illuminate\Http\Request;
 
 class AppController extends Controller
 {
@@ -15,8 +17,12 @@ class AppController extends Controller
         return $this->view('products.index');
     }
 
-    public function orders()
+    public function orders(Request $request,$id=null)
     {
-        return $this->view('orders.index');
+        $warehouse=Warehouse::all();
+        $q=($id)??$warehouse[0]->id;
+
+        $warehouse=$warehouse->pluck('name','id');
+        return $this->view('orders.index',compact('warehouse','q'));
     }
 }

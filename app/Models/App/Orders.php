@@ -33,11 +33,27 @@ class Orders extends Model
 
     public function status()
     {
+        $status='';
         switch ($this->status){
-            case 0:'in progress';break;
-            case 1:'processing';break;
-            case 2:'done';break;
+            case 0:$status='in progress';break;
+            case 1:$status='processing';break;
+            case 2:$status='done';break;
+            case 3:$status='canceled';break;
+            default:$status='unknown';break;
         }
+        return $status;
+    }
+    public function statusClass()
+    {
+        $class='';
+        switch ($this->status){
+            case 0:$class='primary';break;
+            case 1:$class='info';break;
+            case 2:$class='success';break;
+            case 3:$class='warning';break;
+            default:$class='danger';break;
+        }
+        return $class;
     }
 
     public function staff()

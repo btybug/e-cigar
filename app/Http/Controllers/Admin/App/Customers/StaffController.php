@@ -14,10 +14,10 @@ use Illuminate\Http\Request;
 class StaffController extends Controller
 {
 
-    public function getStaff(Request $request)
+    public function getStaff(Request $request,$id=null)
     {
         $warehouse=Warehouse::all();
-        $q=$request->get('q',$warehouse[0]->id);
+        $q=($id)??$warehouse[0]->id;
 
         $users=User::join('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('app_staff','app_staff.users_id','users.id')

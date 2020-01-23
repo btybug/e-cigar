@@ -1249,4 +1249,18 @@ class DatatableController extends Controller
             })->rawColumns(['actions'])
             ->make(true);
     }
+
+    public function getAllAppOrders(Request $request)
+    {
+        return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id')))
+            ->editColumn('status', function ($order) {
+                return '<span class="badge badge-'.$order->statusClass().'">' . $order->status() . '</span>';
+            })
+            ->addColumn('actions', function ($attr) use ($request) {
+                $html = "<a class='btn btn-warning' href='" . route('app_staff_add_permission', [$attr->id, $request->get('warehouse_id')]) . "'>Permission</a>";
+                $html .= "<a class='btn btn-warning' href='" . route('app_staff_badge', [$attr->id, $request->get('warehouse_id')]) . "'>Badge</a>";
+                return $html;
+            })->rawColumns(['actions','status'])
+            ->make(true);
+    }
 }

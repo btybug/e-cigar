@@ -2,27 +2,18 @@
 @section('content')
     <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
         <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs">
+            @foreach($warehouse as $key=>$warehous)
             <li class="nav-item">
-                <a class="nav-link active" href="#">Staff</a>
+                <a class="nav-link @if($q ==$key)active @endif"   href="{!! route('app_staff',$key) !!}">{!! $warehous !!}</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Products</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Orders</a>
-            </li>
+            @endforeach
+
         </ul>
     </div>
     <div class="card">
         <div class="px-3 mt-3">
             <div class="row">
                 <div class="col-lg-6">
-                    <div class="form-group row">
-                        <label class="col-sm-3 col-form-label">Select warehouse</label>
-                        <div class="col-sm-4">
-                            {!! Form::select('warehouse',$warehouse,$q,['class'=>'form-control','id'=>'warehouse']) !!}
-                        </div>
-                    </div>
                 </div>
                 <div class="col-lg-6">
 
@@ -88,12 +79,6 @@
                     {extend: 'excel', className: 'btn btn-info'},
                     {extend: 'pdf', className: 'btn btn-success'},
                     {extend: 'print', className: 'btn btn-warning'}
-                    {{--,{--}}
-                    {{--    text: 'Create',--}}
-                    {{--    action: function (e, dt, node, config) {--}}
-                    {{--        window.location.href = '{!! route('app_staff_manage') !!}'--}}
-                    {{--    }--}}
-                    {{--}--}}
                 ],
                 columns: [
                     {data: 'id', name: 'id'},

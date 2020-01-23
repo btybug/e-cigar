@@ -15,7 +15,7 @@ Route::group(['prefix' => 'discounts'], function () {
     Route::post('/offers/edit/{id}', 'Customers\DiscountController@postOffersEdit')->name('app_customer_offers_edit_post');
 });
 Route::group(['prefix' => 'staff'], function () {
-    Route::get('/', 'Customers\StaffController@getStaff')->name('app_staff');
+    Route::get('/{id?}', 'Customers\StaffController@getStaff')->name('app_staff');
     Route::post('/manage-staff', 'Customers\StaffController@postCreateStaffMember')->name('app_staff_add');
     Route::get('/view-staff-member/{id}', 'Customers\StaffController@getViewStaffMember')->name('app_staff_view');
     Route::get('/roles', 'Customers\StaffController@getRoles')->name('app_staff_roles');
@@ -26,6 +26,6 @@ Route::group(['prefix' => 'staff'], function () {
     Route::post('/add-permission/{id}/{w_id}', 'Customers\StaffController@postStaffPermission');
     Route::get('/permissions', 'Customers\StaffController@getAppPermissions')->name('app_permissions');
 
-    Route::get('/badge', 'Customers\StaffController@getAppBadge')->name('app_staff_badge');
+    Route::get('/badge/{id}/{warehouse_id}', 'Customers\StaffController@getAppBadge')->name('app_staff_badge');
 
 });
