@@ -1,11 +1,20 @@
 @extends('layouts.admin',['activePage'=>'staff'])
 @section('content')
+    <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
+        <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Staff</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Products</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Orders</a>
+            </li>
+        </ul>
+    </div>
     <div class="card">
-        <div class="card-header card-header-primary">
-            <h4 class="card-title ">Staff</h4>
-            <p class="card-category"> Here is a subtitle for this table</p>
-        </div>
-        <div class="px-3 my-3">
+        <div class="px-3 mt-3">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group row">
