@@ -35,6 +35,11 @@ class StaffController extends Controller
     {
         $warehouse=Warehouse::findOrFail($request->get('warehouse_id'));
         $warehouse->staff()->attach($request->get('user_id'));
+        $pass=rand(10000000,99999999);
+        while (User::where('app_pass',$pass)->exists()){
+            $pass=rand(10000000,99999999);
+        }
+        User::where('id',$request->get('user_id'))->update(['app_pass'=>$pass]);
         return response()->json(['error'=>false]);
     }
 
