@@ -139,9 +139,10 @@
                 <div class="clear"></div>
             </section>
             <section>
-                <div class="sectionTitle">
+                <div class="sectionTitle" data-barcode="{!! $model->app_pass !!}">
 {{--                    {!! $barcode !!}--}}
                 </div>
+                <div id="svg_barcode"></div>
                 <div class="clear"></div>
             </section>
 
@@ -152,4 +153,26 @@
 @section('css')
     <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/public/css/cv.css">
+@stop
+@section('js')
+    <script>
+        $(document).ready(function() {
+            $('#svg_barcode').append(`<svg id="svg_${$('.sectionTitle[data-barcode]').data('barcode')}"></svg>`)
+            JsBarcode(`#svg_${$('.sectionTitle[data-barcode]').data('barcode')}`, $('.sectionTitle[data-barcode]').data('barcode'), {
+                // format,
+                // font: text_font,
+                // fontSize: font_size,
+                // textMargin: text_margin,
+                // height,
+                // width,
+                // margin,
+                // background: back_color,
+                // lineColor: line_color,
+                // textAlign: text_align,
+                // fontOptions,
+                // displayValue,
+            })
+                .render();
+        });
+    </script>
 @stop
