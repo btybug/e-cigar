@@ -102,7 +102,7 @@ class OrdersController extends Controller
     {
         $shop = Warehouse::find($request->get('shop_id'));
         if ($shop && $shop->staff()->where('app_pass', $request->get('barcode'))->exists()) {
-            $member = $shop->staff()->where('app_pass', $request->get('barcode'))->with('role')->get();
+            $member = $shop->staff()->where('app_pass', $request->get('barcode'))->with('role')->first();
             return response()->json(['success'=>true,'member'=>$member]);
         }
         return response()->json(['success'=>false,'message'=>'invalid member']);
