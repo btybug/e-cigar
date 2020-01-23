@@ -328,12 +328,22 @@ class ProductsController extends Controller
 
             if($discount){
                 $price = $discount->price * $qty;
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    $price = number_format($price);
+                } else {
+                    $price = money_format('%(#10n',$price);
+                }
                 return response()->json(['error' => false,'price' => $price]);
             }
         }elseif($discount_id != null){
             $discount = StockVariationDiscount::findOrFail($discount_id);
             if($discount){
-                return response()->json(['error' => false,'price' => $discount->price]);
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    $price = number_format($discount->price);
+                } else {
+                    $price = money_format('%(#10n',$discount->price);
+                }
+                return response()->json(['error' => false,'price' => $price]);
             }
         }
 
