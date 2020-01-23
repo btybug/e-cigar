@@ -52,10 +52,6 @@
     <script>
         $(function () {
 
-            $('#warehouse').on('change', function () {
-                window.location.href = "{!! route('app_staff') !!}" + '?q=' + $(this).val();
-            })
-
 
             var table = $('#items-table').DataTable({
                 ajax: {
@@ -91,7 +87,7 @@
                 ]
             });
             $('.staff_add').on('click', function () {
-                const warehouse_id = $('#warehouse').val();
+                const warehouse_id = "{!! $q !!}";
                 const user_id = $('#staff_select').val();
                 $.ajax({
                     type: "post",
