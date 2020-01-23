@@ -100,9 +100,9 @@ class OrdersController extends Controller
 
     public function getAuthorize(Request $request)
     {
-        $shop = Shops::find($request->get('shop_id'));
-        if ($shop && $shop->staff()->where('pass', $request->get('barcode'))->exists()) {
-            $member = $shop->staff()->where('pass', $request->get('barcode'))->with('role')->get();
+        $shop = Warehouse::find($request->get('shop_id'));
+        if ($shop && $shop->staff()->where('app_pass', $request->get('barcode'))->exists()) {
+            $member = $shop->staff()->where('app_pass', $request->get('barcode'))->with('role')->get();
             return response()->json(['success'=>true,'member'=>$member]);
         }
         return response()->json(['success'=>false,'message'=>'invalid member']);

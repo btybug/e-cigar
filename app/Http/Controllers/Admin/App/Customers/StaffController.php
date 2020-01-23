@@ -40,11 +40,8 @@ class StaffController extends Controller
 
     public function getAppBadge($id,$warehouse_id)
     {
-        $model=Staff::findOrfail($id);
-        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        $barcode= '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($model->pass, $generator::TYPE_CODE_128)) . '">';
-        $photo= '<img src="data:image/jpg;base64,' . base64_encode(\Storage::disk('local')->get('/public/'.$model->photo)). '" alt="user">';
-        return view('staff.view', compact('model','barcode','photo'));
+        $model=User::findOrfail($id);
+        return view('staff.view', compact('model'));
     }
 
     public function getRoles()
