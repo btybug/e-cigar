@@ -33,6 +33,8 @@
                     <th>Note</th>
                     <th>Payment method</th>
                     <th>Status</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
@@ -75,6 +77,8 @@
                     {data: 'note', name: 'note'},
                     {data: 'payment_method', name: 'payment_method'},
                     {data: 'status', name: 'status'},
+                    {data: 'created_at', name: 'created_at'},
+                    {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
                 ]
             });

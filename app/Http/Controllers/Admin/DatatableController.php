@@ -1252,7 +1252,7 @@ class DatatableController extends Controller
 
     public function getAllAppOrders(Request $request)
     {
-        return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id')))
+        return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id'))->orderBy('updated_at','DESC'))
             ->editColumn('status', function ($order) {
                 return '<span class="badge badge-'.$order->statusClass().'">' . $order->status() . '</span>';
             })
