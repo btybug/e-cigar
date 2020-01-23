@@ -1236,7 +1236,12 @@ function convert_price($price, $currency, $number_format = true, $withoutSymbol 
                 $price = round($price, -3);
             }
             if ($number_format) {
-                $price = number_format($price);
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    $price = number_format($price);
+                } else {
+                    $price = money_format('%(#10n',$price);
+                }
+
             }
             return ($withoutSymbol) ? $price : $default->symbol . "" . $price;
         } else {
@@ -1247,7 +1252,11 @@ function convert_price($price, $currency, $number_format = true, $withoutSymbol 
                     $price = round($price, -3);
                 }
                 if ($number_format) {
-                    $price = number_format($price);
+                    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                        $price = number_format($price);
+                    } else {
+                        $price = money_format('%(#10n',$price);
+                    }
                 }
                 return ($withoutSymbol) ? $price : $changed->symbol . "" . $price;
             }
