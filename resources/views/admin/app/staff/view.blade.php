@@ -1,5 +1,6 @@
-@extends('layouts.account',['activePage'=>'staff'])
+@extends('layouts.admin',['activePage'=>'staff'])
 @section('content')
+
     <div id="cv" class="instaFade">
         <div class="mainDetails">
             <div id="headshot" class="quickFade">
@@ -7,8 +8,8 @@
             </div>
 
             <div id="name">
-                <h1 class="quickFade delayTwo">{!! $model->name.' '.$model->last_name !!}</h1>
-                <h2 class="quickFade delayThree">{!! $model->role->name !!}</h2>
+{{--                <h1 class="quickFade delayTwo">{!! $model->name.' '.$model->last_name !!}</h1>--}}
+{{--                <h2 class="quickFade delayThree">{!! $model->role->name !!}</h2>--}}
             </div>
 
             <div id="contactDetails" class="quickFade delayFour">
@@ -44,7 +45,7 @@
                 <div class="sectionContent">
                     <article>
                         <h2>{!! $model->pass_type !!}</h2>
-                        <p>{!! $model->pass !!}</p>
+                        <p>{!! $model->app_pass !!}</p>
                     </article>
                 </div>
                 <div class="clear"></div>
@@ -58,7 +59,7 @@
 
                 <div class="sectionContent">
                     <article>
-                        <p>{!! \App\Models\Staff::$statuses[$model->status] !!}</p>
+{{--                        <p>{!! \App\Models\Staff::$statuses[$model->status] !!}</p>--}}
                     </article>
                 </div>
                 <div class="clear"></div>
@@ -96,7 +97,7 @@
                 <div class="sectionContent">
 
                     <article>
-                        <p>{!! $model->shop->name !!}</p>
+{{--                        <p>{!! $model->shop->name !!}</p>--}}
                     </article>
                 </div>
                 <div class="clear"></div>
@@ -139,7 +140,7 @@
             </section>
             <section>
                 <div class="sectionTitle">
-                    {!! $barcode !!}
+{{--                    {!! $barcode !!}--}}
                 </div>
                 <div class="clear"></div>
             </section>

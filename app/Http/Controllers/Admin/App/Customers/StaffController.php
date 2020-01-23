@@ -41,7 +41,7 @@ class StaffController extends Controller
     public function getAppBadge($id,$warehouse_id)
     {
         $model=User::findOrfail($id);
-        return view('staff.view', compact('model'));
+        return view('admin.app.staff.view', compact('model'));
     }
 
     public function getRoles()
