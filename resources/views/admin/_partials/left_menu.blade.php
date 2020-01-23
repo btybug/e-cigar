@@ -270,10 +270,10 @@
                     <span>Reports</span></a></li>
             @endHasAccess
 
-            @ok('admin_landings')
+            @hasAccess('landings')
             <li><a href="{{route('admin_landings')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Landings</span></a></li>
-            @endok
+            @endHasAccess
             {{--            @hasAccess('admin_ebay')--}}
             {{--            <li class="treeview">--}}
             {{--                <a href="#">--}}
@@ -307,8 +307,11 @@
                     @ok('app_staff')
                     <li><a href="{{route('app_staff')}}"><i class="far fa-circle fa-xs"></i>Staff</a></li>
                     @endok
-                    @ok('app_permissions')
-                    <li><a href="{{route('app_permissions')}}"><i class="far fa-circle fa-xs"></i>Permissions</a></li>
+                    @ok('app_products')
+                    <li><a href="{{route('admin_app_products')}}"><i class="far fa-circle fa-xs"></i>Products</a></li>
+                    @endok
+                    @ok('admin_app_orders')
+                    <li><a href="{{route('admin_app_orders')}}"><i class="far fa-circle fa-xs"></i>Orders</a></li>
                     @endok
                 </ul>
             </li>

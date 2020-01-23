@@ -7,6 +7,7 @@
  */
 
 use App\Services\EAN13render;
+
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
@@ -759,6 +760,15 @@ Route::group(['prefix' => 'ebay'], function () {
     Route::get('/auth-accepted', 'Admin\EbayController@getUserTokenBack');
     Route::get('/get-account', 'Admin\EbayController@getAccount')->name('admin_ebay_get_account');
 
+});
+
+Route::group(['prefix' => 'app'], function () {
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/', 'Admin\App\AppController@products')->name('admin_app_products');
+    });
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', 'Admin\App\AppController@orders')->name('admin_app_orders');
+    });
 });
 
 
