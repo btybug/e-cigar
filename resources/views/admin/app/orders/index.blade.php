@@ -30,6 +30,7 @@
                     <th>User</th>
                     <th>Staff</th>
                     <th>Discount</th>
+                    <th>Amount</th>
                     <th>Note</th>
                     <th>Payment method</th>
                     <th>Status</th>
@@ -74,6 +75,7 @@
                     {data: 'user_id', name: 'user_id'},
                     {data: 'staff_id', name: 'staff_id'},
                     {data: 'discount', name: 'discount'},
+                    {data: 'amount', name: 'amount'},
                     {data: 'note', name: 'note'},
                     {data: 'payment_method', name: 'payment_method'},
                     {data: 'status', name: 'status'},

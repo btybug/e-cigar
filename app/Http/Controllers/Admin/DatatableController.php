@@ -1255,6 +1255,13 @@ class DatatableController extends Controller
         return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id'))->orderBy('updated_at','DESC'))
             ->editColumn('status', function ($order) {
                 return '<span class="badge badge-'.$order->statusClass().'">' . $order->status() . '</span>';
+            })->addColumn('amount', function ($order) {
+                if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+                    return 'This is a server using Windows!';
+                } else {
+                    return money_format('%(#10n',$order->items()->sum('price')) . '$';
+                }
+
             })
             ->addColumn('actions', function ($attr) use ($request) {
                 $html = "<a class='btn btn-info' href='#'>View</a>";
