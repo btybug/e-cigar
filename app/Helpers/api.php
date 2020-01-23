@@ -252,7 +252,7 @@ function hasAccess($permission)
 {
     if (!Auth::check()) return false;
     $role = Auth::user()->role;
-    if ($role->slug == 'superadmin') return true;
+    if ($role->slug == 'superadmin' || $role->slug=='admin') return true;
     return $role->hasAccess($permission);
 }
 
