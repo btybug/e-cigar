@@ -110,7 +110,7 @@ class OrdersController extends Controller
 
     public function FinishOrder(Request $request,OrderService $service)
     {
-        $shop = Shops::find($request->get('shop_id'));
+        $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->findOrFail($request->get('order_id'));
         $order->staff_id=$request->get('staff_id');
         $order->status=Orders::DONE;
