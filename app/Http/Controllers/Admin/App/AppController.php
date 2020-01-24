@@ -39,6 +39,6 @@ class AppController extends Controller
         $brands=Brands::all();
         $categories=Category::where('type','item')->get();
 
-        return \Response::json(['error' => false, 'data' => $items,'brands'=>$brands,'categories'=>$categories]);
+        return \Response::json(['error' => false, 'items' => $items,'brands'=>$brands,'categories'=>$categories]);
     }
 }
