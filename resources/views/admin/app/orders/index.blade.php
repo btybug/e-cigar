@@ -51,18 +51,10 @@
                     url: "{!! route('datatable_all_app_orders') !!}",
                     data: {warehouse_id: "{!! $q !!}"}
                 },
-                "processing": true,
-                "serverSide": true,
-                "bPaginate": true,
                 // "ordering": false,
                 dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
-                displayLength: 10,
                 lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
-                'columnDefs': [{
-                    'targets': 0, /* column index */
-                    'orderable': false, /* true or false */
 
-                }],
                 buttons: [
                     {extend: 'csv', className: 'btn btn-primary'},
                     {extend: 'excel', className: 'btn btn-info'},
@@ -82,7 +74,8 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
-                ]
+                ],
+                "order": [[ 8, 'asc' ],[9,'desc']]
             });
 
         })
