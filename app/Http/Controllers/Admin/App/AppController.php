@@ -38,7 +38,6 @@ class AppController extends Controller
         $items=Items::with(['brand','categories','translations'])->whereNotIn('id',$selecteds)->get();
         $brands=Brands::all();
         $categories=Category::where('type','item')->get();
-
         return \Response::json(['error' => false, 'data' => $items,'brands'=>$brands,'categories'=>$categories]);
     }
 }
