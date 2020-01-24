@@ -85,7 +85,7 @@ class Warehouse extends Translatable
 
     public function appitems()
     {
-        return $this->belongsToMany(Items::class,'warehouses_app_items','warehouses_id','item_id');
+        return $this->belongsToMany(Items::class,'warehouses_app_items','warehouse_id','item_id');
     }
 
 }
