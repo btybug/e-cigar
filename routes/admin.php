@@ -765,10 +765,12 @@ Route::group(['prefix' => 'ebay'], function () {
 Route::group(['prefix' => 'app'], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_app_products');
+
     });
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@orders')->name('admin_app_orders');
     });
+    Route::post('/warehouse-not-selected-items/{id}', 'Admin\App\AppController@notSelectedProducts')->name('admin_app_not_selected_products');
 });
 
 
