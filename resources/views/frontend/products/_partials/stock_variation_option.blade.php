@@ -1,4 +1,4 @@
-<div class="col-md-8 pl-0 ">
+<div class="col-xl-7 col-lg-6 col-md-7 pl-0 pr-md-3 pr-0">
     @if($vSettings->display_as == 'menu')
         <div class="select-wall product__select-wall">
             @if($vSettings->type == 'package_product')
@@ -145,10 +145,10 @@
     @endif
 
 </div>
-<div class="col-md-2 d-flex justify-content-center">
+<div class="col-md-2 col-4 d-flex justify-content-md-center pl-0">
     @if($vSettings->price_per == 'item')
         @if($selected && $selected->price_type == 'range')
-            <div class="d-flex flex-column w-100 align-items-center">
+            <div class="d-flex flex-column w-100 align-items-md-center">
                 <span class="text-tert-clr">QTY</span>
                 <div class="product__single-item-inp-num">
                     <div class="quantity">
@@ -166,10 +166,10 @@
             </div>
         @elseif($selected && $selected->price_type == 'fixed')
             <div
-                class="d-flex flex-column w-100 align-items-center">
+                class="d-flex flex-column w-100 align-items-md-center">
                 {{--                <span class="text-tert-clr">*Quality Discount</span>--}}
                 <span class="text-tert-clr">QTY</span>
-                <div class="select-wall product__select-wall w-100">
+                <div class="select-wall product__select-wall product-single-qty-width">
                     <select name="qty" id="" data-id="{{ $selected->id }}"
                             class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible product-qty product-qty_per_price select-qty"
                             style="width: 100%">
@@ -184,7 +184,7 @@
         @endif
     @endif
 </div>
-<div class="col-md-2 pr-0 d-flex justify-content-end">
+<div class="col-xl-3 col-lg-4 col-md-3 pr-0 col-8 d-flex justify-content-end">
     @if($selected && $selected->price_per =='item' && ! $selected->stock->type)
         @if($selected->price_type == 'static')
             <div class="product__single-item-info-price lh-1" data-single-price="{{ $selected->price }}">
@@ -237,7 +237,7 @@
         </div>
     @endif
 </div>
-<div class="col-md-8 col-md-offset-4">
+<div class="col-xl-7 col-lg-6 col-md-7 col-xl-offset-5 col-lg-offset-6 col-md-offset-7">
     <div class="desc-placeholder">
         {!! ($selected) ? $selected->description:null !!}
     </div>
