@@ -18809,12 +18809,19 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
         max-width: 720px;
     }
 }
-
-.home_categories-item {
-    height: 320px;
+.home_categories-item-col{
     margin-bottom: 30px;
 }
-
+.home_categories-item {
+    height: 396px;
+    /*margin-bottom: 30px;*/
+    border: 1px solid #d7d7d7;
+    border-bottom: none;
+    flex: none;
+}
+.home_categories-item-wrap{
+    height: 100%;
+}
 .home_categories-item img {
     height: 100%;
     width: 100%;
@@ -18828,7 +18835,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     bottom: 0;
     left: 0;
     right: 0;
-    color: #FFFFFF;
+    /*color: #FFFFFF;*/
+    border: 1px solid #d7d7d7;
+    flex: 1;
 }
 
 .home_categories-item-inner h4 {

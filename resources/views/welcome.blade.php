@@ -56,16 +56,18 @@
                     <ul class="row home_categories_list">
                         @if(count($categories))
                             @foreach($categories as $category)
-                                <li class="col-md-4 col-sm-6">
-                                    <div class="position-relative home_categories-item">
-                                        <img src="{!! media_image_tmb($category->image) !!}"
-                                             alt="{{ $category->name }}"
-                                             title="{{ $category->name }}"
-                                        />
-                                        <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                <li class="col-md-4 col-sm-6 home_categories-item-col">
+                                    <div class="d-flex flex-column home_categories-item-wrap">
+                                        <div class="position-relative home_categories-item">
+                                            <img src="{!! media_image_tmb($category->image) !!}"
+                                                 alt="{{ $category->name }}"
+                                                 title="{{ $category->name }}"
+                                            />
+                                        </div>
+                                        <div class="d-flex flex-column home_categories-item-inner">
                                             <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
                                             <p>{{ $category->description }}</p>
-                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">{!! __('view_products') !!}</a>
+                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto align-self-center text-uppercase font-15 home_categories-item-btn">{!! __('view_products') !!}</a>
                                         </div>
                                     </div>
                                 </li>
