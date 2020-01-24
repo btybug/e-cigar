@@ -57,7 +57,7 @@ $("body").on('click', '.select-products, .select_product_for_url_js', function (
           $("#productsModal .modal-body .all-list").empty();
           res.data.forEach(item => {
             let categories_ids = '-';
-            item.categories.map((cat) => {
+            item.categories && item.categories.map((cat) => {
               categories_ids = categories_ids + cat.id + '-';
             })
             let html = `<li data-id="${item.id}" class="option-elm-modal">
