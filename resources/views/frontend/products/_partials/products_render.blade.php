@@ -3,7 +3,7 @@
         <ul class="d-inline-bloc">
             @if(count($selecteds))
                 @foreach($selecteds as $key => $selected)
-                    <li data-key="{{ $key }}" class="single-item position-relative">
+                    <li data-key="{{ $key }}" data-type="select" class="single-item position-relative">
                         <span class="remove-icon">×</span>
                         {{ $selected }}
                     </li>
@@ -11,7 +11,7 @@
             @endif
             @if(count($selectedBrands))
                 @foreach($selectedBrands as $key => $selected)
-                    <li data-key="{{ $key }}" class="single-item position-relative">
+                    <li data-key="{{ $key }}" data-type="brand" class="single-item position-relative">
                         <span class="remove-icon">×</span>
                         {{ $selected }}
                     </li>

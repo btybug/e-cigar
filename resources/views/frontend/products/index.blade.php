@@ -363,12 +363,14 @@
                 return objURL;
             };
 
-            function doSubmitForm() {
+            function doSubmitForm(removedData) {
+                console.log(removedData)
                 $('.products-box').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
                     '            <div class="lds-dual-ring"></div>\n' +
                     '        </div>');
                 let form = $("#filter-form");
                 let serializeValue = form.serialize();
+                let serializedArrey;
                     let category = $('.all_categories').val();
                     let search_text = $("#search-for-filter").val();
                     let sort_by = $("#sortBy").val();
@@ -378,9 +380,32 @@
                     // let url = "/products/" + category;
                 // console.log(typeof serializeValue)
                 // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
+                if(removedData) {
+
+                    if(removedData.type === 'brand') {
+                        $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
+                        serializedArrey = serArr.filter((filter) => {
+                        return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                    })
+                    console.log(serializedArrey)
+                    console.log('before', serializeValue)
+
+                    serializeValue = $.param( serializedArrey )
+                    console.log('after', serializeValue)
+                    }
+                    // $(`.all-filters .filter-single-wall [name="select_filter[${filter_id}][]"][value="${filter_value}"]`).trigger('click')
+
+
+
+
+                    
+
+                } 
+                
                 history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
                 var serArr = form.serializeArray();
+                console.log(serArr)
 
                 var filters = serArr.map((filt) => {
                     var n = filt.name;
@@ -390,6 +415,9 @@
                         value: v
                     }
                 }).filter(filt => filt.name.includes('select_filter'));
+
+                
+
                 $.ajax({
                     type: "post",
                     url: url,
@@ -403,6 +431,8 @@
                         if (!data.error) {
                             $("body").find('.products-box').css('height','auto');
                             $(".products-box").html(data.html);
+                            // $("#filter-form").closest('form').data('changed', true);
+
                             let productsWallHeight = parseInt( $('body').find('.products-box').height())
 
                             $("body").find('.products-box').css('height',productsWallHeight);
@@ -671,7 +701,6 @@
                 } else {
                     $(this).closest('.product-single-info_title').next().addClass('products_closed')
                 }
-
             })
 
             $("body").on('click', '.product-card_like-icon', function () {
@@ -712,6 +741,34 @@
             //         return false;
             //     }
             // });
+
+            $('body').on('click', '.selected__filters .single-item .remove-icon', function(ev) {
+                const dataKey = $(ev.target).closest('.single-item').data('key').toString();
+                const dataType = $(ev.target).closest('.single-item').data('type');
+                
+                const filter = dataKey.match(/\d+/ig)
+                filter_id = filter[0] ? filter[0].toString() : '';
+                filter_value = filter[1] ? filter[1].toString() : '';
+                let name = '';
+                let value = '';
+                if(dataType === 'brand') {
+                    name = 'brands[]',
+                    value = filter_id.toString();
+                } else {
+                    if(filter_value) {
+                        name = `select_filter[${filter_id}][]`;
+                        value = filter_value;
+                    } else {
+                        name = `select_filter[${filter_id}]`;
+                    }
+                }
+                const removedData = {
+                    name,
+                    value,
+                    type: dataType
+                }
+                doSubmitForm(removedData)
+            })
         });
     </script>
 
