@@ -260,3 +260,16 @@ $("body").on("click", ".done_select_stickers_js", function () {
     }
   })
 });
+
+$("body").on("click", ".remove-all-attributes", function(ev) {
+  ev.stopImmediatePropagation();
+  let id = $(this)
+      .closest("li")
+      .attr("data-id");
+  $("body")
+      .find(`.attributes-container-${id}`)
+      .remove();
+  $(this)
+      .closest("li")
+      .remove();
+});
