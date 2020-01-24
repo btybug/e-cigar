@@ -44,12 +44,15 @@ const selectProductModalInit = function () {
 
 $("body").on('click', '.select-products, .select_product_for_url_js', function (ev) {
   let arr = [];
+  const action = $(ev.target).data('action');
+  const url = action ? action : "/admin/get-stocks";
   $(".get-all-products-tab")
       .children()
       .each(function () {
           arr.push($(this).attr("data-id"));
       });
-  AjaxCall("/admin/get-stocks", {arr: arr, promotion: 0}, function (res) {
+      console.log(action)
+  AjaxCall(url, {arr: arr, promotion: 0}, function (res) {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
           res.data.forEach(item => {
