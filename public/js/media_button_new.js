@@ -998,9 +998,24 @@ const App = function() {
 
   //********App -> helpers********start
   this.helpers = {
+    // upToHead: (currentLeaf) => {
+    //   let hasId = false;
+    //   breadCrumbsData.map((el) => {
+    //     el.id === currentLeaf.data('id') && (hasId = true)
+    //   })
+    //   if(!hasId) {
+    //     breadCrumbsData.push({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
+    //     if(currentLeaf.closest('tree_leaf').length !== 0) {
+    //       this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
+    //     } else {
+    //       return true;
+    //     }
+    //   }
+    //   currentLeaf.closest('tree_leaf').length !== 0 && this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
+      
+    // },
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, name) => {
-      const self = this;
       console.table({id, name})
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
       // breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
@@ -1008,10 +1023,14 @@ const App = function() {
       //                                <a>Drive</a>
       //                              </li>`;
       
-      if(id !== 1) {
-        breadCrumbsData.push({id, name});
-        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(id, name, 'active')
-      }
+      const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
+      // this.helpers.upToHead(currentLeaf)
+      console.log(breadCrumbsData)
+
+      // if(id !== 1) {
+      //   breadCrumbsData.push({id, name});
+      //   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(id, name, 'active')
+      // }
 
 
 
