@@ -2823,3 +2823,17 @@ document
       }
     }
   });
+
+  $('body').on('input', '.search_item_js', function(ev) {
+    const value = $(ev.target).val();
+    console.log(value)
+    $('.file-box .file-title').each(function() {
+      $(this).closest('.file-box').removeClass('d-none')
+      // $(this).closest('.file-box').addClass('d-block')
+      if($(this).text().toUpperCase().includes(value.trim().toUpperCase())) {
+        $(this).closest('.file-box').addClass('d-block')
+      } else {
+        $(this).closest('.file-box').addClass('d-none')
+      }
+    });
+  })

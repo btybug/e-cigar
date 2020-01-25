@@ -178,7 +178,7 @@
 {{--                  <button type="button" class="btn btn-info" bb-media-click="folder_level_up"><i class="fas fa-level-up-alt"></i>--}}
 {{--                  </button>--}}
                     <div class="d-flex align-items-center">
-                        <input type="text" class="form-control" placeholder="search">
+                        <input type="text" class="form-control search_item_js" placeholder="search">
                         <span class="h5 ml-2 text-white mb-0"><i class="fas fa-search"></i></span>
                     </div>
                 </div>
