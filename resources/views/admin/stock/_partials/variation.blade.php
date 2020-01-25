@@ -62,6 +62,8 @@
                                                     @include('admin.stock._partials.simple_item')
                                                 @elseif($main && $main->type =='filter')
                                                     @include('admin.stock._partials.filter_item')
+                                                @else
+                                                    @include('admin.stock._partials.simple_item')
                                                 @endif
                                             </div>
                                         </div>
