@@ -174,7 +174,7 @@ class StockService
                         $newData['item_id'] = $item['item_id'];
                         $newData['qty'] = ($item['qty']) ?? 0;
                         $newData['image'] = $item['image'];
-                        $newData['name'] = $datum['title'];
+                        $newData['name'] = ($datum['title'])??'';
                         $newData['variation_id'] = $variation_id;
                         $newData['description'] = ($item['description']) ?? null;
 
