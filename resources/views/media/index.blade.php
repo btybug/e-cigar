@@ -495,19 +495,4 @@
   <!-- {!! Html::script("public/plugins/tree/jquery.nestable.min.js") !!} -->
   <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js"></script>--}} -->
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-
-  <script>
-    $('document').ready(
-        function() {
-          $('body').on('click', '.file-drop-zone-title', function() {
-            $(".btn.btn-file>input[type='file']").click();
-          });
-
-//          $('[role="treeitem"]').on('mouseenter', function() {
-//            console.log('hello');
-//            this.css('background-color', 'red')
-//          })
-        }
-    )
-  </script>
 @stop
