@@ -1780,9 +1780,9 @@ const App = function() {
     
 
     //********App -> events -> remove_folder********start
-    remove_folder_req: (elm, e, ids, resolve) => {
-      e.stopPropagation();
-      e.preventDefault();
+    remove_folder_req: (elm, e, ids, resolve, cb) => {
+      e && e.stopPropagation();
+      e && e.preventDefault();
 
       // const id = e.target.getAttribute("data-id") || (elm.closest(".file") ? elm.closest(".file").getAttribute("data-id") : elm.closest(".dd-item").getAttribute("data-id"));
       if(ids.length === 0) resolve(true);
@@ -1802,7 +1802,7 @@ const App = function() {
         () => {
           console.log(22)
           resolve(true);
-
+          cb()
           // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
           // close_name_modal();
 
@@ -2168,9 +2168,15 @@ const removeCheckedImage = (el) => {
 
 const removeImages = () => {
   const checkedImagesArray = [];
+  const checkedFolderArray = []
   const uncheckedImagesArray = [];
+  const uncheckedFolderArray = [];
+
   $.each($('.check-image'), (index, image) => {
     $(image).prop("checked") ? checkedImagesArray.push($(image).closest('[data-id]').attr('data-id')) : uncheckedImagesArray.push($(image).closest('[data-id]').attr('data-id'));
+  });
+  $.each($('.check-folder'), (index, folder) => {
+    $(folder).prop("checked") ? checkedFolderArray.push($(folder).closest('[data-id]').attr('data-id')) : uncheckedFolderArray.push($(folder).closest('[data-id]').attr('data-id'));
   });
   app.requests.removeImage(
       {
@@ -2191,6 +2197,36 @@ const removeImages = () => {
         });
       }
   );
+  app.events.remove_folder_req(undefined, undefined, checkedFolderArray, () => {
+    checkedFolderArray.map((folderId) => {
+      $('.remover-container-content').find(`[data-id="${folderId}"]`).closest('.folderitems').remove();
+    });
+    $('.remover-container-content').find('.folderitems').length === 0
+    && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
+  }, () => {
+    checkedFolderArray.map((imageId) => {
+      $(`.media_right_content .folderitems .folder-container [data-id="${imageId}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+      // app.selectedImage.length = 0;
+      app.requests.drawingItems(undefined, true);
+
+    });
+  });
+
+  // app.events.remove_image_req(undefined, ev, checkedFolderArray, resolve);
+  // app.requests.removeTreeFolder(
+  //   {
+  //     folder_id: checkedFolderArray,
+  //     // Number(id),
+  //     trash: true,
+  //     access_token: "string"
+  //   }, () => {
+  //     checkedImagesArray.map((folderId) => {
+  //       $('.remover-container-content').find(`[data-id="${folderId}"]`).closest('.folderitems').remove();
+  //     });
+  //     $('.remover-container-content').find('.folderitems').length === 0
+  //     && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
+  //   }
+  // )
 };
 
 const checkImage = (checkedImage) => {
@@ -2249,10 +2285,48 @@ const removeImageDrop = (ev, data) => {
     app.selectedImage.length = 0;
 };
 
+const removeFolderDrop = (ev, data) => {
+  const imgTag = $(document.querySelector(`.folder-container [data-id="${data}"]`)).find('img');
+  imgTag.attr('draggable', 'false');
+  const name = $(document.querySelector(`.folder-container [data-id="${data}"]`)).find('.file-title').text().trim();
+  const div = `<div class="folderitems col-xl-2 col-sm-6" draggable="false">
+                <div class="file-box folder-container">
+                    <div draggable="false" data-id="${data}" class="file file-remove" >
+                        <a  >
+                            <span class="corner"></span>
+                            <div class="icon position-relative">
+                                <i class="fa fa-folder"></i>
+                                <span class="position-absolute btn btn-danger btn-sm rounded-0" style="right:0;top: 0; line-height: 0" onclick="removeCheckedImage(this)">
+                                  <i class="fa fa-times" style="font-size: 12px;"></i>
+                                </span>
+                            </div>
+                            <div class="file-name">
+                              <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                              <span class="file-title" style="width: 100%; font-size: 20px">${name}</span>
+                              <span><input type="checkbox" class="check-folder" checked onchange="checkImage(this)"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+              </div>`;
+  $(ev.target).closest('div').find('p.remove_title').remove();
+  $('.remover-container-content .images_container').prepend(div);
+  $('.remover-container-content').find('.remove-checked-item').length === 0
+  && $('.remove-button_container').append(`
+      <div class="d-flex flex-column">
+        <button class="remove-checked-item btn btn-danger" onclick="removeImages()">Delete</button>
+        <button class="remove-in-list btn btn-info my-2" onclick="removeList()">List Remove</button>
+        <input type="checkbox" onchange="checkedAll(this)" checked class="checkbox-all align-self-center">
+      </div>`);
+  $(`.media_right_content .folderitems .folder-container [data-id="${data}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+  app.selectedImage.length = 0;
+};
+
 const drop = (ev, cb) => {
   ev.preventDefault();
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
+  console.log(data)
   const flag = data.item || 'image';
   if(flag === 'image') {
     // console.log(data.data)
@@ -2270,7 +2344,7 @@ const drop = (ev, cb) => {
       }
     }
   } else if(flag === 'folder') {
-    alert('You may not add folders in DnD area!');
+    removeFolderDrop(ev, data.data);
   }
   cb();
 };
@@ -2720,88 +2794,6 @@ document
           $('#addFolderModal').modal('hide');
         });
     });
-
-    // $(document).on('load', function() {
-    //   if(window.FileReader) { 
-    //     addEventHandler(window, 'load', function() {
-    //       // var status = document.getElementById('status');
-    //       var drop   = document.querySelector('folderitems');
-    //       // var list   = document.getElementById('list');
-          
-    //       function cancel(e) {
-    //         if (e.preventDefault) { e.preventDefault(); }
-    //         return false;
-    //       }
-        
-    //       // Tells the browser that we *can* drop on this target
-    //       addEventHandler(drop, 'dragover', cancel);
-    //       addEventHandler(drop, 'dragenter', cancel);
-    //     });
-    //   } else { 
-    //     alert("don't")
-    //     // document.getElementById('status').innerHTML = 'Your browser does not support the HTML5 FileReader.';
-    //   }
-  
-  
-    //   function addEventHandler(obj, evt, handler) {
-    //     if(obj.addEventListener) {
-    //         // W3C method
-    //         obj.addEventListener(evt, handler, false);
-    //     } else if(obj.attachEvent) {
-    //         // IE method.
-    //         obj.attachEvent('on'+evt, handler);
-    //     } else {
-    //         // Old school method.
-    //         obj['on'+evt] = handler;
-    //     }
-    // }
-  
-  
-    // addEventHandler(drop, 'drop', function (e) {
-    //   e = e || window.event; // get window.event if e argument missing (in IE)   
-    //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
-    //   alert('asasasasas')
-    //   var dt    = e.dataTransfer;
-    //   var files = dt.files;
-    //   for (var i=0; i<files.length; i++) {
-    //     var file = files[i];
-    //     var reader = new FileReader();
-          
-    //     //attach event handlers here...
-       
-    //     reader.readAsDataURL(file);
-    //   }
-    //   return false;
-    // });
-  
-  
-  //   addEventHandler(reader, 'loadend', function(e, file) {
-  //     var bin           = this.result; 
-  //     var newFile       = document.createElement('div');
-  //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
-  //     list.appendChild(newFile);  
-  //     var fileNumber = list.getElementsByTagName('div').length;
-  //     status.innerHTML = fileNumber < files.length 
-  //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
-  //                      : 'Done loading. processed '+fileNumber+' files.';
-  
-  //     var img = document.createElement("img"); 
-  //     img.file = file;   
-  //     img.src = bin;
-  //     list.appendChild(img);
-  // }.bindToEventHandler(file));
-  
-  // Function.prototype.bindToEventHandler = function bindToEventHandler() {
-  //   var handler = this;
-  //   var boundParameters = Array.prototype.slice.call(arguments);
-  //   //create closure
-  //   return function(e) {
-  //       e = e || window.event; // get window.event if e argument missing (in IE)   
-  //       boundParameters.unshift(e);
-  //       handler.apply(this, boundParameters);
-  //   }
-  // };
-  //   })
 
   $('body').on('click', '.icon-folder-opening', function(ev) {
     console.log(5555)
