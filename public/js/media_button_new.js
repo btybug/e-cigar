@@ -109,6 +109,7 @@ const normAjax = function (URL, obj = {}, cb) {
 const App = function() {
   let globalFolderId = document.getElementById('core-folder').value;
   this.selectedImage = [];
+  const breadCrumbsData = []
 
   //********App -> htmlMaker********start
   //htmlMaker includes all methods to create html markup
@@ -998,13 +999,32 @@ const App = function() {
   //********App -> helpers********start
   this.helpers = {
     //********App -> helpers -> makeBreadCrumbs********start
-    makeBreadCrumbs: (id, res) => {
-//       const self = this;
-//       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-//       breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
-//                                         bb-media-click="get_folder_items" >
-//                                      <a>Drive</a>
-//                                    </li>`;
+    makeBreadCrumbs: (id, name) => {
+      const self = this;
+      console.table({id, name})
+      const breadCrumbsList = document.querySelector(".bread-crumbs-list");
+      // breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+      //                                   bb-media-click="get_folder_items" >
+      //                                <a>Drive</a>
+      //                              </li>`;
+      
+      if(id !== 1) {
+        breadCrumbsData.push({id, name});
+        breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(id, name, 'active')
+      }
+
+
+
+      // makeBreadCrumbsItem: (key, name, state) => {
+      //   return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
+      //                 bb-media-click="get_folder_items" >
+      //               <a>${name}</a>
+      //             </li>`);
+      // },
+
+
+
+
 //       $('document').ready(() => {
 // var count = 0;
 //         const getTreeData = (data, id) => {
@@ -1339,7 +1359,7 @@ const App = function() {
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
           this.globalFolderId = res.settings.id;
-          this.helpers.makeBreadCrumbs(res.settings.id, res);
+          this.helpers.makeBreadCrumbs(res.settings.id, res.settings.slug);
           this.helpers.makeDnD();
           this.selectedImage.length = 0;
           if(location.pathname === "/admin/media/trash") {
