@@ -1263,8 +1263,8 @@ class DatatableController extends Controller
                 }
 
             })
-            ->addColumn('actions', function ($attr) use ($request) {
-                $html = "<a class='btn btn-info' href='#'>View</a>";
+            ->addColumn('actions', function ($attr){
+                $html = "<a class='btn btn-info' href='".route('admin_app_order_view',$attr->id)."'>View</a>";
                 return $html;
             })->rawColumns(['actions','status'])
             ->make(true);

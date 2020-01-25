@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\App;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\App\Orders;
 use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Items;
@@ -39,5 +40,11 @@ class AppController extends Controller
         $brands=Brands::all();
         $categories=Category::where('type','item')->get();
         return \Response::json(['error' => false, 'data' => $items,'brands'=>$brands,'categories'=>$categories]);
+    }
+
+    public function orderViev($id)
+    {
+        $order=Orders::findOrfail($id);
+        return $this->view('orders.view',compact('order'));
     }
 }

@@ -768,7 +768,8 @@ Route::group(['prefix' => 'app'], function () {
 
     });
     Route::group(['prefix' => 'orders'], function () {
-        Route::get('/{id?}', 'Admin\App\AppController@orders')->name('admin_app_orders');
+        Route::get('/', 'Admin\App\AppController@orders')->name('admin_app_orders');
+        Route::get('/view/{id}', 'Admin\App\AppController@orderViev')->name('admin_app_order_view');
     });
     Route::post('/warehouse-not-selected-items/{id}', 'Admin\App\AppController@notSelectedProducts')->name('admin_app_not_selected_products');
 });
