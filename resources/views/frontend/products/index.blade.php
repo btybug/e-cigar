@@ -377,34 +377,73 @@
                     let subcategory = $("body").find('.subcategory-select.active').data('slug');
 
                     let url = category === '' ? "/products" : "/products/" + category;
+                    var serArr = form.serializeArray();
+
                     // let url = "/products/" + category;
                 // console.log(typeof serializeValue)
                 // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
                 if(removedData) {
 
-                    if(removedData.type === 'brand') {
-                        $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
-                        serializedArrey = serArr.filter((filter) => {
-                        return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
-                    })
-                    console.log(serializedArrey)
-                    console.log('before', serializeValue)
+                    // if(removedData.type === 'brand') {
+                    //     $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
+                    //     serializedArrey = serArr.filter((filter) => {
+                    //         return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                    //     })
+                    //     console.log(serializedArrey)
+                    //     console.log('before', serializeValue)
 
-                    serializeValue = $.param( serializedArrey )
-                    console.log('after', serializeValue)
+                    //     serializeValue = $.param( serializedArrey )
+                    //     console.log('after', serializeValue)
+                    // } else if(removedData.type === 'select') {
+                        if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).is('input')) {
+                            if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).attr('type') === 'radio') {
+                                serializedArrey = serArr.filter((filter) => {
+                                    return !Boolean(filter.name === removedData.name);
+                                })
+                                $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).each(function(index, radio) {
+                                    $(radio).prop('checked', false);
+                                });
+
+                            } else if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).attr('type') === 'checkbox') {
+                                $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
+                                    serializedArrey = serArr.filter((filter) => {
+                                        return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                                    })
+                                    console.log(serializedArrey)
+                                    console.log('before', serializeValue)
+
+                                    console.log('after', serializeValue)
+                            }
+                            serializeValue = $.param( serializedArrey )
+
+                        // }
+                    } else if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).is('select')) {
+
+                        if(removedData.value === "") {
+
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).find('option').each(function(index, option) {
+                                index === 0 && $(option).prop('selected', true);
+                                $(option).prop('selected', false);
+                            });
+                            serializedArrey = serArr.filter((filter) => {
+                                return !Boolean(filter.name === removedData.name);
+                            })
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).trigger('change');
+                        } else {
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).find(`option[value=${removedData.value}]`).prop('selected', false)
+                            serializedArrey = serArr.filter((filter) => {
+                                return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                            });
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).trigger('change');
+                        }
+                        serializeValue = $.param( serializedArrey )
                     }
-                    // $(`.all-filters .filter-single-wall [name="select_filter[${filter_id}][]"][value="${filter_value}"]`).trigger('click')
-
-
-
-
                     
 
                 } 
                 
                 history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
-                var serArr = form.serializeArray();
                 console.log(serArr)
 
                 var filters = serArr.map((filt) => {
@@ -467,7 +506,33 @@
                     }
                 });
             }
-
+            $('body').on('click', '.selected__filters .single-item .remove-icon', function(ev) {
+                const dataKey = $(ev.target).closest('.single-item').data('key').toString();
+                const dataType = $(ev.target).closest('.single-item').data('type');
+                
+                const filter = dataKey.match(/\d+/ig)
+                filter_id = filter[0] ? filter[0].toString() : '';
+                filter_value = filter[1] ? filter[1].toString() : '';
+                let name = '';
+                let value = '';
+                if(dataType === 'brand') {
+                    name = 'brands[]',
+                    value = filter_id.toString();
+                } else {
+                    if(filter_value) {
+                        name = `select_filter[${filter_id}][]`;
+                        value = filter_value;
+                    } else {
+                        name = `select_filter[${filter_id}]`;
+                    }
+                }
+                const removedData = {
+                    name,
+                    value,
+                    type: dataType
+                }
+                doSubmitForm(removedData)
+            })
 
 
             var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
@@ -742,33 +807,7 @@
             //     }
             // });
 
-            $('body').on('click', '.selected__filters .single-item .remove-icon', function(ev) {
-                const dataKey = $(ev.target).closest('.single-item').data('key').toString();
-                const dataType = $(ev.target).closest('.single-item').data('type');
-                
-                const filter = dataKey.match(/\d+/ig)
-                filter_id = filter[0] ? filter[0].toString() : '';
-                filter_value = filter[1] ? filter[1].toString() : '';
-                let name = '';
-                let value = '';
-                if(dataType === 'brand') {
-                    name = 'brands[]',
-                    value = filter_id.toString();
-                } else {
-                    if(filter_value) {
-                        name = `select_filter[${filter_id}][]`;
-                        value = filter_value;
-                    } else {
-                        name = `select_filter[${filter_id}]`;
-                    }
-                }
-                const removedData = {
-                    name,
-                    value,
-                    type: dataType
-                }
-                doSubmitForm(removedData)
-            })
+           
         });
     </script>
 
