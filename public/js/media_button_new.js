@@ -543,7 +543,9 @@ const App = function() {
     makeBreadCrumbsItem: (key, name, state) => {
       return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
                     bb-media-click="get_folder_items" >
-                 <a>${name}</a>
+                 <a style="
+                 user-select: none;
+             ">${name}</a>
                </li>`);
     },
     //********App -> htmlMaker -> makeBreadCrumbsItem********end
@@ -998,39 +1000,77 @@ const App = function() {
 
   //********App -> helpers********start
   this.helpers = {
-    // upToHead: (currentLeaf) => {
-    //   let hasId = false;
-    //   breadCrumbsData.map((el) => {
-    //     el.id === currentLeaf.data('id') && (hasId = true)
-    //   })
-    //   if(!hasId) {
-    //     breadCrumbsData.push({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
-    //     if(currentLeaf.closest('tree_leaf').length !== 0) {
-    //       this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
-    //     } else {
-    //       return true;
-    //     }
-    //   }
-    //   currentLeaf.closest('tree_leaf').length !== 0 && this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
-      
-    // },
+    count: 0,
+    upToHead: (currentLeaf) => {
+      console.log('current', currentLeaf)
+      console.log('parents -> ',currentLeaf.parent().closest('.tree_leaf'))
+      // console.log(currentLeaf.closest('.tree_leaf').closest('.tree_leaf'))
+      // breadCrumbsData.push({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
+      // if(currentLeaf.closest('.tree_leaf').closest('.tree_leaf').length !== 0) {
+      //   console.log('currentLeaf', currentLeaf)
+      //   this.helpers.upToHead(currentLeaf.closest('.tree_leaf').closest('.tree_leaf'));
+      // } else {
+      //   return true;
+      // }
+
+
+
+      let hasNotId = true;
+      this.helpers.count === 0 && (breadCrumbsData.length = 0);
+      breadCrumbsData.map((el) => {
+        console.log(el.id, currentLeaf.data('id'))
+        if(el.id === currentLeaf.data('id')) {
+          return true
+        }
+      });
+      if(hasNotId) {
+        breadCrumbsData.unshift({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
+        this.helpers.count += 1;
+        if(currentLeaf.parent().closest('.tree_leaf').length !== 0) {
+          console.log('currentLeaf', currentLeaf)
+
+          this.helpers.upToHead(currentLeaf.parent().closest('.tree_leaf'));
+        } else {
+          return true;
+        }
+      }
+      // currentLeaf.closest('tree_leaf').length !== 0 && this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
+      this.helpers.count = 0;
+    },
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, name) => {
-      console.table({id, name})
+      // console.table({id, name})
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      // breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
-      //                                   bb-media-click="get_folder_items" >
-      //                                <a>Drive</a>
-      //                              </li>`;
+      // breadCrumbsList.innerHTML = ;
       
       const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
-      // this.helpers.upToHead(currentLeaf)
-      console.log(breadCrumbsData)
+      console.log('currentLeaf', currentLeaf)
+      this.helpers.upToHead(currentLeaf)
+      // console.log(breadCrumbsData)
 
-      // if(id !== 1) {
-      //   breadCrumbsData.push({id, name});
-      //   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(id, name, 'active')
-      // }
+      if(id !== 1) {
+        // breadCrumbsData.push({id, name});
+        breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+                                          bb-media-click="get_folder_items" >
+                                        <a style="
+                                        user-select: none;
+                                    ">Drive</a>
+                                      </li>`
+                                      console.log(breadCrumbsData)
+        breadCrumbsData.map((bread) => {
+          if(bread.id !== 1) {
+            breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(bread.id, bread.name, 'active')
+
+          }
+        });
+      } else {
+        breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
+                                          bb-media-click="get_folder_items" >
+                                        <a style="
+                                        user-select: none;
+                                    ">Drive</a>
+                                      </li>`
+      }
 
 
 
@@ -1578,7 +1618,11 @@ const App = function() {
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
+      console.log(elm, e.target)
       if(e.type === 'dblclick') {
+        if($(e.target).closest('.tree_leaf').length !== 0) {
+          return true;
+        }
         !$(e.target).hasClass('closer') && (function(){
           const id = elm.closest("[data-id]").getAttribute("data-id");
           globalFolderId = id;
@@ -1597,6 +1641,9 @@ const App = function() {
       } else if(e.type === 'click') {
         if($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0 && $(e.target).closest('.icon-folder-opening').length === 0) {
           const id = elm.closest("[data-id]").getAttribute("data-id");
+          if(globalFolderId === id) {
+            return true;
+          }
           globalFolderId = id;
           self.requests.drawingItems(
             {
@@ -1613,7 +1660,6 @@ const App = function() {
         } else {
           $(e.target).closest('.file-box.folder-container').removeClass('active')
         }
-        
       }
     },
     //********App -> events -> get_folder_items********end
