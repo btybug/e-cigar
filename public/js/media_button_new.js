@@ -436,7 +436,6 @@ const App = function() {
       },
     
       makeItem: function(item) {
-        // console.log(item)
         return `<li class="item" data-id="${item.id}" draggable='true'>Item ${item.id}</li>`
       }
     },
@@ -465,7 +464,6 @@ const App = function() {
         swapClass: 'highlight', // The class applied to the hovered swap item
     
         setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-          // console.log('dragEl', $(dragEl).data('id'))
           dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
         },
         onEnd: function (/**Event*/evt) {
@@ -485,7 +483,6 @@ const App = function() {
             $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
             $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
     
-            // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
           }
@@ -1002,23 +999,9 @@ const App = function() {
   this.helpers = {
     count: 0,
     upToHead: (currentLeaf) => {
-      console.log('current', currentLeaf)
-      console.log('parents -> ',currentLeaf.parent().closest('.tree_leaf'))
-      // console.log(currentLeaf.closest('.tree_leaf').closest('.tree_leaf'))
-      // breadCrumbsData.push({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
-      // if(currentLeaf.closest('.tree_leaf').closest('.tree_leaf').length !== 0) {
-      //   console.log('currentLeaf', currentLeaf)
-      //   this.helpers.upToHead(currentLeaf.closest('.tree_leaf').closest('.tree_leaf'));
-      // } else {
-      //   return true;
-      // }
-
-
-
       let hasNotId = true;
       this.helpers.count === 0 && (breadCrumbsData.length = 0);
       breadCrumbsData.map((el) => {
-        console.log(el.id, currentLeaf.data('id'))
         if(el.id === currentLeaf.data('id')) {
           return true
         }
@@ -1027,7 +1010,6 @@ const App = function() {
         breadCrumbsData.unshift({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
         this.helpers.count += 1;
         if(currentLeaf.parent().closest('.tree_leaf').length !== 0) {
-          console.log('currentLeaf', currentLeaf)
 
           this.helpers.upToHead(currentLeaf.parent().closest('.tree_leaf'));
         } else {
@@ -1044,9 +1026,7 @@ const App = function() {
       // breadCrumbsList.innerHTML = ;
       
       const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
-      console.log('currentLeaf', currentLeaf)
       this.helpers.upToHead(currentLeaf)
-      // console.log(breadCrumbsData)
 
       if(id !== 1) {
         // breadCrumbsData.push({id, name});
@@ -1056,7 +1036,6 @@ const App = function() {
                                         user-select: none;
                                     ">Drive</a>
                                       </li>`
-                                      console.log(breadCrumbsData)
         breadCrumbsData.map((bread) => {
           if(bread.id !== 1) {
             breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(bread.id, bread.name, 'active')
@@ -1172,7 +1151,6 @@ const App = function() {
               e.dataTransfer.setData("node_id", JSON.stringify({data: self.selectedImage, item: 'image'})); // required otherwise doesn't work
               // setTimeout(() => (this.className = "invisible"), 0);
               // self.htmlMaker.currentId = id;
-              // console.log(1)
             } else if(!e.target.classList.contains('title-change')) {
               const width = elm.clientWidth;
               const height = elm.clientHeight;
@@ -1188,11 +1166,9 @@ const App = function() {
               // const id = this.getAttribute("data-id");
               const id = [];
               $('.file-box.folder-container.active').each((ind, el) => {
-                console.log($($(el).find('.file')))
                 id.push($($(el).find('.file')).attr("data-id"));
               });
               id.length === 0 && id.push($(this).attr("data-id"))
-              console.log(id)
               e.dataTransfer.setDragImage(crt, 0, 0);
               // e.dataTransfer.effectAllowed = "copy"; // only dropEffect='copy' will be dropable
               e.dataTransfer.setData("node_id", JSON.stringify({data: id, item: $(e.target).closest('[bb-media-type]').attr('bb-media-type')})); // required otherwise doesn't work
@@ -1266,7 +1242,6 @@ const App = function() {
 
 
     //   addEventHandler(reader, 'loadend', function(e, file) {
-    //     console.log('file============', file)
     //     var bin           = this.result; 
     //     var newFile       = document.createElement('div');
     //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
@@ -1312,7 +1287,6 @@ const App = function() {
     //     // });
     // }.bindToEventHandler(file));
           const transfer = JSON.parse(e.dataTransfer.getData("node_id"));
-          console.log(transfer)
 
           let nodeId = self.htmlMaker.dragElementOfTree || transfer.data;
           const type = transfer.item;
@@ -1320,7 +1294,6 @@ const App = function() {
               .closest(".file")
               .getAttribute("data-id");
           if(type === 'image') {
-            console.log(nodeId)
                 self.requests.transferImage(
                   {
                     item_id: nodeId,
@@ -1339,7 +1312,6 @@ const App = function() {
                 },
                   () => {
                     nodeId.map((id) => {
-                      console.log(id, parentId)
                       self.htmlMaker.treeMove(id, parentId);
                     })
                     
@@ -1349,7 +1321,6 @@ const App = function() {
                       access_token: "string"
                     }, true,
                     () => {
-                      console.log(1111);
                     });
                     
                   }
@@ -1618,7 +1589,6 @@ const App = function() {
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
-      console.log(elm, e.target)
       if(e.type === 'dblclick') {
         if($(e.target).closest('.tree_leaf').length !== 0) {
           return true;
@@ -1853,7 +1823,6 @@ const App = function() {
           trash: true,
           access_token: "string"
         }, () => {
-          console.log(11)
           resolve(true);
           // this.requests.drawingItems()
           // this.events.close_name_modal();
@@ -1885,7 +1854,6 @@ const App = function() {
           access_token: "string"
         },
         () => {
-          console.log(22)
           resolve(true);
           cb()
           // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
@@ -1907,7 +1875,6 @@ const App = function() {
           // const li = leaf.closest('li');
           // const key = ol.closest('li').attr('data-id');
           // const name = ol.closest('li').children('div')[0].innerText;
-          // console.log('leaf :', leaf, 'ol: ', ol, 'li: ', li, 'key: ', key, 'name: ', name);
           //
           // li.remove();
           // ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
@@ -2204,11 +2171,9 @@ $('.delete_items').on('click', (ev) => {
 
 const remove_req_function = async (ev, images_ids, folders_ids) => {
   const promise1 = new Promise(function(resolve, reject) {
-    console.log(1)
     app.events.remove_image_req(undefined, ev, images_ids, resolve);
   });
   const promise2 = new Promise(function(resolve, reject) {
-    console.log(2)
     app.events.remove_folder_req(undefined, ev, folders_ids, resolve);
   });
   const promise3 = new Promise(function(resolve, reject) {
@@ -2411,10 +2376,8 @@ const drop = (ev, cb) => {
   ev.preventDefault();
 
   const data = isJson(ev.originalEvent.dataTransfer.getData('node_id'));
-  console.log(data)
   const flag = data.item || 'image';
   if(flag === 'image') {
-    // console.log(data.data)
     if(Array.isArray(data.data)) {
       data.data.map(el=>{
         if($('.remover-container-content').find(`[data-id="${el}"]`).length === 0) {
@@ -2525,73 +2488,6 @@ document
      
     })
 
-
-    // var tree = document.querySelectorAll('.tree_leaf');
-    // var branch = document.querySelectorAll('.tree_branch');
-    // console.log('branch', branch)
-    // for (var i = 0; i < branch.length; i++) {
-    //   new Sortable(branch[i], {
-    //     group: 'b',
-    //     filter: '.filter',
-    //     draggable: ".tree_leaf",
-    //     sort: true,
-    //     animation: 150,
-    //     fallbackOnBody: true,
-    //     // swapThreshold: 0.65,
-    //     dataIdAttr: 'data-id',
-    //     forceFallback: false,
-    //     fallbackClass: "sortable-fallback",
-    //     swapThreshold: 0.60,
-    //     ghostClass: 'background-class',
-    //     swapClass: 'highlight', // The class applied to the hovered swap item
-    
-    //     setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-    //       // console.log('dragEl', $(dragEl).data('id'))
-    //       dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
-    //     },
-    //     onEnd: function (/**Event*/evt) {
-    //       var itemEl = evt.item;  // dragged HTMLElement
-    //       // console.log()
-    //       if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
-    //         $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
-    //         $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
-            
-    //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
-    //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
-    //       }
-    
-    //       if($(evt.from)[0].children.length === 0) {
-    //         $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
-    //         $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
-    
-    //         // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
-    //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
-    //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
-    //       }
-    //     },
-    //     onMove: function (/**Event*/evt, /**Event*/originalEvent) {
-    //       // Example: https://jsbin.com/nawahef/edit?js,output
-    //       if($(evt.related).find('.tree_branch').hasClass('closed_branch')) {
-    //         const branch = $(evt.related).closest('.tree_leaf');
-    //         const opening_icon = $(evt.related).closest('.icon-folder-opening');
-    //         console.log(evt.target)
-    //         if(branch.hasClass('tree_leaf_with_branch')) {
-    //           console.log(22222222222);
-    //           if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
-    //             $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
-    //           }
-    
-    //           if(opening_icon.find('i').hasClass('fa-caret-right')) {
-    //             opening_icon.find('i').removeClass('fa-caret-right');
-    //             opening_icon.find('i').addClass('fa-caret-down');
-    //           }
-    //         }
-    //       }
-          
-          
-    //     }
-    //   });
-    // }
     
 
     
@@ -2713,7 +2609,6 @@ document
               swapClass: 'highlight', // The class applied to the hovered swap item
           
               setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-                // console.log('dragEl', $(dragEl).data('id'))
                 dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
               },
               onEnd: function (/**Event*/evt) {
@@ -2733,7 +2628,6 @@ document
                   $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
                   $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
           
-                  // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
                 }
@@ -2816,7 +2710,6 @@ document
               swapClass: 'highlight', // The class applied to the hovered swap item
           
               setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-                // console.log('dragEl', $(dragEl).data('id'))
                 dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
               },
               onEnd: function (/**Event*/evt) {
@@ -2836,7 +2729,6 @@ document
                   $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
                   $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
           
-                  // console.log('****************', $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]))
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
                 }
@@ -2881,7 +2773,6 @@ document
     });
 
   $('body').on('click', '.icon-folder-opening', function(ev) {
-    console.log(5555)
     const branch = $(ev.target).closest('.tree_leaf');
     const opening_icon = $(ev.target).closest('.icon-folder-opening');
     if(branch.hasClass('tree_leaf_with_branch')) {
@@ -2903,7 +2794,6 @@ document
 
   $('body').on('input', '.search_item_js', function(ev) {
     const value = $(ev.target).val();
-    console.log(value)
     $('.file-box .file-title').each(function() {
       $(this).closest('.file-box').removeClass('d-none')
       // $(this).closest('.file-box').addClass('d-block')
