@@ -15,7 +15,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="text-right mb-2">
-                    <button type="button" class="btn btn-primary add-section"><i class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-primary add-section" data-lang="gb" data-block="{!! count($footer_links) !!}"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="tab-content setting-general-footer--tabs">
                     <div class="tab-pane fade active in show" id="tab1"
@@ -206,6 +206,7 @@
 
         </div>
         <script type="template" id="add-section">
+
             <div class="card panel panel-default mb-3">
                 <div class="card-header panel-heading">Panel Header
                     <div class="pull-right">
