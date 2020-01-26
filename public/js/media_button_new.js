@@ -1,44 +1,3 @@
-let template = () => {
-  return `
-  <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
-                    <ol class="dd-list sortable ui-sortable" id="fff">
-                        <li class="dd-item mjs-nestedSortable-leaf" data-id="3" data-name="test" id="item_3" bb-media-type="folder">
-                            <div class="dd-handle oooo ui-sortable-handle active" bb-media-click="get_folder_items" draggable="true">
-                                <span class="icon-folder-opening"></span>
-                                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
-                                test
-                            </div>
-                        </li>
-                        <li class="dd-item mjs-nestedSortable-leaf" data-id="4" data-name="banners" id="item_4" bb-media-type="folder">
-                            <div class="dd-handle oooo ui-sortable-handle" bb-media-click="get_folder_items" draggable="true">
-                                <span class="icon-folder-opening"></span>
-                                <span class="icon-folder-name"><i class="fa fa-trash"></i></span>
-                                banners
-                            </div>
-                        </li>
-                        <li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="new" data-id="5" id="item_5" bb-media-type="folder">
-                            <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
-                                <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
-                                <span class="icon-folder-name"><i class="fa fa-home"></i></span>
-                                new
-
-                            </div>
-                            <ol class="dd-list">
-                                <li class="dd-item mjs-nestedSortable-leaf" data-id="6" data-name="new" id="item_6" bb-media-type="folder">
-                                    <div class="dd-handle oooo" bb-media-click="get_folder_items" draggable="true">
-                                        <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
-                                        <span class="icon-folder-name"><i class="fa fa-home"></i></span>
-                                        new
-                                    </div>
-
-                                </li>
-                            </ol>
-                        </li>
-                    </ol>
-                </div>
-  `
-}
-
 //********shortAjax********start
 const shortAjax = function (URL, obj = {}, cb) {
   fetch(URL, {
@@ -455,7 +414,6 @@ const App = function() {
         sort: true,
         animation: 150,
         fallbackOnBody: true,
-        // swapThreshold: 0.65,
         dataIdAttr: 'data-id',
         forceFallback: false,
         fallbackClass: "sortable-fallback",
@@ -501,7 +459,6 @@ const App = function() {
         onMove: function (/**Event*/evt, /**Event*/originalEvent) {
           // Example: https://jsbin.com/nawahef/edit?js,output
 
-          // const nodeId = 
           
           if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
             const branch = $(evt.related).closest('.tree_leaf');
@@ -572,26 +529,6 @@ const App = function() {
     },
 
     remove_modal: (id, name, iorf) => {
-      // return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
-      //           <div class="modal-dialog" role="document">
-            
-      //             <!-- Modal content-->
-      //             <div class="modal-content">
-      //               <div class="modal-header">
-      //                 <h4 class="modal-title">Remove images</h4>
-      //                 <button type="button" class="close" data-dismiss="modal" bb-media-click="close_name_modal">&times;</button>
-      //               </div>
-      //               <div class="modal-body">
-      //                     <p>Do You want to remove ${iorf === 'image' ? (name.length === 0 ? 'selected images' : 'image') : 'folder'} ${name}?</p>
-      //               </div>
-      //               <div class="modal-footer">
-      //                <button bb-media-click="close_name_modal" type="button" class="btn btn-primary btn-save" data-dismiss="modal">Close</button>
-      //                       <button type="button" data-id=${id} class="btn btn-secondary btn-close" bb-media-click="${iorf === 'image' ? 'remove_image_req' : 'remove_folder_req'}">Remove</button>
-      //               </div>
-      //             </div>
-            
-      //           </div>
-      //         </div>`);
               return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog" role="document">
             
@@ -622,10 +559,6 @@ const App = function() {
                 <div class="modal-content col-md-9 p-0">
                     <div class="modal-header" style="overflow: visible;">
                         <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>`
-
-                        // <button type="button" class="btn btn-action-popup" title="Edit image" data-dismiss="modal" data-toggle="modal" data-target="#imageeditMode"><i class="iconaction iconEditImageGrey"></i></button>
-                        // <button type="button" class="btn btn-action-popup" title="Download"  data-slideshow="download" ><i class="iconaction iconDownloadGrey"></i></button>
-
         +`</div>
                     <div class="modal-body text-center">
                     ${data.extension === 'pdf' ? `<iframe src="https://docs.google.com/gview?url=${data.url}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe><div class="modal-title"></div>` : `<div class="modal-title"><img src="${data.url}" data-slideshow="typeext" style="width:100%"></div>`}
@@ -654,14 +587,8 @@ const App = function() {
                 <div class="popupDetail col-md-3 p-0">
                     <div class="row p-t-10 p-b-10 justify-content-center">
                         <div class="text-center">`+
-                            // <button class="btn btn-default btn-block active" type="button" data-tabaction="details">Details</button>
           `<h4>${data.real_name}</h4></div>` +
-          // <div class="col-xs-4 col-md-4">
-          //     <button class="btn btn-default btn-block" type="button" data-tabaction="seo">SEO</button>
-          // </div>
-          // <div class="col-xs-4 col-md-4">
-          //     <button class="btn btn-default btn-block" type="button">Option 3</button>
-          // </div>
+          
           `</div>
                     <div class="row rowsection collapse in show" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
@@ -702,15 +629,7 @@ const App = function() {
               data.updated_at
               }</span></td>
                                     </tr>` +
-          // <tr>
-          //     <th>Version</th>
-          //     <td>
-          //         <div class=" col-xs-3 p-l-0">
-          //             <select class="form-control"  data-slideshow="version"></select>
-          //         </div>
-          //         <button type="button" class="btn btn-default p-l-5 p-r-5" data-action="makeasDefault">Make as Default</button>
-          //     </td>
-          // </tr>
+         
           `</table>
                             </div>
                             <div class="table-responsive">
@@ -1016,20 +935,16 @@ const App = function() {
           return true;
         }
       }
-      // currentLeaf.closest('tree_leaf').length !== 0 && this.helpers.upToHead(currentLeaf.closest('tree_leaf'));
       this.helpers.count = 0;
     },
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, name) => {
-      // console.table({id, name})
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      // breadCrumbsList.innerHTML = ;
       
       const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
       this.helpers.upToHead(currentLeaf)
 
       if(id !== 1) {
-        // breadCrumbsData.push({id, name});
         breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
                                           bb-media-click="get_folder_items" >
                                         <a style="
@@ -1050,46 +965,6 @@ const App = function() {
                                     ">Drive</a>
                                       </li>`
       }
-
-
-
-      // makeBreadCrumbsItem: (key, name, state) => {
-      //   return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
-      //                 bb-media-click="get_folder_items" >
-      //               <a>${name}</a>
-      //             </li>`);
-      // },
-
-
-
-
-//       $('document').ready(() => {
-// var count = 0;
-//         const getTreeData = (data, id) => {
-
-//           const element = data.find((el) => {
-//             return Number(el.id) === Number(id);
-//           });
-
-//           !Array.isArray(getTreeData.breadCrumbsData) && (getTreeData.breadCrumbsData = []);
-//           element && getTreeData.breadCrumbsData.unshift({id: element.id, name: element.name});
-//           element && (Number(element.parent_id) !== 1) && getTreeData(data, element.parent_id);
-//           count++;
-//         };
-
-
-//         const treeData = $('#folder-list2>ol').nestedSortable('toArray');
-//         treeData.shift();
-//         treeData[0] && (treeData[0].parent_id = "1");
-//         getTreeData(treeData, id);
-
-//         getTreeData.breadCrumbsData.length > 0 && getTreeData.breadCrumbsData
-//             .map((el, index) => {
-//               index === getTreeData.breadCrumbsData.length-1 ?
-//                   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'disabled') :
-//                   breadCrumbsList.innerHTML += self.htmlMaker.makeBreadCrumbsItem(el.id, el.name, 'active');
-//             });
-//       });
     },
     //********App -> helpers -> makeBreadCrumbs********end
 
@@ -1856,28 +1731,6 @@ const App = function() {
         () => {
           resolve(true);
           cb()
-          // !elm.closest(".folder-container") ? $(`div[data-id=${'' + id}]`).closest(".folder-container").remove() : elm.closest(".folder-container").remove();
-          // close_name_modal();
-
-          // const ol = leaf.closest('ol');
-          // const li = leaf.closest('li');
-          // const key = ol.closest('li').attr('data-id');
-          // const name = ol.closest('li').children('div')[0] ? ol.closest('li').children('div')[0].innerText : null;
-
-          // li.remove();
-          // name && ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
-
-          // if(globalFolderId === 1) {
-          //   tree.find(`[data-id="${id}"]`).remove();
-
-          // }
-          // const ol = leaf.closest('ol');
-          // const li = leaf.closest('li');
-          // const key = ol.closest('li').attr('data-id');
-          // const name = ol.closest('li').children('div')[0].innerText;
-          //
-          // li.remove();
-          // ol.children().length === 0 && ol.closest('li').replaceWith(makeTreeLeaf(key, name));
         }
       );
     },
@@ -1893,20 +1746,6 @@ const App = function() {
           this.events.close_name_modal();
       });
     },
-
-    // remove_image_items: (e) => {
-    //   e.preventDefault();
-    //   e.stopPropagation();
-    //   selectedImage.length !== 0 ? selectedImage.map((id) => {
-    //     this.requests.removeImage(
-    //         {
-    //           item_id: Number(id),
-    //           trash: false,
-    //           access_token: "string"
-    //         }
-    //     );
-    //   }) : this.events.show_remover();
-    // },
     //********App -> events -> remove_image********end
 
     //********App -> events -> edit_item********start
@@ -2025,9 +1864,6 @@ const App = function() {
         folder.addEventListener("dragleave", function (e) {
           if (e.preventDefault) e.preventDefault(); // allows us to drop
           e.stopPropagation();
-
-          // this.children[0].style.backgroundColor = 'white';
-          // this.children[0].style.color = '#294656';
           this.classList.remove("over");
           return false;
         });
@@ -2261,22 +2097,6 @@ const removeImages = () => {
 
     });
   });
-
-  // app.events.remove_image_req(undefined, ev, checkedFolderArray, resolve);
-  // app.requests.removeTreeFolder(
-  //   {
-  //     folder_id: checkedFolderArray,
-  //     // Number(id),
-  //     trash: true,
-  //     access_token: "string"
-  //   }, () => {
-  //     checkedImagesArray.map((folderId) => {
-  //       $('.remover-container-content').find(`[data-id="${folderId}"]`).closest('.folderitems').remove();
-  //     });
-  //     $('.remover-container-content').find('.folderitems').length === 0
-  //     && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
-  //   }
-  // )
 };
 
 const checkImage = (checkedImage) => {
@@ -2446,26 +2266,6 @@ document
       app.requests.emptyTrash();
     })
 
-
-    // transferImage: (obj = JSON.stringify({}), cb) => {
-    //   shortAjax("/api-media/transfer-item", obj, res => {
-    //     if (!res.error) {
-    //       this.requests.drawingItems();
-    //     }
-    //   });
-    // },
-    // //********App -> requests -> transferImage********end
-
-    // //********App -> requests -> transferFolder********start
-    // transferFolder: (obj = {}, cb) => {
-    //   shortAjax("/api-media/get-sort-folder", obj, res => {
-    //     if (!res.error) {
-    //       this.requests.drawingItems();
-    //       cb && cb();
-    //     }
-    //   });
-    // },
-
     $('body').on('click', '.undo_delete_js', function() {
       const imagesArray = [];
       const folderArray = [];
@@ -2561,12 +2361,7 @@ document
       const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
 
       transferMove(activeImages, activeFolders, selectedFolder, () => {
-        // app.requests.drawingItems({
-        //   folder_id: 1,
-        //   files: true,
-        //   access_token: "string"
-        // },
-        // true)
+ 
 
         const from = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${app.globalFolderId}"]`);
         const to = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"]`);
@@ -2646,7 +2441,6 @@ document
               onMove: function (/**Event*/evt, /**Event*/originalEvent) {
                 // Example: https://jsbin.com/nawahef/edit?js,output
       
-                // const nodeId = 
                 
                 if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
                   const branch = $(evt.related).closest('.tree_leaf');
