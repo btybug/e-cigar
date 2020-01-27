@@ -247,7 +247,7 @@ $(document).ready(function () {
                     total_price += $(this).data('single-price')*1;
                 }
             });
-            return total_price * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val()*1;
+            return (total_price * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val()*1).toFixed(2);
         };
 
         const setOfferPrice = (offer, offerPrice) => {
