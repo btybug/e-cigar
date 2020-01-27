@@ -302,7 +302,7 @@ $(document).ready(function () {
         };
         const setTotalPrice = (totalPrice) => {
             // console.log(totalPrice, 222222222222222222);
-            totalPrice !== undefined && $('.continue-shp-wrapp .price-place-summary').html(`${getCurrencySymbol()}${totalPrice}`);
+            totalPrice !== undefined && $('.continue-shp-wrapp .price-place-summary').html(`${getCurrencySymbol()}${Number(totalPrice).toFixed(2)}`);
         };
 
 
