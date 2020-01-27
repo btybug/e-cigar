@@ -396,6 +396,17 @@ const App = function() {
     
       makeItem: function(item) {
         return `<li class="item" data-id="${item.id}" draggable='true'>Item ${item.id}</li>`
+      },
+
+      removeTree: (folderId) => {
+        const brench = $(`.left--media-col .media-tree_leaf-wrapper .tree_leaf[data-id="${folderId}"]`).parent('.tree_branch');
+        $(`.left--media-col .media-tree_leaf-wrapper .tree_leaf[data-id="${folderId}"]`).remove();
+        if(brench.find('.tree_leaf').length === 0) {
+          brench.closest('.tree_leaf').removeClass('tree_leaf_with_branch');
+          brench.closest('.tree_leaf').addClass('tree_leaf_without_branch');
+          brench.closest('.tree_leaf').find('.icon-folder-opening i').removeClass('d-inline');
+          brench.closest('.tree_leaf').find('.icon-folder-opening i').addClass('d-none');
+        }
       }
     },
 
@@ -474,7 +485,6 @@ const App = function() {
               }
             }
           }
-
         }
       });
     }
@@ -1465,7 +1475,7 @@ const App = function() {
     get_folder_items: (elm, e) => {
       const self = this;
       if(e.type === 'dblclick') {
-        if($(e.target).closest('.tree_leaf').length !== 0) {
+        if($(e.target).closest('.tree_leaf').length !== 0 || $(e.target).closest('.bread-crumbs-list').length > 0) {
           return true;
         }
         !$(e.target).hasClass('closer') && (function(){
@@ -1484,7 +1494,7 @@ const App = function() {
           }
         })();
       } else if(e.type === 'click') {
-        if($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0 && $(e.target).closest('.icon-folder-opening').length === 0) {
+        if(($(e.target).closest('.media__folder-list').find('.media-tree_leaf-wrapper').length !== 0 && $(e.target).closest('.icon-folder-opening').length === 0) || $(e.target).closest('.bread-crumbs-list').length > 0) {
           const id = elm.closest("[data-id]").getAttribute("data-id");
           if(globalFolderId === id) {
             return true;
@@ -2022,8 +2032,11 @@ const remove_req_function = async (ev, images_ids, folders_ids) => {
       folder_id: app.globalFolderId,
       files: true,
       access_token: "string"
-    }, true,
+    }, false,
     () => {
+      folders_ids.map((folderId) => {
+        app.htmlMaker.myFuckingTree.removeTree(folderId)
+      })
       app.events.close_name_modal();
     });
   })
@@ -2057,7 +2070,6 @@ const removeImages = () => {
   const checkedFolderArray = []
   const uncheckedImagesArray = [];
   const uncheckedFolderArray = [];
-
   $.each($('.check-image'), (index, image) => {
     $(image).prop("checked") ? checkedImagesArray.push($(image).closest('[data-id]').attr('data-id')) : uncheckedImagesArray.push($(image).closest('[data-id]').attr('data-id'));
   });
@@ -2086,16 +2098,18 @@ const removeImages = () => {
   app.events.remove_folder_req(undefined, undefined, checkedFolderArray, () => {
     checkedFolderArray.map((folderId) => {
       $('.remover-container-content').find(`[data-id="${folderId}"]`).closest('.folderitems').remove();
+      app.htmlMaker.myFuckingTree.removeTree(folderId)
     });
+
     $('.remover-container-content').find('.folderitems').length === 0
     && $('.remove-button_container').empty() && $('.remover-container-content').append('<p class="remove_title" style="margin: 85px auto;">Drag & drop files you want to delete...</p>');
   }, () => {
-    checkedFolderArray.map((imageId) => {
-      $(`.media_right_content .folderitems .folder-container [data-id="${imageId}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
+    checkedFolderArray.map((folderId) => {
+      $(`.media_right_content .folderitems .folder-container [data-id="${folderId}"]`).closest('.file-box').addClass('checked-for-remove').removeClass('active');
       // app.selectedImage.length = 0;
-      app.requests.drawingItems(undefined, true);
-
     });
+    console.log(22222222222222)
+    app.requests.drawingItems(undefined, false);
   });
 };
 
