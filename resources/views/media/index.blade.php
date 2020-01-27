@@ -442,6 +442,11 @@
   cursor: pointer;
   color: #5f6368;
   border-radius: 0 20px 20px 0;
+  border: 1px solid transparent;
+}
+
+.media-tree_leaf-wrapper .tree_leaf_content.over{
+  border: 1px solid #33b5e5;
 }
 
 .media-tree_leaf-wrapper .tree_leaf_content:not(.active):hover{
