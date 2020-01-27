@@ -95,7 +95,7 @@ const App = function() {
                 </div>
                 <div class="file-name">
                 <span class="icon-file"><i class="fa fa-file-o" aria-hidden="true"></i></span>
-                <span class="file-title click-no title-change"  contenteditable="true">${data.title}</span>
+                <span class="file-title click-no title-change"  contenteditable="true">${data.name}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
                 
@@ -1067,6 +1067,165 @@ const App = function() {
           });
         });
 
+        document.querySelectorAll(".tree_leaf_content").forEach(folder => {
+          folder.addEventListener("dragover", function (e) {
+            if (e.preventDefault) e.preventDefault(); // allows us to drop
+            e.dataTransfer.dropEffect = "copy";
+            this.classList.add("over");
+            return false;
+          });
+          folder.addEventListener("dragleave", function (e) {
+            if (e.preventDefault) e.preventDefault(); // allows us to drop
+            this.classList.remove("over");
+            return false;
+          });
+          folder.addEventListener("drop", function (e, file) {
+            this.classList.remove("over");
+  
+      //       function addEventHandler(obj, evt, handler) {
+      //         if(obj.addEventListener) {
+      //             // W3C method
+      //             obj.addEventListener(evt, handler, false);
+      //         } else if(obj.attachEvent) {
+      //             // IE method.
+      //             obj.attachEvent('on'+evt, handler);
+      //         } else {
+      //             // Old school method.
+      //             obj['on'+evt] = handler;
+      //         }
+      //     }
+  
+  
+  
+      //     e = e || window.event; // get window.event if e argument missing (in IE)   
+      //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
+      //   // alert('asasasasas')
+      //   var dt    = e.dataTransfer;
+      //   var files = dt.files;
+      //   for (var i=0; i<files.length; i++) {
+      //     var file = files[i];
+      //     var reader = new FileReader();
+            
+      //     //attach event handlers here...
+         
+      //     reader.readAsDataURL(file);
+      //   }
+  
+      //   var list = document.querySelector('.upload-content')
+  
+      //   Function.prototype.bindToEventHandler = function bindToEventHandler() {
+      //     var handler = this;
+      //     var boundParameters = Array.prototype.slice.call(arguments);
+      //     //create closure
+      //     return function(e) {
+      //         e = e || window.event; // get window.event if e argument missing (in IE)   
+      //         boundParameters.unshift(e);
+      //         handler.apply(this, boundParameters);
+      //     }
+      //   };
+  
+  
+  
+      //   addEventHandler(reader, 'loadend', function(e, file) {
+      //     var bin           = this.result; 
+      //     var newFile       = document.createElement('div');
+      //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
+      //     // list.appendChild(newFile);  
+      //     var fileNumber = list.getElementsByTagName('div').length;
+      //     status.innerHTML = fileNumber < files.length 
+      //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
+      //                      : 'Done loading. processed '+fileNumber+' files.';
+      
+      //     var img = document.createElement("img"); 
+      //     img.file = file;   
+      //     img.src = bin;
+      //     // list.appendChild(img);
+  
+      //     let formData = new FormData();
+  
+      //     formData.append('item[]', file);
+      //     formData.append('_token', $('[name="csrf-token"]').attr('content'));
+      //     formData.append('folder_id', '1');
+  
+      //     fetch('/api-media/upload', {
+      //       method: "post",
+      //       headers: {
+      //         "Content-Type": "multipart/form-data; boundary=----7dd322351017c",
+      //         Accept: "application/json, text/javascript, */*; q=0.01",
+      //         "X-Requested-With": "XMLHttpRequest",
+      //         "X-CSRF-Token": $('input[name="_token"]').val()
+      //       },
+      //       credentials: "same-origin",
+      //       body: formData
+      //     })
+      //       .then(function (response) {
+      //         return response.json();
+      //       })
+      //       .then(function (json) {
+      //         return console.log(json);
+      //       })
+      //       .catch(function (error) {
+      //         console.log(error);
+      //       });
+      //     // shortAjax(, formData, () => {
+      //     //   console.log('Hurrraaaa')
+      //     // });
+      // }.bindToEventHandler(file));
+            const transfer = JSON.parse(e.dataTransfer.getData("node_id"));
+  
+            let nodeId = self.htmlMaker.dragElementOfTree || transfer.data;
+            const type = transfer.item;
+            let parentId = e.target
+                .closest(".tree_leaf")
+                .getAttribute("data-id");
+            if(type === 'image') {
+                  self.requests.transferImage(
+                    {
+                      item_id: nodeId,
+                      folder_id: Number(parentId),
+                      access_token: "string"
+                    }
+                  );
+            } else if(type === 'folder') {
+              if(self.htmlMaker.dragElementOfTree || $($('.folderitems').find(`[data-id="${nodeId}"]`)[0]).closest('.folder-container')) {
+                let nodeId = transfer.data;
+                Number(nodeId) !== Number(parentId) && self.requests.transferFolder(
+                  {
+                    folder_id: nodeId,
+                    parent_id: Number(parentId),
+                    access_token: "string"
+                  },
+                    () => {
+                      nodeId.map((id) => {
+                        self.htmlMaker.treeMove(id, parentId);
+                      })
+                      
+                      self.requests.drawingItems({
+                        folder_id: self.globalFolderId,
+                        files: true,
+                        access_token: "string"
+                      }, true,
+                      () => {
+                      });
+                      
+                    }
+                );
+              } else {
+                self.requests.transferImage(
+                  {
+                    item_id: [Number(nodeId)],
+                    folder_id: Number(parentId),
+                    access_token: "string"
+                  }
+                );
+              }
+            }
+            self.htmlMaker.dragElementOfTree = null;
+            self.htmlMaker.currentId = null;
+            self.selectedImage.length = 0;
+          });
+        });
+
       document.querySelectorAll(".folder-container").forEach(folder => {
         folder.addEventListener("dragover", function (e) {
           if (e.preventDefault) e.preventDefault(); // allows us to drop
@@ -1273,6 +1432,7 @@ const App = function() {
           if (tree) {
             this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
           }
+          $('.search_item_js').val('');
           this.globalFolderId = res.settings.id;
           this.helpers.makeBreadCrumbs(res.settings.id, res.settings.slug);
           this.helpers.makeDnD();
