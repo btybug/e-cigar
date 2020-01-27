@@ -312,36 +312,51 @@
 
     </script>
     <script>
-        function orderSummeryScroll(){
-            if($( window ).width()>=992){
-                let orderSummery = $('.shopping__cart-wrapper .card.order-summary');
-                let orderSummeryHeight = $(orderSummery).height();
-                let orderSummeryParent = $(orderSummery).parent().width();
-                let fixmeTop = $(orderSummery).offset().top - 50;
-
-                $(window).scroll(function() {
-
-                    let currentScroll = $(window).scrollTop();
-
-                    if (currentScroll >= fixmeTop) {
-                        $(orderSummery).addClass('fix_order-summary').width(orderSummeryParent)
-                        $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
-                            'min-height':orderSummeryHeight+'px'
-                        })
-                    } else {
-                        $(orderSummery).removeClass('fix_order-summary').width('auto')
-                        $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
-                            'min-height':'auto'
-                        })
-                    }
-
-                });
+        function orderSummeryScroll(width){
+            let orderSummery = $('.shopping__cart-wrapper .card.order-summary');
+            if(!(width >= 992)) {
+                $(orderSummery).removeClass('fix_order-summary');
+                $(orderSummery).width('auto');
+                $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                    'min-height': 'auto'
+                })
             }
-
         }
+
+        $(window).on('scroll', function(ev) {
+            let orderSummery = $('.shopping__cart-wrapper .card.order-summary');
+            console.log(orderSummery[0].offsetTop)
+            if($(window).width() >= 992) {
+                let fixmeTop = orderSummery.offset().top - 50;
+                let currentScroll = $(window).scrollTop();
+                let orderSummeryHeight = orderSummery.height();
+                let orderSummeryParent = orderSummery.parent().width();
+                console.log('currentScroll ->', currentScroll, 'fixmeTop->', fixmeTop)
+                if (currentScroll >= 135) {
+                    $(orderSummery).addClass('fix_order-summary').width(orderSummeryParent)
+                    $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                        'min-height': orderSummeryHeight + 'px'
+                    })
+                } else {
+                    $(orderSummery).removeClass('fix_order-summary').width('auto')
+                    $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                        'min-height': 'auto'
+                    })
+                }
+            } else {
+                let orderSummery = $('.shopping__cart-wrapper .card.order-summary');
+                $(orderSummery).removeClass('fix_order-summary');
+                $(orderSummery).width('auto');
+                $(orderSummery).closest('.shopping__cart-wrapper').find('.shopping-cart-inner').css({
+                    'min-height':'auto'
+                })
+            }
+        });
+
+
         orderSummeryScroll();
-        $( window ).resize(function() {
-            orderSummeryScroll()
+        $( window ).on('resize', function(ev) {
+            orderSummeryScroll(ev.target.screen.width)
         });
 //        $(document).ready(function () {
 

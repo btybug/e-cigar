@@ -21470,11 +21470,12 @@ max-width: 100%;
 .shopping__cart-tab-table-wall .price-col {
     font-size: 38px;
     letter-spacing: -2px;
-    margin-right: 23px;
+    /*margin-right: 23px;*/
+    margin-right: 0;
 }
 
 .shopping__cart-tab-table-wall .price-td {
-    width: 165px;
+    width: 180px;
 }
 
 .shopping__cart-tab-table-wall .qty-td, .shopping__cart-tab-table-wall .price-td {
@@ -23173,6 +23174,9 @@ header .header-bottom .share-button svg {
     }
     .shopping__cart-no-reg .log-reg-wrapper{
         max-width: 100%;
+    }
+    .shopping__cart-wrapper .shopping-cart-head{
+        padding-left: 0;
     }
 }
 @media (max-width: 991px) {
