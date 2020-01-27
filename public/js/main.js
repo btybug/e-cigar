@@ -259,7 +259,7 @@ $(document).ready(function () {
             let offer_total_price = 0;
             $('.added-offers').find('.special__popup-content-right-product-price').each(function(key) {
                 console.log(key);
-                offer_total_price += $(this).data('price');
+                offer_total_price += Number($(this).data('price')).toFixed(2);
             });
             $('.offer-total-price').html(`${getCurrencySymbol()}${offer_total_price}`);
         };
