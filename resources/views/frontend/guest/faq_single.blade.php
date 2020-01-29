@@ -14,8 +14,7 @@
                         <div class="faq-single-content">
                             <h1 class="font-sec-reg font-36 text-main-clr faq-single-main-title">{!! $faq->question !!}</h1>
                             <div class="faq-single-desc">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                Ab aperiam consequuntur deleniti ducimus earum enim, eos et eum explicabo fugit iure minima modi natus obcaecati perspiciatis quam recusandae repellendus rerum.
+                                {!! $faq->answer !!}
                             </div>
 
                         </div>
