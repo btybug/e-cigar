@@ -50,6 +50,11 @@ class AppController extends Controller
 
     public function addProduct(Request $request)
     {
-        dd($request->all());
+        $shop_id=$request->get('shop_id');
+        $items=$request->get('products');
+        $warehouse=Warehouse::findOrFail($shop_id);
+        $defaultRack=$warehouse->default_rack();
+        $warehouse->appItems()->attach($items,['rack_id'=>$defaultRack->id]);
+        return response()->json(['error'=>false]);
     }
 }

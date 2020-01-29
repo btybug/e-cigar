@@ -901,7 +901,7 @@ class DatatableController extends Controller
             ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->select('items.*', 'item_translations.name', 'item_translations.short_description', 'barcodes.code',
+            ->select('items.*', 'item_translations.name', 'app_items.qty as app_qty','item_translations.short_description', 'barcodes.code',
                 'categories_translations.name as category')
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $id)
@@ -916,7 +916,7 @@ class DatatableController extends Controller
                 }
                 return $str;
             })->addColumn('quantity', function ($attr) {
-                return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
+                return $attr->app_qty;
             })
             ->addColumn('barcode_id', function ($attr) {
                 return ($attr->barcode) ? $attr->barcode->code : 'no barcode';

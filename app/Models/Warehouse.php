@@ -63,6 +63,11 @@ class Warehouse extends Translatable
         return $this->belongsToMany(Items::class, 'filter_items', 'filter_id', 'item_id');
     }
 
+    public function appItems()
+    {
+        return $this->belongsToMany(Items::class, 'app_items', 'warehouse_id', 'item_id');
+    }
+
     public function categories()
     {
         return $this->hasMany(WarehouseRacks::class,'warehouse_id');
@@ -83,9 +88,6 @@ class Warehouse extends Translatable
         return $this->belongsToMany(User::class,'app_staff','warehouses_id','users_id');
     }
 
-    public function appitems()
-    {
-        return $this->belongsToMany(Items::class,'warehouses_app_items','warehouse_id','item_id');
-    }
+
 
 }

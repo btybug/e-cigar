@@ -20,7 +20,7 @@ class CreateAppItemsTable extends Migration
             $table->unsignedInteger('rack_id');
             $table->unsignedInteger('qty')->default(0);
             $table->timestamps();
-
+            $table->unique(['warehouse_id', 'item_id']);
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('set null');
             $table->foreign('rack_id')->references('id')->on('warehouse_racks')->onDelete('set null');
