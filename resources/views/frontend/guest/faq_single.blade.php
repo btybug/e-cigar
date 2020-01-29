@@ -19,7 +19,7 @@
                             </div>
 
                         </div>
-                        @include("frontend.comments.index")
+{{--                        @include("frontend.comments.index")--}}
                     </div>
                     <div class="col-md-3">
                         <div class="faq-single-ads">
