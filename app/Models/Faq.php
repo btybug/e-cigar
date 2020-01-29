@@ -115,4 +115,10 @@ class Faq extends Translatable
         $seo = $this->seo;
         return ($seo) ? $seo->{$name} : null;
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'section_id', 'id')
+            ->where('section','faq');
+    }
 }

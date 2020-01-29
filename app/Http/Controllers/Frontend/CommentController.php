@@ -23,7 +23,6 @@ class CommentController extends Controller
     public function addComment(Request $request,Settings $settings)
     {
         $data = $request->all();
-        dd($data);
         $setting = $settings->getEditableData('admin_comments_setting');
 
         if($setting->status === null){
@@ -69,13 +68,23 @@ class CommentController extends Controller
             return \Response::json(['errors' => $validator->messages(),'success' => false]);
         }
 
+        $config = config("comments");
+
+        if(! isset($config[$data['section']])){
+            $message = "Something is wrong, please try again later";
+            return \Response::json(['success' => false,'message' => $message,'html' => '']);
+        }
+
+
+
         $comment = new Comment();
         $comment->create($result);
-        $post = Posts::find($data['post_id']);
-        $comments = $post->comments()->main()->get();
-        if($setting->status == 1){
 
-            $html = \View::make('frontend.comments.list',compact('comments'))->render();
+        $m = $config[$data['section']];
+        $model = $m::find($data['section_id']);
+       
+        if($setting->status == 1){
+            $html = \View::make('frontend.comments.list',compact('model'))->render();
             $message = "Success";
             $render = true;
         }else{

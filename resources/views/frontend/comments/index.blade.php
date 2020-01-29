@@ -46,7 +46,8 @@
                     </div>
                 </div>
                 <div class="comments-refresh">
-                    @include('frontend.blog.single_post_comments')
+
+                    @include('frontend.comments.list')
                 </div>
                 <div class="message-place">
 

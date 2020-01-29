@@ -62,6 +62,11 @@ class Comment extends Model
         return $this->belongsTo(Posts::class, 'section_id', 'id')->where('section','posts');
     }
 
+    public function faq()
+    {
+        return $this->belongsTo(Faq::class, 'section_id', 'id')->where('section','faq');
+    }
+
     public function children()
     {
         return $this->hasMany(self::class, 'parent_id', 'id')

@@ -18,7 +18,7 @@
                             </div>
 
                         </div>
-{{--                        @include("frontend.comments.index")--}}
+                        @include("frontend.comments.index",['model' => $faq,'type' => 'faq'])
                     </div>
                     <div class="col-md-3">
                         <div class="faq-single-ads">

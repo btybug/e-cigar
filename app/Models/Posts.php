@@ -106,7 +106,8 @@ class Posts extends Translatable
 
     public function comments()
     {
-        return $this->hasMany(Comment::class, 'section_id', 'id')->where('section','posts');
+        return $this->hasMany(Comment::class, 'section_id', 'id')
+            ->where('section','posts');
     }
 
     public function approvedComments()

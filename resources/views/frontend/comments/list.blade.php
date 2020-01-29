@@ -1,1 +1,1 @@
-{!! commentRender($comments) !!}
+{!! commentRender($model->comments()->main()->get()) !!}
