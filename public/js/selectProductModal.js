@@ -191,6 +191,7 @@ $("body").on("click", ".done_select_product_js", function (ev) {
   if($(ev.target).data('ajax')) {
     const products = [];
     const table = $('#stocks-table').DataTable();
+    const shop_id = $('#current-shop').val()
     $('#productsModal .select_product_js').each(function(index, product) {
       if($(product).prop('checked')) {
           const id = $(product).closest('.add-related-event').data('id');
@@ -207,7 +208,7 @@ $("body").on("click", ".done_select_product_js", function (ev) {
           
       }
     })
-    AjaxCall("/admin/app/products/add-product", {products}, function (res) {
+    AjaxCall("/admin/app/products/add-product", {products, shop_id}, function (res) {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
           table.ajax.reload();
