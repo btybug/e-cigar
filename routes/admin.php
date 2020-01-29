@@ -765,6 +765,7 @@ Route::group(['prefix' => 'ebay'], function () {
 Route::group(['prefix' => 'app'], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_app_products');
+        Route::post('/add-product', 'Admin\App\AppController@products')->name('admin_app_add_product');
 
     });
     Route::group(['prefix' => 'orders'], function () {
