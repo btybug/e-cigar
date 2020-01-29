@@ -29,6 +29,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+//        dd(ActivityLogs::where('user_id',1)->get());
 //        dd(ActivityLogs::destroy(['5e07afd83f21000064001b26']));
 //        dd(ActivityLogs::action('stock','create','16'));
 //        40564344854
