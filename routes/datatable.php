@@ -46,6 +46,7 @@ Route::group(['prefix'=>'datatables'],function(){
     Route::get('/items/sales/{item_id}','Admin\DatatableController@getItemSales')->name('datatable_item_sales');
 
     Route::get('/store/get-items','Admin\DatatableController@getAllItems')->name('datatable_all_items');
+    Route::get('/store/get-app-items/{id}','Admin\DatatableController@getAllAppItems')->name('datatable_all_app_items');
     Route::post('/store/get-items-in-modal','Admin\DatatableController@getAllItemsInModal')->name('datatable_all_items_in_modal');
     Route::get('/store/get-items-archived','Admin\DatatableController@getAllItemsArchived')->name('datatable_all_items_archive');
     Route::get('/inventory/get-all-suppliers','Admin\DatatableController@getAllSuppliers')->name('datatable_all_suppliers');

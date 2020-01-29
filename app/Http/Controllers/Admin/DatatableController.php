@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\ReviewStatusTypes;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLogs;
+use App\Models\App\AppItems;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Brands;
@@ -891,6 +892,44 @@ class DatatableController extends Controller
                     . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
                     . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
                     . "</div>";
+            })->rawColumns(['actions', 'category'])->make(true);
+    }
+    public function getAllAppItems($id)
+    {
+        return Datatables::of(AppItems::join('items','app_items.item_id','=','items.id')
+            ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
+            ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->select('items.*', 'item_translations.name', 'item_translations.short_description', 'barcodes.code',
+                'categories_translations.name as category')
+            ->groupBy('items.id')
+            ->where('app_items.warehouse_id', $id)
+            ->where('items.is_archive', false)
+            ->where('item_translations.locale', \Lang::getLocale()))
+            ->editColumn('category', function ($attr) {
+                $str = '';
+                if ($attr->categories && count($attr->categories)) {
+                    foreach ($attr->categories as $category) {
+                        $str .= "<span class='badge badge-dark'>" . $category->name . "</span>";
+                    }
+                }
+                return $str;
+            })->addColumn('quantity', function ($attr) {
+                return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
+            })
+            ->addColumn('barcode_id', function ($attr) {
+                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
+            })
+            ->editColumn('brand_id', function ($attr) {
+                $brand = Category::find($attr->brand_id);
+                return ($brand) ? $brand->name : 'no brand';
+            })->editColumn('status', function ($attr) {
+                return ($attr->status) ? "Active" : 'Draft';
+            })->editColumn('long_description', function ($attr) {
+                return $attr->long_description;
+            })->addColumn('actions', function ($attr) {
+                return "<div class='datatable-td__action'></div>";
             })->rawColumns(['actions', 'category'])->make(true);
     }
 
