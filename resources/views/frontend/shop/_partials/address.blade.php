@@ -8,7 +8,7 @@
                         {{--                    </div>--}}
                         <ul class="nav nav-pills">
                             <li class="nav-item col-md-3">
-                                <a class="item visited d-flex align-items-center justify-content-between"
+                                <a href="{!! route('shop_my_cart') !!}" class="item visited d-flex align-items-center justify-content-between"
                                    ref="javascript:void(0);">
                                     <span class="font-sec-reg text-main-clr num">1</span>
                                     <span
