@@ -47,4 +47,9 @@ class AppController extends Controller
         $order=Orders::findOrfail($id);
         return $this->view('orders.view',compact('order'));
     }
+
+    public function addProduct(Request $request)
+    {
+        dd($request->all());
+    }
 }
