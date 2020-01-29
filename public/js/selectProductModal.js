@@ -187,44 +187,79 @@ $("body").on('click', '.select-stickers', function () {
 });
 
 
-$("body").on("click", ".done_select_product_js", function () {
-  if($('#productsModal').attr('data-url') !== 'url') {
+$("body").on("click", ".done_select_product_js", function (ev) {
+  if($(ev.target).data('ajax')) {
+    const products = [];
     $('#productsModal .select_product_js').each(function(index, product) {
       if($(product).prop('checked')) {
           const id = $(product).closest('.add-related-event').data('id');
           const name =  $(product).closest('.add-related-event').data('name');
-          $(".get-all-products-tab")
-          .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
-                      href="#">${name}</a>
-                      <div class="buttons">
-                      <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
-                      </div>
-                      <input type="hidden" name="related_products[]" value="${id}" />
-                      </li>`);
-      }
-    })
-  } else {
-    $('#productsModal .select_product_js').each(function(index, product) {
-      if($(product).prop('checked')) {
-          const id = $(product).closest('.add-related-event').data('id');
-          const product_url =  $(product).closest('.add-related-event').data('product-url');
-          const key = $('#productsModal').attr('data-url-key');
-
-          $(`.other_images-item[data-key="${key}"]`).length !== 0 
-            ? $(`.other_images-item[data-key="${key}"]`)
-                .find('.product_id_hidden_js').val(id)
-            : $(`.banner-item[data-key="${key}"]`)
-                .find('.product_id_hidden_js').val(id);
+          products.push(id)
+          // $(".get-all-products-tab")
+          // .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+          //             href="#">${name}</a>
+          //             <div class="buttons">
+          //             <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+          //             </div>
+          //             <input type="hidden" name="related_products[]" value="${id}" />
+          //             </li>`);
           
-          $(`.other_images-item[data-key="${key}"]`).length !== 0 
-          ? $(`.other_images-item[data-key="${key}"]`)
-              .find('.url_feald').val(product_url)
-          : $(`.banner-item[data-key="${key}"]`)
-              .find('.url_feald').val(product_url);
       }
     })
-  }
+    AjaxCall("/admin/app/products/add-product", {products}, function (res) {
+      if (!res.error) {
+          $("#stickerModal .modal-body .all-list").empty();
+          // res.data.forEach(item => {
+          //     let html = `<li data-id="${item.id}" class="option-elm-modal">
+          //                   <div class="btn btn-primary add-related-event searchable" data-name="${item.name}"
+          //                     data-id="${item.id}"><input type="checkbox" class="select_product_js"/>
+          //                   </div>
+          //                   <a href="#">${item.name}</a>
+          //                 </li>`;
+             
+          //     $("#stickerModal .modal-body .all-list").append(html);
+          // });
+          // $("#stickerModal").modal();
+      }
+    });
+  } else {
+    if($('#productsModal').attr('data-url') !== 'url') {
+      $('#productsModal .select_product_js').each(function(index, product) {
+        if($(product).prop('checked')) {
+            const id = $(product).closest('.add-related-event').data('id');
+            const name =  $(product).closest('.add-related-event').data('name');
+            $(".get-all-products-tab")
+            .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                        href="#">${name}</a>
+                        <div class="buttons">
+                        <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        </div>
+                        <input type="hidden" name="related_products[]" value="${id}" />
+                        </li>`);
+        }
+      })
+    } else {
+      $('#productsModal .select_product_js').each(function(index, product) {
+        if($(product).prop('checked')) {
+            const id = $(product).closest('.add-related-event').data('id');
+            const product_url =  $(product).closest('.add-related-event').data('product-url');
+            const key = $('#productsModal').attr('data-url-key');
   
+            $(`.other_images-item[data-key="${key}"]`).length !== 0 
+              ? $(`.other_images-item[data-key="${key}"]`)
+                  .find('.product_id_hidden_js').val(id)
+              : $(`.banner-item[data-key="${key}"]`)
+                  .find('.product_id_hidden_js').val(id);
+            
+            $(`.other_images-item[data-key="${key}"]`).length !== 0 
+            ? $(`.other_images-item[data-key="${key}"]`)
+                .find('.url_feald').val(product_url)
+            : $(`.banner-item[data-key="${key}"]`)
+                .find('.url_feald').val(product_url);
+        }
+      })
+    }
+  }
 });
 
 $("body").on("click", ".done_select_attributes_js", function () {
