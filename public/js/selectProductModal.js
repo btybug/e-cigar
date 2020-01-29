@@ -190,6 +190,7 @@ $("body").on('click', '.select-stickers', function () {
 $("body").on("click", ".done_select_product_js", function (ev) {
   if($(ev.target).data('ajax')) {
     const products = [];
+    const table = $('#stocks-table').DataTable();
     $('#productsModal .select_product_js').each(function(index, product) {
       if($(product).prop('checked')) {
           const id = $(product).closest('.add-related-event').data('id');
@@ -208,7 +209,8 @@ $("body").on("click", ".done_select_product_js", function (ev) {
     })
     AjaxCall("/admin/app/products/add-product", {products}, function (res) {
       if (!res.error) {
-          $("#stickerModal .modal-body .all-list").empty();
+          $("#productsModal .modal-body .all-list").empty();
+          table.ajax.reload();
           // res.data.forEach(item => {
           //     let html = `<li data-id="${item.id}" class="option-elm-modal">
           //                   <div class="btn btn-primary add-related-event searchable" data-name="${item.name}"
