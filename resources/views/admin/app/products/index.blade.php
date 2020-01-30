@@ -146,6 +146,26 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div class="modal fade edit_price_modal" id="editPriceModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Price</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                    
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary done_edit_price_js" data-ajax="true">Edit</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
     <input type="hidden" id="current-shop" value="{!! $q !!}">
 
     <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
@@ -566,21 +586,30 @@
                                     }
                                 },
                                 {
-                                    text: 'Quick Edit',
+                                    text: 'Edit Price',
                                     action: function ( e, dt, node, config ) {
-                                        const ids = [];
+                                        $('#editPriceModal .modal-body').html('');
                                         $('#stocks-table tbody tr.selected').each(function() {
-                                            ids.push($(this).find('td.id_n').text());
+                                            const edit_button = $(this).find('.edit_price_js');
+                                            const id = edit_button.data('id');
+                                            const name = edit_button.data('name');
+                                            const price = edit_button.data('price');
+                                            
+                                            $('#editPriceModal .modal-body').append(`<div class="d-flex"> 
+                                                <span>${name}</span>
+                                                <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
+                                            </div>`)
                                         });
+                                        $('#editPriceModal').modal('show');
 
 
-                                        if(ids.length > 0){
-                                            // alert(666)
-                                            window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
-                                        }
-                                        {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
-                                        {{--    console.log(res)--}}
-                                        {{--})--}}
+                                        // if(ids.length > 0){
+                                        //     // alert(666)
+                                        //     window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
+                                        // }
+                                        // {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
+                                        // {{--    console.log(res)--}}
+                                        // {{--})--}}
                                     },
                                 }
                             ]

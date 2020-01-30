@@ -311,3 +311,38 @@ $("body").on("click", ".remove-all-attributes", function(ev) {
       .closest("li")
       .remove();
 });
+
+
+$('body').on('click', '.edit_price_js', function(ev) {
+  const edit_button = $(ev.target);
+  const id = edit_button.data('id');
+  const name = edit_button.data('name');
+  const price = edit_button.data('price');
+
+  $('#editPriceModal .modal-body').html(`<div class="d-flex"> 
+    <span>${name}</span>
+    <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
+  </div>`)
+  console.log(id, name, price)
+  $('#editPriceModal').modal('show');
+})
+
+$('body').on('click', '.done_edit_price_js', function() {
+  const data = [];
+  const table = $('#stocks-table').DataTable();
+  $('#editPriceModal .price_input').each(function() {
+    const price_input = $(this);
+    data.push({
+      id: price_input.data('id'),
+      price: price_input.val()
+    })
+  })
+
+  console.log(data)
+  AjaxCall("/admin/app/products/multi-edit-price", {data}, function (res) {
+    if (!res.error) {
+        table.ajax.reload();
+        $('#editPriceModal').modal('hide');
+    }
+  });
+})
