@@ -20,7 +20,6 @@ class AppController extends Controller
 
     public function products(Request $request, $q = null)
     {
-        dd(route('admin_app_multi_edit_price'));
         $current=null;
         $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
             ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
