@@ -17,13 +17,13 @@ class CreateAppItemsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('item_id');
             $table->unsignedInteger('warehouse_id');
-            $table->unsignedInteger('rack_id');
-            $table->unsignedInteger('qty')->default(0);
+            $table->float('price');
+            $table->tinyInteger('status')->default(0);
             $table->timestamps();
             $table->unique(['warehouse_id', 'item_id']);
             $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
             $table->foreign('warehouse_id')->references('id')->on('warehouses')->onDelete('set null');
-            $table->foreign('rack_id')->references('id')->on('warehouse_racks')->onDelete('set null');
+
         });
     }
 
