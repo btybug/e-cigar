@@ -238,7 +238,7 @@ class DatatableController extends Controller
             return '<i class="' . $brand->icon . '"></i>';
         })
             ->addColumn('actions', function ($brand) {
-                return "<div class='datatable-td__action'>".(userCan('admin_blog_brands_edit')?"<a class='btn btn-warning' href='" . route('admin_blog_brands_edit', $brand->id) . "'><i class='fa fa-edit'></i></a>":null)."<a class='btn btn-danger' href='#'>x</a></div>";
+                return "<div class='datatable-td__action'>" . (userCan('admin_blog_brands_edit') ? "<a class='btn btn-warning' href='" . route('admin_blog_brands_edit', $brand->id) . "'><i class='fa fa-edit'></i></a>" : null) . "<a class='btn btn-danger' href='#'>x</a></div>";
             })->rawColumns(['actions', 'image', 'icon'])
             ->make(true);
 
@@ -252,7 +252,7 @@ class DatatableController extends Controller
             })->addColumn('options', function ($message) {
                 return '<input type="checkbox" data-id="' . $message->id . '">';
             })->addColumn('action', function ($message) {
-                return "<div class='datatable-td__action'>" . (userCan('admin_blog_contact_us_view') ? "<a class='btn btn-info' href='" . route('admin_blog_contact_us_view', $message->id) . "'><i class='fa fa-eye'></i></a>" : null) ."</div>";
+                return "<div class='datatable-td__action'>" . (userCan('admin_blog_contact_us_view') ? "<a class='btn btn-info' href='" . route('admin_blog_contact_us_view', $message->id) . "'><i class='fa fa-eye'></i></a>" : null) . "</div>";
             })->rawColumns(['action', 'options'])
             ->make(true);
     }
@@ -377,9 +377,9 @@ class DatatableController extends Controller
                 return BBgetDateFormat($stock->created_at) . ' ' . BBgetTimeFormat($stock->created_at);
             })
             ->addColumn('actions', function ($stock) {
-                return '<div class="datatable-td__action">'.
-                    (userCan('admin_stock_edit_offer')?'<a class="btn btn-warning mr-1" href="' . route("admin_stock_edit_offer", $stock->id) . '">Edit</a>':null) .
-                '</div>';
+                return '<div class="datatable-td__action">' .
+                    (userCan('admin_stock_edit_offer') ? '<a class="btn btn-warning mr-1" href="' . route("admin_stock_edit_offer", $stock->id) . '">Edit</a>' : null) .
+                    '</div>';
             })->rawColumns(['actions', 'name', 'image'])
             ->make(true);
     }
@@ -522,7 +522,7 @@ class DatatableController extends Controller
                 return ($attr->type) ? "Wholesaler" : "User";
             })
             ->addColumn('actions', function ($post) {
-                return "<div class='datatable-td__action'>".(userCan('admin_orders_invoice_edit')?"<a class='btn btn-warning' href='" . route('admin_orders_invoice_edit', $post->id) . "'>Edit</a>":null). "</div>";
+                return "<div class='datatable-td__action'>" . (userCan('admin_orders_invoice_edit') ? "<a class='btn btn-warning' href='" . route('admin_orders_invoice_edit', $post->id) . "'>Edit</a>" : null) . "</div>";
             })->rawColumns(['actions', 'status'])
             ->make(true);
     }
@@ -894,29 +894,42 @@ class DatatableController extends Controller
                     . "</div>";
             })->rawColumns(['actions', 'category'])->make(true);
     }
+
     public function getAllAppItems($id)
     {
-        return Datatables::of(AppItems::join('items','app_items.item_id','=','items.id')
+        return Datatables::of(AppItems::join('items', 'app_items.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->select('items.*', 'item_translations.name', 'app_items.qty as app_qty','item_translations.short_description', 'barcodes.code',
+            ->select(
+                'items.barcode_id',
+                'app_items.id',
+                'items.brand_id',
+                'app_items.status',
+                'app_items.price',
+                'app_items.created_at',
+                'app_items.item_id',
+                'item_translations.name',
+                'item_translations.short_description',
+                'barcodes.code',
                 'categories_translations.name as category')
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $id)
-            ->where('items.is_archive', false)
+            ->where('items.is_archive', false)->with('item')
             ->where('item_translations.locale', \Lang::getLocale()))
             ->editColumn('category', function ($attr) {
                 $str = '';
-                if ($attr->categories && count($attr->categories)) {
-                    foreach ($attr->categories as $category) {
+                $item = $attr->item;
+                if ($item->categories && count($item->categories)) {
+                    foreach ($item->categories as $category) {
                         $str .= "<span class='badge badge-dark'>" . $category->name . "</span>";
                     }
                 }
                 return $str;
-            })->addColumn('quantity', function ($attr) {
-                return $attr->app_qty;
+            })->addColumn('quantity', function ($attr) use ($id) {
+                $item = $attr->item;
+                return ($item->type == 'simple') ? $item->locations()->where('warehouse_id', $id)->sum('qty') : 'N/A';
             })
             ->addColumn('barcode_id', function ($attr) {
                 return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
@@ -929,7 +942,10 @@ class DatatableController extends Controller
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
-                return "<div class='datatable-td__action'></div>";
+                return "<div class='datatable-td__action'>"
+                    . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='#'>Edit Price</a>" : null) .
+                      (userCan('admin_items_edit') ? ($attr->status)?"<button class='btn btn-info app-product-status' data-href='".route('admin_app_draft_product',$attr->id)."'>Draft</button>":"<button class='btn btn-info app-product-status' data-href='".route('admin_app_activate_product',$attr->id)."'>Activate</button>" : null) .
+                    "</div>";
             })->rawColumns(['actions', 'category'])->make(true);
     }
 
@@ -1247,7 +1263,7 @@ class DatatableController extends Controller
             return BBgetDateFormat($item->created_at);
         })->editColumn('actions', function ($item) {
             $status = "";
-            if(userCan('admin_users_allow_edit_review')){
+            if (userCan('admin_users_allow_edit_review')) {
                 switch ($item->status) {
                     case ReviewStatusTypes::BLOCKED:
                         $status = "<a href='" . route('admin_users_approve_review', $item->id) . "' class='btn btn-success'>Publish</a>" .
@@ -1293,19 +1309,19 @@ class DatatableController extends Controller
     {
         return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id')))
             ->editColumn('status', function ($order) {
-                return '<span class="badge badge-'.$order->statusClass().'">' . $order->status() . '</span>';
+                return '<span class="badge badge-' . $order->statusClass() . '">' . $order->status() . '</span>';
             })->addColumn('amount', function ($order) {
                 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
                     return 'This is a server using Windows!';
                 } else {
-                    return money_format('%(#10n',$order->items()->sum('price')) . '$';
+                    return money_format('%(#10n', $order->items()->sum('price')) . '$';
                 }
 
             })
-            ->addColumn('actions', function ($attr){
-                $html = "<a class='btn btn-info' href='".route('admin_app_order_view',$attr->id)."'>View</a>";
+            ->addColumn('actions', function ($attr) {
+                $html = "<a class='btn btn-info' href='" . route('admin_app_order_view', $attr->id) . "'>View</a>";
                 return $html;
-            })->rawColumns(['actions','status'])
+            })->rawColumns(['actions', 'status'])
             ->make(true);
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin\App;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\App\AppItems;
+use App\Models\App\AppWarehouses;
 use App\Models\App\Orders;
 use App\Models\Brands;
 use App\Models\Category;
@@ -18,10 +20,12 @@ class AppController extends Controller
 
     public function products(Request $request,$id=null)
     {
-        $warehouse=Warehouse::all();
-        $q=($id)??$warehouse[0]->id;
+        $warehouse = Warehouse::whereIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
+        $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
+
+        $q = ($id && count($warehouse)) ? $id : $warehouse[0]->id;
         $warehouse=$warehouse->pluck('name','id');
-        return $this->view('products.index',compact('warehouse','q'));
+        return $this->view('products.index', compact('warehouse', 'q', 'notImportedWarehouse'));
     }
 
     public function orders(Request $request,$id=null)
@@ -54,7 +58,27 @@ class AppController extends Controller
         $items=$request->get('products');
         $warehouse=Warehouse::findOrFail($shop_id);
         $defaultRack=$warehouse->default_rack();
-        $warehouse->appItems()->attach($items,['rack_id'=>$defaultRack->id]);
+        $warehouse->appItems()->attach($items);
         return response()->json(['error'=>false]);
+    }
+
+    public function importShop(Request $request)
+    {
+        foreach ($request->get('warehouse', []) as $w) {
+            AppWarehouses::create(['warehouse_id' => $w]);
+        }
+        return redirect()->back();
+    }
+
+    public function activateProduct($id)
+    {
+        AppItems::where('id', $id)->update(['status' => 1]);
+        return response()->json(['error' => false]);
+    }
+
+    public function draftProduct($id)
+    {
+        AppItems::where('id', $id)->update(['status' => 0]);
+        return response()->json(['error' => false]);
     }
 }

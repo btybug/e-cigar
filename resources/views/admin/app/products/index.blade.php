@@ -139,6 +139,7 @@
 
     <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
+                {!! Form::open(['url'=>route('admin_app_import_shop')]) !!}
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="store_modalLabel">Add New</h5>
@@ -152,37 +153,21 @@
                             <p class="mb-0">Select All</p>
                         </div>
                         <ul class="all-list p-0 modal-stickers--list" id="stickers-modal-list">
+                            @foreach($notImportedWarehouse as $w)
                             <li class="option-elm-modal">
                                 <div class="btn btn-primary add-related-event searchable">
-                                    <input type="checkbox" class="select_product_js">
+                                    <input type="checkbox" name="warehouse[]" value="{!! $w->id !!}" class="select_product_js">
                                 </div>
-                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
+                                <a href="#">{!! $w->name !!}</a>
                             </li>
-                            <li class="option-elm-modal">
-                                <div class="btn btn-primary add-related-event searchable">
-                                    <input type="checkbox" class="select_product_js">
-                                </div>
-                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
-                            </li>
-                            <li class="option-elm-modal">
-                                <div class="btn btn-primary">
-                                    <input type="checkbox">
-                                </div>
-                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
-                            </li>
-                            <li class="option-elm-modal">
-                                <div class="btn btn-primary ">
-                                    <input type="checkbox">
-                                </div>
-                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
-                            </li>
-
+                            @endforeach
                         </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal">Add</button>
+                        <button type="submit" class="btn btn-primary " >Add</button>
                     </div>
                 </div>
+                {!! Form::close() !!}
             </div>
         </div>
 @stop
@@ -743,7 +728,7 @@
                     {data: 'barcode_id', name: 'barcodes.code'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'categories_translations.name'},
-                    {data: 'default_price', name: 'default_price'},
+                    {data: 'price', name: 'price'},
                     {data: 'status', name: 'status'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}

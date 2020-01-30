@@ -304,9 +304,6 @@
                     <li><a href="{{route('app_customer_discounts')}}"><i class="far fa-circle fa-xs"></i>Discounts</a>
                     </li>
                     @endok
-                    @ok('admin_app_locations')
-                    <li><a href="{{route('admin_app_locations')}}"><i class="far fa-circle fa-xs"></i>Locations</a></li>
-                    @endok
                     @ok('app_staff')
                     <li><a href="{{route('app_staff')}}"><i class="far fa-circle fa-xs"></i>Staff</a></li>
                     @endok

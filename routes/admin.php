@@ -766,17 +766,13 @@ Route::group(['prefix' => 'app'], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_app_products');
         Route::post('/add-product', 'Admin\App\AppController@addProduct')->name('admin_app_add_product');
-
+        Route::post('/import-shop', 'Admin\App\AppController@importShop')->name('admin_app_import_shop');
+        Route::get('/activate/{id}', 'Admin\App\AppController@activateProduct')->name('admin_app_activate_product');
+        Route::get('/draft/{id}', 'Admin\App\AppController@draftProduct')->name('admin_app_draft_product');
     });
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/', 'Admin\App\AppController@orders')->name('admin_app_orders');
         Route::get('/view/{id}', 'Admin\App\AppController@orderViev')->name('admin_app_order_view');
-    });
-    Route::group(['prefix' => 'locations'], function () {
-        Route::get('/{id?}', 'Admin\App\ShopController@index')->name('admin_app_locations');
-        Route::post('/get-form/{id?}', 'Admin\App\ShopController@postRackForm')->name('admin_app_locations_form');
-        Route::post('/create-or-update/{id}', 'Admin\App\ShopController@postCreateOrUpdateRack')->name('admin_app_locations_rack_new_or_update');
-
     });
     Route::post('/warehouse-not-selected-items/{id}', 'Admin\App\AppController@notSelectedProducts')->name('admin_app_not_selected_products');
     Route::post('/warehouse-not-selected-items/{id}', 'Admin\App\AppController@notSelectedProducts')->name('admin_app_not_selected_products');
