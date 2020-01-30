@@ -18,12 +18,18 @@ class AppController extends Controller
 {
     protected $view = 'admin.app';
 
-    public function products(Request $request, $id = null)
+    public function products(Request $request, $q = null)
     {
         $warehouse = Warehouse::whereIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
         $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
-
-        $q = ($id && count($warehouse)) ? $id : $warehouse[0]->id;
+        if (!count($warehouse) && $q) abort(404);
+        if($q==null){
+            $q=!count($warehouse)?$warehouse[0]->id:null;
+        }else{
+            if(!AppWarehouses::where('warehouse_id',$q)->exists()){
+                abort(404);
+            }
+        }
         $warehouse = $warehouse->pluck('name', 'id');
         return $this->view('products.index', compact('warehouse', 'q', 'notImportedWarehouse'));
     }
