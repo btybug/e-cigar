@@ -24,9 +24,11 @@
                         class="fa fa-plus"></i></span>Add new</a>
         </div>
     </div>
+    @if($q)
     <button type="button" class="btn btn-info select-products" data-action="{!! route('admin_app_not_selected_products',$q) !!}">
         Select
     </button>
+    @endif
     <ul class="get-all-products-tab stickers--all--lists">
         
     </ul>
@@ -697,7 +699,7 @@
                     }
                 });
             }
-
+@if($q)
             tableInit(
                 "stock_table",
                 [
@@ -735,7 +737,8 @@
                 ],
                 '#stocks-table',
                 "{!! route('datatable_all_app_items',$q) !!}"
-            )
+            );
+            @endif
 
 
             $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
@@ -794,6 +797,16 @@
                     }
                 }
             });
+
+            $('body').on('click', '.app-product-status', function(ev) {
+                const url = $(ev.target).data('href');
+
+                AjaxCall(url, {}, function (res) {
+                    if (!res.error) {
+                        table.ajax.reload();
+                    }
+                });
+            })
 
         });
 
