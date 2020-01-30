@@ -944,7 +944,7 @@ class DatatableController extends Controller
             })->addColumn('actions', function ($attr) {
                 return "<div class='datatable-td__action'>"
                     . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='#'>Edit Price</a>" : null) .
-                      (userCan('admin_items_edit') ? ($attr->status)?"<button class='btn btn-info app-product-status' data-href='".route('admin_app_draft_product',$attr->id)."'>Draft</button>":"<button class='btn btn-info app-product-status' data-href='".route('admin_app_activate_product',$attr->id)."'>Activate</button>" : null) .
+                      (userCan('admin_items_edit') ? ($attr->status)?"<button class='btn btn-danger app-product-status' data-href='".route('admin_app_draft_product',$attr->id)."'>Draft</button>":"<button class='btn btn-info app-product-status' data-href='".route('admin_app_activate_product',$attr->id)."'>Activate</button>" : null) .
                     "</div>";
             })->rawColumns(['actions', 'category'])->make(true);
     }

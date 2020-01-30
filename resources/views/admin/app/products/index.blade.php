@@ -5,15 +5,22 @@
             @foreach($warehouse as $key=>$warehous)
                 <li class="nav-item position-relative">
                     <div class="position-absolute admin-tab-icon-wrap">
-                        <a href="#" class="btn btn-dark">
-                            <i class="fas fa-check"></i>
+                        @if($warehous->status)
+                            <a href="{!! route('admin_app_draft_shop',$warehous->id) !!}" class="btn btn-warning">
+                                <i class="fas fa-archive"></i>
                         </a>
-                        <button class="btn btn-danger">
+                        @else
+                            <a href="{!! route('admin_app_activate_shop',$warehous->id) !!}" class="btn btn-info">
+                                <i class="fas fa-check"></i>
+                            </a>
+                        @endif
+                        <a href="{!! route('admin_app_drop_shop',$warehous->id) !!}" class="btn btn-danger">
                             <i class="fas fa-trash-alt"></i>
-                        </button>
+                        </a>
                     </div>
-                    <a class="nav-link @if($q ==$key)active @endif"   href="{!! route('admin_app_products',$key) !!}">
-                        {!! $warehous !!}
+                    <a class="nav-link @if($q ==$warehous->id)active @endif"
+                       href="{!! route('admin_app_products',$warehous->id) !!}">
+                        {!! $warehous->name !!}
                     </a>
                 </li>
             @endforeach
@@ -32,7 +39,9 @@
     <ul class="get-all-products-tab stickers--all--lists">
         
     </ul>
-
+    @if($current && !$current->status)
+        <h2 class="text-red">This Warehouse is disabled</h2>
+    @endif
     <div class="tab-content w-100">
         <div class="card panel panel-default">
             <div class="d-flex justify-content-between px-4 mt-2">

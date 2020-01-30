@@ -767,8 +767,13 @@ Route::group(['prefix' => 'app'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_app_products');
         Route::post('/add-product', 'Admin\App\AppController@addProduct')->name('admin_app_add_product');
         Route::post('/import-shop', 'Admin\App\AppController@importShop')->name('admin_app_import_shop');
-        Route::get('/activate/{id}', 'Admin\App\AppController@activateProduct')->name('admin_app_activate_product');
-        Route::get('/draft/{id}', 'Admin\App\AppController@draftProduct')->name('admin_app_draft_product');
+        Route::post('/activate/{id}', 'Admin\App\AppController@activateProduct')->name('admin_app_activate_product');
+        Route::post('/draft/{id}', 'Admin\App\AppController@draftProduct')->name('admin_app_draft_product');
+
+        Route::get('/activate-shop/{id}', 'Admin\App\AppController@activateShop')->name('admin_app_activate_shop');
+        Route::get('/draft-shop/{id}', 'Admin\App\AppController@draftShop')->name('admin_app_draft_shop');
+        Route::get('/drop-shop/{id}', 'Admin\App\AppController@removeShop')->name('admin_app_drop_shop');
+
     });
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/', 'Admin\App\AppController@orders')->name('admin_app_orders');

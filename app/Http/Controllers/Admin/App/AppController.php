@@ -20,7 +20,11 @@ class AppController extends Controller
 
     public function products(Request $request, $q = null)
     {
-        $warehouse = Warehouse::whereIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
+        $current=null;
+        $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
+            ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
+            ->where('warehouse_translations.locale', app()->getLocale())
+            ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
         $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
         if (!count($warehouse) && $q) abort(404);
         if($q==null){
@@ -28,10 +32,12 @@ class AppController extends Controller
         }else{
             if(!AppWarehouses::where('warehouse_id',$q)->exists()){
                 abort(404);
+            }else{
+                $current=AppWarehouses::where('warehouse_id',$q)->first();
             }
         }
-        $warehouse = $warehouse->pluck('name', 'id');
-        return $this->view('products.index', compact('warehouse', 'q', 'notImportedWarehouse'));
+
+        return $this->view('products.index', compact('warehouse','current', 'q', 'notImportedWarehouse'));
     }
 
     public function orders(Request $request, $id = null)
@@ -86,5 +92,23 @@ class AppController extends Controller
     {
         AppItems::where('id', $id)->update(['status' => 0]);
         return response()->json(['error' => false]);
+    }
+
+    public function activateShop($id)
+    {
+        AppWarehouses::where('id', $id)->update(['status' => 1]);
+        return redirect()->back();
+    }
+
+    public function draftShop($id)
+    {
+        AppWarehouses::where('warehouse_id', $id)->update(['status' => 0]);
+        return redirect()->back();
+    }
+
+    public function removeShop($id)
+    {
+        AppWarehouses::where('warehouse_id', $id)->delete();
+        return redirect()->route('admin_app_products');
     }
 }
