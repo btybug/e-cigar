@@ -1,5 +1,15 @@
 @extends('layouts.admin',['activePage'=>'discounts'])
 @section('content')
+    <div class="text-right mb-2">
+        <div class="d-inline-block">
+            <a href="#" class="btn btn-success">
+                <i class="fas fa-check"></i>
+            </a>
+            <button class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i>
+            </button>
+        </div>
+    </div>
     <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
         <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs">
             @foreach($warehouse as $key=>$warehous)
@@ -9,6 +19,10 @@
             @endforeach
 
         </ul>
+        <div class="button-area">
+            <a class="btn btn-info add-category text-white" data-toggle="modal" data-target="#store_modal"><span class="icon-plus mr-1"><i
+                        class="fa fa-plus"></i></span>Add new</a>
+        </div>
     </div>
     <button type="button" class="btn btn-info select-products" data-action="{!! route('admin_app_not_selected_products',$q) !!}">
         Select
@@ -122,6 +136,26 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
     <input type="hidden" id="current-shop" value="{!! $q !!}">
+
+    <div class="modal fade" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="store_modalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 @stop
 
 @section('css')
