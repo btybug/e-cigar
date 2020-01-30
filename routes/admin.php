@@ -773,6 +773,7 @@ Route::group(['prefix' => 'app'], function () {
         Route::get('/activate-shop/{id}', 'Admin\App\AppController@activateShop')->name('admin_app_activate_shop');
         Route::get('/draft-shop/{id}', 'Admin\App\AppController@draftShop')->name('admin_app_draft_shop');
         Route::get('/drop-shop/{id}', 'Admin\App\AppController@removeShop')->name('admin_app_drop_shop');
+        Route::post('/multi-edit-price', 'Admin\App\AppController@multiEditPrice')->name('admin_app_multi_edit_price');
 
     });
     Route::group(['prefix' => 'orders'], function () {
