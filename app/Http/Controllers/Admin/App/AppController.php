@@ -24,7 +24,7 @@ class AppController extends Controller
         $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
         if (!count($warehouse) && $q) abort(404);
         if($q==null){
-            $q=!count($warehouse)?$warehouse[0]->id:null;
+            $q=count($warehouse)?$warehouse[0]->id:null;
         }else{
             if(!AppWarehouses::where('warehouse_id',$q)->exists()){
                 abort(404);
