@@ -13,7 +13,7 @@ const selectProductModalInit = function () {
       search.val('');
       var value = '';
       $("ul.all-list .option-elm-modal").filter(function() {
-          $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
+        $(this).find('div.searchable').data('name') && $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
       });
   } else if($('.search_option_js').val() === 'brand') {
     search.removeClass('d-inline');
@@ -25,7 +25,7 @@ const selectProductModalInit = function () {
     $(brands.find('option')[0]).prop('selected', true);
     var value = '';
     $("ul.all-list .option-elm-modal").filter(function() {
-        $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
+      $(this).find('div.searchable').data('name') && $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
     });
   } else if($('.search_option_js').val() === 'category') {
     search.removeClass('d-inline');
@@ -37,7 +37,7 @@ const selectProductModalInit = function () {
     $(categories.find('option')[0]).prop('selected', true)
     var value = '';
     $("ul.all-list .option-elm-modal").filter(function() {
-        $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
+      $(this).find('div.searchable').data('name') && $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
     });
   }
 }
@@ -138,7 +138,7 @@ $("body").on("keyup", '.search-attr', function() {
   console.log($(this).val())
   var value = $(this).val().toLowerCase();
   $("ul.all-list .option-elm-modal").filter(function() {
-      $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
+    $(this).find('div.searchable').data('name') && $(this).toggle($(this).find('div.searchable').data('name').toLowerCase().indexOf(value) > -1)
   });
 });
 
@@ -146,14 +146,14 @@ $('body').on('change', '#brand_select', function() {
   var value = $(this).val();
   $("ul.all-list .option-elm-modal").filter(function() {
     console.log(Number($(this).find('div.searchable').data('brand-id')), Number(value))
-      $(this).toggle(Number($(this).find('div.searchable').data('brand-id')) === Number(value))
+    $(this).find('div.searchable').data('brand-id') && $(this).toggle(Number($(this).find('div.searchable').data('brand-id')) === Number(value))
   });
 });
 
 $('body').on('change', '#category_select', function() {
   var value = $(this).val();
   $("ul.all-list .option-elm-modal").filter(function() {
-      $(this).toggle($(this).find('div.searchable').data('categories-ids').indexOf('-' + value + '-') > -1)
+    $(this).find('div.searchable').data('categories-ids') && $(this).toggle($(this).find('div.searchable').data('categories-ids').indexOf('-' + value + '-') > -1)
   });
 });
 
