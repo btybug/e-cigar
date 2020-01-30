@@ -18,48 +18,48 @@ class AppController extends Controller
 {
     protected $view = 'admin.app';
 
-    public function products(Request $request,$id=null)
+    public function products(Request $request, $id = null)
     {
         $warehouse = Warehouse::whereIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
         $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
 
         $q = ($id && count($warehouse)) ? $id : $warehouse[0]->id;
-        $warehouse=$warehouse->pluck('name','id');
+        $warehouse = $warehouse->pluck('name', 'id');
         return $this->view('products.index', compact('warehouse', 'q', 'notImportedWarehouse'));
     }
 
-    public function orders(Request $request,$id=null)
+    public function orders(Request $request, $id = null)
     {
-        $warehouse=Warehouse::all();
-        $q=($id)??$warehouse[0]->id;
-        $warehouse=$warehouse->pluck('name','id');
-        return $this->view('orders.index',compact('warehouse','q'));
+        $warehouse = Warehouse::all();
+        $q = ($id) ?? $warehouse[0]->id;
+        $warehouse = $warehouse->pluck('name', 'id');
+        return $this->view('orders.index', compact('warehouse', 'q'));
     }
 
     public function notSelectedProducts($id)
     {
-        $warehouse=Warehouse::findOrFail($id);
-        $selecteds=$warehouse->appitems()->pluck('item_id');
-        $items=Items::with(['brand','categories','translations'])->whereNotIn('id',$selecteds)->get();
-        $brands=Brands::all();
-        $categories=Category::where('type','item')->get();
-        return \Response::json(['error' => false, 'data' => $items,'brands'=>$brands,'categories'=>$categories]);
+        $warehouse = Warehouse::findOrFail($id);
+        $selecteds = $warehouse->appitems()->pluck('item_id');
+        $items = Items::with(['brand', 'categories', 'translations'])->whereNotIn('id', $selecteds)->get();
+        $brands = Brands::all();
+        $categories = Category::where('type', 'item')->get();
+        return \Response::json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
     }
 
     public function orderViev($id)
     {
-        $order=Orders::findOrfail($id);
-        return $this->view('orders.view',compact('order'));
+        $order = Orders::findOrfail($id);
+        return $this->view('orders.view', compact('order'));
     }
 
     public function addProduct(Request $request)
     {
-        $shop_id=$request->get('shop_id');
-        $items=$request->get('products');
-        $warehouse=Warehouse::findOrFail($shop_id);
-        $defaultRack=$warehouse->default_rack();
+        $shop_id = $request->get('shop_id');
+        $items = $request->get('products');
+        $warehouse = Warehouse::findOrFail($shop_id);
+        $defaultRack = $warehouse->default_rack();
         $warehouse->appItems()->attach($items);
-        return response()->json(['error'=>false]);
+        return response()->json(['error' => false]);
     }
 
     public function importShop(Request $request)
