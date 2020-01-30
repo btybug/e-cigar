@@ -1,20 +1,20 @@
 @extends('layouts.admin',['activePage'=>'discounts'])
 @section('content')
-    <div class="text-right mb-2">
-        <div class="d-inline-block">
-            <a href="#" class="btn btn-success">
-                <i class="fas fa-check"></i>
-            </a>
-            <button class="btn btn-danger">
-                <i class="fas fa-trash-alt"></i>
-            </button>
-        </div>
-    </div>
     <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
         <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs">
             @foreach($warehouse as $key=>$warehous)
-                <li class="nav-item">
-                    <a class="nav-link @if($q ==$key)active @endif"   href="{!! route('admin_app_products',$key) !!}">{!! $warehous !!}</a>
+                <li class="nav-item position-relative">
+                    <div class="position-absolute admin-tab-icon-wrap">
+                        <a href="#" class="btn btn-dark">
+                            <i class="fas fa-check"></i>
+                        </a>
+                        <button class="btn btn-danger">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    <a class="nav-link @if($q ==$key)active @endif"   href="{!! route('admin_app_products',$key) !!}">
+                        {!! $warehous !!}
+                    </a>
                 </li>
             @endforeach
 
@@ -137,21 +137,50 @@
     </div><!-- /.modal -->
     <input type="hidden" id="current-shop" value="{!! $q !!}">
 
-    <div class="modal fade" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
+    <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="store_modalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="store_modalLabel">Add New</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <div class="d-flex justify-content-start align-items-center mb-2">
+                            <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                            <p class="mb-0">Select All</p>
+                        </div>
+                        <ul class="all-list p-0 modal-stickers--list" id="stickers-modal-list">
+                            <li class="option-elm-modal">
+                                <div class="btn btn-primary add-related-event searchable">
+                                    <input type="checkbox" class="select_product_js">
+                                </div>
+                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
+                            </li>
+                            <li class="option-elm-modal">
+                                <div class="btn btn-primary add-related-event searchable">
+                                    <input type="checkbox" class="select_product_js">
+                                </div>
+                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
+                            </li>
+                            <li class="option-elm-modal">
+                                <div class="btn btn-primary">
+                                    <input type="checkbox">
+                                </div>
+                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
+                            </li>
+                            <li class="option-elm-modal">
+                                <div class="btn btn-primary ">
+                                    <input type="checkbox">
+                                </div>
+                                <a href="#">SMOK - Novo 2  Yellow and Purple</a>
+                            </li>
+
+                        </ul>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal">Add</button>
                     </div>
                 </div>
             </div>

@@ -2106,6 +2106,15 @@ table .faq-ansver{
 .admin-general--tabs-wrapper .nav-item.active .btn.btn-success{
     background-color: #4285f4 !important;
 }
+.admin-general--tabs-wrapper .admin-tab-icon-wrap{
+    right: 5px;
+    top: -12px;
+}
+
+.admin-general--tabs-wrapper .admin-tab-icon-wrap .btn{
+    font-size: 14px !important;
+    padding: 3px 7px !important;
+}
 .admin-general--tabs .nav-link.active {
     background: #4285f4;
 }
