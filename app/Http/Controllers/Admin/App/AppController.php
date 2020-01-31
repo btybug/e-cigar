@@ -114,6 +114,11 @@ class AppController extends Controller
 
     public function multiEditPrice(Request $request)
     {
-        dd($request->all());
+        $items=$request->get('data');
+        foreach ($items as $item){
+            AppItems::where('id', $item['id'])->update(['price' => $item['price']]);
+        }
+        return response()->json(['error' => false]);
+
     }
 }
