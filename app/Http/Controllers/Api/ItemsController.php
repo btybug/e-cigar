@@ -21,6 +21,7 @@ class ItemsController
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->select(
                 'items.barcode_id',
                 'app_items.id',
