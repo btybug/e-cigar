@@ -4,6 +4,7 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Models\App\AppWarehouses;
 use App\Models\RackItems;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
@@ -30,6 +31,11 @@ class ShopController
     }
     public function getShop(Request $request)
     {
-        return Warehouse::all()->pluck('name', 'id');
+        return  AppWarehouses::join('warehouses','app_warehouses.warehouse_id','=','warehouses.id')
+            ->leftJoin('warehouse_translations','warehouses.id','=','warehouse_translations.warehouse_id')
+            ->where('app_warehouses.status',1)
+            ->where('warehouse_translations.locale',app()->getLocale())
+            ->select('warehouses.id','warehouse_translations.name')->pluck('name', 'id');
+
     }
 }
