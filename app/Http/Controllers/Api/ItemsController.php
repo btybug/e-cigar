@@ -21,6 +21,7 @@ class ItemsController
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->leftJoin('item_locations', 'items.id', '=', 'item_locations.item_id')
             ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->select(
                 'items.barcode_id',
@@ -34,10 +35,12 @@ class ItemsController
                 'item_translations.short_description',
                 'item_translations.long_description',
                 'barcodes.code',
-                'categories_translations.name as category'
+                'categories_translations.name as category',
+                'SUM item_locations.qty as qty'
             )
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $w_id)
+            ->where('item_locations.warehouse_id', $w_id)
             ->where('items.is_archive', false)->with('item')
             ->where('item_translations.locale', \Lang::getLocale())->get();
 
