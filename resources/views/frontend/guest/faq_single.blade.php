@@ -6,9 +6,15 @@
             <div class="container main-max-width">
                 <div class="row">
                     <div class="col-md-3">
-                        <div class="faq-single-ads">
-                            <img src="http://webneel.com/daily/sites/default/files/images/project/creative-advertisement%20(13).jpg" alt="ads">
-                        </div>
+                        @if($left_faq_ads && isset($left_faq_ads['images']))
+                            @foreach($left_faq_ads['images'] as $key => $ad)
+                                <div class="faq-single-ads mb-2">
+                                    <a href="{!! $left_faq_ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                        <img src="{!! $ad !!}" alt="{!! $left_faq_ads['tags'][$key] !!}">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <div class="faq-single-content">
@@ -21,9 +27,15 @@
                         @include("frontend.comments.index",['model' => $faq,'type' => 'faq'])
                     </div>
                     <div class="col-md-3">
-                        <div class="faq-single-ads">
-                            <img src="http://webneel.com/daily/sites/default/files/images/project/creative-advertisement%20(13).jpg" alt="ads">
-                        </div>
+                        @if($right_faq_ads && isset($right_faq_ads['images']))
+                            @foreach($right_faq_ads['images'] as $key => $ad)
+                                <div class="faq-single-ads mb-2">
+                                    <a href="{!! $right_faq_ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                        <img src="{!! $ad !!}" alt="{!! $right_faq_ads['tags'][$key] !!}">
+                                    </a>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

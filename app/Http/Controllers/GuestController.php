@@ -45,9 +45,10 @@ class GuestController extends Controller
     public function getFaq()
     {
         $categories = Category::with('faqs')->where('type', 'faq')->whereNull('parent_id')->get();
+        $categoriesCount = Category::with('faqs')->where('type', 'faq')->count();
         $category = $categories->first();
 
-        return $this->view('faq', compact(['categories', 'category']));
+        return $this->view('faq', compact(['categories', 'category','categoriesCount']));
     }
 
     public function getFaqSingle($slug)
@@ -55,7 +56,18 @@ class GuestController extends Controller
         $faq  = Faq::whereTranslation('slug', $slug,'gb')->first();
 
         if(! $faq) abort(404);
-        return $this->view('faq_single', compact(['faq']));
+
+        $left_faq_ads = $this->settings->getEditableData('lef_faq_ads');
+        if($left_faq_ads && isset($left_faq_ads['data'])){
+            $left_faq_ads = json_decode($left_faq_ads['data'],true);
+        }
+
+        $right_faq_ads = $this->settings->getEditableData('right_faq_ads');
+        if($right_faq_ads && isset($right_faq_ads['data'])){
+            $right_faq_ads = json_decode($right_faq_ads['data'],true);
+        }
+
+        return $this->view('faq_single', compact(['faq','left_faq_ads','right_faq_ads']));
     }
 
     public function getFaqByCategory(Request $request)

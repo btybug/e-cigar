@@ -340,6 +340,176 @@
 </div>
 
 
+<div class="form-group">
+    {!! Form::model($models['lef_faq_ads'],['class'=>'form-horizontal']) !!}
+    {!! Form::hidden('type','lef_faq_ads') !!}
+    {!! Form::hidden('p','lef_faq_ads') !!}
+    {!! Form::hidden('id',null) !!}
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading clearfix">
+            <p class="d-inline-block">Left Faq page Ads</p>
+            <div class="pull-right">
+                <button class="btn btn-info">Save</button>
+
+                <button type="button" class="btn btn-primary add-new-social-input-lef_faq_ads">
+                    <i
+                        class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-group d-flex flex-wrap align-items-center social-media-group-lef_faq_ads">
+                @if(isset($models['lef_faq_ads']) && $models['lef_faq_ads'] && isset($models['lef_faq_ads']->data) && @json_decode($models['lef_faq_ads']->data,true))
+                    @php
+                        $data = json_decode($models['lef_faq_ads']->data,true);
+                    @endphp
+                    @foreach($data['images'] as $key => $banner)
+                        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                            <div class="col-xl-7 p-0">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        {!! media_button('lef_faq_ads[images][]',$banner) !!}
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="lef_faq_ads[urls][]" class="form-control" value="{!! $data['urls'][$key] !!}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="lef_faq_ads[tags][]" class="form-control" value="{!! $data['tags'][$key] !!}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                        <div class="col-xl-7 p-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    {!! media_button('lef_faq_ads[images][]') !!}
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="lef_faq_ads[urls][]" class="form-control" id="staticEmail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="lef_faq_ads[tags][]" class="form-control" id="staticEmail">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    {!! Form::close() !!}
+</div>
+
+<div class="form-group">
+    {!! Form::model($models['right_faq_ads'],['class'=>'form-horizontal']) !!}
+    {!! Form::hidden('type','right_faq_ads') !!}
+    {!! Form::hidden('p','right_faq_ads') !!}
+    {!! Form::hidden('id',null) !!}
+    <div class="card panel panel-default">
+        <div class="card-header panel-heading clearfix">
+            <p class="d-inline-block">Right Faq page Ads</p>
+            <div class="pull-right">
+                <button class="btn btn-info">Save</button>
+
+                <button type="button" class="btn btn-primary add-new-social-input-right_faq_ads">
+                    <i
+                        class="fa fa-plus"></i></button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-group d-flex flex-wrap align-items-center social-media-group-right_faq_ads">
+                @if(isset($models['right_faq_ads']) && $models['right_faq_ads'] && isset($models['right_faq_ads']->data) && @json_decode($models['right_faq_ads']->data,true))
+                    @php
+                        $data = json_decode($models['right_faq_ads']->data,true);
+                    @endphp
+                    @foreach($data['images'] as $key => $banner)
+                        <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                            <div class="col-xl-7 p-0">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        {!! media_button('right_faq_ads[images][]',$banner) !!}
+
+                                    </div>
+                                </div>
+
+                                <div class="form-group row mt-3">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="right_faq_ads[urls][]" class="form-control" value="{!! $data['urls'][$key] !!}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" name="right_faq_ads[tags][]" class="form-control" value="{!! $data['tags'][$key] !!}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3">
+                                <button class="plus-icon remove-new-banner-input btn btn-danger">
+                                    <i class="fa fa-minus"></i></button>
+                            </div>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+                        <div class="col-xl-7 p-0">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    {!! media_button('right_faq_ads[images][]') !!}
+
+                                </div>
+                            </div>
+
+                            <div class="form-group row mt-3">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="right_faq_ads[urls][]" class="form-control" id="staticEmail">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                                <div class="col-sm-10">
+                                    <input type="text" name="right_faq_ads[tags][]" class="form-control" id="staticEmail">
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                @endif
+            </div>
+        </div>
+    </div>
+    {!! Form::close() !!}
+</div>
+
 <script type="template" id="add-more-banners">
     <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
         <div class="col-sm-7 p-0">
@@ -360,6 +530,70 @@
                 <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
                 <div class="col-sm-10">
                     <input type="text" name="single_post[tags][]" class="form-control" id="staticEmail" value="">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-3">
+            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                <i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</script>
+
+<script type="template" id="add-more-lef_faq_ads">
+    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+        <div class="col-sm-7 p-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    {!! media_button('lef_faq_ads[images][]',$model) !!}
+
+                </div>
+            </div>
+
+            <div class="form-group row mt-3">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                <div class="col-sm-10">
+                    <input type="text" name="lef_faq_ads[urls][]" class="form-control" value="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                <div class="col-sm-10">
+                    <input type="text" name="lef_faq_ads[tags][]" class="form-control" value="">
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-sm-3">
+            <button class="plus-icon remove-new-banner-input btn btn-danger">
+                <i class="fa fa-minus"></i></button>
+        </div>
+    </div>
+</script>
+
+<script type="template" id="add-more-right_faq_ads">
+    <div class="col-md-12 mb-2 d-flex flex-wrap banner-item">
+        <div class="col-sm-7 p-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    {!! media_button('right_faq_ads[images][]',$model) !!}
+
+                </div>
+            </div>
+
+            <div class="form-group row mt-3">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                <div class="col-sm-10">
+                    <input type="text" name="right_faq_ads[urls][]" class="form-control" value="">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                <div class="col-sm-10">
+                    <input type="text" name="right_faq_ads[tags][]" class="form-control" value="">
                 </div>
             </div>
 
@@ -502,9 +736,20 @@
             $(".social-media-group-confirmation_page").append(html);
         });
 
-        $("body").on("click", ".remove-new-banner-input", function () {
-            $(this).closest(".banner-item").remove();
+        $("body").on("click", ".add-new-social-input-lef_faq_ads", function () {
+            var uid = Math.random().toString(36).substr(2, 9);
+            var html = $("#add-more-lef_faq_ads").html();
+            html = html.replace(/{count}/g, uid);
+            $(".social-media-group-lef_faq_ads").append(html);
         });
+
+        $("body").on("click", ".add-new-social-input-right_faq_ads", function () {
+            var uid = Math.random().toString(36).substr(2, 9);
+            var html = $("#add-more-right_faq_ads").html();
+            html = html.replace(/{count}/g, uid);
+            $(".social-media-group-right_faq_ads").append(html);
+        });
+
     </script>
 @stop
 

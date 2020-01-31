@@ -617,6 +617,8 @@ class SettingsController extends Controller
             $models['single_post'] = $settings->getEditableData('single_post');
             $models['my_account'] = $settings->getEditableData('my_account');
             $models['confirmation_page'] = $settings->getEditableData('confirmation_page');
+            $models['lef_faq_ads'] = $settings->getEditableData('lef_faq_ads');
+            $models['right_faq_ads'] = $settings->getEditableData('right_faq_ads');
 
         } else if ($p == 'banners' || $p == "single_product" || $p == "single_post" || $p == "my_account"||$p == "stickers" || $p == "brands") {
             $model = $settings->getEditableData($p);
@@ -648,7 +650,8 @@ class SettingsController extends Controller
     {
         $p = $request->get('p', 'banners');
 
-        if ($p == "banners" || $p == "single_product" || $p == "single_post" || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page'  || $p == "brands") {
+        if ($p == "banners" || $p == "single_product" || $p == "single_post"
+            || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page'  || $p == "brands"|| $p == "lef_faq_ads"|| $p == "right_faq_ads") {
             $banners = array_filter($request->get($p, []));
             $settings->updateOrCreateSettings($p, ['data' => $banners]);
         } else {

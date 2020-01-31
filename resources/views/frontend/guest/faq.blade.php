@@ -80,7 +80,7 @@
                                 <div class="col-md-3">
                                     <div class="buttons">
                                         <h4>{!! __('general_questions') !!}
-                                            <small class="text-muted">({{$categories->count()}})</small>
+                                            <small class="text-muted">({{$categoriesCount}})</small>
                                         </h4>
                                         <p>{!! __('general_questions_desc') !!}</p>
                                         {!! renderCategory($categories) !!}
