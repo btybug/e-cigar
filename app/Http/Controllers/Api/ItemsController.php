@@ -15,8 +15,6 @@ class ItemsController
     public function getItems(Request $request)
     {
         $w_id = $request->get('shop_id');
-        $warehouse=Warehouse::findOrFail($w_id);
-        $rack=$warehouse->default_rack();
         $items = AppItems::join('items', 'app_items.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')

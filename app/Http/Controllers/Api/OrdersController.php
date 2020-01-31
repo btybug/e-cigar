@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 
 
 use App\Http\Controllers\Controller;
+use App\Models\App\AppItems;
+use App\Models\App\AppWarehouses;
 use App\Models\App\Orders;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
@@ -57,13 +59,14 @@ class OrdersController extends Controller
 
     public function addItemToBascked(Request $request,OrderService $service)
     {
-        $shop = Warehouse::find($request->get('shop_id'));
-        $order = $shop->orders()->find($request->get('order_id'));
-        $item =$shop->default_rack()->items()->where('item_id',$request->get('product_id'))->first();
-        if (!$order->items()->where('item_id', $item->id)->exists()) {
-            $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->item->default_price]]);
+        $shop = AppWarehouses::where('warehouse_id',$request->get('shop_id'));
+        $order = $shop->warehouse->orders()->find($request->get('order_id'));
+        $item=AppItems::find($request->get('product_id'));
+        $item =$shop->warehouse->default_rack()->items()->where('item_id',$item->item_id)->first();
+        if (!$order->items()->where('item_id', $item->item_id)->exists()) {
+            $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
         } else {
-            $order->items()->where('item_id', $item->id)->update(['qty' => $request->get('qty'), 'price' => $item->item->default_price]);
+            $order->items()->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
         }
 
         return response()->json(['success' => true]);
