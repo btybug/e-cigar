@@ -8,7 +8,7 @@
                         @if($warehous->status)
                             <a href="{!! route('admin_app_draft_shop',$warehous->id) !!}" class="btn btn-warning">
                                 <i class="fas fa-archive"></i>
-                        </a>
+                            </a>
                         @else
                             <a href="{!! route('admin_app_activate_shop',$warehous->id) !!}" class="btn btn-info">
                                 <i class="fas fa-check"></i>
@@ -27,17 +27,19 @@
 
         </ul>
         <div class="button-area">
-            <a class="btn btn-info add-category text-white" data-toggle="modal" data-target="#store_modal"><span class="icon-plus mr-1"><i
+            <a class="btn btn-info add-category text-white" data-toggle="modal" data-target="#store_modal"><span
+                    class="icon-plus mr-1"><i
                         class="fa fa-plus"></i></span>Add new</a>
         </div>
     </div>
     @if($q)
-    <button type="button" class="btn btn-info select-products" data-action="{!! route('admin_app_not_selected_products',$q) !!}">
-        Select
-    </button>
+        <button type="button" class="btn btn-info select-products"
+                data-action="{!! route('admin_app_not_selected_products',$q) !!}">
+            Select
+        </button>
     @endif
     <ul class="get-all-products-tab stickers--all--lists">
-        
+
     </ul>
     @if($current && !$current->status)
         <h2 class="text-red">This Warehouse is disabled</h2>
@@ -50,7 +52,9 @@
                         <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
                         <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
                         {{--                            <option value="Name" data-column="2" data-name="name" selected>Name</option>--}}
-                        <option value="Short Description" data-column="3" data-name="short_description" selected>Short Description</option>
+                        <option value="Short Description" data-column="3" data-name="short_description" selected>Short
+                            Description
+                        </option>
                         <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
                         <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
                         <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
@@ -71,7 +75,9 @@
                 <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th><div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div></th>
+                        <th>
+                            <div class="text-center"><input type="checkbox" class="select_all_checkbox"/></div>
+                        </th>
                         <th>id</th>
                         <th>Name</th>
                         <th>Short Description</th>
@@ -123,7 +129,8 @@
                             </select>
                         </div>
                         <div class="col-sm-8">
-                            <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
+                            <input type="text" class="form-control search-attr" id="search-product"
+                                   placeholder="Search">
                             <select class="form-control d-none" id="brand_select">
 
                             </select>
@@ -141,7 +148,9 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal" data-ajax="true">Add</button>
+                    <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal"
+                            data-ajax="true">Add
+                    </button>
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -158,7 +167,7 @@
                 <div class="modal-body">
 
                 </div>
-                    
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary done_edit_price_js" data-ajax="true">Edit</button>
                 </div>
@@ -168,39 +177,41 @@
 
     <input type="hidden" id="current-shop" value="{!! $q !!}">
 
-    <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog" aria-labelledby="store_modalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                {!! Form::open(['url'=>route('admin_app_import_shop')]) !!}
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="store_modalLabel">Add New</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog"
+         aria-labelledby="store_modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            {!! Form::open(['url'=>route('admin_app_import_shop')]) !!}
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="store_modalLabel">Add New</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
-                        </button>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                        <p class="mb-0">Select All</p>
                     </div>
-                    <div class="modal-body">
-                        <div class="d-flex justify-content-start align-items-center mb-2">
-                            <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
-                            <p class="mb-0">Select All</p>
-                        </div>
-                        <ul class="all-list p-0 modal-stickers--list" id="stickers-modal-list">
-                            @foreach($notImportedWarehouse as $w)
+                    <ul class="all-list p-0 modal-stickers--list" id="stickers-modal-list">
+                        @foreach($notImportedWarehouse as $w)
                             <li class="option-elm-modal">
                                 <div class="btn btn-primary add-related-event searchable">
-                                    <input type="checkbox" name="warehouse[]" value="{!! $w->id !!}" class="select_product_js">
+                                    <input type="checkbox" name="warehouse[]" value="{!! $w->id !!}"
+                                           class="select_product_js">
                                 </div>
                                 <a href="#">{!! $w->name !!}</a>
                             </li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary " >Add</button>
-                    </div>
+                        @endforeach
+                    </ul>
                 </div>
-                {!! Form::close() !!}
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary ">Add</button>
+                </div>
             </div>
+            {!! Form::close() !!}
         </div>
+    </div>
 @stop
 
 @section('css')
@@ -213,21 +224,21 @@
         $(function () {
             var table;
 
-            $("body").on('click','.edit-row',function () {
+            $("body").on('click', '.edit-row', function () {
                 let id = $(this).data('id');
 
-                AjaxCall("{!! route('post_admin_items_edit_row') !!}", {id:id}, function (res) {
+                AjaxCall("{!! route('post_admin_items_edit_row') !!}", {id: id}, function (res) {
                     if (!res.error) {
                         $('.edit-list--container .edit-list--container-content').html(res.html);
                         $('.edit-list--container .custom-select').select2();
                         $('.edit-list--container').show();
-                        $(".edit-list--container").draggable({ handle:'.heading'});
+                        $(".edit-list--container").draggable({handle: '.heading'});
                     }
                 });
             });
 
 
-            $("body").on('click','.edit_item_custom',function (e) {
+            $("body").on('click', '.edit_item_custom', function (e) {
                 e.preventDefault();
                 let form = $(this).closest('form').serialize();
 
@@ -246,7 +257,6 @@
                     }
                 });
             });
-
 
 
             const shortAjax = function (URL, obj = {}, cb) {
@@ -273,15 +283,15 @@
             };
 
 
-            $('body').on('click', '.delete_rows', function() {
+            $('body').on('click', '.delete_rows', function () {
                 const ids = [];
-                $('#stocks-table tbody tr.selected').each(function() {
+                $('#stocks-table tbody tr.selected').each(function () {
                     ids.push($(this).find('td.id_n').text());
                 });
 
 
-                if(ids.length > 0){
-                    AjaxCall("{!! route('post_admin_items_multi_delete') !!}", {idS:ids}, function (res) {
+                if (ids.length > 0) {
+                    AjaxCall("{!! route('post_admin_items_multi_delete') !!}", {idS: ids}, function (res) {
                         if (!res.error) {
                             table.ajax.reload();
                             $('#confirm_delete').modal('hide');
@@ -290,16 +300,16 @@
                 }
             });
 
-            const action = function ( dt, url, method, type ) {
+            const action = function (dt, url, method, type) {
                 const ids = [];
-                dt.rows( { selected: true } ).data().map((r) => ids.push(r.id));
+                dt.rows({selected: true}).data().map((r) => ids.push(r.id));
                 console.log('data', ids);
                 shortAjax(url, {method, type, ids}, (res) => console.log('res', res), (err) => console.log('err', err));
             };
 
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
-                if(!localStorage.getItem(storageName)) {
+                if (!localStorage.getItem(storageName)) {
                     localStorage.setItem(storageName, JSON.stringify(selectData))
                 }
 
@@ -325,7 +335,7 @@
                     var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
                         return el.name === id;
                     });
-                    if(visible) {
+                    if (visible) {
                         return head;
                     } else {
                         return {
@@ -352,11 +362,11 @@
                 let italic = Number(barcode_settings.italic);
                 let fontOptions = '';
 
-                if(bold && italic) {
+                if (bold && italic) {
                     fontOptions = 'bold italic'
-                } else if(bold) {
+                } else if (bold) {
                     fontOptions = 'bold'
-                } else if(italic) {
+                } else if (italic) {
                     fontOptions = 'italic'
                 } else {
                     fontOptions = ''
@@ -371,7 +381,7 @@
                     "scrollX": true,
                     dom: '<"d-flex justify-content-between align-items-baseline"lfB><rtip>',
                     displayLength: 10,
-                    lengthMenu: [ [10, 25, 50, -1], [10, 25, 50, "All"] ],
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                     buttons: [
                         {
                             extend: 'collection',
@@ -409,40 +419,30 @@
                                 }
                             ]
                         },
-                        // 'selectAll',
-                        // 'selectNone',
-                        // {
-                        //     extend: 'collection',
-                        //     text: 'Export',
-                        //     buttons: [
-
-                        //     ]
-                        // },
                         {
                             extend: 'collection',
                             text: 'Download',
                             buttons: [
                                 {
                                     text: 'Barcode',
-                                    action: function(e, dt) {
+                                    action: function (e, dt) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
-                                        console.log(ids)
                                         $('.loader_container').css('display', 'block');
                                         $('body').css('overflow', 'hidden');
-                                        if(ids.length === 0) {
+                                        if (ids.length === 0) {
                                             $('.loader_container').css('display', 'none');
                                             $('body').css('overflow', 'auto');
                                             return false;
                                         }
-                                        shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+                                        shortAjax('/admin/find/items/barcodes', {ids}, function (res) {
 
-                                            res.barcodes.map(function(barcode) {
+                                            res.barcodes.map(function (barcode) {
                                                 $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
                                             });
-                                            res.barcodes.map(function(barcode, key) {
+                                            res.barcodes.map(function (barcode, key) {
                                                 JsBarcode(`#svg_${barcode.value}`, barcode.value, {
                                                     format,
                                                     font: text_font,
@@ -482,7 +482,7 @@
                                     text: 'QR Code',
                                     action: function (e, dt) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
@@ -497,7 +497,7 @@
                                             });
                                         }
 
-                                        async function forceDownload(url, fileName){
+                                        async function forceDownload(url, fileName) {
                                             const a = document.createElement("a");
                                             a.href = await toDataURL(url);
                                             a.download = fileName;
@@ -505,23 +505,24 @@
                                             a.click();
                                             document.body.removeChild(a);
                                         }
-                                        if(ids.length === 0) {
+
+                                        if (ids.length === 0) {
                                             $('.loader_container').css('display', 'none');
                                             $('body').css('overflow', 'auto');
                                             return false;
                                         }
-                                        shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
+                                        shortAjax('/admin/find/items/qrcodes', {ids}, function (res) {
 
                                             console.log(res.qrcodes);
                                             $('.loader_container').css('display', 'none');
                                             $('body').css('overflow', 'auto');
 
-                                            res.qrcodes.map(function(arr, key) {
-                                                setTimeout(function() {
-                                                    arr.map(function(er, key) {
+                                            res.qrcodes.map(function (arr, key) {
+                                                setTimeout(function () {
+                                                    arr.map(function (er, key) {
                                                         forceDownload(er.url, er.name.replace(/\s/g, '_').trim() + '.png');
                                                     });
-                                                }, key*3000);
+                                                }, key * 3000);
                                             });
                                         });
                                     }
@@ -534,29 +535,29 @@
                             buttons: [
                                 {
                                     text: 'Barcode',
-                                    action: function ( e, dt, node, config ) {
+                                    action: function (e, dt, node, config) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
 
-                                        ids.length > 0 && shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
+                                        ids.length > 0 && shortAjax('/admin/find/items/barcodes_print', {ids}, function (res) {
                                             console.log(res)
-                                        })
+                                        });
                                     }
                                 },
                                 {
                                     text: 'QR Code',
-                                    action: function ( e, dt, node, config ) {
+                                    action: function (e, dt, node, config) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
-                                        ids.length > 0 && shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
+                                        ids.length > 0 && shortAjax('/admin/find/items/qr_codes_print', {ids}, function (res) {
                                             console.log(res)
-                                        })
+                                        });
                                     }
                                 }
                             ]
@@ -568,80 +569,42 @@
                             buttons: [
                                 {
                                     text: 'Delete',
-                                    attr:  {
+                                    attr: {
                                         'data-toggle': 'modal',
                                         'data-target': '#confirm_delete'
                                     },
-                                    action: function() {
+                                    action: function () {
 
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('.classes__id').text());
                                         });
 
 
-                                        if(ids.length > 0){
+                                        if (ids.length > 0) {
                                             // alert(666)
                                         }
                                     }
                                 },
                                 {
                                     text: 'Edit Price',
-                                    action: function ( e, dt, node, config ) {
+                                    action: function (e, dt, node, config) {
                                         $('#editPriceModal .modal-body').html('');
-                                        $('#stocks-table tbody tr.selected').each(function() {
+                                        $('#stocks-table tbody tr.selected').each(function () {
                                             const edit_button = $(this).find('.edit_price_js');
                                             const id = edit_button.data('id');
                                             const name = edit_button.data('name');
                                             const price = edit_button.data('price');
-                                            
-                                            $('#editPriceModal .modal-body').append(`
-<div class="form-group row">
-        <label class="col-md-9 col-form-label">${name}</label>
-        <div class="col-md-3">
-            <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
-        </div>
-    </div>
-`)
+                                            $('#editPriceModal .modal-body').append(`<div class="form-group row"><label class="col-md-9 col-form-label">${name}</label><div class="col-md-3"><input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}"></div></div>`)
                                         });
                                         $('#editPriceModal').modal('show');
 
-
-                                        // if(ids.length > 0){
-                                        //     // alert(666)
-                                        //     window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
-                                        // }
-                                        // {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
-                                        // {{--    console.log(res)--}}
-                                        // {{--})--}}
-                                    },
-                                }}
+                                    }
+                                }
                             ]
                         },
-                        // {
-                        //     text: 'Edit',
-                        //     className: 'd-none edit_hidden_button',
-                        //     action: function ( e, dt, node, config ) {
-                        //         const ids = [];
-                        //         $('#stocks-table tbody tr.selected').each(function() {
-                        //             ids.push($(this).find('td.id_n').text());
-                        //         });
 
-                        //         if(ids.length > 0){
-                        //             window.location.href = '/admin/inventory/items/edit-rows/'+encodeURI(ids);
-                        //         }
-                        //         {{--ids.length > 0 && AjaxCall('{{ route('post_admin_items_edit_row_many') }}', {ids}, function(res) {--}}
-                        //         {{--    console.log(res)--}}
-                        //         {{--})--}}
-                        //     }
-                        // }
                     ],
-                    // language: {
-                    //     buttons: {
-                    //         selectAll: "Select all items",
-                    //         selectNone: "Select none"
-                    //     }
-                    // },
                     "autoWidth": false,
                     columnDefs: [
                         {
@@ -653,12 +616,12 @@
                                 'selectRow': true
                             }
                         },
-                        { className: "id_n", "targets": [ 1 ], width: '30px' },
-                        { "targets": [ 11 ], width: '20%' },
+                        {className: "id_n", "targets": [1], width: '30px'},
+                        {"targets": [11], width: '20%'},
                     ],
-                    "order": [[ 1, "asc" ]],
+                    "order": [[1, "asc"]],
                     select: {
-                        style:    'multi',
+                        style: 'multi',
                         selector: '.select-checkbox'
                     },
                     exportOptions: {
@@ -684,9 +647,9 @@
 
                 // edit_hidden_button
 
-                table.on( 'select', function ( e, dt, type, indexes ) {
-                    if ( type === 'row' ) {
-                        if($('tr[role="row"].selected').length !== 0) {
+                table.on('select', function (e, dt, type, indexes) {
+                    if (type === 'row') {
+                        if ($('tr[role="row"].selected').length !== 0) {
                             console.log(111)
 
                             $('.edit_hidden_button').removeClass('d-none');
@@ -695,9 +658,9 @@
                     }
                 });
 
-                table.on( 'deselect', function ( e, dt, type, indexes ) {
-                    if ( type === 'row' ) {
-                        if($('tr[role="row"].selected').length === 0) {
+                table.on('deselect', function (e, dt, type, indexes) {
+                    if (type === 'row') {
+                        if ($('tr[role="row"].selected').length === 0) {
                             console.log(222)
 
                             $('.edit_hidden_button').removeClass('d-block');
@@ -709,9 +672,9 @@
 
                 function init() {
                     var selected_items = [];
-                    $(`${selectId} option`).each(function() {
+                    $(`${selectId} option`).each(function () {
                         var column = table.column($(this).attr('data-column'));
-                        if($(this).is(':selected')) {
+                        if ($(this).is(':selected')) {
                             selected_items.push({
                                 id: $(this).val(),
                                 text: $(this).val(),
@@ -732,16 +695,17 @@
                     init();
                 });
 
-                $("body").on( "change", ".select_all_checkbox",function(e) {
+                $("body").on("change", ".select_all_checkbox", function (e) {
                     // console.log(table.rows({selected: true}).length);
-                    if ($(this).is( ":checked" )) {
-                        table.rows(  ).select();
+                    if ($(this).is(":checked")) {
+                        table.rows().select();
                     } else {
-                        table.rows(  ).deselect();
+                        table.rows().deselect();
                     }
                 });
             }
-@if($q)
+
+            @if($current && $current->status)
             tableInit(
                 "stock_table",
                 [
@@ -760,11 +724,13 @@
                 ],
                 '#table_head_id',
                 [
-                    {  data: null,
+                    {
+                        data: null,
                         name: 'items.id',
                         defaultContent: '',
                         className: 'select-checkbox',
-                        orderable: false},
+                        orderable: false
+                    },
                     {data: 'id', name: 'items.id'},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'short_description', name: 'item_translations.short_description'},
@@ -783,8 +749,8 @@
             @endif
 
 
-            $('body').on('click', '.edit-list--container .heading-btn', function(ev) {
-                if($(ev.target).closest('.heading-btn').hasClass('editing_close')) {
+            $('body').on('click', '.edit-list--container .heading-btn', function (ev) {
+                if ($(ev.target).closest('.heading-btn').hasClass('editing_close')) {
                     $('.edit-list--container').find('.edit-list--container-content').empty();
                     $('body').css('overflow', 'unset');
                     $('.edit-list--container').hide();
@@ -793,11 +759,11 @@
                     $('.edit-list--container').removeClass('max-wrap');
                     $('.edit-list--container').removeClass('min-wrap');
                     $('body').css('overflow', 'unset');
-                } else if($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
+                } else if ($(ev.target).closest('.heading-btn').hasClass('editing_max')) {
                     i = $(ev.target).closest('.heading-btn').find('i');
 
-                    if(!$('.edit-list--container').hasClass('max-wrap')) {
-                        if($(".edit-list--container").data('draggable')) {
+                    if (!$('.edit-list--container').hasClass('max-wrap')) {
+                        if ($(".edit-list--container").data('draggable')) {
                             $(".edit-list--container").draggable('destroy');
                         }
                         min = $('.edit-list--container').hasClass('min-wrap');
@@ -809,27 +775,27 @@
                         $('body').css('overflow', 'hidden');
                     } else {
                         max = false;
-                        $(".edit-list--container").draggable({ handle:'.heading'});
+                        $(".edit-list--container").draggable({handle: '.heading'});
                         min && $('.edit-list--container').addClass('min-wrap');
                         i.removeClass('fa-window-restore');
                         i.addClass('fa-window-maximize');
                         $('.edit-list--container').removeClass('max-wrap');
                         $('body').css('overflow', 'unset');
                     }
-                } else if($(ev.target).closest('.heading-btn').hasClass('editing_minimize')) {
-                    if($('.edit-list--container').hasClass('min-wrap')) {
-                        if(max) {
+                } else if ($(ev.target).closest('.heading-btn').hasClass('editing_minimize')) {
+                    if ($('.edit-list--container').hasClass('min-wrap')) {
+                        if (max) {
                             i.removeClass('fa-window-maximize');
                             i.addClass('fa-window-restore');
                             $('.edit-list--container').addClass('max-wrap');
                             $('body').css('overflow', 'hidden');
                         } else {
-                            $(".edit-list--container").draggable({ handle:'.heading'});
+                            $(".edit-list--container").draggable({handle: '.heading'});
 
                         }
                         $('.edit-list--container').removeClass('min-wrap');
                     } else {
-                        if(max) {
+                        if (max) {
                             i.removeClass('fa-window-restore');
                             i.addClass('fa-window-maximize');
                             $('.edit-list--container').removeClass('max-wrap');
@@ -840,7 +806,7 @@
                 }
             });
 
-            $('body').on('click', '.app-product-status', function(ev) {
+            $('body').on('click', '.app-product-status', function (ev) {
                 const url = $(ev.target).data('href');
 
                 AjaxCall(url, {}, function (res) {

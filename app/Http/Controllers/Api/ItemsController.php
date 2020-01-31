@@ -36,14 +36,13 @@ class ItemsController
                 'item_translations.long_description',
                 'barcodes.code',
                 'categories_translations.name as category',
-                'SUM item_locations.qty as qty'
+                \DB::raw('SUM(DISTINCT  item_locations.qty) as qty')
             )
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $w_id)
             ->where('item_locations.warehouse_id', $w_id)
             ->where('items.is_archive', false)->with('item')
             ->where('item_translations.locale', \Lang::getLocale())->get();
-
         return response()->json($items);
     }
 

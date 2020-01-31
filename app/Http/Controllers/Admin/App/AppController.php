@@ -96,7 +96,7 @@ class AppController extends Controller
 
     public function activateShop($id)
     {
-        AppWarehouses::where('id', $id)->update(['status' => 1]);
+        AppWarehouses::where('warehouse_id', $id)->update(['status' => 1]);
         return redirect()->back();
     }
 
