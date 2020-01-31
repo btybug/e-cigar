@@ -32,6 +32,7 @@ class ItemsController
                 'app_items.item_id',
                 'item_translations.name',
                 'item_translations.short_description',
+                'item_translations.long_description',
                 'barcodes.code',
                 'categories_translations.name as category'
             )
