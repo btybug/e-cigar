@@ -46,14 +46,14 @@
                 </div>
                 <div class="col-md-6 offset-md-2">
                     <div class="form-group row">
-                        <select name="" id="" class="form-control">
+                        <select name="" id="" class="form-control select_to_2_js" multiple="multiple">
                             <option value="">Select item1,Select item2</option>
                             <option value="">item1</option>
                             <option value="">item2</option>
                         </select>
                     </div>
                     <div class="form-group row">
-                        <select name="" id="" class="form-control">
+                        <select name="" id="" class="form-control select_to_2_js" multiple="multiple">
                             <option value="">Select gift(juice)</option>
                             <option value="">item1</option>
                             <option value="">item2</option>
@@ -72,8 +72,11 @@
             </div>
         </div>
 @stop
-
+@section('css')
+    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+@stop
 @section('js')
+    <script src="/public/plugins/select2/select2.full.min.js"></script>
     <script>
         $(document).ready(function () {
             $('body').on('change','#offers_select',function () {
@@ -82,7 +85,9 @@
                 }else {
                     $(this).closest('.card-body').find('.content-select-wrap').addClass('d-none')
                 }
-            })
+            });
+
+            $('.select_to_2_js').select2();
         })
     </script>
 @stop
