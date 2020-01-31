@@ -59,7 +59,7 @@ class OrdersController extends Controller
 
     public function addItemToBascked(Request $request,OrderService $service)
     {
-        $shop = AppWarehouses::where('warehouse_id',$request->get('shop_id'));
+        $shop = AppWarehouses::where('warehouse_id',$request->get('shop_id'))->first();
         $order = $shop->warehouse->orders()->find($request->get('order_id'));
         $item=AppItems::find($request->get('product_id'));
         $item =$shop->warehouse->default_rack()->items()->where('item_id',$item->item_id)->first();
