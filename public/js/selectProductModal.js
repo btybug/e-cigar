@@ -319,11 +319,15 @@ $('body').on('click', '.edit_price_js', function(ev) {
   const name = edit_button.data('name');
   const price = edit_button.data('price');
 
-  $('#editPriceModal .modal-body').html(`<div class="d-flex"> 
-    <span>${name}</span>
-    <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
-  </div>`)
-  console.log(id, name, price)
+    $('#editPriceModal .modal-body').html(`
+    <div class="form-group row"> 
+        <label class="col-md-9 col-form-label">${name}</label>
+        <div class="col-md-3">
+            <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
+        </div>
+    </div>
+`)
+    console.log(id, name, price)
   $('#editPriceModal').modal('show');
 })
 
