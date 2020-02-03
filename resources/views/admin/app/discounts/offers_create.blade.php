@@ -68,6 +68,7 @@
     <script src="/public/plugins/select2/select2.full.min.js"></script>
     <script>
         $(document).ready(function () {
+            $('body').find(`.${$('body').find('#offers_select').val()}`).removeClass('d-none')
             $('body').on('change', '#offers_select', function () {
                 if ($(this).val() === 'buy_x_get') {
                     $(this).closest('.card-body').find(`.${$(this).val()}`).removeClass('d-none')
