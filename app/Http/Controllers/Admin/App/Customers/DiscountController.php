@@ -6,7 +6,10 @@ namespace App\Http\Controllers\Admin\App\Customers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
+use App\Models\App\AppOffersDiscount;
 use App\Models\App\Discount;
+use App\Models\Items;
+use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
@@ -43,20 +46,23 @@ class DiscountController extends Controller
 
     public function offers()
     {
-        $discounts = Discount::get();
+        $discounts = AppOffersDiscount::all();
         return view('admin.app.discounts.offers',compact(['discounts']));
     }
 
     public function offersCreate()
     {
+        $items = Items::all()->pluck('name', 'id');
         $model = null;
-        return view('admin.app.discounts.offers_create',compact('model'));
+        return view('admin.app.discounts.offers_create', compact('model', 'items'));
     }
 
-    public function postOffersCreate(DiscountRequest $request)
+    public function postOffersCreate(Request $request)
     {
-        Discount::create($request->except("_token"));
-        return redirect()->route('customer_offers');
+        $date = $request->only('name', 'type');
+        $date['data'] = $request->except('_token', 'name', 'type');
+        AppOffersDiscount::create($date);
+        return redirect()->route('app_customer_offers');
     }
 
     public function offersEdit($id)

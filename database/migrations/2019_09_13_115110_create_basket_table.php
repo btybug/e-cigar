@@ -20,13 +20,16 @@ class CreateBasketTable extends Migration
             $table->string('order_number');
             $table->integer('user_id')->unsigned()->nullable();
             $table->unsignedInteger('staff_id')->nullable();
-            $table->double('discount',3,2)->nullable();
+            $table->unsignedBigInteger('discount_offer_id')->nullable();
+            $table->unsignedBigInteger('admin_discount_id')->nullable();
             $table->text('additional_data')->nullable();
             $table->text('note')->nullable();
             $table->string('payment_method');
             $table->double('tendered')->nullable();
             $table->double('changed')->nullable();
             $table->timestamps();
+            $table->foreign('discount_offer_id')->references('id')->on('app_offers_discount')->onDelete('set null');
+            $table->foreign('admin_discount_id')->references('id')->on('discounts')->onDelete('set null');
         });
     }
 

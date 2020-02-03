@@ -19,7 +19,7 @@ class CreateBasketItemsTable extends Migration
          $table->unsignedInteger('qty');
          $table->double('price');
 
-//         $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+         $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
         });
     }
 

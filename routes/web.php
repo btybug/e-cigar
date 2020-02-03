@@ -31,6 +31,7 @@ Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','who
     Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
     Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
 
+
 });
 
 //Route::get('/', function () {

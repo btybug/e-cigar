@@ -46,6 +46,9 @@
                                     Amount
                                 </th>
                                 <th>
+                                    Status
+                                </th>
+                                <th>
                                     Created Date
                                 </th>
                                 <th>
@@ -63,6 +66,9 @@
                                         </td>
                                         <td>
                                             {!! $discount->amount !!}
+                                        </td>
+                                        <td>
+                                            {!! $discount->status !!}
                                         </td>
                                         <td>
                                             {!! $discount->created_at !!}
