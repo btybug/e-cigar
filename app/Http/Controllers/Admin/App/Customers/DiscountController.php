@@ -67,14 +67,17 @@ class DiscountController extends Controller
 
     public function offersEdit($id)
     {
-        $model = Discount::findOrFail($id);
-        return view('admin.app.discounts.offers_create',compact('model'));
+        $items = Items::all()->pluck('name', 'id');
+        $model = AppOffersDiscount::findOrFail($id);
+        return view('admin.app.discounts.offers_create',compact('model','items'));
     }
 
     public function postOffersEdit(DiscountRequest $request,$id)
     {
-        $model = Discount::findOrFail($id);
-        $model->update($request->except("_token"));
+        $date = $request->only('name', 'type');
+        $date['data'] = $request->except('_token', 'name', 'type');
+        $model = AppOffersDiscount::findOrFail($id);
+        $model->update($date);
         return redirect()->route('customer_offers');
     }
 }

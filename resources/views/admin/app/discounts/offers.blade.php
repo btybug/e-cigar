@@ -60,7 +60,7 @@
                                     </td>
 
                                     <td>
-                                        <a href="{!! route('app_customer_discounts_edit',$discount->id) !!}"
+                                        <a href="{!! route('app_customer_offers_edit',$discount->id) !!}"
                                            class="mr-3 table-edit-link">Edit</a>
                                         <a href="#" class="mr-3 table-edit-link">Delete</a>
                                     </td>
