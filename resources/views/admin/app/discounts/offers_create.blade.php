@@ -10,11 +10,7 @@
             {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
             <div class="card-body">
                 <div class="row mx-0 mb-3">
-                    <select name="type" id="offers_select" class="form-control col-sm-3">
-                        <option value="">Select</option>
-                        <option value="buy_x_get">Buy X Get Y</option>
-                        <option value="item2">item2</option>
-                    </select>
+                    {!! Form::select('type',[null=>'Select Type','buy_x_get'=>'Buy X Get Y'],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
                 </div>
                 <div class="buy_x_get d-none content-select-wrap">
                     <div class="col-md-8">
@@ -35,22 +31,22 @@
                                 <div class="form-group row">
                                     <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('if_by',null,['class'=>'form-control','id'=>'customer_buy']) !!}
+                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control','id'=>'customer_buy']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="get_free" class="col-sm-8 col-form-label">He will get free</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('get_free',null,['class'=>'form-control','id'=>'get_free']) !!}
+                                        {!! Form::text('get_free',($model)?$model->data['get_free']:null,['class'=>'form-control','id'=>'get_free']) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 offset-md-2">
                                 <div class="form-group row">
-                                    {!! Form::select('items[]',$items,null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                    {!! Form::select('items[]',$items,($model)?$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
                                 </div>
                                 <div class="form-group row">
-                                    {!! Form::select('gifts[]',$items,null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                    {!! Form::select('gifts[]',$items,($model)?$model->data['gifts']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
                                 </div>
                             </div>
                         </div>
