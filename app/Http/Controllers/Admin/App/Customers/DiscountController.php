@@ -25,7 +25,7 @@ class DiscountController extends Controller
     public function postCreate(DiscountRequest $request)
     {
         Discount::create($request->except("_token"));
-        return redirect()->route('customer_discounts');
+        return redirect()->route('app_customer_discounts');
     }
 
     public function edit($id)
