@@ -51,12 +51,11 @@
                                 <th>
                                     Created Date
                                 </th>
+
                                 <th>
                                     Actions
                                 </th>
-                                <th>
-                                    Status
-                                </th>
+
                                 </thead>
                                 <tbody>
                                 @foreach($discounts as $discount)
@@ -71,7 +70,10 @@
                                             {!! $discount->amount !!}
                                         </td>
                                         <td>
-                                            {!! $discount->status !!}
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{!! $discount->id !!}">
+                                                <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
+                                            </div>
                                         </td>
                                         <td>
                                             {!! $discount->created_at !!}
@@ -82,12 +84,7 @@
                                                class="mr-3 table-edit-link">Edit</a>
                                             <a href="#" class="mr-3 table-edit-link">Delete</a>
                                         </td>
-                                        <td>
-                                            <div class="custom-control custom-switch">
-                                                <input type="checkbox" class="custom-control-input" id="switch{!! $discount->id !!}">
-                                                <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
-                                            </div>
-                                        </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>

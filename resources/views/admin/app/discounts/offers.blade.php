@@ -53,7 +53,10 @@
                                         {!! $discount->type !!}
                                     </td>
                                     <td>
-                                        {!! $discount->status !!}
+                                        <div class="custom-control custom-switch">
+                                            <input type="checkbox" class="custom-control-input" id="switch{!! $discount->id !!}">
+                                            <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
+                                        </div>
                                     </td>
                                     <td>
                                         {!! $discount->created_at !!}
