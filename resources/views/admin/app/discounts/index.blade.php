@@ -94,3 +94,20 @@
             </div>
         </div>
 @stop
+
+@section('js')
+    <script>
+        $(function() {
+            $('body').on('change', '.custom-control-input', function(ev) {
+                const checked = $(ev.target).is(':checked');
+                const id = $(ev.target).val();
+
+                AjaxCall("/admin/app/discounts/on-off", {id, status: checked ? 1 : 0}, function (res) {
+                    if (!res.error) {
+                        
+                    }
+                });
+            })
+        })
+    </script>
+@stop
