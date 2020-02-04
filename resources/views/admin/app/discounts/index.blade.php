@@ -54,6 +54,9 @@
                                 <th>
                                     Actions
                                 </th>
+                                <th>
+                                    Status
+                                </th>
                                 </thead>
                                 <tbody>
                                 @foreach($discounts as $discount)
@@ -78,6 +81,12 @@
                                             <a href="{!! route('app_customer_discounts_edit',$discount->id) !!}"
                                                class="mr-3 table-edit-link">Edit</a>
                                             <a href="#" class="mr-3 table-edit-link">Delete</a>
+                                        </td>
+                                        <td>
+                                            <div class="custom-control custom-switch">
+                                                <input type="checkbox" class="custom-control-input" id="switch{!! $discount->id !!}">
+                                                <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
