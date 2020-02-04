@@ -138,6 +138,6 @@ class OrdersController extends Controller
     public function getAdminDiscounts()
     {
         $discounts=Discount::where('status','1')->get();
-        return response()->json($discounts);
+        return response()->json(['success'=>true,'discounts'=>$discounts]);
     }
 }
