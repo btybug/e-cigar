@@ -54,7 +54,7 @@
                                     </td>
                                     <td>
                                         <div class="custom-control custom-switch">
-                                            <input type="checkbox"  value="{!! $discount->id !!}" @if($discount->status) checkbox @endif  class="custom-control-input" id="switch{!! $discount->id !!}">
+                                            <input type="checkbox"  value="{!! $discount->id !!}" @if($discount->status) checked @endif  class="custom-control-input" id="switch{!! $discount->id !!}">
                                             <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
                                         </div>
                                     </td>
