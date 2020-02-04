@@ -78,7 +78,6 @@
                                         <td>
                                             {!! $discount->created_at !!}
                                         </td>
-
                                         <td>
                                             <a href="{!! route('app_customer_discounts_edit',$discount->id) !!}"
                                                class="mr-3 table-edit-link">Edit</a>

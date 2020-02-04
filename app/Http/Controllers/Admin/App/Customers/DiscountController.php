@@ -80,4 +80,16 @@ class DiscountController extends Controller
         $model->update($date);
         return redirect()->route('customer_offers');
     }
+
+    public function postOnOff(Request $request)
+    {
+        Discount::where('id',$request->get('id'))->update(['status'=>$request->get('status')]);
+        return response()->json(['error'=>false]);
+    }
+
+    public function postOffersOnOff(Request $request)
+    {
+        AppOffersDiscount::where('id',$request->get('id'))->update(['status'=>$request->get('status')]);
+        return response()->json(['error'=>false]);
+    }
 }
