@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppItems;
 use App\Models\App\AppWarehouses;
+use App\Models\App\Discount;
 use App\Models\App\Orders;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
@@ -132,5 +133,11 @@ class OrdersController extends Controller
         $order->note=$request->get('note');
         $order->save();
         return response()->json(['success'=>true]);
+    }
+
+    public function getAdminDiscounts()
+    {
+        $discounts=Discount::where('status','1')->get();
+        return response()->json($discounts);
     }
 }
