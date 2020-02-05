@@ -143,7 +143,7 @@ class OrdersController extends Controller
 
     public function addAdminDiscounts(Request $request)
     {
-        Orders::where('id',$request->get('order_id'))->update(['admin_discount_id',$request->get('admin_discount_id')]);
+        Orders::where('id',$request->get('order_id'))->update(['admin_discount_id'=>$request->get('admin_discount_id')]);
         return response()->json(['success'=>true]);
 
     }
