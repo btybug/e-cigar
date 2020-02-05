@@ -21,7 +21,7 @@ class AppItems extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'item_categories', 'items.item_id', 'categories_id')
+        return $this->belongsToMany(Category::class, 'item_categories', 'item_id', 'categories_id','item_id')
             ->where('categories.type', 'stocks');
     }
 }
