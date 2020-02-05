@@ -33,7 +33,7 @@ class ItemsController
                 'item_translations.short_description',
                 'item_translations.long_description',
                 'barcodes.code',
-                'categories_translations.name as category',
+//                'categories_translations.name as category',
                 \DB::raw('SUM(DISTINCT  item_locations.qty) as qty')
             )
             ->groupBy('items.id')
