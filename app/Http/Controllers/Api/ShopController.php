@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\App\AppWarehouses;
 use App\Models\RackItems;
+use App\Models\Settings;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
@@ -37,5 +38,12 @@ class ShopController
             ->where('warehouse_translations.locale',app()->getLocale())
             ->select('warehouses.id','warehouse_translations.name')->pluck('name', 'id');
 
+    }
+
+    public function getSettings(Request $request,Settings $settings)
+    {
+        $shop_id=$request->get('shop_id');
+        $model=$settings->getEditableData('app_settings_'.$shop_id);
+        return response()->json(['settings'=>$model]);
     }
 }

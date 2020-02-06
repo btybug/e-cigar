@@ -17,6 +17,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->group(function () {
     Route::get('/user','ShopController@getUser');
     Route::get('/shops', 'ShopController@getShop');
+    Route::post('/get-settings', 'ShopController@getSettings');
 //    Route::middleware('shopping',function (){
     Route::post('/items', 'ItemsController@getItems');
     Route::post('/categories', 'ItemsController@getCategories');
@@ -31,4 +32,5 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-admin-discounts', 'OrdersController@getAdminDiscounts');
     Route::post('/get-offer-discounts', 'OrdersController@getOfferDiscounts');
     Route::post('/add-admin-discounts', 'OrdersController@addAdminDiscounts');
+
     });
