@@ -78,7 +78,7 @@ class DiscountController extends Controller
         $date['data'] = $request->except('_token', 'name', 'type');
         $model = AppOffersDiscount::findOrFail($id);
         $model->update($date);
-        return redirect()->route('customer_offers');
+        return redirect()->back();
     }
 
     public function postOnOff(Request $request)
