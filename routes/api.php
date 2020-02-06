@@ -29,5 +29,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-authorize', 'OrdersController@getAuthorize');
     Route::post('/close-basket', 'OrdersController@getCloseBasket');
     Route::post('/get-admin-discounts', 'OrdersController@getAdminDiscounts');
+    Route::post('/get-offer-discounts', 'OrdersController@getOfferDiscounts');
     Route::post('/add-admin-discounts', 'OrdersController@addAdminDiscounts');
     });
