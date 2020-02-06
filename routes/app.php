@@ -32,3 +32,28 @@ Route::group(['prefix' => 'staff'], function () {
     Route::get('/badge/{id}/{warehouse_id}', 'Customers\StaffController@getAppBadge')->name('app_staff_badge');
 
 });
+
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/{id?}', 'AppController@products')->name('admin_app_products');
+        Route::post('/add-product', 'AppController@addProduct')->name('admin_app_add_product');
+        Route::post('/import-shop', 'AppController@importShop')->name('admin_app_import_shop');
+        Route::post('/activate/{id}', 'AppController@activateProduct')->name('admin_app_activate_product');
+        Route::post('/draft/{id}', 'AppController@draftProduct')->name('admin_app_draft_product');
+
+        Route::get('/activate-shop/{id}', 'AppController@activateShop')->name('admin_app_activate_shop');
+        Route::get('/draft-shop/{id}', 'AppController@draftShop')->name('admin_app_draft_shop');
+        Route::get('/drop-shop/{id}', 'AppController@removeShop')->name('admin_app_drop_shop');
+        Route::post('/multi-edit-price', 'AppController@multiEditPrice')->name('admin_app_multi_edit_price');
+
+    });
+    Route::group(['prefix' => 'settings'], function () {
+        Route::get('/{id?}', 'AppController@getSettings')->name('admin_app_settings');
+        Route::post('/save', 'AppController@saveSettings')->name('admin_app_settings_save');
+
+    });
+    Route::group(['prefix' => 'orders'], function () {
+        Route::get('/', 'AppController@orders')->name('admin_app_orders');
+        Route::get('/view/{id}', 'AppController@orderViev')->name('admin_app_order_view');
+    });
+    Route::post('/warehouse-not-selected-items/{id}', 'AppController@notSelectedProducts')->name('admin_app_not_selected_products');
+    Route::post('/warehouse-not-selected-items/{id}', 'AppController@notSelectedProducts')->name('admin_app_not_selected_products');

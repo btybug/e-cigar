@@ -313,6 +313,9 @@
                     @ok('admin_app_orders')
                     <li><a href="{{route('admin_app_orders')}}"><i class="far fa-circle fa-xs"></i>Orders</a></li>
                     @endok
+                    @ok('admin_app_settings')
+                    <li><a href="{{route('admin_app_settings')}}"><i class="far fa-circle fa-xs"></i>Settings</a></li>
+                    @endok
                 </ul>
             </li>
             @endok
