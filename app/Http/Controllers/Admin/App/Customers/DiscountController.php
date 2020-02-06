@@ -72,7 +72,7 @@ class DiscountController extends Controller
         return view('admin.app.discounts.offers_create',compact('model','items'));
     }
 
-    public function postOffersEdit(DiscountRequest $request,$id)
+    public function postOffersEdit(Request $request,$id)
     {
         $date = $request->only('name', 'type');
         $date['data'] = $request->except('_token', 'name', 'type');
