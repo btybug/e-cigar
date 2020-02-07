@@ -1283,14 +1283,6 @@ function get_symbol()
     return (new \App\Models\SiteCurrencies())->where('code', $code)->value('symbol');
 }
 
-function get_symbol()
-{
-    $default = site_default_currency();
-    $code = (\Cookie::get('currency')) ? \Cookie::get('currency')
-        : (($default) ? $default->code : null);
-
-    return (new \App\Models\SiteCurrencies())->where('code', $code)->value('symbol');
-}
 
 [['code' => 'referral_name', 'description' => 'Invited user name'],
     ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
