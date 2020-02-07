@@ -1283,6 +1283,7 @@ function get_symbol()
     return (new \App\Models\SiteCurrencies())->where('code', $code)->value('symbol');
 }
 
+
 [['code' => 'referral_name', 'description' => 'Invited user name'],
     ['code' => 'referral_last_name', 'description' => 'Invited user last name'],
     ['code' => 'referral_email', 'description' => 'Invited user name'],
