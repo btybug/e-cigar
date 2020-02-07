@@ -24,7 +24,7 @@
         @php $selected = $variation->first(); @endphp
     @endif
     <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"
-         data-single-price="{{ $selected->price }}">
+         data-single-price="{{ ($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price }}">
         {!! filter_button(@$vSettings->filter->slug,@$vSettings->variation_id,'Select options','filter',true,@$vSettings->display_as) !!}
     </div>
     <div class="product-single-info_row-items">

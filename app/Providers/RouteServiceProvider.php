@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+use Illuminate\Support\Facades\Route;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -36,6 +36,8 @@ class RouteServiceProvider extends ServiceProvider
     public function map()
     {
         $this->mapApiRoutes();
+        $this->mapMediaRoutes();
+        $this->mapAppRoutes();
 
         $this->mapWebRoutes();
         $this->mapAdminRoutes();
@@ -69,8 +71,38 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::prefix('api')
 //            ->middleware('api')
-            ->namespace($this->namespace)
+            ->namespace($this->namespace . '\Api')
             ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the "api" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapAppRoutes()
+    {
+        Route::middleware('admin')
+            ->prefix('admin/app')
+            ->namespace($this->namespace . '\Admin\App')
+            ->group(base_path('routes/app.php'));
+    }
+
+    /**
+     * Define the "media" routes for the application.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapMediaRoutes()
+    {
+        Route::prefix('api-media')
+//            ->middleware('admin')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/media.php'));
     }
 
     protected function mapAdminRoutes()

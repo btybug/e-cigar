@@ -62,8 +62,8 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         $comapyData = [];
-        $wholesaler = $data['wholesaler'];
-        if($wholesaler){
+
+        if(isset($data['wholesaler']) && $data['wholesaler']){
             $comapyData = [
                 'company_name' => 'required',
                 'company_number' => 'required',
@@ -93,10 +93,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $customer_number = get_customer_number();
-        $wholesaler = $data['wholesaler'];
         return User::create([
-            'company_name' => ($wholesaler)? $data['company_name']: null,
-            'company_number' => ($wholesaler)? $data['company_number']: null,
+            'company_name' => (isset($data['wholesaler']))? $data['company_name']: null,
+            'company_number' => (isset($data['wholesaler']))? $data['company_number']: null,
             'name' => $data['name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
@@ -104,7 +103,7 @@ class RegisterController extends Controller
             'country' => $data['country'],
             'gender' => $data['gender'],
             'status' => 0,
-            'role_id' => ($wholesaler) ? Roles::where('slug', 'wholesaler')->first()->id : Roles::where('slug', 'customer')->first()->id,
+            'role_id' => (isset($data['wholesaler'])) ? Roles::where('slug', 'wholesaler')->first()->id : Roles::where('slug', 'customer')->first()->id,
             'customer_number' => $customer_number,
             'password' => Hash::make($data['password']),
         ]);

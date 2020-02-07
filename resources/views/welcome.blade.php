@@ -1,55 +1,73 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend',['page_name'=>'banners'])
 @section('content')
     <main class="main-content">
         <div class="home__page-wrapper">
-            <section class="home_slider-wrapper">
-                <div class="home__main-slider">
-                    @if(count($banners))
-                        @foreach($banners as $banner)
-                            @php
-                                $banner = ltrim($banner, '/');
-                                $html = (File::exists($banner)) ? File::get($banner) : "";
-                            @endphp
-                            <div>
-                                {!! $html !!}
-                            </div>
-                        @endforeach
-                    @endif
-                </div>
 
-                <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">
                     @if(count($banners))
-                        @foreach($banners as $banner)
-                            @php
-                                $banner = ltrim($banner, '/');
-                                $html = (File::exists($banner)) ? File::get($banner) : "";
-                            @endphp
-                            <div class="thumb-wall">
-                                {!! $html !!}
-                            </div>
-                        @endforeach
+                    <section class="home_slider-wrapper">
+                        <div class="home__main-slider">
+                            @foreach($banners as $banner)
+                                @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $banner = ltrim($banner, '/');
+                                        $html = (File::exists($banner)) ? File::get($banner) : "";
+                                    @endphp
+                                    <div>
+                                        {!! $html !!}
+                                    </div>
+                                @else
+                                    <div>
+                                        <img src="{{ $banner }}" alt="ads">
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
+                    </section>
                     @endif
-                </div>
-            </section>
-            <div class="container home_width">
+
+{{--                <div class="home__main-slider-thumb" data-carousel-controller-for=".home__main-slider">--}}
+{{--                    @if(count($banners))--}}
+{{--                        @foreach($banners as $banner)--}}
+{{--                            @if(pathinfo($banner,PATHINFO_EXTENSION) == 'html')--}}
+{{--                                @php--}}
+{{--                                    $banner = ltrim($banner, '/');--}}
+{{--                                    $html = (File::exists($banner)) ? File::get($banner) : "";--}}
+{{--                                @endphp--}}
+{{--                                <div class="thumb-wall">--}}
+{{--                                    {!! $html !!}--}}
+{{--                                </div>--}}
+{{--                            @else--}}
+{{--                                <div class="thumb-wall">--}}
+{{--                                    <img src="{{ $banner }}" alt="ads">--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                        @endforeach--}}
+{{--                    @endif--}}
+{{--                </div>--}}
+
+            <div class="container home_width p-home-mobile">
                 <section class="home_categories">
-                    <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">OUR</span> <span>CATEGORIES</span>
+                    <h2 class="font-sec-reg home_main-title text-center text-uppercase">
+                        <span class="font-sec-bold">{!! __('our') !!}</span>
+                        <span>{!! __('categories') !!}</span>
                     </h2>
-                    <p class="font-main-light font-15 text-center home_title-desc">Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                        <br/> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                        orci.</p>
+                    <p class="font-main-light font-15 text-center home_title-desc">
+                        {!! __('cat_desc') !!} </p>
                     <ul class="row home_categories_list">
                         @if(count($categories))
                             @foreach($categories as $category)
-                                <li class="col-md-6">
-                                    <div class="position-relative home_categories-item">
-                                        <img src="{!! media_image_tmb($category->image) !!}" alt="photo">
-                                        <div class="d-flex flex-column position-absolute home_categories-item-inner">
+                                <li class="col-md-4 col-sm-6 home_categories-item-col">
+                                    <div class="d-flex flex-column home_categories-item-wrap">
+                                        <div class="position-relative home_categories-item">
+                                            <img src="{!! media_image_tmb($category->image) !!}"
+                                                 alt="{{ $category->name }}"
+                                                 title="{{ $category->name }}"
+                                            />
+                                        </div>
+                                        <div class="d-flex flex-column home_categories-item-inner">
                                             <h4 class="font-sec-bold font-35 ">{{ $category->name }}</h4>
                                             <p>{{ $category->description }}</p>
-                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view
-                                                products</a>
+                                            <a href="{!! route('categories_front',$category->slug) !!}" class="btn mt-auto align-self-center text-uppercase font-15 home_categories-item-btn">{!! __('view_products') !!}</a>
                                         </div>
                                     </div>
                                 </li>
@@ -96,488 +114,82 @@
                 </section>
             </div>
             <section class="home_brands-wrapper">
-                <h2 class="font-sec-reg home_main-title text-center text-white"><span class="font-sec-bold">OUR</span>
-                    <span>BRANDS</span>
+                <h2 class="font-sec-reg home_main-title text-center text-white text-uppercase">
+                    <span class="font-sec-bold">{!! __('our') !!}</span>
+                    <span>{!! __('brands') !!}</span>
                 </h2>
-                <p class="font-main-light font-15 text-center home_title-desc text-sec-clr">Lorem ipsum dolor sit amet,
-                    consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                    <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                    orci.
-                </p>
+                <p class="font-main-light font-15 text-center home_title-desc text-sec-clr">{!! __('brands_desc') !!}</p>
                 <div class="home_brands-slider">
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
+                    @foreach($brands as $brand)
+                        <div class="brand-wall">
+                            <div class="brand-item">
+                                <a href="javascript:void(0)" class="brand-link">
+                                    <img src="{{ $brand->image }}" alt="{{ $brand-> name }}" title="{{ $brand-> name }}">
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/4.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/5.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/1.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/2.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="brand-wall">
-                        <div class="brand-item">
-                            <a href="#" class="brand-link">
-                                <img src="/public/img/brands/3.png" alt="brand-logo">
-                            </a>
-                        </div>
-                    </div>
+                    @endforeach
+
                 </div>
             </section>
-            <div class="container home_width">
+
                 <section class="home_products-wrapper">
-                    <h2 class="font-sec-reg home_main-title text-center"><span class="font-sec-bold">TOP</span>
-                        <span>PRODUCTS</span>
-                    </h2>
-                    <p class="font-main-light font-15 text-center home_title-desc mb-0">Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit. Suspendisse lorem risus, molestie tincidunt lacus nec,
-                        <br> sagittis tincidunt neque. Aenean luctus tempor libero eget ultrices. Curabitur at nibh
-                        orci.
-                    </p>
+                    <div class="container home_width">
+                        <h2 class="font-sec-reg home_main-title text-center text-uppercase">
+                            <span class="font-sec-bold">{!! __('top') !!}</span>
+                            <span>{!! __('products') !!}</span>
+                        </h2>
 
-                    <div class="d-flex home_products-version">
-                        <div class="col active">
-                            <a href="#" class="products-version-link">
-                                Best Offers
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="products-version-link">
-                                Top Pruducts
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="products-version-link">
-                                Most Sales
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="products-version-link">
-                                News
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="products-version-link">
-                                Category 5
-                            </a>
-                        </div>
-                        <div class="col">
-                            <a href="#" class="products-version-link">
-                                Category 6
-                            </a>
-                        </div>
+                        <p class="font-main-light font-15 text-center home_title-desc mb-0">{!! __('products_desc') !!}</p>
+                        <div class="home_products-version-mobile d-sm-none d-block">
+                            <div class="home_products-version-mobile-select">
+                                <select class="select-2 select-2--no-search main-select main-select-2arrows not-selected top-selectbox" name="" id="" style="width: 100%">
+                                    @if(count($tops))
+                                        @foreach($tops['name'] as $k => $top)
+                                            @if($top && isset($top["gb"]))
+                                            <option value="{{$k}}">{{ $top["gb"] }}</option>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </select>
 
+                            </div>
+                        </div>
                     </div>
-                    <ul class="row products__list-wrapper">
-                        <li class="col-lg-3 col-sm-6">
-                            <div class="products__item-wrapper main-transition">
-                                <div class="products__item-wrapper-inner">
-                                    <a href="#" class="products__item-top">
-                                    <span
-                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
-                                        <span class="position-relative products__item-photo d-block">
-                                        <img src="/public/img/temp/product-2-1.png" alt="product">
-<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
-{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
-                                    </span>
-                                        <span class="products__item-main-content">
-                                         <span class="products__item-photo-thumb">
-
-<span class="products__item-photo-thumb-item active-slider">
-    <img src="/public/img/temp/product-2-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                                                                          <span
-                                                                                              class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-4-1.png" alt="thumb">
-</span>
-
-                                        </span>
-                                        <span class="products__item-content-inner">
-                                            <span
-                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
-60W SMOK² PRIV V8 Starter1
-                                    </span>
-                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
-adipiscing elit. Morbi sodales ...
-                                    </span>
-                                             <span
-                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
-
-                                              <span
-                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
-                                                                               <span class="products__item-discount">
-    <img src="/public/img/discount-70.png" alt="discount">
-</span>
-                                                 <span class="products__item-discount">
-                                                      <img src="/public/img/discount-50.png" alt="discount">
-                                                  </span>
-
-                                              </span>
-
-
-                                        <span class="d-flex flex-wrap products__item-prices">
-{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
-<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
-                                        </span>
-                                    </span>
-                                        </span>
-
-                                    </span>
-
-                                    </a>
-                                    <div
-                                        class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                                        <a href="#"
-                                           class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                                            view more
+                    <div class="d-flex home_products-version">
+                        @if(count($tops))
+                            @foreach($tops['name'] as $k => $top)
+                                @if($top && isset($top["gb"]))
+                                    <div class="top-parent col @if($loop->first) active @endif">
+                                        <a href="javascript:void(0)" data-key="{{ $k }}" class="products-version-link top-link">
+                                            {{ $top["gb"] }}
                                         </a>
-                                        <span class="products__item-favourite active">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="20px" height="18px"
-                                            viewBox="0 0 20 18"
-                                        >
-                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
-                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
-                                        </svg>
-                                    </span>
                                     </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-3 col-sm-6">
-                            <div class="products__item-wrapper main-transition">
-                                <div class="products__item-wrapper-inner">
-                                    <a href="#" class="products__item-top">
-                                    <span
-                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
-                                        <span class="position-relative products__item-photo d-block">
-                                        <img src="/public/img/temp/product-2-1.png" alt="product">
-<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
-{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
-                                    </span>
-                                        <span class="products__item-main-content">
-                                         <span class="products__item-photo-thumb">
+                                @endif
+                            @endforeach
+                        @endif
+                    </div>
 
-<span class="products__item-photo-thumb-item active-slider">
-    <img src="/public/img/temp/product-2-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                                                                          <span
-                                                                                              class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-4-1.png" alt="thumb">
-</span>
+                    <div class="home-top-products">
 
-                                        </span>
-                                        <span class="products__item-content-inner">
-                                            <span
-                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
-Click-N-Vape Smoke V8 Starter
-                                    </span>
-                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
-adipiscing elit. Morbi sodales ...
-                                    </span>
-                                             <span
-                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
-
-                                              <span
-                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
-                                                                               <span class="products__item-discount">
-    <img src="/public/img/discount-70.png" alt="discount">
-</span>
-{{--                                                 <span class="products__item-discount">--}}
-                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
-                                                  {{--</span>--}}
-
-                                              </span>
-
-
-                                        <span class="d-flex flex-wrap products__item-prices">
-{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
-<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
-                                        </span>
-                                    </span>
-                                        </span>
-
-                                    </span>
-
-                                    </a>
-                                    <div
-                                        class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                                        <a href="#"
-                                           class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                                            view more
-                                        </a>
-                                        <span class="products__item-favourite active">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="20px" height="18px"
-                                            viewBox="0 0 20 18"
-                                        >
-                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
-                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
-                                        </svg>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-3 col-sm-6">
-                            <div class="products__item-wrapper main-transition">
-                                <div class="products__item-wrapper-inner">
-                                    <a href="#" class="products__item-top">
-                                    <span
-                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
-                                        <span class="position-relative products__item-photo d-block">
-                                        <img src="/public/img/temp/product-2-1.png" alt="product">
-<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>
-{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
-                                    </span>
-                                        <span class="products__item-main-content">
-                                         <span class="products__item-photo-thumb">
-
-<span class="products__item-photo-thumb-item active-slider">
-    <img src="/public/img/temp/product-2-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                                                                          <span
-                                                                                              class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-4-1.png" alt="thumb">
-</span>
-
-                                        </span>
-                                        <span class="products__item-content-inner">
-                                            <span
-                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
-Click-N-Vape Smoke V8 Starter
-                                    </span>
-                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
-adipiscing elit. Morbi sodales ...
-                                    </span>
-                                             <span
-                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
-
-                                              <span
-                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
-                                                                               <span class="products__item-discount">
-    <img src="/public/img/discount-70.png" alt="discount">
-</span>
-{{--                                                 <span class="products__item-discount">--}}
-                                                  {{--    <img src="/public/img/discount-50.png" alt="discount">--}}
-                                                  {{--</span>--}}
-
-                                              </span>
-
-
-                                        <span class="d-flex flex-wrap products__item-prices">
-{{--<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>--}}
-<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$50</span>
-                                        </span>
-                                    </span>
-                                        </span>
-
-                                    </span>
-
-                                    </a>
-                                    <div
-                                        class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                                        <a href="#"
-                                           class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                                            view more
-                                        </a>
-                                        <span class="products__item-favourite active">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="20px" height="18px"
-                                            viewBox="0 0 20 18"
-                                        >
-                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
-                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
-                                        </svg>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="col-lg-3 col-sm-6">
-                            <div class="products__item-wrapper main-transition">
-                                <div class="products__item-wrapper-inner">
-                                    <a href="#" class="products__item-top">
-                                    <span
-                                        class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">BRAND NAME</span>
-                                        <span class="position-relative products__item-photo d-block">
-                                        <img src="/public/img/temp/product-2-1.png" alt="product">
-{{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
-<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>
-                                    </span>
-                                        <span class="products__item-main-content">
-                                         <span class="products__item-photo-thumb">
-
-<span class="products__item-photo-thumb-item active-slider">
-    <img src="/public/img/temp/product-2-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                             <span class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-3-1.png" alt="thumb">
-</span>
-                                                                                          <span
-                                                                                              class="products__item-photo-thumb-item">
-    <img src="/public/img/temp/product-4-1.png" alt="thumb">
-</span>
-
-                                        </span>
-                                        <span class="products__item-content-inner">
-                                            <span
-                                                class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
-60W SMOK² PRIV V8 Starter1
-                                    </span>
-                                            <span class="font-main-light font-15 products__item-desc">Lorem ipsum dolor amet, consectetur
-adipiscing elit. Morbi sodales ...
-                                    </span>
-                                             <span
-                                                 class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
-
-                                              <span
-                                                  class="d-flex flex-wrap align-items-center products__item-discount-all">
-{{--                                                                               <span class="products__item-discount">--}}
-                                                  {{--    <img src="/public/img/discount-70.png" alt="discount">--}}
-                                                  {{--</span>--}}
-                                                 <span class="products__item-discount">
-                                                      <img src="/public/img/discount-50.png" alt="discount">
-                                                  </span>
-
-                                              </span>
-
-
-                                        <span class="d-flex flex-wrap products__item-prices">
-<span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">$200</span>
-<span class="font-sec-bold font-24 text-tert-clr products__item-main-price">$100</span>
-                                        </span>
-                                    </span>
-                                        </span>
-
-                                    </span>
-
-                                    </a>
-                                    <div
-                                        class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                                        <a href="#"
-                                           class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                                            view more
-                                        </a>
-                                        <span class="products__item-favourite active">
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink"
-                                            width="20px" height="18px"
-                                            viewBox="0 0 20 18"
-                                        >
-                                            <path fill-rule="evenodd" opacity="0.949" fill="rgb(227, 230, 237)"
-                                                  d="M14.700,-0.002 C13.057,-0.002 11.419,0.767 10.360,2.016 C9.300,0.767 7.663,-0.002 6.020,-0.002 C3.036,-0.002 0.720,2.306 0.720,5.281 C0.720,8.936 3.996,11.916 9.009,16.336 L10.360,17.678 L11.711,16.336 C16.723,11.916 19.999,8.936 19.999,5.281 C19.999,2.306 17.684,-0.002 14.700,-0.002 L14.700,-0.002 Z"/>
-                                        </svg>
-                                    </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
+                        @php
+                            $topProducts = (count($tops)) ? array_first($tops['products']) : [];
+                        @endphp
+                        @include("frontend._partials.top_products",['topProducts' => $topProducts])
+                    </div>
+                    <div class="line-home"></div>
                 </section>
-            </div>
+
             <section class="home_reviews-wrapper">
                 <div class="container home_width">
                     <div class="row">
                         <div class="col-md-6 home_reviews-left-border">
                             <div class="home_reviews-left">
                                 <div class="font-sec-reg text-uppercase text-main-clr home_reviews-left-title">
-                                    <span class="font-sec-bold">CUSTOMERS</span>
-                                    <span>REVIEWS</span>
+                                    <span class="font-sec-bold">{!! __('customers') !!}</span>
+                                    <span>{!! __('reviews') !!}</span>
                                 </div>
-                                <p class="font-main-light font-15 home_reviews-left-desc">There are many variations of
-                                    passages of Lorem Ipsum available, but
-                                    the majority have suffered alteration in some form, by injected humour,
-                                    or randomised words which don't look even slightly believable. If you
-                                    are going to use a passage of Lorem Ipsum, you need to be sure.</p>
+                                <p class="font-main-light font-15 home_reviews-left-desc">{!! __('reviews_desc') !!}</p>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -657,23 +269,43 @@ adipiscing elit. Morbi sodales ...
                     </div>
                 </div>
             </section>
-            <div class="container home_width">
-                <section class="d-flex flex-wrap align-items-end justify-content-between home_delivery-wrapper">
-                    <div class="home_delivery-left">
-                        <div class="font-main-bold home_delivery-title">
-                            DPD NEXT DAY DELIVERY
+
+            @if($bottoms && count($bottoms))
+                <div class="container home_width p-home-mobile">
+                    <section class="d-flex flex-wrap align-items-end justify-content-between">
+                        <div class="bottom__main-slider">
+                            @foreach($bottoms as $bottom)
+                                @if(pathinfo($bottom,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $bottom = ltrim($bottom, '/');
+                                        $html = (File::exists($bottom)) ? File::get($bottom) : "";
+                                    @endphp
+                                    <div>
+                                        {!! $html !!}
+                                    </div>
+                                @else
+                                    <div>
+                                        <img src="{{ $bottom }}" alt="ads">
+                                    </div>
+                                @endif
+                            @endforeach
                         </div>
-                        <p class="font-20 home_delivery-desc">Free on orders over $100 - Order before 4pm <br/>
-                            Saturday and Sunday delivery available.</p>
-                    </div>
-                    <div class="home_delivery-right lh-1">
-<span class="font-sec-bold home_delivery-price">
-50%
-</span>
-                        <span class="font-sec-reg home_delivery-off">OFF</span>
-                    </div>
-                </section>
-            </div>
+    {{--                    <div class="home_delivery-left">--}}
+    {{--                        <div class="font-main-bold home_delivery-title">--}}
+    {{--                            DPD NEXT DAY DELIVERY--}}
+    {{--                        </div>--}}
+    {{--                        <p class="font-20 home_delivery-desc">Free on orders over $100 - Order before 4pm <br/>--}}
+    {{--                            Saturday and Sunday delivery available.</p>--}}
+    {{--                    </div>--}}
+    {{--                    <div class="home_delivery-right lh-1">--}}
+    {{--<span class="font-sec-bold home_delivery-price">--}}
+    {{--50%--}}
+    {{--</span>--}}
+    {{--                        <span class="font-sec-reg home_delivery-off">OFF</span>--}}
+    {{--                    </div>--}}
+                    </section>
+                </div>
+            @endif
             <button id="scrollTopBtn" class="scroll-top-btn d-flex align-items-center justify-content-center pointer">
                 <svg viewBox="0 0 17 10" width="17px" height="10px">
                     <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M0.000,8.111 L1.984,10.005 L8.498,3.789 L15.010,10.005 L16.995,8.111 L8.498,0.001 L0.000,8.111 Z"></path>
@@ -689,7 +321,6 @@ adipiscing elit. Morbi sodales ...
     <link href="/public/plugins/formstone/light.css" rel="stylesheet">
     <link href="/public/css/carousel.css" rel="stylesheet">
     <link href="/public/css/home-slider.css" rel="stylesheet">
-
 @stop
 
 @section('js')
@@ -702,24 +333,47 @@ adipiscing elit. Morbi sodales ...
     <script>
         $(document).ready(function () {
             $(".home__main-slider").carousel({
-                pagination: false,
-                controls: false
+                pagination: true,
+                controls: false,
+                autoAdvance:true,
+                autoTime:'3000'
             });
 
-            $(".home__main-slider-thumb").carousel({
+            $(".bottom__main-slider").carousel({
+                pagination: true,
                 controls: false,
-                pagination: false,
-                matchWidth: false
+                autoAdvance:true,
+                autoTime:'3000'
             });
+
+            // $(".home__main-slider-thumb").carousel({
+            //     controls: false,
+            //     pagination: false,
+            //     matchWidth: false
+            // });
             $(".home_brands-slider").carousel({
                 theme: "fs-light",
-                pagination: false,
+                // pagination: false,
                 infinite: true,
                 show: {
-                    "740px": 2,
+                    "320px": 2,
                     "980px": 3,
                     "1220px": 4,
                     "1630px": 5,
+                }
+            });
+
+            // home products slider
+
+            $(".home_products-carousel").carousel({
+                theme: "fs-light",
+                pagination: true,
+                infinite: true,
+                show: {
+                    "768px": 1,
+                    "900px": 2,
+                    "1100px":3,
+                    "1300px": 4,
                 }
             });
             // home reviews slider
@@ -727,18 +381,82 @@ adipiscing elit. Morbi sodales ...
                 controls: false,
                 show: 1
             });
-//home products top list
-            let windowWidyh = $(window).width()
 
-            if(windowWidyh<=767){
-                $(".home_products-version").carousel({
-                    // controls: false,
-                    pagination: false,
-                    show: {
-                        "557px": 2
+            $("body").on('change','.top-selectbox',function () {
+                let key = $(this).val();
+                $.ajax({
+                    type: "post",
+                    url: "/top-product",
+                    cache: false,
+                    datatype: "json",
+                    data: {key: key},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".home-top-products").html(data.html);
+                            $("body").find(".home_products-carousel").carousel({
+                                theme: "fs-light",
+                                pagination: true,
+                                infinite: true,
+                                show: {
+                                    "768px": 1,
+                                    "900px": 2,
+                                    "1100px":3,
+                                    "1300px": 4,
+                                }
+                            });
+                        }
                     }
                 });
-            }
+            });
+
+            $("body").on('click','.top-link',function () {
+                let key = $(this).data('key');
+                $("body").find('.top-parent').removeClass('active');
+                $(this).closest('.top-parent').addClass('active');
+
+                $.ajax({
+                    type: "post",
+                    url: "/top-product",
+                    cache: false,
+                    datatype: "json",
+                    data: {key: key},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".home-top-products").html(data.html);
+
+                            $("body").find(".home_products-carousel").carousel({
+                                theme: "fs-light",
+                                pagination: true,
+                                infinite: true,
+                                show: {
+                                    "768px": 1,
+                                    "900px": 2,
+                                    "1100px":3,
+                                    "1300px": 4,
+                                }
+                            });
+                        }
+                    }
+                });
+            });
+//home products top list
+//             let windowWidyh = $(window).width()
+//
+//             if(windowWidyh<=767){
+//                 $(".home_products-version").carousel({
+//                     // controls: false,
+//                     pagination: false,
+//                     show: {
+//                         "557px": 2
+//                     }
+//                 });
+//             }
 
         })
 

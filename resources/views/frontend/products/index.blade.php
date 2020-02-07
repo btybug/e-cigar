@@ -6,23 +6,23 @@
                 <div class="content-head d-flex flex-wrap justify-content-between align-items-center position-relative">
 
                     <div class="category-select">
-                        {!! Form::select('category',['' => 'All Products']+$categories->toArray(),($category)?$category->slug:null,
+                        {!! Form::select('category',['' => __('all_products')]+$categories->toArray(),($category)?$category->slug:null,
                         [
-                            'class' => 'select-filter all_categories select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                            'class' => 'select-filter all_categories select-2 select-2--no-search main-select products-filter-wrap_select not-selected arrow-dark',
                             'style' =>'width: 100%',
                             'id' => 'choose_product'
                         ]) !!}
                     </div>
                     <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
-                        <div class="sale-only d-flex align-items-center">
-                    <span class="text-gray-clr">
-                        On Sale Only:
-                    </span>
-                            <label class="switch-custom">
-                                <input type="checkbox">
-                                <span class="slider round"></span>
-                            </label>
-                        </div>
+{{--                        <div class="sale-only d-flex align-items-center">--}}
+{{--                    <span class="text-gray-clr">--}}
+{{--                        {!! __('sale_only') !!}:--}}
+{{--                    </span>--}}
+{{--                            <label class="switch-custom">--}}
+{{--                                <input type="checkbox">--}}
+{{--                                <span class="slider round"></span>--}}
+{{--                            </label>--}}
+{{--                        </div>--}}
                         <div class="product-grid-list align-self-center">
                     <span class="d-inline-block products-filter-wrap_display-icons">
             <span id="dispGrid" class="d-inline-block pointer grid display-icon active">
@@ -45,18 +45,17 @@
             </span>
         </span>
                         </div>
-                        <div class="sort-by_select sort-by-products d-flex align-items-center position-relative">
-                            <label for="sortBy" class="text-main-clr mb-0">SORT BY: </label>
+                        <div class="sort-by_select sort-by-products d-flex align-items-center position-relative border-0 new-sort-by_select">
+                            <label for="sortBy" class="text-main-clr mb-0 text-uppercase">{!! __('sort_by') !!}: </label>
                             <div class="select-wall">
                                 {!! Form::select('sort_by',[
-                                    '' => 'Select',
-                                    'newest' => 'Newest',
-                                    'oldest' => 'Oldest',
-                                    'price_desc' => 'Price high',
-                                    'price_asc' => 'Price low',
+                                    'newest' => __('newest'),
+                                    'oldest' => __('oldest'),
+                                    'price_desc' => __('price_high'),
+                                    'price_asc' => __('price_low'),
                                 ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
                                     'id' => 'sortBy',
-                                    'class' => 'select-filter select-2 select-2--no-search main-select main-select-2arrows products-filter-wrap_select not-selected arrow-dark',
+                                    'class' => 'select-filter select-2 select-2--no-search main-select products-filter-wrap_select not-selected arrow-dark',
                                     'style' => 'width: 100%',
                                 ]) !!}
                             </div>
@@ -138,14 +137,14 @@
                             <div class="selected_filter-sidebar-wrapper">
                                 @if(count($selecteds))
                                     <div class="d-flex justify-content-between head">
-                                        <h5 class="font-main-bold">SELECTED</h5>
+                                        <h5 class="font-main-bold text-uppercase">{!! __('selected') !!}</h5>
                                         <a href="javascript:void(0)"
-                                           class="text-tert-clr text-uderlined font-15 reset-form">Reset</a>
+                                           class="text-tert-clr text-uderlined font-15 reset-form">{!! __('reset') !!}</a>
                                     </div>
                                 @endif
                             </div>
                             <div class="filter-sidebar-wrapper">
-                                <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">Filters</h2>
+                                <h2 class="font-sec-reg font-21 text-tert-clr lh-1 filters-title">{!! __('filters') !!}</h2>
                                 <div class="all-filters">
                                     <div class="mobile-back-reset">
                                         <a href="#" class="back-link">
@@ -153,44 +152,21 @@
                                         </a>
                                         <a href="javascript:void(0)"
                                            class="text-tert-clr text-uderlined font-15 reset-form">
-                                            Reset
+                                            {!! __('reset') !!}
                                         </a>
                                     </div>
-                                    <div class="search-filters position-relative">
-                                        <input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="Serach for anything">
-                                        <span class="position-absolute d-flex align-items-center search-icon">
-                            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px">
-<path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"></path>
-</svg>
-                        </span>
-                                    </div>
-                                    <div class="filter-single-wall top-filters border-0">
-                                        <div class="main-filters border-0 p-0">
-                                            <div class="filter-single-wall">
-                                                <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                                    <h5 class="font-sec-reg text-uppercase font-17">Price</h5>
-                                                    <span class="icon-head">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                                </div>
-                                                <div class="list-filter ">
-                                                    <div class="slider-range d-flex flex-wrap align-items-center">
-                                                        <div id="slider-range" class="w-100"></div>
-                                                        <div class="amount w-100">
+                                    {{--<div class="search-filters position-relative">--}}
+                                        {{--<input type="search" class="form-control"  id="search-for-filter" name="search" placeholder="{!! __('search_for_anything') !!}">--}}
+                                        {{--<span class="position-absolute d-flex align-items-center search-icon">--}}
+                            {{--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="20px" height="20px">--}}
+{{--<path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M19.996,18.987 L16.407,15.260 C19.498,11.614 19.327,6.153 15.881,2.715 C14.065,0.902 11.684,-0.004 9.303,-0.004 C6.922,-0.004 4.541,0.902 2.725,2.715 C-0.908,6.339 -0.908,12.216 2.725,15.841 C4.541,17.653 6.922,18.559 9.303,18.559 C11.469,18.559 13.630,17.800 15.371,16.300 L18.936,20.003 L19.996,18.987 ZM9.303,17.370 C7.136,17.370 5.099,16.528 3.567,15.000 C2.035,13.471 1.191,11.439 1.191,9.277 C1.191,7.116 2.035,5.084 3.567,3.555 C5.099,2.027 7.136,1.185 9.303,1.185 C11.469,1.185 13.507,2.027 15.039,3.555 C18.201,6.710 18.201,11.845 15.039,15.000 C13.507,16.528 11.469,17.370 9.303,17.370 Z"></path>--}}
+{{--</svg>--}}
+                        {{--</span>--}}
+                                    {{--</div>--}}
 
-                                                            <input type="hidden" id="amount_range" name="amount"
-                                                                   value="{{ (\Request::has('amount')) ? \Request::get('amount') : null }}">
-                                                            <input type="text" id="amount" name="" readonly
-                                                                   class="font-main-bold font-16 w-100 border-0">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="filter-single-wall">
                                         <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                            <h5 class="font-sec-reg text-uppercase font-17">Brands</h5>
+                                            <h5 class="font-sec-reg text-uppercase font-17">{!! __('brands') !!}</h5>
                                             <span class="icon-head">
                                                 <i class="fas fa-minus"></i>
                                             </span>
@@ -215,15 +191,30 @@
                                         </div>
                                     @endforeach
                                     <div class="mobile-show-filters-wrap">
-                                        <a href="#" class="bg-blue-clr text-sec-clr show-filter-link">Show</a>
+                                        <a href="#" class="bg-blue-clr text-sec-clr show-filter-link">{!! __('show') !!}</a>
                                     </div>
                                 </div>
                             </div>
 
                             {!! Form::close() !!}
                         </div>
-                        <div class="products__page-main_right-wrapper products-box">
-                            @include("frontend.products._partials.products_render",['all_products' => true])
+
+                        <div class="products__page-main_right-wrapper">
+                            @if($category)
+                                <ul class="d-flex products__page-head__list mb-2">
+                                    <li>
+                                        <a href="javascript:void(0)" class="font-sec-reg item-link @if($sc == 'all')active @endif subcategory-select"  data-slug="all">All</a>
+                                    </li>
+                                    @foreach($category->children as $subcategory)
+                                        <li>
+                                            <a href="javascript:void(0)" class="font-sec-reg item-link @if($sc == $subcategory->slug)active @endif subcategory-select" data-slug="{{ $subcategory->slug }}">{!! $subcategory->name !!}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            @endif
+                            <div class="products-box">
+                                @include("frontend.products._partials.products_render",['all_products' => true])
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +236,7 @@
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Select variation</h4>
+                    <h4 class="modal-title">{!! __('select_variation') !!}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
 
@@ -254,10 +245,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">{!! __('cancel') !!}</button>
                     <a href="javascript:void(0)"
                        class="btn border-0 rounded-0 btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase">
-                        <span class="product-card_btn-text mr-2">add to cart</span>
+                        <span class="product-card_btn-text mr-2">{!! __('add_to_cart') !!}</span>
                         <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
                                 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
@@ -332,6 +323,16 @@
                 doSubmitForm()
             });
 
+            $('body').on('click','#displVertBtn',function () {
+                // console.log(6666)
+                $(this).closest('.main-content').find('.products__page-main_right-wrapper .products-box').height('auto')
+            })
+            $("body").on("click",'.subcategory-select', function() {
+                $("body").find('.subcategory-select').removeClass('active');
+                $("body").find('.subcategory-select[data-slug="'+$(this).data('slug')+'"]').addClass('active');
+                doSubmitForm()
+            });
+
             // if($('#filter-form .filter-sidebar-wrapper').length !== 0) {
                 $("#search-for-filter").on('keyup', function(e) {
                     e.preventDefault();
@@ -362,23 +363,88 @@
                 return objURL;
             };
 
-            function doSubmitForm() {
+            function doSubmitForm(removedData) {
+                console.log(removedData)
                 $('.products-box').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
                     '            <div class="lds-dual-ring"></div>\n' +
                     '        </div>');
                 let form = $("#filter-form");
                 let serializeValue = form.serialize();
+                let serializedArrey;
                     let category = $('.all_categories').val();
                     let search_text = $("#search-for-filter").val();
                     let sort_by = $("#sortBy").val();
+                    let subcategory = $("body").find('.subcategory-select.active').data('slug');
 
                     let url = category === '' ? "/products" : "/products/" + category;
+                    var serArr = form.serializeArray();
+
                     // let url = "/products/" + category;
                 // console.log(typeof serializeValue)
                 // console.log(window.location.origin + window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text}`)
-                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&q=${search_text || ''}`);
+                if(removedData) {
+
+                    // if(removedData.type === 'brand') {
+                    //     $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
+                    //     serializedArrey = serArr.filter((filter) => {
+                    //         return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                    //     })
+                    //     console.log(serializedArrey)
+                    //     console.log('before', serializeValue)
+
+                    //     serializeValue = $.param( serializedArrey )
+                    //     console.log('after', serializeValue)
+                    // } else if(removedData.type === 'select') {
+                        if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).is('input')) {
+                            if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).attr('type') === 'radio') {
+                                serializedArrey = serArr.filter((filter) => {
+                                    return !Boolean(filter.name === removedData.name);
+                                })
+                                $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).each(function(index, radio) {
+                                    $(radio).prop('checked', false);
+                                });
+
+                            } else if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).attr('type') === 'checkbox') {
+                                $(`.all-filters .filter-single-wall [name="${removedData.name}"][value="${removedData.value}"]`).trigger('click')
+                                    serializedArrey = serArr.filter((filter) => {
+                                        return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                                    })
+                                    console.log(serializedArrey)
+                                    console.log('before', serializeValue)
+
+                                    console.log('after', serializeValue)
+                            }
+                            serializeValue = $.param( serializedArrey )
+
+                        // }
+                    } else if($(`.all-filters .filter-single-wall [name="${removedData.name}"]`).is('select')) {
+
+                        if(removedData.value === "") {
+
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).find('option').each(function(index, option) {
+                                index === 0 && $(option).prop('selected', true);
+                                $(option).prop('selected', false);
+                            });
+                            serializedArrey = serArr.filter((filter) => {
+                                return !Boolean(filter.name === removedData.name);
+                            })
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).trigger('change');
+                        } else {
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).find(`option[value=${removedData.value}]`).prop('selected', false)
+                            serializedArrey = serArr.filter((filter) => {
+                                return !Boolean(filter.name === removedData.name && filter.value === removedData.value);
+                            });
+                            $(`.all-filters .filter-single-wall [name="${removedData.name}"]`).trigger('change');
+                        }
+                        serializeValue = $.param( serializedArrey )
+                    }
+                    
+
+                } 
+                
+                history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
-                var serArr = form.serializeArray();
+                console.log(serArr)
 
                 var filters = serArr.map((filt) => {
                     var n = filt.name;
@@ -388,18 +454,27 @@
                         value: v
                     }
                 }).filter(filt => filt.name.includes('select_filter'));
+
+                
+
                 $.ajax({
                     type: "post",
                     url: url,
                     cache: false,
                     datatype: "json",
-                    data: `${serializeValue}&sort_by=${sort_by}&q=${search_text || ''}`,
+                    data: `${serializeValue}&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`,
                     headers: {
                         "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                     },
                     success: function (data) {
                         if (!data.error) {
+                            $("body").find('.products-box').css('height','auto');
                             $(".products-box").html(data.html);
+                            // $("#filter-form").closest('form').data('changed', true);
+
+                            let productsWallHeight = parseInt( $('body').find('.products-box').height())
+
+                            $("body").find('.products-box').css('height',productsWallHeight);
                             // var ht = (name, path) => {
                             //     return `<li class="selected_filter-sidebar-item position-relative">
                             //                     <span class="selection_remove" role="presentation">×</span>
@@ -431,28 +506,55 @@
                     }
                 });
             }
-
+            $('body').on('click', '.selected__filters .single-item .remove-icon', function(ev) {
+                const dataKey = $(ev.target).closest('.single-item').data('key').toString();
+                const dataType = $(ev.target).closest('.single-item').data('type');
+                
+                const filter = dataKey.match(/\d+/ig)
+                filter_id = filter[0] ? filter[0].toString() : '';
+                filter_value = filter[1] ? filter[1].toString() : '';
+                let name = '';
+                let value = '';
+                if(dataType === 'brand') {
+                    name = 'brands[]',
+                    value = filter_id.toString();
+                } else {
+                    if(filter_value) {
+                        name = `select_filter[${filter_id}][]`;
+                        value = filter_value;
+                    } else {
+                        name = `select_filter[${filter_id}]`;
+                    }
+                }
+                const removedData = {
+                    name,
+                    value,
+                    type: dataType
+                }
+                doSubmitForm(removedData)
+            })
 
 
             var rangeDataString = "{{ (\Request::has('amount') && \Request::get('amount')) ? \Request::get('amount') : "0,".(convert_price(500,$currency,false,true)) }}";
             console.log(rangeDataString);
             var rangeArray = rangeDataString.split(',');
-            $("#slider-range").slider({
-                range: true,
-                min: 0,
-                max: '{{ convert_price(1000,$currency,false,true,true) }}',
-                values: rangeArray,
-                slide: function (event, ui) {
-                    $("#amount").val(ui.values[0] + " - " + ui.values[1]);
-                    $("#amount_range").val(ui.values[0] + "," + ui.values[1]);
-                },
-                change: function (event, ui) {
-                    doSubmitForm()
-                }
-            });
 
-            $("#amount").val($("#slider-range").slider("values", 0) +
-                " - " + $("#slider-range").slider("values", 1));
+            {{--$("#slider-range").slider({--}}
+            {{--    range: true,--}}
+            {{--    min: 0,--}}
+            {{--    max: '{{ convert_price(1000,$currency,false,true,true) }}',--}}
+            {{--    values: rangeArray,--}}
+            {{--    slide: function (event, ui) {--}}
+            {{--        $("#amount").val(ui.values[0] + " - " + ui.values[1]);--}}
+            {{--        $("#amount_range").val(ui.values[0] + "," + ui.values[1]);--}}
+            {{--    },--}}
+            {{--    change: function (event, ui) {--}}
+            {{--        doSubmitForm()--}}
+            {{--    }--}}
+            {{--});--}}
+
+            // $("#amount").val($("#slider-range").slider("values", 0) +
+            //     " - " + $("#slider-range").slider("values", 1));
 
             // $("body").on('click', '.save-filter-btn', function () {
             //     doSubmitForm();
@@ -664,7 +766,6 @@
                 } else {
                     $(this).closest('.product-single-info_title').next().addClass('products_closed')
                 }
-
             })
 
             $("body").on('click', '.product-card_like-icon', function () {
@@ -705,6 +806,8 @@
             //         return false;
             //     }
             // });
+
+           
         });
     </script>
 

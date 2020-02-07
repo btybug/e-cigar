@@ -4,16 +4,22 @@
     <!-- Trigger the modal with a button -->
     <div class="bestbetter-modal-open">
         @if($multiple)
-            @if(isset($model->$name) && is_array($model->$name))
+            @if(isset($model->$name) && (is_array($model->$name) || is_object($model->$name)) )
                 <input type="text" data-name="{!! $name !!}[]"
-                       data-count="{{ count(array_filter($model->$name)) }}"
-                       value="{!! count(array_filter($model->$name)) !!} selected" placeholder="file count"
+                       data-count="{{ (is_object($model->$name)) ? count($model->$name): count(array_filter($model->$name)) }}"
+                       value="{!! (is_object($model->$name)) ? count($model->$name):count(array_filter($model->$name)) !!} selected" placeholder="file count"
                        class="modal-input-path {!! $uniqId !!}" readonly>
                 @foreach($model->$name as $image)
                     @if($image)
-                        <input type="hidden" name="{!! $name !!}[]"
-                               value="{!! $image !!}" placeholder="file name"
+                        @if(is_object($image))
+                            <input type="hidden" name="{!! $name !!}[]"
+                               value="{!! $image->url !!}" placeholder="file name"
                                class="modal-input-path multipale-hidden-inputs" readonly>
+                        @else
+                            <input type="hidden" name="{!! $name !!}[]"
+                                   value="{!! $image !!}" placeholder="file name"
+                                   class="modal-input-path multipale-hidden-inputs" readonly>
+                        @endif
                     @endif
                 @endforeach
             @else
@@ -43,17 +49,28 @@
     </div>
     @if($multiple)
         <div class="multiple-image-placeholder multiple-image-box-{!! $uniqId !!}">
-            @if(isset($model->$name) && is_array($model->$name))
+            @if(isset($model->$name) && (is_array($model->$name) || is_object($model->$name) ))
                 @foreach($model->$name as $image)
                     @if($image)
-                        <div class="img-thumb-container" style="margin: 10px;">
-                            <div class="inner"><img src="{{ $image }}" width=200>
-                                <span data-src="{{ $image }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
-                                                                               data-is-multiple="true">
-                                    <i class="fa fa-trash"></i>
-                                </span>
+                        @if(is_object($image))
+                            <div class="img-thumb-container" style="margin: 10px;">
+                                <div class="inner"><img src="{{ $image->url }}" width=200>
+                                    <span data-src="{{ $image->url }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
+                                          data-is-multiple="true">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                </div>
                             </div>
-                        </div>
+                        @else
+                            <div class="img-thumb-container" style="margin: 10px;">
+                                <div class="inner"><img src="{{ $image }}" width=200>
+                                    <span data-src="{{ $image }}" data-id="{!! $uniqId !!}" class="remove-thumb-img"
+                                                                                   data-is-multiple="true">
+                                        <i class="fa fa-trash"></i>
+                                    </span>
+                                </div>
+                            </div>
+                        @endif
                     @endif
                 @endforeach
             @endif

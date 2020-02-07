@@ -1,117 +1,57 @@
-@extends('layouts.frontend')
+@extends('layouts.frontend',['page_name'=>'banner'])
+@section('meta')
+    {!! rich() !!}
+    {!! brandSeo($current) !!}
+@stop
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper">
-            <div class="brands_page-top">
-                <div class="container main-max-width h-100">
-                    <div class="d-flex brands_page-top-inner h-100">
-                        <div class="brands_page-top-title">
-                            <h1 class="font-sec-reg font-28 text-tert-clr text-uppercase">Popular Brands</h1>
-                        </div>
-                        <div class="brands_page-top-slider">
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-1.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-2.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="brand-wall">
-                                <div class="brand-item">
-                                    <a href="#" class="brand-link">
-                                        <img src="/public/img/brands/bands-3.png" alt="brand-logo">
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            @if($sliders && isset($sliders->data) && @json_decode($sliders->data,true))
+            <div class="container main-max-width">
+                <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
+
+                        @php
+                            $data = json_decode($sliders->data,true);
+                        @endphp
+                        @foreach($data as $k => $slider)
+                                @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                                    @php
+                                        $banner = ltrim($slider, '/');
+                                        $html = (File::exists($banner)) ? File::get($banner) : "";
+                                    @endphp
+                                    <div>
+                                        <a href="javascript:void(0)" class="d-block h-100">
+                                            {!! $html !!}
+                                        </a>
+                                    </div>
+                                @else
+                                    <div>
+                                        <a href="javascript:void(0)" class="d-block h-100">
+                                            <img src="{{ $slider }}" alt="ads">
+                                        </a>
+                                    </div>
+                                @endif
+                        @endforeach
+
                 </div>
             </div>
+            @endif
+
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap">
                         <div class="brands_aside">
-                            <div class="select-wall">
-                                {!! Form::select('brand_filter',['' => 'All Brands'] + $parentBrands,null,
-                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark','style' => 'width: 100%']) !!}
+{{--                            <div class="select-wall">--}}
+{{--                                {!! Form::select('brand_filter',['' => __('all_brands')] + $parentBrands,null,--}}
+{{--                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}--}}
 
-                            </div>
-                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">Categories</div>
+{{--                            </div>--}}
+                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">{!! __('categories') !!}</div>
                             <ul class="brands_aside-list">
                                 @include("frontend.brands._partials.list")
                             </ul>
                         </div>
-                        <div class="brands_main-content">
+                        <div class="brands_main-content products-box">
                             @include("frontend.brands._partials.current")
                         </div>
 
@@ -144,10 +84,21 @@
     <script src={{asset("public/plugins/formstone/touch.js")}}></script>
     <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
     <script>
+
+
+
         $('body').on('click','.mobile-brands_aside-title',function () {
             $(this).parent().find('.brands_aside-list').slideToggle()
         })
+        $(".stickers-ads-wrapper-carousel").carousel({
+            pagination: false,
+            controls: false,
+            infinite: true,
+            autoAdvance:true,
+            autoTime:4000
+        });
         $(".brands_page-top-slider").carousel({
+            single: true,
             pagination: false,
             controls: false,
             infinite: true,
@@ -158,6 +109,7 @@
                 "1220px": 9
             }
         });
+
         $('body').on('click', '.brands_aside-item-link', function () {
             let value = $(this).data('id');
             let slug = $(this).data('slug');
@@ -174,16 +126,22 @@
                     if (!data.error) {
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
-                        $("body").find('.brands_main-content-top').html(data.html);
+
+                        $("body").find('.products-box').css('height','auto');
+                        $("body").find('.brands_main-content').html(data.html);
+                        let productsWallHeight = parseInt( $('body').find('.products-box').height())
+                        $("body").find('.products-box').css('height',productsWallHeight);
+
+                        $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/brands/' + slug);
                         // document.location.hash = slug
                     }
                 }
             });
         });
-        $('body').on('click', '.product-category', function () {
+        $('body').on('change', '.product-category', function () {
             let value = $(this).data('id');
-            let slug = $(this).data('key');
+            let slug = $(this).val();
             $.ajax({
                 type: "post",
                 url: "/get-category-products",
@@ -196,6 +154,27 @@
                 success: function (data) {
                     if (!data.error) {
                         $("body").find('#brand_related_products_list').html(data.html);
+                    }
+                }
+            });
+        });
+
+        $('body').on('change', '.brand-list', function () {
+            let value = $(this).val();
+            console.log(value);
+            $.ajax({
+                type: "post",
+                url: "/get-brand-list",
+                cache: false,
+                datatype: "json",
+                data: {id: value},
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("body").find('.brands_main-content').html(data.html);
+                        $("body").find('.brands_aside-list').html(data.list);
                     }
                 }
             });

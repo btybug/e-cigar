@@ -14,6 +14,7 @@ class CorsMiddlewaer
 
     public function handle($request, Closure $next)
     {
+
         if ($request->getMethod() === "OPTIONS") {
             $response = \Response::make('');
             if (!empty($_SERVER['HTTP_ORIGIN']) && in_array($_SERVER['HTTP_ORIGIN'], ['http://localhost:8090'])) {
@@ -27,11 +28,16 @@ class CorsMiddlewaer
             $response->header('X-Content-Type-Options', 'nosniff');
             return $response;
         }
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization')
-            ->header('Access-Control-Allow-Methods','POST, GET, OPTIONS, PUT, DELETE')
-            ->header('Access-Control-Allow-Credentials', 'true')
-            ->header('X-Content-Type-Options', 'nosniff');
+
+        $response = $next($request);
+
+        $response->headers->set('Access-Control-Allow-Origin' , '*');
+        $response->headers->set('Access-Control-Allow-Headers', 'Origin, Content-Type, Accept, Authorization');
+        $response->headers->set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS, PUT, DELETE');
+        $response->headers->set('Access-Control-Allow-Credentials', 'true');
+        $response->headers->set('X-Content-Type-Options', 'nosniff');
+        $response->headers->set('SameSite', 'nosniff');
+
+        return $response;
     }
 }

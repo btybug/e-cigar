@@ -163,6 +163,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Jenssegers\Mongodb\MongodbServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Yajra\DataTables\DataTablesServiceProvider::class,
@@ -175,6 +176,9 @@ return [
         Dacastro4\LaravelGmail\LaravelGmailServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
+        Bnb\GoogleCloudPrint\LaravelServiceProvider::class,
+        Hkonnet\LaravelEbay\EbayServiceProvider::class,
 //        Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
         /*
          * Application Service Providers...
@@ -245,7 +249,11 @@ return [
         'Gmail' => \App\Models\Gmail::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'Zipper' => Chumper\Zipper\Zipper::class,
+        'GoogleCloudPrint' => Bnb\GoogleCloudPrint\Facades\GoogleCloudPrint::class,
+        'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
+        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class
     ],
 
 ];

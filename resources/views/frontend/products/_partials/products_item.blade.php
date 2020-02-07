@@ -1,41 +1,47 @@
 <li class="col-sm-6 col-xl-3">
     <div class="products__item-wrapper main-transition">
         <div class="products__item-wrapper-inner">
-            <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}" class="products__item-top">
+            @php
+            $category = $product->categories()->whereNull('categories.parent_id')->first();
+            @endphp
+            <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
+               @if(isset($related)) target="__blank" @endif
+               class="products__item-top">
                     <span class="d-block products__item-photo-brand-name">
                         <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">
                             @if($product->brand)
                                 {{ $product->brand->name }}
                             @else
-                                No brand
+                                {!! __('no_brand') !!}
                             @endif
                         </span>
                         <span class="position-relative products__item-photo d-block">
-                            <img src="{{ (media_image_tmb($product->image)) }}" alt="product">
+                            <img src="{{ (media_image_tmb(checkImage($product->image,'stock'))) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-new">new</span>--}}
                             {{--<span class="position-absolute font-main-bold font-16 products__item-photo-inner products__item-less">-50%</span>--}}
                         </span>
                     </span>
                 <span class="products__item-main-content">
                     <span class="products__item-photo-thumb">
-                         <span class="products__item-photo-thumb-item active-slider">
-                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}">
+                         <span class="products__item-photo-thumb-item active-slider" title="{{ $product->name }}">
+                            <img src="{{ (media_image_tmb($product->image)) }}" alt="{{ $product->name }}" title="{{ $product->name }}">
                          </span>
-                        @if($product->variations)
+                        @if($product->other_images && count($product->other_images))
                             @php $count = 0; @endphp
-                            @foreach($product->variations()->take(3)->get() as $variation)
-                                @if($variation->image)
-                                    @php $count++; @endphp
-                                    <span class="products__item-photo-thumb-item">
-                                        <img src="{{ (media_image_tmb($variation->image)) }}" alt="{{ $variation->name }}">
-                                    </span>
+                            @foreach($product->other_images as $other_image)
+                                @if($count == 3)
+                                    @break
                                 @endif
+                                    @php $count++; @endphp
+                                    <span class="products__item-photo-thumb-item" title="Extra Image {{ $count }}">
+                                        <img src="{{ (media_image_tmb(checkImage($other_image['image'],'stock'))) }}" alt="{{ $other_image['alt'] }}" title="{{ $other_image['alt'] }}">
+                                    </span>
                             @endforeach
                         @endif
                     </span>
                     <span class="products__item-content-inner">
-                        <span class="font-sec-reg font-21 text-main-clr products__item-title text-truncate">
-                            {{ str_limit($product->name,27) }}
+                        <span class="font-sec-reg font-21 text-main-clr products__item-title">
+                            {{ str_limit($product->name,50) }}
                         </span>
                         <span class="font-main-light font-15 products__item-desc">
                             {{ str_limit($product->short_description,50) }}
@@ -43,8 +49,8 @@
                         <span class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
                             <span class="d-flex flex-wrap align-items-center products__item-discount-all">
                                 @if(count($product->stickers))
-                                    @foreach($product->stickers()->take(2)->get() as $sticker)
-                                         <span class="products__item-discount">
+                                    @foreach($product->stickers()->orderBy('ordering')->take(2)->get() as $sticker)
+                                         <span class="products__item-discount" title="{{ $sticker->name }}">
                                              <img src="{{ $sticker->image }}" alt="{{ $sticker->name }}">
                                          </span>
                                     @endforeach
@@ -59,8 +65,40 @@
                                         {{ convert_price($product->price,$currency, false) }}
                                     </span>
                                 @else
+                                    @php
+                                    $firstVariation = ($product->variations && count($product->variations))?$product->variations()->orderBy('ordering','asc')->first():null;
+                                    @endphp
                                     <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
-                                        {{ convert_price($product->price,$currency, false) }}
+                                        @php
+                                            $price = 0;
+                                        @endphp
+                                        @if($firstVariation)
+                                            @if($firstVariation->price_per == 'product')
+                                                @if($firstVariation->common_price)
+                                                   @php $price = $firstVariation->common_price ;@endphp
+                                                @endif
+                                            @else
+                                                @if($firstVariation->price_type == 'dynamic')
+                                                    @php $price = $firstVariation->item->default_price; @endphp
+                                                @elseif($firstVariation->price_type == 'fixed')
+                                                    @php
+                                                        $discount = $firstVariation->discounts()->orderBy('qty','asc')->first();
+                                                        $price = ($discount)?$discount->price:0;
+                                                    @endphp
+                                                @elseif($firstVariation->price_type == 'range')
+                                                    @php
+                                                        $discount = $firstVariation->discounts()->orderBy('from','asc')->first();
+                                                        $price = ($discount)?$discount->price:0;
+                                                    @endphp
+                                                @else
+                                                    @if($firstVariation->price)
+                                                        @php  $price = $firstVariation->price; @endphp
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        @endif
+
+                                        {{ convert_price($price,$currency, false) }}
                                     </span>
                                 @endif
                             </span>
@@ -69,9 +107,10 @@
                 </span>
             </a>
             <div  class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $product->slug]) }}"
+                <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
+                   @if(isset($related)) target="__blank" @endif
                    class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                    view more
+                    {!! __('view_more') !!}
                 </a>
                 @if(Auth::check())
                 <span class="products__item-favourite product-card_like-icon {{ ($product->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}">

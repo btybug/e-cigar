@@ -12,11 +12,11 @@
         <div class="mt-auto special__popup-content-left-bottom">
             <div class="d-flex inner">
                 <a href="javascript:void(0)" class="font-sec-light font-26 text-uppercase bottom-btn-cart no-btn">
-                    NO THANK YOU
+                    {!! __('no_thank_you') !!}
                 </a>
                 <a href="javascript:void(0)"
                    class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
-                    Add To Cart
+                    {!! __('add_to_cart') !!}
                 </a>
             </div>
         </div>
@@ -26,7 +26,7 @@
         <div class="special__popup-content-scroll">
             <div class="special__popup-content-right-item">
                 <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
-                    Selected Product
+                    {!! __('selected_product') !!}
                 </div>
                 <div class="d-flex flex-wrap special__popup-content-right-product">
                     <div class="special__popup-content-right-product-photo">
@@ -48,7 +48,7 @@
             </div>
             <div class="special__popup-content-right-item added-offers">
                 <div class="font-sec-reg font-26 text-sec-clr special__popup-content-right-head">
-                    Added Offers
+                    {!! __('added_offers') !!}
                 </div>
                 @if(isset($extras) && count($extras))
                     @foreach($extras as $item_key => $extra)
@@ -60,7 +60,7 @@
             <a href="#" class="text-main-clr special__popup-content-right-item-more">
                 <div class="d-flex flex-column align-items-center item-more-inner">
                     <span class="icon"><i class="fas fa-plus"></i></span>
-                    <span class="font-26 lh-1">Add more offers</span>
+                    <span class="font-26 lh-1">{!! __('add_more_offers') !!}</span>
                 </div>
             </a>
         </div>

@@ -14,29 +14,23 @@ use Illuminate\Http\Request;
 */
 
 
-Route::group([
-    'prefix' => 'api-media',
-], function () {
-    //Js Tree Api
-    Route::post('/jstree', 'Admin\Media\MediaApiController@getFolderChildrenJsTree');
-    Route::post('/get-folder-childs', 'Admin\Media\MediaApiController@getFolderChilds');
-    Route::post('/get-create-folder-child', 'Admin\Media\MediaApiController@getCreateFolderChild');
-    Route::post('/get-edit-folder', 'Admin\Media\MediaApiController@getEditFolder');
-    Route::post('/get-edit-folder-settings', 'Admin\Media\MediaApiController@getEditFolderSettings');
-    Route::post('/get-folder-info', 'Admin\Media\MediaApiController@getFolderInfo');
-    Route::post('/get-sort-folder', 'Admin\Media\MediaApiController@getSortFolder');
-    Route::post('/get-remove-folder', 'Admin\Media\MediaApiController@getRemoveFolder');
-    Route::post('/get-media-uploaders-settings', 'Admin\Media\MediaApiController@getUploaderSettings');
-    Route::post('/get-media-uploader-rendered', 'Admin\Media\MediaApiController@getFolderUploader');
-    Route::post('/download-folder', 'Admin\Media\MediaApiController@getDownload');
-//ITEMS API
-    Route::post('/get-sort-item', 'Admin\Media\MediaItemsApiController@getSortItems');
-    Route::post('/get-remove-item', 'Admin\Media\MediaItemsApiController@getDeleteItems');
-    Route::post('/upload', 'Admin\Media\MediaItemsApiController@uploadFile')->name('media_upload');
-    Route::post('/replace-item', 'Admin\Media\MediaItemsApiController@replaceFile');
-    Route::post('/rename-item', 'Admin\Media\MediaItemsApiController@renameFile');
-    Route::post('/copy-item', 'Admin\Media\MediaItemsApiController@getCopyItems');
-    Route::post('/transfer-item', 'Admin\Media\MediaItemsApiController@getTransferItems');
-    Route::post('/get-item-details', 'Admin\Media\MediaItemsApiController@getItemDetalis');
-    Route::post('/save-seo', 'Admin\Media\MediaItemsApiController@getSaveSeo');
-});
+Route::middleware('auth:api')->group(function () {
+    Route::get('/user','ShopController@getUser');
+    Route::get('/shops', 'ShopController@getShop');
+    Route::post('/get-settings', 'ShopController@getSettings');
+//    Route::middleware('shopping',function (){
+    Route::post('/items', 'ItemsController@getItems');
+    Route::post('/categories', 'ItemsController@getCategories');
+    Route::post('/get-basket-number', 'OrdersController@getBasketNumber');
+    Route::post('/finish-order','OrdersController@FinishOrder');
+    Route::post('/add-to-basket', 'OrdersController@addItemToBascked');
+    Route::post('/remove-from-basket', 'OrdersController@removeFromBascked');
+    Route::post('/get-baskets', 'OrdersController@getBaskets');
+    Route::post('/get-basket', 'OrdersController@getBasket');
+    Route::post('/get-authorize', 'OrdersController@getAuthorize');
+    Route::post('/close-basket', 'OrdersController@getCloseBasket');
+    Route::post('/get-admin-discounts', 'OrdersController@getAdminDiscounts');
+    Route::post('/get-offer-discounts', 'OrdersController@getOfferDiscounts');
+    Route::post('/add-admin-discounts', 'OrdersController@addAdminDiscounts');
+
+    });

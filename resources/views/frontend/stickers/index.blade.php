@@ -2,13 +2,36 @@
 @section('content')
     <main class="main-content">
         <div class="brands_page-wrapper stickers__page-wrapper">
+            @if($sliders && isset($sliders->data) && @json_decode($sliders->data,true))
             <div class="container main-max-width">
-                <div class="stickers-ads-wrapper">
-                    <a href="#" class="d-block h-100">
-                        <img src="/public/img/temp/ads-stickers.jpg" alt="ads">
-                    </a>
+                <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
+
+                        @php
+                            $data = json_decode($sliders->data,true);
+                        @endphp
+                        @foreach($data as $slider)
+                            @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
+                                @php
+                                    $banner = ltrim($slider, '/');
+                                    $html = (File::exists($banner)) ? File::get($banner) : "";
+                                @endphp
+                                <div>
+                                    <a href="javascript:void(0)" class="d-block h-100">
+                                        {!! $html !!}
+                                    </a>
+                                </div>
+                            @else
+                                <div>
+                                    <a href="javascript:void(0)" class="d-block h-100">
+                                        <img src="{{ $slider }}" alt="ads">
+                                    </a>
+                                </div>
+                            @endif
+                        @endforeach
                 </div>
             </div>
+            @endif
+
             <div class="brands_main-content-wrapper">
                 <div class="container main-max-width">
                     <div class="d-flex flex-wrap">
@@ -63,6 +86,13 @@
                 "1220px": 9
             }
         });
+        $(".stickers-ads-wrapper-carousel").carousel({
+            pagination: false,
+            controls: false,
+            infinite: true,
+            autoAdvance:true,
+            autoTime:4000
+        });
         $('body').on('click', '.brands_aside-item-link', function () {
             let value = $(this).data('id');
             console.log(111)
@@ -80,15 +110,16 @@
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
                         $("body").find('.brands_main-content-top').html(data.html);
+                        $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/stickers/' + value);
 
                     }
                 }
             });
         });
-        $('body').on('click', '.product-category', function () {
+        $('body').on('change', '.product-category', function () {
             let value = $(this).data('id');
-            let slug = $(this).data('key');
+            let slug = $(this).val();
             $.ajax({
                 type: "post",
                 url: "/get-category-products-stickers",

@@ -22,6 +22,7 @@
         @include("frontend.products._partials.offer_option")
     </div>
 
+    @if($vSettings->count_limit > 1)
     <div class="product__single-item-add-new">
         <a href="#"
            class="d-flex justify-content-center align-self-center text-tert-clr font-18 product__single-item-add-new-btn">
@@ -29,4 +30,5 @@
             <span>Add New</span>
         </a>
     </div>
+    @endif
 </div>

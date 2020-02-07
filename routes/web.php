@@ -11,6 +11,7 @@
 */
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::post('/top-product', 'HomeController@topProduct')->name('topProduct');
 
 Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
     ->middleware(['auth','verified','wholesaler','is_not_verifyed_wholesaler'])->name('verification_wholesaler');
@@ -29,6 +30,7 @@ Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','who
     Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@wholesalerSuccess')->name('wholesaler_cash_order_success');
     Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
     Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
+
 
 });
 
@@ -85,6 +87,7 @@ Route::group(['prefix' => 'brands'], function () {
 });
 Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
 Route::post('/get-category-products', 'Frontend\BrandsController@postCategoryProducts')->name('post_category_products');
+Route::post('/get-brand-list', 'Frontend\BrandsController@postBrandProducts')->name('post_brand_list');
 
 Route::group(['prefix' => 'offers'], function () {
     Route::get('/{type?}', 'Frontend\OffersController@getIndex')->name('product_offers');
@@ -98,7 +101,8 @@ Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('po
 Route::post('/get-category-products-stickers', 'Frontend\StickersController@postCategoryProducts')->name('post_category_products_stickers');
 
 
-Route::post('/add-comment', 'Frontend\BlogController@addComment')->name('comment_create_post');
+Route::post('/add-comment', 'Frontend\CommentController@addComment')->name('comment_create_post');
+Route::post('/delete-comment', 'Frontend\CommentController@deleteComment')->name('comment_delete_post');
 
 
 Route::group(['prefix' => 'products'], function () {
@@ -142,6 +146,7 @@ Route::group(['prefix' => '/support'], function () {
     Route::get('/', 'Frontend\CommonController@getSupport')->name('product_support');
 
     Route::get('/faq', 'GuestController@getFaq')->name('faq_page');
+    Route::get('/faq/{slug}', 'GuestController@getFaqSingle')->name('faq_page_single');
     Route::post('/faq-by-category', 'GuestController@getFaqByCategory')->name('faq');
 //    Route::get('/knowledge-base', 'GuestController@getKnowledgeBase')->name('knowledge_base');
 //    Route::get('/manuals', 'GuestController@getManuals')->name('manuals');
@@ -159,8 +164,10 @@ Route::group(['prefix' => '/support'], function () {
 
 Route::get('/landings/{url}', 'GuestController@landings')->name('landings');
 
-Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
+//Route::get('/contact-us', 'Frontend\CommonController@getContactUs')->name('product_contact_us');
 Route::get('/about-us', 'Frontend\CommonController@getAboutUs')->name('about_us');
+Route::get('/privacy', 'Frontend\CommonController@getPrivacy')->name('privacy');
+Route::get('/cookies', 'Frontend\CommonController@getCookies')->name('cookies');
 Route::post('/get-regions-by-country', 'GuestController@getRegionsByCountry')->name('get_regions_by_country');
 Route::post('/get-regions-by-geozone', 'GuestController@getRegionsByGeoZone')->name('get_regions_by_geozone');
 Route::post('/subscribe-to-newsletter', 'Frontend\CommonController@postSubscribe')->name('subscribe_to_newsletter');
@@ -213,6 +220,8 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/', 'Frontend\UserController@getOrders')->name('my_account_orders');
         Route::get('/invoice/{id}', 'Frontend\UserController@getOrderInvoice')->name('my_account_order_invoice');
+        Route::get('/reviews/{id}', 'Frontend\UserController@getOrderReviews')->name('my_account_order_reviews');
+        Route::post('/reviews/{id}', 'Frontend\UserController@postOrderReviews')->name('my_account_order_reviews_post');
     });
     Route::group(['prefix' => 'tickets'], function () {
         Route::get('/', 'Frontend\UserController@getTickets')->name('my_account_tickets');
@@ -236,6 +245,10 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
 });
 Route::group(['prefix' => 'filters'], function () {
     Route::post('/', 'Frontend\FilterApiControll@postGetNext');
+    Route::post('/render-tabs', 'Frontend\FilterApiControll@postRenderTabs');
+});
+Route::group(['prefix' => 'search'], function () {
+    Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
 });
 Route::group(['prefix' => 'search'], function () {
     Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');

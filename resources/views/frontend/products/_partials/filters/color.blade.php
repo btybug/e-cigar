@@ -3,7 +3,7 @@
     <div>
         <div class="d-flex flex-wrap">
             @foreach($filter->stickers as $sticker)
-                <div class="col-md-4 col-4 pl-0 single-wall">
+                <div class="col-md-6 col-6 pl-0 single-wall">
                     <div class="custom-control custom-radio custom-control-inline" style="position: relative">
                         {!! Form::radio("select_filter[$filter->id]",$sticker->id,null,['class' => 'custom-control-input','id' => 'customColor'.$filter->id.$sticker->id]) !!}
                         <label class="custom-control-label pointer position-relative"

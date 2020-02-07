@@ -21,18 +21,24 @@
         </div>
     </div>
     @if(! isset($selected))
-        @php $selected = $variation->first(); @endphp
+        @if($vSettings->type == 'package_product' && (!$vSettings->min_count_limit || $vSettings->min_count_limit == 0))
+            @php $selected = null; @endphp
+        @else
+            @php $selected = $variation->first(); @endphp
+        @endif
     @endif
     <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"
-         data-single-price="{{ $selected->price }}">
+         data-single-price="{{ ($selected)?(($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price):0 }}">
         @include("frontend.products._partials.stock_variation_option")
     </div>
 
-    <div class="product__single-item-add-new">
-        <a href="#"
-           class="d-flex justify-content-center align-self-center text-tert-clr font-18 product__single-item-add-new-btn">
-            <span class="icon-plus"><i class="fas fa-plus"></i></span>
-            <span>Add New</span>
-        </a>
-    </div>
+    @if($vSettings->count_limit > 1)
+        <div class="product__single-item-add-new">
+            <a href="#"
+               class="d-flex justify-content-center align-self-center text-tert-clr font-18 product__single-item-add-new-btn">
+                <span class="icon-plus"><i class="fas fa-plus"></i></span>
+                <span>Add New</span>
+            </a>
+        </div>
+    @endif
 </div>

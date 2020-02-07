@@ -25,9 +25,9 @@ class StoreBlogPost extends FormRequest
     {
         $locale = app()->getLocale();
         return [
-            'url' => 'required|unique:posts,id,'.$this->id,
             "translatable"    => "required|array|min:1",
             "translatable.gb.title"  => "required|string|min:3",
+            "translatable.gb.url"  => "required",
             "translatable.gb.short_description"  => "required|string|min:3",
             "translatable.gb.long_description"  => "required|string|min:3",
         ];

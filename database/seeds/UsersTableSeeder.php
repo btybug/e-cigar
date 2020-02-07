@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
             'country'=>'Yerevan',
             'status'=>1,
             'gender'=>'male',
+            'email_verified_at'=>date('m/d/Y', now()->getTimestamp()),
             'role_id'=>1
         ]);
     }

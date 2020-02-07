@@ -1,6 +1,7 @@
 @extends('layouts.frontend')
 @section('meta')
     {!! stockSeo($vape) !!}
+    {!! \App\Models\RIchSnippets\RichProducts::create($vape->id,$type) !!}
 @stop
 @section('content')
     <div class="main-content">
@@ -10,8 +11,7 @@
             <div class="container main-max-width h-100 p-0">
                 <div class="d-flex flex-lg-row flex-column align-items-center justify-content-between h-100">
                     <a href="{{ route('categories_front') }}"
-                       class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">continue
-                        shopping</a>
+                       class="continue-shp-wrapp_link font-sec-bold font-21 text-light-clr text-uppercase">{!! __('continue_shopping') !!}</a>
                     <div class="d-flex align-items-center ml-lg-auto continue-shp-wrapp_right">
                         <div class="continue-shp-wrapp_qty position-relative">
                             <!--minus qty-->
@@ -35,7 +35,7 @@
                         <a href="#"
                            class="btn-add-to-cart product-card_btn d-inline-flex align-items-center justify-content-between text-center font-15 text-sec-clr text-uppercase"
                            data-toggle="modal" data-target="#specialPopUpModal">
-                            <span class="product-card_btn-text">add to cart</span>
+                            <span class="product-card_btn-text">{!! __('add_to_cart') !!}</span>
                             <span class="d-inline-block ml-auto">
                             <svg viewBox="0 0 18 22" width="18px" height="22px">
                                 <path fill-rule="evenodd" opacity="0.8" fill="rgb(255, 255, 255)"
@@ -101,90 +101,15 @@
                                     </div>
                                 </div>
                                 <div class="brands-top-slider">
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
+                                    @foreach($vape->stickers()->orderBy('ordering')->get() as $sticker)
+                                        <div class="brand-wall">
+                                            <div class="brand-item">
+                                                <a href="javascript:void(0)" class="brand-link">
+                                                    <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}">
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-1.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-2.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-3.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="brand-wall">
-                                        <div class="brand-item">
-                                            <a href="#" class="brand-link">
-                                                <img src="/public/img/brands/brand-single-4.png" alt="brand-logo">
-                                            </a>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
@@ -199,9 +124,13 @@
                                                 <!--product main image-->
                                                 @if($vape->image)
                                                     <div class="h-100">
+                                                        <a href="{!! checkImage($vape->image,'stock') !!}" class="product-single-lightbox-item" title="{!! ($vape->name) !!}" data-lightbox-gallery="photo_gallery-single-product">
                                                         <img class="single-product_top-img"
-                                                             src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                                                             src="{!! checkImage($vape->image,'stock') !!}"
+                                                             alt="{!! ( $vape->name) !!}"
+                                                             title="{!! ( $vape->name) !!}"
+                                                        >
+                                                        </a>
                                                     </div>
                                                 @endif
                                             <!--new label-->
@@ -211,290 +140,422 @@
                                                 {{--                                                <span--}}
                                                 {{--                                                    class="sale-label product-card_sale-label d-inline-block text-uppercase font-main-bold font-16 text-sec-clr position-absolute">-10%</span>--}}
                                             </div>
-
+                                            <div class="main-image-alt-text font-20 font-main-bold text-center text-gray-clr">
+                                                {!! $vape->name !!}
+                                            </div>
                                             <div class="d-flex product-card-thumbs product-card-thumbs--single">
                                                 @if($vape->image)
                                                     <div class="product-card_thumb-img-holder pointer active_slider">
-                                                        <img class="" src="{!! checkImage($vape->image) !!}"
-                                                             alt="{!! @getImage( $vape->image)->seo_alt !!}">
+                                                        <a href="{!! checkImage($vape->image,'stock') !!}" class="product-single-lightbox-item" title="{!! ($vape->name) !!}" data-lightbox-gallery="photo_gallery-single-product">
+                                                            <img class="" src="{!! checkImage($vape->image,'stock') !!}"
+                                                                 alt="{!! ($vape->name) !!}"
+                                                                 title="{!! ($vape->name) !!}"
+                                                            >
+                                                        </a>
                                                     </div>
                                                 @endif
-                                                @if($vape->variations && count($vape->variations))
-                                                    @foreach($vape->variations()->required()->get() as $variation)
-                                                        @if(isset($variation['image']))
-                                                            <div class="product-card_thumb-img-holder pointer"
-                                                                 data-id="{{ $variation['id'] }}">
-                                                                <img class=""
-                                                                     src="{{ checkImage($variation["image"]) }}"
-                                                                     alt="{!! @getImage($variation["image"])->seo_alt !!}">
-                                                            </div>
-                                                        @endif
+                                                @if($vape->other_images && count($vape->other_images))
+                                                    @foreach($vape->other_images as $other_image)
+                                                        <div class="product-card_thumb-img-holder pointer"
+                                                             data-id="null">
+                                                            <a href="{!! checkImage($other_image['image'],'stock') !!}" class="product-single-lightbox-item"
+                                                               title="{!! $other_image['alt'] !!}" data-lightbox-gallery="photo_gallery-single-product">
+
+                                                            <img class=""
+                                                                 src="{{checkImage($other_image['image'],'stock')}}"
+                                                                 alt="{!! $other_image['alt'] !!}"
+                                                                 title="{!! $other_image['alt'] !!}"
+                                                            >
+                                                            </a>
+                                                        </div>
                                                     @endforeach
                                                 @endif
+
                                             </div>
                                         </div>
                                         <div class="col-lg-6 product-single-info-outer">
                                             <div class="product-single-info">
                                                 <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
                                                        id="vpid">
-
-                                                <div class="product__single-item">
-                                                    <div
-                                                        class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">
-                                                        <div
-                                                            class="d-flex align-items-center justify-content-center product_btn-discount">
-                                                            <span
-                                                                class="font-sec-reg font-26 text-sec-clr">QTY Discount</span>
-                                                        </div>
-                                                        <div class="font-main-light font-20">
-                                                            The more you order the more you get
-                                                        </div>
-                                                        <a href="#" class="font-20 text-tert-clr top_details">Offer
-                                                            Details</a>
-                                                    </div>
-
-                                                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                                                </div>
                                                 <div
-                                                    class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">
-                                                    <div
-                                                        class="d-flex align-items-center product__single-delivery-left">
-                                                        <div
-                                                            class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">
-                                                            Delivery
-                                                        </div>
-                                                        <div class="product__single-delivery-select">
-                                                            <div class="select-wall product__select-wall">
-                                                                <select name="" id=""
-                                                                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
-                                                                        style="width: 250px">
-                                                                    <option value="">United Kingdom</option>
-                                                                    <option value="">Armenia</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
+                                                    class="d-flex align-items-center product__single-delivery-right mb-3">
+                                                    <div class="product__single-delivery-free font-20 lh-1">
+                                                        {!! __('free_on_orders_over') !!}
                                                     </div>
-                                                    <div
-                                                        class="d-flex align-items-center product__single-delivery-right">
-                                                        <div class="product__single-delivery-free font-20 lh-1">
-                                                            Free on orders over £10
-                                                        </div>
-                                                        <a href="#"
-                                                           class="product__single-delivery-details font-20 text-tert-clr lh-1">More
-                                                            Details</a>
-                                                    </div>
-
+                                                    <a href="#"
+                                                       class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
+                                                </div>
+                                                <div class="product__single-item">
+                                                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
-
                                 {{--carousel--}}
 
                                 <div class="product-single-tab">
                                     <div id="carousel-tabs-wrap" class="product-single-tab_nav-pills" role="tablist">
                                         <div class="carousel-tabs">
-                                            <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition active"
+                                            @if((trim(strip_tags($vape->long_description)))
+                                              || ($vape->main_item &&  $vape->main_item->specifications  && count($vape->main_item->specifications))
+                                              || (trim(strip_tags($vape->what_is_content))) || ($vape->banners && count($vape->banners)))
+                                                <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition active"
                                                data-toggle="pill" href="#pills-tecnical" role="tab"
-                                               aria-controls="pills-tecnical" aria-selected="true">Technical</a>
+                                               aria-controls="pills-tecnical" aria-selected="true">{!! __('technical') !!}</a>
+                                            @endif
+
+                                            @if($vape->videos && count($vape->videos))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-videos" role="tab"
-                                               aria-controls="pills-videos" aria-selected="true">Videos</a>
+                                               aria-controls="pills-videos" aria-selected="true">{!! __('Videos') !!}</a>
+                                            @endif
+
+                                            @if($vape->special_offers && count($vape->special_offers))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-offers" role="tab"
-                                               aria-controls="pills-offers" aria-selected="true">Offers</a>
+                                               aria-controls="pills-offers" aria-selected="true">{!! __('offers') !!}</a>
+                                            @endif
+
+                                            @if($vape->related_products && count($vape->related_products))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-related" role="tab"
-                                               aria-controls="pills-related" aria-selected="false">Related</a>
-                                            @if($vape->reviews_tab)
+                                               aria-controls="pills-related" aria-selected="false">{!! __('related') !!}</a>
+                                            @endif
+
+                                            @if($vape->reviews_tab && count($reviews))
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-reviews" role="tab"
-                                                   aria-controls="pills-reviews" aria-selected="false">Reviews</a>
+                                                   aria-controls="pills-reviews" aria-selected="false">{!! __('reviews') !!}</a>
                                             @endif
-                                            @if($vape->faq_tab)
+                                            @if($vape->faq_tab && count($vape->faqs))
                                                 <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                    data-toggle="pill" href="#pills-faq" role="tab"
-                                                   aria-controls="pills-faq" aria-selected="false">FAQ</a>
+                                                   aria-controls="pills-faq" aria-selected="false">{!! __('faq') !!}</a>
                                             @endif
                                         </div>
                                     </div>
 
 
                                     <div class="tab-content">
-                                        <div class="tab-pane fade show active" id="pills-tecnical"
-                                             role="tabpanel"
-                                             aria-labelledby="pills-tecnical-tab">
-                                            {{--<p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">--}}
-                                            {{--{!! $vape->long_description !!}--}}
-                                            {{--</p>--}}
-                                            <div class="d-flex flex-wrap">
-                                                <div class="product_single-main-tab-content">
-                                                    <div class="tecnical-desc">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            Description</h3>
-                                                        <div class="tecnical-desc_heading">
-                                                            <div class="row">
-                                                                <div class="col-lg-12 font-15 text-gray-clr">
-                                                                    <div
-                                                                        class="tecnical-desc_info-col font-15 text-gray-clr font-main-light">
-                                                                        {!! $vape->long_description !!}
-                                                                    </div>
 
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {{--                                                <ul class="tecnical-labels list-unstyled d-flex">--}}
-                                                        {{--                                                    @foreach($vape->stickers as $sticker)--}}
-                                                        {{--                                                        <li class="tecnical-labels_item d-flex align-items-center">--}}
-                                                        {{--                                                            <img src="{{ $sticker->image }}" alt=""--}}
-                                                        {{--                                                                 class="tecnical-labels_item-img rounded-circle">--}}
-                                                        {{--                                                            <span--}}
-                                                        {{--                                                                class="tecnical-labels_item-text d-inline-block font-main-bold font-15">--}}
-                                                        {{--                                                        {{ $sticker->name }}--}}
-                                                        {{--                                                    </span>--}}
-                                                        {{--                                                        </li>--}}
-                                                        {{--                                                    @endforeach--}}
+                                        @if((trim(strip_tags($vape->long_description)))
+                                        || ($vape->main_item &&  $vape->main_item->specifications  && count($vape->main_item->specifications))
+                                        || (trim(strip_tags($vape->what_is_content))) || ($vape->banners && count($vape->banners)))
+                                            <div class="tab-pane fade show active" id="pills-tecnical"
+                                                 role="tabpanel"
+                                                 aria-labelledby="pills-tecnical-tab">
+                                                <div class="d-flex flex-wrap">
+                                                    <div class="product_single-main-tab-content">
+                                                        @if(trim(strip_tags($vape->long_description)))
+                                                            <div class="tecnical-desc">
+                                                                <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                    {!! __('description') !!}</h3>
+                                                                <div class="tecnical-desc_heading">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 font-15 text-gray-clr">
+                                                                            <div
+                                                                                class="tecnical-desc_info-col font-15 text-gray-clr font-main-light">
+                                                                                {!! $vape->long_description !!}
+                                                                            </div>
 
-                                                        {{--                                                </ul>--}}
-                                                    </div>
-                                                    <div class="technical-features">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            Features</h3>
-                                                        <div class="d-flex flex-wrap technical-features-content">
-                                                            @if($vape->stockAttrs && count($vape->stockAttrs))
-                                                                @foreach($vape->stockAttrs as $stockAttr)
-                                                                    @if($stockAttr->attr && $stockAttr->children && count($stockAttr->children))
-                                                                        <div
-                                                                            class="d-flex technical-features-content-wall">
-                                                                            <div
-                                                                                class="technical-features-content-left">
-                                                                                <div
-                                                                                    class="d-flex align-items-center h-100">
-                                                                            <span
-                                                                                class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
-                                                                                    @if($stockAttr->attr->description)
-                                                                                        <span data-toggle="tooltip"
-                                                                                              data-placement="top"
-                                                                                              title="{!! $stockAttr->attr->description !!}">
-                                                                                            <svg
-                                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                                                                width="24px"
-                                                                                                height="24px"
-                                                                                                viewBox="0 0 24 24">
-                                                                                                <path
-                                                                                                    fill-rule="evenodd"
-                                                                                                    fill="rgb(255, 255, 255)"
-                                                                                                    d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
-                                                                                            </svg>
-                                                                                        </span>
-                                                                                    @endif
-                                                                                </div>
-                                                                            </div>
-                                                                            <div
-                                                                                class="technical-features-content-right">
-                                                                                <div
-                                                                                    class="d-flex align-items-center h-100">
-                                                                            <span
-                                                                                class="font-18 text-gray-clr font-main-light technical-features-content-desc">
-                                                                                @foreach($stockAttr->children as $child)
-                                                                                    {{ $child->sticker->name }} @if(! $loop->last)
-                                                                                        , @endif
-                                                                                @endforeach
-                                                                            </span>
-                                                                                </div>
-                                                                            </div>
                                                                         </div>
-                                                                    @endif
-                                                                @endforeach
-                                                            @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="technical-inside-box">
-                                                        <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
-                                                            inside tHE BOX</h3>
-                                                        <div class="d-flex flex-wrap technical-inside-box-inner">
-                                                            <div class="technical-inside-box-left lh-1">
-                                                                {!! $vape->what_is_content !!}
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div class="technical-inside-box-right">
-                                                                <div class="technical-inside-box-photo">
-                                                                    @if($vape->what_is_image)
-                                                                        <img src="{{ $vape->what_is_image }}"
-                                                                             alt="what is in box">
+                                                        @endif
+
+                                                        @if($vape->main_item &&  $vape->main_item->specifications_with_children  && count($vape->main_item->specifications_with_children))
+                                                            <div class="technical-features">
+                                                                <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                    {!! __('features') !!}</h3>
+                                                                <div class="d-flex flex-wrap technical-features-content
+                                                                    @if(count($vape->main_item->specifications_with_children) >= 10 ) technical-features-content-to-col @endif">
+                                                                    @if(count($vape->main_item->specifications_with_children) >= 10)
+                                                                        <div class="w-100">
+                                                                        <div class="row ">
+                                                                            @foreach($vape->main_item->specifications_with_children as $stockAttr)
+                                                                                    @if($loop->iteration % 2 == 0)
+                                                                                        <div class="col-md-6">
+                                                                                            <div
+                                                                                                class="d-flex technical-features-content-wall">
+                                                                                                <div
+                                                                                                    class="technical-features-content-left">
+                                                                                                    <div
+                                                                                                        class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
+                                                                                                        @if($stockAttr->attr->description)
+                                                                                                            <span data-toggle="tooltip"
+                                                                                                                  data-placement="top"
+                                                                                                                  title="{!! $stockAttr->attr->description !!}">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                                        width="24px"
+                                                                                                        height="24px"
+                                                                                                        viewBox="0 0 24 24">
+                                                                                                        <path
+                                                                                                            fill-rule="evenodd"
+                                                                                                            fill="rgb(255, 255, 255)"
+                                                                                                            d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
+                                                                                                    </svg>
+                                                                                                </span>
+                                                                                                        @endif
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="technical-features-content-right">
+                                                                                                    <div
+                                                                                                        class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-gray-clr font-main-light technical-features-content-desc">
+                                                                                        @foreach($stockAttr->children as $child)
+                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            @if(! $loop->last)
+                                                                                                ,
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @else
+                                                                                        <div class="col-md-6">
+                                                                                            <div
+                                                                                                class="d-flex technical-features-content-wall">
+                                                                                                <div
+                                                                                                    class="technical-features-content-left">
+                                                                                                    <div
+                                                                                                        class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
+                                                                                                        @if($stockAttr->attr->description)
+                                                                                                            <span data-toggle="tooltip"
+                                                                                                                  data-placement="top"
+                                                                                                                  title="{!! $stockAttr->attr->description !!}">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                                        width="24px"
+                                                                                                        height="24px"
+                                                                                                        viewBox="0 0 24 24">
+                                                                                                        <path
+                                                                                                            fill-rule="evenodd"
+                                                                                                            fill="rgb(255, 255, 255)"
+                                                                                                            d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
+                                                                                                    </svg>
+                                                                                                </span>
+                                                                                                        @endif
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="technical-features-content-right">
+                                                                                                    <div
+                                                                                                        class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-gray-clr font-main-light technical-features-content-desc">
+                                                                                        @foreach($stockAttr->children as $child)
+                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            @if(! $loop->last)
+                                                                                                ,
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </span>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    @endif
+                                                                            @endforeach
+                                                                        </div>
+                                                                        </div>
                                                                     @else
-                                                                        <img src="/public/img/temp/inside-box.jpg"
-                                                                             alt="what is in box">
+                                                                        @foreach($vape->main_item->specifications_with_children as $stockAttr)
+                                                                                <div
+                                                                                            class="d-flex technical-features-content-wall">
+                                                                                            <div
+                                                                                                class="technical-features-content-left">
+                                                                                                <div
+                                                                                                    class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-sec-clr technical-features-content-title">{{ $stockAttr->attr->name }}</span>
+                                                                                                    @if($stockAttr->attr->description)
+                                                                                                        <span data-toggle="tooltip"
+                                                                                                              data-placement="top"
+                                                                                                              title="{!! $stockAttr->attr->description !!}">
+                                                                                                    <svg
+                                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                                                                        width="24px"
+                                                                                                        height="24px"
+                                                                                                        viewBox="0 0 24 24">
+                                                                                                        <path
+                                                                                                            fill-rule="evenodd"
+                                                                                                            fill="rgb(255, 255, 255)"
+                                                                                                            d="M11.997,0.012 C5.379,0.012 0.012,5.379 0.012,11.997 C0.012,18.616 5.379,23.983 11.997,23.983 C18.616,23.983 23.983,18.616 23.983,11.997 C23.983,5.379 18.616,0.012 11.997,0.012 ZM14.492,18.587 C13.876,18.830 13.384,19.016 13.016,19.143 C12.649,19.271 12.222,19.336 11.736,19.336 C10.988,19.336 10.407,19.151 9.993,18.789 C9.579,18.424 9.373,17.962 9.373,17.401 C9.373,17.183 9.389,16.959 9.419,16.732 C9.451,16.506 9.500,16.250 9.568,15.962 L10.340,13.236 C10.408,12.972 10.467,12.723 10.514,12.492 C10.560,12.259 10.583,12.045 10.583,11.850 C10.583,11.503 10.511,11.259 10.368,11.123 C10.223,10.985 9.949,10.918 9.543,10.918 C9.344,10.918 9.139,10.948 8.929,11.010 C8.721,11.073 8.540,11.132 8.392,11.188 L8.596,10.348 C9.101,10.142 9.585,9.966 10.047,9.820 C10.509,9.671 10.945,9.598 11.356,9.598 C12.098,9.598 12.670,9.779 13.073,10.136 C13.474,10.494 13.676,10.960 13.676,11.532 C13.676,11.651 13.662,11.860 13.634,12.159 C13.606,12.458 13.555,12.730 13.479,12.982 L12.711,15.701 C12.649,15.920 12.593,16.169 12.542,16.447 C12.492,16.726 12.468,16.940 12.468,17.084 C12.468,17.444 12.548,17.691 12.710,17.822 C12.871,17.953 13.153,18.020 13.549,18.020 C13.737,18.020 13.947,17.986 14.185,17.920 C14.421,17.855 14.591,17.797 14.698,17.747 L14.492,18.587 ZM14.356,7.550 C13.999,7.883 13.567,8.049 13.062,8.049 C12.560,8.049 12.125,7.883 11.764,7.550 C11.405,7.217 11.223,6.812 11.223,6.339 C11.223,5.868 11.406,5.462 11.764,5.126 C12.125,4.789 12.560,4.621 13.062,4.621 C13.567,4.621 13.999,4.789 14.356,5.126 C14.714,5.462 14.894,5.868 14.894,6.339 C14.894,6.813 14.714,7.217 14.356,7.550 Z"/>
+                                                                                                    </svg>
+                                                                                                </span>
+                                                                                                    @endif
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="technical-features-content-right">
+                                                                                                <div
+                                                                                                    class="d-flex align-items-center h-100">
+                                                                                    <span
+                                                                                        class="font-18 text-gray-clr font-main-light technical-features-content-desc">
+                                                                                        @foreach($stockAttr->children as $child)
+                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            @if(! $loop->last)
+                                                                                                ,
+                                                                                            @endif
+                                                                                        @endforeach
+                                                                                    </span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                        @endforeach
                                                                     @endif
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        @endif
 
+                                                        @if(trim(strip_tags($vape->what_is_content)))
+                                                            <div class="technical-inside-box">
+                                                                <h3 class="tecnical-desc_sub-title font-main-bold font-24 text-uppercase">
+                                                                    {!! __('inside_box') !!}</h3>
+                                                                <div class="d-flex flex-wrap technical-inside-box-inner">
+                                                                    <div class="technical-inside-box-left lh-1">
+                                                                        {!! $vape->what_is_content !!}
+                                                                    </div>
+                                                                    <div class="technical-inside-box-right">
+                                                                        <div class="technical-inside-box-photo">
+                                                                            @if($vape->what_is_image)
+                                                                                <img src="{{ $vape->what_is_image }}"
+                                                                                     alt="what is in box">
+                                                                            @endif
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @endif
+
+                                                        @if($vape->banners && count($vape->banners))
+
+                                                            <div class="tecnical_gallery">
+                                                                <div class="tecnical_gallery-all">
+                                                                    @foreach($vape->banners as $banner)
+                                                                        @if(pathinfo($banner->image,PATHINFO_EXTENSION) == 'html')
+                                                                            @php
+                                                                                $banner = ltrim($banner->image, '/');
+                                                                                $html = (File::exists($banner)) ? File::get($banner) : "";
+                                                                            @endphp
+                                                                            <div>
+                                                                                <a href="{!! $html !!}"
+                                                                                   class="tecnical_gallery_obj-holder lightbox-item"
+                                                                                   data-lightbox-gallery="gallery_name">
+                                                                                        {!! $html !!}
+                                                                                </a>
+                                                                            </div>
+                                                                        @else
+                                                                            <div>
+                                                                                <a href="{{ checkImage($banner->image) }}"
+                                                                                   class="tecnical_gallery_obj-holder lightbox-item"
+                                                                                   data-lightbox-gallery="gallery_name"
+                                                                                   title="yyyyyyyy{!! @getImage($banner->image)->seo_alt !!}">
+                                                                                    <img src="{{ checkImage($banner->image) }}"
+                                                                                         alt="{!! $banner->alt !!}-gallery"
+                                                                                         title="{!! $banner->tags !!}-gallery"
+                                                                                    >
+                                                                                </a>
+                                                                            </div>
+                                                                        @endif
+                                                                    @endforeach
+                                                                </div>
+                                                            </div>
+                                                        @endif
                                                     </div>
 
-                                                    <div class="tecnical_gallery">
-                                                        <div class="tecnical_gallery-all">
-
-                                                            @if($vape->other_images && count($vape->other_images))
-                                                                @foreach($vape->other_images as $other_image)
-                                                                    <a href="{{ $other_image }}"
-                                                                       class="tecnical_gallery_obj-holder lightbox-item"
-                                                                       data-lightbox-gallery="gallery_name"
-                                                                       title="{!! @getImage($other_image)->seo_alt !!}">
-                                                                        <img src="{{ checkImage($other_image) }}"
-                                                                             alt="{!! @getImage($other_image)->seo_alt !!}">
+                                                    <div class="product_single-right-ads">
+                                                        @if($vape->ads && count($vape->ads))
+                                                            @foreach($vape->ads as $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
                                                                     </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @else
+                                                            @if($ads && isset($ads['images']))
+                                                                @foreach($ads['images'] as $key => $ad)
+                                                                    <div class="single-ads-wall">
+                                                                        <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                            <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                        </a>
+                                                                    </div>
                                                                 @endforeach
                                                             @endif
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="product_single-right-ads">
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                        </a>
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        @endif
+
                                         <div class="tab-pane related-tab-pane fade show" id="pills-related"
                                              role="tabpanel"
                                              aria-labelledby="pills-related-tab">
                                             <div class="d-flex flex-wrap">
                                                 <div class="product_single-main-tab-content">
-                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products])
+                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products,'related' => true])
                                                 </div>
                                                 <div class="product_single-right-ads">
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
-                                                    <div class="single-ads-wall">
-                                                        <a href="#" class="d-block h-100">
-                                                            <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
-                                                        </a>
-                                                    </div>
+                                                    @if($vape->ads && count($vape->ads))
+                                                        @foreach($vape->ads as $ad)
+                                                            <div class="single-ads-wall">
+                                                                <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        @if($ads && isset($ads['images']))
+                                                            @foreach($ads['images'] as $key => $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
+
                                                 </div>
                                             </div>
                                         </div>
-                                        @if($vape->reviews_tab)
+                                        @if($vape->reviews_tab && count($reviews))
                                             <div class="tab-pane fade show" id="pills-reviews" role="tabpanel"
                                                  aria-labelledby="pills-tecnical-tab">
-                                                <p class="product-single-tecnical-text font-15 font-main-light text-light-clr mb-0">
-                                                    I bought one.
-                                                </p>
+                                                @foreach($reviews as $review)
+                                                    <section class="reviews__card-wrapper">
+                                                        <blockquote class="rating__card__quote">“{!! $review->review !!}”</blockquote>
+
+                                                        <div class="rating__card__stars">
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR1 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR2 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR3 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR4 )?'checked':'' }}"></span>
+                                                            <span class="fa fa-star {{ ($review->rate >= \App\Enums\ReviewStatusTypes::STAR5 )?'checked':'' }}"></span>
+                                                        </div>
+                                                        <p class="rating__card__bottomText">by {!! $review->nickname !!} on {!! BBgetDateFormat($review->created_at) !!}</p>
+                                                    </section>
+                                                @endforeach
+
                                             </div>
                                         @endif
-                                        @if($vape->faq_tab)
+                                        @if($vape->faq_tab && count($vape->faqs))
                                             <div class="tab-pane fade show" id="pills-faq" role="tabpanel"
                                                  aria-labelledby="pills-faq-tab">
                                                 <div class="faq-wrapper">
@@ -522,51 +583,70 @@
 
                                             </div>
                                         @endif
+                                        @if($vape->videos && count($vape->videos))
                                         <div class="tab-pane fade show" id="pills-videos" role="tabpanel"
                                              aria-labelledby="pills-videos-tab">
                                             <div class="row video-carousel-wrap">
                                                 <div class="col-2">
                                                     <div class="video--carousel-thumb d-flex flex-column"
                                                          data-carousel-controller-for=".video--carousel">
-                                                        @if($vape->videos && count($vape->videos))
-                                                            @foreach($vape->videos as $video)
-                                                                <div class="video-item-thumb"><img
-                                                                        src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
-                                                                        alt="{{ $video }}"></div>
-                                                            @endforeach
-                                                        @endif
+                                                        @foreach($vape->videos as $video)
+                                                            <div class="video-item-thumb"><img
+                                                                    src="https://img.youtube.com/vi/{{ $video }}/maxresdefault.jpg"
+                                                                    alt="{{ $video }}"></div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                                 <div class="col-10">
                                                     <div class="video--carousel">
-                                                        @if($vape->videos && count($vape->videos))
-                                                            @foreach($vape->videos as $video)
-                                                                <div class="video-item">
-                                                                    <iframe width="100%" height="415"
-                                                                            src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
-                                                                            frameborder="0"
-                                                                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                                                                            allowfullscreen></iframe>
-                                                                </div>
-                                                            @endforeach
-                                                        @endif
-
+                                                        @foreach($vape->videos as $video)
+                                                            <div class="video-item">
+                                                                <iframe width="100%" height="415"
+                                                                        src="https://www.youtube.com/embed/{{ $video }}?enablejsapi=1&version=3&playerapiid=ytplayer"
+                                                                        frameborder="0"
+                                                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                                                        allowfullscreen></iframe>
+                                                            </div>
+                                                        @endforeach
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
+                                        @if($vape->special_offers && count($vape->special_offers))
                                         <div class="tab-pane fade show" id="pills-offers" role="tabpanel"
                                              aria-labelledby="pills-offers-tab">
-                                            <p class="product-single-offers-text font-15 font-main-light text-light-clr mb-0">
-                                                offers
-                                            </p>
+                                            <div class="d-flex flex-wrap">
+                                                <div class="product_single-main-tab-content">
+                                                    @include("frontend.products._partials.products_render",['products' => $vape->special_offers])
+                                                </div>
+                                                <div class="product_single-right-ads">
+                                                    @if($vape->ads && count($vape->ads))
+                                                        @foreach($vape->ads as $ad)
+                                                            <div class="single-ads-wall">
+                                                                <a href="{!! $ad->url !!}" target="_blank" class="d-block h-100">
+                                                                    <img src="{!! $ad->image !!}" alt="{!! $ad->tags !!}">
+                                                                </a>
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        @if($ads && isset($ads['images']))
+                                                            @foreach($ads['images'] as $key => $ad)
+                                                                <div class="single-ads-wall">
+                                                                    <a href="{!! $ads['urls'][$key] !!}" target="_blank" class="d-block h-100">
+                                                                        <img src="{!! $ad !!}" alt="{!! $ads['tags'][$key] !!}">
+                                                                    </a>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
+
+                                                </div>
+                                            </div>
                                         </div>
+                                        @endif
                                     </div>
-
-
                                 </div>
-                                {{--carousel--}}
-
                             </div>
 {{--                            <div class="sharethis-inline-share-buttons"></div>--}}
 
@@ -632,11 +712,9 @@
             <div class="modal-dialog modal-dialog-scrollable mw-100" role="document">
                 <div class="modal-content">
                     <div class="modal-header special__popup-head">
-                        <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">Special
-                            Offer</h5>
+                        <h5 class="font-sec-reg font-26 text-sec-clr modal-title" id="specialPopUpModalTitle">{!! __('special_offer') !!}</h5>
                         <div class="font-main-light font-20 text-main-clr align-self-stretch text-truncate special__popup-head-mid">
-                            <span class="w-100 text-truncate">You
-                            might be interested in the following offers</span>
+                            <span class="w-100 text-truncate">{!! __('special_offer_desc') !!}</span>
 
                         </div>
                         <button type="button" class="align-self-stretch close" data-dismiss="modal" aria-label="Close">
@@ -669,6 +747,22 @@
           href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css"/>
 
     <style>
+        .technical-features-content.technical-features-content-to-col{
+max-width: 100%;
+        }
+        .technical-features-content.technical-features-content-to-col .technical-features-content-left{
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        .technical-features-content.technical-features-content-to-col .technical-features-content-right{
+            -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+            max-width: 50%;
+        }
+        .technical-features-content.technical-features-content-to-col  .technical-features-content-wall{
+            height: 100%;
+        }
         .products__item-favourite.active svg path {
             fill: #ee3a50;
         }
@@ -753,6 +847,7 @@
         // };
 
         $(document).ready(function () {
+            $('.product-single-lightbox-item').lightbox()
             $(function () {
                 $('[data-toggle="tooltip"]').tooltip()
             })

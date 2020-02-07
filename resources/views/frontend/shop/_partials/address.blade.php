@@ -2,11 +2,85 @@
     <div class="shopping-cart-inner">
         <div class="d-flex flex-wrap">
             <div class="col-lg-10 pl-0">
-                <div class="shopping__cart-tab-details">
-                    <div class="row">
-                        <div class="col-md-6 detail-left-col">
-                            <div class="cart-details">
-                                <div class="d-flex align-items-center cart-details-head">
+                    <div class="d-flex shopping-cart-head">
+                        {{--                    <div class="shopping-cart-head-back-btn">--}}
+
+                        {{--                    </div>--}}
+                        <ul class="nav nav-pills">
+                            <li class="nav-item col-md-3">
+                                <a href="{!! route('shop_my_cart') !!}" class="item visited d-flex align-items-center justify-content-between"
+                                   ref="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">1</span>
+                                    <span
+                                        class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('shopping_cart') !!}</span>
+                                    <span class="icon">
+                                <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item active d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">2</span>
+                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('checkout') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">3</span>
+                                    <span class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('payment') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                            <li class="nav-item col-md-3">
+                                <a class="item d-flex align-items-center justify-content-between"
+                                   href="javascript:void(0);">
+                                    <span class="font-sec-reg text-main-clr num">4</span>
+                                    <span
+                                        class="name text-uppercase font-main-bold font-16 text-truncate">{!! __('confirmation') !!}</span>
+                                    <span class="icon">
+                                    <svg
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                                        width="24px" height="19px">
+<path fill-rule="evenodd" fill="rgb(81, 229, 109)"
+      d="M7.636,15.030 L1.909,9.075 L-0.000,11.060 L7.636,19.000 L24.000,1.985 L22.091,0.000 L7.636,15.030 Z"/>
+</svg>
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                <div class="shopping__cart-tab-main new__scroll h-100">
+                    <div class="shopping__cart-tab-details">
+                        <div class="row">
+                            <div class="col-md-6 detail-left-col">
+                                <div class="cart-details">
+                                    <div class="d-flex align-items-center cart-details-head">
                                     <span class="cart-details-avatar">
                                         <span class="icon-avatar">
                                             <svg
@@ -18,54 +92,55 @@
                                         </svg>
                                         </span>
                                     </span>
-                                    <span class="font-28 lh-1 text-tert-clr name">
+                                        <span class="font-28 lh-1 text-tert-clr name">
                                         {!! Auth::user()->name !!}
-                                        {!! Auth::user()->last_name !!}
+                                            {!! Auth::user()->last_name !!}
                                     </span>
-                                </div>
-                                <div class="row cart-details-address">
-                                    <div class="col-md-4">
-                                        <h3 class="title">Shipping Address</h3>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="address-info">
-                                            <div class="select-wall product__select-wall">
-                                                {!! Form::select('address_book',[null => 'Select']+$address->toArray(),$address_id,
-                                                ['class' => 'select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible select-address',
-                                                "style" => 'width: 100%']) !!}
-
-                                            </div>
-                                            <div class="main-info">
-                                                @if($default_shipping)
-                                                <span>{!! $default_shipping->company !!}</span>
-                                                <span>{!! $default_shipping->first_line_address !!}</span>
-                                                <span>{!! $default_shipping->second_line_address !!}</span>
-                                                <span>{!! $default_shipping->city !!}</span>
-                                                <span>{!! $countriesShipping[$default_shipping->country] !!}</span>
-                                                <span>{!! getRegionByZone(@$default_shipping->country)[$default_shipping->region] !!}</span>
-                                                <span>{!! $default_shipping->post_code !!}</span>
-                                                @endif
-                                            </div>
-                                            <a href="javascript:void(0)" data-toggle="modal" data-target="#addNewAddress"
-                                               class="font-18 bg-blue-clr text-sec-clr add-address-btn address-book-new">Add
-                                                New Address</a>
+                                    <div class="row cart-details-address">
+                                        <div class="col-md-4">
+                                            <h3 class="title">{!! __('shipping_address') !!}</h3>
                                         </div>
-                                    </div>
+                                        <div class="col-md-6">
+                                            <div class="address-info">
+                                                <div class="select-wall product__select-wall">
+                                                    {!! Form::select('address_book',[null => 'Select']+$address->toArray(),$address_id,
+                                                    ['class' => 'select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible select-address',
+                                                    "style" => 'width: 100%']) !!}
 
-                                </div>
-                                <div class="cart-details-special">
-                                    <h3 class="title">
-                                        Special Notes
-                                    </h3>
-                                    <textarea name="" cols="30" rows="10" class="note"></textarea>
-                                    <p class="font-16 text-tert-clr note-info">
-                                        * Your Billing address is same as your account
-                                    </p>
+                                                </div>
+                                                <div class="main-info">
+                                                    @if($default_shipping)
+                                                        <span>{!! $default_shipping->company !!}</span>
+                                                        <span>{!! $default_shipping->first_line_address !!}</span>
+                                                        <span>{!! $default_shipping->second_line_address !!}</span>
+                                                        <span>{!! $default_shipping->city !!}</span>
+                                                        <span>{!! $countriesShipping[$default_shipping->country] !!}</span>
+                                                        <span>{!! getRegionByZone(@$default_shipping->country)[$default_shipping->region] !!}</span>
+                                                        <span>{!! $default_shipping->post_code !!}</span>
+                                                    @endif
+                                                </div>
+                                                <a href="javascript:void(0)" data-toggle="modal" data-target="#addNewAddress"
+                                                   class="font-18 bg-blue-clr text-sec-clr add-address-btn address-book-new">
+                                                    {!! __('add_new_address') !!}</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="cart-details-special">
+                                        <h3 class="title">
+                                            {!! __('special_notes') !!}
+                                        </h3>
+                                        <textarea name="" cols="30" rows="10" class="note"></textarea>
+                                        <p class="font-16 text-tert-clr note-info">
+                                            {!! __('check_out_area_desc') !!}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6 detail-right-col">
-                            @include("frontend.shop._partials.shipping_options")
+                            <div class="col-md-6 detail-right-col">
+                                @include("frontend.shop._partials.shipping_options")
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -73,7 +148,7 @@
 
             <div class="col-lg-2 pr-md-right">
                 <div class="right-content">
-                    @include("frontend.shop._partials.order_summary",['checkout' => true,"back_route" => route("shop_my_cart")])
+                    @include("frontend.shop._partials.order_summary",['page' =>'checkout','checkout' => true,"back_route" => route("shop_my_cart")])
                 </div>
             </div>
         </div>

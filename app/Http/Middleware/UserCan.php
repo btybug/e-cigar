@@ -16,15 +16,18 @@ class UserCan
     public function handle($request, Closure $next)
     {
         $role = \Auth::user()->role;
-        if ($role->slug != 'superadmin') {
+        if ($role->slug == 'superadmin' || $role->slug == 'admin') {
+            return $next($request);
+        }
+
             if ($role != 'admin_dashboard') {
                 if (!$role->can(\Request::route()->getName())) {
                     abort('401', 'Access Denied');
                 }
+                return $next($request);
             }
-        }
 
-        return $next($request);
+
     }
 
 }

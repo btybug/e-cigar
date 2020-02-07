@@ -1,12 +1,12 @@
 <div class="card order-summary">
     <div class="card-header text-tert-clr font-26">
-        ORDER SUMMARY
+        {!! __('order_summary') !!}
     </div>
     <div class="card-body border-top-0">
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
             <div class="name">
-                Sub Total
+                {!! __('sub_total') !!}
             </div>
             <div
                 class="price font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getSubTotal(),$currency, false) !!}</div>
@@ -14,7 +14,7 @@
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
             <div class="name">
-                Tax
+                {!! __('tax') !!}
             </div>
             <div
                 class="price font-main-bold">{!! convert_price(0,$currency, false) !!}</div>
@@ -22,29 +22,34 @@
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
             <div class="name">
-                Shipping {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
+                {!! __('shipping') !!} {!! ($shipping) ? '('.$shipping->getAttributes()->courier->name.')' : '' !!}
             </div>
             <div
-                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select">
+                class="w-100 d-flex flex-wrap justify-content-between align-items-center row_with-select @if($page === 'payment' || $page === 'checkout') payment--row-shipping @endif">
+                @if($page != 'payment' && $page != 'checkout')
+
                 <div class="select-wall">
                     <select name="" id=""
                             class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
                             style="width: 175px">
-                        <option value="">United Kingdom</option>
-                        <option value="">Armenia</option>
+                        <option value="">{!! __('united_kingdom') !!}</option>
+                        <option value="">{!! __('armenia') !!}</option>
                     </select>
                 </div>
+                @endif
                 <div
                     class="price font-main-bold">{!! ($shipping) ? convert_price($shipping->getValue(),$currency, false) : convert_price(0,$currency, false) !!}</div>
             </div>
 
         </div>
+
+        @if($page != 'payment')
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center">
             <div
                 class="w-100 d-flex flex-wrap justify-content-between align-items-center">
                 <div class="name">
-                    Coupon Discount
+                    {!! __('coupon_discount') !!}
                 </div>
                 @php
                     $coupons = \Cart::getConditionsByType('coupon');
@@ -68,10 +73,11 @@
             </div>
 
         </div>
+        @endif
         <div
             class="single-row font-17 d-flex flex-wrap justify-content-between align-items-center border-bottom-0">
             <div class="name">
-                Total
+                {!! __('total') !!}
             </div>
             <div
                 class="price text-tert-clr font-main-bold">{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false) !!}</div>
@@ -97,30 +103,45 @@
                         @if($default_shipping)
                             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn go-to-payment"
                                href="javascript:void(0)">
-                                CHECKOUT
+                                @if($page == 'checkout')
+                                    {!! __('payment') !!}
+                                @else
+                                    {!! __('checkout') !!}
+                                @endif
                             </a>
                         @else
 
                             <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn address-book-new"
                                href="javascript:void(0)">
-                                CHECKOUT
+                                @if($page == 'checkout')
+                                    {!! __('payment') !!}
+                                @else
+                                    {!! __('checkout') !!}
+                                @endif
                             </a>
                         @endif
                     @endif
                 @else
                     <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr shop-detail-btn"
                        href="{{ @$submit_route }}">
-                        SHOPPING DETAILS
+                        @if($page == 'checkout')
+                            {!! __('payment') !!}
+                        @else
+                            {!! __('checkout') !!}
+                        @endif
+
                     </a>
                 @endif
             @endif
 
         </div>
         <div class="order-summary-btn-wall text-center">
-            <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
-               href="{{ @$back_route }}">
-                Back
-            </a>
+            @if($back_route && $page == 'checkout')
+                <a class="order-summary-btn font-sec-reg text-uppercase font-24 text-main-clr back-btn"
+                   href="{{ @$back_route }}">
+                    {!! __('back') !!}
+                </a>
+            @endif
         </div>
     </div>
 </div>

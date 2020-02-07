@@ -1,9 +1,9 @@
 <div class="brands_main-content-top-photo">
-    <img src="{!! $offer->image !!}" alt="big-brands">
+    <img src="{!! $offer->image !!}" alt="{{ $offer->name }}" title="{{ $offer->name }}">
 </div>
 <div class="brands_main-content-top-right">
     <div class="text-center right-main-img">
-        <img src="/public/img/brands/brands-monster.png" alt="brand">
+        <img src="/public/img/brands/brands-monster.png" alt="{{ $offer->name }}" title="{{ $offer->name }}">
     </div>
     <h2 class="text-center font-sec-reg font-26 mb-0 lh-1">{{ $offer->name }}</h2>
     <ul class="d-flex flex-wrap brands_right-list">
@@ -22,7 +22,7 @@
         @endif
     </ul>
     <div class="d-flex brands_main-content-top-more">
-        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $offer->slug]) }}" class="name">Read more</a>
+        <a href="{{ route('product_single', ['type' =>"vape", 'slug' => $offer->slug]) }}" class="name">{!! __('read_more') !!}</a>
         <span class="icon">
         <svg
             xmlns="http://www.w3.org/2000/svg"
