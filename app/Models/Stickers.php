@@ -60,12 +60,13 @@ class Stickers extends Translatable
 
     protected $guarded = ['id'];
 
-    public $translatedAttributes = ['name','description'];
+    public $translatedAttributes = ['name', 'description'];
 
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'category_stickers', 'sticker_id', 'categories_id');
     }
+
     public function brands()
     {
         return $this->belongsToMany(Brands::class, 'brand_stickers', 'sticker_id', 'brand_id');
@@ -81,7 +82,7 @@ class Stickers extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_stickers', 'sticker_id', 'stock_id');
     }
 
-    public static function getById($id,$col = 'name')
+    public static function getById($id, $col = 'name')
     {
         $attribute = self::find($id);
         return ($attribute && isset($attribute->{$col})) ? $attribute->{$col} : null;
