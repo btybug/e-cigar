@@ -30,13 +30,14 @@ class OrdersController extends Controller
         1 => 'O',
     ];
     protected $latters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
     public function getBasketNumber(Request $request)
     {
         $shop = Warehouse::findOrFail($request->get('shop_id'));
         $lastOrder = $shop->Orders()->orderBy('id', 'DESC')->first();
-        $uniqId = $this->stringId($shop->id,$this->numberId($lastOrder?$lastOrder->id:0));
-        $order=Orders::create(['shop_id'=>$shop->id,'status'=>0,'order_number'=>$uniqId,'staff_id'=>$request->get('staff_id')]);
-        return response()->json(['error'=>false,'basket_number'=>$uniqId,'order_id'=>$order->id]);
+        $uniqId = $this->stringId($shop->id, $this->numberId($lastOrder ? $lastOrder->id : 0));
+        $order = Orders::create(['shop_id' => $shop->id, 'status' => 0, 'order_number' => $uniqId, 'staff_id' => $request->get('staff_id')]);
+        return response()->json(['error' => false, 'basket_number' => $uniqId, 'order_id' => $order->id]);
     }
 
     protected function numberId($id)
@@ -44,7 +45,7 @@ class OrdersController extends Controller
         foreach ($this->nums as $key => $v) {
             if ($id >= $key) {
                 $delta = floor($id / $key);
-                return ($delta > 1) ? $delta . $v . substr((string) $id, -2) : $v . substr((string) $id, -2);
+                return ($delta > 1) ? $delta . $v . substr((string)$id, -2) : $v . substr((string)$id, -2);
             }
         }
     }
@@ -53,19 +54,19 @@ class OrdersController extends Controller
     {
         for ($i = 0; $i <= strlen($this->latters); $i++) {
             for ($j = 0; $j <= strlen($this->latters); $j++) {
-               if(!Orders::where('shop_id',$id)->where('order_number',$this->latters[$i].$this->latters[$j].$suffix)->exists()){
-                 return   $this->latters[$i].$this->latters[$j].$suffix;
-               };
+                if (!Orders::where('shop_id', $id)->where('order_number', $this->latters[$i] . $this->latters[$j] . $suffix)->exists()) {
+                    return $this->latters[$i] . $this->latters[$j] . $suffix;
+                };
             }
         }
     }
 
     public function addItemToBasked(Request $request, OrderService $service)
     {
-        $shop = AppWarehouses::where('warehouse_id',$request->get('shop_id'))->first();
+        $shop = AppWarehouses::where('warehouse_id', $request->get('shop_id'))->first();
         $order = $shop->warehouse->orders()->find($request->get('order_id'));
         if ($request->get('product_id', false)) {
-            $item=AppItems::find($request->get('product_id'));
+            $item = AppItems::find($request->get('product_id'));
 
             if (!$order->items()->where('item_id', $item->item_id)->exists()) {
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
@@ -75,17 +76,17 @@ class OrdersController extends Controller
         }
         if ($request->get('gifts', false)) {
             $gifts = $request->get('gifts');
-            $sync=[];
+            $sync = [];
             $order->items()->where('type', OrdersItems::GIFT)->delete();
             foreach ($gifts as $gift) {
-                $sync[]=$gift['giftId'];
+                $sync[] = $gift['giftId'];
                 foreach ($gift['products'] as $product) {
                     $item = AppItems::find($product['productId']);
-                if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
-                    $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]]);
-                } else {
-                    $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]);
-                }
+                    if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
+                        $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]]);
+                    } else {
+                        $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]);
+                    }
                 }
             }
             $order->discountOffers()->sync($sync);
@@ -103,22 +104,22 @@ class OrdersController extends Controller
 
     public function getBasket(Request $request)
     {
-        $order = Orders::where('order_number',$request->get('basket_number','AA'))
-            ->where('shop_id',$request->get('shop_id',1))
+        $order = Orders::where('order_number', $request->get('basket_number', 'AA'))
+            ->where('shop_id', $request->get('shop_id', 1))
             ->with('items')
             ->first();
 
-        if($order){
-            return response()->json(['success' => true,'basket'=>$order]);
+        if ($order) {
+            return response()->json(['success' => true, 'basket' => $order]);
         }
         return response()->json(['success' => false]);
     }
 
     public function getBaskets(Request $request)
     {
-        $orders=Orders::where('shop_id',$request->get('shop_id',1))->with('items')->get();
-        if($orders){
-            return response()->json(['success' => true,'orders'=>$orders]);
+        $orders = Orders::where('shop_id', $request->get('shop_id', 1))->with('items')->get();
+        if ($orders) {
+            return response()->json(['success' => true, 'orders' => $orders]);
         }
         return response()->json(['success' => false]);
     }
@@ -128,49 +129,50 @@ class OrdersController extends Controller
         $shop = Warehouse::find($request->get('shop_id'));
         if ($shop && $shop->staff()->where('app_pass', $request->get('barcode'))->exists()) {
             $member = $shop->staff()->where('app_pass', $request->get('barcode'))->with('role')->first();
-            return response()->json(['success'=>true,'member'=>$member]);
+            return response()->json(['success' => true, 'member' => $member]);
         }
-        return response()->json(['success'=>false,'message'=>'invalid member']);
+        return response()->json(['success' => false, 'message' => 'invalid member']);
     }
 
-    public function FinishOrder(Request $request,OrderService $service)
+    public function FinishOrder(Request $request, OrderService $service)
     {
         $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->findOrFail($request->get('order_id'));
-        $order->staff_id=$request->get('staff_id');
-        $order->status=Orders::DONE;
-        $order->payment_method=$request->get('payment_method');
-        $order->tendered=$request->get('tendered');
-        $order->changed=$request->get('changed');
+        $order->staff_id = $request->get('staff_id');
+        $order->status = Orders::DONE;
+        $order->payment_method = $request->get('payment_method');
+        $order->tendered = $request->get('tendered');
+        $order->changed = $request->get('changed');
         $order->save();
-        $service->discount($order,$shop);
-        return response()->json(['success'=>true]);
+        $service->discount($order, $shop);
+        return response()->json(['success' => true]);
     }
 
     public function getCloseBasket(Request $request)
     {
         $shop = Warehouse::find($request->get('shop_id'));
         $order = $shop->orders()->findOrFail($request->get('order_id'));
-        $order->note=$request->get('note');
+        $order->note = $request->get('note');
         $order->save();
-        return response()->json(['success'=>true]);
+        return response()->json(['success' => true]);
     }
 
     public function getAdminDiscounts()
     {
-        $discounts=Discount::where('status','1')->get();
-        return response()->json(['success'=>true,'discounts'=>$discounts]);
+        $discounts = Discount::where('status', '1')->get();
+        return response()->json(['success' => true, 'discounts' => $discounts]);
     }
+
     public function getOfferDiscounts()
     {
-        $discounts=AppOffersDiscount::where('status','1')->get();
-        return response()->json(['success'=>true,'offers'=>$discounts]);
+        $discounts = AppOffersDiscount::where('status', '1')->get();
+        return response()->json(['success' => true, 'offers' => $discounts]);
     }
 
     public function addAdminDiscounts(Request $request)
     {
-        Orders::where('id',$request->get('order_id'))->update(['admin_discount_id'=>$request->get('admin_discount_id')]);
-        return response()->json(['success'=>true]);
+        Orders::where('id', $request->get('order_id'))->update(['admin_discount_id' => $request->get('admin_discount_id')]);
+        return response()->json(['success' => true]);
 
     }
 }
