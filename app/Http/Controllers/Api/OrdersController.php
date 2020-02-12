@@ -68,10 +68,10 @@ class OrdersController extends Controller
         if ($request->get('product_id', false)) {
             $item = AppItems::find($request->get('product_id'));
 
-            if (!$order->items()->where('item_id', $item->item_id)->exists()) {
+            if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::SOLD)->exists()) {
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
             } else {
-                $order->items()->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
+                $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
             }
         }
         if ($request->get('gifts', false)) {
