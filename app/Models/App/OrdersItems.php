@@ -10,7 +10,7 @@ class OrdersItems extends Model
 {
     protected $table = 'basket_items';
     const TYPES=[0=>'Sold','1'=>'Gift'];
-    const GIFT=0;
+    const GIFT=1;
     const SOLD=0;
 
     protected $fillable=['basket_id','discount_offer_id','item_id','type','qty','price'];
