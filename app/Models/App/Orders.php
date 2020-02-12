@@ -61,8 +61,8 @@ class Orders extends Model
         return $this->belongsTo(Staff::class,'staff_id');
     }
 
-    public function offerDiscounts()
+    public function discountOffers()
     {
-        return $this->belongsToMany(AppOffersDiscount::class,'app_basket_offer_discounts','discount_offer_id','basket_id');
+        return $this->belongsToMany(AppOffersDiscount::class,'app_basket_offer_discounts','basket_id','discount_offer_id');
     }
 }

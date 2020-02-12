@@ -27,9 +27,9 @@ class OrdersItems extends Model
         return $this->belongsTo(Items::class,'item_id');
     }
 
-    public function discountOffers()
+    public function discountOffer()
     {
-        return $this->belongsToMany(AppOffersDiscount::class,'app_basket_offer_discounts','basket_id','discount_offer_id');
+        return $this->belongsTo(AppOffersDiscount::class,'discount_offer_id');
     }
 
 }
