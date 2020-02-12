@@ -10,6 +10,7 @@ use App\Models\App\AppOffersDiscount;
 use App\Models\App\AppWarehouses;
 use App\Models\App\Discount;
 use App\Models\App\Orders;
+use App\Models\App\OrdersItems;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
 use Illuminate\Http\Request;
@@ -59,21 +60,39 @@ class OrdersController extends Controller
         }
     }
 
-    public function addItemToBascked(Request $request,OrderService $service)
+    public function addItemToBasked(Request $request, OrderService $service)
     {
         $shop = AppWarehouses::where('warehouse_id',$request->get('shop_id'))->first();
         $order = $shop->warehouse->orders()->find($request->get('order_id'));
-        $item=AppItems::find($request->get('product_id'));
-        if (!$order->items()->where('item_id', $item->item_id)->exists()) {
-            $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
-        } else {
-            $order->items()->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
-        }
+        if ($request->get('product_id', false)) {
+            $item=AppItems::find($request->get('product_id'));
 
+            if (!$order->items()->where('item_id', $item->item_id)->exists()) {
+                $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
+            } else {
+                $order->items()->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
+            }
+        }
+        if ($request->get('gifts', false)) {
+            $gifts = $request->get('gifts');
+            $sync=[];
+            $order->items()->where('type', OrdersItems::GIFT)->delete();
+            foreach ($gifts as $gift) {
+                $sync[]=$gift['giftId'];
+                $item = AppItems::find($gift['products']['productId']);
+                if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
+                    $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]]);
+                } else {
+                    $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $request->get('qty'), 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]);
+                }
+            }
+            $order->discountOffers()->sync($sync);
+
+        }
         return response()->json(['success' => true]);
     }
 
-    public function removeFromBascked(Request $request)
+    public function removeFromBasked(Request $request)
     {
         $order = Orders::find($request->get('order_id'));
         $order->basketItems()->detach($request->get('product_id'));

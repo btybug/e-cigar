@@ -60,4 +60,9 @@ class Orders extends Model
     {
         return $this->belongsTo(Staff::class,'staff_id');
     }
+
+    public function offerDiscounts()
+    {
+        return $this->belongsToMany(AppOffersDiscount::class,'app_basket_offer_discounts','discount_offer_id','basket_id');
+    }
 }

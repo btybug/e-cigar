@@ -23,7 +23,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/categories', 'ItemsController@getCategories');
     Route::post('/get-basket-number', 'OrdersController@getBasketNumber');
     Route::post('/finish-order','OrdersController@FinishOrder');
-    Route::post('/add-to-basket', 'OrdersController@addItemToBascked');
+    Route::post('/add-to-basket', 'OrdersController@addItemToBasked');
     Route::post('/remove-from-basket', 'OrdersController@removeFromBascked');
     Route::post('/get-baskets', 'OrdersController@getBaskets');
     Route::post('/get-basket', 'OrdersController@getBasket');
