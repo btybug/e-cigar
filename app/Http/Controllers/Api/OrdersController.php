@@ -82,9 +82,9 @@ class OrdersController extends Controller
                 foreach ($gift['products'] as $product) {
                     $item = AppItems::find($product['productId']);
                 if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
-                    $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]]);
+                    $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]]);
                 } else {
-                    $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $request->get('qty'), 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]);
+                    $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => $item->price, 'type' => OrdersItems::GIFT,'discount_offer_id'=>$gift['giftId']]);
                 }
                 }
             }
