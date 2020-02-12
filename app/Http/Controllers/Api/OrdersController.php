@@ -107,6 +107,7 @@ class OrdersController extends Controller
         $order = Orders::where('order_number', $request->get('basket_number', 'AA'))
             ->where('shop_id', $request->get('shop_id', 1))
             ->with('items')
+            ->with('gifts')
             ->first();
 
         if ($order) {

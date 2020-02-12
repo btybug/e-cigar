@@ -22,7 +22,11 @@ class Orders extends Model
 
     public function items()
     {
-        return $this->hasMany(OrdersItems::class,'basket_id');
+        return $this->hasMany(OrdersItems::class,'basket_id')->where('type', OrdersItems::SOLD);
+    }
+    public function gifts()
+    {
+        return $this->hasMany(OrdersItems::class,'basket_id')->where('type', OrdersItems::GIFT);
     }
 
 
