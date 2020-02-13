@@ -13,6 +13,7 @@ use App\Models\App\Orders;
 use App\Models\App\OrdersItems;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -144,6 +145,11 @@ class OrdersController extends Controller
         $order->payment_method = $request->get('payment_method');
         $order->tendered = $request->get('tendered');
         $order->changed = $request->get('changed');
+        $order->sub_total = $request->get('sub_total');
+        $order->total = $request->get('total');
+        $order->tax = $request->get('tax');
+        $order->admin_discount = $request->get('admin_discount');
+        $order->finished_at = Carbon::now()->timestamp;
         $order->save();
         $service->discount($order, $shop);
         return response()->json(['success' => true]);

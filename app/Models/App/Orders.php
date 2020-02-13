@@ -13,8 +13,8 @@ class Orders extends Model
     const PROCESSING=1;
     const DONE=2;
     protected $table = 'basket';
-    protected $fillable = ['shop_id', 'status', 'user_id', 'discount','order_number', 'additional_data','staff_id','payment_method','tendered','changed'];
-
+    protected $fillable = ['shop_id', 'status', 'user_id', 'discount', 'order_number', 'additional_data', 'staff_id', 'payment_method', 'tendered', 'changed', 'sub_total', 'total', 'tax','admin_discount'];
+    protected $dates = ['created_at','updated_at','finished_at'];
     public function shop()
     {
         return $this->belongsTo(Shops::class,'shop_id');

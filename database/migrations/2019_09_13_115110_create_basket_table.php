@@ -26,6 +26,11 @@ class CreateBasketTable extends Migration
             $table->string('payment_method');
             $table->double('tendered')->nullable();
             $table->double('changed')->nullable();
+            $table->double('sub_total')->nullable();
+            $table->double('total')->nullable();
+            $table->double('tax')->nullable();
+            $table->double('admin_discount')->nullable();
+            $table->timestamp('finished_at')->nullable();
             $table->timestamps();
             $table->foreign('admin_discount_id')->references('id')->on('discounts')->onDelete('set null');
         });

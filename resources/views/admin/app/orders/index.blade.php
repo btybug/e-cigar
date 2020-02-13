@@ -27,14 +27,14 @@
                 <tr>
                     <th>#ID</th>
                     <th>Order number</th>
-                    <th>User</th>
                     <th>Staff</th>
                     <th>Discount</th>
-                    <th>Amount</th>
-                    <th>Note</th>
                     <th>Payment method</th>
                     <th>Status</th>
-                    <th>Created at</th>
+                    <th>Sub Total</th>
+                    <th>Total</th>
+                    <th>tax</th>
+                    <th>Finished at</th>
                     <th>Updated at</th>
                     <th>Actions</th>
                 </tr>
@@ -64,14 +64,14 @@
                 columns: [
                     {data: 'id', name: 'id'},
                     {data: 'order_number', name: 'order_number'},
-                    {data: 'user_id', name: 'user_id'},
                     {data: 'staff_id', name: 'staff_id'},
-                    {data: 'discount', name: 'discount'},
-                    {data: 'amount', name: 'amount'},
-                    {data: 'note', name: 'note'},
+                    {data: 'admin_discount_id', name: 'admin_discount_id'},
                     {data: 'payment_method', name: 'payment_method'},
                     {data: 'status', name: 'status'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'sub_total', name: 'sub_total'},
+                    {data: 'total', name: 'total'},
+                    {data: 'tax', name: 'tax'},
+                    {data: 'finished_at', name: 'finished_at'},
                     {data: 'updated_at', name: 'updated_at'},
                     {data: 'actions', name: 'actions'}
                 ],
