@@ -149,7 +149,7 @@ class OrdersController extends Controller
         $order->total = $request->get('total');
         $order->tax = $request->get('tax');
         $order->admin_discount = $request->get('admin_discount');
-        $order->finished_at = Carbon::now()->timestamp;
+        $order->finished_at = Carbon::now();
         $order->save();
         $service->discount($order, $shop);
         return response()->json(['success' => true]);
