@@ -15,7 +15,12 @@
                     'buy_x_get_all_by_y'=>'Buy X Get all by  Y',
                     ],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
                 </div>
-                <div class="buy_x_get d-none content-select-wrap">
+                <div id="pattern_place_js">
+                </div>
+                
+            </div>
+            {!! Form::close() !!}
+                <div class="buy_x_get d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
 
                         {!! Form::hidden('id') !!}
@@ -59,7 +64,7 @@
 
                     </div>
                 </div>
-                <div class="buy_x_get_all_by_y d-none content-select-wrap">
+                <div class="buy_x_get_all_by_y d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
 
                         {!! Form::hidden('id') !!}
@@ -95,8 +100,6 @@
 
                     </div>
                 </div>
-            </div>
-            {!! Form::close() !!}
         </div>
     </div>
 @stop
@@ -108,15 +111,18 @@
     <script>
         $(document).ready(function () {
             if($('#offers_select').val()){
-                $('body').find('.'+$('#offers_select').val()).removeClass('d-none');
+                $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
+                $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
             }
            
 
             $('body').on('change', '#offers_select', function () {
                 if ($(this).val() === 'buy_x_get') {
-                    $(this).closest('.card-body').find(`.${$(this).val()}`).removeClass('d-none')
-                } else {
-                    $(this).closest('.card-body').find('.content-select-wrap').addClass('d-none')
+                    $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
+                    $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
+                } else if($(this).val() === 'buy_x_get_all_by_y') {
+                    $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
+                    $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
             });
 
