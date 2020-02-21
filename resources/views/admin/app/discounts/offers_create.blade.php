@@ -29,7 +29,7 @@
                                 <div class="form-group row">
                                     <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('name',null,['class'=>'form-control','id'=>'offer_name']) !!}
+                                        {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -39,13 +39,13 @@
                                 <div class="form-group row">
                                     <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control','id'=>'customer_buy']) !!}
+                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control customer_buy']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="get_free" class="col-sm-8 col-form-label">He will get free</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('get_free',($model)?$model->data['get_free']:null,['class'=>'form-control','id'=>'get_free']) !!}
+                                        {!! Form::text('get_free',($model)?$model->data['get_free']:null,['class'=>'form-control get_free']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="form-group row">
                                     <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
                                     <div class="col-sm-8">
-                                        {!! Form::text('name',null,['class'=>'form-control','id'=>'offer_name']) !!}
+                                        {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -83,14 +83,14 @@
                                 <div class="form-group row">
                                     <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control','id'=>'customer_buy']) !!}
+                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control customer_buy']) !!}
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label for="price" class="col-sm-8 col-form-label">He will get all by </label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('price',($model)?$model->data['price']:null,['class'=>'form-control','id'=>'price']) !!}
+                                        {!! Form::text('price',($model)?$model->data['price']:null,['class'=>'form-control price']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -126,6 +126,7 @@
            
 
             $('body').on('change', '#offers_select', function () {
+                console.log($('body').find('.select_to_2_js'))
                 if ($(this).val() === 'buy_x_get') {
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
@@ -133,9 +134,10 @@
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
-                $('body').find('.select_to_2_js').select2();
-
+                
+                $('body').find('#pattern_place_js .select_to_2_js').select2();
             });
+            $('body').find('#pattern_place_js .select_to_2_js').select2();
         })
     </script>
 @stop
