@@ -86,10 +86,19 @@
                                         {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control','id'=>'customer_buy']) !!}
                                     </div>
                                 </div>
+
                                 <div class="form-group row">
                                     <label for="price" class="col-sm-8 col-form-label">He will get all by </label>
                                     <div class="col-sm-4">
                                         {!! Form::text('price',($model)?$model->data['price']:null,['class'=>'form-control','id'=>'price']) !!}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group row">
+                                    <label for="customer_buy" class="col-sm-8 col-form-label">From</label>
+                                    <div class="col-sm-4">
+                                        {!! Form::select('items[]',$items,($model)?$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -124,9 +133,9 @@
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
-            });
+                $('body').find('.select_to_2_js').select2();
 
-            $('.select_to_2_js').select2();
+            });
         })
     </script>
 @stop
