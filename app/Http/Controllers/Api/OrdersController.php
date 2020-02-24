@@ -13,6 +13,7 @@ use App\Models\App\Orders;
 use App\Models\App\OrdersItems;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -182,4 +183,10 @@ class OrdersController extends Controller
         return response()->json(['success' => true]);
 
     }
+
+    public function getCustomers()
+    {
+        return response()->json(['success' => true,'customers'=>User::all()]);
+    }
+
 }
