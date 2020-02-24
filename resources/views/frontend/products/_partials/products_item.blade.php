@@ -2,7 +2,7 @@
     <div class="products__item-wrapper main-transition">
         <div class="products__item-wrapper-inner">
             @php
-            $category = $product->categories()->whereNull('categories.parent_id')->first();
+            $category = $product->categories()->whereNull('categories.parent_id')->where('status',true)->first();
             @endphp
             <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
                @if(isset($related)) target="__blank" @endif

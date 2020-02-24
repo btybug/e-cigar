@@ -35,10 +35,12 @@ class ProductsController extends Controller
 
     public function index(Request $request, $type = null)
     {
-        $category = Category::where('type', 'stocks')->whereNull('parent_id')->where('slug', $type)->first();
+        $category = Category::where('type', 'stocks')
+            ->where('status',true)->whereNull('parent_id')->where('slug', $type)->first();
         if (!$category && $type != null) abort(404);
 
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+        $categories = Category::with('children')
+            ->where('status',true)->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
         $products = ProductSearch::apply($request, $category);
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
