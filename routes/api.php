@@ -33,5 +33,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-offer-discounts', 'OrdersController@getOfferDiscounts');
     Route::post('/add-admin-discounts', 'OrdersController@addAdminDiscounts');
     Route::post('/get-customers', 'OrdersController@getCustomers');
+    Route::post('/add-customer-basket', 'OrdersController@addCustomerBasket');
 
     });

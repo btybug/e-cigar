@@ -189,4 +189,10 @@ class OrdersController extends Controller
         return response()->json(['success' => true,'customers'=>User::all()]);
     }
 
+    public function addCustomerBasket(Request $request)
+    {
+        Orders::where('id', $request->get('order_id'))->update(['user_id' => $request->get('user_id')]);
+        return response()->json(['success' => true]);
+    }
+
 }
