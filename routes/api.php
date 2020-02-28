@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+dd(site_default_currency());
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user','ShopController@getUser');
@@ -35,5 +35,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-customers', 'OrdersController@getCustomers');
     Route::post('/add-customer-basket', 'OrdersController@addCustomerBasket');
     Route::post('/get-staff-members', 'ShopController@getStaffMembers');
+    Route::post('/get-default-currency', 'ShopController@getSiteDefaultCurrency');
 
     });

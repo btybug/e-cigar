@@ -53,4 +53,9 @@ class ShopController extends Controller
         $warehouse=Warehouse::findOrFail($request->get('shop_id'));
          return response()->json(['success'=>true,'members'=>$warehouse->staff]);
     }
+
+    public function getSiteDefaultCurrency(){
+
+        return response()->json(['success' => true,'currency'=>site_default_currency()]);
+    }
 }
