@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-dd(site_default_currency());
 
 Route::middleware('auth:api')->group(function () {
     Route::get('/user','ShopController@getUser');
