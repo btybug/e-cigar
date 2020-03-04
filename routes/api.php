@@ -35,5 +35,6 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/add-customer-basket', 'OrdersController@addCustomerBasket');
     Route::post('/get-staff-members', 'ShopController@getStaffMembers');
     Route::post('/get-default-currency', 'ShopController@getSiteDefaultCurrency');
+    Route::post('/add-order-additional', 'OrdersController@addAdditionalData');
 
     });

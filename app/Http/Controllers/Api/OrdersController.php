@@ -195,4 +195,10 @@ class OrdersController extends Controller
         return response()->json(['success' => true]);
     }
 
+    public function addAdditionalData(Request $request)
+    {
+        Orders::where('id', $request->get('order_id'))->update(['additional_data' => $request->get('additional_data')]);
+        return response()->json(['success' => true]);
+    }
+
 }
