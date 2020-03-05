@@ -17,6 +17,21 @@
                 </div>
                 <div id="pattern_place_js">
                 </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Start at</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="start_at" type="date"  class="form-control input-md">
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">End at</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="end_at" type="date"  class="form-control input-md">
+                    </div>
                 
             </div>
             {!! Form::close() !!}

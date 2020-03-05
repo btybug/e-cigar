@@ -59,7 +59,7 @@ class DiscountController extends Controller
 
     public function postOffersCreate(Request $request)
     {
-        $date = $request->only('name', 'type');
+        $date = $request->only('name','start_at','end_at','type');
         $date['data'] = $request->except('_token', 'name', 'type');
         AppOffersDiscount::create($date);
         return redirect()->route('app_customer_offers');
