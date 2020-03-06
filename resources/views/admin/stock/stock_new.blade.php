@@ -1344,7 +1344,7 @@
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+            {!! Form::hidden('variations[{main_unique}][discount][{count}][ordering]',null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
@@ -1824,7 +1824,6 @@
                 ],
                 template_cdate_format: '[Date Created (CDATE): %m/%d/%Y : %H:%M:%S]',
                 template_mdate_format: '[Date Modified (MDATE): %m/%d/%Y : %H:%M:%S]',
-                height: 600,
                 image_caption: true,
                 quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote quickimage quicktable',
                 noneditable_noneditable_class: "mceNonEditable",
@@ -1975,11 +1974,9 @@
             $('body').on('click', '.add-section-discount', function (ev) {
                 let html = $('#section-discount').html();
                 var id = guid();
-                var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
-                var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
+                var main_unique = $(this).closest('.discount-price').find('.fixed-box').attr('data-main');
                 html = html.replace(/{count}/g, id);
                 html = html.replace(/{main_unique}/g, main_unique);
-                html = html.replace(/{unique}/g, unique);
                 $(this).closest('.discount-price').find('.fixed-box').append(html);
                 countSortableDiscount(this.closest('.discount-price').querySelector('.fixed-box'))
             });

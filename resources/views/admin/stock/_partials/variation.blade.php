@@ -165,30 +165,53 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-wrap">
-                                        <div class="col-md-6 py-2 discount-price">
+                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else hide @endif">
 
                                         </div>
-                                        <div class="col-md-6 py-2 discount-price">
+                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else hide @endif">
                                             <div class="d-flex flex-wrap">
-                                                <div class="fixed-box">
-                                                    <div class="row discount-item d-flex flex-wrap">
-                                                        <div class="col-xl-5 col-sm-4">
-                                                            <label>Qty</label>
-                                                            {!! Form::number("variations[$main_unique][discount][0][qty]",null,['class' => 'form-control']) !!}
-                                                        </div>
+                                                <div class="fixed-box" data-main="{{ $main_unique }}">
+                                                    @if($main->price_per == 'discount')
+                                                        @foreach($main->discounts()->orderBy('ordering','asc')->get() as $key => $datum)
+                                                            <div class="row discount-item d-flex flex-wrap">
+                                                                <div class="col-xl-5 col-sm-4">
+                                                                    <label>Qty</label>
+                                                                    {!! Form::number("variations[$main_unique][discount][$key][qty]",$datum->qty,['class' => 'form-control']) !!}
+                                                                </div>
 
-                                                        <div class="col-xl-5 col-sm-4">
-                                                            <label>Total price</label>
-                                                            {!! Form::number("variations[$main_unique][discount][0][price]",null,['class' => 'form-control']) !!}
+                                                                <div class="col-xl-5 col-sm-4">
+                                                                    <label>Total price</label>
+                                                                    {!! Form::number("variations[$main_unique][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
+                                                                </div>
+                                                                <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
+                                                                    <button class="btn btn-danger remove-discount-item">
+                                                                        <i class="fa fa-minus"></i>
+                                                                    </button>
+                                                                </div>
+                                                                {!! Form::hidden("variations[$main_unique][variations][$key][ordering]",($main) ? $main->ordering : null,
+                                                               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
+                                                            </div>
+                                                        @endforeach
+                                                    @else
+                                                        <div class="row discount-item d-flex flex-wrap">
+                                                            <div class="col-xl-5 col-sm-4">
+                                                                <label>Qty</label>
+                                                                {!! Form::number("variations[$main_unique][discount][0][qty]",null,['class' => 'form-control']) !!}
+                                                            </div>
+
+                                                            <div class="col-xl-5 col-sm-4">
+                                                                <label>Total price</label>
+                                                                {!! Form::number("variations[$main_unique][discount][0][price]",null,['class' => 'form-control']) !!}
+                                                            </div>
+                                                            <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
+                                                                <button class="btn btn-danger remove-discount-item">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </button>
+                                                            </div>
+                                                            {!! Form::hidden("variations[$main_unique][discount][0][ordering]",1,
+                                                           ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
                                                         </div>
-                                                        <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
-                                                            <button class="btn btn-danger remove-discount-item">
-                                                                <i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                        {!! Form::hidden("variations[$main_unique][discount][0][ordering]",1,
-                                                       ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
-                                                    </div>
+                                                    @endif
                                                 </div>
                                                 <div class="col-xl-2 offset-xl-10 col-sm-4 offset-sm-8 pl-sm-3 pl-xl-4 pl-0">
                                                     <a class="btn btn-primary add-section-discount add-discount-field" href="javascript:void(0)"><i

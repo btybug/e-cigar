@@ -150,6 +150,7 @@ class StockController extends Controller
             'stickers', 'fb', 'twitter', 'general', 'robot', 'type_attributes', 'type_attributes_options', 'ads', 'banners', 'special_filters');
         $data['user_id'] = \Auth::id();
         $data['videos'] = $request->get('videos',[]);
+
         $translatable=$request->get('translatable');
         foreach ($translatable as $key=>$value){
            $translatable[$key]['slug']=strtolower(str_replace(' ','-',$value['slug']));
