@@ -602,6 +602,8 @@ class StockController extends Controller
             $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main']))->render();
         } elseif ($request->type == 'filter') {
             $html = \view("admin.stock._partials.filter_item", compact(['stockItems', 'main_unique', 'main']))->render();
+        }elseif ($request->type == 'filter_discount') {
+            $html = \view("admin.stock._partials.filter_discount", compact(['stockItems', 'main_unique', 'main']))->render();
         }
 
 

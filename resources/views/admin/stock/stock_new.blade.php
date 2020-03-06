@@ -1328,6 +1328,27 @@
         </div>
     </script>
 
+    <script type="template" id="section-discount">
+        <div class="row discount-item">
+            <div class="col-xl-5 col-sm-4">
+                <label>Qty</label>
+                {!! Form::number('variations[{main_unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
+            </div>
+
+            <div class="col-xl-5 col-sm-4">
+                <label>Total price</label>
+                {!! Form::number('variations[{main_unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+            </div>
+            <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
+                <button class="btn btn-danger remove-discount-item">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+               ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
+        </div>
+    </script>
+
     <script type="template" id="fixed-discount">
         <div class="row discount-item">
             <div class="col-xl-5 col-sm-4">
@@ -1951,6 +1972,18 @@
                 countSortableDiscount(this.closest('.discount-type-box').querySelector('.range-box'))
             });
 
+            $('body').on('click', '.add-section-discount', function (ev) {
+                let html = $('#section-discount').html();
+                var id = guid();
+                var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
+                var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
+                html = html.replace(/{count}/g, id);
+                html = html.replace(/{main_unique}/g, main_unique);
+                html = html.replace(/{unique}/g, unique);
+                $(this).closest('.discount-price').find('.fixed-box').append(html);
+                countSortableDiscount(this.closest('.discount-price').querySelector('.fixed-box'))
+            });
+
             $('body').on('click', '.add-fixed-discount', function (ev) {
                 let html = $('#fixed-discount').html();
                 var id = guid();
@@ -2377,8 +2410,14 @@
                 if (type == 'product') {
                     parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('d-none');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('d-none').addClass('show');
-                } else {
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.discount-price').removeClass('show').addClass('d-none');
+                } else if(type == 'discount'){
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.discount-price').removeClass('d-none').addClass('show');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('d-none');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('show').addClass('d-none');
+                } else{
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.product_price').removeClass('show').addClass('d-none');
+                    parent.find('[data-unqiue="' + data_id + '"]').find('.discount-price').removeClass('show').addClass('d-none');
                     parent.find('[data-unqiue="' + data_id + '"]').find('.package_price').removeClass('d-none').addClass('show');
                 }
             }
@@ -2480,10 +2519,11 @@
                     {type: value, uniqueId: parent.attr('data-unqiue')},
                     function (res) {
                         if (!res.error) {
-                            if (value == 'filter') {
+                            if (value == 'filter' || value == 'filter_discount') {
                                 parent.find('.multi-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-option').removeClass('hide').addClass('show');
                                 parent.find('.filter-variation-box').empty();
+                                parent.find('.filter-discount-box').empty();
                             } else if (value == 'package_product') {
                                 parent.find('.filter-option').removeClass('show').addClass('hide');
                                 parent.find('.multi-option').removeClass('hide').addClass('show');
