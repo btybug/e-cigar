@@ -43,19 +43,23 @@
                         <span class="font-sec-reg font-21 text-main-clr products__item-title">
                             {{ str_limit($product->name,50) }}
                         </span>
+                        <span class="row">
+                            @if(count($product->stickers))
+                                @foreach($product->stickers()->orderBy('ordering')->take(6)->get() as $sticker)
+                                    <span class="col-4 mb-1">
+                                        <span class="products__item-discount" title="{{ $sticker->name }}">
+                                             <img src="{{ $sticker->image }}" alt="{{ $sticker->name }}">
+                                        </span>
+                                    </span>
+                                @endforeach
+                            @endif
+
+                        </span>
                         <span class="font-main-light font-15 products__item-desc">
                             {{ str_limit($product->short_description,50) }}
                         </span>
-                        <span class="d-flex flex-wrap justify-content-between align-items-center products__item-price-discount">
-                            <span class="d-flex flex-wrap align-items-center products__item-discount-all">
-                                @if(count($product->stickers))
-                                    @foreach($product->stickers()->orderBy('ordering')->take(2)->get() as $sticker)
-                                         <span class="products__item-discount" title="{{ $sticker->name }}">
-                                             <img src="{{ $sticker->image }}" alt="{{ $sticker->name }}">
-                                         </span>
-                                    @endforeach
-                                @endif
-                            </span>
+                        <span class="d-flex flex-wrap justify-content-end align-items-center products__item-price-discount">
+
                             <span class="d-flex flex-wrap products__item-prices">
                                 @if($product->new_price)
                                     <span class="font-sec-reg text-gray-clr font-18 align-self-end products__item-sec-price">
@@ -107,11 +111,11 @@
                 </span>
             </a>
             <div  class="flex-wrap justify-content-between align-items-center products__item-bottom">
-                <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"
-                   @if(isset($related)) target="__blank" @endif
-                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">
-                    {!! __('view_more') !!}
-                </a>
+{{--                <a href="{{ route('product_single', ['type' =>($category)?$category->slug:'vape', 'slug' => $product->slug]) }}"--}}
+{{--                   @if(isset($related)) target="__blank" @endif--}}
+{{--                   class="d-flex align-items-center justify-content-center font-15 text-tert-clr text-uppercase products__item-view-more">--}}
+{{--                    {!! __('view_more') !!}--}}
+{{--                </a>--}}
                 @if(Auth::check())
                 <span class="products__item-favourite product-card_like-icon {{ ($product->in_favorites()->where('user_id',\Auth::id())->first())?'active':null}}">
                     <svg
