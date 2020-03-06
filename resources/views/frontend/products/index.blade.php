@@ -13,7 +13,7 @@
                             'id' => 'choose_product'
                         ]) !!}
                     </div>
-                    <div class="right-head d-flex flex-wrap justify-content-lg-end justify-content-between">
+                    <div class="right-head d-flex flex-wrap ml-5">
 {{--                        <div class="sale-only d-flex align-items-center">--}}
 {{--                    <span class="text-gray-clr">--}}
 {{--                        {!! __('sale_only') !!}:--}}

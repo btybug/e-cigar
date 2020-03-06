@@ -2512,6 +2512,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     /*width: 52px;*/
     width: 100%;
     height: 46px;
+    display: block;
 }
 .products__item-wrapper .products__item-discount-all .products__item-discount:last-of-type{
     /*margin-right: 2px;*/
@@ -6384,8 +6385,8 @@ header .header-bottom .share-button svg {
 }
 @media (min-width: 1199px) and (max-width: 1400px) {
     .products__item-wrapper .products__item-discount {
-        margin-right: 12px;
-        width: 48px;
+        /*margin-right: 12px;*/
+        /*width: 48px;*/
         height: 42px;
     }
 }
