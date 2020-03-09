@@ -77,7 +77,7 @@ class OrdersController extends Controller
             }
         }
         if ($request->get('gifts', false)) {
-            $gifts = $request->get('gifts');
+            $gifts = $request->get('gifts',[]);
             $sync = [];
             $order->items()->where('type', OrdersItems::GIFT)->delete();
             foreach ($gifts as $gift) {
