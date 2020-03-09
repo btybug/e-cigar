@@ -185,7 +185,7 @@
                                                     <a href="#"
                                                        class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
                                                 </div>
-                                                @if($vape->section_type)
+                                                @if($vape->section_type == 1)
                                                     <div class="product__single-item-info mb-3">
                                                         <div
                                                             class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
@@ -919,7 +919,6 @@ max-width: 100%;
                         }
                     }
                 });
-
             });
 
             $("body").on('change', '.select-variation-option', function () {
