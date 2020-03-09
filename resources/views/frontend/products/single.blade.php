@@ -207,13 +207,19 @@
                                                                         class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
 
                                                                     @foreach($variations as $item)
-                                                                        <option value="{{ $item->id }}">
+                                                                        <option value="{{ $item->variation_id }}">
                                                                             {{ $item->title }}
                                                                         </option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
+                                                    </div>
+                                                    @php
+                                                        $variations = collect($vape->variations()->orderBy('ordering','asc')->required()->get())->groupBy('variation_id');
+                                                    @endphp
+                                                    <div class="product__single-item single-section">
+                                                        @include("admin.inventory._partials.render_price_form_single",['model' => $vape,'variation' => $variations->first()])
                                                     </div>
                                                 @else
                                                     <div class="product__single-item">
@@ -894,6 +900,28 @@ max-width: 100%;
             })
 
 
+            $("body").on('change', '#select_section', function () {
+                let variation_id = $(this).val();
+                $.ajax({
+                    type: "post",
+                    url: "{!! route('product_get_section') !!}",
+                    cache: false,
+                    datatype: "json",
+                    data: {variation_id: variation_id},
+                    headers: {
+                        "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                    },
+                    success: function (data) {
+                        if (!data.error) {
+                            $(".single-section").html(data.html);
+                            get_price();
+                            call_subtotal();
+                        }
+                    }
+                });
+
+            });
+
             $("body").on('change', '.select-variation-option', function () {
                 get_price();
                 call_subtotal();
@@ -995,6 +1023,7 @@ max-width: 100%;
 
                         } else {
                             $(".price-place").html('<span class="d-inline-block font-16">' + data.message + '</span>');
+                            $(".price-place-summary").html('<span class="d-inline-block font-16">' + data.message + '</span>');
                             $("#variation_uid").val('');
                             $(".add-fav-variation").addClass('d-none').data('id', '').removeClass('active');
                         }
