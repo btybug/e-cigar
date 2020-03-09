@@ -185,9 +185,41 @@
                                                     <a href="#"
                                                        class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
                                                 </div>
-                                                <div class="product__single-item">
-                                                    @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                                                </div>
+                                                @if($vape->section_type)
+                                                    <div class="product__single-item-info mb-3">
+                                                        <div
+                                                            class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-md-9 pl-0">
+                                                                <span class="font-sec-light font-26">Select section</span>
+                                                            </div>
+                                                            <div class="col-md-3 d-flex justify-content-end pr-0">
+
+                                                            </div>
+                                                        </div>
+                                                        <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                                            <div class="col-xl-7 col-lg-6 col-md-7 pl-0 pr-md-3 pr-0">
+                                                                @php
+                                                                    $variations = $vape->variations()->orderBy('ordering','asc')->required()->groupBy('variation_id')->get();
+                                                                @endphp
+                                                                <select name="product_section"
+                                                                        id="select_section"
+                                                                        style="width: 100%"
+                                                                        class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
+
+                                                                    @foreach($variations as $item)
+                                                                        <option value="{{ $item->id }}">
+                                                                            {{ $item->title }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @else
+                                                    <div class="product__single-item">
+                                                        @include("admin.inventory._partials.render_price_form",['model' => $vape])
+                                                    </div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
