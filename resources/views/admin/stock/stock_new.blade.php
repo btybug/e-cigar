@@ -867,12 +867,19 @@
                                 <div class="container-fluid p-25">
                                     <div class=" row mb-2">
                                             <label class="col-xl-1 col-sm-2 col-3 col-form-label">Price per:</label>
-                                            <div class="col-xl-3 col-sm-4 col-9">
+                                            <div class="col-xl-3 col-sm-4 col-3">
                                                 {!! Form::select('type',[
                                                 0 => 'Section',
                                                 1 => 'Whole Product'
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                             </div>
+                                        <div class="col-xl-3 col-sm-4 col-3">
+                                            <label>Section type: </label>
+                                            Multyple
+                                            {!! Form::radio('section_type',0,true) !!}
+                                            Single
+                                            {!! Form::radio('section_type',1,null) !!}
+                                        </div>
                                     </div>
                                     <div class="v-box">
                                             <div class="accordion" id="accordionStockEdit">

@@ -165,13 +165,13 @@
                                         </div>
                                     </div>
                                     <div class="d-flex flex-wrap">
-                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else hide @endif">
+                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else d-none @endif">
 
                                         </div>
-                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else hide @endif">
+                                        <div class="col-md-6 py-2 discount-price @if($main && $main->price_per == 'discount')  @else d-none @endif">
                                             <div class="d-flex flex-wrap">
                                                 <div class="fixed-box" data-main="{{ $main_unique }}">
-                                                    @if($main->price_per == 'discount')
+                                                    @if($main && $main->price_per == 'discount')
                                                         @foreach($main->discounts()->orderBy('ordering','asc')->get() as $key => $datum)
                                                             <div class="row discount-item d-flex flex-wrap">
                                                                 <div class="col-xl-5 col-sm-4">
@@ -188,7 +188,7 @@
                                                                         <i class="fa fa-minus"></i>
                                                                     </button>
                                                                 </div>
-                                                                {!! Form::hidden("variations[$main_unique][variations][$key][ordering]",($main) ? $main->ordering : null,
+                                                                {!! Form::hidden("variations[$main_unique][discount][$key][ordering]",$datum->ordering,
                                                                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
                                                             </div>
                                                         @endforeach
