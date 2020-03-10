@@ -3047,6 +3047,28 @@ $(document).ready(function () {
             });
         });
 
+        $("body").on('change', '#select_section', function () {
+            var variation_id = $(this).val();
+            $.ajax({
+                type: "post",
+                url: "/products/get-section",
+                cache: false,
+                datatype: "json",
+                data: { variation_id: variation_id },
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function success(data) {
+                    if (!data.error) {
+                        $(".single-section").html(data.html);
+                        setTotalPrice(countTotalPrice());
+                        // get_price();
+                        // call_subtotal();
+                    }
+                }
+            });
+        });
+
         //select variation
         $('body').on('change', '#singleProductPageCnt select.select-variation-option.single-product-select', function (ev) {
             ev.preventDefault();
