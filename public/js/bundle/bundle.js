@@ -3061,6 +3061,7 @@ $(document).ready(function () {
                 success: function success(data) {
                     if (!data.error) {
                         $(".single-section").html(data.html);
+                        filterModalSingleInit();
                         setTotalPrice(countTotalPrice());
                         // get_price();
                         // call_subtotal();

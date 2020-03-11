@@ -36,8 +36,7 @@
                     class="custom-radio custom-control-inline product--inputs-wrap">
                     <input type="radio"
                            {{--data-img="{{ $item->image }}"--}}
-                           {{--@if(isset($selected) && $selected->id == $item->id) checked--}}
-                           {{--@endif data-out="{{ out_of_stock($item) }}"--}}
+                           @if($loop->first) checked @endif
                            class="custom-control-input custom-control-input-radio"
                            id="single_v_select_{{ $discount->id.$x }}"
                            name="variations[{{ $selected->variation_id }}][]"
