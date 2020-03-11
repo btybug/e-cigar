@@ -24,7 +24,7 @@
         @php $selected = $variation->first(); @endphp
     @endif
     <div>
-        <div class="product_radio-single d-flex flex-column">
+        <div class="product_radio-single row">
             @php
             $discounts = $selected->discounts()->orderBy('ordering','asc')->get()
             @endphp
@@ -33,7 +33,7 @@
                     $x = uniqid();
                 @endphp
                 <div
-                    class="custom-radio custom-control-inline product--inputs-wrap">
+                    class="product--inputs-wrap col-xl-4 col-sm-6 product-radio-wall">
                     <input type="radio"
                            {{--data-img="{{ $item->image }}"--}}
                            @if($loop->first) checked @endif

@@ -20794,7 +20794,6 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     box-shadow: inset 0 0 0 6px #5184e5;
     border-color: #5184e5;
 }
-
 .product--inputs-wrap .check-icon {
     left: 0;
     top: 0;
@@ -20839,7 +20838,14 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     fill: #fff;
     transition: stroke-dashoffset .5s linear, fill .4s .5s;
 }
-
+.product__single-item .product-radio-wall .custom-label{
+    border: 1px solid #d7d7d7;
+    padding: 9px 2px;
+    text-align: center;
+}
+.product__single-item .product-radio-wall .custom-label:before{
+    display: none;
+}
 /*------------product single page END-------------*/
 
 /*------------Special offer pop up START-------------*/
