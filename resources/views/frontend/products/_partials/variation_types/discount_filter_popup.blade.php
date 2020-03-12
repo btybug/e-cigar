@@ -53,6 +53,7 @@
                            id="single_v_select_{{ $discount->id.$x }}"
                            name="variations[{{ $selected->variation_id }}][]"
                            data-limit="{{ $discount->qty }}"
+                           data-price="{{ $discount->price }}"
                            value="{{ $discount->id }}">
                     <label class="custom-label"
                            for="single_v_select_{{ $discount->id.$x }}">

@@ -489,6 +489,17 @@ $(document).ready(function () {
             });
         });
 
+        $('body').on('change', '.product__single-item-info.filter_discount .discount-radio', (ev) => {
+            const price = $(ev.target).data('price');
+            const container = $(ev.target).closest('.product__single-item-info.filter_discount');
+            const price_place = container.find('.product__single-item-info-price');
+            container.data('price', price);
+            price_place.data('single-price', price);
+            price_place.find('.product__single-item_price').text(getCurrencySymbol()+price);
+            console.log('------', price_place.data('single-price'));
+            setTotalPrice(countTotalPrice());
+        });
+
         //select variation
         $('body').on('change', '#singleProductPageCnt select.select-variation-option.single-product-select', function(ev) {
             ev.preventDefault();
@@ -1837,7 +1848,7 @@ $(document).ready(function () {
 
                                 const items_row = $(`[data-group-id="${button_group_id}"]`).find('.product-single-info_row-items');
                                 items_row.html(json.html);
-
+                                console.log(json)
                                 const selects = items_row.find('.select-2');
                                 selects.length > 0 && selects.each(function() {
                                     $(this).select2({minimumResultsForSearch: -1});
@@ -4521,5 +4532,6 @@ $('body').on('click', function(ev) {
 //         alert('Select available variation');
 //     }
 // });
+
 
 
