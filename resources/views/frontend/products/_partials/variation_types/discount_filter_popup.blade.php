@@ -2,7 +2,7 @@
     @php $selected = $variation->first(); @endphp
 @endif
 @php
-    $discounts = $selected->discounts()->orderBy('ordering','asc')->get()
+    $discounts = $selected->discounts()->orderBy('ordering','asc')->get();
     $price = 0;
     $discountFirst = null;
     if(count($discounts)){
