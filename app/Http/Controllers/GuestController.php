@@ -226,4 +226,9 @@ class GuestController extends Controller
 //        dd($items);
         return $this->view('landings',compact(['items']));
     }
+
+    public function getStores()
+    {
+        return $this->view('stores');
+    }
 }

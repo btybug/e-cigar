@@ -162,6 +162,8 @@ Route::group(['prefix' => '/support'], function () {
         Route::get('/contact-us', 'GuestController@getContactUs')->name('support_contact_us');
         Route::post('/contact-us', 'GuestController@postContactUs')->name('post_contact_us');
     }
+    Route::get('/stores', 'GuestController@getStores')->name('stores');
+
 });
 
 Route::get('/landings/{url}', 'GuestController@landings')->name('landings');
