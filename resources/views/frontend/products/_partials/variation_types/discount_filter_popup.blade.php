@@ -37,9 +37,10 @@
                     <input type="radio"
                            {{--data-img="{{ $item->image }}"--}}
                            @if($loop->first) checked @endif
-                           class="custom-control-input custom-control-input-radio"
+                           class="custom-control-input custom-control-input-radio discount-radio"
                            id="single_v_select_{{ $discount->id.$x }}"
                            name="variations[{{ $selected->variation_id }}][]"
+                           data-limit="{{ $discount->qty }}"
                            value="{{ $discount->id }}">
                     <label class="custom-label"
                            for="single_v_select_{{ $discount->id.$x }}">
