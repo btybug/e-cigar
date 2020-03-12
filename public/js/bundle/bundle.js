@@ -3072,9 +3072,12 @@ $(document).ready(function () {
 
         $('body').on('change', '.product__single-item-info.filter_discount .discount-radio', function (ev) {
             var price = $(ev.target).data('price');
+            var limit = $(ev.target).data('limit');
             var container = $(ev.target).closest('.product__single-item-info.filter_discount');
             var price_place = container.find('.product__single-item-info-price');
             container.data('price', price);
+            container.data('limit', limit);
+            container.data('min-limit', limit);
             price_place.data('single-price', price);
             price_place.find('.product__single-item_price').text(getCurrencySymbol() + price);
             console.log('------', price_place.data('single-price'));
