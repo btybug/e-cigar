@@ -765,6 +765,20 @@ return [
             ],
 
         ],
+        'stores' => [
+            'name' => 'Stores',
+            'routes' => ['admin_stores','datatable_stores'],
+            'description' => 'Able to see Stores',
+            'children' => [
+                'edit'=>[
+                    'name' => 'Edit Stores',
+                    'routes' => [],
+                    'description' => 'Able to edit Stores',
+                ],
+
+            ],
+
+        ],
     ],
     'seo' => [
         'general' => [

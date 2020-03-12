@@ -180,6 +180,9 @@
                     @ok('admin_category')
                     <li><a href="{{route('admin_category')}}"><i class="far fa-circle fa-xs"></i>Category</a></li>
                     @endok
+                    @ok('admin_stores')
+                    <li><a href="{{route('admin_stores')}}"><i class="far fa-circle fa-xs"></i>Stores</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess

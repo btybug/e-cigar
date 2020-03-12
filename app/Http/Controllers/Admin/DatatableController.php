@@ -41,6 +41,7 @@ use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\StockSales;
+use App\Models\Stores;
 use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
@@ -1323,6 +1324,12 @@ class DatatableController extends Controller
                 $html = "<a class='btn btn-info' href='" . route('admin_app_order_view', $attr->id) . "'>View</a>";
                 return $html;
             })->rawColumns(['actions', 'status'])
+            ->make(true);
+    }
+
+    public function getAllStores()
+    {
+        return Datatables::of(Stores::query())
             ->make(true);
     }
 }
