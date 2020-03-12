@@ -503,6 +503,16 @@ $(document).ready(function () {
             setTotalPrice(countTotalPrice());
         });
 
+        $('body').on('click', '.filters-modal-wizard', (ev) => {
+            const popupButton = $(ev.target).closest('.filter_discount');
+            const modal = $('#wizardViewModal');
+            if(popupButton.length) {
+                modal.data('discount', true);
+            } else {
+                modal.data('discount', false);
+            }
+        });
+
         //select variation
         $('body').on('change', '#singleProductPageCnt select.select-variation-option.single-product-select', function(ev) {
             ev.preventDefault();
@@ -1736,6 +1746,28 @@ $(document).ready(function () {
 
         }
 
+        const modalItemCountHtml = `
+            <div class="d-flex justify-content-between align-items-center p-1">
+                <div class="continue-shp-wrapp_qty position-relative mr-0" style="height: 44px;width: 100px">
+                                <!--minus qty-->
+                                <span data-type="minus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count">
+                                <svg viewBox="0 0 20 3" width="20px" height="3px">
+                                    <path fill-rule="evenodd" fill="rgb(214, 217, 225)" d="M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z"></path>
+                                </svg>
+                            </span>
+                            <input class="field-input w-100 h-100 font-23 text-center border-0 product-qty-select none-touchable " min="number" name="" type="number" value="1">
+                            <!--plus qty-->
+                                <span data-type="plus" class="d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count">
+                                <svg viewBox="0 0 20 20" width="20px" height="20px">
+                                    <path fill-rule="evenodd" fill="rgb(211, 214, 223)" d="M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z"></path>
+                                </svg>
+                            </span>
+                 </div>
+                 <a href="#" class="btn btn-primary">Add</a>
+            </div>
+            
+        `;
+
         const filterModalSingleInit = () => {
             (function () {
                 $(`#singleProductPageCnt .filters-modal-wizard`).each(function (index) {
@@ -1765,6 +1797,10 @@ $(document).ready(function () {
                             },
                             success: function (data) {
                                 $("#wizardViewModal .modal-body").html(data.html);
+                                if($("#wizardViewModal").data('discount')) {
+                                    console.log('========');
+                                    $("#wizardViewModal .modal-body").find('ul.content li .item-content').append(modalItemCountHtml);
+                                }
                                 selected_ides.length = 0;
                                 $(`.product__single-item-info[data-group-id="${group_id}"]`).find('.product__single-item-info-bottom').each(function(a, b) {
                                     $(this).data('id') && selected_ides.push($(this).data('id'));
