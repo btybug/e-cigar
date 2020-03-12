@@ -5,25 +5,33 @@
      data-per-price="{{ $vSettings->price_per }}"
      data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
      data-min-limit="{{ $vSettings->min_count_limit }}">
-
+    @if(! isset($selected))
+        @php $selected = $variation->first(); @endphp
+    @endif
+    @php
+        $discounts = $selected->discounts()->orderBy('ordering','asc')->get()
+    @endphp
     <div
         class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
         <div class="col-md-9 pl-0">
             <span class="font-sec-light font-26">{{ $vSettings->title }}</span>
         </div>
         <div class="col-md-3 d-flex justify-content-end pr-0">
-            @if($vSettings->price_per == 'product')
-                <div class="product__single-item-info-price" data-single-price="{{ $vSettings->price }}">
+            @php
+            $price = 0;
+            if(count($discounts)){
+            $price = $discounts->first()->price;
+            }
+            @endphp
+                <div class="product__single-item-info-price" data-single-price="{{ $price }}">
                     <span class="font-40 product__single-item_price">
-                            {{ convert_price($vSettings->price,$currency, false) }}
+                            {{ convert_price($price,$currency, false) }}
                     </span>
                 </div>
-            @endif
+
         </div>
     </div>
-    @if(! isset($selected))
-        @php $selected = $variation->first(); @endphp
-    @endif
+
     <div>
         <div class="product_radio-single row">
             @php
