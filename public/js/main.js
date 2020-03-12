@@ -1653,13 +1653,22 @@ $(document).ready(function () {
         // };
         // filterModalSingleInit();
 
-        function limite_message(group_id, active_item) {
+        function limite_message(group_id, active_item, discount) {
             const place = $('#wizardViewModal .message_place_js');
             const limit = $(`.product__single-item-info[data-group-id="${group_id}"]`).data('limit');
             const min_limit = $(`.product__single-item-info[data-group-id="${group_id}"]`).data('min-limit');
-            const count = $('#wizardAll').find('.item-content.active').length;
+
+            let count = 0;
+            if(discount) {
+                $('#wizardAll').find('.item-content.active .product-qty-select').each(function() {
+                    console.log($(this).val())
+                    count += Number($(this).val());
+                });
+            } else {
+                count = $('#wizardAll').find('.item-content.active').length;
+            }
             let message = '';
-            console.log(22222222222);
+            console.log(22222222222, count);
             // console.log(count, min_limit, limit)
             if(count < min_limit || count > limit) {
                 $('#wizardViewModal .b_save').attr('disabled', true);
@@ -1689,7 +1698,7 @@ $(document).ready(function () {
             place.text(message);
         }
 
-        function activate_item(self, id, name, group_id) {
+        function activate_item(self, id, name, group_id, count) {
             const limit = $(`.product__single-item-info[data-group-id="${group_id}"]`).data('limit');
             if(limit !== 1) {
                 if($(self).hasClass('active')) {
@@ -1763,7 +1772,7 @@ $(document).ready(function () {
                                 </svg>
                             </span>
                  </div>
-                 <a href="#" class="btn btn-primary">Add</a>
+                 <button class="btn btn-primary add_discount_js">Add</button>
             </div>
             
         `;
@@ -1805,24 +1814,56 @@ $(document).ready(function () {
                                 $(`.product__single-item-info[data-group-id="${group_id}"]`).find('.product__single-item-info-bottom').each(function(a, b) {
                                     $(this).data('id') && selected_ides.push($(this).data('id'));
                                 });
-                                $("#wizardViewModal ul.content li").each(function() {
-                                    $(this).find(".item-content").on('click', function () {
-                                        let id = $(this).closest('li').attr('data-id');
-                                        let name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name, group_id);
-                                        const active_item = $(this).hasClass('active');
-                                        limite_message(group_id, active_item);
-                                    });
-                                    // console.log(selected_ides);
-                                    // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
-                                    if(selected_ides.includes($(this).data('id'))) {
-                                        let id = $(this).closest('li').attr('data-id');
-                                        let name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name, group_id);
-                                        limite_message(group_id, true);
-                                    }
+                                if(!$("#wizardViewModal").data('discount')) {
+                                    $("#wizardViewModal ul.content li").each(function() {
+                                        $(this).find(".item-content").on('click', function () {
+                                            let id = $(this).closest('li').attr('data-id');
+                                            let name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            const active_item = $(this).hasClass('active');
+                                            limite_message(group_id, active_item);
+                                        });
+                                        // console.log(selected_ides);
+                                        // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
+                                        if(selected_ides.includes($(this).data('id'))) {
+                                            let id = $(this).closest('li').attr('data-id');
+                                            let name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            limite_message(group_id, true);
+                                        }
 
-                                });
+                                    });
+                                } else {
+                                    $("#wizardViewModal ul.content li").each(function() {
+                                        $(this).find(".add_discount_js").on('click', function () {
+                                            let id = $(this).closest('li').attr('data-id');
+                                            let name = $(this).closest('li').attr('data-name');
+                                            let count = $(this).val();
+                                            activate_item($(this).closest('.item-content'), id, name, group_id, count);
+                                            const active_item = $(this).closest('.item-content').hasClass('active');
+                                            if(active_item) {
+                                                $(this).removeClass('btn-primary');
+                                                $(this).addClass('btn-danger');
+                                                $(this).text('Remove');
+                                            } else {
+                                                $(this).removeClass('btn-danger');
+                                                $(this).addClass('btn-primary');
+                                                $(this).text('Add');
+                                            }
+                                            limite_message(group_id, active_item, true);
+                                        });
+                                        // console.log(selected_ides);
+                                        // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
+                                        if(selected_ides.includes($(this).data('id'))) {
+                                            let id = $(this).closest('li').attr('data-id');
+                                            let name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            limite_message(group_id, true);
+                                        }
+
+                                    });
+                                }
+
                                 limite_message(group_id, true);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //

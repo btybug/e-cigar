@@ -4159,13 +4159,22 @@ $(document).ready(function () {
         // };
         // filterModalSingleInit();
 
-        function limite_message(group_id, active_item) {
+        function limite_message(group_id, active_item, discount) {
             var place = $('#wizardViewModal .message_place_js');
             var limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('limit');
             var min_limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('min-limit');
-            var count = $('#wizardAll').find('.item-content.active').length;
+
+            var count = 0;
+            if (discount) {
+                $('#wizardAll').find('.item-content.active .product-qty-select').each(function () {
+                    console.log($(this).val());
+                    count += Number($(this).val());
+                });
+            } else {
+                count = $('#wizardAll').find('.item-content.active').length;
+            }
             var message = '';
-            console.log(22222222222);
+            console.log(22222222222, count);
             // console.log(count, min_limit, limit)
             if (count < min_limit || count > limit) {
                 $('#wizardViewModal .b_save').attr('disabled', true);
@@ -4195,7 +4204,7 @@ $(document).ready(function () {
             place.text(message);
         }
 
-        function activate_item(self, id, name, group_id) {
+        function activate_item(self, id, name, group_id, count) {
             var limit = $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").data('limit');
             if (limit !== 1) {
                 if ($(self).hasClass('active')) {
@@ -4242,7 +4251,7 @@ $(document).ready(function () {
             }
         }
 
-        var modalItemCountHtml = "\n            <div class=\"d-flex justify-content-between align-items-center p-1\">\n                <div class=\"continue-shp-wrapp_qty position-relative mr-0\" style=\"height: 44px;width: 100px\">\n                                <!--minus qty-->\n                                <span data-type=\"minus\" class=\"d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count\">\n                                <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                </svg>\n                            </span>\n                            <input class=\"field-input w-100 h-100 font-23 text-center border-0 product-qty-select none-touchable \" min=\"number\" name=\"\" type=\"number\" value=\"1\">\n                            <!--plus qty-->\n                                <span data-type=\"plus\" class=\"d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count\">\n                                <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                </svg>\n                            </span>\n                 </div>\n                 <a href=\"#\" class=\"btn btn-primary\">Add</a>\n            </div>\n            \n        ";
+        var modalItemCountHtml = "\n            <div class=\"d-flex justify-content-between align-items-center p-1\">\n                <div class=\"continue-shp-wrapp_qty position-relative mr-0\" style=\"height: 44px;width: 100px\">\n                                <!--minus qty-->\n                                <span data-type=\"minus\" class=\"d-inline-block pointer position-absolute continue-shp-wrapp_qty-minus qty-count\">\n                                <svg viewBox=\"0 0 20 3\" width=\"20px\" height=\"3px\">\n                                    <path fill-rule=\"evenodd\" fill=\"rgb(214, 217, 225)\" d=\"M20.004,2.938 L-0.007,2.938 L-0.007,0.580 L20.004,0.580 L20.004,2.938 Z\"></path>\n                                </svg>\n                            </span>\n                            <input class=\"field-input w-100 h-100 font-23 text-center border-0 product-qty-select none-touchable \" min=\"number\" name=\"\" type=\"number\" value=\"1\">\n                            <!--plus qty-->\n                                <span data-type=\"plus\" class=\"d-inline-block pointer position-absolute continue-shp-wrapp_qty-plus qty-count\">\n                                <svg viewBox=\"0 0 20 20\" width=\"20px\" height=\"20px\">\n                                    <path fill-rule=\"evenodd\" fill=\"rgb(211, 214, 223)\" d=\"M20.004,10.938 L11.315,10.938 L11.315,20.000 L8.696,20.000 L8.696,10.938 L-0.007,10.938 L-0.007,8.580 L8.696,8.580 L8.696,0.007 L11.315,0.007 L11.315,8.580 L20.004,8.580 L20.004,10.938 Z\"></path>\n                                </svg>\n                            </span>\n                 </div>\n                 <button class=\"btn btn-primary add_discount_js\">Add</button>\n            </div>\n            \n        ";
 
         var filterModalSingleInit = function filterModalSingleInit() {
             (function () {
@@ -4281,23 +4290,54 @@ $(document).ready(function () {
                                 $(".product__single-item-info[data-group-id=\"" + group_id + "\"]").find('.product__single-item-info-bottom').each(function (a, b) {
                                     $(this).data('id') && selected_ides.push($(this).data('id'));
                                 });
-                                $("#wizardViewModal ul.content li").each(function () {
-                                    $(this).find(".item-content").on('click', function () {
-                                        var id = $(this).closest('li').attr('data-id');
-                                        var name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name, group_id);
-                                        var active_item = $(this).hasClass('active');
-                                        limite_message(group_id, active_item);
+                                if (!$("#wizardViewModal").data('discount')) {
+                                    $("#wizardViewModal ul.content li").each(function () {
+                                        $(this).find(".item-content").on('click', function () {
+                                            var id = $(this).closest('li').attr('data-id');
+                                            var name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            var active_item = $(this).hasClass('active');
+                                            limite_message(group_id, active_item);
+                                        });
+                                        // console.log(selected_ides);
+                                        // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
+                                        if (selected_ides.includes($(this).data('id'))) {
+                                            var id = $(this).closest('li').attr('data-id');
+                                            var name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            limite_message(group_id, true);
+                                        }
                                     });
-                                    // console.log(selected_ides);
-                                    // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
-                                    if (selected_ides.includes($(this).data('id'))) {
-                                        var id = $(this).closest('li').attr('data-id');
-                                        var name = $(this).closest('li').attr('data-name');
-                                        activate_item(this, id, name, group_id);
-                                        limite_message(group_id, true);
-                                    }
-                                });
+                                } else {
+                                    $("#wizardViewModal ul.content li").each(function () {
+                                        $(this).find(".add_discount_js").on('click', function () {
+                                            var id = $(this).closest('li').attr('data-id');
+                                            var name = $(this).closest('li').attr('data-name');
+                                            var count = $(this).val();
+                                            activate_item($(this).closest('.item-content'), id, name, group_id, count);
+                                            var active_item = $(this).closest('.item-content').hasClass('active');
+                                            if (active_item) {
+                                                $(this).removeClass('btn-primary');
+                                                $(this).addClass('btn-danger');
+                                                $(this).text('Remove');
+                                            } else {
+                                                $(this).removeClass('btn-danger');
+                                                $(this).addClass('btn-primary');
+                                                $(this).text('Add');
+                                            }
+                                            limite_message(group_id, active_item, true);
+                                        });
+                                        // console.log(selected_ides);
+                                        // console.log('lalalalaaaa', selected_ides.includes($(this).data('id')) && $($(this).find(".item-content")[0]));
+                                        if (selected_ides.includes($(this).data('id'))) {
+                                            var id = $(this).closest('li').attr('data-id');
+                                            var name = $(this).closest('li').attr('data-name');
+                                            activate_item(this, id, name, group_id);
+                                            limite_message(group_id, true);
+                                        }
+                                    });
+                                }
+
                                 limite_message(group_id, true);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //
