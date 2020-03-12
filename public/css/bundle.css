@@ -20848,6 +20848,38 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 /*------------product single page END-------------*/
 
+/*------------store page START-------------*/
+.stores-page--wrapper{
+    margin: 20px 0;
+}
+.stores-page--wrapper .store-block .store-photo {
+    /*height: 100%;*/
+}
+.stores-page--wrapper .store-block{
+    margin-bottom: 15px;
+}
+.stores-page--wrapper .store-block .store-photo img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.stores-page--wrapper .store-block .store-title{
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+.stores-page--wrapper .store-block .store-block{
+    margin-bottom: 15px;
+}
+.stores-page--wrapper .store-block .store-map{
+    height: 462px;
+}
+.stores-page--wrapper .store-info .form-group{
+    margin-bottom: 5px;
+    padding: 5px 0;
+    box-shadow: 0 0 3px #ccc;
+}
+/*------------store page END-------------*/
+
 /*------------Special offer pop up START-------------*/
 #specialPopUpModal .modal-dialog {
     width: 100%;
