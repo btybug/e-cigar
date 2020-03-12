@@ -43,7 +43,7 @@
                 </select>
             @endif
         </div>
-    @elseif($vSettings->type == 'filter')
+    @elseif($vSettings->type == 'filter' || $vSettings->type == 'filter_discount')
         <div class="select-wall product__select-wall">
             <span
                 class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
