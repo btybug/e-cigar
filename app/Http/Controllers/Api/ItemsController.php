@@ -40,7 +40,8 @@ class ItemsController
             ->where('app_items.warehouse_id', $w_id)
             ->with('categories')
             ->where('item_locations.warehouse_id', $w_id)
-            ->where('items.is_archive', false)->with('item')
+            ->where('items.is_archive', false)
+            ->with('item')
             ->where('item_translations.locale', \Lang::getLocale())->get();
         return response()->json($items);
     }
