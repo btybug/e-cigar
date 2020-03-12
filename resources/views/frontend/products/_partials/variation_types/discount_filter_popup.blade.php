@@ -1,28 +1,31 @@
+@if(! isset($selected))
+    @php $selected = $variation->first(); @endphp
+@endif
+@php
+    $discounts = $selected->discounts()->orderBy('ordering','asc')->get()
+    $price = 0;
+    $discountFirst = null;
+    if(count($discounts)){
+        $discountFirst = $discounts->first();
+        $price = $discountFirst->price;
+    }
+@endphp
+
 <div class="product__single-item-info mb-3 limit {{$vSettings->type}}"
      data-section-type="discount"
      data-group-id="{{ $vSettings->variation_id }}"
-     data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ $vSettings->count_limit }}"
+     data-req="{{ $vSettings->is_required }}" data-id="{{ $vSettings->id }}" data-limit="{{ ($discountFirst)?$discountFirst->qty:0 }}"
      data-per-price="{{ $vSettings->price_per }}"
-     data-price="{{ convert_price($vSettings->price,$currency,false,true) }}"
-     data-min-limit="{{ $vSettings->min_count_limit }}">
-    @if(! isset($selected))
-        @php $selected = $variation->first(); @endphp
-    @endif
-    @php
-        $discounts = $selected->discounts()->orderBy('ordering','asc')->get()
-    @endphp
+     data-price="{{ convert_price($price,$currency,false,true) }}"
+     data-min-limit="{{ ($discountFirst)?$discountFirst->qty:0 }}">
+
     <div
         class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
         <div class="col-md-9 pl-0">
             <span class="font-sec-light font-26">{{ $vSettings->title }}</span>
         </div>
         <div class="col-md-3 d-flex justify-content-end pr-0">
-            @php
-            $price = 0;
-            if(count($discounts)){
-            $price = $discounts->first()->price;
-            }
-            @endphp
+
                 <div class="product__single-item-info-price" data-single-price="{{ $price }}">
                     <span class="font-40 product__single-item_price">
                             {{ convert_price($price,$currency, false) }}
