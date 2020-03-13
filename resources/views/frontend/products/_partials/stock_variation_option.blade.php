@@ -182,6 +182,23 @@
                 </div>
             </div>
         @endif
+    @elseif($vSettings->type == 'filter_discount')
+        <div class="d-flex flex-column w-100 align-items-md-center">
+            <span class="text-tert-clr">QTY</span>
+            <div class="product__single-item-inp-num">
+                <div class="quantity">
+                    @php
+                        $to = $selected->discounts()->orderBy('to','desc')->first();
+                    @endphp
+                    {!! Form::number('qty',(isset($quantities[$selected->id]))?$quantities[$selected->id]:1,['class' => 'product-qty product-qty_per_price input-qty',
+                        'data-id' => $selected->id,'min' => 1,'max'=> ($to)?$to->to:'','step' => 1,'readonly' => true]) !!}
+{{--                    <div class="inp-icons">--}}
+{{--                        <span class="inp-up"></span>--}}
+{{--                        <span class="inp-down"></span>--}}
+{{--                    </div>--}}
+                </div>
+            </div>
+        </div>
     @endif
 </div>
 <div class="col-xl-3 col-lg-4 col-md-3 pr-0 col-8 d-flex justify-content-end">
