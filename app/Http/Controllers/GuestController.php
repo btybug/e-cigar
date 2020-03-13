@@ -232,6 +232,7 @@ class GuestController extends Controller
     {
         $stores=Stores::leftJoin('stores_translations', 'stores.id', '=', 'stores_translations.stores_id')
             ->where('stores_translations.locale', app()->getLocale())
+            ->where('stores.status', 1)
             ->with('phones')
             ->with('emails')
             ->select('stores.long','stores.lat','stores.image','stores_translations.title'
