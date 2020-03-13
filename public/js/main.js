@@ -1792,6 +1792,7 @@ $(document).ready(function () {
             const limit = $(`.product__single-item-info[data-group-id="${group_id}"]`).data('limit');
             if(type === 'minus') {
                 currentValue > 1 && $(this).siblings('.product-qty-select').val(currentValue-1);
+                limite_message(group_id, isActive, true);
             } else if(type === 'plus') {
                 if(isActive) {
                     let count = 0;
