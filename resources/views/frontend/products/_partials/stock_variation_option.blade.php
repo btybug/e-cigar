@@ -80,7 +80,7 @@
                                    value="{{ $item->id }}">
                             <label class="custom-label"
                                    for="single_v_select_{{ $item->id.$x }}">
-                                <span class="font-sec-ex-light font-26 count">{{ $item->item->short_name }}</span>
+                                <span class="font-sec-ex-light font-26 count">{{ $item->item->name }}</span>
                             </label>
                         </div>
                     @endforeach
@@ -103,7 +103,7 @@
                            value="{{ $selected->id }}">
                     <label class="custom-label checkbox-select"
                            for="single_v_select_{{ $selected->id.$x }}">
-                        <span class="font-sec-ex-light font-26 count">{{ $selected->item->short_name }}</span>
+                        <span class="font-sec-ex-light font-26 count">{{ $selected->item->name }}</span>
                         <span
                             class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
@@ -121,7 +121,7 @@
                 class="d-flex align-items-center justify-content-center text-sec-clr align-self-center remove-single_product-item">
             <i class="fas fa-times"></i>
             </span>
-            <span class="font-sec-light font-26">{{ $selected->item->short_name }}</span>
+            <span class="font-sec-light font-26">{{ $selected->item->name }}</span>
         </div>
         {{--<div class="d-flex flex-wrap product__single-item-info-size">--}}
         {{--<div class="product_radio-single">--}}
