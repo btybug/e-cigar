@@ -3445,6 +3445,12 @@ $(document).ready(function () {
                                 qty = '1';
                                 discount_id = null;
                             }
+                        } else if($(this).closest('.filter_discount').length > 0) {
+                            id = $(this).data('id');
+                            if($(this).find('.input-qty').length>0) {
+                                qty = $(this).find('.input-qty').val();
+                                discount_id = null;
+                            }
                         }
                     }
 
@@ -3455,7 +3461,7 @@ $(document).ready(function () {
                     });
                 });
 
-                variations.push({
+                group_id && variations.push({
                     group_id,
                     products: products !== 'no' ? products.filter(function(el) {
                         return el.id !== undefined;
@@ -3472,6 +3478,7 @@ $(document).ready(function () {
                 gr.products.length < minLimit && minLimit !== 0 && bad.push(gr.group_id);
             });
             console.table({product_id, product_qty, variations});
+
             if(bad.length !== 0) {
                 bad.map(function(group_id) {
                     $(`.product__single-item-info[data-group-id="${group_id}"]`).css('border-color', 'red');
