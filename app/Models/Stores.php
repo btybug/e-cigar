@@ -11,7 +11,7 @@ class Stores extends Translatable
 {
     protected $table = 'stores';
     protected $guarded = ['id'];
-    public $translatedAttributes = ['title', 'description', 'address', 'director'];
+    public $translatedAttributes = ['title', 'description', 'address','country', 'director'];
 
     public $translationModel = StoresTranslations::class;
 

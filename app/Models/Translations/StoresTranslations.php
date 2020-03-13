@@ -28,5 +28,5 @@ class StoresTranslations extends Model
 {
     protected $table = 'stores_translations';
     public $timestamps = false;
-    protected $fillable = ['title','description', 'address','director'];
+    protected $fillable = ['title','description', 'address','country','director'];
 }
