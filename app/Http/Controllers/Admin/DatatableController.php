@@ -1330,6 +1330,14 @@ class DatatableController extends Controller
     public function getAllStores()
     {
         return Datatables::of(Stores::query())
+            ->addColumn('phones', function ($attr) {
+
+            })->addColumn('emails', function ($attr) {
+
+            })->addColumn('actions', function ($attr) {
+                $html = "<a class='btn btn-info' href='" . route('admin_stores_edit_or_create', $attr->id) . "'>Edit</a>";
+                return $html;
+            })->rawColumns(['actions'])
             ->make(true);
     }
 }

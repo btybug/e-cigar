@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-    {!! Form::model(null,['url' => route('admin_new_post'), 'id' => 'post_form','files' => true]) !!}
+    {!! Form::model($shop,['url' => route('admin_stores_post_edit_or_create'), 'id' => 'post_form','files' => true]) !!}
     <div class="card panel panel-default bg-transparent border-0">
         <div class="card-header panel-heading d-flex flex-wrap justify-content-between align-items-center">
             <h2 class="m-0">{{"Add Store" }}</h2>
@@ -63,7 +63,7 @@
                                                                     <div class="form-group row">
                                                                         <label class="col-md-2 col-form-label">Director full name</label>
                                                                         <div class="col-md-10">
-                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][director]',get_translated($shop,strtolower($language->code),'director'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                            {!! Form::text('translatable['.strtolower($language->code).'][director]',get_translated($shop,strtolower($language->code),'director'),['class'=>'form-control']) !!}
 
                                                                         </div>
                                                                     </div>
@@ -105,84 +105,102 @@
                         </div>
                         <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="view-product-wall mb-3">
-                                <div class="card mb-2">
-                                    <div class="card-header">
-                                        Panel
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="author-wall wall border-0 bg-transparent p-0">
-                                            <div class="row form-group">
-                                                {{Form::label('author', 'Author',['class' => 'col-xl-3'])}}
-                                                <div class="col-xl-9">
-                                                    {!! Form::select('user_id',[],null,
-                                                                ['class' => 'form-control','id'=> 'status']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="status-wall wall border-0 bg-transparent p-0">
-                                            <div class="row form-group">
-                                                {{Form::label('', 'Contact Type',['class' => 'col-xl-3'])}}
-                                                <div class="col-xl-9">
-                                                    {!! Form::select('contacts[type][]',[0 => 'Draft',1 => 'Published'],null,
-                                                                ['class' => 'form-control','id'=> 'status']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="comment-wall wall border-0 bg-transparent p-0">
-                                            <div class="row form-group">
-                                                {{Form::label('comment', 'Enable comment',['class' => 'col-xl-3'])}}
-                                                <div class="col-xl-9">
-                                                    YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
-                                                    NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="stores-widget-wrapper">
                                     <div class="card mb-2">
                                         <div class="card-header d-flex justify-content-between align-items-center">
                                             <span>Phone Number</span>
-                                            <span class="btn btn-primary add-stores-block-js"><i class="fas fa-plus"></i></span>
+                                            <span class="btn btn-primary add-stores-block-js" data-name="phones"><i
+                                                    class="fas fa-plus"></i></span>
                                         </div>
                                         <div class="card-body">
-                                            <div class="stores-widget-block mb-3">
-                                                <div class="row form-group">
-                                                    <label class="col-xl-3 col-form-label">Title</label>
-                                                    <div class="col-xl-9">
-                                                        <input type="text" class="form-control">
+                                            @if($shop)
+                                                @foreach($shop->phones as $key=>$phone)
+                                                    <div class="stores-widget-block mb-3">
+                                                        <div class="row form-group">
+                                                            <label class="col-xl-3 col-form-label">Title</label>
+                                                            <div class="col-xl-9">
+                                                                <input type="text" name="phones[{!! $key !!}][title]"
+                                                                       value="{!! $phone->title !!}"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-xl-3 col-form-label">Content</label>
+                                                            <div class="col-xl-9">
+                                                                <input type="text" name="phones[{!! $key !!}][contact]"
+                                                                       value="{!! $phone->contact !!}"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="stores-widget-block mb-3">
+                                                    <div class="row form-group">
+                                                        <label class="col-xl-3 col-form-label">Title</label>
+                                                        <div class="col-xl-9">
+                                                            <input type="text" name="phones[0][title]"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-xl-3 col-form-label">Content</label>
+                                                        <div class="col-xl-9">
+                                                            <input type="text" name="phones[0][contact]"
+                                                                   class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <label class="col-xl-3 col-form-label">Content</label>
-                                                    <div class="col-xl-9">
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="card mb-2">
                                         <div class="card-header d-flex justify-content-between align-items-center">
                                             <span>Email</span>
-                                            <span class="btn btn-primary add-stores-block-js"><i class="fas fa-plus"></i></span>
+                                            <span class="btn btn-primary add-stores-block-js" data-name="emails"><i
+                                                    class="fas fa-plus"></i></span>
 
                                         </div>
                                         <div class="card-body">
-                                            <div class="stores-widget-block mb-3">
-                                                <div class="row form-group">
-                                                    <label class="col-xl-3 col-form-label">Title</label>
-                                                    <div class="col-xl-9">
-                                                        <input type="text" class="form-control">
+                                            @if($shop)
+                                                @foreach($shop->emails as $key=>$emails)
+                                                    <div class="stores-widget-block mb-3">
+                                                        <div class="row form-group">
+                                                            <label class="col-xl-3 col-form-label">Title</label>
+                                                            <div class="col-xl-9">
+                                                                <input type="text" name="emails[{!! $key !!}][title]"
+                                                                       value="{!! $emails->title !!}"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-xl-3 col-form-label">Content</label>
+                                                            <div class="col-xl-9">
+                                                                <input type="text" name="emails[{!! $key !!}][contact]"
+                                                                       value="{!! $emails->contact !!}"
+                                                                       class="form-control">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div class="stores-widget-block mb-3">
+                                                    <div class="row form-group">
+                                                        <label class="col-xl-3 col-form-label">Title</label>
+                                                        <div class="col-xl-9">
+                                                            <input type="text" name="emails[0][title]"
+                                                                   class="form-control">
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-xl-3 col-form-label">Content</label>
+                                                        <div class="col-xl-9">
+                                                            <input type="text" name="emails[0][contact]"
+                                                                   class="form-control">
+                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="row form-group">
-                                                    <label class="col-xl-3 col-form-label">Content</label>
-                                                    <div class="col-xl-9">
-                                                        <input type="text" class="form-control">
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -198,24 +216,27 @@
 @section('js')
     <script>
         $(document).ready(function () {
-            let storeBlockHtml= `
+            let storeBlockHtml = `
                 <div class="stores-widget-block pt-3 border-top">
                     <div class="row form-group">
                         <label class="col-xl-3 col-form-label">Title</label>
                         <div class="col-xl-9">
-                            <input type="text" class="form-control">
+                            <input type="text" name="{name}[{key}][title]" class="form-control">
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="col-xl-3 col-form-label">Content</label>
                         <div class="col-xl-9">
-                            <input type="text" class="form-control">
+                            <input type="text" name="{name}[{key}][contact]" class="form-control">
                         </div>
                     </div>
                   </div>
             `;
-            $('body').on('click','.add-stores-block-js',function () {
-                $(this).closest('.card').find('.card-body').append(storeBlockHtml)
+            $('body').on('click', '.add-stores-block-js', function () {
+                let key = $(this).closest('.card').find('.card-body').find('.stores-widget-block').length + 1;
+                let html = storeBlockHtml.replace(/{name}/g, $(this).data('name'));
+                html = html.replace(/{key}/g, key);
+                $(this).closest('.card').find('.card-body').append(html)
             })
         })
     </script>

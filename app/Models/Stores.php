@@ -19,4 +19,13 @@ class Stores extends Translatable
     {
         return $this->hasMany(StoreContacts::class,'stores_id');
     }
+
+    public function phones()
+    {
+        return $this->hasMany(StoreContacts::class,'stores_id')->where('type','phone');
+    }
+    public function emails()
+    {
+        return $this->hasMany(StoreContacts::class,'stores_id')->where('type','email');
+    }
 }

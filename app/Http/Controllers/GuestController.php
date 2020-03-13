@@ -12,6 +12,7 @@ use App\Models\Items;
 use App\Models\Landing;
 use App\Models\Settings;
 use App\Models\Stock;
+use App\Models\Stores;
 use App\Models\ZoneCountries;
 use App\Services\ShortCodes;
 use Illuminate\Http\Request;
@@ -229,6 +230,7 @@ class GuestController extends Controller
 
     public function getStores()
     {
-        return $this->view('stores');
+        $stores=Stores::all();
+        return $this->view('stores',compact('stores'));
     }
 }

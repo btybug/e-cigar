@@ -23,6 +23,7 @@
                     <th>Title</th>
                     <th>Address</th>
                     <th>Director</th>
+                    <th>Status</th>
                     <th>Phones</th>
                     <th>Emails</th>
                     <th>Action</th>
@@ -104,7 +105,6 @@
                             column.visible(false);
                         }
                     });
-                    console.log(selected_items, 'selected_items')
                     localStorage.setItem(storageName, JSON.stringify(selected_items))
                 }
 
@@ -114,28 +114,27 @@
                     init();
                 });
             }
-
             tableInit(
                 "blog_table",
                 [
                     {id: 'ID', name: 'id'},
                     {id: 'Title', name: 'title'},
-                    {id: 'Author', name: 'user_id'},
-                    {id: 'URL', name: 'url'},
-                    {id: 'Short Description', name: 'short_description'},
+                    {id: 'Address', name: 'address'},
+                    {id: 'Director', name: 'director'},
                     {id: 'Status', name: 'status'},
-                    {id: 'Added/Last Modified Date', name: 'created_at'},
+                    {id: 'Phones', name: 'phones'},
+                    {id: 'Emails', name: 'emails'},
                     {id: 'Action', name: 'actions'}
                 ],
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'url', name: 'url'},
-                    {data: 'short_description', name: 'short_description'},
+                    {data: 'address', name: 'address'},
+                    {data: 'director', name: 'director'},
                     {data: 'status', name: 'status'},
-                    {data: 'created_at', name: 'created_at'},
+                    {data: 'phones', name: 'phones'},
+                    {data: 'emails', name: 'emails'},
                     {data: 'actions', name: 'actions'}
                 ],
                 '#posts-table',
