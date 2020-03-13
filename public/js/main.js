@@ -1802,7 +1802,7 @@ $(document).ready(function () {
                     if(count + 1 <= limit) {
                         $(this).siblings('.product-qty-select').val(currentValue+1);
                     }
-
+                    limite_message(group_id, isActive, true);
                 } else {
                     $(this).siblings('.product-qty-select').val(currentValue+1);
                 }
@@ -1817,6 +1817,7 @@ $(document).ready(function () {
             const limit = $(ev.target).data('limit');
             const container = $(ev.target).closest('.product__single-item-info.filter_discount');
             const price_place = container.find('.product__single-item-info-price');
+            container.find('.product-single-info_row-items').empty();
             container.data('price', price);
             container.data('limit', limit);
             container.data('min-limit', limit);
@@ -1825,7 +1826,6 @@ $(document).ready(function () {
                 if(number >= limit) {
                     $(el).remove();
                 }
-
                 // console.table({number: number, el: el})
             });
             price_place.find('.product__single-item_price').text(getCurrencySymbol()+price);
@@ -1915,13 +1915,14 @@ $(document).ready(function () {
                                             activate_item(this, id, name, group_id, true);
                                             limite_message(group_id, true, true);
                                             $("#wizardViewModal ul.content li").each(function() {
-                                                console.log($(this).find('.item-content'))
-
+                                                const selectedItemIdDiscount = $(this).data('id');
                                                 const active_item = $(this).find('.item-content').hasClass('active');
-                                                console.log(active_item)
                                                 if(active_item) {
                                                     const buttonAdd = $(this).find('.add_discount_js');
-                                                    console.log()
+                                                    $(this).find('.product-qty-select')
+                                                        .val($(`.product__single-item-info.filter_discount[data-group-id="${button_group_id}"]`)
+                                                            .find(`.product__single-item-info-bottom[data-id="${selectedItemIdDiscount}"]`)
+                                                            .find('.product-qty_per_price').val())
                                                     buttonAdd.removeClass('btn-primary');
                                                     buttonAdd.addClass('btn-danger');
                                                     buttonAdd.text('Remove');
@@ -3469,7 +3470,7 @@ $(document).ready(function () {
                 console.log(gr.group_id, minLimit)
                 gr.products.length < minLimit && minLimit !== 0 && bad.push(gr.group_id);
             });
-            // console.log(variations);
+            console.table({product_id, product_qty, variations});
             if(bad.length !== 0) {
                 bad.map(function(group_id) {
                     $(`.product__single-item-info[data-group-id="${group_id}"]`).css('border-color', 'red');
