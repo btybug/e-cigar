@@ -17,6 +17,7 @@ class CreateStoreContactsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stores_id');
             $table->string('type');
+            $table->string('title');
             $table->string('contact');
             $table->timestamps();
             $table->foreign('stores_id')->references('id')->on('stores')->onDelete('cascade');
