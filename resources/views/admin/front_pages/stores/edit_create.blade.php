@@ -105,13 +105,13 @@
                         </div>
                         <div class="col-lg-4 col-md-5 col-sm-4">
                             <div class="view-product-wall mb-3">
-                                <div class="card">
+                                <div class="card mb-2">
                                     <div class="card-header">
                                         Panel
                                     </div>
                                     <div class="card-body">
                                         <div class="author-wall wall border-0 bg-transparent p-0">
-                                            <div class="row">
+                                            <div class="row form-group">
                                                 {{Form::label('author', 'Author',['class' => 'col-xl-3'])}}
                                                 <div class="col-xl-9">
                                                     {!! Form::select('user_id',[],null,
@@ -120,7 +120,7 @@
                                             </div>
                                         </div>
                                         <div class="status-wall wall border-0 bg-transparent p-0">
-                                            <div class="row">
+                                            <div class="row form-group">
                                                 {{Form::label('', 'Contact Type',['class' => 'col-xl-3'])}}
                                                 <div class="col-xl-9">
                                                     {!! Form::select('contacts[type][]',[0 => 'Draft',1 => 'Published'],null,
@@ -129,11 +129,58 @@
                                             </div>
                                         </div>
                                         <div class="comment-wall wall border-0 bg-transparent p-0">
-                                            <div class="row">
+                                            <div class="row form-group">
                                                 {{Form::label('comment', 'Enable comment',['class' => 'col-xl-3'])}}
                                                 <div class="col-xl-9">
                                                     YES {!! Form::radio('comment_enabled',1,true,['class' => '']) !!}
                                                     NO {!! Form::radio('comment_enabled',0,null,['class' => '']) !!}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="stores-widget-wrapper">
+                                    <div class="card mb-2">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <span>Phone Number</span>
+                                            <span class="btn btn-primary add-stores-block-js"><i class="fas fa-plus"></i></span>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="stores-widget-block mb-3">
+                                                <div class="row form-group">
+                                                    <label class="col-xl-3 col-form-label">Title</label>
+                                                    <div class="col-xl-9">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-xl-3 col-form-label">Content</label>
+                                                    <div class="col-xl-9">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card mb-2">
+                                        <div class="card-header d-flex justify-content-between align-items-center">
+                                            <span>Email</span>
+                                            <span class="btn btn-primary add-stores-block-js"><i class="fas fa-plus"></i></span>
+
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="stores-widget-block mb-3">
+                                                <div class="row form-group">
+                                                    <label class="col-xl-3 col-form-label">Title</label>
+                                                    <div class="col-xl-9">
+                                                        <input type="text" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-xl-3 col-form-label">Content</label>
+                                                    <div class="col-xl-9">
+                                                        <input type="text" class="form-control">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -148,3 +195,28 @@
     </div>
     {!! Form::close() !!}
 @endsection
+@section('js')
+    <script>
+        $(document).ready(function () {
+            let storeBlockHtml= `
+                <div class="stores-widget-block pt-3 border-top">
+                    <div class="row form-group">
+                        <label class="col-xl-3 col-form-label">Title</label>
+                        <div class="col-xl-9">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label class="col-xl-3 col-form-label">Content</label>
+                        <div class="col-xl-9">
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                  </div>
+            `;
+            $('body').on('click','.add-stores-block-js',function () {
+                $(this).closest('.card').find('.card-body').append(storeBlockHtml)
+            })
+        })
+    </script>
+@stop
