@@ -4426,20 +4426,44 @@ $(document).ready(function () {
 
                     $('body').on('click', "#wizardViewModal[data-group=\"" + button_group_id + "\"] .b_save", function () {
                         var items_array = [];
+                        var self = $(this);
+                        console.log('lalalalalala');
+                        var isDiscount = $(".product__single-item-info[data-group-id=\"" + self.closest('#wizardViewModal').data('group') + "\"]").hasClass('filter_discount');
+                        if (isDiscount) {
+                            console.log('narananananana');
+                            items_array = {};
+                            $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
 
-                        $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
-                            items_array.push($(this).closest('li').attr('data-id'));
-                        });
-
-                        var popup_items_qty = [];
-                        // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
-                        $("[data-id-popup].selected-item_popup").find('.popup_field-input').each(function () {
-                            var $this = $(this);
-                            popup_items_qty.push({
-                                id: $this.closest('.selected-item_popup').attr('data-id-popup'),
-                                value: $this.val()
+                                if (!items_array[$(this).closest('li').attr('data-id')]) {
+                                    console.log($(this).closest('li').attr('data-id'), Number($(this).closest('li').find('.product-qty-select').val()));
+                                    items_array[$(this).closest('li').attr('data-id')] = Number($(this).closest('li').find('.product-qty-select').val());
+                                }
                             });
-                        });
+
+                            var _popup_items_qty = [];
+                            // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
+                            $("[data-id-popup].selected-item_popup").find('.popup_field-input').each(function () {
+                                var $this = $(this);
+                                _popup_items_qty.push({
+                                    id: $this.closest('.selected-item_popup').attr('data-id-popup'),
+                                    value: $this.val()
+                                });
+                            });
+                        } else {
+                            $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
+                                items_array.push($(this).closest('li').attr('data-id'));
+                            });
+
+                            var _popup_items_qty2 = [];
+                            // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
+                            $("[data-id-popup].selected-item_popup").find('.popup_field-input').each(function () {
+                                var $this = $(this);
+                                _popup_items_qty2.push({
+                                    id: $this.closest('.selected-item_popup').attr('data-id-popup'),
+                                    value: $this.val()
+                                });
+                            });
+                        }
 
                         fetch("/products/get-variation-menu-raws", {
                             method: "post",
@@ -4450,7 +4474,7 @@ $(document).ready(function () {
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({ ids: items_array })
+                            body: isDiscount ? JSON.stringify({ ids: items_array, type: 'discount' }) : JSON.stringify({ ids: items_array })
                         }).then(function (response) {
                             return response.json();
                         }).then(function (json) {

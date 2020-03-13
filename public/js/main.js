@@ -1961,21 +1961,45 @@ $(document).ready(function () {
 
 
                     $('body').on('click', `#wizardViewModal[data-group="${button_group_id}"] .b_save`, function () {
-                        const items_array = [];
+                        let items_array = [];
+                        const self = $(this);
+                        console.log('lalalalalala');
+                        const isDiscount = $(`.product__single-item-info[data-group-id="${self.closest('#wizardViewModal').data('group')}"]`).hasClass('filter_discount');
+                        if(isDiscount) {
+                            console.log('narananananana');
+                            items_array = {};
+                            $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
 
-                        $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
-                            items_array.push($(this).closest('li').attr('data-id'));
-                        });
-
-                        const popup_items_qty = [];
-                        // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
-                        $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function () {
-                            const $this = $(this);
-                            popup_items_qty.push({
-                                id: $this.closest('.selected-item_popup').attr('data-id-popup'),
-                                value: $this.val()
+                                if(!items_array[$(this).closest('li').attr('data-id')]) {
+                                    console.log($(this).closest('li').attr('data-id'), Number($(this).closest('li').find('.product-qty-select').val()))
+                                    items_array[$(this).closest('li').attr('data-id')] = Number($(this).closest('li').find('.product-qty-select').val());
+                                }
                             });
-                        });
+
+                            const popup_items_qty = [];
+                            // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
+                            $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function () {
+                                const $this = $(this);
+                                popup_items_qty.push({
+                                    id: $this.closest('.selected-item_popup').attr('data-id-popup'),
+                                    value: $this.val()
+                                });
+                            });
+                        } else {
+                            $('#wizardViewModal .modal-body').find(".item-content.active").each(function () {
+                                items_array.push($(this).closest('li').attr('data-id'));
+                            });
+
+                            const popup_items_qty = [];
+                            // console.log($(`[data-id-popup].selected-item_popup`).find('.popup_field-input'));
+                            $(`[data-id-popup].selected-item_popup`).find('.popup_field-input').each(function () {
+                                const $this = $(this);
+                                popup_items_qty.push({
+                                    id: $this.closest('.selected-item_popup').attr('data-id-popup'),
+                                    value: $this.val()
+                                });
+                            });
+                        }
 
                         fetch("/products/get-variation-menu-raws", {
                             method: "post",
@@ -1986,7 +2010,7 @@ $(document).ready(function () {
                                 "X-CSRF-Token": $('input[name="_token"]').val()
                             },
                             credentials: "same-origin",
-                            body: JSON.stringify({ids: items_array})
+                            body: isDiscount ? JSON.stringify({ids: items_array, type: 'discount'}) : JSON.stringify({ids: items_array})
                         })
                             .then(function (response) {
                                 return response.json();
