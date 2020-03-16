@@ -265,7 +265,7 @@ class CartService
                 if($discount){
                     $options = $fData['products'];
                     $product_limit = 0;
-                    $data['group'] = $fData['group_id'];
+                    $data['group'] = $mainVariation;
                     $data['options'] = [];
                     $data['price'] = $discount->price;
                     $this->price = $discount->price;
