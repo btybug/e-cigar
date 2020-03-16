@@ -1653,6 +1653,7 @@ $(document).ready(function () {
                     count += Number($(this).val());
                 });
             } else {
+                console.log('****************')
                 count = $('#wizardAll').find('.item-content.active').length;
             }
             let message = '';
@@ -1914,7 +1915,7 @@ $(document).ready(function () {
                                             let id = $(this).closest('li').attr('data-id');
                                             let name = $(this).closest('li').attr('data-name');
                                             activate_item(this, id, name, group_id, true);
-                                            limite_message(group_id, true, true);
+
                                             $("#wizardViewModal ul.content li").each(function() {
                                                 const selectedItemIdDiscount = $(this).data('id');
                                                 const active_item = $(this).find('.item-content').hasClass('active');
@@ -1928,13 +1929,15 @@ $(document).ready(function () {
                                                     buttonAdd.addClass('btn-danger');
                                                     buttonAdd.text('Remove');
                                                 }
+                                                limite_message(group_id, active_item, true);
                                             });
+
                                         }
 
                                     });
                                 }
 
-                                limite_message(group_id, true);
+                                // limite_message(group_id, true);
                                 // $(`#wizardViewModal ul.content li`).each(function() {
                                 //
                                 // });
