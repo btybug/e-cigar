@@ -197,6 +197,7 @@ class OrdersController extends Controller
 
     public function addAdditionalData(Request $request)
     {
+        dd($request->all());
         $order = Orders::find('id', $request->get('order_id'));//->update(['additional_data' => $request->get('additional_data')]);
         $order->additional_data = $request->get('additional_data');
         $order->save();
