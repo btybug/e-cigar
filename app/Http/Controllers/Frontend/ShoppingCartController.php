@@ -120,6 +120,7 @@ class ShoppingCartController extends Controller
     public function postAddToCart(Request $request)
     {
         $product = Stock::where('status', true)->find($request->product_id);
+//        dd($request->all());
         if ($product) {
             $error = $this->cartService->validateProduct($product, $request->variations);
 //            dd($this->cartService->variations,$this->cartService->price);
