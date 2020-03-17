@@ -253,13 +253,14 @@ class CartService
     public function validateProduct($product, $vdata)
     {
         $error = false;
-
+        $mainVariation = null;
         if(count($vdata) == 1){
             $fData = array_first($vdata);
             $mainVariation = $product->variations()->where('variation_id',$fData['group_id'])->first();
         }
 
         if($mainVariation && $mainVariation->type == 'filter_discount'){
+
             if($mainVariation->price_per == 'discount'){
                 $discount = $mainVariation->discounts()->where('qty',$fData['limit'])->first();
                 if($discount){
@@ -297,7 +298,9 @@ class CartService
             }
         }else{
             $extraVariations = $product->variations()->with('item')->required()->groupby('stock_variations.variation_id')->get();
-            if ($vdata && count($vdata) == count($extraVariations)) {
+
+            if (($vdata && count($vdata) == count($extraVariations))|| ($vdata && ($product->section_type == 1) )) {
+//                dd($product,$vdata,count($vdata),count($extraVariations));
                 foreach ($vdata as $k => $item) {
                     $data = [];
                     $group = $product->variations()->with('item')->where('variation_id', $item['group_id'])->first();
@@ -310,6 +313,7 @@ class CartService
                             $data['price'] = 0;
                         }else{
                             if(isset($item['products']) && count($item['products'])) {
+//                                dd($vdata,$group->price_per,$item['products']);
                                 if ($group->price_per == 'product') {
                                     $data['price'] = $group->price;
                                     $this->price += $group->price;
@@ -371,9 +375,20 @@ class CartService
                                 }
                             }
 
-                            if ($group->min_count_limit > $product_limit || $group->count_limit < $product_limit) {
-                                $error = "Please select options according to limit";
+//                            dd($group->min_count_limit > $product_limit || $group->count_limit < $product_limit);
+//                            dd($product_limit,$data['options']);
+                            if($group->type == 'single'){
+                                if (!isset($data['options']) || count($data['options']) != 1) {
+                                    $error = "Please select options according to limit";
+                                }
+                            }else{
+                                if (! isset($item['products']) || ($group->min_count_limit > count($item['products']) || $group->count_limit < count($item['products']))) {
+                                    dd($item,$group,$product_limit);
+                                    $error = "Please select options according to limit";
+                                }
                             }
+
+
                         }
                     } else {
                         $error = "Section not found";
