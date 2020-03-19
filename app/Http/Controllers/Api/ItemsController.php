@@ -54,7 +54,7 @@ class ItemsController
 
     public function getItemLocations(Request $request)
     {
-        $result=WarehouseRacks::where('shop_id',$request->get('shop_id'))->whereNull('parent_id')->get();
+        $result=WarehouseRacks::where('warehouse_id',$request->get('shop_id'))->whereNull('parent_id')->get();
         return response()->json(['success'=>true,'data'=>$result]);
     }
 }
