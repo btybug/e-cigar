@@ -67,6 +67,11 @@ class OrdersController extends Controller
     {
         $shop = AppWarehouses::where('warehouse_id', $request->get('shop_id'))->first();
         $order = $shop->warehouse->orders()->find($request->get('order_id'));
+        if($order->status==Orders::DONE){
+            $order->status=Orders::EDITING;
+            $order->history()->create(['data'=>$order->toArray()]);
+            $order->save();
+        }
         if ($request->get('product_id', false)) {
             $item = AppItems::find($request->get('product_id'));
 
@@ -99,7 +104,12 @@ class OrdersController extends Controller
 
     public function removeFromBasked(Request $request)
     {
-        $order = Orders::find($request->get('order_id'));
+        $order = Orders::with('basketItems')->where('id',$request->get('order_id'))->get();
+        if($order->status==Orders::DONE){
+            $order->status=Orders::EDITING;
+            $order->history()->create(['data'=>$order->toArray()]);
+            $order->save();
+        }
         $order->basketItems()->detach($request->get('product_id'));
         return response()->json(['success' => true]);
     }
