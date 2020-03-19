@@ -104,7 +104,7 @@ class OrdersController extends Controller
 
     public function removeFromBasked(Request $request)
     {
-        $order = Orders::with('basketItems')->where('id',$request->get('order_id'))->get();
+        $order = Orders::with('basketItems')->where('id',$request->get('order_id'))->first();
         if($order->status==Orders::DONE){
             $order->status=Orders::EDITING;
             $order->history()->create(['data'=>$order->toArray()]);
