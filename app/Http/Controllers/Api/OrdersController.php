@@ -81,12 +81,12 @@ class OrdersController extends Controller
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
             } else {
                $items= $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->first();
-//                if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
-//                    $location = ItemsLocations::where('warehouse_id', $request->get('shop_id'))->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->firstOrNew();
-//                    $item = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
-//                    $location->qty+=$item->qty-$request->get('qty');
-//                    $location->save();
-//                }
+                if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
+                    $location = ItemsLocations::where('warehouse_id', $request->get('shop_id'))->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->firstOrNew();
+                    $item = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
+                    $location->qty+=$item->qty-$request->get('qty');
+                    $location->save();
+                }
                 $items->qty=$request->get('qty');
                 $items->price=$item->price;
                 $items->save();
@@ -122,7 +122,7 @@ class OrdersController extends Controller
             $order->save();
         }
         if ($order->status == Orders::EDITING) {
-            $location = ItemsLocations::where('warehouse_id', $request->get('shop_id'))->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->firstOrNew();
+            $location = ItemsLocations::firstOrNew(['warehouse_id'=>$request->get('shop_id')],['rack_id'=>$request->get('location_id'),'item_id'=>'product_id']);
             $item = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
             $location->qty+=$item->qty;
             $location->save();
