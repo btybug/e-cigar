@@ -5,6 +5,7 @@ namespace App\Models\App;
 
 
 use App\Models\ItemsLocations;
+use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
@@ -21,7 +22,7 @@ class Orders extends Model
     ];
     public function shop()
     {
-        return $this->belongsTo(Shops::class,'shop_id');
+        return $this->belongsTo(Warehouse::class,'shop_id');
     }
 
     public function items()

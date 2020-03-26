@@ -239,7 +239,7 @@ class OrdersController extends Controller
     public function test( OrderService $service)
     {
         $order = Orders::find(58);
-        dd($order->history[0]->data);
+        dd(collect($order->history[0]->data['items'])->pluck('qty','item_id'),$order->items);
     }
 
 }
