@@ -88,9 +88,7 @@ class OrdersController extends Controller
                     $location->qty+=$basketItem->qty-$request->get('qty');
                     $location->save();
                 }
-                $items->qty=$request->get('qty');
-                $items->price=$item->price;
-                $items->save();
+                $items->update(['qty'=>$request->get('qty'),'price'=>$item->price]);
             }
         }
 //        if ($request->get('gifts', false)) {
