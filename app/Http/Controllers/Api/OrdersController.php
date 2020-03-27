@@ -89,7 +89,7 @@ class OrdersController extends Controller
                     $location->qty+=$basketItem->qty-$request->get('qty');
                     $location->save();
                 }
-                $order->basketItems()->where('item_id', $request->get('product_id'))->update(['qty'=>$request->get('qty'),'price'=>$item->price]);
+                $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
 
             }
         }
