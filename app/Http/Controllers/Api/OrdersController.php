@@ -92,24 +92,24 @@ class OrdersController extends Controller
                 $items->save();
             }
         }
-        if ($request->get('gifts', false)) {
-            $gifts = $request->get('gifts',[]);
-            $sync = [];
-            $order->items()->where('type', OrdersItems::GIFT)->delete();
-            foreach ($gifts as $gift) {
-                $sync[] = $gift['giftId'];
-                foreach ($gift['products'] as $product) {
-                    $item = AppItems::find($product['productId']);
-                    if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
-                        $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]]);
-                    } else {
-                        $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]);
-                    }
-                }
-            }
-            $order->discountOffers()->sync($sync);
-
-        }
+//        if ($request->get('gifts', false)) {
+//            $gifts = $request->get('gifts',[]);
+//            $sync = [];
+//            $order->items()->where('type', OrdersItems::GIFT)->delete();
+//            foreach ($gifts as $gift) {
+//                $sync[] = $gift['giftId'];
+//                foreach ($gift['products'] as $product) {
+//                    $item = AppItems::find($product['productId']);
+//                    if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
+//                        $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]]);
+//                    } else {
+//                        $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]);
+//                    }
+//                }
+//            }
+//            $order->discountOffers()->sync($sync);
+//
+//        }
         return response()->json(['success' => true]);
     }
 
