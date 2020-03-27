@@ -81,6 +81,7 @@ class OrdersController extends Controller
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
             } else {
                $items= $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->first();
+               dd($items);
                 if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
                     $location = ItemsLocations::firstOrNew(['warehouse_id'=>$request->get('shop_id')],['rack_id'=>$request->get('location_id'),'item_id'=>$request->get('product_id')]);
                     $basketItem = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
