@@ -88,7 +88,7 @@ class OrdersController extends Controller
                     $location->save();
                 }
                 $items->qty=$request->get('qty');
-                $items->price=$basketItem->price;
+                $items->price=$item->price;
                 $items->save();
             }
         }
