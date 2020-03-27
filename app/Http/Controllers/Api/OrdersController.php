@@ -81,34 +81,35 @@ class OrdersController extends Controller
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
             } else {
                $items= $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->first();
-         
+               dd($items);
                 if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
                     $location = ItemsLocations::firstOrNew(['warehouse_id'=>$request->get('shop_id')],['rack_id'=>$request->get('location_id'),'item_id'=>$request->get('product_id')]);
                     $basketItem = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
                     $location->qty+=$basketItem->qty-$request->get('qty');
                     $location->save();
                 }
-                $items->update(['qty'=>$request->get('qty'),'price'=>$item->price]);
+                $order->basketItems()->where('item_id', $request->get('product_id'))->update(['qty'=>$request->get('qty'),'price'=>$item->price]);
+
             }
         }
-//        if ($request->get('gifts', false)) {
-//            $gifts = $request->get('gifts',[]);
-//            $sync = [];
-//            $order->items()->where('type', OrdersItems::GIFT)->delete();
-//            foreach ($gifts as $gift) {
-//                $sync[] = $gift['giftId'];
-//                foreach ($gift['products'] as $product) {
-//                    $item = AppItems::find($product['productId']);
-//                    if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
-//                        $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]]);
-//                    } else {
-//                        $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]);
-//                    }
-//                }
-//            }
-//            $order->discountOffers()->sync($sync);
-//
-//        }
+        if ($request->get('gifts', false)) {
+            $gifts = $request->get('gifts',[]);
+            $sync = [];
+            $order->items()->where('type', OrdersItems::GIFT)->delete();
+            foreach ($gifts as $gift) {
+                $sync[] = $gift['giftId'];
+                foreach ($gift['products'] as $product) {
+                    $item = AppItems::find($product['productId']);
+                    if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->exists()) {
+                        $order->basketItems()->attach([$item->item_id => ['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]]);
+                    } else {
+                        $order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::GIFT)->update(['qty' => $product['qty'], 'price' => 0, 'type' => OrdersItems::GIFT, 'discount_offer_id' => $gift['giftId']]);
+                    }
+                }
+            }
+            $order->discountOffers()->sync($sync);
+
+        }
         return response()->json(['success' => true]);
     }
 
