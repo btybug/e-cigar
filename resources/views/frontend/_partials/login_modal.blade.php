@@ -74,10 +74,11 @@
                         </form>
                         <div class="row">
                             <div class="col-md-6">
-{{--                                <a href="{{ route('password.request') }}" class="font-13 text-gray-clr text-uderlined">{!! __('forgot_password') !!}?</a>--}}
+                                <a href="{{ route('redirect_login') }}" class="font-13 text-gray-clr text-uderlined">{!! __('Login Wholesale') !!}?</a>
                             </div>
                             <div class="col-md-6 text-right ">
                                 <p class="mb-0 font-13 text-gray-clr">
+
                                     &nbsp;{!! __('sign_up_question') !!}
                                     <span class="text-uderlined text-uppercase text-main-clr pointer" data-toggle="modal" data-target="#registerModal" data-dismiss="modal">{!! __('sign_up') !!}</span>
                                 </p>
