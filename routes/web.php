@@ -255,5 +255,8 @@ Route::group(['prefix' => 'search'], function () {
     Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
 });
 
+
 Route::get('/redirect', 'Auth\OauthLoginController@gatCode')->name('redirect_login');
 Route::get('/callback', 'Auth\OauthLoginController@Callback');
+
+Route::get('/test', 'Api\OrdersController@test');
