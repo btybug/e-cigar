@@ -84,7 +84,7 @@ class OrdersController extends Controller
 
                 if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
                     $location = ItemsLocations::where(['warehouse_id' => $request->get('shop_id')])->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->first();
-                    $basketItem = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
+                    $basketItem = $order->basketItems()->where('basket_items.item_id', $request->get('product_id'))->first();
                     if (!$location) {
                         ItemsLocations::create([
                             'warehouse_id' => $request->get('shop_id'),
