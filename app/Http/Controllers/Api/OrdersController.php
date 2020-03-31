@@ -83,10 +83,19 @@ class OrdersController extends Controller
                $items= $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->first();
 
                 if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
-                    $location = ItemsLocations::firstOrNew(['warehouse_id'=>$request->get('shop_id')],['rack_id'=>$request->get('location_id'),'item_id'=>$request->get('product_id')]);
+                    $location = ItemsLocations::where(['warehouse_id' => $request->get('shop_id')])->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->first();
                     $basketItem = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
-                    $qty= $location->qty+($basketItem->qty-$request->get('qty'));
-                    ItemsLocations::where('id',$location->id)->update(['qty'=>$qty]);
+                    if (!$location) {
+                        ItemsLocations::create([
+                            'warehouse_id' => $request->get('shop_id'),
+                            'rack_id' => $request->get('location_id'),
+                            'item_id' => $request->get('product_id'),
+                            'qty' => $basketItem->qty - $request->get('qty'),
+                        ]);
+                    } else {
+                        $qty = $location->qty + ($basketItem->qty - $request->get('qty'));
+                        ItemsLocations::where('id', $location->id)->update(['qty' => $qty]);
+                    }
                 }
                 $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
 
