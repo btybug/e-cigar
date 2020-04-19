@@ -58,6 +58,48 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div>
+                                    <label class="text-gray-clr register-form_label">Become a Wholesaler ?</label>
+                                </div>
+                                <div class="row no-gutters form-checkes-outer d-flex justify-content-between">
+                                    <div>
+                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"
+                                               name="wholesaler" id="wholesaler1" value="0" checked>
+                                        <label
+                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
+                                            for="wholesaler1">
+                                            No
+                                        </label>
+                                    </div>
+                                    <div>
+                                        <input class="form-check-input register-form_input-radio wholesaler_radio" type="radio"
+                                               name="wholesaler" id="wholesaler2" value="1">
+                                        <label
+                                            class="form-check-label mb-0 d-flex align-items-center text-gray-clr pointer"
+                                            for="wholesaler2">
+                                            Yes
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row d-none wholesaler-box">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="companyName" class="text-gray-clr register-form_label">Company
+                                            Name</label>
+                                        <input id="companyName" type="text" class="form-control register-form_input-text"
+                                               name="company_name" value="{{ old('company_name') }}">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="companyNumber" class="text-gray-clr register-form_label">Company Number</label>
+                                        <input id="companyNumber" type="text" class="form-control register-form_input-text"
+                                               name="company_number" value="{{ old('company_number') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label for="firstName" class="text-gray-clr register-form_label">{!! __('first_name') !!} <sup class="font-8 text-danger"><i class="fas fa-star"></i></sup></label>

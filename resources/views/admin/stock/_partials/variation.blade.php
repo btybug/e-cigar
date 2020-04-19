@@ -238,6 +238,7 @@
 
             </div>
         </div>
+>>>>>>> dev
     </div>
 </div>
 {{--<div class="card panel panel-default stock-page" data-unqiue="{{ $main_unique }}">--}}
