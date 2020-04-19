@@ -12,7 +12,7 @@
                     <div class="chek-title">
                         <label for="stripe_paymant" class="title font-weight-bold">{!! strtoupper($category->type) !!}</label>
                     </div>
-                    <a href="{!! route('admin_get_category',$category->type) !!}" class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>
+                    <a href="#" class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>
                 </li>
             @endforeach
         </ul>
