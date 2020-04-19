@@ -26,12 +26,6 @@ class RolesTableSeeder extends Seeder
             'slug'=>'customer',
             'type'=>'frontend',
             'description' =>'this role can all'
-        ],[
-
-            'title' =>'Wholesaler',
-            'slug'=>'wholesaler',
-            'type'=>'frontend',
-            'description' =>'this role have wholesaller ability'
         ]
         ]);
     }

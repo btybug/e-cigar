@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="google-recaptcha-key" content="{!!env('GOOGLE_RECAPTCHA_KEY')!!}">
-    <meta name="google-site-verification" content="Z407Ah-a75yFLeExaK-cNsS1XEhzcbb-6qAPax2V0eI" />
+    <meta name="google-site-verification" content="bYambdrAC-nymmiVMr-A2jiKeKW8gEsCcCRozCLDp4o" />
     {!! main_pages_seo(isset($page_name)?$page_name:null) !!}
 
     @yield('meta')

@@ -254,9 +254,6 @@ Route::group(['prefix' => 'filters'], function () {
 Route::group(['prefix' => 'search'], function () {
     Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
 });
-Route::group(['prefix' => 'search'], function () {
-    Route::post('/', 'Frontend\SearchControll@postSearch')->name('frontend_search');
-});
 
 
 Route::get('/redirect', 'Auth\OauthLoginController@gatCode')->name('redirect_login');
