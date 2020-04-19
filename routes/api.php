@@ -13,18 +13,18 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Route::middleware('auth:api')->group(function () {
     Route::get('/user','ShopController@getUser');
     Route::get('/shops', 'ShopController@getShop');
     Route::post('/get-settings', 'ShopController@getSettings');
 //    Route::middleware('shopping',function (){
     Route::post('/items', 'ItemsController@getItems');
+    Route::post('/get-item-locations', 'ItemsController@getItemLocations');
     Route::post('/categories', 'ItemsController@getCategories');
     Route::post('/get-basket-number', 'OrdersController@getBasketNumber');
     Route::post('/finish-order','OrdersController@FinishOrder');
-    Route::post('/add-to-basket', 'OrdersController@addItemToBascked');
-    Route::post('/remove-from-basket', 'OrdersController@removeFromBascked');
+    Route::post('/add-to-basket', 'OrdersController@addItemToBasked');
+    Route::post('/remove-from-basket', 'OrdersController@removeFromBasked');
     Route::post('/get-baskets', 'OrdersController@getBaskets');
     Route::post('/get-basket', 'OrdersController@getBasket');
     Route::post('/get-authorize', 'OrdersController@getAuthorize');
@@ -32,5 +32,10 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-admin-discounts', 'OrdersController@getAdminDiscounts');
     Route::post('/get-offer-discounts', 'OrdersController@getOfferDiscounts');
     Route::post('/add-admin-discounts', 'OrdersController@addAdminDiscounts');
+    Route::post('/get-customers', 'OrdersController@getCustomers');
+    Route::post('/add-customer-basket', 'OrdersController@addCustomerBasket');
+    Route::post('/get-staff-members', 'ShopController@getStaffMembers');
+    Route::post('/get-default-currency', 'ShopController@getSiteDefaultCurrency');
+    Route::post('/add-order-additional', 'OrdersController@addAdditionalData');
 
     });

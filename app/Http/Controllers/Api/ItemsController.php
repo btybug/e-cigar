@@ -8,6 +8,7 @@ use App\Models\App\AppItems;
 use App\Models\Category;
 use App\Models\Items;
 use App\Models\Warehouse;
+use App\Models\WarehouseRacks;
 use Illuminate\Http\Request;
 
 class ItemsController
@@ -40,7 +41,8 @@ class ItemsController
             ->where('app_items.warehouse_id', $w_id)
             ->with('categories')
             ->where('item_locations.warehouse_id', $w_id)
-            ->where('items.is_archive', false)->with('item')
+            ->where('items.is_archive', false)
+            ->with('item')
             ->where('item_translations.locale', \Lang::getLocale())->get();
         return response()->json($items);
     }
@@ -48,5 +50,11 @@ class ItemsController
     public function getCategories(Request $request)
     {
         return  Category::whereNull('parent_id')->where('type', 'stocks')->get();
+    }
+
+    public function getItemLocations(Request $request)
+    {
+        $result=WarehouseRacks::where('warehouse_id',$request->get('shop_id'))->whereNull('parent_id')->get();
+        return response()->json(['success'=>true,'data'=>$result]);
     }
 }

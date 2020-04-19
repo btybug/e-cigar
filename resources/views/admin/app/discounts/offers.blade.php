@@ -37,6 +37,12 @@
                                 Status
                             </th>
                             <th>
+                                Start date
+                            </th>
+                            <th>
+                                End Date
+                            </th>
+                            <th>
                                 Created Date
                             </th>
                             <th>
@@ -57,6 +63,12 @@
                                             <input type="checkbox"  value="{!! $discount->id !!}" @if($discount->status) checked @endif  class="custom-control-input" id="switch{!! $discount->id !!}">
                                             <label class="custom-control-label" for="switch{!! $discount->id !!}"></label>
                                         </div>
+                                    </td>
+                                    <td>
+                                        {!! $discount->start_at !!}
+                                    </td>
+                                    <td>
+                                        {!! $discount->end_at !!}
                                     </td>
                                     <td>
                                         {!! $discount->created_at !!}

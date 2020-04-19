@@ -11,6 +11,7 @@ namespace App\Models;
 
 use App\Models\Common\Translatable;
 use App\Models\Translations\ItemTranslations;
+use Defuse\Crypto\File;
 
 /**
  * App\Models\Items
@@ -119,7 +120,7 @@ class Items extends Translatable
 
     public $translatedAttributes = ['name','short_name', 'short_description', 'long_description'];
 
-    protected $appends = array('qty');
+    protected $appends = array('qty','img64');
 
     const ACTIVE = 1;
     const DRAFT = 0;
@@ -127,6 +128,17 @@ class Items extends Translatable
     public function getQtyAttribute()
     {
         return ($this->type == 'simple') ? $this->purchase()->sum('qty') - $this->others()->sum('qty') : 0;
+    }
+    public function getImg64Attribute()
+    {
+        $path = base_path($this->image);
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        if (!\File::isFile($path)){
+            return null;
+        }
+        $data = file_get_contents($path);
+        $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+       return $base64;
     }
 
     public function scopeActive($query)

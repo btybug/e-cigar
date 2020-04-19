@@ -734,6 +734,11 @@ Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_down
 Route::group(['prefix' => 'category'], function () {
     Route::get('/', 'Admin\CategoriesController@list')->name('admin_category');
 });
+Route::group(['prefix' => 'stores'], function () {
+    Route::get('/', 'Admin\StoresController@index')->name('admin_stores');
+    Route::get('/edit-or-create/{id?}', 'Admin\StoresController@editOrCreate')->name('admin_stores_edit_or_create');
+    Route::post('/edit-or-create/{id?}', 'Admin\StoresController@postEditOrCreate')->name('admin_stores_post_edit_or_create');
+});
 Route::group(['prefix' => 'reports'], function () {
     Route::get('/', 'Admin\ReportsController@getList')->name('admin_reports');
     Route::get('/new', 'Admin\ReportsController@getIndex')->name('admin_reports_new');

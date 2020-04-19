@@ -19,6 +19,8 @@ class CreateAppOffersDiscountTable extends Migration
             $table->string('type');
             $table->tinyInteger('status')->default(0);
             $table->json('data');
+            $table->timestamp('start')->nullable();
+            $table->timestamp('end')->nullable(0);
             $table->timestamps();
         });
     }

@@ -41,6 +41,7 @@ use App\Models\Sports;
 use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\StockSales;
+use App\Models\Stores;
 use App\Models\Suppliers;
 use App\Models\Teams;
 use App\Models\Ticket;
@@ -1307,6 +1308,7 @@ class DatatableController extends Controller
 
     public function getAllAppOrders(Request $request)
     {
+
         return Datatables::of(\App\Models\App\Orders::where('shop_id', $request->get('warehouse_id')))
             ->editColumn('status', function ($order) {
                 return '<span class="badge badge-' . $order->statusClass() . '">' . $order->status() . '</span>';
@@ -1322,6 +1324,20 @@ class DatatableController extends Controller
                 $html = "<a class='btn btn-info' href='" . route('admin_app_order_view', $attr->id) . "'>View</a>";
                 return $html;
             })->rawColumns(['actions', 'status'])
+            ->make(true);
+    }
+
+    public function getAllStores()
+    {
+        return Datatables::of(Stores::query())
+            ->addColumn('phones', function ($attr) {
+
+            })->addColumn('emails', function ($attr) {
+
+            })->addColumn('actions', function ($attr) {
+                $html = "<a class='btn btn-info' href='" . route('admin_stores_edit_or_create', $attr->id) . "'>Edit</a>";
+                return $html;
+            })->rawColumns(['actions'])
             ->make(true);
     }
 }

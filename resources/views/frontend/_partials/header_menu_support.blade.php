@@ -118,3 +118,35 @@
         </a>
     </div>
 </div>
+<div class="col-lg-3 col-sm-6">
+    <div class="single-product">
+        <a href="{!! route('stores') !!}" class="d-block">
+            <div class="product-photo">
+                <img src="/public/img/faq-icon.png" alt="cookies" title="stores">
+            </div>
+            <div class="product-content">
+                <div class="product-title-more d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="product-title">
+                        <h5 class="font-25 font-sec-bold text-uppercase m-0">{!! __('stores') !!}</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="col-lg-3 col-sm-6">
+    <div class="single-product">
+        <a href="{!! route('cookies') !!}" class="d-block">
+            <div class="product-photo">
+                <img src="/public/img/faq-icon.png" alt="cookies" title="distributors">
+            </div>
+            <div class="product-content">
+                <div class="product-title-more d-flex flex-wrap justify-content-between align-items-center">
+                    <div class="product-title">
+                        <h5 class="font-25 font-sec-bold text-uppercase m-0">{!! __('distributors') !!}</h5>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

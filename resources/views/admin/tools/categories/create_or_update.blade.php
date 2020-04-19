@@ -69,6 +69,13 @@
 @endif
 
 <div class="form-group row">
+    <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Status</label>
+    <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
+        {!! Form::select('status',[0=>'Draft',1=>'Published'],null,['class'=>'form-control']) !!}
+    </div>
+</div>
+
+<div class="form-group row">
     <label class="col-xl-2 col-lg-4 col-md-12 col-sm-3 col-form-label">Custom classes</label>
     <div class="col-xl-10 col-lg-8 col-md-12 col-sm-9">
         {!! Form::text('classes',null,['class'=>'form-control']) !!}

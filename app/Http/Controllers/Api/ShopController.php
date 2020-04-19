@@ -4,13 +4,14 @@
 namespace App\Http\Controllers\Api;
 
 
+use App\Http\Controllers\Controller;
 use App\Models\App\AppWarehouses;
 use App\Models\RackItems;
 use App\Models\Settings;
 use App\Models\Warehouse;
 use Illuminate\Http\Request;
 
-class ShopController
+class ShopController extends Controller
 {
 //    public function getUser(Request $request)
 //    {
@@ -45,5 +46,16 @@ class ShopController
         $shop_id=$request->get('shop_id');
         $model=$settings->getEditableData('app_settings_'.$shop_id);
         return response()->json(['settings'=>$model]);
+    }
+
+    public function getStaffMembers(Request $request)
+    {
+        $warehouse=Warehouse::findOrFail($request->get('shop_id'));
+         return response()->json(['success'=>true,'members'=>$warehouse->staff]);
+    }
+
+    public function getSiteDefaultCurrency(){
+
+        return response()->json(['success' => true,'currency'=>site_default_currency()]);
     }
 }

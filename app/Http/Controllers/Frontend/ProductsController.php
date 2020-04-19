@@ -35,10 +35,12 @@ class ProductsController extends Controller
 
     public function index(Request $request, $type = null)
     {
-        $category = Category::where('type', 'stocks')->whereNull('parent_id')->where('slug', $type)->first();
+        $category = Category::where('type', 'stocks')
+            ->where('status',true)->whereNull('parent_id')->where('slug', $type)->first();
         if (!$category && $type != null) abort(404);
 
-        $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+        $categories = Category::with('children')
+            ->where('status',true)->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
         $products = ProductSearch::apply($request, $category);
 //        $products = ProductSearch::apply($request,$category,true);
 //        dd($products);
@@ -162,6 +164,15 @@ class ProductsController extends Controller
         return \Response::json(['message' => 'See available options', 'error' => true]);
     }
 
+    public function getSection(Request $request)
+    {
+        $variation_id = $request->get('variation_id');
+        $variation = StockVariation::where('variation_id',$variation_id)->get();
+
+        $html = View('admin.inventory._partials.render_price_form_single',compact(['variation']))->render();
+        return response()->json(['error' => false, 'html' => $html]);
+    }
+
     public function getPackageTypeLimit(Request $request)
     {
         $variation = StockVariation::findOrFail($request->id);
@@ -256,9 +267,18 @@ class ProductsController extends Controller
 
     public function getVariationMenuRaws(Request $request)
     {
-        $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
+        $type = $request->get('type',null);
+        $quantities = [];
+        if($type){
+            $variations = StockVariation::whereIn('id', array_keys($request->get('ids', [])))->get();
+            $quantities = $request->get('ids', []);
+        }else{
+            $variations = StockVariation::whereIn('id', $request->get('ids', []))->get();
+        }
+
+
         $vSettings = $variations->first();
-        $html = \view("frontend.products._partials.render_variations", compact(['variations', 'vSettings']))->render();
+        $html = \view("frontend.products._partials.render_variations", compact(['variations', 'vSettings','quantities']))->render();
 
         return \Response::json(['error' => false, 'html' => $html, 'items' => $request->get('items', [])]);
     }
