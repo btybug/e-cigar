@@ -733,6 +733,7 @@ Route::get('/print-pdf/{id}', 'Admin\OrdersController@printPdf')->name('pdf_down
 
 Route::group(['prefix' => 'category'], function () {
     Route::get('/', 'Admin\CategoriesController@list')->name('admin_category');
+    Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_get_category');
 });
 Route::group(['prefix' => 'stores'], function () {
     Route::get('/', 'Admin\StoresController@index')->name('admin_stores');
