@@ -98,9 +98,6 @@
                     <li><a href="{{route('admin_items_transfer')}}"><i class="far fa-circle fa-xs"></i> Transfer
                             Items</a></li>
                     @endok
-                    @ok('admin_items_transfer')
-                    <li><a href="{{route('admin_items_transfer')}}"><i class="fa fa-circle-o"></i> Transfer Items</a></li>
-                    @endok
                     @ok('admin_suppliers')
                     <li><a href="{{route('admin_suppliers')}}"><i class="far fa-circle fa-xs"></i>Suppliers</a></li>
                     @endok
