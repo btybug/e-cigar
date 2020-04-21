@@ -3063,6 +3063,7 @@ $(document).ready(function () {
                         $(".single-section").html(data.html);
                         filterModalSingleInit();
                         setTotalPrice(countTotalPrice());
+                        $(".single-section").find(".select-qty").select2({ minimumResultsForSearch: -1 });
                         // get_price();
                         // call_subtotal();
                     }

@@ -190,7 +190,7 @@
                                                         <div
                                                             class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
                                                             <div class="col-md-9 pl-0">
-                                                                <span class="font-sec-light font-26">Select section</span>
+                                                                <span class="font-sec-light font-26">Select option</span>
                                                             </div>
                                                             <div class="col-md-3 d-flex justify-content-end pr-0">
 
