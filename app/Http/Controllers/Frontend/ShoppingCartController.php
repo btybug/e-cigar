@@ -442,8 +442,10 @@ class ShoppingCartController extends Controller
                 ->groupBy('country')->pluck('country', 'id')->toArray();
 
         $active_payments_gateways = (new Settings())->getEditableData('active_payments_gateways');
+
         $cash = (new Settings())->getEditableData('payments_gateways_cash');
         $stripe = (new Settings())->getEditableData('payments_gateways');
+        $paypal = (new Settings())->getEditableData('payments_gateways_paypal');
         if (\Auth::check()) {
             $user = \Auth::user();
             $default_shipping = $user->addresses()->where('id', session()->get('shipping_address_id'))->first();
@@ -476,7 +478,7 @@ class ShoppingCartController extends Controller
         }
 
 
-        return $this->view('payment', compact(['cash', 'stripe', 'active_payments_gateways', 'billing_address', 'default_shipping',
+        return $this->view('payment', compact(['cash', 'stripe','paypal' ,'active_payments_gateways', 'billing_address', 'default_shipping',
             'countries', 'countriesShipping', 'geoZone', 'shipping', 'delivery', 'address', 'address_id']));
     }
 

@@ -107,6 +107,27 @@
                                                 @endif
                                             @endif
 
+                                                @if(in_array('paypal',$geoZone->payment_options) && $active_payments_gateways->paypal)
+                                                    @if($paypal)
+                                                        <div class="method">
+                                                            <div class="custom-control custom-radio">
+                                                                <input type="radio" class="custom-control-input payment_methods"
+                                                                       checked id="deliveryRadios3" name="payment_method" value="paypal">
+                                                                <label class="custom-control-label" for="deliveryRadios3">
+                                                                <span class="d-flex method-wrap pointer">
+                                                                         <span class="method-payment-photo">
+                                                                             <img
+                                                                                 src="{{ $paypal->image }}"
+                                                                                 alt="brand"/>
+                                                                        </span>
+                                                                </span>
+                                                                    <span class="check-line"></span>
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                @endif
+
                                             @if(in_array('stripe',$geoZone->payment_options) && $active_payments_gateways->stripe)
                                                 @if($stripe)
                                                     <div class="method">
@@ -198,6 +219,11 @@
                                             </button>
                                         </div>
                                     @endif
+                                    <div id="paypal-method" class="payment-method-data d-none">
+                                        <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done">
+                                            {!! __('paypal') !!}
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

@@ -383,13 +383,21 @@
                 var button = '';
                 if(method == 'cash'){
                     $("#stripe-method").removeClass('show').addClass('d-none');
+                    $("#paypal-method").removeClass('show').addClass('d-none');
                     $("#cash-method").removeClass('d-none').addClass('show');
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-cash w-100">{!! __('pay_cash') !!}</button>';
                 }else if(method == 'stripe'){
                     $("#stripe-method").removeClass('d-none').addClass('show');
+                    $("#paypal-method").removeClass('show').addClass('d-none');
                     $("#cash-method").removeClass('show').addClass('d-none');
 
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-stripe">{!! __('pay_with_card') !!}</button>';
+                }else if(method == 'paypal'){
+                    $("#stripe-method").removeClass('show').addClass('d-none');
+                    $("#cash-method").removeClass('show').addClass('d-none');
+                    $("#paypal-method").removeClass('d-none').addClass('show');
+
+                    button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-paypal">{!! __('paypal') !!}</button>';
                 }
 console.log(method)
                 el.html(button);

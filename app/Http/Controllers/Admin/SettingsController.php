@@ -414,6 +414,18 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function getStorePaymentsGatewaysPaypal(Settings $settings)
+    {
+        $model = $settings->getEditableData('payments_gateways_paypal');
+        return $this->view('store.payments_gateways.paypal', compact('model'));
+    }
+
+    public function postStorePaymentsGatewaysPaypal(Request $request, Settings $settings)
+    {
+        $settings->updateOrCreateSettings('payments_gateways_paypal', $request->except('_token'));
+        return redirect()->back();
+    }
+
     public function getStorePrinting(Settings $settings)
     {
         $model = $settings->getEditableData('printing');

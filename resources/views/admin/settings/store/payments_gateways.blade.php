@@ -70,7 +70,7 @@
                         <input id="paypal" type="checkbox" name="paypal" @if($model->paypal) checked @endif value="paypal" class="gateways_inp">
                         <label for="paypal" class="title">Paypal</label>
                     </div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                    <a href="{!! route('admin_payment_gateways_paypal') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
 
             </ul>
