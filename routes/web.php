@@ -192,7 +192,7 @@ Route::post('/get-payment-options', 'Frontend\ShoppingCartController@postPayment
 Route::post('/cash-order', 'Frontend\CashPaymentController@order')->name('cash_order');
 Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@success')->name('cash_order_success');
 Route::post('/apply-coupon', 'Frontend\ShoppingCartController@postApplyCoupon')->name('apply_coupon');
-
+Route::post('/pay-with-paypal', 'Frontend\PaymentController@payWithpaypal')->name('pay_with_paypal');
 
 Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], function () {
     Route::get('/', 'Frontend\UserController@index')->name('my_account');

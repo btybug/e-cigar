@@ -184,6 +184,23 @@
                     // Then listen for a click on your confirm button
                     return actions.order.capture().then(function () {
                         // Show a confiurmation to the buyer
+                        $(".container").css('opacity','0.6');
+                        $(".loader-img").toggleClass('d-none');
+                        AjaxCall(
+                            "/pay-with-paypal",
+                            {},
+                            res => {
+                                if (!res.error) {
+                                    $(".container").css('opacity','1');
+                                    $(".loader-img").toggleClass('d-none');
+                                    // window.location = res.url;
+                                }
+                            },
+                            error => {
+                                $(".container").css('opacity','1');
+                                $(".loader-img").toggleClass('d-none');
+                            }
+                        );
                         alert('Transaction complete!');
                     });
                 });
