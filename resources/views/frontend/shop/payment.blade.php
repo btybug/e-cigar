@@ -175,22 +175,23 @@
                     }
                 });
             },
-            onAuthorize: function (data, actions) {
-                // Get the payment details
-                return actions.payment.get()
-                    .then(function (paymentDetails) {
-                        // Show a confirmation using the details from paymentDetails
-                        // Then listen for a click on your confirm button
-                        document.querySelector('#confirm-button')
-                            .addEventListener('click', function () {
-                                // Execute the payment
-                                return actions.payment.execute()
-                                    .then(function () {
-                                        alert('success')
-                                        // Show a success page to the buyer
-                                    });
+            onApprove: function (data, actions) {
+
+                // Get the order details
+                return actions.order.get().then(function (orderDetails) {
+
+                    // Show a confirmation using the details from orderDetails
+                    // Then listen for a click on your confirm button
+                    document.querySelector('#confirm-button')
+                        .addEventListener('click', function () {
+
+                            // Capture the transaction funds
+                            return actions.order.capture().then(function () {
+                                // Show a confiurmation to the buyer
+                                alert('Transaction complete!');
                             });
-                    });
+                        });
+                });
             },
             createOrder: function(data, actions) {
                 // Set up the transaction
