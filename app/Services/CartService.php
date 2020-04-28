@@ -383,7 +383,7 @@ class CartService
                                 }
                             } else {
                                 if (!isset($item['products']) || ($group->min_count_limit > count($item['products']) || $group->count_limit < count($item['products']))) {
-                                    dd($item, $group, $product_limit);
+//                                    dd($item, $group, $product_limit);
                                     $error = "Please select options according to limit";
                                 }
                             }

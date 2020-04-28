@@ -149,6 +149,69 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency=GBP"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    </script>
+
+    <script>
+        paypal.Buttons({
+            enableStandardCardFields: false,
+            env: 'sandbox', // Optional: specify 'sandbox' environment later change to production
+            client: {
+                sandbox:    'ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency',
+                production: 'xxxxxxxxx'
+            },
+            commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+            payment: function (data, actions) {
+                return actions.payment.create({
+                    payment: {
+                        transactions: [
+                            {
+                                amount: {
+                                    total: '1.00',
+                                    currency: 'USD'
+                                }
+                            }
+                        ]
+                    }
+                });
+            },
+            onAuthorize: function (data, actions) {
+                // Get the payment details
+                return actions.payment.get()
+                    .then(function (paymentDetails) {
+                        // Show a confirmation using the details from paymentDetails
+                        // Then listen for a click on your confirm button
+                        document.querySelector('#confirm-button')
+                            .addEventListener('click', function () {
+                                // Execute the payment
+                                return actions.payment.execute()
+                                    .then(function () {
+                                        alert('success')
+                                        // Show a success page to the buyer
+                                    });
+                            });
+                    });
+            },
+            createOrder: function(data, actions) {
+                // Set up the transaction
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: "{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false,true) !!}"
+                        }
+                    }]
+                });
+            },
+            onCancel: function (data) {
+                alert("Canceled")
+            },
+            onError: function (err) {
+                // Show an error page here, when an error occurs
+                alert(err.toString())
+            }
+        }).render('#paypal-button-container');
+        // This function displays Smart Payment Buttons on your web page.
+    </script>
 
     <script>
 

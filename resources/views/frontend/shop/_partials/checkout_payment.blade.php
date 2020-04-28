@@ -220,9 +220,7 @@
                                         </div>
                                     @endif
                                     <div id="paypal-method" class="payment-method-data d-none">
-                                        <button class="btn btn-primary text-uppercase mt-1 font-15 btn-done">
-                                            {!! __('paypal') !!}
-                                        </button>
+                                        <div id="paypal-button-container"></div>
                                     </div>
                                 </div>
                             </div>
