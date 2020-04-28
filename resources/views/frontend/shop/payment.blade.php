@@ -182,15 +182,10 @@
 
                     // Show a confirmation using the details from orderDetails
                     // Then listen for a click on your confirm button
-                    document.querySelector('#confirm-button')
-                        .addEventListener('click', function () {
-
-                            // Capture the transaction funds
-                            return actions.order.capture().then(function () {
-                                // Show a confiurmation to the buyer
-                                alert('Transaction complete!');
-                            });
-                        });
+                    return actions.order.capture().then(function () {
+                        // Show a confiurmation to the buyer
+                        alert('Transaction complete!');
+                    });
                 });
             },
             createOrder: function(data, actions) {
