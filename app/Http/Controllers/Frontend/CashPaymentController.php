@@ -37,6 +37,7 @@ class CashPaymentController extends Controller
     private $statuses;
     private $settings;
     private $amount;
+    private $orderDetails = null;
     private $paymentService;
 
     public function __construct(

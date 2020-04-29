@@ -25,6 +25,7 @@ class PaymentController extends Controller
     private $statuses;
     private $settings;
     private $amount;
+    private $orderDetails = null;
     private $paymentService;
 
     public function __construct(
@@ -94,6 +95,7 @@ class PaymentController extends Controller
 //            $transaction = $payment->create($this->_api_context);
 
             $this->paymentService->method = 'paypal';
+            $this->paymentService->orderDetails = $request->get('data');
             $order = $this->paymentService->call();
 //            $this->makeTransaction([], $order);
 

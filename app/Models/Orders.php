@@ -69,6 +69,7 @@ class Orders extends Model
 
     const ORDER_NEW_SESSION_ID = 'order_new';
 
+    protected $casts = ['order_details' => 'json'];
 
     public function shippingAddress()
     {

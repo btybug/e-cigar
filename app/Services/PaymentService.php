@@ -24,6 +24,7 @@ class PaymentService
 {
     private $amount = 0;
     public $method = 'cash';
+    public $orderDetails = null;
 
     public function __construct(
         Statuses $statuses,
@@ -81,7 +82,8 @@ class PaymentService
                 'payment_method' => $this->method,
                 'shipping_price' => $shipping->getValue(),
                 'currency' => get_currency(),
-                'order_number' => $order_number
+                'order_number' => $order_number,
+                'order_details' => $this->orderDetails
             ]);
 
             $status = $setting = $this->settings->getData('order', 'open');

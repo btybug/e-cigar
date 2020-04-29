@@ -176,10 +176,8 @@
                 });
             },
             onApprove: function (data, actions) {
-                console.log('approve',data,actions)
                 // Get the order details
                 return actions.order.get().then(function (orderDetails){
-
                     // Show a confirmation using the details from orderDetails
                     // Then listen for a click on your confirm button
                     return actions.order.capture().then(function () {
@@ -188,7 +186,7 @@
                         $(".loader-img").toggleClass('d-none');
                         AjaxCall(
                             "/pay-with-paypal",
-                            {data : data},
+                            {data : orderDetails},
                             res => {
                                 if (!res.error) {
                                     $(".container").css('opacity','1');
