@@ -176,9 +176,9 @@
                 });
             },
             onApprove: function (data, actions) {
-
+                console.log('approve',data,actions)
                 // Get the order details
-                return actions.order.get().then(function (orderDetails) {
+                return actions.order.get().then(function (orderDetails){
 
                     // Show a confirmation using the details from orderDetails
                     // Then listen for a click on your confirm button
@@ -188,12 +188,12 @@
                         $(".loader-img").toggleClass('d-none');
                         AjaxCall(
                             "/pay-with-paypal",
-                            {},
+                            {data : data},
                             res => {
                                 if (!res.error) {
                                     $(".container").css('opacity','1');
                                     $(".loader-img").toggleClass('d-none');
-                                    // window.location = res.url;
+                                    window.location = res.url;
                                 }
                             },
                             error => {
@@ -201,7 +201,6 @@
                                 $(".loader-img").toggleClass('d-none');
                             }
                         );
-                        alert('Transaction complete!');
                     });
                 });
             },

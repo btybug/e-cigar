@@ -34,12 +34,12 @@ class PaymentController extends Controller
     )
     {
         /** PayPal api context **/
-        $paypal_conf = \Config::get('paypal');
-        $this->_api_context = new ApiContext(new OAuthTokenCredential(
-                $paypal_conf['client_id'],
-                $paypal_conf['secret'])
-        );
-        $this->_api_context->setConfig($paypal_conf['settings']);
+//        $paypal_conf = \Config::get('paypal');
+//        $this->_api_context = new ApiContext(new OAuthTokenCredential(
+//                $paypal_conf['client_id'],
+//                $paypal_conf['secret'])
+//        );
+//        $this->_api_context->setConfig($paypal_conf['settings']);
         $this->statuses = $statuses;
         $this->settings = $settings;
         $this->paymentService = $paymentService;
@@ -50,52 +50,54 @@ class PaymentController extends Controller
     {
         try {
 
-            $payer = new Payer();
-            $payer->setPaymentMethod('paypal');
-            $items = Cart::getContent();
-
-            $itemsArray = [];
-            foreach ($items as $variation_id => $item) {
-                $item_ = new Item();
-                $item_->setName($item->attributes->product->name)/** item name **/
-                ->setCurrency('GBP')
-                    ->setQuantity($item->quantity)
-                    ->setPrice($item->price);
-                /** unit price **/
-
-                $itemsArray[] = $item_;
-            }
-
-            $item_list = new ItemList();
-            $item_list->setItems($itemsArray);
-
-            $amount = new Amount();
-            $amount->setCurrency('GBP')
-                ->setTotal($this->amount);
-
-            $transaction = new Transaction();
-
-            $transaction->setAmount($this->amount)
-                ->setItemList($item_list)
-                ->setDescription('Your transaction description');
+//            $payer = new Payer();
+//            $payer->setPaymentMethod('paypal');
+//            $items = Cart::getContent();
+//
+//            $itemsArray = [];
+//            foreach ($items as $variation_id => $item) {
+//                $item_ = new Item();
+//                $item_->setName($item->attributes->product->name)/** item name **/
+//                ->setCurrency('GBP')
+//                    ->setQuantity($item->quantity)
+//                    ->setPrice($item->price);
+//                /** unit price **/
+//
+//                $itemsArray[] = $item_;
+//            }
+//
+//            $item_list = new ItemList();
+//            $item_list->setItems($itemsArray);
+//
+//            $amount = new Amount();
+//            $amount->setCurrency('GBP')
+//                ->setTotal($this->amount);
+//
+//            $transaction = new Transaction();
+//
+//            $transaction->setAmount($this->amount)
+//                ->setItemList($item_list)
+//                ->setDescription('Your transaction description');
+//
+//
+//
+//            $redirect_urls = new RedirectUrls();
+//            $redirect_urls->setReturnUrl(route('cash_order_success', $order->id));
+//
+//            $payment = new Payment();
+//            $payment->setIntent('Sale')
+//                ->setPayer($payer)
+//                ->setRedirectUrls($redirect_urls)
+//                ->setTransactions(array($transaction));
+//            /** dd($payment->create($this->_api_context));exit; **/
+//
+//            $transaction = $payment->create($this->_api_context);
 
             $this->paymentService->method = 'paypal';
             $order = $this->paymentService->call();
+//            $this->makeTransaction([], $order);
 
-            $redirect_urls = new RedirectUrls();
-            $redirect_urls->setReturnUrl(route('cash_order_success', $order->id));
-
-            $payment = new Payment();
-            $payment->setIntent('Sale')
-                ->setPayer($payer)
-                ->setRedirectUrls($redirect_urls)
-                ->setTransactions(array($transaction));
-            /** dd($payment->create($this->_api_context));exit; **/
-
-            $transaction = $payment->create($this->_api_context);
-            $this->makeTransaction($transaction, $order);
-
-        } catch (\PayPal\Exception\PPConnectionException $ex) {
+        } catch (\Exception $ex) {
             if (\Config::get('app.debug')) {
                 \Session::put('error', 'Connection timeout');
                 return \Redirect::route('paywithpaypal');
@@ -105,20 +107,7 @@ class PaymentController extends Controller
             }
         }
 
-        foreach ($payment->getLinks() as $link) {
-            if ($link->getRel() == 'approval_url') {
-                $redirect_url = $link->getHref();
-                break;
-            }
-        }
-        /** add payment ID to session **/
-        \Session::put('paypal_payment_id', $payment->getId());
-        if (isset($redirect_url)) {
-            /** redirect to paypal **/
-            return \Redirect::away($redirect_url);
-        }
-        \Session::put('error', 'Unknown error occurred');
-        return \Redirect::route('home');
+        return \Response::json(['error' => false, 'url' => route('cash_order_success', $order->id)]);
     }
 
     private function makeTransaction($charge, $order)
