@@ -208,6 +208,9 @@
             createOrder: function(data, actions) {
                 // Set up the transaction
                 return actions.order.create({
+                    application_context: {
+                        shipping_preference: 'NO_SHIPPING'
+                    },
                     purchase_units: [{
                         amount: {
                             value: "{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false,true) !!}"
