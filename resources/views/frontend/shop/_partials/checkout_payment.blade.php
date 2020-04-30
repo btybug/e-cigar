@@ -128,7 +128,7 @@
                                                 @endif
                                             @endif
 
-                                            @if(in_array('paypal_card',$geoZone->payment_options) && $active_payments_gateways->stripe)
+                                            @if(in_array('paypal_card',$geoZone->payment_options) && $active_payments_gateways->paypal_card)
                                                 @if($paypal_card)
                                                     <div class="method">
                                                         <div class="custom-control custom-radio">
