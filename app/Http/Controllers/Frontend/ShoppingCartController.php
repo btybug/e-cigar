@@ -448,6 +448,7 @@ class ShoppingCartController extends Controller
         $paypal = (new Settings())->getEditableData('payments_gateways_paypal');
         $paypal_card = (new Settings())->getEditableData('payments_gateways_paypal_card');
 
+        dd($paypal_card,$paypal);
         if (\Auth::check()) {
             $user = \Auth::user();
             $default_shipping = $user->addresses()->where('id', session()->get('shipping_address_id'))->first();
