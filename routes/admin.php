@@ -90,11 +90,13 @@ Route::group(['prefix' => 'settings'], function () {
         Route::post('/payment-gateways/stripe', 'Admin\SettingsController@postStorePaymentsGatewaysSettings')->name('post_admin_payment_gateways_stripe');
 
         Route::get('/payment-gateways/cash', 'Admin\SettingsController@getStorePaymentsGatewaysCash')->name('admin_payment_gateways_cash');
-        Route::post('/payment-gateways/cash', 'Admin\SettingsController@postStorePaymentsGatewaysCash')->name('post_admin_payment_gateways_cash')
+        Route::post('/payment-gateways/cash', 'Admin\SettingsController@postStorePaymentsGatewaysCash')->name('post_admin_payment_gateways_cash');
 
-        ;
         Route::get('/payment-gateways/paypal', 'Admin\SettingsController@getStorePaymentsGatewaysPaypal')->name('admin_payment_gateways_paypal');
         Route::post('/payment-gateways/paypal', 'Admin\SettingsController@postStorePaymentsGatewaysPaypal')->name('post_admin_payment_gateways_paypal');
+
+        Route::get('/payment-gateways/paypal-card', 'Admin\SettingsController@getStorePaymentsGatewaysPaypalCard')->name('admin_payment_gateways_paypal_card');
+        Route::post('/payment-gateways/paypal-card', 'Admin\SettingsController@postStorePaymentsGatewaysPaypalCard')->name('post_admin_payment_gateways_paypal_card');
 
         Route::get('/printing', 'Admin\SettingsController@getStorePrinting')->name('admin_settings_printing');
         Route::post('/printing', 'Admin\SettingsController@postStorePrinting')->name('admin_settings_printing_post');

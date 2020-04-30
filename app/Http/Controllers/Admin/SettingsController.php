@@ -426,6 +426,18 @@ class SettingsController extends Controller
         return redirect()->back();
     }
 
+    public function getStorePaymentsGatewaysPaypalCard(Settings $settings)
+    {
+        $model = $settings->getEditableData('payments_gateways_paypal_card');
+        return $this->view('store.payments_gateways.paypal_card', compact('model'));
+    }
+
+    public function postStorePaymentsGatewaysPaypalCard(Request $request, Settings $settings)
+    {
+        $settings->updateOrCreateSettings('payments_gateways_paypal_card', $request->except('_token'));
+        return redirect()->back();
+    }
+
     public function getStorePrinting(Settings $settings)
     {
         $model = $settings->getEditableData('printing');
@@ -445,6 +457,8 @@ class SettingsController extends Controller
 
     public function postStorePaymentsGatewaysEnable(Request $request, Settings $settings)
     {
+        $model = $settings->getEditableData('active_payments_gateways');
+        $data = $model->toArray();
         $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
         $settings->updateOrCreateSettings('active_payments_gateways', $data);
         return 1;

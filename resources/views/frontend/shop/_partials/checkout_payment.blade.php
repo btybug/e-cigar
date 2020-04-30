@@ -107,27 +107,6 @@
                                                 @endif
                                             @endif
 
-                                                @if(in_array('paypal',$geoZone->payment_options) && $active_payments_gateways->paypal)
-                                                    @if($paypal)
-                                                        <div class="method">
-                                                            <div class="custom-control custom-radio">
-                                                                <input type="radio" class="custom-control-input payment_methods"
-                                                                       checked id="deliveryRadios3" name="payment_method" value="paypal">
-                                                                <label class="custom-control-label" for="deliveryRadios3">
-                                                                <span class="d-flex method-wrap pointer">
-                                                                         <span class="method-payment-photo">
-                                                                             <img
-                                                                                 src="{{ $paypal->image }}"
-                                                                                 alt="brand"/>
-                                                                        </span>
-                                                                </span>
-                                                                    <span class="check-line"></span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                @endif
-
                                             @if(in_array('stripe',$geoZone->payment_options) && $active_payments_gateways->stripe)
                                                 @if($stripe)
                                                     <div class="method">
@@ -142,6 +121,48 @@
                                                                                  alt="brand"/>
                                                                         </span>
                                                                 </span>
+                                                                <span class="check-line"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endif
+
+                                            @if(in_array('paypal_card',$geoZone->payment_options) && $active_payments_gateways->stripe)
+                                                @if($paypal_card)
+                                                    <div class="method">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" class="custom-control-input payment_methods"
+                                                                   {{ (!$cash && $stripe)?'checked':'' }} id="deliveryRadios4" name="payment_method" value="paypal_card">
+                                                            <label class="custom-control-label" for="deliveryRadios4">
+                                                                <span class="d-flex method-wrap pointer">
+                                                                         <span class="method-payment-photo">
+                                                                             <img
+                                                                                 src="{{ $paypal_card->image }}"
+                                                                                 alt="brand"/>
+                                                                        </span>
+                                                                </span>
+                                                                <span class="check-line"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @endif
+
+                                            @if(in_array('paypal',$geoZone->payment_options) && $active_payments_gateways->paypal)
+                                                @if($paypal)
+                                                    <div class="method">
+                                                        <div class="custom-control custom-radio">
+                                                            <input type="radio" class="custom-control-input payment_methods"
+                                                                   checked id="deliveryRadios3" name="payment_method" value="paypal">
+                                                            <label class="custom-control-label" for="deliveryRadios3">
+                                                            <span class="d-flex method-wrap pointer">
+                                                                     <span class="method-payment-photo">
+                                                                         <img
+                                                                             src="{{ $paypal->image }}"
+                                                                             alt="brand"/>
+                                                                    </span>
+                                                            </span>
                                                                 <span class="check-line"></span>
                                                             </label>
                                                         </div>
@@ -219,8 +240,13 @@
                                             </button>
                                         </div>
                                     @endif
+
                                     <div id="paypal-method" class="payment-method-data d-none">
                                         <div id="paypal-button-container"></div>
+                                    </div>
+
+                                    <div id="paypal-card-method" class="payment-method-data d-none">
+                                        <div id="paypal-card-button-container"></div>
                                     </div>
                                 </div>
                             </div>

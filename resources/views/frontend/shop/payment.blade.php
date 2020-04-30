@@ -149,80 +149,100 @@
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://js.stripe.com/v3/"></script>
-    <script src="https://www.paypal.com/sdk/js?client-id=ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency=GBP"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+    <script src="https://www.paypal.com/sdk/js?client-id=ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency=GBP&components=buttons,funding-eligibility"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
     </script>
-
     <script>
-        paypal.Buttons({
-            enableStandardCardFields: false,
-            env: 'sandbox', // Optional: specify 'sandbox' environment later change to production
-            client: {
-                sandbox:    'ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency',
-                production: 'xxxxxxxxx'
-            },
-            commit: true, // Optional: show a 'Pay Now' button in the checkout flow
-            payment: function (data, actions) {
-                return actions.payment.create({
-                    payment: {
-                        transactions: [
-                            {
-                                amount: {
-                                    total: '1.00',
-                                    currency: 'USD'
+        var FUNDING_SOURCES = [
+            paypal.FUNDING.PAYPAL,
+            // paypal.FUNDING.CREDIT,
+            paypal.FUNDING.CARD
+        ];
+
+        // Loop over each funding source / payment method
+        FUNDING_SOURCES.forEach(function(fundingSource) {
+            var button = paypal.Buttons({
+                fundingSource: fundingSource,
+                enableStandardCardFields: false,
+                env: 'sandbox', // Optional: specify 'sandbox' environment later change to production
+                client: {
+                    sandbox:    'ATE5DicGShtNMJ5igc66jXzks8wlP-nctQQbckKJFzhsjSEoW08XJq_rlJamvs8UhUOuNC3tRq4tg1vB&currency',
+                    production: 'xxxxxxxxx'
+                },
+                commit: true, // Optional: show a 'Pay Now' button in the checkout flow
+                payment: function (data, actions) {
+                    return actions.payment.create({
+                        payment: {
+                            transactions: [
+                                {
+                                    amount: {
+                                        total: '1.00',
+                                        currency: 'USD'
+                                    }
                                 }
-                            }
-                        ]
-                    }
-                });
-            },
-            onApprove: function (data, actions) {
-                // Get the order details
-                return actions.order.get().then(function (orderDetails){
-                    // Show a confirmation using the details from orderDetails
-                    // Then listen for a click on your confirm button
-                    return actions.order.capture().then(function () {
-                        // Show a confiurmation to the buyer
-                        $(".container").css('opacity','0.6');
-                        $(".loader-img").toggleClass('d-none');
-                        AjaxCall(
-                            "/pay-with-paypal",
-                            {data : orderDetails},
-                            res => {
-                                if (!res.error) {
+                            ]
+                        }
+                    });
+                },
+                onApprove: function (data, actions) {
+                    // Get the order details
+                    return actions.order.get().then(function (orderDetails){
+                        // Show a confirmation using the details from orderDetails
+                        // Then listen for a click on your confirm button
+                        return actions.order.capture().then(function () {
+                            // Show a confiurmation to the buyer
+                            $(".container").css('opacity','0.6');
+                            $(".loader-img").toggleClass('d-none');
+                            AjaxCall(
+                                "/pay-with-paypal",
+                                {data : orderDetails},
+                                res => {
+                                    if (!res.error) {
+                                        $(".container").css('opacity','1');
+                                        $(".loader-img").toggleClass('d-none');
+                                        window.location = res.url;
+                                    }
+                                },
+                                error => {
                                     $(".container").css('opacity','1');
                                     $(".loader-img").toggleClass('d-none');
-                                    window.location = res.url;
                                 }
-                            },
-                            error => {
-                                $(".container").css('opacity','1');
-                                $(".loader-img").toggleClass('d-none');
-                            }
-                        );
+                            );
+                        });
                     });
-                });
-            },
-            createOrder: function(data, actions) {
-                // Set up the transaction
-                return actions.order.create({
-                    application_context: {
-                        shipping_preference: 'NO_SHIPPING'
-                    },
-                    purchase_units: [{
-                        amount: {
-                            value: "{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false,true) !!}"
-                        }
-                    }]
-                });
-            },
-            onCancel: function (data) {
-                alert("Canceled")
-            },
-            onError: function (err) {
-                // Show an error page here, when an error occurs
-                alert(err.toString())
+                },
+                createOrder: function(data, actions) {
+                    // Set up the transaction
+                    return actions.order.create({
+                        application_context: {
+                            shipping_preference: 'NO_SHIPPING'
+                        },
+                        purchase_units: [{
+                            amount: {
+                                value: "{!! convert_price(\App\Services\CartService::getTotalPriceSum()+\Cart::getTotal(),$currency, false,true) !!}"
+                            }
+                        }]
+                    });
+                },
+                onCancel: function (data) {
+                    alert("Canceled")
+                },
+                onError: function (err) {
+                    // Show an error page here, when an error occurs
+                    alert(err.toString())
+                }
+            });
+
+
+            console.log(fundingSource)
+            // Check if the button is eligible
+            if (fundingSource == 'paypal') {
+                // Render the standalone button for that funding source
+                button.render('#paypal-button-container');
+            }else{
+                button.render('#paypal-card-button-container');
             }
-        }).render('#paypal-button-container');
+        });
+
         // This function displays Smart Payment Buttons on your web page.
     </script>
 
@@ -460,20 +480,33 @@
                 if(method == 'cash'){
                     $("#stripe-method").removeClass('show').addClass('d-none');
                     $("#paypal-method").removeClass('show').addClass('d-none');
+                    $("#paypal-card-method").removeClass('show').addClass('d-none');
+
                     $("#cash-method").removeClass('d-none').addClass('show');
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-cash w-100">{!! __('pay_cash') !!}</button>';
                 }else if(method == 'stripe'){
                     $("#stripe-method").removeClass('d-none').addClass('show');
                     $("#paypal-method").removeClass('show').addClass('d-none');
+                    $("#paypal-card-method").removeClass('show').addClass('d-none');
+
                     $("#cash-method").removeClass('show').addClass('d-none');
 
                     button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-stripe">{!! __('pay_with_card') !!}</button>';
                 }else if(method == 'paypal'){
                     $("#stripe-method").removeClass('show').addClass('d-none');
                     $("#cash-method").removeClass('show').addClass('d-none');
+                    $("#paypal-card-method").removeClass('show').addClass('d-none');
+
                     $("#paypal-method").removeClass('d-none').addClass('show');
 
-                    button = '<button class="order-summary-btn font-sec-reg text-uppercase font-24 text-sec-clr submit-paypal">{!! __('paypal') !!}</button>';
+                    button = '';
+                }else if(method == 'paypal_card'){
+                    $("#stripe-method").removeClass('show').addClass('d-none');
+                    $("#cash-method").removeClass('show').addClass('d-none');
+                    $("#paypal-method").removeClass('show').addClass('d-none');
+                    $("#paypal-card-method").removeClass('d-none').addClass('show');
+
+                    button = '';
                 }
 console.log(method)
                 el.html(button);

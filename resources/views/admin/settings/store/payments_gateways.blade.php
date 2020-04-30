@@ -72,6 +72,13 @@
                     </div>
                     <a href="{!! route('admin_payment_gateways_paypal') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
+                <li class="item">
+                    <div class="chek-title">
+                        <input id="paypal_card" type="checkbox" name="paypal_card" @if($model->paypal_card) checked @endif value="paypal_card" class="gateways_inp">
+                        <label for="paypal_card" class="title">Paypal CARD</label>
+                    </div>
+                    <a href="{!! route('admin_payment_gateways_paypal_card') !!}" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                </li>
 
             </ul>
         </div>
