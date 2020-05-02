@@ -78,10 +78,11 @@ Route::get('order-success/{id}', function ($id) {
 Auth::routes();
 Auth::routes(['verify' => true]);
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::group(['prefix' => 'news'], function () {
-    Route::get('/', 'Frontend\BlogController@index')->name('blog');
-    Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
-});
+//Route::group(['prefix' => 'news'], function () {
+//    Route::get('/', 'Frontend\BlogController@index')->name('blog');
+//    Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
+//});
+
 Route::group(['prefix' => 'brands'], function () {
     Route::get('/{type?}', 'Frontend\BrandsController@index')->name('brands');
 });

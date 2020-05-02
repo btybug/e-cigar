@@ -182,7 +182,7 @@
                                                     <div class="product__single-delivery-free font-20 lh-1">
                                                         {!! __('free_on_orders_over') !!}
                                                     </div>
-                                                    <a href="#"
+                                                    <a href="{!! route('delivery') !!}"
                                                        class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
                                                 </div>
                                                 @if( $vape->section_type == 1 )

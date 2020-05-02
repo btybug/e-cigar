@@ -74,9 +74,9 @@
                                 <a class="nav-link" href="{!! route('product_offers') !!}">{!! __('offers') !!}</a>
                             </li>
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{!! route('blog') !!}">{!! __('news') !!}</a>
-                            </li>
+                            {{--<li class="nav-item">--}}
+                                {{--<a class="nav-link" href="{!! route('blog') !!}">{!! __('news') !!}</a>--}}
+                            {{--</li>--}}
 
                             <li class="nav-item align-items-center nav-item--has-dropdown">
                                 <a class="nav-link br-nav-l" href="{!! route('brands') !!}">{!! __('brands') !!}
