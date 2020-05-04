@@ -3304,10 +3304,13 @@ outline: none;
 }
 
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content .item-photo {
-    height: 288px;
+    /*height: 288px;*/
+    min-height: 100px;
     background: #eeeeee;
 }
-
+#wizardViewModal .footer--right .message_place_js{
+    display: none;
+}
 #wizardViewModal .shopping-cart_wrapper .content-wrap .item-content .item-title {
   padding: 5px 15px;
   border-top: 1px solid #ccc;
