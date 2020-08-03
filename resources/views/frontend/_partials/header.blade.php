@@ -324,7 +324,7 @@
     @include("frontend._partials.login_modal")
 
     <!--modal Register-->
-    @include("frontend._partials.create_account")
+{{--    @include("frontend._partials.create_account")--}}
 
 @endif
 
