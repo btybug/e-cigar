@@ -18832,7 +18832,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin-bottom: 30px;
 }
 .home_categories-item {
-    height: 396px;
+    /*height: 396px;*/
+    min-height:50px;
     /*margin-bottom: 30px;*/
     border: 1px solid #d7d7d7;
     border-bottom: none;
@@ -19242,7 +19243,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 
 .products__item-wrapper .products__item-photo {
-    height: 267px;
+    /*height: 267px;*/
     background-color: #e3e6ed;
 
 }
@@ -19376,8 +19377,8 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 
 .products__item-wrapper .products__item-discount {
     /*margin-right: 20px;*/
-    /*width: 52px;*/
-    width: 100%;
+    width: 52px;
+    /*width: 100%;*/
     height: 46px;
     display: block;
 }
@@ -23263,6 +23264,12 @@ header .header-bottom .share-button svg {
     .products__page-main .filter-sidebar-wrapper .filter-single-wall.top-filters .main-filters {
         position: static;
     }
+    .home_categories-item-inner{
+        padding: 30px;
+    }
+    .home_categories-item-inner h4{
+        font-size: 26px;
+    }
 }
 @media (min-width: 1199px) and (max-width: 1629px) {
     .contact__page-wrapper .contact-main-content .col-xl-2{
@@ -23795,6 +23802,9 @@ flex-direction: column;
     .product__single-item-info{
         padding: 15px;
     }
+    .products__page-head__list > li:not(:last-of-type){
+        margin-right: 30px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -24051,6 +24061,19 @@ flex-direction: column;
     }
     .shopping__cart-no-reg .log-reg-wrapper >div.col-lg-6{
         padding: 0;
+    }
+    .products__page-main .filter-sidebar-wrapper .all-filters{
+        margin-top: 35px;
+    }
+    .products__page-head__list > li:not(:last-of-type){
+        margin-right: 10px;
+    }
+    .products-page .main-content-wrapper .content-head .right-head{
+        margin-left: 10px !important;
+    }
+    .products-page .main-content-wrapper .content-head .products__page-head__list .item-link{
+        font-size: 16px;
+        padding: 0 7px;
     }
 }
 
