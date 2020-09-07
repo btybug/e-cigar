@@ -127,10 +127,10 @@
                         $("body").find(".brands_aside-item-link").removeClass('active');
                         $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
 
-                        $("body").find('.products-box').css('height','auto');
+                        // $("body").find('.products-box').css('height','auto');
                         $("body").find('.brands_main-content').html(data.html);
-                        let productsWallHeight = parseInt( $('body').find('.products-box').height())
-                        $("body").find('.products-box').css('height',productsWallHeight);
+                        // let productsWallHeight = parseInt( $('body').find('.products-box').height())
+                        // $("body").find('.products-box').css('height',productsWallHeight);
 
                         $("body").find("#sortBy").select2();
                         history.pushState(null, null, '/brands/' + slug);

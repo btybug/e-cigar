@@ -13615,7 +13615,8 @@ header .header-top .navbar-nav .nav-item.nav-item--has-dropdown a {
     padding-right: 8px !important;
 }
 header .header-top .navbar-nav .nav-item--has-dropdown_dropdown{
-    max-height: 795px;
+    /*max-height: 795px;*/
+    max-height: calc(100vh - 145px);
 }
 header .header-top .navbar-nav .nav-link {
     color: #ffffff !important;
@@ -15883,9 +15884,9 @@ vertical-align: middle;
 
 .my-account--selects.pos-fixed {
     position: fixed;
-    top: 50px;
+    top: 68px;
     width: 100%;
-    z-index: 999;
+    z-index: 9999;
     background: transparent;
     padding: 0;
 }
@@ -16258,7 +16259,7 @@ vertical-align: middle;
         position: fixed;
         left: 0;
         right: 0;
-        top: 50px;
+        top: 68px;
         z-index: 9999;
     }
 
@@ -19689,15 +19690,15 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 @media (min-width: 768px) {
     .brands_page-wrapper .brands_aside {
-        -ms-flex: 0 0 230px;
-        flex: 0 0 230px;
-        max-width: 230px;
+        -ms-flex: 0 0 200px;
+        flex: 0 0 200px;
+        max-width: 200px;
     }
 
     .brands_page-wrapper .brands_main-content {
-        -ms-flex: 0 0 calc(100% - 230px);
-        flex: 0 0 calc(100% - 230px);
-        max-width: calc(100% - 230px);
+        -ms-flex: 0 0 calc(100% - 200px);
+        flex: 0 0 calc(100% - 200px);
+        max-width: calc(100% - 200px);
     }
 }
 @media (min-width: 991px){
@@ -23805,6 +23806,9 @@ flex-direction: column;
     .products__page-head__list > li:not(:last-of-type){
         margin-right: 30px;
     }
+    .brands_main-content-products-wrapper .right-wrapper{
+        padding-left: 15px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -24026,6 +24030,7 @@ flex-direction: column;
     }
     .profile-sidebar.hidden-sidebar, #cartSidebar{
         top: 69px;
+        height: calc(100% - 69px);
     }
 
     header .header-top .navbar .sidebar_button_active_detector.active{
@@ -24074,6 +24079,9 @@ flex-direction: column;
     .products-page .main-content-wrapper .content-head .products__page-head__list .item-link{
         font-size: 16px;
         padding: 0 7px;
+    }
+    #share_modal{
+        top: 68px;
     }
 }
 
@@ -24472,6 +24480,7 @@ flex-direction: column;
     .adult-modal .modal-content{
         height: auto;
     }
+
 }
 @media (max-width: 455px) {
     .continue-shp-wrapp .product-card_price {
@@ -24524,6 +24533,13 @@ flex-direction: column;
     }
     .brands_main-content-products-wrapper .brands_main-content-products-top .sort-by_select{
         max-width: 100%;
+    }
+    #cartSidebar{
+        width: 270px;
+        right: -310px;
+    }
+    #cartSidebar.show{
+        right: 0;
     }
 
 }
