@@ -5,18 +5,18 @@
                 <div class="row">
                     <div class="col-md-3">
                         <ul class="left-wrapper">
-                            @if(LaravelGmail::check())
-                                <li class="item-wrap">
-                                    <a href="{!! route('support_contact_us') !!}"
-                                       class="d-flex align-items-center item-link">
-                                        <span class="line"></span>
-                                        <div class="item-photo">
-                                            <img src="/img/message-icon.png" alt="contact" title="contact">
-                                        </div>
-                                        <div class="item-name font-20">{!! __('contact_us') !!}</div>
-                                    </a>
-                                </li>
-                            @endif
+{{--                            @if(LaravelGmail::check())--}}
+{{--                                <li class="item-wrap">--}}
+{{--                                    <a href="{!! route('support_contact_us') !!}"--}}
+{{--                                       class="d-flex align-items-center item-link">--}}
+{{--                                        <span class="line"></span>--}}
+{{--                                        <div class="item-photo">--}}
+{{--                                            <img src="/img/message-icon.png" alt="contact" title="contact">--}}
+{{--                                        </div>--}}
+{{--                                        <div class="item-name font-20">{!! __('contact_us') !!}</div>--}}
+{{--                                    </a>--}}
+{{--                                </li>--}}
+{{--                            @endif--}}
                             <li class="item-wrap">
                                 <a href="{!! route('delivery') !!}" class="d-flex align-items-center item-link active">
                                     <div class="item-photo">
