@@ -98,7 +98,7 @@ const App = function() {
                 <span class="file-title click-no title-change"  contenteditable="true">${data.name}</span>
                     <!--<small>Added: ${data.updated_at}</small>-->
                 </div>
-                
+
             </a>
         </div>`);
     },
@@ -183,9 +183,9 @@ const App = function() {
             return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" ${data.extension === "pdf" && ('data-url="' + data.url + '"')}>
                         <a  bb-media-click="select_item" bb-media-type="image">
                             <span class="corner"></span>
-                
+
                             <div class="icon">
-                                <img width="180px" data-lightbox="image" src="${data.extension.toUpperCase() === 'PNG' || data.extension.toUpperCase() === 'JPG' || data.extension.toUpperCase() === 'JPEG' ? '/public/media/tmp/' + data.original_name : data.url}">
+                                <img width="180px" data-lightbox="image" src="${data.extension.toUpperCase() === 'PNG' || data.extension.toUpperCase() === 'JPG' || data.extension.toUpperCase() === 'JPEG' ? '/media/tmp/' + data.original_name : data.url}">
                                 <i class="fa fa-file"></i>
                             </div>
                             <div class="file-name">
@@ -193,7 +193,7 @@ const App = function() {
                             <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
                             </div>
                             <!--<small>Added: ${data.updated_at}</small>-->
-                            
+
                         </a>
                     </div>`);
 
@@ -205,9 +205,9 @@ const App = function() {
           return (`<div draggable="true" data-id="${data.id}" class="file" >
                         <a  bb-media-click="select_item" bb-media-type="image">
                             <span class="corner"></span>
-                
+
                             <div class="icon">
-                                <img width="180px" data-lightbox="image" src="/public/images/html.jpg">
+                                <img width="180px" data-lightbox="image" src="/images/html.jpg">
                                 <i class="fa fa-file"></i>
                             </div>
                             <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
@@ -215,7 +215,7 @@ const App = function() {
                             <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
                             </div>
                             <!--<small>Added: ${data.updated_at}</small>-->
-                            
+
                         </a>
                     </div>`);
       },
@@ -225,9 +225,9 @@ const App = function() {
         return (`<div draggable="true" data-id="${data.id}" class="file" >
                       <a  bb-media-click="select_item" bb-media-type="image">
                           <span class="corner"></span>
-              
+
                           <div class="icon">
-                              <img width="180px" data-lightbox="image" src="/public/images/pdf.png">
+                              <img width="180px" data-lightbox="image" src="/images/pdf.png">
                               <i class="fa fa-file"></i>
                           </div>
                           <div class="file-name" data-url="${data.url}" data-id="${data.id}" data-key="${data.key}">
@@ -235,7 +235,7 @@ const App = function() {
                           <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
                           </div>
                           <!--<small>Added: ${data.updated_at}</small>-->
-                          
+
                       </a>
                   </div>`);
     },
@@ -267,7 +267,7 @@ const App = function() {
       return (`<div class="oooo" bb-media-click="get_folder_items" draggable="true">
                 <div class="disclose oooo"><span class="closer"></span></div>
                 <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
-                ${branchName} 
+                ${branchName}
               </div>
               <ol class="dd-list">
                   <li class="dd-item mjs-nestedSortable-leaf" data-id="${id}" data-name="${leafName}" id="item_${id}">
@@ -333,42 +333,42 @@ const App = function() {
           destination.appendChild(clone.firstChild);
         }
       },
-    
+
       replaceHtml: (source, destination) => {
         while (destination.firstChild) {
           destination.removeChild(destination.firstChild);
         }
         this.copyHtml(source, destination);
       },
-    
+
       makeTreeLeaf: (id, name) => {
         return (`<li class="tree_leaf tree_leaf_without_branch" data-id="${id}" data-name="${name}" id="item_${id}" bb-media-type="folder">
                   <div class="tree_leaf_content" bb-media-click="get_folder_items" draggable="true">
                     <span class="icon-folder-opening"><i class="fa fa-caret-down  d-none"></i></span>
                     <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                     <span class="folder-item--title">${name}</span>
-                    
+
                   </div>
                   <ol class="tree_branch">
-                        
+
                   </ol>
               </li>`);
       },
-      
+
       makeTreeBranch: function(id, name) {
         return (`<li class="tree_leaf tree_leaf_with_branch" data-name="${name}" data-id="${id}" id="item_${id}" bb-media-type="folder">
                       <div class="tree_leaf_content" bb-media-click="get_folder_items" draggable="true">
                           <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
                           <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                           <span class="folder-item--title">${name}</span>
-                          
+
                       </div>
                       <ol class="tree_branch closed_branch">
-                        
+
                       </ol>
                   </li>`);
       },
-      
+
       mapTree: (el, data) => {
         el.html('');
         data.map((child) => {
@@ -380,20 +380,20 @@ const App = function() {
           }
         })
       },
-    
+
       makeTree: function(data, rootSelector) {
         const treeRootElement = $(rootSelector);
         data && this.mapTree(treeRootElement, data);
       },
-    
+
       mapItems: function(data) {
         const itemRootElement = $('.items_container');
-        
+
         data.items.length > 0 && itemRootElement.append(data.items.map((item) => {
           return this.makeItem(item);
         }))
       },
-    
+
       makeItem: function(item) {
         return `<li class="item" data-id="${item.id}" draggable='true'>Item ${item.id}</li>`
       },
@@ -431,31 +431,31 @@ const App = function() {
         swapThreshold: 0.20,
         ghostClass: 'background-class',
         swapClass: 'highlight', // The class applied to the hovered swap item
-    
+
         setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
           dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
         },
         onEnd: function (/**Event*/evt) {
-          
+
           const nodeId = evt.item.getAttribute('data-id');
           const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
 
           if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
             $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
             $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
-            
+
             $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
             $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
           }
-    
+
           if($(evt.from)[0].children.length === 0) {
             $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
             $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
-    
+
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
             $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
           }
-          
+
           self.requests.transferFolder(
             {
               folder_id: [Number(nodeId)],
@@ -470,7 +470,7 @@ const App = function() {
         onMove: function (/**Event*/evt, /**Event*/originalEvent) {
           // Example: https://jsbin.com/nawahef/edit?js,output
 
-          
+
           if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
             const branch = $(evt.related).closest('.tree_leaf');
             const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
@@ -478,7 +478,7 @@ const App = function() {
               if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                 $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
               }
-    
+
               if(opening_icon.find('i').hasClass('fa-caret-right')) {
                 opening_icon.find('i').removeClass('fa-caret-right');
                 opening_icon.find('i').addClass('fa-caret-down');
@@ -489,7 +489,7 @@ const App = function() {
       });
     }
 
-    
+
       const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
       let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
       const {dndForTree} = this.events;
@@ -505,7 +505,7 @@ const App = function() {
 
     //********App -> htmlMaker -> makeBreadCrumbsItem********start
     makeBreadCrumbsItem: (key, name, state) => {
-      return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
+      return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}"
                     bb-media-click="get_folder_items" >
                  <a style="
                  user-select: none;
@@ -518,7 +518,7 @@ const App = function() {
     editNameModal: (id, name, flag) => {
       return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
-            
+
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
@@ -533,7 +533,7 @@ const App = function() {
                             <button type="button" data-id="${id}" flag="${flag}" class="btn btn-primary btn-save" bb-media-click="save_edited_title">Save changes</button>
                     </div>
                   </div>
-            
+
                 </div>
               </div>`);
     },
@@ -541,7 +541,7 @@ const App = function() {
     remove_modal: (id, name, iorf) => {
               return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog" role="document">
-            
+
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
@@ -556,7 +556,7 @@ const App = function() {
                             <button type="button" class="btn btn-secondary btn-close done_remove_items">Remove</button>
                     </div>
                   </div>
-            
+
                 </div>
               </div>`);
     },
@@ -572,9 +572,9 @@ const App = function() {
         +`</div>
                     <div class="modal-body text-center">
                     ${data.extension === 'pdf' ? `<iframe src="https://docs.google.com/gview?url=${data.url}&amp;embedded=true" style="width:100%; height:500px" frameborder="0"></iframe><div class="modal-title"></div>` : `<div class="modal-title"><img src="${data.url}" data-slideshow="typeext" style="width:100%"></div>`}
-												
-												
-												
+
+
+
 												</div>
 													 <div class="modal-footer col-md-9">
 		<div style="display: flex; justify-content: space-between;width:100%">
@@ -598,11 +598,11 @@ const App = function() {
                     <div class="row p-t-10 p-b-10 justify-content-center">
                         <div class="text-center">`+
           `<h4>${data.real_name}</h4></div>` +
-          
+
           `</div>
                     <div class="row rowsection collapse in show" data-tabcontent="details">
                         <div class="col-xs-12 col-md-12">
-                            
+
                             <div class="table-responsive">
                                 <table class="table tableborder0">
                                     <tr>
@@ -639,7 +639,7 @@ const App = function() {
               data.updated_at
               }</span></td>
                                     </tr>` +
-         
+
           `</table>
                             </div>
                             <div class="table-responsive">
@@ -647,7 +647,7 @@ const App = function() {
                                 <table class="table tableborder0">
 
                                     <tr>
-                                        
+
                                         <td>
                                             <input type="text" data-slideshow="alt_tags" class="form-control hide" value="" >
                                             <div class="altTagsdata"></div>
@@ -902,7 +902,7 @@ const App = function() {
     copy_modal: (id) => {
       return (`<div class="modal fade show d-block custom_modal_edit" id="myModal" role="dialog">
                 <div class="modal-dialog">
-            
+
                   <!-- Modal content-->
                   <div class="modal-content">
                     <div class="modal-header">
@@ -917,7 +917,7 @@ const App = function() {
                             <button type="button" data-id=${id} class="btn btn-primary btn-save" bb-media-click="copy_images_req">Copy</button>
                     </div>
                   </div>
-            
+
                 </div>
               </div>`);
     }
@@ -950,7 +950,7 @@ const App = function() {
     //********App -> helpers -> makeBreadCrumbs********start
     makeBreadCrumbs: (id, name) => {
       const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      
+
       const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
       this.helpers.upToHead(currentLeaf)
 
@@ -1081,7 +1081,7 @@ const App = function() {
           });
           folder.addEventListener("drop", function (e, file) {
             this.classList.remove("over");
-  
+
       //       function addEventHandler(obj, evt, handler) {
       //         if(obj.addEventListener) {
       //             // W3C method
@@ -1094,10 +1094,10 @@ const App = function() {
       //             obj['on'+evt] = handler;
       //         }
       //     }
-  
-  
-  
-      //     e = e || window.event; // get window.event if e argument missing (in IE)   
+
+
+
+      //     e = e || window.event; // get window.event if e argument missing (in IE)
       //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
       //   // alert('asasasasas')
       //   var dt    = e.dataTransfer;
@@ -1105,48 +1105,48 @@ const App = function() {
       //   for (var i=0; i<files.length; i++) {
       //     var file = files[i];
       //     var reader = new FileReader();
-            
+
       //     //attach event handlers here...
-         
+
       //     reader.readAsDataURL(file);
       //   }
-  
+
       //   var list = document.querySelector('.upload-content')
-  
+
       //   Function.prototype.bindToEventHandler = function bindToEventHandler() {
       //     var handler = this;
       //     var boundParameters = Array.prototype.slice.call(arguments);
       //     //create closure
       //     return function(e) {
-      //         e = e || window.event; // get window.event if e argument missing (in IE)   
+      //         e = e || window.event; // get window.event if e argument missing (in IE)
       //         boundParameters.unshift(e);
       //         handler.apply(this, boundParameters);
       //     }
       //   };
-  
-  
-  
+
+
+
       //   addEventHandler(reader, 'loadend', function(e, file) {
-      //     var bin           = this.result; 
+      //     var bin           = this.result;
       //     var newFile       = document.createElement('div');
       //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
-      //     // list.appendChild(newFile);  
+      //     // list.appendChild(newFile);
       //     var fileNumber = list.getElementsByTagName('div').length;
-      //     status.innerHTML = fileNumber < files.length 
-      //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
+      //     status.innerHTML = fileNumber < files.length
+      //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...'
       //                      : 'Done loading. processed '+fileNumber+' files.';
-      
-      //     var img = document.createElement("img"); 
-      //     img.file = file;   
+
+      //     var img = document.createElement("img");
+      //     img.file = file;
       //     img.src = bin;
       //     // list.appendChild(img);
-  
+
       //     let formData = new FormData();
-  
+
       //     formData.append('item[]', file);
       //     formData.append('_token', $('[name="csrf-token"]').attr('content'));
       //     formData.append('folder_id', '1');
-  
+
       //     fetch('/api-media/upload', {
       //       method: "post",
       //       headers: {
@@ -1172,7 +1172,7 @@ const App = function() {
       //     // });
       // }.bindToEventHandler(file));
             const transfer = JSON.parse(e.dataTransfer.getData("node_id"));
-  
+
             let nodeId = self.htmlMaker.dragElementOfTree || transfer.data;
             const type = transfer.item;
             let parentId = e.target
@@ -1199,7 +1199,7 @@ const App = function() {
                       nodeId.map((id) => {
                         self.htmlMaker.treeMove(id, parentId);
                       })
-                      
+
                       self.requests.drawingItems({
                         folder_id: self.globalFolderId,
                         files: true,
@@ -1207,7 +1207,7 @@ const App = function() {
                       }, true,
                       () => {
                       });
-                      
+
                     }
                 );
               } else {
@@ -1256,7 +1256,7 @@ const App = function() {
 
 
 
-    //     e = e || window.event; // get window.event if e argument missing (in IE)   
+    //     e = e || window.event; // get window.event if e argument missing (in IE)
     //   if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
     //   // alert('asasasasas')
     //   var dt    = e.dataTransfer;
@@ -1264,9 +1264,9 @@ const App = function() {
     //   for (var i=0; i<files.length; i++) {
     //     var file = files[i];
     //     var reader = new FileReader();
-          
+
     //     //attach event handlers here...
-       
+
     //     reader.readAsDataURL(file);
     //   }
 
@@ -1277,7 +1277,7 @@ const App = function() {
     //     var boundParameters = Array.prototype.slice.call(arguments);
     //     //create closure
     //     return function(e) {
-    //         e = e || window.event; // get window.event if e argument missing (in IE)   
+    //         e = e || window.event; // get window.event if e argument missing (in IE)
     //         boundParameters.unshift(e);
     //         handler.apply(this, boundParameters);
     //     }
@@ -1286,17 +1286,17 @@ const App = function() {
 
 
     //   addEventHandler(reader, 'loadend', function(e, file) {
-    //     var bin           = this.result; 
+    //     var bin           = this.result;
     //     var newFile       = document.createElement('div');
     //     newFile.innerHTML = 'Loaded : '+file.name+' size '+file.size+' B';
-    //     // list.appendChild(newFile);  
+    //     // list.appendChild(newFile);
     //     var fileNumber = list.getElementsByTagName('div').length;
-    //     status.innerHTML = fileNumber < files.length 
-    //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...' 
+    //     status.innerHTML = fileNumber < files.length
+    //                      ? 'Loaded 100% of file '+fileNumber+' of '+files.length+'...'
     //                      : 'Done loading. processed '+fileNumber+' files.';
-    
-    //     var img = document.createElement("img"); 
-    //     img.file = file;   
+
+    //     var img = document.createElement("img");
+    //     img.file = file;
     //     img.src = bin;
     //     // list.appendChild(img);
 
@@ -1358,7 +1358,7 @@ const App = function() {
                     nodeId.map((id) => {
                       self.htmlMaker.treeMove(id, parentId);
                     })
-                    
+
                     self.requests.drawingItems({
                       folder_id: self.globalFolderId,
                       files: true,
@@ -1366,7 +1366,7 @@ const App = function() {
                     }, true,
                     () => {
                     });
-                    
+
                   }
               );
             } else {
@@ -1443,7 +1443,7 @@ const App = function() {
             $('.file-title').hover(function() {
               $(this).css('box-shadow', 'none',);
             })
-            
+
           }
           $('.media__folder-list .media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
           $($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
@@ -1630,7 +1630,7 @@ const App = function() {
       this.requests.saveSeo($(elm).closest('form').serializeArray());
     },
     //********App -> events -> save_seo********end
-    
+
     //********App -> events -> get_folder_items********start
     get_folder_items: (elm, e) => {
       const self = this;
@@ -1876,7 +1876,7 @@ const App = function() {
       );
     },
 
-    
+
 
     //********App -> events -> remove_folder********start
     remove_folder_req: (elm, e, ids, resolve, cb) => {
@@ -1959,7 +1959,7 @@ const App = function() {
               access_token: "string"
             },
             () => {
-              
+
               $(`.file[data-id="${itemId}"]`).find('.file-title').html(name);
               this.events.close_name_modal();
             }
@@ -2047,7 +2047,7 @@ const App = function() {
               .closest(".file")
               .getAttribute("data-id") : e.target.closest(".dd-item").getAttribute("data-id");
           if(Array.isArray(nodeId)) {
-            
+
               self.requests.transferImage(
                   {
                     item_id: nodeId,
@@ -2055,7 +2055,7 @@ const App = function() {
                     access_token: "string"
                   }
               );
-        
+
           } else {
             if($('.folderitems').find(`[data-id="${nodeId}"]`)[0].closest('.folder-container')) {
               self.requests.transferFolder(
@@ -2183,11 +2183,11 @@ const remove_req_function = async (ev, images_ids, folders_ids) => {
     app.events.remove_folder_req(undefined, ev, folders_ids, resolve);
   });
   const promise3 = new Promise(function(resolve, reject) {
-    
+
   })
 
-  // images_ids.length > 0 && folders_ids.length > 0 && 
-  Promise.all([promise1, promise2]).then((value) => { 
+  // images_ids.length > 0 && folders_ids.length > 0 &&
+  Promise.all([promise1, promise2]).then((value) => {
     app.requests.drawingItems({
       folder_id: app.globalFolderId,
       files: true,
@@ -2212,9 +2212,9 @@ $('body').on('click','.done_remove_items', (ev) => {
     images_ids.push($(i).find('.file').data('id'));
   });
 
-  
+
   remove_req_function(ev, images_ids, folders_ids)
-  
+
 })
 
 const removeCheckedImage = (el) => {
@@ -2422,7 +2422,7 @@ document
       const trashButtons = `<button class="btn btn-danger empty_trash_js">EMPTY TRASH</button>
       <button type="button" class="btn btn-primary undo_delete_js">UNDO DELETE
       </button>`;
-    
+
       $('.left--media-col').addClass('d-none');
       $('.right--media-col').toggleClass('col-lg-10 col-lg-12');
       $('.right--media-col').toggleClass('col-sm-8 col-sm-12');
@@ -2430,12 +2430,12 @@ document
       $('[aria-label="breadcrumb"] .bread-crumbs-list').addClass('d-none');
       $('.upload-content .upload--head').empty();
       $('.upload-content .upload--head').html(trashButtons);
-    
+
       $('body .file-title').each(function() {
         $(this).attr('contenteditable', 'false');
       })
     }
-    
+
     $('body').on('click', '.empty_trash_js', function() {
       app.requests.emptyTrash();
     })
@@ -2448,23 +2448,23 @@ document
       })
       $('.folder-container.active').each(function() {
         folderArray.push($(this).find('div[data-id]').attr('data-id'))
-      })    
-   
+      })
+
         app.requests.transferImage({
           item_id: imagesArray,
-          folder_id: 1 
+          folder_id: 1
         })
-      
+
         app.requests.transferFolder({
           parent_id: 1,
-          folder_id: folderArray 
+          folder_id: folderArray
         })
-     
+
     })
 
-    
 
-    
+
+
 
     $('#moveMediaModal').on('show.bs.modal', function(ev) {
       if($('.media_right_content .folderitems').find('.file-box.active').length > 0) {
@@ -2478,7 +2478,7 @@ document
                   <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                   Drive2
               </div>
-            
+
               <ol class="tree_branch" id="fff">
 
               </ol>
@@ -2504,21 +2504,21 @@ document
     const imageTransfer = (activeImages, selectedFolder) => {
         app.requests.transferImage({
           item_id: activeImages,
-          folder_id: selectedFolder 
-        }); 
+          folder_id: selectedFolder
+        });
     }
 
     const folderTransfer = (activeFolders, selectedFolder) => {
       app.requests.transferFolder({
         parent_id: selectedFolder,
-        folder_id: activeFolders 
+        folder_id: activeFolders
       });
     }
 
     const transferMove = (activeImages, activeFolders, selectedFolder, cb) => {
       imageTransfer(activeImages, selectedFolder);
       folderTransfer(activeFolders, selectedFolder);
-       
+
       cb();
     }
 
@@ -2527,7 +2527,7 @@ document
       $($('.media_right_content .folderitems').find('.folder-container.active')).each(function() {
         activeFolders.push($(this).find('.file').data('id'));
       })
-     
+
       const activeImages = [];
       $($('.media_right_content .folderitems').find('.image-container.active')).each(function() {
         activeImages.push($(this).find('.file').data('id'));
@@ -2535,7 +2535,7 @@ document
       const selectedFolder = $('#moveMediaModal .tree_leaf_content.active').closest('.tree_leaf').data('id');
 
       transferMove(activeImages, activeFolders, selectedFolder, () => {
- 
+
 
         const from = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${app.globalFolderId}"]`);
         const to = $(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"]`);
@@ -2543,7 +2543,7 @@ document
         activeFolders.map((id) => {
           from.find(`.tree_leaf[data-id="${id}"]`).appendTo(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${selectedFolder}"] > .tree_branch`);
         });
-        
+
 
         if(from.find('.tree_branch').length === 1 && from.find('.tree_leaf').length === 0 && from.hasClass('tree_leaf_with_branch')) {
           from.removeClass('tree_leaf_with_branch');
@@ -2576,31 +2576,31 @@ document
               swapThreshold: 0.20,
               ghostClass: 'background-class',
               swapClass: 'highlight', // The class applied to the hovered swap item
-          
+
               setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
                 dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
               },
               onEnd: function (/**Event*/evt) {
-                
+
                 const nodeId = evt.item.getAttribute('data-id');
                 const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
-      
+
                 if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
                   $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
                   $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
-                  
+
                   $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
                   $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
                 }
-          
+
                 if($(evt.from)[0].children.length === 0) {
                   $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
                   $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
-          
+
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
                 }
-                
+
                 app.requests.transferFolder(
                   {
                     folder_id: [Number(nodeId)],
@@ -2614,8 +2614,8 @@ document
               },
               onMove: function (/**Event*/evt, /**Event*/originalEvent) {
                 // Example: https://jsbin.com/nawahef/edit?js,output
-      
-                
+
+
                 if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
                   const branch = $(evt.related).closest('.tree_leaf');
                   const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
@@ -2623,20 +2623,20 @@ document
                     if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                       $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
                     }
-          
+
                     if(opening_icon.find('i').hasClass('fa-caret-right')) {
                       opening_icon.find('i').removeClass('fa-caret-right');
                       opening_icon.find('i').addClass('fa-caret-down');
                     }
                   }
                 }
-      
+
               }
             });
           }
         $('#moveMediaModal').modal('hide');
       });
-      
+
     });
 
     $('body').on('click', '#moveMediaModal .tree_leaf_content', function(ev) {
@@ -2676,31 +2676,31 @@ document
               swapThreshold: 0.20,
               ghostClass: 'background-class',
               swapClass: 'highlight', // The class applied to the hovered swap item
-          
+
               setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
                 dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
               },
               onEnd: function (/**Event*/evt) {
-                
+
                 const nodeId = evt.item.getAttribute('data-id');
                 const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
-      
+
                 if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
                   $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
                   $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
-                  
+
                   $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
                   $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
                 }
-          
+
                 if($(evt.from)[0].children.length === 0) {
                   $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
                   $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
-          
+
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
                   $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
                 }
-                
+
                 app.requests.transferFolder(
                   {
                     folder_id: [Number(nodeId)],
@@ -2714,9 +2714,9 @@ document
               },
               onMove: function (/**Event*/evt, /**Event*/originalEvent) {
                 // Example: https://jsbin.com/nawahef/edit?js,output
-      
-                // const nodeId = 
-                
+
+                // const nodeId =
+
                 if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
                   const branch = $(evt.related).closest('.tree_leaf');
                   const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
@@ -2724,14 +2724,14 @@ document
                     if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
                       $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
                     }
-          
+
                     if(opening_icon.find('i').hasClass('fa-caret-right')) {
                       opening_icon.find('i').removeClass('fa-caret-right');
                       opening_icon.find('i').addClass('fa-caret-down');
                     }
                   }
                 }
-      
+
               }
             });
           }
@@ -2749,7 +2749,7 @@ document
       } else {
         $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
       }
-  
+
       if(!opening_icon.find('i').hasClass('fa-caret-right')) {
         opening_icon.find('i').removeClass('fa-caret-down');
         opening_icon.find('i').addClass('fa-caret-right');

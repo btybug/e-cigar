@@ -2081,7 +2081,7 @@ limitations under the License.
 }
 
 .Header-auth .gapi-analytics-auth-styles-signinbutton-image {
-    background: url('/public/images/ga-mark-white.svg') no-repeat 0 50%;
+    background: url('/images/ga-mark-white.svg') no-repeat 0 50%;
     background-size: 1.5em;
     border: 0;
     height: 1.5em;

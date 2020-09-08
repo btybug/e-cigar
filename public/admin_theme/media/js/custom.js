@@ -939,7 +939,7 @@ function App() {
 
 
                         if(document.querySelector(`.${inputId}_media_single_img`)) {
-                            document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
+                            document.querySelector(`.${inputId}_media_single_img`).src = "/images/html.jpg";
                             document.querySelector(`.${inputId}_media_single_img`).addEventListener('click', (ev) => {
                             });
                         }
@@ -955,7 +955,7 @@ function App() {
                     }
                     document.querySelector(`.${inputId}`).value = urlValue;
                 // }
-                
+
             }
             // document.querySelector(".file-realtive-url").value = "";
             self.helpers.hideAllActiveImages();

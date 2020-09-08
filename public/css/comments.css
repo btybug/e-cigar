@@ -179,7 +179,7 @@
 
 .comment-list-wrapper .user-comment-img.sub .wrap-wall:before {
     content: "";
-    background-image: url(/public/img/arrow-reply.svg);
+    background-image: url(/img/arrow-reply.svg);
     background-repeat: no-repeat;
     width: 18px;
     position: absolute;

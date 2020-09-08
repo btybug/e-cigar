@@ -13929,7 +13929,7 @@ footer .footer-top .footer-info .footer-logo {
 footer .footer-top .footer-info .footer-logo img{
     width: 100%;
     max-width: 145px;
-    
+
 }
 footer .footer-top .footer-info .footer-desc {
     color: #7c7c7c;
@@ -18990,7 +18990,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 }
 /*home brands start*/
 .home_brands-wrapper {
-    background-image: url('/public/img/home-brand-bg.jpg');
+    background-image: url('/img/home-brand-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     height: 410px;
@@ -19599,7 +19599,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 .home_delivery-wrapper {
     margin: 50px 0;
     padding: 39px 147px;;
-    background-image: url('/public/img/delivery-bg.jpg');
+    background-image: url('/img/delivery-bg.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     color: #FFFFFF;
