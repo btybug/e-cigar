@@ -1,5 +1,4 @@
-@extends('layouts.frontend')
-@section('content')
+
     <main class="main-content">
         <section class="support__pages-wrapper ">
             <div class="container main-max-width">
@@ -107,45 +106,44 @@
         </section>
 
     </main>
-@stop
 
-@section("js")
-    <script>
-        postSendAjax = function (url, data, success, error) {
-            $.ajax({
-                type: "post",
-                url: url,
-                cache: false,
-                datatype: "json",
-                data: data,
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (success) {
-                        success(data);
-                    }
-                    return data;
-                },
-                error: function (errorThrown) {
-                    if (error) {
-                        error(errorThrown);
-                    }
-                    return errorThrown;
-                }
-            });
-        };
+{{--@section("js")--}}
+{{--    <script>--}}
+{{--        postSendAjax = function (url, data, success, error) {--}}
+{{--            $.ajax({--}}
+{{--                type: "post",--}}
+{{--                url: url,--}}
+{{--                cache: false,--}}
+{{--                datatype: "json",--}}
+{{--                data: data,--}}
+{{--                headers: {--}}
+{{--                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")--}}
+{{--                },--}}
+{{--                success: function (data) {--}}
+{{--                    if (success) {--}}
+{{--                        success(data);--}}
+{{--                    }--}}
+{{--                    return data;--}}
+{{--                },--}}
+{{--                error: function (errorThrown) {--}}
+{{--                    if (error) {--}}
+{{--                        error(errorThrown);--}}
+{{--                    }--}}
+{{--                    return errorThrown;--}}
+{{--                }--}}
+{{--            });--}}
+{{--        };--}}
 
-        $("body").on("change", "#country", function () {
-            let value = $(this).val()
-            postSendAjax("{!! route('delivery_get_countries') !!}", {value}, function (res) {
-                if (!res.error) {
-                    $(".city-choser").empty().append(res.html)
-                    $(".shipping-methods").empty().append(res.sHtml)
-                }
-            })
-        })
+{{--        $("body").on("change", "#country", function () {--}}
+{{--            let value = $(this).val()--}}
+{{--            postSendAjax("{!! route('delivery_get_countries') !!}", {value}, function (res) {--}}
+{{--                if (!res.error) {--}}
+{{--                    $(".city-choser").empty().append(res.html)--}}
+{{--                    $(".shipping-methods").empty().append(res.sHtml)--}}
+{{--                }--}}
+{{--            })--}}
+{{--        })--}}
 
-    </script>
+{{--    </script>--}}
 
-@stop
+{{--@stop--}}
