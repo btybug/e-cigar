@@ -258,7 +258,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 
 
-    <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
+    <link href={{asset("css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
     <style>
         .scroll_content {
             padding-top: 30px;

@@ -115,7 +115,7 @@
     </main>
 @endsection
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/frontend/css/faq-page.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/faq-page.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <script>

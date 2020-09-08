@@ -190,7 +190,7 @@
 @stop
 
 @section('js')
-    <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
+    <script src="{!! url('js/jquery.printPage.js') !!}"></script>
     <script>
         $(function () {
             const shortAjax = function (URL, obj = {}, cb) {

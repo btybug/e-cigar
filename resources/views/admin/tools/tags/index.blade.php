@@ -36,7 +36,7 @@
 @section("css")
     <link rel="stylesheet"
           href="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.css">
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
     <!-- <script>

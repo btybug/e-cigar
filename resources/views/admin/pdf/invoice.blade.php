@@ -7,7 +7,7 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="stylesheet" href="{{asset('public/css/invoice.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/invoice.css?v='.rand(111,999))}}">
     <style>
         @font-face {
             font-family: 'Oswald-Regular';

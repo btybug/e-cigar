@@ -123,11 +123,11 @@
 @stop
 
 @section('css')
-    {!! Html::style("public/admin_assets/css/dashboard.css") !!}
+    {!! Html::style("admin_assets/css/dashboard.css") !!}
 
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    {!! Html::style('public/css/demo.html5imageupload.css') !!}
+    {!! Html::style('css/demo.html5imageupload.css') !!}
 
     <style>
         .errors {
@@ -166,7 +166,7 @@
     </style>
 @stop
 @section('js')
-    {!! Html::script('public/js/html5imageupload.js') !!}
+    {!! Html::script('js/html5imageupload.js') !!}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>

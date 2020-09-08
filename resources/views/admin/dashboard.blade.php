@@ -123,17 +123,17 @@
 @stop
 @section('css')
     <!-- jvectormap -->
-    {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
-    {!! Html::style("public/admin_assets/css/dashboard.css") !!}
+    {!! Html::style("admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
+    {!! Html::style("admin_assets/css/dashboard.css") !!}
     {!! HTML::style('/js/google/analytic/index.css') !!}
 @stop
 @section('js')
 
 
     <!-- jvectormap -->
-    {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
-    {!! Html::script("public/admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
-    {!! Html::script("public/admin_theme/dist/js/pages/dashboard.js?v=".rand(111,999))!!}
+    {!! Html::script("admin_theme/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js")!!}
+    {!! Html::script("admin_theme/plugins/jvectormap/jquery-jvectormap-world-mill-en.js")!!}
+    {!! Html::script("admin_theme/dist/js/pages/dashboard.js?v=".rand(111,999))!!}
 
     <!-- Include the ViewSelector2 component script. -->
 

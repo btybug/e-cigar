@@ -521,7 +521,7 @@
 
 @stop
 @section('css')
-    {!! Html::style('public/css/demo.html5imageupload.css') !!}
+    {!! Html::style('css/demo.html5imageupload.css') !!}
     <style>
         .table-tr-border-bottom-white {
             border-bottom: 1px solid #ffffff !important;
@@ -561,12 +561,12 @@
             color: #fff;
         }
     </style>
-    {!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
+    {!! Html::style("admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
 @stop
 
 @section('js')
-    {!! Html::script("public/admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
-    {!! Html::script('public/js/html5imageupload.js') !!}
+    {!! Html::script("admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
+    {!! Html::script('js/html5imageupload.js') !!}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
@@ -757,5 +757,5 @@
             });
         });
     </script>
-    {!! Html::script('public/js/my_account.js') !!}
+    {!! Html::script('js/my_account.js') !!}
 @stop

@@ -1,7 +1,7 @@
 <input id="uploader" class="file-loading" data-folder-id="{!! 1 !!}" multiple   name="item[]" type="file" data-upload-url="{!! route('media_upload') !!}">
 
-{!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
-{!!  Html::script('public/js/bootstrap-fileinput/js/fileinput.min.js') !!}
+{!!  Html::style('js/bootstrap-fileinput/css/fileinput.min.css') !!}
+{!!  Html::script('js/bootstrap-fileinput/js/fileinput.min.js') !!}
 <script>
     $(function(){
        $("#uploader").fileinput({

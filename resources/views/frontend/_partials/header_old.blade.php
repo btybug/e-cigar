@@ -22,7 +22,7 @@
                         <div class="collapse navbar-collapse" id="navbar_collapse_0">
                             @if(Auth::check())
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="{!! url('public/images/other.png') !!}" width="20px" alt=""/>
+                                    <img src="{!! url('images/other.png') !!}" width="20px" alt=""/>
                                     <span class="d-none d-md-inline">{!! Auth::user()->name !!}</span> <b class="caret"></b>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">

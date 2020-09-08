@@ -325,11 +325,11 @@
 
 @section('js')
 
-    <script src={{asset("public/js/bundle/carousel.js")}}></script>
-    <script src={{asset("public/plugins/formstone/core.js")}}></script>
-    <script src={{asset("public/plugins/formstone/mediaquery.js")}}></script>
-    <script src={{asset("public/plugins/formstone/touch.js")}}></script>
-    <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
+    <script src={{asset("js/bundle/carousel.js")}}></script>
+    <script src={{asset("plugins/formstone/core.js")}}></script>
+    <script src={{asset("plugins/formstone/mediaquery.js")}}></script>
+    <script src={{asset("plugins/formstone/touch.js")}}></script>
+    <script src={{asset("plugins/formstone/carousel/carousel.js")}}></script>
     <script>
         $(document).ready(function () {
             $(".home__main-slider").carousel({

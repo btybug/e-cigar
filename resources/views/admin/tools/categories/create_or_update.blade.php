@@ -133,8 +133,8 @@
 {!! Form::close() !!}
 
 @if(is_enabled_media_modal())
-    <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/media/js/custom.js') !!}"></script>
-    <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
+    <script src="{!! url('admin_theme/media/js/lightbox.js') !!}"></script>
+    <script src="{!! url('admin_theme/media/js/jstree.min.js') !!}"></script>
+    <script src="{!! url('admin_theme/media/js/custom.js') !!}"></script>
+    <script src="{!! url('admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
 @endif

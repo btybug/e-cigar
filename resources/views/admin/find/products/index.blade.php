@@ -44,11 +44,11 @@
     <script src="https://cdn.datatables.net/buttons/1.5.0/js/dataTables.buttons.min.js"></script>
     <script src="https://cdn.datatables.net/select/1.2.4/js/dataTables.select.min.js"></script>
 
-    <script src="{{url('public/js/DataTables/js/editor.bootstrap4.js')}}"></script>
+    <script src="{{url('js/DataTables/js/editor.bootstrap4.js')}}"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.0/js/buttons.bootstrap.min.js"></script>
 
-    <script src="{{url('public/js/DataTables/js/editor.bootstrap.min.js')}}"></script>
-    <script src="{{url('public/js/DataTables/js/editor.select2.js')}}"></script>
+    <script src="{{url('js/DataTables/js/editor.bootstrap.min.js')}}"></script>
+    <script src="{{url('js/DataTables/js/editor.select2.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>

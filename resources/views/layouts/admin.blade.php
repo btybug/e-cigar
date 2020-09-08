@@ -8,21 +8,21 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.7 -->
-{{--{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
+{{--{!! Html::style("admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
 <!-- Bootstrap 4.3.1 -->
-{!! Html::style("public/admin_theme/bower_components/bootstrap-4/css/bootstrap.min.css") !!}
+{!! Html::style("admin_theme/bower_components/bootstrap-4/css/bootstrap.min.css") !!}
 <!-- Font Awesome -->
-{{--{!! Html::style("public/admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}--}}
-{!! Html::style("public/admin_theme/fontawesome-5/css/all.min.css") !!}
+{{--{!! Html::style("admin_theme/bower_components/font-awesome/css/font-awesome.min.css") !!}--}}
+{!! Html::style("admin_theme/fontawesome-5/css/all.min.css") !!}
 <!-- Ionicons -->
-{!! Html::style("public/admin_theme/bower_components/Ionicons/css/ionicons.min.css") !!}
+{!! Html::style("admin_theme/bower_components/Ionicons/css/ionicons.min.css") !!}
 <!-- Theme style -->
-{!! Html::style("public/admin_theme/dist/css/AdminLTE.min.css") !!}
+{!! Html::style("admin_theme/dist/css/AdminLTE.min.css") !!}
 <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-{!! Html::style("public/admin_theme/dist/css/skins/_all-skins.min.css") !!}
+{!! Html::style("admin_theme/dist/css/skins/_all-skins.min.css") !!}
 <!-- Morris chart -->
-{!! Html::style("public/admin_theme/bower_components/morris.js/morris.css") !!}
+{!! Html::style("admin_theme/bower_components/morris.js/morris.css") !!}
 <style>
     .loader_text {
         color: #fff;
@@ -169,30 +169,30 @@
 
 
     <!-- Date Picker -->
-{!! Html::style("public/admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
+{!! Html::style("admin_theme/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css") !!}
 <!-- Daterange picker -->
-{!! Html::style("public/admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.css") !!}
+{!! Html::style("admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.css") !!}
 <!-- bootstrap wysihtml5 - text editor -->
-  {!! Html::style("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
-  {!! Html::style("public/plugins/bootstrap-select/bootstrap-select.min.css") !!}
+  {!! Html::style("admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css") !!}
+  {!! Html::style("plugins/bootstrap-select/bootstrap-select.min.css") !!}
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/css/bootstrap-colorpicker.css" integrity="sha256-iu+Hq7JHYN0rAeT3Y+c4lEKIskeGgG/MpAyrj6W9iTI=" crossorigin="anonymous" />
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/animate.css')}}">
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/media-tree.css')}}">
-  <link rel="stylesheet" href="{{asset('public/js/DataTables/datatables.min.css')}}">
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/jquery.datetimepicker.min.css')}}">
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
-  <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/animate.css')}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/media-tree.css')}}">
+  <link rel="stylesheet" href="{{asset('js/DataTables/datatables.min.css')}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/jquery.datetimepicker.min.css')}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/custom.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('css/flag-icon.css')}}">
 
   <!--Media Button Stiles-->
 
   @if(is_enabled_media_modal())
-    {!! Html::style('public/admin_theme/media/css/styles.css') !!}
-    {!! Html::style('public/admin_theme/media/css/style.css') !!}
-    {!! Html::style('public/admin_theme/media/css/lightbox.css') !!}
-    {!! Html::style('public/admin_theme/fileinput/css/fileinput.min.css') !!}
-    {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
-{{--    {!! Html::style("public/css/jquery.nestable.min.css") !!}--}}
+    {!! Html::style('admin_theme/media/css/styles.css') !!}
+    {!! Html::style('admin_theme/media/css/style.css') !!}
+    {!! Html::style('admin_theme/media/css/lightbox.css') !!}
+    {!! Html::style('admin_theme/fileinput/css/fileinput.min.css') !!}
+    {!! Html::style("media_template/css/media-plus.css?v='.rand(111,999))") !!}
+{{--    {!! Html::style("css/jquery.nestable.min.css") !!}--}}
   @endif
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -205,8 +205,8 @@
   <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/custom.css?v='.rand(111,999))}}">
-  <link rel="stylesheet" href="{{asset('public/admin_assets/css/newstyle.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/custom.css?v='.rand(111,999))}}">
+  <link rel="stylesheet" href="{{asset('admin_assets/css/newstyle.css?v='.rand(111,999))}}">
   {{--<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/skin-lion/ui.fancytree.min.css">--}}
   @yield('css')
 
@@ -294,56 +294,56 @@
 <textarea name="" id="barcode-settings" class="hidden" cols="30" rows="10">{!! $settings->getEditableData('barcodes')->toJson() !!}</textarea>
 <!-- ./wrapper -->
 {{--<!-- jQuery 3 -->--}}
-{!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
+{!! Html::script("admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
 {{--<!-- jQuery UI 1.11.4 -->--}}
-{!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+{!! Html::script("admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
 <script> $.ajaxSetup({headers: {'X-CSRF-TOKEN': '{{csrf_token()}}'}});
 </script>
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-sortable/0.9.13/jquery-sortable-min.js"></script>--}}
 {{--<script src="http://dev.bootydev.co.uk/resources/assets/js/nestedSortable/jquery.mjs.nestedSortable.js"></script>--}}
-{!! Html::script("public/plugins/jquery-migrate/jquery-migrate.js")!!}
-{!! Html::script("public/plugins/tree/jquery.mjs.nestedSortable.js")!!}
+{!! Html::script("plugins/jquery-migrate/jquery-migrate.js")!!}
+{!! Html::script("plugins/tree/jquery.mjs.nestedSortable.js")!!}
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-{!! Html::script("public/plugins/bootstrap-select/bootstrap-select.min.js")!!}
+{!! Html::script("plugins/bootstrap-select/bootstrap-select.min.js")!!}
 
 <script>
   $.widget.bridge('uibutton', $.ui.button);
 </script>
 <!-- Bootstrap 3.3.7 -->
-{{--{!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}--}}
+{{--{!! Html::script("admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}--}}
 <!-- Bootstrap 4.3.1 -->
-{!! Html::script("public/admin_theme/bower_components/bootstrap-4/js/bootstrap.bundle.min.js")!!}
+{!! Html::script("admin_theme/bower_components/bootstrap-4/js/bootstrap.bundle.min.js")!!}
 <!-- Morris.js charts -->
-{!! Html::script("public/admin_theme/bower_components/raphael/raphael.min.js")!!}
-{!! Html::script("public/admin_theme/bower_components/morris.js/morris.min.js")!!}
+{!! Html::script("admin_theme/bower_components/raphael/raphael.min.js")!!}
+{!! Html::script("admin_theme/bower_components/morris.js/morris.min.js")!!}
 <!-- Sparkline -->
-{!! Html::script("public/admin_theme/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js")!!}
+{!! Html::script("admin_theme/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js")!!}
 
 <!-- jQuery Knob Chart -->
-{!! Html::script("public/admin_theme/bower_components/jquery-knob/dist/jquery.knob.min.js")!!}
+{!! Html::script("admin_theme/bower_components/jquery-knob/dist/jquery.knob.min.js")!!}
 <!-- daterangepicker -->
-{!! Html::script("public/admin_theme/bower_components/moment/min/moment.min.js")!!}
-{!! Html::script("public/admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.js")!!}
+{!! Html::script("admin_theme/bower_components/moment/min/moment.min.js")!!}
+{!! Html::script("admin_theme/bower_components/bootstrap-daterangepicker/daterangepicker.js")!!}
 <!-- datepicker -->
-{!! Html::script("public/admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
+{!! Html::script("admin_theme/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")!!}
 <!-- Bootstrap WYSIHTML5 -->
-{!! Html::script("public/admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")!!}
+{!! Html::script("admin_theme/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js")!!}
 <!-- Slimscroll -->
-{!! Html::script("public/admin_theme/bower_components/jquery-slimscroll/jquery.slimscroll.min.js")!!}
+{!! Html::script("admin_theme/bower_components/jquery-slimscroll/jquery.slimscroll.min.js")!!}
 <!-- FastClick -->
-{!! Html::script("public/admin_theme/bower_components/fastclick/lib/fastclick.js")!!}
+{!! Html::script("admin_theme/bower_components/fastclick/lib/fastclick.js")!!}
 <!-- AdminLTE App -->
-{!! Html::script("public/admin_theme/dist/js/adminlte.min.js")!!}
+{!! Html::script("admin_theme/dist/js/adminlte.min.js")!!}
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!-- AdminLTE for demo purposes -->
-{!! Html::script("public/admin_theme/dist/js/demo.js")!!}
+{!! Html::script("admin_theme/dist/js/demo.js")!!}
 
 
-<script src="{{asset('public/js/DataTables/datatables.min.js')}}"></script>
+<script src="{{asset('js/DataTables/datatables.min.js')}}"></script>
 
-{{--{!! Html::script("public/admin_assets/js/helpers.js")!!}--}}
+{{--{!! Html::script("admin_assets/js/helpers.js")!!}--}}
 
-{!! Html::script("public/admin_assets/js/jquery.datetimepicker.full.min.js")!!}
+{!! Html::script("admin_assets/js/jquery.datetimepicker.full.min.js")!!}
 
 
 
@@ -357,10 +357,10 @@
       opacity: 1;
     }
   </style>
-  <script src="{!! url('public/admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
-  <script src="{!! url('public/admin_theme/media/js/lightbox.js') !!}"></script>
-  <script src="{!! url('public/admin_theme/media/js/jstree.min.js') !!}"></script>
-  <script src="{!! url('public/admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
+  <script src="{!! url('admin_theme/fileinput/js/fileinput.min.js') !!}"></script>
+  <script src="{!! url('admin_theme/media/js/lightbox.js') !!}"></script>
+  <script src="{!! url('admin_theme/media/js/jstree.min.js') !!}"></script>
+  <script src="{!! url('admin_theme/media/js/custom.js?v='.rand(111,999)) !!}"></script>
 
 @endif
 <script>
@@ -431,14 +431,14 @@
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jsbarcode/3.11.0/JsBarcode.all.min.js" integrity="sha256-BjqnfACYltVzhRtGNR2C4jB9NAN0WxxzECeje7/XpwE=" crossorigin="anonymous"></script>
-<script src="{{url('public/js/saveSvgAsPng.js')}}"></script>
-<script src="{{url('public/js/selectProductModal.js')}}"></script>
-<script src="{{url('public/js/permitions.js')}}"></script>
+<script src="{{url('js/saveSvgAsPng.js')}}"></script>
+<script src="{{url('js/selectProductModal.js')}}"></script>
+<script src="{{url('js/permitions.js')}}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-colorpicker/2.5.3/js/bootstrap-colorpicker.js" integrity="sha256-DQMtbH0EZgaw6tLtBLk8KW50A7ouiB4oc8+hwuienog=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.js" integrity="sha256-m4GLhtBF1Ue31vdmii9AEzvSYnBTJFzYkVToaD047Z4=" crossorigin="anonymous"></script>
 
 @yield('js')
 @stack('javascript')
-<script src="{{asset('public/admin_assets/js/custom.js')}}"></script>
+<script src="{{asset('admin_assets/js/custom.js')}}"></script>
 </body>
 </html>

@@ -131,5 +131,5 @@
 @stop
 
 @section("js")
-    <script src={{asset("public/js/my-account/notifications.js")}}></script>
+    <script src={{asset("js/my-account/notifications.js")}}></script>
 @stop

@@ -48,7 +48,7 @@
                         </table>
                     </div>
                 </div>
-                
+
                 <div class="form-group row">
                     <label class="col-sm-2 control-label" for="input-discount">Price</label>
                     <div class="col-sm-10">
@@ -98,7 +98,7 @@
     </div>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/bootstrap-tagsinput.css">
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>

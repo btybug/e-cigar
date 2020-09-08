@@ -41,38 +41,38 @@
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
 
 
-    {{--<link href={{asset("public/frontend/css/bootstrap.min.css")}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/plugins/select2/select2.min.css")}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/css/global.css")}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/css/products.css?v=".rand(111,999))}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />--}}
-    {{--<link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>--}}
-    {{--<link href="{{asset('public/css/flag-icon.css')}}" rel="stylesheet" />--}}
-    {{--<link href="{{asset('public/css/custom.css')}}" rel="stylesheet" />--}}
-    {{--*****packed in public/css/bundle.css***** --}}
-    <link href="{{asset('public/css/invoice.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('public/css/bundle.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/css/comments.css?v='.rand(111,999))}}">
+    {{--<link href={{asset("frontend/css/bootstrap.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("plugins/jquery-ui/jquery-ui.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("plugins/select2/select2.min.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("css/global.css")}} rel="stylesheet" />--}}
+    {{--<link href={{asset("css/products.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("css/product-cards.css?v=".rand(111,999))}} rel="stylesheet" />--}}
+    {{--<link href={{asset("css/main.css?v=".rand(111,999))}} rel="stylesheet"/>--}}
+    {{--<link href="{{asset('css/flag-icon.css')}}" rel="stylesheet" />--}}
+    {{--<link href="{{asset('css/custom.css')}}" rel="stylesheet" />--}}
+    {{--*****packed in css/bundle.css***** --}}
+    <link href="{{asset('css/invoice.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('css/bundle.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/comments.css?v='.rand(111,999))}}">
     {{-- ********************************************* --}}
-    {{-- <script src={{asset("public/js/jQuery3.3.1.js")}}></script> --}}
-    {{-- <script src={{asset("public/plugins/jquery-ui/jquery-ui.min.js")}}></script> --}}
-    {{-- *****packed in public/plugins/jquery.js***** --}}
-    <script src={{asset("public/js/bundle/jquery.js")}}></script>
+    {{-- <script src={{asset("js/jQuery3.3.1.js")}}></script> --}}
+    {{-- <script src={{asset("plugins/jquery-ui/jquery-ui.min.js")}}></script> --}}
+    {{-- *****packed in plugins/jquery.js***** --}}
+    <script src={{asset("js/bundle/jquery.js")}}></script>
 
-    {{--<script src={{asset("public/plugins/fancytree.js",['type' => 'module'])}}></script>--}}
+    {{--<script src={{asset("plugins/fancytree.js",['type' => 'module'])}}></script>--}}
 
 <!--[if lt IE 9]>-->
-    <script src={{asset("public/plugins/crossbrowserjs/html5shiv.js")}}></script>
-    <script src={{asset("public/plugins/crossbrowserjs/respond.min.js")}}></script>
+    <script src={{asset("plugins/crossbrowserjs/html5shiv.js")}}></script>
+    <script src={{asset("plugins/crossbrowserjs/respond.min.js")}}></script>
     <!--<![endif]-->
     <!--[if !IE]><!-->
-    <script src={{asset("public/plugins/crossbrowserjs/ofi.min.js")}}></script>
-    <script src={{asset("public/plugins/crossbrowserjs/customFit.js")}}></script>
+    <script src={{asset("plugins/crossbrowserjs/ofi.min.js")}}></script>
+    <script src={{asset("plugins/crossbrowserjs/customFit.js")}}></script>
     <!--<![endif]-->
 {{--    <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=inline-share-buttons"></script>--}}
     <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5d00a4864351e90012650424&product=custom-share-buttons"></script>
-    <script src={{asset("public/plugins/autocomplete/jquery.autocomplete.min.js")}}></script>
+    <script src={{asset("plugins/autocomplete/jquery.autocomplete.min.js")}}></script>
     @if(!Auth::check())
         <script
             src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoadCallback&render={!! env('GOOGLE_RECAPTCHA_KEY') !!}"
@@ -125,15 +125,15 @@
 
 
 {{-- ********************************************* --}}
-{{--<script src={{asset("public/plugins/select2/select2.full.min.js")}}></script>--}}
-{{--<script src={{asset("public/js/bootstrap.bundle.min.js")}}></script>--}}
-{{--<script src={{asset("public/js/hover-slider.js")}}></script>--}}
-{{--<script src={{asset("public/js/main.js?v=".rand(111,999))}}></script>--}}
-{{--<script src={{asset("public/js/login.js")}}></script>--}}
-{{--<script src={{asset("public/js/register.js")}}></script>--}}
-{{-- *****packed in public/js/bundle/bundle.js***** --}}
-<script src={{asset("public/js/bundle/bundle.js?v=".rand(111,999))}}></script>
-{!! Html::script('public/js/custom/comments.js') !!}
+{{--<script src={{asset("plugins/select2/select2.full.min.js")}}></script>--}}
+{{--<script src={{asset("js/bootstrap.bundle.min.js")}}></script>--}}
+{{--<script src={{asset("js/hover-slider.js")}}></script>--}}
+{{--<script src={{asset("js/main.js?v=".rand(111,999))}}></script>--}}
+{{--<script src={{asset("js/login.js")}}></script>--}}
+{{--<script src={{asset("js/register.js")}}></script>--}}
+{{-- *****packed in js/bundle/bundle.js***** --}}
+<script src={{asset("js/bundle/bundle.js?v=".rand(111,999))}}></script>
+{!! Html::script('js/custom/comments.js') !!}
 @stack('style')
 
 @yield('js')
