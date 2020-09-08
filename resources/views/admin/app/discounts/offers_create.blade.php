@@ -32,7 +32,7 @@
                     <div class="col-md-4">
                         <input id="textinput" name="end_at" type="date"  class="form-control input-md">
                     </div>
-                
+
             </div>
             {!! Form::close() !!}
                 <div class="buy_x_get d-none pattern_js content-select-wrap">
@@ -128,17 +128,17 @@
     </div>
 @stop
 @section('css')
-    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+    <link href="/plugins/select2/select2.min.css" rel="stylesheet"/>
 @stop
 @section('js')
-    <script src="/public/plugins/select2/select2.full.min.js"></script>
+    <script src="/plugins/select2/select2.full.min.js"></script>
     <script>
         $(document).ready(function () {
             if($('#offers_select').val()){
                 $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                 $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
             }
-           
+
 
             $('body').on('change', '#offers_select', function () {
                 console.log($('body').find('.select_to_2_js'))
@@ -149,7 +149,7 @@
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
-                
+
                 $('body').find('#pattern_place_js .select_to_2_js').select2();
             });
             $('body').find('#pattern_place_js .select_to_2_js').select2();

@@ -44,10 +44,10 @@
                         @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
                     </div>
                     </div>
-                    
+
                     <div class="card-body panel-body pt-0">
 
-                        
+
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -114,10 +114,10 @@
     </div>
 @stop
 @section('css')
-    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+    <link href="/plugins/select2/select2.min.css" rel="stylesheet"/>
 @stop
 @section('js')
-    <script src="/public/plugins/select2/select2.full.min.js"></script>
+    <script src="/plugins/select2/select2.full.min.js"></script>
 
     <script>
         $(document).ready(function() {

@@ -3,7 +3,7 @@
 </div>
 <div class="brands_main-content-top-right">
     <div class="text-center right-main-img">
-        <img src="/public/img/brands/brands-monster.png" alt="{{ $offer->name }}" title="{{ $offer->name }}">
+        <img src="/img/brands/brands-monster.png" alt="{{ $offer->name }}" title="{{ $offer->name }}">
     </div>
     <h2 class="text-center font-sec-reg font-26 mb-0 lh-1">{{ $offer->name }}</h2>
     <ul class="d-flex flex-wrap brands_right-list">

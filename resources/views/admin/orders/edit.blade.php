@@ -54,7 +54,7 @@
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="sipping-item-wrap address-item">
                                                         <div class="item-photo">
-                                                            <img src="/public/img/confirm-home.png" class="home-img"
+                                                            <img src="/img/confirm-home.png" class="home-img"
                                                                  alt="item"/>
                                                         </div>
                                                         <h3 class="font-sec-reg font-18 item-title">Shipping
@@ -72,7 +72,7 @@
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="sipping-item-wrap delivery-item">
                                                         <div class="item-photo">
-                                                            <img src="/public/img/confirm-calendar.png"
+                                                            <img src="/img/confirm-calendar.png"
                                                                  class="calendar-img"
                                                                  alt="item"/>
                                                         </div>
@@ -514,8 +514,8 @@
 @stop
 
 @section('css')
-    <link href="/public/admin_assets/css/global-admin.css" rel="stylesheet">
-    <link href="/public/css/invoice.css" rel="stylesheet">
+    <link href="/admin_assets/css/global-admin.css" rel="stylesheet">
+    <link href="/css/invoice.css" rel="stylesheet">
     <style>
         .order-main-cnt_right-col {
             height: calc(100vh - 285px);

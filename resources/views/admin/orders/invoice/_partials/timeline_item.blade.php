@@ -6,7 +6,7 @@
                     <span class="timeline-item-left-col_dtls font-main-bold font-18">{!! BBgetDateFormat($history->created_at) !!}</span>
                     <span class="timeline-item-left-col_dtls font-16 time">{!! BBgetTimeFormat($history->created_at) !!}</span>
                 </div>
-                <img src="/public/admin_theme/dist/img/user2-160x160.jpg">
+                <img src="/admin_theme/dist/img/user2-160x160.jpg">
 
             </div>
         </div>

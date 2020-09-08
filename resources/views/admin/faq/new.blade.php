@@ -223,7 +223,7 @@
                                     <tr>
                                         <th scope="row">
                                             <label for="seo_focuskw">Focus Keyword:</label>
-                                            <img src="/public/images/question-mark.png" alt="question">
+                                            <img src="/images/question-mark.png" alt="question">
                                         </th>
                                         <td>
                                             {!! Form::text('general[og:keywords]',($model)?$model->getSeoField('og:keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$model)]) !!}
@@ -232,7 +232,7 @@
                                     <tr>
                                         <th scope="row">
                                             <label for="seo_title">SEO Title:</label>
-                                            <img src="/public/images/question-mark.png" alt="question">
+                                            <img src="/images/question-mark.png" alt="question">
                                         </th>
                                         <td>
                                             {!! Form::text('general[og:title]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$model)]) !!}
@@ -247,7 +247,7 @@
                                     <tr>
                                         <th scope="row">
                                             <label for="seo_metadesc">Meta description:</label>
-                                            <img src="/public/images/question-mark.png" alt="question">
+                                            <img src="/images/question-mark.png" alt="question">
                                         </th>
                                         <td>
                                             {!! Form::textarea('general[og:description]',($model)?$model->getSeoField('og:title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$model)]) !!}
@@ -630,6 +630,6 @@
 
 
     </script>
-    <script src="/public/admin_theme/blog_new.js"></script>
+    <script src="/admin_theme/blog_new.js"></script>
 
 @stop

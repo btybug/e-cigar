@@ -173,7 +173,7 @@
 @stop
 @section('js')
 
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
 
     <script>
         $(function () {

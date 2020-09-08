@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
   <div class="col-md-4">
-  
+
 <div class="box box-primary">
    <div class="box-header with-border">
       <h3 class="box-title">Add Routes</h3>
@@ -190,7 +190,7 @@
          <p class="mymgmenu"><label for=""></label><input type="checkbox" class="megamenu"><em>Use As Mega Menu</em></p>
          <hr class="myhrborder">
          <button class="deletebutton">Remove</button>
-        
+
       </div>
    </div>
 </li>
@@ -206,5 +206,5 @@
 
 @section("js")
 <script src="http://laraframe.codemen.org/backend/vendors/menu_manager/jquery.mjs.nestedSortable.js"></script>
-<script src="/public/js/custom/menu_manager.js"></script>
+<script src="/js/custom/menu_manager.js"></script>
 @stop

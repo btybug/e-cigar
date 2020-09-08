@@ -68,7 +68,7 @@
                                         <div class="row">
                                             <div class="col-lg-1 col-2 pr-0">
                                                 <div class="user-img">
-                                                    <img src="/public/images/male.png" alt="">
+                                                    <img src="/images/male.png" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-11 col-10">

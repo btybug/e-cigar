@@ -394,7 +394,7 @@
                                     {{--<div class="form-group row avatar align-items-center mb-4 border-top border-bottom py-3">--}}
                                     {{--<span class="col-md-4">Avatar</span>--}}
                                     {{--<div class="col-md-8">--}}
-                                    {{--<img width="150" src="/public/images/{!!$user->gender!!}.png" alt="">--}}
+                                    {{--<img width="150" src="/images/{!!$user->gender!!}.png" alt="">--}}
                                     {{--<div>--}}
                                     {{--<button type="button" class="btn btn-secondary">Change Avatar</button>--}}
                                     {{--</div>--}}

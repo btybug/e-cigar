@@ -607,7 +607,7 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
             $("#barcode").select2();

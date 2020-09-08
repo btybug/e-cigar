@@ -1,7 +1,7 @@
 <div class="product-content-left-col-inner">
     <div class="d-flex w-100 product-tab-main-content-desc">
         <div class="product-tab-main-content-title">
-            <img class="img-fluid logo" src="/public/img/kaliony-logo.svg"
+            <img class="img-fluid logo" src="/img/kaliony-logo.svg"
                  alt="kaliony">
 
             <div class="product-tab-main-content-sub text-uppercase">

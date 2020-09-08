@@ -215,7 +215,7 @@
 
 @stop
 @section('js')
-    <script src="/public/js/tiket.js"></script>
+    <script src="/js/tiket.js"></script>
 
     <script>
         $(document).ready(function () {

@@ -302,7 +302,7 @@
 {{--<span class="d-flex method-wrap pointer">--}}
 {{--<span class="method-payment-photo">--}}
 {{--<img--}}
-{{--src="/public/img/temp/method-cart-logos.png"--}}
+{{--src="/img/temp/method-cart-logos.png"--}}
 {{--alt="brand"/>--}}
 {{--</span>--}}
 {{--</span>--}}
@@ -318,7 +318,7 @@
 {{--<span class="d-flex method-wrap pointer">--}}
 {{--<span class="method-payment-photo">--}}
 {{--<img--}}
-{{--src="/public/img/temp/method-cart-paypal-logo.png"--}}
+{{--src="/img/temp/method-cart-paypal-logo.png"--}}
 {{--alt="brand"/>--}}
 {{--</span>--}}
 {{--</span>--}}
@@ -334,7 +334,7 @@
 {{--<span class="d-flex method-wrap pointer">--}}
 {{--<span class="method-payment-photo">--}}
 {{--<img--}}
-{{--src="/public/img/temp/method-cart-maestro-logo.png"--}}
+{{--src="/img/temp/method-cart-maestro-logo.png"--}}
 {{--alt="brand"/>--}}
 {{--</span>--}}
 {{--</span>--}}
@@ -357,7 +357,7 @@
 {{--<input type="text" class="form-control place-light" id="cardNumber"--}}
 {{--placeholder="1234 1234 1234 1234">--}}
 {{--<span class="cards-icon d-inline-flex align-items-center"><img--}}
-{{--src="/public/img/visa-logo.png" alt="visa"></span>--}}
+{{--src="/img/visa-logo.png" alt="visa"></span>--}}
 {{--</div>--}}
 {{--</div>--}}
 {{--<div class="form-group row item-wrap">--}}

@@ -345,7 +345,7 @@
                                                 style="font-family:Oswald, sans-serif; font-size: 11px; mso-line-height-rule:exactly;font-weight: bold; line-height: 12px; color: #353535; text-transform: uppercase;padding-left: 35px;">
                                                 <a href="#" target="_blank"
                                                    style="font-family: Roboto, sans-serif; color: #353535; text-decoration: none;display: inline-block">
-                                                    <img src="{!!url('/public/mail-templates/confirm-email/images/logo.png')!!}"
+                                                    <img src="{!!url('/mail-templates/confirm-email/images/logo.png')!!}"
                                                          alt="Vapors Hub" width="201" height="64"
                                                          border="0" style="display: block; outline: none;"/>
                                                 </a>
@@ -365,7 +365,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="{!!url('/public/mail-templates/confirm-email/images/product-discount.jpg')!!}"
+                                    <img src="{!!url('/mail-templates/confirm-email/images/product-discount.jpg')!!}"
                                          alt="discount" style="width: 100%">
                                 </td>
                             </tr>
@@ -378,7 +378,7 @@
                                            style="border-collapse: collapse;border: 1px solid #d7d7d7;box-shadow: 0px 3px 21px 0px rgba(0, 0, 0, 0.11);">
                                         <tr>
                                             <td class="mobile-col mobile-img" style="padding: 25px 33px 25px 17px;">
-                                                <img src="{!!url('/public/mail-templates/confirm-email/images/congr.png')!!}"
+                                                <img src="{!!url('/mail-templates/confirm-email/images/congr.png')!!}"
                                                      alt="Congratulations">
                                             </td>
                                             <td class="mobile-col mobile-account">
@@ -546,7 +546,7 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <img src="{!!url('/public/mail-templates/confirm-email/images/line.jpg')!!}" alt="line"
+                                    <img src="{!!url('/mail-templates/confirm-email/images/line.jpg')!!}" alt="line"
                                          style="width: 100%">
                                 </td>
                             </tr>
@@ -583,7 +583,7 @@
                                         <tr>
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
-                                                    <img src="{!!url('/public/mail-templates/confirm-email/images/social-fb.png')!!}"
+                                                    <img src="{!!url('/mail-templates/confirm-email/images/social-fb.png')!!}"
                                                          alt="fb" style="width: 100%">
                                                 </a>
                                             </td>
@@ -591,7 +591,7 @@
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
                                                     <img
-                                                        src="{!!url('/public/mail-templates/confirm-email/images/social-instagram.png')!!}"
+                                                        src="{!!url('/mail-templates/confirm-email/images/social-instagram.png')!!}"
                                                         alt="instagram"
                                                         style="width: 100%">
                                                 </a>
@@ -600,7 +600,7 @@
                                             <td width="55">
                                                 <a href="#" target="_blank" style="display: inline-block">
                                                     <img
-                                                        src="{!!url('/public/mail-templates/confirm-email/images/social-youtube.png')!!}"
+                                                        src="{!!url('/mail-templates/confirm-email/images/social-youtube.png')!!}"
                                                         alt="youtube"
                                                         style="width: 100%">
                                                 </a>

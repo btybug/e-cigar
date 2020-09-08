@@ -5,7 +5,7 @@
     <div id="view-selector-container"></div>
 @stop
 @section('css')
-    {!! HTML::style('/public/js/google/analytic/index.css') !!}
+    {!! HTML::style('/js/google/analytic/index.css') !!}
 @stop
 @section('js')
 
@@ -18,10 +18,10 @@
         }(window,document,'script'));
     </script>
     <!-- Include the ViewSelector2 component script. -->
-    <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/view-selector2.js"></script>
+    <script src="https://ga-dev-tools.appspot.com/javascript/embed-api/components/view-selector2.js"></script>
 
     <!-- Include the DateRangeSelector component script. -->
-    <script src="https://ga-dev-tools.appspot.com/public/javascript/embed-api/components/date-range-selector.js"></script>
+    <script src="https://ga-dev-tools.appspot.com/javascript/embed-api/components/date-range-selector.js"></script>
 
     <script>
 

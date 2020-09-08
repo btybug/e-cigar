@@ -13,7 +13,7 @@
                                        class="d-flex align-items-center item-link active">
                                         <span class="line"></span>
                                         <div class="item-photo">
-                                            <img src="/public/img/message-icon.png" alt="contact" title="Contact Us">
+                                            <img src="/img/message-icon.png" alt="contact" title="Contact Us">
                                         </div>
                                         <div class="item-name font-20">{!! __('contact_us') !!}</div>
                                     </a>
@@ -22,7 +22,7 @@
                             <li class="item-wrap">
                                 <a href="{!! route('delivery') !!}" class="d-flex align-items-center item-link">
                                     <div class="item-photo">
-                                        <img src="/public/img/delivery-icon.png" alt="Delivery" title="Delivery">
+                                        <img src="/img/delivery-icon.png" alt="Delivery" title="Delivery">
                                     </div>
                                     <div class="item-name font-20">{!! __('delivery') !!}</div>
                                 </a>
@@ -31,7 +31,7 @@
                                 <a href="{!! route('terms_conditions') !!}"
                                    class="d-flex align-items-center item-link ">
                                     <div class="item-photo">
-                                        <img src="/public/img/paper-icon.png" alt="Terms Conditions" title="Terms & Conditions">
+                                        <img src="/img/paper-icon.png" alt="Terms Conditions" title="Terms & Conditions">
                                     </div>
                                     <div class="item-name font-20">{!! __('terms_and_conditions') !!}</div>
                                 </a>
@@ -40,7 +40,7 @@
                             <li class="item-wrap">
                                 <a href="{!! route('faq_page') !!}" class="d-flex align-items-center item-link">
                                     <div class="item-photo">
-                                        <img src="/public/img/faq-icon.png" alt="FAQ" title="FAQ">
+                                        <img src="/img/faq-icon.png" alt="FAQ" title="FAQ">
                                     </div>
                                     <div class="item-name font-20">{!! __('faq') !!}</div>
                                 </a>
@@ -49,7 +49,7 @@
                                 <li class="item-wrap">
                                     <a href="{!! route('about_us') !!}" class="d-flex align-items-center item-link">
                                         <div class="item-photo">
-                                            <img src="/public/img/faq-icon.png" alt="about_us" title="about_us">
+                                            <img src="/img/faq-icon.png" alt="about_us" title="about_us">
                                         </div>
                                         <div class="item-name font-20">{!! __('About us') !!}</div>
                                     </a>
@@ -58,7 +58,7 @@
                                 <li class="item-wrap">
                                     <a href="{!! route('privacy') !!}" class="d-flex align-items-center item-link">
                                         <div class="item-photo">
-                                            <img src="/public/img/faq-icon.png" alt="privacy" title="privacy">
+                                            <img src="/img/faq-icon.png" alt="privacy" title="privacy">
                                         </div>
                                         <div class="item-name font-20">{!! __('privacy') !!}</div>
                                     </a>
@@ -66,7 +66,7 @@
                                 <li class="item-wrap">
                                     <a href="{!! route('cookies') !!}" class="d-flex align-items-center item-link ">
                                         <div class="item-photo">
-                                            <img src="/public/img/faq-icon.png" alt="cookies" title="cookies">
+                                            <img src="/img/faq-icon.png" alt="cookies" title="cookies">
                                         </div>
                                         <div class="item-name font-20">{!! __('cookies') !!}</div>
                                     </a>
@@ -237,13 +237,13 @@
                                 <div class="d-flex flex-wrap justify-content-between social-body">
                                     <a href="#" class="mr-1 d-flex align-items-center">
                                         <span class="icon">
-                                            <img src="/public/img/whatsapp-icon.png" alt="whatsapp">
+                                            <img src="/img/whatsapp-icon.png" alt="whatsapp">
                                         </span>
                                         <span class="name font-sec-light font-20 lh-1 text-main-clr">WhatsApp</span>
                                     </a>
                                     <a href="#" class="d-flex align-items-center">
                                         <span class="icon">
-                                            <img src="/public/img/facebook-icon.png" alt="Messenger">
+                                            <img src="/img/facebook-icon.png" alt="Messenger">
                                         </span>
                                         <span class="name font-sec-light font-20 lh-1 text-main-clr">Messenger</span>
                                     </a>

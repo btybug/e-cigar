@@ -103,7 +103,7 @@
         }
         .files {
             position: relative;
-            background: url("/public/img/excel.png");
+            background: url("/img/excel.png");
             width: 100%;
             height: 200px;
             -webkit-background-size:cover;

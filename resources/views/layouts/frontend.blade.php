@@ -34,8 +34,8 @@
         gtag('config', '{!! env('GOOGLE_ANALYTICS_TRACKING_ID') !!}');
     </script>
     <!-- End Google Analytics -->
-    <link rel="shortcut icon" href="{!! url('/public/img/favicon.png') !!}">
-    <link rel="shortcut icon" href="{!! url('/public/img/favicon.ico') !!}">
+    <link rel="shortcut icon" href="{!! url('/img/favicon.png') !!}">
+    <link rel="shortcut icon" href="{!! url('/img/favicon.ico') !!}">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
           integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
@@ -114,7 +114,7 @@
         </div>
     </div>
 </div>
-<img src="/public/images/loader.gif" class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
+<img src="/images/loader.gif" class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 @include("frontend.products._partials.extra_modal")
 @if(is_enabled_filter_modal())
   {!! filter_modal_html() !!}

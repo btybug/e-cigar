@@ -11,8 +11,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.0/css/buttons.bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/select/1.2.4/css/select.bootstrap.min.css">
-    <link rel="stylesheet" href="/public/js/DataTables/css/editor.dataTables.css">
-    <link rel="stylesheet" href="/public/js/DataTables/css/editor.bootstrap.css">
+    <link rel="stylesheet" href="/js/DataTables/css/editor.dataTables.css">
+    <link rel="stylesheet" href="/js/DataTables/css/editor.bootstrap.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>

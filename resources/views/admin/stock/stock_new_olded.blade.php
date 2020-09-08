@@ -919,7 +919,7 @@
                                                                     <tr>
                                                                         <th scope="row">
                                                                             <label for="seo_focuskw">Focus Keyword:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -929,7 +929,7 @@
                                                                     <tr>
                                                                         <th scope="row">
                                                                             <label for="seo_title">SEO Title:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -948,7 +948,7 @@
                                                                         <th scope="row">
                                                                             <label for="seo_metadesc">Meta
                                                                                 description:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -1453,7 +1453,7 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
 
         $(document).ready(function () {

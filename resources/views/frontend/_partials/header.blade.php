@@ -10,7 +10,7 @@
                             <span class="navbar-toggler-icon"></span>
                         </button>
                         <a href="{!! url('/') !!}" class="logo-small-screens d-md-none d-flex align-items-center ml-3">
-                            <img src="{!! url('/public/img/kaliony-hub-logo.svg') !!}"  alt="" class="logo-small-screens_logo">
+                            <img src="{!! url('/img/kaliony-hub-logo.svg') !!}"  alt="" class="logo-small-screens_logo">
 {{--                            <h1 class="font-14 font-sec-bold text-sec-clr text-uppercase ml-2 mb-0">The Vapors Hub</h1>--}}
                         </a>
                     </div>

@@ -76,7 +76,7 @@
 
                         {{--<li class="col-md-6">--}}
                             {{--<div class="position-relative home_categories-item">--}}
-                                {{--<img src="/public/img/temp/product_2.jpg" alt="photo">--}}
+                                {{--<img src="/img/temp/product_2.jpg" alt="photo">--}}
                                 {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
                                     {{--<h4 class="font-sec-bold font-35 ">Cbd</h4>--}}
                                     {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
@@ -88,7 +88,7 @@
                         {{--</li>--}}
                         {{--<li class="col-md-6">--}}
                             {{--<div class="position-relative home_categories-item mb-0">--}}
-                                {{--<img src="/public/img/temp/product_3.jpg" alt="photo">--}}
+                                {{--<img src="/img/temp/product_3.jpg" alt="photo">--}}
                                 {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
                                     {{--<h4 class="font-sec-bold font-35 ">E-liquid</h4>--}}
                                     {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
@@ -100,7 +100,7 @@
                         {{--</li>--}}
                         {{--<li class="col-md-6">--}}
                             {{--<div class="position-relative home_categories-item mb-0">--}}
-                                {{--<img src="/public/img/temp/product_4.jpg" alt="photo">--}}
+                                {{--<img src="/img/temp/product_4.jpg" alt="photo">--}}
                                 {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
                                     {{--<h4 class="font-sec-bold font-35 ">Parts</h4>--}}
                                     {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
@@ -317,10 +317,10 @@
 @stop
 
 @section('css')
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
-    <link href="/public/css/carousel.css" rel="stylesheet">
-    <link href="/public/css/home-slider.css" rel="stylesheet">
+    <link href="/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/plugins/formstone/light.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/home-slider.css" rel="stylesheet">
 @stop
 
 @section('js')

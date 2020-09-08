@@ -157,7 +157,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
-    <script src="/public/js/tiket.js"></script>
+    <script src="/js/tiket.js"></script>
 
     <script>
 
@@ -332,6 +332,6 @@
 
     </script>
 
-    <script src="/public/admin_theme/blog_new.js"></script>
+    <script src="/admin_theme/blog_new.js"></script>
 
 @stop

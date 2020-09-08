@@ -100,7 +100,7 @@
                                 <div class="row">
                                     <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
                                         <div class="user-img">
-                                            <img src="/public/images/male.png" alt="">
+                                            <img src="/images/male.png" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">

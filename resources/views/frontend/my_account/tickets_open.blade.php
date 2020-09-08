@@ -130,7 +130,7 @@
 @section('js')
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
     <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-    <script src="/public/admin_theme/blog_new.js"></script>
-    <script src="/public/js/tiket.js"></script>
+    <script src="/admin_theme/blog_new.js"></script>
+    <script src="/js/tiket.js"></script>
 
 @stop

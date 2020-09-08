@@ -42,10 +42,10 @@
 {{--                    </div>--}}
 {{--                    <div class="footer-payment">--}}
 {{--                        <div>--}}
-{{--                            <img src="/public/img/paypal.png" alt="paypal" title="paypal">--}}
-{{--                            <img src="/public/img/visa.png" alt="visa" title="visa">--}}
-{{--                            <img src="/public/img/maestro.png" alt="maestro" title="maestro">--}}
-{{--                            <img src="/public/img/mc.png" alt="mc" title="mc">--}}
+{{--                            <img src="/img/paypal.png" alt="paypal" title="paypal">--}}
+{{--                            <img src="/img/visa.png" alt="visa" title="visa">--}}
+{{--                            <img src="/img/maestro.png" alt="maestro" title="maestro">--}}
+{{--                            <img src="/img/mc.png" alt="mc" title="mc">--}}
 {{--                        </div>--}}
 {{--                    </div>--}}
 

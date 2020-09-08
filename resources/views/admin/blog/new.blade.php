@@ -295,7 +295,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_focuskw">Focus Keyword:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::text('general[keywords]',($post)?$post->getSeoField('keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'keywords',$post)]) !!}
@@ -304,7 +304,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_title">SEO Title:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::text('general[title]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'title',$post)]) !!}
@@ -319,7 +319,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_metadesc">Meta description:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::textarea('general[description]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'description',$post)]) !!}
@@ -661,6 +661,6 @@ SEO
          return false; // return false to cancel form action
          });*/
     </script>
-    <script src="/public/admin_theme/blog_new.js"></script>
+    <script src="/admin_theme/blog_new.js"></script>
 
 @stop

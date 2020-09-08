@@ -70,7 +70,7 @@
                                                 <div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">
                                                     <div id="cardNumber" class="field form-control"></div>
                                                     <span class="cards-icon d-inline-flex align-items-center">
-                                                    <img src="/public/img/visa-logo.png" alt="visa"></span>
+                                                    <img src="/img/visa-logo.png" alt="visa"></span>
                                                 </div>
                                             </div>
                                             <div class="form-group row item-wrap">

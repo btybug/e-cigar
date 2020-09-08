@@ -107,7 +107,7 @@
             @section('css')
                 <link rel="stylesheet"
                       href="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.css?v='.rand(111,999))}}">
-                <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+                <link href="/plugins/select2/select2.min.css" rel="stylesheet"/>
                 <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
                 <style>
                     .highlight_mark {
@@ -118,7 +118,7 @@
 
             @section("js")
                 <script src="{{asset('public/admin_theme/bootstrap-colorselector/bootstrap-colorselector.min.js')}}"></script>
-                <script src="/public/plugins/select2/select2.full.min.js"></script>
+                <script src="/plugins/select2/select2.full.min.js"></script>
 
                 <script>
                     $( document ).ready(function() {

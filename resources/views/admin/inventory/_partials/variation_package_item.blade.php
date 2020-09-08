@@ -11,7 +11,7 @@
                     @elseif($main && $main->stock)
                         <img src="{{ media_image_tmb($main->stock->image) }}" alt="photo"  class="v-img">
                     @else
-                        <img src="/public/images/no_image.png" alt="photo"  class="v-img">
+                        <img src="/images/no_image.png" alt="photo"  class="v-img">
                     @endif
                 </div>
                 <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"

@@ -5,7 +5,7 @@
         <div class="comment-infos text-center">
             <div class="d-inline-flex align-items-center comment-infos-inner">
                                                             <span class="icon">
-                                                                <img src="/public/img/comment-repeat-icon.png" alt="icon">
+                                                                <img src="/img/comment-repeat-icon.png" alt="icon">
                                                             </span>
                 <p class="font-main-bold font-16 mb-0 lh-1">{{ BBgetDateFormat($item->created_at) }}, {!! $item->body !!}</p>
             </div>

@@ -125,7 +125,7 @@
     <!-- jvectormap -->
     {!! Html::style("public/admin_theme/bower_components/jvectormap/jquery-jvectormap.css") !!}
     {!! Html::style("public/admin_assets/css/dashboard.css") !!}
-    {!! HTML::style('/public/js/google/analytic/index.css') !!}
+    {!! HTML::style('/js/google/analytic/index.css') !!}
 @stop
 @section('js')
 
@@ -157,8 +157,8 @@
             };
         }(window, document, 'script'));
     </script>
-    {!! HTML::script('/public/js/google/analytic/view-selector2.js') !!}
-    {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
+    {!! HTML::script('/js/google/analytic/view-selector2.js') !!}
+    {!! HTML::script('/js/google/analytic/date-range-selector.js') !!}
     <script>
         {{--gapi.analytics.ready(function () {--}}
             {{--console.log(gapi);--}}

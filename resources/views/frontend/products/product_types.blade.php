@@ -34,7 +34,7 @@
                                         <div class="left-content">
                                             <div class="title-logo text-center">
                                                 <div class="wrap">
-                                                    <img src="/public/img/kaliony-logo.svg" alt="kaliony" class="w-100">
+                                                    <img src="/img/kaliony-logo.svg" alt="kaliony" class="w-100">
 
                                                     <div class="sub">
                                                         <em class="txt-cl-red">{{ $value->name }}</em>
@@ -82,7 +82,7 @@
                                             @if($value->image)
                                                 <img src="{{ $value->image }}" alt="">
                                             @else
-                                                <img src="/public/images/no_image.jpg" style="max-height:450px !important;" alt="">
+                                                <img src="/images/no_image.jpg" style="max-height:450px !important;" alt="">
                                             @endif
                                         </div>
                                     </div>
@@ -101,7 +101,7 @@
                                                                             @if($product->image)
                                                                                 <img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}">
                                                                             @else
-                                                                                <img class="card-img-top" src="/public/images/no_image.jpg" alt="{{ $product->name }}">
+                                                                                <img class="card-img-top" src="/images/no_image.jpg" alt="{{ $product->name }}">
                                                                             @endif
                                                                         </div>
                                                                         <div class="name text-center">

@@ -64,7 +64,7 @@
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="sipping-item-wrap address-item">
                                                         <div class="item-photo">
-                                                            <img src="/public/img/confirm-home.png" class="home-img"
+                                                            <img src="/img/confirm-home.png" class="home-img"
                                                                  alt="item"/>
                                                         </div>
                                                         <h3 class="font-sec-reg font-18 item-title">Shipping
@@ -82,7 +82,7 @@
                                                 <li class="col-md-4 col-sm-6">
                                                     <div class="sipping-item-wrap delivery-item">
                                                         <div class="item-photo">
-                                                            <img src="/public/img/confirm-calendar.png"
+                                                            <img src="/img/confirm-calendar.png"
                                                                  class="calendar-img"
                                                                  alt="item"/>
                                                         </div>
@@ -472,16 +472,16 @@
                             <div class="font-main-reg order-docs__tab-left">
                                 <div class="nav flex-column list-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                     <a class="nav-link item-link active" id="v-pills-docs-invoice-tab" data-toggle="pill" href="#v-pills-docs-invoice" role="tab" aria-controls="v-pills-docs-invoice" aria-selected="true">
-                                        <span class="icon"><img src="/public/img/print-icon.png" alt="icon"></span>
+                                        <span class="icon"><img src="/img/print-icon.png" alt="icon"></span>
                                         <span class="font-20 text-main-clr name">Invoice</span>
                                     </a>
                                     <a class="nav-link item-link" id="v-pills-docs-shipping-tab" data-toggle="pill" href="#v-pills-docs-shipping" role="tab" aria-controls="v-pills-docs-shipping" aria-selected="false">
-                                        <span class="icon"><img src="/public/img/delivery-icon.png"
+                                        <span class="icon"><img src="/img/delivery-icon.png"
                                                                 alt="icon"></span>
                                         <span class="font-20 text-main-clr name">Shipping Label</span>
                                     </a>
                                     <a class="nav-link item-link" id="v-pills-docs-downloads-tab" data-toggle="pill" href="#v-pills-docs-downloads" role="tab" aria-controls="v-pills-docs-downloads" aria-selected="false">
-                                        <span class="icon"><img src="/public/img/delivery-icon.png"
+                                        <span class="icon"><img src="/img/delivery-icon.png"
                                                                 alt="icon"></span>
                                         <span class="font-20 text-main-clr name">Downloads</span>
                                     </a>
@@ -489,13 +489,13 @@
 {{--                                <ul class="list-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">--}}
 {{--                                    <li class="item-wrap">--}}
 {{--                                        <a class="item-link" id="v-pills-docs-invoice-tab" data-toggle="pill" href="#v-pills-docs-invoice" role="tab" aria-controls="v-pills-docs-invoice" aria-selected="true">--}}
-{{--                                            <span class="icon"><img src="/public/img/print-icon.png" alt="icon"></span>--}}
+{{--                                            <span class="icon"><img src="/img/print-icon.png" alt="icon"></span>--}}
 {{--                                            <span class="font-20 text-main-clr name">Invoice</span>--}}
 {{--                                        </a>--}}
 {{--                                    </li>--}}
 {{--                                    <li class="item-wrap">--}}
 {{--                                        <a class="item-link"  id="v-pills-docs-shipping-tab" data-toggle="pill" href="#v-pills-docs-shipping" role="tab" aria-controls="v-pills-docs-shipping" aria-selected="false">--}}
-{{--                                            <span class="icon"><img src="/public/img/delivery-icon.png"--}}
+{{--                                            <span class="icon"><img src="/img/delivery-icon.png"--}}
 {{--                                                                    alt="icon"></span>--}}
 {{--                                            <span class="font-20 text-main-clr name">Shipping Label</span>--}}
 {{--                                        </a>--}}
@@ -662,8 +662,8 @@
 @stop
 
 @section('css')
-    <link href="/public/admin_assets/css/global-admin.css" rel="stylesheet">
-    <link href="/public/css/invoice.css" rel="stylesheet">
+    <link href="/admin_assets/css/global-admin.css" rel="stylesheet">
+    <link href="/css/invoice.css" rel="stylesheet">
     <style>
         .order-main-cnt_right-col {
             height: calc(100vh - 285px);

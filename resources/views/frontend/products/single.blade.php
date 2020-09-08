@@ -733,9 +733,9 @@
 @stop
 
 @section('css')
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
+    <link href="/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/plugins/formstone/light.css" rel="stylesheet">
     <link type="text/css" rel="stylesheet"
           href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css"/>
     <link type="text/css" rel="stylesheet"
@@ -824,12 +824,12 @@ max-width: 100%;
 @stop
 
 @section("js")
-    <script src="/public/plugins/formstone/core.js"></script>
-    <script src="/public/plugins/formstone/mediaquery.js"></script>
-    <script src="/public/plugins/formstone/touch.js"></script>
-    <script src="/public/plugins/formstone/transition.js"></script>
-    <script src="/public/plugins/formstone/lightbox/lightbox.js"></script>
-    <script src="/public/plugins/formstone/carousel/carousel.js"></script>
+    <script src="/plugins/formstone/core.js"></script>
+    <script src="/plugins/formstone/mediaquery.js"></script>
+    <script src="/plugins/formstone/touch.js"></script>
+    <script src="/plugins/formstone/transition.js"></script>
+    <script src="/plugins/formstone/lightbox/lightbox.js"></script>
+    <script src="/plugins/formstone/carousel/carousel.js"></script>
     <script type="text/javascript"
             src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>

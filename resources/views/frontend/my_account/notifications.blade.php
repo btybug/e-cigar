@@ -83,7 +83,7 @@
             <div class="modal-content rounded-0">
                 <div class="row no-gutters h-100">
                     <div class="col-md-4">
-                        <div class="modal_left-img-holder h-100" style="background-image: url(/public/img/temp/modal-login-bg.jpg)"></div>
+                        <div class="modal_left-img-holder h-100" style="background-image: url(/img/temp/modal-login-bg.jpg)"></div>
                     </div>
                     <div class="col-md-8">
                       <div class="modal-body h-100 d-flex flex-column">
@@ -112,7 +112,7 @@
             {{--<div class="modal-content">--}}
                 {{--<div class="row no-gutters modal-content_inner">--}}
                     {{--<div class="col-md-4 col-sm-2">--}}
-                        {{--<div class="modal_left-img-holder h-100" style="background-image: url(/public/img/temp/modal-login-bg.jpg)"></div>--}}
+                        {{--<div class="modal_left-img-holder h-100" style="background-image: url(/img/temp/modal-login-bg.jpg)"></div>--}}
                     {{--</div>--}}
 
                     {{--<div class="col-md-8 col-sm-10">--}}

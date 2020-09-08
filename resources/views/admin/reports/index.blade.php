@@ -76,7 +76,7 @@
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    {!! HTML::script('/public/js/google/analytic/date-range-selector.js') !!}
+    {!! HTML::script('/js/google/analytic/date-range-selector.js') !!}
     <script>
         function call_find(option){
             AjaxCall("/admin/find/call-find", {key: option}, function (res) {
@@ -167,7 +167,7 @@ function date_column() {
     });
 }
         function doSubmitForm() {
-            
+
             $('.find-wrapper-results-content').html('<div id="loading" class="justify-content-center align-items-center my-5 d-flex">\n' +
                 '            <div class="lds-dual-ring"></div>\n' +
                 '        </div>');

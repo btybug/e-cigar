@@ -59,5 +59,5 @@
 
         </script> -->
     <script src="https://bootstrap-tagsinput.github.io/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js"></script>
-    <script src="/public/js/custom/tags.js?v=".rand(111,999)></script>
+    <script src="/js/custom/tags.js?v=".rand(111,999)></script>
 @stop

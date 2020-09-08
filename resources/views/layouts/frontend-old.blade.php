@@ -13,7 +13,7 @@
     <link href={{asset("public/frontend/css/font-awesome.min.css")}} rel="stylesheet" />
     <link href={{asset("public/css/fonts.css?v=".rand(111,999))}} rel="stylesheet" />
     <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet" />
-    {{--<link href="{{'/public'.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
+    {{--<link href="{{''.mix('comments.css', 'vendor/comments')->toHtml() }}" rel="stylesheet">--}}
     {{----}}
     <link rel="stylesheet" href="{{asset('public/css/flag-icon.css')}}">
 
@@ -33,7 +33,7 @@
     @yield('css')
 
 
-    {{--<script src="{{ '/public'.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>--}}
+    {{--<script src="{{ ''.mix('comments.js', 'vendor/comments')->toHtml() }}"></script>--}}
 
 </head>
 <body>
@@ -55,7 +55,7 @@
         </div>
     </div>
 </div>
-<img src="/public/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
+<img src="/images/loader.gif"  class="loader-img d-none" style="width:100px;position: absolute;top:50%;left:50%"/>
 
 <script src={{asset("public/js/main.js")}}></script>
 <script>

@@ -71,10 +71,10 @@
 
 @stop
 @section('css')
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
-    <link href="/public/css/carousel.css" rel="stylesheet">
-    <link href="/public/css/home-slider.css" rel="stylesheet">
+    <link href="/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/plugins/formstone/light.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/home-slider.css" rel="stylesheet">
 
 @stop
 
