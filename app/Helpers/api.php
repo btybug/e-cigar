@@ -1605,7 +1605,7 @@ function rich(){
 
     $localBusiness = \Spatie\SchemaOrg\Schema::product()
         ->name('Spatie')
-        ->image('https://e-cigar.com/public/media/drive/12/ff39e4af551574b9911e15aaedfb9119.png');
+        ->image(env('APP_URL').'/media/drive/12/ff39e4af551574b9911e15aaedfb9119.png');
 
     echo $localBusiness->toScript();
 }
