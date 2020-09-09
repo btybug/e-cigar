@@ -12,11 +12,24 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Attributes;
 use App\Models\Brands;
 use App\Models\Category;
+use App\Models\Couriers;
 use App\Models\Dashboard;
+use App\Models\Filters;
 use App\Models\Items;
+use App\Models\ItemsMedia;
 use App\Models\Roles;
+use App\Models\Stickers;
+use App\Models\Stock;
+use App\Models\StockAds;
+use App\Models\StockBanners;
+use App\Models\StockVariation;
+use App\Models\Stores;
+use App\Models\Translations\BrandsSeoTranslations;
+use App\Models\Warehouse;
+use App\Models\WarehouseRacks;
 use App\Services\ManagerApiRequest;
 use App\Services\UserService;
 use App\Services\Widgets;
@@ -61,6 +74,72 @@ class AdminController extends Controller
             $item->image=str_replace('/public','',$item->image);
             $item->save();
         }
+        $items=ItemsMedia::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=StockVariation::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Attributes::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=BrandsSeoTranslations::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Couriers::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Filters::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Stickers::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=StockAds::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=StockBanners::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Stock::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Stores::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=WarehouseRacks::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Warehouse::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+
     }
 
     public function find()
