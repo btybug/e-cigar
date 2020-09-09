@@ -1366,7 +1366,7 @@ function item_default_image(){
 
 function no_image()
 {
-    return "/public/images/no_image.png";
+    return "/images/no_image.png";
 }
 
 function media_image_tmb($path)
