@@ -9,6 +9,7 @@
 use App\Services\EAN13render;
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+Route::get('/fix', 'Admin\AdminController@fixMedia')->name('admin_fixtul');
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
 Route::group(['prefix' => 'find'], function () {

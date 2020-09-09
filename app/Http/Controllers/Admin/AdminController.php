@@ -12,7 +12,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Admin\Requests\AdminProfileRequest;
 use App\Http\Controllers\Admin\Requests\UserAvaratRequest;
 use App\Http\Controllers\Controller;
+use App\Models\Brands;
+use App\Models\Category;
 use App\Models\Dashboard;
+use App\Models\Items;
 use App\Models\Roles;
 use App\Services\ManagerApiRequest;
 use App\Services\UserService;
@@ -21,6 +24,7 @@ use App\User;
 use PragmaRX\Countries\Package\Countries;
 use App\Models\GeoZones;
 use Illuminate\Http\Request;
+use function GuzzleHttp\Psr7\str;
 
 class AdminController extends Controller
 {
@@ -38,6 +42,25 @@ class AdminController extends Controller
         $widgets = \Auth::user()->widgets()->pluck('widget')->all();
 
         return view('admin.dashboard', compact(['widgets']));
+    }
+
+    public function fixMedia()
+    {
+        $items=Items::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Brands::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
+        $items=Category::all();
+        foreach ($items as $item){
+            $item->image=str_replace('/public','',$item->image);
+            $item->save();
+        }
     }
 
     public function find()
