@@ -1347,8 +1347,8 @@ function user_can_claim($user)
 function checkImage($img,$type=null)
 {
         switch ($type){
-            case 'stock':$img= (File::exists(base_path().$img)) ? $img : stock_default_image();break;
-            case 'item':$img= (File::exists(base_path().$img)) ? $img : item_default_image();break;
+            case 'stock':$img= (File::exists(public_path().$img)) ? $img : stock_default_image();break;
+            case 'item':$img= (File::exists(public_path().$img)) ? $img : item_default_image();break;
         }
         return $img;
 

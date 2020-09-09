@@ -122,6 +122,20 @@ class AdminController extends Controller
         $items=Stock::all();
         foreach ($items as $item){
             $item->image=str_replace('/public','',$item->image);
+
+            if(is_array($item->other_images)){
+                $images=[];
+                foreach ($item->other_images as $key=>$image){
+                    if (isset($image['image'])){
+                        $image['image']=str_replace('/public','',$image['image']);
+                        $images[$key]=$image;
+
+                    }
+
+                }
+                $item->other_images=$images;
+            }
+
             $item->save();
         }
         $items=Stores::all();
