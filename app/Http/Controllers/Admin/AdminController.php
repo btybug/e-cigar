@@ -76,7 +76,7 @@ class AdminController extends Controller
         }
         $items=ItemsMedia::all();
         foreach ($items as $item){
-            $item->image=str_replace('/public','',$item->image);
+            $item->url=str_replace('/public','',$item->url);
             $item->save();
         }
         $items=StockVariation::all();
