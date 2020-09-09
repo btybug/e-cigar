@@ -1371,9 +1371,10 @@ function no_image()
 
 function media_image_tmb($path)
 {
+
     $e = explode('/', $path);
-    $image = 'public/media/tmp/' . end($e);
-    return (File::exists(base_path($image)) && !File::isDirectory(base_path($image))) ? url($image) : no_image();
+    $image = 'media/tmp/' . end($e);
+    return (File::exists(public_path($image)) && !File::isDirectory(public_path($image))) ? url($image) : no_image();
 
 }
 function media_image_tmb_path($path)
