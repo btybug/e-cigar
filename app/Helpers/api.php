@@ -1403,7 +1403,7 @@ function user_avatar($id = null)
         }
     }
 
-    return '/public/img/user.svg';
+    return '/img/user.svg';
 }
 
 function user_avatar_class($id = null)
