@@ -21,7 +21,7 @@ class CreateBasketTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->unsignedInteger('staff_id')->nullable();
             $table->unsignedBigInteger('admin_discount_id')->nullable();
-            $table->text('additional_data')->nullable();
+            $table->longText('additional_data')->nullable();
             $table->text('note')->nullable();
             $table->string('payment_method');
             $table->double('tendered')->nullable();

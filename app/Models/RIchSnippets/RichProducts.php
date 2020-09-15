@@ -17,6 +17,16 @@ class RichProducts
             'db_column' => 'name',
             'default' => '{name}'
         ],
+        'additionalProperty' => [
+            'label' => 'Additional Property',
+            'db_column' => null,
+            'default' => ''
+        ],
+        'aggregateRating' => [
+            'label' => 'Additional Property',
+            'db_column' => null,
+            'default' => '{name}'
+        ],
         'image' => [
             'label' => 'Image',
             'db_column' => 'image',
@@ -36,6 +46,73 @@ class RichProducts
             'label' => 'Category',
             'db_column' => 'category.name',
             'default' => '{categories}'
+        ],
+        'award' => [
+            'label' => 'Category',
+            'db_column' => 'category.name',
+            'default' => ''
+        ],
+        'color' => [
+            'label' => 'Color',
+            'db_column' => 'category.name',
+            'default' => '{color}'
+        ],
+        'height' => [
+            'label' => 'Height',
+            'db_column' => '',
+            'default' => '{height}'
+        ],
+        'offers' => [
+            'label' => 'Offers',
+            'db_column' => '',
+            'default' => '{offers}'
+        ],
+        'productID' => [
+            'label' => 'productID',
+            'db_column' => '',
+            'default' => '{productID}'
+        ],
+        'weight' => [
+            'label' => 'weight',
+            'db_column' => '',
+            'default' => '{weight}'
+        ],
+        'width' => [
+            'label' => 'width',
+            'db_column' => '',
+            'default' => '{width}'
+        ],
+        'gtin' => [
+            'label' => 'gtin',
+            'db_column' => '',
+            'default' => ''
+        ],
+        'gtin12' => [
+            'label' => 'gtin12',
+            'db_column' => '',
+            'default' => ''
+        ],
+        'gtin13' => [
+            'label' => 'gtin13',
+            'db_column' => '',
+            'default' => ''
+        ],
+
+        'gtin14' => [
+            'label' => 'gtin14',
+            'db_column' => '',
+            'default' => ''
+        ],
+
+        'gtin8' => [
+            'label' => 'gtin8',
+            'db_column' => '',
+            'default' => ''
+        ],
+        'isRelatedTo' => [
+            'label' => 'isRelatedTo',
+            'db_column' => '',
+            'default' => ''
         ],
 
     ];
@@ -97,7 +174,11 @@ class RichProducts
     {
         preg_match('/{(.*?)}/', $string, $matches);
         if (count($matches)) {
-            $string = str_replace($matches[0], $this->{$matches[1]}(), $string);
+            $value = '';
+            if (method_exists($this, $matches[1])) {
+                $value = $this->{$matches[1]}();
+            }
+            $string = str_replace($matches[0], $value, $string);
             $string = $this->parametazor($string);
         }
         return $string;

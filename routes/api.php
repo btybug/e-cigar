@@ -19,6 +19,7 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/get-settings', 'ShopController@getSettings');
 //    Route::middleware('shopping',function (){
     Route::post('/items', 'ItemsController@getItems');
+    Route::post('/get-item-locations', 'ItemsController@getItemLocations');
     Route::post('/categories', 'ItemsController@getCategories');
     Route::post('/get-basket-number', 'OrdersController@getBasketNumber');
     Route::post('/finish-order','OrdersController@FinishOrder');

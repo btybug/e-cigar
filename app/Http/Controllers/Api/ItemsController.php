@@ -8,6 +8,7 @@ use App\Models\App\AppItems;
 use App\Models\Category;
 use App\Models\Items;
 use App\Models\Warehouse;
+use App\Models\WarehouseRacks;
 use Illuminate\Http\Request;
 
 class ItemsController
@@ -49,5 +50,11 @@ class ItemsController
     public function getCategories(Request $request)
     {
         return  Category::whereNull('parent_id')->where('type', 'stocks')->get();
+    }
+
+    public function getItemLocations(Request $request)
+    {
+        $result=WarehouseRacks::where('warehouse_id',$request->get('shop_id'))->whereNull('parent_id')->get();
+        return response()->json(['success'=>true,'data'=>$result]);
     }
 }

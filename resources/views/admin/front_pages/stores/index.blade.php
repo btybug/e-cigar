@@ -22,6 +22,7 @@
                     <th>ID</th>
                     <th>Title</th>
                     <th>Address</th>
+                    <th>Country</th>
                     <th>Director</th>
                     <th>Status</th>
                     <th>Phones</th>
@@ -120,6 +121,7 @@
                     {id: 'ID', name: 'id'},
                     {id: 'Title', name: 'title'},
                     {id: 'Address', name: 'address'},
+                    {id: 'Country', name: 'country'},
                     {id: 'Director', name: 'director'},
                     {id: 'Status', name: 'status'},
                     {id: 'Phones', name: 'phones'},
@@ -131,6 +133,7 @@
                     {data: 'id', name: 'id'},
                     {data: 'title', name: 'title'},
                     {data: 'address', name: 'address'},
+                    {data: 'country', name: 'country'},
                     {data: 'director', name: 'director'},
                     {data: 'status', name: 'status'},
                     {data: 'phones', name: 'phones'},

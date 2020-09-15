@@ -20,6 +20,7 @@ class CreateStoresTranslationsTable extends Migration
             $table->string('title');
             $table->string('director');
             $table->text('address');
+            $table->text('country');
             $table->text('description')->nullable();
             $table->unique(['stores_id','locale']);
             $table->timestamps();

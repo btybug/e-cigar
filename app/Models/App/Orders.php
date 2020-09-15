@@ -5,6 +5,7 @@ namespace App\Models\App;
 
 
 use App\Models\ItemsLocations;
+use App\Models\Warehouse;
 use Illuminate\Database\Eloquent\Model;
 
 class Orders extends Model
@@ -12,15 +13,16 @@ class Orders extends Model
     const IN_PROGRESS=0;
     const PROCESSING=1;
     const DONE=2;
+    const EDITING=3;
     protected $table = 'basket';
-    protected $fillable = ['shop_id', 'status', 'user_id', 'discount', 'order_number', 'additional_data', 'staff_id', 'payment_method', 'tendered', 'changed', 'sub_total', 'total', 'tax','admin_discount'];
+    protected $fillable = ['shop_id', 'status', 'user_id', 'discount', 'order_number',  'staff_id', 'payment_method','tendered', 'changed', 'sub_total', 'total', 'tax','admin_discount'];
     protected $dates = ['created_at','updated_at','finished_at'];
     protected $casts=[
         'additional_data'=>'array'
     ];
     public function shop()
     {
-        return $this->belongsTo(Shops::class,'shop_id');
+        return $this->belongsTo(Warehouse::class,'shop_id');
     }
 
     public function items()
@@ -71,5 +73,10 @@ class Orders extends Model
     public function discountOffers()
     {
         return $this->belongsToMany(AppOffersDiscount::class,'app_basket_offer_discounts','basket_id','discount_offer_id');
+    }
+
+    public function history()
+    {
+        return $this->hasMany(OrderHistory::class,'basket_id');
     }
 }

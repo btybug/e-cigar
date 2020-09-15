@@ -55,6 +55,12 @@
                                                                         </div>
                                                                     </div>
                                                                     <div class="form-group row">
+                                                                        {{Form::label('address', 'Country',['class'=>'col-md-2 col-form-label'])}}
+                                                                        <div class="col-md-10">
+                                                                            {{Form::select('translatable['.strtolower($language->code).'][country]',['Armenia'=>'Armenia','United Kingdom'=>'United Kingdom'], get_translated($shop,strtolower($language->code),'country'),['class' =>'form-control','id'=>'address'])}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
                                                                         <label class="col-md-2 col-form-label">Description</label>
                                                                         <div class="col-md-10">
                                                                             {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($shop,strtolower($language->code),'description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}

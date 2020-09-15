@@ -67,9 +67,12 @@ class PostController extends Controller
         $data = $request->except('_token', 'translatable', 'categories', 'stocks', 'fb', 'twitter', 'general', 'robot');
 
         $post = Posts::updateOrCreate($request->id, $data);
+
         $post->categories()->sync(json_decode($request->get('categories', [])));
         $post->stocks()->sync($request->get('stocks', []));
+
         $this->createOrUpdateSeo($request, $post->id);
+
         return redirect()->route('admin_blog');
     }
 
@@ -123,6 +126,7 @@ class PostController extends Controller
 
     private function createOrUpdateSeo($request, $post_id)
     {
+        dd($request->all());
         $types = $request->only(['fb', 'general', 'twitter', 'robot']);
         foreach ($types as $type => $data) {
             foreach ($data as $name => $value) {

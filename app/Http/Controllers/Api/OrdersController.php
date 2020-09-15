@@ -11,6 +11,7 @@ use App\Models\App\AppWarehouses;
 use App\Models\App\Discount;
 use App\Models\App\Orders;
 use App\Models\App\OrdersItems;
+use App\Models\ItemsLocations;
 use App\Models\Warehouse;
 use App\Services\App\OrderService;
 use App\User;
@@ -66,14 +67,38 @@ class OrdersController extends Controller
     public function addItemToBasked(Request $request, OrderService $service)
     {
         $shop = AppWarehouses::where('warehouse_id', $request->get('shop_id'))->first();
-        $order = $shop->warehouse->orders()->find($request->get('order_id'));
+        $order = $shop->warehouse->orders()->with('items')->find($request->get('order_id'));
+        if($order->status==Orders::DONE){
+            $order->status=Orders::EDITING;
+            $order->history()->create(['data'=>$order->toArray()]);
+            $order->save();
+        }
+
         if ($request->get('product_id', false)) {
             $item = AppItems::find($request->get('product_id'));
 
             if (!$order->items()->where('item_id', $item->item_id)->where('type', OrdersItems::SOLD)->exists()) {
                 $order->basketItems()->attach([$item->item_id => ['qty' => $request->get('qty'), 'price' => $item->price]]);
             } else {
+               $items= $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->first();
+
+                if ($order->status == Orders::EDITING &&  $items->qty>$request->get('qty')) {
+                    $location = ItemsLocations::where(['warehouse_id' => $request->get('shop_id')])->where('rack_id', $request->get('location_id'))->where('item_id', $request->get('product_id'))->first();
+                    $basketItem = $order->basketItems()->where('basket_items.item_id', $request->get('product_id'))->first();
+                    if (!$location) {
+                        ItemsLocations::create([
+                            'warehouse_id' => $request->get('shop_id'),
+                            'rack_id' => $request->get('location_id'),
+                            'item_id' => $request->get('product_id'),
+                            'qty' => $basketItem->qty - $request->get('qty'),
+                        ]);
+                    } else {
+                        $qty = $location->qty + ($basketItem->qty - $request->get('qty'));
+                        ItemsLocations::where('id', $location->id)->update(['qty' => $qty]);
+                    }
+                }
                 $order->items()->where('type', OrdersItems::SOLD)->where('item_id', $item->item_id)->update(['qty' => $request->get('qty'), 'price' => $item->price]);
+
             }
         }
         if ($request->get('gifts', false)) {
@@ -99,7 +124,19 @@ class OrdersController extends Controller
 
     public function removeFromBasked(Request $request)
     {
-        $order = Orders::find($request->get('order_id'));
+        $order = Orders::with('basketItems')->where('id', $request->get('order_id'))->first();
+        if ($order->status == Orders::DONE) {
+            $order->status = Orders::EDITING;
+            $order->history()->create(['data' => $order->toArray()]);
+            $order->save();
+        }
+        if ($order->status == Orders::EDITING) {
+            $location = ItemsLocations::firstOrNew(['warehouse_id'=>$request->get('shop_id')],['rack_id'=>$request->get('location_id'),'item_id'=>$request->get('product_id')]);
+            $item = $order->basketItems()->where('item_id', $request->get('product_id'))->first();
+            $location->qty+=$item->qty;
+            $location->save();
+        }
+
         $order->basketItems()->detach($request->get('product_id'));
         return response()->json(['success' => true]);
     }
@@ -152,7 +189,12 @@ class OrdersController extends Controller
         $order->admin_discount = $request->get('admin_discount');
         $order->finished_at = Carbon::now();
         $order->save();
-        $service->discount($order, $shop);
+        if ($order->status != Orders::EDITING){
+            $service->discount($order, $shop);
+        }else{
+            $service->discountEdit($order, $shop);
+        }
+
         return response()->json(['success' => true]);
     }
 
@@ -197,8 +239,16 @@ class OrdersController extends Controller
 
     public function addAdditionalData(Request $request)
     {
-        Orders::where('id', $request->get('order_id'))->update(['additional_data' => $request->get('additional_data')]);
+        $order = Orders::find($request->get('order_id'));//->update(['additional_data' => $request->get('additional_data')]);
+        $order->additional_data = $request->get('additional_data');
+        $order->save();
         return response()->json(['success' => true]);
+    }
+
+    public function test( OrderService $service)
+    {
+        $order = Orders::find(58);
+        dd(collect($order->history[0]->data['items'])->pluck('qty','item_id'),$order->items);
     }
 
 }

@@ -230,7 +230,17 @@ class GuestController extends Controller
 
     public function getStores()
     {
-        $stores=Stores::all();
+        $stores=Stores::leftJoin('stores_translations', 'stores.id', '=', 'stores_translations.stores_id')
+            ->where('stores_translations.locale', app()->getLocale())
+            ->where('stores.status', 1)
+            ->with('phones')
+            ->with('emails')
+            ->select('stores.long','stores.lat','stores.image','stores_translations.title'
+                ,'stores_translations.director'
+                ,'stores_translations.address'
+                ,'stores_translations.country'
+                ,'stores_translations.description')
+            ->get()->groupBy('country');
         return $this->view('stores',compact('stores'));
     }
 }
