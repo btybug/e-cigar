@@ -455,6 +455,8 @@ a:focus {
 .right--media-col-wrapper{
   background-color: #3c8dbc40;
   border-left: 1px solid #fff;
+    height: 100%;
+    overflow: hidden;
 }
 .right--media-col-wrapper .upload--head{
   display: flex;
@@ -1343,7 +1345,7 @@ ul.notes li div {
   color: #3d4d5d;
 }
 .folder-list li button { margin-top: 2px;}
-.folder-list li button i{ margin-right: 0px; } 
+.folder-list li button i{ margin-right: 0px; }
 .folder-list ul{ margin-left:0px; padding-left: 15px;}
 .folder-list li.active > div > a{ color: #1840C0;}
 
@@ -1470,8 +1472,8 @@ ul.notes li div {
   height:100% ;
 }
 #page-wrapper .over-auto{
-  height: 100%;
-  overflow: auto;
+    height: calc(100% - 38px);
+    overflow: auto;
 }
 #page-wrapper .ibox.over-auto{
   background-color: #fff;
