@@ -45,7 +45,7 @@ return [
     | and never fallback to the translator one.
     |
     */
-    'locale' => 'en',
+    'locale' => 'gb',
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     | set it to false.
     |
     */
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'gb',
 
     /*
     |--------------------------------------------------------------------------
