@@ -7380,7 +7380,7 @@ flex-direction: column;
     }
 
     .home_categories-item{
-        height: 271px;
+        /*height: 271px;*/
         /*margin-bottom: 10px;*/
     }
     .home_categories-item-col{

@@ -15073,7 +15073,7 @@ header .search-icon-mobile {
     .header-top .navbar-collapse ul.navbar-nav {
         padding-left: 15px;
         background-color: rgba(0, 0, 0, 0.82);
-
+        margin-bottom: 110px;
     }
     header .header-top .navbar{
         height: 100%;
@@ -24251,7 +24251,7 @@ flex-direction: column;
     }
 
     .home_categories-item{
-        height: 271px;
+        /*height: 271px;*/
         /*margin-bottom: 10px;*/
     }
     .home_categories-item-col{
