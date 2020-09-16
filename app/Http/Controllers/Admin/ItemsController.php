@@ -84,16 +84,16 @@ class ItemsController extends Controller
 
     public function postNew(ItemsRequest $request)
     {
-        $data = $request->only('sku', 'image', 'barcode_id', 'type', 'status',
+        $data = $request->only('sku', 'image', 'barcode', 'type', 'status',
             'default_price', 'landing','brand_id','manual_codes','length','width','height','weight',
             'item_length','item_width','item_height','item_weight');
-//        dd($data);
+
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveMedia($request->get('media', []), $item);
         $this->saveMedia($request->get('videos', []), $item, 'video');
         $this->saveMedia($request->get('downloads', []), $item, 'download');
         $this->savePackages($item, $request->get('packages', []));
-
+        $this->saveBarcode($data['barcode']);
 
         $item->suppliers()->sync($request->get('suppliers'));
 
@@ -167,6 +167,16 @@ class ItemsController extends Controller
         }
 
         $item->locations()->whereNotIn('id', $deletableArray)->delete();
+    }
+
+    private function saveBarcode($barcode):void
+    {
+        $b = Barcodes::where('code',$barcode)->first();
+        if(! $b){
+            Barcodes::create([
+                'code' => $barcode
+            ]);
+        }
     }
 
     private function saveImages(Request $request, $item)

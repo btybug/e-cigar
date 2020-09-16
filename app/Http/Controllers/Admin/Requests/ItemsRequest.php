@@ -26,7 +26,7 @@ class ItemsRequest extends FormRequest
         return [
             "translatable"    => "required|array|min:1",
             "translatable.gb.name"  => "required|string|min:3",
-            "barcode_id"  => "required",
+            "barcode"  => "required",
             "image"  => "required",
             "default_price"  => "required",
 //            "type"  => "required|in:simple,bundle",

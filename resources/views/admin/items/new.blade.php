@@ -140,7 +140,7 @@
                                                                     <label for="barcode" class="control-label col-lg-4 col-form-label">Barcode</label>
 
                                                                     <div class="col-lg-8">
-                                                                        {!! Form::select('barcode_id', $barcodes,null,
+                                                                        {!! Form::text('barcode', null,
                                                                         ['class' => 'form-control','id' => 'barcode']) !!}
                                                                     </div>
                                                                 </div>
@@ -420,16 +420,16 @@
                                                                     BARCODE
                                                                 </div>
                                                                 <div class="col-xl-6">
-                                                                    @if(strlen($model->barcode->code) == 13)
-                                                                        <img src="{!! url('public/barcodes/'.$model->barcode->code.'.png') !!}" />
+                                                                    @if(strlen($model->barcode) == 13)
+                                                                        <img src="{!! url('public/barcodes/'.$model->barcode.'.png') !!}" />
                                                                     @else
                                                                         Barcode is invalid, need to be 13 numbers
                                                                     @endif
                                                                 </div>
 
                                                                 <div class="col-xl-3">
-                                                                    @if(strlen($model->barcode->code) == 13)
-                                                                        <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode->code,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
+                                                                    @if(strlen($model->barcode) == 13)
+                                                                        <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
                                                                     @endif
                                                                 </div>
                                                             </div>
@@ -444,7 +444,7 @@
                                                 </div>
                                                 <div class="card-body">
                                                     @if($model && $model->barcode)
-                                                        @include("admin.items._partials.qr",['code' => $model->barcode->code])
+                                                        @include("admin.items._partials.qr",['code' => $model->barcode])
                                                     @endif
                                                 </div>
                                             </div>
