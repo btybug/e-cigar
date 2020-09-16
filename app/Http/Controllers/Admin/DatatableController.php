@@ -857,10 +857,9 @@ class DatatableController extends Controller
     public function getAllItems()
     {
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->select('items.*', 'item_translations.name', 'item_translations.short_description', 'barcodes.code',
+            ->select('items.*', 'item_translations.name', 'item_translations.short_description',
                 'categories_translations.name as category')
             ->groupBy('items.id')
             ->where('items.is_archive', false)
@@ -876,8 +875,8 @@ class DatatableController extends Controller
             })->addColumn('quantity', function ($attr) {
                 return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
             })
-            ->addColumn('barcode_id', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
+            ->addColumn('barcode', function ($attr) {
+                return ($attr->barcode) ? $attr->barcode : 'no barcode';
             })
             ->editColumn('brand_id', function ($attr) {
                 $brand = Category::find($attr->brand_id);
