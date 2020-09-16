@@ -81,7 +81,7 @@
                                         {!! $vape->name !!}
                                     </h1>
                                     <div class="d-flex align-items-center">
-                                        <span class="font-sec-reg font-26 text-main-clr lh-1">
+                                        <span class="font-sec-reg font-26 text-main-clr">
                                             {!! $vape->short_description !!}
                                         </span>
                                         @if(Auth::check())

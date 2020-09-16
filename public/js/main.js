@@ -4,6 +4,20 @@ $( document ).ready(function () {
         heightBlock('.main-left-tabs .nav', '.main-left-tabs .nav a');
     });
 
+    // product hover
+    $('body').on('mouseover', '.products__item-wrapper', function() {
+        if (!$(this).hasClass("product_list")) {
+            let photoHeight = $(this).find('.products__item-photo-brand-name').outerHeight();
+            let contentInnerHeight = $(this).find('.products__item-content-inner').outerHeight();
+            let itemDescHeight = $(this).find('.products__item-desc').outerHeight();
+            let contentHeight = contentInnerHeight-itemDescHeight-3;
+            $(this).css({height:photoHeight+contentHeight});
+        }
+    });
+    $('body').on('mouseout', '.products__item-wrapper', function() {
+        $(this).css({height:'auto'});
+    });
+
     $('body').on('click', '.product-grid-list .display-icon', function () {
         if ($(this).hasClass('list')) {
             $(this).closest('body').find('.products__all-list-product >li').addClass('products_col-list')
@@ -96,32 +110,47 @@ $('.select-2--no-search').select2({
     minimumResultsForSearch: Infinity
 });
 
-var afterHeight;
-var productsWallHeight = parseInt( $('body').find('.products-box').height());
-$("body").find(".products__item-wrapper").hover(
-    function() {
-        afterHeight = parseInt( $('body').find('.products__item-wrapper-inner').height());
-        $(this).closest('.products-box').css('height',productsWallHeight)
-        // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
-    }, function() {
-        $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height','auto');
-    }
-);
+// var afterHeight;
+// var productsWallHeight = parseInt( $('body').find('.products-box').height());
+// $("body").find(".products__item-wrapper").hover(
+//     function() {
+//         afterHeight = parseInt( $('body').find('.products__item-wrapper-inner').height());
+//         $(this).closest('.products-box').css('height',productsWallHeight)
+//         // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
+//     }, function() {
+//         $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height','auto');
+//     }
+// );
 
 
 $(document).ready(function () {
     $("#loading").fadeOut("slow", function () {
-        var afterHeight;
-        var productsWallHeight = parseInt( $('body').find('.products-box').height());
-        $("body").find(".products__item-wrapper").hover(
-            function() {
-                afterHeight = parseInt( $('body').find('.products__item-wrapper-inner').height());
-                $(this).closest('.products-box').css('height',productsWallHeight)
-                // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
-            }, function() {
-                $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height','auto');
+
+        // var afterHeight;
+        // var productsWallHeight = parseInt( $('body').find('.products-box').height());
+        // $("body").find(".products__item-wrapper").hover(
+        //     function() {
+        //         afterHeight = parseInt( $('body').find('.products__item-wrapper-inner').height());
+        //         $(this).closest('.products-box').css('height',productsWallHeight)
+        //         // $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height',567);
+        //     }, function() {
+        //         $(this).closest('.products__item-wrapper').find('.products__item-wrapper-inner').css('height','auto');
+        //     }
+        // );
+
+        // product hover
+        $('body').on('mouseover', '.products__item-wrapper', function() {
+            if (!$(this).hasClass("product_list")) {
+                let photoHeight = $(this).find('.products__item-photo-brand-name').outerHeight();
+                let contentInnerHeight = $(this).find('.products__item-content-inner').outerHeight();
+                let itemDescHeight = $(this).find('.products__item-desc').outerHeight();
+                let contentHeight = contentInnerHeight-itemDescHeight-3;
+                $(this).css({height:photoHeight+contentHeight});
             }
-        );
+        });
+        $('body').on('mouseout', '.products__item-wrapper', function() {
+            $(this).css({height:'auto'});
+        });
 
         $(this).removeClass('d-flex').addClass('d-none'); // Optional if it's going to only be used once.
         $("#singleProductPageCnt").removeClass('d-none').addClass('d-flex');

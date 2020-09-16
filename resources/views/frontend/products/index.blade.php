@@ -3,7 +3,7 @@
     <main class="main-content products-page position-relative">
         <div class="top-filters products__page-top-filters main-content-wrapper">
             <div class="container main-max-width">
-                <div class="content-head d-flex flex-wrap justify-content-between align-items-center position-relative">
+                <div class="content-head d-flex justify-content-between align-items-center position-relative">
 
                     <div class="category-select">
                         {!! Form::select('category',['' => __('all_products')]+$categories->toArray(),($category)?$category->slug:null,
@@ -471,13 +471,13 @@
                     },
                     success: function (data) {
                         if (!data.error) {
-                            $("body").find('.products-box').css('height','auto');
+                            // $("body").find('.products-box').css('height','auto');
                             $(".products-box").html(data.html);
                             // $("#filter-form").closest('form').data('changed', true);
 
-                            let productsWallHeight = parseInt( $('body').find('.products-box').height())
+                            // let productsWallHeight = parseInt( $('body').find('.products-box').height())
 
-                            $("body").find('.products-box').css('height',productsWallHeight);
+                            // $("body").find('.products-box').css('height',productsWallHeight);
                             // var ht = (name, path) => {
                             //     return `<li class="selected_filter-sidebar-item position-relative">
                             //                     <span class="selection_remove" role="presentation">×</span>
