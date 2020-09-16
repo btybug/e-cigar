@@ -46,16 +46,16 @@ class ItemsController extends Controller
 
     public function index()
     {
-        $items = Items::all();
-        foreach ($items as $item){
-            $c = Barcodes::find($item->barcode_id);
-            if($c){
-                $item->barcode = $c->code;
-                $item->save();
-            }
-
-        }
-        dd(555);
+//        $items = Items::all();
+//        foreach ($items as $item){
+//            $c = Barcodes::find($item->barcode_id);
+//            if($c){
+//                $item->barcode = $c->code;
+//                $item->save();
+//            }
+//
+//        }
+//        dd(555);
         return $this->view('index');
     }
 
