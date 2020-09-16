@@ -21,9 +21,7 @@ class ItemsController
 //            ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
 //            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->leftJoin('item_locations', 'items.id', '=', 'item_locations.item_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->select(
-                'items.barcode_id',
                 'app_items.id',
                 'items.brand_id',
                 'app_items.status',
@@ -33,7 +31,7 @@ class ItemsController
                 'item_translations.name',
                 'item_translations.short_description',
                 'item_translations.long_description',
-                'barcodes.code',
+                'items.barcode',
 //                'categories_translations.name as category',
                 \DB::raw('SUM(DISTINCT  item_locations.qty) as qty')
             )
