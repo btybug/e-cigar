@@ -68,7 +68,6 @@ class ItemsController extends Controller
     {
         $model = null;
         $bundle = false;
-        $barcodes = $this->barcodeService->getPluck();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $data = Category::recursiveItems($categories, 0, [], []);
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
@@ -78,7 +77,7 @@ class ItemsController extends Controller
         $racks = [];
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'bundle', 'categories', 'warehouses',
+        return $this->view('new', compact('model', 'allAttrs', 'bundle', 'categories', 'warehouses',
             'racks', 'shelves', 'data','brands','downloads'));
     }
 
@@ -110,7 +109,6 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($id);
         $bundle = ($model->type != 'bundle') ? false : true;
-        $barcodes = $this->barcodeService->getPluck();
         $items = Items::all()->pluck('name', 'id')->all();
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
@@ -123,7 +121,7 @@ class ItemsController extends Controller
         $shelves = [];
         $brands = Brands::all();
 
-        return $this->view('new', compact('model', 'allAttrs', 'barcodes', 'items', 'bundle',
+        return $this->view('new', compact('model', 'allAttrs', 'items', 'bundle',
             'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));
     }
 
