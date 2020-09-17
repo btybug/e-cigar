@@ -2328,8 +2328,9 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
     margin-right: 33px !important;
 }
 .home_products-carousel .fs-carousel-canister.fs-touch-element {
-    min-height: 652px;
+    min-height: 690px;
 }
+
 .home_products-wrapper .line-home {
     width: 100%;
     height: 45px;
@@ -6716,6 +6717,16 @@ flex-direction: column;
     .home_products-version{
         max-width: 830px;
     }
+    .stores-page--wrapper .store-block .store-map{
+        height: 262px;
+    }
+    .products__item-wrapper.product_list .products__item-prices{
+        top: 8px;
+        right: 20px;
+    }
+    .products__item-wrapper.product_list .products__item-bottom{
+        width: auto;
+    }
 }
 
 @media (max-width: 992px) {
@@ -7229,6 +7240,10 @@ flex-direction: column;
     #share_modal{
         top: 68px;
     }
+    .wizardViewModal--new .modal-body .nav-tabs .nav-link{
+        font-size: 14px;
+        padding: .3rem 0.4rem;
+    }
 }
 
 @media (max-width: 640px) {
@@ -7626,6 +7641,9 @@ flex-direction: column;
     .adult-modal .modal-content{
         height: auto;
     }
+    .stores-page--wrapper .store-block .store-title{
+        font-size: 26px;
+    }
 }
 @media (max-width: 455px) {
     .continue-shp-wrapp .product-card_price {
@@ -7685,6 +7703,38 @@ flex-direction: column;
     }
     #cartSidebar.show{
         right: 0;
+    }
+    #cartSidebar {
+
+    }
+    #cartSidebar .cart-sidebar_item-img-holder{
+        width: 75px;
+        height: 75px;
+    }
+    #cartSidebar .cart-sidebar_item-img-holder img{
+        width: 100%;
+        height: 100%;
+    }
+    #cartSidebar .cart-sidebar_item .col-7 h3.font-20{
+        font-size: 16px;
+        margin-right: 12px;
+    }
+    #cartSidebar .cart-sidebar_view-btn,
+    #cartSidebar .cart-sidebar_check-btn {
+        padding: 10px 16px;
+    }
+    .product__single-top .brands-top-slider .fs-carousel-control{
+        width: 28px !important;
+    }
+    .product__single-top .brands-top-slider .fs-carousel-wrapper{
+        max-width: calc(100% - 56px);
+    }
+    .product__single-top .brands-top-slider .fs-carousel-control.fs-carousel-control_previous:before{
+        margin-left: 2px!important;
+    }
+    .product__single-wrapper .product__single-top .brands-top-slider .brand-wall{
+        margin-left: 5px;
+        margin-right: 5px;
     }
 }
 

@@ -7,7 +7,7 @@
                 <div class="store-block">
 
                     <div class="row">
-                        <div class="col-2">
+                        <div class="col-sm-2 col-4">
 
                             <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                                 @foreach($stores as $key=>$countries)
@@ -18,7 +18,7 @@
                             </div>
 
                         </div>
-                        <div class="col-10">
+                        <div class="col-sm-10 col-8">
                             <div class="tab-content" id="v-pills-tabContent">
                                 @foreach($stores as $key=>$countries)
 
@@ -27,7 +27,7 @@
                                         @foreach($countries as $stor )
                                             <h3 class="font-sec-reg text-tert-clr font-36 text-uppercase store-title">{!! $stor->title !!}</h3>
                                             <div class="row">
-                                                <div class="col-lg-3 col-sm-4">
+                                                <div class="col-xl-3 col-md-4 col-sm-5">
                                                     <div class="store-left-block">
                                                         <div class="store-photo">
                                                             <img src="{!! url($stor->image) !!}"
@@ -35,24 +35,24 @@
                                                         </div>
                                                         <div class="container store-info">
                                                             <div class="row form-group border border-bottom">
-                                                                <div class="col-sm-3 pl-sm-1 pl-2">
+                                                                <div class="col-lg-3 pl-lg-1">
                                                                     <div class="store-info-title">
                                                                         CEO:
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-sm-9">
+                                                                <div class="col-lg-9">
                                                                     <div class="store-info-content">
                                                                         {!! $stor->director !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         <div class="row form-group border border-bottom">
-                                                            <div class="col-sm-3 pl-sm-1 pl-2">
+                                                            <div class="col-lg-3 pl-lg-1">
                                                                 <div class="store-info-title">
                                                                     Address:
                                                                 </div>
                                                             </div>
-                                                            <div class="col-sm-9">
+                                                            <div class="col-lg-9">
                                                                 <div class="store-info-content">
                                                                     {!! $stor->address !!}
                                                                 </div>
@@ -90,12 +90,12 @@
                                                 </div>
 
                                             </div>
-                                            <div class="col-lg-6 col-sm-5">
+                                                <div class="col-xl-6 col-md-8 col-sm-7">
                                                 <div class="store-content">
                                                     <p>{!! $stor->description !!}</p>
                                                 </div>
                                             </div>
-                                                <div class="col-lg-3 col-sm-3">
+                                                <div class="col-xl-3 col-12">
                                                     <div class="store-map">
                                                         <iframe
                                                             src="https://maps.google.com/maps?q={!! $stor->lat !!},{!! $stor->long !!}&hl=es&z=14&amp;output=embed"

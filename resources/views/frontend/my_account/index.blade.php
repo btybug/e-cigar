@@ -117,7 +117,7 @@
                                         {!! Form::model($user,['url'=>route('post_my_account_referrals')]) !!}
                                     @endif
                                     <div class="form-group row no-gutters p-0">
-                                        <label for="username" class="col-md-2 col-form-label">
+                                        <label for="username" class="col-md-4 col-form-label">
                                            {!! __('referred_by') !!}
                                         </label>
                                         <div class="col-md-6">

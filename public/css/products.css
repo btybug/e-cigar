@@ -1030,7 +1030,7 @@ footer .footer-bottom .footer_select-lang .main-select-2arrows + .select2-contai
 @media screen and (max-width: 767px) {
     .sort-by_select {
         max-width: 190px;
-        margin-left: 15px;
+        margin-left: 0px;
     }
 }
 

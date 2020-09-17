@@ -40,7 +40,7 @@
     <div class="profile-inner-pg-right-cnt">
         <div class="profile-inner-pg-right-cnt_inner h-100">
            <div class="row flex-lg-row flex-column-reverse">
-               <div class="col-lg-9">
+               <div class="col-lg-12">
                    @include("frontend.products._partials.products_render",['products' => $user->favorites])
                </div>
                <div class="col-lg-3 mb-xl-0 mb-4">
