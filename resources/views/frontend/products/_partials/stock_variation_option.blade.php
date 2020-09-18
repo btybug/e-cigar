@@ -158,8 +158,12 @@
                         {!! Form::number('qty',1,['class' => 'product-qty product-qty_per_price input-qty',
                             'data-id' => $selected->id,'min' => 1,'max'=> ($to)?$to->to:'','step' => 1,'readonly' => true]) !!}
                         <div class="inp-icons">
-                            <span class="inp-up"></span>
-                            <span class="inp-down"></span>
+                            <div class="d-flex justify-content-center inp-up-wrap inp-up">
+                                <span class="inp-up-icon"></span>
+                            </div>
+                            <div class="d-flex justify-content-center inp-down-wrap inp-down">
+                                <span class="inp-down-icon"></span>
+                            </div>
                         </div>
                     </div>
                 </div>
