@@ -32,7 +32,7 @@
                     <div class="col-md-4">
                         <input id="textinput" name="end_at" type="date"  class="form-control input-md">
                     </div>
-                
+
             </div>
             {!! Form::close() !!}
                 <div class="buy_x_get d-none pattern_js content-select-wrap">
@@ -60,16 +60,16 @@
                                 <div class="form-group row">
                                     <label for="get_free" class="col-sm-8 col-form-label">He will get free</label>
                                     <div class="col-sm-4">
-                                        {!! Form::text('get_free',($model)?$model->data['get_free']:null,['class'=>'form-control get_free']) !!}
+                                        {!! Form::text('get_free',($model)?@$model->data['get_free']:null,['class'=>'form-control get_free']) !!}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-6 offset-md-2">
                                 <div class="form-group row">
-                                    {!! Form::select('items[]',$items,($model)?$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                    {!! Form::select('items[]',$items,($model)?@$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
                                 </div>
                                 <div class="form-group row">
-                                    {!! Form::select('gifts[]',$items,($model)?$model->data['gifts']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                    {!! Form::select('gifts[]',$items,($model)?@$model->data['gifts']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
                                 </div>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                 $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                 $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
             }
-           
+
 
             $('body').on('change', '#offers_select', function () {
                 console.log($('body').find('.select_to_2_js'))
@@ -149,7 +149,7 @@
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
-                
+
                 $('body').find('#pattern_place_js .select_to_2_js').select2();
             });
             $('body').find('#pattern_place_js .select_to_2_js').select2();
