@@ -10,11 +10,10 @@ class MediaApiController extends Controller
 {
     public function getFolderChilds(Request $request)
     {
-        $folder=null;
         $data = $request->all();
         $validator = \Validator::make($data, [
-//            'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
-//            'slug' => 'required_without_all:folder_id|alpha_dash'
+            'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
+            'slug' => 'required_without_all:folder_id|alpha_dash'
         ]);
         if ($validator->fails()) {
             return \Response::json(['error' => true, 'message' => $validator->messages()]);
