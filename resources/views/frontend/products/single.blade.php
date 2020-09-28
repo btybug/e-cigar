@@ -114,6 +114,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="container main-max-width single-product-dtls-wrap-outer pr-lg-0">
                         <div class="row">
                             <div class="col-12">

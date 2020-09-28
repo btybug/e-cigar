@@ -32,9 +32,9 @@ class MailTemplatesRequest extends FormRequest
             'is_active' => 'required|in:0,1',
             'translatable.gb.subject' => 'required',
             'translatable.gb.content' => 'required',
-            'admin.from' => 'required|email',
-            'admin.translatable.gb.subject' => 'required',
-            'admin.translatable.gb.content' => 'required',
+//            'admin.from' => 'required|email',
+//            'admin.translatable.gb.subject' => 'required',
+//            'admin.translatable.gb.content' => 'required',
         ];
     }
 }

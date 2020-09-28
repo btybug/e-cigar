@@ -184,13 +184,16 @@ class EmailsNotificationsController extends Controller
         $admin_data['cc']=is_array($admin_data['cc'])?implode(',',$admin_data['cc']):null;
         }
         MailTemplates::updateOrCreate($request->id, $data, $translatable);
-        $translatable = $admin_data['translatable'];
-        unset($admin_data['translatable']);
-        $admin_data['slug'] = 'admin_' . $mail->slug;
-        $admin_model = MailTemplates::where('slug', $admin_data['slug'])->first();
-        $admin_data['is_for_admin'] = 1;
-        $id = ($admin_model) ? $admin_model->id : null;
-        MailTemplates::updateOrCreate($id, $admin_data, $translatable);
+        if($request->get('admin_email')){
+            $translatable = $admin_data['translatable'];
+            unset($admin_data['translatable']);
+            $admin_data['slug'] = 'admin_' . $mail->slug;
+            $admin_model = MailTemplates::where('slug', $admin_data['slug'])->first();
+            $admin_data['is_for_admin'] = 1;
+            $id = ($admin_model) ? $admin_model->id : null;
+            MailTemplates::updateOrCreate($id, $admin_data, $translatable);
+        }
+
         return redirect()->route('admin_emails_notifications_emails');
     }
 

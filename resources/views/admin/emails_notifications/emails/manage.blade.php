@@ -87,7 +87,7 @@ User
                                         </div>
 
                                     </div>
-                                    <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+                                    <div class="tab-pane fade @if(!$model->admin_email) hidden @endif" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
                                        <div class="card">
                                            <div class="card-header">
                                                Admin
@@ -153,7 +153,39 @@ User
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-header">{{Form::label('is_active', 'Status',['class' => ''])}}</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+                                <div class="col-md-8">
+                                    {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
+                                </div>
+                            </div>
+
+                            <!-- Multiple Radios -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="radios">Admin Email</label>
+                                <div class="col-md-8">
+                                    <div class="radio">
+                                        <label for="radios-0">
+                                            {!! Form::radio('admin_email',1,true,['id'=>'radios-0','class'=>'admin-email']) !!}
+                                            On
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="radios-1">
+                                            {!! Form::radio('admin_email',0,true,['id'=>'radios-0','class'=>'admin-email']) !!}
+                                            Off
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                     @if(isset($shortcodes->relatedShortcoders[$model->slug]))
                         <div class="card mb-3">
                             <div class="card-header">Specific shortcodes for this type</div>
@@ -208,12 +240,7 @@ User
                             </div>
                         </div>
 
-                        <div class="card mb-3">
-                            <div class="card-header">{{Form::label('is_active', 'Status',['class' => ''])}}</div>
-                            <div class="card-body">
-                                {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
-                            </div>
-                        </div>
+
                 </div>
             </div>
 
@@ -229,6 +256,13 @@ User
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
     <script>
+        $('body').on('change','.admin-email',function () {
+            if($(this).val()==0){
+                $('#tab2').addClass('hidden');
+            }else{
+                $('#tab2').removeClass('hidden');
+            }
+        });
         $("#admin-cc").select2({width: '100%', tags: true});
         function initTinyMce(e) {
             tinymce.init({
