@@ -25,7 +25,7 @@ class MediaApiController extends Controller
             $folder = Folders::where('name', $data['slug'])->with('children', 'items')->first();
         }
 
-        if (!$folder) {
+        if (isset($folder) && !$folder) {
             return \Response::json(['error' => true, 'message' => [0 => 'undefined folder!!!']]);
         }
         return \Response::json(['error' => false, 'data' => $folder->toArray(), 'settings' => $folder->settings]);
