@@ -153,7 +153,39 @@ User
                         </div>
                     </div>
                 </div>
+
                 <div class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-header">{{Form::label('is_active', 'Status',['class' => ''])}}</div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="selectbasic">Select Basic</label>
+                                <div class="col-md-8">
+                                    {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
+                                </div>
+                            </div>
+
+                            <!-- Multiple Radios -->
+                            <div class="form-group">
+                                <label class="col-md-4 control-label" for="radios">Admin Email</label>
+                                <div class="col-md-8">
+                                    <div class="radio">
+                                        <label for="radios-0">
+                                            {!! Form::radio('admin_email',1,true,['id'=>'radios-0']) !!}
+                                            On
+                                        </label>
+                                    </div>
+                                    <div class="radio">
+                                        <label for="radios-1">
+                                            {!! Form::radio('admin_email',0,true,['id'=>'radios-0']) !!}
+                                            Off
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                     @if(isset($shortcodes->relatedShortcoders[$model->slug]))
                         <div class="card mb-3">
                             <div class="card-header">Specific shortcodes for this type</div>
@@ -208,12 +240,7 @@ User
                             </div>
                         </div>
 
-                        <div class="card mb-3">
-                            <div class="card-header">{{Form::label('is_active', 'Status',['class' => ''])}}</div>
-                            <div class="card-body">
-                                {{Form::select('is_active',[1=>'Active',0=>'Inactive'] ,null,['class' =>'form-control','id'=>'to_admin'])}}
-                            </div>
-                        </div>
+
                 </div>
             </div>
 
