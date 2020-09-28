@@ -10,6 +10,7 @@ class MediaApiController extends Controller
 {
     public function getFolderChilds(Request $request)
     {
+        $folder=null;
         $data = $request->all();
         $validator = \Validator::make($data, [
 //            'folder_id' => 'required_without_all:slug|integer|exists:drive_folders,id',
