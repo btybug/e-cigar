@@ -287,8 +287,6 @@
                     $(".address-form").html(res.html);
                     $("body").find(".geo_region_book").select2();
                     $("#newAddressModal").modal();
-                    $(".delete-address").attr('data-id',res.addressBook.id)
-
                 }
             }
                 )
@@ -307,6 +305,12 @@
                         {
                             $(".selected-form").html(res.html);
                             $("body").find(".address-book-form .geo_region_book").select2();
+                            if(res.addressBook){
+
+                                $(".delete-address").attr('data-id',res.addressBook.id)
+                            }else{
+                                $(".delete-address").attr('data-id',"")
+                            }
 
                             // $("#newAddressModal").modal();
                         }
@@ -395,7 +399,7 @@
             $("body").on("click", ".delete-address", function () {
                 var value = $(this).data('id');
                 let $_this = $(this);
-                if(value || value !='' || value != undefined){
+                if(value &&  value !='' &&  value != undefined){
                     AjaxCall(
                         "/my-account/delete-address-book",
                         {id: value},
@@ -406,6 +410,7 @@
                         }
                     );
                 }else{
+
                     alert("Nothing selected for delete")
                 }
 
