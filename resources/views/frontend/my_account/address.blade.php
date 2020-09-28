@@ -347,7 +347,7 @@
             )
                 {
                     $(".render-address").html(res.html);
-                    $(".delete-address").data('id',res.addressBook)
+                    $(".delete-address").attr('data-id',res.addressBook.id)
                 }
             }
             )
