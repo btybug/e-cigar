@@ -221,6 +221,8 @@ Route::group(['prefix' => 'my-account', 'middleware' => ['auth', 'verified']], f
     Route::post('/address-book-form', 'Frontend\UserController@postAddressBookForm')->name('post_my_account_address_book_form');
     Route::post('/save-address-book', 'Frontend\UserController@postAddressBookSave')->name('post_my_account_address_book_save');
     Route::post('/select-address-book', 'Frontend\UserController@postAddressBookSelect')->name('post_my_account_address_book_select');
+    Route::post('/delete-address-book', 'Frontend\UserController@postDeleteAddress')->name('post_my_account_address_book_delete');
+
     Route::group(['prefix' => 'orders'], function () {
         Route::get('/', 'Frontend\UserController@getOrders')->name('my_account_orders');
         Route::get('/invoice/{id}', 'Frontend\UserController@getOrderInvoice')->name('my_account_order_invoice');

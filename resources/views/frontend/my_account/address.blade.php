@@ -159,7 +159,7 @@
                                                <label for="selectAddress" class="control-label text-muted font-22">{!! __('default_shipping_address') !!}</label>
                                                <div class="row">
                                                    <div class="col-md-5 d-flex">
-                                                       {!! Form::select('address_book',$address,($default_shipping)?$default_shipping->id:null,['class' => 'form-control select-2 select-2--no-search main-select main-select-2arrows checkout-form_select edit-address']) !!}
+                                                       {!! Form::select('address_book',['' => 'Select']+$address->all(),($default_shipping)?$default_shipping->id:null,['class' => 'form-control select-2 select-2--no-search main-select main-select-2arrows checkout-form_select edit-address']) !!}
                                                        <button type="button"
                                                                class="nav-link nav-link--new-address btn ntfs-btn address-book-new rounded-0 ml-4">
                                                            + {!! __('add_new') !!}
@@ -173,7 +173,7 @@
                                                </div>
                                                {{--<button type="submit" class="btn btn-primary edit-address">Edit</button>--}}
                                                <div class="col-md-9 offset-md-3 text-right">
-                                                   <button type="button" class="btn btn-transp edit-address rounded-0">{!! __('delete') !!}</button>
+                                                   <button type="button" data-id="{{ ($default_shipping) ? $default_shipping->id:'' }}" class="btn btn-transp delete-address rounded-0">{!! __('delete') !!}</button>
                                                </div>
                                            </div>
 
@@ -235,7 +235,7 @@
                 !res.error
                 )
                 {
-                    // window.location.reload();
+                    window.location.reload();
                 }
             },
                 error =>
@@ -347,6 +347,7 @@
             )
                 {
                     $(".render-address").html(res.html);
+                    $(".delete-address").data('id',res.addressBook)
                 }
             }
             )
@@ -387,6 +388,25 @@
             }
                 )
                 ;
+            });
+
+            $("body").on("click", ".delete-address", function () {
+                var value = $(this).data('id');
+                let $_this = $(this);
+                if(value || value !='' || value != undefined){
+                    AjaxCall(
+                        "/my-account/delete-address-book",
+                        {id: value},
+                        res => {
+                            if (!res.error) {
+                                window.location.reload();
+                            }
+                        }
+                    );
+                }else{
+                    alert("Nothing selected for delete")
+                }
+
             });
         })
     </script>

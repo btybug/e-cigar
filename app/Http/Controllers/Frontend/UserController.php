@@ -153,7 +153,7 @@ class UserController extends Controller
 
         $html = $this->view('_partials.new_address', compact(['address_book', 'countriesShipping', 'default']))->render();
 
-        return \Response::json(['error' => false, 'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html,'addressBook' => $address_book]);
     }
 
     public function postAddressBookSelect(Request $request)
@@ -162,7 +162,7 @@ class UserController extends Controller
 
         $html = $this->view('_partials.render_address', compact(['address']))->render();
 
-        return \Response::json(['error' => false, 'html' => $html]);
+        return \Response::json(['error' => false, 'html' => $html,'addressBook' => $address]);
     }
 
     public function postAddressBookSave(AddressesRequest $request)
@@ -176,6 +176,17 @@ class UserController extends Controller
         $address = Addresses::updateOrCreate(['id' => $request->get('id', null), 'user_id' => $data['user_id']], $data);
 
         return \Response::json(['error' => false, 'data' => $address]);
+    }
+
+    public function postDeleteAddress(Request $request)
+    {
+        $address = \Auth::user()->addresses()->where('id',$request->id);
+
+        if($address){
+            $address->delete();
+        }
+
+        return \Response::json(['error' => false]);
     }
 
     public function getOrders()
