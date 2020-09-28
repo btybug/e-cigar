@@ -287,6 +287,8 @@
                     $(".address-form").html(res.html);
                     $("body").find(".geo_region_book").select2();
                     $("#newAddressModal").modal();
+                    $(".delete-address").attr('data-id',res.addressBook.id)
+
                 }
             }
                 )
