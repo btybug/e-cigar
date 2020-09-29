@@ -73,7 +73,7 @@
                         </ul>
                     </div>
                     <div class="col-md-9">
-                        @if(isset($model->description))
+                        @if($model && isset($model->description))
                         <div class="row">
                             <div class="col-md-12">
                                 {!! $model->description !!}
