@@ -20,6 +20,7 @@
                             <a class="list-group-item list-group-item-action @if($p=='ads')active @endif" href="?p=ads">Ads</a>
                             <a class="list-group-item list-group-item-action @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
                             <a class="list-group-item list-group-item-action @if($p=='brands')active @endif" href="?p=brands">Brands</a>
+                            <a class="list-group-item list-group-item-action @if($p=='delivery')active @endif" href="?p=delivery">Delivery</a>
                         </div>
                     </div>
                     <div class="col-sm-9 col-8">

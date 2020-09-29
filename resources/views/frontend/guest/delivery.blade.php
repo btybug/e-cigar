@@ -73,6 +73,11 @@
                         </ul>
                     </div>
                     <div class="col-md-9">
+                        <div class="row">
+                            <div class="col-md-12">
+                                {!! $model->description !!}
+                            </div>
+                        </div>
                         <div class="bg-white p-5 shadow-sm">
                             <div class="row justify-content-center mb-5">
                                 <div class="col-md-8">

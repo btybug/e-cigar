@@ -108,8 +108,9 @@ class GuestController extends Controller
     public function getDelivery(GeoZones $geoZones)
     {
         $countries = $geoZones->pluck('name', 'id')->toArray();
+        $model = Common::where('type', 'delivery')->first();
 
-        return $this->view('delivery', compact('countries'));
+        return $this->view('delivery', compact('countries','model'));
     }
 
     public function getWholeSellers()
@@ -119,10 +120,8 @@ class GuestController extends Controller
 
     public function getCities(Request $request)
     {
-        $regions = [];
         $deliveries = [];
         $geoZone = GeoZones::find($request->value);
-
         $countries = $geoZone->countries()->get();
 
         if(count($countries)){
@@ -133,11 +132,9 @@ class GuestController extends Controller
             }
         }
 
-
-        $rHtml = \View::make($this->view . '._partials.regions',compact(['regions']))->render();
         $sHtml = \View::make($this->view . '._partials.shipping_methods',compact(['deliveries']))->render();
 
-         return ['error' => false, 'html' => $rHtml,'sHtml' => $sHtml];
+         return ['error' => false, 'html' => '','sHtml' => $sHtml];
     }
 
     public function getDeliveryPrices(Request $request)
