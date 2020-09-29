@@ -75,24 +75,12 @@
                     <div class="col-md-9">
                         <div class="bg-white p-5 shadow-sm">
                             <div class="row justify-content-center mb-5">
-                                <div class="col-md-4">
+                                <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="country">{!! __('select_country') !!}</label>
                                         {!! Form::select('country',$countries,null,['class'=>'form-control','id'=>'country']) !!}
                                     </div>
                                 </div>
-
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label for="city">{!! __('select_city') !!}</label>
-                                        <div class="city-choser">
-                                            <select id="city" disabled readonly="true" class="form-control">
-                                                <option selected>{!! __('choose') !!}...</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
                             </div>
                             <div class="row">
                                 <div class="col-md-12 shipping-methods">
