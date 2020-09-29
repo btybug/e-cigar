@@ -78,7 +78,7 @@
                                 <div class="col-md-8">
                                     <div class="form-group">
                                         <label for="country">{!! __('select_country') !!}</label>
-                                        {!! Form::select('country',$countries,null,['class'=>'form-control','id'=>'country']) !!}
+                                        {!! Form::select('country',['' => 'Select']+$countries,null,['class'=>'form-control','id'=>'country']) !!}
                                     </div>
                                 </div>
                             </div>

@@ -107,10 +107,7 @@ class GuestController extends Controller
 
     public function getDelivery(GeoZones $geoZones)
     {
-        $countries = [null => 'Select Country'] + $geoZones
-                ->join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-                ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')
-                ->groupBy('country')->pluck('country', 'country')->toArray();
+        $countries = $geoZones->pluck('name', 'id')->toArray();
 
         return $this->view('delivery', compact('countries'));
     }
@@ -125,11 +122,10 @@ class GuestController extends Controller
         $regions = [];
         $deliveries = [];
         $geoZones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-            ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')->get();
-
+            ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')->where('geo_zones.id',$request->value)->get();
         if($geoZones){
             foreach ($geoZones as $geoZone){
-                $countries = $geoZone->countries()->where('name',$request->value)->get();
+                $countries = $geoZone->countries()->get();
                 if(count($countries)){
                     if(count($geoZone->deliveries)){
                         foreach ($geoZone->deliveries as $delivery){
