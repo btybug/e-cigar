@@ -121,26 +121,18 @@ class GuestController extends Controller
     {
         $regions = [];
         $deliveries = [];
-        $geoZones = GeoZones::join('zone_countries', 'geo_zones.id', '=', 'zone_countries.geo_zone_id')
-            ->select('zone_countries.*', 'zone_countries.name as country','geo_zones.id as g_id')->where('geo_zones.id',$request->value)->get();
-        if($geoZones){
-            foreach ($geoZones as $geoZone){
-                $countries = $geoZone->countries()->get();
-                if(count($countries)){
-                    if(count($geoZone->deliveries)){
-                        foreach ($geoZone->deliveries as $delivery){
-                            $deliveries[] = $delivery;
-                        }
-                    }
+        $geoZone = GeoZones::find($request->value);
 
-                    foreach ($countries as $country){
-                        if(count($country->regions)){
-                            $regions = array_merge($regions,$country->regions()->pluck('name','name')->all());
-                        }
-                    }
+        $countries = $geoZone->countries()->get();
+
+        if(count($countries)){
+            if(count($geoZone->deliveries)){
+                foreach ($geoZone->deliveries as $delivery){
+                    $deliveries[] = $delivery;
                 }
             }
         }
+
 
         $rHtml = \View::make($this->view . '._partials.regions',compact(['regions']))->render();
         $sHtml = \View::make($this->view . '._partials.shipping_methods',compact(['deliveries']))->render();
