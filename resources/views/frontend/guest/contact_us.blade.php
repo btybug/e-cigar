@@ -235,13 +235,7 @@
                                     <span class="font-sec-light font-20 lh-1 text-tert-clr">{!! __('chat_with_us') !!}</span>
                                 </div>
                                 <div class="d-flex flex-wrap justify-content-between social-body">
-                                    <a href="#" class="mr-1 d-flex align-items-center">
-                                        <span class="icon">
-                                            <img src="/public/img/whatsapp-icon.png" alt="whatsapp">
-                                        </span>
-                                        <span class="name font-sec-light font-20 lh-1 text-main-clr">WhatsApp</span>
-                                    </a>
-                                    <a href="#" class="d-flex align-items-center">
+                                    <a href="https://www.facebook.com/Kaliony-113752720481911" class="d-flex align-items-center">
                                         <span class="icon">
                                             <img src="/public/img/facebook-icon.png" alt="Messenger">
                                         </span>
