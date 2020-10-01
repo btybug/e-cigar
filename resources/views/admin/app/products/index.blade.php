@@ -56,7 +56,7 @@
                             Description
                         </option>
                         <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
-                        <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
+                        <option value="Barcode" data-column="5" data-name="barcode" selected>Barcode</option>
                         <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
                         <option value="Category" data-column="7" data-name="category" selected>Category</option>
                         <option value="Price" data-column="8" data-name="price" selected>Price</option>
