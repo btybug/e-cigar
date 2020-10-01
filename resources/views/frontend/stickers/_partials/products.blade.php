@@ -41,10 +41,8 @@
                 <div class="select-wall">
                     {!! Form::select('sort_by',[
 
-                                    'newest' => __('newest'),
                                     'oldest' => __('oldest'),
-                                    'price_desc' => __('price_high'),
-                                    'price_asc' => __('price_low'),
+                                    'newest' => __('newest'),
                                 ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
                                     'id' => 'sortBy',
                                     'class' => 'select-filter select-2 select-2--no-search main-select products-filter-wrap_select not-selected arrow-dark',
