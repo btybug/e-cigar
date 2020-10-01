@@ -911,7 +911,6 @@ class DatatableController extends Controller
                 'app_items.item_id',
                 'item_translations.name',
                 'item_translations.short_description',
-                'barcodes.code',
                 'categories_translations.name as category')
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $id)
