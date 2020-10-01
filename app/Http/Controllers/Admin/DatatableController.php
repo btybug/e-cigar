@@ -948,7 +948,6 @@ class DatatableController extends Controller
     public function getAllItemsInModal()
     {
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('items.*', 'item_translations.name', 'item_translations.short_description', 'barcodes.code', 'categories_translations.name')
@@ -969,8 +968,6 @@ class DatatableController extends Controller
                 return $attr->short_description;
             })->addColumn('quantity', function ($attr) {
                 return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
-            })->editColumn('barcode_id', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {
