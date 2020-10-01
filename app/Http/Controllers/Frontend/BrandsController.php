@@ -80,17 +80,38 @@ class BrandsController extends Controller
             ->whereIn('stock_categories.stock_id', $products->pluck('id'))
             ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
         $f = isset($stockCategories[$request->slug])?$request->slug:false;
-        $products = $products
-            ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
-            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
+        $orderFilter = static::generateOrderBy($request->get('sortBy', null));
 
+        $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
+            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
             if(! $f){
-                $products = $products->select('stocks.*')->groupBy('stocks.id')->get();
+                $products = $products->select('stocks.*')->groupBy('stocks.id')->orderBy($orderFilter[0], $orderFilter[1])->get();
             }else{
-                $products = $products->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
+                $products = $products->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->orderBy($orderFilter[0], $orderFilter[1])->get();
             }
-        $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->render();
+        $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->with([
+            'sortBy' => $request->get('sortBy', null)
+        ])->render();
         return response()->json(['error' => false, 'html' => $html]);
+    }
+
+    private static function generateOrderBy(?string $orderBy)
+    {
+        switch ($orderBy) {
+            case "newest":
+                $defaultCol = 'created_at';
+                $ordering = 'desc';
+                break;
+            case "oldest":
+                $defaultCol = 'created_at';
+                $ordering = 'asc';
+                break;
+            default:
+                $defaultCol = 'created_at';
+                $ordering = 'desc';
+        }
+
+        return [$defaultCol, $ordering];
     }
 
     public function postBrandProducts(Request $request)
