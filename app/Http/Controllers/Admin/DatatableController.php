@@ -899,11 +899,9 @@ class DatatableController extends Controller
     {
         return Datatables::of(AppItems::join('items', 'app_items.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select(
-                'items.barcode_id',
                 'app_items.id',
                 'items.brand_id',
                 'app_items.status',
@@ -912,7 +910,6 @@ class DatatableController extends Controller
                 'app_items.item_id',
                 'item_translations.name',
                 'item_translations.short_description',
-                'barcodes.code',
                 'categories_translations.name as category')
             ->groupBy('items.id')
             ->where('app_items.warehouse_id', $id)
@@ -930,9 +927,6 @@ class DatatableController extends Controller
             })->addColumn('quantity', function ($attr) use ($id) {
                 $item = $attr->item;
                 return ($item->type == 'simple') ? $item->locations()->where('warehouse_id', $id)->sum('qty') : 'N/A';
-            })
-            ->addColumn('barcode_id', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
             })
             ->editColumn('brand_id', function ($attr) {
                 $brand = Category::find($attr->brand_id);
@@ -952,7 +946,6 @@ class DatatableController extends Controller
     public function getAllItemsInModal()
     {
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select('items.*', 'item_translations.name', 'item_translations.short_description', 'barcodes.code', 'categories_translations.name')
@@ -973,8 +966,6 @@ class DatatableController extends Controller
                 return $attr->short_description;
             })->addColumn('quantity', function ($attr) {
                 return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
-            })->editColumn('barcode_id', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
             })->editColumn('long_description', function ($attr) {
                 return $attr->long_description;
             })->addColumn('actions', function ($attr) {

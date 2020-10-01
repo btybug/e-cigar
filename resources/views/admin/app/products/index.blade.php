@@ -56,7 +56,7 @@
                             Description
                         </option>
                         <option value="Brand" data-column="4" data-name="brand_id" selected>Brand</option>
-                        <option value="Barcode" data-column="5" data-name="barcode_id" selected>Barcode</option>
+                        <option value="Barcode" data-column="5" data-name="barcode" selected>Barcode</option>
                         <option value="Quantity" data-column="6" data-name="quantity" selected>Quantity</option>
                         <option value="Category" data-column="7" data-name="category" selected>Category</option>
                         <option value="Price" data-column="8" data-name="price" selected>Price</option>
@@ -714,7 +714,7 @@
                     {id: 'Name', name: 'name'},
                     {id: 'Short Description', name: 'short_description'},
                     {id: 'Brand', name: 'brand_id'},
-                    {id: 'Barcode', name: 'barcode_id'},
+                    {id: 'Barcode', name: 'barcode'},
                     {id: 'Quantity', name: 'quantity'},
                     {id: 'Category', name: 'category'},
                     {id: 'Price', name: 'price'},
@@ -735,7 +735,7 @@
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'short_description', name: 'item_translations.short_description'},
                     {data: 'brand_id', name: 'categories_translations.name'},
-                    {data: 'barcode_id', name: 'barcodes.code'},
+                    {data: 'barcode', name: 'barcode'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'categories_translations.name'},
                     {data: 'price', name: 'price'},
