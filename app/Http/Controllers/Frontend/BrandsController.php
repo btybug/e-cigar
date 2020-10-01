@@ -66,9 +66,8 @@ class BrandsController extends Controller
             ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get():$products->get();
         $html = view("frontend.brands._partials.current", compact('current', 'products', 'stockCategories','f'))->render();
         return response()->json(['error' => false, 'html' => $html]);
-
-        return response()->json(['error' => true]);
     }
+
     public function postCategoryProducts(Request $request)
     {
         $current = Brands::findOrFail($request->id);

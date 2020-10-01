@@ -43,7 +43,7 @@
 
                                     'oldest' => __('oldest'),
                                     'newest' => __('newest'),
-                                ],(\Request::has('sort_by')) ? \Request::get('sort_by') : null,[
+                                ],($sortBy) ?? null,[
                                     'id' => 'sortBy',
                                     'class' => 'select-filter select-2 select-2--no-search main-select products-filter-wrap_select not-selected arrow-dark',
                                     'style' => 'width: 100%',

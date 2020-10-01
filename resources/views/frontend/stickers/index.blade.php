@@ -120,22 +120,49 @@
         $('body').on('change', '.product-category', function () {
             let value = $(this).data('id');
             let slug = $(this).val();
+            let sortBy = $("body").find("#sortBy").val();
             $.ajax({
                 type: "post",
                 url: "/get-category-products-stickers",
                 cache: false,
                 datatype: "json",
-                data: {id: value, slug: slug},
+                data: {id: value, slug: slug,sortBy:sortBy},
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
                 success: function (data) {
                     if (!data.error) {
                         $("body").find('#sticker_related_products_list').html(data.html);
+                        $("body").find("#sortBy").select2();
                     }
                 }
             });
         });
+
+        $('body').on('change', '#sortBy', function () {
+            let value = $("body").find(".product-category").data('id');
+            let slug = $("body").find(".product-category").val();
+            let sortBy = $("body").find("#sortBy").val();
+
+            $.ajax({
+                type: "post",
+                url: "/get-category-products-stickers",
+                cache: false,
+                datatype: "json",
+                data: {id: value, slug: slug,sortBy:sortBy},
+
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                },
+                success: function (data) {
+                    if (!data.error) {
+                        $("body").find('#sticker_related_products_list').html(data.html);
+                        $("body").find("#sortBy").select2();
+                    }
+                }
+            });
+        });
+
         $('body').on('click', '.brands_main-content-top-more', function () {
             let topBlock = $(this).closest('.brands_main-content-top');
             if ($(this).hasClass('more-info-btn')) {
