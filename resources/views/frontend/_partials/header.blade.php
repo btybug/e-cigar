@@ -71,7 +71,7 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{!! route('product_offers') !!}">{!! __('offers') !!}</a>
+                                <a class="nav-link" href="{!! route('stickers') !!}">{!! __('Stickers') !!}</a>
                             </li>
 
                             <li class="nav-item">

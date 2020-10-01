@@ -54,43 +54,6 @@
                                 </li>
                             @endforeach
                         @endif
-
-                        {{--<li class="col-md-6">--}}
-                            {{--<div class="position-relative home_categories-item">--}}
-                                {{--<img src="/public/img/temp/product_2.jpg" alt="photo">--}}
-                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
-                                    {{--<h4 class="font-sec-bold font-35 ">Cbd</h4>--}}
-                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
-                                        {{--interdum. Nullam lorem elit.</p>--}}
-                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
-                                        {{--products</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li class="col-md-6">--}}
-                            {{--<div class="position-relative home_categories-item mb-0">--}}
-                                {{--<img src="/public/img/temp/product_3.jpg" alt="photo">--}}
-                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
-                                    {{--<h4 class="font-sec-bold font-35 ">E-liquid</h4>--}}
-                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
-                                        {{--interdum. Nullam lorem elit.</p>--}}
-                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
-                                        {{--products</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--<li class="col-md-6">--}}
-                            {{--<div class="position-relative home_categories-item mb-0">--}}
-                                {{--<img src="/public/img/temp/product_4.jpg" alt="photo">--}}
-                                {{--<div class="d-flex flex-column position-absolute home_categories-item-inner">--}}
-                                    {{--<h4 class="font-sec-bold font-35 ">Parts</h4>--}}
-                                    {{--<p>Suspendisse at ante ac arcu elementum <br/>--}}
-                                        {{--interdum. Nullam lorem elit.</p>--}}
-                                    {{--<a href="#" class="btn mt-auto text-uppercase font-15 home_categories-item-btn">view--}}
-                                        {{--products</a>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
                     </ul>
                 </section>
             </div>
@@ -161,95 +124,95 @@
                     <div class="line-home"></div>
                 </section>
 
-            <section class="home_reviews-wrapper">
-                <div class="container home_width">
-                    <div class="row">
-                        <div class="col-md-6 home_reviews-left-border">
-                            <div class="home_reviews-left">
-                                <div class="font-sec-reg text-uppercase text-main-clr home_reviews-left-title">
-                                    <span class="font-sec-bold">{!! __('customers') !!}</span>
-                                    <span>{!! __('reviews') !!}</span>
-                                </div>
-                                <p class="font-main-light font-15 home_reviews-left-desc">{!! __('reviews_desc') !!}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="text-main-clr home_reviews-slider">
-                                <div class="home_reviews-slider-item">
-                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>
-                                    <div class="home_reviews-slider-stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many
-                                        variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour,
-                                        or randomised words which don't look even slightly believable.</p>
-                                </div>
-                                <div class="home_reviews-slider-item">
-                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>
-                                    <div class="home_reviews-slider-stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many
-                                        variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour,
-                                        or randomised words which don't look even slightly believable.</p>
-                                </div>
-                                <div class="home_reviews-slider-item">
-                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>
-                                    <div class="home_reviews-slider-stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many
-                                        variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour,
-                                        or randomised words which don't look even slightly believable.</p>
-                                </div>
-                                <div class="home_reviews-slider-item">
-                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>
-                                    <div class="home_reviews-slider-stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many
-                                        variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour,
-                                        or randomised words which don't look even slightly believable.</p>
-                                </div>
-                                <div class="home_reviews-slider-item">
-                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>
-                                    <div class="home_reviews-slider-stars">
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star checked"></span>
-                                        <span class="fa fa-star"></span>
-                                    </div>
-                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many
-                                        variations of passages of Lorem Ipsum available, but
-                                        the majority have suffered alteration in some form, by injected humour,
-                                        or randomised words which don't look even slightly believable.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+{{--            <section class="home_reviews-wrapper">--}}
+{{--                <div class="container home_width">--}}
+{{--                    <div class="row">--}}
+{{--                        <div class="col-md-6 home_reviews-left-border">--}}
+{{--                            <div class="home_reviews-left">--}}
+{{--                                <div class="font-sec-reg text-uppercase text-main-clr home_reviews-left-title">--}}
+{{--                                    <span class="font-sec-bold">{!! __('customers') !!}</span>--}}
+{{--                                    <span>{!! __('reviews') !!}</span>--}}
+{{--                                </div>--}}
+{{--                                <p class="font-main-light font-15 home_reviews-left-desc">{!! __('reviews_desc') !!}</p>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="col-md-6">--}}
+{{--                            <div class="text-main-clr home_reviews-slider">--}}
+{{--                                <div class="home_reviews-slider-item">--}}
+{{--                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>--}}
+{{--                                    <div class="home_reviews-slider-stars">--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star"></span>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many--}}
+{{--                                        variations of passages of Lorem Ipsum available, but--}}
+{{--                                        the majority have suffered alteration in some form, by injected humour,--}}
+{{--                                        or randomised words which don't look even slightly believable.</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="home_reviews-slider-item">--}}
+{{--                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>--}}
+{{--                                    <div class="home_reviews-slider-stars">--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star"></span>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many--}}
+{{--                                        variations of passages of Lorem Ipsum available, but--}}
+{{--                                        the majority have suffered alteration in some form, by injected humour,--}}
+{{--                                        or randomised words which don't look even slightly believable.</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="home_reviews-slider-item">--}}
+{{--                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>--}}
+{{--                                    <div class="home_reviews-slider-stars">--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star"></span>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many--}}
+{{--                                        variations of passages of Lorem Ipsum available, but--}}
+{{--                                        the majority have suffered alteration in some form, by injected humour,--}}
+{{--                                        or randomised words which don't look even slightly believable.</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="home_reviews-slider-item">--}}
+{{--                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>--}}
+{{--                                    <div class="home_reviews-slider-stars">--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star"></span>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many--}}
+{{--                                        variations of passages of Lorem Ipsum available, but--}}
+{{--                                        the majority have suffered alteration in some form, by injected humour,--}}
+{{--                                        or randomised words which don't look even slightly believable.</p>--}}
+{{--                                </div>--}}
+{{--                                <div class="home_reviews-slider-item">--}}
+{{--                                    <div class="font-sec-reg font-21 lh-1 home_reviews-slider-title">Ethan Hawkins</div>--}}
+{{--                                    <div class="home_reviews-slider-stars">--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star checked"></span>--}}
+{{--                                        <span class="fa fa-star"></span>--}}
+{{--                                    </div>--}}
+{{--                                    <p class="font-main-light font-15 home_reviews-slider-desc">There are many--}}
+{{--                                        variations of passages of Lorem Ipsum available, but--}}
+{{--                                        the majority have suffered alteration in some form, by injected humour,--}}
+{{--                                        or randomised words which don't look even slightly believable.</p>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </section>--}}
 
             @if($bottoms && count($bottoms))
                 <div class="container home_width p-home-mobile">
