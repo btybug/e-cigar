@@ -2,6 +2,9 @@
     class="d-flex justify-content-between align-items-center brands_main-content-products-top">
     <div class="left-wrapper">
         <select class="form-control list-tabs product-category" data-id="{!! $current->id !!}">
+            <option value="all" @if('all'==$f) selected @endif>
+                All
+            </option>
             @foreach($stockCategories as $key=>$category)
                 <option value="{!! $key !!}" @if($key==$f) selected @endif>
                     {!! $category !!}
@@ -56,10 +59,8 @@
 </div>
 <div class="brands_main-content-products">
     <ul class="row brands_products__list-wrapper products__all-list-product">
-        @if($products->count())
-            @foreach($products as $product)
-                @include("frontend.products._partials.products_item")
-            @endforeach
-        @endif
+        @foreach($products as $product)
+            @include("frontend.products._partials.products_item")
+        @endforeach
     </ul>
 </div>

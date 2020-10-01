@@ -24,6 +24,7 @@ class BrandsController extends Controller
         $slug = ($slug) ? $slug : $brands->first()->slug;
         $current = ($slug) ? Brands::where('slug', $slug)->firstOrFail() : null;
         $products = ($current) ? $current->products() : collect([]);
+
         $categories = Category::where('type', 'stocks')->whereNotNull('parent_id')->get();
         $stockCategories = StockCategories::
         leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
@@ -31,10 +32,17 @@ class BrandsController extends Controller
             ->where('categories_translations.locale', app()->getLocale())
             ->whereIn('stock_categories.stock_id', $products->pluck('id'))
             ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
+
         $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
+
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
-            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
+            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
+        if(! $f){
+            $products = $products->select('stocks.*')->groupBy('stocks.id')->get();
+        }else{
+            $products = $products->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
+        }
+
         $settings = new Settings();
         $sliders = $settings->getEditableData('brands');
 
@@ -72,11 +80,15 @@ class BrandsController extends Controller
             ->whereIn('stock_categories.stock_id', $products->pluck('id'))
             ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
         $f = isset($stockCategories[$request->slug])?$request->slug:false;
-        $products = ($f)?$products
+        $products = $products
             ->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
-            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->where('categories.slug', $f)->select('stocks.*')
-            ->groupBy('stocks.id')->get():$products->get();
+            ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
+
+            if(! $f){
+                $products = $products->select('stocks.*')->groupBy('stocks.id')->get();
+            }else{
+                $products = $products->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get();
+            }
         $html = view('frontend.brands._partials.products', compact('current', 'products', 'stockCategories','f'))->render();
         return response()->json(['error' => false, 'html' => $html]);
     }

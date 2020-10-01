@@ -139,6 +139,7 @@
                 }
             });
         });
+
         $('body').on('change', '.product-category', function () {
             let value = $(this).data('id');
             let slug = $(this).val();
@@ -153,7 +154,7 @@
                 },
                 success: function (data) {
                     if (!data.error) {
-                        $("body").find('#brand_related_products_list').html(data.html);
+                        $("body").find('#sticker_related_products_list').html(data.html);
                     }
                 }
             });
