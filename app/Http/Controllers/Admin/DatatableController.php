@@ -899,7 +899,6 @@ class DatatableController extends Controller
     {
         return Datatables::of(AppItems::join('items', 'app_items.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('barcodes', 'items.barcode_id', '=', 'barcodes.id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select(
@@ -930,9 +929,6 @@ class DatatableController extends Controller
             })->addColumn('quantity', function ($attr) use ($id) {
                 $item = $attr->item;
                 return ($item->type == 'simple') ? $item->locations()->where('warehouse_id', $id)->sum('qty') : 'N/A';
-            })
-            ->addColumn('barcode_id', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode->code : 'no barcode';
             })
             ->editColumn('brand_id', function ($attr) {
                 $brand = Category::find($attr->brand_id);
