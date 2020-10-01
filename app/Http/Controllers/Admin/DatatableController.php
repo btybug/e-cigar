@@ -902,7 +902,6 @@ class DatatableController extends Controller
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
             ->select(
-                'items.barcode_id',
                 'app_items.id',
                 'items.brand_id',
                 'app_items.status',
