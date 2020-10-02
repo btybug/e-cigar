@@ -290,12 +290,8 @@
                                                                 <td>
                                                                     <div class="form-group mb-0">
                                                                         <strong>From</strong>
-                                                                        <div class="input-group bootstrap-timepicker timepicker flex-nowrap">
-                                                                            {!! Form::text('opening_hours[time_from][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker1']) !!}
-                                                                            <label class="input-group-addon input-group-append mb-0"
-                                                                                   for="timepicker1">
-                                                                                <span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span>
-                                                                            </label>
+                                                                        <div class="input-group  flex-nowrap">
+                                                                            {!! Form::text('opening_hours[time_from][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker']) !!}
                                                                         </div>
 
                                                                     </div>
@@ -303,10 +299,8 @@
                                                                 <td>
                                                                     <div class="form-group mb-0">
                                                                         <strong>To</strong>
-                                                                        <div class="input-group bootstrap-timepicker timepicker flex-nowrap">
-                                                                            {!! Form::text('opening_hours[time_to][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker1']) !!}
-                                                                            <label class="input-group-addon input-group-append mb-0"
-                                                                                   for="timepicker2"><span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span></label>
+                                                                        <div class="input-group flex-nowrap">
+                                                                            {!! Form::text('opening_hours[time_to][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker']) !!}
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -453,22 +447,23 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}">
+    <!-- <link rel="stylesheet" href="{{asset('public/admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}"> -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wickedpicker@0.4.3/stylesheets/wickedpicker.css">
 @stop
 
 
 @section('js')
-    {!! Html::script("public/admin_theme/plugins/timepicker/bootstrap-timepicker.js")!!}
+    <!-- {!! Html::script("public/admin_theme/plugins/timepicker/bootstrap-timepicker.js")!!} -->
+    <script src="https://cdn.jsdelivr.net/npm/wickedpicker@0.4.3/dist/wickedpicker.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>
         $(function () {
 
-
+            $('.timepicker').wickedpicker({minutesInterval: 1, secondsInterval: 1});
             $(".calendar").datepicker();
-            $('.timepicker1').timepicker();
+            // $('.timepicker1').timepicker();
             $('#first_line_country').select2();
             $("body").on("click", ".add-new-social-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
@@ -500,22 +495,20 @@
                 var html = '<tr><td><div class="form-group"><label for="weekday" class="mb-0">Weekday</label><select class="form-control"  name="opening_hours[weekday][]"><option value="Sunday" selected="selected">Sunday</option><option value="Monday">Monday</option><option value="Tuesday">Tuesday</option><option value="Wednesday">Wednesday</option><option value="Thursday">Thursday</option><option value="Friday">Friday</option><option value="Saturday">Saturday</option></select> </div> </td> <td> ' +
                     '<div class="form-group"> ' +
                     '<strong>From</strong> ' +
-                    '<div class="input-group bootstrap-timepicker timepicker">' +
-                    '<input class="form-control timepicker1" name="opening_hours[time_from][]" type="text" >' +
-                    '<label class="input-group-addon input-group-append" for="timepicker1">' +
-                    '<span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span>' +
+                    '<div class="input-group">' +
+                    '<input class="form-control timepicker" name="opening_hours[time_from][]" type="text" >' +
                     '</div></div> </td> <td> <div class="form-group"> ' +
                     '<strong>To</strong> ' +
-                    '<div class="input-group bootstrap-timepicker timepicker"> ' +
-                    '<input class="form-control timepicker1" name="opening_hours[time_to][]" type="text"> ' +
-                    '<label class="input-group-addon input-group-append" for="timepicker2">' +
-                    '<span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span>' +
-                    '</label> </div> </div> </td> <td><button type="button" class="btn btn-danger pull-right remove-hour"><i class="fa fa-minus"></i></button>' +
+                    '<div class="input-group"> ' +
+                    '<input class="form-control timepicker" name="opening_hours[time_to][]" type="text"> ' +
+                    '</div> </div> </td> <td><button type="button" class="btn btn-danger pull-right remove-hour"><i class="fa fa-minus"></i></button>' +
                     '</td></tr>';
                 $("#working-hours").append(html);
-                $('.timepicker1').timepicker();
+                $('.timepicker').wickedpicker({minutesInterval: 1, secondsInterval: 1});
             });
-
+            // '<label class="input-group-addon input-group-append" for="timepicker2">' +
+            //     '<span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span>' +
+            // '</label> 
             $("body").on("click", ".remove-hour", function () {
                 $(this).closest("tr").remove();
             });
