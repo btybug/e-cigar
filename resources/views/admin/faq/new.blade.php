@@ -145,7 +145,7 @@
                                     </div>
 
                                 </div>
-                                {!! media_widget('other_images',$model,true,'drive',null,"Extra Images") !!}
+                                {!! media_widget('gallery',$model,true,'drive',null,"Extra Images") !!}
                             </div>
                         </div>
                     </div>
