@@ -183,6 +183,9 @@
                     @ok('admin_stores')
                     <li><a href="{{route('admin_stores')}}"><i class="far fa-circle fa-xs"></i>Stores</a></li>
                     @endok
+                    @ok('admin_extra_pages')
+                    <li><a href="{{route('admin_extra_pages')}}"><i class="far fa-circle fa-xs"></i>Extra Images</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess

@@ -1,4 +1,3 @@
-
 <div class="form-group">
     {!! Form::model($models['single_post'],['class'=>'form-horizontal']) !!}
     {!! Form::hidden('type','single_post') !!}

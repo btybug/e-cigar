@@ -21,7 +21,7 @@
         @ok('admin_settings_main_pages')
         <li class="nav-item ">
             <a class="nav-link @if($active == 'main_pages')active @endif" id="general-tab" href="{!! route('admin_settings_main_pages') !!}" role="tab"
-               aria-controls="general" aria-selected="true" aria-expanded="true">Main Pages</a>
+               aria-controls="general" aria-selected="true" aria-expanded="true">Ads</a>
         </li>
         @endok
         @ok('admin_settings_connections')
