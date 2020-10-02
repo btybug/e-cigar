@@ -604,7 +604,57 @@ class SettingsController extends Controller
         return $this->view('home_page', compact(['model']));
     }
 
-    public function getMainPages(Settings $settings, Request $request)
+    public function getAds(Settings $settings, Request $request)
+    {
+        $p = 'ads';
+        $top=null;
+        $bottom=null;
+        $model=null;
+        $models = [];
+        $models['single_product'] = $settings->getEditableData('single_product');
+        $models['single_post'] = $settings->getEditableData('single_post');
+        $models['my_account'] = $settings->getEditableData('my_account');
+        $models['confirmation_page'] = $settings->getEditableData('confirmation_page');
+        $models['lef_faq_ads'] = $settings->getEditableData('lef_faq_ads');
+        $models['right_faq_ads'] = $settings->getEditableData('right_faq_ads');
+        $items=[];
+
+        return $this->view('ads', compact(['model', 'p','items','top','models','bottom']));
+    }
+
+
+
+    public function postHomePage(Request $request, Settings $settings)
+    {
+        $banners = array_filter($request->get('banners', []));
+        $settings->updateOrCreateSettings('banners', ['data' => $banners]);
+
+        return redirect()->back();
+    }
+
+    public function postAds(Request $request, Settings $settings)
+    {
+        $p = $request->get('p', 'banners');
+
+        if ($p == "banners" || $p == "single_product" || $p == "single_post"
+            || $p == "my_account"|| $p == "stickers" || $p == 'confirmation_page'  || $p == "brands"|| $p == "lef_faq_ads"|| $p == "right_faq_ads") {
+            $banners = array_filter($request->get($p, []));
+            $settings->updateOrCreateSettings($p, ['data' => $banners]);
+        } else {
+
+            $data = $request->except('_token', 'translatable','p');
+            Common::updateOrCreate($request->id, $data,$request->get('translatable'));
+        }
+        if ($request->exists('top')){
+            $settings->updateOrCreateSettings('top', ['data'=>$request->get('top')]);
+        }
+        if ($request->exists('bottom_banner')){
+            $settings->updateOrCreateSettings('bottom_banner', ['data'=>$request->get('bottom_banner')]);
+        }
+        return redirect()->back();
+    }
+
+    public function getExtraPages(Settings $settings, Request $request)
     {
         $p = $request->get('p', 'banners');
         $top=null;
@@ -633,20 +683,10 @@ class SettingsController extends Controller
             $items=Stock::all()->pluck('name','id');
         }
 
-        return $this->view('main_pages', compact(['model', 'p','items','top','models','bottom']));
+        return $this->view('extra_pages', compact(['model', 'p','items','top','models','bottom']));
     }
 
-
-
-    public function postHomePage(Request $request, Settings $settings)
-    {
-        $banners = array_filter($request->get('banners', []));
-        $settings->updateOrCreateSettings('banners', ['data' => $banners]);
-
-        return redirect()->back();
-    }
-
-    public function postMainPages(Request $request, Settings $settings)
+    public function postExtraPages(Request $request, Settings $settings)
     {
         $p = $request->get('p', 'banners');
 

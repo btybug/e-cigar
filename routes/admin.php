@@ -54,8 +54,8 @@ Route::group(['prefix' => 'settings'], function () {
         Route::get('/accounts', 'Admin\SettingsController@getAccounts')->name('admin_settings_accounts');
         Route::post('/accounts', 'Admin\SettingsController@postAccounts')->name('post_admin_settings_accounts');
 
-        Route::get('/main-pages', 'Admin\SettingsController@getMainPages')->name('admin_settings_main_pages');
-        Route::post('/main-pages', 'Admin\SettingsController@postMainPages')->name('post_admin_settings_main_pages');
+        Route::get('/ads', 'Admin\SettingsController@getAds')->name('admin_settings_main_pages');
+        Route::post('/ads', 'Admin\SettingsController@postAds')->name('post_admin_settings_main_pages');
 
 
 
@@ -766,6 +766,11 @@ Route::group(['prefix' => 'ebay'], function () {
     Route::get('/auth-accepted', 'Admin\EbayController@getUserTokenBack');
     Route::get('/get-account', 'Admin\EbayController@getAccount')->name('admin_ebay_get_account');
 
+});
+
+Route::group(['prefix' => 'extra-pages'], function () {
+    Route::get('/', 'Admin\SettingsController@getExtraPages')->name('admin_extra_pages');
+    Route::post('/', 'Admin\SettingsController@postExtraPages')->name('admin_extra_pages');
 });
 
 

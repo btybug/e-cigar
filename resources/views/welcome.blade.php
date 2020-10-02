@@ -121,7 +121,6 @@
                         @endphp
                         @include("frontend._partials.top_products",['topProducts' => $topProducts])
                     </div>
-                    <div class="line-home"></div>
                 </section>
 
 {{--            <section class="home_reviews-wrapper">--}}

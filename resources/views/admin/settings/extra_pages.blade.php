@@ -6,8 +6,6 @@
 
     <div class="container-fluid">
         <div class="row flex-column">
-            @include("admin.settings._partials.menu",['active'=> 'main_pages'])
-
             <div class="tab-content">
                 <div class="row">
                     <div class="col-sm-3 col-4 pr-md-3 pr-0">
@@ -17,7 +15,6 @@
                             <a class="list-group-item list-group-item-action @if($p=='about_us')active @endif" href="?p=about_us">About us</a>
                             <a class="list-group-item list-group-item-action @if($p=='privacy')active @endif" href="?p=privacy">Privacy</a>
                             <a class="list-group-item list-group-item-action @if($p=='cookies')active @endif" href="?p=cookies">Cookies</a>
-                            <a class="list-group-item list-group-item-action @if($p=='ads')active @endif" href="?p=ads">Ads</a>
                             <a class="list-group-item list-group-item-action @if($p=='stickers')active @endif" href="?p=stickers">Sticker</a>
                             <a class="list-group-item list-group-item-action @if($p=='brands')active @endif" href="?p=brands">Brands</a>
                             <a class="list-group-item list-group-item-action @if($p=='delivery')active @endif" href="?p=delivery">Delivery</a>
