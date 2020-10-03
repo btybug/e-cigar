@@ -271,7 +271,8 @@
                                                             $openingHours=@json_decode($model->opening_hours,true);
                                                         @endphp
 
-                                                        @foreach($openingHours['weekday'] as $key=>$weekday)
+                                                        @foreach($openingHours['weekday'] as $key => $weekday)
+
                                                             <tr>
                                                                 <td>
                                                                     <div class="form-group mb-0">
@@ -288,10 +289,11 @@
                                                                     </div>
                                                                 </td>
                                                                 <td>
+
                                                                     <div class="form-group mb-0">
                                                                         <strong>From</strong>
                                                                         <div class="input-group  flex-nowrap">
-                                                                            {!! Form::text('opening_hours[time_from][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker']) !!}
+                                                                            {!! Form::time('opening_hours[time_from][]',$openingHours['time_from'][$key],['class'=>'form-control']) !!}
                                                                         </div>
 
                                                                     </div>
@@ -300,7 +302,7 @@
                                                                     <div class="form-group mb-0">
                                                                         <strong>To</strong>
                                                                         <div class="input-group flex-nowrap">
-                                                                            {!! Form::text('opening_hours[time_to][]',$openingHours['time_from'][$key],['class'=>'form-control timepicker']) !!}
+                                                                            {!! Form::time('opening_hours[time_to][]',$openingHours['time_to'][$key],['class'=>'form-control']) !!}
                                                                         </div>
                                                                     </div>
                                                                 </td>
@@ -339,7 +341,7 @@
                                                                 <div class="form-group">
                                                                     <strong>From</strong>
                                                                     <div class="input-group bootstrap-timepicker timepicker">
-                                                                        {!! Form::text('opening_hours[time_from][]',null,['class'=>'form-control timepicker1']) !!}
+                                                                        {!! Form::time('opening_hours[time_from][]',null,['class'=>'form-control']) !!}
                                                                         <label class="input-group-addon input-group-append"
                                                                                for="timepicker1"><span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span></label>
                                                                     </div>
@@ -350,7 +352,7 @@
                                                                 <div class="form-group">
                                                                     <strong>To</strong>
                                                                     <div class="input-group bootstrap-timepicker timepicker">
-                                                                        {!! Form::text('opening_hours[time_to][]',null,['class'=>'form-control timepicker1']) !!}
+                                                                        {!! Form::time('opening_hours[time_to][]',null,['class'=>'form-control']) !!}
                                                                         <label class="input-group-addon input-group-append"
                                                                                for="timepicker2"><span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span></label>
                                                                     </div>
@@ -496,11 +498,11 @@
                     '<div class="form-group"> ' +
                     '<strong>From</strong> ' +
                     '<div class="input-group">' +
-                    '<input class="form-control timepicker" name="opening_hours[time_from][]" type="text" >' +
+                    '<input class="form-control" name="opening_hours[time_from][]" type="time" >' +
                     '</div></div> </td> <td> <div class="form-group"> ' +
                     '<strong>To</strong> ' +
                     '<div class="input-group"> ' +
-                    '<input class="form-control timepicker" name="opening_hours[time_to][]" type="text"> ' +
+                    '<input class="form-control" name="opening_hours[time_to][]" type="time"> ' +
                     '</div> </div> </td> <td><button type="button" class="btn btn-danger pull-right remove-hour"><i class="fa fa-minus"></i></button>' +
                     '</td></tr>';
                 $("#working-hours").append(html);
@@ -508,7 +510,7 @@
             });
             // '<label class="input-group-addon input-group-append" for="timepicker2">' +
             //     '<span class="input-group-text h-100"> <i class="fa fa-clock-o"></i></span>' +
-            // '</label> 
+            // '</label>
             $("body").on("click", ".remove-hour", function () {
                 $(this).closest("tr").remove();
             });
