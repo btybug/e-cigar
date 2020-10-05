@@ -5,6 +5,7 @@
             <option value="all" @if('all'==$f) selected @endif>
                 All
             </option>
+
             @foreach($stockCategories as $key=>$category)
                 <option value="{!! $key !!}" @if($key==$f) selected @endif>
                     {!! $category !!}

@@ -140,18 +140,6 @@
 {{--</svg>--}}
                         {{--</span>--}}
                                     {{--</div>--}}
-
-                                    <div class="filter-single-wall">
-                                        <div class="d-flex justify-content-between align-items-center head filter-main__head">
-                                            <h5 class="font-sec-reg text-uppercase font-17">{!! __('brands') !!}</h5>
-                                            <span class="icon-head">
-                                                <i class="fas fa-minus"></i>
-                                            </span>
-                                        </div>
-                                        <div class="list-filter">
-                                            @include('frontend.products._partials.filters.checkbox_brand')
-                                        </div>
-                                    </div>
                                     @foreach($filters as $filter)
                                         <div class="filter-single-wall">
                                             <div class="d-flex justify-content-between align-items-center head filter-main__head">
@@ -441,10 +429,10 @@
                         }
                         serializeValue = $.param( serializedArrey )
                     }
-                    
 
-                } 
-                
+
+                }
+
                 history.replaceState('', '', window.location.pathname + '?' + serializeValue + `&sort_by=${sort_by}&subcategory=${subcategory}&q=${search_text || ''}`);
                 // window.location.replace(window.location.origin + window.location.pathname + '?' + form);
                 console.log(serArr)
@@ -458,7 +446,7 @@
                     }
                 }).filter(filt => filt.name.includes('select_filter'));
 
-                
+
 
                 $.ajax({
                     type: "post",
@@ -512,7 +500,7 @@
             $('body').on('click', '.selected__filters .single-item .remove-icon', function(ev) {
                 const dataKey = $(ev.target).closest('.single-item').data('key').toString();
                 const dataType = $(ev.target).closest('.single-item').data('type');
-                
+
                 const filter = dataKey.match(/\d+/ig)
                 filter_id = filter[0] ? filter[0].toString() : '';
                 filter_value = filter[1] ? filter[1].toString() : '';
@@ -810,7 +798,7 @@
             //     }
             // });
 
-           
+
         });
     </script>
 

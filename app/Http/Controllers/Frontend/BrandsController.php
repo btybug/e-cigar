@@ -25,15 +25,11 @@ class BrandsController extends Controller
         $current = ($slug) ? Brands::where('slug', $slug)->firstOrFail() : null;
         $products = ($current) ? $current->products() : collect([]);
 
-        $categories = Category::where('type', 'stocks')->whereNotNull('parent_id')->get();
-        $stockCategories = StockCategories::
-        leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
-            ->where('categories_translations.locale', app()->getLocale())
-            ->whereIn('stock_categories.stock_id', $products->pluck('id'))
-            ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
+        $categories = Category::where('type', 'stocks')->whereNull('parent_id')->get();
 
-        $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
+        $stockCategories = Category::withTranslation()->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+
+        $f = false;
 
         $products = $products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id');
@@ -54,13 +50,9 @@ class BrandsController extends Controller
         $current = Brands::findOrFail($request->id);
 
         $products = $current->products();
-        $stockCategories = StockCategories::
-        leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
-            ->where('categories_translations.locale', app()->getLocale())
-            ->whereIn('stock_categories.stock_id', $products->pluck('id'))
-            ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
-        $f = ($stockCategories->count())?(array_keys($stockCategories->toArray())[0]):false;
+        $stockCategories = Category::withTranslation()->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+
+        $f = false;
         $products = ($f)?$products->leftJoin('stock_categories', 'stock_categories.stock_id', '=', 'stocks.id')
             ->leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
             ->where('categories.slug', $f)->select('stocks.*')->groupBy('stocks.id')->get():$products->get();
@@ -73,11 +65,8 @@ class BrandsController extends Controller
         $current = Brands::findOrFail($request->id);
 
         $products = $current->products();
-        $stockCategories = StockCategories::leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')
-            ->leftJoin('categories_translations', 'categories_translations.category_id', '=', 'categories.id')
-            ->where('categories_translations.locale', app()->getLocale())
-            ->whereIn('stock_categories.stock_id', $products->pluck('id'))
-            ->groupBy('stock_categories.categories_id')->select('categories.slug', 'categories_translations.name')->pluck('name', 'slug');
+        $stockCategories = Category::withTranslation()->where('type', 'stocks')->whereNull('parent_id')->get()->pluck('name', 'slug');
+
         $f = isset($stockCategories[$request->slug])?$request->slug:false;
         $orderFilter = static::generateOrderBy($request->get('sortBy', null));
 
