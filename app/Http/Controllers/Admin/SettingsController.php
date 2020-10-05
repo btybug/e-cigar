@@ -471,8 +471,8 @@ class SettingsController extends Controller
 
     public function getDeliveryCost(Settings $settings)
     {
-        $model = $settings->getEditableData('deliverycost');
-        return $this->view('store.delivery_cost', compact('model'));
+        $types = DeliveryCostsTypes::all();
+        return $this->view('store.delivery_cost', compact('types'));
     }
 
     public function getTaxRates(Settings $settings)
@@ -500,6 +500,11 @@ class SettingsController extends Controller
         $tax->is_active = ($request->get('onOff') == 'true') ? 1 : 0;
         $tax->save();
         return 1;
+    }
+
+    public function postStoreDeliveryCostTypeEnable(Request $request)
+    {
+      return DeliveryCostsTypes::where('id',$request->get('key'))->update(['is_enabled'=>($request->get('onOff')?1:0)]);
     }
 
     public function searchPaymentOptions(Request $request, Settings $settings)
