@@ -51,20 +51,16 @@
         </div>
         <div class="payment_gateways_tab">
             <ul class="list_paymant">
+                @foreach($types as $type)
                 <li class="item">
                     <div class="chek-title">
-                        <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">Based on Order amount</label>
+                        @if(!$type->is_core)
+                        <input id="cash_paymant" @if($type->is_enabled) checked @endif  name="types" value="{!! $type->id !!}" class="gateways_inp" type="checkbox">
+                        @endif
+                        <label for="cash_paymant" class="title">{!! $type->title !!}</label>
                     </div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
                 </li>
-                <li class="item">
-                    <div class="chek-title">
-                        <input id="cash_paymant" @if($model->cash) checked @endif  name="cash" class="gateways_inp" type="checkbox">
-                        <label for="cash_paymant" class="title">Based on weight</label>
-                    </div>
-                    <a href="#" class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                </li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -84,16 +80,16 @@
             }
         });
         $('.gateways_inp').on('change',function () {
-            var data={key:$(this).attr('name'),onOff:$(this).prop( "checked")}
-            {{--$.ajax({--}}
-            {{--type: "post",--}}
-            {{--url: '{!! route('post_admin_payment_gateways_enable') !!}',--}}
-            {{--datatype: "json",--}}
-            {{--data: data,--}}
-            {{--headers: {--}}
-            {{--"X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")--}}
-            {{--}--}}
-            {{--});--}}
+            var data={key:$(this).val(),onOff:$(this).prop( "checked")?1:0}
+            $.ajax({
+                type: "post",
+                url: '{!! route('post_admin_delivery_cost_type_enable') !!}',
+                datatype: "json",
+                data: data,
+                headers: {
+                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
+                }
+            });
         });
 
     </script>

@@ -257,7 +257,7 @@ class SettingsController extends Controller
             ->select('couriers.*', 'courier_translations.name')
             ->pluck('name', 'id');
         $geo_zone = GeoZones::find($id);
-        $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
+        $delivery_types = DeliveryCostsTypes::where('is_enabled',1)->pluck('title', 'id');
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
 
         return $this->view('store.general.new_shipping_zone', compact(
@@ -471,8 +471,8 @@ class SettingsController extends Controller
 
     public function getDeliveryCost(Settings $settings)
     {
-        $model = $settings->getEditableData('deliverycost');
-        return $this->view('store.delivery_cost', compact('model'));
+        $types = DeliveryCostsTypes::all();
+        return $this->view('store.delivery_cost', compact('types'));
     }
 
     public function getTaxRates(Settings $settings)
@@ -500,6 +500,13 @@ class SettingsController extends Controller
         $tax->is_active = ($request->get('onOff') == 'true') ? 1 : 0;
         $tax->save();
         return 1;
+    }
+
+    public function postStoreDeliveryCostTypeEnable(Request $request)
+    {
+       DeliveryCostsTypes::where('id',$request->get('key'))->update(['is_enabled'=>($request->get('onOff')?1:0)]);
+        return response()->json(['is_enabled'=>((bool)$request->get('onOff')?1:0)]);
+
     }
 
     public function searchPaymentOptions(Request $request, Settings $settings)

@@ -118,6 +118,7 @@ Route::group(['prefix' => 'settings'], function () {
 
         });
         Route::post('/payment-gateways/enable', 'Admin\SettingsController@postStorePaymentsGatewaysEnable')->name('post_admin_payment_gateways_enable');
+        Route::post('/delivery-cost-type/enable', 'Admin\SettingsController@postStoreDeliveryCostTypeEnable')->name('post_admin_delivery_cost_type_enable');
         Route::group(['prefix' => 'couriers'], function () {
             Route::get('/', 'Admin\SettingsController@getCouriers')->name('admin_settings_couriers');
             Route::get('/edit/{id}', 'Admin\SettingsController@getCouriersEdit')->name('admin_settings_courier_edit');
@@ -454,6 +455,23 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/get-list', 'Admin\ItemsController@postSuppliersList')->name('post_admin_suppliers_list');
 
     });
+    Route::group(['prefix' => 'stores'], function () {
+        Route::get('/{id?}', 'App\AppController@products')->name('admin_stores');
+        Route::post('/add-product', 'App\AppController@addProduct')->name('admin_app_add_product');
+        Route::post('/import-shop', 'App\AppController@importShop')->name('admin_app_import_shop');
+        Route::post('/activate/{id}', 'App\AppController@activateProduct')->name('admin_app_activate_product');
+        Route::post('/draft/{id}', 'App\AppController@draftProduct')->name('admin_app_draft_product');
+
+        Route::get('/activate-shop/{id}', 'App\AppController@activateShop')->name('admin_app_activate_shop');
+        Route::get('/draft-shop/{id}', 'App\AppController@draftShop')->name('admin_app_draft_shop');
+        Route::get('/drop-shop/{id}', 'App\AppController@removeShop')->name('admin_app_drop_shop');
+        Route::post('/multi-edit-price', 'App\AppController@multiEditPrice')->name('admin_app_multi_edit_price');
+        Route::group(['prefix' => 'warehouses'], function () {
+            Route::get('/', 'Admin\StoresController@index')->name('admin_stores_warehouses');
+            Route::get('/edit-or-create/{id?}', 'Admin\StoresController@editOrCreate')->name('admin_stores_edit_or_create');
+            Route::post('/edit-or-create/{id?}', 'Admin\StoresController@postEditOrCreate')->name('admin_stores_post_edit_or_create');
+        });
+    });
 
     Route::group(['prefix' => 'other'], function () {
         Route::get('/', 'Admin\OtherController@getIndex')->name('admin_inventory_other');
@@ -727,11 +745,7 @@ Route::group(['prefix' => 'category'], function () {
     Route::get('/', 'Admin\CategoriesController@list')->name('admin_category');
     Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_get_category');
 });
-Route::group(['prefix' => 'stores'], function () {
-    Route::get('/', 'Admin\StoresController@index')->name('admin_stores');
-    Route::get('/edit-or-create/{id?}', 'Admin\StoresController@editOrCreate')->name('admin_stores_edit_or_create');
-    Route::post('/edit-or-create/{id?}', 'Admin\StoresController@postEditOrCreate')->name('admin_stores_post_edit_or_create');
-});
+
 Route::group(['prefix' => 'reports'], function () {
     Route::get('/', 'Admin\ReportsController@getList')->name('admin_reports');
     Route::get('/new', 'Admin\ReportsController@getIndex')->name('admin_reports_new');
