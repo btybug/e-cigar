@@ -395,7 +395,7 @@ class DatatableController extends Controller
                 return "<div class='datatable-td__action'>
                     <a class='btn btn-warning' href='" . route('admin_settings_geo_zones_new', $geo_zone->id) . "'>Edit</a>
                     <a class='btn btn-info' href='#'><i class='fa fa-copy'></i></a>
-                    <a class='btn btn-danger' href='#'>x</a>
+                    <a class='btn btn-danger' href='" . route('admin_settings_geo_zones_delete', $geo_zone->id) . "'>x</a>
                     </div>";
             })->rawColumns(['actions'])
             ->make(true);

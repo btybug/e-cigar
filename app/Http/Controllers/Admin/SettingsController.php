@@ -267,6 +267,14 @@ class SettingsController extends Controller
             'active_couriers', 'delivery_types', 'tax_rates'));
     }
 
+    public function deleteGeoZone($id)
+    {
+        $geo_zone = GeoZones::findOrFail($id);
+        $geo_zone->delete();
+
+        return redirect()->back();
+    }
+
 
     public function saveGeoZone(GeoZonesRequest $request)
     {
