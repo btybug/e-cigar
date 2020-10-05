@@ -114,7 +114,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="container main-max-width single-product-dtls-wrap-outer pr-lg-0">
                         <div class="row">
                             <div class="col-12">
@@ -314,7 +314,7 @@
                                                                         <div class="w-100">
                                                                         <div class="row ">
                                                                             @foreach($vape->main_item->specifications_with_children as $stockAttr)
-                                                                                    @if($loop->iteration % 2 == 0)
+                                                                            @if($loop->iteration % 2 == 0)
                                                                                         <div class="col-md-6">
                                                                                             <div
                                                                                                 class="d-flex technical-features-content-wall">
