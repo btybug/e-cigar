@@ -114,6 +114,7 @@ Route::group(['prefix' => 'settings'], function () {
         Route::group(['prefix' => 'tax-rates'], function () {
             Route::get('/', 'Admin\SettingsController@getTaxRates')->name('admin_settings_tax_rates');
             Route::get('/create-or-update/{id?}', 'Admin\SettingsController@getCreateRate')->name('get_admin_settings_tax_create_or_update');
+            Route::get('/delete/{id?}', 'Admin\SettingsController@getDeleteRate')->name('get_admin_settings_tax_delete');
             Route::post('/create-or-update/{id?}', 'Admin\SettingsController@postCreateOrUpdateTaxRate')->name('post_admin_settings_tax_create_or_update');
             Route::post('/enable', 'Admin\SettingsController@postTaxRatesEnable')->name('post_admin_tax_rate_enable');
 

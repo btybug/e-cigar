@@ -467,7 +467,7 @@ class SettingsController extends Controller
     }
     public function getCouriersDelete($id)
     {
-        $model = Couriers::where('id',$id)->delete();
+        Couriers::where('id',$id)->delete();
         return redirect()->back();
     }
     public function getCreateCouriers()
@@ -498,6 +498,11 @@ class SettingsController extends Controller
     {
         $model = TaxRates::find($id);
         return $this->view('store.tax_rates.create', compact('model'));
+    }
+    public function getDeleteRate($id)
+    {
+        TaxRates::where('id',$id)->delete();
+        return redirect()->back();
     }
 
     public function postCreateOrUpdateTaxRate(Request $request)
