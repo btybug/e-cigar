@@ -35,6 +35,7 @@ class ToolsController extends Controller
         $data=$request->except(['_token','translatable','attributes'],[]);
         $sticker = Stickers::updateOrCreate($request->id,$data);
         $attributes = $request->get('attributes',[]);
+        $sticker->attrs()->delete();
 
         if(count($attributes)){
             foreach ($attributes as $attribute){
