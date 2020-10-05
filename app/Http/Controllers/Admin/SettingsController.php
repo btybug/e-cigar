@@ -257,7 +257,7 @@ class SettingsController extends Controller
             ->select('couriers.*', 'courier_translations.name')
             ->pluck('name', 'id');
         $geo_zone = GeoZones::find($id);
-        $delivery_types = DeliveryCostsTypes::all()->pluck('title', 'id');
+        $delivery_types = DeliveryCostsTypes::where('is_enabled',1)->pluck('title', 'id');
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
 
         return $this->view('store.general.new_shipping_zone', compact(
