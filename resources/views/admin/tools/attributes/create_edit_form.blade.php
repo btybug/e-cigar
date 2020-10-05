@@ -236,7 +236,7 @@
                             @foreach($model->stickers as $sticker)
                                 <div class="inventory-attr-item" data-id="{{ $sticker->id }}">
                                     <h3 class="text">{!! $sticker->name !!}</h3>
-                                    <button type="button" class="btn btn-danger remove-all-attributes"><i class="fa fa-close"></i></button>
+                                    <button type="button" class="btn btn-danger remove-all-attributes del-sticker"><i class="fa fa-close"></i></button>
                                     <input type="hidden" name="stickers[]" value="{{ $sticker->id }}">
                                 </div>
                             @endforeach
@@ -310,7 +310,7 @@
     </div><!-- /.modal -->
 @stop
 @section('js')
-    <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
+    <script src="/public/js/iconpicker.js"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
@@ -322,98 +322,63 @@
         //     });
         // });
 
-        $('.filter--display input:radio[name="filter"]').change(function() {
-            var filter = $(this).filter(':checked').val();
-
-            if(filter === '1') {
-                $('.panel-display-as').removeClass('hide')
-            }else {
-                $('.panel-display-as').addClass('hide')
-            }
-        });
 
 
-
-        $("body").on('click', '.remove-all-attributes', function () {
-            $(this).closest('.inventory-attr-item').remove();
-        });
-
-        // $("body").on('click', '.select-stickers', function () {
-        //     let arr = [];
-        //     $(".get-all-stickers-tab")
-        //         .children()
-        //         .each(function () {
-        //             arr.push($(this).attr("data-id"));
-        //         });
-        //     AjaxCall("/admin/tools/stickers/get-all", {arr}, function (res) {
-        //         if (!res.error) {
-        //             $("#stickerModal .modal-body .all-list").empty();
-        //             res.data.forEach(item => {
-        //                 let html = `<li data-id="${item.id}" class="option-elm-modal"><a
-        //                                         href="#">${item.name}
-        //                                         </a> <a class="btn btn-primary add-related-event searchable" data-name="${item.name}"
-        //                                         data-id="${item.id}">ADD</a></li>`;
-        //                 $("#stickerModal .modal-body .all-list").append(html);
-        //             });
-        //             $("#stickerModal").modal();
-        //         }
-        //     });
-        // });
-
-        // $("body").on("click", ".add-related-event", function () {
-        //     let id = $(this).data("id");
-        //     let name = $(this).data("name");
-        //     $(".get-all-stickers-tab")
-        //         .append(`<div class="inventory-attr-item" data-id="${id}">
-        //                                     <h3 class="text">${name}</h3>
-        //                                     <button  type="button" class="btn btn-danger remove-all-attributes "><i class="fa fa-close"></i></button>
-        //                                     <input type="hidden" name="stickers[]" value="${id}">
-        //                                 </div>`);
-        //     $(this)
-        //         .parent()
-        //         .remove();
-        // });
-
-        $('body').on('change', '.inventory_attributes .display_as-select', function () {
-            $(".display-as-wall").addClass("d-none")
-            $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
-
-        });
-        $('.icon-picker').iconpicker();
-        $("body").on("click", ".iconpicker-item", function () {
-            let value = $(".icon-picker").val()
-            $("#font-show-area").attr("class", value)
-        })
-
-        $("body").on("click", ".attr-option", function () {
-            var id = $(this).data('item-id');
-            var parentId = $(this).data('parent-id');
-            AjaxCall("/admin/tools/attributes/options-show-form", {id: id, parentId: parentId}, function (res) {
-                if (!res.error) {
-                    $(".options-form").html(res.html);
-                    $('.icon-picker').iconpicker();
-                }
-            });
-        });
-
-        $("body").on("click", ".delete-option", function () {
-            var id = $(this).data('item-id');
-            AjaxCall("/admin/tools/attributes/options-delete", {id: id}, function (res) {
-                if (!res.error) {
-                    $(".options-form").html('');
-                    $("body").find('.attr-option').each(function () {
-                        if ($(this).attr('data-item-id') == id) {
-                            $(this).remove()
-                        }
-                    })
-                    // $('.icon-picker').iconpicker();
-                }
-            });
-        });
-
-    </script>
-    <script>
         $(document).ready(function () {
+            $('.filter--display input:radio[name="filter"]').change(function() {
+                var filter = $(this).filter(':checked').val();
+
+                if(filter === '1') {
+                    $('.panel-display-as').removeClass('hide')
+                }else {
+                    $('.panel-display-as').addClass('hide')
+                }
+            });
+
+            // $("body").on('click', '.del-sticker', function (e) {
+            //     alert(211212313)
+            // });
+            $(".get-all-stickers-tab").on('click', '.remove-all-attributes', function (e) {
+                $(this).closest('.inventory-attr-item').remove();
+            });
+
+            $('body').on('change', '.inventory_attributes .display_as-select', function () {
+                $(".display-as-wall").addClass("d-none")
+                $(`[data-displayas="${$(this).val()}"]`).removeClass("d-none")
+
+            });
+            $('.icon-picker').iconpicker();
+            $("body").on("click", ".iconpicker-item", function () {
+                let value = $(".icon-picker").val()
+                $("#font-show-area").attr("class", value)
+            })
+
+            $("body").on("click", ".attr-option", function () {
+                var id = $(this).data('item-id');
+                var parentId = $(this).data('parent-id');
+                AjaxCall("/admin/tools/attributes/options-show-form", {id: id, parentId: parentId}, function (res) {
+                    if (!res.error) {
+                        $(".options-form").html(res.html);
+                        $('.icon-picker').iconpicker();
+                    }
+                });
+            });
+
+            $("body").on("click", ".delete-option", function () {
+                var id = $(this).data('item-id');
+                AjaxCall("/admin/tools/attributes/options-delete", {id: id}, function (res) {
+                    if (!res.error) {
+                        $(".options-form").html('');
+                        $("body").find('.attr-option').each(function () {
+                            if ($(this).attr('data-item-id') == id) {
+                                $(this).remove()
+                            }
+                        })
+                        // $('.icon-picker').iconpicker();
+                    }
+                });
+            });
+
             function render_categories_tree() {
                 $("#treeview_json").jstree({
                     "checkbox": {
@@ -469,7 +434,7 @@
 @stop
 @section("css")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
-    <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
+    <link rel="stylesheet" href="/public/css/iconpicker.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <style>
