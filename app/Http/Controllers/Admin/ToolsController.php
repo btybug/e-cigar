@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
+use App\Models\AttributeStickers;
 use App\Models\Stickers;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,8 @@ class ToolsController extends Controller
         $data=$request->except(['_token','translatable','attributes'],[]);
         $sticker = Stickers::updateOrCreate($request->id,$data);
         $attributes = $request->get('attributes',[]);
-        $sticker->attrs()->delete();
+
+        AttributeStickers::where('sticker_id',$sticker->id)->delete();
 
         if(count($attributes)){
             foreach ($attributes as $attribute){
