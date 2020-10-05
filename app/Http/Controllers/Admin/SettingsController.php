@@ -465,6 +465,11 @@ class SettingsController extends Controller
         $model = Couriers::find($id);
         return $this->view('store.couriers.edit', compact('model'));
     }
+    public function getCouriersDelete($id)
+    {
+        $model = Couriers::where('id',$id)->delete();
+        return redirect()->back();
+    }
     public function getCreateCouriers()
     {
         $model = null;

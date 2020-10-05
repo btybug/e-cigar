@@ -69,10 +69,17 @@
                                            @endif  name="{!! $courier->id !!}" class="gateways_inp" type="checkbox">
                                     <label for="cash_paymant" class="title">{!! $courier->name !!}</label>
                                 </div>
-                                @ok('admin_settings_courier_edit')
-                                <a href="{!! route('admin_settings_courier_edit',$courier->id) !!}"
-                                   class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
-                                @endok
+                                <div class="row pull-right">
+                                    @ok('admin_settings_courier_edit')
+                                    <a href="{!! route('admin_settings_courier_edit',$courier->id) !!}"
+                                       class="btn btn-sm btn-warning"><i class="fa fa-cogs"></i></a>
+                                    @endok
+                                    @ok('admin_settings_courier_delete')
+                                    <a href="{!! route('admin_settings_courier_delete',$courier->id) !!}"
+                                       class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                    @endok
+                                </div>
+
                             </li>
                         @endforeach
                     </ul>
