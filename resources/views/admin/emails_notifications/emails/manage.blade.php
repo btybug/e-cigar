@@ -9,7 +9,7 @@
             </div>
             <div>
                 <div class="d-flex flex-wrap  btn-save">
-                    {!! media_button('template',null,false,'html') !!}
+
                     <button type="submit" class="btn btn-primary ml-1">Save</button>
                 </div>
             </div>
@@ -72,7 +72,26 @@ User
                                                                             {{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group row">
+                                                                    <div class="form-group">
+                                                                        <label class="col-md-4 control-label" for="radios">Template Type</label>
+                                                                        <div class="col-md-4">
+                                                                            <label class="radio-inline" for="templateType-0">
+                                                                                {!! Form::radio('templateType',0,true,['id'=>'templateType-0']) !!}
+                                                                                TinyMCE
+                                                                            </label>
+                                                                            <label class="radio-inline" for="templateType-1">
+                                                                                {!! Form::radio('templateType',1,false,['id'=>'templateType-1']) !!}
+                                                                                Media Template
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row media hidden">
+                                                                        {{Form::label('content_'.strtolower($language->code), 'Content Type',['class' => 'col-sm-12'])}}
+                                                                        <div class="col-sm-12">
+                                                                            {!! media_button('template',null,false,'html') !!}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row tiny-mce">
                                                                         {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-12'])}}
                                                                         <div class="col-sm-12">
                                                                             {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
@@ -263,6 +282,16 @@ User
                 $('#tab2').removeClass('hidden');
             }
         });
+
+        $('body').on('change','input[name=templateType]',function () {
+            if($(this).val()==1){
+                $('.tiny-mce').addClass('hidden')
+                $('.media').removeClass('hidden')
+            }else{
+                $('.tiny-mce').removeClass('hidden')
+                $('.media').addClass('hidden')
+            }
+        })
         $("#admin-cc").select2({width: '100%', tags: true});
         function initTinyMce(e) {
             tinymce.init({

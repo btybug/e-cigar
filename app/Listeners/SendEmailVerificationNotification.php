@@ -6,6 +6,7 @@ use App\Events\Registered;
 use App\Models\MailJob;
 use App\Models\MailTemplates;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Support\Facades\Artisan;
 
 /**
  * Created by PhpStorm.
@@ -29,6 +30,7 @@ class SendEmailVerificationNotification
                 ->where('is_active', '1')
                 ->first();
             if ($mailTemplate) {
+
                 MailJob::create([
                     'template_id' => $mailTemplate->id,
                     'must_be_done' => now(),
@@ -45,7 +47,7 @@ class SendEmailVerificationNotification
                     ]);
                 }
             }
-
+            Artisan::call('send:emails');
         }
     }
 }
