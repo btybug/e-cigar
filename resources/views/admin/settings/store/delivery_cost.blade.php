@@ -80,7 +80,7 @@
             }
         });
         $('.gateways_inp').on('change',function () {
-            var data={key:$(this).val(),onOff:$(this).prop( "checked")}
+            var data={key:$(this).val(),onOff:$(this).prop( "checked")?1:0}
             $.ajax({
                 type: "post",
                 url: '{!! route('post_admin_delivery_cost_type_enable') !!}',

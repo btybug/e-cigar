@@ -504,7 +504,9 @@ class SettingsController extends Controller
 
     public function postStoreDeliveryCostTypeEnable(Request $request)
     {
-      return DeliveryCostsTypes::where('id',$request->get('key'))->update(['is_enabled'=>($request->get('onOff')?1:0)]);
+       DeliveryCostsTypes::where('id',$request->get('key'))->update(['is_enabled'=>($request->get('onOff')?1:0)]);
+        return response()->json(['is_enabled'=>((bool)$request->get('onOff')?1:0)]);
+
     }
 
     public function searchPaymentOptions(Request $request, Settings $settings)
