@@ -136,7 +136,7 @@
                                                             {{--E-Juice</p>--}}
                                                         <div class="order__product-info">
                                                             @if(! $order->type)
-                                                                @if(count($item->options['options']))
+                                                                @if(isset($item->options['options']) && $item->options['options'] && count($item->options['options']))
                                                                     <ul class="list-unstyled mb-0">
                                                                         @foreach($item->options['options'] as $option)
                                                                             <li class="single-row-product">
@@ -253,7 +253,7 @@
                                                             E-Juice</p>
                                                         <div class="order__product-info">
                                                             @if(! $order->type)
-                                                                @if(count($item->options['options']))
+                                                                @if(isset($item->options['options']) && $item->options['options'] && count($item->options['options']))
                                                                     <ul class="list-unstyled mb-0">
                                                                         @foreach($item->options['options'] as $option)
                                                                             <li class="single-row-product">
