@@ -459,16 +459,16 @@ Route::group(['prefix' => 'inventory'], function () {
 
     });
     Route::group(['prefix' => 'stores'], function () {
-        Route::get('/{id?}', 'App\AppController@products')->name('admin_stores');
-        Route::post('/add-product', 'App\AppController@addProduct')->name('admin_app_add_product');
-        Route::post('/import-shop', 'App\AppController@importShop')->name('admin_app_import_shop');
-        Route::post('/activate/{id}', 'App\AppController@activateProduct')->name('admin_app_activate_product');
-        Route::post('/draft/{id}', 'App\AppController@draftProduct')->name('admin_app_draft_product');
+        Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_stores');
+        Route::post('/add-product', 'Admin\App\AppController@addProduct')->name('admin_app_add_product');
+        Route::post('/import-shop', 'Admin\App\AppController@importShop')->name('admin_app_import_shop');
+        Route::post('/activate/{id}', 'Admin\App\AppController@activateProduct')->name('admin_app_activate_product');
+        Route::post('/draft/{id}', 'Admin\App\AppController@draftProduct')->name('admin_app_draft_product');
 
-        Route::get('/activate-shop/{id}', 'App\AppController@activateShop')->name('admin_app_activate_shop');
-        Route::get('/draft-shop/{id}', 'App\AppController@draftShop')->name('admin_app_draft_shop');
-        Route::get('/drop-shop/{id}', 'App\AppController@removeShop')->name('admin_app_drop_shop');
-        Route::post('/multi-edit-price', 'App\AppController@multiEditPrice')->name('admin_app_multi_edit_price');
+        Route::get('/activate-shop/{id}', 'Admin\App\AppController@activateShop')->name('admin_app_activate_shop');
+        Route::get('/draft-shop/{id}', 'Admin\App\AppController@draftShop')->name('admin_app_draft_shop');
+        Route::get('/drop-shop/{id}', 'Admin\App\AppController@removeShop')->name('admin_app_drop_shop');
+        Route::post('/multi-edit-price', 'Admin\App\AppController@multiEditPrice')->name('admin_app_multi_edit_price');
         Route::group(['prefix' => 'warehouses'], function () {
             Route::get('/', 'Admin\StoresController@index')->name('admin_stores_warehouses');
             Route::get('/edit-or-create/{id?}', 'Admin\StoresController@editOrCreate')->name('admin_stores_edit_or_create');
