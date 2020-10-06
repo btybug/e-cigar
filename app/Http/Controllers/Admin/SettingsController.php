@@ -11,7 +11,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Requests\AccountsRequest;
 use App\Http\Controllers\Admin\Requests\GeoZonesRequest;
-use App\Http\Controllers\Admin\Requests\MailTemplatesRequest;
 use App\Http\Controllers\Controller;
 use App\Models\Common;
 use App\Models\Couriers;
@@ -20,25 +19,17 @@ use App\Models\DeliveryCostsTypes;
 use App\Models\Emails;
 use App\Models\FooterLinks;
 use App\Models\GeoZones;
-use App\Models\GetForexData;
-use App\Models\Gmail;
-use App\Models\Items;
 use App\Models\Languages;
-use App\Models\MailTemplates;
-use App\Models\MainPagesSeo;
 use App\Models\Products;
 use App\Models\Settings;
 use App\Models\ShippingZones;
 use App\Models\SiteCurrencies;
 use App\Models\SiteLanguages;
-use App\Models\Statuses;
 use App\Models\Stock;
 use App\Models\TaxRates;
 use App\Models\Translations\FooterLinkTranslation;
-use App\Services\ShortCodes;
 use Illuminate\Http\Request;
 use PragmaRX\Countries\Package\Countries;
-use Torann\GeoIP\GeoIP;
 
 class SettingsController extends Controller
 {
@@ -448,16 +439,14 @@ class SettingsController extends Controller
 
     public function postCouriersEnable(Request $request, Settings $settings)
     {
-        $data[$request->get('key')] = ($request->get('onOff') == 'true') ? 1 : 0;
-        $settings->updateOrCreateSettings('active_couriers', $data);
-        return 1;
+        $res = Couriers::where('id', $request->get('key'))->update(['is_active' => ($request->get('onOff') == 'true') ? 1 : 0]);
+        return $res;
     }
 
     public function getCouriers(Settings $settings)
     {
-        $model = $settings->getEditableData('active_couriers');
         $couriers = Couriers::all();
-        return $this->view('store.couriers', compact('model', 'couriers'));
+        return $this->view('store.couriers', compact( 'couriers'));
     }
 
     public function getCouriersEdit($id)

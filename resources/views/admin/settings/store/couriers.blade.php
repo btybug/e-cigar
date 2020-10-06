@@ -63,9 +63,9 @@
                 <div class="payment_gateways_tab">
                     <ul class="list_paymant">
                         @foreach($couriers as $courier)
-                            <li class="item @if($model->{$courier->id}) active @endif">
+                            <li class="item @if($courier->is_active) active @endif">
                                 <div class="chek-title">
-                                    <input id="cash_paymant" @if($model->{$courier->id}) checked
+                                    <input id="cash_paymant" @if($courier->is_active) checked
                                            @endif  name="{!! $courier->id !!}" class="gateways_inp" type="checkbox">
                                     <label for="cash_paymant" class="title">{!! $courier->name !!}</label>
                                 </div>
