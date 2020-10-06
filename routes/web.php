@@ -83,7 +83,8 @@ Route::group(['prefix' => 'news'], function () {
     Route::get('/{post_id}', 'Frontend\BlogController@getSingle')->name('blog_post');
 });
 Route::group(['prefix' => 'brands'], function () {
-    Route::get('/{type?}', 'Frontend\BrandsController@index')->name('brands');
+    Route::get('/', 'Frontend\BrandsController@index')->name('brands');
+    Route::get('/{type}', 'Frontend\BrandsController@single')->name('brand_single');
 });
 Route::post('/get-brand', 'Frontend\BrandsController@postBrand')->name('post_brand');
 Route::post('/get-category-products', 'Frontend\BrandsController@postCategoryProducts')->name('post_category_products');

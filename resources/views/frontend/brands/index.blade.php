@@ -1,61 +1,39 @@
-@extends('layouts.frontend',['page_name'=>'banner'])
-@section('meta')
-    {!! rich() !!}
-    {!! brandSeo($current) !!}
-@stop
+@extends('layouts.frontend')
 @section('content')
     <main class="main-content">
-        <div class="brands_page-wrapper">
-            @if($sliders && isset($sliders->data) && @json_decode($sliders->data,true))
+        <div class="news-wrap change-display-wrap display-grid">
             <div class="container main-max-width">
-                <div class="stickers-ads-wrapper stickers-ads-wrapper-carousel mb-5">
+                <div class="row justify-content-md-start justify-content-center">
+                    @foreach($brands as $brand)
+                        <a href="{!! route('brand_single',$brand->slug) !!}" class="news-wrap_col">
+                            <span class="news-card main-transition position-relative">
+                                <span class="news-card_view d-block position-relative">
+                                    <!--news main image-->
+                                        <img class="card-img-top"  src="{!! $brand->image !!}" alt="{!! $brand->name !!}" title="{!! $brand->name !!}">
+                                    <!--share icon-->
+                                    <span class="like-icon news-card_share-icon d-inline-block pointer main-transition position-absolute">
+                                    <svg iewBox="0 0 20 21" width="20px" height="21px">
+                                        <path fill-rule="evenodd"  opacity="0.6" fill="rgb(255, 255, 255)" d="M16.364,13.881 C15.393,13.881 14.480,14.252 13.793,14.925 C13.603,15.111 13.438,15.316 13.296,15.533 L7.014,11.799 C7.181,11.392 7.275,10.948 7.275,10.484 C7.275,10.018 7.181,9.576 7.015,9.168 L13.298,5.461 C13.944,6.454 15.074,7.116 16.364,7.116 C18.368,7.116 19.999,5.518 19.999,3.555 C19.999,1.592 18.368,-0.006 16.364,-0.006 C14.359,-0.006 12.728,1.592 12.728,3.555 C12.728,4.002 12.817,4.430 12.971,4.823 L6.678,8.535 C6.028,7.565 4.910,6.923 3.639,6.923 C1.635,6.923 0.004,8.519 0.004,10.484 C0.004,12.447 1.635,14.045 3.639,14.045 C4.910,14.045 6.028,13.402 6.678,12.431 L12.969,16.172 C12.813,16.573 12.728,17.001 12.728,17.442 C12.728,18.393 13.106,19.289 13.793,19.960 C14.480,20.633 15.393,21.003 16.364,21.003 C17.335,21.003 18.247,20.633 18.934,19.960 C19.621,19.289 19.999,18.393 19.999,17.442 C19.999,16.491 19.621,15.598 18.934,14.925 C18.247,14.252 17.335,13.881 16.364,13.881 L16.364,13.881 Z"/>
+                                    </svg>
+                                </span>
 
-                        @php
-                            $data = json_decode($sliders->data,true);
-                        @endphp
-                        @foreach($data as $k => $slider)
-                                @if(pathinfo($slider,PATHINFO_EXTENSION) == 'html')
-                                    @php
-                                        $banner = ltrim($slider, '/');
-                                        $html = (File::exists($banner)) ? File::get($banner) : "";
-                                    @endphp
-                                    <div>
-                                        <a href="javascript:void(0)" class="d-block h-100">
-                                            {!! $html !!}
-                                        </a>
-                                    </div>
-                                @else
-                                    <div>
-                                        <a href="javascript:void(0)" class="d-block h-100">
-                                            <img src="{{ $slider }}" alt="ads">
-                                        </a>
-                                    </div>
-                                @endif
-                        @endforeach
+                                </span>
+                                <span class="news-card_body">
+                                    <span class="news-card_body-text d-block">
+                                        <span class="d-inline-block card-title font-21 font-sec-bold text-main-clr underlined-on-hover" title="{{ $brand->title }}">{!! str_limit($brand->name,30) !!}</span>
+                                        <span class="card-text d-block font-main-light font-15 text-light-clr" title="{{ $brand->description }}">
+                                            {!! str_limit($brand->description,100) !!}
+                                        </span>
+                                    </span>
+                                </span>
 
-                </div>
-            </div>
-            @endif
+                            </span>
+                        </a>
 
-            <div class="brands_main-content-wrapper">
-                <div class="container main-max-width">
-                    <div class="d-flex flex-wrap">
-                        <div class="brands_aside">
-{{--                            <div class="select-wall">--}}
-{{--                                {!! Form::select('brand_filter',['' => __('all_brands')] + $parentBrands,null,--}}
-{{--                                ['class' => 'select-2 select-2--no-search main-select main-select-2arrows not-selected arrow-dark brand-list','style' => 'width: 100%']) !!}--}}
 
-{{--                            </div>--}}
-                            <div class="mobile-brands_aside-title text-tert-clr font-sec-reg d-md-none d-block">{!! __('categories') !!}</div>
-                            <ul class="brands_aside-list">
-                                @include("frontend.brands._partials.list")
-                            </ul>
-                        </div>
-                        <div class="brands_main-content products-box">
-                            @include("frontend.brands._partials.current")
-                        </div>
-
-                    </div>
+                    {{--<strong>{!! BBgetDateFormat($post->created_at,'d') !!}</strong>{!! BBgetDateFormat($post->created_at,'M') !!}--}}
+                @endforeach
+                <!-- The END -->
                 </div>
             </div>
         </div>
@@ -63,167 +41,32 @@
         <!--scroll top button-->
         <button id="scrollTopBtn" class="scroll-top-btn d-flex align-items-center justify-content-center pointer">
             <svg viewBox="0 0 17 10" width="17px" height="10px">
-                <path fill-rule="evenodd" fill="rgb(124, 124, 124)"
-                      d="M0.000,8.111 L1.984,10.005 L8.498,3.789 L15.010,10.005 L16.995,8.111 L8.498,0.001 L0.000,8.111 Z"></path>
+                <path fill-rule="evenodd" fill="rgb(124, 124, 124)" d="M0.000,8.111 L1.984,10.005 L8.498,3.789 L15.010,10.005 L16.995,8.111 L8.498,0.001 L0.000,8.111 Z"></path>
             </svg>
         </button>
     </main>
-
 @stop
-@section('css')
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
-    <link href="/public/css/carousel.css" rel="stylesheet">
-    <link href="/public/css/home-slider.css" rel="stylesheet">
+@section("js")
 
-@stop
-
-@section('js')
-    <script src={{asset("public/plugins/formstone/core.js")}}></script>
-    <script src={{asset("public/plugins/formstone/mediaquery.js")}}></script>
-    <script src={{asset("public/plugins/formstone/touch.js")}}></script>
-    <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
     <script>
+        // $("body").on("click", ".change-view-blog", function (e) {
+        //     e.preventDefault()
+        //     $(".change-view-blog").removeClass("active")
+        //     $(this).addClass("active")
+        //     if($(this).attr("id") === "list_news"){
+        //         localStorage.setItem('testObject',"list_news");
+        //         $(".blogs").addClass("blogs-list")
+        //     }else {
+        //         localStorage.setItem('testObject',"cube");
+        //         $(".blogs").removeClass("blogs-list")
+        //     }
+        // })
 
+        // localStorage.setItem('testObject', JSON.stringify(testObject));
 
+        // Retrieve the object from storage
+        // var retrievedObject = localStorage.getItem('testObject');
 
-        $('body').on('click','.mobile-brands_aside-title',function () {
-            $(this).parent().find('.brands_aside-list').slideToggle()
-        })
-        $(".stickers-ads-wrapper-carousel").carousel({
-            pagination: false,
-            controls: false,
-            infinite: true,
-            autoAdvance:true,
-            autoTime:4000
-        });
-        $(".brands_page-top-slider").carousel({
-            single: true,
-            pagination: false,
-            controls: false,
-            infinite: true,
-            matchWidth:false,
-            show: {
-                "740px": 2,
-                "980px": 3,
-                "1220px": 9
-            }
-        });
-
-        $('body').on('click', '.brands_aside-item-link', function () {
-            let value = $(this).data('id');
-            let slug = $(this).data('slug');
-            $.ajax({
-                type: "post",
-                url: "/get-brand",
-                cache: false,
-                datatype: "json",
-                data: {id: value},
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
-                        $("body").find(".brands_aside-item-link").removeClass('active');
-                        $("body").find(".brands_aside-item-link[data-id='" + value + "']").addClass('active');
-
-                        // $("body").find('.products-box').css('height','auto');
-                        $("body").find('.brands_main-content').html(data.html);
-                        // let productsWallHeight = parseInt( $('body').find('.products-box').height())
-                        // $("body").find('.products-box').css('height',productsWallHeight);
-
-                        $("body").find("#sortBy").select2();
-                        history.pushState(null, null, '/brands/' + slug);
-                        // document.location.hash = slug
-                    }
-                }
-            });
-        });
-
-        $('body').on('change', '.product-category', function () {
-            let value = $(this).data('id');
-            let slug = $(this).val();
-            let sort = $("body").find("#sortBy").val();
-            $.ajax({
-                type: "post",
-                url: "/get-category-products",
-                cache: false,
-                datatype: "json",
-                data: {id: value,slug:slug,sortBy:sort},
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
-                        $("body").find('#sticker_related_products_list').html(data.html);
-                        $("body").find("#sortBy").select2();
-                    }
-                }
-            });
-        });
-
-        $('body').on('change', '#sortBy', function () {
-            let value = $("body").find(".product-category").data('id');
-            let slug = $("body").find(".product-category").val();
-            let sort = $("body").find("#sortBy").val();
-            $.ajax({
-                type: "post",
-                url: "/get-category-products",
-                cache: false,
-                datatype: "json",
-                data: {id: value,slug:slug,sortBy:sort},
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
-                        $("body").find('#sticker_related_products_list').html(data.html);
-                        $("body").find("#sortBy").select2();
-                    }
-                }
-            });
-        });
-
-        $('body').on('change', '.brand-list', function () {
-            let value = $(this).val();
-            console.log(value);
-            $.ajax({
-                type: "post",
-                url: "/get-brand-list",
-                cache: false,
-                datatype: "json",
-                data: {id: value},
-                headers: {
-                    "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
-                },
-                success: function (data) {
-                    if (!data.error) {
-                        $("body").find('.brands_main-content').html(data.html);
-                        $("body").find('.brands_aside-list').html(data.list);
-                    }
-                }
-            });
-        });
-
-        $('body').on('click', '.brands_main-content-top-more', function () {
-            let topBlock = $(this).closest('.brands_main-content-top');
-            if ($(this).hasClass('more-info-btn')) {
-                $(this).toggleClass('d-flex d-none')
-            } else {
-                $(topBlock).find('.more-info-btn').toggleClass('d-none d-flex')
-            }
-            $(topBlock).find('.brands_main-content-top-info').toggleClass('d-none')
-            $(topBlock).find('.brands_main-content-top-right').toggleClass('bottom-border')
-            $(topBlock).toggleClass('margin-b-brands-top')
-
-        })
-        // grid brands products
-        //         $('body').on('click', '.brands_main-content-products-top .product-grid-list .display-icon', function () {
-        //             if ($(this).hasClass('list')) {
-        // $(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').addClass('list-product')
-        //             }else {
-        //                 $(this).closest('.brands_main-content-products-wrapper').find('.brands_products__list-wrapper >li').removeClass('list-product')
-        //             }
-        //         })
     </script>
+
 @stop

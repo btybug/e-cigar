@@ -78,46 +78,10 @@
                                 <a class="nav-link" href="{!! route('blog') !!}">{!! __('news') !!}</a>
                             </li>
 
-                            <li class="nav-item align-items-center nav-item--has-dropdown">
-                                <a class="nav-link br-nav-l" href="{!! route('brands') !!}">{!! __('brands') !!}
-                                    <span class="ml-2 d-inline-block arrow main-transition pointer">
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                xmlns:xlink="http://www.w3.org/1999/xlink"
-                                width="9px" height="6px">
-<path fill-rule="evenodd" fill="rgb(121, 121, 121)"
-      d="M0.003,0.001 L8.998,0.001 L4.501,5.999 L0.003,0.001 Z"/>
-</svg>
-                        </span>
-                                </a>
-
-                                <div class="nav-item--has-dropdown_dropdown main-scrollbar">
-                                    <div class="products-menu-item row">
-                                        @include("frontend._partials.header_menu_brands")
-                                    </div>
-                                </div>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{!! route('brands') !!}">{!! __('brands') !!}</a>
                             </li>
-                            {{--<li class="nav-item nav-item--has-dropdown position-relative">--}}
-                                {{--<a class="nav-link" href="{!! route('blog') !!}">--}}
-                                    {{--Community--}}
-                                    {{--<span class="ml-2 d-inline-block arrow main-transition pointer">--}}
-                            {{--<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="9px" height="6px">--}}
-{{--<path fill-rule="evenodd" fill="rgb(121, 121, 121)" d="M0.003,0.001 L8.998,0.001 L4.501,5.999 L0.003,0.001 Z"></path>--}}
-{{--</svg>--}}
-                        {{--</span>--}}
-                                {{--</a>--}}
-                                {{--<ul class="nav-item--has-dropdown_dropdown list-unstyled p-0">--}}
-                                    {{--<li class="nav-item--has-dropdown_dropdown-item">--}}
-                                        {{--<a href="{!! route('blog') !!}" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">News</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item--has-dropdown_dropdown-item">--}}
-                                        {{--<a href="#" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">Forums</a>--}}
-                                    {{--</li>--}}
-                                    {{--<li class="nav-item--has-dropdown_dropdown-item">--}}
-                                        {{--<a href="#" class="nav-item--has-dropdown_dropdown-link d-inline-block w-100 text-gray-clr font-15 main-transition">Social</a>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
+
                             <li class="nav-item align-items-center nav-item--has-dropdown">
                                 <a class="nav-link br-nav-l" href="{!! route('product_support') !!}">{!! __('support') !!}
                                     <span class="ml-2 d-inline-block arrow main-transition pointer">

@@ -186,6 +186,9 @@
                     @ok('admin_extra_pages')
                     <li><a href="{{route('admin_extra_pages')}}"><i class="far fa-circle fa-xs"></i>Extra Images</a></li>
                     @endok
+                    @ok('admin_settings_store')
+                    <li><a href="{{route('admin_settings_store')}}"><i class="far fa-circle fa-xs"></i>Shopping cart</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess
@@ -232,9 +235,6 @@
                     @ok('admin_settings_general')
                     <li><a href="{{route('admin_settings_general')}}"><i class="far fa-circle fa-xs"></i> General</a>
                     </li>
-                    @endok
-                    @ok('admin_settings_store')
-                    <li><a href="{{route('admin_settings_store')}}"><i class="far fa-circle fa-xs"></i>Store</a></li>
                     @endok
                     @ok('admin_settings_events')
                     <li><a href="{{route('admin_settings_events')}}"><i class="far fa-circle fa-xs"></i>Events</a></li>
