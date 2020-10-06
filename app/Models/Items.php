@@ -118,7 +118,7 @@ class Items extends Translatable
     ];
     public $translationModel = ItemTranslations::class;
 
-    public $translatedAttributes = ['name','short_name', 'short_description', 'long_description'];
+    public $translatedAttributes = ['name','short_name', 'short_description', 'long_description','what_is_content'];
 
     protected $appends = array('qty','img64');
 
@@ -225,5 +225,10 @@ class Items extends Translatable
     {
         return $this->hasMany(ItemCategories::class,'item_id');
 
+    }
+
+    public function stickers()
+    {
+        return $this->belongsToMany(Stickers::class, 'item_stickers', 'item_id', 'sticker_id');
     }
 }

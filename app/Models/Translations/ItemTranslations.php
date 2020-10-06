@@ -34,5 +34,5 @@ class ItemTranslations extends Model
 
     protected $table = 'item_translations';
 
-    protected $fillable = ['name','short_name', 'short_description', 'long_description','item_id'];
+    protected $fillable = ['name','short_name', 'short_description', 'long_description','item_id','what_is_content'];
 }

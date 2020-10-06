@@ -21,6 +21,7 @@ class CreateItemTranslationsTable extends Migration
             $table->text('long_description')->nullable();
             $table->integer('items_id')->unsigned();
             $table->string('locale')->index();
+            $table->text('what_is_content')->nullable();
             $table->timestamps();
             $table->unique(['items_id','locale']);
             $table->foreign('items_id')->references('id')->on('items')->onDelete('cascade');

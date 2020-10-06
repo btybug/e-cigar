@@ -85,7 +85,7 @@ class ItemsController extends Controller
     {
         $data = $request->only('sku', 'image', 'barcode', 'type', 'status',
             'default_price', 'landing','brand_id','manual_codes','length','width','height','weight',
-            'item_length','item_width','item_height','item_weight');
+            'item_length','item_width','item_height','item_weight','what_is_image');
 
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveMedia($request->get('media', []), $item);
@@ -100,6 +100,16 @@ class ItemsController extends Controller
         $this->itemService->makeOptions($item, $request->get('options', []));
         $item->categories()->sync(json_decode($request->get('categories', [])));
         $route = ($item->is_archive) ? 'admin_items_archives' : 'admin_items';
+
+        $item->stickers()->detach();
+        $stickers = $request->get('stickers', []);
+        if (count($stickers)) {
+            foreach ($stickers as $sticker) {
+                $item->stickers()->attach($sticker['id'], [
+                    'ordering' => $sticker['ordering']
+                ]);
+            }
+        }
 
         ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         return redirect()->back();
