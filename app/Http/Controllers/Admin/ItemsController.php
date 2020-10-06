@@ -78,14 +78,14 @@ class ItemsController extends Controller
         $shelves = [];
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         return $this->view('new', compact('model', 'allAttrs', 'bundle', 'categories', 'warehouses',
-            'racks', 'shelves', 'data','brands','downloads'));
+            'racks', 'shelves', 'data', 'brands', 'downloads'));
     }
 
     public function postNew(ItemsRequest $request)
     {
         $data = $request->only('sku', 'image', 'barcode', 'type', 'status',
-            'default_price', 'landing','brand_id','manual_codes','length','width','height','weight',
-            'item_length','item_width','item_height','item_weight','what_is_image');
+            'default_price', 'landing', 'brand_id', 'manual_codes', 'length', 'width', 'height', 'weight',
+            'item_length', 'item_width', 'item_height', 'item_weight', 'what_is_image');
 
         $item = Items::updateOrCreate($request->id, $data);
         $this->saveMedia($request->get('media', []), $item);
@@ -132,7 +132,7 @@ class ItemsController extends Controller
         $brands = Brands::all();
 
         return $this->view('new', compact('model', 'allAttrs', 'items', 'bundle',
-            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves','brands','downloads'));
+            'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves', 'brands', 'downloads'));
     }
 
     private function savePackages($item, array $data = [])
@@ -177,10 +177,10 @@ class ItemsController extends Controller
         $item->locations()->whereNotIn('id', $deletableArray)->delete();
     }
 
-    private function saveBarcode($barcode):void
+    private function saveBarcode($barcode): void
     {
-        $b = Barcodes::where('code',$barcode)->first();
-        if(! $b){
+        $b = Barcodes::where('code', $barcode)->first();
+        if (!$b) {
             Barcodes::create([
                 'code' => $barcode
             ]);
@@ -203,20 +203,19 @@ class ItemsController extends Controller
 
     private function saveMedia(array $images, $item, $type = 'image')
     {
-        if(!count($images)) return null;
-        $olds=$item->media->where('type',$type)->pluck('url')->toArray();
+        if (!count($images)) return null;
+        $olds = $item->media->where('type', $type)->pluck('url')->toArray();
 
         foreach ($images as $image) {
-            if(!in_array($image,$olds))
+            if (!in_array($image, $olds))
                 ItemsMedia::create(['url' => $image, 'type' => $type, 'item_id' => $item->id]);
         }
-        foreach ($olds as $old){
-            if(!in_array($old,$images)){
-                ItemsMedia::where('item_id',$item->id)->where('type',$type)->where('url',$old)->delete();
+        foreach ($olds as $old) {
+            if (!in_array($old, $images)) {
+                ItemsMedia::where('item_id', $item->id)->where('type', $type)->where('url', $old)->delete();
             }
         }
     }
-
 
 
     public function getPurchase($id)
@@ -370,19 +369,19 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($request->item_id);
         $from = ItemsLocations::findOrFail($request->from);
-        $to = ItemsLocations::where('item_id',$model->id)
-            ->where('warehouse_id',$request->to_w)
-            ->where('rack_id',$request->to_r)
-            ->where('shelve_id',$request->to_s)->first();
+        $to = ItemsLocations::where('item_id', $model->id)
+            ->where('warehouse_id', $request->to_w)
+            ->where('rack_id', $request->to_r)
+            ->where('shelve_id', $request->to_s)->first();
 
         if ($from->qty < $request->qty) {
             return redirect()->back()->with('error', "Max qty that you can transfer is $from->qty");
         }
 
         $from->update(['qty' => ($from->qty - $request->qty)]);
-        if($to){
+        if ($to) {
             $to->update(['qty' => ($to->qty + $request->qty)]);
-        }else{
+        } else {
             $to = ItemsLocations::create([
                 'item_id' => $model->id,
                 'warehouse_id' => $request->to_w,
@@ -411,7 +410,7 @@ class ItemsController extends Controller
         $racks = [];
         $shelves = [];
 
-        $html = View("admin.items.transfer.locations", compact('model', 'data','warehouses','racks','shelves'))->render();
+        $html = View("admin.items.transfer.locations", compact('model', 'data', 'warehouses', 'racks', 'shelves'))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -421,33 +420,33 @@ class ItemsController extends Controller
         $barcode = Barcodes::find($request->code);
         if (!$barcode) return response()->json(['error' => true]);
 
-        $html = $this->view('_partials.qr', ['code' => $barcode->code,'model' => null])->render();
+        $html = $this->view('_partials.qr', ['code' => $barcode->code, 'model' => null])->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
 
-    public function downloadCode($code, $type = 'qr',$name = null)
+    public function downloadCode($code, $type = 'qr', $name = null)
     {
-        if($type == 'manual'){
+        if ($type == 'manual') {
             $item = Items::findOrFail($name);
             $codes = $item->manual_codes;
-            if(isset($codes[$code])){
+            if (isset($codes[$code])) {
 
-                $path = base_path().$codes[$code]['image'];
-                $name = $item->name .'manual.png';
+                $path = base_path() . $codes[$code]['image'];
+                $name = $item->name . 'manual.png';
             }
 
-        }else{
+        } else {
             $barcode = Barcodes::where('code', $code)->first();
             if (!$barcode) return response()->json(['error' => true]);
 
             if ($type == 'qr') {
 
                 $name = $name . 'QR.png';
-                $path = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $code, "QRCODE" ,200, 200);
-            } else  {
+                $path = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $code, "QRCODE", 200, 200);
+            } else {
                 $name = $name . "BARCODE.png";
 //            $path = D1Barcode::getBarcodePNGPath($barcode->code, "EAN13", 2, 100, array(0, 0, 0), true);
-                $path= base_path('public/barcodes/'.$code.'.png');
+                $path = base_path('public/barcodes/' . $code . '.png');
             }
         }
 
@@ -456,11 +455,11 @@ class ItemsController extends Controller
 
     public function getDownloadHtml(Request $request)
     {
-        $item = Category::where('type', 'downloads')->whereNull('parent_id')->where('id',$request->id)->first();
+        $item = Category::where('type', 'downloads')->whereNull('parent_id')->where('id', $request->id)->first();
 
         if (!$item) return response()->json(['error' => true]);
 
-        $html = $this->view('_partials.manual_downloads', ['item' => $item,'model' => null])->render();
+        $html = $this->view('_partials.manual_downloads', ['item' => $item, 'model' => null])->render();
         return response()->json(['error' => false, 'html' => $html]);
     }
 
@@ -469,12 +468,12 @@ class ItemsController extends Controller
         $method = $request->get('method');
         $type = $request->get('type');
         $ids = $request->get('ids');
-        $items = Items::whereIn('id',$ids)->get();
-        if($method == 'download'){
-            if($type == 'qr_code'){
+        $items = Items::whereIn('id', $ids)->get();
+        if ($method == 'download') {
+            if ($type == 'qr_code') {
                 $this->x($items);
 
-                return \Response::download(public_path('codes.zip'), 'codes.zip', array('Content-Type: application/octet-stream','Content-Length: '. filesize(public_path('codes.zip'))))->deleteFileAfterSend(true);
+                return \Response::download(public_path('codes.zip'), 'codes.zip', array('Content-Type: application/octet-stream', 'Content-Length: ' . filesize(public_path('codes.zip'))))->deleteFileAfterSend(true);
             }
         }
         dd($request->all());
@@ -483,8 +482,8 @@ class ItemsController extends Controller
     public function x($items)
     {
         $fileArray = [];
-        foreach ($items as $item){
-            $fileArray[] = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $item->barcode->code, "QRCODE" ,200, 200);
+        foreach ($items as $item) {
+            $fileArray[] = \DNS2D::getBarcodePNGPath('https://kaliony.com/landings/' . $item->barcode->code, "QRCODE", 200, 200);
         }
 
         $zipper = new Zipper();
@@ -498,7 +497,7 @@ class ItemsController extends Controller
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
         $barcodes = Barcodes::all()->pluck('code', 'id');
 
-        $html = \View::make("admin.items._partials.edit_row",compact(['model','categories','brands','barcodes']))->render();
+        $html = \View::make("admin.items._partials.edit_row", compact(['model', 'categories', 'brands', 'barcodes']))->render();
 
         return response()->json(['error' => false, 'html' => $html]);
     }
@@ -507,7 +506,7 @@ class ItemsController extends Controller
     {
         $model = Items::findOrFail($request->id);
 
-        Items::updateOrCreate($request->id,$request->except(['name','_token','categories','short_description']),['gb' => [
+        Items::updateOrCreate($request->id, $request->except(['name', '_token', 'categories', 'short_description']), ['gb' => [
             'name' => $request->name,
             'short_description' => $request->short_description,
         ]]);
@@ -519,7 +518,7 @@ class ItemsController extends Controller
 
     public function postItemRowsEdit($ids)
     {
-        $ids = explode(',',$ids);
+        $ids = explode(',', $ids);
         $items = Items::findMany($ids);
         $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
         $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
@@ -530,24 +529,24 @@ class ItemsController extends Controller
 
     public function postItemMultiDelete(Request $request)
     {
-        Items::whereIn('id',$request->get('idS'))->delete();
+        Items::whereIn('id', $request->get('idS'))->delete();
         foreach ($request->get('idS') as $id) {
             ActivityLogs::action('items', 'delete', $id);
         }
-        return response()->json(['error'=>false,]);
+        return response()->json(['error' => false,]);
     }
 
     public function postItemRowsEditSave(Request $request)
     {
-        $items = $request->get('items',[]);
-        if(count($items)){
-            foreach ($items as $id => $item){
+        $items = $request->get('items', []);
+        if (count($items)) {
+            foreach ($items as $id => $item) {
                 $model = Items::findOrFail($id);
-                Items::updateOrCreate($id,array_except($item,['name','categories','short_description']),['gb' => [
+                Items::updateOrCreate($id, array_except($item, ['name', 'categories', 'short_description']), ['gb' => [
                     'name' => $item['name'],
                     'short_description' => $item['short_description']
                 ]]);
-                $cat = (count($item['categories']))? $item['categories'] : [];
+                $cat = (count($item['categories'])) ? $item['categories'] : [];
                 $model->categories()->sync($cat);
                 ActivityLogs::action('items', 'update', $model->id);
             }
