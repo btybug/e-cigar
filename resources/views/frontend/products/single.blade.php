@@ -350,7 +350,7 @@
                                                                                     <span
                                                                                         class="font-18 text-gray-clr font-main-light technical-features-content-desc">
                                                                                         @foreach($stockAttr->children as $child)
-                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            <a href="{{ route('tags',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
                                                                                             @if(! $loop->last)
                                                                                                 ,
                                                                                             @endif
@@ -396,7 +396,7 @@
                                                                                     <span
                                                                                         class="font-18 text-gray-clr font-main-light technical-features-content-desc">
                                                                                         @foreach($stockAttr->children as $child)
-                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            <a href="{{ route('tags',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
                                                                                             @if(! $loop->last)
                                                                                                 ,
                                                                                             @endif
@@ -446,7 +446,7 @@
                                                                                     <span
                                                                                         class="font-18 text-gray-clr font-main-light technical-features-content-desc">
                                                                                         @foreach($stockAttr->children as $child)
-                                                                                            <a href="{{ route('stickers',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
+                                                                                            <a href="{{ route('tags',$child->sticker->slug) }}">{{ $child->sticker->name }} </a>
                                                                                             @if(! $loop->last)
                                                                                                 ,
                                                                                             @endif
