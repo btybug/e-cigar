@@ -651,40 +651,6 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {{--<div id="mediaspecifications" class="tab-pane fade ">--}}
-                                                        {{--<div class="table-responsive">--}}
-                                                            {{--<table class="table table--store-settings">--}}
-                                                                {{--<thead>--}}
-                                                                {{--<tr class="bg-my-light-pink">--}}
-                                                                    {{--<th>Attributes</th>--}}
-                                                                    {{--<th></th>--}}
-                                                                    {{--<th></th>--}}
-                                                                {{--</tr>--}}
-                                                                {{--</thead>--}}
-
-                                                                {{--<tbody class="v-options-list">--}}
-                                                                {{--@if($model && $model->stockAttrs)--}}
-                                                                    {{--@foreach($model->stockAttrs as $selected)--}}
-                                                                        {{--@include('admin.inventory._partials.specifications')--}}
-                                                                    {{--@endforeach--}}
-                                                                {{--@endif--}}
-                                                                {{--</tbody>--}}
-
-                                                                {{--<tfoot>--}}
-                                                                {{--<tr class="add-new-ship-filed-container">--}}
-                                                                    {{--<td colspan="4" class="text-right">--}}
-                                                                        {{--<button type="button"--}}
-                                                                                {{--class="btn btn-primary add-specification_button">--}}
-                                                                            {{--<i--}}
-                                                                                {{--class="fa fa-plus-circle add-specification"></i>--}}
-                                                                        {{--</button>--}}
-                                                                    {{--</td>--}}
-                                                                {{--</tr>--}}
-                                                                {{--</tfoot>--}}
-                                                            {{--</table>--}}
-                                                        {{--</div>--}}
-                                                    {{--</div>--}}
-
                                                     <div id="ads" class="tab-pane fade ">
                                                         <div class="card panel panel-default">
                                                             <div class="card-header panel-heading clearfix">
@@ -866,20 +832,14 @@
                             <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class=" row mb-2">
-                                            <label class="col-xl-1 col-sm-2 col-3 col-form-label">Price per:</label>
+                                            {!! Form::hidden('type',0) !!}
+                                            <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
                                             <div class="col-xl-3 col-sm-4 col-3">
-                                                {!! Form::select('type',[
-                                                0 => 'Section',
-                                                1 => 'Whole Product'
+                                                {!! Form::select('section_type',[
+                                                0 => 'Multy Section',
+                                                1 => 'Single Section'
                                             ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
                                             </div>
-                                        <div class="col-xl-3 col-sm-4 col-3">
-                                            <label>Section type: </label>
-                                            Multyple
-                                            {!! Form::radio('section_type',0,true) !!}
-                                            Single
-                                            {!! Form::radio('section_type',1,null) !!}
-                                        </div>
                                     </div>
                                     <div class="v-box">
                                             <div class="accordion" id="accordionStockEdit">
