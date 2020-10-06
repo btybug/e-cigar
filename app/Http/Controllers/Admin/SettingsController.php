@@ -239,14 +239,7 @@ class SettingsController extends Controller
     {
         $activePayments = $settings->where('section', 'active_payments_gateways')->where('val', 1)->pluck('key', 'section');
         $tax_rates = TaxRates::where('is_active', 1)->get()->pluck('name', 'id')->toArray();
-        $active_couriers = Settings::LeftJoin('couriers', 'bty_settings.key', '=', 'couriers.id')
-            ->where('bty_settings.section', 'active_couriers')
-            ->where('bty_settings.val', '1')
-            ->select('couriers.*')
-            ->LeftJoin('courier_translations', 'couriers.id', '=', 'courier_translations.couriers_id')
-            ->where('courier_translations.locale', app()->getLocale())
-            ->select('couriers.*', 'courier_translations.name')
-            ->pluck('name', 'id');
+        $active_couriers = Couriers::where('is_active',1)->get()->pluck('name', 'id');
         $geo_zone = GeoZones::find($id);
         $delivery_types = DeliveryCostsTypes::where('is_enabled',1)->pluck('title', 'id');
         $countries = [null => 'Select Country'] + $countries->all()->pluck('name.common', 'name.common')->toArray();
