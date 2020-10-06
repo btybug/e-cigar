@@ -1088,7 +1088,7 @@ class DatatableController extends Controller
     public function getAllBarcodes()
     {
         return Datatables::of(
-            Barcodes::leftJoin('items', 'items.barcode_id', '=', 'barcodes.id')
+            Barcodes::leftJoin('items', 'items.barcode', '=', 'barcodes.code')
                 ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
                 ->where('item_translations.locale', app()->getLocale())->select('barcodes.*', 'item_translations.name as item_name')
         )

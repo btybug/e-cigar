@@ -29,6 +29,6 @@ class Barcodes extends Model
 
     public function item()
     {
-        return $this->hasOne(Items::class,'barcode_id');
+        return $this->hasOne(Items::class,'barcode','code');
     }
 }
