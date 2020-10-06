@@ -75,7 +75,7 @@
                                                                                         title=""
                                                                                         data-original-title="Attribute Name Title">Product Name</span></label>
                                                                                 <div class="col-xl-10">
-                                                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                                    {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control product_name_for_barcode']) !!}
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
@@ -151,7 +151,7 @@
                                                                         SKU</label>
                                                                     <div class="col-lg-8">
                                                                         {!! Form::text('sku', null,
-                                                                        ['class' => 'form-control']) !!}
+                                                                        ['class' => 'form-control sku_for_barcode']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -421,15 +421,15 @@
                                                                 </div>
                                                                 <div class="col-xl-6">
                                                                     @if(strlen($model->barcode) == 13)
-                                                                        <img src="{!! url('public/barcodes/'.$model->barcode.'.png') !!}" />
+                                                                        <div class="printing_barcode"></div>
                                                                     @else
                                                                         Barcode is invalid, need to be 13 numbers
                                                                     @endif
                                                                 </div>
 
                                                                 <div class="col-xl-3">
-                                                                    <a class="btn btn-primary" href="javascript:void(0)">Print with name</a>
-                                                                    <a class="btn btn-secondary" href="javascript:void(0)">Print barcode</a>
+                                                                    <a class="btn btn-primary" href="javascript:void(0)" id="print_barcode_item_with_name">Print with name</a>
+                                                                    <a class="btn btn-secondary"  href="javascript:void(0)" id="print_barcode_item">Print barcode</a>
 
                                                                 @if(strlen($model->barcode) == 13)
                                                                         <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
@@ -555,7 +555,7 @@
         </div>
         {!! Form::close() !!}
     </div>
-
+    <div id="svg_barcode"></div>
     <script type="template" id="add-more-video">
         <div class="input-group " style="display: flex">
             <input type="text" class="form-control video-url-link"
@@ -608,6 +608,180 @@
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(function () {
+            const barcode_settings = JSON.parse($('#barcode-settings').text());
+            let text = 5060730202285;
+            let width = Number(barcode_settings.width);
+            let height = Number(barcode_settings.height);
+            let margin = Number(barcode_settings.margin);
+            let back_color = barcode_settings.background_color;
+            let line_color = barcode_settings.line_color;
+            let text_align = barcode_settings.text_align;
+            let text_font = barcode_settings.text_font;
+            let format = barcode_settings.format;
+            let font_size = Number(barcode_settings.font_size);
+            let text_margin = Number(barcode_settings.text_margin);
+            let displayValue = Boolean(Number(barcode_settings.text_switch));
+            let bold = Number(barcode_settings.bold);
+            let italic = Number(barcode_settings.italic);
+            let fontOptions = '';
+
+                if(bold && italic) {
+                    fontOptions = 'bold italic'
+                } else if(bold) {
+                    fontOptions = 'bold'
+                } else if(italic) {
+                    fontOptions = 'italic'
+                } else {
+                    fontOptions = ''
+                }
+                $('#barcode_height').val(barcode_settings.height);
+                $('#barcode_height').next('.value').text(height)
+                $('#barcode_width').val(barcode_settings.width);
+                $('#barcode_width').next('.value').text(width)
+                $('#barcode_margin').val(barcode_settings.margin);
+                $('#barcode_margin').next('.value').text(margin)
+                $('#barcode_background_color').val(back_color);
+                $('#barcode_line_color').val(line_color);
+                $('#barcode_text_switch').attr('checked', displayValue);
+                $('#barcode_text_font').val(text_font);
+                $('#barcode_format').val(format);
+                $('#barcode_font_size').val(barcode_settings.font_size);
+                $('#barcode_font_size').next('.value').text(font_size)
+                $('#barcode_text_margin').val(barcode_settings.text_margin);
+                $('#barcode_text_margin').next('.value').text(text_margin)
+                $('#barcode_background_color').val(back_color);
+                $('#barcode_background_color').css('background-color', back_color);
+                $('#barcode_line_color').val(line_color);
+                $('#barcode_line_color').css('background-color', line_color);
+                $('#text_bold').attr('checked', !!bold);
+                $('#text_italic').attr('checked', !!italic);
+
+
+                shortAjax('/admin/find/items/barcodes', {ids: [$('[name="id"]').val()]}, function(res) {
+
+                    res.barcodes.map(function(barcode) {
+                        $('.printing_barcode').append(`<svg class="svg_${barcode.value}"></svg>`)
+                    });
+
+                    res.barcodes.map(function(barcode, key) {
+                        JsBarcode(`.svg_${barcode.value}`, barcode.value, {
+                            format,
+                            font: text_font,
+                            fontSize: font_size,
+                            textMargin: text_margin,
+                            height,
+                            width,
+                            margin,
+                            background: back_color,
+                            lineColor: line_color,
+                            textAlign: text_align,
+                            fontOptions,
+                            displayValue,
+                        })
+                            .render();
+                        // const svg = $(`#svg_${barcode.value}`);
+                        // $('.loader_container').css('display', 'none');
+                        // $('body').css('overflow', 'auto');
+                        // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
+                    })
+                })
+                
+                
+                $("body").on('click', '#print_barcode_item_with_name', function() {
+                    const ifr = $('<iframe>', {
+                        name: 'myiframe',
+                        class: 'printFrame'
+                    })
+                        .appendTo('body')
+                        .contents().find('body');
+
+                        const name = $(".product_name_for_barcode").val();
+                        const sku = $(".sku_for_barcode").val();
+                    shortAjax('/admin/find/items/barcodes', {ids: [$('[name="id"]').val()]}, function(res) {
+                        ifr.append(`<div style="width: 250px; text-align: center">${name}</div>`);
+                        ifr.append(`<div style="width: 250px; text-align: center">${sku}</div>`);
+                        
+                        res.barcodes.map(function(barcode) {
+                            $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
+                        });
+    
+                        res.barcodes.map(function(barcode, key) {
+                            JsBarcode(`#svg_${barcode.value}`, barcode.value, {
+                                format,
+                                font: text_font,
+                                fontSize: font_size,
+                                textMargin: text_margin,
+                                height,
+                                width,
+                                margin,
+                                background: back_color,
+                                lineColor: line_color,
+                                textAlign: text_align,
+                                fontOptions,
+                                displayValue,
+                            })
+                                .render();
+                            const svg = $(`#svg_${barcode.value}`);
+                            // $('.loader_container').css('display', 'none');
+                            // $('body').css('overflow', 'auto');
+                            // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
+    
+                            
+                            ifr.append(svg);
+    
+                        })
+                        window.frames['myiframe'].focus();
+                        window.frames['myiframe'].print();
+                        console.log(999999999999);
+    
+                        setTimeout(() => { $(".printFrame").remove(); }, 1000);
+                    })
+                });
+                $("body").on('click', '#print_barcode_item', function() {
+                    const ifr = $('<iframe>', {
+                        name: 'myiframe',
+                        class: 'printFrame'
+                    })
+                        .appendTo('body')
+                        .contents().find('body');
+                    shortAjax('/admin/find/items/barcodes', {ids: [$('[name="id"]').val()]}, function(res) {
+    
+                        res.barcodes.map(function(barcode) {
+                            $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
+                        });
+    
+                        res.barcodes.map(function(barcode, key) {
+                            JsBarcode(`#svg_${barcode.value}`, barcode.value, {
+                                format,
+                                font: text_font,
+                                fontSize: font_size,
+                                textMargin: text_margin,
+                                height,
+                                width,
+                                margin,
+                                background: back_color,
+                                lineColor: line_color,
+                                textAlign: text_align,
+                                fontOptions,
+                                displayValue,
+                            })
+                                .render();
+                            const svg = $(`#svg_${barcode.value}`);
+                            // $('.loader_container').css('display', 'none');
+                            // $('body').css('overflow', 'auto');
+                            // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
+    
+                            
+                            ifr.append(svg);
+    
+                        })
+                        window.frames['myiframe'].focus();
+                        window.frames['myiframe'].print();
+                        console.log(999999999999);
+    
+                        setTimeout(() => { $(".printFrame").remove(); }, 1000);
+                    })
+                });
             $("#barcode").select2();
             $('#landing'). click(function() {
                 if ($(this).prop("checked") == true) {
@@ -677,11 +851,11 @@
                 }
             }
 
-
             $("body").on('click', '.delete-v-option_button', function () {
                 $(this).closest('tr').remove();
             });
 
+            
 
             $("body").on('click', '.add-package-item', function () {
                 AjaxCall(

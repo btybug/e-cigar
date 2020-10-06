@@ -217,6 +217,23 @@
                 shortAjax(url, {method, type, ids}, (res) => console.log('res', res), (err) => console.log('err', err));
             };
 
+            // function openPrintDialogue(){
+            //         const svg = $(this).closest("tr").find("svg").clone();
+            //         $('<iframe>', {
+            //             name: 'myiframe',
+            //             class: 'printFrame'
+            //         })
+            //         .appendTo('body')
+            //         .contents().find('body')
+            //         .append(svg);
+
+            //         window.frames['myiframe'].focus();
+            //         window.frames['myiframe'].print();
+
+            //         setTimeout(() => { $(".printFrame").remove(); }, 1000);
+            //     };
+
+            //     $('body').on('click', '.print_barcodes', openPrintDialogue)
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
@@ -454,30 +471,145 @@
                             buttons: [
                                 {
                                     text: 'Barcode',
+                                    className: 'print_barcodes',
                                     action: function ( e, dt, node, config ) {
                                         const ids = [];
+
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
+                                        // $('.loader_container').css('display', 'block');
+                                        // $('body').css('overflow', 'hidden');
 
-                                        ids.length > 0 && shortAjax('/admin/find/items/barcodes_print', {ids}, function(res) {
-                                            console.log(res)
+                                        // if(ids.length === 0) {
+                                        //     $('.loader_container').css('display', 'none');
+                                        //     $('body').css('overflow', 'auto');
+                                        //     return false;
+                                        // }
+                                        const ifr = $('<iframe>', {
+                                            name: 'myiframe',
+                                            class: 'printFrame'
+                                        })
+                                            .appendTo('body')
+                                            .contents().find('body');
+                                        shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+
+                                            res.barcodes.map(function(barcode) {
+                                                $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
+                                            });
+
+                                            res.barcodes.map(function(barcode, key) {
+                                                JsBarcode(`#svg_${barcode.value}`, barcode.value, {
+                                                    format,
+                                                    font: text_font,
+                                                    fontSize: font_size,
+                                                    textMargin: text_margin,
+                                                    height,
+                                                    width,
+                                                    margin,
+                                                    background: back_color,
+                                                    lineColor: line_color,
+                                                    textAlign: text_align,
+                                                    fontOptions,
+                                                    displayValue,
+                                                })
+                                                    .render();
+                                                const svg = $(`#svg_${barcode.value}`);
+                                                // $('.loader_container').css('display', 'none');
+                                                // $('body').css('overflow', 'auto');
+                                                // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
+
+                                                
+                                                ifr.append(svg);
+
+                                            })
+                                            window.frames['myiframe'].focus();
+                                            window.frames['myiframe'].print();
+                                            console.log(999999999999);
+
+                                            setTimeout(() => { $(".printFrame").remove(); }, 1000);
                                         })
                                     }
-                                },
+                                },  
                                 {
                                     text: 'QR Code',
+                                    className: 'print_qr_code',
                                     action: function ( e, dt, node, config ) {
                                         const ids = [];
+                                        const ifr = $('<iframe>', {
+                                            name: 'myiframe',
+                                            class: 'printFrame'
+                                        })
+                                            .appendTo('body')
+                                            .contents().find('body');
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
-                                        ids.length > 0 && shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
-                                            console.log(res)
+                                        // $('.loader_container').css('display', 'block');
+                                        // $('body').css('overflow', 'hidden');
+
+                                        async function toDataURL(url) {
+                                            return await fetch(url).then((response) => {
+                                                return response.blob();
+                                            }).then(blob => {
+                                                return URL.createObjectURL(blob);
+                                            });
+                                        }
+
+                                        async function forceDownload(url, cont){
+                                            const a = document.createElement("img");
+                                            const src = await toDataURL(url);
+                                            a.setAttribute("src", src)
+                                            a.setAttribute("width", 200);
+                                            a.setAttribute("height", 200);
+                                            a.setAttribute("alt", "img");
+                                            a.style.margin = "15px";
+                                            // a.style.marginRight = "15px";
+                                            cont.append(a);
+                                            // a.click();
+                                            // cont.remove(a);
+                                            return Promise.resolve('ok');
+                                        }
+                                        // if(ids.length === 0) {
+                                        //     $('.loader_container').css('display', 'none');
+                                        //     $('body').css('overflow', 'auto');
+                                        //     return false;
+                                        // }
+                                        shortAjax('/admin/find/items/qrcodes', {ids}, async function(res) {
+                                            // $('.loader_container').css('display', 'none');
+                                            // $('body').css('overflow', 'auto');
+
+                                            await Promise.all(res.qrcodes.map(async function(arr, key) {
+                                                // setTimeout(function() {
+                                                    return await Promise.all(arr.map(async function(er, key) {
+                                                        return await forceDownload(er.url, ifr);
+                                                        // ifr.append(`<img src="${er.name.replace(/\s/g, '_').trim() + '.png'}" alt="a" width="500" height="500"`)
+                                                    }));
+                                                // }, key*3000);
+                                            }))
+
+                                            await setTimeout(function() {
+                                                window.frames['myiframe'].focus();
+                                                window.frames['myiframe'].print();
+                                                console.log(999999999999);
+                                            }, 1000)
+                                            await setTimeout(() => { $(".printFrame").remove(); }, 2000);
                                         })
+
+                                        
                                     }
+                                    // {
+                                    //     const ids = [];
+                                    //     $('#stocks-table tbody tr.selected').each(function() {
+                                    //         ids.push($(this).find('td.id_n').text());
+                                    //     });
+
+                                    //     ids.length > 0 && shortAjax('/admin/find/items/qr_codes_print', {ids}, function(res) {
+                                    //         console.log(res)
+                                    //     })
+                                    // }
                                 }
                             ]
                         },

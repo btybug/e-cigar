@@ -669,6 +669,24 @@
                         .render();
                 })
 
+                function openPrintDialogue(){
+                    const svg = $(this).closest("tr").find("svg").clone();
+                    $('<iframe>', {
+                        name: 'myiframe',
+                        class: 'printFrame'
+                    })
+                    .appendTo('body')
+                    .contents().find('body')
+                    .append(svg);
+
+                    window.frames['myiframe'].focus();
+                    window.frames['myiframe'].print();
+
+                    setTimeout(() => { $(".printFrame").remove(); }, 1000);
+                };
+
+                $('body').on('click', '.printB', openPrintDialogue)
+
                 $('body').on('input', '#barcode_text_margin', function(ev) {
                     text_margin = Number($(ev.target).val());
                     $('#barcode_text_margin').next('.value').text(text_margin)
