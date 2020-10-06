@@ -21,6 +21,7 @@ class StickersController extends Controller
     {
         $stickers = Stickers::get();
         $current = ($slug) ? Stickers::where('slug',$slug)->first() : $stickers->first();
+        if(! $current) abort(404);
         $products=($current)?$current->products():collect([]);
         $stockCategories = StockCategories::
         leftJoin('categories', 'stock_categories.categories_id', '=', 'categories.id')

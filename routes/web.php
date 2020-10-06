@@ -95,8 +95,8 @@ Route::group(['prefix' => 'offers'], function () {
 });
 Route::post('/get-offer', 'Frontend\OffersController@postOffer')->name('post_offers');
 
-Route::group(['prefix' => 'stickers'], function () {
-    Route::get('/{type?}', 'Frontend\StickersController@index')->name('stickers');
+Route::group(['prefix' => 'tags'], function () {
+    Route::get('/{type?}', 'Frontend\StickersController@index')->name('tags');
 });
 Route::post('/get-sticker', 'Frontend\StickersController@postSticker')->name('post_sticker');
 Route::post('/get-category-products-stickers', 'Frontend\StickersController@postCategoryProducts')->name('post_category_products_stickers');

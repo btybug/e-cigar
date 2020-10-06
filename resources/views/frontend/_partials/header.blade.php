@@ -71,7 +71,7 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{!! route('stickers') !!}">{!! __('Stickers') !!}</a>
+                                <a class="nav-link" href="{!! route('tags') !!}">{!! __('Tags') !!}</a>
                             </li>
 
                             <li class="nav-item">
