@@ -428,7 +428,10 @@
                                                                 </div>
 
                                                                 <div class="col-xl-3">
-                                                                    @if(strlen($model->barcode) == 13)
+                                                                    <a class="btn btn-primary" href="javascript:void(0)">Print with name</a>
+                                                                    <a class="btn btn-secondary" href="javascript:void(0)">Print barcode</a>
+
+                                                                @if(strlen($model->barcode) == 13)
                                                                         <a class="btn btn-success" href="{{ route("admin_items_download_code",[$model->barcode,'barcode',($model)?$model->name: null]) }}">Download Barcode</a>
                                                                     @endif
                                                                 </div>
