@@ -543,7 +543,7 @@ class StockController extends Controller
 
     public function postItemByID(Request $request)
     {
-        $item = Items::active()->findOrFail($request->id);
+        $item = Items::with(['brand','media','videos','categories','stickers'])->active()->findOrFail($request->id);
 
         return \Response::json(['error' => false, 'data' => $item]);
     }
@@ -668,9 +668,7 @@ class StockController extends Controller
 
     public function mainItem(Request $request)
     {
-        $data = $request->get('items', []);
-
-        $items = Items::whereIn('id', $data)->get()->pluck('name', 'id')->all();
+        $items = Items::get()->pluck('name', 'id')->all();
 
         $html = view("admin.stock._partials.main_items", compact(['items']))->render();
 
