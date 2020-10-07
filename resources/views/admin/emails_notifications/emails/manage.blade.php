@@ -51,6 +51,19 @@ User
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label class="col-md-4 control-label" for="radios">Template Type</label>
+                                                    <div class="col-md-4">
+                                                        <label class="radio-inline" for="templateType-0">
+                                                            {!! Form::radio('content_type',0,true,['id'=>'templateType-0']) !!}
+                                                            TinyMCE
+                                                        </label>
+                                                        <label class="radio-inline" for="templateType-1">
+                                                            {!! Form::radio('content_type',1,false,['id'=>'templateType-1']) !!}
+                                                            Media Template
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
                                                     @if(count(get_languages()))
                                                         <ul class="nav nav-tabs">
                                                             @foreach(get_languages() as $language)
@@ -72,26 +85,14 @@ User
                                                                             {{Form::text('translatable['.strtolower($language->code).'][subject]',get_translated($model,strtolower($language->code),'subject') ,['class' =>'form-control','id'=>'subject_am','placeholder' => __('Subject')])}}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label class="col-md-4 control-label" for="radios">Template Type</label>
-                                                                        <div class="col-md-4">
-                                                                            <label class="radio-inline" for="templateType-0">
-                                                                                {!! Form::radio('templateType',0,true,['id'=>'templateType-0']) !!}
-                                                                                TinyMCE
-                                                                            </label>
-                                                                            <label class="radio-inline" for="templateType-1">
-                                                                                {!! Form::radio('templateType',1,false,['id'=>'templateType-1']) !!}
-                                                                                Media Template
-                                                                            </label>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row media hidden">
+
+                                                                    <div class="form-group row media {!! $model->content_type?null:'hidden' !!}">
                                                                         {{Form::label('content_'.strtolower($language->code), 'Content Type',['class' => 'col-sm-12'])}}
                                                                         <div class="col-sm-12">
                                                                             {!! media_button('template',null,false,'html') !!}
                                                                         </div>
                                                                     </div>
-                                                                    <div class="form-group row tiny-mce">
+                                                                    <div class="form-group row tiny-mce {!! $model->content_type?'hidden':'' !!}">
                                                                         {{Form::label('content_'.strtolower($language->code), 'Content',['class' => 'col-sm-12'])}}
                                                                         <div class="col-sm-12">
                                                                             {{Form::textarea('translatable['.strtolower($language->code).'][content]',get_translated($model,strtolower($language->code),'content') ,['class' =>'form-control content_editor','cols'=>30,'rows'=>2,'placeholder' => __('Content')])}}
@@ -283,7 +284,7 @@ User
             }
         });
 
-        $('body').on('change','input[name=templateType]',function () {
+        $('body').on('change','input[name=content_type]',function () {
             if($(this).val()==1){
                 $('.tiny-mce').addClass('hidden')
                 $('.media').removeClass('hidden')
