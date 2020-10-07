@@ -76,7 +76,7 @@
                                                                                             title=""
                                                                                             data-original-title="Attribute Name Title">Product Name</span></label>
                                                                                     <div class="col-xl-10">
-                                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control']) !!}
+                                                                                        {!! Form::text('translatable['.strtolower($language->code).'][name]',get_translated($model,strtolower($language->code),'name'),['class'=>'form-control name_js '.strtolower($language->code)]) !!}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
@@ -86,7 +86,7 @@
                                                                                             title=""
                                                                                             data-original-title="Short Description">Short Description</span></label>
                                                                                     <div class="col-xl-10">
-                                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control','cols'=>30,'rows'=>2]) !!}
+                                                                                        {!! Form::textarea('translatable['.strtolower($language->code).'][short_description]',get_translated($model,strtolower($language->code),'short_description'),['class'=>'form-control short_des_js '.strtolower($language->code),'cols'=>30,'rows'=>2]) !!}
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
@@ -1683,6 +1683,22 @@
 
                     AjaxCall("{{ route('admin_stock_variations_get_item_by_id') }}", {id:item.val()}, function (res) {
                         if (!res.error) {
+                            res.data.translations.forEach((el) => {
+                                console.log(el)
+                                if(el.locale === "am") {
+                                    $('.name_js.am').val(el.name);
+                                    $('.short_des_js.am').val(el.short_description);
+                                } else if(el.locale === "gb") {
+                                    $('.name_js.gb').val(el.name);
+                                    $('.short_des_js.gb').val(el.short_description);
+                                }
+                            });
+                            let categories = JSON.parse($('#categories_tree').val());
+                            res.data.categories.forEach(el => {
+                                categories = [...categories, el.id]
+                            })
+                            $('#categories_tree').val(categories);
+
                             console.log(res.data,888888877744444)
                         }
                     });
