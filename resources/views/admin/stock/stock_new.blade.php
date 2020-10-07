@@ -749,7 +749,7 @@
                                                                                                         title=""
                                                                                                         data-original-title="Short Description">Long Description</span></label>
                                                                                                 <div class="col-xl-10">
-                                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                                    {!! Form::textarea('translatable['.strtolower($language->code).'][long_description]',get_translated($model,strtolower($language->code),'long_description'),['class'=>'form-control tinyMcArea long_description '.strtolower($language->code),'cols'=>30,'rows'=>10, 'id'=>'long_description'.strtolower($language->code)]) !!}
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
@@ -796,7 +796,7 @@
                                                                                                 title=""
                                                                                                 data-original-title="what_is_content">Content</span></label>
                                                                                         <div class="col-xl-10">
-                                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10]) !!}
+                                                                                            {!! Form::textarea('translatable['.strtolower($language->code).'][what_is_content]',get_translated($model,strtolower($language->code),'what_is_content'),['class'=>'form-control tinyMcArea','cols'=>30,'rows'=>10, 'id'=>'what_is_content'.strtolower($language->code)]) !!}
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -1688,17 +1688,26 @@
                                 if(el.locale === "am") {
                                     $('.name_js.am').val(el.name);
                                     $('.short_des_js.am').val(el.short_description);
+                                    tinymce.get('long_descriptionam').setContent(el.long_description ? el.long_description : '');
+                                    tinymce.get('what_is_contentam').setContent(el.what_is_content ? el.what_is_content : '');
                                 } else if(el.locale === "gb") {
                                     $('.name_js.gb').val(el.name);
                                     $('.short_des_js.gb').val(el.short_description);
+                                    tinymce.get('long_descriptiongb').setContent(el.long_description ? el.long_description : '');
+                                    tinymce.get('what_is_contentgb').setContent(el.what_is_content ? el.what_is_content : '');
                                 }
                             });
                             let categories = JSON.parse($('#categories_tree').val());
                             res.data.categories.forEach(el => {
                                 categories = [...categories, el.id]
-                            })
-                            $('#categories_tree').val(categories);
-
+                            });
+                            $('[name="brand_id"]').val(res.data.brand_id);
+                                                  
+                            
+                            // $('#categories_tree').val(categories);
+                            categories.forEach(el => {
+                                $(`${el}_anchor`).click();
+                            });
                             console.log(res.data,888888877744444)
                         }
                     });
