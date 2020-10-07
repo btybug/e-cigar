@@ -52,6 +52,6 @@ class Couriers extends Translatable
      * @var array
      */
     public $translationModel = CouriersTranslations::class;
-    protected $fillable = ['icon', 'image'];
+    protected $fillable = ['icon', 'image','delivery_time'];
     public $translatedAttributes = ['name', 'description'];
 }

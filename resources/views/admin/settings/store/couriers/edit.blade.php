@@ -7,10 +7,10 @@
     <div class="inventory_attributes">
         <div class="card panel panel-default">
                     <div class="card-header panel-heading d-flex flex-wrap justify-content-between">
-                        <h2 class="mb-0 mr-1">Attribute</h2>
+                        <h2 class="mb-0 mr-1">Couriers</h2>
                         <div class="button-save text-right">
                             <a class="btn btn-default"
-                               href="{!! route('admin_store_attributes') !!}">Back</a>
+                               href="{!! route('admin_settings_couriers') !!}">Back</a>
                         </div>
                     </div>
                     @if ($errors->any())
@@ -70,6 +70,12 @@
                                     </div>
                                     <div class="col-sm-1 text-center font-icon-added">
                                         <i id="font-show-area"></i>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 control-label" for="input-total">Delivery time</label>
+                                    <div class="col-sm-10">
+                                        {!! Form::text('delivery_time',null,['class'=>'form-control']) !!}
                                     </div>
                                 </div>
                                 <div class="form-group row">
