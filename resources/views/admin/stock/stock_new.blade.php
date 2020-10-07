@@ -832,13 +832,13 @@
                             <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
                                 <div class="container-fluid p-25">
                                     <div class=" row mb-2">
-                                            {!! Form::hidden('type',0) !!}
+                                            {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
                                             <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
                                             <div class="col-xl-3 col-sm-4 col-3">
                                                 {!! Form::select('section_type',[
                                                 0 => 'Multy Section',
                                                 1 => 'Single Section'
-                                            ],null,['class' => 'form-control','id' => 'changeProductType']) !!}
+                                            ],null,['class' => 'form-control']) !!}
                                             </div>
                                     </div>
                                     <div class="v-box">
