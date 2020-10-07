@@ -64,7 +64,7 @@ class MailTemplates extends Translatable
      * @var array
      */
     public $translationModel = MailTemplatesTranslations::class;
-    protected $fillable = ['from','to','cc','module','subject','is_active','slug','is_for_admin','admin_email'];
+    protected $fillable = ['from','to','cc','module','subject','is_active','slug','is_for_admin','admin_email','content_type'];
     public $translatedAttributes = ['title', 'subject', 'content'];
     public static $types=[
         'registration'=>'Registration',
