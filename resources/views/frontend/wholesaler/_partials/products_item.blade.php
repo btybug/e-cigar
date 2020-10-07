@@ -4,7 +4,7 @@
             <a href="#" class="products__item-top">
                     <span class="d-block products__item-photo-brand-name">
                         <span class="font-sec-reg text-uppercase d-block text-center text-truncate products__item-brand-name font-16 text-sec-clr lh-1">
-                            {{ $item->barcode->code }}
+                            {{ $item->barcode }}
                         </span>
                         <span class="position-relative products__item-photo d-block">
                             <img src="{{ (media_image_tmb($item->image)) }}" alt="product">
