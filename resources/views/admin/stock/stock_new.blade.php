@@ -3,7 +3,6 @@
 
 @stop
 @section('content')
-
     {!! Form::model($model,['class'=>'form-horizontal stock-form','url' => route('admin_stock_save')]) !!}
     <div class="card border-0">
         <div class="card-header d-flex justify-content-between align-items-center">
@@ -1697,10 +1696,7 @@
                                     tinymce.get('what_is_contentgb').setContent(el.what_is_content ? el.what_is_content : '');
                                 }
                             });
-                            let categories = JSON.parse($('#categories_tree').val());
-                            res.data.categories.forEach(el => {
-                                categories = [...categories, el.id]
-                            });
+
                             $('[name="brand_id"]').val(res.data.brand_id);
 
                             $(".get-all-stickers-tab").empty();
@@ -1731,21 +1727,34 @@
                                 $(".other_images-group").append(html);
                                 console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
                                 $(`input.${media_uuid}`).val(el.url);
-                                
+
                                 console.log(9997897)
                             });
 
-
-
-                            // $(this)
-                            //     .parent()
-                            //     .remove();                        
-                            
-                            // $('#categories_tree').val(categories);
-                            categories.forEach(el => {
-                                $(`${el}_anchor`).click();
-                            });
-                            console.log(res.data,888888877744444)
+                           let tree = $("#treeview_json").jstree({
+                                "checkbox": {
+                                    "three_state": false,
+                                    "cascade": 'undetermined',
+                                    "keep_selected_style": false
+                                },
+                                plugins: ["wholerow", "checkbox", "types"],
+                                core: {
+                                    themes: {
+                                        responsive: !1
+                                    },
+                                    data: res.categories
+                                },
+                                types: {
+                                    "default": {
+                                        icon: "fa fa-folder text-primary fa-lg"
+                                    },
+                                    file: {
+                                        icon: "fa fa-file text-success fa-lg"
+                                    }
+                                }
+                            })
+                            tree.refresh(false);
+                            console.log(JSON.stringify(res.categories),888888877744444)
                         }
                     });
 
