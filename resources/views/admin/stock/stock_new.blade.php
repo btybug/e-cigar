@@ -1517,7 +1517,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.10/themes/default/style.min.css" integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg==" crossorigin="anonymous" />
     <style>
         #itemsModal .items-box {
             flex: 1;
@@ -1577,7 +1577,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.10/jstree.min.js" integrity="sha512-fgHQj3Fsk5TtG3XglZ/JkE06lx/gJdBZ+Lll785gf5RW3NWcGsyTBwauFtwrlZvpsuv6XSjzB97fBNagkT6uDg==" crossorigin="anonymous"></script>
     <!-- <script src="/public/js/tinymce/tinymce.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script> -->
     <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
@@ -1717,19 +1717,41 @@
                                                 </li>`);
                             });
 
+                            $('.card-container-stock-media').find('img').attr('src', res.data.image);
+                            $('.card-container-stock-media').find('img').attr('alt', res.data.image);
+                            $('.card-container-stock-media').find('.remove-thumb-img single').attr('data-src', res.data.image);
+
                             $(".other_images-group").empty();
                             res.data.media.forEach((el) => {
                                 var uid = Math.random().toString(36).substr(2, 9);
                                 var html = $("#add-more-other_images-tags").html();
                                 const media_uuid = 'media_' + uid
                                 html = html.replace(/{count}/g, uid);
-                                html = html.replace(/media_/g, media_uuid);
+                                html = html.replace(/media_/g, media_uuid+" ");
                                 $(".other_images-group").append(html);
-                                console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
+                                // console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
                                 $(`input.${media_uuid}`).val(el.url);
 
                                 console.log(9997897)
                             });
+                            // console.log(7777777, $("#treeview_json").jstree(true).get_json())
+                            let d = $("#treeview_json").jstree(true).get_json()
+                            $("#treeview_json").data('jstree', false).empty();
+                            let dta = res.categories;
+
+                            function fff(el) {
+                                if(el.state) {
+                                    if(el.state.selected && el.children.length > 0) {
+                                        return {...el, state: {selected: true, opened: true}}
+                                    }
+                                } else {
+                                    return el;
+                                }
+                            }
+
+                            dta = dta.map(el => {
+                                return fff(el);
+                            })
 
                            let tree = $("#treeview_json").jstree({
                                 "checkbox": {
@@ -1742,7 +1764,7 @@
                                     themes: {
                                         responsive: !1
                                     },
-                                    data: res.categories
+                                    data: dta
                                 },
                                 types: {
                                     "default": {
@@ -1753,8 +1775,9 @@
                                     }
                                 }
                             })
-                            tree.refresh(false);
-                            console.log(JSON.stringify(res.categories),888888877744444)
+                            // $("#treeview_json").data('jstree', false).empty().jstree(d);
+                            tree.jstree(true).refresh();
+                            // console.log(JSON.stringify(res.categories), 888888877744444);
                         }
                     });
 
