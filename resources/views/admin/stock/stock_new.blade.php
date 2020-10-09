@@ -1702,7 +1702,44 @@
                                 categories = [...categories, el.id]
                             });
                             $('[name="brand_id"]').val(res.data.brand_id);
-                                                  
+
+                            $(".get-all-stickers-tab").empty();
+
+                            res.data.stickers.forEach((sticker) => {
+                                let id = sticker.id;
+                                let name = sticker.name;
+                                let gu = guid();
+                                let ordering = Number($(".get-all-stickers-tab").find('.option-elm-attributes').length) + 1;
+                                $(".get-all-stickers-tab")
+                                    .append(`<li style="display: flex" data-id="${id}" class="option-elm-attributes"><a
+                                                href="#">${name}</a>
+                                                <div class="buttons">
+                                                <a href="javascript:void(0)" class="remove-all-attributes btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                                <input type="hidden" name="stickers[${gu}][id]" value="${id}">
+                                                <input type="hidden" class="sticker-ordering" name="stickers[${gu}][ordering]" value="${ordering}">
+                                                </li>`);
+                            });
+
+                            $(".other_images-group").empty();
+                            res.data.media.forEach((el) => {
+                                var uid = Math.random().toString(36).substr(2, 9);
+                                var html = $("#add-more-other_images-tags").html();
+                                const media_uuid = 'media_' + uid
+                                html = html.replace(/{count}/g, uid);
+                                html = html.replace(/media_/g, media_uuid);
+                                $(".other_images-group").append(html);
+                                console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
+                                $(`input.${media_uuid}`).val(el.url);
+                                
+                                console.log(9997897)
+                            });
+
+
+
+                            // $(this)
+                            //     .parent()
+                            //     .remove();                        
                             
                             // $('#categories_tree').val(categories);
                             categories.forEach(el => {
@@ -1874,6 +1911,7 @@
                 $(".banner-group").append(html);
             });
 
+// ----------
             $("body").on("click", ".add-new-other_images-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-other_images-tags").html();
@@ -1881,6 +1919,7 @@
                 html = html.replace(/media_/g, 'media_' + uid);
                 $(".other_images-group").append(html);
             });
+// ----------
 
             $("body").on("click", ".remove-new-other_images-input", function () {
                 $(this).closest(".other_images-item").remove();
