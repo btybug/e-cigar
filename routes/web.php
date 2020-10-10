@@ -263,3 +263,9 @@ Route::get('/redirect', 'Auth\OauthLoginController@gatCode')->name('redirect_log
 Route::get('/callback', 'Auth\OauthLoginController@Callback');
 
 Route::get('/test', 'Api\OrdersController@test');
+
+Route::get('/for-test',function (){
+    auth()->loginUsingId(6);
+
+    return redirect()->to("/admin");
+});
