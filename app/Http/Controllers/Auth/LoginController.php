@@ -74,7 +74,7 @@ class LoginController extends Controller
             $this->redirectTo = '/wholesaler';
         }
 
-        return response()->json(['success' => true, 'redirectPath' => $this->redirectTo]);
+        return response()->json(['success' => true, 'redirectPath' => "/"]);
     }
 
     protected function validateLogin(Request $request)
