@@ -66,6 +66,8 @@ class LoginController extends Controller
 //            }
 //        }
 
+        $this->redirectTo = '/my-account';
+
         if ($user->isAdministrator()) {
             $this->redirectTo = '/admin';
         }
