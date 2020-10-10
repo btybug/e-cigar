@@ -66,7 +66,7 @@ class LoginController extends Controller
             }
         }
 
-        return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);
+        return response()->json(['success' => true, 'redirectPath' => $this->redirectTo]);
     }
 
     protected function validateLogin(Request $request)
