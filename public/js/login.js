@@ -103,7 +103,7 @@
                         },
                         success: function (data) {
                             if (!data.error) {
-                                location.href = data.redirectPath
+                                // location.href = data.redirectPath
                                 console.log(data)
                             } else {
                                 alert('error')
