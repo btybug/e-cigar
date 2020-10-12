@@ -66,7 +66,7 @@ class LoginController extends Controller
             }
         }
 
-        dd($this->redirectPath());
+        dd($this->redirectTo,$this->redirectPath(),'ste');
 
         return response()->json(['success' => true, 'redirectPath' => $this->redirectPath()]);
     }
