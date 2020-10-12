@@ -15,7 +15,7 @@
                             <h2 class="text-uppercase text-main-clr font-20 modal-title text-center">{!! __('customer_login') !!}</h2>
 {{--                            <p class="font-13 text-gray-clr modal-text"> {!! __('login_desc') !!}</p>--}}
                         </div>
-                        <form  method="POST" action="/login" class="register-form mt-5" id="login-form">
+                        <form  method="POST" action="{{ route('login') }}" class="register-form mt-5" id="login-form">
                             @csrf
 
                             <div class="form-group mb-5">
