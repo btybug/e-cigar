@@ -11,7 +11,7 @@
                 })
                 .then(() => {
                     var data = $(this).serialize();
-                    console.log($(this))
+
                     var errorHandler = function (fieldElement, errorObject, message, fieldElementName) {
                         var change = function (fieldElementChange, fieldElementNameChange) {
                             fieldElementChange.removeClass('transition-horizontal input-error');
@@ -31,7 +31,6 @@
                         fieldElement.on('keypress', function () { change(fieldElement, fieldElementName) });
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });
                     };
-                    console.log(1111111, data)
 
                     $.ajax({
                         type: "post",
@@ -44,8 +43,7 @@
                         },
                         success: function (data) {
                             if (!data.error) {
-                                // location.href = data.redirectPath
-                                console.log(data)
+                                location.href = data.redirectPath
                             } else {
                                 alert('error')
                             }
@@ -53,7 +51,6 @@
                         error: function (error) {
                             var emailEl = $('#loginEmail');
                             var passwordEl = $('#loginPass');
-                            console.log(777777, error)
                             errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#loginEmail');
                             errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#loginPass');
                         }
@@ -93,7 +90,7 @@
                         fieldElement.on('keypress', function () { change(fieldElement, fieldElementName) });
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });
                     };
-                    console.log(2222222, data)
+
                     $.ajax({
                         type: "post",
                         url: "/login",
@@ -105,8 +102,7 @@
                         },
                         success: function (data) {
                             if (!data.error) {
-                                // location.href = data.redirectPath
-                                console.log(data)
+                                location.href = data.redirectPath
                             } else {
                                 alert('error')
                             }
@@ -114,7 +110,6 @@
                         error: function (error) {
                             var emailEl = $('#loginEmail');
                             var passwordEl = $('#loginPass');
-                            console.log(888888, error)
                             errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#loginEmail');
                             errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#loginPass');
                         }

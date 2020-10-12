@@ -7662,7 +7662,7 @@ function onRecaptchaLoadCallback() {
                 $('.g-recaptcha-response').val(token);
             }).then(function () {
                 var data = $(_this5).serialize();
-                console.log($(_this5));
+
                 var errorHandler = function errorHandler(fieldElement, errorObject, message, fieldElementName) {
                     var change = function change(fieldElementChange, fieldElementNameChange) {
                         fieldElementChange.removeClass('transition-horizontal input-error');
@@ -7686,7 +7686,6 @@ function onRecaptchaLoadCallback() {
                         change(fieldElement, fieldElementName);
                     });
                 };
-                console.log(1111111, data);
 
                 $.ajax({
                     type: "post",
@@ -7699,8 +7698,7 @@ function onRecaptchaLoadCallback() {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            // location.href = data.redirectPath
-                            console.log(data);
+                            location.href = data.redirectPath;
                         } else {
                             alert('error');
                         }
@@ -7708,7 +7706,6 @@ function onRecaptchaLoadCallback() {
                     error: function error(_error3) {
                         var emailEl = $('#loginEmail');
                         var passwordEl = $('#loginPass');
-                        console.log(777777, _error3);
                         errorHandler(emailEl, _error3.responseJSON.errors, _error3.responseJSON.errors.email, '#loginEmail');
                         errorHandler(passwordEl, _error3.responseJSON.errors, _error3.responseJSON.errors.password, '#loginPass');
                     }
@@ -7752,7 +7749,7 @@ function onRecaptchaLoadCallback() {
                         change(fieldElement, fieldElementName);
                     });
                 };
-                console.log(2222222, data);
+
                 $.ajax({
                     type: "post",
                     url: "/login",
@@ -7764,8 +7761,7 @@ function onRecaptchaLoadCallback() {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            // location.href = data.redirectPath
-                            console.log(data);
+                            location.href = data.redirectPath;
                         } else {
                             alert('error');
                         }
@@ -7773,7 +7769,6 @@ function onRecaptchaLoadCallback() {
                     error: function error(_error4) {
                         var emailEl = $('#loginEmail');
                         var passwordEl = $('#loginPass');
-                        console.log(888888, _error4);
                         errorHandler(emailEl, _error4.responseJSON.errors, _error4.responseJSON.errors.email, '#loginEmail');
                         errorHandler(passwordEl, _error4.responseJSON.errors, _error4.responseJSON.errors.password, '#loginPass');
                     }
