@@ -7772,6 +7772,7 @@ function onRecaptchaLoadCallback() {
                     error: function error(_error4) {
                         var emailEl = $('#loginEmail');
                         var passwordEl = $('#loginPass');
+                        console.log(888888, _error4);
                         errorHandler(emailEl, _error4.responseJSON.errors, _error4.responseJSON.errors.email, '#loginEmail');
                         errorHandler(passwordEl, _error4.responseJSON.errors, _error4.responseJSON.errors.password, '#loginPass');
                     }
