@@ -7686,6 +7686,7 @@ function onRecaptchaLoadCallback() {
                         change(fieldElement, fieldElementName);
                     });
                 };
+                console.log(1111111, data);
 
                 $.ajax({
                     type: "post",
@@ -7750,7 +7751,7 @@ function onRecaptchaLoadCallback() {
                         change(fieldElement, fieldElementName);
                     });
                 };
-
+                console.log(2222222, data);
                 $.ajax({
                     type: "post",
                     url: "/login",

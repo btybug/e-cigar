@@ -31,6 +31,7 @@
                         fieldElement.on('keypress', function () { change(fieldElement, fieldElementName) });
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });
                     };
+                    console.log(1111111, data)
 
                     $.ajax({
                         type: "post",
@@ -91,7 +92,7 @@
                         fieldElement.on('keypress', function () { change(fieldElement, fieldElementName) });
                         fieldElement.on('change', function () { change(fieldElement, fieldElementName) });
                     };
-
+                    console.log(2222222, data)
                     $.ajax({
                         type: "post",
                         url: "/login",
