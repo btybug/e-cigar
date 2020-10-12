@@ -11,14 +11,6 @@
     {!! main_pages_seo(isset($page_name)?$page_name:null) !!}
 
     @yield('meta')
-
-
-
-<!-- Start of ukdevplus Zendesk Widget script -->
-    <script id="ze-snippet"
-            src="https://static.zdassets.com/ekr/snippet.js?key=7cef91e3-cb9d-4443-9c06-2ac7bffed052"></script>
-    <!-- End of ukdevplus Zendesk Widget script -->
-
     <!-- Global Site Tag (gtag.js) - Google Analytics -->
     <script async
             src="https://www.googletagmanager.com/gtag/js?id={!! env('GOOGLE_ANALYTICS_TRACKING_ID') !!}"></script>
