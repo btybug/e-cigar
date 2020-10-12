@@ -1738,11 +1738,19 @@
                             let d = $("#treeview_json").jstree(true).get_json()
                             $("#treeview_json").data('jstree', false).empty();
                             let dta = res.categories;
-
+                            let catValues = [];
                             function fff(el) {
                                 if(el.state) {
-                                    if(el.state.selected && el.children.length > 0) {
-                                        return {...el, state: {selected: true, opened: true}}
+                                    if(el.state.selected) {
+                                        console.log("el",el)
+                                        catValues.push(el.id);
+                                        el.children.length > 0
+                                        if(el.children.length > 0) {
+                                            el.children.map(e => {
+                                                return fff(e);
+                                            })
+                                            return {...el, state: {selected: true, opened: true}}
+                                        }
                                     }
                                 } else {
                                     return el;
@@ -1752,7 +1760,7 @@
                             dta = dta.map(el => {
                                 return fff(el);
                             })
-
+                           $("#categories_tree").val(JSON.stringify(catValues))
                            let tree = $("#treeview_json").jstree({
                                 "checkbox": {
                                     "three_state": false,
