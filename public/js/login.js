@@ -11,7 +11,7 @@
                 })
                 .then(() => {
                     var data = $(this).serialize();
-
+                    console.log($(this))
                     var errorHandler = function (fieldElement, errorObject, message, fieldElementName) {
                         var change = function (fieldElementChange, fieldElementNameChange) {
                             fieldElementChange.removeClass('transition-horizontal input-error');
