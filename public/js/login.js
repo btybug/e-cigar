@@ -53,6 +53,7 @@
                         error: function (error) {
                             var emailEl = $('#loginEmail');
                             var passwordEl = $('#loginPass');
+                            console.log(777777, error)
                             errorHandler(emailEl, error.responseJSON.errors, error.responseJSON.errors.email, '#loginEmail');
                             errorHandler(passwordEl, error.responseJSON.errors, error.responseJSON.errors.password, '#loginPass');
                         }
