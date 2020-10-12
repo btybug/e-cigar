@@ -7698,7 +7698,7 @@ function onRecaptchaLoadCallback() {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            location.href = data.redirectPath;
+                            // location.href = data.redirectPath
                             console.log(data);
                         } else {
                             alert('error');
@@ -7762,7 +7762,7 @@ function onRecaptchaLoadCallback() {
                     },
                     success: function success(data) {
                         if (!data.error) {
-                            location.href = data.redirectPath;
+                            // location.href = data.redirectPath
                             console.log(data);
                         } else {
                             alert('error');
