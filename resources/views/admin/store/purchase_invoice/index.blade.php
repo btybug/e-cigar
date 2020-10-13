@@ -33,14 +33,10 @@
                         <div>
                             <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                                 <option value="#" data-column="0" data-name="id">#</option>
-                                <option value="Name" data-column="1" data-name="name">Name</option>
-                                <option value="SKU" data-column="2" data-name="sku">SKU</option>
-                                <option value="Owner" data-column="3" data-name="user_id">Owner</option>
-                                <option value="Qty" data-column="4" data-name="qty">Qty</option>
-                                <option value="Price" data-column="5" data-name="price">Price</option>
-                                <option value="Purchase Date" data-column="6" data-name="purchase_date">Purchase Date</option>
-                                <option value="Entry Date" data-column="7" data-name="created_at">Entry Date</option>
-                                <option value="Actions" data-column="8" data-name="actions">Actions</option>
+                                <option value="Invoice Number" data-column="1" data-name="invoice_number">Invoice Number</option>
+                                <option value="Description" data-column="2" data-name="description">Description</option>
+                                <option value="Created Date" data-column="3" data-name="created_at">Created Date</option>
+                                <option value="Actions" data-column="4" data-name="actions">Actions</option>
                             </select>
                         </div>
                         <div>
@@ -57,13 +53,9 @@
                             <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Name</th>
-                                <th>SKU</th>
-                                <th>Owner</th>
-                                <th>Qty</th>
-                                <th>Price</th>
-                                <th>Purchase Date</th>
-                                <th>Entry Date</th>
+                                <th>Invoice Number</th>
+                                <th>Description</th>
+                                <th>Created Date</th>
                                 <th>Actions</th>
                             </tr>
                             </thead>
@@ -162,29 +154,21 @@
                 "inventory_purchase_table",
                 [
                     {id: '#', name: 'id'},
-                    {id: 'Name', name: 'name'},
-                    {id: 'SKU', name: 'sku'},
-                    {id: 'Owner', name: 'user_id'},
-                    {id: 'Qty', name: 'qty'},
-                    {id: 'Price', name: 'price'},
-                    {id: 'Purchase Date', name: 'purchase_date'},
-                    {id: 'Entry Date', name: 'created_at'},
+                    {id: 'Invoice Number', name: 'invoice_number'},
+                    {id: 'Description', name: 'description'},
+                    {id: 'Created Date', name: 'created_at'},
                     {id: 'actions', name: 'actions'}
                 ],
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'sku', name: 'sku'},
-                    {data: 'user_id', name: 'user_id'},
-                    {data: 'qty', name: 'qty'},
-                    {data: 'price', name: 'price'},
-                    {data: 'purchase_date', name: 'purchase_date'},
+                    {data: 'invoice_number', name: 'invoice_number'},
+                    {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ],
                 '#categories-table',
-                "{!! route('datatable_all_purchases') !!}"
+                "{!! route('datatable_all_purchase_invoices') !!}"
             )
         });
 

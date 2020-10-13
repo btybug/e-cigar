@@ -32,6 +32,7 @@ use App\Models\Others;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Purchase;
+use App\Models\PurchaseInvoice;
 use App\Models\Regions;
 use App\Models\Review;
 use App\Models\Roles;
@@ -750,6 +751,27 @@ class DatatableController extends Controller
             ->make(true);
     }
 
+
+    public function getPurchaseInvoices()
+    {
+        return Datatables::of(PurchaseInvoice::query())
+            ->addColumn('inovoice_number', function ($attr) {
+                return $attr->inovoice_number;
+            })->addColumn('description', function ($attr) {
+                return $attr->description;
+            })->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($faq) {
+                $html = "<div class='datatable-td__action'>";
+                if (userCan('admin_inventory_purchase_invocies_edit')) {
+                    $html .= "<a class='btn btn-warning' href='" . route("admin_inventory_purchase_invocies_edit", $faq->id) . "'>Edit</a>";
+                }
+                $html .= "</div>";
+                return $html;
+            })->rawColumns(['actions','created_at'])
+            ->make(true);
+    }
 
     public function getPurchases()
     {
