@@ -168,14 +168,33 @@ class StoreController extends Controller
         return $this->view('purchase.index');
     }
 
+    public function getPurchaseInvoices()
+    {
+        return $this->view('purchase_invoice.index');
+    }
+
     public function getPurchaseNew()
     {
         $model = null;
-        $items = Items::get()->pluck('name', 'id')->all();
+        $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
+        ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
+
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
 
         return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses'));
+    }
+
+    public function getPurchaseInvoicesNew()
+    {
+        $model = null;
+        $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
+        ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
+
+        $suppliers = Suppliers::all()->pluck('name', 'id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
+
+        return $this->view('purchase_invoice.new', compact('model', 'items', 'suppliers', 'warehouses'));
     }
 
     public function postSaveOrUpdate(PurchaseRequest $request)
@@ -192,6 +211,22 @@ class StoreController extends Controller
         }
 
         return redirect()->route('admin_inventory_purchase');
+    }
+
+    public function postSaveOrUpdateInvoices(PurchaseRequest $request)
+    {
+        $data = $request->except('_token', 'qty', 'locations');
+        $data['purchase_date'] = Carbon::parse($data['purchase_date']);
+        $data['user_id'] = \Auth::id();
+        $purchase = Purchase::updateOrCreate($request->only('id'), $data);
+        $item = Items::find($request->get('item_id'));
+
+        if ($item) {
+            $purchase->qty = $this->saveLocations($item, $request->get('locations', []));
+            $purchase->save();
+        }
+
+        return redirect()->route('admin_inventory_purchase_invocies');
     }
 
     private function saveLocations($item, array $data = [])
@@ -219,12 +254,27 @@ class StoreController extends Controller
     public function EditPurchase($id)
     {
         $model = Purchase::findOrFail($id);
-        $items = Items::where('type', 'simple')->get()->pluck('name', 'id')->all();
+        $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
+            ->where('type', 'simple')
+            ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
         $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
         return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses', 'racks', 'shelves'));
+    }
+
+    public function EditPurchaseInvoices($id)
+    {
+        $model = Purchase::findOrFail($id);
+        $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
+            ->where('type', 'simple')
+            ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
+        $suppliers = Suppliers::all()->pluck('name', 'id')->all();
+        $warehouses = Warehouse::all()->pluck('name', 'id')->all();
+        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
+        $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
+        return $this->view('purchase_invoice.new', compact('model', 'items', 'suppliers', 'warehouses', 'racks', 'shelves'));
     }
 
 

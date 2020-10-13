@@ -8,7 +8,7 @@
             <div class="d-flex flex-wrap justify-content-between w-100 admin-general--tabs-wrapper">
             <ul class="nav nav-tabs new-main-admin--tabs mb-3 admin-general--tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="info-tab" href="javascript:void(0)" role="tab"
+                    <a class="nav-link" id="info-tab" href="{!! route('admin_inventory_purchase') !!}" role="tab"
                        aria-controls="general" aria-selected="true" aria-expanded="true">Purchase</a>
                 </li>
                 @ok('admin_inventory_other')
@@ -18,7 +18,7 @@
                 </li>
                 @endok
                 <li class="nav-item">
-                    <a class="nav-link" id="invoices-tab" href="{!! route('admin_inventory_purchase_invocies') !!}" role="tab"
+                    <a class="nav-link active" id="invoices-tab" href="javascript:void(0)" role="tab"
                        aria-controls="invoices" aria-selected="true" aria-expanded="true">Purchase Invoices</a>
                 </li>
             </ul>
@@ -44,9 +44,9 @@
                             </select>
                         </div>
                         <div>
-                            @ok('admin_inventory_purchase_new')
+                            @ok('admin_inventory_purchase_invocies_new')
                             <div class="pull-right">
-                                <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_new') !!}">Add new</a>
+                                <a class="btn btn-primary" href="{!! route('admin_inventory_purchase_invocies_new') !!}">Add new</a>
                             </div>
                             @endok
                         </div>

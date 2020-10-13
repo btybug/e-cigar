@@ -447,6 +447,15 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/get-item-locations', 'Admin\StoreController@postItemLocations')->name('admin_item_locations');
 
     });
+
+    Route::group(['prefix' => 'purchase-invoices'], function () {
+        Route::get('/', 'Admin\StoreController@getPurchaseInvoices')->name('admin_inventory_purchase_invocies');
+        Route::get('/new', 'Admin\StoreController@getPurchaseInvoicesNew')->name('admin_inventory_purchase_invocies_new');
+        Route::post('/new-or-update', 'Admin\StoreController@postSaveOrUpdateInvoices')->name('admin_inventory_purchase_invocies_save');
+        Route::get('/delete/{id}', 'Admin\StoreController@DeletePurchaseInvoices')->name('admin_inventory_purchase_invocies_delete');
+        Route::get('/edit/{id}', 'Admin\StoreController@EditPurchaseInvoices')->name('admin_inventory_purchase_invocies_edit');
+    });
+
     Route::group(['prefix' => 'suppliers'], function () {
         Route::get('/', 'Admin\ItemsController@getSuppliers')->name('admin_suppliers');
         Route::get('/new', 'Admin\ItemsController@getSuppliersNew')->name('admin_suppliers_new');
