@@ -183,7 +183,7 @@ class StoreController extends Controller
 
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
-        $invoices = PurchaseInvoice::all()->pluck('invoice_number','id')->all();
+        $invoices = PurchaseInvoice::all()->pluck('name','id')->all();
 
         return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses','invoices'));
     }
@@ -249,7 +249,7 @@ class StoreController extends Controller
             ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
-        $invoices = PurchaseInvoice::all()->pluck('invoice_number','id')->all();
+        $invoices = PurchaseInvoice::all()->pluck('name','id')->all();
         $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
         $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
         return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses', 'racks', 'shelves','invoices'));
