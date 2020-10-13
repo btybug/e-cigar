@@ -911,6 +911,7 @@ class DatatableController extends Controller
                 return "<div class='datatable-td__action'>"
                     . (userCan('admin_items_edit') ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $attr->id . "'><i class='fa fa-road'></i></a>" : null)
                     . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>" : null)
+                    . (userCan('admin_items_duplicate') ? "<a class='btn btn-primary' href='" . route('admin_items_duplicate', $attr->id) . "'>Copy</a>" : null)
                     . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
                     . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
                     . "</div>";

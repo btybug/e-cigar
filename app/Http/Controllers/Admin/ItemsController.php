@@ -135,6 +135,57 @@ class ItemsController extends Controller
             'categories', 'data', 'checkedCategories', 'warehouses', 'racks', 'shelves', 'brands', 'downloads'));
     }
 
+    public function getDuplicate($id)
+    {
+        $model = Items::findOrFail($id);
+        $newModel = $model->replicateWithTranslations();
+        $newModel->push();
+
+        foreach ($model->media as $media) {
+            $new_media = $media->replicate();
+            $new_media->item_id = $newModel->id;
+            $new_media->push();
+        }
+
+        foreach ($model->videos as $video) {
+            $new_video = $video->replicate();
+            $new_video->item_id = $newModel->id;
+            $new_video->push();
+        }
+
+        foreach ($model->packages as $package) {
+            $new_package = $package->replicate();
+            $new_package->item_id = $newModel->id;
+            $new_package->push();
+        }
+
+        foreach ($model->suppliers as $supplier) {
+            $new_supplier = $supplier->replicate();
+            $new_supplier->item_id = $newModel->id;
+            $new_supplier->push();
+        }
+
+        foreach ($model->specifications as $specification) {
+            $new_specification = $specification->replicate();
+            $new_specification->item_id = $newModel->id;
+            $new_specification->push();
+        }
+
+        foreach ($model->ItemStickers as $sticker) {
+            $new_sticker = $sticker->replicate();
+            $new_sticker->item_id = $newModel->id;
+            $new_sticker->push();
+        }
+
+        foreach ($model->ItemCategories as $category) {
+            $new_category = $category->replicate();
+            $new_category->item_id = $newModel->id;
+            $new_category->push();
+        }
+
+        return redirect()->back();
+    }
+
     private function savePackages($item, array $data = [])
     {
         $deletableArray = [];

@@ -510,6 +510,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/edit-rows', 'Admin\ItemsController@postItemRowsEditSave')->name('post_admin_items_edit_row_many_save');
         Route::post('/edit-row-save', 'Admin\ItemsController@postItemRowEditSave')->name('post_admin_items_edit_row_save');
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
+        Route::get('/duplicate/{id}', 'Admin\ItemsController@getDuplicate')->name('admin_items_duplicate');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
         Route::get('/archive/{item_id}', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
         Route::post('/add-package', 'Admin\ItemsController@addPackage')->name('admin_items_package_add');
