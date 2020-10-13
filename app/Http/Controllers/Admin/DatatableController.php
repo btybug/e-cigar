@@ -32,6 +32,7 @@ use App\Models\Others;
 use App\Models\Posts;
 use App\Models\Products;
 use App\Models\Purchase;
+use App\Models\PurchaseInvoice;
 use App\Models\Regions;
 use App\Models\Review;
 use App\Models\Roles;
@@ -751,6 +752,27 @@ class DatatableController extends Controller
     }
 
 
+    public function getPurchaseInvoices()
+    {
+        return Datatables::of(PurchaseInvoice::query())
+            ->addColumn('inovoice_number', function ($attr) {
+                return $attr->inovoice_number;
+            })->addColumn('description', function ($attr) {
+                return $attr->description;
+            })->editColumn('created_at', function ($attr) {
+                return BBgetDateFormat($attr->created_at);
+            })
+            ->addColumn('actions', function ($faq) {
+                $html = "<div class='datatable-td__action'>";
+                if (userCan('admin_inventory_purchase_invocies_edit')) {
+                    $html .= "<a class='btn btn-warning' href='" . route("admin_inventory_purchase_invocies_edit", $faq->id) . "'>Edit</a>";
+                }
+                $html .= "</div>";
+                return $html;
+            })->rawColumns(['actions','created_at'])
+            ->make(true);
+    }
+
     public function getPurchases()
     {
         return Datatables::of(Purchase::query())
@@ -889,6 +911,7 @@ class DatatableController extends Controller
                 return "<div class='datatable-td__action'>"
                     . (userCan('admin_items_edit') ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $attr->id . "'><i class='fa fa-road'></i></a>" : null)
                     . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>" : null)
+                    . (userCan('admin_items_duplicate') ? "<a class='btn btn-primary' href='" . route('admin_items_duplicate', $attr->id) . "'>Copy</a>" : null)
                     . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
                     . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
                     . "</div>";

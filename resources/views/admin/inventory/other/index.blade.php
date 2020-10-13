@@ -12,7 +12,10 @@
                         <a class="nav-link active" id="general-tab" href="javascript:void(0)" role="tab"
                            aria-controls="accounts" aria-selected="true" aria-expanded="true">Others</a>
                     </li>
-
+                    <li class="nav-item">
+                        <a class="nav-link" id="invoices-tab" href="{!! route('admin_inventory_purchase_invocies') !!}" role="tab"
+                           aria-controls="invoices" aria-selected="true" aria-expanded="true">Purchase Invoices</a>
+                    </li>
                 </ul>
             </div>
             <div class="tab-content w-100">
