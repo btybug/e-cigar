@@ -14,6 +14,12 @@
                 {!! Form::hidden('id') !!}
 
                 <div class="form-group row">
+                    <label class="col-sm-2 control-label" for="invoiceNumber">Name</label>
+                    <div class="col-sm-10">
+                        {!! Form::text('name',null,['placeholder' => 'Invoice name','class'=> 'form-control']) !!}
+                    </div>
+                </div>
+                <div class="form-group row">
                     <label class="col-sm-2 control-label" for="invoiceNumber">Invoice number</label>
                     <div class="col-sm-10">
                         {!! Form::number('invoice_number',null,['placeholder' => 'Invoice number','class'=> 'form-control']) !!}

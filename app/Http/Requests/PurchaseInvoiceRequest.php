@@ -24,6 +24,7 @@ class PurchaseInvoiceRequest extends FormRequest
     public function rules()
     {
         return [
+            "name"    => 'required',
             "invoice_number"    => 'required',
             "description"  => "required",
             "pdf"  => "required",

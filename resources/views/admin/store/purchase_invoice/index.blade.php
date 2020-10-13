@@ -33,10 +33,11 @@
                         <div>
                             <select name="table_head" id="table_head_id" class="selectpicker" multiple>
                                 <option value="#" data-column="0" data-name="id">#</option>
-                                <option value="Invoice Number" data-column="1" data-name="invoice_number">Invoice Number</option>
-                                <option value="Description" data-column="2" data-name="description">Description</option>
-                                <option value="Created Date" data-column="3" data-name="created_at">Created Date</option>
-                                <option value="Actions" data-column="4" data-name="actions">Actions</option>
+                                <option value="Name" data-column="1" data-name="name">Name</option>
+                                <option value="Invoice Number" data-column="2" data-name="invoice_number">Invoice Number</option>
+                                <option value="Description" data-column="3" data-name="description">Description</option>
+                                <option value="Created Date" data-column="4" data-name="created_at">Created Date</option>
+                                <option value="Actions" data-column="5" data-name="actions">Actions</option>
                             </select>
                         </div>
                         <div>
@@ -53,6 +54,7 @@
                             <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Name</th>
                                 <th>Invoice Number</th>
                                 <th>Description</th>
                                 <th>Created Date</th>
@@ -154,6 +156,7 @@
                 "inventory_purchase_table",
                 [
                     {id: '#', name: 'id'},
+                    {id: 'Name', name: 'name'},
                     {id: 'Invoice Number', name: 'invoice_number'},
                     {id: 'Description', name: 'description'},
                     {id: 'Created Date', name: 'created_at'},
@@ -162,6 +165,7 @@
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
+                    {data: 'name', name: 'name'},
                     {data: 'invoice_number', name: 'invoice_number'},
                     {data: 'description', name: 'description'},
                     {data: 'created_at', name: 'created_at'},

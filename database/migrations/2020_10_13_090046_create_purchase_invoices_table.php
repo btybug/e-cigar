@@ -15,6 +15,7 @@ class CreatePurchaseInvoicesTable extends Migration
     {
         Schema::create('purchase_invoices', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name');
             $table->string('invoice_number');
             $table->text('description');
             $table->text('pdf');
