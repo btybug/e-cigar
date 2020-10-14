@@ -122,6 +122,60 @@
             </div>
         </div>
     </div>
+    <div class="modal" tabindex="-1" id="select_columns" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Columns</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="_id" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_id" checked="checked" value="1" style="margin-right: 20px"/>
+                    <span>Id</span>
+                </label>    
+                <label for="_name" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_name" checked="checked" value="2" style="margin-right: 20px"/>
+                    <span>Name</span>
+                </label>    
+                <label for="_short" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_short" checked="checked" value="3" style="margin-right: 20px"/>
+                    <span>Short Description</span>
+                </label>    
+                <label for="_brand" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_brand" checked="checked" value="4" style="margin-right: 20px"/>
+                    <span>Brand</span>
+                </label>    
+                <label for="_barcode" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_barcode" checked="checked" value="5" style="margin-right: 20px"/>
+                    <span>Barcode</span>
+                </label>    
+                <label for="_qty" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_qty" checked="checked" value="6" style="margin-right: 20px"/>
+                    <span>Quantity</span>
+                </label>    
+                <label for="_category" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_category" checked="checked" value="7" style="margin-right: 20px"/>
+                    <span>Category</span>
+                </label>    
+                <label for="_price" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_price" checked="checked" value="8" style="margin-right: 20px"/>
+                    <span>Price</span>
+                </label>
+                <label for="_status" style="display: flex; align-items: center; margin-left: 20px"> 
+                    <input type="checkbox" class="_select_column" id="_status" checked="checked" value="9" style="margin-right: 20px"/>
+                    <span>Status</span>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary select_columns">Export</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
@@ -298,8 +352,8 @@
                 } else {
                     fontOptions = ''
                 }
-
-
+                
+                var arr = [2,5]
                 table = $(tableId).DataTable({
                     ajax: ajaxUrl,
                     "processing": true,
@@ -322,18 +376,49 @@
                                 },
                                 {
                                     extend: 'csvHtml5',
-                                    exportOptions: {
-                                        columns: ':visible'
-                                    }
+                                    action: function(e, dt, button, config) {
+                                        const _self = this;
+                                        function columnExp() {
+                                            $.fn.dataTable.ext.buttons.csvHtml5.exportOptions.columns = $("._select_column:checked").map(function() {
+                                                return Number($(this).val());
+                                            }).toArray();
+                                            $.fn.dataTable.ext.buttons.csvHtml5.action.call(_self, e, dt, button, config);
+                                            $("body").off("click", ".select_columns", columnExp)
+                                            $('#select_columns').modal('hide');
+                                        }
+                                        $('#select_columns').modal('show');
+                                        $("body").on("click", ".select_columns", columnExp);
+                                    },
                                 },
                                 {
                                     extend: 'excelHtml5',
-                                    exportOptions: {
-                                        columns: ':visible'
-                                    }
+                                    action: function(e, dt, button, config) {
+                                        const _self = this;
+                                        function columnExp() {
+                                            $.fn.dataTable.ext.buttons.excelHtml5.exportOptions.columns = $("._select_column:checked").map(function() {
+                                                return Number($(this).val());
+                                            }).toArray();
+                                            $.fn.dataTable.ext.buttons.excelHtml5.action.call(_self, e, dt, button, config);
+                                            $("body").off("click", ".select_columns", columnExp)
+                                            $('#select_columns').modal('hide');
+                                        }
+                                        $('#select_columns').modal('show');
+                                        $("body").on("click", ".select_columns", columnExp);
+                                    },
                                 },
                                 {
                                     extend: 'pdfHtml5',
+                                    // customize: function ( doc ) {
+                                    //     // Splice the image in after the header, but before the table
+                                    //     doc.content[1].table.body = doc.content[1].table.body.map(elem => {
+                                    //         return elem.filter((el, index) => {
+                                    //             return index === 5 || index === 4
+                                    //         })
+                                    //     });
+                                        
+                                    //     return doc.content
+                                    //     // Data URL generated by http://dataurl.net/#dataurlmaker
+                                    // },
                                     exportOptions: {
                                         columns: ':visible'
                                     }
@@ -346,15 +431,6 @@
                                 }
                             ]
                         },
-                        // 'selectAll',
-                        // 'selectNone',
-                        // {
-                        //     extend: 'collection',
-                        //     text: 'Export',
-                        //     buttons: [
-
-                        //     ]
-                        // },
                         {
                             extend: 'collection',
                             text: 'Download',
@@ -366,7 +442,6 @@
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
-                                        console.log(ids)
                                         $('.loader_container').css('display', 'block');
                                         $('body').css('overflow', 'hidden');
                                         if(ids.length === 0) {
@@ -449,7 +524,7 @@
                                         }
                                         shortAjax('/admin/find/items/qrcodes', {ids}, function(res) {
 
-                                            console.log(res.qrcodes);
+                                            // console.log(res.qrcodes);
                                             $('.loader_container').css('display', 'none');
                                             $('body').css('overflow', 'auto');
 
@@ -513,20 +588,16 @@
                                                     textAlign: text_align,
                                                     fontOptions,
                                                     displayValue,
-                                                })
-                                                    .render();
+                                                }).render();
                                                 const svg = $(`#svg_${barcode.value}`);
                                                 // $('.loader_container').css('display', 'none');
                                                 // $('body').css('overflow', 'auto');
                                                 // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
-
                                                 
                                                 ifr.append(svg);
-
                                             })
                                             window.frames['myiframe'].focus();
                                             window.frames['myiframe'].print();
-                                            console.log(999999999999);
 
                                             setTimeout(() => { $(".printFrame").remove(); }, 1000);
                                         })
@@ -593,12 +664,9 @@
                                             await setTimeout(function() {
                                                 window.frames['myiframe'].focus();
                                                 window.frames['myiframe'].print();
-                                                console.log(999999999999);
                                             }, 1000)
                                             await setTimeout(() => { $(".printFrame").remove(); }, 2000);
                                         })
-
-                                        
                                     }
                                     // {
                                     //     const ids = [];
@@ -631,7 +699,6 @@
                                             ids.push($(this).find('.classes__id').text());
                                         });
 
-
                                         if(ids.length > 0){
                                             // alert(666)
                                         }
@@ -644,7 +711,6 @@
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
-
 
                                         if(ids.length > 0){
                                             // alert(666)
@@ -711,8 +777,31 @@
                     initComplete: function () {
                         this.api().columns().every(function () {
                             var column = this;
-                            console.log(column)
                             var input = document.createElement("input");
+                            let placeholder = "";
+                            switch(column[0][0]) {
+                                case 1: placeholder = "Id"
+                                    break;
+                                case 2: placeholder = "Name"
+                                    break;
+                                case 3: placeholder = "Short Description"
+                                    break;
+                                case 4: placeholder = "Brand"
+                                    break;
+                                case 5: placeholder = "Barcode"
+                                    break;
+                                case 6: placeholder = "Quantity"
+                                    break;
+                                case 7: placeholder = "Category"
+                                    break;
+                                case 8: placeholder = "Price"
+                                    break;
+                                case 9: placeholder = "Status"
+                                    break;
+
+                                default: return true;
+                            }
+                            $(input).attr('placeholder', placeholder)
                             column[0][0] !== 0 && column[0][0] !== 11 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
@@ -726,7 +815,6 @@
                 table.on( 'select', function ( e, dt, type, indexes ) {
                     if ( type === 'row' ) {
                         if($('tr[role="row"].selected').length !== 0) {
-                            console.log(111)
 
                             $('.edit_hidden_button').removeClass('d-none');
                             $('.edit_hidden_button').addClass('d-block');
@@ -737,14 +825,12 @@
                 table.on( 'deselect', function ( e, dt, type, indexes ) {
                     if ( type === 'row' ) {
                         if($('tr[role="row"].selected').length === 0) {
-                            console.log(222)
 
                             $('.edit_hidden_button').removeClass('d-block');
                             $('.edit_hidden_button').addClass('d-none');
                         }
                     }
                 });
-
 
                 function init() {
                     var selected_items = [];
@@ -761,7 +847,6 @@
                             column.visible(false);
                         }
                     });
-                    console.log(selected_items, 'selected_items')
                     localStorage.setItem(storageName, JSON.stringify(selected_items))
                 }
 
@@ -859,7 +944,6 @@
                     $('body').css('overflow', 'unset');
                     $('.edit-list--container').hide();
                     $(".edit-list--container").draggable('destroy');
-
                     $('.edit-list--container').removeClass('max-wrap');
                     $('.edit-list--container').removeClass('min-wrap');
                     $('body').css('overflow', 'unset');
@@ -895,7 +979,6 @@
                             $('body').css('overflow', 'hidden');
                         } else {
                             $(".edit-list--container").draggable({ handle:'.heading'});
-
                         }
                         $('.edit-list--container').removeClass('min-wrap');
                     } else {

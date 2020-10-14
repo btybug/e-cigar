@@ -1755,14 +1755,12 @@
                             function fff(el) {
                                 if(el.state) {
                                     if(el.state.selected) {
-                                        console.log("el",el)
                                         catValues.push(el.id);
-                                        el.children.length > 0
                                         if(el.children.length > 0) {
                                             el.children.map(e => {
                                                 return fff(e);
-                                            })
-                                            return {...el, state: {selected: true, opened: true}}
+                                            });
+                                            return {...el, state: {selected: true, opened: true}};
                                         }
                                     }
                                 } else {
@@ -1772,7 +1770,7 @@
 
                             dta = dta.map(el => {
                                 return fff(el);
-                            })
+                            });
                            $("#categories_tree").val(JSON.stringify(catValues))
                            let tree = $("#treeview_json").jstree({
                                 "checkbox": {
@@ -1796,18 +1794,13 @@
                                     }
                                 }
                             })
-                            // $("#treeview_json").data('jstree', false).empty().jstree(d);
                             tree.jstree(true).refresh();
-                            // console.log(JSON.stringify(res.categories), 888888877744444);
                         }
                     });
 
-
                     $("#mainItemModal").modal('hide');
                 }
-
             });
-
 
                 const shortAjax = function (URL, obj = {}, cb) {
                 fetch(URL, {
@@ -1923,7 +1916,7 @@
             });
             $(document).on('click',function (ev) {
                 // ev.stopImmediatePropagation();
-                console.log($(ev.target).closest('.stock-toggle-tiny__wrapper'));
+                // console.log($(ev.target).closest('.stock-toggle-tiny__wrapper'));
                 if($(ev.target).closest('.stock-toggle-tiny__wrapper').length === 0
                 ){
                     $('body').find('.stock-toggle-tiny__wrapper').fadeOut()
