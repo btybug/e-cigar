@@ -389,22 +389,6 @@
                                         $('#select_columns').modal('show');
                                         $("body").on("click", ".select_columns", columnExp);
                                     },
-                                    // exportOptions: {
-                                    //     columns: arr,
-                                    //     format: {
-                                    //         body: function ( data, row, column, node ) {
-                                    //             console.log( data, row, column, node )
-                                    //             if(column == 2) {
-                                    //                 return data
-                                    //             } else {
-                                    //                 return ''
-                                    //             }
-                                    //             // return column == 2 ?
-                                    //             //                 'foobar':
-                                    //             //                 data;
-                                    //         }
-                                    //     }
-                                    // }
                                 },
                                 {
                                     extend: 'excelHtml5',
@@ -447,15 +431,6 @@
                                 }
                             ]
                         },
-                        // 'selectAll',
-                        // 'selectNone',
-                        // {
-                        //     extend: 'collection',
-                        //     text: 'Export',
-                        //     buttons: [
-
-                        //     ]
-                        // },
                         {
                             extend: 'collection',
                             text: 'Download',
@@ -467,7 +442,6 @@
                                         $('#stocks-table tbody tr.selected').each(function() {
                                             ids.push($(this).find('td.id_n').text());
                                         });
-                                        console.log(ids)
                                         $('.loader_container').css('display', 'block');
                                         $('body').css('overflow', 'hidden');
                                         if(ids.length === 0) {
@@ -804,6 +778,31 @@
                         this.api().columns().every(function () {
                             var column = this;
                             var input = document.createElement("input");
+                            let placeholder = "";
+                            switch(column[0][0]) {
+                                case 1: placeholder = "Id"
+                                    break;
+                                case 2: placeholder = "Name"
+                                    break;
+                                case 3: placeholder = "Short Description"
+                                    break;
+                                case 4: placeholder = "Brand"
+                                    break;
+                                case 5: placeholder = "Barcode"
+                                    break;
+                                case 6: placeholder = "Quantity"
+                                    break;
+                                case 7: placeholder = "Category"
+                                    break;
+                                case 8: placeholder = "Price"
+                                    break;
+                                case 9: placeholder = "Status"
+                                    break;
+
+                                default: return true;
+                            }
+                            $(input).attr('placeholder', placeholder)
+                            console.log(placeholder)
                             column[0][0] !== 0 && column[0][0] !== 11 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
