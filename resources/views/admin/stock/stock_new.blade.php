@@ -836,8 +836,9 @@
                                             <div class="col-xl-3 col-sm-4 col-3">
                                                 {!! Form::select('section_type',[
                                                 0 => 'Multy Section',
-                                                1 => 'Single Section'
-                                            ],null,['class' => 'form-control']) !!}
+                                                1 => 'Single Section',
+                                                2 => 'Simple Product'
+                                            ],null,['class' => 'form-control select-section-type']) !!}
                                             </div>
                                     </div>
                                     <div class="v-box">
@@ -852,7 +853,7 @@
                                             </div>
                                     </div>
                                     <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options" data-required="1"><i
+                                        <a class="btn btn-info text-white duplicate-v-options @if($model && $model->section_type == 2) d-none @endif" data-required="1"><i
                                                 class="fa fa-plus"></i> Add
                                             new option</a>
                                     </div>
@@ -1586,6 +1587,18 @@
     <script>
 
         $(document).ready(function () {
+            $("body").on('change','.select-section-type',function () {
+                let val = $(this).val();
+
+                if(val == 2){
+                    $('body').find('.duplicate-v-options').addClass('d-none');
+                    $('body').find('#stockEditSortablePrice').empty();
+                    $('body').find('.duplicate-v-options').trigger('click')
+                }else{
+                    $('body').find('.duplicate-v-options').removeClass('d-none');
+                }
+            });
+
             function editSortablePriceFunc(){
                 let editSortablePrice = Array.from($('#stockEditSortablePrice .required-single_wall'));
                 editSortablePrice.forEach((item,index)=>{
