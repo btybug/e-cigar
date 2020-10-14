@@ -802,7 +802,6 @@
                                 default: return true;
                             }
                             $(input).attr('placeholder', placeholder)
-                            console.log(placeholder)
                             column[0][0] !== 0 && column[0][0] !== 11 && $(input).appendTo($(column.footer()).empty())
                                 .on('keyup change clear', function () {
                                     column.search($(this).val(), false, false, true).draw();
