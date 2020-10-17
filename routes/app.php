@@ -33,6 +33,11 @@ Route::group(['prefix' => 'staff'], function () {
 
 });
 
+Route::group(['prefix' => 'shops'], function () {
+    Route::get('/', 'AppController@shops')->name('app_shops');
+
+});
+
     Route::group(['prefix' => 'products'], function () {
         Route::get('/{id?}', 'AppController@products')->name('admin_app_products');
         Route::post('/add-product', 'AppController@addProduct')->name('admin_app_add_product');
