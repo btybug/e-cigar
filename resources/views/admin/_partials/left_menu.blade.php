@@ -306,6 +306,10 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('app_shops')
+                    <li><a href="{{route('app_shops')}}"><i class="far fa-circle fa-xs"></i>Shops</a>
+                    </li>
+                    @endok
                     @ok('app_customer_discounts')
                     <li><a href="{{route('app_customer_discounts')}}"><i class="far fa-circle fa-xs"></i>Discounts</a>
                     </li>
