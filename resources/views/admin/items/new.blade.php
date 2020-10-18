@@ -177,16 +177,8 @@
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="status" class="control-label col-lg-4 col-form-label">
-                                                                        Status</label>
-                                                                    <div class="col-lg-8">
-                                                                        {!! Form::select('status', [0 => 'Draft',1 => 'Active'],null,
-                                                                        ['class' => 'form-control']) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
+                                                            {!! Form::hidden('status',1) !!}
+
                                                             <div class="form-group">
                                                                 <div class="row">
                                                                     <label class="col-lg-4 control-label">Brands</label>

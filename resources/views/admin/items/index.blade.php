@@ -892,7 +892,7 @@
                     {data: 'id', name: 'items.id'},
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'short_description', name: 'item_translations.short_description'},
-                    {data: 'brand_id', name: 'categories_translations.name'},
+                    {data: 'brand_id', name: 'brands_translations.name'},
                     {data: 'barcode', name: 'barcode'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'categories_translations.name'},

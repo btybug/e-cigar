@@ -881,6 +881,8 @@ class DatatableController extends Controller
         return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
             ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->leftJoin('brands', 'items.brand_id', '=', 'brands.id')
+            ->leftJoin('brands_translations', 'brands.id', '=', 'brands_translations.brands_id')
             ->select('items.*', 'item_translations.name', 'item_translations.short_description',
                 'categories_translations.name as category')
             ->groupBy('items.id')
@@ -901,8 +903,7 @@ class DatatableController extends Controller
                 return ($attr->barcode) ? $attr->barcode : 'no barcode';
             })
             ->editColumn('brand_id', function ($attr) {
-                $brand = Category::find($attr->brand_id);
-                return ($brand) ? $brand->name : 'no brand';
+                return ($attr->brand) ? $attr->brand->name : 'no brand';
             })->editColumn('status', function ($attr) {
                 return ($attr->status) ? "Active" : 'Draft';
             })->editColumn('long_description', function ($attr) {
