@@ -1,8 +1,5 @@
 @php
-    $warehouses = \App\Models\App\AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
-            ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
-            ->where('warehouse_translations.locale', app()->getLocale())
-            ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
+    $warehouses = \App\Models\App\AppWarehouses::all();
 @endphp
 
 <aside class="main-sidebar">
@@ -321,8 +318,9 @@
                     <li><a href="{{route('app_customer_discounts')}}"><i class="far fa-circle fa-xs"></i>Discounts</a>
                     </li>
                     @endok
+
                     @foreach($warehouses as $warehouse)
-                        <li><a href="{{route('admin_app_settings')}}"><i class="far fa-circle fa-xs"></i>{!! $warehouse->name !!}</a></li>
+                        <li><a href="{{route('admin_app_products',$warehouse->id)}}"><i class="far fa-circle fa-xs"></i>{!! $warehouse->warehouse->name !!}</a></li>
                         @endforeach
                 </ul>
             </li>
