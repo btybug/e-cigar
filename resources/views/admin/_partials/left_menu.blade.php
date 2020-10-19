@@ -1,3 +1,10 @@
+@php
+    $warehouses = \App\Models\App\AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
+            ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
+            ->where('warehouse_translations.locale', app()->getLocale())
+            ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
+@endphp
+
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -314,18 +321,9 @@
                     <li><a href="{{route('app_customer_discounts')}}"><i class="far fa-circle fa-xs"></i>Discounts</a>
                     </li>
                     @endok
-                    @ok('app_staff')
-                    <li><a href="{{route('app_staff')}}"><i class="far fa-circle fa-xs"></i>Staff</a></li>
-                    @endok
-                    @ok('app_products')
-                    <li><a href="{{route('admin_app_products')}}"><i class="far fa-circle fa-xs"></i>Products</a></li>
-                    @endok
-                    @ok('admin_app_orders')
-                    <li><a href="{{route('admin_app_orders')}}"><i class="far fa-circle fa-xs"></i>Orders</a></li>
-                    @endok
-                    @ok('admin_app_settings')
-                    <li><a href="{{route('admin_app_settings')}}"><i class="far fa-circle fa-xs"></i>Settings</a></li>
-                    @endok
+                    @foreach($warehouses as $warehouse)
+                        <li><a href="{{route('admin_app_settings')}}"><i class="far fa-circle fa-xs"></i>{!! $warehouse->name !!}</a></li>
+                        @endforeach
                 </ul>
             </li>
             @endok

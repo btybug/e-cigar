@@ -19,17 +19,38 @@ class AppController extends Controller
 {
     protected $view = 'admin.app';
 
-    public function products(Request $request, $q = null)
+    public function warehouse($q = null)
     {
-        $current=null;
+        $current = null;
         $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
             ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
             ->where('warehouse_translations.locale', app()->getLocale())
             ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
         $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
         if (!count($warehouse) && $q) abort(404);
-        if($q==null){
-            $q=count($warehouse)?$warehouse[0]->id:null;
+        if ($q == null) {
+            $q = count($warehouse) ? $warehouse[0]->id : null;
+        } else {
+            if (!AppWarehouses::where('warehouse_id', $q)->exists()) {
+                abort(404);
+            } else {
+                $current = AppWarehouses::where('warehouse_id', $q)->first();
+            }
+        }
+        return $this->view('warehouse', compact('current'));
+    }
+
+    public function products(Request $request, $q)
+    {
+        $current = null;
+        $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
+            ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
+            ->where('warehouse_translations.locale', app()->getLocale())
+            ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
+        $notImportedWarehouse = Warehouse::whereNotIn('id', AppWarehouses::all()->pluck('warehouse_id'))->get();
+        if (!count($warehouse) && $q) abort(404);
+        if ($q == null) {
+            $q = count($warehouse) ? $warehouse[0]->id : null;
         }else{
             if(!AppWarehouses::where('warehouse_id',$q)->exists()){
                 abort(404);
@@ -41,12 +62,14 @@ class AppController extends Controller
         return $this->view('products.index', compact('warehouse','current', 'q', 'notImportedWarehouse'));
     }
 
-    public function orders(Request $request, $id = null)
+    public function orders($q)
     {
-        $warehouse = Warehouse::all();
-        $q = ($id) ?? $warehouse[0]->id;
-        $warehouse = $warehouse->pluck('name', 'id');
-        return $this->view('orders.index', compact('warehouse', 'q'));
+        if (!AppWarehouses::where('warehouse_id', $q)->exists()) {
+            abort(404);
+        } else {
+            $current = AppWarehouses::where('warehouse_id', $q)->first();
+        }
+        return $this->view('orders.index', compact('current', 'q'));
     }
 
     public function notSelectedProducts($id)
@@ -123,27 +146,15 @@ class AppController extends Controller
 
     }
 
-    public function getSettings(Settings $settings,$id = null)
+    public function getSettings(Settings $settings, $q)
     {
-        $q=$id;
-        $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
-            ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
-            ->where('warehouse_translations.locale', app()->getLocale())
-            ->select('warehouses.*', 'warehouse_translations.name', 'app_warehouses.status')->get();
-
-
-        if (!count($warehouse) && $q) abort(404);
-        if($q==null){
-            $q=count($warehouse)?$warehouse[0]->id:null;
-        }else{
-            if(!AppWarehouses::where('warehouse_id',$q)->exists()){
-                abort(404);
-            }else{
-                $current=AppWarehouses::where('warehouse_id',$q)->first();
-            }
+        if (!AppWarehouses::where('warehouse_id', $q)->exists()) {
+            abort(404);
+        } else {
+            $current = AppWarehouses::where('warehouse_id', $q)->first();
         }
-        $settings=$settings->getEditableData('app_settings_'.$q)->toArray();
-        return $this->view('settings', compact('warehouse', 'q','settings'));
+        $settings = $settings->getEditableData('app_settings_' . $q)->toArray();
+        return $this->view('settings', compact('current', 'q', 'settings'));
     }
 
     public function saveSettings(Request $request,Settings $settings)

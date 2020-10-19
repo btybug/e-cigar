@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\App\Customers;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppPermissions;
 use App\Models\App\AppStaffPermissions;
+use App\Models\App\AppWarehouses;
 use App\Models\Warehouse;
 use App\User;
 use Illuminate\Http\Request;
@@ -14,10 +15,9 @@ use Illuminate\Http\Request;
 class StaffController extends Controller
 {
 
-    public function getStaff(Request $request,$id=null)
+    public function getStaff($q)
     {
-        $warehouse=Warehouse::all();
-        $q=($id)??$warehouse[0]->id;
+
 
         $users=User::join('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('app_staff','app_staff.users_id','users.id')
@@ -27,8 +27,12 @@ class StaffController extends Controller
 
             ->select('users.*', 'roles.title')
             ->pluck('users.name','id');
-        $warehouse=$warehouse->pluck('name','id');
-        return view('admin.app.staff.index',compact('warehouse','users','q'));
+        if(!AppWarehouses::where('warehouse_id',$q)->exists()){
+            abort(404);
+        }else{
+            $current=AppWarehouses::where('warehouse_id',$q)->first();
+        }
+        return view('admin.app.staff.index',compact('users','q','current'));
     }
 
     public function postCreateStaffMember(Request $request)
