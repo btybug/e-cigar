@@ -150,9 +150,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal"
-                            data-ajax="true">Add
-                    </button>
+                  
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
@@ -179,41 +177,7 @@
 
     <input type="hidden" id="current-shop" value="{!! $q !!}">
 
-    <div class="modal fade select-products__modal" id="store_modal" tabindex="-1" role="dialog"
-         aria-labelledby="store_modalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            {!! Form::open(['url'=>route('admin_app_import_shop')]) !!}
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="store_modalLabel">Add New</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <div class="d-flex justify-content-start align-items-center mb-2">
-                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
-                        <p class="mb-0">Select All</p>
-                    </div>
-                    <ul class="all-list p-0 modal-stickers--list" id="stickers-modal-list">
-                        @foreach($notImportedWarehouse as $w)
-                            <li class="option-elm-modal">
-                                <div class="btn btn-primary add-related-event searchable">
-                                    <input type="checkbox" name="warehouse[]" value="{!! $w->id !!}"
-                                           class="select_product_js">
-                                </div>
-                                <a href="#">{!! $w->name !!}</a>
-                            </li>
-                        @endforeach
-                    </ul>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary ">Add</button>
-                </div>
-            </div>
-            {!! Form::close() !!}
-        </div>
-    </div>
+
 @stop
 
 @section('css')
