@@ -505,7 +505,7 @@
 
                                                             <tbody class="v-options-list">
                                                             @if($model && $model->specifications)
-                                                                @foreach($model->specifications()->whereNull('parent_id')->get() as $selected)
+                                                                @foreach($model->specifications()->whereNull('parent_id')->orderBy('attributes_id')->get() as $selected)
                                                                     @include('admin.items._partials.specifications')
                                                                 @endforeach
                                                             @endif

@@ -390,6 +390,7 @@ class ItemsController extends Controller
         $selecteds = Attributes::leftJoin('attribute_categories', 'attributes.id', 'attribute_categories.attribute_id')
             ->whereIn('attribute_categories.categories_id', $request->get('ids', []))
             ->select('attributes.*')
+            ->orderBy('attributes.id')
             ->groupBy('attributes.id')
             ->get();
 
