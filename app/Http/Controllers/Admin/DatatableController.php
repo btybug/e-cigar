@@ -6,6 +6,7 @@ use App\Enums\ReviewStatusTypes;
 use App\Http\Controllers\Controller;
 use App\Models\ActivityLogs;
 use App\Models\App\AppItems;
+use App\Models\App\AppWarehouses;
 use App\Models\Attributes;
 use App\Models\Barcodes;
 use App\Models\Brands;
@@ -1171,10 +1172,14 @@ class DatatableController extends Controller
                 return ($attr->image) ? "<img src='$attr->image' class='img img-responsive' width='100px'/>" : "No image";
             })
             ->addColumn('actions', function ($attr) {
+                $is_in_app=AppWarehouses::where('warehouse_id',$attr->id)->exists();
                 $html = "<div class='datatable-td__action'>";
                 $html .= userCan('admin_warehouses_edit') ? "<a class='btn btn-warning' href='" . route('admin_warehouses_edit', $attr->id) . "'>Edit</a>" : '';
                 $html .= userCan('admin_warehouses_manage') ? '<a href="' . route("admin_warehouses_manage", $attr->id) . '" class="btn btn-info" >Activity</a>' : null;
                 $html .= userCan('admin_warehouses_delete') ? '<a href="javascript:void(0)" data-href="' . route("admin_warehouses_delete") . '" class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a>' : null;
+                if(!$is_in_app){
+                    $html .= userCan('admin_warehouses_delete') ? '<a href="' . route("admin_app_import_shop",$attr->id) . '"  class="btn btn-danger" >Import to App</a>' : null;
+                }
                 $html .= "</div>";
                 return $html;
 

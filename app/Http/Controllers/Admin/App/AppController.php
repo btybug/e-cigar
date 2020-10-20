@@ -106,6 +106,12 @@ class AppController extends Controller
         return redirect()->back();
     }
 
+    public function importShopApp($id)
+    {
+        AppWarehouses::create(['warehouse_id' => $id]);
+        return redirect()->back();
+    }
+
     public function activateProduct($id)
     {
         AppItems::where('id', $id)->update(['status' => 1]);

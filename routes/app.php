@@ -41,7 +41,7 @@ Route::group(['prefix' => 'shops'], function () {
     Route::group(['prefix' => 'products'], function () {
         Route::get('/{id?}', 'AppController@products')->name('admin_app_products');
         Route::post('/add-product', 'AppController@addProduct')->name('admin_app_add_product');
-        Route::post('/import-shop', 'AppController@importShop')->name('admin_app_import_shop');
+        Route::get('/import-shop/{id}', 'AppController@importShop')->name('admin_app_import_shop');
         Route::post('/activate/{id}', 'AppController@activateProduct')->name('admin_app_activate_product');
         Route::post('/draft/{id}', 'AppController@draftProduct')->name('admin_app_draft_product');
 
