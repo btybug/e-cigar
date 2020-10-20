@@ -159,11 +159,12 @@ class ItemsController extends Controller
             $new_package->push();
         }
 
-        foreach ($model->suppliers as $supplier) {
+        foreach ($model->ItemSuppliers as $supplier) {
             $new_supplier = $supplier->replicate();
             $new_supplier->item_id = $newModel->id;
             $new_supplier->push();
         }
+
 
         foreach ($model->specifications as $specification) {
             $new_specification = $specification->replicate();
