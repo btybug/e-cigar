@@ -1,3 +1,7 @@
+@php
+    $warehouses = \App\Models\App\AppWarehouses::all();
+@endphp
+
 <aside class="main-sidebar">
     <!-- sidebar: style can be found in sidebar.less -->
     <section class="sidebar">
@@ -314,18 +318,10 @@
                     <li><a href="{{route('app_customer_discounts')}}"><i class="far fa-circle fa-xs"></i>Discounts</a>
                     </li>
                     @endok
-                    @ok('app_staff')
-                    <li><a href="{{route('app_staff')}}"><i class="far fa-circle fa-xs"></i>Staff</a></li>
-                    @endok
-                    @ok('app_products')
-                    <li><a href="{{route('admin_app_products')}}"><i class="far fa-circle fa-xs"></i>Products</a></li>
-                    @endok
-                    @ok('admin_app_orders')
-                    <li><a href="{{route('admin_app_orders')}}"><i class="far fa-circle fa-xs"></i>Orders</a></li>
-                    @endok
-                    @ok('admin_app_settings')
-                    <li><a href="{{route('admin_app_settings')}}"><i class="far fa-circle fa-xs"></i>Settings</a></li>
-                    @endok
+
+                    @foreach($warehouses as $warehouse)
+                        <li><a href="{{route('admin_app_products',$warehouse->id)}}"><i class="far fa-circle fa-xs"></i>{!! $warehouse->warehouse->name !!}</a></li>
+                        @endforeach
                 </ul>
             </li>
             @endok

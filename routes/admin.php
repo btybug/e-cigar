@@ -470,7 +470,7 @@ Route::group(['prefix' => 'inventory'], function () {
     Route::group(['prefix' => 'stores'], function () {
         Route::get('/{id?}', 'Admin\App\AppController@products')->name('admin_stores');
         Route::post('/add-product', 'Admin\App\AppController@addProduct')->name('admin_app_add_product');
-        Route::post('/import-shop', 'Admin\App\AppController@importShop')->name('admin_app_import_shop');
+//        Route::post('/import-shop', 'Admin\App\AppController@importShop')->name('admin_app_import_shop');
         Route::post('/activate/{id}', 'Admin\App\AppController@activateProduct')->name('admin_app_activate_product');
         Route::post('/draft/{id}', 'Admin\App\AppController@draftProduct')->name('admin_app_draft_product');
 
