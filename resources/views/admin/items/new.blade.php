@@ -857,7 +857,7 @@
                         setTimeout(() => { $(".printFrame").remove(); }, 1000);
                     })
                 });
-            $("#barcode").select2();
+
             $('#landing'). click(function() {
                 if ($(this).prop("checked") == true) {
                     var code  = $("#barcode").val();
@@ -1026,6 +1026,7 @@
             });
 
             $("body").on('click', '.select-suppliers', function () {
+                console.log(4444444)
                 let arr = [];
                 $(".suppliers-block")
                     .children()
