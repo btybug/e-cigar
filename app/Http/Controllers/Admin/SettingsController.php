@@ -213,6 +213,7 @@ class SettingsController extends Controller
 
     public function postFooter(Request $request)
     {
+        dd($request->get('translatable'));
         FooterLinkTranslation::truncate();
         FooterLinks::whereNotNull('id')->delete();
         $translatables = $request->get('translatable');

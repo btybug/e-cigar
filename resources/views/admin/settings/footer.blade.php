@@ -15,7 +15,7 @@
                 </div>
                 <div class="clearfix"></div>
                 <div class="text-right mb-2">
-                    <button type="button" class="btn btn-primary add-section" data-lang="gb" data-block="{!! count($footer_links) !!}"><i class="fa fa-plus"></i></button>
+                    <button type="button" class="btn btn-primary add-section" data-lang="gb" data-block="@if(isset($footer_links['gb'])){{ count($footer_links['gb']) }}@else{{ 0 }}@endif"><i class="fa fa-plus"></i></button>
                 </div>
                 <div class="tab-content setting-general-footer--tabs">
                     <div class="tab-pane fade active in show" id="tab1"
@@ -307,11 +307,11 @@
             <script type="text/javascript">
                 $(function () {
                     $('body').on('click', '.add-section', function () {
+                        console.log($(this).attr('data-block'),'block');
                         let html = $('#add-section').html();
                         html = html.replace(/{code}/g, $(this).attr('data-lang'));
-                        let block = ($(this).attr('data-block') / 1) + 1
-                        html = html.replace(/{block}/g, block);
-                        $(this).attr('data-block', block)
+                        var uid = Math.random().toString(36).substr(2, 9);
+                        html = html.replace(/{block}/g, uid);
                         $(this).closest('.form-horizontal').find('.panel-group').append(html);
                     });
                     $('body').on('click', '.remove-section', function () {
