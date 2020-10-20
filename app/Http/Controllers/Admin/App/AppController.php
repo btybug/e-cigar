@@ -98,15 +98,15 @@ class AppController extends Controller
         return response()->json(['error' => false]);
     }
 
-    public function importShop(Request $request)
-    {
-        foreach ($request->get('warehouse', []) as $w) {
-            AppWarehouses::create(['warehouse_id' => $w]);
-        }
-        return redirect()->back();
-    }
+//    public function importShop(Request $request)
+//    {
+//        foreach ($request->get('warehouse', []) as $w) {
+//            AppWarehouses::create(['warehouse_id' => $w]);
+//        }
+//        return redirect()->back();
+//    }
 
-    public function importShopApp($id)
+    public function importShop($id)
     {
         AppWarehouses::create(['warehouse_id' => $id]);
         return redirect()->back();
