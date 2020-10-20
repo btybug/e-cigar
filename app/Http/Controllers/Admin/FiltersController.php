@@ -41,7 +41,7 @@ class FiltersController extends Controller
 
     public function postDelete(Request $request)
     {
-        $model = Filters::findOrFail($request->get('slug'));
+        $model = Category::where('type','filter')->findOrFail($request->get('slug'));
         $model->delete();
         return response()->json(['error' => false]);
     }

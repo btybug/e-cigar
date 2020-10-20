@@ -1156,7 +1156,7 @@ class DatatableController extends Controller
             return BBgetDateFormat($faq->created_at);
         })->addColumn('actions', function ($attr) {
             $html = "<div class='datatable-td__action'><a class='btn btn-warning' href='" . route('admin_tools_filters_manage', $attr->id) . "'>Edit</a>";
-            return $html .= '<a href="javascript:void(0)" data-href="#" class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
+            return $html .= '<a href="javascript:void(0)" data-href="'.route("post_admin_tools_filters_delete").'" class="delete-button btn btn-danger" data-key="' . $attr->id . '">x</a></div>';
         })->rawColumns(['actions'])->make(true);
     }
 
