@@ -331,12 +331,11 @@ class StockController extends Controller
             'general', 'allAttrs', 'twitterSeo', 'fbSeo', 'robot']));
     }
 
-    public function postStockCopy(Request $request)
+    public function postStockCopy($id)
     {
-        $id=$request->get('id');
         $stock=Stock::findOrFail($id);
         $stock->duplicate();
-        return response()->json(['error'=>false]);
+        return redirect()->back();
     }
 
 

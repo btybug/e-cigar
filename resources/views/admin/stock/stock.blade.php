@@ -44,10 +44,10 @@
                         @ok('admin_stock_new')<div><a class="btn btn-primary" href="{!! route('admin_stock_new') !!}">Add new</a></div>@endok
                     </div>
                     </div>
-                    
+
                     <div class="card-body panel-body pt-0">
 
-                        
+
                         <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                             <thead>
                             <tr>
@@ -136,17 +136,6 @@
                     }
                 });
             });
-            $("body").on('click','.copy-stock',function () {
-                let id=$(this).data('id');
-                AjaxCall("{!! route('admin_stock_copy') !!}",{id:id},function (res) {
-                    if (!res.error) {
-                        table.ajax.reload();
-                    }
-                });
-
-            });
-
-
 
             $("body").on('click','.edit_item_custom',function (e) {
                 e.preventDefault();

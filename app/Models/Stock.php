@@ -167,6 +167,11 @@ class Stock extends Translatable
             ->whereIn('categories.type', ['stocks']);
     }
 
+    public function StockCategories()
+    {
+        return $this->hasMany(StockCategories::class,'stock_id');
+    }
+
     public function brand()
     {
         return $this->belongsTo(Brands::class, 'brand_id', 'id');
@@ -203,15 +208,30 @@ class Stock extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id');
     }
 
+    public function StockRelated()
+    {
+        return $this->hasMany(StockRelated::class,'stock_id');
+    }
+
     public function special_offers()
     {
         return $this->belongsToMany(Stock::class, 'stock_offer_products', 'stock_id', 'offer_id');
+    }
+
+    public function StockOfferProducts()
+    {
+        return $this->hasMany(StockOfferProducts::class,'stock_id');
     }
 
     public function special_filters()
     {
         return $this->belongsToMany(Category::class, 'stock_filters', 'stock_id', 'categories_id')
             ->where('categories.type','special_filter');
+    }
+
+    public function StockFilters()
+    {
+        return $this->hasMany(StockFilters::class,'stock_id');
     }
 
     public function offer_products()
@@ -227,6 +247,11 @@ class Stock extends Translatable
     public function stickers()
     {
         return $this->belongsToMany(Stickers::class, 'stock_stickers', 'stock_id', 'sticker_id');
+    }
+
+    public function StockStickers()
+    {
+        return $this->hasMany(StockStickers::class,'stock_id');
     }
 
     public function forRender()
@@ -310,29 +335,80 @@ class Stock extends Translatable
     public function duplicate()
     {
         //copy attributes
-        $new = $this->replicate();
-
+        $newModel = $this->replicateWithTranslations();
+        $newModel->slug = $this->slug. '-'.shortUniqueID(); //need update
         //save model before you recreate relations (so it has an id)
-        $new->push();
+        $newModel->push();
 
-        //reset relations on EXISTING MODEL (this way you can control which ones will be loaded
-        $this->relations = [];
-
-        //load relations on EXISTING MODEL
-        $this->load(
-            'specifications','categories','offers','related_products',
-            'special_offers','special_filters','offer_products','promotions',
-            'stickers','type_attrs','faqs','in_favorites'
-        );
-
-        //re-sync everything
-        foreach ($this->relations as $relationName => $values){
-            $new->{$relationName}()->sync($values);
+        foreach ($this->variations as $variation) {
+            $new_variation = $variation->replicate();
+            $new_variation->stock_id = $newModel->id;
+            $new_variation->push();
+            foreach ($variation->options as $option){
+                $new_option = $option->replicate();
+                $new_option->variation_id = $variation->id;
+                $new_option->push();
+            }
+            foreach ($variation->discounts as $discount){
+                $new_discount = $discount->replicate();
+                $new_discount->variation_id = $variation->id;
+                $new_discount->push();
+            }
         }
-        foreach($this->translations as $translation){
-            $translation->stock_id=$new->id;
-            $translation->save();
-        };
-        return $new;
+
+        foreach ($this->specifications as $specification) {
+            $new_specification = $specification->replicate();
+            $new_specification->stock_id = $newModel->id;
+            $new_specification->push();
+        }
+
+        foreach ($this->StockCategories as $category) {
+            $new_category = $category->replicate();
+            $new_category->stock_id = $newModel->id;
+            $new_category->push();
+        }
+
+        foreach ($this->StockStickers as $sticker) {
+            $new_sticker = $sticker->replicate();
+            $new_sticker->stock_id = $newModel->id;
+            $new_sticker->push();
+        }
+
+        foreach ($this->banners as $banner) {
+            $new_banner = $banner->replicate();
+            $new_banner->stock_id = $newModel->id;
+            $new_banner->push();
+        }
+
+        foreach ($this->ads as $ad) {
+            $new_ad = $ad->replicate();
+            $new_ad->stock_id = $newModel->id;
+            $new_ad->push();
+        }
+
+        foreach ($this->StockRelated as $related) {
+            $new_related = $related->replicate();
+            $new_related->stock_id = $newModel->id;
+            $new_related->push();
+        }
+
+        foreach ($this->StockOfferProducts as $offerProduct) {
+            $new_offer = $offerProduct->replicate();
+            $new_offer->stock_id = $newModel->id;
+            $new_offer->push();
+        }
+
+        foreach ($this->StockFilters as $stockFilter) {
+            $new_filter = $stockFilter->replicate();
+            $new_filter->stock_id = $newModel->id;
+            $new_filter->push();
+        }
+
+        if($this->seo){
+            $new_seo = $this->seo->replicate();
+            $new_seo->stock_id = $newModel->id;
+            $new_seo->push();
+        }
+        return $newModel;
     }
 }

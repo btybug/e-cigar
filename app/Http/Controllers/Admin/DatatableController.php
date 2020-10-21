@@ -360,7 +360,7 @@ class DatatableController extends Controller
             ->addColumn('actions', function ($stock) {
                 return '<div class="datatable-td__action">'
                     . ((userCan('admin_stock_edit')) ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $stock->id . "'><i class='fa fa-road'></i></a><a class='btn btn-warning mr-1' href='" . route("admin_stock_edit", $stock->id) . "'>Edit</a>" : '')
-                    . ((userCan('admin_stock_edit')) ? "<a class='btn  copy-stock' href='javascript:void(0)' style='background-color: #5cff29;color:black' data-id='" . $stock->id . "'><i class='fa fa-copy'></i></a>" : '')
+                    . ((userCan('admin_stock_copy')) ? "<a class='btn' href='".route('admin_stock_copy',$stock->id)."' style='background-color: #5cff29;color:black' data-id='" . $stock->id . "'><i class='fa fa-copy'></i></a>" : '')
                     . ((userCan('admin_stock_delete')) ? '<a href="javascript:void(0)" data-href="' . route("admin_stock_delete") . '"
                 class="delete-button btn btn-danger" data-key="' . $stock->id . '">x</a>' : null) . '</div>';
             })->rawColumns(['actions', 'name', 'image'])
