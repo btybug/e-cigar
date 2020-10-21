@@ -103,9 +103,31 @@
                                 <div class="brands-top-slider">
                                     @foreach($vape->stickers()->orderBy('ordering')->get() as $sticker)
                                         <div class="brand-wall">
-                                            <div class="brand-item">
+                                            <div class="brand-item" style="position: relative">
                                                 <a href="javascript:void(0)" class="brand-link">
-                                                    <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}">
+                                                    @if($sticker->image)
+                                                        <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}" 
+                                                            onerror="$('<div><div>{!! $sticker->name !!}</div></div>').insertAfter(this); $(this).next().css({
+                                                                'width': '100%',
+                                                                'height': '100%',
+                                                                'border': '1px solid #d7d7d7', 
+                                                                'text-align': 'center',
+                                                                'display': 'flex',
+                                                                'align-items': 'center',
+                                                                'justify-content': 'center',
+                                                                }); $(this).remove()" 
+                                                        />
+                                                    @else
+                                                        <div style="
+                                                            width: 100%; 
+                                                            height: 100%; 
+                                                            border: 1px solid #d7d7d7; 
+                                                            text-align: center;
+                                                            display: flex;
+                                                            align-items: center;
+                                                            justify-content: center;"
+                                                        ><div>{!! $sticker->name !!}</div></div>
+                                                    @endif
                                                 </a>
                                             </div>
                                         </div>
