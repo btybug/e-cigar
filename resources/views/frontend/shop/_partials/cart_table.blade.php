@@ -284,7 +284,7 @@
                                                                         </div>
                                                                         <div class="info-product">
                                                                             <h6 class="font-21 text-tert-clr title">
-                                                                            {{ $extra['offer']->item->short_name }}
+                                                                            {{ $extra['offer']->name }}
                                                                             </h6>
                                                                             <div
                                                                                 class="d-flex align-items-center price-wall">

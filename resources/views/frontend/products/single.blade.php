@@ -227,6 +227,27 @@
                                                         @include("admin.inventory._partials.render_price_form",['model' => $vape])
                                                     </div>
                                                 @endif
+                                                <div class="product__single-item">
+                                                    <div class="product__single-item-info mb-3">
+
+                                                        <div class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                                            <div class="col-9 pl-0">
+                                                                <span class="font-sec-light font-26">{{ $vape->special_offers->count() }} Special offer{!! ($vape->special_offers->count()>1)?'s':'' !!}</span>
+                                                            </div>
+                                                            <div class="col-3 d-flex justify-content-end pr-0">
+                                                                @if($vape->special_offers->count() > 0)
+                                                                <a href="javascript:void(0)" class="btn btn-primary text-center font-15 text-sec-clr text-uppercase">
+                                                                    <span class="product-card_btn-text">Select</span>
+                                                                </a>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+{{--                                                        <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"--}}
+{{--                                                             data-single-price="{{ ($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price }}">--}}
+{{--                                                            @include("frontend.products._partials.stock_variation_option")--}}
+{{--                                                        </div>--}}
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
