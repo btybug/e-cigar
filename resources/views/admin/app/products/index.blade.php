@@ -121,6 +121,11 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal"
+                            data-ajax="true">Add
+                    </button>
+                </div>
                 <div class="modal-body">
                     <div class="form-group row">
                         <div class="col-sm-4">
@@ -149,9 +154,7 @@
 
                     </ul>
                 </div>
-                <div class="modal-footer">
-                  
-                </div>
+
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
