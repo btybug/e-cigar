@@ -567,7 +567,7 @@ const App = function() {
       return `<div class="adminmodal modal fade show d-block in" style="display: block" id="imageload" tabindex="-1" role="dialog" aria-labelledby="imageloadLabel">
             <div class="modal-dialog modal-lg row" role="document">
                 <div class="modal-content col-md-9 p-0">
-                    <div class="modal-header" style="overflow: visible;">
+                    <div class="modal-header" style="overflow: visible; z-index: 10;">
                         <button type="button" bb-media-click="close_full_modal" class="close" data-dismiss="modal" aria-label="Close"><i class="iconaction iconClose"></i></button>`
         +`</div>
                     <div class="modal-body text-center">
