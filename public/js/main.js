@@ -287,7 +287,12 @@ $(document).ready(function () {
                     total_price += $(this).data('single-price')*1;
                 }
             });
-            return (total_price * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val()*1).toFixed(2);
+            let offerTotalPrice = 0;
+            console.log("off Price",$(".offer-price-for-total").each(function(index, offer) {
+                offerTotalPrice+=Number($(offer).data("price")*1);
+                return offer;
+            }));
+            return ((total_price + offerTotalPrice) * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val()*1).toFixed(2);
         };
 
         const setOfferPrice = (offer, offerPrice) => {
@@ -3138,6 +3143,7 @@ $(document).ready(function () {
                             }));
                             $(".special-box").html(data.html);
                             $("#specialPopUpModal").modal('hide');
+                            setTotalPrice(countTotalPrice());
                             // $("#headerShopCartBtn").click();
                         })
                         .catch(function (error) {
@@ -3464,13 +3470,25 @@ $(document).ready(function () {
 
         $("body").on('click', '.bottom-btn-cart.no-btn', function() {
             $("#specialPopUpModal").modal('hide');
-            setTimeout(function() {
-                $("#headerShopCartBtn").click();
-            }, 0);
+            // setTimeout(function() {
+            //     $("#headerShopCartBtn").click();
+            // }, 0);
 
         });
 
         // get-special-offers
+
+        $("body").on('click', '.delete-so', function(e) {
+            e.preventDefault();
+            const id = Number($(this).data('id'));
+            const data = JSON.parse($("#special_offer_data").val());
+            let newData = {...data, variations: data.variations.filter((el) => {
+                return el.product_id != id;
+            })};
+            $("#special_offer_data").val(JSON.stringify(newData));
+            $(this).closest('.border').remove();
+            setTotalPrice(countTotalPrice());
+        });
 
         $("body").on('click', '#product-select-offer', function (e) {
             e.stopImmediatePropagation();
@@ -3533,6 +3551,8 @@ $(document).ready(function () {
                 }
             });
         })
+
+        // setTotalPrice(countTotalPrice())
 
         $("body").on('click', '.btn-add-to-cart', function (e) {
             e.stopImmediatePropagation();
@@ -3679,18 +3699,52 @@ $(document).ready(function () {
                                 $('#cartSidebar').html(data.headerHtml);
                                 $('.add-cart-number.cart-count').html(data.count);
                                 console.log('data.show_popup', data.show_popup)
-                                if(data.show_popup) {
-                                    $('#specialPopUpModal .modal-body').html(data.specialHtml);
-                                    $('.special__popup-main-product-item .select-2').each(function() {
-                                        $(this).select2({minimumResultsForSearch: -1});
-                                    });
-                                    filterModalOfferInit();
-                                    filterSelectOfferInit();
-                                    countOfferPrice();
-                                    $("#specialPopUpModal").modal('show');
-                                } else {
+                                const offerDataFromInput = JSON.parse($("#special_offer_data").val());
+
+                                fetch("/add-extra-to-cart", {
+                                    method: "post",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Accept: "application/json",
+                                        "X-Requested-With": "XMLHttpRequest",
+                                        "X-CSRF-Token": $('input[name="_token"]').val()
+                                    },
+                                    credentials: "same-origin",
+                                    body: JSON.stringify({
+                                        key: data.key,
+                                        ...offerDataFromInput
+                                    })
+                                })
+                                .then(function (response) {
+                                    return response.json();
+                                })
+                                .then(function (data) {
+                                    // $self.closest('.special__popup-main-product-item').addClass('active');
+                                    // console.log($self.closest('.special__popup-main-product-item'));
+                                    // btnAddToRemove($self);
+                                    // $('.special__popup-content-right-item.added-offers').append(data.html);
                                     $('#headerShopCartBtn').trigger('click');
-                                }
+                                })
+                                .catch(function (error) {
+                                    console.log(error);
+                                });
+                               
+                    
+                    
+                    
+                    
+                    // if(data.show_popup) {
+                                //     $('#specialPopUpModal .modal-body').html(data.specialHtml);
+                                //     $('.special__popup-main-product-item .select-2').each(function() {
+                                //         $(this).select2({minimumResultsForSearch: -1});
+                                //     });
+                                //     filterModalOfferInit();
+                                //     filterSelectOfferInit();
+                                //     countOfferPrice();
+                                //     $("#specialPopUpModal").modal('show');
+                                // } else {
+                                    
+                                // }
                             }
 
                             // $(".cart-count").html(data.count);

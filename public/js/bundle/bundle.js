@@ -1,3 +1,5 @@
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
 
 /*! Select2 4.0.6-rc.1 | https://github.com/select2/select2/blob/master/LICENSE.md */!function (a) {
@@ -2922,7 +2924,12 @@ $(document).ready(function () {
                     total_price += $(this).data('single-price') * 1;
                 }
             });
-            return (total_price * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val() * 1).toFixed(2);
+            var offerTotalPrice = 0;
+            console.log("off Price", $(".offer-price-for-total").each(function (index, offer) {
+                offerTotalPrice += Number($(offer).data("price") * 1);
+                return offer;
+            }));
+            return ((total_price + offerTotalPrice) * $('.continue-shp-wrapp .continue-shp-wrapp_qty input[type="number"].field-input.product-qty-select').val() * 1).toFixed(2);
         };
 
         var setOfferPrice = function setOfferPrice(offer, offerPrice) {
@@ -5574,6 +5581,7 @@ $(document).ready(function () {
                         }));
                         $(".special-box").html(data.html);
                         $("#specialPopUpModal").modal('hide');
+                        setTotalPrice(countTotalPrice());
                         // $("#headerShopCartBtn").click();
                     }).catch(function (error) {
                         console.log(error);
@@ -5878,12 +5886,24 @@ $(document).ready(function () {
 
         $("body").on('click', '.bottom-btn-cart.no-btn', function () {
             $("#specialPopUpModal").modal('hide');
-            setTimeout(function () {
-                $("#headerShopCartBtn").click();
-            }, 0);
+            // setTimeout(function() {
+            //     $("#headerShopCartBtn").click();
+            // }, 0);
         });
 
         // get-special-offers
+
+        $("body").on('click', '.delete-so', function (e) {
+            e.preventDefault();
+            var id = Number($(this).data('id'));
+            var data = JSON.parse($("#special_offer_data").val());
+            var newData = _extends({}, data, { variations: data.variations.filter(function (el) {
+                    return el.product_id != id;
+                }) });
+            $("#special_offer_data").val(JSON.stringify(newData));
+            $(this).closest('.border').remove();
+            setTotalPrice(countTotalPrice());
+        });
 
         $("body").on('click', '#product-select-offer', function (e) {
             e.stopImmediatePropagation();
@@ -5945,6 +5965,8 @@ $(document).ready(function () {
                 }
             });
         });
+
+        // setTotalPrice(countTotalPrice())
 
         $("body").on('click', '.btn-add-to-cart', function (e) {
             e.stopImmediatePropagation();
@@ -6088,18 +6110,44 @@ $(document).ready(function () {
                                 $('#cartSidebar').html(data.headerHtml);
                                 $('.add-cart-number.cart-count').html(data.count);
                                 console.log('data.show_popup', data.show_popup);
-                                if (data.show_popup) {
-                                    $('#specialPopUpModal .modal-body').html(data.specialHtml);
-                                    $('.special__popup-main-product-item .select-2').each(function () {
-                                        $(this).select2({ minimumResultsForSearch: -1 });
-                                    });
-                                    filterModalOfferInit();
-                                    filterSelectOfferInit();
-                                    countOfferPrice();
-                                    $("#specialPopUpModal").modal('show');
-                                } else {
+                                var offerDataFromInput = JSON.parse($("#special_offer_data").val());
+
+                                fetch("/add-extra-to-cart", {
+                                    method: "post",
+                                    headers: {
+                                        "Content-Type": "application/json",
+                                        Accept: "application/json",
+                                        "X-Requested-With": "XMLHttpRequest",
+                                        "X-CSRF-Token": $('input[name="_token"]').val()
+                                    },
+                                    credentials: "same-origin",
+                                    body: JSON.stringify(_extends({
+                                        key: data.key
+                                    }, offerDataFromInput))
+                                }).then(function (response) {
+                                    return response.json();
+                                }).then(function (data) {
+                                    // $self.closest('.special__popup-main-product-item').addClass('active');
+                                    // console.log($self.closest('.special__popup-main-product-item'));
+                                    // btnAddToRemove($self);
+                                    // $('.special__popup-content-right-item.added-offers').append(data.html);
                                     $('#headerShopCartBtn').trigger('click');
-                                }
+                                }).catch(function (error) {
+                                    console.log(error);
+                                });
+
+                                // if(data.show_popup) {
+                                //     $('#specialPopUpModal .modal-body').html(data.specialHtml);
+                                //     $('.special__popup-main-product-item .select-2').each(function() {
+                                //         $(this).select2({minimumResultsForSearch: -1});
+                                //     });
+                                //     filterModalOfferInit();
+                                //     filterSelectOfferInit();
+                                //     countOfferPrice();
+                                //     $("#specialPopUpModal").modal('show');
+                                // } else {
+
+                                // }
                             }
 
                             // $(".cart-count").html(data.count);
