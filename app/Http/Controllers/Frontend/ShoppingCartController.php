@@ -580,7 +580,7 @@ class ShoppingCartController extends Controller
         $extras = [];
         if(isset($request->variations)){
             $this->cartService->validateExtra($product, $request->variations);
-            $extras = $this->cartService->extras;
+            $extras = $this->cartService->extras['data'];
         }
 
         $popuphtml = \View('frontend.products._partials.offer_popup', ['vape' => $product, 'key' => null, 'price' => $price, 'qty' => $qty, 'extras' => $extras])->render();
