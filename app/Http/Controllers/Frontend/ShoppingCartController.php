@@ -584,8 +584,9 @@ class ShoppingCartController extends Controller
 
     public function selectSpecialOffers(Request $request)
     {
+        dd($request->all());
         $product = Stock::findOrFail($request->product_id);
-
+//        $offers = $product->special_offers()->whereIn('id',)
         $html = '';
         return response()->json(['error' => false, 'html' => $html]);
     }

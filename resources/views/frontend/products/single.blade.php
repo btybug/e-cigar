@@ -264,10 +264,21 @@
                                                                 @endif
                                                             </div>
                                                         </div>
-{{--                                                        <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom"--}}
-{{--                                                             data-single-price="{{ ($selected->price_type == 'dynamic')? $selected->item->default_price:$selected->price }}">--}}
-{{--                                                            @include("frontend.products._partials.stock_variation_option")--}}
-{{--                                                        </div>--}}
+                                                        <div class="special-box">
+                                                           <div class="d-flex flex-wrap align-items-center lh-1 border p-2">
+                                                               <div class="col-1 pl-0">
+                                                                   <a href="javascript:void(0)" class="link-black"><span class="fas fa-trash"></span></a>
+                                                               </div>
+                                                               <div class="col-8 pl-0">
+                                                                   <span class="font-sec-light font-26">Ietm 2</span>
+                                                               </div>
+                                                               <div class="col-3 d-flex justify-content-end pr-0">
+                                                                   <span class="font-40 product__single-item_price ">
+                                                                            £20
+                                                                   </span>
+                                                               </div>
+                                                           </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
