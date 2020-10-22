@@ -3121,7 +3121,7 @@ $(document).ready(function () {
                         credentials: "same-origin",
                         body: JSON.stringify({
                             product_id: $('#vpid').val(),
-                            products: pr
+                            variations: products
                         })
                     }).then(function (response) {
                         return response.json();
