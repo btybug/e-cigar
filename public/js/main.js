@@ -3477,9 +3477,9 @@ $(document).ready(function () {
             e.preventDefault();
             const id = $('#singleProductPageCnt #vpid').val();
             const price = countTotalPrice();
-            const variations = $("#special_offer_data").val() && JSON.parse($("#special_offer_data").val());
+            const variations = $("#special_offer_data").val() && JSON.parse($("#special_offer_data").val()).variations;
             
-            console.log("$(#special_offer_data).val()", $("#special_offer_data").val().length)
+            console.log("$(#special_offer_data).val()", variations)
             $.ajax({
                 type: "post",
                 url: "/get-special-offers",
