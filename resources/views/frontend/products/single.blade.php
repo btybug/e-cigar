@@ -106,22 +106,22 @@
                                             <div class="brand-item" style="position: relative">
                                                 <a href="javascript:void(0)" class="brand-link">
                                                     @if($sticker->image)
-                                                        <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}" 
+                                                        <img src="{!! $sticker->image !!}" alt="{{ $sticker->name }}" title="{{ $sticker->name }}"
                                                             onerror="$('<div><div>{!! $sticker->name !!}</div></div>').insertAfter(this); $(this).next().css({
                                                                 'width': '100%',
                                                                 'height': '100%',
-                                                                'border': '1px solid #d7d7d7', 
+                                                                'border': '1px solid #d7d7d7',
                                                                 'text-align': 'center',
                                                                 'display': 'flex',
                                                                 'align-items': 'center',
                                                                 'justify-content': 'center',
-                                                                }); $(this).remove()" 
+                                                                }); $(this).remove()"
                                                         />
                                                     @else
                                                         <div style="
-                                                            width: 100%; 
-                                                            height: 100%; 
-                                                            border: 1px solid #d7d7d7; 
+                                                            width: 100%;
+                                                            height: 100%;
+                                                            border: 1px solid #d7d7d7;
                                                             text-align: center;
                                                             display: flex;
                                                             align-items: center;
@@ -258,7 +258,7 @@
                                                             </div>
                                                             <div class="col-3 d-flex justify-content-end pr-0">
                                                                 @if($vape->special_offers->count() > 0)
-                                                                <a href="javascript:void(0)" class="btn btn-primary text-center font-15 text-sec-clr text-uppercase">
+                                                                <a href="javascript:void(0)" id="product-select-offer" class="btn btn-primary text-center font-15 text-sec-clr text-uppercase">
                                                                     <span class="product-card_btn-text">Select</span>
                                                                 </a>
                                                                 @endif
