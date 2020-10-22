@@ -2,7 +2,7 @@
     @foreach($offers['data'] as $extra)
         <div class="d-flex flex-wrap align-items-center lh-1 border p-2">
             <div class="col-1 pl-0">
-                <a href="javascript:void(0)" data-group="{{ $extra['offer']->id }}" class="link-black"><span class="fas fa-trash"></span></a>
+                <a href="javascript:void(0)" data-id="{{ $extra['offer']->id }}" class="link-black delete-so"><span class="fas fa-trash"></span></a>
             </div>
             <div class="col-8 pl-0">
                 <span class="font-sec-light font-26">{{ $extra['offer']->name }}</span>
