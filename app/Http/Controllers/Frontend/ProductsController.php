@@ -345,11 +345,10 @@ class ProductsController extends Controller
         if($qty != null){
             $variation = StockVariation::findOrFail($request->variation_id);
             $discount = $variation->discounts()->where('from','<=',$qty)->where('to','>=',$qty)->first();
-
             if($discount){
                 $price = $discount->price * $qty;
                 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                    $price = number_format($price);
+                    $price = number_format($price,1);
                 } else {
                     $price = money_format('%(#10n',$price);
                 }
@@ -359,7 +358,7 @@ class ProductsController extends Controller
             $discount = StockVariationDiscount::findOrFail($discount_id);
             if($discount){
                 if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-                    $price = number_format($discount->price);
+                    $price = number_format($discount->price,1);
                 } else {
                     $price = money_format('%(#10n',$discount->price);
                 }
