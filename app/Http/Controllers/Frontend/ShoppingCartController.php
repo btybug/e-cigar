@@ -581,4 +581,10 @@ class ShoppingCartController extends Controller
         $popuphtml = \View('frontend.products._partials.offer_popup', ['vape' => $product, 'key' => null, 'price' => $price, 'qty' => $qty, 'extras' => []])->render();
         return response()->json(['error' => false, 'html' => $popuphtml]);
     }
+
+    public function selectSpecialOffers(Request $request)
+    {
+        $html = '';
+        return response()->json(['error' => false, 'html' => $html]);
+    }
 }
