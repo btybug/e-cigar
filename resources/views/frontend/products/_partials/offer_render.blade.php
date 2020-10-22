@@ -8,7 +8,7 @@
                 <span class="font-sec-light font-26">{{ $extra['offer']->name }}</span>
             </div>
             <div class="col-3 d-flex justify-content-end pr-0">
-               <span class="font-40 product__single-item_price ">
+               <span class="font-40 product__single-item_price offer-price-for-total" data-price="{{ $extra['price'] }}">
                        {!! convert_price($extra['price'],get_currency()) !!}
                </span>
             </div>
