@@ -3477,12 +3477,15 @@ $(document).ready(function () {
             e.preventDefault();
             const id = $('#singleProductPageCnt #vpid').val();
             const price = countTotalPrice();
+            const variations = $("#special_offer_data").val();
+            
+            console.log("$(#special_offer_data).val()", $("#special_offer_data").val().length)
             $.ajax({
                 type: "post",
                 url: "/get-special-offers",
                 cache: false,
                 datatype: "json",
-                data: {id, price},
+                data: {id, price, variations},
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },

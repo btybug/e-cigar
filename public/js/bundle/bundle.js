@@ -5890,12 +5890,15 @@ $(document).ready(function () {
             e.preventDefault();
             var id = $('#singleProductPageCnt #vpid').val();
             var price = countTotalPrice();
+            var variations = $("#special_offer_data").val();
+
+            console.log("$(#special_offer_data).val()", $("#special_offer_data").val().length);
             $.ajax({
                 type: "post",
                 url: "/get-special-offers",
                 cache: false,
                 datatype: "json",
-                data: { id: id, price: price },
+                data: { id: id, price: price, variations: variations },
                 headers: {
                     "X-CSRF-TOKEN": $("meta[name='csrf-token']").attr("content")
                 },
