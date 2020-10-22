@@ -588,7 +588,6 @@ class ShoppingCartController extends Controller
         $variations = $request->get('variations',collect([]));
         $this->cartService->validateExtra($product, $request->variations);
         $offers = $this->cartService->extras;
-
         $html = \View('frontend.products._partials.offer_render',compact('offers'))->render();
         return response()->json(['error' => false, 'html' => $html,'data' => $variations]);
     }
