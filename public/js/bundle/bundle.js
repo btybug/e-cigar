@@ -5890,7 +5890,7 @@ $(document).ready(function () {
             e.preventDefault();
             var id = $('#singleProductPageCnt #vpid').val();
             var price = countTotalPrice();
-            var variations = $("#special_offer_data").val();
+            var variations = $("#special_offer_data").val() && JSON.parse($("#special_offer_data").val());
 
             console.log("$(#special_offer_data).val()", $("#special_offer_data").val().length);
             $.ajax({
