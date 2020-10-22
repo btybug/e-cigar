@@ -1,5 +1,5 @@
 @if(count($offers))
-    @foreach($offers as $extra)
+    @foreach($offers['data'] as $extra)
         <div class="d-flex flex-wrap align-items-center lh-1 border p-2">
             <div class="col-1 pl-0">
                 <a href="javascript:void(0)" data-group="{{ $extra['variations']['group']->variation_id }}" class="link-black"><span class="fas fa-trash"></span></a>
