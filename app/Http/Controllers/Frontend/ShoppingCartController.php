@@ -584,10 +584,12 @@ class ShoppingCartController extends Controller
 
     public function selectSpecialOffers(Request $request)
     {
-        dd($request->all());
         $product = Stock::findOrFail($request->product_id);
-//        $offers = $product->special_offers()->whereIn('id',)
-        $html = '';
-        return response()->json(['error' => false, 'html' => $html]);
+        $variations = $request->get('variations',collect([]));
+        $this->cartService->validateExtra($product, $request->variations);
+        $offers = $this->cartService->extras;
+
+        $html = \View('frontend.products._partials.offer_render',compact('offers'))->render();
+        return response()->json(['error' => false, 'html' => $html,'data' => $variations]);
     }
 }
