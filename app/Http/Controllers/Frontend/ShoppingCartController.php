@@ -577,7 +577,7 @@ class ShoppingCartController extends Controller
         $product = Stock::findOrFail($request->id);
         $price = $request->price;
         $qty = 1;
-        if(count($request->variations)){
+        if(isset($request->variations)){
             $this->cartService->validateExtra($product, $request->variations);
             $extras = $this->cartService->extras;
         }
