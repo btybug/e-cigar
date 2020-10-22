@@ -571,4 +571,14 @@ class ShoppingCartController extends Controller
 
         return response()->json(['error' => true]);
     }
+
+    public function getSpecialOffers(Request $request)
+    {
+        $product = Stock::findOrFail($request->id);
+        $price = $request->price;
+        $qty = 1;
+
+        $popuphtml = \View('frontend.products._partials.offer_popup', ['vape' => $product, 'key' => null, 'price' => $price, 'qty' => $qty, 'extras' => []])->render();
+        return response()->json(['error' => false, 'html' => $popuphtml]);
+    }
 }

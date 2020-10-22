@@ -185,6 +185,7 @@ Route::post('/my-cart-special-offer', 'Frontend\ShoppingCartController@postSpeci
 Route::get('/check-out', 'Frontend\ShoppingCartController@getCheckOut')->name('shop_check_out');
 Route::get('/payment/{token}', 'Frontend\ShoppingCartController@getPayment')->name('shop_payment');
 Route::post('/add-to-cart', 'Frontend\ShoppingCartController@postAddToCart')->name('shop_add_to_cart');
+Route::post('/get-special-offers', 'Frontend\ShoppingCartController@getSpecialOffers')->name('get_special_offers');
 Route::post('/add-extra-to-cart', 'Frontend\ShoppingCartController@postAddExtraToCart')->name('shop_add_extra_to_cart');
 Route::post('/update-cart', 'Frontend\ShoppingCartController@postUpdateQty')->name('shop_update_cart');
 Route::post('/remove-from-cart', 'Frontend\ShoppingCartController@postRemoveFromCart')->name('shop_remove_from_cart');

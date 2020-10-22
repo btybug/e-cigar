@@ -14,10 +14,17 @@
                 <a href="javascript:void(0)" class="font-sec-light font-26 text-uppercase bottom-btn-cart no-btn">
                     {!! __('no_thank_you') !!}
                 </a>
-                <a href="javascript:void(0)"
-                   class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
-                    {!! __('add_to_cart') !!}
-                </a>
+                @if($key)
+                    <a href="javascript:void(0)"
+                       class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
+                        {!! __('add_to_cart') !!}
+                    </a>
+                @else
+                    <a href="javascript:void(0)"
+                       class="font-sec-light font-26 text-uppercase bg-blue-clr bottom-btn-cart">
+                        {!! __('Select') !!}
+                    </a>
+                @endif
             </div>
         </div>
 
