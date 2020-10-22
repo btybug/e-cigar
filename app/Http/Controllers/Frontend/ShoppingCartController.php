@@ -577,12 +577,13 @@ class ShoppingCartController extends Controller
         $product = Stock::findOrFail($request->id);
         $price = $request->price;
         $qty = 1;
+        $extras = [];
         if(isset($request->variations)){
             $this->cartService->validateExtra($product, $request->variations);
             $extras = $this->cartService->extras;
         }
 
-        $popuphtml = \View('frontend.products._partials.offer_popup', ['vape' => $product, 'key' => null, 'price' => $price, 'qty' => $qty, 'extras' => (isset($extras['data'])??[])])->render();
+        $popuphtml = \View('frontend.products._partials.offer_popup', ['vape' => $product, 'key' => null, 'price' => $price, 'qty' => $qty, 'extras' => $extras])->render();
         return response()->json(['error' => false, 'html' => $popuphtml]);
     }
 
