@@ -5568,6 +5568,11 @@ $(document).ready(function () {
                         // console.log($self.closest('.special__popup-main-product-item'));
                         // btnAddToRemove($self);
                         // $('.special__popup-content-right-item.added-offers').append(data.html);
+                        $("#special_offer_data").val(JSON.stringify({
+                            product_id: $('#vpid').val(),
+                            variations: products
+                        }));
+                        $(".special-box").html(data.html);
                         $("#specialPopUpModal").modal('hide');
                         // $("#headerShopCartBtn").click();
                     }).catch(function (error) {
@@ -5602,11 +5607,12 @@ $(document).ready(function () {
                     //     .catch(function (error) {
                     //         console.log(error);
                     //     });
-                    console.log({
-                        key: $('.special__popup-content').data('key'),
-                        product_id: $('.special__popup-content').data('product-id'),
-                        variations: products
-                    });
+
+                    // console.log({
+                    //     key: $('.special__popup-content').data('key'),
+                    //     product_id: $('.special__popup-content').data('product-id'),
+                    //     variations: products
+                    // });
                     // $("#specialPopUpModal").modal('hide');
                 } else {}
             }
