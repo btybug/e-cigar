@@ -829,35 +829,46 @@
                                 </div>
                             </div>
                             <div id="variations" class="tab-pane  basic-details-tab stock-variations-tab fade">
-                                <div class="container-fluid p-25">
-                                    <div class=" row mb-2">
-                                            {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
-                                            <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
-                                            <div class="col-xl-3 col-sm-4 col-3">
-                                                {!! Form::select('section_type',[
-                                                0 => 'Multy Section',
-                                                1 => 'Single Section',
-                                                2 => 'Simple Product'
-                                            ],null,['class' => 'form-control select-section-type']) !!}
-                                            </div>
-                                    </div>
-                                    <div class="v-box">
-                                            <div class="accordion" id="accordionStockEdit">
-                                                <div id="stockEditSortablePrice" class="list-group">
-                                                    @if($model && isset($variations))
-                                                        @foreach($variations as $k=>$v)
-                                                            @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
-                                                        @endforeach
-                                                    @endif
+                                <ul class="nav nav-tabs mt-5">
+                                    @foreach($roles as $role)
+                                        <li class="nav-item"><a class="nav-link @if($loop->first) active @endif" data-toggle="tab" href="#{{$role->slug}}">{!! $role->title !!}</a>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                @foreach($roles as $role)
+                                    <div id="{{ $role->slug }}" class="tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
+                                        {!! $role->title !!}
+                                        <div class="container-fluid p-25">
+                                        <div class=" row mb-2">
+                                                {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
+                                                <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
+                                                <div class="col-xl-3 col-sm-4 col-3">
+                                                    {!! Form::select('section_type',[
+                                                    0 => 'Multy Section',
+                                                    1 => 'Single Section',
+                                                    2 => 'Simple Product'
+                                                ],null,['class' => 'form-control select-section-type']) !!}
                                                 </div>
-                                            </div>
+                                        </div>
+                                        <div class="v-box">
+                                                <div class="accordion" id="accordionStockEdit">
+                                                    <div id="stockEditSortablePrice" class="list-group">
+                                                        @if($model && isset($variations))
+                                                            @foreach($variations as $k=>$v)
+                                                                @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
+                                                            @endforeach
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                        </div>
+                                        <div class="text-center m-4">
+                                            <a class="btn btn-info text-white duplicate-v-options @if($model && $model->section_type == 2) d-none @endif" data-required="1"><i
+                                                    class="fa fa-plus"></i> Add
+                                                new option</a>
+                                        </div>
                                     </div>
-                                    <div class="text-center m-4">
-                                        <a class="btn btn-info text-white duplicate-v-options @if($model && $model->section_type == 2) d-none @endif" data-required="1"><i
-                                                class="fa fa-plus"></i> Add
-                                            new option</a>
                                     </div>
-                                </div>
+                                @endforeach
                             </div>
 
                             <div id="seo" class="tab-pane basic-details-tab tab_seo fade">

@@ -18,6 +18,7 @@ use App\Models\Brands;
 use App\Models\Category;
 use App\Models\Filters;
 use App\Models\Items;
+use App\Models\Roles;
 use App\Models\Settings;
 use App\Models\Stickers;
 use App\Models\Stock;
@@ -96,7 +97,7 @@ class StockController extends Controller
         $brands = Category::with('children')->where('type', 'brands')->whereNull('parent_id')->get();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
         $special_filters = Category::with('children')->where('type', 'special_filter')->whereNull('parent_id')->get();
-
+        $roles = Roles::where('type','frontend')->get();
         $data = Category::recursiveItems($categories);
         $dataOffers = Category::recursiveItems($offers);
 
@@ -110,7 +111,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
         return $this->view('stock_new', compact(['model', 'data', 'brands', 'categories', 'general', 'allAttrs', 'offers', 'dataOffers',
-            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters', 'special_filters']));
+            'twitterSeo', 'fbSeo', 'robot', 'stockItems', 'filters', 'special_filters','roles']));
     }
 
     public function getStockEdit($id)
@@ -118,7 +119,7 @@ class StockController extends Controller
         $model = Stock::findOrFail($id);
         $variations = collect($model->variations()->where('is_required', true)->orderBy('ordering','asc')->get())->groupBy('variation_id');
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
-
+        $roles = Roles::where('type','frontend')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $brands =Brands::all();
         $offers = Category::with('children')->where('type', 'offers')->whereNull('parent_id')->get();
@@ -139,7 +140,7 @@ class StockController extends Controller
         $robot = $this->settings->getEditableData('seo_robot_stocks');
 
         return $this->view('stock_new', compact(['model', 'variations', 'extraVariations', 'brands', 'offers', 'dataOffers',
-            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters', 'special_filters']));
+            'checkedCategories', 'categories', 'allAttrs', 'general', 'stockItems', 'twitterSeo', 'fbSeo', 'robot', 'data', 'filters', 'special_filters','roles']));
     }
 
     public function postStock(ProductsRequest $request)
