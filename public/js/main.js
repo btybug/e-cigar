@@ -2868,9 +2868,9 @@ $(document).ready(function () {
 
             const activeProducts = $('body').find(' .special__popup-main-product-item.active');
             const products = [];
-            //Edo
-            if(location.pathname === "/my-cart") {
-                if(activeProducts.length > 0) {
+            //Edo 
+            if(location.pathname === "/my-cart") { 
+                if(activeProducts.length > 0) { 
                     activeProducts.each(function() {
                         const product_id = $(this).data('id');
                         const product_qty = 1;

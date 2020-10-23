@@ -5317,7 +5317,7 @@ $(document).ready(function () {
 
             var activeProducts = $('body').find(' .special__popup-main-product-item.active');
             var products = [];
-            //Edo
+            //Edo 
             if (location.pathname === "/my-cart") {
                 if (activeProducts.length > 0) {
                     activeProducts.each(function () {
