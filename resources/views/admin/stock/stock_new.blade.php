@@ -835,12 +835,13 @@
                                         </li>
                                     @endforeach
                                 </ul>
+                                {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
                                 @foreach($roles as $role)
                                     <div id="{{ $role->slug }}" class="tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
                                         {!! $role->title !!}
                                         <div class="container-fluid p-25">
                                         <div class=" row mb-2">
-                                                {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
+
                                                 <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
                                                 <div class="col-xl-3 col-sm-4 col-3">
                                                     {!! Form::select('section_type',[
@@ -851,8 +852,8 @@
                                                 </div>
                                         </div>
                                         <div class="v-box">
-                                                <div class="accordion" id="accordionStockEdit">
-                                                    <div id="stockEditSortablePrice" class="list-group">
+                                                <div class="accordion" id="accordionStockEdit{{ $role->slug }}">
+                                                    <div class="list-group stockEditSortablePrice">
                                                         @if($model && isset($variations))
                                                             @foreach($variations as $k=>$v)
                                                                 @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
@@ -1603,7 +1604,7 @@
 
                 if(val == 2){
                     $('body').find('.duplicate-v-options').addClass('d-none');
-                    $('body').find('#stockEditSortablePrice').empty();
+                    $('body').find('.stockEditSortablePrice').empty();
                     $('body').find('.duplicate-v-options').trigger('click')
                 }else{
                     $('body').find('.duplicate-v-options').removeClass('d-none');
@@ -1611,13 +1612,13 @@
             });
 
             function editSortablePriceFunc(){
-                let editSortablePrice = Array.from($('#stockEditSortablePrice .required-single_wall'));
+                let editSortablePrice = Array.from($('.stockEditSortablePrice .required-single_wall'));
                 editSortablePrice.forEach((item,index)=>{
                     $(item).find('.card-header .stock-edit-price-tab-ordering input').val(index+1)
                 })
             }
 
-            new Sortable.create(document.querySelector('#stockEditSortablePrice'), {
+            new Sortable.create(document.querySelector('.stockEditSortablePrice'), {
                 animation: 150,
                 ghostClass: 'blue-background-class',
                 handle: '.stock-page--head',
@@ -2448,7 +2449,7 @@
                     {required: $(this).attr('data-required')},
                     function (res) {
                         if (!res.error) {
-                            parent.find('#stockEditSortablePrice').append(res.html);
+                            parent.find('.stockEditSortablePrice').append(res.html);
                             var value = $("#changeProductType").val();
                             let sections = parent.find('.stock-page');
                             editSortablePriceFunc()
