@@ -48,6 +48,7 @@ class RolesController extends Controller
             'type' => 'required|in:backend,frontend'
         ]);
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
+        dd($validator->fails());
         if ($validator->fails()) return redirect()->back();
         $role = Roles::create($data);
         $role->permissions()->sync($permissions);
@@ -71,6 +72,7 @@ class RolesController extends Controller
         $data['slug'] = str_replace(' ', '_', strtolower($data['title']));
 
         $role = Roles::find($data['id']);
+        $role->fill($data)->save();
         $permissions = array_merge($permissions, $has_access);
         $role->permissions()->sync($permissions);
         return redirect()->back();
