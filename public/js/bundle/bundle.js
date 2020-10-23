@@ -5450,7 +5450,7 @@ $(document).ready(function () {
                 } else {}
             } else {
 
-                if (activeProducts.length > 0) {
+                if (activeProducts) {
                     var pr = [];
                     activeProducts.each(function () {
                         var product_id = $(this).data('id');
@@ -5937,6 +5937,12 @@ $(document).ready(function () {
                             filterModalOfferInit();
                             filterSelectOfferInit();
                             countOfferPrice();
+                            $('.special__popup-content-right-product').each(function () {
+                                if ($(".special__popup-main-product-item[data-id=\"" + $(this).data('id') + "\"]").length > 0) {
+                                    $(".special__popup-main-product-item[data-id=\"" + $(this).data('id') + "\"]").addClass('user-non-select');
+                                }
+                            });
+                            $('.user-non-select').find('.special__popup-main-product-item-btn').removeClass('add-btn').addClass('remove-btn').html('remove');
                             $("#specialPopUpModal").modal('show');
                         }
                         //  else {
