@@ -837,7 +837,7 @@
                                 </ul>
                                 {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
                                 @foreach($roles as $role)
-                                    <div id="{{ $role->slug }}" class="tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
+                                    <div id="{{ $role->slug }}" class="main-tab tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
                                         <div class="container-fluid p-25">
                                         <div class=" row mb-2">
 
@@ -1602,11 +1602,11 @@
                 let val = $(this).val();
 
                 if(val == 2){
-                    $('body').find('.duplicate-v-options').addClass('d-none');
-                    $('body').find('.stockEditSortablePrice').empty();
-                    $('body').find('.duplicate-v-options').trigger('click')
+                    $(this).closest('.main-tab').find('.duplicate-v-options').addClass('d-none');
+                    $(this).closest('.main-tab').find('.stockEditSortablePrice').empty();
+                    $(this).closest('.main-tab').find('.duplicate-v-options').trigger('click')
                 }else{
-                    $('body').find('.duplicate-v-options').removeClass('d-none');
+                    $(this).closest('.main-tab').find('.duplicate-v-options').removeClass('d-none');
                 }
             });
 
@@ -2442,7 +2442,7 @@
             });
 
             $("body").on('click', '.duplicate-v-options', function () {
-                let parent = $(this).closest('.basic-details-tab');
+                let parent = $(this).closest('.main-tab');
                 AjaxCall(
                     "/admin/stock/duplicate-v-options",
                     {required: $(this).attr('data-required')},
