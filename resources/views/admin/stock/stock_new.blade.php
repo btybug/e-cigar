@@ -838,7 +838,6 @@
                                 {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
                                 @foreach($roles as $role)
                                     <div id="{{ $role->slug }}" class="tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
-                                        {!! $role->title !!}
                                         <div class="container-fluid p-25">
                                         <div class=" row mb-2">
 
