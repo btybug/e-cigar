@@ -852,7 +852,7 @@
                                                 </div>
                                         </div>
                                         <div class="v-box">
-                                                <div class="accordion" id="accordionStockEdit{{ $role->slug }}">
+                                                <div class="accordion accordionStockEdit">
                                                     <div class="list-group stockEditSortablePrice">
                                                         @if($model && isset($variations))
                                                             @foreach($variations as $k=>$v)
@@ -1625,7 +1625,7 @@
                 onSort: function (/**Event*/evt) {
                     // same properties as onEnd
                     // alert(55)
-                    console.log(evt,6666)
+                    console.log(evt,6666,8787878)
                     editSortablePriceFunc()
                 }
             });

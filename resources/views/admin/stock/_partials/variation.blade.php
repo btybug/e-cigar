@@ -40,7 +40,7 @@
                 <button type="button" class="btn btn-danger delete-v-option"><i class="fa fa-times"></i></button>
             </div>
         </div>
-        <div id="collapseStock{{$main_unique}}" class="collapse" aria-labelledby="heading{{$main_unique}}" data-parent="#accordionStockEdit">
+        <div id="collapseStock{{$main_unique}}" class="collapse" aria-labelledby="heading{{$main_unique}}" data-parent=".accordionStockEdit">
             <div class="card-body panel-body">
                 <div class="row mb-2">
                     <div class="col-xl-5 col-lg-7 col-md-12 head-left">
