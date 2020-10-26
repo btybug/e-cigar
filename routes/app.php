@@ -61,4 +61,3 @@ Route::group(['prefix' => 'shops'], function () {
         Route::get('/view/{id}', 'AppController@orderViev')->name('admin_app_order_view');
     });
     Route::post('/warehouse-not-selected-items/{id}', 'AppController@notSelectedProducts')->name('admin_app_not_selected_products');
-    Route::post('/warehouse-not-selected-items/{id}', 'AppController@notSelectedProducts')->name('admin_app_not_selected_products');
