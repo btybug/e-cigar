@@ -42,13 +42,7 @@ class AppController extends Controller
 
     public function products(Request $request, $q)
     {
-        $id=1;
-        $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
-            ->select('items.*', 'app_items.item_id','app_items.warehouse_id')
-            ->where(function ($query)use($id){
-                return  $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id','!=',$id);
-            })->with(['brand', 'categories', 'translations'])->get();
-        dd($items);
+      
         $current = null;
         $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
             ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
