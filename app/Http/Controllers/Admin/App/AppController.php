@@ -42,7 +42,7 @@ class AppController extends Controller
 
     public function products(Request $request, $q)
     {
-      
+
         $current = null;
         $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
             ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
@@ -83,7 +83,7 @@ class AppController extends Controller
 
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
-        return \Response::json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
+        return response()->json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
     }
 
     public function orderViev($id)
