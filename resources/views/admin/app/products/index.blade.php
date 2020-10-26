@@ -29,9 +29,7 @@
             </li>
         </ul>
         <div class="button-area">
-            <a class="btn btn-info add-category text-white" data-toggle="modal" data-target="#store_modal"><span
-                    class="icon-plus mr-1"><i
-                        class="fa fa-plus"></i></span>Add new</a>
+
         </div>
     </div>
     @if($q)
