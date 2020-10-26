@@ -117,7 +117,7 @@ class StockController extends Controller
     public function getStockEdit($id)
     {
         $model = Stock::findOrFail($id);
-        $variations = collect($model->variations()->where('is_required', true)->orderBy('ordering','asc')->get())->groupBy('variation_id');
+        $variations = $model->variations()->where('is_required', true)->orderBy('ordering','asc')->get();
         $extraVariations = collect($model->variations()->where('is_required', false)->get())->groupBy('variation_id');
         $roles = Roles::where('type','frontend')->get();
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
@@ -410,7 +410,9 @@ class StockController extends Controller
         $stock = Stock::find($request->get('stockID'));
         $package_variation = null;
         $main = null;
-        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems', 'main_unique', 'main', 'items','stock']))->render();
+        $role_id = $request->get('role_id');
+        $role = Roles::find($role_id);
+        $html = \View("admin.items._partials.variation_package_item", compact(['package_variation', 'stockItems', 'main_unique', 'main', 'items','stock','role']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -431,9 +433,10 @@ class StockController extends Controller
         $package_variation = null;
         $model = null;
         $required = $request->required;
+        $role_id = $request->get('role_id');
         $filters = Category::where('type', 'filter')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
-
-        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters', 'required']))->render();
+        $role = Roles::find($role_id);
+        $html = \View('admin.stock._partials.variation', compact(['model', 'package_variation', 'stockItems', 'filters', 'required','role']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -588,8 +591,9 @@ class StockController extends Controller
         $stockItems = Items::active()->get()->pluck('name', 'id')->all();
         $main = null;
         $package_variation = null;
-
-        $html = \view("admin.items._partials.variation_package_item", compact(['items', 'main_unique', 'stockItems', 'main', 'package_variation']))->render();
+        $role_id = $request->get('role_id');
+        $role = Roles::find($role_id);
+        $html = \view("admin.items._partials.variation_package_item", compact(['items', 'main_unique', 'stockItems', 'main', 'package_variation','role']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -600,14 +604,17 @@ class StockController extends Controller
         $main_unique = $request->get('uniqueId');
         $main = null;
         $html = '';
+        $role_id = $request->get('role_id');
+        $role = Roles::find($role_id);
+
         if ($request->type == 'single') {
-            $html = \view("admin.stock._partials.simple_item", compact(['stockItems', 'main_unique', 'main']))->render();
+            $html = \view("admin.stock._partials.simple_item", compact(['stockItems', 'main_unique', 'main','role']))->render();
         } elseif ($request->type == 'package_product') {
-            $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main']))->render();
+            $html = \view("admin.stock._partials.package_item", compact(['stockItems', 'main_unique', 'main','role']))->render();
         } elseif ($request->type == 'filter') {
-            $html = \view("admin.stock._partials.filter_item", compact(['stockItems', 'main_unique', 'main']))->render();
+            $html = \view("admin.stock._partials.filter_item", compact(['stockItems', 'main_unique', 'main','role']))->render();
         }elseif ($request->type == 'filter_discount') {
-            $html = \view("admin.stock._partials.filter_discount", compact(['stockItems', 'main_unique', 'main']))->render();
+            $html = \view("admin.stock._partials.filter_discount", compact(['stockItems', 'main_unique', 'main','role']))->render();
         }
 
 

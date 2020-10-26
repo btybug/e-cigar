@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <label>Display as: </label>
-                        {!! Form::select("variations[$main_unique][display_as]",
+                        {!! Form::select("variations[$role->id][$main_unique][display_as]",
                         ['menu' => 'Menu','list' => 'List','popup' => "Pop up"],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
                 </div>

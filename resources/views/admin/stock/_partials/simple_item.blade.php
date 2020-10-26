@@ -4,8 +4,8 @@
             <div class="">
                 <div class="row">
                     {{--<div class="col-md-2">--}}
-                    {!! Form::hidden("variations[$main_unique][min_count_limit]",1) !!}
-                    {!! Form::hidden("variations[$main_unique][count_limit]",1) !!}
+                    {!! Form::hidden("variations[$role->id][$main_unique][min_count_limit]",1) !!}
+                    {!! Form::hidden("variations[$role->id][$main_unique][count_limit]",1) !!}
                     {{--</div>--}}
                     {{--<div class="col-md-2">--}}
                     {{--How Many items user can select : {!! Form::number("variations[$main_unique][count_limit]",--}}
@@ -13,7 +13,7 @@
                     {{--</div>--}}
                     <div class="col-lg-12">
                         <label>Display as: </label>
-                        {!! Form::select("variations[$main_unique][display_as]",
+                        {!! Form::select("variations[$role->id][$main_unique][display_as]",
                         ['menu' => 'Select Box','list' => 'Radio'],($main) ? $main->display_as : null,['class' => 'form-control display-change']) !!}
                     </div>
 

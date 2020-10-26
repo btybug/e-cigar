@@ -5,22 +5,22 @@
             <div class="row discount-item">
                 <div class="col-sm-3">
                     <label>From</label>
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][from]",$datum->from,['class' => 'form-control']) !!}
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][from]",$datum->from,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-sm-3">
                     <label>To</label>
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][to]",$datum->to,['class' => 'form-control']) !!}
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][to]",$datum->to,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-4 col-sm-3">
                     <label>Price/Item</label>
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                {!! Form::hidden("variations[$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
+                {!! Form::hidden("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         @endforeach
@@ -37,19 +37,19 @@
             <div class="row discount-item ">
                 <div class="col-xl-5 col-sm-4">
                     <label>Qty</label>
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][qty]",$datum->qty,['class' => 'form-control']) !!}
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][qty]",$datum->qty,['class' => 'form-control']) !!}
                 </div>
 
                 <div class="col-xl-5 col-sm-4">
                     <label>Total price</label>
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][price]",$datum->price,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                {!! Form::hidden("variations[$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
+                {!! Form::hidden("variations[$role->id][$main_unique][variations][$uniqueID][discount][$key][ordering]",($main) ? $main->ordering : null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         @endforeach

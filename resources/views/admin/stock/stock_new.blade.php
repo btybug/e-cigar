@@ -837,32 +837,40 @@
                                 </ul>
                                 {!! Form::hidden('type',0,['id' => 'changeProductType']) !!}
                                 @foreach($roles as $role)
-                                    <div id="{{ $role->slug }}" class="main-tab tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif">
+                                    <div id="{{ $role->slug }}" class="main-tab tab-pane {{ $role->slug }}-details-tab @if($loop->first) fade in active show @else fade @endif" data-role="{{ $role->id }}">
                                         <div class="container-fluid p-25">
                                         <div class=" row mb-2">
-
+                                                @php
+                                                $section_type = null;
+                                                if($model){
+                                                    $v = $model->variations->where('role_id',$role->id)->first();
+                                                    if($v){
+                                                        $section_type = $v->section_type;
+                                                    }
+                                                }
+                                                @endphp
                                                 <label class="col-xl-1 col-sm-2 col-3 col-form-label">Section type:</label>
                                                 <div class="col-xl-3 col-sm-4 col-3">
-                                                    {!! Form::select('section_type',[
+                                                    {!! Form::select("variations[$role->id][section_type]",[
                                                     0 => 'Multy Section',
                                                     1 => 'Single Section',
                                                     2 => 'Simple Product'
-                                                ],null,['class' => 'form-control select-section-type']) !!}
+                                                ],$section_type,['class' => 'form-control select-section-type']) !!}
                                                 </div>
                                         </div>
                                         <div class="v-box">
                                                 <div class="accordion accordionStockEdit">
                                                     <div class="list-group stockEditSortablePrice">
                                                         @if($model && isset($variations))
-                                                            @foreach($variations as $k=>$v)
-                                                                @include("admin.stock._partials.variation",['required' => 1,"k"=>$k])
+                                                            @foreach(collect($variations->where('role_id',$role->id)->all())->groupBy('variation_id') as $k=>$v)
+                                                                @include("admin.stock._partials.variation",['required' => 1,"k"=>$k,'role' =>$role])
                                                             @endforeach
                                                         @endif
                                                     </div>
                                                 </div>
                                         </div>
                                         <div class="text-center m-4">
-                                            <a class="btn btn-info text-white duplicate-v-options @if($model && $model->section_type == 2) d-none @endif" data-required="1"><i
+                                            <a class="btn btn-info text-white duplicate-v-options @if($section_type && $section_type == 2) d-none @endif" data-required="1"><i
                                                     class="fa fa-plus"></i> Add
                                                 new option</a>
                                         </div>
@@ -1286,22 +1294,22 @@
         <div class="row discount-item">
             <div class="col-sm-3">
                 <label>From</label>
-                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-sm-3">
                 <label>To</label>
-                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-xl-4 col-sm-3">
                 <label>Price/Item</label>
-                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+            {!! Form::hidden("variations[{role}][{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
@@ -1310,19 +1318,19 @@
         <div class="row discount-item">
             <div class="col-xl-5 col-sm-4">
                 <label>Qty</label>
-                {!! Form::number('variations[{main_unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
             </div>
 
             <div class="col-xl-5 col-sm-4">
                 <label>Total price</label>
-                {!! Form::number('variations[{main_unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            {!! Form::hidden('variations[{main_unique}][discount][{count}][ordering]',null,
+            {!! Form::hidden('variations[{role}][{main_unique}][discount][{count}][ordering]',null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
@@ -1331,19 +1339,19 @@
         <div class="row discount-item">
             <div class="col-xl-5 col-sm-4">
                 <label>Qty</label>
-                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
             </div>
 
             <div class="col-xl-5 col-sm-4">
                 <label>Total price</label>
-                {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
             </div>
             <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                 <button class="btn btn-danger remove-discount-item">
                     <i class="fa fa-minus"></i>
                 </button>
             </div>
-            {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+            {!! Form::hidden("variations[{role}][{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
         </div>
     </script>
@@ -1354,22 +1362,22 @@
             <div class="row discount-item">
                 <div class="col-sm-3">
                     <label>From</label>
-                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][from]',null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-sm-3">
                     <label>To</label>
-                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][to]',null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-4 col-sm-3">
                     <label>Price/Item</label>
-                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-2 col-sm-3 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+                {!! Form::hidden("variations[{role}][{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
         </div>
@@ -1385,19 +1393,19 @@
             <div class="row discount-item">
                 <div class="col-xl-5 col-sm-4">
                     <label>Qty</label>
-                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][qty]',null,['class' => 'form-control']) !!}
                 </div>
 
                 <div class="col-xl-5 col-sm-4">
                     <label>Total price</label>
-                    {!! Form::number('variations[{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
+                    {!! Form::number('variations[{role}][{main_unique}][variations][{unique}][discount][{count}][price]',null,['class' => 'form-control']) !!}
                 </div>
                 <div class="col-xl-2 col-sm-4 mt-sm-0 mt-2 align-self-end">
                     <button class="btn btn-danger remove-discount-item">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
-                {!! Form::hidden("variations[{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
+                {!! Form::hidden("variations[{role}][{main_unique}][variations][{unique}][discount][{count}][ordering]",null,
                ['class' => 'sort-discount-hidden-field','placeholder' => 'Sort']) !!}
             </div>
 
@@ -2050,6 +2058,8 @@
                 var id = guid();
                 var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
                 var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
+                var role = $(this).closest('.main-tab').data('role');
+                html = html.replace(/{role}/g, role);
                 html = html.replace(/{count}/g, id);
                 html = html.replace(/{main_unique}/g, main_unique);
                 html = html.replace(/{unique}/g, unique);
@@ -2062,6 +2072,8 @@
                 let html = $('#section-discount').html();
                 var id = guid();
                 var main_unique = $(this).closest('.discount-price').find('.fixed-box').attr('data-main');
+                var role = $(this).closest('.main-tab').data('role');
+                html = html.replace(/{role}/g, role);
                 html = html.replace(/{count}/g, id);
                 html = html.replace(/{main_unique}/g, main_unique);
                 $(this).closest('.discount-price').find('.fixed-box').append(html);
@@ -2073,6 +2085,8 @@
                 var id = guid();
                 var main_unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('main_unique');
                 var unique = $(this).closest('.stock-items-tab-prices').find('.price-type-change').attr('unique');
+                var role = $(this).closest('.main-tab').data('role');
+                html = html.replace(/{role}/g, role);
                 html = html.replace(/{count}/g, id);
                 html = html.replace(/{main_unique}/g, main_unique);
                 html = html.replace(/{unique}/g, unique);
@@ -2255,8 +2269,10 @@
             $("body").on("change", ".filter-select", function () {
                 let parent = $(this).closest('.stock-page');
                 let value = $(this).val();
+                let role_id = $(this).closest('.main-tab').data('role');
                 AjaxCall("{{ route('admin_stock_filter_items') }}", {
                     id: value,
+                    role_id: role_id,
                     uniqueId: parent.attr('data-unqiue')
                 }, function (res) {
                     if (!res.error) {
@@ -2316,10 +2332,9 @@
                             existings.push($(e).attr('data-id'));
                         }
                     });
-
                 AjaxCall(
                     "/admin/stock/add-package-variation",
-                    {main_unique: data_id, items: existings,stockID: stockID},
+                    {main_unique: data_id, items: existings,stockID: stockID,role_id: $_this.closest('.main-tab').data('role')},
                     function (res) {
                         if (!res.error) {
                             $_this.find('.package-variation-box').append(res.html)
@@ -2443,9 +2458,13 @@
 
             $("body").on('click', '.duplicate-v-options', function () {
                 let parent = $(this).closest('.main-tab');
+
                 AjaxCall(
                     "/admin/stock/duplicate-v-options",
-                    {required: $(this).attr('data-required')},
+                    {
+                        required: $(this).attr('data-required'),
+                        role_id: parent.data('role')
+                    },
                     function (res) {
                         if (!res.error) {
                             parent.find('.stockEditSortablePrice').append(res.html);
@@ -2576,6 +2595,8 @@
 
                     var html = $('#fixed-discount-temp').html();
                     var id = guid();
+                    var role = $(this).closest('.main-tab').data('role');
+                    html = html.replace(/{role}/g, role);
                     html = html.replace(/{count}/g, id);
                     html = html.replace(/{main_unique}/g, main_unique);
                     html = html.replace(/{unique}/g, unique);
@@ -2586,6 +2607,8 @@
                     parent.find('.price-discount').removeClass('d-none').addClass('show');
                     var id = guid();
                     var html = $('#range-discount-temp').html();
+                    var role = $(this).closest('.main-tab').data('role');
+                    html = html.replace(/{role}/g, role);
                     html = html.replace(/{count}/g, id);
                     html = html.replace(/{main_unique}/g, main_unique);
                     html = html.replace(/{unique}/g, unique);
@@ -2598,9 +2621,10 @@
             $('body').on('change', '.variation-product-select', function () {
                 let value = $(this).val();
                 let parent = $(this).closest('.stock-page');
+                let role_id = $(this).closest('.main-tab').data('role');
                 AjaxCall(
                     "/admin/stock/variation-option-view",
-                    {type: value, uniqueId: parent.attr('data-unqiue')},
+                    {type: value, uniqueId: parent.attr('data-unqiue'),role_id: role_id},
                     function (res) {
                         if (!res.error) {
                             if (value == 'filter' || value == 'filter_discount') {

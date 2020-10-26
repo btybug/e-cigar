@@ -14,7 +14,7 @@
                         <img src="/public/images/no_image.png" alt="photo"  class="v-img">
                     @endif
                 </div>
-                <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"
+                <select name="variations[{{ $role->id }}][{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"
                         class="form-control v-item-change">
                     @if($package_variation->item->is_archive)
                         <option value="{{ $package_variation->item_id }}"
@@ -29,9 +29,9 @@
                 </select>
 
                 <div class="my-1">
-                    {!! Form::hidden("variations[$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
+                    {!! Form::hidden("variations[$role->id][$main_unique][variations][$uniqueID][id]",($package_variation) ? $package_variation->id : null) !!}
                 </div>
-                <select name="variations[{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
+                <select name="variations[{{ $role->id }}][{{ $main_unique }}][variations][{{ $uniqueID }}][image]" class="form-control select-v-img">
                     @if($package_variation && $package_variation->item)
                     <option value="{{ $package_variation->item->image }}" selected>Original Image</option>
                     @endif
@@ -51,28 +51,28 @@
             <div class="stock-item-name-desc col-lg-7 mt-lg-0 mt-1">
 
                 <div class="stock-item-desc ">
-                    {!! Form::textarea("variations[$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
+                    {!! Form::textarea("variations[$role->id][$main_unique][variations][$uniqueID][description]",($package_variation) ? $package_variation->description : null,
 ['class' => 'form-control stock-tiny-areas','style' => 'height:300px !important;']) !!}
 
                 </div>
             </div>
         </div>
 
-        {!! Form::hidden("variations[$main_unique][variations][$uniqueID][qty]",($package_variation) ? $package_variation->qty : null) !!}
+        {!! Form::hidden("variations[$role->id][$main_unique][variations][$uniqueID][qty]",($package_variation) ? $package_variation->qty : null) !!}
     </div>
 
     <div
         class="package_price stock-items-tab-prices col-lg-6 col-9 @if(! $main || ($main && $main->price_per == 'product')) d-none @endif ">
         <div class="row ">
             <div class="col-xl-5 col-sm-7">
-                {!! Form::select("variations[$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
+                {!! Form::select("variations[$role->id][$main_unique][variations][$uniqueID][price_type]",['dynamic' => 'Dynamic option','static' => 'Static',
             'fixed' => 'Discount fixed','range'=>'Discount range'],
                 ($package_variation) ? $package_variation->price_type : null,['class' => 'form-control price-type-change','main_unique' => $main_unique,'unique' => $uniqueID]) !!}
             </div>
             <div class="col-md-12 mt-1">
                 <div
                     class="price-static @if($package_variation && $package_variation->price_type =='static') show @else d-none @endif">
-                    {!! Form::number("variations[$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,
+                    {!! Form::number("variations[$role->id][$main_unique][variations][$uniqueID][price]",($package_variation) ? $package_variation->price : null,
                     ['class' => 'form-control v-price','step' => 'any']) !!}
                 </div>
                 <div data-main="{{ $main_unique }}" data-group="{{ $uniqueID }}"

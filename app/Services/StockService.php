@@ -154,64 +154,70 @@ class StockService
     {
         $deletableArray = [];
         if (count($data)) {
-//            dd($data);
-            foreach ($data as $variation_id => $datum) {
-                $newData = [];
-//                dd($datum);
-                $newData['ordering'] = ($datum['ordering']) ?? 0;
-                $newData['count_limit'] = ($datum['count_limit']) ?? 0;
-                $newData['min_count_limit'] = ($datum['min_count_limit']) ?? 0;
-                $newData['title'] = $datum['title'];
-                $newData['type'] = $datum['type'];
-                $newData['is_required'] = $datum['is_required'];
-                $newData['display_as'] = $datum['display_as'];
-                $newData['price_per'] = $datum['price_per'];
-                $newData['filter_category_id'] = ($datum['filter_category_id']) ?? 0;
-                $newData['common_price'] = ($datum['common_price']) ?? 0;
+            dd($data);
+            foreach ($data as $role_id => $d){
+                $section_type = $d['section_type'];
+                unset($d['section_type']);
+                foreach ($d as $variation_id => $datum) {
+                    $newData = [];
 
-                if (isset($datum['variations']) && count($datum['variations'])) {
-                    foreach ($datum['variations'] as $item) {
-                        $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price']) ?? 0);
-                        $newData['item_id'] = $item['item_id'];
-                        $newData['qty'] = ($item['qty']) ?? 0;
-                        $newData['image'] = $item['image'];
-                        $newData['name'] = ($datum['title'])??'';
-                        $newData['variation_id'] = $variation_id;
-                        $newData['description'] = ($item['description']) ?? null;
+                    $newData['ordering'] = ($datum['ordering']) ?? 0;
+                    $newData['count_limit'] = ($datum['count_limit']) ?? 0;
+                    $newData['min_count_limit'] = ($datum['min_count_limit']) ?? 0;
+                    $newData['title'] = $datum['title'];
+                    $newData['type'] = $datum['type'];
+                    $newData['is_required'] = $datum['is_required'];
+                    $newData['display_as'] = $datum['display_as'];
+                    $newData['price_per'] = $datum['price_per'];
+                    $newData['filter_category_id'] = ($datum['filter_category_id']) ?? 0;
+                    $newData['common_price'] = ($datum['common_price']) ?? 0;
+                    $newData['section_type'] = $section_type;
+                    $newData['role_id'] = $role_id;
 
-                        $newData['price_type'] = ($item['price_type']) ?? null;
-                        $newData['discount_type'] = (isset($item['discount_type'])) ?$item['discount_type']: null;
+                    if (isset($datum['variations']) && count($datum['variations'])) {
+                        foreach ($datum['variations'] as $item) {
+                            $newData['price'] = ($datum['price_per'] == 'product') ? $newData['common_price'] : (($item['price']) ?? 0);
+                            $newData['item_id'] = $item['item_id'];
+                            $newData['qty'] = ($item['qty']) ?? 0;
+                            $newData['image'] = $item['image'];
+                            $newData['name'] = ($datum['title'])??'';
+                            $newData['variation_id'] = $variation_id;
+                            $newData['description'] = ($item['description']) ?? null;
+
+                            $newData['price_type'] = ($item['price_type']) ?? null;
+                            $newData['discount_type'] = (isset($item['discount_type'])) ?$item['discount_type']: null;
 
 //                        $newData['filter_category_id'] = $datum['filter_category_id'];
-                        if (isset($item['id'])) {
-                            $variation = StockVariation::find($item['id']);
-                            $variation->update($newData);
-                        } else {
-                            $variation = $stock->variations()->create($newData);
-                        }
-                        $discountDeletable = [];
-                        if($datum['price_per'] == 'discount'){
-                            $discounts = (isset($datum['discount']))?$datum['discount']:[];;
-                        }else{
-                            $discounts = (isset($item['discount']))?$item['discount']:[];
-                        }
-
-                        if(count($discounts)){
-                            foreach ($discounts as $discount){
-                                if (isset($discount['id'])) {
-                                    $d = StockVariationDiscount::find($discount['id']);
-                                    $d->update($discount);
-                                } else {
-                                    $d = $variation->discounts()->create($discount);
-                                }
-
-                                $discountDeletable[] = $d->id;
+                            if (isset($item['id'])) {
+                                $variation = StockVariation::find($item['id']);
+                                $variation->update($newData);
+                            } else {
+                                $variation = $stock->variations()->create($newData);
                             }
+                            $discountDeletable = [];
+                            if($datum['price_per'] == 'discount'){
+                                $discounts = (isset($datum['discount']))?$datum['discount']:[];;
+                            }else{
+                                $discounts = (isset($item['discount']))?$item['discount']:[];
+                            }
+
+                            if(count($discounts)){
+                                foreach ($discounts as $discount){
+                                    if (isset($discount['id'])) {
+                                        $d = StockVariationDiscount::find($discount['id']);
+                                        $d->update($discount);
+                                    } else {
+                                        $d = $variation->discounts()->create($discount);
+                                    }
+
+                                    $discountDeletable[] = $d->id;
+                                }
+                            }
+
+                            $variation->discounts()->whereNotIn('id', $discountDeletable)->delete();
+                            $deletableArray[] = $variation->id;
+
                         }
-
-                        $variation->discounts()->whereNotIn('id', $discountDeletable)->delete();
-                        $deletableArray[] = $variation->id;
-
                     }
                 }
             }

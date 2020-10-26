@@ -17,7 +17,9 @@ class CreateStockVariationsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('stock_id');
             $table->unsignedInteger('item_id');
+            $table->unsignedInteger('role_id')->nullable();
             $table->string('variation_id');
+            $table->tinyInteger('section_type')->default(0);
             $table->string('type');
             $table->string('title')->nullable();
             $table->tinyInteger('is_required')->default(0);
