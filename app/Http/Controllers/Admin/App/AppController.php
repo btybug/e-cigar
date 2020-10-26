@@ -76,8 +76,6 @@ class AppController extends Controller
     {
        $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')->
        where('warehouse_id', $id)->whereNull('app_items.item_id')->select('items.*', 'app_items.item_id')->with(['brand', 'categories', 'translations'])->get();
-        $warehouse = Warehouse::findOrFail($id);
-        $selecteds = $warehouse->appitems()->pluck('item_id');
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
         return \Response::json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
