@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Warehouse;
+use Google\Auth\Cache\Item;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -74,6 +75,9 @@ class AppController extends Controller
 
     public function notSelectedProducts($id)
     {
+       $items= Item::leftJoin('app_item','items.id','app_items.item_id')
+           ->where('warehouse_id',$id)->select('items.*','app_items.item_id')->get();
+       dd($items);
         $warehouse = Warehouse::findOrFail($id);
         $selecteds = $warehouse->appitems()->pluck('item_id');
         dd($selecteds);
