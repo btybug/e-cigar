@@ -13,7 +13,6 @@ use App\Models\Category;
 use App\Models\Items;
 use App\Models\Settings;
 use App\Models\Warehouse;
-use Google\Auth\Cache\Item;
 use Illuminate\Http\Request;
 
 class AppController extends Controller
@@ -75,14 +74,10 @@ class AppController extends Controller
 
     public function notSelectedProducts($id)
     {
-       $items= Items::leftJoin('app_items','items.id','app_items.item_id')->
-           where('warehouse_id',$id)->select('items.*','app_items.item_id')->get()->toArray();
-       dd($items);
+       $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')->
+       where('warehouse_id', $id)->whereNull('app_items.item_id')->select('items.*', 'app_items.item_id')->with(['brand', 'categories', 'translations'])->get();
         $warehouse = Warehouse::findOrFail($id);
         $selecteds = $warehouse->appitems()->pluck('item_id');
-        dd($selecteds);
-        $items = Items::with(['brand', 'categories', 'translations'])->whereNotIn('id', $selecteds)->get();
-        dd($items);
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
         return \Response::json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
