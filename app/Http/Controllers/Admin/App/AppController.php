@@ -75,7 +75,6 @@ class AppController extends Controller
     public function notSelectedProducts($id)
     {
        $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
-//           ->whereNull('app_items.item_id')
            ->select('items.*', 'app_items.item_id','app_items.warehouse_id')
            ->where(function ($query)use($id){
              return  $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id','!=',$id);
