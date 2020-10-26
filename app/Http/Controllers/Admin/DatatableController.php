@@ -934,6 +934,7 @@ class DatatableController extends Controller
                 'app_items.created_at',
                 'app_items.item_id',
                 'item_translations.name',
+                'items.barcode',
                 'item_translations.short_description',
                 'categories_translations.name as category')
             ->groupBy('items.id')
