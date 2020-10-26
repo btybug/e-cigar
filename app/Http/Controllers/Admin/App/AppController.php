@@ -76,6 +76,7 @@ class AppController extends Controller
     {
         $warehouse = Warehouse::findOrFail($id);
         $selecteds = $warehouse->appitems()->pluck('item_id');
+        dd($selecteds);
         $items = Items::with(['brand', 'categories', 'translations'])->whereNotIn('id', $selecteds)->get();
         dd($items);
         $brands = Brands::all();
