@@ -74,8 +74,13 @@ class AppController extends Controller
 
     public function notSelectedProducts($id)
     {
-       $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')->
-       where('warehouse_id', $id)->whereNull('app_items.item_id')->select('items.*', 'app_items.item_id')->with(['brand', 'categories', 'translations'])->get();
+       $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
+//           ->whereNull('app_items.item_id')
+           ->select('items.*', 'app_items.item_id','app_items.warehouse_id')
+           ->where(function ($query)use($id){
+             return  $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id','!=',$id);
+           })
+           ->with(['brand', 'categories', 'translations'])->get();
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
         return \Response::json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
