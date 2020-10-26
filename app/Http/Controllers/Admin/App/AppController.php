@@ -75,7 +75,7 @@ class AppController extends Controller
 
     public function notSelectedProducts($id)
     {
-       $items= Items::leftJoin('app_item','items.id','app_items.item_id')->
+       $items= Items::leftJoin('app_items','items.id','app_items.item_id')->
            where('warehouse_id',$id)->select('items.*','app_items.item_id')->get();
        dd($items);
         $warehouse = Warehouse::findOrFail($id);
