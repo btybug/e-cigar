@@ -154,7 +154,7 @@ class StockService
     {
         $deletableArray = [];
         if (count($data)) {
-            dd($data);
+//            dd($data);
             foreach ($data as $role_id => $d){
                 $section_type = $d['section_type'];
                 unset($d['section_type']);

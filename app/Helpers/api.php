@@ -7,6 +7,7 @@
  */
 
 
+use App\Models\Roles;
 use App\Models\Settings;
 
 $_MEDIA_BUTTON = false;
@@ -1620,6 +1621,15 @@ function getItemShortname($id){
         return $item->short_name;
     }
     return null;
-
 }
 
+function get_role_for_product(){
+    $role = Roles::where('slug','customer')->first();
+    if(\Auth::check()){
+        if(! \Auth::user()->isAdministrator()){
+            $role = \Auth::user()->role;
+        }
+    }
+
+    return $role;
+}

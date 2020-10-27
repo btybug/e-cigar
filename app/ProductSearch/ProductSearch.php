@@ -3,6 +3,7 @@
 namespace App\ProductSearch;
 
 use App\Models\Category;
+use App\Models\Roles;
 use App\Models\Stock;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
@@ -117,6 +118,7 @@ class ProductSearch
 
     private static function createObject($category = null, $request)
     {
+        $role = get_role_for_product();
         $query = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id');
         $query->leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id');
 
@@ -149,6 +151,7 @@ class ProductSearch
             $query->where('stocks.status', true);
         }
         $query->where('stocks.is_offer', false);
+        $query->where('stock_variations.role_id', $role->id);
 
         return $query->select('stocks.*', 'stock_translations.name',
             'stock_translations.short_description', 'stock_variations.price', 'stock_variations.id as variation_id',
