@@ -134,7 +134,8 @@
         });
         $("body").on('click', '.select-products', function () {
             let parent = $('.get-all-attributes-tab').find('li');
-            let existings = [];
+            let existings = [];  console.log(66666)
+
             parent.each(function (i, e) {
                 existings.push($(e).data('id'));
             });

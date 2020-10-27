@@ -46,28 +46,27 @@ $("body").on('click', '.select-products, .select_product_for_url_js', function (
   let arr = [];
   const action = $(ev.target).data('action');
   const url = action ? action : "/admin/get-stocks";
-  $(".get-all-products-tab")
-      .children()
-      .each(function () {
-          arr.push($(this).attr("data-id"));
-      });
-      console.log(action)
-  AjaxCall(url, {arr: arr, promotion: 0}, function (res) {
+  // $(".get-all-products-tab")
+  //     .children()
+  //     .each(function () {
+  //         arr.push($(this).attr("data-id"));
+  //     });
+  AjaxCall(url, {}, function (res) {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
-          res.data.forEach(item => {
-            let categories_ids = '-';
-            item.categories && item.categories.map((cat) => {
-              categories_ids = categories_ids + cat.id + '-';
-            })
-            let html = `<li data-id="${item.id}" class="option-elm-modal">
-                          <div class="btn btn-primary add-related-event searchable" data-name="${item.name}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}"
-                            data-id="${item.id}" data-product-url="${item.page_link}"><input type="checkbox" class="select_product_js"/>
-                          </div>
-                          <a href="#">${item.name}</a>
-                        </li>`;
-            $("#productsModal .modal-body .all-list").append(html);
-          });
+          // res.data.forEach(item => {
+          //   let categories_ids = '-';
+          //   item.categories && item.categories.map((cat) => {
+          //     categories_ids = categories_ids + cat.id + '-';
+          //   })
+          //   let html = `<li data-id="${item.id}" class="option-elm-modal">
+          //                 <div class="btn btn-primary add-related-event searchable" data-name="${item.name}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}"
+          //                   data-id="${item.id}" data-product-url="${item.page_link}"><input type="checkbox" class="select_product_js"/>
+          //                 </div>
+          //                 <a href="#">${item.name}</a>
+          //               </li>`;
+          //   $("#productsModal .modal-body .all-list").append(html);
+          // });
           $('#category_select').append(`<option value="" disabled selected>Select Category</option>`)
           res.categories.forEach(category => {
             let html = `<option value="${category.id}">${category.name}</option>`;
@@ -205,7 +204,7 @@ $("body").on("click", ".done_select_product_js", function (ev) {
           //             </div>
           //             <input type="hidden" name="related_products[]" value="${id}" />
           //             </li>`);
-          
+
       }
     })
     AjaxCall("/admin/app/products/add-product", {products, shop_id}, function (res) {
@@ -219,7 +218,7 @@ $("body").on("click", ".done_select_product_js", function (ev) {
           //                   </div>
           //                   <a href="#">${item.name}</a>
           //                 </li>`;
-             
+
           //     $("#stickerModal .modal-body .all-list").append(html);
           // });
           // $("#stickerModal").modal();
@@ -247,14 +246,14 @@ $("body").on("click", ".done_select_product_js", function (ev) {
             const id = $(product).closest('.add-related-event').data('id');
             const product_url =  $(product).closest('.add-related-event').data('product-url');
             const key = $('#productsModal').attr('data-url-key');
-  
-            $(`.other_images-item[data-key="${key}"]`).length !== 0 
+
+            $(`.other_images-item[data-key="${key}"]`).length !== 0
               ? $(`.other_images-item[data-key="${key}"]`)
                   .find('.product_id_hidden_js').val(id)
               : $(`.banner-item[data-key="${key}"]`)
                   .find('.product_id_hidden_js').val(id);
-            
-            $(`.other_images-item[data-key="${key}"]`).length !== 0 
+
+            $(`.other_images-item[data-key="${key}"]`).length !== 0
             ? $(`.other_images-item[data-key="${key}"]`)
                 .find('.url_feald').val(product_url)
             : $(`.banner-item[data-key="${key}"]`)
@@ -320,7 +319,7 @@ $('body').on('click', '.edit_price_js', function(ev) {
   const price = edit_button.data('price');
 
     $('#editPriceModal .modal-body').html(`
-    <div class="form-group row"> 
+    <div class="form-group row">
         <label class="col-md-9 col-form-label">${name}</label>
         <div class="col-md-3">
             <input type="number" class="form-control price_input" value="${price}" aria-label="Small" aria-describedby="inputGroup-sizing-sm" data-name="${name}" data-id="${id}">
