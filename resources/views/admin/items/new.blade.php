@@ -38,7 +38,6 @@
 {{--                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#settings">Settings</a></li>--}}
 {{--                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#management">Management</a></li>--}}
                                             <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#specifications">Specifications</a></li>
-                                            <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#stickers">Stickers</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -139,15 +138,7 @@
                                                                     {!! Form::checkbox('landing',1,null,['class' => 'check-landing','id' => 'landing']) !!}
                                                                 </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="row">
-                                                                    <label for="barcode" class="control-label col-xl-2 col-form-label">Default price</label>
 
-                                                                    <div class="col-xl-10">
-                                                                        {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -185,6 +176,15 @@
                                                                     <div class="col-sm-8">
                                                                         {!! Form::select('brand_id',[null=>'Select Brand']+$brands->pluck('name','id')->toArray(),null,['class'=>'form-control']) !!}
 
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="form-group">
+                                                                <div class="row">
+                                                                    <label class="col-lg-4 control-label">Default Price</label>
+                                                                    <div class="col-sm-8">
+                                                                        {!! Form::number('default_price',null,['class' => 'form-control','min'=>0,'step' => 'any']) !!}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -533,6 +533,41 @@
 
 {{--                                        </div>--}}
                                         <div id="specifications" class="tab-pane fade">
+                                            <div class="card mb-3">
+                                                <div class="card-header panel-heading d-flex justify-content-between align-items-center mb-2">
+                                                    <h4>
+                                                        Stickers
+                                                    </h4>
+                                                    <button type="button" class="btn btn-info select-stickers">
+                                                        Select
+                                                    </button>
+                                                </div>
+                                                <div class="card-body panel-body product-body">
+                                                    <ul class="get-all-stickers-tab stickers--all--lists">
+                                                        @if(isset($model) && $model->stickers && count($model->stickers))
+                                                            @foreach($model->stickers()->orderBy('ordering','asc')->get() as $key => $sticker)
+                                                                <li style="display: flex"
+                                                                    data-id="{{ $sticker->id }}"
+                                                                    class="option-elm-attributes">
+                                                                    <a href="#"
+                                                                       class="stick--link">{!! $sticker->name !!}</a>
+                                                                    <div class="buttons">
+                                                                        <a href="javascript:void(0)"
+                                                                           class="remove-all-attributes btn btn-sm btn-danger">
+                                                                            <i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                    <input type="hidden" name="stickers[{{$key}}][id]"
+                                                                           value="{{ $sticker->id }}">
+                                                                    <input type="hidden" class="sticker-ordering" name="stickers[{{ $key }}][ordering]"
+                                                                           value="{{ $sticker->ordering }}">
+                                                                </li>
+                                                            @endforeach
+                                                        @endif
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
                                             <div class="card panel panel-default">
                                                 <div class="card-header">
                                                     Specifications
@@ -587,41 +622,7 @@
                                             </div>
 
                                         </div>
-                                        <div id="stickers" class="tab-pane fade ">
-                                            <div class="card">
-                                                <div class="card-header panel-heading d-flex justify-content-between align-items-center mb-2">
-                                                    <h4>
-                                                        Stickers
-                                                    </h4>
-                                                    <button type="button" class="btn btn-info select-stickers">
-                                                        Select
-                                                    </button>
-                                                </div>
-                                                <div class="card-body panel-body product-body">
-                                                    <ul class="get-all-stickers-tab stickers--all--lists">
-                                                        @if(isset($model) && $model->stickers && count($model->stickers))
-                                                            @foreach($model->stickers()->orderBy('ordering','asc')->get() as $key => $sticker)
-                                                                <li style="display: flex"
-                                                                    data-id="{{ $sticker->id }}"
-                                                                    class="option-elm-attributes">
-                                                                    <a href="#"
-                                                                       class="stick--link">{!! $sticker->name !!}</a>
-                                                                    <div class="buttons">
-                                                                        <a href="javascript:void(0)"
-                                                                           class="remove-all-attributes btn btn-sm btn-danger">
-                                                                            <i class="fa fa-trash"></i></a>
-                                                                    </div>
-                                                                    <input type="hidden" name="stickers[{{$key}}][id]"
-                                                                           value="{{ $sticker->id }}">
-                                                                    <input type="hidden" class="sticker-ordering" name="stickers[{{ $key }}][ordering]"
-                                                                           value="{{ $sticker->ordering }}">
-                                                                </li>
-                                                            @endforeach
-                                                        @endif
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
