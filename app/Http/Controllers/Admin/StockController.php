@@ -546,7 +546,7 @@ class StockController extends Controller
 
     public function postItemByID(Request $request)
     {
-        $item = Items::with(['brand','media','videos','categories','stickers'])->active()->findOrFail($request->id);
+        $item = Items::with(['brand','videos','categories','stickers'])->active()->findOrFail($request->id);
         $categories = Category::with('children')->where('type', 'stocks')->whereNull('parent_id')->get();
         $checkedCategories = $item->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);

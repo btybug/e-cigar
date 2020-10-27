@@ -85,10 +85,10 @@ class ItemsController extends Controller
     {
         $data = $request->only('sku', 'image', 'barcode', 'type', 'status',
             'default_price', 'landing', 'brand_id', 'manual_codes', 'length', 'width', 'height', 'weight',
-            'item_length', 'item_width', 'item_height', 'item_weight', 'what_is_image');
+            'item_length', 'item_width', 'item_height', 'item_weight', 'what_is_image','other_images');
 
         $item = Items::updateOrCreate($request->id, $data);
-        $this->saveMedia($request->get('media', []), $item);
+
         $this->saveMedia($request->get('videos', []), $item, 'video');
         $this->saveMedia($request->get('downloads', []), $item, 'download');
         $this->savePackages($item, $request->get('packages', []));
@@ -140,12 +140,6 @@ class ItemsController extends Controller
         $model = Items::findOrFail($id);
         $newModel = $model->replicateWithTranslations();
         $newModel->push();
-
-        foreach ($model->media as $media) {
-            $new_media = $media->replicate();
-            $new_media->item_id = $newModel->id;
-            $new_media->push();
-        }
 
         foreach ($model->videos as $video) {
             $new_video = $video->replicate();

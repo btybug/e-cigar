@@ -196,31 +196,92 @@
                                         </div>
 
                                         <div id="media" class="tab-pane fade">
-                                            <div class="card panel panel-default mb-3">
-                                                <div class="card-header">
-                                                    Feature image
+                                            {!! media_widget('image',$model, false, 'drive', null, 'Feature Image') !!}
+                                            <div class="card panel panel-default mb-3 other_images-block">
+                                                <div class="card-header panel-heading clearfix">
+                                                    <p class="d-inline-block">Extra Images</p>
+                                                    <div class="col-sm-2 pull-right">
+                                                        <button type="button"
+                                                                class="btn btn-primary add-new-other_images-input">
+                                                            <i
+                                                                class="fa fa-plus"></i></button>
+                                                    </div>
                                                 </div>
                                                 <div class="card-body">
-                                                    <div class="form-group">
-                                                        <div class="row">
-                                                            <div class="col-lg-8">
-                                                                {!! media_button('image',$model) !!}
-                                                            </div>
-                                                        </div>
+                                                    <div
+                                                        class="form-group d-flex flex-wrap align-items-center other_images-group">
+
+                                                        @if($model && $model->other_images && count($model->other_images))
+                                                            @foreach($model->other_images as $key => $other_image)
+                                                                <div
+                                                                    class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{{ $key }}][url]">
+                                                                    <div class="col-sm-7 p-0">
+
+                                                                        <div class="input-group">
+                                                                            <div class="input-group-prepend">
+                                                                                {!! media_button("other_images[$key][image]",$other_image['image']) !!}
+                                                                            </div>
+                                                                        </div>
+                                                                        <input type="hidden"
+                                                                               name="other_images[{{ $key }}][product_id]" value="null"
+                                                                               class="form-control product_id_hidden_js">
+
+                                                                        <div class="form-group row mt-3">
+                                                                            <label for="staticEmail"
+                                                                                   class="col-sm-2 col-form-label">Url</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text"
+                                                                                       name="other_images[{{ $key }}][url]" value="{{ $other_image['url'] }}"
+                                                                                       class="form-control url_feald">
+                                                                                <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{{ $key }}][url]">
+                                                                                    Select
+                                                                                </button>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail"
+                                                                                   class="col-sm-2 col-form-label">Tag</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text"
+                                                                                       name="other_images[{{ $key }}][tags]" value="{{ $other_image['tags'] }}"
+                                                                                       class="form-control">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <label for="staticEmail"
+                                                                                   class="col-sm-2 col-form-label">Alt text</label>
+                                                                            <div class="col-sm-10">
+                                                                                <input type="text"
+                                                                                       name="other_images[{{ $key }}][alt]" value="{{ $other_image['alt'] }}"
+                                                                                       class="form-control">
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="col-sm-3">
+                                                                        <button class="plus-icon remove-new-other_images-input btn btn-danger">
+                                                                            <i class="fa fa-minus"></i></button>
+                                                                    </div>
+                                                                </div>
+                                                            @endforeach
+                                                        @endif
+
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <div class="card panel panel-default mb-3">
-                                                <div class="card-header panel-heading">
-                                                    <p class="pull-left mb-0">
-                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Image</b>
-                                                    </p>
-                                                </div>
-                                                <div class="card-body stock-basic-future-photo-body-wrap">
-                                                    {!! media_button('media',$model,true) !!}
-                                                </div>
-                                            </div>
+
+{{--                                            <div class="card panel panel-default mb-3">--}}
+{{--                                                <div class="card-header panel-heading">--}}
+{{--                                                    <p class="pull-left mb-0">--}}
+{{--                                                        <b data-toggle="tooltip" title="" data-original-title="Change featured image">Image</b>--}}
+{{--                                                    </p>--}}
+{{--                                                </div>--}}
+{{--                                                <div class="card-body stock-basic-future-photo-body-wrap">--}}
+{{--                                                    {!! media_button('media',$model,true) !!}--}}
+{{--                                                </div>--}}
+{{--                                            </div>--}}
+
                                             <div class="card panel panel-default mb-3">
                                                 <div class="card-header panel-heading">
                                                     <p class="pull-left mb-0">
@@ -664,6 +725,92 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <script type="template" id="add-more-other_images-tags">
+        <div class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{count}][url]">
+            <div class="col-sm-7 p-0">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        {!! media_button('other_images[{count}][image]',$model) !!}
+
+                    </div>
+                </div>
+                <input type="hidden"
+                       name="other_images[{count}][product_id]" value="null"
+                       class="form-control product_id_hidden_js">
+
+                <div class="form-group row mt-3">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="other_images[{count}][url]" class="form-control url_feald"  value="">
+                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{count}][url]">
+                            Select
+                        </button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="other_images[{count}][tags]" class="form-control" value="">
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="staticEmail" class="col-sm-2 col-form-label">Alt text</label>
+                    <div class="col-sm-10">
+                        <input type="text" name="other_images[{count}][alt]" class="form-control" value="">
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="col-sm-3">
+                <button class="plus-icon remove-new-other_images-input btn btn-danger">
+                    <i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+    </script>
+
+    <div class="modal fade select-products__modal" id="productsModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Select Products</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <div class="col-sm-4">
+                            <select class="form-control search_option_js">
+                                <option value="general" selected>General</option>
+                                <option value="brand">Brands</option>
+                                <option value="category">Categories</option>
+                            </select>
+                        </div>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
+                            <select class="form-control d-none" id="brand_select">
+
+                            </select>
+                            <select class="form-control d-none" id="category_select">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-start align-items-center mb-2">
+                        <input type="checkbox" class="all_select_products_js" style="margin: 0 18.240px"/>
+                        <p class="mb-0">Select All</p>
+                    </div>
+                    <ul class="all-list modal-stickers--list" id="stickers-modal-list">
+
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary done_select_product_js" data-dismiss="modal">Add</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -683,6 +830,19 @@
 
     <script>
         $(function () {
+
+            $("body").on("click", ".add-new-other_images-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-other_images-tags").html();
+                html = html.replace(/{count}/g, uid);
+                html = html.replace(/media_/g, 'media_' + uid);
+                $(".other_images-group").append(html);
+            });
+
+            $("body").on("click", ".remove-new-other_images-input", function () {
+                $(this).closest(".other_images-item").remove();
+            });
+
             const barcode_settings = JSON.parse($('#barcode-settings').text());
             let text = 5060730202285;
             let width = Number(barcode_settings.width);

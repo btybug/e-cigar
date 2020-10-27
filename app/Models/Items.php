@@ -115,6 +115,7 @@ class Items extends Translatable
 
     protected $casts = [
         'manual_codes' => 'json',
+        'other_images' => 'json',
     ];
     public $translationModel = ItemTranslations::class;
 
@@ -170,11 +171,6 @@ class Items extends Translatable
     public function brand()
     {
         return $this->belongsTo(Brands::class, 'brand_id','id');
-    }
-
-    public function media()
-    {
-        return $this->hasMany(ItemsMedia::class, 'item_id')->where('items_media.type','image');
     }
 
     public function videos()

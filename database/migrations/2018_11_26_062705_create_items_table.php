@@ -21,6 +21,7 @@ class CreateItemsTable extends Migration
             $table->string('alert',191)->nullable();
             $table->integer('quantity')->default(0);
             $table->text('image');
+            $table->text('other_images')->nullable();
             $table->string('what_is_image')->nullable();
             $table->decimal('default_price',6,2)->default(0);
             $table->tinyInteger('status')->default(0);
