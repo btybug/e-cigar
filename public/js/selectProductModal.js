@@ -46,12 +46,13 @@ $("body").on('click', '.select-products, .select_product_for_url_js', function (
   let arr = [];
   const action = $(ev.target).data('action');
   const url = action ? action : "/admin/get-stocks";
-  // $(".get-all-products-tab")
-  //     .children()
-  //     .each(function () {
-  //         arr.push($(this).attr("data-id"));
-  //     });
-  AjaxCall(url, {}, function (res) {
+  $(".get-all-products-tab")
+      .children()
+      .each(function () {
+          arr.push($(this).attr("data-id"));
+      });
+      console.log(action)
+  AjaxCall(url, {arr: arr, promotion: 0}, function (res) {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
           // res.data.forEach(item => {
