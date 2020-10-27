@@ -55,19 +55,19 @@ $("body").on('click', '.select-products, .select_product_for_url_js', function (
   AjaxCall(url, {arr: arr, promotion: 0}, function (res) {
       if (!res.error) {
           $("#productsModal .modal-body .all-list").empty();
-          res.data.forEach(item => {
-            let categories_ids = '-';
-            item.categories && item.categories.map((cat) => {
-              categories_ids = categories_ids + cat.id + '-';
-            })
-            let html = `<li data-id="${item.id}" class="option-elm-modal">
-                          <div class="btn btn-primary add-related-event searchable" data-name="${item.name}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}"
-                            data-id="${item.id}" data-product-url="${item.page_link}"><input type="checkbox" class="select_product_js"/>
-                          </div>
-                          <a href="#">${item.name}</a>
-                        </li>`;
-            $("#productsModal .modal-body .all-list").append(html);
-          });
+          // res.data.forEach(item => {
+          //   let categories_ids = '-';
+          //   item.categories && item.categories.map((cat) => {
+          //     categories_ids = categories_ids + cat.id + '-';
+          //   })
+          //   let html = `<li data-id="${item.id}" class="option-elm-modal">
+          //                 <div class="btn btn-primary add-related-event searchable" data-name="${item.name}" data-brand-id="${item.brand_id}" data-categories-ids="${categories_ids}"
+          //                   data-id="${item.id}" data-product-url="${item.page_link}"><input type="checkbox" class="select_product_js"/>
+          //                 </div>
+          //                 <a href="#">${item.name}</a>
+          //               </li>`;
+          //   $("#productsModal .modal-body .all-list").append(html);
+          // });
           $('#category_select').append(`<option value="" disabled selected>Select Category</option>`)
           res.categories.forEach(category => {
             let html = `<option value="${category.id}">${category.name}</option>`;
