@@ -80,7 +80,7 @@ class AppController extends Controller
            ->where(function ($query)use($id){
              return  $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id','!=',$id);
            })
-//           ->with(['brand', 'categories', 'translations'])
+           ->with(['brand', 'categories', 'translations'])
            ->get();
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
