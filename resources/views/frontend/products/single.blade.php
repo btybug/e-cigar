@@ -208,7 +208,10 @@
                                                     <a href="#"
                                                        class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
                                                 </div>
-                                                @if( $vape->section_type == 1 )
+                                                @php
+                                                $section_type = $vape->variations()->where('role_id',$role->id)->first()->section_type;
+                                                @endphp
+                                                @if( $section_type == 1 )
                                                     <div class="product__single-item-info mb-3">
                                                         <div
                                                             class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
@@ -222,7 +225,7 @@
                                                         <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
                                                             <div class="col-xl-7 col-lg-6 col-md-7 pl-0 pr-md-3 pr-0">
                                                                 @php
-                                                                    $variations = $vape->variations()->orderBy('ordering','asc')->required()->groupBy('variation_id')->get();
+                                                                    $variations = $vape->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->required()->groupBy('variation_id')->get();
                                                                 @endphp
                                                                 <select name="product_section"
                                                                         id="select_section"
@@ -239,7 +242,7 @@
                                                         </div>
                                                     </div>
                                                     @php
-                                                        $variations = collect($vape->variations()->orderBy('ordering','asc')->required()->get())->groupBy('variation_id');
+                                                        $variations = collect($vape->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->required()->get())->groupBy('variation_id');
                                                     @endphp
                                                     <div class="product__single-item single-section">
                                                         @include("admin.inventory._partials.render_price_form_single",['model' => $vape,'variation' => $variations->first()])

@@ -16,23 +16,23 @@ Route::post('/top-product', 'HomeController@topProduct')->name('topProduct');
 Route::get('/verification-wholesaler', 'HomeController@verifyWholesaler')
     ->middleware(['auth','verified','wholesaler','is_not_verifyed_wholesaler'])->name('verification_wholesaler');
 
-Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','wholesaler','verifyed_wholesaler']], function () {
-    Route::get('/', 'Frontend\WholesalerController@index')->name('wholesaler');
-    Route::post('/add-to-cart', 'Frontend\WholesalerController@addToCart')->name('wholesaler_add_to_cart');
-    Route::get('/my-cart', 'Frontend\WholesalerController@getCart')->name('wholesaler_my_cart');
-    Route::get('/check-out', 'Frontend\WholesalerController@getCheckOut')->name('wholesaler_check_out');
-    Route::get('/payment/{token}', 'Frontend\WholesalerController@getPayment')->name('wholesaler_payment');
-    Route::post('/update-cart', 'Frontend\WholesalerController@postUpdateQty')->name('wholesaler_update_cart');
-    Route::post('/remove-from-cart', 'Frontend\WholesalerController@postRemoveFromCart')->name('wholesaler_remove_from_cart');
-    Route::post('/change-shipping-method', 'Frontend\WholesalerController@postChangeShippingMethod')->name('wholesaler_change_shipping_method');
-    Route::post('/get-payment-options', 'Frontend\WholesalerController@postPaymentOptions')->name('wholesaler_get_payment_options');
-    Route::post('/cash-order', 'Frontend\CashPaymentController@wholesalerOrder')->name('wholesaler_cash_order');
-    Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@wholesalerSuccess')->name('wholesaler_cash_order_success');
-    Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
-    Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
-
-
-});
+//Route::group(['prefix' => 'wholesaler', 'middleware' => ['auth', 'verified','wholesaler','verifyed_wholesaler']], function () {
+//    Route::get('/', 'Frontend\WholesalerController@index')->name('wholesaler');
+//    Route::post('/add-to-cart', 'Frontend\WholesalerController@addToCart')->name('wholesaler_add_to_cart');
+//    Route::get('/my-cart', 'Frontend\WholesalerController@getCart')->name('wholesaler_my_cart');
+//    Route::get('/check-out', 'Frontend\WholesalerController@getCheckOut')->name('wholesaler_check_out');
+//    Route::get('/payment/{token}', 'Frontend\WholesalerController@getPayment')->name('wholesaler_payment');
+//    Route::post('/update-cart', 'Frontend\WholesalerController@postUpdateQty')->name('wholesaler_update_cart');
+//    Route::post('/remove-from-cart', 'Frontend\WholesalerController@postRemoveFromCart')->name('wholesaler_remove_from_cart');
+//    Route::post('/change-shipping-method', 'Frontend\WholesalerController@postChangeShippingMethod')->name('wholesaler_change_shipping_method');
+//    Route::post('/get-payment-options', 'Frontend\WholesalerController@postPaymentOptions')->name('wholesaler_get_payment_options');
+//    Route::post('/cash-order', 'Frontend\CashPaymentController@wholesalerOrder')->name('wholesaler_cash_order');
+//    Route::get('/cash-order-success/{id}', 'Frontend\CashPaymentController@wholesalerSuccess')->name('wholesaler_cash_order_success');
+//    Route::post('/apply-coupon', 'Frontend\WholesalerController@postApplyCoupon')->name('wholesaler_apply_coupon');
+//    Route::post('/stripe-charge', 'Frontend\StripePaymentController@wholesalerStripeCharge');
+//
+//
+//});
 
 //Route::get('/', function () {
 //    // Get all tickets

@@ -92,14 +92,13 @@ class ProductsController extends Controller
 
         if ($vape->is_offer) abort(404);
 
-        $variations = $vape->variations()->required()->with('options')->get();
-
         $ads = $this->settings->getEditableData('single_product');
         if($ads && isset($ads['data'])){
             $ads = json_decode($ads['data'],true);
         }
-        $reviews = Review::whereIn('item_id',$vape->variations()->pluck('item_id','item_id')->all())->where('status',ReviewStatusTypes::PUBLISHED)->latest()->get();
-        return $this->view('single', compact(['vape', 'variations', 'type','ads','reviews']));
+        $role = get_role_for_product();
+        $reviews = Review::whereIn('item_id',$vape->variations()->where('role_id',$role->id)->pluck('item_id','item_id')->all())->where('status',ReviewStatusTypes::PUBLISHED)->latest()->get();
+        return $this->view('single', compact(['vape', 'type','ads','reviews','role']));
     }
 
     public function getPrice(Request $request)

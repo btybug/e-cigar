@@ -120,7 +120,8 @@ class Items extends Translatable
 
     public $translatedAttributes = ['name','short_name', 'short_description', 'long_description','what_is_content'];
 
-    protected $appends = array('qty','img64');
+//    protected $appends = array('qty','img64');
+    protected $appends = array('qty');
 
     const ACTIVE = 1;
     const DRAFT = 0;
@@ -129,6 +130,7 @@ class Items extends Translatable
     {
         return ($this->type == 'simple') ? $this->purchase()->sum('qty') - $this->others()->sum('qty') : 0;
     }
+
     public function getImg64Attribute()
     {
         $path = base_path($this->image);

@@ -198,6 +198,12 @@ class Stock extends Translatable
         return $this->hasMany(StockVariation::class, 'stock_id');
     }
 
+    public function variations_by_user()
+    {
+        $role = get_role_for_product();
+        return $this->hasMany(StockVariation::class, 'stock_id')->where('stock_variations.role_id',$role->id);
+    }
+
     public function promotion_prices()
     {
         return $this->hasMany(PromotionPrice::class, 'promotion_id');

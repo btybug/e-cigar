@@ -101,11 +101,6 @@
                                     </div>
                                 </div>
                             </li>
-                            @if(Auth::check() && Auth::user()->isWholeseler())
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{!! route('wholesaler') !!}">{!! __('wholesaler') !!}</a>
-                                </li>
-                            @endif
                         </ul>
                     </div>
                 </nav>

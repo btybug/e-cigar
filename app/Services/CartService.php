@@ -254,9 +254,10 @@ class CartService
     {
         $error = false;
         $mainVariation = null;
+        $role = get_role_for_product();
         if (count($vdata) == 1) {
             $fData = array_first($vdata);
-            $mainVariation = $product->variations()->where('variation_id', $fData['group_id'])->first();
+            $mainVariation = $product->variations()->where('role_id',$role->id)->where('variation_id', $fData['group_id'])->first();
         }
 
         if ($mainVariation && $mainVariation->type == 'filter_discount') {
@@ -272,7 +273,7 @@ class CartService
                     $this->price = $discount->price;
                     if (count($options)) {
                         foreach ($options as $p) {
-                            $option = $product->variations()->with('item')->where('variation_id', $fData['group_id'])->where('id', $p['id'])->first();
+                            $option = $product->variations()->with('item')->where('role_id',$role->id)->where('variation_id', $fData['group_id'])->where('id', $p['id'])->first();
                             if ($option) {
                                 $product_limit += $p['qty'];
                                 $data['options'][] = [
@@ -297,13 +298,13 @@ class CartService
                 $error = "Section not found";
             }
         } else {
-            $extraVariations = $product->variations()->with('item')->required()->groupby('stock_variations.variation_id')->get();
+            $extraVariations = $product->variations()->with('item')->where('role_id',$role->id)->required()->groupby('stock_variations.variation_id')->get();
 
             if (($vdata && count($vdata) == count($extraVariations)) || ($vdata && ($product->section_type == 1))) {
 //                dd($product,$vdata,count($vdata),count($extraVariations));
                 foreach ($vdata as $k => $item) {
                     $data = [];
-                    $group = $product->variations()->with('item')->where('variation_id', $item['group_id'])->first();
+                    $group = $product->variations()->with('item')->where('role_id',$role->id)->where('variation_id', $item['group_id'])->first();
                     if ($group) {
                         $data['group'] = $group;
                         $data['options'] = [];
@@ -318,7 +319,7 @@ class CartService
                                     $data['price'] = $group->price;
                                     $this->price += $group->price;
                                     foreach ($item['products'] as $p) {
-                                        $option = $product->variations()->with('item')->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                        $option = $product->variations()->with('item')->where('role_id',$role->id)->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                         if ($option) {
                                             $product_limit += $p['qty'];
                                             $data['options'][] = [
@@ -332,7 +333,7 @@ class CartService
                                 } else {
                                     $itemPrice = 0;
                                     foreach ($item['products'] as $p) {
-                                        $option = $product->variations()->with('item')->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
+                                        $option = $product->variations()->with('item')->where('role_id',$role->id)->where('variation_id', $item['group_id'])->where('id', $p['id'])->first();
                                         if ($option) {
                                             $p['qty'] = ($p['qty']) ?? 1;
                                             if ($option->price_type == 'fixed' || $option->price_type == 'range') {

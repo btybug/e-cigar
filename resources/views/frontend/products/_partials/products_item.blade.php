@@ -71,7 +71,7 @@
                                 @else
                                     @php
                                     $role = get_role_for_product();
-                                    $firstVariation = ($product->variations && count($product->variations))?$product->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->first():null;
+                                    $firstVariation = ($product->variations && count($product->variations_by_user))?$product->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->first():null;
                                     @endphp
                                     <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
                                         @php
