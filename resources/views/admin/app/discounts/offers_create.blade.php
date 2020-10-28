@@ -8,6 +8,7 @@
                 </div>
             </div>
             {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
+            {!! Form::hidden('app_warehouse_id',$w_id) !!}
             <div class="card-body">
                 <div class="row mx-0 mb-3">
                     {!! Form::select('type',[null=>'Select Type',
@@ -22,19 +23,21 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">Start at</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="start_at" type="date"  class="form-control input-md">
+                        <input id="textinput" name="start_at" type="date" class="form-control input-md">
                     </div>
                 </div>
-
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">End at</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="end_at" type="date"  class="form-control input-md">
+                        <input id="textinput" name="end_at" type="date" class="form-control input-md">
                     </div>
 
+                </div>
             </div>
-            {!! Form::close() !!}
+                {!! Form::close() !!}
+
+
                 <div class="buy_x_get d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
 
@@ -81,7 +84,6 @@
                 </div>
                 <div class="buy_x_get_all_by_y d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
-
                         {!! Form::hidden('id') !!}
                         <div class="row">
                             <div class="col-md-8">
@@ -124,8 +126,8 @@
 
                     </div>
                 </div>
+            </div>
         </div>
-    </div>
 @stop
 @section('css')
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
@@ -134,20 +136,20 @@
     <script src="/public/plugins/select2/select2.full.min.js"></script>
     <script>
         $(document).ready(function () {
-            if($('#offers_select').val()){
-                $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
-                $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
+            if ($('#offers_select').val()) {
+                $('#pattern_place_js').html($('body').find('.' + $('#offers_select').val()).clone());
+                $('#pattern_place_js ' + '.' + $('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
             }
 
 
             $('body').on('change', '#offers_select', function () {
                 console.log($('body').find('.select_to_2_js'))
                 if ($(this).val() === 'buy_x_get') {
-                    $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
-                    $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
-                } else if($(this).val() === 'buy_x_get_all_by_y') {
-                    $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
-                    $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
+                    $('#pattern_place_js').html($('body').find('.' + $('#offers_select').val()).clone());
+                    $('#pattern_place_js ' + '.' + $('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
+                } else if ($(this).val() === 'buy_x_get_all_by_y') {
+                    $('#pattern_place_js').html($('body').find('.' + $('#offers_select').val()).clone());
+                    $('#pattern_place_js ' + '.' + $('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }
 
                 $('body').find('#pattern_place_js .select_to_2_js').select2();

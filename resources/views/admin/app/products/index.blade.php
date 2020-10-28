@@ -27,6 +27,18 @@
                     Settings
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link " href="{!! route("app_customer_discounts",$current->id) !!}">
+                    Admin discounts
+                    <div class="ripple-container"></div>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{!! route("app_customer_offers",$current->id) !!}">
+                    Offers
+                    <div class="ripple-container"></div>
+                </a>
+            </li>
         </ul>
         <div class="button-area">
 

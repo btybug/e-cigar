@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\App;
 use App\Http\Controllers\Controller;
 use App\Models\App\AppItems;
 use App\Models\App\AppWarehouses;
+use App\Models\App\Discount;
 use App\Models\App\Orders;
 use App\Models\Brands;
 use App\Models\Category;
@@ -73,15 +74,29 @@ class AppController extends Controller
         return $this->view('orders.index', compact('current', 'q'));
     }
 
+    public function discounts($q=1)
+    {
+        $current = AppWarehouses::where('warehouse_id', $q)->first();
+        $discounts = $current->discounts;
+        return view('admin.app.discounts.index', compact(['discounts','current']));
+    }
+
+    public function offers($q)
+    {
+        $current = AppWarehouses::where('warehouse_id', $q)->first();
+        $discounts = $current->offers;
+        return view('admin.app.discounts.offers', compact(['current', 'discounts']));
+    }
+
     public function notSelectedProducts($id)
     {
-       $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
-           ->select('items.*', 'app_items.item_id','app_items.warehouse_id')
-           ->where(function ($query)use($id){
-             return  $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id','!=',$id);
-           })
-           ->with(['brand', 'categories', 'translations'])
-           ->get();
+        $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
+            ->select('items.*', 'app_items.item_id', 'app_items.warehouse_id')
+            ->where(function ($query) use ($id) {
+                return $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id', '!=', $id);
+            })
+            ->with(['brand', 'categories', 'translations'])
+            ->get();
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
         return response()->json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);

@@ -13,63 +13,65 @@ use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {
-    public function index()
-    {
-        $discounts = Discount::get();
-        return view('admin.app.discounts.index',compact(['discounts']));
-    }
 
-    public function create()
+
+    public function create($w_id)
     {
         $model = null;
-        return view('admin.app.discounts.create',compact('model'));
+        return view('admin.app.discounts.create',compact('model','w_id'));
     }
 
     public function postCreate(DiscountRequest $request)
     {
         Discount::create($request->except("_token"));
-        return redirect()->route('app_customer_discounts');
+        return redirect()->route('app_customer_discounts',$request->get('app_warehouse_id'));
     }
 
-    public function edit($id)
+    public function edit($id,$w_id)
     {
         $model = Discount::findOrFail($id);
-        return view('admin.app.discounts.create',compact('model'));
+        return view('admin.app.discounts.create',compact('model','w_id'));
     }
 
     public function postEdit(DiscountRequest $request,$id)
     {
         $model = Discount::findOrFail($id);
         $model->update($request->except("_token"));
-        return redirect()->route('customer_discounts');
+        return redirect()->route('customer_discounts',$request->get('app_warehouse_id'));
     }
 
-    public function offers()
-    {
-        $discounts = AppOffersDiscount::all();
-        return view('admin.app.discounts.offers',compact(['discounts']));
-    }
 
-    public function offersCreate()
+
+    public function offersCreate($w_id)
     {
         $items = Items::all()->pluck('name', 'id');
         $model = null;
-        return view('admin.app.discounts.offers_create', compact('model', 'items'));
+        return view('admin.app.discounts.offers_create', compact('model', 'items','w_id'));
     }
 
     public function postOffersCreate(Request $request)
     {
-        $date = $request->only('name','start_at','end_at','type');
+        $date = $request->only('name','start_at','end_at','type','app_warehouse_id');
+        $v=\Validator::make($date,[
+            'name'=>'required',
+            'start_at'=>'required',
+            'end_at'=>'required',
+            'type'=>'required',
+            'app_warehouse_id'=>'required'
+        ]);
+        if ($v->fails()){
+            return redirect()->back()->withErrors($v->errors());
+        }
         $date['data'] = $request->except('_token', 'name', 'type');
         AppOffersDiscount::create($date);
-        return redirect()->route('app_customer_offers');
+        return redirect()->route('app_customer_offers',$date['app_warehouse_id']);
     }
 
-    public function offersEdit($id)
+    public function offersEdit($id,$w_id)
     {
         $items = Items::all()->pluck('name', 'id');
         $model = AppOffersDiscount::findOrFail($id);
-        return view('admin.app.discounts.offers_create',compact('model','items'));
+        return view('admin.app.discounts.offers_create',compact('model','items','w_id'));
     }
 
     public function postOffersEdit(Request $request,$id)

@@ -17,4 +17,14 @@ class AppWarehouses extends Model
     {
         return $this->belongsTo(Warehouse::class, 'warehouse_id');
     }
+
+    public function offers()
+    {
+        return $this->hasMany(AppOffersDiscount::class,'app_warehouse_id');
+    }
+
+    public function discounts()
+    {
+        return $this->hasMany(Discount::class,'app_warehouse_id');
+    }
 }

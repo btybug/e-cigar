@@ -12,6 +12,7 @@
                     <div class="col-md-8">
                         {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
                         {!! Form::hidden('id') !!}
+                        {!! Form::hidden('app_warehouse_id',$w_id) !!}
                         <div class="form-group row required">
                             <label class="col-md-2 control-label" for="input-code">
                                 <span data-toggle="tooltip" title="" data-original-title="">Name</span></label>
