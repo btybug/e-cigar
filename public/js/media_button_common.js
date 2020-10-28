@@ -1,5 +1,5 @@
 //********shortAjax********start
-console.log(123456789);
+console.log(122222222);
 const shortAjax = function (URL, obj = {}, cb) {
   fetch(URL, {
     method: "post",
@@ -69,7 +69,6 @@ const normAjax = function (URL, obj = {}, cb) {
 const App = function() {
   let globalFolderId = document.getElementById('core-folder').value;
   this.selectedImage = [];
-  const breadCrumbsData = []
 
   //********App -> htmlMaker********start
   //htmlMaker includes all methods to create html markup
@@ -181,22 +180,38 @@ const App = function() {
 
     //********App -> htmlMaker -> makeImage********start
     makeImage: (data) => {
-            return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" ${data.extension === "pdf" && ('data-url="' + data.url + '"')}>
-                        <a  bb-media-click="select_item" bb-media-type="image">
-                            <span class="corner"></span>
+      return `<div data-id="${data.id}" data-relative-url="${
+                    data.relativeUrl
+                    }" class="file">
+                <a  bb-media-click="select_item" >
+                    <span class="corner"></span>
+
+                    <div class="icon">
+                        <img width="180px" data-lightbox="image" src="${data.url}">
+                    </div>
+                    <div class="file-name">
+                    <span class=" -file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+                    <span class="file-title">${data.real_name}</span>
+                    </div>
+                    <!--<small>Added: ${data.updated_at}</small>-->
+                </a>
+              </div>`;
+            // return (`<div draggable="true" data-id="${data.id}" class="file" data-type="${data.extension}" ${data.extension === "pdf" && ('data-url="' + data.url + '"')}>
+            //             <a  bb-media-click="select_item" bb-media-type="image">
+            //                 <span class="corner"></span>
                 
-                            <div class="icon">
-                                <img width="180px" data-lightbox="image" src="${data.extension.toUpperCase() === 'PNG' || data.extension.toUpperCase() === 'JPG' || data.extension.toUpperCase() === 'JPEG' ? '/public/media/tmp/' + data.original_name : data.url}">
-                                <i class="fa fa-file"></i>
-                            </div>
-                            <div class="file-name">
-                            <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
-                            <span class="file-title title-change" contenteditable="true" >${data.real_name}</span>
-                            </div>
-                            <!--<small>Added: ${data.updated_at}</small>-->
+            //                 <div class="icon">
+            //                     <img width="180px" data-lightbox="image" src="${data.extension.toUpperCase() === 'PNG' || data.extension.toUpperCase() === 'JPG' || data.extension.toUpperCase() === 'JPEG' ? '/public/media/tmp/' + data.original_name : data.url}">
+            //                     <i class="fa fa-file"></i>
+            //                 </div>
+            //                 <div class="file-name">
+            //                 <span class="icon-file"><i class="fa fa-file-image-o" aria-hidden="true"></i></span>
+            //                 <span class="file-title title-change" >${data.real_name}</span>
+            //                 </div>
+            //                 <!--<small>Added: ${data.updated_at}</small>-->
                             
-                        </a>
-                    </div>`);
+            //             </a>
+            //         </div>`);
 
     },
     //********App -> htmlMaker -> makeImage********end
@@ -505,14 +520,7 @@ const App = function() {
     //********App -> htmlMaker -> makeTreeFolder********end
 
     //********App -> htmlMaker -> makeBreadCrumbsItem********start
-    makeBreadCrumbsItem: (key, name, state) => {
-      return (`<li class="breadcrumb-item bread-crumbs-list-item ${state}" data-id="${key}" data-crumbs-id="${key}" 
-                    bb-media-click="get_folder_items" >
-                 <a style="
-                 user-select: none;
-             ">${name}</a>
-               </li>`);
-    },
+    
     //********App -> htmlMaker -> makeBreadCrumbsItem********end
 
     //********App -> htmlMaker -> editNameModal********start
@@ -930,14 +938,8 @@ const App = function() {
     count: 0,
     upToHead: (currentLeaf) => {
       let hasNotId = true;
-      this.helpers.count === 0 && (breadCrumbsData.length = 0);
-      breadCrumbsData.map((el) => {
-        if(el.id === currentLeaf.data('id')) {
-          return true
-        }
-      });
+      
       if(hasNotId) {
-        breadCrumbsData.unshift({id: currentLeaf.data('id'), name: currentLeaf.data('name')})
         this.helpers.count += 1;
         if(currentLeaf.parent().closest('.tree_leaf').length !== 0) {
 
@@ -949,34 +951,7 @@ const App = function() {
       this.helpers.count = 0;
     },
     //********App -> helpers -> makeBreadCrumbs********start
-    makeBreadCrumbs: (id, name) => {
-      const breadCrumbsList = document.querySelector(".bread-crumbs-list");
-      
-      const currentLeaf = $('.media-tree_leaf-wrapper').find(`.tree_leaf[data-id="${id}"]`);
-      this.helpers.upToHead(currentLeaf)
-
-      if(id !== 1) {
-        breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
-                                          bb-media-click="get_folder_items" >
-                                        <a style="
-                                        user-select: none;
-                                    ">Drive</a>
-                                      </li>`
-        breadCrumbsData.map((bread) => {
-          if(bread.id !== 1) {
-            breadCrumbsList.innerHTML += this.htmlMaker.makeBreadCrumbsItem(bread.id, bread.name, 'active')
-
-          }
-        });
-      } else {
-        breadCrumbsList.innerHTML = `<li class="breadcrumb-item bread-crumbs-list-item active" data-id="1" data-crumbs-id="1"
-                                          bb-media-click="get_folder_items" >
-                                        <a style="
-                                        user-select: none;
-                                    ">Drive</a>
-                                      </li>`
-      }
-    },
+    
     //********App -> helpers -> makeBreadCrumbs********end
 
     //********App -> helpers -> showUploaderContainer********start
@@ -1435,7 +1410,6 @@ const App = function() {
           }
           $('.search_item_js').val('');
           this.globalFolderId = res.settings.id;
-          this.helpers.makeBreadCrumbs(res.settings.id, res.settings.slug);
           this.helpers.makeDnD();
           this.selectedImage.length = 0;
           if(location.pathname === "/admin/media/trash") {
@@ -1985,23 +1959,7 @@ const App = function() {
     //********App -> events -> close_full_modal********end
 
     //********App -> events -> folder_level_up********start
-    folder_level_up: (elm, e) => {
-      const allActiveBreadCrumbs = document.querySelectorAll(
-          ".bread-crumbs-list-item.active"
-      );
-      if (allActiveBreadCrumbs.length) {
-        const oneLevelUpID = allActiveBreadCrumbs[
-          allActiveBreadCrumbs.length - 1
-            ].getAttribute("data-id");
-        this.requests.drawingItems(
-          {
-            folder_id: Number(oneLevelUpID),
-            files: true,
-            access_token: "string"
-          }
-        );
-      }
-    },
+   
     //********App -> events -> folder_level_up********end
 
     //********App -> events -> close_name_modal********start
@@ -2412,11 +2370,7 @@ $('body').on('click', '.copy-button', (ev) => {
   app.selectedImage.length !== 0 && app.events.copy_images(app.selectedImage, ev);
 });
 
-document
-    .querySelector('.remover-container .remover-remove')
-    .onclick = function() {
-      $('.remover-container').toggleClass('d-none');
-    };
+
 
 
     if(location.pathname === "/admin/media/trash") {
@@ -2742,8 +2696,10 @@ document
     });
 
   $('body').on('click', '.icon-folder-opening', function(ev) {
+    ev.stopImmediatePropagation()
     const branch = $(ev.target).closest('.tree_leaf');
     const opening_icon = $(ev.target).closest('.icon-folder-opening');
+    console.log(5548979856)
     if(branch.hasClass('tree_leaf_with_branch')) {
       if(!$(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
         $(branch.find('.tree_branch')[0]).addClass('closed_branch');

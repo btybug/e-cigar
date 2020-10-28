@@ -96,7 +96,7 @@ function App() {
 //         },
 
         makeTreeBranch: (id, name, children, makeTree) => {
-            return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}" bb-media-type="folder" draggable="false" bb-media-click="get_folder_items" style="    user-drag: none !important;
+            return (`<li class="dd-item mjs-nestedSortable-branch mjs-nestedSortable-expanded" data-name="${name}" data-id=${id} id="item_${id}" bb-media-type="folder" draggable="false" style="    user-drag: none !important;
     user-select: none !important;">
                 <div class="oooo" bb-media-click="get_folder_items" data-id=${id}>
                   <div class="disclose oooo"><span class="closer"></span></div>
@@ -119,7 +119,7 @@ function App() {
         },
 
         makeTreeLeaf: (id, name) => {
-            return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder" bb-media-click="get_folder_items" draggable="false" style="    user-drag: none !important;
+            return (`<li class="dd-item mjs-nestedSortable-leaf" data-id=${id} data-name="${name}" id="item_${id}" bb-media-type="folder" draggable="false" style="    user-drag: none !important;
     user-select: none !important;">
                   <div class="dd-handle oooo" bb-media-click="get_folder_items" data-id=${id}>${name}</div>
                   <span class="dropdown file-actions d-none" style="position: absolute; right: 10px; top: -8px; max-width: 100px;">
@@ -137,177 +137,22 @@ function App() {
                 </li>`);
         },
 
-        myFuckingTree: {
-
-            copyHtml: (source, destination) => {
-              var clone = source.ownerDocument === destination.ownerDocument
-                  ? source.cloneNode(true)
-                  : destination.ownerDocument.importNode(source, true);
-              while (clone.firstChild) {
-                destination.appendChild(clone.firstChild);
-              }
-            },
-          
-            replaceHtml: (source, destination) => {
-              while (destination.firstChild) {
-                destination.removeChild(destination.firstChild);
-              }
-              this.copyHtml(source, destination);
-            },
-          
-            makeTreeLeaf: (id, name) => {
-              return (`<li class="tree_leaf tree_leaf_without_branch" data-id="${id}" data-name="${name}" id="item_${id}" bb-media-type="folder">
-                        <div class="tree_leaf_content" bb-media-click="get_folder_items">
-                          <span class="icon-folder-opening"><i class="fa fa-caret-down  d-none"></i></span>
-                          <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
-                          <span class="folder-item--title">${name}</span>
-                          
-                        </div>
-                        <ol class="tree_branch">
-                              
-                        </ol>
-                    </li>`);
-            },
-            
-            makeTreeBranch: function(id, name) {
-              return (`<li class="tree_leaf tree_leaf_with_branch" data-name="${name}" data-id="${id}" id="item_${id}" bb-media-type="folder">
-                            <div class="tree_leaf_content" bb-media-click="get_folder_items">
-                                <span class="icon-folder-opening"><i class="fa fa-caret-right"></i></span>
-                                <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
-                                <span class="folder-item--title">${name}</span>
-                                
-                            </div>
-                            <ol class="tree_branch closed_branch">
-                              
-                            </ol>
-                        </li>`);
-            },
-            
-            mapTree: (el, data) => {
-              el.html('');
-              data.map((child) => {
-                if(child.children.length === 0) {
-                  el.append(this.htmlMaker.myFuckingTree.makeTreeLeaf(child.id, child.name));
-                } else {
-                  el.append(this.htmlMaker.myFuckingTree.makeTreeBranch(child.id, child.name))
-                  this.htmlMaker.myFuckingTree.mapTree($($(`.tree_leaf[data-id="${child.id}"]`).find('.tree_branch')[0]), child.children)
-                }
-              })
-            },
-          
-            makeTree: function(data, rootSelector) {
-              const treeRootElement = $(rootSelector);
-              data && this.mapTree(treeRootElement, data);
-            },
-          
-            mapItems: function(data) {
-              const itemRootElement = $('.items_container');
-              
-              data.items.length > 0 && itemRootElement.append(data.items.map((item) => {
-                return this.makeItem(item);
-              }))
-            },
-          
-            makeItem: function(item) {
-              return `<li class="item" data-id="${item.id}">Item ${item.id}</li>`
-            },
-      
-            removeTree: (folderId) => {
-              const brench = $(`.left--media-col .media-tree_leaf-wrapper .tree_leaf[data-id="${folderId}"]`).parent('.tree_branch');
-              $(`.left--media-col .media-tree_leaf-wrapper .tree_leaf[data-id="${folderId}"]`).remove();
-              if(brench.find('.tree_leaf').length === 0) {
-                brench.closest('.tree_leaf').removeClass('tree_leaf_with_branch');
-                brench.closest('.tree_leaf').addClass('tree_leaf_without_branch');
-                brench.closest('.tree_leaf').find('.icon-folder-opening i').removeClass('d-inline');
-                brench.closest('.tree_leaf').find('.icon-folder-opening i').addClass('d-none');
-              }
-            }
-          },
-
         makeTreeFolder: (data, el) => {
-            const self = this;
-            $($('.media-tree_leaf-wrapper').find('.tree_branch')[0]).html('');
-            self.htmlMaker.myFuckingTree.makeTree(data, '.media__folder-list .tree_branch');
-            var branch = document.querySelectorAll('.tree_branch');
-            // for (var i = 0; i < branch.length; i++) {
-            // new Sortable(branch[i], {
-            //     group: 'b',
-            //     filter: '.filter',
-            //     draggable: ".tree_leaf",
-            //     sort: true,
-            //     animation: 150,
-            //     fallbackOnBody: true,
-            //     dataIdAttr: 'data-id',
-            //     forceFallback: false,
-            //     fallbackClass: "sortable-fallback",
-            //     swapThreshold: 0.20,
-            //     ghostClass: 'background-class',
-            //     swapClass: 'highlight', // The class applied to the hovered swap item
-            
-            //     setData: function (/** DataTransfer */dataTransfer, /** HTMLElement*/dragEl) {
-            //     dataTransfer.setData('id', $(dragEl).data('id')); // `dataTransfer` object of HTML5 DragEvent
-            //     },
-            //     onEnd: function (/**Event*/evt) {
-                
-            //     const nodeId = evt.item.getAttribute('data-id');
-            //     const parentId = evt.to.closest('.tree_leaf').getAttribute('data-id');
-
-            //     if($(evt.to).closest('.tree_leaf').hasClass('tree_leaf_without_branch')) {
-            //         $(evt.to).closest('.tree_leaf').removeClass('tree_leaf_without_branch');
-            //         $(evt.to).closest('.tree_leaf').addClass('tree_leaf_with_branch');
-                    
-            //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-none');
-            //         $($(evt.to).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-inline');
-            //     }
-                
-            //     if($(evt.from)[0].children.length === 0) {
-            //         $(evt.from).closest('.tree_leaf').removeClass('tree_leaf_with_branch');
-            //         $(evt.from).closest('.tree_leaf').addClass('tree_leaf_without_branch');
-            
-            //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').addClass('d-none');
-            //         $($(evt.from).closest('.tree_leaf').find('.icon-folder-opening')[0]).find('i').removeClass('d-inline');
-            //     }
-                
-            //     self.requests.transferFolder(
-            //         {
-            //         folder_id: [Number(nodeId)],
-            //         parent_id: Number(parentId),
-            //         access_token: "string"
-            //         },
-            //         () => {
-            //             self.htmlMaker.treeMove(nodeId, parentId);
-            //         }
-            //     );
-            //     },
-            //     onMove: function (/**Event*/evt, /**Event*/originalEvent) {
-            //     // Example: https://jsbin.com/nawahef/edit?js,output
-
-                
-            //     if($($(evt.related).find('.tree_branch')[0]).hasClass('closed_branch')) {
-            //         const branch = $(evt.related).closest('.tree_leaf');
-            //         const opening_icon = $($(evt.related).find('.icon-folder-opening')[0]);
-            //         if(branch.hasClass('tree_leaf_with_branch')) {
-            //         if($(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
-            //             $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
-            //         }
-            
-            //         if(opening_icon.find('i').hasClass('fa-caret-right')) {
-            //             opening_icon.find('i').removeClass('fa-caret-right');
-            //             opening_icon.find('i').addClass('fa-caret-down');
-            //         }
-            //         }
-            //     }
-            //     }
-            // });
-            // }
-
-            
             const {makeTreeLeaf, makeTreeBranch} = this.htmlMaker;
-            let {currentParentOfDrag, currentDragTreeElementId} = this.htmlMaker;
-            // const {dndForTree} = this.events;
-            const {transferFolder} = this.requests;
 
-            // dndForTree();
+            function makeTree (data) {
+                const getTreeData = (data) => {
+                    return data.map((el) => {
+                        const children = el.children.length === 0 ? null : getTreeData(el.children);
+                        return {id: el.key, title: el.title, children: children};
+                    });
+                };
+                return data && data.map((el)=>{
+                    return !el.children || el.children.length === 0 ? makeTreeLeaf(el.key, el.name) : makeTreeBranch(el.key, el.name, el.children, makeTree);
+                });
+            };
+
+            $(el).children().html(makeTree(data).join(' '));
 
             document.querySelectorAll('.disclose').forEach((el)=>{el.onclick = function() {
                 $(this).closest('li').toggleClass('mjs-nestedSortable-collapsed').toggleClass('mjs-nestedSortable-expanded');
@@ -695,7 +540,7 @@ function App() {
         makeDnD() {
             document
                 .querySelectorAll(
-                    `[data-type="main-container"]`
+                    `[data-type="main-container"] [draggable="true"]`
                 )
                 .forEach(elm => {
                     elm.addEventListener("dragstart", function(e) {
@@ -839,15 +684,11 @@ function App() {
                             .querySelector('p.no_content').remove();
                         mainContainer.innerHTML += html;
                         if (tree) {
-                            self.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
+                            self.htmlMaker.makeTreeFolder(res.data.children, '#jstree_html');
                         } else {
                             // cb(self.htmlMaker.makeTreeFolder(folder));
                         }
                     });
-
-                    // if (tree) {
-                    //     this.htmlMaker.makeTreeFolder(res.data.children, '#folder-list2');
-                    // }
 
                     if(res.data.items.length === 0 && res.data.children.length === 0) {
                         document
@@ -858,9 +699,6 @@ function App() {
 
                     globalFolderId = res.settings.id;
 
-                    $('.media__folder-list .media-tree_leaf-wrapper .tree_leaf_content.active').removeClass('active');
-                    $($(`.media__folder-list .media-tree_leaf-wrapper .tree_leaf[data-id="${this.globalFolderId}"]`).find('.tree_leaf_content')[0]).addClass('active');
-          
                     // self.helpers.makeBreadCrumbs(res.settings.id);
                     // self.helpers.makeDnD();
                     cb ? cb() : null;
@@ -961,23 +799,17 @@ function App() {
             );
         },
         get_folder_items(elm, e) {
-            console.log(1111, elm)
+
             !$(e.target).hasClass('closer') && (function(){
                 let id = elm[0].getAttribute("data-id");
-                if(!id) {
-                    id = $(elm[0]).closest(".tree_leaf").attr("data-id")
-                }
                 prevFolder.push(globalFolderId);
                 self.requests.drawingItems(
                     {
                         folder_id: Number(id),
                         files: false,
-                        access_token: "string",
+                        access_token: "string"
                     },
-                    false,
-                    () => {
-                        $(elm[0]).closest(".tree_leaf_content").addClass("active");
-                    }
+                    false
                 );
             })();
 
@@ -1437,25 +1269,3 @@ $("body").on("click", ".remove-thumb-img", function(e) {
 // // });
 
 
-
-$('body').on('click', '.icon-folder-opening', function(ev) {
-    ev.stopImmediatePropagation()
-    const branch = $(ev.target).closest('.tree_leaf');
-    const opening_icon = $(ev.target).closest('.icon-folder-opening');
-    console.log(5548979856)
-    if(branch.hasClass('tree_leaf_with_branch')) {
-      if(!$(branch.find('.tree_branch')[0]).hasClass('closed_branch')) {
-        $(branch.find('.tree_branch')[0]).addClass('closed_branch');
-      } else {
-        $(branch.find('.tree_branch')[0]).removeClass('closed_branch');
-      }
-  
-      if(!opening_icon.find('i').hasClass('fa-caret-right')) {
-        opening_icon.find('i').removeClass('fa-caret-down');
-        opening_icon.find('i').addClass('fa-caret-right');
-      } else {
-        opening_icon.find('i').removeClass('fa-caret-right');
-        opening_icon.find('i').addClass('fa-caret-down');
-      }
-    }
-  });
