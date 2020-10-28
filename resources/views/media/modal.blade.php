@@ -13,12 +13,23 @@
         <div class="modal-body">
           <div class="content ">
             <div class="left">
-              <div bb-media-click="get_folder_items" class="dd-item" draggable="true" data-id="{!! @get_media_folder()->id !!}" style="background-color: #3c8dbc; width: 100%; text-align: center; color: white;  margin-bottom: -50px; cursor: pointer">{!! strtoupper(@get_media_folder()->name) !!}</div>
-              <div class="folder-list" id="jstree_html" class="demo" data-media="folder" data-menudata>
-                <ol class="dd-list sortable" id="fff">
+            <div class="folder-list media__folder-list" id="folder-list2" data-media="folder" data-menudata="">
+                  <div class="media-tree_leaf-wrapper" style="display: flex; justify-content: space-between;">
+                    <ol class="first-branch">
+                      <li class="tree_leaf leaf filter" data-id="1" data-name="Drive" id="item_1" bb-media-type="folder">
+                        <div class="tree_leaf_content active" bb-media-click="get_folder_items" draggable="true">
+                            <span class="icon-folder-opening"></span>
+                            <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
+                            Drive2
+                        </div>
+                      
+                        <ol class="tree_branch" id="fff">
 
-                </ol>
-              </div>
+                        </ol>
+                      </li>
+                    </ol>
+                  </div>
+                </div>
             </div>
             <div class="media_modal_right_content">
               <div class="content-upload media-modal-content-upload d-none">
@@ -33,8 +44,8 @@
               <div class="img">
                 <div class="lds-dual-ring"></div>
               </div>
-              <div class="row main-content media-modal-main-content modal_img_container" data-type="main-container">
-                <!-- <div class="icon">
+              <div class="m-0 d-flex flex-wrap folderitems w-100 main-content media-modal-main-content modal_img_container" style="position: relative;" data-media="folderitem" data-type="main-container">
+                <!-- <div class="icon"> 
                     <i class="fa fa-folder" aria-hidden="true"></i>
                     <ul class="list-unstyled list-inline text-center icons">
                         <li class="text-center"><a href="#"><i class="fa fa-info" aria-hidden="true"></i></a></li>
