@@ -22,6 +22,7 @@ class AppController extends Controller
 
     public function warehouse($q = null)
     {
+
         $current = null;
         $warehouse = AppWarehouses::join('warehouses', 'app_warehouses.warehouse_id', '=', 'warehouses.id')
             ->leftJoin('warehouse_translations', 'warehouses.id', '=', 'warehouse_translations.warehouse_id')
@@ -54,11 +55,8 @@ class AppController extends Controller
         if ($q == null) {
             $q = count($warehouse) ? $warehouse[0]->id : null;
         }else{
-            if(!AppWarehouses::where('warehouse_id',$q)->exists()){
-                abort(404);
-            }else{
-                $current=AppWarehouses::where('warehouse_id',$q)->first();
-            }
+
+                $current=AppWarehouses::findOrFail($q);
         }
 
         return $this->view('products.index', compact('warehouse','current', 'q', 'notImportedWarehouse'));
@@ -66,37 +64,30 @@ class AppController extends Controller
 
     public function orders($q)
     {
-        if (!AppWarehouses::where('warehouse_id', $q)->exists()) {
-            abort(404);
-        } else {
-            $current = AppWarehouses::where('warehouse_id', $q)->first();
-        }
+        $current=AppWarehouses::findOrFail($q);
         return $this->view('orders.index', compact('current', 'q'));
     }
 
     public function discounts($q=1)
     {
-        $current = AppWarehouses::where('warehouse_id', $q)->first();
+        $current=AppWarehouses::findOrFail($q);
         $discounts = $current->discounts;
         return view('admin.app.discounts.index', compact(['discounts','current']));
     }
 
     public function offers($q)
     {
-        $current = AppWarehouses::where('warehouse_id', $q)->first();
+        $current=AppWarehouses::findOrFail($q);
         $discounts = $current->offers;
         return view('admin.app.discounts.offers', compact(['current', 'discounts']));
     }
 
     public function notSelectedProducts($id)
     {
-        $items = Items::leftJoin('app_items', 'items.id', 'app_items.item_id')
-            ->select('items.*', 'app_items.item_id', 'app_items.warehouse_id')
-            ->where(function ($query) use ($id) {
-                return $query->whereNull('app_items.warehouse_id')->orWhere('app_items.warehouse_id', '!=', $id);
-            })
-            ->with(['brand', 'categories', 'translations'])
-            ->get();
+        $current=AppWarehouses::findOrFail($id);
+        $warehouse = $current->warehouse;
+        $selecteds = $warehouse->appitems()->pluck('item_id');
+        $items = Items::with(['brand', 'categories', 'translations'])->whereNotIn('id', $selecteds)->get();
         $brands = Brands::all();
         $categories = Category::where('type', 'item')->get();
         return response()->json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
@@ -112,7 +103,8 @@ class AppController extends Controller
     {
         $shop_id = $request->get('shop_id');
         $items = $request->get('products');
-        $warehouse = Warehouse::findOrFail($shop_id);
+        $current=AppWarehouses::findOrFail($shop_id);
+        $warehouse = $current->warehouse;
         $defaultRack = $warehouse->default_rack();
         $warehouse->appItems()->attach($items);
         return response()->json(['error' => false]);
@@ -174,11 +166,7 @@ class AppController extends Controller
 
     public function getSettings(Settings $settings, $q)
     {
-        if (!AppWarehouses::where('warehouse_id', $q)->exists()) {
-            abort(404);
-        } else {
-            $current = AppWarehouses::where('warehouse_id', $q)->first();
-        }
+        $current=AppWarehouses::findOrFail($q);
         $settings = $settings->getEditableData('app_settings_' . $q)->toArray();
         return $this->view('settings', compact('current', 'q', 'settings'));
     }
