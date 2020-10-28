@@ -1,5 +1,12 @@
 @php
-    $products = \App\Models\Stock::where('status',true)->whereIn('id',$topProducts)->get();
+    $role = get_role_for_product();
+    $products = \App\Models\Stock::leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
+        ->leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+        ->select('stocks.*')
+        ->where('status',true)->whereIn('stocks.id',$topProducts)
+        ->where('stock_translations.locale', app()->getLocale())
+        ->where('stock_variations.role_id', $role->id)
+        ->groupBy('stocks.id')->get();
 @endphp
 <div class="products__list-wrapper home_products-carousel">
 @foreach($products as $product)

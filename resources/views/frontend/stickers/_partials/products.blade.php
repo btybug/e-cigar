@@ -1,5 +1,6 @@
 <div
     class="d-flex justify-content-between align-items-center brands_main-content-products-top">
+    @if(count($stockCategories))
     <div class="left-wrapper">
         <select class="form-control list-tabs product-category" data-id="{!! $current->id !!}">
             @foreach($stockCategories as $key=>$category)
@@ -52,6 +53,7 @@
             </div>
         </div>
     </div>
+    @endif
 </div>
 <div class="brands_main-content-products">
     <ul class="row brands_products__list-wrapper products__all-list-product">

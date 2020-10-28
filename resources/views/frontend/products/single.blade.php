@@ -302,7 +302,7 @@
                                                aria-controls="pills-offers" aria-selected="true">{!! __('offers') !!}</a>
                                             @endif
 
-                                            @if($vape->related_products && count($vape->related_products))
+                                            @if($vape->relatedProductsByCustomer && count($vape->relatedProductsByCustomer))
                                             <a class="nav-link product-single-tab_link font-20 font-main-bold main-transition"
                                                data-toggle="pill" href="#pills-related" role="tab"
                                                aria-controls="pills-related" aria-selected="false">{!! __('related') !!}</a>
@@ -594,7 +594,7 @@
                                              aria-labelledby="pills-related-tab">
                                             <div class="d-flex flex-wrap">
                                                 <div class="product_single-main-tab-content">
-                                                    @include("frontend.products._partials.products_render",['products' => $vape->related_products,'related' => true])
+                                                    @include("frontend.products._partials.products_render",['products' => $vape->relatedProductsByCustomer,'related' => true])
                                                 </div>
                                                 <div class="product_single-right-ads">
                                                     @if($vape->ads && count($vape->ads))

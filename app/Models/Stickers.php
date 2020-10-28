@@ -79,7 +79,15 @@ class Stickers extends Translatable
 
     public function products()
     {
-        return $this->belongsToMany(Stock::class, 'stock_stickers', 'sticker_id', 'stock_id');
+        $role = get_role_for_product();
+
+        return $this->belongsToMany(Stock::class, 'stock_stickers', 'sticker_id', 'stock_id')
+            ->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
+            ->leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->where('stock_translations.locale', app()->getLocale())
+            ->where('stock_variations.role_id', $role->id)
+            ->select('stocks.*')
+            ->groupBy('stocks.id');
     }
 
     public static function getById($id, $col = 'name')

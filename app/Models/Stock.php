@@ -214,6 +214,18 @@ class Stock extends Translatable
         return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id');
     }
 
+    public function relatedProductsByCustomer()
+    {
+        $role = get_role_for_product();
+        return $this->belongsToMany(Stock::class, 'stock_related', 'stock_id', 'related_id')
+            ->leftJoin('stock_variations', 'stocks.id', '=', 'stock_variations.stock_id')
+            ->leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->where('stock_translations.locale', app()->getLocale())
+            ->where('stock_variations.role_id', $role->id)
+            ->select('stocks.*')
+            ->groupBy('stocks.id');
+    }
+
     public function StockRelated()
     {
         return $this->hasMany(StockRelated::class,'stock_id');

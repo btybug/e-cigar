@@ -51,7 +51,7 @@ class HomeController extends Controller
         $brands = Category::where('type','brands')->whereNull('parent_id')->where('status',true)->get();
         $tops = $this->settings->getEditableData('top');
         $tops = ($tops->data) ? json_decode($tops->data, true) : [];
-//        dd($tops);
+
         return view('welcome', compact(['banners','categories','brands','tops','bottoms']));
     }
 
