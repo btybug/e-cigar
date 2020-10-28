@@ -29,6 +29,7 @@ class Brands extends Translatable
             ->leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
             ->where('stock_translations.locale', app()->getLocale())
             ->where('stock_variations.role_id', $role->id)
+            ->where('stocks.status',true)
             ->select('stocks.*')
             ->groupBy('stocks.id');
     }
