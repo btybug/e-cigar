@@ -922,6 +922,7 @@ class DatatableController extends Controller
 
     public function getAllAppItems($id)
     {
+        $current=AppWarehouses::findOrFail($id);
         return Datatables::of(AppItems::join('items', 'app_items.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
@@ -938,7 +939,7 @@ class DatatableController extends Controller
                 'item_translations.short_description',
                 'categories_translations.name as category')
             ->groupBy('items.id')
-            ->where('app_items.warehouse_id', $id)
+            ->where('app_items.warehouse_id', $current->warehouse_id)
             ->where('items.is_archive', false)->with('item')
             ->where('item_translations.locale', \Lang::getLocale()))
             ->editColumn('category', function ($attr) {

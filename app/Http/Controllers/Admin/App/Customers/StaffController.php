@@ -27,11 +27,7 @@ class StaffController extends Controller
 
             ->select('users.*', 'roles.title')
             ->pluck('users.name','id');
-        if(!AppWarehouses::where('warehouse_id',$q)->exists()){
-            abort(404);
-        }else{
-            $current=AppWarehouses::where('warehouse_id',$q)->first();
-        }
+        $current=AppWarehouses::findOrFail($q);
         return view('admin.app.staff.index',compact('users','q','current'));
     }
 
