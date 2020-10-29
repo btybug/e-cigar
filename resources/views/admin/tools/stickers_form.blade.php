@@ -68,6 +68,23 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-md-2 col-form-label">Items</label>
+                    <div class="col-md-10">
+                        {!! Form::select('items[]',$items,($model)?$model->items->pluck('id','id')->all():null,['class'=>'form-control sticker_attribute','multiple' => true]) !!}
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="row">
+                    <label class="col-md-2 col-form-label">Products</label>
+                    <div class="col-md-10">
+                        {!! Form::select('products[]',$products,($model)?$model->stocks->pluck('id','id')->all():null,['class'=>'form-control sticker_attribute','multiple' => true]) !!}
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

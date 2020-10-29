@@ -12,7 +12,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Attributes;
 use App\Models\AttributeStickers;
+use App\Models\Items;
 use App\Models\Stickers;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class ToolsController extends Controller
@@ -28,12 +30,14 @@ class ToolsController extends Controller
     {
         $stickers = Stickers::all();
         $attributes = Attributes::get()->pluck('name','id')->all();
-        return $this->view('stickers',compact(['stickers','attributes']));
+        $items = Items::get()->pluck('name','id')->all();
+        $products = Stock::get()->pluck('name','id')->all();
+        return $this->view('stickers',compact(['stickers','attributes','items','products']));
     }
 
     public function postStickersManage(Request $request)
     {
-        $data=$request->except(['_token','translatable','attributes'],[]);
+        $data=$request->except(['_token','translatable','attributes','items','products'],[]);
         $sticker = Stickers::updateOrCreate($request->id,$data);
         $attributes = $request->get('attributes',[]);
 
@@ -48,6 +52,22 @@ class ToolsController extends Controller
             }
         }
 
+        $sticker->items()->detach();
+        $items = $request->get('items', []);
+        if (count($items)) {
+            foreach ($items as $item) {
+                $sticker->items()->attach($item);
+            }
+        }
+
+        $sticker->stocks()->detach();
+        $products = $request->get('products', []);
+        if (count($products)) {
+            foreach ($products as $product) {
+                $sticker->stocks()->attach($product);
+            }
+        }
+
         return redirect()->back();
     }
 
@@ -56,8 +76,9 @@ class ToolsController extends Controller
         $model=Stickers::findOrFail($request->get('id'));
         $path=$this->view.'.stickers_form';
         $attributes = Attributes::get()->pluck('name','id')->all();
-
-        $html=\View::make($path)->with(['model'=>$model,'attributes' => $attributes])->render();
+        $items = Items::get()->pluck('name','id')->all();
+        $products = Stock::get()->pluck('name','id')->all();
+        $html=\View::make($path,compact(['model','attributes','items','products']))->render();
         return \Response::json(['error'=>false,'html'=>$html]);
     }
 

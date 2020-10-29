@@ -77,6 +77,16 @@ class Stickers extends Translatable
         return $this->belongsToMany(Attributes::class, 'attributes_stickers', 'sticker_id', 'attributes_id');
     }
 
+    public function stocks()
+    {
+        return $this->belongsToMany(Stock::class, 'stock_stickers', 'sticker_id', 'stock_id');
+    }
+
+    public function items()
+    {
+        return $this->belongsToMany(Items::class, 'item_stickers', 'sticker_id', 'item_id');
+    }
+
     public function products()
     {
         $role = get_role_for_product();
