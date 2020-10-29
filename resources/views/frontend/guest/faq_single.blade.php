@@ -26,6 +26,7 @@
                         </div>
                         <div class="product_single-main-tab-content">
                             <ul class="row products__page-list-product products__all-list-product">
+
                                 @foreach($faq->stocks as $product)
                                     <li class="col-sm-6 col-xl-4 mb-2">
                                         <div class="products__item-wrapper main-transition">
@@ -99,7 +100,9 @@
                                     </span>
                                 @else
                                     @php
-                                        $firstVariation = ($product->variations && count($product->variations))?$product->variations()->orderBy('ordering','asc')->first():null;
+                                        $role = get_role_for_product();
+
+                                    $firstVariation = ($product->variations && count($product->variations))?$product->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->first():null;
                                     @endphp
                                     <span class="font-sec-bold font-24 text-tert-clr products__item-main-price">
                                         @php
