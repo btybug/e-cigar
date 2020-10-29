@@ -222,7 +222,8 @@ class Items extends Translatable
     public function categories()
     {
         return $this->belongsToMany(Category::class, 'item_categories', 'item_id', 'categories_id')
-            ->where('categories.type', 'stocks');
+            ->where('categories.type', 'stocks')
+            ->with('translations');
     }
 
     public function ItemCategories()

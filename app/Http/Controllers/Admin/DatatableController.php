@@ -337,7 +337,44 @@ class DatatableController extends Controller
             })->rawColumns(['actions', 'name', 'end_date', 'start_date'])
             ->make(true);
     }
+    public function getAllItems(Request $request)
+    {
+        $query=Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin('item_categories', 'item_categories.item_id', '=', 'items.id')
+            ->leftJoin('categories', 'item_categories.categories_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->leftJoin('brands', 'items.brand_id', '=', 'brands.id')
+            ->leftJoin('brands_translations', 'brands.id', '=', 'brands_translations.brands_id')
+            ->select('items.*', 'item_translations.name', 'item_translations.short_description')
+            ->groupBy('items.id')
+            ->where('items.is_archive', false)
+            ->where('item_translations.locale', \Lang::getLocale())->with(['categories','categories.translations']);
 
+        return Datatables::of($query)
+            ->addColumn('categories', function ($attr) {
+                return implode(',', $attr->categories->pluck('name')->toArray());
+            })->addColumn('quantity', function ($attr) {
+                return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
+            })
+            ->addColumn('barcode', function ($attr) {
+                return ($attr->barcode) ? $attr->barcode : 'no barcode';
+            })
+            ->editColumn('brand_id', function ($attr) {
+                return ($attr->brand) ? $attr->brand->name : 'no brand';
+            })->editColumn('status', function ($attr) {
+                return ($attr->status) ? "Active" : 'Draft';
+            })->editColumn('long_description', function ($attr) {
+                return $attr->long_description;
+            })->addColumn('actions', function ($attr) {
+                return "<div class='datatable-td__action'>"
+                    . (userCan('admin_items_edit') ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $attr->id . "'><i class='fa fa-road'></i></a>" : null)
+                    . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>" : null)
+                    . (userCan('admin_items_duplicate') ? "<a class='btn btn-primary' href='" . route('admin_items_duplicate', $attr->id) . "'>Copy</a>" : null)
+                    . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
+                    . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
+                    . "</div>";
+            })->rawColumns(['actions', 'categories'])->make(true);
+    }
     public function getAllStocks()
     {
         return Datatables::of(Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
@@ -877,48 +914,7 @@ class DatatableController extends Controller
             ->make(true);
     }
 
-    public function getAllItems()
-    {
-        return Datatables::of(Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
-            ->leftJoin('categories', 'items.brand_id', '=', 'categories.id')
-            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
-            ->leftJoin('brands', 'items.brand_id', '=', 'brands.id')
-            ->leftJoin('brands_translations', 'brands.id', '=', 'brands_translations.brands_id')
-            ->select('items.*', 'item_translations.name', 'item_translations.short_description',
-                'categories_translations.name as category')
-            ->groupBy('items.id')
-            ->where('items.is_archive', false)
-            ->where('item_translations.locale', \Lang::getLocale()))
-            ->editColumn('category', function ($attr) {
-                $str = '';
-                if ($attr->categories && count($attr->categories)) {
-                    foreach ($attr->categories as $category) {
-                        $str .= "<span class='badge badge-dark'>" . $category->name . "</span>";
-                    }
-                }
-                return $str;
-            })->addColumn('quantity', function ($attr) {
-                return ($attr->type == 'simple') ? $attr->purchase()->sum('qty') - $attr->others()->sum('qty') : 'N/A';
-            })
-            ->addColumn('barcode', function ($attr) {
-                return ($attr->barcode) ? $attr->barcode : 'no barcode';
-            })
-            ->editColumn('brand_id', function ($attr) {
-                return ($attr->brand) ? $attr->brand->name : 'no brand';
-            })->editColumn('status', function ($attr) {
-                return ($attr->status) ? "Active" : 'Draft';
-            })->editColumn('long_description', function ($attr) {
-                return $attr->long_description;
-            })->addColumn('actions', function ($attr) {
-                return "<div class='datatable-td__action'>"
-                    . (userCan('admin_items_edit') ? "<a class='btn edit-row' style='background-color: #86caff;color:black' data-id='" . $attr->id . "'><i class='fa fa-road'></i></a>" : null)
-                    . (userCan('admin_items_edit') ? "<a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>" : null)
-                    . (userCan('admin_items_duplicate') ? "<a class='btn btn-primary' href='" . route('admin_items_duplicate', $attr->id) . "'>Copy</a>" : null)
-                    . (userCan('admin_items_purchase') ? "<a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>" : null)
-                    . (userCan('admin_items_archive') ? "<a class='btn btn-danger' href='" . route('admin_items_archive', $attr->id) . "'>x</a>" : null)
-                    . "</div>";
-            })->rawColumns(['actions', 'category'])->make(true);
-    }
+
 
     public function getAllAppItems($id)
     {
