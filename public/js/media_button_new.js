@@ -2779,11 +2779,6 @@ document
     $(this).css("background-color", "#2a2a2a");
     $(this).css("overflow", "unset");
     $(this).css("min-width", "unset");
-    $(this).css("overflow-wrap", "break-word");
-    $(this).css("word-wrap", "break-word");
-    $(this).css("hyphens", "auto");
-    $(this).css("width", "100px");
-    $(this).css("max-width", "100px");
   }).on('blur', '[contenteditable]', function() {
     $(this).css("text-overflow", "ellipsis");
     $(this).css("background-color", "unset");
