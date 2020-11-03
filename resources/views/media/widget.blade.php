@@ -106,6 +106,15 @@
                             </div>
                         </div>
                     <!-- @endif -->
+                @else
+                        <div class="img-thumb-container" style="margin: 10px;">
+                            <div class="inner">
+                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
+                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </div>
+                        </div>
                 @endif
             @elseif($model && is_object($model))
                 @if(isset($model->$name))
@@ -128,6 +137,15 @@
                             </div>
                         </div>
                     <!-- @endif -->
+                    @else
+                        <div class="img-thumb-container" style="margin: 10px;">
+                            <div class="inner">
+                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
+                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </div>
+                        </div>
                 @endif
             @else
                 @if($model)
@@ -151,6 +169,15 @@
                         </div>
                     </div>
                     <!-- @endif -->
+                    @else
+                        <div class="img-thumb-container" style="margin: 10px;">
+                            <div class="inner">
+                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
+                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                    <i class="fa fa-trash"></i>
+                                </span>
+                            </div>
+                        </div>
                 @endif
             @endif
         </div>
