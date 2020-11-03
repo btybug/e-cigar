@@ -180,7 +180,7 @@ class StoreController extends Controller
         $model = null;
         $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
         ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
-        dd(count($items),Items::all()->count());
+
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $invoices = PurchaseInvoice::all()->pluck('name','id')->all();
