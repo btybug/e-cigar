@@ -1094,8 +1094,7 @@ function App() {
                     //     </div>
                     // `)
                 // } else {
-                    let urlValue = document.querySelector(".file-realtive-url")
-                        .value;
+                    let urlValue = document.querySelector(".file-realtive-url").value;
                     console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
                     const exArray = urlValue.match(/[^\.]+/g);
                     const ex = exArray[exArray.length - 1];
@@ -1103,8 +1102,7 @@ function App() {
                     if(ex === 'html' || ex === 'Html' || ex === 'HTML') {
                         document.querySelector(`.${inputId}`).value = urlValue;
                         console.log('files', document.getElementById('uploader').files);
-                        console.log(location)
-
+                        console.log(location);
 
                         if(document.querySelector(`.${inputId}_media_single_img`)) {
                             document.querySelector(`.${inputId}_media_single_img`).src = "/public/images/html.jpg";
@@ -1120,6 +1118,7 @@ function App() {
                             });
                         });
                         document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
+                        $(document.querySelector(`.${inputId}_media_single_img`)).closest("div").find("span").css("display", "block")
                     }
                     document.querySelector(`.${inputId}`).value = urlValue;
                 // }
@@ -1251,8 +1250,11 @@ $("body").on("click", ".bestbetter-modal-open button", function() {
 
 $("body").on("click", ".remove-thumb-img", function(e) {
     e.preventDefault();
+    console.log(879456123)
     var id = $(this).data("id");
     let realInput = $(`.${id}`);
+    console.log("realInput", realInput);
+    console.log("realInput value", realInput.val());
 
     let src = $(this).attr("data-src");
     $(".multipale-hidden-inputs").each(function() {
@@ -1260,13 +1262,19 @@ $("body").on("click", ".remove-thumb-img", function(e) {
             $(this).remove();
         }
     });
+    console.log("$(this)", $(this));
+    $(this).css("display", "none");
+    // realInput.val()
     let cn = realInput.attr("data-count") - 1;
-    realInput.val(cn + " selected");
+    realInput.val("");
+    $(this).closest("div").find("img").attr("src", "/public/images/no_image.jpg");
+    $(this).closest("div").find("img").attr("alt", "");
+    $(this).closest("div").find("span").data("src", "");
     realInput.attr("data-count", cn);
 
-    $(this)
-        .closest(".img-thumb-container")
-        .remove();
+    // $(this)
+    //     .closest(".img-thumb-container")
+    //     .remove();
 });
 
 
