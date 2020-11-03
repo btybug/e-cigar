@@ -179,7 +179,7 @@ class StoreController extends Controller
     {
         $model = null;
         $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
-        ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
+        ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->where('item_translations.locale',app()->getLocale())->get()->pluck('full_name', 'id')->all();
 
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
