@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Exports\ItemsExport;
 use App\Http\Controllers\Admin\Requests\ItemsRequest;
 use App\Http\Controllers\Admin\Requests\SupplierRequest;
 use App\Http\Controllers\Controller;
@@ -79,6 +80,11 @@ class ItemsController extends Controller
         $allAttrs = Attributes::with('children')->whereNull('parent_id')->get();
         return $this->view('new', compact('model', 'allAttrs', 'bundle', 'categories', 'warehouses',
             'racks', 'shelves', 'data', 'brands', 'downloads'));
+    }
+
+    public function export()
+    {
+        return \Excel::download(new ItemsExport(), 'items.xlsx');
     }
 
     public function postNew(ItemsRequest $request)

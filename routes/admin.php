@@ -503,6 +503,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/', 'Admin\ItemsController@index')->name('admin_items');
         Route::get('/archives', 'Admin\ItemsController@archives')->name('admin_items_archives');
         Route::get('/new', 'Admin\ItemsController@getNew')->name('admin_items_new');
+        Route::get('/export', 'Admin\ItemsController@export')->name('admin_items_export');
         Route::post('/new', 'Admin\ItemsController@postNew')->name('post_admin_items_new');
         Route::post('/edit-row', 'Admin\ItemsController@postItemRowEdit')->name('post_admin_items_edit_row');
         Route::post('/multi-delete', 'Admin\ItemsController@postItemMultiDelete')->name('post_admin_items_multi_delete');
