@@ -41,6 +41,9 @@
                         <div class="ml-1">
                             <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
                         </div>
+                        <div class="ml-1">
+                            <a  href="{!! route('admin_items_export') !!}" class="btn btn-primary">Export</a>
+                        </div>
                         @endok
                     </div>
 {{--                    <div class="card-header panel-heading d-flex justify-content-between">--}}

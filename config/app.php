@@ -179,6 +179,7 @@ return [
         Chumper\Zipper\ZipperServiceProvider::class,
         Bnb\GoogleCloudPrint\LaravelServiceProvider::class,
         Hkonnet\LaravelEbay\EbayServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 //        Huddle\Zendesk\Providers\ZendeskServiceProvider::class,
         /*
          * Application Service Providers...
@@ -253,7 +254,8 @@ return [
         'GoogleCloudPrint' => Bnb\GoogleCloudPrint\Facades\GoogleCloudPrint::class,
         'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
-        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class
+        'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class
     ],
 
 ];
