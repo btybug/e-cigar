@@ -434,7 +434,7 @@
                                                                                             <div style="width: calc(100% - 120px)">
                                                                                                 <input type="text"
                                                                                                        name="other_images[{{ $key }}][alt]" value="{{ $other_image['alt'] }}"
-                                                                                                       class="form-control">
+                                                                                                       class="form-control alt_text">
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -1523,7 +1523,7 @@
                 <div class="form-group row">
                     <label for="staticEmail" style="width: 70px">Alt text</label>
                     <div style="width: calc(100% - 120px)">
-                        <input type="text" name="other_images[{count}][alt]" class="form-control" value="">
+                        <input type="text" name="other_images[{count}][alt]" class="form-control alt_text" value="">
                     </div>
                 </div>
 

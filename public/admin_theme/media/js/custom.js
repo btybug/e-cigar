@@ -1070,7 +1070,6 @@ function App() {
                 const card = $(`button#${inputId}`).closest('.card');
                 // if(card.find('img.img-responsive').length === 0) {
                 //     console.log(456465465165)
-
                     // console.log('inputId', inputId, 'urlValue', urlValue, document.querySelector(`.${inputId}_media_single_img`));
 
                     // card.find('input.modal-input-path').remove();
@@ -1115,6 +1114,12 @@ function App() {
                         });
                         document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
                         $(document.querySelector(`.${inputId}_media_single_img`)).closest("div").find("span").css("display", "block")
+                        let id = $(`#myModal [bb-media-click="open_images"]`).attr("data-id");
+                        if($(`.modal-input-path.${id}`).closest(".other_images-item")) {
+                            console.log(888888888888)
+                            const arrN = $(".file-box.image-container.active").find(".file-title").text().match(/(.*)\./im);
+                            $(`.modal-input-path.${id}`).closest(".other_images-item").find(".alt_text").val(arrN[arrN.length-1]);
+                        }
                     }
                     document.querySelector(`.${inputId}`).value = urlValue;
                 // }
@@ -1241,6 +1246,9 @@ $("body").on("click", ".bestbetter-modal-open button", function() {
     let value = $(this).attr("data-multiple");
     inputId = $(this).attr("id");
     multiple = JSON.parse(value);
+    let id = $(this).attr("id");
+    $(`#myModal [bb-media-click="open_images"]`).attr("data-id", id);
+    console.log(548796321)
     // $(".img").removeClass("active");
 });
 
