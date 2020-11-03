@@ -1986,6 +1986,9 @@
                 html = html.replace(/{count}/g, uid);
                 html = html.replace(/media_/g, 'media_' + uid);
                 $(".other_images-group").append(html);
+                // $().append(`
+                //     <img src="/public/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
+                // `)
             });
 // ----------
 
