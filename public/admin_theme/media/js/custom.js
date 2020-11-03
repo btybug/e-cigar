@@ -980,10 +980,6 @@ function App() {
                     }
                 );
             })();
-
-
-
-
         },
         add_new_folder(elm, e) {
             let name = document.querySelector(".new-folder-input").value;

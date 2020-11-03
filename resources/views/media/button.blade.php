@@ -1,6 +1,6 @@
 
 <input type="hidden" id="core-folder" value="{!! $id !!}">
-<div class="bestbetter-modal">
+<div class="bestbetter-modal" style="display: flex;flex-direction: column;">
     <!-- Trigger the modal with a button -->
     <div class="bestbetter-modal-open">
         @if($multiple)
@@ -88,7 +88,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}" style="max-width: 200px; width: 100%; margin-top: 10px;"/>
                 @endif
             @endif
         @elseif($model && is_object($model))
@@ -103,7 +103,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"  style="max-width: 200px; width: 100%; margin-top: 10px;"/>
                 @endif
             @endif
         @else
@@ -119,7 +119,7 @@
                     @endphp
                     {!! $html !!}
                 @else
-                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}"/>
+                    <img src="{{ $mi }}" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="{{ $mi }}" style="max-width: 200px; width: 100%; margin-top: 10px;"/>
                 @endif
             @endif
         @endif

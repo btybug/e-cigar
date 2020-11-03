@@ -393,51 +393,54 @@
                                                                     @if($model && $model->other_images && count($model->other_images))
                                                                         @foreach($model->other_images as $key => $other_image)
                                                                             <div
-                                                                                class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{{ $key }}][url]">
-                                                                                <div class="col-sm-7 p-0">
+                                                                                class="col-md-12 mb-5 d-flex flex-wrap other_images-item" data-key="other_images[{{ $key }}][url]">
+                                                                                <div class="col-sm-11 p-0 d-flex">
 
-                                                                                    <div class="input-group">
+                                                                                    <div class="input-group" style="width: 250px">
                                                                                         <div class="input-group-prepend">
                                                                                             {!! media_button("other_images[$key][image]",$other_image['image']) !!}
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="hidden"
-                                                                                           name="other_images[{{ $key }}][product_id]" value="null"
-                                                                                           class="form-control product_id_hidden_js">
+                                                                                    <div style="width: 80%; margin-top: 40px">
 
-                                                                                    <div class="form-group row mt-3">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Url</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="other_images[{{ $key }}][url]" value="{{ $other_image['url'] }}"
-                                                                                                   class="form-control url_feald">
-                                                                                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{{ $key }}][url]">
-                                                                                                Select
-                                                                                            </button>
+                                                                                        <input type="hidden"
+                                                                                               name="other_images[{{ $key }}][product_id]" value="null"
+                                                                                               class="form-control product_id_hidden_js">
+    
+                                                                                        <div class="form-group row mt-3">
+                                                                                            <label for="staticEmail"
+                                                                                                   style="width: 70px">Url</label>
+                                                                                            <div class="d-flex" style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                       name="other_images[{{ $key }}][url]" value="{{ $other_image['url'] }}"
+                                                                                                       class="form-control url_feald mr-1">
+                                                                                                <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{{ $key }}][url]">
+                                                                                                    Select
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Tag</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="other_images[{{ $key }}][tags]" value="{{ $other_image['tags'] }}"
-                                                                                                   class="form-control">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="staticEmail"
+                                                                                                style="width: 70px">Tag</label>
+                                                                                            <div  style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                       name="other_images[{{ $key }}][tags]" value="{{ $other_image['tags'] }}"
+                                                                                                       class="form-control">
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Alt text</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="other_images[{{ $key }}][alt]" value="{{ $other_image['alt'] }}"
-                                                                                                   class="form-control">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="staticEmail"
+                                                                                                style="width: 70px">Alt text</label>
+                                                                                            <div style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                       name="other_images[{{ $key }}][alt]" value="{{ $other_image['alt'] }}"
+                                                                                                       class="form-control">
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
 
                                                                                 </div>
-                                                                                <div class="col-sm-3">
+                                                                                <div class="col-sm-1">
                                                                                     <button class="plus-icon remove-new-other_images-input btn btn-danger">
                                                                                         <i class="fa fa-minus"></i></button>
                                                                                 </div>
@@ -1503,23 +1506,23 @@
                     class="form-control product_id_hidden_js">
 
                 <div class="form-group row mt-3">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="other_images[{count}][url]" class="form-control url_feald"  value="">
+                    <label for="staticEmail" style="width: 70px">Url</label>
+                    <div class="d-flex"  style="width: calc(100% - 120px)">
+                        <input type="text" name="other_images[{count}][url]" class="form-control url_feald mr-1"  value="">
                         <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{count}][url]">
                             Select
                         </button>
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
-                    <div class="col-sm-10">
+                    <label for="staticEmail" style="width: 70px">Tag</label>
+                    <div style="width: calc(100% - 120px)">
                         <input type="text" name="other_images[{count}][tags]" class="form-control" value="">
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Alt text</label>
-                    <div class="col-sm-10">
+                    <label for="staticEmail" style="width: 70px">Alt text</label>
+                    <div style="width: calc(100% - 120px)">
                         <input type="text" name="other_images[{count}][alt]" class="form-control" value="">
                     </div>
                 </div>
@@ -1757,14 +1760,14 @@
                             res.data.media.forEach((el) => {
                                 var uid = Math.random().toString(36).substr(2, 9);
                                 var html = $("#add-more-other_images-tags").html();
-                                const media_uuid = 'media_' + uid
+                                const media_uuid = 'media_' + uid;
                                 html = html.replace(/{count}/g, uid);
                                 html = html.replace(/media_/g, media_uuid+" ");
                                 $(".other_images-group").append(html);
                                 // console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
                                 $(`input.${media_uuid}`).val(el.url);
 
-                                console.log(9997897)
+                                console.log(9997897);
                             });
                             // console.log(7777777, $("#treeview_json").jstree(true).get_json())
                             let d = $("#treeview_json").jstree(true).get_json()
