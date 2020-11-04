@@ -1190,7 +1190,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
                             <select class="form-control d-none" id="brand_select">
-
+                                
                             </select>
                             <select class="form-control d-none" id="category_select">
 
@@ -1493,43 +1493,44 @@
     </script>
 
     <script type="template" id="add-more-other_images-tags">
-        <div class="col-md-12 mb-2 d-flex flex-wrap other_images-item" data-key="other_images[{count}][url]">
-            <div class="col-sm-7 p-0">
-                <div class="input-group">
-                    <div class="input-group-prepend">
+        <div class="col-md-12 mb-5 d-flex flex-wrap other_images-item" data-key="other_images[{count}][url]">
+            <div class="col-sm-11 p-0 d-flex">
+                <div class="input-group" style="width: 250px">
+                    <div class="input-group-prepend added_section_js">
                         {!! media_button('other_images[{count}][image]',$model) !!}
 
                     </div>
                 </div>
-                <input type="hidden"
-                    name="other_images[{count}][product_id]" value="null"
-                    class="form-control product_id_hidden_js">
+                <div style="width: 80%; margin-top: 40px">
+                    <input type="hidden"
+                        name="other_images[{count}][product_id]" value="null"
+                        class="form-control product_id_hidden_js">
 
-                <div class="form-group row mt-3">
-                    <label for="staticEmail" style="width: 70px">Url</label>
-                    <div class="d-flex"  style="width: calc(100% - 120px)">
-                        <input type="text" name="other_images[{count}][url]" class="form-control url_feald mr-1"  value="">
-                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{count}][url]">
-                            Select
-                        </button>
+                    <div class="form-group row mt-3">
+                        <label for="staticEmail" style="width: 70px">Url</label>
+                        <div class="d-flex"  style="width: calc(100% - 120px)">
+                            <input type="text" name="other_images[{count}][url]" class="form-control url_feald mr-1"  value="">
+                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="other_images[{count}][url]">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" style="width: 70px">Tag</label>
+                        <div style="width: calc(100% - 120px)">
+                            <input type="text" name="other_images[{count}][tags]" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" style="width: 70px">Alt text</label>
+                        <div style="width: calc(100% - 120px)">
+                            <input type="text" name="other_images[{count}][alt]" class="form-control alt_text" value="">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" style="width: 70px">Tag</label>
-                    <div style="width: calc(100% - 120px)">
-                        <input type="text" name="other_images[{count}][tags]" class="form-control" value="">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" style="width: 70px">Alt text</label>
-                    <div style="width: calc(100% - 120px)">
-                        <input type="text" name="other_images[{count}][alt]" class="form-control alt_text" value="">
-                    </div>
-                </div>
-
 
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-1">
                 <button class="plus-icon remove-new-other_images-input btn btn-danger">
                     <i class="fa fa-minus"></i></button>
             </div>
@@ -1767,7 +1768,6 @@
                                 // console.log($(".other_images-group"), $(`input.${media_uuid}`), `input.${media_uuid}`);
                                 $(`input.${media_uuid}`).val(el.url);
 
-                                console.log(9997897);
                             });
                             // console.log(7777777, $("#treeview_json").jstree(true).get_json())
                             let d = $("#treeview_json").jstree(true).get_json()
@@ -1983,9 +1983,13 @@
             $("body").on("click", ".add-new-other_images-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-other_images-tags").html();
+                const media_uuid = 'media_' + uid;
                 html = html.replace(/{count}/g, uid);
-                html = html.replace(/media_/g, 'media_' + uid);
+                html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
+                html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
+                console.log(html);
                 $(".other_images-group").append(html);
+                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
                 // $().append(`
                 //     <img src="/public/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
                 // `)
