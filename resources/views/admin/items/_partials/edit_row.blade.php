@@ -27,6 +27,12 @@
         </div>
     </div>
     <div class="form-group row">
+        <label for="barcode" class="col-4 col-form-label">Barcode</label>
+        <div class="col-8">
+            {!! Form::text('barcode',null,['class'=>'form-control','id'=>'barcode']) !!}
+        </div>
+    </div>
+    <div class="form-group row">
         <label for="select" class="col-4 col-form-label">Categories</label>
         <div class="col-8">
             {!! Form::select('categories[]',$categories,$model->categories()->pluck('id','id'),['class'=>'custom-select','style' => 'width:100%','multiple'=>true]) !!}
