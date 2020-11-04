@@ -995,7 +995,6 @@ class DatatableController extends Controller
                 return "<div class='datatable-td__action'>
             <a class='btn btn-warning' href='" . route('admin_items_edit', $attr->id) . "'>Edit</a>
             <a class='btn btn-info' href='" . route('admin_items_purchase', $attr->id) . "'>Activity</a>
-            <a class='btn btn-success' href='" . route('admin_items_activate', $attr->id) . "'><i class='fa fa-arrow-circle-left'></i></a>
             </div>";
             })->rawColumns(['actions'])->make(true);
     }
