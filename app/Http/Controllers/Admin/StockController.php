@@ -62,26 +62,26 @@ class StockController extends Controller
 //        }
 //        dd('done');
 
-        $c = Category::where('slug', 'e-liquid')->first();
-        $stocks = Stock::leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
-            ->where('stock_categories.categories_id', $c->id)
-            ->where('is_offer',false)->get();
-
-        foreach ($stocks as $stock){
-            $item = $stock->main_item;
-            if($item){
-                $item->translate('gb')->name = $stock->name;
-                $item->translate('gb')->short_description = $stock->short_description;
-                $item->translate('gb')->long_description = $stock->long_description;
-                $item->translate('gb')->what_is_content = $stock->what_is_content;
-                $item->image = $stock->image;
-                $item->what_is_image = $stock->what_is_image;
-                $item->other_images = $stock->other_images;
-                $item->save();
-            }
-
-        }
-        dd("done!!! ". $stocks->count() ." products copied to Items");
+//        $c = Category::where('slug', 'e-liquid')->first();
+//        $stocks = Stock::leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
+//            ->where('stock_categories.categories_id', $c->id)
+//            ->where('is_offer',false)->get();
+//
+//        foreach ($stocks as $stock){
+//            $item = $stock->main_item;
+//            if($item){
+//                $item->translate('gb')->name = $stock->name;
+//                $item->translate('gb')->short_description = $stock->short_description;
+//                $item->translate('gb')->long_description = $stock->long_description;
+//                $item->translate('gb')->what_is_content = $stock->what_is_content;
+//                $item->image = $stock->image;
+//                $item->what_is_image = $stock->what_is_image;
+//                $item->other_images = $stock->other_images;
+//                $item->save();
+//            }
+//
+//        }
+//        dd("done!!! ". $stocks->count() ." products copied to Items");
 
         return $this->view('stock');
     }
