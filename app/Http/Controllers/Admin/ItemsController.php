@@ -561,7 +561,6 @@ class ItemsController extends Controller
 
         Items::updateOrCreate($request->id, $request->except(['name', '_token', 'categories', 'short_description']), ['gb' => [
             'name' => $request->name,
-            'barcode' => $request->barcode,
             'short_description' => $request->short_description,
         ]]);
         ActivityLogs::action('items', 'update', $model->id);
