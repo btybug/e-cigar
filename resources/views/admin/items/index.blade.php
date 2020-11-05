@@ -42,7 +42,7 @@
                             <a  href="{!! route('admin_items_new') !!}" class="btn btn-primary">New Item</a>
                         </div>
                         <div class="ml-1">
-                            <a  href="{!! route('admin_items_export') !!}" class="btn btn-primary">Export</a>
+                            <button class="btn btn-primary export_table_js">Export</button>
                         </div>
                         @endok
                     </div>
@@ -179,6 +179,37 @@
             </div>
         </div>
     </div>
+
+    <div class="modal" tabindex="-1" id="export_options" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Select Options</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <label for="_1" style="display: flex; align-items: center; margin-left: 20px">
+                    <input type="radio"  id="_1" name="export_options" checked="checked" value="1" style="margin-right: 20px"/>
+                    <span>1</span>
+                </label>
+                <label for="_2" style="display: flex; align-items: center; margin-left: 20px">
+                    <input type="radio"  id="_2" name="export_options" value="2" style="margin-right: 20px"/>
+                    <span>2</span>
+                </label>
+                <label for="_3" style="display: flex; align-items: center; margin-left: 20px">
+                    <input type="radio"  id="_3" name="export_options" value="3" style="margin-right: 20px"/>
+                    <span>3</span>
+                </label>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary export_selected_options">Export</button>
+            </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
@@ -291,6 +322,7 @@
             //     };
 
             //     $('body').on('click', '.print_barcodes', openPrintDialogue)
+
 
             function tableInit(storageName, selectData, selectId, tableData, tableId, ajaxUrl) {
                 if(!localStorage.getItem(storageName)) {
@@ -813,6 +845,16 @@
                     }
                 });
 
+                $(".export_table_js").on("click", function() {
+                    $('#export_options').modal('show');
+                })
+
+                $(".export_selected_options").on("click", function() {
+                    let linkify = table.ajax.params();
+                    console.log(7777, $.param(linkify));
+                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), {}, (res) => console.log('res', res), (err) => console.log('err', err));
+                    $('#export_options').modal('hide');
+                })
                 // edit_hidden_button
 
                 table.on( 'select', function ( e, dt, type, indexes ) {
