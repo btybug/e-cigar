@@ -36,7 +36,9 @@
 
                             </div>
                             <div class="row cart-table">
-
+                                    @if($order)
+                                        @include("admin.orders.invoice._partials.cart")
+                                    @endif
                             </div>
                             <div class="text-right add-product">
                                 <button class="btn btn-primary btn-sm" data-toggle="modal" data-target=".add-product-modal"><i
@@ -111,7 +113,7 @@
         <div class="modal-dialog modal-lg mw-100" role="document">
             <div class="modal-content">
                 <div class="modal-header rounded-0">
-                    <h4 class="modal-title">Modal Big</h4>
+                    <h4 class="modal-title">Select Products</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -4011,10 +4013,10 @@
                             const variations = [];
                             const bad = [];
                             const product__single_items = $('.product__single-item-info');
-
+                            let filter_discount_limit = null;
                             product__single_items.each(function() {
                                 const group_id = $(this).data('group-id');
-                                const products = [];
+                                let products = [];
                                 $(this).find('.product__single-item-info-bottom').each(function() {
                                     let id;
                                     let qty;
@@ -4070,34 +4072,68 @@
                                                 qty = '1';
                                                 discount_id = null;
                                             }
+                                        } else if($(this).closest('.filter_discount').length > 0) {
+                                            filter_discount_limit = $(this).closest('.filter_discount').data('limit');
+                                            id = $(this).data('id');
+                                            if($(this).find('.input-qty').length>0) {
+                                                qty = $(this).find('.input-qty').val();
+                                                discount_id = null;
+                                            }
                                         }
                                     }
-                                    products.push({
+
+                                    id === 'no' ? (products = 'no') : products.push({
                                         id,
                                         qty,
                                         discount_id
                                     });
                                 });
 
-                                variations.push({
-                                    group_id,
-                                    products: products.filter(function(el) {
-                                        return el.id !== undefined;
-                                    })
-                                });
+                                if(group_id && filter_discount_limit) {
+                                    variations.push({
+                                        group_id,
+                                        limit: filter_discount_limit,
+                                        products: products !== 'no' ? products.filter(function(el) {
+                                            return el.id !== undefined;
+                                        }) : 'no'
+                                    });
+                                } else if(group_id) {
+                                    variations.push({
+                                        group_id,
+                                        products: products !== 'no' ? products.filter(function(el) {
+                                            return el.id !== undefined;
+                                        }) : 'no'
+                                    });
+                                }
+
 
 
                             });
-                            console.log({product_id,product_qty,user_id, variations});
+                            // console.log({product_id,product_qty, variations});
                             variations.map((gr) => {
-                                gr.products.length === 0 && bad.push(gr.group_id);
+                                if(gr.limit) {
+                                    const limit = gr.limit*1;
+                                    const qty = gr.products.reduce((el1, el2) => {
+                                        return {qty: el1.qty*1+el2.qty*1};
+                                    }, {qty: 0}).qty;
+                                    console.log(gr.group_id, gr.products, qty, limit);
+
+                                    qty !== limit && bad.push(gr.group_id);
+                                } else {
+                                    const minLimit = $('#singleProductPageCnt').find(`[data-group-id="${gr.group_id}"]`).attr('data-min-limit')*1;
+                                    const maxLimit = $('#singleProductPageCnt').find(`[data-group-id="${gr.group_id}"]`).attr('data-limit')*1;
+                                    gr.products.length < minLimit && minLimit !== 0 && bad.push(gr.group_id);
+                                }
                             });
                             if(bad.length !== 0) {
+                                console.log(bad.length,'steee')
                                 bad.map(function(group_id) {
                                     $(`.product__single-item-info[data-group-id="${group_id}"]`).css('border-color', 'red');
                                 });
                                 return false;
                             } else {
+                                console.log('ajax')
+
                                 $.ajax({
                                     type: "post",
                                     url: "/admin/orders/invoices/add-to-cart",

@@ -100,7 +100,11 @@ class InvoiceOrdersController extends Controller
     {
         $order = OrderInvoice::findOrFail($id);
         $user = $order->user;
-        $products = Stock::all()->pluck('name', 'id')->all();
+        $products = Stock::leftJoin('stock_translations', 'stocks.id', '=', 'stock_translations.stock_id')
+            ->select('stocks.*', 'stock_translations.name')
+            ->where('stocks.is_offer', false)
+            ->where('stock_translations.locale', \Lang::getLocale())->groupBy('stocks.id')->get()->pluck('name', 'id')->all();
+
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
         $users = User::all()->pluck('name', 'id')->all();
         $delivery = null;
@@ -156,6 +160,7 @@ class InvoiceOrdersController extends Controller
 
     public function getNew()
     {
+        $order = null;
         $user = null;
         $products = Stock::all()->pluck('name', 'id')->all();
         $statuses = $this->statuses->where('type', 'order')->get()->pluck('name', 'id');
@@ -176,7 +181,7 @@ class InvoiceOrdersController extends Controller
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->clear();
         Cart::session(Orders::ORDER_NEW_SESSION_ID)->removeConditionsByType('shipping');
 
-        return $this->view('new', compact('statuses', 'products', 'users', 'user', 'countries', 'countriesShipping'));
+        return $this->view('new', compact('statuses', 'products', 'users', 'user', 'countries', 'countriesShipping','order'));
     }
 
     public function addNote(OrderHistoryRequest $request, OrdersService $ordersService)
@@ -218,7 +223,8 @@ class InvoiceOrdersController extends Controller
     {
         $vape = Stock::findOrFail($request->id);
         $currency = get_currency();
-        $html = $this->view('_partials.product', compact(['vape','currency']))->render();
+        $role = get_role_for_product();
+        $html = $this->view('_partials.product', compact(['vape','currency','role']))->render();
 
         return \Response::json(['error' => false, 'html' => $html]);
     }
@@ -876,7 +882,7 @@ class InvoiceOrdersController extends Controller
             'title' => 'First PDF for Medium',
             'heading' => 'Hello from 99Points.info',
             'content' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry
-            s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
             It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.'
         ];
 

@@ -24,51 +24,77 @@
                 <div class="product-single-info">
                     <input type="hidden" value="{{ $vape->id }}" data-p="{{ $vape->type }}"
                            id="vpid">
-
-                    <div class="product__single-item">
-                        <div
-                            class="d-flex flex-wrap align-items-center justify-content-between product__single-item-top">
-                            <div
-                                class="d-flex align-items-center justify-content-center product_btn-discount">
-                                                            <span
-                                                                class="font-sec-reg font-26 text-sec-clr">QTY Discount</span>
-                            </div>
-                            <div class="font-main-light font-20">
-                                The more you order the more you get
-                            </div>
-                            <a href="#" class="font-20 text-tert-clr top_details">Offer
-                                Details</a>
-                        </div>
-
-                        @include("admin.inventory._partials.render_price_form",['model' => $vape])
-                    </div>
                     <div
-                        class="d-flex flex-wrap align-items-center justify-content-between product__single-delivery">
-                        <div
-                            class="d-flex align-items-center product__single-delivery-left">
+                        class="d-flex align-items-center product__single-delivery-right mb-3">
+                        <div class="product__single-delivery-free font-20 lh-1">
+                            {!! __('free_on_orders_over') !!}
+                        </div>
+                        <a href="#"
+                           class="product__single-delivery-details font-20 text-tert-clr lh-1">{!! __('more_detail') !!}</a>
+                    </div>
+                    @php
+                        $section_type = $vape->variations()->where('role_id',$role->id)->first()->section_type;
+                    @endphp
+                    @if( $section_type == 1 )
+                        <div class="product__single-item-info mb-3">
                             <div
-                                class="font-sec-reg text-main-clr font-28 lh-1 product__single-delivery-title">
-                                Delivery
+                                class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                <div class="col-md-9 pl-0">
+                                    <span class="font-sec-light font-26">Select section</span>
+                                </div>
+                                <div class="col-md-3 d-flex justify-content-end pr-0">
+
+                                </div>
                             </div>
-                            <div class="product__single-delivery-select">
-                                <div class="select-wall product__select-wall">
-                                    <select name="" id=""
-                                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible"
-                                            style="width: 250px">
-                                        <option value="">United Kingdom</option>
-                                        <option value="">Armenia</option>
+                            <div class="d-flex flex-wrap align-items-end mb-2 product__single-item-info-bottom">
+                                <div class="col-xl-7 col-lg-6 col-md-7 pl-0 pr-md-3 pr-0">
+                                    @php
+                                        $variations = $vape->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->required()->groupBy('variation_id')->get();
+                                    @endphp
+                                    <select name="product_section"
+                                            id="select_section"
+                                            style="width: 100%"
+                                            class="select-2 select-2--no-search main-select not-selected arrow-dark select2-hidden-accessible single-product-select">
+
+                                        @foreach($variations as $item)
+                                            <option value="{{ $item->variation_id }}">
+                                                {{ $item->title }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class="d-flex align-items-center product__single-delivery-right">
-                            <div class="product__single-delivery-free font-20 lh-1">
-                                Free on orders over £10
+                        @php
+                            $variations = collect($vape->variations()->where('role_id',$role->id)->orderBy('ordering','asc')->required()->get())->groupBy('variation_id');
+                        @endphp
+                        <div class="product__single-item single-section">
+                            @include("admin.inventory._partials.render_price_form_single",['model' => $vape,'variation' => $variations->first()])
+                        </div>
+                    @else
+                        <div class="product__single-item">
+                            @include("admin.inventory._partials.render_price_form",['model' => $vape])
+                        </div>
+                    @endif
+                    <div class="product__single-item">
+                        <div class="product__single-item-info mb-3">
+
+                            <div class="d-flex flex-wrap align-items-center lh-1 product__single-item-info-top">
+                                <div class="col-9 pl-0">
+                                    <span class="font-sec-light font-26">{{ $vape->special_offers->count() }} Special offer{!! ($vape->special_offers->count()>1)?'s':'' !!}</span>
+                                </div>
+                                <div class="col-3 d-flex justify-content-end pr-0">
+                                    @if($vape->special_offers->count() > 0)
+                                        <a href="javascript:void(0)" id="product-select-offer" class="btn btn-primary text-center font-15 text-sec-clr text-uppercase">
+                                            <span class="product-card_btn-text">Select</span>
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
-                            <a href="#"
-                               class="product__single-delivery-details font-20 text-tert-clr lh-1">More
-                                Details</a>
+                            {!! Form::hidden('special_offer',null,['id' => 'special_offer_data']) !!}
+                            <div class="special-box">
+
+                            </div>
                         </div>
                     </div>
                 </div>

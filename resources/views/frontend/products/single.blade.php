@@ -325,7 +325,7 @@
                                     <div class="tab-content">
 
                                         @if((trim(strip_tags($vape->long_description)))
-                                        || ($vape->main_item &&  $vape->main_item->specifications  && count($vape->main_item->specifications))
+                                        || ($vape->main_item &&  $vape->main_item->specifications_with_children  && count($vape->main_item->specifications_with_children))
                                         || (trim(strip_tags($vape->what_is_content))) || ($vape->banners && count($vape->banners)))
                                             <div class="tab-pane fade show active" id="pills-tecnical"
                                                  role="tabpanel"
@@ -359,8 +359,10 @@
                                                                     @if(count($vape->main_item->specifications_with_children) >= 10)
                                                                         <div class="w-100">
                                                                         <div class="row ">
-                                                                            @foreach($vape->main_item->specifications_with_children as $stockAttr)
-                                                                            @if($loop->iteration % 2 == 0)
+                                                                            @foreach($vape->main_item->specifications as $stockAttr)
+                                                                                @if($stockAttr->attr)
+
+                                                                                    @if($loop->iteration % 2 == 0)
                                                                                         <div class="col-md-6">
                                                                                             <div
                                                                                                 class="d-flex technical-features-content-wall">
@@ -453,11 +455,13 @@
                                                                                             </div>
                                                                                         </div>
                                                                                     @endif
+                                                                                @endif
                                                                             @endforeach
                                                                         </div>
                                                                         </div>
                                                                     @else
                                                                         @foreach($vape->main_item->specifications_with_children as $stockAttr)
+                                                                            @if($stockAttr->attr)
                                                                                 <div
                                                                                             class="d-flex technical-features-content-wall">
                                                                                             <div
@@ -501,6 +505,7 @@
                                                                                                 </div>
                                                                                             </div>
                                                                                         </div>
+                                                                            @endif
                                                                         @endforeach
                                                                     @endif
                                                                 </div>

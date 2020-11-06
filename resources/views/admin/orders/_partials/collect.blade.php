@@ -106,7 +106,7 @@
                 @endif
             </td>
             <td class="barcode-td align_middle w-25">
-                <span class="barcode-block">{{ $item->barcode->code }}</span>
+                <span class="barcode-block">{{ $item->barcode }}</span>
             </td>
             <td class="last-td w-25 @if($collected) active @endif">
                 <div class="check-block">
