@@ -181,6 +181,7 @@ class StoreController extends Controller
         $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
             ->where('item_translations.locale',app()->getLocale())
         ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))
+             ->where('is_archive',0)
             ->get()->pluck('full_name', 'id')->all();
 
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
@@ -248,6 +249,7 @@ class StoreController extends Controller
         $model = Purchase::findOrFail($id);
         $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
             ->where('type', 'simple')
+            ->where('is_archive',0)
             ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
