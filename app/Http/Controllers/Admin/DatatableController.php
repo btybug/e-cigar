@@ -985,7 +985,21 @@ class DatatableController extends Controller
 
     public function getAllItemsArchived()
     {
-        return Datatables::of(Items::archive())
+        $query=Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin('item_categories', 'item_categories.item_id', '=', 'items.id')
+            ->leftJoin('categories', 'item_categories.categories_id', '=', 'categories.id')
+            ->leftJoin('categories_translations', 'categories.id', '=', 'categories_translations.category_id')
+            ->leftJoin('brands', 'items.brand_id', '=', 'brands.id')
+            ->leftJoin('brands_translations', 'brands.id', '=', 'brands_translations.brands_id')
+            ->select('items.*', 'item_translations.name', 'item_translations.short_description')
+            ->groupBy('items.id')
+            ->where('items.is_archive', true)
+            ->where('item_translations.locale', \Lang::getLocale())->with(['categories','categories.translations']);
+
+        return Datatables::of($query)
+            ->addColumn('barcode', function ($attr) {
+                return ($attr->barcode) ? $attr->barcode : 'no barcode';
+            })
             ->editColumn('name', function ($attr) {
                 return $attr->name;
             })->editColumn('short_description', function ($attr) {
