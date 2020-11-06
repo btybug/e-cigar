@@ -257,9 +257,9 @@
 
 
 
-            const shortAjax = function (URL, obj = {}, cb) {
+            const shortAjax = function (URL, obj = {}, cb, method) {
                 fetch(URL, {
-                    method: "post",
+                    method: method ? method : "post",
                     headers: {
                         "Content-Type": "application/json",
                         Accept: "application/json",
@@ -302,7 +302,7 @@
                 const ids = [];
                 dt.rows( { selected: true } ).data().map((r) => ids.push(r.id));
                 console.log('data', ids);
-                shortAjax(url, {method, type, ids}, (res) => console.log('res', res), (err) => console.log('err', err));
+                shortAjax(url, {method, type, ids}, (res) => console.log('res', res));
             };
 
             // function openPrintDialogue(){
@@ -852,7 +852,7 @@
                 $(".export_selected_options").on("click", function() {
                     let linkify = table.ajax.params();
                     console.log(7777, $.param(linkify));
-                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), {}, (res) => console.log('res', res), (err) => console.log('err', err));
+                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), {}, (res) => console.log('res', res), "GET");
                     $('#export_options').modal('hide');
                 })
                 // edit_hidden_button
