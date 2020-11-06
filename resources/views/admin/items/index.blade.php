@@ -852,7 +852,7 @@
                 $(".export_selected_options").on("click", function() {
                     let linkify = table.ajax.params();
                     console.log(7777, $.param(linkify));
-                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), {}, (res) => console.log('res', res), "GET");
+                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), null, (res) => console.log('res', res), "GET");
                     $('#export_options').modal('hide');
                 })
                 // edit_hidden_button
