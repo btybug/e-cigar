@@ -257,7 +257,8 @@
 
 
 
-            const shortAjax = function (URL, obj = {}, cb, method) {
+            const shortAjax = function (URL, obj = {}, cb) {
+                console.log(method === "GET")
                 fetch(URL, {
                     method: method ? method : "post",
                     headers: {
@@ -267,7 +268,7 @@
                         "X-CSRF-Token": $('input[name="_token"]').val()
                     },
                     credentials: "same-origin",
-                    body: JSON.stringify(obj)
+                    body: method === "GET" ? null : JSON.stringify(obj)
                 })
                     .then(function (response) {
                         return response.json();
@@ -280,6 +281,24 @@
                     });
             };
 
+            const shortAjaxGet = function (URL, cb) {
+                fetch(URL, {
+                    method: "get",
+                    headers: {
+                        "Content-Type": "application/json",
+                        Accept: "application/json",
+                        "X-Requested-With": "XMLHttpRequest",
+                        "X-CSRF-Token": $('input[name="_token"]').val()
+                    },
+                    credentials: "same-origin"
+                })
+                    .then(function (response) {
+                        return response;
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            };
 
             $('body').on('click', '.delete_rows', function() {
                 const ids = [];
@@ -852,7 +871,7 @@
                 $(".export_selected_options").on("click", function() {
                     let linkify = table.ajax.params();
                     console.log(7777, $.param(linkify));
-                    shortAjax("/admin/inventory/items/export?"+$.param(linkify), null, (res) => console.log('res', res), "GET");
+                    shortAjaxGet("/admin/inventory/items/export?"+$.param(linkify), (res) => console.log('res', res));
                     $('#export_options').modal('hide');
                 })
                 // edit_hidden_button
