@@ -131,6 +131,17 @@
                     ],
                     columns: tableHeadArray
                 });
+                $('.dataTables_filter input').unbind().keyup(function(e) {
+                    var value = $(this).val();
+                    if (value.length>3) {
+                        // alert(value);
+                        table.search(value).draw();
+                    } else {     
+                        //optional, reset the search if the phrase 
+                        //is less then 3 characters long
+                        table.search('').draw();
+                    }        
+                });
 
                 function init() {
                     var selected_items = [];
