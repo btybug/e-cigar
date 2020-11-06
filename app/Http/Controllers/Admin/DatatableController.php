@@ -813,7 +813,10 @@ class DatatableController extends Controller
 
     public function getPurchases()
     {
-        return Datatables::of(Purchase::query())
+        return Datatables::of(Purchase::join('items', 'purchases.item_id', '=', 'items.id')
+            ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->where('item_translations.locale', \Lang::getLocale())
+        ->select('purchases.*','item_translations.name'))
             ->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
             })->addColumn('name', function ($attr) {

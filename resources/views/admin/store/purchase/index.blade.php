@@ -131,17 +131,6 @@
                     ],
                     columns: tableHeadArray
                 });
-                $('.dataTables_filter input').unbind().keyup(function(e) {
-                    var value = $(this).val();
-                    if (value.length>0) {
-                        // alert(value);
-                        table.search(value).draw();
-                    } else {     
-                        //optional, reset the search if the phrase 
-                        //is less then 3 characters long
-                        table.search('').draw();
-                    }        
-                });
 
                 function init() {
                     var selected_items = [];
@@ -185,7 +174,7 @@
                 '#table_head_id',
                 [
                     {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
+                    {data: 'name', name: 'item_translations.name'},
                     {data: 'sku', name: 'sku'},
                     {data: 'user_id', name: 'user_id'},
                     {data: 'qty', name: 'qty'},
