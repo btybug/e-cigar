@@ -82,9 +82,9 @@ class ItemsController extends Controller
             'racks', 'shelves', 'data', 'brands', 'downloads'));
     }
 
-    public function export()
+    public function export(Request $request)
     {
-        return \Excel::download(new ItemsExport(), 'items.xlsx');
+        return \Excel::download(new ItemsExport($request), 'items.xlsx');
     }
 
     public function postNew(ItemsRequest $request)
