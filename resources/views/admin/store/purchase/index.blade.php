@@ -133,7 +133,7 @@
                 });
                 $('.dataTables_filter input').unbind().keyup(function(e) {
                     var value = $(this).val();
-                    if (value.length>3) {
+                    if (value.length>0) {
                         // alert(value);
                         table.search(value).draw();
                     } else {     
