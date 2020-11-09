@@ -227,7 +227,7 @@
                                                                                         <input type="hidden"
                                                                                                name="other_images[{{ $key }}][product_id]" value="null"
                                                                                                class="form-control product_id_hidden_js">
-    
+
                                                                                         <div class="form-group row mt-3">
                                                                                             <label for="staticEmail"
                                                                                                    style="width: 70px">Url</label>
@@ -287,7 +287,7 @@
                                                                 <div
                                                                     class="form-group d-flex flex-wrap align-items-center banner-group">
 
-                                                                    @if($model && count($model->banners))
+                                                                    @if($model && $model->banners && count($model->banners))
                                                                         @foreach($model->banners as $key => $banner)
                                                                             <div
                                                                                 class="col-md-12 mb-2 d-flex flex-wrap banner-item" data-key="banners[{{ $key }}][product_id]">
