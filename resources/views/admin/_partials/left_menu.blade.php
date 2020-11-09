@@ -130,6 +130,19 @@
                     <li><a href="{{route('admin_inventory_barcodes')}}"><i class="far fa-circle fa-xs"></i>Barcodes</a>
                     </li>
                     @endok
+
+                    @ok('admin_blog_brands')
+                    <li><a href="{{route('admin_blog_brands')}}"><i class="far fa-circle fa-xs"></i> Brands</a></li>
+                    @endok
+
+                    @ok('admin_store_attributes')
+                    <li><a href="{{route('admin_store_attributes')}}"><i class="far fa-circle fa-xs"></i> Attributes</a>
+                    </li>
+                    @endok
+
+                    @ok('admin_category')
+                    <li><a href="{{route('admin_category')}}"><i class="far fa-circle fa-xs"></i>Category</a></li>
+                    @endok
                 </ul>
             </li>
             @endHasAccess
@@ -144,9 +157,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    @ok('admin_stock')
-                    <li><a href="{{route('admin_stock')}}"><i class="far fa-circle fa-xs"></i>Products</a></li>
-                    @endok
+
                     @ok('admin_orders')
                     <li><a href="{{route('admin_orders')}}"><i class="far fa-circle fa-xs"></i> All orders</a></li>
                     @endok
@@ -175,22 +186,21 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
+                    @ok('admin_stock')
+                    <li><a href="{{route('admin_stock')}}"><i class="far fa-circle fa-xs"></i>Products</a></li>
+                    @endok
+
                     @ok('admin_blog')
                     <li><a href="{{route('admin_blog')}}"><i class="far fa-circle fa-xs"></i> Posts</a></li>
                     @endok
-                    @ok('admin_blog_brands')
-                    <li><a href="{{route('admin_blog_brands')}}"><i class="far fa-circle fa-xs"></i> Brands</a></li>
-                    @endok
+
                     @ok('show_comments')
                     <li><a href="{{route('show_comments')}}"><i class="far fa-circle fa-xs"></i>Comments</a></li>
                     @endok
                     @ok('admin_faq')
                     <li><a href="{{route('admin_faq')}}"><i class="far fa-circle fa-xs"></i> FAQ</a></li>
                     @endok
-                    @ok('admin_store_attributes')
-                    <li><a href="{{route('admin_store_attributes')}}"><i class="far fa-circle fa-xs"></i> Attributes</a>
-                    </li>
-                    @endok
+
                     @ok('admin_blog_contact_us')
                     <li><a href="{{route('admin_blog_contact_us')}}"><i class="far fa-circle fa-xs"></i>Contact us</a>
                     </li>
@@ -201,9 +211,7 @@
                     @ok('admin_reviews')
                     <li><a href="{{route('admin_reviews')}}"><i class="far fa-circle fa-xs"></i> Reviews</a></li>
                     @endok
-                    @ok('admin_category')
-                    <li><a href="{{route('admin_category')}}"><i class="far fa-circle fa-xs"></i>Category</a></li>
-                    @endok
+
                     @ok('admin_stores')
                     <li><a href="{{route('admin_stores')}}"><i class="far fa-circle fa-xs"></i>Stores</a></li>
                     @endok
