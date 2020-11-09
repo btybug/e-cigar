@@ -66,22 +66,42 @@ class StockController extends Controller
 //        $stocks = Stock::leftJoin('stock_categories', 'stocks.id', '=', 'stock_categories.stock_id')
 //            ->where('stock_categories.categories_id', $c->id)
 //            ->where('is_offer',false)->get();
-//
-//        foreach ($stocks as $stock){
-//            $item = $stock->main_item;
-//            if($item){
-//                $item->translate('gb')->name = $stock->name;
-//                $item->translate('gb')->short_description = $stock->short_description;
-//                $item->translate('gb')->long_description = $stock->long_description;
-//                $item->translate('gb')->what_is_content = $stock->what_is_content;
-//                $item->image = $stock->image;
-//                $item->what_is_image = $stock->what_is_image;
-//                $item->other_images = $stock->other_images;
-//                $item->save();
-//            }
-//
-//        }
-//        dd("done!!! ". $stocks->count() ." products copied to Items");
+        $stocks = Stock::all();
+
+        foreach ($stocks as $stock){
+            $item = $stock->main_item;
+            if($item){
+                $item->translate('gb')->name = $stock->name;
+                $item->translate('gb')->short_description = $stock->short_description;
+                $item->translate('gb')->long_description = $stock->long_description;
+                $item->translate('gb')->what_is_content = $stock->what_is_content;
+                $item->image = $stock->image;
+                $item->what_is_image = $stock->what_is_image;
+                $item->other_images = $stock->other_images;
+                $item->save();
+
+                $banners = $stock->banners->toArray();
+                $item->banners()->delete();
+                if (count($banners)) {
+                    foreach ($banners as $banner) {
+                        if ($banner['image']) {
+                            $item_b = $item->banners()->create($banner);
+                        }
+                    }
+                }
+
+                $item->stickers()->detach();
+                $stickers = $stock->stickers;
+                if (count($stickers)) {
+                    foreach ($stickers as $sticker) {
+                        $item->stickers()->attach($sticker->id, [
+                            'ordering' => $sticker->ordering
+                        ]);
+                    }
+                }
+            }
+        }
+        dd("done!!! ". $stocks->count() ." products copied to Items");
 
         return $this->view('stock');
     }
