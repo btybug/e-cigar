@@ -16,10 +16,10 @@ class CreateItemBannersTable extends Migration
         Schema::create('item_banners', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('item_id');
-            $table->text('image');
-            $table->text('url');
-            $table->text('tags');
-            $table->text('alt');
+            $table->text('image')->nullable();
+            $table->text('url')->nullable();
+            $table->text('tags')->nullable();
+            $table->text('alt')->nullable();
             $table->timestamps();
 
 //            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
