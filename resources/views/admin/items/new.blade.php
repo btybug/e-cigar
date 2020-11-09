@@ -954,14 +954,6 @@
     <script>
         $(function () {
 
-            $("body").on("click", ".add-new-other_images-input", function () {
-                var uid = Math.random().toString(36).substr(2, 9);
-                var html = $("#add-more-other_images-tags").html();
-                html = html.replace(/{count}/g, uid);
-                html = html.replace(/media_/g, 'media_' + uid);
-                $(".other_images-group").append(html);
-            });
-
             $("body").on("click", ".remove-new-other_images-input", function () {
                 $(this).closest(".other_images-item").remove();
             });
@@ -1171,6 +1163,34 @@
 
                 render_shelves(r_id,parent)
             })
+
+            $("body").on("click", ".add-new-banner-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-banners-tags").html();
+                const media_uuid = 'media_' + uid;
+                html = html.replace(/{count}/g, uid);
+                html = html.replaceAll(/modal-input-path .*"$/gmi, 'modal-input-path"');
+                html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
+                html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
+                $(".banner-group").append(html);
+                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+            });
+
+// ----------
+            $("body").on("click", ".add-new-other_images-input", function () {
+                var uid = Math.random().toString(36).substr(2, 9);
+                var html = $("#add-more-other_images-tags").html();
+                const media_uuid = 'media_' + uid;
+                html = html.replace(/{count}/g, uid);
+                html = html.replaceAll(/modal-input-path .*"$/gmi, 'modal-input-path"');
+                html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
+                html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
+                $(".other_images-group").append(html);
+                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+                // $().append(`
+                //     <img src="/public/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
+                // `)
+            });
 
             function render_racks(w_id,parent){
                 parent.find(".rack").html('<option value="0">Select Rack</option>');
