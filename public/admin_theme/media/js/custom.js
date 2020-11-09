@@ -1115,10 +1115,14 @@ function App() {
                         document.querySelector(`.${inputId}_media_single_img`).src = urlValue;
                         $(document.querySelector(`.${inputId}_media_single_img`)).closest("div").find("span").css("display", "block");
                         let id = $(`#myModal [bb-media-click="open_images"]`).attr("data-id");
+                        console.log(id, $(`.modal-input-path.${id}`).closest(".banner-item"))
                         if($(`.modal-input-path.${id}`).closest(".other_images-item")) {
-                            console.log(888888888888)
                             const arrN = $(".file-box.image-container.active").find(".file-title").text().match(/(.*)\./im);
                             $(`.modal-input-path.${id}`).closest(".other_images-item").find(".alt_text").val(arrN[arrN.length-1]);
+                        }
+                        if($(`.modal-input-path.${id}`).closest(".banner-item")) {
+                            const arrN = $(".file-box.image-container.active").find(".file-title").text().match(/(.*)\./im);
+                            $(`.modal-input-path.${id}`).closest(".banner-item").find(".alt_text").val(arrN[arrN.length-1]);
                         }
 
                     }
