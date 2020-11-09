@@ -242,4 +242,9 @@ class Items extends Translatable
     {
         return $this->belongsToMany(Stickers::class, 'item_stickers', 'item_id', 'sticker_id');
     }
+
+    public function banners()
+    {
+        return $this->hasMany(ItemBanners::class, 'item_id');
+    }
 }

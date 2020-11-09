@@ -117,6 +117,31 @@ class ItemsController extends Controller
             }
         }
 
+        $banners = $request->get('banners', []);
+
+        $bannerNotDeletable = [];
+        if (count($banners)) {
+            foreach ($banners as $banner) {
+                if (isset($banner['id'])) {
+                    $item_ba = $item->banners()->where('id', $banner['id'])->first();
+                    if ($item_ba) {
+                        if ($banner['image']) {
+                            $item_ba->fill($banner);
+                            $item_ba->save();
+                            $bannerNotDeletable[] = $item_ba->id;
+                        }
+                    }
+                } else {
+                    if ($banner['image']) {
+                        $item_ba = $item->banners()->create($banner);
+                        $bannerNotDeletable[] = $item_ba->id;
+                    }
+                }
+            }
+        }
+
+        $item->banners()->whereNotIn('id', $bannerNotDeletable)->delete();
+
         ActivityLogs::action('items', (($request->id) ? 'update' : 'create'), $item->id);
         return redirect()->back();
     }
