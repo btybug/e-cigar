@@ -35,9 +35,7 @@ class ItemsExport implements FromCollection, WithHeadings
                 'items.status', 'items.length', 'items.width',
                 'items.height', 'items.weight', 'items.item_length',
                 'items.item_width', 'items.item_height', 'items.item_weight'
-            )
-            ->groupBy('items.id')
-            ->where('items.is_archive', false)
+            )->groupBy('items.id')->where('items.is_archive', false)
             ->where('item_translations.locale', \Lang::getLocale()))
             ->addColumn('actions', function ($attr) {
                 return null;

@@ -470,50 +470,52 @@
                                                                         @foreach($model->banners as $key => $banner)
                                                                             <div
                                                                                 class="col-md-12 mb-2 d-flex flex-wrap banner-item" data-key="banners[{{ $key }}][product_id]">
-                                                                                <div class="col-sm-7 p-0">
+                                                                                <div class="col-sm-11 p-0 d-flex">
 
-                                                                                    <div class="input-group">
+                                                                                    <div class="input-group" style="width: 250px">
                                                                                         <div class="input-group-prepend">
                                                                                             {!! media_button("banners[$key][image]",$banner->image) !!}
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="hidden"
-                                                                                           name="banners[{{ $key }}][product_id]" value="null"
-                                                                                           class="form-control product_id_hidden_js">
+                                                                                    <div style="width: 80%; margin-top: 40px">
+                                                                                        <input type="hidden"
+                                                                                            name="banners[{{ $key }}][product_id]" value="null"
+                                                                                            class="form-control product_id_hidden_js">
 
-                                                                                    <div class="form-group row mt-3">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Url</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
-                                                                                                   class="form-control url_feald">
-                                                                                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{{ $key }}][product_id]">
-                                                                                                Select
-                                                                                            </button>
+                                                                                        <div class="form-group row mt-3">
+                                                                                            <label for="staticEmail"
+                                                                                                style="width: 70px">Url</label>
+                                                                                            <div class="d-flex" style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                    name="banners[{{ $key }}][url]" value="{{ $banner->url }}"
+                                                                                                    class="form-control url_feald mr-1">
+                                                                                                <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{{ $key }}][product_id]">
+                                                                                                    Select
+                                                                                                </button>
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Tag</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][tags]" value="{{ $banner->tags }}"
-                                                                                                   class="form-control">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="staticEmail"
+                                                                                                style="width: 70px">Tag</label>
+                                                                                            <div class="d-flex" style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                    name="banners[{{ $key }}][tags]" value="{{ $banner->tags }}"
+                                                                                                    class="form-control">
+                                                                                            </div>
                                                                                         </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <label for="staticEmail"
-                                                                                               class="col-sm-2 col-form-label">Alt text</label>
-                                                                                        <div class="col-sm-10">
-                                                                                            <input type="text"
-                                                                                                   name="banners[{{ $key }}][alt]" value="{{ $banner->alt }}"
-                                                                                                   class="form-control">
+                                                                                        <div class="form-group row">
+                                                                                            <label for="staticEmail"
+                                                                                                style="width: 70px">Alt text</label>
+                                                                                            <div class="d-flex" style="width: calc(100% - 120px)">
+                                                                                                <input type="text"
+                                                                                                    name="banners[{{ $key }}][alt]" value="{{ $banner->alt }}"
+                                                                                                    class="form-control alt_text">
+                                                                                            </div>
                                                                                         </div>
                                                                                     </div>
 
                                                                                 </div>
-                                                                                <div class="col-sm-3">
+                                                                                <div class="col-sm-1">
                                                                                     <button class="plus-icon remove-new-banner-input btn btn-danger">
                                                                                         <i class="fa fa-minus"></i></button>
                                                                                 </div>
@@ -1451,41 +1453,41 @@
 
     <script type="template" id="add-more-banners-tags">
         <div class="col-md-12 mb-2 d-flex flex-wrap banner-item" data-key="banners[{count}][product_id]">
-            <div class="col-sm-7 p-0">
-                <div class="input-group">
-                    <div class="input-group-prepend">
+            <div class="col-sm-11 p-0 d-flex">
+                <div class="input-group" style="width: 250px">
+                    <div class="input-group-prepend added_section_js">
                         {!! media_button('banners[{count}][image]',$model) !!}
 
                     </div>
                 </div>
-                <input type="hidden"
-                    name="banners[{count}][product_id]" value="null"
-                    class="form-control product_id_hidden_js">
-                <div class="form-group row mt-3">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Url</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="banners[{count}][url]" class="form-control url_feald"  value="">
-                        <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{count}][product_id]">
-                            Select
-                        </button>
+                <div style="width: 80%; margin-top: 40px">
+                    <input type="hidden"
+                        name="banners[{count}][product_id]" value="null"
+                        class="form-control product_id_hidden_js">
+                    <div class="form-group row mt-3">
+                        <label for="staticEmail" style="width: 70px">Url</label>
+                        <div class="d-flex"  style="width: calc(100% - 120px)">
+                            <input type="text" name="banners[{count}][url]" class="form-control url_feald mr-1" value="">
+                            <button type="button" class="btn btn-info select_product_for_url_js" data-key="banners[{count}][product_id]">
+                                Select
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" style="width: 70px">Tag</label>
+                        <div class="d-flex"  style="width: calc(100% - 120px)">
+                            <input type="text" name="banners[{count}][tags]" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="staticEmail" style="width: 70px">Alt text</label>
+                        <div class="d-flex"  style="width: calc(100% - 120px)">
+                            <input type="text" name="banners[{count}][alt]" class="form-control alt_text" value="">
+                        </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Tag</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="banners[{count}][tags]" class="form-control" value="">
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <label for="staticEmail" class="col-sm-2 col-form-label">Alt text</label>
-                    <div class="col-sm-10">
-                        <input type="text" name="banners[{count}][alt]" class="form-control" value="">
-                    </div>
-                </div>
-
-
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-1">
                 <button class="plus-icon remove-new-banner-input btn btn-danger">
                     <i class="fa fa-minus"></i></button>
             </div>
@@ -1676,17 +1678,16 @@
 
 
             $('body').on('click', '.save-prod', function(e) {
-                const invalidBanners = $('.stock-form').serializeArray().filter((el) => {
-                    return el.name.includes('banners') && ( el.value.trim() === "" );
-                })
+                // const invalidBanners = $('.stock-form').serializeArray().filter((el) => {
+                //     return el.name.includes('banners') && ( el.value.trim() === "" );
+                // })
 
-                if(invalidBanners.length > 0) {
-                    e.preventDefault();
-                    alert('Please, add banner\'s properties...')
-                } else {
+                // if(invalidBanners.length > 0) {
+                    // e.preventDefault();
+                //     alert('Please, add banner\'s properties...')
+                // } else {
                     $('.stock-form').submit();
-                }
-
+                // }
             });
 
 
@@ -1974,9 +1975,13 @@
             $("body").on("click", ".add-new-banner-input", function () {
                 var uid = Math.random().toString(36).substr(2, 9);
                 var html = $("#add-more-banners-tags").html();
+                const media_uuid = 'media_' + uid;
                 html = html.replace(/{count}/g, uid);
-                html = html.replace(/media_/g, 'media_' + uid);
+                html = html.replaceAll(/modal-input-path .*"$/gmi, 'modal-input-path"');
+                html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
+                html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
                 $(".banner-group").append(html);
+                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
             });
 
 // ----------
@@ -1985,9 +1990,9 @@
                 var html = $("#add-more-other_images-tags").html();
                 const media_uuid = 'media_' + uid;
                 html = html.replace(/{count}/g, uid);
+                html = html.replaceAll(/modal-input-path .*"$/gmi, 'modal-input-path"');
                 html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
                 html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
-                console.log(html);
                 $(".other_images-group").append(html);
                 $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
                 // $().append(`
