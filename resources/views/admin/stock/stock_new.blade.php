@@ -1688,7 +1688,6 @@
                 // } else {
                     $('.stock-form').submit();
                 // }
-
             });
 
 
