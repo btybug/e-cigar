@@ -9,6 +9,12 @@
 use App\Services\EAN13render;
 
 Route::get('/', 'Admin\AdminController@getDashboard')->name('admin_dashboard');
+
+Route::group(['prefix' => 'my-account'], function () {
+    Route::get('/plugins', 'Admin\MyAccountController@getIndex')->name('admin_plugins');
+    Route::get('/sites', 'Admin\MyAccountController@getSites')->name('admin_sites');
+});
+
 Route::get('/mail-templates/{template}', 'Admin\EmailsNotificationsController@templates');
 
 Route::group(['prefix' => 'find'], function () {

@@ -33,6 +33,26 @@
             <li><a href="{{route('admin_dashboard')}}"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a>
             </li>
 
+            @hasAccess('admin_plugins')
+                <li class="treeview">
+                    <a href="javascript:void(0)">
+                        <i class="fas fa-users"></i>
+                        <span>My Account</span>
+                        <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        @ok('admin_plugins')
+                            <li><a href="{{route('admin_plugins')}}"><i class="far fa-circle fa-xs"></i>Plugins</a></li>
+                        @endok
+                        @ok('admin_sites')
+                            <li><a href="{{route('admin_sites')}}"><i class="far fa-circle fa-xs"></i>Sites</a></li>
+                        @endok
+                    </ul>
+                </li>
+            @endHasAccess
+
             {{--<li><a href="{{route('admin_passport')}}"><i class="fa  fa-user-secret"></i> <span>Passport</span></a></li>--}}
             @hasAccess('media')
             <li class="treeview"><a href="javascript:void(0)"><i class="far fa-images"></i> <span>Media</span>
