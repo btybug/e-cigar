@@ -121,8 +121,8 @@ class Items extends Translatable
 
     public $translatedAttributes = ['name','short_name', 'short_description', 'long_description','what_is_content'];
 
-//    protected $appends = array('qty','img64');
-    protected $appends = array('qty');
+    protected $appends = array('qty','img64');
+//    protected $appends = array('qty');
 
     const ACTIVE = 1;
     const DRAFT = 0;
