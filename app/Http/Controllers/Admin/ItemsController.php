@@ -574,7 +574,7 @@ class ItemsController extends Controller
         $ids = explode(',', $ids);
         $items = Items::findMany($ids);
         $categories = Category::where('type', 'stocks')->get()->pluck('name', 'id')->all();
-        $brands = Category::where('type', 'brands')->whereNull('parent_id')->get()->pluck('name', 'id')->all();
+        $brands = Brands::all()->pluck('name', 'id')->toArray();
         $barcodes = Barcodes::all()->pluck('code', 'id');
 
         return $this->view('rows_edit', compact(['items', 'categories', 'brands', 'barcodes']));

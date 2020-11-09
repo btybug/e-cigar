@@ -8,6 +8,7 @@
                 <tr>
                     <th>Name</th>
                     <th>Short description</th>
+                    <th>Barcode</th>
                     <th>Price</th>
                     <th>Brand</th>
                     <th>Categories</th>
@@ -25,10 +26,13 @@
                                 {!! Form::text("items[$item->id][short_description]",$item->short_description,['class'=>'form-control']) !!}
                             </td>
                             <td>
+                                {!! Form::text("items[$item->id][barcode]",$item->barcode,['class'=>'form-control']) !!}
+                            </td>
+                            <td>
                                 {!! Form::number("items[$item->id][default_price]",$item->default_price,['class'=>'form-control','min'=>0,'step'=>0.01]) !!}
                             </td>
                             <td>
-                                {!! Form::select("items[$item->id][brand_id]",$brands,$item->brand_id,['class'=>'custom-select','style' => 'width:100%']) !!}
+                                {!! Form::select("items[$item->id][brand_id]",[null=>'Select Brand']+$brands,$item->brand_id,['class'=>'custom-select','style' => 'width:100%']) !!}
                             </td>
                             <td>
                                 {!! Form::select("items[$item->id][categories][]",$categories,$item->categories()->pluck('id','id'),['class'=>'custom-select','style' => 'width:100%','multiple'=>true]) !!}
