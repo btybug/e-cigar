@@ -63,7 +63,7 @@
                     <select name="table_head" id="table_head_id" class="selectpicker text-black" multiple>
                         <!-- <option value="#" data-column="0" data-name="#" selected disabled>#</option>
                         <option value="#" data-column="1" data-name="id" selected disabled>id</option> -->
-                        {{--                            <option value="Name" data-column="2" data-name="name" selected>Name</option>--}}
+                        <option value="Name" data-column="2" data-name="name" selected>Name</option>
                         <option value="Short Description" data-column="3" data-name="short_description" selected>Short
                             Description
                         </option>
@@ -84,7 +84,7 @@
             {{--                    </div>--}}
             <div class="card-body panel-body pt-0">
 
-                <table id="stocks-table" class="table table-style table-bordered" cellspacing="0" width="100%">
+                <table id="app-p-table" class="table table-style table-bordered" cellspacing="0" width="100%">
                     <thead>
                     <tr>
                         <th>
@@ -264,7 +264,7 @@
 
             $('body').on('click', '.delete_rows', function () {
                 const ids = [];
-                $('#stocks-table tbody tr.selected').each(function () {
+                $('#app-p-table tbody tr.selected').each(function () {
                     ids.push($(this).find('td.id_n').text());
                 });
 
@@ -406,7 +406,7 @@
                                     text: 'Barcode',
                                     action: function (e, dt) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
                                         $('.loader_container').css('display', 'block');
@@ -461,7 +461,7 @@
                                     text: 'QR Code',
                                     action: function (e, dt) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
@@ -516,7 +516,7 @@
                                     text: 'Barcode',
                                     action: function (e, dt, node, config) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
@@ -530,7 +530,7 @@
                                     text: 'QR Code',
                                     action: function (e, dt, node, config) {
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('td.id_n').text());
                                         });
 
@@ -555,7 +555,7 @@
                                     action: function () {
 
                                         const ids = [];
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             ids.push($(this).find('.classes__id').text());
                                         });
 
@@ -569,7 +569,7 @@
                                     text: 'Edit Price',
                                     action: function (e, dt, node, config) {
                                         $('#editPriceModal .modal-body').html('');
-                                        $('#stocks-table tbody tr.selected').each(function () {
+                                        $('#app-p-table tbody tr.selected').each(function () {
                                             const edit_button = $(this).find('.edit_price_js');
                                             const id = edit_button.data('id');
                                             const name = edit_button.data('name');
@@ -686,14 +686,14 @@
 
             @if($current && $current->status)
             tableInit(
-                "stock_table",
+                "app-p-table",
                 [
                     {id: '#', name: 'id'},
                     {id: 'id', name: 'id'},
                     {id: 'Name', name: 'name'},
                     {id: 'Short Description', name: 'short_description'},
                     {id: 'Brand', name: 'brand_id'},
-                    {id: 'Barcode', name: 'barcode'},
+                    {id: 'Barcode', name: 'items.barcode'},
                     {id: 'Quantity', name: 'quantity'},
                     {id: 'Category', name: 'category'},
                     {id: 'Price', name: 'price'},
@@ -714,7 +714,7 @@
                     {data: 'name', name: 'item_translations.name'},
                     {data: 'short_description', name: 'item_translations.short_description'},
                     {data: 'brand_id', name: 'categories_translations.name'},
-                    {data: 'barcode', name: 'barcode'},
+                    {data: 'barcode', name: 'items.barcode'},
                     {data: 'quantity', name: 'items.quantity'},
                     {data: 'category', name: 'categories_translations.name'},
                     {data: 'price', name: 'price'},
@@ -722,7 +722,7 @@
                     {data: 'created_at', name: 'created_at'},
                     {data: 'actions', name: 'actions'}
                 ],
-                '#stocks-table',
+                '#app-p-table',
                 "{!! route('datatable_all_app_items',$q) !!}"
             );
             @endif

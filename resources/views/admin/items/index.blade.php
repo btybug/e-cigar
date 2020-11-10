@@ -932,7 +932,7 @@
             }
 
             tableInit(
-                "stock_table",
+                "items_table",
                 [
                     {id: '#', name: 'id'},
                     {id: 'id', name: 'id'},

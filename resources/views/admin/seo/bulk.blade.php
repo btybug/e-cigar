@@ -175,7 +175,7 @@
             }
 
             tableInit(
-                "bulk_table",
+                "seo_bulk_table",
                 [
                     {id: '#', name: 'id'},
                     {id: 'Post Title', name: 'post_title'},

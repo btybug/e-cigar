@@ -89,7 +89,7 @@ class AppController extends Controller
         $selecteds = $warehouse->appitems()->pluck('item_id');
         $items = Items::with(['brand', 'categories', 'translations'])->whereNotIn('id', $selecteds)->get();
         $brands = Brands::all();
-        $categories = Category::where('type', 'item')->get();
+        $categories = Category::where('type', 'stocks')->get();
         return response()->json(['error' => false, 'data' => $items, 'brands' => $brands, 'categories' => $categories]);
     }
 

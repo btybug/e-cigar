@@ -278,7 +278,7 @@
             }
 
             tableInit(
-                "stock_table",
+                "stock_table_offer",
                 [
                     {id: '#', name: 'id'},
                     {id: 'id', name: 'id'},
