@@ -2,6 +2,7 @@
 
 namespace App\Models\App;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -28,5 +29,10 @@ class Discount extends Model
 {
     protected $table='discounts';
     protected $guarded = ['id'];
+
+    public function staff()
+    {
+        return $this->belongsToMany(User::class,'discount_staff','discount_id','staff_id');
+    }
 
 }

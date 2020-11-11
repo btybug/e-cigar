@@ -7,6 +7,7 @@ namespace App\Http\Controllers\Admin\App\Customers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DiscountRequest;
 use App\Models\App\AppOffersDiscount;
+use App\Models\App\AppWarehouses;
 use App\Models\App\Discount;
 use App\Models\Items;
 use Illuminate\Http\Request;
@@ -18,19 +19,23 @@ class DiscountController extends Controller
     public function create($w_id)
     {
         $model = null;
-        return view('admin.app.discounts.create',compact('model','w_id'));
+        $current=AppWarehouses::findOrFail($w_id);
+        $staff=$current->warehouse->staff->pluck('name','id')->toArray();
+        return view('admin.app.discounts.create',compact('model','w_id','staff'));
     }
 
     public function postCreate(DiscountRequest $request)
     {
-        Discount::create($request->except("_token"));
+        $result=Discount::create($request->except("_token","staff"));
+        $result->staff()->sync($request->get('staff'));
         return redirect()->route('app_customer_discounts',$request->get('app_warehouse_id'));
     }
 
     public function edit($id,$w_id)
     {
         $model = Discount::findOrFail($id);
-        return view('admin.app.discounts.create',compact('model','w_id'));
+        $staff=$model->staff->pluck('name','id')->toArray();
+        return view('admin.app.discounts.create',compact('model','w_id','staff'));
     }
 
     public function postEdit(DiscountRequest $request,$id)
