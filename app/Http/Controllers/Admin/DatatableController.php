@@ -816,13 +816,13 @@ class DatatableController extends Controller
         return Datatables::of(Purchase::join('items', 'purchases.item_id', '=', 'items.id')
             ->leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
             ->where('item_translations.locale', \Lang::getLocale())
-        ->select('purchases.*','item_translations.name'))
-            ->editColumn('user_id', function ($faq) {
+        ->selectRaw('purchases.*, item_translations.name, sum(qty) as sum_qty')->groupBy('item_id'))
+            ->editColumn('qty', function ($faq) {
+                return $faq->sum_qty;
+            })->editColumn('user_id', function ($faq) {
                 return $faq->user->name;
             })->addColumn('name', function ($attr) {
                 return ($attr->item) ? $attr->item->name : null;
-            })->addColumn('sku', function ($attr) {
-                return ($attr->item) ? $attr->item->sku : null;
             })->editColumn('created_at', function ($faq) {
                 return BBgetDateFormat($faq->created_at);
             })->editColumn('purchase_date', function ($faq) {
@@ -830,8 +830,8 @@ class DatatableController extends Controller
             })
             ->addColumn('actions', function ($faq) {
                 $html = "<div class='datatable-td__action'>";
-                if (userCan('admin_inventory_purchase_edit')) {
-                    $html .= "<a class='btn btn-warning' href='" . route("admin_inventory_purchase_edit", $faq->id) . "'>Edit</a>";
+                if (userCan('admin_inventory_purchase_view')) {
+                    $html .= "<a class='btn btn-info' href='" . route("admin_inventory_purchase_view", $faq->id) . "'>View</a>";
                 }
                 $html .= "</div>";
                 return $html;

@@ -246,17 +246,21 @@ class StoreController extends Controller
 
     public function EditPurchase($id)
     {
-        $model = Purchase::findOrFail($id);
+        $group = Purchase::findOrFail($id);
+        $models = Purchase::where('item_id',$group->item_id)->orderByDesc('id')->get();
         $items = Items::leftJoin('item_translations','items.id','item_translations.items_id')
             ->where('type', 'simple')
             ->where('is_archive',0)
-            ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))->get()->pluck('full_name', 'id')->all();
+            ->select('items.id', \DB::raw('CONCAT(item_translations.name, " - ", items.barcode) AS full_name'))
+            ->where('is_archive',0)
+            ->get()->pluck('full_name', 'id')->all();
         $suppliers = Suppliers::all()->pluck('name', 'id')->all();
         $warehouses = Warehouse::all()->pluck('name', 'id')->all();
         $invoices = PurchaseInvoice::all()->pluck('name','id')->all();
-        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
-        $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
-        return $this->view('purchase.new', compact('model', 'items', 'suppliers', 'warehouses', 'racks', 'shelves','invoices'));
+
+//        $racks = WarehouseRacks::whereNull('parent_id')->where('warehouse_id', $model->warehouse_id)->get()->pluck('name', 'id')->all();
+//        $shelves = WarehouseRacks::where('warehouse_id', $model->warehouse_id)->where('parent_id', $model->rack_id)->get()->pluck('name', 'id')->all();
+        return $this->view('purchase.view', compact('models', 'items', 'suppliers', 'warehouses','invoices','group'));
     }
 
     public function EditPurchaseInvoices($id)

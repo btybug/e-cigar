@@ -75,6 +75,6 @@ class Purchase extends Model
 
     public function invoice()
     {
-        return $this->hasOne(PurchaseInvoice::class, 'purchase_invoice_id');
+        return $this->hasOne(PurchaseInvoice::class, 'id','purchase_invoice_id');
     }
 }
