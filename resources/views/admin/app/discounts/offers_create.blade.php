@@ -9,15 +9,77 @@
             </div>
             {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
             {!! Form::hidden('app_warehouse_id',$w_id) !!}
+            <div id="pattern_place_js">
+                <div class="col-md-8">
+                    {!! Form::hidden('id') !!}
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group row">
+                                <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
+                                <div class="col-sm-8">
+                                    {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group row">
+                                <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
+                                <div class="col-sm-4">
+                                    {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control customer_buy']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 offset-md-2">
+                            <div class="form-group row">
+                                {!! Form::select('items[]',$items,($model)?@$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
             <div class="card-body">
-                <div class="row mx-0 mb-3">
-                    {!! Form::select('type',[null=>'Select Type',
-                    'buy_x_get'=>'Buy X Get Y',
-                    'buy_x_get_all_by_y'=>'Buy X Get all by  Y',
-                    ],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
-                </div>
-                <div id="pattern_place_js">
-                </div>
+                <!--Table-->
+                <table id="tablePreview" class="table">
+
+                    <!--Table body-->
+                    <tbody>
+                    <tr>
+                        <th scope="row"><input type="radio"></th>
+                        <td colspan="2">Give them all for</td>
+                        <td><span>&#163;</span></td>
+                        <td colspan="2"><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input type="radio"></th>
+                        <td>Give</td>
+                        <td><input type="number"></td>
+                        <td colspan="3">For free</td>
+
+                    </tr>
+                    <tr>
+                        <th scope="row"><input type="radio"></th>
+                        <td>Give</td>
+                        <td><input type="number"></td>
+                        <td>For</td>
+                        <td><span>&#163;</span></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><input type="radio"></th>
+                        <td>Give</td>
+                        <td><input type="number"></td>
+                        <td>For</td>
+                        <td><span>%</span></td>
+                        <td><input type="number"></td>
+                    </tr>
+                    </tbody>
+                    <!--Table body-->
+                </table>
+                <!--Table-->
 
                 <!-- Text input-->
                 <div class="form-group">
