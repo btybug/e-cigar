@@ -11,6 +11,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Barcodes;
+use App\Models\Items;
 use App\Models\Settings;
 use App\Services\EAN13render;
 use Illuminate\Http\Request;
@@ -68,6 +69,17 @@ class BarcodesController extends Controller
     {
         $barcode=Barcodes::findOrfail($id);
         return $this->view('print',compact('barcode'));
+    }
+
+    public function printBarcode(Request $request)
+    {
+        $barcodes = Items::leftJoin('item_translations', 'items.id', '=', 'item_translations.items_id')
+            ->leftJoin('barcodes','items.barcode','barcodes.code')
+            ->where('item_translations.locale',app()->getLocale())
+            ->select('items.barcode as value','item_translations.name as file_name','item.default_price as price')
+            ->whereIn('barcodes.id',$request->get('ids'))->get();
+
+        return response()->json(['barcodes'=>$barcodes]);
     }
 
 
