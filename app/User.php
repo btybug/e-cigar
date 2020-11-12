@@ -5,6 +5,7 @@ namespace App;
 use Actuallymab\LaravelComment\CanComment;
 use App\Models\Addresses;
 use App\Models\App\AppPermissions;
+use App\Models\App\Discount;
 use App\Models\Coupons;
 use App\Models\Dashboard;
 use App\Models\Favorites;
@@ -262,5 +263,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function appPermissions()
     {
         return $this->belongsToMany(AppPermissions::class,'app_staff_permissions','user_id','permission_id');
+    }
+
+    public function discounts()
+    {
+        return $this->belongsToMany(Discount::class,'discount_staff','staff_id','discount_id');
     }
 }

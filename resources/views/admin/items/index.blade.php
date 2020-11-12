@@ -191,15 +191,15 @@
             </div>
             <div class="modal-body">
                 <label for="_1" style="display: flex; align-items: center; margin-left: 20px">
-                    <input type="radio"  id="_1" name="export_options" checked="checked" value="1" style="margin-right: 20px"/>
+                    <input type="radio" id="_1" name="export_options" checked="checked" value="1" style="margin-right: 20px"/>
                     <span>1</span>
                 </label>
                 <label for="_2" style="display: flex; align-items: center; margin-left: 20px">
-                    <input type="radio"  id="_2" name="export_options" value="2" style="margin-right: 20px"/>
+                    <input type="radio" id="_2" name="export_options" value="2" style="margin-right: 20px"/>
                     <span>2</span>
                 </label>
                 <label for="_3" style="display: flex; align-items: center; margin-left: 20px">
-                    <input type="radio"  id="_3" name="export_options" value="3" style="margin-right: 20px"/>
+                    <input type="radio" id="_3" name="export_options" value="3" style="margin-right: 20px"/>
                     <span>3</span>
                 </label>
             </div>
@@ -349,8 +349,8 @@
                 }
 
                 let selId = JSON.parse(localStorage.getItem(storageName)).map((el) => {
-                    return el.id;
-            });
+                        return el.id;
+                });
 
                 $(selectId).selectpicker({
                     // actionsBox: true,
@@ -367,18 +367,18 @@
 
                 tableArray = tableHeadArray.map((head) => {
                     const id = head.data;
-                var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
-                    return el.name === id;
+                    var visible = JSON.parse(localStorage.getItem(storageName)).find((el) => {
+                        return el.name === id;
+                    });
+                    if(visible) {
+                        return head;
+                    } else {
+                        return {
+                            ...head,
+                            visible: false
+                        };
+                    }
                 });
-                if(visible) {
-                    return head;
-                } else {
-                    return {
-                        ...head,
-                        visible: false
-                    };
-                }
-            });
 
                 const barcode_settings = JSON.parse($('#barcode-settings').text());
 

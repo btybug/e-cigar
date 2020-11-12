@@ -34,6 +34,12 @@
                             </div>
                         </div>
                         <div class="form-group row">
+                            <label class="col-md-2 control-label" for="staffs">Staff</label>
+                            <div class="col-md-10">
+                                {!! Form::select('staff[]',$staff,($model)?$model->staff->pluck('id'):null,['class'=> 'form-control select_to_2_js ','multiple']) !!}
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label class="col-md-2 control-label" for="input-status"></label>
                             <div class="col-md-10 text-right">
                                 {!! Form::submit('Save',['class' => 'btn btn-primary']) !!}
@@ -45,9 +51,15 @@
             </div>
         </div>
 @stop
+@section('css')
+    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+@stop
 
 @section('js')
+    <script src="/public/plugins/select2/select2.full.min.js"></script>
     <script>
-
+        $(document).ready(function () {
+            $('body').find('.select_to_2_js').select2();
+        })
     </script>
 @stop
