@@ -1012,7 +1012,7 @@
                 })
                     .appendTo('body')
                     .contents().find('body');
-                shortAjax('/admin/find/items/barcodes', {ids}, function(res) {
+                shortAjax('/admin/inventory/barcode/print-barcode', {ids}, function(res) {
 
                     res.barcodes.map(function(barcode) {
                         $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
@@ -1037,8 +1037,14 @@
                         // $('.loader_container').css('display', 'none');
                         // $('body').css('overflow', 'auto');
                         // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
-                        ifr.append("<div>Hello</div>")
                         ifr.append(svg);
+                        if(priceCheck && nameCheck) {
+                            ifr.append(`<div>${barcode.file_name} - ${barcode.price}</div>`)
+                        } else if(priceCheck && !nameCheck) {
+                            ifr.append(`<div>${barcode.price}</div>`)
+                        } else if(!priceCheck && nameCheck) {
+                            ifr.append(`<div>${barcode.file_name}</div>`)
+                        }
                     })
                     window.frames['myiframe'].focus();
                     window.frames['myiframe'].print();
