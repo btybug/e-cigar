@@ -1049,7 +1049,10 @@
                     window.frames['myiframe'].focus();
                     window.frames['myiframe'].print();
 
-                    setTimeout(() => { $(".printFrame").remove(); }, 1000);
+                    setTimeout(() => {
+                        $(".printFrame").remove(); 
+                        $("#barcodePrintModal").modal("hide");
+                    }, 1000);
                 })
             })
 
