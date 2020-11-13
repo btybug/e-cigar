@@ -13,7 +13,7 @@
                     {!! Form::select('type',[null=>'Select Type',
                     'buy_x_get'=>'Buy X Get Y',
                     'buy_x_get_all_by_y'=>'Buy X Get all by  Y',
-                    'mixed'=>'Mixed',
+                    'mixed'=>'Quantity discount identical items',
                     ],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
                 </div>
                 <div id="pattern_place_js">
