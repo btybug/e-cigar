@@ -580,7 +580,6 @@
                                                                 </div>
 
                                                                 <div class="col-xl-3">
-                                                                    <a class="btn btn-primary" href="javascript:void(0)" id="print_barcode_item_with_name">Print with name</a>
                                                                     <a class="btn btn-secondary"  href="javascript:void(0)" id="print_barcode_item">Print barcode</a>
 
                                                                 @if(strlen($model->barcode) == 13)
@@ -934,6 +933,43 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+
+    <div class="modal fade" id="barcodePrintModal" tabindex="-1" role="dialog" aria-labelledby="barcodePrintModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-xs" role="document">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="barcodeModalCenterTitle">Barcode Print</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <label>
+                            <input type="checkbox" name="print_type" id="num_check"/>
+                            <span>Show numbers</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" name="print_type" value="name" id="name_check"/>
+                            <span>Show item name</span>
+                        </label>
+                    </div>
+                    <div>
+                        <label>
+                            <input type="checkbox" name="print_type" value="price" id="price_check"/>
+                            <span>Show price</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save_barcode_print_js">Print</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
@@ -1036,102 +1072,54 @@
                     })
                 })
 
-
-                $("body").on('click', '#print_barcode_item_with_name', function() {
-                    const ifr = $('<iframe>', {
-                        name: 'myiframe',
-                        class: 'printFrame'
-                    })
-                        .appendTo('body')
-                        .contents().find('body');
-
-                        const name = $(".product_name_for_barcode").val();
-                        const sku = $(".sku_for_barcode").val();
-                    shortAjax('/admin/find/items/barcodes', {ids: [$('[name="id"]').val()]}, function(res) {
-                        ifr.append(`<div style="width: 250px; text-align: center">${name}</div>`);
-                        ifr.append(`<div style="width: 250px; text-align: center">${sku}</div>`);
-
-                        res.barcodes.map(function(barcode) {
-                            $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
-                        });
-
-                        res.barcodes.map(function(barcode, key) {
-                            JsBarcode(`#svg_${barcode.value}`, barcode.value, {
-                                format,
-                                font: text_font,
-                                fontSize: font_size,
-                                textMargin: text_margin,
-                                height,
-                                width,
-                                margin,
-                                background: back_color,
-                                lineColor: line_color,
-                                textAlign: text_align,
-                                fontOptions,
-                                displayValue,
-                            })
-                                .render();
-                            const svg = $(`#svg_${barcode.value}`);
-                            // $('.loader_container').css('display', 'none');
-                            // $('body').css('overflow', 'auto');
-                            // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
-
-
-                            ifr.append(svg);
-
-                        })
-                        window.frames['myiframe'].focus();
-                        window.frames['myiframe'].print();
-                        console.log(999999999999);
-
-                        setTimeout(() => { $(".printFrame").remove(); }, 1000);
-                    })
-                });
                 $("body").on('click', '#print_barcode_item', function() {
+                    $("#barcodePrintModal").modal("show");
+                });
+
+                $("#save_barcode_print_js").on('click', function() {
+                    const ids = [];
+                    const priceCheck = $("#price_check").prop('checked');
+                    const nameCheck = $("#name_check").prop('checked');
+                    const numCheck = $("#num_check").prop('checked');
+                    const name = $($(".product_name_for_barcode")[0]).val();
+                    const barcode = $("#barcode").val();
+                    const price = $('[name="default_price"]').val();
+
                     const ifr = $('<iframe>', {
                         name: 'myiframe',
                         class: 'printFrame'
                     })
                         .appendTo('body')
                         .contents().find('body');
-                    shortAjax('/admin/find/items/barcodes', {ids: [$('[name="id"]').val()]}, function(res) {
+                    $('#svg_barcode').append(`<svg id="svg_${barcode}"></svg>`)
+                    JsBarcode(`#svg_${barcode}`, barcode, {
+                        format,
+                        font: text_font,
+                        fontSize: font_size,
+                        textMargin: text_margin,
+                        height,
+                        width,
+                        margin,
+                        background: back_color,
+                        lineColor: line_color,
+                        textAlign: text_align,
+                        fontOptions,
+                        displayValue: numCheck,
+                    }).render();
+                    const svg = $(`#svg_${barcode}`);
+                    ifr.append(svg);
+                    if(priceCheck && nameCheck) {
+                        ifr.append(`<div>${name} - ${price}</div>`)
+                    } else if(priceCheck && !nameCheck) {
+                        ifr.append(`<div>${price}</div>`)
+                    } else if(!priceCheck && nameCheck) {
+                        ifr.append(`<div>${name}</div>`)
+                    }
+                    window.frames['myiframe'].focus();
+                    window.frames['myiframe'].print();
 
-                        res.barcodes.map(function(barcode) {
-                            $('#svg_barcode').append(`<svg id="svg_${barcode.value}"></svg>`)
-                        });
-
-                        res.barcodes.map(function(barcode, key) {
-                            JsBarcode(`#svg_${barcode.value}`, barcode.value, {
-                                format,
-                                font: text_font,
-                                fontSize: font_size,
-                                textMargin: text_margin,
-                                height,
-                                width,
-                                margin,
-                                background: back_color,
-                                lineColor: line_color,
-                                textAlign: text_align,
-                                fontOptions,
-                                displayValue,
-                            })
-                                .render();
-                            const svg = $(`#svg_${barcode.value}`);
-                            // $('.loader_container').css('display', 'none');
-                            // $('body').css('overflow', 'auto');
-                            // saveSvgAsPng(document.getElementById(`svg_${barcode.value}`), `${barcode.file_name.replace(/\s/g, '_').trim()}.png`, {scale: 10});
-
-
-                            ifr.append(svg);
-
-                        })
-                        window.frames['myiframe'].focus();
-                        window.frames['myiframe'].print();
-                        console.log(999999999999);
-
-                        setTimeout(() => { $(".printFrame").remove(); }, 1000);
-                    })
-                });
+                    setTimeout(() => { $(".printFrame").remove(); }, 1000);
+                })
 
             $('#landing'). click(function() {
                 if ($(this).prop("checked") == true) {
