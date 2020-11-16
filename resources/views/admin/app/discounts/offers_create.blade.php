@@ -109,27 +109,27 @@
                                         <!--Table body-->
                                         <tbody>
                                         <tr>
-                                            <th scope="row"><input type="radio"></th>
+                                            <th scope="row"><input type="radio" name="option" value="give_them_all_by"></th>
                                             <td colspan="2">Give them all by</td>
                                             <td><span>&#163;</span></td>
-                                            <td colspan="2"><input type="number"></td>
+                                            <td colspan="2"><input type="number" name="give_them_all_by"></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><input type="radio"></th>
+                                            <th scope="row"><input type="radio" name="option" value="give_cheapest_free"></th>
                                             <td colspan="5">Give cheapest free</td>
 
                                         </tr>
                                         <tr>
-                                            <th scope="row"><input type="radio"></th>
+                                            <th scope="row"><input type="radio" name="option" value="give_fixed_discount"></th>
                                             <td colspan="2">Give this fixed discount</td>
                                             <td colspan="2"><span>&#163;</span></td>
-                                            <td ><input type="number"></td>
+                                            <td ><input type="number" name="give_fixed_discount"></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><input type="radio"></th>
+                                            <th scope="row"><input type="radio" name="option" value="give_the_discount"></th>
                                             <td colspan="2">Give the discount</td>
                                             <td colspan="2"><span>%</span></td>
-                                            <td><input type="number"></td>
+                                            <td><input type="number" name="give_the_discount"></td>
                                         </tr>
                                         </tbody>
                                         <!--Table body-->
