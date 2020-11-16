@@ -8,6 +8,9 @@
                 </div>
             </div>
             {!! Form::model($model, ['id' => 'form-discount','class' => 'form-horizontal']) !!}
+            {!! Form::hidden('id') !!}
+            {!! Form::hidden('app_warehouse_id',$w_id) !!}
+
             <div class="card-body">
                 <div class="row mx-0 mb-3">
                     {!! Form::select('type',[null=>'Select Type',
@@ -16,6 +19,14 @@
                     'mixed'=>'Quantity discount identical items',
                     ],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
                 </div>
+                <div class="col-md-8">
+                    <div class="form-group row">
+                        <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
+                        <div class="col-sm-8">
+                            {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
+                        </div>
+                    </div>
+                </div>
                 <div id="pattern_place_js">
                 </div>
 
@@ -23,7 +34,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">Start at</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="start_at" type="date"  class="form-control input-md">
+                        <input id="textinput" name="start_at" type="date" class="form-control input-md">
                     </div>
                 </div>
 
@@ -31,25 +42,15 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="textinput">End at</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="end_at" type="date"  class="form-control input-md">
+                        <input id="textinput" name="end_at" type="date" class="form-control input-md">
                     </div>
+                </div>
 
             </div>
             {!! Form::close() !!}
+
                 <div class="buy_x_get d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
-
-                        {!! Form::hidden('id') !!}
-                        <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group row">
-                                    <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
-                                    <div class="col-sm-8">
-                                        {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group row">
@@ -82,18 +83,6 @@
                 </div>
                 <div class="mix_match d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
-
-                        {!! Form::hidden('id') !!}
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group row">
-                                    <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
-                                    <div class="col-sm-8">
-                                        {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="col-md-4">
@@ -122,29 +111,27 @@
                                     <!--Table body-->
                                     <tbody>
                                     <tr>
-                                        <th scope="row"><input type="radio" name="option" value="give_them_all_by"></th>
+                                        <th scope="row">{!! Form::radio('option','give_them_all_by',($model && isset($model->data['option']) && $model->data['option']=='give_them_all_by')) !!}</th>
                                         <td colspan="2">Give them all by</td>
                                         <td><span>&#163;</span></td>
-                                        <td colspan="2"><input type="number" name="give_them_all_by"></td>
+                                        <td colspan="2"><input type="number" name="give_them_all_by" @if($model) value="{!! @$model->data['give_them_all_by'] !!}" @endif ></td>
                                     </tr>
                                     <tr>
-                                        <th scope="row"><input type="radio" name="option" value="give_cheapest_free">
-                                        </th>
+                                        <th scope="row">{!! Form::radio('option','give_cheapest_free',($model && isset($model->data['option']) && $model->data['option']=='give_cheapest_free')) !!}</th>
                                         <td colspan="5">Give cheapest free</td>
 
                                     </tr>
                                     <tr>
-                                        <th scope="row"><input type="radio" name="option" value="give_fixed_discount">
-                                        </th>
+                                        <th scope="row">{!! Form::radio('option','give_fixed_discount',($model && isset($model->data['option']) && $model->data['option']=='give_fixed_discount')) !!}</th>
                                         <td colspan="2">Give this fixed discount</td>
                                             <td colspan="2"><span>&#163;</span></td>
-                                            <td ><input type="number" name="give_fixed_discount"></td>
+                                            <td ><input type="number"  name="give_fixed_discount" @if($model) value="{!! @$model->data['give_fixed_discount'] !!}" @endif></td>
                                         </tr>
                                         <tr>
-                                            <th scope="row"><input type="radio" name="option" value="give_the_discount"></th>
+                                            <th scope="row">{!! Form::radio('option','give_the_discount',($model && isset($model->data['option']) && $model->data['option']=='give_the_discount')) !!}</th>
                                             <td colspan="2">Give the discount</td>
                                             <td colspan="2"><span>%</span></td>
-                                            <td><input type="number" name="give_the_discount"></td>
+                                            <td><input type="number" name="give_the_discount" @if($model) value="{!! @$model->data['give_the_discount'] !!}" @endif></td>
                                         </tr>
                                         </tbody>
                                         <!--Table body-->
@@ -155,20 +142,9 @@
                         <div class="text-left">
                             <button type="submit" class="btn btn-primary">Save</button>
                         </div>
-
                     </div>
                 </div>
                 <div class="mixed d-none pattern_js content-select-wrap">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <div class="form-group row">
-                                <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
-                                <div class="col-sm-8">
-                                    {!! Form::text('name',null,['class'=>'form-control offer_name']) !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="col-md-8">
                         <div class="row">
                             <div class="col-md-4">
@@ -186,37 +162,36 @@
                             </div>
                         </div>
                         <table id="tablePreview" class="table">
-
                             <!--Table body-->
                             <tbody>
                             <tr>
-                                <th scope="row"><input type="radio" name="option" value="give_them_all_for"></th>
+                                <th scope="row">{!! Form::radio('option','give_them_all_for',($model && isset($model->data['option']) && $model->data['option']=='give_them_all_for')) !!}</th>
                                 <td colspan="2">Give them all for</td>
                                 <td><span>&#163;</span></td>
-                                <td colspan="2"><input type="number" name="give_them_all_for"></td>
+                                <td colspan="2"><input type="number" name="give_them_all_for" value="{!! @$model->data['give_them_all_for'] !!}"></td>
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio" name="option" value="give_for_free"></th>
+                                <th scope="row">{!! Form::radio('option','give_for_free',($model && isset($model->data['option']) && $model->data['option']=='give_for_free')) !!}</th>
                                 <td>Give</td>
-                                <td><input type="number" name="give_for_free"></td>
+                                <td><input type="number" name="give_for_free" value="{!! @$model->data['give_for_free'] !!}"></td>
                                 <td colspan="3">For free</td>
 
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio" name="option" value="give_for"></th>
+                                <th scope="row">{!! Form::radio('option','give_for',($model && isset($model->data['option']) && $model->data['option']=='give_for')) !!}</th>
                                 <td>Give</td>
-                                <td><input type="number" name="give_for[qty]"></td>
+                                <td><input type="number" name="give_for[qty]"  value="{!! @$model->data['give_for']['qty'] !!}"></td>
                                 <td>For</td>
                                 <td><span>&#163;</span></td>
-                                <td><input type="number" name="give_for[for]"></td>
+                                <td><input type="number" name="give_for[for]" value="{!! @$model->data['give_for']['for'] !!}"></td>
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio" name="option" value="give_discount"></th>
+                                <th scope="row">{!! Form::radio('option','give_discount',($model && isset($model->data['option']) && $model->data['option']=='give_discount')) !!}</th>
                                 <td>Give</td>
-                                <td><input type="number" name="give_discount[qty]"></td>
+                                <td><input type="number" name="give_discount[qty]" value="{!! @$model->data['give_discount']['qty'] !!}"></td>
                                 <td>For</td>
                                 <td><span>%</span></td>
-                                <td><input type="number" name="give_discount[percent]"></td>
+                                <td><input type="number" name="give_discount[percent]" value="{!! @$model->data['give_discount']['percent'] !!}"></td>
                             </tr>
                             </tbody>
                             <!--Table body-->
