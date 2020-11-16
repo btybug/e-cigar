@@ -183,33 +183,33 @@
                             <!--Table body-->
                             <tbody>
                             <tr>
-                                <th scope="row"><input type="radio"></th>
+                                <th scope="row"><input type="radio" name="option" value="give_them_all_for"></th>
                                 <td colspan="2">Give them all for</td>
                                 <td><span>&#163;</span></td>
-                                <td colspan="2"><input type="number"></td>
+                                <td colspan="2"><input type="number" name="give_them_all_for"></td>
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio"></th>
+                                <th scope="row"><input type="radio" name="option" value="give_for_free"></th>
                                 <td>Give</td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="give_for_free"></td>
                                 <td colspan="3">For free</td>
 
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio"></th>
+                                <th scope="row"><input type="radio" name="option" value="give_for"></th>
                                 <td>Give</td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="give_for[qty]"></td>
                                 <td>For</td>
                                 <td><span>&#163;</span></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="give_for[for]"></td>
                             </tr>
                             <tr>
-                                <th scope="row"><input type="radio"></th>
+                                <th scope="row"><input type="radio" name="option" value="give_discount"></th>
                                 <td>Give</td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="give_discount[qty]"></td>
                                 <td>For</td>
                                 <td><span>%</span></td>
-                                <td><input type="number"></td>
+                                <td><input type="number" name="give_discount[percent]"></td>
                             </tr>
                             </tbody>
                             <!--Table body-->
