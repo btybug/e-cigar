@@ -85,7 +85,7 @@
 
                         {!! Form::hidden('id') !!}
                         <div class="row">
-                            <div class="col-md-8">
+                            <div class="col-md-6">
                                 <div class="form-group row">
                                     <label for="offer_name" class="col-sm-4 col-form-label">Offer Name</label>
                                     <div class="col-sm-8">
@@ -95,33 +95,48 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-8">
-                                <div class="form-group row">
-                                    <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
-                                    <div class="col-sm-4">
-                                        {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control customer_buy']) !!}
+                            <div class="col-md-12">
+                                <div class="col-md-4">
+                                    <div class="form-group row">
+                                        <label for="customer_buy" class="col-sm-8 col-form-label">If Customer
+                                            Buy</label>
+                                        <div class="col-sm-4">
+                                            {!! Form::text('if_by',($model)?$model->data['if_by']:null,['class'=>'form-control customer_buy']) !!}
+                                        </div>
                                     </div>
                                 </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group row">
+                                        <label for="customer_buy" class="col-sm-8 col-form-label">From</label>
+                                        <div class="col-sm-8">
+                                            {!! Form::select('items[]',$items,($model)?$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div class="col-md-12">
-                                    <table id="tablePreview" class="table">
 
-                                        <!--Table body-->
-                                        <tbody>
-                                        <tr>
-                                            <th scope="row"><input type="radio" name="option" value="give_them_all_by"></th>
-                                            <td colspan="2">Give them all by</td>
-                                            <td><span>&#163;</span></td>
-                                            <td colspan="2"><input type="number" name="give_them_all_by"></td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><input type="radio" name="option" value="give_cheapest_free"></th>
-                                            <td colspan="5">Give cheapest free</td>
+                            <div class="col-md-12">
+                                <table id="tablePreview" class="table">
 
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><input type="radio" name="option" value="give_fixed_discount"></th>
-                                            <td colspan="2">Give this fixed discount</td>
+                                    <!--Table body-->
+                                    <tbody>
+                                    <tr>
+                                        <th scope="row"><input type="radio" name="option" value="give_them_all_by"></th>
+                                        <td colspan="2">Give them all by</td>
+                                        <td><span>&#163;</span></td>
+                                        <td colspan="2"><input type="number" name="give_them_all_by"></td>
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><input type="radio" name="option" value="give_cheapest_free">
+                                        </th>
+                                        <td colspan="5">Give cheapest free</td>
+
+                                    </tr>
+                                    <tr>
+                                        <th scope="row"><input type="radio" name="option" value="give_fixed_discount">
+                                        </th>
+                                        <td colspan="2">Give this fixed discount</td>
                                             <td colspan="2"><span>&#163;</span></td>
                                             <td ><input type="number" name="give_fixed_discount"></td>
                                         </tr>
@@ -135,15 +150,7 @@
                                         <!--Table body-->
                                     </table>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group row">
-                                    <label for="customer_buy" class="col-sm-8 col-form-label">From</label>
-                                    <div class="col-sm-4">
-                                        {!! Form::select('items[]',$items,($model)?$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                         <div class="text-left">
                             <button type="submit" class="btn btn-primary">Save</button>
@@ -174,7 +181,7 @@
                             </div>
                             <div class="col-md-6 offset-md-2">
                                 <div class="form-group row">
-                                    {!! Form::select('items[]',$items,($model)?@$model->data['items']:null,['class'=>'form-control select_to_2_js','multiple']) !!}
+                                    {!! Form::select('items[]',$items,($model)?@$model->data['items']:null,['class'=>'form-control select_to_2_js']) !!}
                                 </div>
                             </div>
                         </div>
@@ -238,7 +245,6 @@
 
 
             $('body').on('change', '#offers_select', function () {
-                console.log($('body').find('.select_to_2_js'))
                 if ($(this).val() === 'buy_x_get') {
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
