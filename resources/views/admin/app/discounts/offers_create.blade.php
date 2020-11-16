@@ -12,7 +12,7 @@
                 <div class="row mx-0 mb-3">
                     {!! Form::select('type',[null=>'Select Type',
                     'buy_x_get'=>'Buy X Get Y',
-                    'buy_x_get_all_by_y'=>'Buy X Get all by  Y',
+                    'mix_match'=>'Mix Match',
                     'mixed'=>'Quantity discount identical items',
                     ],null,['class'=>'form-control col-sm-3','id'=>'offers_select']) !!}
                 </div>
@@ -80,7 +80,7 @@
 
                     </div>
                 </div>
-                <div class="buy_x_get_all_by_y d-none pattern_js content-select-wrap">
+                <div class="mix_match d-none pattern_js content-select-wrap">
                     <div class="col-md-8">
 
                         {!! Form::hidden('id') !!}
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-8">
                                 <div class="form-group row">
                                     <label for="customer_buy" class="col-sm-8 col-form-label">If Customer Buy</label>
                                     <div class="col-sm-4">
@@ -103,11 +103,37 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="price" class="col-sm-8 col-form-label">He will get all by </label>
-                                    <div class="col-sm-4">
-                                        {!! Form::text('price',($model)?$model->data['price']:null,['class'=>'form-control price']) !!}
-                                    </div>
+                                <div class="col-md-12">
+                                    <table id="tablePreview" class="table">
+
+                                        <!--Table body-->
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row"><input type="radio"></th>
+                                            <td colspan="2">Give them all by</td>
+                                            <td><span>&#163;</span></td>
+                                            <td colspan="2"><input type="number"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><input type="radio"></th>
+                                            <td colspan="5">Give cheapest free</td>
+
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><input type="radio"></th>
+                                            <td colspan="2">Give this fixed discount</td>
+                                            <td colspan="2"><span>&#163;</span></td>
+                                            <td ><input type="number"></td>
+                                        </tr>
+                                        <tr>
+                                            <th scope="row"><input type="radio"></th>
+                                            <td colspan="2">Give the discount</td>
+                                            <td colspan="2"><span>%</span></td>
+                                            <td><input type="number"></td>
+                                        </tr>
+                                        </tbody>
+                                        <!--Table body-->
+                                    </table>
                                 </div>
                             </div>
                             <div class="col-md-4">
@@ -216,7 +242,7 @@
                 if ($(this).val() === 'buy_x_get') {
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
-                } else if($(this).val() === 'buy_x_get_all_by_y') {
+                } else if($(this).val() === 'mix_match') {
                     $('#pattern_place_js').html($('body').find('.'+$('#offers_select').val()).clone());
                     $('#pattern_place_js '+'.'+$('#offers_select').val()).removeClass('d-none').removeClass('pattern_js');
                 }else if($(this).val() === 'mixed') {
