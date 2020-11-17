@@ -58,7 +58,6 @@ class StockController extends Controller
 //                    $other_images[$k] = $datum;
 //                }
 //            }
-
             $stock->image = substr($stock->image,7);
 //            $stock->other_images = $other_images;
             $stock->save();
