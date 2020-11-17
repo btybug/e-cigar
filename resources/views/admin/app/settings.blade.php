@@ -40,7 +40,7 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-12">
         {!! Form::model($settings,['url'=>route('admin_app_settings_save')]) !!}
         {!! Form::hidden('shop_id',$q) !!}
             <div class="form-group row">
@@ -56,12 +56,48 @@
                     </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="offset-4 col-8">
-                    <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+        <div class="form-group row">
+            <div class="offset-4 col-8">
+                <button name="submit" type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-2">
+                <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
+                       aria-controls="v-pills-home" aria-selected="true">General</a>
+                    <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
+                       aria-controls="v-pills-profile" aria-selected="false">Second screen</a>
+
                 </div>
             </div>
-       {!! Form::close() !!}
+            <div class="col-md-10">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                        <p>Select Template</p>
+                        <div class="row">
+                            <div class="col-md-1"><input type="checkbox"></div>
+                            <div class="col-md-5" style="height: 200px;background: rgba(214,214,214,0.76);">
+                                <div class="row" style="height: 200px;">
+                                    <div class="col-md-8" style="border-right: 1px solid;height: 100%">
+                                        <p>Image</p>
+                                    </div>
+                                    <div class="col-md-4"  style="height: 100%">
+                                        <p>Item purchased</p>
+                                    </div>
+                                </div>
 
+                            </div>
+                            <div class="col-md-1"><input type="checkbox"></div>
+                            <div class="col-md-5" style="height: 200px;background:rgba(214,214,214,0.76);">
+                                <p>Image</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"></div>
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
     </div>
 @stop
