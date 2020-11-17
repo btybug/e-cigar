@@ -76,7 +76,6 @@ class DiscountController extends Controller
     {
         $items = Items::all()->pluck('name', 'id');
         $model = AppOffersDiscount::findOrFail($id);
-//        dd($model->data);
         return view('admin.app.discounts.offers_create',compact('model','items','w_id'));
     }
 
