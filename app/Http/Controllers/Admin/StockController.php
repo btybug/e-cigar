@@ -46,9 +46,9 @@ class StockController extends Controller
 
     public function stock()
     {
-        $stocks = StockVariation::all();
-
-        foreach ($stocks as $stock){
+//        $stocks = StockVariation::all();
+//
+//        foreach ($stocks as $stock){
 //            $data = $stock->other_images;
 //            $other_images = [];
 //            if($data && count($data)){
@@ -57,13 +57,13 @@ class StockController extends Controller
 //                    $other_images[$k] = $datum;
 //                }
 //            }
-
-            $stock->image = substr($stock->image,7);
+//
+//            $stock->image = substr($stock->image,7);
 //            $stock->other_images = $other_images;
-            $stock->save();
-        }
-
-        dd("done !!!q");
+//            $stock->save();
+//        }
+//
+//        dd("done !!!");
 //
 //        $filters = StockVariation::where('type','filter')->get();
 //
