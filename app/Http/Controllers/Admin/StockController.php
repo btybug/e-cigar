@@ -46,11 +46,27 @@ class StockController extends Controller
 
     public function stock()
     {
-//        $stocks = Items::all();
-//        foreach ($stocks as $stock){
-//            $stock->translate('gb')->short_name = $stock->name;
-//            $stock->save();
-//        }
+        $stocks = Items::all();
+
+//        $x = substr("123456789",10);
+//        dd($x);
+
+        foreach ($stocks as $stock){
+            $data = $stock->other_images;
+            $other_images = [];
+            if($data && count($data)){
+                foreach ($data as $k => $datum){
+                    $datum['image'] = substr($datum['image'],7);
+                    $other_images[$k] = $datum;
+                }
+            }
+
+            $stock->image = substr($stock->image,7);
+            $stock->other_images = $other_images;
+            $stock->save();
+        }
+
+        dd("done !!!");
 //
 //        $filters = StockVariation::where('type','filter')->get();
 //
