@@ -83,7 +83,7 @@
                                                    @php $price = $firstVariation->common_price ;@endphp
                                                 @endif
                                             @else
-                                                @if($firstVariation->price_type == 'dynamic')
+                                                @if($firstVariation->price_type == 'dynamic' && $firstVariation->item)
                                                     @php $price = $firstVariation->item->default_price; @endphp
                                                 @elseif($firstVariation->price_type == 'fixed')
                                                     @php
