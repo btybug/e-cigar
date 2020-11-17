@@ -41,10 +41,11 @@
                         </td>
                         <td>
                             <a href="{!! route('admin_get_category',$category->slug) !!}" class="btn btn-sm btn-info text-white"><i class="fa fa-eye"></i></a>
-                            <a href="{!! route('admin_edit_category_type',$category->id) !!}" class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>
+
 
                             @if(! $category->is_core)
-                            <a href="{!! route('admin_delete_category_type',$category->id) !!}" class="btn btn-sm btn-danger text-white"><i class="fa fa-trash"></i></a>
+                                <a href="{!! route('admin_edit_category_type',$category->id) !!}" class="btn btn-sm btn-warning text-white"><i class="fa fa-edit"></i></a>
+                                <a href="{!! route('admin_delete_category_type',$category->id) !!}" class="btn btn-sm btn-danger text-white"><i class="fa fa-trash"></i></a>
                             @endif
                         </td>
                     </tr>
