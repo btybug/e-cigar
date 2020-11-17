@@ -9,10 +9,12 @@
 namespace App\Http\Controllers\Admin;
 
 
+use App\Http\Controllers\Admin\Requests\CategoryTypeRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryPost;
 use App\Models\Category;
 use App\Models\CategoryPost;
+use App\Models\CategoryType;
 use App\Models\Products;
 use App\Models\ShippingZones;
 use App\Models\Stickers;
@@ -25,8 +27,36 @@ class CategoriesController extends Controller
 
     public function list()
     {
-        $categories=Category::groupBy('type')->get();
+        $categories=CategoryType::all();
         return $this->view('list',compact('categories'));
+    }
+
+    public function createType()
+    {
+        $model = null;
+        return $this->view('type',compact('model'));
+    }
+
+    public function postCreateType(CategoryTypeRequest $request)
+    {
+        $data = $request->except(['_token']);
+        CategoryType::create($data);
+
+        return redirect()->route('admin_category');
+    }
+
+    public function editType($id)
+    {
+        $model = CategoryType::findORFail($id);
+        return $this->view('type',compact('model'));
+    }
+
+    public function postEditType(CategoryTypeRequest $request)
+    {
+        $data = $request->except(['_token']);
+        CategoryType::updateOrCreate($request->id, $data);
+
+        return redirect()->route('admin_category');
     }
 
     public function getCategories($type)

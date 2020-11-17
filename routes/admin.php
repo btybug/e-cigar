@@ -765,6 +765,17 @@ Route::group(['prefix' => 'gmail'], function () {
 Route::group(['prefix' => 'category'], function () {
     Route::get('/', 'Admin\CategoriesController@list')->name('admin_category');
     Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_get_category');
+    Route::group(['prefix' => 'type'], function () {
+        Route::get('/create', 'Admin\CategoriesController@createType')->name('admin_create_category_type');
+        Route::post('/create', 'Admin\CategoriesController@postCreateType')->name('admin_create_category_type_post');
+        Route::group(['prefix' => '{id}'], function () {
+            Route::get('/edit', 'Admin\CategoriesController@editType')->name('admin_edit_category_type');
+            Route::post('/edit', 'Admin\CategoriesController@postEditType')->name('admin_edit_category_type_post');
+
+            Route::get('/delete', 'Admin\CategoriesController@deleteType')->name('admin_delete_category_type');
+        });
+    });
+    Route::get('/{type}', 'Admin\CategoriesController@getCategories')->name('admin_get_category');
 });
 
 Route::group(['prefix' => 'reports'], function () {

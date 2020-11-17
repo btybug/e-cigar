@@ -11,6 +11,13 @@ class CategoryTableSeeder extends Seeder
      */
     public function run()
     {
+        \App\Models\CategoryType::create([
+           'name'=>'Products/Items',
+           'slug' => 'stocks',
+           'is_core' => true
+        ]);
+
+
         $locale='gb';
 
         $category = new \App\Models\Category(['slug' => 'vape','user_id' => 1,'type' => 'stocks','is_core' => 1]);
