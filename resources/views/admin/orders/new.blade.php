@@ -253,12 +253,12 @@
 
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
+    <link href="/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/plugins/formstone/lightbox/lightbox.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css">
 
 
-    <link href={{asset("public/css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
+    <link href={{asset("css/main.css?v=".rand(111,999))}} rel="stylesheet"/>
     <style>
         .scroll_content {
             padding-top: 30px;
@@ -658,8 +658,8 @@
 @stop
 
 @section('js')
-    <script src="/public/plugins/formstone/carousel/carousel.js"></script>
-    <script src="/public/plugins/formstone/lightbox/lightbox.js"></script>
+    <script src="/plugins/formstone/carousel/carousel.js"></script>
+    <script src="/plugins/formstone/lightbox/lightbox.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
     {{--//STRIPE--}}

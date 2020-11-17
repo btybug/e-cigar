@@ -120,7 +120,7 @@
 
 @section('js')
     <script src="https://mbraak.github.io/jqTree/tree.jquery.js"></script>
-    <script src="/public/plugins/select2/select2.full.min.js"></script>
+    <script src="/plugins/select2/select2.full.min.js"></script>
     <script src="https://farbelous.io/fontawesome-iconpicker/dist/js/fontawesome-iconpicker.js"></script>
     <script>
         var data = {!! json_encode(\App\Models\Filters::recursiveItems($category->filters),true) !!};
@@ -381,11 +381,11 @@
     </script>
 @stop
 @section("css")
-    <link rel="stylesheet" href="/public/css/custom.css">
+    <link rel="stylesheet" href="/css/custom.css">
     <link rel="stylesheet" href="https://mbraak.github.io/jqTree/jqtree.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
-    <link href="/public/plugins/select2/select2.min.css" rel="stylesheet"/>
+    <link href="/plugins/select2/select2.min.css" rel="stylesheet"/>
     <style>
         .highlight_mark {
             background-color: #33b5e5;

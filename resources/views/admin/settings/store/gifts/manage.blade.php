@@ -114,7 +114,7 @@
 
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
 
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
 @stop
@@ -137,7 +137,7 @@
             choose_juices: `@include('admin.settings.store.gifts.choose_juices')`,
         }
     </script>
-    <script src="{{asset('public/js/custom/gifts.js')}}"></script>
+    <script src="{{asset('js/custom/gifts.js')}}"></script>
 
 
 @stop

@@ -1,7 +1,7 @@
 <div class="tabs-outer">
     <div class="text-center tabs-top">
         <div class="img-outer">
-            <img src="/public/images/{!!Auth::user()->gender!!}.png" alt="">
+            <img src="/images/{!!Auth::user()->gender!!}.png" alt="">
         </div>
         <h4 class="mb-3">{!!Auth::user()->name!!}</h4>
         <h5 class="font-weight-normal">Position</h5>

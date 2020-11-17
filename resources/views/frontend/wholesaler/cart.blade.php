@@ -93,7 +93,7 @@
     </main>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/frontend/css/cart.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/cart.css')}}">
 @stop
 @section("js")
     <script>

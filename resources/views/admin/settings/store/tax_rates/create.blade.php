@@ -97,7 +97,7 @@
 @section("css")
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css">
     <link rel="stylesheet" href="https://farbelous.io/fontawesome-iconpicker/dist/css/fontawesome-iconpicker.min.css">
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
     <style>
         #font-show-area {
             font-size: 50px;

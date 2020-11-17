@@ -100,7 +100,7 @@
                                 <div class="row">
                                     <div class="col-sm-1 col-md-1 col-lg-1 col-xl-1">
                                         <div class="user-img">
-                                            <img src="/public/images/male.png" alt="">
+                                            <img src="/images/male.png" alt="">
                                         </div>
                                     </div>
                                     <div class="col-sm-11 col-md-8 col-lg-5 col-xl-7">
@@ -152,8 +152,8 @@
 
 @stop
 @section('css')
-    {!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
-    <link href={{asset("public/frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
+    {!! Html::style("admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}
+    <link href={{asset("frontend/css/blog-single.css?v=".rand(111,999))}} rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css" />
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css" />
@@ -235,12 +235,12 @@
 @stop
 
 @section("js")
-    {!! Html::script("public/admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
+    {!! Html::script("admin_theme/bower_components/jquery/dist/jquery.min.js")!!}
     <!-- jQuery UI 1.11.4 -->
-    {!! Html::script("public/admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
-    {!! Html::script("public/admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
+    {!! Html::script("admin_theme/bower_components/jquery-ui/jquery-ui.min.js")!!}
+    {!! Html::script("admin_theme/bower_components/bootstrap/dist/js/bootstrap.min.js")!!}
 
-    {!! Html::script('public/js/custom/comments.js') !!}
+    {!! Html::script('js/custom/comments.js') !!}
     <script>
         $(document).ready(function () {
 

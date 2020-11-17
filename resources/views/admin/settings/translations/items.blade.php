@@ -24,7 +24,7 @@
             {!! Form::open(['class'=>'form-horizontal']) !!}
             <div class="card panel panel-default mb-3">
                 <div class="card-body panel-body">
-                    
+
 
                     <div class="form-group">
                         <div class="accordion" id="accordionTranslation">
@@ -101,7 +101,7 @@
                             @endforeach
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             {!! Form::close() !!}
@@ -114,7 +114,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')

@@ -84,8 +84,8 @@
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
     <style>
         .form-control{
@@ -147,7 +147,7 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
             $("body").on('change','#promotionType',function () {

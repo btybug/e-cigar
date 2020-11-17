@@ -301,7 +301,7 @@
     </div>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
     <style>
         .errors {

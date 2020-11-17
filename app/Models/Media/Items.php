@@ -219,12 +219,12 @@ class Items extends Model
 
     public function getUrlAttribute()
     {
-        return url('/public/media/drive/' . $this->original_folder . '/' . $this->original_name);
+        return url('/media/drive/' . $this->original_folder . '/' . $this->original_name);
     }
 
     public function getRelativeUrlAttribute()
     {
-        return '/public/media/drive/' . $this->original_folder . '/' . $this->original_name;
+        return '/media/drive/' . $this->original_folder . '/' . $this->original_name;
     }
 
     public function storage()

@@ -18,7 +18,7 @@
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="sipping-item-wrap">
                                                     <div class="item-photo">
-                                                        <img src="/public/img/confirm-box.png" class="box-img"
+                                                        <img src="/img/confirm-box.png" class="box-img"
                                                              alt="item"/>
                                                     </div>
                                                     <h3 class="font-sec-reg font-24 item-title">{!! __('order_number') !!}</h3>
@@ -33,7 +33,7 @@
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="sipping-item-wrap address-item">
                                                     <div class="item-photo">
-                                                        <img src="/public/img/confirm-home.png" class="home-img"
+                                                        <img src="/img/confirm-home.png" class="home-img"
                                                              alt="item"/>
                                                     </div>
                                                     <h3 class="font-sec-reg font-24 item-title">{!! __('shipping_address') !!}</h3>
@@ -50,7 +50,7 @@
                                             <li class="col-md-4 col-sm-6">
                                                 <div class="sipping-item-wrap delivery-item">
                                                     <div class="item-photo">
-                                                        <img src="/public/img/confirm-calendar.png" class="calendar-img"
+                                                        <img src="/img/confirm-calendar.png" class="calendar-img"
                                                              alt="item"/>
                                                     </div>
                                                     <h3 class="font-sec-reg font-24 item-title">
@@ -69,7 +69,7 @@
                                         <div class="sipping-item-wrap-both">
                                             <div class="d-flex flex-wrap align-items-center sipping-item-wrap ">
                                                 <div class="item-photo">
-                                                    <img src="/public/img/confirm-user.png" class="user-img"
+                                                    <img src="/img/confirm-user.png" class="user-img"
                                                          alt="item"/>
                                                 </div>
                                                 <a href="{{ route('my_account') }}"
@@ -78,7 +78,7 @@
                                             </div>
                                             <div class="d-flex flex-wrap align-items-center sipping-item-wrap ">
                                                 <div class="item-photo">
-                                                    <img src="/public/img/confirm-gift.png" class="gift-img"
+                                                    <img src="/img/confirm-gift.png" class="gift-img"
                                                          alt="item"/>
                                                 </div>
                                                 <a href="{{ route('home') }}"
@@ -193,7 +193,7 @@
                             <div class="col-lg-2 pr-md-right">
                                 <div class="right-content">
                                     <div class="right-ads">
-                                        <img src="/public/img/temp/ads-product-2.jpg" alt="ads">
+                                        <img src="/img/temp/ads-product-2.jpg" alt="ads">
                                     </div>
                                     <div class="card order-summary">
                                         <div class="card-header text-tert-clr font-26">

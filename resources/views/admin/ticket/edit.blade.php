@@ -211,11 +211,11 @@
     </section>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
-    <script src="/public/js/tiket.js"></script>
+    <script src="/js/tiket.js"></script>
 
     <script>
         $(document).ready(function () {

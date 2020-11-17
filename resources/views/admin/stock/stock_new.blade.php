@@ -406,7 +406,7 @@
                                                                                         <input type="hidden"
                                                                                                name="other_images[{{ $key }}][product_id]" value="null"
                                                                                                class="form-control product_id_hidden_js">
-    
+
                                                                                         <div class="form-group row mt-3">
                                                                                             <label for="staticEmail"
                                                                                                    style="width: 70px">Url</label>
@@ -969,7 +969,7 @@
                                                                     <tr>
                                                                         <th scope="row">
                                                                             <label for="seo_focuskw">Focus Keyword:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -979,7 +979,7 @@
                                                                     <tr>
                                                                         <th scope="row">
                                                                             <label for="seo_title">SEO Title:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -998,7 +998,7 @@
                                                                         <th scope="row">
                                                                             <label for="seo_metadesc">Meta
                                                                                 description:</label>
-                                                                            <img src="/public/images/question-mark.png"
+                                                                            <img src="/images/question-mark.png"
                                                                                  alt="question">
                                                                         </th>
                                                                         <td>
@@ -1192,7 +1192,7 @@
                         <div class="col-sm-8">
                             <input type="text" class="form-control search-attr" id="search-product" placeholder="Search">
                             <select class="form-control d-none" id="brand_select">
-                                
+
                             </select>
                             <select class="form-control d-none" id="category_select">
 
@@ -1541,8 +1541,8 @@
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.10/themes/default/style.min.css" integrity="sha512-P8BwDSUInKMA7I116Z1RFg/Dfk85uFdliEUYO7vQlwtxLVMNvZimfMAQsaf++9EhlAGOVX6yhDQAIY3/70jDUg==" crossorigin="anonymous" />
     <style>
         #itemsModal .items-box {
@@ -1604,10 +1604,10 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.3.10/jstree.min.js" integrity="sha512-fgHQj3Fsk5TtG3XglZ/JkE06lx/gJdBZ+Lll785gf5RW3NWcGsyTBwauFtwrlZvpsuv6XSjzB97fBNagkT6uDg==" crossorigin="anonymous"></script>
-    <!-- <script src="/public/js/tinymce/tinymce.min.js"></script> -->
+    <!-- <script src="/js/tinymce/tinymce.min.js"></script> -->
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script> -->
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
-    <script src="/public/plugins/tinymce/tinymce.js"></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/plugins/tinymce/tinymce.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script>
 
@@ -1981,7 +1981,7 @@
                 html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
                 html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
                 $(".banner-group").append(html);
-                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
             });
 
 // ----------
@@ -1994,9 +1994,9 @@
                 html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
                 html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
                 $(".other_images-group").append(html);
-                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
                 // $().append(`
-                //     <img src="/public/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
+                //     <img src="/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
                 // `)
             });
 // ----------

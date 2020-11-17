@@ -973,19 +973,19 @@
 @stop
 @section('css')
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8"
             src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <script src="/public/plugins/tinymce/tinymce.js"></script>
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/plugins/tinymce/tinymce.js"></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
 
     <script>
         $(function () {
@@ -1118,8 +1118,8 @@
                     window.frames['myiframe'].focus();
                     window.frames['myiframe'].print();
 
-                    setTimeout(() => { 
-                        $(".printFrame").remove(); 
+                    setTimeout(() => {
+                        $(".printFrame").remove();
                         $("#barcodePrintModal").modal("hide");
                     }, 1000);
                 })
@@ -1164,7 +1164,7 @@
                 html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
                 html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
                 $(".banner-group").append(html);
-                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+                $(".banner-group").find(".banner-item").last().find(".bestbetter-modal").append(`<img src="/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
             });
 
 // ----------
@@ -1177,9 +1177,9 @@
                 html = html.replace(/modal-input-path/g, "modal-input-path " + media_uuid);
                 html = html.replaceAll(/media_.*"$/gmi, media_uuid+'"');
                 $(".other_images-group").append(html);
-                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/public/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
+                $(".other_images-group").find(".other_images-item").last().find(".bestbetter-modal").append(`<img src="/images/no_image.jpg" class="img img-responsive ${media_uuid}_media_single_img" width="100px" data-id="${media_uuid}_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">`);
                 // $().append(`
-                //     <img src="/public/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/public/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
+                //     <img src="/images/no_image.jpg" class="img img-responsive media_5fa16c92c4d1f_media_single_img" width="100px" data-id="media_5fa16c92c4d1f_media_single_img" alt="/images/no_image.jpg" style="max-width: 200px; width: 100%; margin-top: 10px;">
                 // `)
             });
 

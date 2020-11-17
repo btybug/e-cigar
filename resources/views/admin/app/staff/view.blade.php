@@ -4,7 +4,7 @@
     <div id="cv" class="instaFade">
         <div class="mainDetails">
             <div id="headshot" class="quickFade">
-                <img src="{!!  url(Storage::disk('local')->url('app/public/'.$model->photo))!!}" alt="user"/>
+                <img src="{!!  url(Storage::disk('local')->url('app/'.$model->photo))!!}" alt="user"/>
             </div>
 
             <div id="name">
@@ -152,7 +152,7 @@
 @stop
 @section('css')
     <link href='http://fonts.googleapis.com/css?family=Rokkitt:400,700|Lato:400,300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/public/css/cv.css">
+    <link rel="stylesheet" href="/css/cv.css">
 @stop
 @section('js')
     <script>

@@ -124,13 +124,13 @@
 
 @section('css')
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
-    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
 @stop
 
 @section('js')
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
-    <script src="/public/admin_theme/blog_new.js"></script>
-    <script src="/public/js/tiket.js"></script>
+    <script src="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="/admin_theme/blog_new.js"></script>
+    <script src="/js/tiket.js"></script>
 
 @stop

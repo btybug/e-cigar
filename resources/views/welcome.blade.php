@@ -260,19 +260,19 @@
 @stop
 
 @section('css')
-    <link href="/public/plugins/formstone/carousel/carousel.css" rel="stylesheet">
-    <link href="/public/plugins/formstone/light.css" rel="stylesheet">
-    <link href="/public/css/carousel.css" rel="stylesheet">
-    <link href="/public/css/home-slider.css" rel="stylesheet">
+    <link href="/plugins/formstone/carousel/carousel.css" rel="stylesheet">
+    <link href="/plugins/formstone/light.css" rel="stylesheet">
+    <link href="/css/carousel.css" rel="stylesheet">
+    <link href="/css/home-slider.css" rel="stylesheet">
 @stop
 
 @section('js')
 
-    <script src={{asset("public/js/bundle/carousel.js")}}></script>
-    <script src={{asset("public/plugins/formstone/core.js")}}></script>
-    <script src={{asset("public/plugins/formstone/mediaquery.js")}}></script>
-    <script src={{asset("public/plugins/formstone/touch.js")}}></script>
-    <script src={{asset("public/plugins/formstone/carousel/carousel.js")}}></script>
+    <script src={{asset("js/bundle/carousel.js")}}></script>
+    <script src={{asset("plugins/formstone/core.js")}}></script>
+    <script src={{asset("plugins/formstone/mediaquery.js")}}></script>
+    <script src={{asset("plugins/formstone/touch.js")}}></script>
+    <script src={{asset("plugins/formstone/carousel/carousel.js")}}></script>
     <script>
         $(document).ready(function () {
             $(".home__main-slider").carousel({

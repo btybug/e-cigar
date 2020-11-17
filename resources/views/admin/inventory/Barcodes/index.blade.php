@@ -242,7 +242,7 @@
 @stop
 
 @section('js')
-    <script src="{!! url('public/js/jquery.printPage.js') !!}"></script>
+    <script src="{!! url('js/jquery.printPage.js') !!}"></script>
     <script>
         $(function () {
             const shortAjax = function (URL, obj = {}, cb) {
@@ -971,7 +971,7 @@
                     {data: 'actions', name: 'actions',orderable : false,'searchable':false}
 
 
-                    
+
                     // {data: 'id', name: 'items.id'},
                     // {data: 'name', name: 'item_translations.name'},
                     // {data: 'short_description', name: 'item_translations.short_description'},
@@ -1050,14 +1050,14 @@
                     window.frames['myiframe'].print();
 
                     setTimeout(() => {
-                        $(".printFrame").remove(); 
+                        $(".printFrame").remove();
                         $("#barcodePrintModal").modal("hide");
                     }, 1000);
                 })
             })
 
 
-            
+
 
 
 

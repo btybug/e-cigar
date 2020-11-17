@@ -68,7 +68,7 @@
                                         <div class="row">
                                             <div class="col-lg-1 col-2 pr-0">
                                                 <div class="user-img">
-                                                    <img src="/public/images/male.png" alt="">
+                                                    <img src="/images/male.png" alt="">
                                                 </div>
                                             </div>
                                             <div class="col-lg-11 col-10">
@@ -189,7 +189,7 @@
     </section>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')

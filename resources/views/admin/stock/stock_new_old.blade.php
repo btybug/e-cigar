@@ -514,7 +514,7 @@
                                                             <tr>
                                                                 <th scope="row">
                                                                     <label for="seo_focuskw">Focus Keyword:</label>
-                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                    <img src="/images/question-mark.png" alt="question">
                                                                 </th>
                                                                 <td>
                                                                     <input class="form-control" placeholder="" name="general[og:keywords]" type="text">
@@ -523,7 +523,7 @@
                                                             <tr>
                                                                 <th scope="row">
                                                                     <label for="seo_title">SEO Title:</label>
-                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                    <img src="/images/question-mark.png" alt="question">
                                                                 </th>
                                                                 <td>
                                                                     <input class="form-control" placeholder="Lorem Ipsum" name="general[og:title]" type="text">
@@ -538,7 +538,7 @@
                                                             <tr>
                                                                 <th scope="row">
                                                                     <label for="seo_metadesc">Meta description:</label>
-                                                                    <img src="/public/images/question-mark.png" alt="question">
+                                                                    <img src="/images/question-mark.png" alt="question">
                                                                 </th>
                                                                 <td>
                                                                     <textarea class="form-control" rows="2" placeholder="Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," name="" cols="50"></textarea>
@@ -689,18 +689,18 @@
 @stop
 @section('css')
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
-    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
-    <link rel="stylesheet" href="{{asset('public/admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('admin_assets/css/nopagescroll.css?v='.rand(111,999))}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 
 @stop
 @section('js')
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-treeview/1.2.0/bootstrap-treeview.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <script src="/public/js/custom/stock.js?v=" .rand(111,999)></script>
+    <script src="/js/custom/stock.js?v=" .rand(111,999)></script>
     <script>
         $(document).ready(function () {
             $("body").on('click', '.select-products', function () {

@@ -154,7 +154,7 @@ function get_site_logo()
 {
     $settings = new \App\Models\Settings();
     $logo = $settings->getData('admin_general_settings', 'siteLogo');
-    return ($logo && $logo->val) ? $logo->val : '/public/images/no_image.png';
+    return ($logo && $logo->val) ? $logo->val : '/images/no_image.png';
 }
 
 function get_site_name()
@@ -1367,13 +1367,13 @@ function item_default_image(){
 
 function no_image()
 {
-    return "/public/images/no_image.png";
+    return "/images/no_image.png";
 }
 
 function media_image_tmb($path)
 {
     $e = explode('/', $path);
-    $image = 'public/media/tmp/' . end($e);
+    $image = 'media/tmp/' . end($e);
     return (File::exists(base_path($image)) && !File::isDirectory(base_path($image))) ? url($image) : no_image();
 
 }
@@ -1403,7 +1403,7 @@ function user_avatar($id = null)
         }
     }
 
-    return '/public/img/user.svg';
+    return '/img/user.svg';
 }
 
 function user_avatar_class($id = null)
@@ -1606,7 +1606,7 @@ function rich(){
 
     $localBusiness = \Spatie\SchemaOrg\Schema::product()
         ->name('Spatie')
-        ->image('https://e-cigar.com/public/media/drive/12/ff39e4af551574b9911e15aaedfb9119.png');
+        ->image('https://e-cigar.com/media/drive/12/ff39e4af551574b9911e15aaedfb9119.png');
 
     echo $localBusiness->toScript();
 }

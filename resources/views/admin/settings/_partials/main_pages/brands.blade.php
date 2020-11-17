@@ -83,14 +83,14 @@
 </script>
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/plugins/timepicker/bootstrap-timepicker.css')}}">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet"/>
 
 @stop
 
 
 @section('js')
-    {!! Html::script("public/admin_theme/plugins/timepicker/bootstrap-timepicker.js")!!}
+    {!! Html::script("admin_theme/plugins/timepicker/bootstrap-timepicker.js")!!}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
     <script>

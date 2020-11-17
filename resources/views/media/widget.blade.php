@@ -109,8 +109,8 @@
                 @else
                         <div class="img-thumb-container" style="margin: 10px;">
                             <div class="inner">
-                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
-                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                <img src="/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/images/no_image.png"/>
+                                <span data-src="/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
                                     <i class="fa fa-trash"></i>
                                 </span>
                             </div>
@@ -140,8 +140,8 @@
                     @else
                         <div class="img-thumb-container" style="margin: 10px;">
                             <div class="inner">
-                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
-                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                <img src="/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/images/no_image.png"/>
+                                <span data-src="/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
                                     <i class="fa fa-trash"></i>
                                 </span>
                             </div>
@@ -172,8 +172,8 @@
                     @else
                         <div class="img-thumb-container" style="margin: 10px;">
                             <div class="inner">
-                                <img src="/public/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/public/images/no_image.png"/>
-                                <span data-src="/public/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
+                                <img src="/images/no_image.png" class="img img-responsive {!! $uniqId."_media_single_img" !!}" width="100px" data-id="{!! $uniqId."_media_single_img" !!}" alt="/images/no_image.png"/>
+                                <span data-src="/images/no_image.png" data-id="{!! $uniqId !!}" class="remove-thumb-img single" data-is-multiple="false">
                                     <i class="fa fa-trash"></i>
                                 </span>
                             </div>

@@ -18,7 +18,7 @@
     </section>
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/frontend/css/cart.css')}}">
+    <link rel="stylesheet" href="{{asset('frontend/css/cart.css')}}">
 @stop
 
 
@@ -141,7 +141,7 @@
                                                                 <span class="d-flex method-wrap pointer">
                                                                     <span class="method-left">
                                                                          <span class="photo">
-<img src="/public/img/temp/dpd-method-icon.jpg" alt="brand">
+<img src="/img/temp/dpd-method-icon.jpg" alt="brand">
                                                                 </span>
                                                                     </span>
                                                                      <span class="method-right">
@@ -164,7 +164,7 @@
                                                                 <span class="d-flex method-wrap pointer">
                                                                     <span class="method-left">
                                                                          <span class="photo">
-<img src="/public/img/temp/dhl-method-icon.jpg" alt="brand">
+<img src="/img/temp/dhl-method-icon.jpg" alt="brand">
                                                                 </span>
                                                                     </span>
                                                                      <span class="method-right">
@@ -189,7 +189,7 @@
 
                                                                     <span class="method-left">
                                                                          <span class="photo">
-                                                                <img src="/public/img/temp/fedex-method-icon.jpg"
+                                                                <img src="/img/temp/fedex-method-icon.jpg"
                                                                      alt="brand">
                                                                 </span>
                                                                     </span>

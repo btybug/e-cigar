@@ -362,16 +362,16 @@
         /* end news inner new*/
 
     </style>
-    {{--{!! Html::style("public/admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
+    {{--{!! Html::style("admin_theme/bower_components/bootstrap/dist/css/bootstrap.min.css") !!}--}}
     <link rel="stylesheet" type="text/css"
           href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.css"/>
     <link type="text/css" rel="stylesheet"
           href="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials-theme-flat.css"/>
-    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
-    <link rel="stylesheet" href="{{asset('public/plugins/formstone/carousel/carousel.css')}}">
-    <link rel="stylesheet" href="{{asset('public/plugins/formstone/light.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/OwlCarousel2/owl.carousel.min.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/OwlCarousel2/owl.theme.default.min.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/formstone/carousel/carousel.css')}}">
+    <link rel="stylesheet" href="{{asset('plugins/formstone/light.css')}}">
     <style>
 
         #gp-inner-container {
@@ -386,7 +386,7 @@
 @stop
 
 @section("js")
-    {{--<script src="{{asset('public/admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>--}}
+    {{--<script src="{{asset('admin_theme/OwlCarousel2/owl.carousel.min.js')}}"></script>--}}
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery.jssocials/1.4.0/jssocials.min.js"></script>
     <script>
@@ -404,10 +404,10 @@
         })
     </script>
 
-    <script src="{{asset('public/plugins/formstone/core.js')}}"></script>
-    <script src="{{asset('public/plugins/formstone/mediaquery.js')}}"></script>
-    <script src="{{asset('public/plugins/formstone/touch.js')}}"></script>
-    <script src="{{asset('public/plugins/formstone/carousel/carousel.js')}}"></script>
+    <script src="{{asset('plugins/formstone/core.js')}}"></script>
+    <script src="{{asset('plugins/formstone/mediaquery.js')}}"></script>
+    <script src="{{asset('plugins/formstone/touch.js')}}"></script>
+    <script src="{{asset('plugins/formstone/carousel/carousel.js')}}"></script>
 
     <script>
 

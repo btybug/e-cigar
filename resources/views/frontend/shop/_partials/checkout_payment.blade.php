@@ -144,7 +144,7 @@
                                                     <div class="col-xl-6 col-sm-8 p-xl-0 center-col align-self-center">
                                                         <div id="cardNumber" class="field form-control"></div>
                                                         <span class="cards-icon d-inline-flex align-items-center">
-                                                    <img src="/public/img/visa-logo.png" alt="visa"></span>
+                                                    <img src="/img/visa-logo.png" alt="visa"></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row item-wrap">
@@ -257,9 +257,9 @@
                                     {{--<span class="font-main-bold text-uppercase mb-1 d-flex flex-wrap">--}}
                                           {{--{{ $stripe->stripe_payment_name }}--}}
                                         {{--<span class="cards d-flex align-self-center align-items-center">--}}
-                                             {{--<img src="/public/img/visa-logo.png" alt="visa">--}}
-                                             {{--<img src="/public/img/mc-logo.png" alt="mc">--}}
-                                             {{--<img src="/public/img/maestro-logo.png" alt="maestro">--}}
+                                             {{--<img src="/img/visa-logo.png" alt="visa">--}}
+                                             {{--<img src="/img/mc-logo.png" alt="mc">--}}
+                                             {{--<img src="/img/maestro-logo.png" alt="maestro">--}}
                                          {{--</span>--}}
                                     {{--</span>--}}
                                     {{--<span class="font-12">{{ $stripe->description }}</span>--}}
@@ -295,7 +295,7 @@
                                                 {{--<div id="cardNumber" class="field form-control"></div>--}}
                                                 {{--<input type="text" class="form-control" id="cardNumber" placeholder="4598 9849 4894 8408">--}}
                                                 {{--<span class="cards-icon d-inline-flex align-items-center">--}}
-                                                    {{--<img src="/public/img/visa-logo.png" alt="visa"></span>--}}
+                                                    {{--<img src="/img/visa-logo.png" alt="visa"></span>--}}
                                             {{--</div>--}}
                                         {{--</div>--}}
                                         {{--<div class="form-group row item-wrap">--}}
@@ -360,7 +360,7 @@
 
                                                             {{--<span class="font-main-bold text-uppercase mb-1 d-flex flex-wrap">--}}
                                                                 {{--Pay with PayPal--}}
-                                                                {{--<span class="cards"><img src="/public/img/paypal.png" alt="paypal"></span>--}}
+                                                                {{--<span class="cards"><img src="/img/paypal.png" alt="paypal"></span>--}}
                                                             {{--</span>--}}
                                                             {{--<span class="font-12">The standard chunk of Lorem Ipsum used since the 1500s</span>--}}
                                                             {{--</span>--}}

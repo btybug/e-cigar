@@ -22,7 +22,7 @@
                         <div class="collapse navbar-collapse" id="navbar_collapse_0">
                             @if(Auth::check())
                                 <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown">
-                                    <img src="{!! url('public/images/other.png') !!}" width="20px" alt=""/>
+                                    <img src="{!! url('images/other.png') !!}" width="20px" alt=""/>
                                     <span class="d-none d-md-inline">{!! Auth::user()->name !!}</span> <b class="caret"></b>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
@@ -126,7 +126,7 @@
                             <a href="{!!route('shop_my_cart')  !!}" id="dropdownMenuButton" {{--class="dropdown-toggle"--}}{{-- aria-haspopup="true" aria-expanded="false"--}}>
                                 <span class="badge badge-secondary cart-count">{{ cartCount() }}</span>
                                 <i class="fa fa-cart-arrow-down" aria-hidden="true"></i>
-                                <!--<img class="img-fluid" src="http://laravelcommerce.com/public/images/shopping_cart.png" alt="icon">-->
+                                <!--<img class="img-fluid" src="http://laravelcommerce.com/images/shopping_cart.png" alt="icon">-->
 
                                 <span class="block">
                     	<span class="title">My Cart</span>

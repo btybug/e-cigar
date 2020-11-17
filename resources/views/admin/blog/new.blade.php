@@ -295,7 +295,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_focuskw">Focus Keyword:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::text('general[keywords]',($post)?$post->getSeoField('keywords'):null,['class'=>'form-control','placeholder'=>getSeo($general,'keywords',$post)]) !!}
@@ -304,7 +304,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_title">SEO Title:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::text('general[title]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','placeholder'=>getSeo($general,'title',$post)]) !!}
@@ -319,7 +319,7 @@ SEO
                                                 <tr>
                                                     <th scope="row">
                                                         <label for="seo_metadesc">Meta description:</label>
-                                                        <img src="/public/images/question-mark.png" alt="question">
+                                                        <img src="/images/question-mark.png" alt="question">
                                                     </th>
                                                     <td>
                                                         {!! Form::textarea('general[description]',($post)?$post->getSeoField('title'):null,['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'description',$post)]) !!}
@@ -434,18 +434,18 @@ SEO
     </div><!-- /.modal -->
 @stop
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/admin_theme/flagstrap/css/flags.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/flagstrap/css/flags.css')}}">
     <link rel="stylesheet" href="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.css">
-    <link rel="stylesheet" href="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
+    <link rel="stylesheet" href="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css"/>
 
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 @stop
 @section('js')
 
-    <script src="{{asset('public/admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
+    <script src="{{asset('admin_theme/flagstrap/js/jquery.flagstrap.js')}}"></script>
     <script src="https://phppot.com/demo/bootstrap-tags-input-with-autocomplete/typeahead.js"></script>
-    <script src="{{asset('public/admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
+    <script src="{{asset('admin_theme/bootstrap-tagsinput/bootstrap-tagsinput.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/5.1.2/tinymce.min.js" integrity="sha256-DdWABQXQvgw5MFqHCMQ34eo2D3GTcL6xA36LVz1sAmQ=" crossorigin="anonymous"></script>
@@ -661,6 +661,6 @@ SEO
          return false; // return false to cancel form action
          });*/
     </script>
-    <script src="/public/admin_theme/blog_new.js"></script>
+    <script src="/admin_theme/blog_new.js"></script>
 
 @stop

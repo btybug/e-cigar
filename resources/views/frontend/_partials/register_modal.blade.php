@@ -8,7 +8,7 @@
             <div class="row no-gutters modal-content_inner">
                 <div class="col-md-4 col-sm-2">
                     <div class="modal_left-img-holder h-100"
-                         style="background-image: url(/public/img/temp/modal-acount-bg.jpg)"></div>
+                         style="background-image: url(/img/temp/modal-acount-bg.jpg)"></div>
                 </div>
                 <div class="col-md-8 col-sm-10">
                     <div class="modal_right">

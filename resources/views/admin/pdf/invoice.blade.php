@@ -7,37 +7,37 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    <link rel="stylesheet" href="{{asset('public/css/invoice.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/invoice.css?v='.rand(111,999))}}">
     <style>
         @font-face {
             font-family: 'Oswald-Regular';
-            src: {{ url('/public/fonts/Oswald-Regular.eot') }};
-            src: {{ url('/public/fonts/Oswald-Regular.eot?#iefix') }} format('embedded-opentype'),
-            {{ url('/public/fonts/Oswald-Regular.woff2') }} format('woff2'),
-            {{ url('/public/fonts/Oswald-Regular.woff') }} format('woff'),
-            {{ url('/public/fonts/Oswald-Regular.ttf') }} format('truetype');
+            src: {{ url('/fonts/Oswald-Regular.eot') }};
+            src: {{ url('/fonts/Oswald-Regular.eot?#iefix') }} format('embedded-opentype'),
+            {{ url('/fonts/Oswald-Regular.woff2') }} format('woff2'),
+            {{ url('/fonts/Oswald-Regular.woff') }} format('woff'),
+            {{ url('/fonts/Oswald-Regular.ttf') }} format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Roboto-Regular';
-            src: {{ url('/public/fonts/Roboto-Regular.eot') }};
-            src: {{ url('/public/fonts/Roboto-Regular.eot?#iefix') }} format('embedded-opentype'),
-        {{ url('/public/fonts/Roboto-Regular.woff2')  }} format('woff2'),
-            {{url('/public/fonts/Roboto-Regular.woff')  }} format('woff'),
-            {{ url('/public/fonts/Roboto-Regular.ttf')  }} format('truetype');
+            src: {{ url('/fonts/Roboto-Regular.eot') }};
+            src: {{ url('/fonts/Roboto-Regular.eot?#iefix') }} format('embedded-opentype'),
+        {{ url('/fonts/Roboto-Regular.woff2')  }} format('woff2'),
+            {{url('/fonts/Roboto-Regular.woff')  }} format('woff'),
+            {{ url('/fonts/Roboto-Regular.ttf')  }} format('truetype');
             font-weight: normal;
             font-style: normal;
         }
 
         @font-face {
             font-family: 'Roboto-Medium';
-            src: {{url('/public/fonts/Roboto-Medium.eot')}};
-            src: {{url('/public/fonts/Roboto-Medium.eot?#iefix')}} format('embedded-opentype'),
-            {{url('/public/fonts/Roboto-Medium.woff2')}} format('woff2'),
-            {{url('/public/fonts/Roboto-Medium.woff')}} format('woff'),
-            {{url('/public/fonts/Roboto-Medium.ttf')}} format('truetype');
+            src: {{url('/fonts/Roboto-Medium.eot')}};
+            src: {{url('/fonts/Roboto-Medium.eot?#iefix')}} format('embedded-opentype'),
+            {{url('/fonts/Roboto-Medium.woff2')}} format('woff2'),
+            {{url('/fonts/Roboto-Medium.woff')}} format('woff'),
+            {{url('/fonts/Roboto-Medium.ttf')}} format('truetype');
             font-weight: 500;
             font-style: normal;
         }
@@ -180,7 +180,7 @@
         </div>
         <div class="invoice__content-paid-price">
             <div class="invoice__content-paid">
-                <img src="{{ url('/public/img/temp/paid-invoice.png') }}" alt="paid">
+                <img src="{{ url('/img/temp/paid-invoice.png') }}" alt="paid">
             </div>
             <div class="invoice__content-price">
                 <div class="invoice__content-price-item clearfix">

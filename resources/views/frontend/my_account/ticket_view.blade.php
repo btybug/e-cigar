@@ -237,7 +237,7 @@
                         <div class="ticket__tab-wrapper-right-col">
                             <div class="ticket__tab-wrapper-right">
                                 <a href="#" class="d-block">
-                                    <img src="/public/img/temp/ads-product-2.jpg" alt="ads" class="ads-img">
+                                    <img src="/img/temp/ads-product-2.jpg" alt="ads" class="ads-img">
                                 </a>
                             </div>
                         </div>

@@ -55,7 +55,7 @@
                                                         <tr>
                                                             <th scope="row" style="width: 16.5%">
                                                                 <label for="seo_focuskw">Focus Keyword:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/images/question-mark.png" alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::text('translatable['.strtolower($language->code).'][keywords]',get_translated($seo,strtolower($language->code),'keywords'),['class'=>'form-control','placeholder'=>getSeo($general,'og:keywords',$brand)]) !!}
@@ -64,7 +64,7 @@
                                                         <tr>
                                                             <th scope="row" style="width: 16.5%">
                                                                 <label for="seo_title">SEO Title:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/images/question-mark.png" alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::text('translatable['.strtolower($language->code).'][title]',get_translated($seo,strtolower($language->code),'title'),['class'=>'form-control','placeholder'=>getSeo($general,'og:title',$brand)]) !!}
@@ -79,7 +79,7 @@
                                                         <tr>
                                                             <th scope="row" style="width: 16.5%">
                                                                 <label for="seo_metadesc">Meta description:</label>
-                                                                <img src="/public/images/question-mark.png" alt="question">
+                                                                <img src="/images/question-mark.png" alt="question">
                                                             </th>
                                                             <td>
                                                                 {!! Form::textarea('translatable['.strtolower($language->code).'][description]',get_translated($seo,strtolower($language->code),'description'),['class'=>'form-control','rows'=>2,'placeholder'=>getSeo($general,'og:description',$brand)]) !!}

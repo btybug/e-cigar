@@ -56,7 +56,7 @@
                         <td colspan="5">Tax Rate - <span id="taxzone">ArmeniaVaT20</span></td>
                     </tr>
                     <tbody>
-                    
+
                     <tr class="bg-my-light-pink">
                         <th>Order Amount</th>
                         <th>Courier</th>
@@ -124,8 +124,8 @@
                     </tbody>
 
                     <tfoot>
-                    
-                 
+
+
                     <tr>
                         <td colspan="5" class="text-center table--store-settings_add-options add-new-order-filed">
                             <span><i class="fa fa-plus"></i></span> Add more option
@@ -240,7 +240,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 @stop
 
 @section('js')

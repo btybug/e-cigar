@@ -82,7 +82,7 @@
                             <span class="icon-folder-name"><i class="fa fa-folder"></i></span>
                             Drive2
                         </div>
-                      
+
                         <ol class="tree_branch" id="fff">
 
                         </ol>
@@ -279,11 +279,11 @@
 @section('css')
   {{--@push("css")--}}
   {{--{!! Html::style("/resources/assets/js/animate/css/animate.css") !!}--}}
-  {!! Html::style("public/media_template/css/media-plus.css?v='.rand(111,999))") !!}
-  {!! Html::style("public/media_template/css/style.css?v='.rand(111,999))") !!}
-  {!! Html::style("public/admin_theme/media/css/lightbox.css") !!}
-  {!! Html::style("public/js/bootstrap-select/css/bootstrap-select.min.css") !!}
-  {!! Html::style("public/js/tag-it/css/jquery.tagit.css") !!}
+  {!! Html::style("media_template/css/media-plus.css?v='.rand(111,999))") !!}
+  {!! Html::style("media_template/css/style.css?v='.rand(111,999))") !!}
+  {!! Html::style("admin_theme/media/css/lightbox.css") !!}
+  {!! Html::style("js/bootstrap-select/css/bootstrap-select.min.css") !!}
+  {!! Html::style("js/tag-it/css/jquery.tagit.css") !!}
   {{--@endpush--}}
   <style>
     .active > .file {
@@ -477,18 +477,18 @@
   user-select: none;
 }
   </style>
-  {!!  Html::style('public/js/bootstrap-fileinput/css/fileinput.min.css') !!}
+  {!!  Html::style('js/bootstrap-fileinput/css/fileinput.min.css') !!}
 
 @stop
 @section("js")
-  {!! Html::script('public/js/bootstrap-fileinput/js/fileinput.min.js') !!}
-  {!! Html::script("public/js/nestedSortable/jquery.mjs.nestedSortable.js") !!}
-  {!! Html::script("public/admin_theme/media/js/lightbox.js") !!}
-  {!! Html::script("public/js/bootstrap-select/js/bootstrap-select.min.js") !!}
-  {!! Html::script("public/js/tag-it/js/tag-it.js") !!}
-  {{--{!! Html::script("public/js/media_button.js") !!}--}}
-  {!! Html::script("public/js/media_button_new.js?v=".rand(999,99999)) !!}
-  {{--    {!! Html::script("public/js/bundle/media.js",['type' => 'module']) !!}--}}
+  {!! Html::script('js/bootstrap-fileinput/js/fileinput.min.js') !!}
+  {!! Html::script("js/nestedSortable/jquery.mjs.nestedSortable.js") !!}
+  {!! Html::script("admin_theme/media/js/lightbox.js") !!}
+  {!! Html::script("js/bootstrap-select/js/bootstrap-select.min.js") !!}
+  {!! Html::script("js/tag-it/js/tag-it.js") !!}
+  {{--{!! Html::script("js/media_button.js") !!}--}}
+  {!! Html::script("js/media_button_new.js?v=".rand(999,99999)) !!}
+  {{--    {!! Html::script("js/bundle/media.js",['type' => 'module']) !!}--}}
 
   <script src="https://cdn.jsdelivr.net/npm/@shopify/draggable@1.0.0-beta.8/lib/draggable.bundle.js"></script>
   <!-- <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.ui-deps.js"></script>
@@ -497,7 +497,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.filter.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.dnd5.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery.fancytree@2.30.2/dist/modules/jquery.fancytree.glyph.js"></script> -->
-  <!-- {!! Html::script("public/plugins/tree/jquery.nestable.min.js") !!} -->
+  <!-- {!! Html::script("plugins/tree/jquery.nestable.min.js") !!} -->
   <!-- {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/nestable2/1.6.0/jquery.nestable.min.js"></script>--}} -->
   <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
 @stop

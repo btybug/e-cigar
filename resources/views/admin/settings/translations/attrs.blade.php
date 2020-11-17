@@ -91,7 +91,7 @@
                             @endforeach
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
             {!! Form::close() !!}
@@ -103,7 +103,7 @@
 @stop
 
 @section('css')
-    <link rel="stylesheet" href="{{asset('public/css/custom.css?v='.rand(111,999))}}">
+    <link rel="stylesheet" href="{{asset('css/custom.css?v='.rand(111,999))}}">
 
 @stop
 @section('js')
