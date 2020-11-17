@@ -76,7 +76,7 @@
                     <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
                         <p>Select Template</p>
                         <div class="row">
-                            <div class="col-md-1"><input type="checkbox"></div>
+                            <div class="col-md-1"><input type="radio" name="template" value="1"></div>
                             <div class="col-md-5" style="height: 200px;background: rgba(214,214,214,0.76);">
                                 <div class="row" style="height: 200px;">
                                     <div class="col-md-8" style="border-right: 1px solid;height: 100%">
@@ -88,7 +88,7 @@
                                 </div>
 
                             </div>
-                            <div class="col-md-1"><input type="checkbox"></div>
+                            <div class="col-md-1"><input type="radio" name="template" value="2"></div>
                             <div class="col-md-5" style="height: 200px;background:rgba(214,214,214,0.76);">
                                 <p>Image</p>
                             </div>
