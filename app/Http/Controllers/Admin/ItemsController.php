@@ -632,4 +632,18 @@ class ItemsController extends Controller
         }
         return response()->json(['error' => true]);
     }
+
+    public function checkBarcode(Request $request)
+    {
+        $id = $request->get('id',null);
+        $barcode = $request->get('barcode',null);
+
+        $item = Items::where('barcode',$barcode)->where('id','!=',$id)->first();
+        $error = false;
+        if($item) {
+            $error = true;
+        }
+
+        return response()->json(['error' => $error]);
+    }
 }

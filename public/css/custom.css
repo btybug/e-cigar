@@ -1380,6 +1380,9 @@ tr.notification-is_read {
 .input-error {
   outline: 1px solid red !important;
 }
+.error {
+  color: red !important;
+}
 
 .transition-horizontal {
   animation-name: example;

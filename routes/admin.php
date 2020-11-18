@@ -528,6 +528,7 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::post('/get-download-html', 'Admin\ItemsController@getDownloadHtml')->name('admin_items_download_html');
         Route::get('/download-code/{code}/{type?}/{item_id?}', 'Admin\ItemsController@downloadCode')->name('admin_items_download_code');
         Route::get('/datatable-selections', 'Admin\ItemsController@datatableSelections')->name('admin_items_datatable_selections');
+        Route::post('/check-barcode', 'Admin\ItemsController@checkBarcode')->name('admin_items_check_barcode');
 
 
     });

@@ -23,7 +23,7 @@
                 <div class="tab-content">
                     <div id="info" class="tab-pane fade in active show media-new-tab basic-details-tab">
 
-                        {!! Form::hidden('id',null) !!}
+                        {!! Form::hidden('id',null,['id' => 'itemId']) !!}
                         {!! Form::hidden('type',($bundle)?"bundle":"simple") !!}
 
                         <div class="row">
@@ -155,6 +155,7 @@
                                                                     <div class="col-lg-8">
                                                                         {!! Form::text('barcode', null,
                                                                         ['class' => 'form-control','id' => 'barcode']) !!}
+                                                                        <span class="error barcode-error"></span>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -989,6 +990,18 @@
 
     <script>
         $(function () {
+
+            $("body").on("input", "#barcode", function () {
+               let barcode = $(this).val();
+               let id = $("#itemId").val();
+                AjaxCall("{{ route('admin_items_check_barcode') }}", {barcode: barcode,id:id}, function (res) {
+                    if (!res.error) {
+                        $(".barcode-error").html("");
+                    }else{
+                        $(".barcode-error").html('The barcode has already been taken.');
+                    }
+                });
+            });
 
             $("body").on("click", ".remove-new-other_images-input", function () {
                 $(this).closest(".other_images-item").remove();
