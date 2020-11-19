@@ -14,6 +14,7 @@ use App\Http\Requests\FaqRequest;
 use App\Http\Requests\StoreBlogPost;
 use App\Models\Category;
 use App\Models\CategoryPost;
+use App\Models\CategoryType;
 use App\Models\Comment;
 use App\Models\Faq;
 use App\Models\Posts;
@@ -48,7 +49,12 @@ class FaqController extends Controller
     public function create()
     {
         $model = null;
-        $categories = Category::with('children')->where('type','faq')->whereNull('parent_id')->get();
+        $d = $this->settings->getEditableData('faq_category')->toArray();
+        $categories = collect([]);
+        if($d && isset($d['category'])){
+            $categories = Category::with('children')->where('type',$d['category'])->whereNull('parent_id')->get();
+        }
+
         $data = Category::recursiveItems($categories);
 
         $general = $this->settings->getEditableData('seo_faq')->toArray();
@@ -61,10 +67,31 @@ class FaqController extends Controller
 
     public function settings()
     {
-        $categories = Category::whereNull('parent_id')->where('type', 'faq')->get();
-        $allCategories = Category::where('type', 'faq')->get();
+        $types = CategoryType::all()->pluck('name','slug')->all();
+        $general = $this->settings->getEditableData('faq_category')->toArray();
+
+        return $this->view('settings', compact('types','general'));
+    }
+
+    public function postSettings(Request $request)
+    {
+        $data = $request->except(['_token']);
+
+        $this->settings->updateOrCreateSettings('faq_category',$data);
+        return redirect()->back();
+    }
+
+    public function getCategory()
+    {
+        $general = $this->settings->getEditableData('faq_category')->toArray();
+        $allCategories = $categories = collect([]);
+        if($general && isset($general['category'])){
+            $categories = Category::whereNull('parent_id')->where('type', $general['category'])->get();
+            $allCategories = Category::where('type', $general['category'])->get();
+        }
+
         enableMedia('drive');
-        return $this->view('settings', compact('categories','allCategories'));
+        return $this->view('category', compact('categories','allCategories'));
     }
 
     public function newPost(FaqRequest $request, $locale = null)
@@ -88,7 +115,13 @@ class FaqController extends Controller
     public function edit($id)
     {
         $model = Faq::findOrFail($id);
-        $categories = Category::with('children')->where('type','faq')->whereNull('parent_id')->get();
+
+        $d = $this->settings->getEditableData('faq_category')->toArray();
+        $categories = collect([]);
+        if($d && isset($d['category'])){
+            $categories = Category::with('children')->where('type',$d['category'])->whereNull('parent_id')->get();
+        }
+
         $checkedCategories = $model->categories()->pluck('id')->all();
         $data = Category::recursiveItems($categories, 0, [], $checkedCategories);
 

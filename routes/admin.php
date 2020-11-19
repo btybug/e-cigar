@@ -343,6 +343,8 @@ Route::group(['prefix' => 'faq'], function () {
     Route::get('/', 'Admin\FaqController@index')->name('admin_faq');
     Route::get('create', 'Admin\FaqController@create')->name('admin_faq_create');
     Route::get('settings', 'Admin\FaqController@settings')->name('admin_faq_settings');
+    Route::post('settings', 'Admin\FaqController@postSettings')->name('admin_faq_settings_post');
+    Route::get('category', 'Admin\FaqController@getCategory')->name('admin_faq_setting_category');
     Route::post('delete', 'Admin\FaqController@getDelete')->name('admin_faq_delete');
     Route::get('edit/{id}', 'Admin\FaqController@edit')->name('admin_faq_edit');
     Route::post('create-new', 'Admin\FaqController@newPost')->name('admin_faq_new');

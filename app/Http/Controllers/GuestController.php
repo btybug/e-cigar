@@ -45,9 +45,14 @@ class GuestController extends Controller
 
     public function getFaq()
     {
-        $categories = Category::with('faqs')->where('type', 'faq')->whereNull('parent_id')->get();
-        $categoriesCount = Category::with('faqs')->where('type', 'faq')->count();
-        $category = $categories->first();
+        $d = $this->settings->getEditableData('faq_category')->toArray();
+        $categories = collect([]);
+        $categoriesCount = 0;
+        if($d && isset($d['category'])){
+            $categories = Category::with('faqs')->where('type',$d['category'])->whereNull('parent_id')->get();
+            $categoriesCount = Category::with('faqs')->where('type', $d['category'])->count();
+        }
+        $category = (count($categories))?$categories->first():null;
 
         return $this->view('faq', compact(['categories', 'category','categoriesCount']));
     }
@@ -73,10 +78,14 @@ class GuestController extends Controller
 
     public function getFaqByCategory(Request $request)
     {
-        $category = Category::with('faqs')->where('type', 'faq')->where('id', $request->uid)->first();
+        $d = $this->settings->getEditableData('faq_category')->toArray();
+        $category = null;
+        if($d && isset($d['category'])){
+            $category = Category::with('faqs')->where('type', $d['category'])->where('id', $request->uid)->first();
+        }
+
         if ($category) {
             $html = $this->view('_partials.faq_questions', compact(['category']))->render();
-
             return \Response::json(['error' => false, 'html' => $html, 'count' => $category->faqs->count()]);
         }
 
