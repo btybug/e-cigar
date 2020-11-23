@@ -103,7 +103,7 @@
                            value="{{ $selected->id }}">
                     <label class="custom-label checkbox-select"
                            for="single_v_select_{{ $selected->id.$x }}">
-                        <span class="font-sec-ex-light font-26 count">{{ $selected->item->name }}</span>
+                        <span class="font-sec-ex-light font-26 count">{{ ($selected->item)?$selected->item->name:$selected->name }}</span>
                         <span
                             class="check-icon d-inline-flex align-items-center justify-content-center position-absolute">
                                             <svg viewBox="0 0 26 26" enable-background="new 0 0 26 26">
