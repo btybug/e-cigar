@@ -1484,7 +1484,8 @@ function getItemStockVariations($group, array $items = [])
 
 function out_of_stock($item)
 {
-    if ($item) {
+    if ($item && $item->item) {
+
         $qty = $item->item->qty;
         $settings = new \App\Models\Settings();
         $model = $settings->getEditableData('store_out_of_stock');

@@ -16,7 +16,7 @@
                 </div>
                 <select name="variations[{{ $role->id }}][{{ $main_unique }}][variations][{{ $uniqueID }}][item_id]"
                         class="form-control v-item-change">
-                    @if($package_variation->item->is_archive)
+                    @if($package_variation->item && $package_variation->item->is_archive)
                         <option value="{{ $package_variation->item_id }}"
                                 selected>{{ $package_variation->name }}</option>
                     @endif
