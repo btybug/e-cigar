@@ -1374,14 +1374,14 @@ function media_image_tmb($path)
 {
     $e = explode('/', $path);
     $image = 'media/tmp/' . end($e);
-    return (File::exists(base_path($image)) && !File::isDirectory(base_path($image))) ? url($image) : no_image();
+    return (File::exists(public_path($image)) && !File::isDirectory(public_path($image))) ? url($image) : no_image();
 
 }
 function media_image_tmb_path($path)
 {
     $e = explode('/', $path);
-    $image = 'public'.DS.'media'.DS.'tmp'.DS. end($e);
-    return (File::exists(base_path($image)) && !File::isDirectory(base_path($image))) ? base_path($image) : false;
+    $image = 'media'.DS.'tmp'.DS. end($e);
+    return (File::exists(public_path($image)) && !File::isDirectory(public_path($image))) ? public_path($image) : false;
 
 }
 
