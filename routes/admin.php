@@ -521,7 +521,8 @@ Route::group(['prefix' => 'inventory'], function () {
         Route::get('/edit/{id}', 'Admin\ItemsController@getEdit')->name('admin_items_edit');
         Route::get('/duplicate/{id}', 'Admin\ItemsController@getDuplicate')->name('admin_items_duplicate');
         Route::get('/purchase/{item_id}', 'Admin\ItemsController@getPurchase')->name('admin_items_purchase');
-        Route::get('/archive/{item_id}', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
+        Route::post('/archive', 'Admin\ItemsController@putArchive')->name('admin_items_archive');
+        Route::post('/remove-main', 'Admin\ItemsController@removeMainItem')->name('admin_items_remove_main_item');
         Route::post('/add-package', 'Admin\ItemsController@addPackage')->name('admin_items_package_add');
         Route::post('/add-location', 'Admin\ItemsController@addLocation')->name('admin_items_location_add');
         Route::post('/get-specifications', 'Admin\ItemsController@getSpecification')->name('admin_items_get_specification');

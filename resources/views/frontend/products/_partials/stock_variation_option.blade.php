@@ -80,7 +80,7 @@
                                    value="{{ $item->id }}">
                             <label class="custom-label"
                                    for="single_v_select_{{ $item->id.$x }}">
-                                <span class="font-sec-ex-light font-26 count">{{ $item->item->name }}</span>
+                                <span class="font-sec-ex-light font-26 count">{{ ($selected->item)?$selected->item->name:$selected->name }}</span>
                             </label>
                         </div>
                     @endforeach

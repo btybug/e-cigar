@@ -23,6 +23,8 @@ use App\Models\ItemsLocations;
 use App\Models\ItemsMedia;
 use App\Models\ItemsPackages;
 use App\Models\ItemsTransfers;
+use App\Models\Stock;
+use App\Models\StockVariation;
 use App\Models\Suppliers;
 use App\Models\Warehouse;
 use App\Services\BarcodesService;
@@ -301,13 +303,41 @@ class ItemsController extends Controller
         return $this->view('purchase', compact('item'));
     }
 
-    public function putArchive($id)
+    public function putArchive(Request $request)
     {
+        $id = $request->get('id');
+        $products = Stock::where('main_item_id',$id)->get();
+        if(count($products)){
+            $html = '<p>This item we use in products as main Items, removing this Item you will remove products too. Are you sure ?</p>
+                    <p>These products using same Item as main: </p>';
+            foreach ($products as $product){
+                $html .= "<p><a href='".route('admin_stock_edit',$product->id)."' target='_blank'>$product->name</a></p>";
+            }
+            return response()->json(['error' => false,'warning' => true,
+                'message' => $html]);
+        }
+
+        $item = Items::FindOrFail($id);
+        $item->is_archive = true;
+        $item->save();
+        StockVariation::where('item_id',$id)->delete();
+
+        ActivityLogs::action('items', 'delete', $id);
+        return response()->json(['error' => false,'warning' => false]);
+    }
+
+    public function removeMainItem(Request $request)
+    {
+        $id = $request->get('id');
+        Stock::where('main_item_id',$id)->delete();
+        StockVariation::where('item_id',$id)->delete();
+
         $item = Items::FindOrFail($id);
         $item->is_archive = true;
         $item->save();
         ActivityLogs::action('items', 'delete', $id);
-        return redirect()->back();
+
+        return response()->json(['error' => false]);
     }
 
     public function putActivate($id)

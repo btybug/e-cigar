@@ -323,6 +323,7 @@ class InvoiceOrdersController extends Controller
         $user = User::where('id',$request->user_id)->first();
         $default_shipping = null;
         $shipping = null;
+        $delivery = null;
         $geoZone = null;
 
         if ($product) {

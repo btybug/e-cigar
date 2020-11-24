@@ -106,6 +106,26 @@
         </div>
     </div>
 
+    <div class="modal" tabindex="-1" id="warning_delete" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Delete</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-primary delete_yes" data-id="0">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="modal" tabindex="-1" id="confirm_delete" role="dialog">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -315,6 +335,31 @@
                         }
                     });
                 }
+            });
+
+            $('body').on('click', '.delete-btn', function() {
+                const id = $(this).data('id');
+                AjaxCall("{!! route('admin_items_archive') !!}", {id:id}, function (res) {
+                    if (!res.error) {
+                        if (res.warning) {
+                            $('#warning_delete').find('.modal-body').html(res.message);
+                            $('#warning_delete').find('.delete_yes').data("id",id);
+                            $('#warning_delete').modal();
+                        }else{
+                            table.ajax.reload();
+                        }
+                    }
+                });
+            });
+
+            $('body').on('click', '.delete_yes', function() {
+                const id = $(this).data('id');
+                AjaxCall("{!! route('admin_items_remove_main_item') !!}", {id:id}, function (res) {
+                    if (!res.error) {
+                        $('#warning_delete').modal('hide');
+                        table.ajax.reload();
+                    }
+                });
             });
 
             const action = function ( dt, url, method, type ) {
