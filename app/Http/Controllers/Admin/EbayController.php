@@ -23,6 +23,7 @@ class EbayController extends Controller
     public function __construct()
     {
         $config = config('ebay');
+        dd($config);
         $this->oAuthService = new OAuthService([
             'credentials' => $config['sandbox']['credentials'],
             'ruName' => $config['sandbox']['ruName'],
