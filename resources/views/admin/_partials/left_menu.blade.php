@@ -312,22 +312,7 @@
             <li><a href="{{route('admin_landings')}}"><i class="fa fa-download" aria-hidden="true"></i>
                     <span>Landings</span></a></li>
             @endHasAccess
-            {{--            @hasAccess('admin_ebay')--}}
-            {{--            <li class="treeview">--}}
-            {{--                <a href="#">--}}
-            {{--                    <i class="fa fa-handshake-o"></i>--}}
-            {{--                    <span>eBay</span>--}}
-            {{--                    <span class="pull-right-container">--}}
-            {{--              <i class="fa fa-angle-left pull-right"></i>--}}
-            {{--            </span>--}}
-            {{--                </a>--}}
-            {{--                <ul class="treeview-menu">--}}
-            {{--                   <li><a href="{{route('admin_ebay')}}"><i class="fa fa-circle-o"></i>Settings</a></li>--}}
-            {{--                    <li><a href="{{route('admin_ebay_listing')}}"><i class="fa fa-circle-o"></i>Listing</a></li>--}}
-            {{--                    <li><a href="{{route('admin_ebay_orders')}}"><i class="fa fa-circle-o"></i>Orders</a></li>--}}
-            {{--                </ul>--}}
-            {{--            </li>--}}
-            {{--            @endHasAccess--}}
+
             @ok('admin_app')
             <li class="treeview">
                 <a href="#">
@@ -349,6 +334,22 @@
                 </ul>
             </li>
             @endok
+            @hasAccess('admin_ebay')
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-ebay"></i>
+                    <span>eBay</span>
+                    <span class="pull-right-container">
+                          <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{route('admin_ebay')}}"><i class="fa fa-circle-o"></i>Settings</a></li>
+                    <li><a href="{{route('admin_ebay_listing')}}"><i class="fa fa-circle-o"></i>Listing</a></li>
+                    <li><a href="{{route('admin_ebay_orders')}}"><i class="fa fa-circle-o"></i>Orders</a></li>
+                </ul>
+            </li>
+            @endHasAccess
         </ul>
     </section>
     <!-- /.sidebar -->
