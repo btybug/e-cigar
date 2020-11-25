@@ -31,6 +31,9 @@ class EbayController extends Controller
     }
     public function settings()
     {
+//        $ebay=new Ebay();
+//       dd($ebay->getAccessToken()) ;
+
         return $this->view('settings');
     }
 
