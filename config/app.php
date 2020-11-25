@@ -190,6 +190,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         \App\Providers\ValidatorServiceProvider::class,
+        Hkonnet\LaravelEbay\EbayServiceProvider::class,
     ],
 
     /*
@@ -255,7 +256,9 @@ return [
         'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class,
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
-        'Excel' => Maatwebsite\Excel\Facades\Excel::class
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
+        'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class
+
     ],
 
 ];

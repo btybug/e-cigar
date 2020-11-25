@@ -823,6 +823,10 @@ Route::group(['prefix' => 'extra-pages'], function () {
     Route::post('/', 'Admin\SettingsController@postExtraPages')->name('admin_extra_pages');
 });
 
+//Route::group(['prefix' => 'ebay'], function () {
+//    Route::get('/', 'Admin\Api\EbayController@getSelling')->name('admin_ebay');
+//});
+
 
 
 
