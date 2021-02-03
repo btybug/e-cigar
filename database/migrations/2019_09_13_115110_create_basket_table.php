@@ -23,6 +23,7 @@ class CreateBasketTable extends Migration
             $table->unsignedBigInteger('admin_discount_id')->nullable();
             $table->longText('additional_data')->nullable();
             $table->text('note')->nullable();
+            $table->text('p_v_number')->nullable();
             $table->string('payment_method');
             $table->double('tendered')->nullable();
             $table->double('changed')->nullable();

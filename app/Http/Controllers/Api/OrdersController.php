@@ -183,6 +183,7 @@ class OrdersController extends Controller
         $order->payment_method = $request->get('payment_method');
         $order->tendered = $request->get('tendered');
         $order->changed = $request->get('changed');
+        $order->p_v_number = $request->get('p_v_number');
         $order->sub_total = $request->get('sub_total');
         $order->total = $request->get('total');
         $order->tax = $request->get('tax');
