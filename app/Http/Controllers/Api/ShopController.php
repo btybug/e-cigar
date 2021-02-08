@@ -37,7 +37,7 @@ class ShopController extends Controller
             ->leftJoin('warehouse_translations','warehouses.id','=','warehouse_translations.warehouse_id')
             ->where('app_warehouses.status',1)
             ->where('warehouse_translations.locale',app()->getLocale())
-            ->select('warehouses.id','warehouse_translations.name')->pluck('name', 'id');
+            ->select('app_warehouses.id','warehouse_translations.name')->pluck('name', 'id');
 
     }
 

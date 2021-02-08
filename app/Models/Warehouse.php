@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\App\AppWarehouses;
 use App\Models\Common\Translatable;
 use App\Models\Translations\WarehouseTranslations;
 use App\User;
@@ -80,14 +81,15 @@ class Warehouse extends Translatable
 
     public function orders()
     {
-        return $this->hasMany(\App\Models\App\Orders::class,'shop_id');
+        return $this->hasMany(\App\Models\App\Orders::class, 'shop_id');
     }
 
-    public function staff()
+
+
+    public function appWarehouse()
     {
-        return $this->belongsToMany(User::class,'app_staff','warehouses_id','users_id');
+        return $this->hasMany(AppWarehouses::class,'warehouse_id');
     }
-
 
 
 }

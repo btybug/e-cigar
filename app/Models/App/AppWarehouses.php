@@ -5,6 +5,7 @@ namespace App\Models\App;
 
 
 use App\Models\Warehouse;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class AppWarehouses extends Model
@@ -26,5 +27,10 @@ class AppWarehouses extends Model
     public function discounts()
     {
         return $this->hasMany(Discount::class,'app_warehouse_id');
+    }
+
+    public function staff()
+    {
+        return $this->belongsToMany(User::class, 'app_staff', 'warehouses_id', 'users_id');
     }
 }

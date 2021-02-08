@@ -257,7 +257,6 @@ return [
 //        'Zendesk' => Huddle\Zendesk\Facades\Zendesk::class
         'Moloquent' => Jenssegers\Mongodb\Eloquent\Model::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-        'Ebay' => Hkonnet\LaravelEbay\Facade\Ebay::class
 
     ],
 

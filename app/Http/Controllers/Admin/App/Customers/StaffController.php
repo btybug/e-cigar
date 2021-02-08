@@ -17,8 +17,6 @@ class StaffController extends Controller
 
     public function getStaff($q)
     {
-
-
         $users=User::join('roles', 'users.role_id', '=', 'roles.id')
             ->leftJoin('app_staff','app_staff.users_id','users.id')
             ->where('app_staff.warehouses_id','!=',$q)

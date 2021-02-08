@@ -58,7 +58,6 @@ class AppController extends Controller
 
                 $current=AppWarehouses::findOrFail($q);
         }
-
         return $this->view('products.index', compact('warehouse','current', 'q', 'notImportedWarehouse'));
     }
 
