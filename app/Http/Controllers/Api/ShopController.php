@@ -33,6 +33,7 @@ class ShopController extends Controller
     }
     public function getShop(Request $request)
     {
+        dd(1);
         return  AppWarehouses::join('warehouses','app_warehouses.warehouse_id','=','warehouses.id')
             ->leftJoin('warehouse_translations','warehouses.id','=','warehouse_translations.warehouse_id')
             ->where('app_warehouses.status',1)
